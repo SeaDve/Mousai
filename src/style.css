@@ -1,0 +1,10 @@
+.progressbar progress {
+border: none;
+background-color: white;
+}
+
+.progressbar trough {
+border: none;
+background: none;
+}
+
