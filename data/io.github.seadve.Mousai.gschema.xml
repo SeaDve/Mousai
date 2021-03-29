@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="mousai">
+	<schema id="io.github.seadve.Mousai" path="/io/github/seadve/Mousai/">
+	</schema>
+</schemalist>
