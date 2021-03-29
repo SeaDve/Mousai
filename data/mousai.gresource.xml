@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/io/github/seadve/Mousai">
+    <file alias="window.ui">ui/window.ui</file>
+    <file alias="songrow.ui">ui/songrow.ui</file>
+    <file alias="style.css">ui/style.css</file>
+  </gresource>
+</gresources>
