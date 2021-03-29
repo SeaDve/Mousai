@@ -32,47 +32,22 @@ class MousaiWindow(Gtk.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
         self.start_button.connect("clicked", self.on_start_button_clicked)
-
         self.voice_recorder = VoiceRecorder()
 
     def on_start_button_clicked(self, widget):
+        self.voice_recorder.start(self.on_microphone_record_callback)
 
-        self.voice_recorder.start()
+    def on_microphone_record_callback(self):
+        song_file = self.voice_recorder.get_tmp_dir()
+        json_output = json.loads(self.song_guesser(song_file))
 
-
-
-class VoiceRecorder:
-    def start(self):
-        pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! opusenc ! webmmux ! filesink location={self.get_tmp_dir()}'
-        self.recorder_gst = Gst.parse_launch(pipeline)
-        bus = self.recorder_gst.get_bus()
-        bus.add_signal_watch()
-        bus.connect("message", self._on_recorder_gst_message)
-        self.recorder_gst.set_state(Gst.State.PLAYING)
-
-        timer = Timer(self._on_stop_record, 5)
-        timer.start()
-
-    def _on_stop_record(self):
-        self.recorder_gst.send_event(Gst.Event.new_eos())
-        self.callback()
-
-    def callback(self):
-
-        song_file = self.get_tmp_dir()
-
-        result = self.song_guesser(song_file)
-
-        test = json.loads(result)
-
-        print(test["status"])
+        print(json_output["status"])
         try:
-            print(test["result"]["title"])
-            print(test["result"]["artist"])
+            print(json_output["result"]["title"])
+            print(json_output["result"]["artist"])
         except Exception:
-            print(test)
+            print(json_output)
             print("Song not found")
 
     def song_guesser(self, song_file):
@@ -80,14 +55,27 @@ class VoiceRecorder:
             'return': 'apple_music,spotify',
             'api_token': 'e49148ca676e38f5c8d3d47feac62af8'
         }
-
-        files = {
-            'file': open(song_file, 'rb'),
-        }
-
+        files = {'file': open(song_file, 'rb')}
         result = requests.post('https://api.audd.io/', data=data, files=files)
         return result.text
 
+
+
+class VoiceRecorder:
+    def start(self, param):
+        pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! opusenc ! webmmux ! filesink location={self.get_tmp_dir()}'
+        self.recorder_gst = Gst.parse_launch(pipeline)
+        bus = self.recorder_gst.get_bus()
+        bus.add_signal_watch()
+        bus.connect("message", self._on_recorder_gst_message)
+        self.recorder_gst.set_state(Gst.State.PLAYING)
+
+        timer = Timer(self._on_stop_record, param, 5)
+        timer.start()
+
+    def _on_stop_record(self, callback):
+        self.recorder_gst.send_event(Gst.Event.new_eos())
+        callback()
 
     def _on_recorder_gst_message(self, bus, message):
         t = message.type
@@ -116,13 +104,14 @@ class VoiceRecorder:
 
 
 class Timer:
-    def __init__(self, function, time_delay):
+    def __init__(self, function, param, time_delay):
         self.function = function
+        self.param = param
         self.time_delay = time_delay * 100
 
     def _displaydelay(self):
         if self.time_delay == 10: #or self.stopped:
-            self.function()
+            self.function(self.param)
             return False
         self.time_delay -= 10
         print(self.time_delay)
