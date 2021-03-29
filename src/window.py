@@ -23,6 +23,12 @@ from gi.repository import Gtk, Gst, GLib, Handy, Gio
 
 Gst.init(None)
 
+# Implement song not found
+# make it easier to insert token
+# add image on action row
+# add empty state on main_screen
+# make listening state more beautiful
+
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):
@@ -68,9 +74,11 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.main_stack.set_visible_child(self.main_screen_box)
 
     def song_guesser(self, song_file):
+        TOKEN = 'e49148ca676e38f5c8d3d47feac62af8'
+
         data = {
             'return': 'apple_music,spotify',
-            'api_token': 'e49148ca676e38f5c8d3d47feac62af8'
+            'api_token': TOKEN
         }
         files = {'file': open(song_file, 'rb')}
 
