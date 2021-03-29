@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai">
     <file>window.ui</file>
+    <file>songrow.ui</file>
     <file>style.css</file>
   </gresource>
 </gresources>

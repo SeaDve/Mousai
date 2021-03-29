@@ -19,9 +19,10 @@ import os
 import json
 import requests
 import time
+import urllib.request
 from subprocess import PIPE, Popen
 
-from gi.repository import Gtk, Gst, GLib, Handy, Gio
+from gi.repository import Gtk, Gst, GLib, Handy, Gio, GdkPixbuf
 
 Gst.init(None)
 
@@ -83,6 +84,7 @@ class MousaiWindow(Handy.ApplicationWindow):
             title = memory_list[num]["title"]
             artist = memory_list[num]["artist"]
             song_link = memory_list[num]["song_link"]
+            #icon_uri = memory_list[num]["icon_uri"]
 
             song_row = SongRow(title, artist, song_link)
             song_row.show()
@@ -124,14 +126,19 @@ class MousaiWindow(Handy.ApplicationWindow):
             title = json_output["result"]["title"]
             artist = json_output["result"]["artist"]
             song_link = json_output["result"]["song_link"]
+            icon_uri = json_output["result"]["spotify"]["album"]["images"][2]["url"]
 
             self.song_entry = {}
             self.song_entry["title"] = title
             self.song_entry["artist"] = artist
             self.song_entry["song_link"] = song_link
+            self.song_entry["icon_uri"] = icon_uri
             self.memory_list.append(self.song_entry)
 
+            urllib.request.urlretrieve(icon_uri, f'{title}.jpg')
+
             song_row = SongRow(title, artist, song_link)
+            song_row.song_icon.set_from_file(f"{title}.jpg")
             song_row.show()
             self.history_listbox.insert(song_row, 0)
         except Exception:
@@ -153,7 +160,8 @@ class MousaiWindow(Handy.ApplicationWindow):
         TOKEN = 'e49148ca676e38f5c8d3d47feac62af8'
 
         data = {
-            'api_token': TOKEN
+            'api_token': TOKEN,
+            'return': 'spotify',
         }
         files = {'file': open(song_file, 'rb')}
 
@@ -162,7 +170,12 @@ class MousaiWindow(Handy.ApplicationWindow):
         #return """{"status": "test"}"""
 
 
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/songrow.ui')
 class SongRow(Handy.ActionRow):
+    __gtype_name__ = 'SongRow'
+
+    song_icon = Gtk.Template.Child()
+
     def __init__(self, title, artist, song_link, **kwargs):
         super().__init__(**kwargs)
 
@@ -170,7 +183,9 @@ class SongRow(Handy.ActionRow):
         self.set_subtitle(artist)
         self.song_link = song_link
 
-        self.set_icon_name("emblem-music-symbolic")
+        #self.song_icon.set_text(title)
+        self.song_icon.set_from_file(f"{title}.jpg")
+        self.add_prefix(self.song_icon)
 
         placeholder = Gtk.Button()
         self.set_activatable_widget(placeholder)
