@@ -87,6 +87,8 @@ class SongRow(Handy.ActionRow):
         self.set_subtitle(artist)
         self.song_link = song_link
 
+        self.set_icon_name("emblem-music-symbolic")
+
         placeholder = Gtk.Button()
         self.set_activatable_widget(placeholder)
         self.connect("activated", self.on_songrow_clicked)

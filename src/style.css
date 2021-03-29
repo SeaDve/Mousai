@@ -1,6 +1,6 @@
 .progressbar progress {
 border: none;
-background-color: white;
+background-color: @theme_text_color;
 }
 
 .progressbar trough {
