@@ -23,23 +23,27 @@ from gi.repository import Gtk, Gst, GLib, Handy, Gio
 
 Gst.init(None)
 
-# Implement song not found
-# make it easier to insert token
-# add image on action row
-# add empty state on main_screen
+# DONE Implement song not found
+# DONE add empty state on main_screen
 # make listening state more beautiful
+# add image on action row
+# make it easier to insert token
+# save song history
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 
+    listen_cancel_stack = Gtk.Template.Child()
     start_button = Gtk.Template.Child()
+    cancel_button = Gtk.Template.Child()
     history_listbox = Gtk.Template.Child()
 
     main_stack = Gtk.Template.Child()
     main_screen_box = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
+    empty_state_box = Gtk.Template.Child()
 
     progressbar =  Gtk.Template.Child()
     progressbar1 =  Gtk.Template.Child()
@@ -47,11 +51,35 @@ class MousaiWindow(Handy.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.start_button.connect("clicked", self.on_start_button_clicked)
+        self.cancel_button.connect("clicked", self.on_cancel_button_clicked)
         self.voice_recorder = VoiceRecorder()
+
+        # title = "TITLE"
+        # artist = "ARTIST"
+        # song_link = "SONG_LINK"
+
+        # song_row = SongRow(title, artist, song_link)
+        # song_row.show()
+        # self.history_listbox.insert(song_row, 0)
+
+        self.memory_list = []
+        if not self.memory_list:
+            self.main_stack.set_visible_child(self.empty_state_box)
 
     def on_start_button_clicked(self, widget):
         self.voice_recorder.start(self, self.on_microphone_record_callback)
+
         self.main_stack.set_visible_child(self.recording_box)
+        self.listen_cancel_stack.set_visible_child(self.cancel_button)
+
+    def on_cancel_button_clicked(self, widget):
+        self.voice_recorder.cancel()
+
+        if self.memory_list:
+            self.main_stack.set_visible_child(self.main_screen_box)
+        else:
+            self.main_stack.set_visible_child(self.empty_state_box)
+        self.listen_cancel_stack.set_visible_child(self.start_button)
 
     def on_microphone_record_callback(self):
         song_file = self.voice_recorder.get_tmp_dir()
@@ -65,13 +93,25 @@ class MousaiWindow(Handy.ApplicationWindow):
             artist = json_output["result"]["artist"]
             song_link = json_output["result"]["song_link"]
 
+            self.memory_list.append(title)
+
             song_row = SongRow(title, artist, song_link)
             song_row.show()
             self.history_listbox.insert(song_row, 0)
         except Exception:
-            print("Song not found")
+            error = Gtk.MessageDialog(transient_for=self,
+                                      type=Gtk.MessageType.WARNING,
+                                      buttons=Gtk.ButtonsType.OK,
+                                      text=_("Sorry!"))
+            error.format_secondary_text(_("The song was not recognized."))
+            error.run()
+            error.destroy()
 
-        self.main_stack.set_visible_child(self.main_screen_box)
+        if self.memory_list:
+            self.main_stack.set_visible_child(self.main_screen_box)
+        else:
+            self.main_stack.set_visible_child(self.empty_state_box)
+        self.listen_cancel_stack.set_visible_child(self.start_button)
 
     def song_guesser(self, song_file):
         TOKEN = 'e49148ca676e38f5c8d3d47feac62af8'
@@ -116,8 +156,8 @@ class VoiceRecorder:
         bus.connect("message", self._on_recorder_gst_message)
         self.recorder_gst.set_state(Gst.State.PLAYING)
 
-        timer = Timer(self._on_stop_record, param, 5)
-        timer.start()
+        self.timer = Timer(self._on_stop_record, param, 5)
+        self.timer.start()
 
         # VISUALIZER
         pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! level interval=50000000 ! fakesink qos=false'
@@ -127,6 +167,11 @@ class VoiceRecorder:
         bus.connect("message", self._on_visualizer_gst_message)
         self.visualizer_gst.set_state(Gst.State.PLAYING)
 
+    def cancel(self):
+        self.recorder_gst.send_event(Gst.Event.new_eos())
+        self.visualizer_gst.send_event(Gst.Event.new_eos())
+        self.visualizer_gst.set_state(Gst.State.NULL)
+        self.timer.stop()
 
     def _on_stop_record(self, callback):
         self.recorder_gst.send_event(Gst.Event.new_eos())
@@ -174,13 +219,14 @@ class Timer:
         self.function = function
         self.param = param
         self.time_delay = time_delay * 100
+        self.stopped = False
 
     def _displaydelay(self):
-        if self.time_delay == 10: #or self.stopped:
-            self.function(self.param)
+        if self.time_delay == 10 or self.stopped:
+            if not self.stopped:
+                self.function(self.param)
             return False
         self.time_delay -= 10
-        print(self.time_delay)
         return True
 
     def start(self):

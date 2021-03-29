@@ -6,23 +6,23 @@
   <template class="MousaiWindow" parent="HdyApplicationWindow">
     <property name="can-focus">False</property>
     <property name="default-width">600</property>
-    <property name="default-height">300</property>
+    <property name="default-height">400</property>
     <child>
-      <object class="GtkStack" id="main_stack">
+      <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="transition-duration">150</property>
-        <property name="transition-type">crossfade</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox" id="main_screen_box">
+          <object class="HdyHeaderBar">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="orientation">vertical</property>
+            <property name="show-close-button">True</property>
             <child>
-              <object class="HdyHeaderBar">
+              <object class="GtkStack" id="listen_cancel_stack">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="show-close-button">True</property>
+                <property name="transition-duration">150</property>
+                <property name="transition-type">crossfade</property>
                 <child>
                   <object class="GtkButton" id="start_button">
                     <property name="label" translatable="yes">Listen</property>
@@ -35,16 +35,64 @@
                       <class name="suggested-action"/>
                     </style>
                   </object>
+                  <packing>
+                    <property name="name">page0</property>
+                    <property name="title" translatable="yes">page0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="cancel_button">
+                    <property name="label" translatable="yes">Cancel</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="name">page1</property>
+                    <property name="title" translatable="yes">page1</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuButton">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="focus-on-click">False</property>
+                <property name="receives-default">True</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                  </object>
                 </child>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="pack-type">end</property>
+                <property name="position">1</property>
               </packing>
             </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStack" id="main_stack">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="vexpand">True</property>
+            <property name="transition-duration">150</property>
+            <property name="transition-type">crossfade</property>
             <child>
-              <object class="GtkScrolledWindow">
+              <object class="GtkScrolledWindow" id="main_screen_box">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="vexpand">True</property>
@@ -79,66 +127,47 @@
                   </object>
                 </child>
               </object>
+            </child>
+            <child>
+              <object class="HdyStatusPage" id="empty_state_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">emblem-music-symbolic</property>
+                <property name="title">Start Mousaing!</property>
+                <property name="description">Click the listen button to start</property>
+              </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="name">page0</property>
+                <property name="title" translatable="yes">page0</property>
                 <property name="position">1</property>
               </packing>
             </child>
-          </object>
-          <packing>
-            <property name="name">page0</property>
-            <property name="title" translatable="yes">page0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="HdyWindowHandle" id="recording_box">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
             <child>
-              <object class="GtkBox">
+              <object class="HdyWindowHandle" id="recording_box">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">18</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Listening</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="vexpand">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">18</property>
                         <child>
-                          <object class="GtkProgressBar" id="progressbar">
+                          <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="valign">start</property>
-                            <property name="inverted">True</property>
-                            <style>
-                              <class name="progressbar"/>
-                            </style>
+                            <property name="label" translatable="yes">Listening</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                            </attributes>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -147,13 +176,44 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkProgressBar" id="progressbar1">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="valign">start</property>
-                            <style>
-                              <class name="progressbar"/>
-                            </style>
+                            <property name="margin-left">12</property>
+                            <property name="margin-right">12</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
+                            <child>
+                              <object class="GtkProgressBar" id="progressbar">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="valign">start</property>
+                                <property name="inverted">True</property>
+                                <style>
+                                  <class name="progressbar"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkProgressBar" id="progressbar1">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="valign">start</property>
+                                <style>
+                                  <class name="progressbar"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -165,23 +225,23 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
                 </child>
               </object>
+              <packing>
+                <property name="name">page1</property>
+                <property name="title" translatable="yes">page1</property>
+                <property name="position">2</property>
+              </packing>
             </child>
           </object>
           <packing>
-            <property name="name">page1</property>
-            <property name="title" translatable="yes">page1</property>
-            <property name="position">1</property>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
