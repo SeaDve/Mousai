@@ -19,8 +19,10 @@ import sys
 import gi
 
 gi.require_version('Gtk', '3.0')
+gi.require_version('Gst', '1.0')
+gi.require_version('Handy', '1')
 
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, Handy
 
 from .window import MousaiWindow
 
@@ -29,6 +31,11 @@ class Application(Gtk.Application):
     def __init__(self):
         super().__init__(application_id='io.github.seadve.Mousai',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
+
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+
+        Handy.init()
 
     def do_activate(self):
         win = self.props.active_window

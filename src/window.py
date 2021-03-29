@@ -19,16 +19,17 @@ import requests
 import json
 from subprocess import PIPE, Popen
 
-from gi.repository import Gtk, Gst, GLib
+from gi.repository import Gtk, Gst, GLib, Handy
 
 Gst.init(None)
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
-class MousaiWindow(Gtk.ApplicationWindow):
+class MousaiWindow(Handy.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 
     start_button = Gtk.Template.Child()
+    history_listbox = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -42,12 +43,17 @@ class MousaiWindow(Gtk.ApplicationWindow):
         song_file = self.voice_recorder.get_tmp_dir()
         json_output = json.loads(self.song_guesser(song_file))
 
+        print(json_output)
         print(json_output["status"])
+
         try:
-            print(json_output["result"]["title"])
-            print(json_output["result"]["artist"])
+            title = json_output["result"]["title"]
+            artist = json_output["result"]["artist"]
+
+            song_row = SongRow(title, artist)
+            song_row.show()
+            self.history_listbox.insert(song_row, 0)
         except Exception:
-            print(json_output)
             print("Song not found")
 
     def song_guesser(self, song_file):
@@ -59,6 +65,13 @@ class MousaiWindow(Gtk.ApplicationWindow):
         result = requests.post('https://api.audd.io/', data=data, files=files)
         return result.text
 
+
+class SongRow(Handy.ActionRow):
+    def __init__(self, title, artist, **kwargs):
+        super().__init__(**kwargs)
+
+        self.set_title(title)
+        self.set_subtitle(artist)
 
 
 class VoiceRecorder:
