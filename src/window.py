@@ -70,7 +70,7 @@ class MousaiWindow(Handy.ApplicationWindow):
                 self.memory_list = json.load(memory_file)
         except Exception:
             with open("sample.json", "w") as memory_file:
-                memory_file.write("[]")
+                memory_file.write("[]") # WILL CREATE ERROR ON FIRST LAUNCH
                 self.memory_list = json.load(memory_file)
 
         if self.memory_list:
@@ -153,7 +153,6 @@ class MousaiWindow(Handy.ApplicationWindow):
         TOKEN = 'e49148ca676e38f5c8d3d47feac62af8'
 
         data = {
-            'return': 'apple_music,spotify',
             'api_token': TOKEN
         }
         files = {'file': open(song_file, 'rb')}
