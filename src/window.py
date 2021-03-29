@@ -15,8 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import requests
+import os
 import json
+import requests
+import time
 from subprocess import PIPE, Popen
 
 from gi.repository import Gtk, Gst, GLib, Handy, Gio
@@ -25,10 +27,10 @@ Gst.init(None)
 
 # DONE Implement song not found
 # DONE add empty state on main_screen
-# make listening state more beautiful
+# DONE make listening state more beautiful
+# DONE save song history
 # add image on action row
 # make it easier to insert token
-# save song history
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
@@ -52,6 +54,7 @@ class MousaiWindow(Handy.ApplicationWindow):
         super().__init__(**kwargs)
         self.start_button.connect("clicked", self.on_start_button_clicked)
         self.cancel_button.connect("clicked", self.on_cancel_button_clicked)
+        self.connect("delete-event", self.on_quit)
         self.voice_recorder = VoiceRecorder()
 
         # title = "TITLE"
@@ -62,9 +65,38 @@ class MousaiWindow(Handy.ApplicationWindow):
         # song_row.show()
         # self.history_listbox.insert(song_row, 0)
 
-        self.memory_list = []
-        if not self.memory_list:
+        try:
+            with open("sample.json", "r") as memory_file:
+                self.memory_list = json.load(memory_file)
+        except Exception:
+            with open("sample.json", "w") as memory_file:
+                memory_file.write("[]")
+                self.memory_list = json.load(memory_file)
+
+        if self.memory_list:
+            self.load_memory_list(self.memory_list)
+        else:
             self.main_stack.set_visible_child(self.empty_state_box)
+
+    def load_memory_list(self, memory_list):
+        for num, item in enumerate(memory_list):
+            title = memory_list[num]["title"]
+            artist = memory_list[num]["artist"]
+            song_link = memory_list[num]["song_link"]
+
+            song_row = SongRow(title, artist, song_link)
+            song_row.show()
+            self.history_listbox.insert(song_row, 0)
+
+    def clear_memory_list(self):
+        with open("sample.json", "w") as memory_file:
+            memory_file.write("[]")
+            self.memory_list = json.load(memory_file)
+
+    def on_quit(self, widget, arg):
+        json_memory = json.dumps(self.memory_list, indent=4)
+        with open("sample.json", "w") as outfile:
+            outfile.write(json_memory)
 
     def on_start_button_clicked(self, widget):
         self.voice_recorder.start(self, self.on_microphone_record_callback)
@@ -93,7 +125,11 @@ class MousaiWindow(Handy.ApplicationWindow):
             artist = json_output["result"]["artist"]
             song_link = json_output["result"]["song_link"]
 
-            self.memory_list.append(title)
+            self.song_entry = {}
+            self.song_entry["title"] = title
+            self.song_entry["artist"] = artist
+            self.song_entry["song_link"] = song_link
+            self.memory_list.append(self.song_entry)
 
             song_row = SongRow(title, artist, song_link)
             song_row.show()
@@ -149,15 +185,13 @@ class VoiceRecorder:
     def start(self, window, param):
         self.window = window
 
+        # AUDIO RECORDER
         pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! opusenc ! webmmux ! filesink location={self.get_tmp_dir()}'
         self.recorder_gst = Gst.parse_launch(pipeline)
         bus = self.recorder_gst.get_bus()
         bus.add_signal_watch()
         bus.connect("message", self._on_recorder_gst_message)
         self.recorder_gst.set_state(Gst.State.PLAYING)
-
-        self.timer = Timer(self._on_stop_record, param, 5)
-        self.timer.start()
 
         # VISUALIZER
         pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! level interval=50000000 ! fakesink qos=false'
@@ -166,6 +200,9 @@ class VoiceRecorder:
         bus.add_signal_watch()
         bus.connect("message", self._on_visualizer_gst_message)
         self.visualizer_gst.set_state(Gst.State.PLAYING)
+
+        self.timer = Timer(self._on_stop_record, param, 5)
+        self.timer.start()
 
     def cancel(self):
         self.recorder_gst.send_event(Gst.Event.new_eos())
@@ -234,5 +271,3 @@ class Timer:
 
     def stop(self):
         self.stopped = True
-
-    
