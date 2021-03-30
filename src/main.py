@@ -84,7 +84,6 @@ class Application(Gtk.Application):
 
     def reset_token_value(self, action, widget):
         self.get_active_window().destroy()
-        self.settings.set_string("token-value", "default")
         win = WelcomeWindow(self.settings, application=self)
         win.present()
 
