@@ -41,14 +41,14 @@
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
                 <property name="accelerator">&lt;ctrl&gt;r</property>
-                <property name="title" translatable="yes">Toggle record</property>
+                <property name="title" translatable="yes">Start listening</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
                 <property name="accelerator">&lt;ctrl&gt;c</property>
-                <property name="title" translatable="yes">Cancel delay</property>
+                <property name="title" translatable="yes">Cancel listening</property>
               </object>
             </child>
           </object>

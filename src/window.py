@@ -28,11 +28,15 @@ Gst.init(None)
 
 # DONE Implement song not found
 # DONE add empty state on main_screen
-# DONE make listening state more beautiful
 # DONE save song history
-# add image on action row
-# make it easier to insert token
+# DONE add image on action row
+# DONE make it easier to insert token
+# DONE move to proper data dir
 
+# use hdy avatar
+# fix issue on first start
+# DONE make listening state more beautiful
+# more informative insert token state
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):
@@ -59,19 +63,13 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.connect("delete-event", self.on_quit)
         self.voice_recorder = VoiceRecorder()
 
-        # title = "TITLE"
-        # artist = "ARTIST"
-        # song_link = "SONG_LINK"
-
-        # song_row = SongRow(title, artist, song_link)
-        # song_row.show()
-        # self.history_listbox.insert(song_row, 0)
+        self.json_directory = f"{self.voice_recorder.get_tmp_dir()}mousai.json"
 
         try:
-            with open("sample.json", "r") as memory_file:
+            with open(self.json_directory, "r") as memory_file:
                 self.memory_list = json.load(memory_file)
         except Exception:
-            with open("sample.json", "w") as memory_file:
+            with open(self.json_directory, "w") as memory_file:
                 memory_file.write("[]") # WILL CREATE ERROR ON FIRST LAUNCH
                 self.memory_list = json.load(memory_file)
 
@@ -93,7 +91,7 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def clear_memory_list(self):
         empty_list = json.dumps([], indent=4)
-        with open("sample.json", "w") as memory_file:
+        with open(self.json_directory, "w") as memory_file:
             memory_file.write(empty_list)
             self.memory_list = []
 
@@ -103,7 +101,7 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def on_quit(self, widget, arg):
         json_memory = json.dumps(self.memory_list, indent=4)
-        with open("sample.json", "w") as outfile:
+        with open(self.json_directory, "w") as outfile:
             outfile.write(json_memory)
 
     def on_start_button_clicked(self, widget):
@@ -122,7 +120,8 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.listen_cancel_stack.set_visible_child(self.start_button)
 
     def on_microphone_record_callback(self):
-        song_file = self.voice_recorder.get_tmp_dir()
+        song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
+        print(song_file)
         json_output = json.loads(self.song_guesser(song_file))
 
         print(json_output)
@@ -190,7 +189,7 @@ class SongRow(Handy.ActionRow):
         self.song_link = song_link
 
         #self.song_icon.set_text(title)
-        self.song_icon.set_from_file(f"{title}.jpg")
+        self.song_icon.set_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
         self.add_prefix(self.song_icon)
 
         placeholder = Gtk.Button()
@@ -206,7 +205,7 @@ class VoiceRecorder:
         self.window = window
 
         # AUDIO RECORDER
-        pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! opusenc ! webmmux ! filesink location={self.get_tmp_dir()}'
+        pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! opusenc ! webmmux ! filesink location={self.get_tmp_dir()}mousaitmp.ogg'
         self.recorder_gst = Gst.parse_launch(pipeline)
         bus = self.recorder_gst.get_bus()
         bus.add_signal_watch()
@@ -254,12 +253,12 @@ class VoiceRecorder:
         except:
             pass
 
-    def get_tmp_dir(self):
+    @staticmethod
+    def get_tmp_dir():
         directory = GLib.getenv('XDG_CACHE_HOME')
         if not directory:
             directory = ""
-        #return f"{directory}/tmp/mousaitmp.ogg"
-        return "/home/dave/test.ogg"
+        return f"{directory}/tmp/"
 
     def get_default_audio_input(self):
         pactl_output = Popen(
