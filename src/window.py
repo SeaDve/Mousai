@@ -92,9 +92,14 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.history_listbox.insert(song_row, 0)
 
     def clear_memory_list(self):
+        empty_list = json.dumps([], indent=4)
         with open("sample.json", "w") as memory_file:
-            memory_file.write("[]")
-            self.memory_list = json.load(memory_file)
+            memory_file.write(empty_list)
+            self.memory_list = []
+
+        win = MousaiWindow(self.settings, application=self.get_application())
+        self.destroy()
+        win.present()
 
     def on_quit(self, widget, arg):
         json_memory = json.dumps(self.memory_list, indent=4)
