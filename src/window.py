@@ -259,7 +259,8 @@ class VoiceRecorder:
             directory = ""
         return f"{directory}/tmp/"
 
-    def get_default_audio_input(self):
+    @staticmethod
+    def get_default_audio_input():
         pactl_output = Popen(
             'pactl info | tail -n +14 | cut -d" " -f3',
             shell=True,
