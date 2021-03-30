@@ -32,10 +32,11 @@ Gst.init(None)
 # DONE add image on action row
 # DONE make it easier to insert token
 # DONE move to proper data dir
+# DONE make listening state more beautiful
 
 # use hdy avatar
 # fix issue on first start
-# DONE make listening state more beautiful
+# create icon
 # more informative insert token state
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
@@ -52,8 +53,7 @@ class MousaiWindow(Handy.ApplicationWindow):
     recording_box = Gtk.Template.Child()
     empty_state_box = Gtk.Template.Child()
 
-    progressbar =  Gtk.Template.Child()
-    progressbar1 =  Gtk.Template.Child()
+    mic_status = Gtk.Template.Child()
 
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
@@ -68,7 +68,9 @@ class MousaiWindow(Handy.ApplicationWindow):
         try:
             with open(self.json_directory, "r") as memory_file:
                 self.memory_list = json.load(memory_file)
-        except Exception:
+        except Exception as e:
+            print(e)
+            print("exception")
             with open(self.json_directory, "w") as memory_file:
                 memory_file.write("[]") # WILL CREATE ERROR ON FIRST LAUNCH
                 self.memory_list = json.load(memory_file)
@@ -83,7 +85,6 @@ class MousaiWindow(Handy.ApplicationWindow):
             title = memory_list[num]["title"]
             artist = memory_list[num]["artist"]
             song_link = memory_list[num]["song_link"]
-            #icon_uri = memory_list[num]["icon_uri"]
 
             song_row = SongRow(title, artist, song_link)
             song_row.show()
@@ -139,10 +140,10 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.song_entry["icon_uri"] = icon_uri
             self.memory_list.append(self.song_entry)
 
-            urllib.request.urlretrieve(icon_uri, f'{title}.jpg')
+            urllib.request.urlretrieve(icon_uri, f"{self.voice_recorder.get_tmp_dir()}{title}.jpg")
 
             song_row = SongRow(title, artist, song_link)
-            song_row.song_icon.set_from_file(f"{title}.jpg")
+            song_row.song_icon.set_from_file(f"{self.voice_recorder.get_tmp_dir()}{title}.jpg")
             song_row.show()
             self.history_listbox.insert(song_row, 0)
         except Exception:
@@ -244,13 +245,21 @@ class VoiceRecorder:
             print("Error: %s" % err, debug)
 
     def _on_visualizer_gst_message(self, bus, message):
+        val = 100
         try:
             p = message.get_structure().get_value("rms")
-            frac = int(50-(-1*p[0]))/50
-            self.window.progressbar.set_fraction(frac)
-            self.window.progressbar1.set_fraction(frac)
+            val = int(p[0]*-2.2)
         except:
             pass
+
+        if 0 <= val <= 36:
+            self.window.mic_status.set_from_icon_name("microphone-sensitivity-high-symbolic", 72)
+        elif 37 <= val <= 57:
+            self.window.mic_status.set_from_icon_name("microphone-sensitivity-medium-symbolic", 72)
+        elif 58 <= val <= 85:
+            self.window.mic_status.set_from_icon_name("microphone-sensitivity-low-symbolic", 72)
+        elif val >= 86:
+            self.window.mic_status.set_from_icon_name("microphone-sensitivity-muted-symbolic", 72)
 
     @staticmethod
     def get_tmp_dir():
