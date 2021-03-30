@@ -9,8 +9,7 @@
         "--share=ipc",
         "--socket=pulseaudio",
         "--socket=fallback-x11",
-        "--socket=wayland",
-        "--filesystem=home"
+        "--socket=wayland"
     ],
     "cleanup" : [
         "/include",
@@ -28,11 +27,11 @@
             "name" : "libhandy",
             "buildsystem": "meson",
             "config-opts":[
-          	"-Dgtk_doc=false",
-          	"-Dtests=false",
-          	"-Dexamples=false",
-          	"-Dvapi=false",
-          	"-Dglade_catalog=disabled"
+                "-Dgtk_doc=false",
+                "-Dtests=false",
+                "-Dexamples=false",
+                "-Dvapi=false",
+                "-Dglade_catalog=disabled"
             ],
             "cleanup" : [
                 "/include",
@@ -86,8 +85,8 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "file:///home/dave/Projects/Mousai"
+                    "type" : "dir",
+                    "url" : "."
                 }
             ]
         }
