@@ -19,11 +19,10 @@ import json
 import requests
 import urllib.request
 from gettext import gettext as _
-from subprocess import PIPE, Popen
 
-from gi.repository import Gtk, Gst, GLib, Handy, Gio
+from gi.repository import Gtk, Handy, Gio
 
-Gst.init(None)
+from .utils import VoiceRecorder
 
 # DONE Implement song not found
 # DONE add empty state on main_screen
@@ -195,106 +194,3 @@ class SongRow(Handy.ActionRow):
 
     def on_songrow_clicked(self, widget):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
-
-
-class VoiceRecorder:
-    def start(self, window, param):
-        self.window = window
-
-        # AUDIO RECORDER
-        pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
-                    f'opusenc ! webmmux ! filesink location={self.get_tmp_dir()}mousaitmp.ogg')
-        self.recorder_gst = Gst.parse_launch(pipeline)
-        bus = self.recorder_gst.get_bus()
-        bus.add_signal_watch()
-        bus.connect("message", self._on_recorder_gst_message)
-        self.recorder_gst.set_state(Gst.State.PLAYING)
-
-        # VISUALIZER
-        pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
-                    'level interval=50000000 ! fakesink qos=false')
-        self.visualizer_gst = Gst.parse_launch(pipeline)
-        bus = self.visualizer_gst.get_bus()
-        bus.add_signal_watch()
-        bus.connect("message", self._on_visualizer_gst_message)
-        self.visualizer_gst.set_state(Gst.State.PLAYING)
-
-        self.timer = Timer(self._on_stop_record, param, 5)
-        self.timer.start()
-
-    def cancel(self):
-        self.recorder_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.set_state(Gst.State.NULL)
-        self.timer.stop()
-
-    def _on_stop_record(self, callback):
-        self.recorder_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.set_state(Gst.State.NULL)
-        callback()
-
-    def _on_recorder_gst_message(self, bus, message):
-        t = message.type
-        if t == Gst.MessageType.EOS:
-            self.recorder_gst.set_state(Gst.State.NULL)
-        elif t == Gst.MessageType.ERROR:
-            self.recorder_gst.set_state(Gst.State.NULL)
-            err, debug = message.parse_error()
-            print("Error: %s" % err, debug)
-
-    def _on_visualizer_gst_message(self, bus, message):
-        val = 100
-        try:
-            p = message.get_structure().get_value("rms")
-            val = int(p[0] * -2.2)
-        except Exception:
-            pass
-
-        if 0 <= val <= 36:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-high-symbolic", 72)
-        elif 37 <= val <= 57:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-medium-symbolic", 72)
-        elif 58 <= val <= 85:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-low-symbolic", 72)
-        elif val >= 86:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-muted-symbolic", 72)
-
-    @staticmethod
-    def get_tmp_dir():
-        directory = GLib.getenv('XDG_CACHE_HOME')
-        if not directory:
-            directory = ""
-        return f"{directory}/tmp/"
-
-    @staticmethod
-    def get_default_audio_input():
-        pactl_output = Popen(
-            'pactl info | tail -n +14 | cut -d" " -f3',
-            shell=True,
-            text=True,
-            stdout=PIPE
-        ).stdout.read().rstrip()
-        return pactl_output
-
-
-class Timer:
-    def __init__(self, function, param, time_delay):
-        self.function = function
-        self.param = param
-        self.time_delay = time_delay * 100
-        self.stopped = False
-
-    def _displaydelay(self):
-        if self.time_delay == 10 or self.stopped:
-            if not self.stopped:
-                self.function(self.param)
-            return False
-        self.time_delay -= 10
-        return True
-
-    def start(self):
-        GLib.timeout_add(100, self._displaydelay)
-
-    def stop(self):
-        self.stopped = True
