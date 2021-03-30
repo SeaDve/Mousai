@@ -39,15 +39,15 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="valign">center</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
+                    <property name="margin-start">36</property>
+                    <property name="margin-end">36</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">36</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Mousai uses audd.io APIs to work, so it is required to login to &lt;a href="https://dashboard.audd.io/"&gt;their website&lt;/a&gt;, and get a token.</property>
+                        <property name="label" translatable="yes">Mousai uses audd.io APIs to work, so it is required to login to &lt;a href="https://dashboard.audd.io/"&gt;their website&lt;/a&gt; and get a token. Leaving this blank will give you a couple of trials.</property>
                         <property name="use-markup">True</property>
                         <property name="justify">center</property>
                         <property name="wrap">True</property>

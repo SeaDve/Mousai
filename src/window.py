@@ -33,11 +33,11 @@ Gst.init(None)
 # DONE make it easier to insert token
 # DONE move to proper data dir
 # DONE make listening state more beautiful
+# DONE more informative insert token state
 
 # use hdy avatar
 # fix issue on first start
 # create icon
-# more informative insert token state
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):
