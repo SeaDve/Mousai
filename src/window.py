@@ -15,14 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import json
 import requests
-import time
 import urllib.request
 from subprocess import PIPE, Popen
 
-from gi.repository import Gtk, Gst, GLib, Handy, Gio, GdkPixbuf
+from gi.repository import Gtk, Gst, GLib, Handy, Gio
 
 Gst.init(None)
 
@@ -38,6 +36,7 @@ Gst.init(None)
 
 # use hdy avatar
 # create icon
+
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):
@@ -68,7 +67,7 @@ class MousaiWindow(Handy.ApplicationWindow):
         try:
             with open(self.json_directory, "r") as memory_file:
                 self.memory_list = json.load(memory_file)
-        except Exception as e:
+        except Exception:
             with open(self.json_directory, "w") as memory_file:
                 json.dump([], memory_file)
                 self.memory_list = []
@@ -185,7 +184,7 @@ class SongRow(Handy.ActionRow):
         self.set_subtitle(artist)
         self.song_link = song_link
 
-        #self.song_icon.set_text(title)
+        # self.song_icon.set_text(title)
         self.song_icon.set_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
         self.add_prefix(self.song_icon)
 
@@ -245,8 +244,8 @@ class VoiceRecorder:
         val = 100
         try:
             p = message.get_structure().get_value("rms")
-            val = int(p[0]*-2.2)
-        except:
+            val = int(p[0] * -2.2)
+        except Exception:
             pass
 
         if 0 <= val <= 36:

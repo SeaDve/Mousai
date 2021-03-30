@@ -19,6 +19,7 @@ from gi.repository import Gtk, Handy
 
 from .window import MousaiWindow
 
+
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/welcome.ui')
 class WelcomeWindow(Handy.ApplicationWindow):
     __gtype_name__ = 'WelcomeWindow'
