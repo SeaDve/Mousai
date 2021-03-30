@@ -5,5 +5,7 @@
     <file alias="songrow.ui">ui/songrow.ui</file>
     <file alias="welcome.ui">ui/welcome.ui</file>
     <file alias="shortcuts.ui">ui/shortcuts.ui</file>
+
+    <file preprocess="xml-stripblanks" alias="logo.svg">logo/io.github.seadve.Mousai.svg</file>
   </gresource>
 </gresources>
