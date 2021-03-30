@@ -58,7 +58,7 @@ class Application(Gtk.Application):
         token = self.settings.get_string("token-value")
         win = self.props.active_window
         if not win:
-            if token == "default":
+            if not token:
                 win = WelcomeWindow(self.settings, application=self)
             else:
                 win = MousaiWindow(self.settings, application=self)

@@ -2,7 +2,7 @@
 <schemalist gettext-domain="mousai">
   <schema id="io.github.seadve.Mousai" path="/io/github/seadve/Mousai/">
     <key type="s" name="token-value">
-      <default>"default"</default>
+      <default>""</default>
     </key>
   </schema>
 </schemalist>
