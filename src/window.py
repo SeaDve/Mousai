@@ -25,19 +25,6 @@ from gi.repository import Gtk, Handy
 from .songrow import SongRow
 from .utils import VoiceRecorder
 
-# DONE Implement song not found
-# DONE add empty state on main_screen
-# DONE save song history
-# DONE add image on action row
-# DONE make it easier to insert token
-# DONE move to proper data dir
-# DONE make listening state more beautiful
-# DONE more informative insert token state
-# DONE fix issue on first start
-
-# use hdy avatar
-# create icon
-
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):

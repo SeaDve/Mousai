@@ -1,0 +1,153 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mousai package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: mousai\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-30 14:26+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.seadve.Mousai.desktop.in:3
+#: data/io.github.seadve.Mousai.appdata.xml.in:6
+msgid "Mousai"
+msgstr ""
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.seadve.Mousai.desktop.in:11
+msgid "Shazam;Music;Song;Identify;"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:7
+msgid "Simple song indentifier"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:9
+msgid ""
+"Mousai is a simple application that can identify song like Shazam. It saves "
+"the artist, album, and title of the identified song in a JSON file. Note: "
+"This uses the API of audd.io, so it is necessary to login to their site to "
+"get more trials."
+msgstr ""
+
+#. Translators: please do NOT translate this
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
+msgid "Dave Patrick"
+msgstr ""
+
+#: src/main.py:106
+msgid "Simple song identifier"
+msgstr ""
+
+#: src/main.py:109
+msgid "Copyright 2021 Dave Patrick"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/main.py:111
+msgid "translator-credits"
+msgstr ""
+
+#: src/main.py:112
+msgid "GitHub"
+msgstr ""
+
+#: src/window.py:138
+msgid "Sorry!"
+msgstr ""
+
+#: src/window.py:139
+msgid "The song was not recognized."
+msgstr ""
+
+#: data/ui/shortcuts.ui:12
+msgid "General"
+msgstr ""
+
+#: data/ui/shortcuts.ui:17
+msgid "Open menu"
+msgstr ""
+
+#: data/ui/shortcuts.ui:24
+msgid "Show keyboard shortcuts"
+msgstr ""
+
+#: data/ui/shortcuts.ui:31
+msgid "Quit"
+msgstr ""
+
+#: data/ui/shortcuts.ui:39
+msgid "Recording"
+msgstr ""
+
+#: data/ui/shortcuts.ui:44
+msgid "Start listening"
+msgstr ""
+
+#: data/ui/shortcuts.ui:51
+msgid "Cancel listening"
+msgstr ""
+
+#: data/ui/welcome.ui:19
+msgid "Welcome to Mousai"
+msgstr ""
+
+#: data/ui/welcome.ui:50
+msgid ""
+"Mousai uses audd.io APIs to work, so it is required to login to <a href="
+"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+"this as default will give you a couple of trials."
+msgstr ""
+
+#: data/ui/welcome.ui:70
+msgid "Enter a valid token"
+msgstr ""
+
+#: data/ui/welcome.ui:80
+msgid "Submit"
+msgstr ""
+
+#: data/ui/welcome.ui:110 data/ui/window.ui:41 data/ui/window.ui:145
+msgid "page0"
+msgstr ""
+
+#: data/ui/window.ui:28
+msgid "Listen"
+msgstr ""
+
+#: data/ui/window.ui:46
+msgid "Cancel"
+msgstr ""
+
+#: data/ui/window.ui:57 data/ui/window.ui:207
+msgid "page1"
+msgstr ""
+
+#: data/ui/window.ui:184
+msgid "Listening…"
+msgstr ""
+
+#: data/ui/window.ui:225
+msgid "Clear song history"
+msgstr ""
+
+#: data/ui/window.ui:229
+msgid "Reset token"
+msgstr ""
+
+#: data/ui/window.ui:235
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/ui/window.ui:239
+msgid "About Mousai"
+msgstr ""
