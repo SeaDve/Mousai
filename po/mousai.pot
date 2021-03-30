@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 14:44+0800\n"
+"POT-Creation-Date: 2021-03-30 16:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
@@ -72,23 +72,24 @@ msgstr ""
 msgid "Cancel listening"
 msgstr ""
 
-#: data/ui/welcome.ui:16
+#: data/ui/welcome.ui:41
 msgid "Welcome to Mousai"
 msgstr ""
 
-#: data/ui/welcome.ui:38
-msgid ""
-"Mousai uses audd.io APIs to work, so it is required to login to <a href="
-"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
-"this as default will give you a couple of trials."
-msgstr ""
-
-#: data/ui/welcome.ui:53
+#: data/ui/welcome.ui:57
 msgid "Enter a valid token"
 msgstr ""
 
-#: data/ui/welcome.ui:58
+#: data/ui/welcome.ui:62
 msgid "Submit"
+msgstr ""
+
+#: data/ui/welcome.ui:80
+msgctxt "Do not translate the link, only 'their website'"
+msgid ""
+"Mousai uses audd.io APIs to work, so it is required to login to <a href="
+"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+"this as default will give you a few trials."
 msgstr ""
 
 #: data/ui/window.ui:24
@@ -109,7 +110,7 @@ msgid "Click the listen button to start"
 msgstr ""
 
 #: data/ui/window.ui:134
-msgid "Listening…"
+msgid "Listening"
 msgstr ""
 
 #: data/ui/window.ui:155
@@ -128,20 +129,20 @@ msgstr ""
 msgid "About Mousai"
 msgstr ""
 
-#: src/main.py:99
+#: src/main.py:106
 msgid "Simple song identifier"
 msgstr ""
 
-#: src/main.py:102
+#: src/main.py:109
 msgid "Copyright 2021 Dave Patrick"
 msgstr ""
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:104
+#: src/main.py:111
 msgid "translator-credits"
 msgstr ""
 
-#: src/main.py:105
+#: src/main.py:112
 msgid "GitHub"
 msgstr ""
 
