@@ -1,3 +1,5 @@
+subdir('logo')
+
 desktop_file = i18n.merge_file(
   input: 'io.github.seadve.Mousai.desktop.in',
   output: 'io.github.seadve.Mousai.desktop',
