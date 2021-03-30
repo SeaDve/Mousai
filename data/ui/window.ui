@@ -120,7 +120,7 @@
                         <property name="valign">center</property>
                         <property name="vexpand">True</property>
                         <property name="orientation">vertical</property>
-                        <property name="spacing">18</property>
+                        <property name="spacing">36</property>
                         <child>
                           <object class="GtkImage" id="mic_status">
                             <property name="visible">True</property>
@@ -131,9 +131,9 @@
                         <child>
                           <object class="GtkLabel">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Listening…</property>
+                            <property name="label" translatable="yes">Listening</property>
                             <style>
-                              <class name="welcome_label"/>
+                              <class name="listening_label"/>
                             </style>
                           </object>
                         </child>
