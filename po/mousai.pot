@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 14:26+0800\n"
+"POT-Creation-Date: 2021-03-30 14:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,31 +44,6 @@ msgstr ""
 msgid "Dave Patrick"
 msgstr ""
 
-#: src/main.py:106
-msgid "Simple song identifier"
-msgstr ""
-
-#: src/main.py:109
-msgid "Copyright 2021 Dave Patrick"
-msgstr ""
-
-#. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:111
-msgid "translator-credits"
-msgstr ""
-
-#: src/main.py:112
-msgid "GitHub"
-msgstr ""
-
-#: src/window.py:138
-msgid "Sorry!"
-msgstr ""
-
-#: src/window.py:139
-msgid "The song was not recognized."
-msgstr ""
-
 #: data/ui/shortcuts.ui:12
 msgid "General"
 msgstr ""
@@ -97,57 +72,83 @@ msgstr ""
 msgid "Cancel listening"
 msgstr ""
 
-#: data/ui/welcome.ui:19
+#: data/ui/welcome.ui:16
 msgid "Welcome to Mousai"
 msgstr ""
 
-#: data/ui/welcome.ui:50
+#: data/ui/welcome.ui:38
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this as default will give you a couple of trials."
 msgstr ""
 
-#: data/ui/welcome.ui:70
+#: data/ui/welcome.ui:53
 msgid "Enter a valid token"
 msgstr ""
 
-#: data/ui/welcome.ui:80
+#: data/ui/welcome.ui:58
 msgid "Submit"
 msgstr ""
 
-#: data/ui/welcome.ui:110 data/ui/window.ui:41 data/ui/window.ui:145
-msgid "page0"
-msgstr ""
-
-#: data/ui/window.ui:28
+#: data/ui/window.ui:24
 msgid "Listen"
 msgstr ""
 
-#: data/ui/window.ui:46
+#: data/ui/window.ui:36
 msgid "Cancel"
 msgstr ""
 
-#: data/ui/window.ui:57 data/ui/window.ui:207
-msgid "page1"
+#: data/ui/window.ui:105
+msgctxt "Mousaing is not a real word"
+msgid "Start Mousaing!"
 msgstr ""
 
-#: data/ui/window.ui:184
+#: data/ui/window.ui:106
+msgid "Click the listen button to start"
+msgstr ""
+
+#: data/ui/window.ui:134
 msgid "Listening…"
 msgstr ""
 
-#: data/ui/window.ui:225
+#: data/ui/window.ui:155
 msgid "Clear song history"
 msgstr ""
 
-#: data/ui/window.ui:229
+#: data/ui/window.ui:159
 msgid "Reset token"
 msgstr ""
 
-#: data/ui/window.ui:235
+#: data/ui/window.ui:165
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: data/ui/window.ui:239
+#: data/ui/window.ui:169
 msgid "About Mousai"
+msgstr ""
+
+#: src/main.py:99
+msgid "Simple song identifier"
+msgstr ""
+
+#: src/main.py:102
+msgid "Copyright 2021 Dave Patrick"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/main.py:104
+msgid "translator-credits"
+msgstr ""
+
+#: src/main.py:105
+msgid "GitHub"
+msgstr ""
+
+#: src/window.py:138
+msgid "Sorry!"
+msgstr ""
+
+#: src/window.py:139
+msgid "The song was not recognized."
 msgstr ""

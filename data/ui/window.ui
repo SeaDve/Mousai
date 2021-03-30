@@ -102,8 +102,8 @@
               <object class="HdyStatusPage" id="empty_state_box">
                 <property name="visible">True</property>
                 <property name="icon-name">emblem-music-symbolic</property>
-                <property name="title">Start Mousaing!</property>
-                <property name="description">Click the listen button to start</property>
+                <property name="title" translatable="yes" context="Mousaing is not a real word">Start Mousaing!</property>
+                <property name="description" translatable="yes">Click the listen button to start</property>
               </object>
             </child>
             <child>
