@@ -124,7 +124,7 @@
                         <child>
                           <object class="GtkImage" id="mic_status">
                             <property name="visible">True</property>
-                            <property name="pixel-size">72</property>
+                            <property name="pixel-size">108</property>
                             <property name="icon-name">audio-input-microphone-symbolic</property>
                           </object>
                         </child>
@@ -132,9 +132,9 @@
                           <object class="GtkLabel">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">Listening…</property>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
+                            <style>
+                              <class name="welcome_label"/>
+                            </style>
                           </object>
                         </child>
                       </object>
