@@ -23,6 +23,7 @@ mousai_sources = [
   'window.py',
   'welcome.py',
   'utils.py',
+  'songrow.py',
 ]
 
 install_data(mousai_sources, install_dir: moduledir)
