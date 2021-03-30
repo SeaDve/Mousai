@@ -42,13 +42,6 @@ class Application(Gtk.Application):
     def do_startup(self):
         Gtk.Application.do_startup(self)
 
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_resource('/io/github/seadve/Mousai/style.css')
-        screen = Gdk.Screen.get_default()
-        Gtk.StyleContext.add_provider_for_screen(
-            screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
-        )
-
         self.settings = Gio.Settings.new('io.github.seadve.Mousai')
         self.setup_actions()
 
