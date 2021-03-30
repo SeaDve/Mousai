@@ -114,7 +114,7 @@ class Application(Gtk.Application):
         about.show()
 
     def on_quit(self, action, widget):
-        self.get_active_window().on_quit("", "")
+        self.get_active_window().on_quit(None, None)
         self.quit()
 
 
