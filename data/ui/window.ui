@@ -13,6 +13,7 @@
         <child>
           <object class="HdyHeaderBar">
             <property name="visible">True</property>
+            <property name="title">Mousai</property>
             <property name="show-close-button">True</property>
             <child>
               <object class="GtkStack" id="listen_cancel_stack">
