@@ -22,15 +22,21 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('Handy', '1')
 
-from gi.repository import Gtk, Gio, Handy, Gdk
+from gi.repository import Gtk, Gio, Handy, Gdk, GLib
 
 from .window import MousaiWindow
+from .welcome import WelcomeWindow
 
 
 class Application(Gtk.Application):
-    def __init__(self):
+    def __init__(self, version):
         super().__init__(application_id='io.github.seadve.Mousai',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
+
+        self.version = version
+
+        GLib.set_application_name("Mousai")
+        GLib.set_prgname('io.github.seadve.Mousai')
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
@@ -42,15 +48,21 @@ class Application(Gtk.Application):
             screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
+        self.settings = Gio.Settings.new('io.github.seadve.Mousai')
+
         Handy.init()
 
     def do_activate(self):
+        token = self.settings.get_string("token-value")
         win = self.props.active_window
         if not win:
-            win = MousaiWindow(application=self)
+            if token == "default":
+                win = WelcomeWindow(self.settings, application=self)
+            else:
+                win = MousaiWindow(self.settings, application=self)
         win.present()
 
 
 def main(version):
-    app = Application()
+    app = Application(version)
     return app.run(sys.argv)

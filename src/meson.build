@@ -21,6 +21,7 @@ mousai_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'welcome.py',
 ]
 
 install_data(mousai_sources, install_dir: moduledir)

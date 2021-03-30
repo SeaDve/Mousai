@@ -51,8 +51,9 @@ class MousaiWindow(Handy.ApplicationWindow):
     progressbar =  Gtk.Template.Child()
     progressbar1 =  Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
+    def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
+        self.settings = settings
         self.start_button.connect("clicked", self.on_start_button_clicked)
         self.cancel_button.connect("clicked", self.on_cancel_button_clicked)
         self.connect("delete-event", self.on_quit)
@@ -157,10 +158,10 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.listen_cancel_stack.set_visible_child(self.start_button)
 
     def song_guesser(self, song_file):
-        TOKEN = 'e49148ca676e38f5c8d3d47feac62af8'
+        token = self.settings.get_string("token-value")
 
         data = {
-            'api_token': TOKEN,
+            'api_token': token,
             'return': 'spotify',
         }
         files = {'file': open(song_file, 'rb')}

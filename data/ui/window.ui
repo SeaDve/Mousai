@@ -64,6 +64,7 @@
                 <property name="can-focus">True</property>
                 <property name="focus-on-click">False</property>
                 <property name="receives-default">True</property>
+                <property name="menu-model">menu</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -261,4 +262,26 @@
       </object>
     </child>
   </template>
+  <menu id="menu">
+    <section>
+      <item>
+        <attribute name="action">app.clear-history</attribute>
+        <attribute translatable="yes" name="label">Clear song history</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.reset-token</attribute>
+        <attribute translatable="yes" name="label">Reset token</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="action">app.show-shortcuts</attribute>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+      </item>
+      <item>
+        <attribute name="action">app.show-about</attribute>
+        <attribute name="label" translatable="yes">About Mousai</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

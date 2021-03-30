@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="mousai">
-	<schema id="io.github.seadve.Mousai" path="/io/github/seadve/Mousai/">
-	</schema>
+  <schema id="io.github.seadve.Mousai" path="/io/github/seadve/Mousai/">
+    <key type="s" name="token-value">
+      <default>"default"</default>
+    </key>
+  </schema>
 </schemalist>
