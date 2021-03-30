@@ -34,9 +34,9 @@ Gst.init(None)
 # DONE move to proper data dir
 # DONE make listening state more beautiful
 # DONE more informative insert token state
+# DONE fix issue on first start
 
 # use hdy avatar
-# fix issue on first start
 # create icon
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
@@ -69,11 +69,9 @@ class MousaiWindow(Handy.ApplicationWindow):
             with open(self.json_directory, "r") as memory_file:
                 self.memory_list = json.load(memory_file)
         except Exception as e:
-            print(e)
-            print("exception")
             with open(self.json_directory, "w") as memory_file:
-                memory_file.write("[]") # WILL CREATE ERROR ON FIRST LAUNCH
-                self.memory_list = json.load(memory_file)
+                json.dump([], memory_file)
+                self.memory_list = []
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
@@ -172,7 +170,6 @@ class MousaiWindow(Handy.ApplicationWindow):
 
         result = requests.post('https://api.audd.io/', data=data, files=files)
         return result.text
-        #return """{"status": "test"}"""
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/songrow.ui')
