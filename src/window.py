@@ -121,7 +121,6 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def on_microphone_record_callback(self):
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
-        print(song_file)
         json_output = json.loads(self.song_guesser(song_file))
 
         print(json_output)
