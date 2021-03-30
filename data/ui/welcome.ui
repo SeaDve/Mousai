@@ -64,6 +64,7 @@
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
                                 <property name="halign">center</property>
+                                <accelerator key="Return" signal="activate"/>
                                 <style>
                                   <class name="suggested-action"/>
                                 </style>
