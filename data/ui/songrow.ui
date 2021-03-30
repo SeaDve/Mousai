@@ -13,12 +13,10 @@
   </template>
   <object class="HdyAvatar" id="song_ic">
     <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="show-initials">True</property>
     <property name="size">36</property>
   </object>
   <object class="GtkImage" id="song_icon">
     <property name="visible">True</property>
-    <property name="can-focus">False</property>
   </object>
 </interface>
