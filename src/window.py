@@ -76,9 +76,8 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.history_listbox.insert(song_row, 0)
 
     def clear_memory_list(self):
-        empty_list = json.dumps([], indent=4)
         with open(self.json_directory, "w") as memory_file:
-            memory_file.write(empty_list)
+            json.dump([], memory_file)
             self.memory_list = []
 
         win = MousaiWindow(self.settings, application=self.get_application())
@@ -86,9 +85,8 @@ class MousaiWindow(Handy.ApplicationWindow):
         win.present()
 
     def on_quit(self, widget, arg):
-        json_memory = json.dumps(self.memory_list, indent=4)
         with open(self.json_directory, "w") as outfile:
-            outfile.write(json_memory)
+            json.dump(self.memory_list, outfile, indent=4)
 
     def on_start_button_clicked(self, widget):
         self.voice_recorder.start(self, self.on_microphone_record_callback)
