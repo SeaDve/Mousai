@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>io.github.seadve.Mousai.desktop</id>
-	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>GPL-3.0-or-later</project_license>
-	<description>
-	</description>
+  <id>io.github.seadve.Mousai.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Mousai</name>
+  <summary>Simple song indentifier</summary>
+  <description>
+    <p>
+    Mousai is a simple application that can identify song like Shazam. It saves the artist, album, and title of the identified song in a JSON file.
+
+    Note: This uses the API of audd.io, so it is necessary to login to their site to get more trials.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/SeaDve/Mousai</url>
+  <url type="bugtracker">https://github.com/SeaDve/Mousai/issues</url>
+  <url type="translate">https://github.com/SeaDve/Mousai/tree/master/po</url>
+  <url type="donation">https://paypal.me/sedve</url>
+  <!-- Translators: please do NOT translate this -->
+  <developer_name>Dave Patrick</developer_name>
+  <content_rating type="oars-1.1"/>
+
+  <launchable type="desktop-id">io.github.seadve.Mousai.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/SeaDve/Mousai/master/screenshots/Mousai-screenshot.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SeaDve/Mousai/master/screenshots/Mousai-screenshot2.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SeaDve/Mousai/master/screenshots/Mousai-screenshot3.png</image>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="0.1.0" date="2021-03-30">
+      <description>
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
+
 </component>
