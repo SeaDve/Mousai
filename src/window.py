@@ -20,8 +20,9 @@ import requests
 import urllib.request
 from gettext import gettext as _
 
-from gi.repository import Gtk, Handy, Gio
+from gi.repository import Gtk, Handy
 
+from .songrow import SongRow
 from .utils import VoiceRecorder
 
 # DONE Implement song not found
@@ -169,28 +170,3 @@ class MousaiWindow(Handy.ApplicationWindow):
 
         result = requests.post('https://api.audd.io/', data=data, files=files)
         return result.text
-
-
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/songrow.ui')
-class SongRow(Handy.ActionRow):
-    __gtype_name__ = 'SongRow'
-
-    song_icon = Gtk.Template.Child()
-
-    def __init__(self, title, artist, song_link, **kwargs):
-        super().__init__(**kwargs)
-
-        self.set_title(title)
-        self.set_subtitle(artist)
-        self.song_link = song_link
-
-        # self.song_icon.set_text(title)
-        self.song_icon.set_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
-        self.add_prefix(self.song_icon)
-
-        placeholder = Gtk.Button()
-        self.set_activatable_widget(placeholder)
-        self.connect("activated", self.on_songrow_clicked)
-
-    def on_songrow_clicked(self, widget):
-        Gio.AppInfo.launch_default_for_uri(self.song_link)
