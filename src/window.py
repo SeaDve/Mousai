@@ -18,6 +18,7 @@
 import json
 import requests
 import urllib.request
+from gettext import gettext as _
 from subprocess import PIPE, Popen
 
 from gi.repository import Gtk, Gst, GLib, Handy, Gio
@@ -201,7 +202,8 @@ class VoiceRecorder:
         self.window = window
 
         # AUDIO RECORDER
-        pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! opusenc ! webmmux ! filesink location={self.get_tmp_dir()}mousaitmp.ogg'
+        pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
+                    f'opusenc ! webmmux ! filesink location={self.get_tmp_dir()}mousaitmp.ogg')
         self.recorder_gst = Gst.parse_launch(pipeline)
         bus = self.recorder_gst.get_bus()
         bus.add_signal_watch()
@@ -209,7 +211,8 @@ class VoiceRecorder:
         self.recorder_gst.set_state(Gst.State.PLAYING)
 
         # VISUALIZER
-        pipeline = f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! level interval=50000000 ! fakesink qos=false'
+        pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
+                    'level interval=50000000 ! fakesink qos=false')
         self.visualizer_gst = Gst.parse_launch(pipeline)
         bus = self.visualizer_gst.get_bus()
         bus.add_signal_watch()

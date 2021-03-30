@@ -17,6 +17,7 @@
 
 import sys
 import gi
+from gettext import gettext as _
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')

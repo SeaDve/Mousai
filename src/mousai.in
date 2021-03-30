@@ -20,6 +20,7 @@
 import os
 import sys
 import signal
+import locale
 import gettext
 
 VERSION = '@VERSION@'
@@ -28,7 +29,11 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-gettext.install('mousai', localedir)
+
+locale.bindtextdomain('mousai', localedir)
+locale.textdomain('mousai')
+gettext.bindtextdomain('mousai', localedir)
+gettext.textdomain('mousai')
 
 if __name__ == '__main__':
     import gi
