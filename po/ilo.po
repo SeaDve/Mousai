@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-31 08:16+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-03-31 05:10+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Iloko <https://hosted.weblate.org/projects/kooha/mousai/ilo/>"
+"\n"
 "Language: ilo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.6-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -45,23 +48,23 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:12
 msgid "General"
-msgstr ""
+msgstr "Amamin"
 
 #: data/ui/shortcuts.ui:17
 msgid "Open menu"
-msgstr ""
+msgstr "Luktan ti menu"
 
 #: data/ui/shortcuts.ui:24
 msgid "Show keyboard shortcuts"
-msgstr ""
+msgstr "Ipakita ti shortcut ti keyboard"
 
 #: data/ui/shortcuts.ui:31
 msgid "Quit"
-msgstr ""
+msgstr "Rumuar"
 
 #: data/ui/shortcuts.ui:39
 msgid "Recording"
-msgstr ""
+msgstr "agrekrekord"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
