@@ -142,7 +142,6 @@ class MousaiWindow(Handy.ApplicationWindow):
         except Exception:
             pass
 
-
         if self.memory_list:
             self.main_stack.set_visible_child(self.main_screen_box)
         else:
