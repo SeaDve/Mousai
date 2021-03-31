@@ -1,3 +1,5 @@
+name: Unit Testing
+
 on:
   push:
     branches: [master]
