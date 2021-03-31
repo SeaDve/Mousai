@@ -6,17 +6,14 @@
   <template class="SongRow" parent="HdyActionRow">
     <property name="visible">True</property>
     <property name="can-focus">True</property>
-    <property name="activatable">False</property>
     <child>
       <placeholder/>
     </child>
   </template>
-  <object class="HdyAvatar" id="song_ic">
+  <object class="HdyAvatar" id="song_icon">
     <property name="visible">True</property>
-    <property name="show-initials">True</property>
-    <property name="size">36</property>
-  </object>
-  <object class="GtkImage" id="song_icon">
-    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">emblem-music-symbolic</property>
+    <property name="size">42</property>
   </object>
 </interface>

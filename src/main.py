@@ -84,6 +84,7 @@ class Application(Gtk.Application):
         self.get_active_window().clear_memory_list()
 
     def reset_token_value(self, action, widget):
+        self.get_active_window().on_quit(None, None)
         self.get_active_window().destroy()
         win = WelcomeWindow(self.settings, application=self)
         win.present()

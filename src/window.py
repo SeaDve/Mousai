@@ -20,7 +20,7 @@ import requests
 import urllib.request
 from gettext import gettext as _
 
-from gi.repository import Gtk, Handy
+from gi.repository import Gtk, Handy, GdkPixbuf
 
 from .songrow import SongRow
 from .utils import VoiceRecorder
@@ -114,19 +114,14 @@ class MousaiWindow(Handy.ApplicationWindow):
             title = json_output["result"]["title"]
             artist = json_output["result"]["artist"]
             song_link = json_output["result"]["song_link"]
-            icon_uri = json_output["result"]["spotify"]["album"]["images"][2]["url"]
 
             self.song_entry = {}
             self.song_entry["title"] = title
             self.song_entry["artist"] = artist
             self.song_entry["song_link"] = song_link
-            self.song_entry["icon_uri"] = icon_uri
             self.memory_list.append(self.song_entry)
 
-            urllib.request.urlretrieve(icon_uri, f"{self.voice_recorder.get_tmp_dir()}{title}.jpg")
-
             song_row = SongRow(title, artist, song_link)
-            song_row.song_icon.set_from_file(f"{self.voice_recorder.get_tmp_dir()}{title}.jpg")
             song_row.show()
             self.history_listbox.insert(song_row, 0)
         except Exception:
@@ -137,6 +132,16 @@ class MousaiWindow(Handy.ApplicationWindow):
             error.format_secondary_text(_("The song was not recognized."))
             error.run()
             error.destroy()
+
+        try:
+            icon_uri = json_output["result"]["spotify"]["album"]["images"][2]["url"]
+            self.song_entry["icon_uri"] = icon_uri
+            urllib.request.urlretrieve(icon_uri, f"{self.voice_recorder.get_tmp_dir()}{title}.jpg")
+            image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
+            song_row.song_icon.set_loadable_icon(image)
+        except Exception:
+            pass
+
 
         if self.memory_list:
             self.main_stack.set_visible_child(self.main_screen_box)

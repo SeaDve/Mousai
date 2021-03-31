@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import Gtk, Gio, Handy
+from gi.repository import Gtk, Gio, Handy, GdkPixbuf
 
 from .utils import VoiceRecorder
 
@@ -33,8 +33,12 @@ class SongRow(Handy.ActionRow):
         self.set_subtitle(artist)
         self.song_link = song_link
 
-        # self.song_icon.set_text(title)
-        self.song_icon.set_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
+        try:
+            image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
+            self.song_icon.set_loadable_icon(image)
+        except Exception:
+            pass
+
         self.add_prefix(self.song_icon)
 
         placeholder = Gtk.Button()
