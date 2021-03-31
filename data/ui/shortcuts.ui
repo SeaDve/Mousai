@@ -36,7 +36,7 @@
         <child>
           <object class="GtkShortcutsGroup">
             <property name="visible">True</property>
-            <property name="title" translatable="yes">Recording</property>
+            <property name="title" translatable="yes">Controls</property>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="visible">True</property>
