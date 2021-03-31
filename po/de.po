@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 19:58+0800\n"
+"POT-Creation-Date: 2021-03-31 20:37+0800\n"
 "PO-Revision-Date: 2021-03-31 05:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
@@ -144,12 +144,16 @@ msgstr "Jonathan Haas"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:131
+#: src/window.py:132
 msgid "Sorry!"
 msgstr ""
 
-#: src/window.py:132
+#: src/window.py:136
 msgid "The song was not recognized."
+msgstr ""
+
+#: src/window.py:138
+msgid "Something went wrong."
 msgstr ""
 
 #~ msgid "Recording"
