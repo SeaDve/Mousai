@@ -45,6 +45,10 @@ meson builddir --prefix=/usr/local
 ninja -C builddir install
 ```
 
+## AudD
+
+You can check their [Privacy Policy](https://audd.io/privacy/) and [Terms of Services](https://audd.io/terms/) for more informations about AudD.
+
 
 ## Credits
 
