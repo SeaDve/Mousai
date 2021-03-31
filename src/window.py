@@ -134,6 +134,8 @@ class MousaiWindow(Handy.ApplicationWindow):
                 error.format_secondary_text(json_output["error"]["error_message"])
             elif status == "success" and not json_output["result"]:
                 error.format_secondary_text(_("The song was not recognized."))
+            else:
+                error.format_secondary_text(_("Something went wrong."))
             error.run()
             error.destroy()
 
