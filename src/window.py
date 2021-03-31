@@ -136,8 +136,8 @@ class MousaiWindow(Handy.ApplicationWindow):
         try:
             icon_uri = json_output["result"]["spotify"]["album"]["images"][2]["url"]
             self.song_entry["icon_uri"] = icon_uri
-            urllib.request.urlretrieve(icon_uri, f"{self.voice_recorder.get_tmp_dir()}{title}.jpg")
-            image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}.jpg")
+            urllib.request.urlretrieve(icon_uri, f"{self.voice_recorder.get_tmp_dir()}{title}{artist}.jpg")
+            image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg")
             song_row.song_icon.set_loadable_icon(image)
         except Exception:
             pass
