@@ -127,9 +127,9 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.history_listbox.insert(song_row, 0)
         except Exception:
             error = Gtk.MessageDialog(transient_for=self,
-                                          type=Gtk.MessageType.WARNING,
-                                          buttons=Gtk.ButtonsType.OK,
-                                          text=_("Sorry!"))
+                                      type=Gtk.MessageType.WARNING,
+                                      buttons=Gtk.ButtonsType.OK,
+                                      text=_("Sorry!"))
             if status == "error":
                 error.format_secondary_text(json_output["error"]["error_message"])
             elif status == "success" and not json_output["result"]:
