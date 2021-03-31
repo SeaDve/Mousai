@@ -7,7 +7,10 @@
 
 <br>
 <p align="center">
-    <a href="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml">
+  <a href="https://hosted.weblate.org/engage/kooha/">
+    <img src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg" alt="Translation status"  />
+  </a>
+  <a href="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml">
     <img src="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml/badge.svg" alt="CI status"/>
   </a>
   <a href="https://paypal.me/sedve">
