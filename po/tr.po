@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Oğuz Ersen <oguzersen@protonmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 13:23+0800\n"
-"PO-Revision-Date: 2021-03-31 05:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2021-03-31 19:58+0800\n"
+"PO-Revision-Date: 2021-03-31 12:34+0000\n"
+"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
 ">\n"
 "Language: tr\n"
@@ -22,16 +21,16 @@ msgstr ""
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Music;Song;Identify;Müzik;Şarkı;Tanımla;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
 msgid "Simple song identifier"
-msgstr ""
+msgstr "Basit bir şarkı tanımlayıcı"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
@@ -40,6 +39,10 @@ msgid ""
 "This uses the API of audd.io, so it is necessary to login to their site to "
 "get more trials."
 msgstr ""
+"Mousai, Shazam gibi şarkıları tanımlayabilen basit bir uygulamadır. "
+"Tanımlanan şarkının sanatçısını, albümünü ve başlığını bir JSON dosyasına "
+"kaydeder. Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme "
+"almak için sitelerinde oturum açmak gerekir."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
@@ -52,7 +55,7 @@ msgstr "Genel"
 
 #: data/ui/shortcuts.ui:17
 msgid "Open menu"
-msgstr "Menüyü Aç"
+msgstr "Menüyü aç"
 
 #: data/ui/shortcuts.ui:24
 msgid "Show keyboard shortcuts"
@@ -60,31 +63,31 @@ msgstr "Klavye kısayollarını göster"
 
 #: data/ui/shortcuts.ui:31
 msgid "Quit"
-msgstr "Çık"
+msgstr "Çıkış"
 
 #: data/ui/shortcuts.ui:39
 msgid "Controls"
-msgstr ""
+msgstr "Denetimler"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr ""
+msgstr "Dinlemeye başla"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr ""
+msgstr "Dinlemeyi iptal et"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Mousai'ye hoş geldiniz"
 
 #: data/ui/welcome.ui:56
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Geçerli bir belirteç girin"
 
 #: data/ui/welcome.ui:61
 msgid "Submit"
-msgstr ""
+msgstr "Gönder"
 
 #: data/ui/welcome.ui:80
 msgctxt "Do not translate the link, only 'their website'"
@@ -93,10 +96,13 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai, çalışmak için audd.io API'lerini kullanır, bu nedenle <a href="
+"\"https://dashboard.audd.io/\">web sitesinde</a> oturum açıp bir belirteç "
+"alınması gerekir. Bunu boş bırakmak size günde birkaç deneme verecektir."
 
 #: data/ui/window.ui:24
 msgid "Listen"
-msgstr ""
+msgstr "Dinle"
 
 #: data/ui/window.ui:36
 msgid "Cancel"
@@ -105,40 +111,40 @@ msgstr "İptal"
 #: data/ui/window.ui:105
 msgctxt "Mousaing is not a real word"
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Mousai kullanmaya başla!"
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Başlamak için dinle düğmesine tıklayın"
 
 #: data/ui/window.ui:134
 msgid "Listening"
-msgstr ""
+msgstr "Dinliyor"
 
 #: data/ui/window.ui:155
 msgid "Clear song history"
-msgstr ""
+msgstr "Şarkı geçmişini temizle"
 
 #: data/ui/window.ui:159
 msgid "Reset token"
-msgstr ""
+msgstr "Belirteci sıfırla"
 
 #: data/ui/window.ui:165
 msgid "Keyboard Shortcuts"
-msgstr "Kısayol Tuşları"
+msgstr "Klavye Kısayolları"
 
 #: data/ui/window.ui:169
 msgid "About Mousai"
-msgstr ""
+msgstr "Mousai Hakkında"
 
 #: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
-msgstr "Copyright 2021 Dave Patrick"
+msgstr "Telif hakkı 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:112
 msgid "translator-credits"
-msgstr "çevirmen-kredisi"
+msgstr "Oğuz Ersen"
 
 #: src/main.py:113
 msgid "GitHub"
@@ -146,11 +152,11 @@ msgstr "GitHub"
 
 #: src/window.py:131
 msgid "Sorry!"
-msgstr ""
+msgstr "Üzgünüm!"
 
 #: src/window.py:132
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Şarkı tanınmadı."
 
 #~ msgid "Recording"
 #~ msgstr "Kayıt"
