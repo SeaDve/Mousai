@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-31 13:23+0800\n"
-"PO-Revision-Date: 2021-03-31 05:23+0000\n"
+"PO-Revision-Date: 2021-03-31 05:40+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -69,7 +69,7 @@ msgstr "Isara"
 
 #: data/ui/shortcuts.ui:39
 msgid "Controls"
-msgstr ""
+msgstr "Mga controls"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
@@ -155,11 +155,11 @@ msgstr "GitHub"
 
 #: src/window.py:131
 msgid "Sorry!"
-msgstr ""
+msgstr "Paumanhin!"
 
 #: src/window.py:132
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Ang kanta ay hindi makilala."
 
 #~ msgid "Simple song indentifier"
 #~ msgstr "Simpleng pangkilala ng kanta"
