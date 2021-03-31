@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 08:16+0800\n"
+"POT-Creation-Date: 2021-03-31 13:23+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Shazam;Music;Song;Identify;"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
 msgid "Simple song identifier"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgid "Quit"
 msgstr ""
 
 #: data/ui/shortcuts.ui:39
-msgid "Recording"
+msgid "Controls"
 msgstr ""
 
 #: data/ui/shortcuts.ui:44
@@ -127,10 +127,6 @@ msgstr ""
 
 #: data/ui/window.ui:169
 msgid "About Mousai"
-msgstr ""
-
-#: src/main.py:107
-msgid "Simple song identifier"
 msgstr ""
 
 #: src/main.py:110
