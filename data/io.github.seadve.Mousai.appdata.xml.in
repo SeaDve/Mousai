@@ -35,6 +35,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.0" date="2021-03-31">
+      <description>
+        <p>This update brings few bug fixes:</p>
+        <ul>
+          <li>Fixed a bug when there are two similar named songs</li>
+          <li>Minor tweaks</li>
+          <li>Added Filipino translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2021-03-30">
       <description>
         <p>Initial release.</p>
