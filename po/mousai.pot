@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-30 16:55+0800\n"
+"POT-Creation-Date: 2021-03-31 08:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,15 +72,15 @@ msgstr ""
 msgid "Cancel listening"
 msgstr ""
 
-#: data/ui/welcome.ui:41
+#: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
 msgstr ""
 
-#: data/ui/welcome.ui:57
+#: data/ui/welcome.ui:56
 msgid "Enter a valid token"
 msgstr ""
 
-#: data/ui/welcome.ui:62
+#: data/ui/welcome.ui:61
 msgid "Submit"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgctxt "Do not translate the link, only 'their website'"
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
-"this as default will give you a few trials."
+"this blank will give you a few trials per day."
 msgstr ""
 
 #: data/ui/window.ui:24
@@ -129,27 +129,27 @@ msgstr ""
 msgid "About Mousai"
 msgstr ""
 
-#: src/main.py:106
+#: src/main.py:107
 msgid "Simple song identifier"
 msgstr ""
 
-#: src/main.py:109
+#: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
 msgstr ""
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:111
+#: src/main.py:112
 msgid "translator-credits"
 msgstr ""
 
-#: src/main.py:112
+#: src/main.py:113
 msgid "GitHub"
 msgstr ""
 
-#: src/window.py:138
+#: src/window.py:131
 msgid "Sorry!"
 msgstr ""
 
-#: src/window.py:139
+#: src/window.py:132
 msgid "The song was not recognized."
 msgstr ""
