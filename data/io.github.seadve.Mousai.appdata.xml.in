@@ -14,7 +14,7 @@
   </description>
   <url type="homepage">https://github.com/SeaDve/Mousai</url>
   <url type="bugtracker">https://github.com/SeaDve/Mousai/issues</url>
-  <url type="translate">https://github.com/SeaDve/Mousai/tree/master/po</url>
+  <url type="translate">https://hosted.weblate.org/projects/kooha/mousai/</url>
   <url type="donation">https://paypal.me/sedve</url>
   <!-- Translators: please do NOT translate this -->
   <developer_name>Dave Patrick</developer_name>
