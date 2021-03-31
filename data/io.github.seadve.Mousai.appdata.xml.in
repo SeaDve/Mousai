@@ -40,8 +40,11 @@
         <p>This update brings few bug fixes:</p>
         <ul>
           <li>Fixed a bug when there are two similar named songs</li>
-          <li>Minor tweaks</li>
+          <li>Fixed an error when the song was not recognized</li>
+          <li>Added an error when the token has run out</li>
           <li>Added Filipino translations</li>
+          <li>Added Turkish translations</li>
+          <li>Added Portuguese translations</li>
         </ul>
       </description>
     </release>
