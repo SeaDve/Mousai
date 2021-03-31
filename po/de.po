@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-31 08:16+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-03-31 05:10+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.6-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -41,27 +44,27 @@ msgstr ""
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:12
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: data/ui/shortcuts.ui:17
 msgid "Open menu"
-msgstr ""
+msgstr "Menü öffnen"
 
 #: data/ui/shortcuts.ui:24
 msgid "Show keyboard shortcuts"
-msgstr ""
+msgstr "Tastaturkürzel anzeigen"
 
 #: data/ui/shortcuts.ui:31
 msgid "Quit"
-msgstr ""
+msgstr "Beenden"
 
 #: data/ui/shortcuts.ui:39
 msgid "Recording"
-msgstr ""
+msgstr "Aufnahme"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
@@ -97,7 +100,7 @@ msgstr ""
 
 #: data/ui/window.ui:36
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: data/ui/window.ui:105
 msgctxt "Mousaing is not a real word"
@@ -122,7 +125,7 @@ msgstr ""
 
 #: data/ui/window.ui:165
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tastenkombinationen"
 
 #: data/ui/window.ui:169
 msgid "About Mousai"
@@ -134,16 +137,16 @@ msgstr ""
 
 #: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:112
 msgid "translator-credits"
-msgstr ""
+msgstr "Jonathan Haas"
 
 #: src/main.py:113
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/window.py:131
 msgid "Sorry!"
