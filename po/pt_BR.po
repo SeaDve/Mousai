@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 08:16+0800\n"
+"POT-Creation-Date: 2021-03-31 13:23+0800\n"
 "PO-Revision-Date: 2021-03-31 05:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -29,8 +29,8 @@ msgstr ""
 msgid "Shazam;Music;Song;Identify;"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7
-msgid "Simple song indentifier"
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+msgid "Simple song identifier"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
@@ -63,8 +63,8 @@ msgid "Quit"
 msgstr "Sair"
 
 #: data/ui/shortcuts.ui:39
-msgid "Recording"
-msgstr "Gravando"
+msgid "Controls"
+msgstr ""
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
@@ -131,10 +131,6 @@ msgstr "Atalhos de teclado"
 msgid "About Mousai"
 msgstr ""
 
-#: src/main.py:107
-msgid "Simple song identifier"
-msgstr ""
-
 #: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -157,3 +153,6 @@ msgstr ""
 #: src/window.py:132
 msgid "The song was not recognized."
 msgstr ""
+
+#~ msgid "Recording"
+#~ msgstr "Gravando"
