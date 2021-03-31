@@ -28,7 +28,7 @@ msgid "Shazam;Music;Song;Identify;"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7
-msgid "Simple song indentifier"
+msgid "Simple song identifier"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9

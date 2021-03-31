@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Mousai</name>
-  <summary>Simple song indentifier</summary>
+  <summary>Simple song identifier</summary>
   <description>
     <p>
     Mousai is a simple application that can identify song like Shazam. It saves the artist, album, and title of the identified song in a JSON file.
