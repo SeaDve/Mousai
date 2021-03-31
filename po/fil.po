@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Dave Patrick <davecruz48@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 08:16+0800\n"
-"PO-Revision-Date: 2021-03-31 05:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2021-03-31 13:23+0800\n"
+"PO-Revision-Date: 2021-03-31 05:40+0000\n"
+"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -23,16 +22,16 @@ msgstr ""
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Music;Song;Identify;Tunog;Kanta;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7
-msgid "Simple song indentifier"
-msgstr ""
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+msgid "Simple song identifier"
+msgstr "Simpleng pangkilala ng kanta"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
@@ -41,6 +40,11 @@ msgid ""
 "This uses the API of audd.io, so it is necessary to login to their site to "
 "get more trials."
 msgstr ""
+"Ang Mousai ay isang simpleng apikasyon na may kakayahang makakilala ng kanta "
+"tulad ng Shazam. Puwede siyang magsave ng kumanta, album, at pamagat ng "
+"kanta sa isang JSON file. Paaalala: Ito ay gumagamit ng API ng audd.io, kaya "
+"kinakailangang mag-login sa kanilang site upang makakuha pa ng mas madaming "
+"trials."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
@@ -64,28 +68,28 @@ msgid "Quit"
 msgstr "Isara"
 
 #: data/ui/shortcuts.ui:39
-msgid "Recording"
-msgstr "Nagrerekord"
+msgid "Controls"
+msgstr "Mga controls"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr ""
+msgstr "Magsimulang makinig"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr ""
+msgstr "Ikansela ang pagkinig"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Maligayang Pagdating sa Mousai"
 
 #: data/ui/welcome.ui:56
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Maglagay ng tamang token"
 
 #: data/ui/welcome.ui:61
 msgid "Submit"
-msgstr ""
+msgstr "Isumite"
 
 #: data/ui/welcome.ui:80
 msgctxt "Do not translate the link, only 'their website'"
@@ -94,10 +98,14 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Ang Mousai ay gumagamit ng API ng audd.io upang gumana, kaya kailangang "
+"maglogin sa <a href=\"https://dashboard.audd.io/\">kanilang website</a> at "
+"kumuha ng token. Kapag wala kang linagay, magkakaroon ka lamang ng iilang "
+"trials kada araw."
 
 #: data/ui/window.ui:24
 msgid "Listen"
-msgstr ""
+msgstr "Makinig"
 
 #: data/ui/window.ui:36
 msgid "Cancel"
@@ -106,23 +114,23 @@ msgstr "Ikansela"
 #: data/ui/window.ui:105
 msgctxt "Mousaing is not a real word"
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Magsimulang magmousai!"
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Pindutin ang button sa pagkinig upang magsimula"
 
 #: data/ui/window.ui:134
 msgid "Listening"
-msgstr ""
+msgstr "Nakikinig"
 
 #: data/ui/window.ui:155
 msgid "Clear song history"
-msgstr ""
+msgstr "Burahin ang history"
 
 #: data/ui/window.ui:159
 msgid "Reset token"
-msgstr ""
+msgstr "I-reset ang token"
 
 #: data/ui/window.ui:165
 msgid "Keyboard Shortcuts"
@@ -130,11 +138,7 @@ msgstr "Mga keyboard shortcut"
 
 #: data/ui/window.ui:169
 msgid "About Mousai"
-msgstr ""
-
-#: src/main.py:107
-msgid "Simple song identifier"
-msgstr ""
+msgstr "Tungkol sa Mousai"
 
 #: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
@@ -151,8 +155,14 @@ msgstr "GitHub"
 
 #: src/window.py:131
 msgid "Sorry!"
-msgstr ""
+msgstr "Paumanhin!"
 
 #: src/window.py:132
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Ang kanta ay hindi makilala."
+
+#~ msgid "Simple song indentifier"
+#~ msgstr "Simpleng pangkilala ng kanta"
+
+#~ msgid "Recording"
+#~ msgstr "Nagrerekord"
