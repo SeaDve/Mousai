@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 20:37+0800\n"
+"POT-Creation-Date: 2021-04-01 09:02+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,8 +100,8 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
-msgctxt "Mousaing is not a real word"
 msgid "Start Mousaing!"
 msgstr ""
 
