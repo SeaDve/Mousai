@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 20:37+0800\n"
-"PO-Revision-Date: 2021-03-31 12:34+0000\n"
+"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"PO-Revision-Date: 2021-04-01 01:03+0000\n"
 "Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
 "com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -109,10 +109,10 @@ msgstr "Escutar"
 msgid "Cancel"
 msgstr "Cancelar"
 
+#. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
-msgctxt "Mousaing is not a real word"
 msgid "Start Mousaing!"
-msgstr "Comece a identificar!"
+msgstr ""
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
@@ -145,9 +145,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:112
 msgid "translator-credits"
-msgstr ""
-"Vitor Cardoso\n"
-"Felipe Kinoshita"
+msgstr "Vitor Cardoso"
 
 #: src/main.py:113
 msgid "GitHub"
@@ -163,7 +161,11 @@ msgstr "A música não foi reconhecida."
 
 #: src/window.py:138
 msgid "Something went wrong."
-msgstr ""
+msgstr "Algo deu errado."
+
+#~ msgctxt "Mousaing is not a real word"
+#~ msgid "Start Mousaing!"
+#~ msgstr "Comece a identificar!"
 
 #~ msgid "Recording"
 #~ msgstr "Gravando"

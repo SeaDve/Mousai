@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 20:37+0800\n"
+"POT-Creation-Date: 2021-04-01 09:02+0800\n"
 "PO-Revision-Date: 2021-03-31 05:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
@@ -102,8 +102,8 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
-msgctxt "Mousaing is not a real word"
 msgid "Start Mousaing!"
 msgstr ""
 

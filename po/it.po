@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Nicolas Mariniello <seldon1000@tutanota.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 20:37+0800\n"
-"PO-Revision-Date: 2021-03-31 05:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"PO-Revision-Date: 2021-04-01 01:03+0000\n"
+"Last-Translator: Nicolas Mariniello <seldon1000@tutanota.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
 ">\n"
 "Language: it\n"
@@ -22,16 +21,16 @@ msgstr ""
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Musica;Canzone;Identificare;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
 msgid "Simple song identifier"
-msgstr ""
+msgstr "Semplice identificatore di canzoni"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
@@ -40,6 +39,10 @@ msgid ""
 "This uses the API of audd.io, so it is necessary to login to their site to "
 "get more trials."
 msgstr ""
+"Mousai è un'applicazione semplice che può identificare le canzoni come "
+"Shazam. Salva l'artista, l'album e il titolo della canzone identificata in "
+"un file JSON. Nota: L'app usa le API di audd.io, quindi è necessario "
+"effettuare l'accesso al sito per ottenere più tentativi."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
@@ -64,27 +67,27 @@ msgstr "Esci"
 
 #: data/ui/shortcuts.ui:39
 msgid "Controls"
-msgstr ""
+msgstr "Controlli"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr ""
+msgstr "Ascolta"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr ""
+msgstr "Annulla"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Benvenuto in Mousai"
 
 #: data/ui/welcome.ui:56
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Inserisci un token valido"
 
 #: data/ui/welcome.ui:61
 msgid "Submit"
-msgstr ""
+msgstr "Invia"
 
 #: data/ui/welcome.ui:80
 msgctxt "Do not translate the link, only 'their website'"
@@ -93,35 +96,38 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai sfrutta le API audd.io, quindi è necessario effettuare l'accesso al "
+"<a href=\"https://dashboard.audd.io/\">loro sito</a> e ricevere un token. "
+"Lasciare questo vuoto ti darà solo pochi tentativi al giorno."
 
 #: data/ui/window.ui:24
 msgid "Listen"
-msgstr ""
+msgstr "Ascolta"
 
 #: data/ui/window.ui:36
 msgid "Cancel"
 msgstr "Annulla"
 
+#. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
-msgctxt "Mousaing is not a real word"
 msgid "Start Mousaing!"
 msgstr ""
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Premi il pulsante di ascolto per inizare"
 
 #: data/ui/window.ui:134
 msgid "Listening"
-msgstr ""
+msgstr "Sto ascoltando"
 
 #: data/ui/window.ui:155
 msgid "Clear song history"
-msgstr ""
+msgstr "Cancella la cronologia delle canzoni"
 
 #: data/ui/window.ui:159
 msgid "Reset token"
-msgstr ""
+msgstr "Ripristina il token"
 
 #: data/ui/window.ui:165
 msgid "Keyboard Shortcuts"
@@ -129,7 +135,7 @@ msgstr "Scorciatoie da tastiera"
 
 #: data/ui/window.ui:169
 msgid "About Mousai"
-msgstr ""
+msgstr "A proposito di Mousai"
 
 #: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
@@ -146,15 +152,19 @@ msgstr "GitHub"
 
 #: src/window.py:132
 msgid "Sorry!"
-msgstr ""
+msgstr "Mi dispiace!"
 
 #: src/window.py:136
 msgid "The song was not recognized."
-msgstr ""
+msgstr "La canzone non è stata riconosciuta."
 
 #: src/window.py:138
 msgid "Something went wrong."
-msgstr ""
+msgstr "Qualcosa è andato storto."
+
+#~ msgctxt "Mousaing is not a real word"
+#~ msgid "Start Mousaing!"
+#~ msgstr "Inizia a Mousare!"
 
 #~ msgid "Recording"
 #~ msgstr "In registrazione"
