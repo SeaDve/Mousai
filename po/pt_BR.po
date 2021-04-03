@@ -7,9 +7,9 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-01 09:02+0800\n"
-"PO-Revision-Date: 2021-04-01 01:03+0000\n"
-"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
-"com>\n"
+"PO-Revision-Date: 2021-04-03 13:26+0000\n"
+"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>"
+"\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -112,7 +112,7 @@ msgstr "Cancelar"
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Comece a Mousaiar!"
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"

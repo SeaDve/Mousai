@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-01 09:02+0800\n"
-"PO-Revision-Date: 2021-03-31 05:40+0000\n"
+"PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -114,7 +114,7 @@ msgstr "Ikansela"
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Magsimulang magmousai!"
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
@@ -163,7 +163,7 @@ msgstr "Ang kanta ay hindi makilala."
 
 #: src/window.py:138
 msgid "Something went wrong."
-msgstr ""
+msgstr "Parang may mali."
 
 #~ msgctxt "Mousaing is not a real word"
 #~ msgid "Start Mousaing!"

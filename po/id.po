@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Reza Almanda <rezaalmanda27@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-01 09:02+0800\n"
-"PO-Revision-Date: 2021-03-31 05:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-04-03 13:26+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -22,16 +21,16 @@ msgstr ""
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
 msgid "Simple song identifier"
-msgstr ""
+msgstr "Pengenal lagu sederhana"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
@@ -40,6 +39,10 @@ msgid ""
 "This uses the API of audd.io, so it is necessary to login to their site to "
 "get more trials."
 msgstr ""
+"Mousai adalah aplikasi sederhana untuk mengenal lagu seperti Shazam. Ini "
+"menyimpan artis, album, dan judul lagu yang diidentifikasi dalam file JSON. "
+"Catatan: Ini menggunakan API audd.io, sehingga perlu login ke situs mereka "
+"untuk mendapatkan lebih banyak uji coba."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
@@ -64,27 +67,27 @@ msgstr "Berhenti"
 
 #: data/ui/shortcuts.ui:39
 msgid "Controls"
-msgstr ""
+msgstr "Kontrol"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr ""
+msgstr "Mulai dengarkan"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr ""
+msgstr "Batal dengarkan"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Selamat datang di Mousai"
 
 #: data/ui/welcome.ui:56
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Masukkan token yang valid"
 
 #: data/ui/welcome.ui:61
 msgid "Submit"
-msgstr ""
+msgstr "Kirim"
 
 #: data/ui/welcome.ui:80
 msgctxt "Do not translate the link, only 'their website'"
@@ -93,10 +96,13 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai menggunakan audd.io api untuk bekerja, sehingga anda perlu masuk ke "
+"<a href=\"https://dashboard.audd.io/\">situs web mereka</a> dan mendapatkan "
+"token. Membiarkannya kosong akan memberi Anda beberapa percobaan per hari."
 
 #: data/ui/window.ui:24
 msgid "Listen"
-msgstr ""
+msgstr "Dengar"
 
 #: data/ui/window.ui:36
 msgid "Cancel"
@@ -105,23 +111,23 @@ msgstr "Batal"
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Mulai Mousaing!"
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Klik tombol dengar untuk memulai"
 
 #: data/ui/window.ui:134
 msgid "Listening"
-msgstr ""
+msgstr "Mendengarkan"
 
 #: data/ui/window.ui:155
 msgid "Clear song history"
-msgstr ""
+msgstr "Hapus riwayat lagu"
 
 #: data/ui/window.ui:159
 msgid "Reset token"
-msgstr ""
+msgstr "Setel ulang token"
 
 #: data/ui/window.ui:165
 msgid "Keyboard Shortcuts"
@@ -129,7 +135,7 @@ msgstr "Pintasan Keyboard"
 
 #: data/ui/window.ui:169
 msgid "About Mousai"
-msgstr ""
+msgstr "Tentang Mousai"
 
 #: src/main.py:110
 msgid "Copyright 2021 Dave Patrick"
@@ -146,15 +152,15 @@ msgstr "GitHub"
 
 #: src/window.py:132
 msgid "Sorry!"
-msgstr ""
+msgstr "Maaf!"
 
 #: src/window.py:136
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Lagu tidak dikenali."
 
 #: src/window.py:138
 msgid "Something went wrong."
-msgstr ""
+msgstr "Ada yang salah."
 
 #~ msgid "Recording"
 #~ msgstr "Merekam"
