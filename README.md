@@ -53,4 +53,4 @@ You can check their [Privacy Policy](https://audd.io/privacy/) and [Terms of Ser
 
 ## Credits
 
-Developed by **[Dave Patrick](https://github.com/SeaDve)**.
+Developed by **[Dave Patrick](https://github.com/SeaDve)** and [contributors](https://github.com/SeaDve/Mousai/graphs/contributors).
