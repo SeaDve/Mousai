@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mousai package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mousai\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.seadve.Mousai.desktop.in:3
+#: data/io.github.seadve.Mousai.appdata.xml.in:6
+msgid "Mousai"
+msgstr ""
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.seadve.Mousai.desktop.in:11
+msgid "Shazam;Music;Song;Identify;"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+msgid "Simple song identifier"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:9
+msgid ""
+"Mousai is a simple application that can identify song like Shazam. It saves "
+"the artist, album, and title of the identified song in a JSON file. Note: "
+"This uses the API of audd.io, so it is necessary to login to their site to "
+"get more trials."
+msgstr ""
+
+#. Translators: please do NOT translate this
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
+msgid "Dave Patrick"
+msgstr ""
+
+#: data/ui/shortcuts.ui:12
+msgid "General"
+msgstr ""
+
+#: data/ui/shortcuts.ui:17
+msgid "Open menu"
+msgstr ""
+
+#: data/ui/shortcuts.ui:24
+msgid "Show keyboard shortcuts"
+msgstr ""
+
+#: data/ui/shortcuts.ui:31
+msgid "Quit"
+msgstr ""
+
+#: data/ui/shortcuts.ui:39
+msgid "Controls"
+msgstr ""
+
+#: data/ui/shortcuts.ui:44
+msgid "Start listening"
+msgstr ""
+
+#: data/ui/shortcuts.ui:51
+msgid "Cancel listening"
+msgstr ""
+
+#: data/ui/welcome.ui:40
+msgid "Welcome to Mousai"
+msgstr ""
+
+#: data/ui/welcome.ui:56
+msgid "Enter a valid token"
+msgstr ""
+
+#: data/ui/welcome.ui:61
+msgid "Submit"
+msgstr ""
+
+#: data/ui/welcome.ui:80
+msgctxt "Do not translate the link, only 'their website'"
+msgid ""
+"Mousai uses audd.io APIs to work, so it is required to login to <a href="
+"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+"this blank will give you a few trials per day."
+msgstr ""
+
+#: data/ui/window.ui:24
+msgid "Listen"
+msgstr ""
+
+#: data/ui/window.ui:36
+msgid "Cancel"
+msgstr ""
+
+#. Mousaing is not a real word, but it is supposed to be a verb
+#: data/ui/window.ui:105
+msgid "Start Mousaing!"
+msgstr ""
+
+#: data/ui/window.ui:106
+msgid "Click the listen button to start"
+msgstr ""
+
+#: data/ui/window.ui:134
+msgid "Listening"
+msgstr ""
+
+#: data/ui/window.ui:155
+msgid "Clear song history"
+msgstr ""
+
+#: data/ui/window.ui:159
+msgid "Reset token"
+msgstr ""
+
+#: data/ui/window.ui:165
+msgid "Keyboard Shortcuts"
+msgstr ""
+
+#: data/ui/window.ui:169
+msgid "About Mousai"
+msgstr ""
+
+#: src/main.py:110
+msgid "Copyright 2021 Dave Patrick"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/main.py:112
+msgid "translator-credits"
+msgstr ""
+
+#: src/main.py:113
+msgid "GitHub"
+msgstr ""
+
+#: src/window.py:132
+msgid "Sorry!"
+msgstr ""
+
+#: src/window.py:136
+msgid "The song was not recognized."
+msgstr ""
+
+#: src/window.py:138
+msgid "Something went wrong."
+msgstr ""
