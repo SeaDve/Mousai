@@ -32,18 +32,13 @@ class SongRow(Handy.ActionRow):
         self.set_title(title)
         self.set_subtitle(artist)
         self.song_link = song_link
-
+        self.add_prefix(self.song_icon)
         try:
             image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg")
             self.song_icon.set_loadable_icon(image)
         except Exception:
             pass
 
-        self.add_prefix(self.song_icon)
-
-        placeholder = Gtk.Button()
-        self.set_activatable_widget(placeholder)
-        self.connect("activated", self.on_songrow_clicked)
-
+    @Gtk.Template.Callback()
     def on_songrow_clicked(self, widget):
         Gio.AppInfo.launch_default_for_uri(self.song_link)

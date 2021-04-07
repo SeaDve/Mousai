@@ -7,7 +7,17 @@
     <property name="visible">True</property>
     <property name="can-focus">True</property>
     <child>
-      <placeholder/>
+      <object class="GtkButton">
+        <property name="visible">True</property>
+        <property name="valign">center</property>
+        <signal name="clicked" handler="on_songrow_clicked" swapped="no"/>
+        <child>
+          <object class="GtkImage">
+            <property name="visible">True</property>
+            <property name="icon-name">media-playback-start-symbolic</property>
+          </object>
+        </child>
+      </object>
     </child>
   </template>
   <object class="HdyAvatar" id="song_icon">
