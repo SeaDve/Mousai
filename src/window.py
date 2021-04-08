@@ -100,9 +100,17 @@ class MousaiWindow(Handy.ApplicationWindow):
             title = json_output["result"]["title"]
             artist = json_output["result"]["artist"]
             song_link = json_output["result"]["song_link"]
+
+            song_link_list = [item["song_link"] for item in self.memory_list]
+            if song_link in song_link_list:
+                for row in self.history_listbox.get_children():
+                    self.history_listbox.remove(row)
+                song_link_index = song_link_list.index(song_link)
+                self.memory_list.pop(song_link_index)
+                self.load_memory_list(self.memory_list)
+
             song_row = SongRow(title, artist, song_link)
             self.history_listbox.insert(song_row, 0)
-
             song_entry = {"title": title, "artist": artist, "song_link": song_link}
             self.memory_list.append(song_entry)
         except Exception:
