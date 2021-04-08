@@ -55,10 +55,9 @@ class Application(Gtk.Application):
         Handy.init()
 
     def do_activate(self):
-        token = self.settings.get_string("token-value")
         win = self.props.active_window
         if not win:
-            if not token:
+            if not self.settings.get_string("token-value"):
                 win = WelcomeWindow(self.settings, application=self)
             else:
                 win = MousaiWindow(self.settings, application=self)
