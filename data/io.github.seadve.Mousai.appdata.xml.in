@@ -7,9 +7,10 @@
   <summary>Simple song identifier</summary>
   <description>
     <p>
-    Mousai is a simple application that can identify song like Shazam. It can identify both its title and artist.
-
-    Note: This uses the API of audd.io, so it is necessary to login to their site to get more trials.
+      Mousai is a simple application that can identify song like Shazam. It can identify both its title and artist.
+    </p>
+    <p>
+      Note: This uses the API of audd.io, so it is necessary to login to their site to get more trials.
     </p>
   </description>
   <url type="homepage">https://github.com/SeaDve/Mousai</url>
@@ -35,6 +36,18 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.0" date="2021-04-08">
+      <description>
+        <p>New features and performance improvements:</p>
+        <ul>
+          <li>Added a play button to preview songs</li>
+          <li>Song history would not output redundant songs now</li>
+          <li>Code cleaning</li>
+          <li>Added Dutch translations</li>
+          <li>Added Norweigan translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.0" date="2021-03-31">
       <description>
         <p>This update brings few bug fixes:</p>
