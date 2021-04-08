@@ -20,7 +20,7 @@ import requests
 import urllib.request
 from gettext import gettext as _
 
-from gi.repository import Gtk, Handy, GdkPixbuf
+from gi.repository import Gtk, Handy, GdkPixbuf, GLib
 
 from .songrow import SongRow
 from .utils import VoiceRecorder
@@ -52,13 +52,7 @@ class MousaiWindow(Handy.ApplicationWindow):
 
         self.json_directory = f"{self.voice_recorder.get_tmp_dir()}mousai.json"
 
-        try:
-            with open(self.json_directory, "r") as memory_file:
-                self.memory_list = json.load(memory_file)
-        except Exception:
-            with open(self.json_directory, "w") as memory_file:
-                json.dump([], memory_file)
-                self.memory_list = []
+        self.memory_list = list(self.settings.get_value("memory-list"))
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
@@ -76,17 +70,14 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.history_listbox.insert(song_row, 0)
 
     def clear_memory_list(self):
-        with open(self.json_directory, "w") as memory_file:
-            json.dump([], memory_file)
-            self.memory_list = []
+        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
 
         win = MousaiWindow(self.settings, application=self.get_application())
         self.destroy()
         win.present()
 
     def on_quit(self, widget, arg):
-        with open(self.json_directory, "w") as outfile:
-            json.dump(self.memory_list, outfile, indent=4)
+        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
 
     def on_start_button_clicked(self, widget):
         self.voice_recorder.start(self, self.on_microphone_record_callback)

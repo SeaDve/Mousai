@@ -24,7 +24,7 @@
 </p>
 
 ## Description
-Mousai is a simple application that can identify song like Shazam. It saves the artist, album, and title of the identified song in a JSON file.
+Mousai is a simple application that can identify song like Shazam. It can identify both its title and artist.
 
 Note: This uses the API of audd.io, so it is necessary to login to their site to get more trials.
 
