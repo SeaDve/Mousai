@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"POT-Creation-Date: 2021-04-08 11:01+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -28,24 +28,24 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musikk;Sang;Identifisering;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Simple song identifier"
 msgstr "Enkel sanggjenkjenner"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
-"Mousai is a simple application that can identify song like Shazam. It saves "
-"the artist, album, and title of the identified song in a JSON file. Note: "
-"This uses the API of audd.io, so it is necessary to login to their site to "
-"get more trials."
+"Mousai is a simple application that can identify song like Shazam. It can "
+"identify both its title and artist."
 msgstr ""
-"Mousai er et enkelt program som kan identifisere sanger, slik Shazam gjør "
-"det. Det lagrer artist, album, og tittel for identifiserte sanger i en JSON-"
-"fil. Merk: Dette bruker API-et til audd.io, så man må logge inn på siden "
-"deres for å utvide prøveperioden."
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to login to their "
+"site to get more trials."
+msgstr ""
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:20
+#: data/io.github.seadve.Mousai.appdata.xml.in:21
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -96,9 +96,9 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai bruker API-et til audd.io. Man må logge inn på <a href=\"https"
-"://dashboard.audd.io/\">nettsiden deres</a> og hente et symbol. Å la dette "
-"stå tomt gir deg noen forsøk per dag."
+"Mousai bruker API-et til audd.io. Man må logge inn på <a href=\"https://"
+"dashboard.audd.io/\">nettsiden deres</a> og hente et symbol. Å la dette stå "
+"tomt gir deg noen forsøk per dag."
 
 #: data/ui/window.ui:24
 msgid "Listen"
@@ -138,27 +138,38 @@ msgstr "Tastatursnarveier"
 msgid "About Mousai"
 msgstr "Om Mousai"
 
-#: src/main.py:110
+#: src/main.py:109
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Opphavsrett 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:112
+#: src/main.py:111
 msgid "translator-credits"
 msgstr "Allan Nordhøy &lt;epost@anotheragency.no&gt;"
 
-#: src/main.py:113
+#: src/main.py:112
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:132
+#: src/window.py:120
 msgid "Sorry!"
 msgstr "Beklager"
 
-#: src/window.py:136
+#: src/window.py:124
 msgid "The song was not recognized."
 msgstr "Gjenkjenner ikke sangen."
 
-#: src/window.py:138
+#: src/window.py:126
 msgid "Something went wrong."
 msgstr "Noe gikk galt."
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song like Shazam. It "
+#~ "saves the artist, album, and title of the identified song in a JSON file. "
+#~ "Note: This uses the API of audd.io, so it is necessary to login to their "
+#~ "site to get more trials."
+#~ msgstr ""
+#~ "Mousai er et enkelt program som kan identifisere sanger, slik Shazam gjør "
+#~ "det. Det lagrer artist, album, og tittel for identifiserte sanger i en "
+#~ "JSON-fil. Merk: Dette bruker API-et til audd.io, så man må logge inn på "
+#~ "siden deres for å utvide prøveperioden."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"POT-Creation-Date: 2021-04-08 11:01+0800\n"
 "PO-Revision-Date: 2021-03-31 05:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -29,20 +29,24 @@ msgstr ""
 msgid "Shazam;Music;Song;Identify;"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Simple song identifier"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
-"Mousai is a simple application that can identify song like Shazam. It saves "
-"the artist, album, and title of the identified song in a JSON file. Note: "
-"This uses the API of audd.io, so it is necessary to login to their site to "
-"get more trials."
+"Mousai is a simple application that can identify song like Shazam. It can "
+"identify both its title and artist."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to login to their "
+"site to get more trials."
 msgstr ""
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:20
+#: data/io.github.seadve.Mousai.appdata.xml.in:21
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -131,28 +135,28 @@ msgstr ""
 msgid "About Mousai"
 msgstr ""
 
-#: src/main.py:110
+#: src/main.py:109
 msgid "Copyright 2021 Dave Patrick"
 msgstr ""
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:112
+#: src/main.py:111
 msgid "translator-credits"
 msgstr ""
 
-#: src/main.py:113
+#: src/main.py:112
 msgid "GitHub"
 msgstr ""
 
-#: src/window.py:132
+#: src/window.py:120
 msgid "Sorry!"
 msgstr ""
 
-#: src/window.py:136
+#: src/window.py:124
 msgid "The song was not recognized."
 msgstr ""
 
-#: src/window.py:138
+#: src/window.py:126
 msgid "Something went wrong."
 msgstr ""
 

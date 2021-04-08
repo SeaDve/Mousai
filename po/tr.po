@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"POT-Creation-Date: 2021-04-08 11:01+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,24 +28,24 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Müzik;Şarkı;Tanımla;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Simple song identifier"
 msgstr "Basit bir şarkı tanımlayıcı"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
-"Mousai is a simple application that can identify song like Shazam. It saves "
-"the artist, album, and title of the identified song in a JSON file. Note: "
-"This uses the API of audd.io, so it is necessary to login to their site to "
-"get more trials."
+"Mousai is a simple application that can identify song like Shazam. It can "
+"identify both its title and artist."
 msgstr ""
-"Mousai, Shazam gibi şarkıları tanımlayabilen basit bir uygulamadır. "
-"Tanımlanan şarkının sanatçısını, albümünü ve başlığını bir JSON dosyasına "
-"kaydeder. Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme "
-"almak için sitelerinde oturum açmak gerekir."
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to login to their "
+"site to get more trials."
+msgstr ""
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:20
+#: data/io.github.seadve.Mousai.appdata.xml.in:21
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -137,30 +137,41 @@ msgstr "Klavye Kısayolları"
 msgid "About Mousai"
 msgstr "Mousai Hakkında"
 
-#: src/main.py:110
+#: src/main.py:109
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Telif hakkı 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:112
+#: src/main.py:111
 msgid "translator-credits"
 msgstr "Oğuz Ersen"
 
-#: src/main.py:113
+#: src/main.py:112
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:132
+#: src/window.py:120
 msgid "Sorry!"
 msgstr "Üzgünüm!"
 
-#: src/window.py:136
+#: src/window.py:124
 msgid "The song was not recognized."
 msgstr "Şarkı tanınmadı."
 
-#: src/window.py:138
+#: src/window.py:126
 msgid "Something went wrong."
 msgstr "Bir şeyler yanlış gitti."
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song like Shazam. It "
+#~ "saves the artist, album, and title of the identified song in a JSON file. "
+#~ "Note: This uses the API of audd.io, so it is necessary to login to their "
+#~ "site to get more trials."
+#~ msgstr ""
+#~ "Mousai, Shazam gibi şarkıları tanımlayabilen basit bir uygulamadır. "
+#~ "Tanımlanan şarkının sanatçısını, albümünü ve başlığını bir JSON dosyasına "
+#~ "kaydeder. Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla "
+#~ "deneme almak için sitelerinde oturum açmak gerekir."
 
 #~ msgctxt "Mousaing is not a real word"
 #~ msgid "Start Mousaing!"
