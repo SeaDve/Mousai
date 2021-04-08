@@ -6,8 +6,9 @@
   <template class="SongRow" parent="HdyActionRow">
     <property name="visible">True</property>
     <property name="can-focus">True</property>
+    <property name="activatable-widget">play_button</property>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="play_button">
         <property name="visible">True</property>
         <property name="valign">center</property>
         <signal name="clicked" handler="on_songrow_clicked" swapped="no"/>
