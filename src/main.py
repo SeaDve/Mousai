@@ -80,23 +80,23 @@ class Application(Gtk.Application):
             if accel:
                 self.set_accels_for_action(f"app.{action}", accel)
 
-    def clear_song_history(self, action, widget):
+    def clear_song_history(self, action, param):
         self.get_active_window().clear_memory_list()
 
-    def reset_token_value(self, action, widget):
+    def reset_token_value(self, action, param):
         self.get_active_window().on_quit(None, None)
         self.get_active_window().destroy()
         win = WelcomeWindow(self.settings, application=self)
         win.present()
 
-    def show_shortcuts_window(self, action, widget):
+    def show_shortcuts_window(self, action, param):
         builder = Gtk.Builder()
         builder.add_from_resource('/io/github/seadve/Mousai/shortcuts.ui')
         window = builder.get_object('shortcuts')
         window.set_transient_for(self.get_active_window())
         window.present()
 
-    def show_about_dialog(self, action, widget):
+    def show_about_dialog(self, action, param):
         about = Gtk.AboutDialog()
         about.set_transient_for(self.get_active_window())
         about.set_modal(True)
@@ -114,7 +114,7 @@ class Application(Gtk.Application):
         about.set_website("https://github.com/SeaDve/Mousai")
         about.show()
 
-    def on_quit(self, action, widget):
+    def on_quit(self, action, param):
         self.get_active_window().on_quit(None, None)
         self.quit()
 

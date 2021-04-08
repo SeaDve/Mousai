@@ -34,7 +34,8 @@ class SongRow(Handy.ActionRow):
         self.song_link = song_link
         self.add_prefix(self.song_icon)
         try:
-            image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg")
+            icon_dir = f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg"
+            image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
             self.song_icon.set_loadable_icon(image)
         except Exception:
             pass
