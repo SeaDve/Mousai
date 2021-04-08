@@ -109,7 +109,6 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.memory_list.append(self.song_entry)
 
             song_row = SongRow(title, artist, song_link)
-            song_row.show()
             self.history_listbox.insert(song_row, 0)
         except Exception:
             error = Gtk.MessageDialog(transient_for=self,
@@ -142,12 +141,6 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def song_guesser(self, song_file):
         token = self.settings.get_string("token-value")
-
-        data = {
-            'api_token': token,
-            'return': 'spotify',
-        }
+        data = {'api_token': token, 'return': 'spotify',}
         files = {'file': open(song_file, 'rb')}
-
-        result = requests.post('https://api.audd.io/', data=data, files=files)
-        return result.text
+        return requests.post('https://api.audd.io/', data=data, files=files).text
