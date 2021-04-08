@@ -34,25 +34,21 @@ class MousaiWindow(Handy.ApplicationWindow):
     start_button = Gtk.Template.Child()
     cancel_button = Gtk.Template.Child()
     history_listbox = Gtk.Template.Child()
-
     main_stack = Gtk.Template.Child()
     main_screen_box = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
     empty_state_box = Gtk.Template.Child()
-
     mic_status = Gtk.Template.Child()
 
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
+        self.voice_recorder = VoiceRecorder()
+        self.memory_list = list(self.settings.get_value("memory-list"))
+
         self.start_button.connect("clicked", self.on_start_button_clicked)
         self.cancel_button.connect("clicked", self.on_cancel_button_clicked)
         self.connect("delete-event", self.on_quit)
-        self.voice_recorder = VoiceRecorder()
-
-        self.json_directory = f"{self.voice_recorder.get_tmp_dir()}mousai.json"
-
-        self.memory_list = list(self.settings.get_value("memory-list"))
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
@@ -61,17 +57,16 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def load_memory_list(self, memory_list):
         for num, item in enumerate(memory_list):
-            title = memory_list[num]["title"]
-            artist = memory_list[num]["artist"]
-            song_link = memory_list[num]["song_link"]
+            info_dict = memory_list[num]
+            title = info_dict["title"]
+            artist = info_dict["artist"]
+            song_link = info_dict["song_link"]
 
             song_row = SongRow(title, artist, song_link)
-            song_row.show()
             self.history_listbox.insert(song_row, 0)
 
     def clear_memory_list(self):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
-
         win = MousaiWindow(self.settings, application=self.get_application())
         self.destroy()
         win.present()
