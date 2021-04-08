@@ -26,8 +26,8 @@ class SongRow(Handy.ActionRow):
 
     song_icon = Gtk.Template.Child()
 
-    def __init__(self, title, artist, song_link, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, title, artist, song_link):
+        super().__init__()
 
         self.set_title(title)
         self.set_subtitle(artist)
