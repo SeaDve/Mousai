@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mousai package.
+# Heimen Stoffels <vistausss@outlook.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: mousai\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"PO-Revision-Date: 2021-04-06 17:26+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.6-dev\n"
+
+#: data/io.github.seadve.Mousai.desktop.in:3
+#: data/io.github.seadve.Mousai.appdata.xml.in:6
+msgid "Mousai"
+msgstr "Mousai"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.seadve.Mousai.desktop.in:11
+msgid "Shazam;Music;Song;Identify;"
+msgstr "Shazam;Muziek;Song;Nummer;Identificeren;Herkennen;"
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+msgid "Simple song identifier"
+msgstr "Eenvoudige muziekherkenningstoepassing"
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:9
+msgid ""
+"Mousai is a simple application that can identify song like Shazam. It saves "
+"the artist, album, and title of the identified song in a JSON file. Note: "
+"This uses the API of audd.io, so it is necessary to login to their site to "
+"get more trials."
+msgstr ""
+"Mousai is een eenvoudige toepassing om muziek te herkennen, net als Shazam. "
+"De artiest, naam van het nummer en albumnaam worden opgeslagen in een json-"
+"bestand. Let op: deze toepassing gebruikt de api van audd.io. Log daar in om "
+"meer proefperiodes aan te vragen."
+
+#. Translators: please do NOT translate this
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
+msgid "Dave Patrick"
+msgstr "Dave Patrick"
+
+#: data/ui/shortcuts.ui:12
+msgid "General"
+msgstr "Algemeen"
+
+#: data/ui/shortcuts.ui:17
+msgid "Open menu"
+msgstr "Menu openen"
+
+#: data/ui/shortcuts.ui:24
+msgid "Show keyboard shortcuts"
+msgstr "Sneltoetsen tonen"
+
+#: data/ui/shortcuts.ui:31
+msgid "Quit"
+msgstr "Afsluiten"
+
+#: data/ui/shortcuts.ui:39
+msgid "Controls"
+msgstr "Bediening"
+
+#: data/ui/shortcuts.ui:44
+msgid "Start listening"
+msgstr "Luisteren"
+
+#: data/ui/shortcuts.ui:51
+msgid "Cancel listening"
+msgstr "Stoppen met luisteren"
+
+#: data/ui/welcome.ui:40
+msgid "Welcome to Mousai"
+msgstr "Welkom bij Mousai"
+
+#: data/ui/welcome.ui:56
+msgid "Enter a valid token"
+msgstr "Voer een geldige sleutel in"
+
+#: data/ui/welcome.ui:61
+msgid "Submit"
+msgstr "Indienen"
+
+#: data/ui/welcome.ui:80
+msgctxt "Do not translate the link, only 'their website'"
+msgid ""
+"Mousai uses audd.io APIs to work, so it is required to login to <a href="
+"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+"this blank will give you a few trials per day."
+msgstr ""
+"Mousai gebruikt de audd.io-api's, welke vereisen dat je inlogt op hun <a "
+"href=\"https://dashboard.audd.io/\">website</a> en een toegangssleutel "
+"aanvraagt. Als je dit leeg laat, kun je slechts een paar keer per dag muziek "
+"herkennen."
+
+#: data/ui/window.ui:24
+msgid "Listen"
+msgstr "Luisteren"
+
+#: data/ui/window.ui:36
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. Mousaing is not a real word, but it is supposed to be a verb
+#: data/ui/window.ui:105
+msgid "Start Mousaing!"
+msgstr "Beginnen met Mousaïng!"
+
+#: data/ui/window.ui:106
+msgid "Click the listen button to start"
+msgstr "Klik op 'Luisteren' om aan de slag te gaan"
+
+#: data/ui/window.ui:134
+msgid "Listening"
+msgstr "Bezig met luisteren"
+
+#: data/ui/window.ui:155
+msgid "Clear song history"
+msgstr "Geschiedenis wissen"
+
+#: data/ui/window.ui:159
+msgid "Reset token"
+msgstr "Toegangssleutel herstellen"
+
+#: data/ui/window.ui:165
+msgid "Keyboard Shortcuts"
+msgstr "Sneltoetsen"
+
+#: data/ui/window.ui:169
+msgid "About Mousai"
+msgstr "Over Mousai"
+
+#: src/main.py:110
+msgid "Copyright 2021 Dave Patrick"
+msgstr "Copyright 2021 Dave Patrick"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/main.py:112
+msgid "translator-credits"
+msgstr "Heimen Stoffels"
+
+#: src/main.py:113
+msgid "GitHub"
+msgstr "GitHub"
+
+#: src/window.py:132
+msgid "Sorry!"
+msgstr "Sorry!"
+
+#: src/window.py:136
+msgid "The song was not recognized."
+msgstr "Het nummer werd niet herkend."
+
+#: src/window.py:138
+msgid "Something went wrong."
+msgstr "Er is iets misgegaan."
