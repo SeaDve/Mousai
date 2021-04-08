@@ -95,21 +95,16 @@ class MousaiWindow(Handy.ApplicationWindow):
 
         print(json_output)
         status = json_output["status"]
-        print(status)
 
         try:
             title = json_output["result"]["title"]
             artist = json_output["result"]["artist"]
             song_link = json_output["result"]["song_link"]
-
-            self.song_entry = {}
-            self.song_entry["title"] = title
-            self.song_entry["artist"] = artist
-            self.song_entry["song_link"] = song_link
-            self.memory_list.append(self.song_entry)
-
             song_row = SongRow(title, artist, song_link)
             self.history_listbox.insert(song_row, 0)
+
+            song_entry = {"title": title, "artist": artist, "song_link": song_link}
+            self.memory_list.append(song_entry)
         except Exception:
             error = Gtk.MessageDialog(transient_for=self,
                                       type=Gtk.MessageType.WARNING,
@@ -126,7 +121,7 @@ class MousaiWindow(Handy.ApplicationWindow):
 
         try:
             icon_uri = json_output["result"]["spotify"]["album"]["images"][2]["url"]
-            self.song_entry["icon_uri"] = icon_uri
+            song_entry["icon_uri"] = icon_uri
             urllib.request.urlretrieve(icon_uri, f"{self.voice_recorder.get_tmp_dir()}{title}{artist}.jpg")
             image = GdkPixbuf.Pixbuf.new_from_file(f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg")
             song_row.song_icon.set_loadable_icon(image)
