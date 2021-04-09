@@ -109,7 +109,7 @@
             <child>
               <object class="HdyStatusPage" id="recording_box">
                 <property name="visible">True</property>
-                <property name="icon-name">audio-input-microphone-symbolic</property>
+                <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
                 <property name="title" translatable="yes">Listening</property>
               </object>
             </child>
