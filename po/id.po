@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 11:01+0800\n"
+"POT-Creation-Date: 2021-04-09 13:15+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -117,23 +117,23 @@ msgstr "Mulai Mousaing!"
 msgid "Click the listen button to start"
 msgstr "Klik tombol dengar untuk memulai"
 
-#: data/ui/window.ui:134
+#: data/ui/window.ui:113
 msgid "Listening"
 msgstr "Mendengarkan"
 
-#: data/ui/window.ui:155
+#: data/ui/window.ui:125
 msgid "Clear song history"
 msgstr "Hapus riwayat lagu"
 
-#: data/ui/window.ui:159
+#: data/ui/window.ui:129
 msgid "Reset token"
 msgstr "Setel ulang token"
 
-#: data/ui/window.ui:165
+#: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Keyboard"
 
-#: data/ui/window.ui:169
+#: data/ui/window.ui:139
 msgid "About Mousai"
 msgstr "Tentang Mousai"
 

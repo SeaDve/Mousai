@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 11:01+0800\n"
+"POT-Creation-Date: 2021-04-09 13:15+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: TheInterestingSoul <wangpy01@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -117,23 +117,23 @@ msgstr "开始听歌识曲吧！"
 msgid "Click the listen button to start"
 msgstr "点击该按钮以开始"
 
-#: data/ui/window.ui:134
+#: data/ui/window.ui:113
 msgid "Listening"
 msgstr "正在侦听"
 
-#: data/ui/window.ui:155
+#: data/ui/window.ui:125
 msgid "Clear song history"
 msgstr "清除识别记录"
 
-#: data/ui/window.ui:159
+#: data/ui/window.ui:129
 msgid "Reset token"
 msgstr "重设令牌值"
 
-#: data/ui/window.ui:165
+#: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: data/ui/window.ui:169
+#: data/ui/window.ui:139
 msgid "About Mousai"
 msgstr "关于 Mousai"
 

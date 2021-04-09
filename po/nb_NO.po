@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 11:01+0800\n"
+"POT-Creation-Date: 2021-04-09 13:15+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -117,24 +117,24 @@ msgstr "Start Mousaing."
 msgid "Click the listen button to start"
 msgstr "Klikk på lytteknappen for å starte"
 
-#: data/ui/window.ui:134
+#: data/ui/window.ui:113
 #, fuzzy
 msgid "Listening"
 msgstr "Lytting"
 
-#: data/ui/window.ui:155
+#: data/ui/window.ui:125
 msgid "Clear song history"
 msgstr "Tøm sanghistorikk"
 
-#: data/ui/window.ui:159
+#: data/ui/window.ui:129
 msgid "Reset token"
 msgstr "Tilbakestill symbol"
 
-#: data/ui/window.ui:165
+#: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: data/ui/window.ui:169
+#: data/ui/window.ui:139
 msgid "About Mousai"
 msgstr "Om Mousai"
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 11:01+0800\n"
-"PO-Revision-Date: 2021-04-03 13:26+0000\n"
+"POT-Creation-Date: 2021-04-09 13:15+0800\n"
+"PO-Revision-Date: 2021-04-09 05:17+0000\n"
 "Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
 "com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -38,12 +38,16 @@ msgid ""
 "Mousai is a simple application that can identify song like Shazam. It can "
 "identify both its title and artist."
 msgstr ""
+"O Mousai é um aplicativo simples que pode identificar músicas como o Shazam. "
+"Ele pode identificar o título e o artista."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
 msgstr ""
+"Nota: Este usa a API de audd.io, por isso é necessário fazer o login em seu "
+"site para obter mais tentativas."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:21
@@ -76,7 +80,7 @@ msgstr "Começar a escutar"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr "Cancelar escutar"
+msgstr "Parar de escutar"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -98,8 +102,8 @@ msgid ""
 "this blank will give you a few trials per day."
 msgstr ""
 "Mousai usa APIs audd.io para funcionar, por isso é necessário fazer o login "
-"para <a href=\"https://dashboard.audd.io/\">o site deles </a> e obter um "
-"token. Deixar este campo em branco resultará em algumas tentativas por dia."
+"no <a href=\"https://dashboard.audd.io/\">site deles </a> e obter um token. "
+"Deixar este campo em branco resultará em algumas tentativas por dia."
 
 #: data/ui/window.ui:24
 msgid "Listen"
@@ -118,23 +122,23 @@ msgstr "Comece a Mousaiar!"
 msgid "Click the listen button to start"
 msgstr "Clique no botão escutar para iniciar"
 
-#: data/ui/window.ui:134
+#: data/ui/window.ui:113
 msgid "Listening"
 msgstr "Escutando"
 
-#: data/ui/window.ui:155
+#: data/ui/window.ui:125
 msgid "Clear song history"
 msgstr "Limpar histórico de música"
 
-#: data/ui/window.ui:159
+#: data/ui/window.ui:129
 msgid "Reset token"
 msgstr "Redefinir token"
 
-#: data/ui/window.ui:165
+#: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: data/ui/window.ui:169
+#: data/ui/window.ui:139
 msgid "About Mousai"
 msgstr "Sobre o Mousai"
 
