@@ -38,7 +38,6 @@ class MousaiWindow(Handy.ApplicationWindow):
     main_screen_box = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
     empty_state_box = Gtk.Template.Child()
-    mic_status = Gtk.Template.Child()
 
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)

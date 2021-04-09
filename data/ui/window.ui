@@ -107,40 +107,10 @@
               </object>
             </child>
             <child>
-              <object class="HdyWindowHandle" id="recording_box">
+              <object class="HdyStatusPage" id="recording_box">
                 <property name="visible">True</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="halign">center</property>
-                        <property name="valign">center</property>
-                        <property name="vexpand">True</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">36</property>
-                        <child>
-                          <object class="GtkImage" id="mic_status">
-                            <property name="visible">True</property>
-                            <property name="pixel-size">108</property>
-                            <property name="icon-name">audio-input-microphone-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Listening</property>
-                            <style>
-                              <class name="listening_label"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <property name="icon-name">audio-input-microphone-symbolic</property>
+                <property name="title" translatable="yes">Listening</property>
               </object>
             </child>
           </object>

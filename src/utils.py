@@ -76,13 +76,13 @@ class VoiceRecorder:
             pass
 
         if 0 <= val <= 36:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-high-symbolic", 72)
+            self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
         elif 37 <= val <= 57:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-medium-symbolic", 72)
+            self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
         elif 58 <= val <= 85:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-low-symbolic", 72)
+            self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
         elif val >= 86:
-            self.window.mic_status.set_from_icon_name("microphone-sensitivity-muted-symbolic", 72)
+            self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
 
     @staticmethod
     def get_tmp_dir():
