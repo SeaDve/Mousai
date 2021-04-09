@@ -56,7 +56,7 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.main_stack.set_visible_child(self.empty_state_box)
 
     def load_memory_list(self, memory_list):
-        for index, _ in enumerate(memory_list):
+        for index, song in enumerate(memory_list):
             info_dict = memory_list[index]
             title = info_dict["title"]
             artist = info_dict["artist"]
