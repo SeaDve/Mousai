@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 11:01+0800\n"
-"PO-Revision-Date: 2021-04-03 13:26+0000\n"
+"POT-Creation-Date: 2021-04-09 13:15+0800\n"
+"PO-Revision-Date: 2021-04-09 05:17+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
 ">\n"
@@ -37,12 +37,16 @@ msgid ""
 "Mousai is a simple application that can identify song like Shazam. It can "
 "identify both its title and artist."
 msgstr ""
+"Mousai, Shazam gibi şarkıları tanımlayabilen basit bir uygulamadır. Hem "
+"başlığını hem de sanatçısını tanımlayabilir."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
 msgstr ""
+"Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme almak için "
+"sitelerinde oturum açmak gerekir."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:21
@@ -117,23 +121,23 @@ msgstr "Mousai yapmaya başla!"
 msgid "Click the listen button to start"
 msgstr "Başlamak için dinle düğmesine tıklayın"
 
-#: data/ui/window.ui:134
+#: data/ui/window.ui:113
 msgid "Listening"
 msgstr "Dinliyor"
 
-#: data/ui/window.ui:155
+#: data/ui/window.ui:125
 msgid "Clear song history"
 msgstr "Şarkı geçmişini temizle"
 
-#: data/ui/window.ui:159
+#: data/ui/window.ui:129
 msgid "Reset token"
 msgstr "Belirteci sıfırla"
 
-#: data/ui/window.ui:165
+#: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: data/ui/window.ui:169
+#: data/ui/window.ui:139
 msgid "About Mousai"
 msgstr "Mousai Hakkında"
 

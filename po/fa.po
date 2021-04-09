@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 11:01+0800\n"
+"POT-Creation-Date: 2021-04-09 13:15+0800\n"
 "PO-Revision-Date: 2021-03-31 05:10+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
@@ -115,23 +115,23 @@ msgstr ""
 msgid "Click the listen button to start"
 msgstr ""
 
-#: data/ui/window.ui:134
+#: data/ui/window.ui:113
 msgid "Listening"
 msgstr ""
 
-#: data/ui/window.ui:155
+#: data/ui/window.ui:125
 msgid "Clear song history"
 msgstr ""
 
-#: data/ui/window.ui:159
+#: data/ui/window.ui:129
 msgid "Reset token"
 msgstr ""
 
-#: data/ui/window.ui:165
+#: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: data/ui/window.ui:169
+#: data/ui/window.ui:139
 msgid "About Mousai"
 msgstr ""
 
