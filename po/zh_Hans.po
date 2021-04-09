@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 09:02+0800\n"
+"POT-Creation-Date: 2021-04-08 11:01+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: TheInterestingSoul <wangpy01@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -28,22 +28,24 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:107
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Simple song identifier"
 msgstr "听歌识曲软件"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid ""
-"Mousai is a simple application that can identify song like Shazam. It saves "
-"the artist, album, and title of the identified song in a JSON file. Note: "
-"This uses the API of audd.io, so it is necessary to login to their site to "
-"get more trials."
+"Mousai is a simple application that can identify song like Shazam. It can "
+"identify both its title and artist."
 msgstr ""
-"Mousai 是一个简单的应用程序，它可以像 Shazam 一样听歌识曲。Mousai 会把识别到的歌手、专辑与歌曲标题保存在 JSON 文件中。请注意："
-"本软件需要使用 audd.io 的 API，因此您需要登录以获得更多的免费额度。"
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to login to their "
+"site to get more trials."
+msgstr ""
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:20
+#: data/io.github.seadve.Mousai.appdata.xml.in:21
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -94,8 +96,9 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai 使用 audd.io 的 API 以实现其功能， 因此您需要 <a href=\"https://dashboard.audd.io/\""
-">登录该网站</a>并获取一个令牌值。不填写此项将只能使用免费额度（一天几次）。"
+"Mousai 使用 audd.io 的 API 以实现其功能， 因此您需要 <a href=\"https://"
+"dashboard.audd.io/\">登录该网站</a>并获取一个令牌值。不填写此项将只能使用免费"
+"额度（一天几次）。"
 
 #: data/ui/window.ui:24
 msgid "Listen"
@@ -134,30 +137,40 @@ msgstr "键盘快捷键"
 msgid "About Mousai"
 msgstr "关于 Mousai"
 
-#: src/main.py:110
+#: src/main.py:109
 msgid "Copyright 2021 Dave Patrick"
 msgstr "版权所有 © 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:112
+#: src/main.py:111
 msgid "translator-credits"
 msgstr "有趣的灵魂 (@TheInterestingSoul)"
 
-#: src/main.py:113
+#: src/main.py:112
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:132
+#: src/window.py:120
 msgid "Sorry!"
 msgstr "抱歉！"
 
-#: src/window.py:136
+#: src/window.py:124
 msgid "The song was not recognized."
 msgstr "无识别结果。"
 
-#: src/window.py:138
+#: src/window.py:126
 msgid "Something went wrong."
 msgstr "识别时出现了问题。"
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song like Shazam. It "
+#~ "saves the artist, album, and title of the identified song in a JSON file. "
+#~ "Note: This uses the API of audd.io, so it is necessary to login to their "
+#~ "site to get more trials."
+#~ msgstr ""
+#~ "Mousai 是一个简单的应用程序，它可以像 Shazam 一样听歌识曲。Mousai 会把识别"
+#~ "到的歌手、专辑与歌曲标题保存在 JSON 文件中。请注意：本软件需要使用 audd."
+#~ "io 的 API，因此您需要登录以获得更多的免费额度。"
 
 #~ msgid "Recording"
 #~ msgstr "录制中"
