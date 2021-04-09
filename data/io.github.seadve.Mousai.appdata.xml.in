@@ -36,6 +36,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.1" date="2021-04-09">
+      <description>
+        <p>Minor improvements:</p>
+        <ul>
+          <li>Minor UI Improvements</li>
+          <li>Window is no longer destroyed on clear history</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.0" date="2021-04-08">
       <description>
         <p>New features and performance improvements:</p>
