@@ -67,9 +67,10 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def clear_memory_list(self):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
-        win = MousaiWindow(self.settings, application=self.get_application())
-        self.destroy()
-        win.present()
+        self.main_stack.set_visible_child(self.empty_state_box)
+        for row in self.history_listbox.get_children():
+            self.history_listbox.remove(row)
+            self.memory_list = []
 
     def on_quit(self, widget, arg):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
