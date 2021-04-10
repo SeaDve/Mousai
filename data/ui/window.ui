@@ -122,11 +122,11 @@
     <section>
       <item>
         <attribute name="action">app.clear-history</attribute>
-        <attribute name="label" translatable="yes">Clear song history</attribute>
+        <attribute name="label" translatable="yes">Clear Song History</attribute>
       </item>
       <item>
         <attribute name="action">app.reset-token</attribute>
-        <attribute name="label" translatable="yes">Reset token</attribute>
+        <attribute name="label" translatable="yes">Reset Token</attribute>
       </item>
     </section>
     <section>
