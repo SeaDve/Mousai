@@ -120,11 +120,10 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.listen_cancel_stack.set_visible_child(self.start_button)
 
     def load_memory_list(self, memory_list):
-        for index, song in enumerate(memory_list):
-            info_dict = memory_list[index]
-            title = info_dict["title"]
-            artist = info_dict["artist"]
-            song_link = info_dict["song_link"]
+        for song in memory_list:
+            title = song["title"]
+            artist = song["artist"]
+            song_link = song["song_link"]
             song_row = SongRow(title, artist, song_link)
             self.history_listbox.insert(song_row, 0)
 
@@ -135,5 +134,5 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.memory_list = []
         self.main_stack.set_visible_child(self.empty_state_box)
 
-    def on_quit(self, widget, arg):
+    def on_quit(self, widget, param):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
