@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-09 05:17+0000\n"
-"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
+"PO-Revision-Date: 2021-04-10 10:37+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -31,11 +31,11 @@ msgstr "Shazam;Music;Song;Identify;Tunog;Kanta;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Alamin ang kanta sa kaunting sandali"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr ""
+msgstr "Dumiskubre ng mga kanta gamit ang napakadaling gamiting interface."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -43,6 +43,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Ang Mousai ay isang simpleng aplikasyon na kayang maka-identify ng kanta "
+"tulad ng Shazam. Pinduting mo lang ang listen button, maghintay sandali. "
+"Ibibigay niya na ang pamagat at kumanta ng kanta!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -54,27 +57,27 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Bakit magugustuhan mo ang Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
-msgstr ""
+msgstr "🎸 Ilagay sa isang history and nadiskubreng kanta."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 I-play ang nadiskubreng kanta sa iyong browser."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Madaling gamiting interface."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Madaling gamiting mga keyboard shortcuts."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -111,7 +114,7 @@ msgstr "Ikansela ang pagkinig"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr ""
+msgstr "Mga opsyon"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
@@ -119,7 +122,7 @@ msgstr "Burahin ang history"
 
 #: data/ui/shortcuts.ui:71
 msgid "Reset token value"
-msgstr ""
+msgstr "I-reset ang token"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -168,11 +171,11 @@ msgstr "Nakikinig"
 
 #: data/ui/window.ui:125
 msgid "Clear Song History"
-msgstr ""
+msgstr "Burahin Ang History"
 
 #: data/ui/window.ui:129
 msgid "Reset Token"
-msgstr ""
+msgstr "I-reset Ang Token"
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
