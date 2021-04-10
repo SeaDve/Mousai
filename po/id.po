@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 13:15+0800\n"
+"POT-Creation-Date: 2021-04-10 18:28+0800\n"
 "PO-Revision-Date: 2021-04-03 13:26+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -29,23 +29,52 @@ msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
-msgid "Simple song identifier"
-msgstr "Pengenal lagu sederhana"
-
-#: data/io.github.seadve.Mousai.appdata.xml.in:9
-msgid ""
-"Mousai is a simple application that can identify song like Shazam. It can "
-"identify both its title and artist."
+msgid "Identify any songs in seconds"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:12
+#: data/io.github.seadve.Mousai.appdata.xml.in:9
+msgid "Discover songs you are aching to know with an easy-to-use interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:10
+msgid ""
+"Mousai is a simple application that can identify song similar to Shazam. "
+"Just click the listen button, and then wait a few seconds. It will magically "
+"return the title and artist of that song!"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
 msgstr ""
 
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid "Why you will love Mousai?"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:14
+msgid "🎵 Identify the title and artist of the song within seconds."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎸 Store the identified song with the Album art in a history."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
+msgid "🌐 Play the identified song in your browser."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
+msgid "📱 Easy-to-use user interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
+msgid "⌨️ User-friendly keyboard shortcuts."
+msgstr ""
+
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:21
+#: data/io.github.seadve.Mousai.appdata.xml.in:26
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -76,6 +105,18 @@ msgstr "Mulai dengarkan"
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
 msgstr "Batal dengarkan"
+
+#: data/ui/shortcuts.ui:59
+msgid "Settings"
+msgstr ""
+
+#: data/ui/shortcuts.ui:64
+msgid "Clear song history"
+msgstr "Hapus riwayat lagu"
+
+#: data/ui/shortcuts.ui:71
+msgid "Reset token value"
+msgstr ""
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -122,12 +163,12 @@ msgid "Listening"
 msgstr "Mendengarkan"
 
 #: data/ui/window.ui:125
-msgid "Clear song history"
-msgstr "Hapus riwayat lagu"
+msgid "Clear Song History"
+msgstr ""
 
 #: data/ui/window.ui:129
-msgid "Reset token"
-msgstr "Setel ulang token"
+msgid "Reset Token"
+msgstr ""
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
@@ -150,17 +191,23 @@ msgstr "Dani Rananta"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:120
+#: src/window.py:94
 msgid "Sorry!"
 msgstr "Maaf!"
 
-#: src/window.py:124
+#: src/window.py:98
 msgid "The song was not recognized."
 msgstr "Lagu tidak dikenali."
 
-#: src/window.py:126
+#: src/window.py:100
 msgid "Something went wrong."
 msgstr "Ada yang salah."
+
+#~ msgid "Simple song identifier"
+#~ msgstr "Pengenal lagu sederhana"
+
+#~ msgid "Reset token"
+#~ msgstr "Setel ulang token"
 
 #~ msgid ""
 #~ "Mousai is a simple application that can identify song like Shazam. It "
