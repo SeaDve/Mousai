@@ -77,7 +77,7 @@
                         <child>
                           <object class="GtkLabel">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes" context="Do not translate the link, only 'their website'">Mousai uses audd.io APIs to work, so it is required to login to &lt;a href="https://dashboard.audd.io/"&gt;their website&lt;/a&gt; and get a token. Leaving this blank will give you a few trials per day.</property>
+                            <property name="label" translatable="yes" comments="Do not translate the link, only 'their website'">Mousai uses audd.io APIs to work, so it is required to login to &lt;a href="https://dashboard.audd.io/"&gt;their website&lt;/a&gt; and get a token. Leaving this blank will give you a few trials per day.</property>
                             <property name="use-markup">True</property>
                             <property name="justify">center</property>
                             <property name="wrap">True</property>

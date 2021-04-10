@@ -65,6 +65,11 @@ ninja -C builddir install
 ```
 
 
+## 🙌 Help translate Mousai
+You can help Mousai translate into your native language. If you found any typos 
+or think you can improve a translation, you can use the [Weblate](https://hosted.weblate.org/engage/kooha/) platform.
+
+
 ## ☕ Support me and the project
 
 Mousai is free and will always be for everyone to use. If you like the project and

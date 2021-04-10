@@ -121,10 +121,7 @@ class MousaiWindow(Handy.ApplicationWindow):
 
     def load_memory_list(self, memory_list):
         for song in memory_list:
-            title = song["title"]
-            artist = song["artist"]
-            song_link = song["song_link"]
-            song_row = SongRow(title, artist, song_link)
+            song_row = SongRow(song["title"], song["artist"], song["song_link"])
             self.history_listbox.insert(song_row, 0)
 
     def clear_memory_list(self):
