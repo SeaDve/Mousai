@@ -16,7 +16,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-import requests
 import urllib.request
 from gettext import gettext as _
 
@@ -54,47 +53,22 @@ class MousaiWindow(Handy.ApplicationWindow):
         else:
             self.main_stack.set_visible_child(self.empty_state_box)
 
-    def load_memory_list(self, memory_list):
-        for index, song in enumerate(memory_list):
-            info_dict = memory_list[index]
-            title = info_dict["title"]
-            artist = info_dict["artist"]
-            song_link = info_dict["song_link"]
-
-            song_row = SongRow(title, artist, song_link)
-            self.history_listbox.insert(song_row, 0)
-
-    def clear_memory_list(self):
-        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
-        self.main_stack.set_visible_child(self.empty_state_box)
-        for row in self.history_listbox.get_children():
-            self.history_listbox.remove(row)
-            self.memory_list = []
-
-    def on_quit(self, widget, arg):
-        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
-
     def on_start_button_clicked(self, widget):
         self.voice_recorder.start(self, self.on_microphone_record_callback)
-
         self.main_stack.set_visible_child(self.recording_box)
         self.listen_cancel_stack.set_visible_child(self.cancel_button)
 
     def on_cancel_button_clicked(self, widget):
         self.voice_recorder.cancel()
-
-        if self.memory_list:
-            self.main_stack.set_visible_child(self.main_screen_box)
-        else:
-            self.main_stack.set_visible_child(self.empty_state_box)
-        self.listen_cancel_stack.set_visible_child(self.start_button)
+        self.return_default_page()
 
     def on_microphone_record_callback(self):
+        token = self.settings.get_string("token-value")
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
-        json_output = json.loads(self.song_guesser(song_file))
+        json_output = json.loads(self.voice_recorder.guess_song(token, song_file))
+        status = json_output["status"]
 
         print(json_output)
-        status = json_output["status"]
 
         try:
             title = json_output["result"]["title"]
@@ -136,14 +110,30 @@ class MousaiWindow(Handy.ApplicationWindow):
         except Exception:
             pass
 
+        self.return_default_page()
+
+    def return_default_page(self):
         if self.memory_list:
             self.main_stack.set_visible_child(self.main_screen_box)
         else:
             self.main_stack.set_visible_child(self.empty_state_box)
         self.listen_cancel_stack.set_visible_child(self.start_button)
 
-    def song_guesser(self, song_file):
-        token = self.settings.get_string("token-value")
-        data = {'api_token': token, 'return': 'spotify'}
-        files = {'file': open(song_file, 'rb')}
-        return requests.post('https://api.audd.io/', data=data, files=files).text
+    def load_memory_list(self, memory_list):
+        for index, song in enumerate(memory_list):
+            info_dict = memory_list[index]
+            title = info_dict["title"]
+            artist = info_dict["artist"]
+            song_link = info_dict["song_link"]
+            song_row = SongRow(title, artist, song_link)
+            self.history_listbox.insert(song_row, 0)
+
+    def clear_memory_list(self):
+        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
+        for row in self.history_listbox.get_children():
+            self.history_listbox.remove(row)
+            self.memory_list = []
+        self.main_stack.set_visible_child(self.empty_state_box)
+
+    def on_quit(self, widget, arg):
+        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))

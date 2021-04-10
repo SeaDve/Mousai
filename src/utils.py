@@ -17,6 +17,7 @@
 
 from subprocess import PIPE, Popen
 
+import requests
 from gi.repository import GLib, Gst
 Gst.init(None)
 
@@ -100,6 +101,12 @@ class VoiceRecorder:
             stdout=PIPE
         ).stdout.read().rstrip()
         return pactl_output
+
+    @staticmethod
+    def guess_song(token, song_file):
+        data = {'api_token': token, 'return': 'spotify'}
+        files = {'file': open(song_file, 'rb')}
+        return requests.post('https://api.audd.io/', data=data, files=files).text
 
 
 class Timer:

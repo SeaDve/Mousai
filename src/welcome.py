@@ -30,8 +30,8 @@ class WelcomeWindow(Handy.ApplicationWindow):
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
-        self.submit_button.connect("clicked", self.on_submit_button_clicked)
         self.token_entry.set_text(self.settings.get_string("token-value"))
+        self.submit_button.connect("clicked", self.on_submit_button_clicked)
 
     def on_submit_button_clicked(self, widget):
         self.settings.set_string("token-value", self.token_entry.get_text())
