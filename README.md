@@ -3,7 +3,7 @@
   Mousai
 </h1>
 
-<p align="center"><strong>Simple song identifier</strong></p>
+<p align="center"><strong>Identify any songs in seconds</strong></p>
 
 <p align="center">
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai"><img width="200" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.png"/></a>
@@ -11,6 +11,9 @@
 
 <br>
 <p align="center">
+  <a href="https://github.com/SeaDve/Mousai/blob/master/COPYING">
+    <img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg">
+  </a>
   <a href="https://hosted.weblate.org/engage/kooha/">
     <img src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg" alt="Translation status"  />
   </a>
@@ -23,22 +26,37 @@
   <img src="screenshots/Mousai-preview.png" alt="Preview"/>
 </p>
 
-## Description
-Mousai is a simple application that can identify song like Shazam. It can identify both its title and artist.
+Discover songs you are aching to know with an easy-to-use interface.
+
+Mousai is a simple application that can identify songs similar to Shazam. Just
+click the listen button, and then wait a few seconds. It will magically return
+the title and artist of that song!
 
 Note: This uses the API of audd.io, so it is necessary to login to their site to get more trials.
 
+Why you will love Mousai?
+* 🎵 Identify the title and artist of the song within seconds.
+* 🎸 Store the identified song with the Album art in history.
+* 🌐 Play the identified song in your browser.
+* 📱 Easy-to-use user interface.
+* ⌨️ User-friendly keyboard shortcuts.
 
-## Building from source
+## 🌈 AudD
 
-### GNOME Builder (Recommended)
+AudD is a music recognition API that makes Mousai possible. For more information,
+you can check their [Privacy Policy](https://audd.io/privacy/) and [Terms of Services](https://audd.io/terms/).
+
+
+## 🏗️ Building from source
+
+### GNOME Builder
 GNOME Builder is the environment used for developing this application. It can use Flatpak manifests to create a consistent building and running environment cross-distro. Thus, it is highly recommended you use it.
 
 1. Download [GNOME Builder](https://flathub.org/apps/details/org.gnome.Builder).
 2. In Builder, click the "Clone Repository" button at the bottom, using `https://github.com/SeaDve/Mousai.git` as the URL.
 3. Click the build button at the top once the project is loaded.
 
-### Manual with meson
+### Meson
 ```
 git clone https://github.com/SeaDve/Mousai.git
 cd Mousai
@@ -46,11 +64,15 @@ meson builddir --prefix=/usr/local
 ninja -C builddir install
 ```
 
-## AudD
 
-You can check their [Privacy Policy](https://audd.io/privacy/) and [Terms of Services](https://audd.io/terms/) for more informations about AudD.
+## ☕ Support me and the project
+
+Mousai is free and will always be for everyone to use. If you like the project and
+would like to support and fund it, you may donate through [Paypal](https://www.paypal.com/paypalme/sedve) 
+or [Patreon](https://www.patreon.com/SeaDve).
 
 
-## Credits
+## 💝 Acknowledgment
 
-Developed by **[Dave Patrick](https://github.com/SeaDve)** and [contributors](https://github.com/SeaDve/Mousai/graphs/contributors).
+Special thanks to [AudD's API](https://audd.io/) and [contributors](https://github.com/SeaDve/Mousai/graphs/contributors) 
+for making Mousai possible. Also, a warm thanks to the project's [translators](https://hosted.weblate.org/engage/kooha/).

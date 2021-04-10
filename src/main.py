@@ -103,7 +103,7 @@ class Application(Gtk.Application):
         about.set_program_name("Mousai")
         about.set_logo_icon_name("io.github.seadve.Mousai")
         about.set_authors(["Dave Patrick"])
-        about.set_comments(_("Simple song identifier"))
+        about.set_comments(_("Identify any songs in seconds"))
         about.set_wrap_license(True)
         about.set_license_type(Gtk.License.GPL_3_0)
         about.set_copyright(_("Copyright 2021 Dave Patrick"))
