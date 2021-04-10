@@ -65,8 +65,8 @@ class Application(Gtk.Application):
 
     def setup_actions(self):
         simple_actions = [
-            ("clear-history", self.clear_song_history, None),
-            ("reset-token", self.reset_token_value, None),
+            ("clear-history", self.clear_song_history, ("<Ctrl>BackSpace",)),
+            ("reset-token", self.reset_token_value, ("<Ctrl>Delete",)),
             ("show-shortcuts", self.show_shortcuts_window, ("<Ctrl>question",)),
             ("show-about", self.show_about_dialog, None),
             ("quit", self.on_quit, ("<Ctrl>q",)),
