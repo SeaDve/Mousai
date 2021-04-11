@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 13:15+0800\n"
-"PO-Revision-Date: 2021-04-09 05:17+0000\n"
-"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
+"POT-Creation-Date: 2021-04-10 18:28+0800\n"
+"PO-Revision-Date: 2021-04-10 10:37+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -30,19 +30,24 @@ msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Tunog;Kanta;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
-msgid "Simple song identifier"
-msgstr "Simpleng pangkilala ng kanta"
+msgid "Identify any songs in seconds"
+msgstr "Alamin ang kanta sa kaunting sandali"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
-msgid ""
-"Mousai is a simple application that can identify song like Shazam. It can "
-"identify both its title and artist."
-msgstr ""
-"Ang Mousai ay isang simpleng aplikasyon kung saan maaari kang makapag-"
-"identify ng mga kanta kagaya ng Shazam. Maaari niyang maidentify ang "
-"parehong pamagat at singer."
+msgid "Discover songs you are aching to know with an easy-to-use interface."
+msgstr "Dumiskubre ng mga kanta gamit ang napakadaling gamiting interface."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:12
+#: data/io.github.seadve.Mousai.appdata.xml.in:10
+msgid ""
+"Mousai is a simple application that can identify song similar to Shazam. "
+"Just click the listen button, and then wait a few seconds. It will magically "
+"return the title and artist of that song!"
+msgstr ""
+"Ang Mousai ay isang simpleng aplikasyon na kayang maka-identify ng kanta "
+"tulad ng Shazam. Pinduting mo lang ang listen button, maghintay sandali. "
+"Ibibigay niya na ang pamagat at kumanta ng kanta!"
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
@@ -50,8 +55,32 @@ msgstr ""
 "Paalala: Gumagamit ito ng API ng audd.io, kaya kinakailangan na maglogin sa "
 "kanilang site upang makatanggap ng mas maraming trials."
 
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid "Why you will love Mousai?"
+msgstr "Bakit magugustuhan mo ang Mousai?"
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:14
+msgid "🎵 Identify the title and artist of the song within seconds."
+msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎸 Store the identified song with the Album art in a history."
+msgstr "🎸 Ilagay sa isang history and nadiskubreng kanta."
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
+msgid "🌐 Play the identified song in your browser."
+msgstr "🌐 I-play ang nadiskubreng kanta sa iyong browser."
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
+msgid "📱 Easy-to-use user interface."
+msgstr "📱 Madaling gamiting interface."
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
+msgid "⌨️ User-friendly keyboard shortcuts."
+msgstr "⌨️ Madaling gamiting mga keyboard shortcuts."
+
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:21
+#: data/io.github.seadve.Mousai.appdata.xml.in:26
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -82,6 +111,18 @@ msgstr "Magsimulang makinig"
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
 msgstr "Ikansela ang pagkinig"
+
+#: data/ui/shortcuts.ui:59
+msgid "Settings"
+msgstr "Mga opsyon"
+
+#: data/ui/shortcuts.ui:64
+msgid "Clear song history"
+msgstr "Burahin ang history"
+
+#: data/ui/shortcuts.ui:71
+msgid "Reset token value"
+msgstr "I-reset ang token"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -129,12 +170,12 @@ msgid "Listening"
 msgstr "Nakikinig"
 
 #: data/ui/window.ui:125
-msgid "Clear song history"
-msgstr "Burahin ang history"
+msgid "Clear Song History"
+msgstr "Burahin Ang History"
 
 #: data/ui/window.ui:129
-msgid "Reset token"
-msgstr "I-reset ang token"
+msgid "Reset Token"
+msgstr "I-reset Ang Token"
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
@@ -157,17 +198,31 @@ msgstr "Dave Patrick"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:120
+#: src/window.py:94
 msgid "Sorry!"
 msgstr "Paumanhin!"
 
-#: src/window.py:124
+#: src/window.py:98
 msgid "The song was not recognized."
 msgstr "Ang kanta ay hindi makilala."
 
-#: src/window.py:126
+#: src/window.py:100
 msgid "Something went wrong."
 msgstr "Parang may mali."
+
+#~ msgid "Simple song identifier"
+#~ msgstr "Simpleng pangkilala ng kanta"
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song like Shazam. It can "
+#~ "identify both its title and artist."
+#~ msgstr ""
+#~ "Ang Mousai ay isang simpleng aplikasyon kung saan maaari kang makapag-"
+#~ "identify ng mga kanta kagaya ng Shazam. Maaari niyang maidentify ang "
+#~ "parehong pamagat at singer."
+
+#~ msgid "Reset token"
+#~ msgstr "I-reset ang token"
 
 #~ msgid ""
 #~ "Mousai is a simple application that can identify song like Shazam. It "
