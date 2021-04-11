@@ -85,6 +85,11 @@ class VoiceRecorder:
         elif val >= 86:
             self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
 
+        if val >= 100:
+            self.window.recording_box.set_title("Muted")
+        else:
+            self.window.recording_box.set_title("Listening")
+
     @staticmethod
     def get_tmp_dir():
         directory = GLib.getenv('XDG_CACHE_HOME')
