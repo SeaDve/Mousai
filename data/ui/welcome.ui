@@ -1,42 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="3.24"/>
-  <requires lib="libhandy" version="1.0"/>
-  <template class="WelcomeWindow" parent="HdyApplicationWindow">
+  <requires lib="gtk" version="4.0"/>
+  <template class="WelcomeWindow" parent="AdwApplicationWindow">
     <property name="default-width">600</property>
     <property name="default-height">450</property>
     <child>
-      <object class="HdyWindowHandle">
-        <property name="visible">True</property>
+      <object class="GtkWindowHandle">
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkStack">
-                <property name="visible">True</property>
-                <property name="vexpand">True</property>
+                <property name="vexpand">1</property>
                 <child>
-                  <object class="HdyClamp">
-                    <property name="visible">True</property>
+                  <object class="AdwClamp">
                     <child>
                       <object class="GtkBox">
-                        <property name="visible">True</property>
                         <property name="valign">center</property>
-                        <property name="margin">36</property>
+                        <property name="margin-start">36</property>
+                        <property name="margin-end">36</property>
+                        <property name="margin-top">36</property>
+                        <property name="margin-bottom">36</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">36</property>
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
+                            <property name="can-focus">0</property>
+                            <property name="pixel-size">132</property>
                             <property name="resource">/io/github/seadve/Mousai/logo.svg</property>
-                            <property name="icon-size">72</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="visible">True</property>
                             <property name="label" translatable="yes">Welcome to Mousai</property>
                             <property name="justify">center</property>
                             <style>
@@ -46,24 +41,18 @@
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">True</property>
                             <child>
                               <object class="GtkEntry" id="token_entry">
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="has-focus">True</property>
-                                <property name="hexpand">True</property>
+                                <property name="hexpand">1</property>
                                 <property name="placeholder-text" translatable="yes">Enter a valid token</property>
                               </object>
                             </child>
                             <child>
                               <object class="GtkButton" id="submit_button">
                                 <property name="label" translatable="yes">Submit</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">True</property>
+                                <property name="receives-default">1</property>
                                 <property name="halign">center</property>
-                                <accelerator key="Return" signal="activate"/>
+                                <!-- <accelerator key="Return" signal="activate"/> -->
                                 <style>
                                   <class name="suggested-action"/>
                                 </style>
@@ -76,11 +65,10 @@
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes" comments="Do not translate the link, only 'their website'">Mousai uses audd.io APIs to work, so it is required to login to &lt;a href="https://dashboard.audd.io/"&gt;their website&lt;/a&gt; and get a token. Leaving this blank will give you a few trials per day.</property>
-                            <property name="use-markup">True</property>
+                            <property name="label" translatable="yes" comments="Do not translate the link, only &apos;their website&apos;">Mousai uses audd.io APIs to work, so it is required to login to &lt;a href=&quot;https://dashboard.audd.io/&quot;&gt;their website&lt;/a&gt; and get a token. Leaving this blank will give you a few trials per day.</property>
+                            <property name="use-markup">1</property>
                             <property name="justify">center</property>
-                            <property name="wrap">True</property>
+                            <property name="wrap">1</property>
                           </object>
                         </child>
                       </object>

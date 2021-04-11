@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import Gtk, Handy
+from gi.repository import Gtk, Adw
 
 from .window import MousaiWindow
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/welcome.ui')
-class WelcomeWindow(Handy.ApplicationWindow):
+class WelcomeWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'WelcomeWindow'
 
     submit_button = Gtk.Template.Child()

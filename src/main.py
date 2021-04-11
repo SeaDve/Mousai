@@ -19,11 +19,11 @@ import sys
 import gi
 from gettext import gettext as _
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
-gi.require_version('Handy', '1')
+gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Gio, Handy, Gdk, GLib
+from gi.repository import Gtk, Gio, Adw, Gdk, GLib
 
 from .window import MousaiWindow
 from .welcome import WelcomeWindow
@@ -44,15 +44,15 @@ class Application(Gtk.Application):
 
         css_provider = Gtk.CssProvider()
         css_provider.load_from_resource('/io/github/seadve/Mousai/style.css')
-        screen = Gdk.Screen.get_default()
-        Gtk.StyleContext.add_provider_for_screen(
-            screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+        display = Gdk.Display.get_default()
+        Gtk.StyleContext.add_provider_for_display(
+            display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
         self.settings = Gio.Settings.new('io.github.seadve.Mousai')
         self.setup_actions()
 
-        Handy.init()
+        Adw.init()
 
     def do_activate(self):
         win = self.props.active_window

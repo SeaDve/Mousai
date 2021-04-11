@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import Gtk, Gio, Handy, GdkPixbuf
+from gi.repository import Gtk, Gio, Adw, GdkPixbuf
 
 from .utils import VoiceRecorder
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/songrow.ui')
-class SongRow(Handy.ActionRow):
+class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
 
     song_icon = Gtk.Template.Child()

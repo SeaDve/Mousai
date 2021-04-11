@@ -19,14 +19,24 @@ import json
 import urllib.request
 from gettext import gettext as _
 
-from gi.repository import Gtk, Handy, GdkPixbuf, GLib
+from gi.repository import Gtk, GdkPixbuf, GLib, Adw
 
 from .songrow import SongRow
 from .utils import VoiceRecorder
 
 
+### GTK 4 BLOCKERS
+# Loadable icon for AdwAvatar
+# Delete event for window
+# Listbox no get children
+# Broken error message
+# Keyboard accelerator
+# Icon for welcome window
+# Linked entry in welcome window
+
+
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
-class MousaiWindow(Handy.ApplicationWindow):
+class MousaiWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 
     listen_cancel_stack = Gtk.Template.Child()
@@ -46,7 +56,7 @@ class MousaiWindow(Handy.ApplicationWindow):
 
         self.start_button.connect("clicked", self.on_start_button_clicked)
         self.cancel_button.connect("clicked", self.on_cancel_button_clicked)
-        self.connect("delete-event", self.on_quit)
+        # self.connect("delete-event", self.on_quit)
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
@@ -89,7 +99,6 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.memory_list.append(song_entry)
         except Exception:
             error = Gtk.MessageDialog(transient_for=self,
-                                      type=Gtk.MessageType.WARNING,
                                       buttons=Gtk.ButtonsType.OK,
                                       text=_("Sorry!"))
             if status == "error":
