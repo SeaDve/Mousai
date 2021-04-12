@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Heimen Stoffels <vistausss@outlook.com>, 2021.
+# Heimen Stoffels <vistausss@fastmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-09 05:17+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"PO-Revision-Date: 2021-04-12 13:26+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -29,11 +30,13 @@ msgstr "Shazam;Muziek;Song;Nummer;Identificeren;Herkennen;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Vind elk nummer in een mum van tijd"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Ontdek namen van nummers die je al lang wilde weten, allemaal in een "
+"eenvoudig te gebruiken toepassing."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -41,6 +44,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai is een eenvoudige toepassing waarmee je nummers kunt herkennen, net "
+"zoals Shazam. Klik op de luisterknop, wacht een paar seconden en het "
+"antwoord staat voor je klaar!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -52,27 +58,27 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Waarom je Mousai wilt gebruiken?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Vind de naam van een nummer en artiest in een mum van tijd."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
-msgstr ""
+msgstr "🎸 Bewaar het nummer met albumhoes en al in de geschiedenis."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 Speel het nummer af in je webbrowser."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Eenvoudig vormgegeven."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Gebruiksvriendelijke sneltoetsen."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -109,7 +115,7 @@ msgstr "Stoppen met luisteren"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
@@ -117,7 +123,7 @@ msgstr "Geschiedenis wissen"
 
 #: data/ui/shortcuts.ui:71
 msgid "Reset token value"
-msgstr ""
+msgstr "Toegangssleutel herstellen"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -166,11 +172,11 @@ msgstr "Bezig met luisteren"
 
 #: data/ui/window.ui:125
 msgid "Clear Song History"
-msgstr ""
+msgstr "Geschiedenis wissen"
 
 #: data/ui/window.ui:129
 msgid "Reset Token"
-msgstr ""
+msgstr "Toegangssleutel herstellen"
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"

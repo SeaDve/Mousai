@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-10 10:37+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-04-12 13:26+0000\n"
+"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -114,7 +114,7 @@ msgstr "Ikansela ang pagkinig"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr "Mga opsyon"
+msgstr "Mga Opsyon"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
