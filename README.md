@@ -11,8 +11,8 @@
 
 <br>
 <p align="center">
-  <a href="https://github.com/SeaDve/Mousai/blob/master/COPYING">
-    <img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg">
+  <a href="https://liberapay.com/SeaDve/">
+    <img src="https://img.shields.io/liberapay/receives/SeaDve.svg?logo=liberapay">
   </a>
   <a href="https://hosted.weblate.org/engage/kooha/">
     <img src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg" alt="Translation status"  />
@@ -73,8 +73,7 @@ or think you can improve a translation, you can use the [Weblate](https://hosted
 ## ☕ Support me and the project
 
 Mousai is free and will always be for everyone to use. If you like the project and
-would like to support and fund it, you may donate through [Paypal](https://www.paypal.com/paypalme/sedve) 
-or [Patreon](https://www.patreon.com/SeaDve).
+would like to support and fund it, you may donate through [Liberapay](https://liberapay.com/SeaDve/).
 
 
 ## 💝 Acknowledgment
