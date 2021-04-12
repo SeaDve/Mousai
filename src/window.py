@@ -17,7 +17,6 @@
 
 import json
 import urllib.request
-from gettext import gettext as _
 
 from gi.repository import Gtk, Handy, GdkPixbuf, GLib
 

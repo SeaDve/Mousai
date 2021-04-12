@@ -32,8 +32,7 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 locale.bindtextdomain('mousai', localedir)
 locale.textdomain('mousai')
-gettext.bindtextdomain('mousai', localedir)
-gettext.textdomain('mousai')
+gettext.install('mousai', localedir)
 
 if __name__ == '__main__':
     import gi
