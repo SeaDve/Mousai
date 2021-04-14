@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021.
+# liimee <alt3753.7@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-03 13:26+0000\n"
-"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
+"PO-Revision-Date: 2021-04-12 13:26+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -30,11 +31,13 @@ msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Kenali lagu apa saja dalam hitungan detik"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Temukan lagu yang sangat ingin Anda ketahui dengan antarmuka yang mudah "
+"digunakan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -42,6 +45,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai adalah aplikasi sederhana yang dapat mengenali lagu yang mirip dengan "
+"Shazam. Hanya dengan mengklik tombol dengarkan, dan tunggu beberapa detik. "
+"Mousai akan memberitahu judul dan artis lagu tersebut dengan ajaib!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -51,11 +57,12 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Mengapa Anda akan mencintai Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
+#, fuzzy
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Kenali judul dan artis dari lagu dalam hitungan detik."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
@@ -63,15 +70,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 Putar lagu yang dikenali di browser Anda."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Antarmuka yang mudah digunakan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Pintasan keyboard yang bersahabat."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -100,15 +107,15 @@ msgstr "Kontrol"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr "Mulai dengarkan"
+msgstr "Mulai mendengarkan"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr "Batal dengarkan"
+msgstr "Batal mendengarkan"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
@@ -137,13 +144,13 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai menggunakan audd.io api untuk bekerja, sehingga anda perlu masuk ke "
+"Mousai menggunakan API audd.io untuk bekerja, sehingga Anda perlu masuk ke "
 "<a href=\"https://dashboard.audd.io/\">situs web mereka</a> dan mendapatkan "
 "token. Membiarkannya kosong akan memberi Anda beberapa percobaan per hari."
 
 #: data/ui/window.ui:24
 msgid "Listen"
-msgstr "Dengar"
+msgstr "Dengarkan"
 
 #: data/ui/window.ui:36
 msgid "Cancel"
@@ -164,7 +171,7 @@ msgstr "Mendengarkan"
 
 #: data/ui/window.ui:125
 msgid "Clear Song History"
-msgstr ""
+msgstr "Hapus Riwayat Lagu"
 
 #: data/ui/window.ui:129
 msgid "Reset Token"
@@ -185,7 +192,7 @@ msgstr "Hak Cipta 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:111
 msgid "translator-credits"
-msgstr "Dani Rananta"
+msgstr "    "
 
 #: src/main.py:112
 msgid "GitHub"

@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-03-31 05:10+0000\n"
+"PO-Revision-Date: 2021-04-12 13:26+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +109,7 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"

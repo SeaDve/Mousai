@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-09 05:17+0000\n"
-"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
-">\n"
+"PO-Revision-Date: 2021-04-12 13:26+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,11 @@ msgstr "Shazam;Music;Song;Identify;Müzik;Şarkı;Tanımla;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Herhangi bir şarkıyı saniyeler içinde tanımlayın"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr ""
+msgstr "Kullanımı kolay bir arayüzle bilmek istediğiniz şarkıları keşfedin."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -42,6 +42,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai, Shazam'a benzer şarkıları tanımlayabilen basit bir uygulamadır. "
+"Dinle düğmesine tıklayın ve ardından birkaç saniye bekleyin. Sihirli bir "
+"şekilde şarkının adını ve sanatçısını gösterecektir!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -53,27 +56,27 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Mousai'yi neden seveceksiniz?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Şarkının adını ve sanatçısını saniyeler içinde tanımlayın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
-msgstr ""
+msgstr "🎸 Tanımlanan şarkıyı albüm resmiyle birlikte geçmişte saklayın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 Tanımlanan şarkıyı tarayıcınızda çalın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Kullanımı kolay kullanıcı arayüzü."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Kullanıcı dostu klavye kısayolları."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -110,7 +113,7 @@ msgstr "Dinlemeyi iptal et"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
@@ -118,7 +121,7 @@ msgstr "Şarkı geçmişini temizle"
 
 #: data/ui/shortcuts.ui:71
 msgid "Reset token value"
-msgstr ""
+msgstr "Belirteç değerini sıfırla"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -166,11 +169,11 @@ msgstr "Dinliyor"
 
 #: data/ui/window.ui:125
 msgid "Clear Song History"
-msgstr ""
+msgstr "Şarkı Geçmişini Temizle"
 
 #: data/ui/window.ui:129
 msgid "Reset Token"
-msgstr ""
+msgstr "Belirteci Sıfırla"
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
