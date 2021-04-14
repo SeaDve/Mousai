@@ -108,10 +108,10 @@ class VoiceRecorder:
         return pactl_output
 
     @staticmethod
-    def guess_song(token, song_file):
+    def guess_song(song_file, token):
         data = {'api_token': token, 'return': 'spotify'}
         files = {'file': open(song_file, 'rb')}
-        return requests.post('https://api.audd.io/', data=data, files=files).text
+        return requests.post('https://api.audd.io/', data=data, files=files).json()
 
 
 class Timer:

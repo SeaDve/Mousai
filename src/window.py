@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
 import urllib.request
 
 from gi.repository import Gtk, Handy, GdkPixbuf, GLib
@@ -62,17 +61,17 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.return_default_page()
 
     def on_microphone_record_callback(self):
-        token = self.settings.get_string("token-value")
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
-        json_output = json.loads(self.voice_recorder.guess_song(token, song_file))
-        status = json_output["status"]
+        token = self.settings.get_string("token-value")
+        output = self.voice_recorder.guess_song(song_file, token)
+        status = output["status"]
 
-        print(json_output)
+        print(output)
 
         try:
-            title = json_output["result"]["title"]
-            artist = json_output["result"]["artist"]
-            song_link = json_output["result"]["song_link"]
+            title = output["result"]["title"]
+            artist = output["result"]["artist"]
+            song_link = output["result"]["song_link"]
 
             song_link_list = [item["song_link"] for item in self.memory_list]
             if song_link in song_link_list:
@@ -92,8 +91,8 @@ class MousaiWindow(Handy.ApplicationWindow):
                                       buttons=Gtk.ButtonsType.OK,
                                       text=_("Sorry!"))
             if status == "error":
-                error.format_secondary_text(json_output["error"]["error_message"])
-            elif status == "success" and not json_output["result"]:
+                error.format_secondary_text(output["error"]["error_message"])
+            elif status == "success" and not output["result"]:
                 error.format_secondary_text(_("The song was not recognized."))
             else:
                 error.format_secondary_text(_("Something went wrong."))
@@ -101,7 +100,7 @@ class MousaiWindow(Handy.ApplicationWindow):
             error.destroy()
 
         try:
-            icon_uri = json_output["result"]["spotify"]["album"]["images"][2]["url"]
+            icon_uri = output["result"]["spotify"]["album"]["images"][2]["url"]
             icon_dir = f"{self.voice_recorder.get_tmp_dir()}{title}{artist}.jpg"
             urllib.request.urlretrieve(icon_uri, icon_dir)
             image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
