@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Jan Novák <novak@silen.org>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-12 13:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-04-15 06:26+0000\n"
+"Last-Translator: Jan Novák <novak@silen.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -182,7 +181,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:111
 msgid "translator-credits"
-msgstr "Jan Novák / Nirsiel"
+msgstr "Jan Novák <novak@silen.org>"
 
 #: src/main.py:112
 msgid "GitHub"
