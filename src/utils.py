@@ -19,6 +19,7 @@ import requests
 from subprocess import PIPE, Popen
 
 from gi.repository import GLib, Gst
+
 Gst.init(None)
 
 
