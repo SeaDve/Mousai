@@ -17,7 +17,7 @@
 
 from gi.repository import Gtk, Handy
 
-from .window import MousaiWindow
+from mousai.window import MousaiWindow
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/welcome.ui')

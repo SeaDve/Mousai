@@ -16,16 +16,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
-import gi
 
+import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('Handy', '1')
-
 from gi.repository import Gtk, Gio, Handy, Gdk, GLib
 
-from .window import MousaiWindow
-from .welcome import WelcomeWindow
+from mousai.window import MousaiWindow
+from mousai.welcome import WelcomeWindow
 
 
 class Application(Gtk.Application):

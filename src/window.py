@@ -19,8 +19,8 @@ import urllib.request
 
 from gi.repository import Gtk, Handy, GdkPixbuf, GLib
 
-from .songrow import SongRow
-from .utils import VoiceRecorder
+from mousai.songrow import SongRow
+from mousai.utils import VoiceRecorder
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')

@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import requests
 from subprocess import PIPE, Popen
 
-import requests
 from gi.repository import GLib, Gst
 Gst.init(None)
 
