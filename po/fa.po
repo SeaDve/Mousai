@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# سهیل خانعلی‌پور <soheil@disroot.org>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-12 13:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-04-17 11:18+0000\n"
+"Last-Translator: سهیل خانعلی‌پور <soheil@disroot.org>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
 "\n"
 "Language: fa\n"
@@ -81,7 +80,7 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:12
 msgid "General"
-msgstr "فراگیر"
+msgstr "فَراگیر"
 
 #: data/ui/shortcuts.ui:17
 msgid "Open menu"
@@ -183,7 +182,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:111
 msgid "translator-credits"
-msgstr "سهیل خانعلی‌پور"
+msgstr "سُـھِـیـل خانعَلی‌پور"
 
 #: src/main.py:112
 msgid "GitHub"
