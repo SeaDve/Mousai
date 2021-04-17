@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Allan Nordhøy <epost@anotheragency.no>, 2021.
+# Syver Stensholt <sssandum@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-03 13:26+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"PO-Revision-Date: 2021-04-15 06:26+0000\n"
+"Last-Translator: Syver Stensholt <sssandum@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
 "mousai/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -30,11 +31,12 @@ msgstr "Shazam;Musikk;Sang;Identifisering;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Identifiser sanger på sekunder"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Oppdag sanger du knitrer etter å gjenkjenne med et enkelt brukergrensesnitt."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -42,36 +44,41 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai er et enkelt program som kan gjenkjenne sanger, som Shazam. Klikk på "
+"lytteknappen og vent noen sekunder. Det vil magisk vise deg både tittel og "
+"artist for sangen."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
 msgstr ""
+"Merk: Dette bruker API-et til audd.io, så du må logge inn på deres side for "
+"å få flere forsøk."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Hvorfor du vil elske Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Identifiser tittel og artist for for en sang på sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
-msgstr ""
+msgstr "🎸 Lagre identifisert sang med omslag i historikken."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 Spill identifisert sang i din nettleser."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱Enkelt brukegrensesnitt."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Brukervennlige tastatursnarveier."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -108,7 +115,7 @@ msgstr "Avbryt lytting"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
-msgstr ""
+msgstr "Innstillinger"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
@@ -116,7 +123,7 @@ msgstr "Tøm sanghistorikk"
 
 #: data/ui/shortcuts.ui:71
 msgid "Reset token value"
-msgstr ""
+msgstr "Tilbakestill symbolverdi"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
@@ -165,11 +172,11 @@ msgstr "Lytting"
 
 #: data/ui/window.ui:125
 msgid "Clear Song History"
-msgstr ""
+msgstr "Tøm sanghistorikk"
 
 #: data/ui/window.ui:129
 msgid "Reset Token"
-msgstr ""
+msgstr "Tilbakestill symbol"
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"

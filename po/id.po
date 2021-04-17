@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-12 13:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-04-15 06:26+0000\n"
+"Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -50,23 +50,27 @@ msgstr ""
 "Mousai akan memberitahu judul dan artis lagu tersebut dengan ajaib!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
+#, fuzzy
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
 msgstr ""
+"Catatan: Ini menggunakan API dari audd.io, jadi itu sebuah keharusan untuk "
+"masuk ke situs mereka untuk mendapatkan lebih banyak percobaan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
 msgstr "Mengapa Anda akan mencintai Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
-#, fuzzy
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr "🎵 Kenali judul dan artis dari lagu dalam hitungan detik."
+msgstr "🎵 Kenali judul dan artis dari sebuah lagu dalam hitungan detik."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+#, fuzzy
 msgid "🎸 Store the identified song with the Album art in a history."
 msgstr ""
+"🎸 Simpan lagu yang sudah dikenal dengan seni Album di dalam sebuah riwayat."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."

@@ -1,15 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# J. Lavoie <j.lavoie@net-c.ca>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-10 18:28+0800\n"
-"PO-Revision-Date: 2021-04-12 13:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-04-17 11:18+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
 "\n"
 "Language: de\n"
@@ -22,20 +21,22 @@ msgstr ""
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Musik;Lied;Identifizieren;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Identifiziere alle Lieder in Sekunden"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Entdecke Lieder, die du unbedingt kennenlernen möchtest, mit einer einfach "
+"zu bedienenden Benutzeroberfläche."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -43,36 +44,45 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai ist eine einfache Anwendung, die Lieder ähnlich wie Shazam "
+"identifizieren kann. Klicke einfach auf die Schaltfläche „Anhören“, und "
+"warte dann ein paar Sekunden. Es wird auf magische Weise den Titel und den "
+"Interpreten dieses Liedes zurückgeben!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
 msgstr ""
+"Hinweis: Dies verwendet die API von audd.io, daher ist es notwendig, sich "
+"auf deren Website anzumelden, um weitere Versuche zu erhalten."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Warum wirst du Mousai lieben?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr ""
+"🎵 Identifiziere den Titel und den Interpreten des Liedes innerhalb von "
+"Sekunden."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
 msgstr ""
+"🎸 Speichere den identifizierten Titel mit dem Albumbild in einem Verlauf."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 Spiele das identifizierte Lied in deinem Browser ab."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Einfach zu bedienende Benutzeroberfläche."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Benutzerfreundliche Tastaturkürzel."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -97,15 +107,15 @@ msgstr "Beenden"
 
 #: data/ui/shortcuts.ui:39
 msgid "Controls"
-msgstr ""
+msgstr "Steuerelemente"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr ""
+msgstr "Anhören beginnen"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr ""
+msgstr "Anhören abbrechen"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
@@ -113,23 +123,23 @@ msgstr "Einstellungen"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
-msgstr ""
+msgstr "Liedverlauf löschen"
 
 #: data/ui/shortcuts.ui:71
 msgid "Reset token value"
-msgstr ""
+msgstr "Token-Wert zurücksetzen"
 
 #: data/ui/welcome.ui:40
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Willkommen bei Mousai"
 
 #: data/ui/welcome.ui:56
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Gib ein gültiges Token ein"
 
 #: data/ui/welcome.ui:61
 msgid "Submit"
-msgstr ""
+msgstr "Absenden"
 
 #: data/ui/welcome.ui:80
 msgctxt "Do not translate the link, only 'their website'"
@@ -138,10 +148,14 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai verwendet audd.io-APIs, um zu funktionieren, daher ist es "
+"erforderlich, sich auf <a href=\"https://dashboard.audd.io/\">deren Website</"
+"a> anzumelden und ein Token zu erhalten. Wenn du dieses Feld leer lässt, "
+"erhälst du ein paar Versuche pro Tag."
 
 #: data/ui/window.ui:24
 msgid "Listen"
-msgstr ""
+msgstr "Anhören"
 
 #: data/ui/window.ui:36
 msgid "Cancel"
@@ -150,23 +164,23 @@ msgstr "Abbrechen"
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:105
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Fang an zu Mousaien!"
 
 #: data/ui/window.ui:106
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Klicke auf die Schaltfläche „Anhören“, um zu starten"
 
 #: data/ui/window.ui:113
 msgid "Listening"
-msgstr ""
+msgstr "Hört gerade an"
 
 #: data/ui/window.ui:125
 msgid "Clear Song History"
-msgstr ""
+msgstr "Liedverlauf löschen"
 
 #: data/ui/window.ui:129
 msgid "Reset Token"
-msgstr ""
+msgstr "Token zurücksetzen"
 
 #: data/ui/window.ui:135
 msgid "Keyboard Shortcuts"
@@ -174,7 +188,7 @@ msgstr "Tastenkombinationen"
 
 #: data/ui/window.ui:139
 msgid "About Mousai"
-msgstr ""
+msgstr "Über Mousai"
 
 #: src/main.py:109
 msgid "Copyright 2021 Dave Patrick"
@@ -191,15 +205,15 @@ msgstr "GitHub"
 
 #: src/window.py:94
 msgid "Sorry!"
-msgstr ""
+msgstr "Entschuldigung!"
 
 #: src/window.py:98
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Das Lied wurde nicht erkannt."
 
 #: src/window.py:100
 msgid "Something went wrong."
-msgstr ""
+msgstr "Etwas hat nicht geklappt."
 
 #~ msgid "Recording"
 #~ msgstr "Aufnahme"
