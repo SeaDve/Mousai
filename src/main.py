@@ -21,7 +21,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('Handy', '1')
-from gi.repository import Gtk, Gio, Handy, Gdk, GLib
+from gi.repository import Gtk, Gdk, Gio, GLib, Handy
 
 from mousai.window import MousaiWindow
 from mousai.welcome import WelcomeWindow

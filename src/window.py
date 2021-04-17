@@ -17,7 +17,7 @@
 
 import urllib.request
 
-from gi.repository import Gtk, Handy, GdkPixbuf, GLib
+from gi.repository import GdkPixbuf, GLib, Gtk, Handy
 
 from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
