@@ -31,9 +31,8 @@ class WelcomeWindow(Handy.ApplicationWindow):
         super().__init__(**kwargs)
         self.settings = settings
         self.token_entry.set_text(self.settings.get_string("token-value"))
-        self.token_entry.connect("activate", self.on_submit_button_clicked)
-        self.submit_button.connect("clicked", self.on_submit_button_clicked)
 
+    @Gtk.Template.Callback()
     def on_submit_button_clicked(self, widget):
         self.settings.set_string("token-value", self.token_entry.get_text())
         win = MousaiWindow(self.settings, application=self.get_application())

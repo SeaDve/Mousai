@@ -73,7 +73,7 @@ class VoiceRecorder:
         val = 100
         try:
             p = message.get_structure().get_value("rms")
-            val = int(p[0] * -2.2)
+            val = (p[0] * -2.2) - 50
         except Exception:
             pass
 
@@ -81,14 +81,13 @@ class VoiceRecorder:
             self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
         elif 37 <= val <= 57:
             self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
-        elif 58 <= val <= 85:
+        elif 58 <= val <= 999:
             self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
-        elif val >= 86:
+        elif val >= 1000:
             self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
-
-        if val >= 100:
             self.window.recording_box.set_title("Muted")
-        else:
+
+        if not val >= 1000:
             self.window.recording_box.set_title("Listening")
 
     @staticmethod

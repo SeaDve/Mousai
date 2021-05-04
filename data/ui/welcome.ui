@@ -34,6 +34,7 @@
                                 <property name="has-focus">True</property>
                                 <property name="hexpand">True</property>
                                 <property name="placeholder-text" translatable="yes">Enter a valid token</property>
+                                <signal name="activate" handler="on_submit_button_clicked" swapped="no"/>
                               </object>
                             </child>
                             <child>
@@ -42,6 +43,7 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
+                                <signal name="clicked" handler="on_submit_button_clicked" swapped="no"/>
                                 <style>
                                   <class name="suggested-action"/>
                                 </style>

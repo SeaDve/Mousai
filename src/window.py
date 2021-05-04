@@ -42,23 +42,10 @@ class MousaiWindow(Handy.ApplicationWindow):
         self.voice_recorder = VoiceRecorder()
         self.memory_list = list(self.settings.get_value("memory-list"))
 
-        self.start_button.connect("clicked", self.on_start_button_clicked)
-        self.cancel_button.connect("clicked", self.on_cancel_button_clicked)
-        self.connect("delete-event", self.on_quit)
-
         if self.memory_list:
             self.load_memory_list(self.memory_list)
         else:
             self.main_stack.set_visible_child(self.empty_state_box)
-
-    def on_start_button_clicked(self, widget):
-        self.voice_recorder.start(self, self.on_microphone_record_callback)
-        self.main_stack.set_visible_child(self.recording_box)
-        self.listen_cancel_stack.set_visible_child(self.cancel_button)
-
-    def on_cancel_button_clicked(self, widget):
-        self.voice_recorder.cancel()
-        self.return_default_page()
 
     def on_microphone_record_callback(self):
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
@@ -129,5 +116,17 @@ class MousaiWindow(Handy.ApplicationWindow):
             self.memory_list = []
         self.main_stack.set_visible_child(self.empty_state_box)
 
+    @Gtk.Template.Callback()
+    def on_start_button_clicked(self, widget):
+        self.voice_recorder.start(self, self.on_microphone_record_callback)
+        self.main_stack.set_visible_child(self.recording_box)
+        self.listen_cancel_stack.set_visible_child(self.cancel_button)
+
+    @Gtk.Template.Callback()
+    def on_cancel_button_clicked(self, widget):
+        self.voice_recorder.cancel()
+        self.return_default_page()
+
+    @Gtk.Template.Callback()
     def on_quit(self, widget, param):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))

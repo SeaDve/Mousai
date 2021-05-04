@@ -5,6 +5,7 @@
   <template class="MousaiWindow" parent="HdyApplicationWindow">
     <property name="default-width">600</property>
     <property name="default-height">400</property>
+    <signal name="delete-event" handler="on_quit" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -25,6 +26,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
                     <accelerator key="r" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                     <style>
                       <class name="suggested-action"/>
@@ -37,6 +39,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
                     <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                     <style>
                       <class name="destructive-action"/>
@@ -110,7 +113,7 @@
               <object class="HdyStatusPage" id="recording_box">
                 <property name="visible">True</property>
                 <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
-                <property name="title" translatable="yes">Listening</property>
+                <property name="title" translatable="yes">Muted</property>
               </object>
             </child>
           </object>
