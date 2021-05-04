@@ -9,41 +9,21 @@
       <object class="HdyWindowHandle">
         <property name="visible">True</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkOverlay">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkStack">
+              <object class="HdyStatusPage">
                 <property name="visible">True</property>
-                <property name="vexpand">True</property>
+                <property name="icon-name">io.github.seadve.Mousai</property>
+                <property name="title" translatable="yes">Welcome to Mousai</property>
                 <child>
                   <object class="HdyClamp">
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
-                        <property name="valign">center</property>
-                        <property name="margin">36</property>
                         <property name="orientation">vertical</property>
-                        <property name="spacing">36</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="resource">/io/github/seadve/Mousai/logo.svg</property>
-                            <property name="icon-size">72</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Welcome to Mousai</property>
-                            <property name="justify">center</property>
-                            <style>
-                              <class name="welcome_label"/>
-                            </style>
-                          </object>
-                        </child>
+                        <property name="spacing">24</property>
                         <child>
                           <object class="GtkBox">
                             <property name="visible">True</property>
@@ -62,7 +42,6 @@
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
-                                <property name="halign">center</property>
                                 <style>
                                   <class name="suggested-action"/>
                                 </style>
@@ -86,6 +65,16 @@
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child type="overlay">
+              <object class="GtkHeaderBar">
+                <property name="visible">True</property>
+                <property name="valign">start</property>
+                <property name="show-close-button">True</property>
+                <style>
+                  <class name="flat"/>
+                </style>
               </object>
             </child>
           </object>

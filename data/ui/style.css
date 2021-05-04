@@ -1,4 +1,5 @@
-.welcome_label {
-  font-weight: 700;
-  font-size: 132%;
+.flat {
+  background-image: none;
+  border: none;
+  background-color: transparent;
 }
