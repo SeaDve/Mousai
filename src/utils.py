@@ -72,7 +72,7 @@ class VoiceRecorder:
     def _on_visualizer_gst_message(self, bus, message):
         try:
             p = message.get_structure().get_value("rms")
-            val = p[0]*-2.2
+            val = p[0] * -2.2
         except (AttributeError, TypeError):
             pass
 
