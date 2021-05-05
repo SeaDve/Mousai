@@ -70,25 +70,27 @@ class VoiceRecorder:
             print("Error: %s" % err, debug)
 
     def _on_visualizer_gst_message(self, bus, message):
-        val = 100
         try:
             p = message.get_structure().get_value("rms")
-            val = (p[0] * -2.2) - 50
-        except Exception:
+            val = p[0]*-2.2
+        except (AttributeError, TypeError):
             pass
 
-        if 0 <= val <= 36:
-            self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
-        elif 37 <= val <= 57:
-            self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
-        elif 58 <= val <= 999:
-            self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
-        elif val >= 1000:
-            self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
-            self.window.recording_box.set_title("Muted")
+        try:
+            if val <= 36:
+                self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
+            elif 37 <= val <= 57:
+                self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
+            elif 58 <= val <= 999:
+                self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
+            else:
+                self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
+                self.window.recording_box.set_title("Muted")
 
-        if not val >= 1000:
-            self.window.recording_box.set_title("Listening")
+            if not val >= 1000:
+                self.window.recording_box.set_title("Listening")
+        except UnboundLocalError:
+            pass
 
     @staticmethod
     def get_tmp_dir():
