@@ -41,6 +41,26 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.2" date="2021-05-05">
+      <description>
+        <p>Not a big release, but it has some notable changes:</p>
+        <ul>
+          <li>Improved UI experience</li>
+          <li>Much improved performance and startup</li>
+          <li>Updated Portuguese translations</li>
+          <li>Updated Turkish translations</li>
+          <li>Updated Filipino translations</li>
+          <li>Updated Dutch translations</li>
+          <li>Updated Indonesian translations</li>
+          <li>Updated French translations</li>
+          <li>Updated Italian translations</li>
+          <li>Updated German translations</li>
+          <li>Updated Spanish translations</li>
+          <li>Updated Chinese (Simplified) translations</li>
+          <li>Updated Portuguese (Brazil) translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.1" date="2021-04-09">
       <description>
         <p>Minor improvements:</p>
