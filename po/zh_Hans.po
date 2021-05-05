@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 18:28+0800\n"
+"POT-Creation-Date: 2021-05-05 08:50+0800\n"
 "PO-Revision-Date: 2021-05-01 19:42+0000\n"
 "Last-Translator: TheInterestingSoul <wangpy01@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
 msgid "Identify any songs in seconds"
 msgstr "一个迅速听歌识曲的软件"
 
@@ -41,13 +41,16 @@ msgid ""
 "Mousai is a simple application that can identify song similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
-msgstr "Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“侦听”按钮，然后等待几秒钟。它将神奇地反馈该歌曲的标题和艺术家！"
+msgstr ""
+"Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“侦听”按钮，然后等待几秒"
+"钟。它将神奇地反馈该歌曲的标题和艺术家！"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
-msgstr "请注意：本软件使用了 audd.io 的 API，因此你需要登录才能获取更多的使用机会。"
+msgstr ""
+"请注意：本软件使用了 audd.io 的 API，因此你需要登录才能获取更多的使用机会。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -118,90 +121,100 @@ msgstr "清除识别记录"
 msgid "Reset token value"
 msgstr "重置令牌值"
 
-#: data/ui/welcome.ui:40
+#: data/ui/welcome.ui:18
 msgid "Welcome to Mousai"
 msgstr "欢迎使用 Mousai"
 
-#: data/ui/welcome.ui:56
+#: data/ui/welcome.ui:37
 msgid "Enter a valid token"
 msgstr "输入有效的令牌值"
 
-#: data/ui/welcome.ui:61
+#: data/ui/welcome.ui:43
 msgid "Submit"
 msgstr "提交"
 
-#: data/ui/welcome.ui:80
-msgctxt "Do not translate the link, only 'their website'"
+#. Do not translate the link, only 'their website'
+#: data/ui/welcome.ui:61
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai 使用 audd.io 的 API 以实现其功能， 因此您需要 <a href=\"https://"
-"dashboard.audd.io/\">登录该网站</a>并获取一个令牌值。不填写此项将只能使用免费"
-"额度（一天几次）。"
 
-#: data/ui/window.ui:24
+#: data/ui/window.ui:25
 msgid "Listen"
 msgstr "侦听"
 
-#: data/ui/window.ui:36
+#: data/ui/window.ui:38
 msgid "Cancel"
 msgstr "取消"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:105
+#: data/ui/window.ui:108
 msgid "Start Mousaing!"
 msgstr "开始听歌识曲吧！"
 
-#: data/ui/window.ui:106
+#: data/ui/window.ui:109
 msgid "Click the listen button to start"
 msgstr "点击该按钮以开始"
 
-#: data/ui/window.ui:113
-msgid "Listening"
-msgstr "正在侦听"
+#: data/ui/window.ui:116
+msgid "Muted"
+msgstr ""
 
-#: data/ui/window.ui:125
+#: data/ui/window.ui:128
 msgid "Clear Song History"
 msgstr "清除识别历史"
 
-#: data/ui/window.ui:129
+#: data/ui/window.ui:132
 msgid "Reset Token"
 msgstr "重置令牌"
 
-#: data/ui/window.ui:135
+#: data/ui/window.ui:138
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: data/ui/window.ui:139
+#: data/ui/window.ui:142
 msgid "About Mousai"
 msgstr "关于 Mousai"
 
-#: src/main.py:109
+#: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
 msgstr "版权所有 © 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:111
+#: src/main.py:109
 msgid "translator-credits"
 msgstr "有趣的灵魂 (@TheInterestingSoul)"
 
-#: src/main.py:112
+#: src/main.py:110
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:94
+#: src/window.py:79
 msgid "Sorry!"
 msgstr "抱歉！"
 
-#: src/window.py:98
+#: src/window.py:83
 msgid "The song was not recognized."
 msgstr "无识别结果。"
 
-#: src/window.py:100
+#: src/window.py:85
 msgid "Something went wrong."
 msgstr "识别时出现了问题。"
+
+#~ msgctxt "Do not translate the link, only 'their website'"
+#~ msgid ""
+#~ "Mousai uses audd.io APIs to work, so it is required to login to <a href="
+#~ "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+#~ "this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Mousai 使用 audd.io 的 API 以实现其功能， 因此您需要 <a href=\"https://"
+#~ "dashboard.audd.io/\">登录该网站</a>并获取一个令牌值。不填写此项将只能使用"
+#~ "免费额度（一天几次）。"
+
+#~ msgid "Listening"
+#~ msgstr "正在侦听"
 
 #~ msgid "Simple song identifier"
 #~ msgstr "听歌识曲软件"

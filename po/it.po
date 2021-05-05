@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 18:28+0800\n"
+"POT-Creation-Date: 2021-05-05 08:50+0800\n"
 "PO-Revision-Date: 2021-04-17 11:18+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
-"\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
+">\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musica;Canzone;Identificare;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
 msgid "Identify any songs in seconds"
 msgstr "Identifica qualsiasi canzone in pochi secondi"
 
@@ -128,90 +128,100 @@ msgstr "Cancella la cronologia delle canzoni"
 msgid "Reset token value"
 msgstr "Reimposta il valore del token"
 
-#: data/ui/welcome.ui:40
+#: data/ui/welcome.ui:18
 msgid "Welcome to Mousai"
 msgstr "Benvenuto/a in Mousai"
 
-#: data/ui/welcome.ui:56
+#: data/ui/welcome.ui:37
 msgid "Enter a valid token"
 msgstr "Inserisci un token valido"
 
-#: data/ui/welcome.ui:61
+#: data/ui/welcome.ui:43
 msgid "Submit"
 msgstr "Invia"
 
-#: data/ui/welcome.ui:80
-msgctxt "Do not translate the link, only 'their website'"
+#. Do not translate the link, only 'their website'
+#: data/ui/welcome.ui:61
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai sfrutta le API audd.io, quindi è necessario effettuare l'accesso al "
-"<a href=\"https://dashboard.audd.io/\">loro sito</a> e ricevere un token. "
-"Lasciare questo vuoto ti darà solo pochi tentativi al giorno."
 
-#: data/ui/window.ui:24
+#: data/ui/window.ui:25
 msgid "Listen"
 msgstr "Ascolta"
 
-#: data/ui/window.ui:36
+#: data/ui/window.ui:38
 msgid "Cancel"
 msgstr "Annulla"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:105
+#: data/ui/window.ui:108
 msgid "Start Mousaing!"
 msgstr "Inizia a Mousare!"
 
-#: data/ui/window.ui:106
+#: data/ui/window.ui:109
 msgid "Click the listen button to start"
 msgstr "Premi il pulsante di ascolto per iniziare"
 
-#: data/ui/window.ui:113
-msgid "Listening"
-msgstr "Sto ascoltando"
+#: data/ui/window.ui:116
+msgid "Muted"
+msgstr ""
 
-#: data/ui/window.ui:125
+#: data/ui/window.ui:128
 msgid "Clear Song History"
 msgstr "Cancella la cronologia delle canzoni"
 
-#: data/ui/window.ui:129
+#: data/ui/window.ui:132
 msgid "Reset Token"
 msgstr "Reimposta il token"
 
-#: data/ui/window.ui:135
+#: data/ui/window.ui:138
 msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
-#: data/ui/window.ui:139
+#: data/ui/window.ui:142
 msgid "About Mousai"
 msgstr "A proposito di Mousai"
 
-#: src/main.py:109
+#: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:111
+#: src/main.py:109
 msgid "translator-credits"
 msgstr "Nicolas Mariniello"
 
-#: src/main.py:112
+#: src/main.py:110
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:94
+#: src/window.py:79
 msgid "Sorry!"
 msgstr "Mi dispiace!"
 
-#: src/window.py:98
+#: src/window.py:83
 msgid "The song was not recognized."
 msgstr "La canzone non è stata riconosciuta."
 
-#: src/window.py:100
+#: src/window.py:85
 msgid "Something went wrong."
 msgstr "Qualcosa è andato storto."
+
+#~ msgctxt "Do not translate the link, only 'their website'"
+#~ msgid ""
+#~ "Mousai uses audd.io APIs to work, so it is required to login to <a href="
+#~ "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+#~ "this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Mousai sfrutta le API audd.io, quindi è necessario effettuare l'accesso "
+#~ "al <a href=\"https://dashboard.audd.io/\">loro sito</a> e ricevere un "
+#~ "token. Lasciare questo vuoto ti darà solo pochi tentativi al giorno."
+
+#~ msgid "Listening"
+#~ msgstr "Sto ascoltando"
 
 #~ msgid "Simple song identifier"
 #~ msgstr "Semplice identificatore di canzoni"

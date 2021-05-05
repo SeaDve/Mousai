@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-10 18:28+0800\n"
+"POT-Creation-Date: 2021-05-05 08:50+0800\n"
 "PO-Revision-Date: 2021-05-03 12:32+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:106
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
 msgid "Identify any songs in seconds"
 msgstr "Kenali lagu apa saja dalam hitungan detik"
 
@@ -126,90 +126,101 @@ msgstr "Hapus riwayat lagu"
 msgid "Reset token value"
 msgstr "Setel ulang nilai token"
 
-#: data/ui/welcome.ui:40
+#: data/ui/welcome.ui:18
 msgid "Welcome to Mousai"
 msgstr "Selamat datang di Mousai"
 
-#: data/ui/welcome.ui:56
+#: data/ui/welcome.ui:37
 msgid "Enter a valid token"
 msgstr "Masukkan token yang valid"
 
-#: data/ui/welcome.ui:61
+#: data/ui/welcome.ui:43
 msgid "Submit"
 msgstr "Kirim"
 
-#: data/ui/welcome.ui:80
-msgctxt "Do not translate the link, only 'their website'"
+#. Do not translate the link, only 'their website'
+#: data/ui/welcome.ui:61
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai menggunakan API audd.io untuk bekerja, sehingga Anda perlu masuk ke "
-"<a href=\"https://dashboard.audd.io/\">situs web mereka</a> dan mendapatkan "
-"token. Membiarkannya kosong akan memberi Anda beberapa percobaan per hari."
 
-#: data/ui/window.ui:24
+#: data/ui/window.ui:25
 msgid "Listen"
 msgstr "Dengarkan"
 
-#: data/ui/window.ui:36
+#: data/ui/window.ui:38
 msgid "Cancel"
 msgstr "Batal"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:105
+#: data/ui/window.ui:108
 msgid "Start Mousaing!"
 msgstr "Mulai Mousaing!"
 
-#: data/ui/window.ui:106
+#: data/ui/window.ui:109
 msgid "Click the listen button to start"
 msgstr "Klik tombol dengar untuk memulai"
 
-#: data/ui/window.ui:113
-msgid "Listening"
-msgstr "Mendengarkan"
+#: data/ui/window.ui:116
+msgid "Muted"
+msgstr ""
 
-#: data/ui/window.ui:125
+#: data/ui/window.ui:128
 msgid "Clear Song History"
 msgstr "Hapus Riwayat Lagu"
 
-#: data/ui/window.ui:129
+#: data/ui/window.ui:132
 msgid "Reset Token"
 msgstr "Setel Ulang Token"
 
-#: data/ui/window.ui:135
+#: data/ui/window.ui:138
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Keyboard"
 
-#: data/ui/window.ui:139
+#: data/ui/window.ui:142
 msgid "About Mousai"
 msgstr "Tentang Mousai"
 
-#: src/main.py:109
+#: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Hak Cipta 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:111
+#: src/main.py:109
 msgid "translator-credits"
 msgstr "kredit-penerjemah"
 
-#: src/main.py:112
+#: src/main.py:110
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:94
+#: src/window.py:79
 msgid "Sorry!"
 msgstr "Maaf!"
 
-#: src/window.py:98
+#: src/window.py:83
 msgid "The song was not recognized."
 msgstr "Lagu tidak dikenali."
 
-#: src/window.py:100
+#: src/window.py:85
 msgid "Something went wrong."
 msgstr "Ada yang salah."
+
+#~ msgctxt "Do not translate the link, only 'their website'"
+#~ msgid ""
+#~ "Mousai uses audd.io APIs to work, so it is required to login to <a href="
+#~ "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+#~ "this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Mousai menggunakan API audd.io untuk bekerja, sehingga Anda perlu masuk "
+#~ "ke <a href=\"https://dashboard.audd.io/\">situs web mereka</a> dan "
+#~ "mendapatkan token. Membiarkannya kosong akan memberi Anda beberapa "
+#~ "percobaan per hari."
+
+#~ msgid "Listening"
+#~ msgstr "Mendengarkan"
 
 #~ msgid "Simple song identifier"
 #~ msgstr "Pengenal lagu sederhana"
