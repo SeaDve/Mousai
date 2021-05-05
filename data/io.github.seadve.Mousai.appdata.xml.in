@@ -47,6 +47,7 @@
         <ul>
           <li>Improved UI experience</li>
           <li>Much improved performance and startup</li>
+          <li>Added shortcuts for clearing history and resetting token</li>
           <li>Updated Portuguese translations</li>
           <li>Updated Turkish translations</li>
           <li>Updated Filipino translations</li>
