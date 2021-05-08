@@ -2,21 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 08:50+0800\n"
-"PO-Revision-Date: 2021-04-17 11:18+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2021-05-08 17:32+0000\n"
+"Last-Translator: SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -147,6 +148,10 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai utilise les API audd.io pour fonctionner, il est donc nécessaire de "
+"se connecter à <a href=\"https://dashboard.audd.io/\">leur site web</a> et "
+"d'obtenir un jeton. Si vous laissez ce champ vide, vous aurez droit à "
+"quelques essais par jour."
 
 #: data/ui/window.ui:25
 msgid "Listen"
@@ -167,7 +172,7 @@ msgstr "Cliquez sur le bouton d'écoute pour commencer"
 
 #: data/ui/window.ui:116
 msgid "Muted"
-msgstr ""
+msgstr "En sourdine"
 
 #: data/ui/window.ui:128
 msgid "Clear Song History"

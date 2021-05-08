@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 08:50+0800\n"
-"PO-Revision-Date: 2021-04-12 13:26+0000\n"
+"PO-Revision-Date: 2021-05-08 17:32+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1 && n != 2 && n != 3 && (n % 10 == 4 "
 "|| n % 10 == 6 || n % 10 == 9);\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -143,6 +143,10 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Ang Mousai ay gumagamit ng API ng audd.io upang gumana, kaya kailangang "
+"maglogin sa <a href=\"https://dashboard.audd.io/\">kanilang website</a> at "
+"kumuha ng token. Kapag wala kang linagay, magkakaroon ka lamang ng iilang "
+"trials kada araw."
 
 #: data/ui/window.ui:25
 msgid "Listen"
@@ -163,7 +167,7 @@ msgstr "Pindutin ang button sa pagkinig upang magsimula"
 
 #: data/ui/window.ui:116
 msgid "Muted"
-msgstr ""
+msgstr "Naka-mute"
 
 #: data/ui/window.ui:128
 msgid "Clear Song History"
