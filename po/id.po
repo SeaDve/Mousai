@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 08:50+0800\n"
-"PO-Revision-Date: 2021-05-03 12:32+0000\n"
+"PO-Revision-Date: 2021-05-10 07:32+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
@@ -145,6 +145,9 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai menggunakan API audd.io untuk bekerja, jadi anda perlu login ke<a "
+"href=\"https://dashboard.audd.io/\">situs mereka</a>untuk mendapatkan token. "
+"Jika dibiarkan kosong anda akan diberi masa ujicoba per hari."
 
 #: data/ui/window.ui:25
 msgid "Listen"
@@ -165,7 +168,7 @@ msgstr "Klik tombol dengar untuk memulai"
 
 #: data/ui/window.ui:116
 msgid "Muted"
-msgstr ""
+msgstr "Disenyapkan"
 
 #: data/ui/window.ui:128
 msgid "Clear Song History"
