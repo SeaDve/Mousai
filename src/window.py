@@ -23,7 +23,7 @@ from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/window.ui')
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
 class MousaiWindow(Handy.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 

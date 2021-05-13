@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai">
-    <file preprocess="xml-stripblanks" alias="window.ui">ui/window.ui</file>
-    <file preprocess="xml-stripblanks" alias="songrow.ui">ui/songrow.ui</file>
-    <file preprocess="xml-stripblanks" alias="welcome.ui">ui/welcome.ui</file>
-    <file preprocess="xml-stripblanks" alias="shortcuts.ui">ui/shortcuts.ui</file>
-
-    <file alias="style.css">ui/style.css</file>
-
-    <file preprocess="xml-stripblanks" alias="logo.svg">logo/io.github.seadve.Mousai.svg</file>
+    <file preprocess="xml-stripblanks">ui/window.ui</file>
+    <file preprocess="xml-stripblanks">ui/songrow.ui</file>
+    <file preprocess="xml-stripblanks">ui/welcome.ui</file>
+    <file preprocess="xml-stripblanks">ui/shortcuts.ui</file>
+    <file>ui/style.css</file>
   </gresource>
 </gresources>

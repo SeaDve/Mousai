@@ -41,7 +41,7 @@ class Application(Gtk.Application):
         Gtk.Application.do_startup(self)
 
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_resource('/io/github/seadve/Mousai/style.css')
+        css_provider.load_from_resource('/io/github/seadve/Mousai/ui/style.css')
         screen = Gdk.Screen.get_default()
         Gtk.StyleContext.add_provider_for_screen(
             screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
@@ -88,7 +88,7 @@ class Application(Gtk.Application):
 
     def show_shortcuts_window(self, action, param):
         builder = Gtk.Builder()
-        builder.add_from_resource('/io/github/seadve/Mousai/shortcuts.ui')
+        builder.add_from_resource('/io/github/seadve/Mousai/ui/shortcuts.ui')
         window = builder.get_object('shortcuts')
         window.set_transient_for(self.get_active_window())
         window.present()

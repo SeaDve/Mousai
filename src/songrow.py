@@ -20,7 +20,7 @@ from gi.repository import GdkPixbuf, Gio, Gtk, Handy
 from mousai.utils import VoiceRecorder
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/songrow.ui')
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/songrow.ui')
 class SongRow(Handy.ActionRow):
     __gtype_name__ = 'SongRow'
 
