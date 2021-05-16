@@ -38,7 +38,7 @@ class VoiceRecorder:
 
         # VISUALIZER
         pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
-                    'level interval=50000000 ! fakesink qos=false')
+                    'level interval=90000000 ! fakesink qos=false')
         self.visualizer_gst = Gst.parse_launch(pipeline)
         bus = self.visualizer_gst.get_bus()
         bus.add_signal_watch()
@@ -71,19 +71,21 @@ class VoiceRecorder:
 
     def _on_visualizer_gst_message(self, bus, message):
         try:
-            p = message.get_structure().get_value("rms")
-            val = p[0] * -2.2
+            val = message.get_structure().get_value("peak")[0]
         except (AttributeError, TypeError):
             pass
 
         try:
-            if val <= 36:
+            if -9 <= val <= 0:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
-            elif 37 <= val <= 57:
+                print("hi")
+            elif -10 <= val <= -2:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
-            elif 58 <= val <= 999:
+                print("med")
+            elif -349 <= val <= -16:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
-            else:
+                print("low")
+            elif val < -349:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
                 self.window.recording_box.set_title("Muted")
 
