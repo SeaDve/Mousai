@@ -78,13 +78,10 @@ class VoiceRecorder:
         try:
             if -9 <= val <= 0:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
-                print("hi")
             elif -10 <= val <= -2:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
-                print("med")
             elif -349 <= val <= -16:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
-                print("low")
             elif val < -349:
                 self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
                 self.window.recording_box.set_title("Muted")
