@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 08:50+0800\n"
-"PO-Revision-Date: 2021-05-08 17:32+0000\n"
-"Last-Translator: robert schneider <robertschv@gmail.com>\n"
+"PO-Revision-Date: 2021-05-16 01:37+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
 "Language: es\n"
@@ -195,10 +195,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:109
 msgid "translator-credits"
-msgstr ""
-"Roberto Bautista\n"
-"Óscar Fernández Díaz\n"
-"Robert Schneider"
+msgstr "Óscar Fernández Díaz"
 
 #: src/main.py:110
 msgid "GitHub"
