@@ -26,6 +26,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
                     <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
                     <accelerator key="r" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                     <style>
@@ -39,6 +40,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Cancel the Recording</property>
                     <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
                     <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                     <style>
@@ -53,6 +55,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="menu-model">menu</property>
+                <property name="tooltip-text" translatable="yes">Main Menu</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
