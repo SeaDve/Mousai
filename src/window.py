@@ -23,9 +23,10 @@ from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
 
 
-### GTK 4 BLOCKERS
+# GTK 4 BLOCKERS
+# Use try else
 # Loadable icon for AdwAvatar
-# Listbox no get children
+# Listbox no get children (Use listview)
 # Broken error message
 # Icon for welcome window
 # Linked entry in welcome window
@@ -73,7 +74,7 @@ class MousaiWindow(Adw.ApplicationWindow):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
 
     def on_peak_changed(self, recorder, peak):
-        peak = self.voice_recorder.peak
+        peak = recorder.peak
         if -9 <= peak <= 0:
             icon_name = "microphone-sensitivity-high-symbolic"
         elif -10 <= peak <= -2:
