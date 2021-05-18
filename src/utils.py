@@ -20,13 +20,17 @@ from subprocess import PIPE, Popen
 
 import gi
 gi.require_version('GstPbutils', '1.0')
-from gi.repository import GLib, Gst, GstPbutils
+from gi.repository import GLib, Gst, GstPbutils, GObject
 
 Gst.init(None)
 
 
-class VoiceRecorder:
+class VoiceRecorder(GObject.Object):
+    __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
+
     def __init__(self):
+        super().__init__()
+
         self.pipeline = Gst.Pipeline()
         self.src = Gst.ElementFactory.make('pulsesrc')
         audio_convert = Gst.ElementFactory.make('audioconvert')
@@ -44,9 +48,7 @@ class VoiceRecorder:
         self.src.link(audio_convert)
         audio_convert.link_filtered(self.level, caps)
 
-    def start(self, window, param):
-        self.window = window
-
+    def start(self):
         self.record_bus = self.pipeline.get_bus()
         self.record_bus.add_signal_watch()
         self.handler_id = self.record_bus.connect('message', self._on_gst_message)
@@ -59,51 +61,34 @@ class VoiceRecorder:
 
         self.pipeline.set_state(Gst.State.PLAYING)
 
-        self.timer = Timer(self.stop, param, 5)
-        self.timer.start()
+        self.timer = Timer(self.stop)
+        self.timer.start(5)
 
     def cancel(self):
         self.pipeline.set_state(Gst.State.NULL)
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
-        self.timer.stop()
+        self.timer.cancel()
 
-    def stop(self, callback):
+    def stop(self):
         self.pipeline.set_state(Gst.State.NULL)
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
-        callback()
+        self.emit('record-done')
 
     def _on_gst_message(self, bus, message):
         t = message.type
         if t == Gst.MessageType.ELEMENT:
-            try:
-                val = message.get_structure().get_value("peak")[0]
-            except (AttributeError, TypeError, IndexError):
-                pass
-            else:
-                if -9 <= val <= 0:
-                    self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
-                elif -10 <= val <= -2:
-                    self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
-                elif -349 <= val <= -16:
-                    self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
-                elif val < -349:
-                    self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
-                    self.window.recording_box.set_title("Muted")
-
-                if not val >= 1000:
-                    self.window.recording_box.set_title("Listening")
+            self.val = message.get_structure().get_value("peak")[0]
         elif t == Gst.MessageType.EOS:
             self.stop()
         elif t == Gst.MessageType.ERROR:
             err, debug = message.parse_error()
             print("Error: %s" % err, debug)
 
-    def get_profile(self):
+    @staticmethod
+    def get_profile():
         audio_caps = Gst.Caps.from_string('audio/x-opus')
-        audio_caps.set_value('channels', 1)
-
         encoding_profile = GstPbutils.EncodingAudioProfile.new(audio_caps, None, None, 1)
         container_caps = Gst.Caps.from_string('application/ogg')
         container_profile = GstPbutils.EncodingContainerProfile.new('record', None, container_caps, None)
@@ -135,22 +120,21 @@ class VoiceRecorder:
 
 
 class Timer:
-    def __init__(self, function, param, time_delay):
+    def __init__(self, function):
         self.function = function
-        self.param = param
-        self.time_delay = time_delay * 100
-        self.stopped = False
+        self.cancelled = False
 
-    def _displaydelay(self):
-        if self.time_delay == 10 or self.stopped:
-            if not self.stopped:
-                self.function(self.param)
+    def _update_time(self):
+        if self.time_delay == 10 or self.cancelled:
+            if not self.cancelled:
+                self.function()
             return False
         self.time_delay -= 10
         return True
 
-    def start(self):
-        GLib.timeout_add(100, self._displaydelay)
+    def start(self, time_delay):
+        self.time_delay = time_delay * 100
+        GLib.timeout_add(100, self._update_time)
 
-    def stop(self):
-        self.stopped = True
+    def cancel(self):
+        self.cancelled = True

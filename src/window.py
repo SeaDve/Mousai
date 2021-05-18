@@ -48,6 +48,7 @@ class MousaiWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         self.settings = settings
         self.voice_recorder = VoiceRecorder()
+        self.voice_recorder.connect("record-done", self.on_record_done)
         self.memory_list = list(self.settings.get_value("memory-list"))
 
         if self.memory_list:
@@ -55,7 +56,7 @@ class MousaiWindow(Adw.ApplicationWindow):
         else:
             self.main_stack.set_visible_child(self.empty_state_box)
 
-    def on_microphone_record_callback(self):
+    def on_record_done(self, recorder):
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
         token = self.settings.get_string("token-value")
         output = self.voice_recorder.guess_song(song_file, token)
@@ -126,7 +127,7 @@ class MousaiWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
-        self.voice_recorder.start(self, self.on_microphone_record_callback)
+        self.voice_recorder.start()
         self.main_stack.set_visible_child(self.recording_box)
         self.listen_cancel_stack.set_visible_child(self.cancel_button)
 
