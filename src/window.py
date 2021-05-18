@@ -17,14 +17,22 @@
 
 import urllib.request
 
-from gi.repository import GdkPixbuf, GLib, Gtk, Handy
+from gi.repository import GdkPixbuf, GLib, Gtk, Adw
 
 from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
 
 
+### GTK 4 BLOCKERS
+# Loadable icon for AdwAvatar
+# Listbox no get children
+# Broken error message
+# Icon for welcome window
+# Linked entry in welcome window
+
+
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
-class MousaiWindow(Handy.ApplicationWindow):
+class MousaiWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 
     listen_cancel_stack = Gtk.Template.Child()

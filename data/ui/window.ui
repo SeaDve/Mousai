@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="3.24"/>
-  <requires lib="libhandy" version="1.0"/>
-  <template class="MousaiWindow" parent="HdyApplicationWindow">
+  <requires lib="gtk" version="4.0"/>
+  <template class="MousaiWindow" parent="AdwApplicationWindow">
     <property name="default-width">600</property>
     <property name="default-height">400</property>
-    <signal name="delete-event" handler="on_quit" swapped="no"/>
+    <signal name="close-request" handler="on_quit" swapped="no"/>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="HdyHeaderBar">
-            <property name="visible">True</property>
-            <property name="title">Mousai</property>
-            <property name="show-close-button">True</property>
+          <object class="AdwHeaderBar">
             <child>
               <object class="GtkStack" id="listen_cancel_stack">
-                <property name="visible">True</property>
                 <property name="transition-duration">150</property>
                 <property name="transition-type">crossfade</property>
                 <child>
                   <object class="GtkButton" id="start_button">
                     <property name="label" translatable="yes">Listen</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
                     <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
                     <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
-                    <accelerator key="r" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                    <child>
+                      <object class="GtkShortcutController">
+                        <property name="scope">managed</property>
+                        <child>
+                          <object class="GtkShortcut">
+                            <property name="trigger">&lt;Control&gt;r</property>
+                            <property name="action">activate</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="suggested-action"/>
                     </style>
@@ -37,12 +38,19 @@
                 <child>
                   <object class="GtkButton" id="cancel_button">
                     <property name="label" translatable="yes">Cancel</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
                     <property name="tooltip-text" translatable="yes">Cancel the Recording</property>
                     <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
-                    <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                    <child>
+                      <object class="GtkShortcutController">
+                        <property name="scope">managed</property>
+                        <child>
+                          <object class="GtkShortcut">
+                            <property name="trigger">&lt;Control&gt;c</property>
+                            <property name="action">activate</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                     <style>
                       <class name="destructive-action"/>
                     </style>
@@ -50,48 +58,34 @@
                 </child>
               </object>
             </child>
-            <child>
+            <child type="end">
               <object class="GtkMenuButton">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
                 <property name="menu-model">menu</property>
                 <property name="tooltip-text" translatable="yes">Main Menu</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="icon-name">open-menu-symbolic</property>
-                  </object>
-                </child>
-                <accelerator key="F10" signal="activate"/>
+                <property name="icon-name">open-menu-symbolic</property>
+                <!-- <accelerator key="F10" signal="activate"/> -->
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
           </object>
         </child>
         <child>
           <object class="GtkStack" id="main_stack">
-            <property name="visible">True</property>
             <property name="vexpand">True</property>
             <property name="transition-duration">150</property>
             <property name="transition-type">crossfade</property>
             <child>
               <object class="GtkScrolledWindow" id="main_screen_box">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
                 <property name="vexpand">True</property>
-                <child>
+                <property name="child">
                   <object class="GtkViewport">
-                    <property name="visible">True</property>
-                    <property name="shadow-type">none</property>
                     <child>
-                      <object class="HdyClamp">
-                        <property name="visible">True</property>
+                      <object class="AdwClamp">
                         <child>
                           <object class="GtkListBox" id="history_listbox">
-                            <property name="visible">True</property>
-                            <property name="margin">12</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
+                            <property name="margin-top">12</property>
+                            <property name="margin-bottom">12</property>
                             <property name="selection-mode">none</property>
                             <style>
                               <class name="content"/>
@@ -101,20 +95,18 @@
                       </object>
                     </child>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
             <child>
-              <object class="HdyStatusPage" id="empty_state_box">
-                <property name="visible">True</property>
+              <object class="AdwStatusPage" id="empty_state_box">
                 <property name="icon-name">emblem-music-symbolic</property>
                 <property name="title" translatable="yes" comments="Mousaing is not a real word, but it is supposed to be a verb">Start Mousaing!</property>
                 <property name="description" translatable="yes">Click the listen button to start.</property>
               </object>
             </child>
             <child>
-              <object class="HdyStatusPage" id="recording_box">
-                <property name="visible">True</property>
+              <object class="AdwStatusPage" id="recording_box">
                 <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
                 <property name="title" translatable="yes">Muted</property>
               </object>
