@@ -18,78 +18,97 @@
 import requests
 from subprocess import PIPE, Popen
 
-from gi.repository import GLib, Gst
+import gi
+gi.require_version('GstPbutils', '1.0')
+from gi.repository import GLib, Gst, GstPbutils
 
 Gst.init(None)
 
 
 class VoiceRecorder:
+    def __init__(self):
+        self.pipeline = Gst.Pipeline()
+        self.src = Gst.ElementFactory.make('pulsesrc')
+        audio_convert = Gst.ElementFactory.make('audioconvert')
+        caps = Gst.Caps.from_string('audio/x-raw')
+        self.level = Gst.ElementFactory.make('level')
+        self.encodebin = Gst.ElementFactory.make('encodebin')
+        self.filesink = Gst.ElementFactory.make('filesink')
+
+        self.pipeline.add(self.src)
+        self.pipeline.add(audio_convert)
+        self.pipeline.add(self.level)
+        self.pipeline.add(self.encodebin)
+        self.pipeline.add(self.filesink)
+
+        self.src.link(audio_convert)
+        audio_convert.link_filtered(self.level, caps)
+
     def start(self, window, param):
         self.window = window
 
-        # AUDIO RECORDER
-        pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
-                    f'opusenc ! webmmux ! filesink location={self.get_tmp_dir()}mousaitmp.ogg')
-        self.recorder_gst = Gst.parse_launch(pipeline)
-        bus = self.recorder_gst.get_bus()
-        bus.add_signal_watch()
-        bus.connect("message", self._on_recorder_gst_message)
-        self.recorder_gst.set_state(Gst.State.PLAYING)
+        self.record_bus = self.pipeline.get_bus()
+        self.record_bus.add_signal_watch()
+        self.handler_id = self.record_bus.connect('message', self._on_gst_message)
 
-        # VISUALIZER
-        pipeline = (f'pulsesrc device="{self.get_default_audio_input()}" ! audioconvert ! '
-                    'level interval=90000000 ! fakesink qos=false')
-        self.visualizer_gst = Gst.parse_launch(pipeline)
-        bus = self.visualizer_gst.get_bus()
-        bus.add_signal_watch()
-        bus.connect("message", self._on_visualizer_gst_message)
-        self.visualizer_gst.set_state(Gst.State.PLAYING)
+        self.src.set_property('device', self.get_default_audio_input())
+        self.encodebin.set_property('profile', self.get_profile())
+        self.filesink.set_property('location', f'{self.get_tmp_dir()}mousaitmp.ogg')
+        self.level.link(self.encodebin)
+        self.encodebin.link(self.filesink)
 
-        self.timer = Timer(self._on_stop_record, param, 5)
+        self.pipeline.set_state(Gst.State.PLAYING)
+
+        self.timer = Timer(self.stop, param, 5)
         self.timer.start()
 
     def cancel(self):
-        self.recorder_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.set_state(Gst.State.NULL)
+        self.pipeline.set_state(Gst.State.NULL)
+        self.record_bus.remove_watch()
+        self.record_bus.disconnect(self.handler_id)
         self.timer.stop()
 
-    def _on_stop_record(self, callback):
-        self.recorder_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.send_event(Gst.Event.new_eos())
-        self.visualizer_gst.set_state(Gst.State.NULL)
+    def stop(self, callback):
+        self.pipeline.set_state(Gst.State.NULL)
+        self.record_bus.remove_watch()
+        self.record_bus.disconnect(self.handler_id)
         callback()
 
-    def _on_recorder_gst_message(self, bus, message):
+    def _on_gst_message(self, bus, message):
         t = message.type
-        if t == Gst.MessageType.EOS:
-            self.recorder_gst.set_state(Gst.State.NULL)
+        if t == Gst.MessageType.ELEMENT:
+            try:
+                val = message.get_structure().get_value("peak")[0]
+            except (AttributeError, TypeError, IndexError):
+                pass
+            else:
+                if -9 <= val <= 0:
+                    self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
+                elif -10 <= val <= -2:
+                    self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
+                elif -349 <= val <= -16:
+                    self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
+                elif val < -349:
+                    self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
+                    self.window.recording_box.set_title("Muted")
+
+                if not val >= 1000:
+                    self.window.recording_box.set_title("Listening")
+        elif t == Gst.MessageType.EOS:
+            self.stop()
         elif t == Gst.MessageType.ERROR:
-            self.recorder_gst.set_state(Gst.State.NULL)
             err, debug = message.parse_error()
             print("Error: %s" % err, debug)
 
-    def _on_visualizer_gst_message(self, bus, message):
-        try:
-            val = message.get_structure().get_value("peak")[0]
-        except (AttributeError, TypeError):
-            pass
+    def get_profile(self):
+        audio_caps = Gst.Caps.from_string('audio/x-opus')
+        audio_caps.set_value('channels', 1)
 
-        try:
-            if -9 <= val <= 0:
-                self.window.recording_box.set_icon_name("microphone-sensitivity-high-symbolic")
-            elif -10 <= val <= -2:
-                self.window.recording_box.set_icon_name("microphone-sensitivity-medium-symbolic")
-            elif -349 <= val <= -16:
-                self.window.recording_box.set_icon_name("microphone-sensitivity-low-symbolic")
-            elif val < -349:
-                self.window.recording_box.set_icon_name("microphone-sensitivity-muted-symbolic")
-                self.window.recording_box.set_title("Muted")
-
-            if not val >= 1000:
-                self.window.recording_box.set_title("Listening")
-        except UnboundLocalError:
-            pass
+        encoding_profile = GstPbutils.EncodingAudioProfile.new(audio_caps, None, None, 1)
+        container_caps = Gst.Caps.from_string('application/ogg')
+        container_profile = GstPbutils.EncodingContainerProfile.new('record', None, container_caps, None)
+        container_profile.add_profile(encoding_profile)
+        return container_profile
 
     @staticmethod
     def get_tmp_dir():
