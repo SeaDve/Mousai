@@ -58,7 +58,7 @@
                         <child>
                           <object class="GtkLabel">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes" comments="Do not translate the link, only 'their website'">Get yourself an API token from &lt;a href="https://dashboard.audd.io/"&gt;audd.io&lt;/a&gt;. Without one you only get a few tries per day.</property>
+                            <property name="label" translatable="yes" comments="Do not translate the link, only 'their website'">Get yourself an API token from &lt;a href="https://dashboard.audd.io/"&gt;audd.io&lt;/a&gt; to enter here. Without one you only get a few tries per day.</property>
                             <property name="use-markup">True</property>
                             <property name="justify">center</property>
                             <property name="wrap">True</property>
