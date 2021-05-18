@@ -17,7 +17,7 @@
 
 import urllib.request
 
-from gi.repository import GdkPixbuf, GLib, Gtk, Adw, GObject
+from gi.repository import GdkPixbuf, GLib, Gtk, Adw
 
 from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
@@ -25,6 +25,7 @@ from mousai.utils import VoiceRecorder
 
 # GTK 4 BLOCKERS
 # Use try else
+# Reduce Gtk Template Child usage
 # Loadable icon for AdwAvatar
 # Listbox no get children (Use listview)
 # Broken error message
