@@ -17,7 +17,7 @@
 
 import urllib.request
 
-from gi.repository import GdkPixbuf, GLib, Gtk, Adw
+from gi.repository import GdkPixbuf, GLib, Gtk, Adw, GObject
 
 from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
@@ -48,13 +48,41 @@ class MousaiWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         self.settings = settings
         self.voice_recorder = VoiceRecorder()
-        self.voice_recorder.connect("record-done", self.on_record_done)
+        self.voice_recorder.connect('record-done', self.on_record_done)
+        self.voice_recorder.connect('notify::peak', self.on_peak_changed)
         self.memory_list = list(self.settings.get_value("memory-list"))
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
         else:
             self.main_stack.set_visible_child(self.empty_state_box)
+
+    @Gtk.Template.Callback()
+    def on_start_button_clicked(self, button):
+        self.voice_recorder.start()
+        self.main_stack.set_visible_child(self.recording_box)
+        self.listen_cancel_stack.set_visible_child(self.cancel_button)
+
+    @Gtk.Template.Callback()
+    def on_cancel_button_clicked(self, button):
+        self.voice_recorder.cancel()
+        self.return_default_page()
+
+    @Gtk.Template.Callback()
+    def on_quit(self, window):
+        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
+
+    def on_peak_changed(self, recorder, peak):
+        peak = self.voice_recorder.peak
+        if -9 <= peak <= 0:
+            icon_name = "microphone-sensitivity-high-symbolic"
+        elif -10 <= peak <= -2:
+            icon_name = "microphone-sensitivity-medium-symbolic"
+        elif -349 <= peak <= -16:
+            icon_name = "microphone-sensitivity-low-symbolic"
+        else:
+            icon_name = "microphone-sensitivity-muted-symbolic"
+        self.recording_box.set_icon_name(icon_name)
 
     def on_record_done(self, recorder):
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
@@ -124,18 +152,3 @@ class MousaiWindow(Adw.ApplicationWindow):
             self.history_listbox.remove(row)
             self.memory_list = []
         self.main_stack.set_visible_child(self.empty_state_box)
-
-    @Gtk.Template.Callback()
-    def on_start_button_clicked(self, button):
-        self.voice_recorder.start()
-        self.main_stack.set_visible_child(self.recording_box)
-        self.listen_cancel_stack.set_visible_child(self.cancel_button)
-
-    @Gtk.Template.Callback()
-    def on_cancel_button_clicked(self, button):
-        self.voice_recorder.cancel()
-        self.return_default_page()
-
-    @Gtk.Template.Callback()
-    def on_quit(self, window):
-        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))

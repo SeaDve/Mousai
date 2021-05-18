@@ -25,8 +25,10 @@ from gi.repository import GLib, Gst, GstPbutils, GObject
 Gst.init(None)
 
 
-class VoiceRecorder(GObject.Object):
+class VoiceRecorder(GObject.GObject):
     __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
+
+    peak = GObject.Property(type=float, flags=GObject.ParamFlags.READWRITE)
 
     def __init__(self):
         super().__init__()
@@ -79,7 +81,8 @@ class VoiceRecorder(GObject.Object):
     def _on_gst_message(self, bus, message):
         t = message.type
         if t == Gst.MessageType.ELEMENT:
-            self.val = message.get_structure().get_value("peak")[0]
+            peak = message.get_structure().get_value('peak')[0]
+            self.set_property('peak', peak)
         elif t == Gst.MessageType.EOS:
             self.stop()
         elif t == Gst.MessageType.ERROR:
