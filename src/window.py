@@ -125,16 +125,16 @@ class MousaiWindow(Adw.ApplicationWindow):
         self.main_stack.set_visible_child(self.empty_state_box)
 
     @Gtk.Template.Callback()
-    def on_start_button_clicked(self, widget):
+    def on_start_button_clicked(self, button):
         self.voice_recorder.start(self, self.on_microphone_record_callback)
         self.main_stack.set_visible_child(self.recording_box)
         self.listen_cancel_stack.set_visible_child(self.cancel_button)
 
     @Gtk.Template.Callback()
-    def on_cancel_button_clicked(self, widget):
+    def on_cancel_button_clicked(self, button):
         self.voice_recorder.cancel()
         self.return_default_page()
 
     @Gtk.Template.Callback()
-    def on_quit(self, widget, param):
+    def on_quit(self, window):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))

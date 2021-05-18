@@ -33,7 +33,7 @@ class WelcomeWindow(Adw.ApplicationWindow):
         self.token_entry.set_text(self.settings.get_string("token-value"))
 
     @Gtk.Template.Callback()
-    def on_submit_button_clicked(self, widget):
+    def on_submit_button_clicked(self, button):
         self.settings.set_string("token-value", self.token_entry.get_text())
         win = MousaiWindow(self.settings, application=self.get_application())
         self.destroy()
