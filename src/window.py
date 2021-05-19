@@ -22,15 +22,10 @@ from gi.repository import GdkPixbuf, GLib, Gtk, Adw
 from mousai.songrow import SongRow
 from mousai.utils import VoiceRecorder
 
-
-# GTK 4 BLOCKERS
-# Broken error message
-# Icon for welcome window (Use size request)
-
 # Listbox no get children (Use listview)
 # Loadable icon for AdwAvatar
 # Use try else
-# Cleaning
+# Cleaning and copy meogram's new window handling
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
@@ -92,9 +87,9 @@ class MousaiWindow(Adw.ApplicationWindow):
         self.recording_box.set_title(title)
 
     def on_record_done(self, recorder):
-        song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
+        song_file = f"{recorder.get_tmp_dir()}mousaitmp.ogg"
         token = self.settings.get_string("token-value")
-        output = self.voice_recorder.guess_song(song_file, token)
+        output = recorder.guess_song(song_file, token)
         status = output["status"]
 
         print(output)
@@ -130,7 +125,7 @@ class MousaiWindow(Adw.ApplicationWindow):
 
         try:
             icon_uri = output["result"]["spotify"]["album"]["images"][2]["url"]
-            icon_dir = f"{self.voice_recorder.get_tmp_dir()}{title}{artist}.jpg"
+            icon_dir = f"{recorder.get_tmp_dir()}{title}{artist}.jpg"
             urllib.request.urlretrieve(icon_uri, icon_dir)
             image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
             song_row.song_icon.set_loadable_icon(image)
