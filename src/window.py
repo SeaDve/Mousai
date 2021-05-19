@@ -73,15 +73,21 @@ class MousaiWindow(Adw.ApplicationWindow):
 
     def on_peak_changed(self, recorder, peak):
         peak = recorder.peak
-        if -9 <= peak <= 0:
-            icon_name = "microphone-sensitivity-high-symbolic"
-        elif -10 <= peak <= -2:
-            icon_name = "microphone-sensitivity-medium-symbolic"
-        elif -349 <= peak <= -16:
-            icon_name = "microphone-sensitivity-low-symbolic"
+        if -6 < peak <= 0:
+            icon_name = 'microphone-sensitivity-high-symbolic'
+            title = "Listening"
+        elif -15 < peak <= -6:
+            icon_name = 'microphone-sensitivity-medium-symbolic'
+            title = "Listening"
+        elif -349 < peak <= -15:
+            icon_name = 'microphone-sensitivity-low-symbolic'
+            title = "Listening"
         else:
-            icon_name = "microphone-sensitivity-muted-symbolic"
+            icon_name = 'microphone-sensitivity-muted-symbolic'
+            title = "Muted"
+
         self.recording_box.set_icon_name(icon_name)
+        self.recording_box.set_title(title)
 
     def on_record_done(self, recorder):
         song_file = f"{self.voice_recorder.get_tmp_dir()}mousaitmp.ogg"
