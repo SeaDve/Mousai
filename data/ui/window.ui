@@ -15,45 +15,55 @@
                 <property name="transition-duration">150</property>
                 <property name="transition-type">crossfade</property>
                 <child>
-                  <object class="GtkButton" id="start_button">
-                    <property name="label" translatable="yes">Listen</property>
-                    <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
-                    <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
-                    <child>
-                      <object class="GtkShortcutController">
-                        <property name="scope">managed</property>
+                  <object class="GtkStackPage">
+                    <property name="name">listen</property>
+                    <property name="child">
+                      <object class="GtkButton">
+                        <property name="label" translatable="yes">Listen</property>
+                        <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
+                        <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
                         <child>
-                          <object class="GtkShortcut">
-                            <property name="trigger">&lt;Control&gt;r</property>
-                            <property name="action">activate</property>
+                          <object class="GtkShortcutController">
+                            <property name="scope">managed</property>
+                            <child>
+                              <object class="GtkShortcut">
+                                <property name="trigger">&lt;Control&gt;r</property>
+                                <property name="action">activate</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
-                    </child>
-                    <style>
-                      <class name="suggested-action"/>
-                    </style>
+                    </property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton" id="cancel_button">
-                    <property name="label" translatable="yes">Cancel</property>
-                    <property name="tooltip-text" translatable="yes">Cancel the Recording</property>
-                    <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
-                    <child>
-                      <object class="GtkShortcutController">
-                        <property name="scope">managed</property>
+                  <object class="GtkStackPage">
+                    <property name="name">cancel</property>
+                    <property name="child">
+                      <object class="GtkButton">
+                        <property name="label" translatable="yes">Cancel</property>
+                        <property name="tooltip-text" translatable="yes">Cancel the Recording</property>
+                        <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
+                        <style>
+                          <class name="destructive-action"/>
+                        </style>
                         <child>
-                          <object class="GtkShortcut">
-                            <property name="trigger">&lt;Control&gt;c</property>
-                            <property name="action">activate</property>
+                          <object class="GtkShortcutController">
+                            <property name="scope">managed</property>
+                            <child>
+                              <object class="GtkShortcut">
+                                <property name="trigger">&lt;Control&gt;c</property>
+                                <property name="action">activate</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
-                    </child>
-                    <style>
-                      <class name="destructive-action"/>
-                    </style>
+                    </property>
                   </object>
                 </child>
               </object>

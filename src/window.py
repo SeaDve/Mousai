@@ -24,12 +24,13 @@ from mousai.utils import VoiceRecorder
 
 
 # GTK 4 BLOCKERS
+# Save window size
 # Use try else
 # Reduce Gtk Template Child usage
 # Loadable icon for AdwAvatar
 # Listbox no get children (Use listview)
 # Broken error message
-# Icon for welcome window
+# Icon for welcome window (Use size request)
 # Linked entry in welcome window
 
 
@@ -38,10 +39,9 @@ class MousaiWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 
     listen_cancel_stack = Gtk.Template.Child()
-    start_button = Gtk.Template.Child()
-    cancel_button = Gtk.Template.Child()
     history_listbox = Gtk.Template.Child()
     main_stack = Gtk.Template.Child()
+
     main_screen_box = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
     empty_state_box = Gtk.Template.Child()
@@ -63,7 +63,7 @@ class MousaiWindow(Adw.ApplicationWindow):
     def on_start_button_clicked(self, button):
         self.voice_recorder.start()
         self.main_stack.set_visible_child(self.recording_box)
-        self.listen_cancel_stack.set_visible_child(self.cancel_button)
+        self.listen_cancel_stack.set_visible_child_name('cancel')
 
     @Gtk.Template.Callback()
     def on_cancel_button_clicked(self, button):
@@ -141,7 +141,7 @@ class MousaiWindow(Adw.ApplicationWindow):
             self.main_stack.set_visible_child(self.main_screen_box)
         else:
             self.main_stack.set_visible_child(self.empty_state_box)
-        self.listen_cancel_stack.set_visible_child(self.start_button)
+        self.listen_cancel_stack.set_visible_child_name('listen')
 
     def load_memory_list(self, memory_list):
         for song in memory_list:
