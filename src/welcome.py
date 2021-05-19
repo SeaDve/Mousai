@@ -24,7 +24,6 @@ from mousai.window import MousaiWindow
 class WelcomeWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'WelcomeWindow'
 
-    submit_button = Gtk.Template.Child()
     token_entry = Gtk.Template.Child()
 
     def __init__(self, settings, **kwargs):

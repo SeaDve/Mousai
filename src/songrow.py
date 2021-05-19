@@ -25,7 +25,6 @@ class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
 
     song_icon = Gtk.Template.Child()
-    play_button = Gtk.Template.Child()
 
     def __init__(self, title, artist, song_link):
         super().__init__()
@@ -34,7 +33,6 @@ class SongRow(Adw.ActionRow):
         self.set_subtitle(artist)
         self.song_link = song_link
         self.add_prefix(self.song_icon)
-        self.play_button.connect("clicked", self.on_play_button_clicked)
 
         try:
             icon_dir = f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg"
@@ -43,5 +41,6 @@ class SongRow(Adw.ActionRow):
         except Exception:
             pass
 
+    @Gtk.Template.Callback()
     def on_play_button_clicked(self, widget):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
