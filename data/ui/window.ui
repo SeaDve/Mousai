@@ -84,41 +84,56 @@
             <property name="transition-duration">150</property>
             <property name="transition-type">crossfade</property>
             <child>
-              <object class="GtkScrolledWindow" id="main_screen_box">
-                <property name="vexpand">True</property>
+              <object class="GtkStackPage">
+                <property name="name">main-screen</property>
                 <property name="child">
-                  <object class="GtkViewport">
-                    <child>
-                      <object class="AdwClamp">
+                  <object class="GtkScrolledWindow">
+                    <property name="vexpand">True</property>
+                    <property name="child">
+                      <object class="GtkViewport">
                         <child>
-                          <object class="GtkListBox" id="history_listbox">
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
-                            <property name="margin-top">12</property>
-                            <property name="margin-bottom">12</property>
-                            <property name="selection-mode">none</property>
-                            <style>
-                              <class name="content"/>
-                            </style>
+                          <object class="AdwClamp">
+                            <child>
+                              <object class="GtkListBox" id="history_listbox">
+                                <property name="margin-start">12</property>
+                                <property name="margin-end">12</property>
+                                <property name="margin-top">12</property>
+                                <property name="margin-bottom">12</property>
+                                <property name="selection-mode">none</property>
+                                <style>
+                                  <class name="content"/>
+                                </style>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
-                    </child>
+                    </property>
                   </object>
                 </property>
               </object>
             </child>
             <child>
-              <object class="AdwStatusPage" id="empty_state_box">
-                <property name="icon-name">emblem-music-symbolic</property>
-                <property name="title" translatable="yes" comments="Mousaing is not a real word, but it is supposed to be a verb">Start Mousaing!</property>
-                <property name="description" translatable="yes">Click the listen button to start.</property>
+              <object class="GtkStackPage">
+                <property name="name">empty-state</property>
+                <property name="child">
+                  <object class="AdwStatusPage">
+                    <property name="icon-name">emblem-music-symbolic</property>
+                    <property name="title" translatable="yes" comments="Mousaing is not a real word, but it is supposed to be a verb">Start Mousaing!</property>
+                    <property name="description" translatable="yes">Click the listen button to start.</property>
+                  </object>
+                  </property>
               </object>
             </child>
             <child>
-              <object class="AdwStatusPage" id="recording_box">
-                <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
-                <property name="title" translatable="yes">Muted</property>
+              <object class="GtkStackPage">
+                <property name="name">recording</property>
+                <property name="child">
+                  <object class="AdwStatusPage" id="recording_box">
+                    <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
+                    <property name="title" translatable="yes">Muted</property>
+                  </object>
+               </property>
               </object>
             </child>
           </object>

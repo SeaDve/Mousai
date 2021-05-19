@@ -26,7 +26,6 @@ from mousai.utils import VoiceRecorder
 # GTK 4 BLOCKERS
 # Save window size
 # Use try else
-# Reduce Gtk Template Child usage
 # Loadable icon for AdwAvatar
 # Listbox no get children (Use listview)
 # Broken error message
@@ -42,9 +41,7 @@ class MousaiWindow(Adw.ApplicationWindow):
     history_listbox = Gtk.Template.Child()
     main_stack = Gtk.Template.Child()
 
-    main_screen_box = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
-    empty_state_box = Gtk.Template.Child()
 
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
@@ -57,12 +54,12 @@ class MousaiWindow(Adw.ApplicationWindow):
         if self.memory_list:
             self.load_memory_list(self.memory_list)
         else:
-            self.main_stack.set_visible_child(self.empty_state_box)
+            self.main_stack.set_visible_child_name('empty-state')
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
         self.voice_recorder.start()
-        self.main_stack.set_visible_child(self.recording_box)
+        self.main_stack.set_visible_child_name('recording')
         self.listen_cancel_stack.set_visible_child_name('cancel')
 
     @Gtk.Template.Callback()
@@ -138,9 +135,9 @@ class MousaiWindow(Adw.ApplicationWindow):
 
     def return_default_page(self):
         if self.memory_list:
-            self.main_stack.set_visible_child(self.main_screen_box)
+            self.main_stack.set_visible_child_name('main-screen')
         else:
-            self.main_stack.set_visible_child(self.empty_state_box)
+            self.main_stack.set_visible_child_name('empty-state')
         self.listen_cancel_stack.set_visible_child_name('listen')
 
     def load_memory_list(self, memory_list):
@@ -153,4 +150,4 @@ class MousaiWindow(Adw.ApplicationWindow):
         for row in self.history_listbox.get_children():
             self.history_listbox.remove(row)
             self.memory_list = []
-        self.main_stack.set_visible_child(self.empty_state_box)
+        self.main_stack.set_visible_child_name('empty-state')
