@@ -7,5 +7,8 @@
     <key type="aa{ss}" name="memory-list">
       <default>[]</default>
     </key>
+    <key type="ai" name="window-size">
+      <default>[600, 400]</default>
+    </key>
   </schema>
 </schemalist>

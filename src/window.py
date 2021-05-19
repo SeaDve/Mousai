@@ -26,11 +26,12 @@ from mousai.utils import VoiceRecorder
 # GTK 4 BLOCKERS
 # Save window size
 # Use try else
-# Loadable icon for AdwAvatar
-# Listbox no get children (Use listview)
 # Broken error message
 # Icon for welcome window (Use size request)
 # Linked entry in welcome window
+
+# Listbox no get children (Use listview)
+# Loadable icon for AdwAvatar
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
@@ -55,6 +56,7 @@ class MousaiWindow(Adw.ApplicationWindow):
             self.load_memory_list(self.memory_list)
         else:
             self.main_stack.set_visible_child_name('empty-state')
+        self.load_window_size()
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -70,6 +72,7 @@ class MousaiWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_quit(self, window):
         self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
+        self.save_window_size()
 
     def on_peak_changed(self, recorder, peak):
         peak = recorder.peak
@@ -157,3 +160,14 @@ class MousaiWindow(Adw.ApplicationWindow):
             self.history_listbox.remove(row)
             self.memory_list = []
         self.main_stack.set_visible_child_name('empty-state')
+
+    def save_window_size(self):
+        size = (
+            self.get_size(Gtk.Orientation.HORIZONTAL),
+            self.get_size(Gtk.Orientation.VERTICAL)
+        )
+        self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
+
+    def load_window_size(self):
+        size = self.settings.get_value('window-size')
+        self.set_default_size(*size)
