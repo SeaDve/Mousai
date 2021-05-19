@@ -24,14 +24,13 @@ from mousai.utils import VoiceRecorder
 
 
 # GTK 4 BLOCKERS
-# Save window size
-# Use try else
 # Broken error message
 # Icon for welcome window (Use size request)
-# Linked entry in welcome window
 
 # Listbox no get children (Use listview)
 # Loadable icon for AdwAvatar
+# Use try else
+# Cleaning
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
@@ -118,18 +117,16 @@ class MousaiWindow(Adw.ApplicationWindow):
             song_entry = {"title": title, "artist": artist, "song_link": song_link}
             self.memory_list.append(song_entry)
         except Exception:
-            error = Gtk.MessageDialog(transient_for=self,
-                                      type=Gtk.MessageType.WARNING,
-                                      buttons=Gtk.ButtonsType.OK,
-                                      text=_("Sorry!"))
+            error = Gtk.MessageDialog(transient_for=self, modal=True,
+                                      buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
             if status == "error":
-                error.format_secondary_text(output["error"]["error_message"])
+                error.props.text = output["error"]["error_message"]
             elif status == "success" and not output["result"]:
-                error.format_secondary_text(_("The song was not recognized."))
+                error.props.text = _("The song was not recognized.")
             else:
-                error.format_secondary_text(_("Something went wrong."))
-            error.run()
-            error.destroy()
+                error.props.text = _("Something went wrong.")
+            error.present()
+            error.connect("response", lambda *_: error.close())
 
         try:
             icon_uri = output["result"]["spotify"]["album"]["images"][2]["url"]
