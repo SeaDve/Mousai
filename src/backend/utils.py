@@ -64,6 +64,7 @@ class VoiceRecorder(GObject.GObject):
         self.pipeline.set_state(Gst.State.PLAYING)
 
         self.timer = Timer(self.stop)
+        # self.timer.start(5)
         self.timer.start(1)
 
     def cancel(self):

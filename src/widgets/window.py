@@ -22,7 +22,7 @@ from gi.repository import GdkPixbuf, GLib, Gtk, Adw, Gio
 from mousai.widgets.songrow import SongRow
 from mousai.backend.utils import VoiceRecorder
 
-# Fix gtk error
+# Add players
 # Loadable icon for AdwAvatar
 # Use try else
 # Cleaning and copy meogram's new window handling
@@ -36,17 +36,16 @@ class MousaiWindow(Adw.ApplicationWindow):
     main_stack = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
     history_listbox = Gtk.Template.Child()
-
-    history_model = Gio.ListStore.new(SongRow)
     voice_recorder = VoiceRecorder()
 
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
         self.memory_list = list(self.settings.get_value("memory-list"))
+        self.history_model = Gio.ListStore.new(SongRow)
+        self.history_listbox.bind_model(self.history_model, lambda song: song)
         self.voice_recorder.connect('record-done', self.on_record_done)
         self.voice_recorder.connect('notify::peak', self.on_peak_changed)
-        self.history_listbox.bind_model(self.history_model, lambda song: song)
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
