@@ -17,12 +17,12 @@
 
 import urllib.request
 
-from gi.repository import GdkPixbuf, GLib, Gtk, Adw
+from gi.repository import GdkPixbuf, GLib, Gtk, Adw, Gio
 
 from mousai.widgets.songrow import SongRow
 from mousai.backend.utils import VoiceRecorder
 
-# Listbox no get children (Use listview)
+# Fix gtk error
 # Loadable icon for AdwAvatar
 # Use try else
 # Cleaning and copy meogram's new window handling
@@ -33,18 +33,20 @@ class MousaiWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MousaiWindow'
 
     listen_cancel_stack = Gtk.Template.Child()
-    history_listbox = Gtk.Template.Child()
     main_stack = Gtk.Template.Child()
-
     recording_box = Gtk.Template.Child()
+    history_listbox = Gtk.Template.Child()
+
+    history_model = Gio.ListStore.new(SongRow)
+    voice_recorder = VoiceRecorder()
 
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
-        self.voice_recorder = VoiceRecorder()
+        self.memory_list = list(self.settings.get_value("memory-list"))
         self.voice_recorder.connect('record-done', self.on_record_done)
         self.voice_recorder.connect('notify::peak', self.on_peak_changed)
-        self.memory_list = list(self.settings.get_value("memory-list"))
+        self.history_listbox.bind_model(self.history_model, lambda song: song)
 
         if self.memory_list:
             self.load_memory_list(self.memory_list)
@@ -87,50 +89,49 @@ class MousaiWindow(Adw.ApplicationWindow):
         self.recording_box.set_title(title)
 
     def on_record_done(self, recorder):
-        song_file = f"{recorder.get_tmp_dir()}mousaitmp.ogg"
+        song_file = f'{recorder.get_tmp_dir()}mousaitmp.ogg'
         token = self.settings.get_string("token-value")
         output = recorder.guess_song(song_file, token)
-        status = output["status"]
+        status = output['status']
 
         print(output)
 
         try:
-            title = output["result"]["title"]
-            artist = output["result"]["artist"]
-            song_link = output["result"]["song_link"]
-
-            song_link_list = [item["song_link"] for item in self.memory_list]
-            if song_link in song_link_list:
-                for row in self.history_listbox.get_children():
-                    self.history_listbox.remove(row)
-                song_link_index = song_link_list.index(song_link)
-                self.memory_list.pop(song_link_index)
-                self.load_memory_list(self.memory_list)
-
-            song_row = SongRow(title, artist, song_link)
-            self.history_listbox.insert(song_row, 0)
-            song_entry = {"title": title, "artist": artist, "song_link": song_link}
-            self.memory_list.append(song_entry)
+            result = output['result']
+            song = result['title'], result['artist'], result['song_link']
         except Exception:
             error = Gtk.MessageDialog(transient_for=self, modal=True,
                                       buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
             if status == "error":
                 error.props.text = output["error"]["error_message"]
-            elif status == "success" and not output["result"]:
+            elif status == "success" and not result:
                 error.props.text = _("The song was not recognized.")
             else:
                 error.props.text = _("Something went wrong.")
             error.present()
             error.connect("response", lambda *_: error.close())
+        else:
+            song_link_list = [item["song_link"] for item in self.memory_list]
+            if song[2] in song_link_list:
+                self.history_model.remove_all()
+                song_link_index = song_link_list.index(song[2])
+                self.memory_list.pop(song_link_index)
+                self.load_memory_list(self.memory_list)
+
+            song_row = SongRow(*song)
+            self.history_model.insert(0, song_row)
+            song_entry = {"title": song[0], "artist": song[1], "song_link": song[2]}
+            self.memory_list.append(song_entry)
 
         try:
-            icon_uri = output["result"]["spotify"]["album"]["images"][2]["url"]
-            icon_dir = f"{recorder.get_tmp_dir()}{title}{artist}.jpg"
-            urllib.request.urlretrieve(icon_uri, icon_dir)
-            image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
-            song_row.song_icon.set_loadable_icon(image)
+            icon_uri = result["spotify"]["album"]["images"][2]["url"]
         except Exception:
             pass
+        else:
+            icon_dir = f"{recorder.get_tmp_dir()}{song[0]}{song[1]}.jpg"
+            urllib.request.urlretrieve(icon_uri, icon_dir)
+            image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
+            # song_row.song_icon.set_loadable_icon(image)
 
         self.return_default_page()
 
@@ -141,17 +142,16 @@ class MousaiWindow(Adw.ApplicationWindow):
             self.main_stack.set_visible_child_name('empty-state')
         self.listen_cancel_stack.set_visible_child_name('listen')
 
+    def clear_memory_list(self):
+        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
+        self.memory_list = []
+        self.history_model.remove_all()
+        self.main_stack.set_visible_child_name('empty-state')
+
     def load_memory_list(self, memory_list):
         for song in memory_list:
             song_row = SongRow(song["title"], song["artist"], song["song_link"])
-            self.history_listbox.insert(song_row, 0)
-
-    def clear_memory_list(self):
-        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
-        for row in self.history_listbox.get_children():
-            self.history_listbox.remove(row)
-            self.memory_list = []
-        self.main_stack.set_visible_child_name('empty-state')
+            self.history_model.insert(0, song_row)
 
     def save_window_size(self):
         size = (
