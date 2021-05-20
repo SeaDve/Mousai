@@ -17,7 +17,7 @@
 
 from gi.repository import Gtk, Adw
 
-from mousai.window import MousaiWindow
+from mousai.widgets.window import MousaiWindow
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/welcome.ui')

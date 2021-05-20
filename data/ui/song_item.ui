@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="GtkBox">
+        <property name="spacing">6</property>
+        <child>
+          <object class="HdyAvatar">
+            <property name="icon-name">emblem-music-symbolic</property>
+            <property name="size">48</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="hexpand">True</property>
+            <property name="orientation">vertical</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkLabel">
+                <binding name="label">
+                  <lookup name="title" type="SongItem">
+                    <lookup name="song_item">GtkListItem</lookup>
+                  </lookup>
+                </binding>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <binding name="label">
+                  <lookup name="artist" type="SongItem">
+                    <lookup name="song_item">GtkListItem</lookup>
+                  </lookup>
+                </binding>
+                <style>
+                  <class name="caption"/>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="valign">center</property>
+            <property name="tooltip-text" translatable="yes">Open in Browser</property>
+            <property name="icon-name">media-playback-start-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>
