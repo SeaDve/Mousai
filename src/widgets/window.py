@@ -19,8 +19,8 @@ import urllib.request
 
 from gi.repository import GdkPixbuf, GLib, Gtk, Adw
 
-from mousai.songrow import SongRow
-from mousai.utils import VoiceRecorder
+from mousai.widgets.songrow import SongRow
+from mousai.backend.utils import VoiceRecorder
 
 # Listbox no get children (Use listview)
 # Loadable icon for AdwAvatar

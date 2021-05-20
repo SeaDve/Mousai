@@ -17,7 +17,7 @@
 
 from gi.repository import GdkPixbuf, Gio, Gtk, Adw
 
-from mousai.utils import VoiceRecorder
+from mousai.backend.utils import VoiceRecorder
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/songrow.ui')
