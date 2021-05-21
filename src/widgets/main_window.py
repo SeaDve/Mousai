@@ -19,13 +19,14 @@ import urllib.request
 
 from gi.repository import GdkPixbuf, GLib, Gtk, Adw, Gio
 
-from mousai.widgets.songrow import SongRow
-from mousai.backend.recorder import VoiceRecorder
+from mousai.widgets.song_row import SongRow
+from mousai.backend.voice_recorder import VoiceRecorder
 from mousai.backend.audd_wrapper import Audd
 
 # Loadable icon for AdwAvatar
 # Use try else
 # Fix mem leak new win
+# Fix still playing when resetting token
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
