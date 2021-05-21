@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GLib, Gtk, Adw, Gio
+from collections import namedtuple
+
+from gi.repository import GLib, Gtk, Adw, Gio, GObject
 
 from mousai.widgets.song_row import SongRow
 from mousai.backend.voice_recorder import VoiceRecorder
@@ -23,6 +25,7 @@ from mousai.backend.utils import Utils
 
 # Fix mem leak new win
 # Fix still playing when resetting token
+Song = namedtuple('Song', 'title artist song_link audio_src')
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/main_window.ui')
@@ -37,7 +40,7 @@ class MainWindow(Adw.ApplicationWindow):
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
-        self.memory_list = list(self.settings.get_value("memory-list"))
+        self.memory_list = list(self.settings.get_value('memory-list'))
 
         self.history_model = Gio.ListStore.new(SongRow)
         self.history_listbox.bind_model(self.history_model, lambda song: song)
@@ -46,11 +49,9 @@ class MainWindow(Adw.ApplicationWindow):
         self.voice_recorder.connect('record-done', self.on_record_done)
         self.voice_recorder.connect('notify::peak', self.on_peak_changed)
 
-        if self.memory_list:
-            self.load_memory_list(self.memory_list)
-        else:
-            self.main_stack.set_visible_child_name('empty-state')
+        self.return_default_page()
         self.load_window_size()
+        self.load_memory_list()
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
@@ -65,7 +66,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_quit(self, window):
-        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', self.memory_list))
+        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', self.memory_list))
         self.save_window_size()
 
     def on_peak_changed(self, recorder, peak):
@@ -88,44 +89,46 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_record_done(self, recorder):
         song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
-        token = self.settings.get_string("token-value")
+        token = self.settings.get_string('token-value')
         output = Utils.guess_song(song_file, token)
         status = output['status']
 
-        print(output)
-
         try:
             result = output['result']
-            song = result['title'], result['artist'], result['song_link'], result['audio_src']
-        except Exception:
+            song = Song(*list(result.values())[:-1])
+        except KeyError:
             error = Gtk.MessageDialog(transient_for=self, modal=True,
                                       buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
-            if status == "error":
-                error.props.text = output["error_message"]
-            elif status == "success" and not result:
+            if status == 'error':
+                error.props.text = output['error_message']
+            elif status == 'success' and not result:
                 error.props.text = _("The song was not recognized.")
             else:
                 error.props.text = _("Something went wrong.")
             error.present()
-            error.connect("response", lambda *_: error.close())
+            error.connect('response', lambda *_: error.close())
         else:
-            song_link_list = [item["song_link"] for item in self.memory_list]
-            if song[2] in song_link_list:
-                self.history_model.remove_all()
-                song_link_index = song_link_list.index(song[2])
-                self.memory_list.pop(song_link_index)
-                self.load_memory_list(self.memory_list)
-
             if image_src := result['image_src']:
-                icon_dir = f"{Utils.get_tmp_dir()}/{song[0]}{song[1]}.jpg"
+                icon_dir = f'{Utils.get_tmp_dir()}/{song[0]}{song[1]}.jpg'
                 Utils.download_image(image_src, icon_dir)
 
-            song_row = SongRow(*song)
-            self.history_model.insert(0, song_row)
-            song_entry = {"title": song[0], "artist": song[1], "song_link": song[2], 'audio_src': song[3]}
-            self.memory_list.append(song_entry)
+            self.remove_duplicates(song.song_link)
+            self.new_song_row(song)
+            self.memory_list.append(dict(song._asdict()))
 
         self.return_default_page()
+
+    def remove_duplicates(self, song_id):
+        song_link_list = [item['song_link'] for item in self.memory_list]
+        if song_id in song_link_list:
+            self.history_model.remove_all()
+            song_link_index = song_link_list.index(song_id)
+            self.memory_list.pop(song_link_index)
+            self.load_memory_list()
+
+    def new_song_row(self, song):
+        song_row = SongRow(*song)
+        self.history_model.insert(0, song_row)
 
     def return_default_page(self):
         if self.memory_list:
@@ -134,16 +137,15 @@ class MainWindow(Adw.ApplicationWindow):
             self.main_stack.set_visible_child_name('empty-state')
         self.listen_cancel_stack.set_visible_child_name('listen')
 
+    def load_memory_list(self):
+        for song in self.memory_list:
+            self.new_song_row(song.values())
+
     def clear_memory_list(self):
-        self.settings.set_value("memory-list", GLib.Variant('aa{ss}', []))
+        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', []))
         self.memory_list = []
         self.history_model.remove_all()
         self.main_stack.set_visible_child_name('empty-state')
-
-    def load_memory_list(self, memory_list):
-        for song in memory_list:
-            song_row = SongRow(song['title'], song['artist'], song['song_link'], song.get('audio_src'))
-            self.history_model.insert(0, song_row)
 
     def save_window_size(self):
         size = (

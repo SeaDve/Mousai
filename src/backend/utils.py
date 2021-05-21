@@ -54,15 +54,15 @@ class Utils:
                 .replace(';', '')
             track = json.loads(track)[0]['sample']['src']
         except (IndexError, requests.exceptions.ConnectionError, requests.exceptions.MissingSchema):
-            return ""
+            return ''
         else:
             return track
 
     def _get_image_src(res):
         try:
-            return res["spotify"]["album"]["images"][2]["url"]
+            return res['spotify']['album']['images'][2]['url']
         except KeyError:
-            return ""
+            return ''
 
     @staticmethod
     def download_image(link, save_dir):
@@ -73,11 +73,12 @@ class Utils:
         data = {'api_token': token, 'return': 'spotify'}
         files = {'file': open(song_file, 'rb')}
         res = requests.post('https://api.audd.io/', data=data, files=files).json()
+        print(res)
         return Utils._simplify(res)
 
     @staticmethod
     def get_tmp_dir():
         directory = GLib.getenv('XDG_CACHE_HOME')
         if not directory:
-            directory = ""
-        return f"{directory}/tmp"
+            directory = ''
+        return f'{directory}/tmp'

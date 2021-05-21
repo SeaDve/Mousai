@@ -28,10 +28,10 @@ class SongRow(Adw.ActionRow):
     song_icon = Gtk.Template.Child()
     button_player = Gtk.Template.Child()
 
-    def __init__(self, song_title, artist, song_link, song_src):
+    def __init__(self, title, artist, song_link, song_src):
         super().__init__()
 
-        self.props.title = song_title
+        self.props.title = title
         self.props.subtitle = artist
         self.song_link = song_link
 
@@ -41,7 +41,7 @@ class SongRow(Adw.ActionRow):
 
     def load_song_icon(self, size):
         try:
-            file_name = f"{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg"
+            file_name = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'
             pixbuf = GdkPixbuf.Pixbuf.new_from_file(file_name)
         except GLib.Error:
             return None

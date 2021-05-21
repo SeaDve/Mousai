@@ -27,9 +27,9 @@ class WelcomeWindow(Adw.ApplicationWindow):
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
-        self.token_entry.set_text(self.settings.get_string("token-value"))
+        self.token_entry.set_text(self.settings.get_string('token-value'))
 
     @Gtk.Template.Callback()
     def on_submit_button_clicked(self, button):
-        self.settings.set_string("token-value", self.token_entry.get_text())
+        self.settings.set_string('token-value', self.token_entry.get_text())
         self.props.application.open_main_window()
