@@ -1,4 +1,4 @@
-# welcome.py
+# welcome_window.py
 #
 # Copyright 2021 SeaDve
 #
