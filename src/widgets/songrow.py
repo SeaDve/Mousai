@@ -26,16 +26,16 @@ class SongRow(Adw.ActionRow):
 
     song_icon = Gtk.Template.Child()
 
-    def __init__(self, title, artist, song_link):
+    def __init__(self, song_title, artist, song_link):
         super().__init__()
 
-        self.set_title(title)
-        self.set_subtitle(artist)
+        self.props.title = song_title
+        self.props.subtitle = artist
         self.song_link = song_link
         self.add_prefix(self.song_icon)
 
         try:
-            icon_dir = f"{VoiceRecorder.get_tmp_dir()}{title}{artist}.jpg"
+            icon_dir = f"{VoiceRecorder.get_tmp_dir()}{song_title}{artist}.jpg"
             image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
             self.song_icon.set_loadable_icon(image)
         except Exception:
