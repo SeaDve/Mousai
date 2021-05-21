@@ -28,16 +28,16 @@ class Utils:
     @staticmethod
     def _simplify(res):
         status = res['status']
-        output = {'status' : status}
+        output = {'status': status}
         if status == 'success':
             if song_result := res['result']:
                 song_link = song_result['song_link']
                 output['result'] = {
-                    'title' : song_result['title'],
-                    'artist' : song_result['artist'],
-                    'song_link' : song_link,
-                    'audio_src' : Utils._get_audio_src(song_link),
-                    'image_src' : Utils._get_image_src(song_result)
+                    'title': song_result['title'],
+                    'artist': song_result['artist'],
+                    'song_link': song_link,
+                    'audio_src': Utils._get_audio_src(song_link),
+                    'image_src': Utils._get_image_src(song_result)
                 }
             else:
                 output['result'] = None
@@ -50,8 +50,8 @@ class Utils:
         try:
             page = requests.get(url, timeout=5)
             track = re.findall(r'tracks = .*;', page.text)[0] \
-                .replace('tracks = ','') \
-                .replace(';','')
+                .replace('tracks = ', '') \
+                .replace(';', '')
             track = json.loads(track)[0]['sample']['src']
         except (IndexError, requests.exceptions.ConnectionError, requests.exceptions.MissingSchema):
             return ""
