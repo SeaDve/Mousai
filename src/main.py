@@ -23,7 +23,7 @@ gi.require_version('Gst', '1.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gdk, Gio, GLib, Adw
 
-from mousai.widgets.window import MousaiWindow
+from mousai.widgets.window import MainWindow
 from mousai.widgets.welcome import WelcomeWindow
 
 
@@ -58,7 +58,7 @@ class Application(Gtk.Application):
             if not self.settings.get_string("token-value"):
                 win = WelcomeWindow(self.settings, application=self)
             else:
-                win = MousaiWindow(self.settings, application=self)
+                win = MainWindow(self.settings, application=self)
         win.present()
 
     def setup_actions(self):
@@ -77,12 +77,16 @@ class Application(Gtk.Application):
             if accel:
                 self.set_accels_for_action(f"app.{action}", accel)
 
+    def open_main_window(self):
+        self.get_active_window().close()
+        win = MainWindow(self.settings, application=self)
+        win.present()
+
     def clear_song_history(self, action, param):
         self.get_active_window().clear_memory_list()
 
     def reset_token_value(self, action, param):
-        self.get_active_window().on_quit(None)
-        self.get_active_window().destroy()
+        self.get_active_window().close()
         win = WelcomeWindow(self.settings, application=self)
         win.present()
 

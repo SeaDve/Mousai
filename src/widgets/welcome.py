@@ -17,8 +17,6 @@
 
 from gi.repository import Gtk, Adw
 
-from mousai.widgets.window import MousaiWindow
-
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/welcome.ui')
 class WelcomeWindow(Adw.ApplicationWindow):
@@ -34,6 +32,4 @@ class WelcomeWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_submit_button_clicked(self, button):
         self.settings.set_string("token-value", self.token_entry.get_text())
-        win = MousaiWindow(self.settings, application=self.get_application())
-        self.destroy()
-        win.present()
+        self.props.application.open_main_window()

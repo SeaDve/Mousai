@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="MousaiWindow" parent="AdwApplicationWindow">
+  <template class="MainWindow" parent="AdwApplicationWindow">
     <signal name="close-request" handler="on_quit" swapped="no"/>
     <child>
       <object class="GtkBox">
