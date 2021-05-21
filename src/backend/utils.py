@@ -75,7 +75,7 @@ class Utils:
         try:
             res = requests.post('https://api.audd.io/', data=data, files=files).json()
         except Exception as error:
-            res = {'status': 'error', 'error' : {'error_message': f"Connection Error:{error}"}}
+            res = {'status': 'error', 'error': {'error_message': f"Connection Error:{error}"}}
         finally:
             return Utils._simplify(res)
 

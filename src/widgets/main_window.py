@@ -17,7 +17,7 @@
 
 from collections import namedtuple
 
-from gi.repository import GLib, Gtk, Adw, Gio, GObject
+from gi.repository import GLib, Gtk, Adw, Gio
 
 from mousai.widgets.song_row import SongRow
 from mousai.backend.voice_recorder import VoiceRecorder
