@@ -27,6 +27,7 @@ from mousai.backend.audd_wrapper import Audd
 # Use try else
 # Fix mem leak new win
 # Fix still playing when resetting token
+# Finalize voice recorder timer and wrapper output
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')

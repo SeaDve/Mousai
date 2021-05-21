@@ -19,7 +19,7 @@ from subprocess import PIPE, Popen
 
 import gi
 gi.require_version('GstPbutils', '1.0')
-from gi.repository import GLib, Gst, GstPbutils, GObject, GLib
+from gi.repository import GLib, Gst, GstPbutils, GObject
 
 
 class VoiceRecorder(GObject.GObject):
@@ -112,6 +112,7 @@ class VoiceRecorder(GObject.GObject):
         if not directory:
             directory = ""
         return f"{directory}/tmp"
+
 
 class Timer:
     def __init__(self, function):
