@@ -30,7 +30,7 @@ class TokenDialog(Gtk.Dialog):
         self.token_entry.set_text(self.settings.get_string('token-value'))
 
         # Workaround to hide titlebar
-        placeholder = Gtk.HeaderBar()
+        placeholder = Gtk.Box()
         placeholder.set_visible(False)
         self.set_titlebar(placeholder)
 
