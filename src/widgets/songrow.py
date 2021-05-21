@@ -15,9 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GdkPixbuf, Gio, Gtk, Adw
+from gi.repository import GdkPixbuf, Gio, Gtk, Adw, GObject
 
-from mousai.backend.utils import VoiceRecorder
+from mousai.backend.recorder import VoiceRecorder
+from mousai.widgets.button_player import ButtonPlayer
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/songrow.ui')
@@ -25,22 +26,28 @@ class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
 
     song_icon = Gtk.Template.Child()
+    button_player = Gtk.Template.Child()
 
-    def __init__(self, song_title, artist, song_link):
+    def __init__(self, song_title, artist, song_link, song_src):
         super().__init__()
 
         self.props.title = song_title
         self.props.subtitle = artist
         self.song_link = song_link
         self.add_prefix(self.song_icon)
+        self.button_player.set_song_src(song_src)
 
         try:
-            icon_dir = f"{VoiceRecorder.get_tmp_dir()}{song_title}{artist}.jpg"
+            icon_dir = f"{VoiceRecorder.get_tmp_dir()}/{song_title}{artist}.jpg"
             image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
             self.song_icon.set_loadable_icon(image)
         except Exception:
             pass
 
     @Gtk.Template.Callback()
-    def on_play_button_clicked(self, widget):
+    def on_open_link_button_clicked(self, button):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
+
+    @Gtk.Template.Callback()
+    def get_icon(self, self_, is_stopped):
+        return 'media-playback-stop-symbolic' if is_stopped else 'media-playback-start-symbolic'

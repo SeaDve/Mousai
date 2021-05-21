@@ -3,13 +3,29 @@
   <requires lib="gtk" version="4.0"/>
   <template class="SongRow" parent="AdwActionRow">
     <property name="can-focus">True</property>
-    <property name="activatable-widget">play_button</property>
+    <property name="activatable-widget">open_link_button</property>
     <child>
-      <object class="GtkButton" id="play_button">
+      <object class="GtkBox">
         <property name="valign">center</property>
-        <property name="tooltip-text" translatable="yes">Open in Browser</property>
-        <property name="icon-name">media-playback-start-symbolic</property>
-        <signal name="clicked" handler="on_play_button_clicked" swapped="no"/>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkButton" id="open_link_button">
+            <property name="tooltip-text" translatable="yes">Open in Browser</property>
+            <property name="icon-name">insert-link-symbolic</property>
+            <signal name="clicked" handler="on_open_link_button_clicked" swapped="no"/>
+          </object>
+        </child>
+        <child>
+          <object class="ButtonPlayer" id="button_player">
+            <property name="action-name">but.play</property>
+            <property name="tooltip-text" translatable="yes">Play preview</property>
+            <binding name="icon-name">
+              <closure type="gchararray" function="get_icon">
+                <lookup name="is-stopped">button_player</lookup>
+              </closure>
+            </binding>
+          </object>
+        </child>
       </object>
     </child>
   </template>
