@@ -1,37 +1,36 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Luna Jernberg <droidbittin@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-05 08:50+0800\n"
-"PO-Revision-Date: 2021-04-12 13:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
-">\n"
+"PO-Revision-Date: 2021-05-21 20:37+0000\n"
+"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Musik;Låt;Identifiera;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Identifiera alla låtar på några sekunder"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -52,11 +51,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Varför du kommer att älska Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Identifiera låtens titel och artist inom några sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song with the Album art in a history."
@@ -64,15 +63,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🌐 Play the identified song in your browser."
-msgstr ""
+msgstr "🌐 Spela den identifierade låten i din webbläsare."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Lättanvänt användargränssnitt."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Användarvänliga kortkommandon."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:26
@@ -97,15 +96,15 @@ msgstr "Avsluta"
 
 #: data/ui/shortcuts.ui:39
 msgid "Controls"
-msgstr ""
+msgstr "Kontroller"
 
 #: data/ui/shortcuts.ui:44
 msgid "Start listening"
-msgstr ""
+msgstr "Börja lyssna"
 
 #: data/ui/shortcuts.ui:51
 msgid "Cancel listening"
-msgstr ""
+msgstr "Sluta lyssna"
 
 #: data/ui/shortcuts.ui:59
 msgid "Settings"
@@ -113,23 +112,23 @@ msgstr "Inställningar"
 
 #: data/ui/shortcuts.ui:64
 msgid "Clear song history"
-msgstr ""
+msgstr "Rensa låthistorik"
 
 #: data/ui/shortcuts.ui:71
 msgid "Reset token value"
-msgstr ""
+msgstr "Återställ tokenvärde"
 
 #: data/ui/welcome.ui:18
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Välkommen till Mousai"
 
 #: data/ui/welcome.ui:37
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Ange en giltig token"
 
 #: data/ui/welcome.ui:43
 msgid "Submit"
-msgstr ""
+msgstr "Skicka"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/welcome.ui:61
@@ -141,7 +140,7 @@ msgstr ""
 
 #: data/ui/window.ui:25
 msgid "Listen"
-msgstr ""
+msgstr "Lyssna"
 
 #: data/ui/window.ui:38
 msgid "Cancel"
@@ -150,23 +149,23 @@ msgstr "Avbryt"
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/window.ui:108
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Börja Mousaing!"
 
 #: data/ui/window.ui:109
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Klicka på lyssna knappen för att starta"
 
 #: data/ui/window.ui:116
 msgid "Muted"
-msgstr ""
+msgstr "Tystad"
 
 #: data/ui/window.ui:128
 msgid "Clear Song History"
-msgstr ""
+msgstr "Rensa låthistorik"
 
 #: data/ui/window.ui:132
 msgid "Reset Token"
-msgstr ""
+msgstr "Återställ Token"
 
 #: data/ui/window.ui:138
 msgid "Keyboard Shortcuts"
@@ -174,7 +173,7 @@ msgstr "Tangenbordsgenvägar"
 
 #: data/ui/window.ui:142
 msgid "About Mousai"
-msgstr ""
+msgstr "Om Mousai"
 
 #: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
@@ -183,7 +182,9 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:109
 msgid "translator-credits"
-msgstr "Åke Engelbrektson <eson@svenskasprakfiler.se>"
+msgstr ""
+"Åke Engelbrektson &lt;eson@svenskasprakfiler.se&gt;\n"
+"Luna Jernberg &lt;droidbittin@gmail.com&gt;"
 
 #: src/main.py:110
 msgid "GitHub"
@@ -191,15 +192,15 @@ msgstr "GitHub"
 
 #: src/window.py:79
 msgid "Sorry!"
-msgstr ""
+msgstr "Förlåt!"
 
 #: src/window.py:83
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Låten kändes inte igen."
 
 #: src/window.py:85
 msgid "Something went wrong."
-msgstr ""
+msgstr "Något gick fel."
 
 #~ msgid "Recording"
 #~ msgstr "Spelar in"
