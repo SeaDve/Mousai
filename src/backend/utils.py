@@ -72,9 +72,12 @@ class Utils:
     def guess_song(song_file, token):
         data = {'api_token': token, 'return': 'spotify'}
         files = {'file': open(song_file, 'rb')}
-        res = requests.post('https://api.audd.io/', data=data, files=files).json()
-        print(res)
-        return Utils._simplify(res)
+        try:
+            res = requests.post('https://api.audd.io/', data=data, files=files).json()
+        except Exception as error:
+            res = {'status': 'error', 'error' : {'error_message': f"Connection Error:{error}"}}
+        finally:
+            return Utils._simplify(res)
 
     @staticmethod
     def get_tmp_dir():
