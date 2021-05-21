@@ -20,9 +20,9 @@ import urllib.request
 from gi.repository import GdkPixbuf, GLib, Gtk, Adw, Gio
 
 from mousai.widgets.songrow import SongRow
-from mousai.backend.utils import VoiceRecorder
+from mousai.backend.recorder import VoiceRecorder
+from mousai.backend.audd_wrapper import Audd
 
-# Add players for music
 # Loadable icon for AdwAvatar
 # Use try else
 # Fix mem leak new win
@@ -90,21 +90,21 @@ class MainWindow(Adw.ApplicationWindow):
         self.recording_box.set_title(title)
 
     def on_record_done(self, recorder):
-        song_file = f'{recorder.get_tmp_dir()}mousaitmp.ogg'
+        song_file = f'{VoiceRecorder.get_tmp_dir()}/mousaitmp.ogg'
         token = self.settings.get_string("token-value")
-        output = recorder.guess_song(song_file, token)
+        output = Audd.guess_song(song_file, token)
         status = output['status']
 
         print(output)
 
         try:
             result = output['result']
-            song = result['title'], result['artist'], result['song_link']
+            song = result['title'], result['artist'], result['song_link'], result['song_src']
         except Exception:
             error = Gtk.MessageDialog(transient_for=self, modal=True,
                                       buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
             if status == "error":
-                error.props.text = output["error"]["error_message"]
+                error.props.text = output["error_message"]
             elif status == "success" and not result:
                 error.props.text = _("The song was not recognized.")
             else:
@@ -121,7 +121,7 @@ class MainWindow(Adw.ApplicationWindow):
 
             song_row = SongRow(*song)
             self.history_model.insert(0, song_row)
-            song_entry = {"title": song[0], "artist": song[1], "song_link": song[2]}
+            song_entry = {"title": song[0], "artist": song[1], "song_link": song[2], 'song_src': song[3]}
             self.memory_list.append(song_entry)
 
         try:
@@ -129,7 +129,7 @@ class MainWindow(Adw.ApplicationWindow):
         except Exception:
             pass
         else:
-            icon_dir = f"{recorder.get_tmp_dir()}{song[0]}{song[1]}.jpg"
+            icon_dir = f"{VoiceRecorder.get_tmp_dir()}/{song[0]}{song[1]}.jpg"
             urllib.request.urlretrieve(icon_uri, icon_dir)
             image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
             # song_row.song_icon.set_loadable_icon(image)
@@ -151,7 +151,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def load_memory_list(self, memory_list):
         for song in memory_list:
-            song_row = SongRow(song["title"], song["artist"], song["song_link"])
+            song_row = SongRow(song['title'], song['artist'], song['song_link'], song.get('song_src'))
             self.history_model.insert(0, song_row)
 
     def save_window_size(self):
