@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GdkPixbuf, Gio, Gtk, Adw
+from gi.repository import GdkPixbuf, Gio, Gtk, Adw, GLib
 
-from mousai.backend.voice_recorder import VoiceRecorder
+from mousai.backend.utils import Utils
 from mousai.widgets.button_player import ButtonPlayer  # noqa: F401
 
 
@@ -34,15 +34,18 @@ class SongRow(Adw.ActionRow):
         self.props.title = song_title
         self.props.subtitle = artist
         self.song_link = song_link
-        self.add_prefix(self.song_icon)
-        self.button_player.set_song_src(song_src)
 
+        self.button_player.set_song_src(song_src)
+        self.add_prefix(self.song_icon)
+        self.song_icon.set_image_load_func(self.load_song_icon)
+
+    def load_song_icon(self, size):
         try:
-            icon_dir = f"{VoiceRecorder.get_tmp_dir()}/{song_title}{artist}.jpg"
-            image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
-            self.song_icon.set_loadable_icon(image)
-        except Exception:
-            pass
+            file_name = f"{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg"
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file(file_name)
+        except GLib.Error:
+            return None
+        return pixbuf
 
     @Gtk.Template.Callback()
     def on_open_link_button_clicked(self, button):

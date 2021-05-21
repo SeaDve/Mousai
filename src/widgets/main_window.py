@@ -15,19 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import urllib.request
-
-from gi.repository import GdkPixbuf, GLib, Gtk, Adw, Gio
+from gi.repository import GLib, Gtk, Adw, Gio
 
 from mousai.widgets.song_row import SongRow
 from mousai.backend.voice_recorder import VoiceRecorder
-from mousai.backend.audd_wrapper import Audd
+from mousai.backend.utils import Utils
 
-# Loadable icon for AdwAvatar
-# Use try else
 # Fix mem leak new win
 # Fix still playing when resetting token
-# Finalize voice recorder timer and wrapper output
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/main_window.ui')
@@ -92,16 +87,16 @@ class MainWindow(Adw.ApplicationWindow):
         self.recording_box.set_title(title)
 
     def on_record_done(self, recorder):
-        song_file = f'{VoiceRecorder.get_tmp_dir()}/mousaitmp.ogg'
+        song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
         token = self.settings.get_string("token-value")
-        output = Audd.guess_song(song_file, token)
+        output = Utils.guess_song(song_file, token)
         status = output['status']
 
         print(output)
 
         try:
             result = output['result']
-            song = result['title'], result['artist'], result['song_link'], result['song_src']
+            song = result['title'], result['artist'], result['song_link'], result['audio_src']
         except Exception:
             error = Gtk.MessageDialog(transient_for=self, modal=True,
                                       buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
@@ -121,20 +116,14 @@ class MainWindow(Adw.ApplicationWindow):
                 self.memory_list.pop(song_link_index)
                 self.load_memory_list(self.memory_list)
 
+            if image_src := result['image_src']:
+                icon_dir = f"{Utils.get_tmp_dir()}/{song[0]}{song[1]}.jpg"
+                Utils.download_image(image_src, icon_dir)
+
             song_row = SongRow(*song)
             self.history_model.insert(0, song_row)
-            song_entry = {"title": song[0], "artist": song[1], "song_link": song[2], 'song_src': song[3]}
+            song_entry = {"title": song[0], "artist": song[1], "song_link": song[2], 'audio_src': song[3]}
             self.memory_list.append(song_entry)
-
-        try:
-            icon_uri = result["spotify"]["album"]["images"][2]["url"]
-        except Exception:
-            pass
-        else:
-            icon_dir = f"{VoiceRecorder.get_tmp_dir()}/{song[0]}{song[1]}.jpg"
-            urllib.request.urlretrieve(icon_uri, icon_dir)
-            image = GdkPixbuf.Pixbuf.new_from_file(icon_dir)
-            # song_row.song_icon.set_loadable_icon(image)
 
         self.return_default_page()
 
@@ -153,7 +142,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def load_memory_list(self, memory_list):
         for song in memory_list:
-            song_row = SongRow(song['title'], song['artist'], song['song_link'], song.get('song_src'))
+            song_row = SongRow(song['title'], song['artist'], song['song_link'], song.get('audio_src'))
             self.history_model.insert(0, song_row)
 
     def save_window_size(self):

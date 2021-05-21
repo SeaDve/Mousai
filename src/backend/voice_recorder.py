@@ -21,6 +21,8 @@ import gi
 gi.require_version('GstPbutils', '1.0')
 from gi.repository import GLib, Gst, GstPbutils, GObject
 
+from mousai.backend.utils import Utils
+
 
 class VoiceRecorder(GObject.GObject):
     __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
@@ -54,15 +56,14 @@ class VoiceRecorder(GObject.GObject):
 
         self.src.set_property('device', self.get_default_audio_input())
         self.encodebin.set_property('profile', self.get_profile())
-        self.filesink.set_property('location', f'{self.get_tmp_dir()}/mousaitmp.ogg')
+        self.filesink.set_property('location', f'{Utils.get_tmp_dir()}/mousaitmp.ogg')
         self.level.link(self.encodebin)
         self.encodebin.link(self.filesink)
 
         self.pipeline.set_state(Gst.State.PLAYING)
 
         self.timer = Timer(self.stop)
-        # self.timer.start(5)
-        self.timer.start(1)
+        self.timer.start(5)
 
     def cancel(self):
         self.pipeline.set_state(Gst.State.NULL)
@@ -105,13 +106,6 @@ class VoiceRecorder(GObject.GObject):
             stdout=PIPE
         ).stdout.read().rstrip()
         return pactl_output
-
-    @staticmethod
-    def get_tmp_dir():
-        directory = GLib.getenv('XDG_CACHE_HOME')
-        if not directory:
-            directory = ""
-        return f"{directory}/tmp"
 
 
 class Timer:
