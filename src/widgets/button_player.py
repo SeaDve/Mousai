@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GLib, Gst, GObject, Gtk
+from gi.repository import Gst, GObject, Gtk
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/button_player.ui')

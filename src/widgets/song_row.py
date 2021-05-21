@@ -15,10 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GdkPixbuf, Gio, Gtk, Adw, GObject
+from gi.repository import GdkPixbuf, Gio, Gtk, Adw
 
 from mousai.backend.voice_recorder import VoiceRecorder
-from mousai.widgets.button_player import ButtonPlayer
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/songrow.ui')
