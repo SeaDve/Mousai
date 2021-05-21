@@ -65,4 +65,5 @@ class ButtonPlayer(Gtk.Button):
             self.playbin.set_state(Gst.State.PLAYING)
 
     def set_song_src(self, song_src):
+        self.set_sensitive(song_src)
         self.playbin.set_property('uri', song_src)
