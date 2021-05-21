@@ -30,7 +30,7 @@ from mousai.backend.audd_wrapper import Audd
 # Finalize voice recorder timer and wrapper output
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/main_window.ui')
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 

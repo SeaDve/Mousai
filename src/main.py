@@ -94,7 +94,7 @@ class Application(Gtk.Application):
 
     def show_shortcuts_window(self, action, param):
         builder = Gtk.Builder()
-        builder.add_from_resource('/io/github/seadve/Mousai/ui/shortcuts.ui')
+        builder.add_from_resource('/io/github/seadve/Mousai/ui/shortcuts_window.ui')
         window = builder.get_object('shortcuts')
         window.set_transient_for(self.get_active_window())
         window.present()

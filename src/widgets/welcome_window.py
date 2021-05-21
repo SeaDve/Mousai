@@ -18,7 +18,7 @@
 from gi.repository import Gtk, Adw
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/welcome.ui')
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/welcome_window.ui')
 class WelcomeWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'WelcomeWindow'
 

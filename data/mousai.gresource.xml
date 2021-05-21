@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai">
-    <file preprocess="xml-stripblanks">ui/window.ui</file>
-    <file preprocess="xml-stripblanks">ui/songrow.ui</file>
+    <file preprocess="xml-stripblanks">ui/main_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/song_row.ui</file>
     <file preprocess="xml-stripblanks">ui/button_player.ui</file>
-    <file preprocess="xml-stripblanks">ui/welcome.ui</file>
-    <file preprocess="xml-stripblanks">ui/shortcuts.ui</file>
+    <file preprocess="xml-stripblanks">ui/welcome_window.ui</file>
+    <file preprocess="xml-stripblanks">ui/shortcuts_window.ui</file>
     <file>ui/style.css</file>
   </gresource>
 </gresources>

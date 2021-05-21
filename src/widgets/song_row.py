@@ -18,9 +18,10 @@
 from gi.repository import GdkPixbuf, Gio, Gtk, Adw
 
 from mousai.backend.voice_recorder import VoiceRecorder
+from mousai.widgets.button_player import ButtonPlayer  # noqa: F401
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/songrow.ui')
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/song_row.ui')
 class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
 
