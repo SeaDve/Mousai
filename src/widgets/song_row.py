@@ -17,7 +17,7 @@
 
 from gi.repository import GdkPixbuf, Gio, Gtk, Adw, GObject
 
-from mousai.backend.recorder import VoiceRecorder
+from mousai.backend.voice_recorder import VoiceRecorder
 from mousai.widgets.button_player import ButtonPlayer
 
 

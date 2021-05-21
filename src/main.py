@@ -23,8 +23,8 @@ gi.require_version('Gst', '1.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gdk, Gio, GLib, Adw, Gst
 
-from mousai.widgets.window import MainWindow
-from mousai.widgets.welcome import WelcomeWindow
+from mousai.widgets.main_window import MainWindow
+from mousai.widgets.welcome_window import WelcomeWindow
 
 Gst.init(None)
 

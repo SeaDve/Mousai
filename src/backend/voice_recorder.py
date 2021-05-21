@@ -21,8 +21,6 @@ import gi
 gi.require_version('GstPbutils', '1.0')
 from gi.repository import GLib, Gst, GstPbutils, GObject, GLib
 
-from mousai.backend.utils import Utils
-
 
 class VoiceRecorder(GObject.GObject):
     __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
