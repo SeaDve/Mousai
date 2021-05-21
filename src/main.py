@@ -24,7 +24,7 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Gdk, Gio, GLib, Adw, Gst
 
 from mousai.widgets.main_window import MainWindow
-from mousai.widgets.welcome_window import WelcomeWindow
+from mousai.widgets.token_dialog import TokenDialog
 
 Gst.init(None)
 
@@ -57,16 +57,15 @@ class Application(Gtk.Application):
     def do_activate(self):
         win = self.props.active_window
         if not win:
+            win = MainWindow(self.settings, application=self)
             if not self.settings.get_string("token-value"):
-                win = WelcomeWindow(self.settings, application=self)
-            else:
-                win = MainWindow(self.settings, application=self)
+                GLib.timeout_add(5, lambda: self.show_token_window())
         win.present()
 
     def setup_actions(self):
         simple_actions = [
             ("clear-history", self.clear_song_history, ("<Ctrl>BackSpace",)),
-            ("reset-token", self.reset_token_value, ("<Ctrl>Delete",)),
+            ("show-token", self.show_token_window, ("<Ctrl>Delete",)),
             ("show-shortcuts", self.show_shortcuts_window, ("<Ctrl>question",)),
             ("show-about", self.show_about_dialog, None),
             ("quit", self.on_quit, ("<Ctrl>q",)),
@@ -79,18 +78,13 @@ class Application(Gtk.Application):
             if accel:
                 self.set_accels_for_action(f"app.{action}", accel)
 
-    def open_main_window(self):
-        self.get_active_window().close()
-        win = MainWindow(self.settings, application=self)
-        win.present()
-
     def clear_song_history(self, action, param):
         self.get_active_window().clear_memory_list()
 
-    def reset_token_value(self, action, param):
-        self.get_active_window().close()
-        win = WelcomeWindow(self.settings, application=self)
-        win.present()
+    def show_token_window(self, action=None, param=None):
+        window = TokenDialog(self.settings)
+        window.set_transient_for(self.get_active_window())
+        window.present()
 
     def show_shortcuts_window(self, action, param):
         builder = Gtk.Builder()
@@ -118,7 +112,7 @@ class Application(Gtk.Application):
         about.show()
 
     def on_quit(self, action, param):
-        self.get_active_window().on_quit(None)
+        self.get_active_window().on_quit()
         self.quit()
 
 

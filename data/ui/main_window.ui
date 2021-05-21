@@ -146,7 +146,7 @@
         <attribute name="label" translatable="yes">Clear Song History</attribute>
       </item>
       <item>
-        <attribute name="action">app.reset-token</attribute>
+        <attribute name="action">app.show-token</attribute>
         <attribute name="label" translatable="yes">Reset Token</attribute>
       </item>
     </section>

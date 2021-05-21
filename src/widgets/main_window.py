@@ -23,8 +23,6 @@ from mousai.widgets.song_row import SongRow
 from mousai.backend.voice_recorder import VoiceRecorder
 from mousai.backend.utils import Utils
 
-# Fix mem leak new win
-# Fix still playing when resetting token
 Song = namedtuple('Song', 'title artist song_link audio_src')
 
 
@@ -65,7 +63,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.return_default_page()
 
     @Gtk.Template.Callback()
-    def on_quit(self, window):
+    def on_quit(self, window=None):
         self.settings.set_value('memory-list', GLib.Variant('aa{ss}', self.memory_list))
         self.save_window_size()
 

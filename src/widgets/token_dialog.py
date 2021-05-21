@@ -18,18 +18,23 @@
 from gi.repository import Gtk, Adw
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/welcome_window.ui')
-class WelcomeWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'WelcomeWindow'
+@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/token_dialog.ui')
+class TokenDialog(Gtk.Dialog):
+    __gtype_name__ = 'TokenDialog'
 
     token_entry = Gtk.Template.Child()
 
-    def __init__(self, settings, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, settings):
+        super().__init__()
         self.settings = settings
         self.token_entry.set_text(self.settings.get_string('token-value'))
+
+        # Workaround to hide titlebar
+        placeholder = Gtk.HeaderBar()
+        placeholder.set_visible(False)
+        self.set_titlebar(placeholder)
 
     @Gtk.Template.Callback()
     def on_submit_button_clicked(self, button):
         self.settings.set_string('token-value', self.token_entry.get_text())
-        self.props.application.open_main_window()
+        self.close()
