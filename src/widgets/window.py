@@ -25,13 +25,12 @@ from mousai.backend.utils import VoiceRecorder
 # Add players for music
 # Loadable icon for AdwAvatar
 # Use try else
-# Cleaning and copy meogram's new window handling
-# Fix mem leak
+# Fix mem leak new win
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/window.ui')
-class MousaiWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'MousaiWindow'
+class MainWindow(Adw.ApplicationWindow):
+    __gtype_name__ = 'MainWindow'
 
     listen_cancel_stack = Gtk.Template.Child()
     main_stack = Gtk.Template.Child()
