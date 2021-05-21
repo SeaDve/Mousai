@@ -9,7 +9,7 @@ on:
 jobs:
   flake8:
     name: "Linter"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,15 +20,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt update -y
-          sudo apt -y install flake8
+          pip install flake8
       - name: Lint with flake8
         run: |
           flake8 --builtins=_ --ignore E402,W503 --max-complexity=10 --max-line-length=110 --show-source --statistics src/
 
   mypy:
     name: "Static Type Checker"
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
