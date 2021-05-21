@@ -53,7 +53,7 @@ class Utils:
                 .replace('tracks = ', '') \
                 .replace(';', '')
             track = json.loads(track)[0]['sample']['src']
-        except (IndexError, requests.exceptions.ConnectionError, requests.exceptions.MissingSchema):
+        except Exception:
             return ''
         else:
             return track

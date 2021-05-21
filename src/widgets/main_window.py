@@ -94,7 +94,7 @@ class MainWindow(Adw.ApplicationWindow):
         try:
             result = output['result']
             song = Song(*list(result.values())[:-1])
-        except KeyError:
+        except (AttributeError, KeyError):
             error = Gtk.MessageDialog(transient_for=self, modal=True,
                                       buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
             if status == 'error':
