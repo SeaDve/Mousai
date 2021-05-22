@@ -58,25 +58,25 @@ class Application(Gtk.Application):
         win = self.props.active_window
         if not win:
             win = MainWindow(self.settings, application=self)
-            if not self.settings.get_string("token-value"):
+            if not self.settings.get_string('token-value'):
                 GLib.timeout_add(5, lambda: self.show_token_window())
         win.present()
 
     def setup_actions(self):
         simple_actions = [
-            ("clear-history", self.clear_song_history, ("<Ctrl>BackSpace",)),
-            ("show-token", self.show_token_window, ("<Ctrl>Delete",)),
-            ("show-shortcuts", self.show_shortcuts_window, ("<Ctrl>question",)),
-            ("show-about", self.show_about_dialog, None),
-            ("quit", self.on_quit, ("<Ctrl>q",)),
+            ('clear-history', self.clear_song_history, ('<Ctrl>BackSpace',)),
+            ('show-token', self.show_token_window, ('<Ctrl>Delete',)),
+            ('show-shortcuts', self.show_shortcuts_window, ('<Ctrl>question',)),
+            ('show-about', self.show_about_dialog, None),
+            ('quit', self.on_quit, ('<Ctrl>q',)),
         ]
 
         for action, callback, accel in simple_actions:
             simple_action = Gio.SimpleAction.new(action, None)
-            simple_action.connect("activate", callback)
+            simple_action.connect('activate', callback)
             self.add_action(simple_action)
             if accel:
-                self.set_accels_for_action(f"app.{action}", accel)
+                self.set_accels_for_action(f'app.{action}', accel)
 
     def clear_song_history(self, action, param):
         self.get_active_window().clear_memory_list()

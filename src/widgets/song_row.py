@@ -28,7 +28,7 @@ class SongRow(Adw.ActionRow):
     song_icon = Gtk.Template.Child()
     button_player = Gtk.Template.Child()
 
-    def __init__(self, title, artist, song_link, song_src=""):
+    def __init__(self, title, artist, song_link, song_src=''):
         super().__init__()
 
         self.props.title = title

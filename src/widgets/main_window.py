@@ -71,16 +71,16 @@ class MainWindow(Adw.ApplicationWindow):
         peak = recorder.peak
         if -6 < peak <= 0:
             icon_name = 'microphone-sensitivity-high-symbolic'
-            title = "Listening"
+            title = _("Listening")
         elif -15 < peak <= -6:
             icon_name = 'microphone-sensitivity-medium-symbolic'
-            title = "Listening"
+            title = _("Listening")
         elif -349 < peak <= -15:
             icon_name = 'microphone-sensitivity-low-symbolic'
-            title = "Listening"
+            title = _("Listening")
         else:
             icon_name = 'microphone-sensitivity-muted-symbolic'
-            title = "Muted"
+            title = _("Muted")
 
         self.recording_box.set_icon_name(icon_name)
         self.recording_box.set_title(title)

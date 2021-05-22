@@ -1,8 +1,9 @@
 data/io.github.seadve.Mousai.desktop.in
 data/io.github.seadve.Mousai.appdata.xml.in
 data/io.github.seadve.Mousai.gschema.xml
-data/ui/shortcuts.ui
-data/ui/welcome.ui
-data/ui/window.ui
+data/ui/shortcuts_window.ui
+data/ui/token_dialog.ui
+data/ui/song_row.ui
+data/ui/main_window.ui
+src/widgets/main_window.py
 src/main.py
-src/window.py
