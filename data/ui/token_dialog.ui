@@ -30,7 +30,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkButton" id="submit_button">
+                              <object class="GtkButton">
                                 <property name="label" translatable="yes">Submit</property>
                                 <signal name="clicked" handler="on_submit_button_clicked" swapped="no"/>
                                 <style>

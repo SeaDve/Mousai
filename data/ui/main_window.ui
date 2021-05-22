@@ -75,11 +75,6 @@
                 <property name="menu-model">menu</property>
                 <property name="tooltip-text" translatable="yes">Main Menu</property>
                 <property name="icon-name">open-menu-symbolic</property>
-                <binding name="visible">
-                  <closure type="gboolean" function="get_menu_button_visibility">
-                    <lookup name="visible-child-name">main_stack</lookup>
-                  </closure>
-                </binding>
                 <!-- <accelerator key="F10" signal="activate"/> -->
               </object>
             </child>

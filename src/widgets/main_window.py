@@ -164,9 +164,5 @@ class MainWindow(Adw.ApplicationWindow):
         self.return_default_page()
 
     @Gtk.Template.Callback()
-    def get_menu_button_visibility(self, window, visible_child):
-        return visible_child in ['empty-state', 'main-screen']
-
-    @Gtk.Template.Callback()
     def get_visible_button(self, window, visible_child):
         return 'cancel' if visible_child == 'recording' else 'listen'
