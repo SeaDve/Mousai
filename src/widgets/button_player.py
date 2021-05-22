@@ -53,7 +53,7 @@ class ButtonPlayer(Gtk.Button):
             err, debug = message.parse_error()
             print("Error: %s" % err, debug)
         elif t == Gst.MessageType.EOS:
-            self._stop()
+            self.activate()
         elif t == Gst.MessageType.BUFFERING:
             percent = message.parse_buffering()
             if percent < 100:
