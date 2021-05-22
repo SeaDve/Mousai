@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:16+0800\n"
+"POT-Creation-Date: 2021-05-22 09:31+0800\n"
 "PO-Revision-Date: 2021-05-18 15:34+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -65,7 +65,7 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Identifiser tittel og artist for for en sang på sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song including the Album art in history"
+msgid "🎸 Store the identified song including the album art in history"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16

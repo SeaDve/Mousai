@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:16+0800\n"
+"POT-Creation-Date: 2021-05-22 09:31+0800\n"
 "PO-Revision-Date: 2021-05-18 15:34+0000\n"
 "Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
 "com>\n"
@@ -65,7 +65,7 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Identifique o título e o artista da música em segundos."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song including the Album art in history"
+msgid "🎸 Store the identified song including the album art in history"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
