@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 08:50+0800\n"
+"POT-Creation-Date: 2021-05-22 09:16+0800\n"
 "PO-Revision-Date: 2021-05-01 19:42+0000\n"
 "Last-Translator: TheInterestingSoul <wangpy01@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -61,122 +61,163 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 在几秒内识别歌曲与作曲家。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song with the Album art in a history."
-msgstr "🎸 将已识别的歌曲与专辑插图一起存储在历史记录中。"
+msgid "🎸 Store the identified song including the Album art in history"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
-msgid "🌐 Play the identified song in your browser."
-msgstr "🌐 在浏览器中播放识别的歌曲。"
+msgid "🎼 Preview the identified song with the native player."
+msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
+msgid "🌐 Browse the song in the web with the link."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 易于使用的用户界面。"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ 友好易记的快捷键。"
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:26
+#: data/io.github.seadve.Mousai.appdata.xml.in:27
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts.ui:12
+#: data/ui/shortcuts_window.ui:12
 msgid "General"
 msgstr "一般"
 
-#: data/ui/shortcuts.ui:17
+#: data/ui/shortcuts_window.ui:17
 msgid "Open menu"
 msgstr "打开菜单"
 
-#: data/ui/shortcuts.ui:24
+#: data/ui/shortcuts_window.ui:24
 msgid "Show keyboard shortcuts"
 msgstr "显示快捷键列表"
 
-#: data/ui/shortcuts.ui:31
+#: data/ui/shortcuts_window.ui:31
 msgid "Quit"
 msgstr "退出"
 
-#: data/ui/shortcuts.ui:39
+#: data/ui/shortcuts_window.ui:39
 msgid "Controls"
 msgstr "控制"
 
-#: data/ui/shortcuts.ui:44
+#: data/ui/shortcuts_window.ui:44
 msgid "Start listening"
 msgstr "开始听歌识曲"
 
-#: data/ui/shortcuts.ui:51
+#: data/ui/shortcuts_window.ui:51
 msgid "Cancel listening"
 msgstr "取消听歌识曲"
 
-#: data/ui/shortcuts.ui:59
+#: data/ui/shortcuts_window.ui:59
 msgid "Settings"
 msgstr "设置"
 
-#: data/ui/shortcuts.ui:64
+#: data/ui/shortcuts_window.ui:64
 msgid "Clear song history"
 msgstr "清除识别记录"
 
-#: data/ui/shortcuts.ui:71
+#: data/ui/shortcuts_window.ui:71
 msgid "Reset token value"
 msgstr "重置令牌值"
 
-#: data/ui/welcome.ui:18
+#: data/ui/token_dialog.ui:16
 msgid "Welcome to Mousai"
 msgstr "欢迎使用 Mousai"
 
-#: data/ui/welcome.ui:37
+#: data/ui/token_dialog.ui:29
 msgid "Enter a valid token"
 msgstr "输入有效的令牌值"
 
-#: data/ui/welcome.ui:43
+#: data/ui/token_dialog.ui:35
 msgid "Submit"
 msgstr "提交"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/welcome.ui:61
+#: data/ui/token_dialog.ui:49
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
 
-#: data/ui/window.ui:25
+#: data/ui/song_row.ui:13
+msgid "Open in Browser"
+msgstr ""
+
+#: data/ui/song_row.ui:21
+msgid "Play preview"
+msgstr ""
+
+#: data/ui/main_window.ui:20
 msgid "Listen"
 msgstr "侦听"
 
-#: data/ui/window.ui:38
+#: data/ui/main_window.ui:21
+msgid "Start Identifying Music"
+msgstr ""
+
+#: data/ui/main_window.ui:46
 msgid "Cancel"
 msgstr "取消"
 
+#: data/ui/main_window.ui:47
+msgid "Cancel the Recording"
+msgstr ""
+
+#: data/ui/main_window.ui:72
+msgid "Main Menu"
+msgstr ""
+
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:108
+#: data/ui/main_window.ui:120
 msgid "Start Mousaing!"
 msgstr "开始听歌识曲吧！"
 
-#: data/ui/window.ui:109
-msgid "Click the listen button to start"
-msgstr "点击该按钮以开始"
+#: data/ui/main_window.ui:121
+msgid "Click the listen button to start."
+msgstr ""
 
-#: data/ui/window.ui:116
+#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
 msgid "Muted"
 msgstr ""
 
-#: data/ui/window.ui:128
+#: data/ui/main_window.ui:146
 msgid "Clear Song History"
 msgstr "清除识别历史"
 
-#: data/ui/window.ui:132
+#: data/ui/main_window.ui:150
 msgid "Reset Token"
 msgstr "重置令牌"
 
-#: data/ui/window.ui:138
+#: data/ui/main_window.ui:156
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: data/ui/window.ui:142
+#: data/ui/main_window.ui:160
 msgid "About Mousai"
 msgstr "关于 Mousai"
+
+#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
+#: src/widgets/main_window.py:80
+msgid "Listening"
+msgstr "正在侦听"
+
+#: src/widgets/main_window.py:99
+msgid "Sorry"
+msgstr ""
+
+#: src/widgets/main_window.py:103
+msgid "The song was not recognized."
+msgstr "无识别结果。"
+
+#: src/widgets/main_window.py:105
+msgid "Something went wrong."
+msgstr "识别时出现了问题。"
 
 #: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
@@ -191,17 +232,17 @@ msgstr "有趣的灵魂 (@TheInterestingSoul)"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:79
-msgid "Sorry!"
-msgstr "抱歉！"
+#~ msgid "🎸 Store the identified song with the Album art in a history."
+#~ msgstr "🎸 将已识别的歌曲与专辑插图一起存储在历史记录中。"
 
-#: src/window.py:83
-msgid "The song was not recognized."
-msgstr "无识别结果。"
+#~ msgid "🌐 Play the identified song in your browser."
+#~ msgstr "🌐 在浏览器中播放识别的歌曲。"
 
-#: src/window.py:85
-msgid "Something went wrong."
-msgstr "识别时出现了问题。"
+#~ msgid "Click the listen button to start"
+#~ msgstr "点击该按钮以开始"
+
+#~ msgid "Sorry!"
+#~ msgstr "抱歉！"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""
@@ -212,9 +253,6 @@ msgstr "识别时出现了问题。"
 #~ "Mousai 使用 audd.io 的 API 以实现其功能， 因此您需要 <a href=\"https://"
 #~ "dashboard.audd.io/\">登录该网站</a>并获取一个令牌值。不填写此项将只能使用"
 #~ "免费额度（一天几次）。"
-
-#~ msgid "Listening"
-#~ msgstr "正在侦听"
 
 #~ msgid "Simple song identifier"
 #~ msgstr "听歌识曲软件"

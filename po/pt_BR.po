@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 08:50+0800\n"
+"POT-Creation-Date: 2021-05-22 09:16+0800\n"
 "PO-Revision-Date: 2021-05-18 15:34+0000\n"
-"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>"
-"\n"
+"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
+"com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -65,80 +65,84 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Identifique o título e o artista da música em segundos."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song with the Album art in a history."
-msgstr "🎸 Armazene a música identificada com a capa do Álbum em um histórico."
+msgid "🎸 Store the identified song including the Album art in history"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
-msgid "🌐 Play the identified song in your browser."
-msgstr "🌐 Reproduza a música identificada em seu navegador."
+msgid "🎼 Preview the identified song with the native player."
+msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
+msgid "🌐 Browse the song in the web with the link."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Interface de usuário fácil de usar."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Atalhos de teclado fáceis de usar."
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:26
+#: data/io.github.seadve.Mousai.appdata.xml.in:27
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts.ui:12
+#: data/ui/shortcuts_window.ui:12
 msgid "General"
 msgstr "Geral"
 
-#: data/ui/shortcuts.ui:17
+#: data/ui/shortcuts_window.ui:17
 msgid "Open menu"
 msgstr "Abrir o menu"
 
-#: data/ui/shortcuts.ui:24
+#: data/ui/shortcuts_window.ui:24
 msgid "Show keyboard shortcuts"
 msgstr "Mostrar atalhos de teclado"
 
-#: data/ui/shortcuts.ui:31
+#: data/ui/shortcuts_window.ui:31
 msgid "Quit"
 msgstr "Sair"
 
-#: data/ui/shortcuts.ui:39
+#: data/ui/shortcuts_window.ui:39
 msgid "Controls"
 msgstr "Controles"
 
-#: data/ui/shortcuts.ui:44
+#: data/ui/shortcuts_window.ui:44
 msgid "Start listening"
 msgstr "Começar a escutar"
 
-#: data/ui/shortcuts.ui:51
+#: data/ui/shortcuts_window.ui:51
 msgid "Cancel listening"
 msgstr "Parar de escutar"
 
-#: data/ui/shortcuts.ui:59
+#: data/ui/shortcuts_window.ui:59
 msgid "Settings"
 msgstr "Configurações"
 
-#: data/ui/shortcuts.ui:64
+#: data/ui/shortcuts_window.ui:64
 msgid "Clear song history"
 msgstr "Limpar histórico de música"
 
-#: data/ui/shortcuts.ui:71
+#: data/ui/shortcuts_window.ui:71
 msgid "Reset token value"
 msgstr "Redefinir o valor do token"
 
-#: data/ui/welcome.ui:18
+#: data/ui/token_dialog.ui:16
 msgid "Welcome to Mousai"
 msgstr "Bem-vindo ao Mousai"
 
-#: data/ui/welcome.ui:37
+#: data/ui/token_dialog.ui:29
 msgid "Enter a valid token"
 msgstr "Entre com um token válido"
 
-#: data/ui/welcome.ui:43
+#: data/ui/token_dialog.ui:35
 msgid "Submit"
 msgstr "Enviar"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/welcome.ui:61
+#: data/ui/token_dialog.ui:49
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
@@ -148,42 +152,79 @@ msgstr ""
 "no <a href=\"https://dashboard.audd.io/\"> site </a> e obter um token. "
 "Deixar este campo em branco resultará em algumas tentativas por dia."
 
-#: data/ui/window.ui:25
+#: data/ui/song_row.ui:13
+msgid "Open in Browser"
+msgstr ""
+
+#: data/ui/song_row.ui:21
+msgid "Play preview"
+msgstr ""
+
+#: data/ui/main_window.ui:20
 msgid "Listen"
 msgstr "Escutar"
 
-#: data/ui/window.ui:38
+#: data/ui/main_window.ui:21
+msgid "Start Identifying Music"
+msgstr ""
+
+#: data/ui/main_window.ui:46
 msgid "Cancel"
 msgstr "Cancelar"
 
+#: data/ui/main_window.ui:47
+msgid "Cancel the Recording"
+msgstr ""
+
+#: data/ui/main_window.ui:72
+msgid "Main Menu"
+msgstr ""
+
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:108
+#: data/ui/main_window.ui:120
 msgid "Start Mousaing!"
 msgstr "Comece a Mousaiar!"
 
-#: data/ui/window.ui:109
-msgid "Click the listen button to start"
-msgstr "Clique no botão escutar para iniciar"
+#: data/ui/main_window.ui:121
+msgid "Click the listen button to start."
+msgstr ""
 
-#: data/ui/window.ui:116
+#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
 msgid "Muted"
 msgstr "Mudo"
 
-#: data/ui/window.ui:128
+#: data/ui/main_window.ui:146
 msgid "Clear Song History"
 msgstr "Limpar histórico de músicas"
 
-#: data/ui/window.ui:132
+#: data/ui/main_window.ui:150
 msgid "Reset Token"
 msgstr "Reiniciar token"
 
-#: data/ui/window.ui:138
+#: data/ui/main_window.ui:156
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: data/ui/window.ui:142
+#: data/ui/main_window.ui:160
 msgid "About Mousai"
 msgstr "Sobre o Mousai"
+
+#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
+#: src/widgets/main_window.py:80
+msgid "Listening"
+msgstr "Escutando"
+
+#: src/widgets/main_window.py:99
+msgid "Sorry"
+msgstr ""
+
+#: src/widgets/main_window.py:103
+msgid "The song was not recognized."
+msgstr "A música não foi reconhecida."
+
+#: src/widgets/main_window.py:105
+msgid "Something went wrong."
+msgstr "Algo deu errado."
 
 #: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
@@ -198,17 +239,18 @@ msgstr "Vitor Cardoso"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:79
-msgid "Sorry!"
-msgstr "Desculpa!"
+#~ msgid "🎸 Store the identified song with the Album art in a history."
+#~ msgstr ""
+#~ "🎸 Armazene a música identificada com a capa do Álbum em um histórico."
 
-#: src/window.py:83
-msgid "The song was not recognized."
-msgstr "A música não foi reconhecida."
+#~ msgid "🌐 Play the identified song in your browser."
+#~ msgstr "🌐 Reproduza a música identificada em seu navegador."
 
-#: src/window.py:85
-msgid "Something went wrong."
-msgstr "Algo deu errado."
+#~ msgid "Click the listen button to start"
+#~ msgstr "Clique no botão escutar para iniciar"
+
+#~ msgid "Sorry!"
+#~ msgstr "Desculpa!"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""
@@ -220,9 +262,6 @@ msgstr "Algo deu errado."
 #~ "login no <a href=\"https://dashboard.audd.io/\">site deles </a> e obter "
 #~ "um token. Deixar este campo em branco resultará em algumas tentativas por "
 #~ "dia."
-
-#~ msgid "Listening"
-#~ msgstr "Escutando"
 
 #~ msgid "Simple song identifier"
 #~ msgstr "Simples identificador de música"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 08:50+0800\n"
+"POT-Creation-Date: 2021-05-22 09:16+0800\n"
 "PO-Revision-Date: 2021-04-26 05:32+0000\n"
 "Last-Translator: MartinIIOT <max_m@centrum.sk>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/kooha/mousai/sk/"
@@ -58,121 +58,162 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song with the Album art in a history."
+msgid "🎸 Store the identified song including the Album art in history"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
-msgid "🌐 Play the identified song in your browser."
+msgid "🎼 Preview the identified song with the native player."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
-msgid "📱 Easy-to-use user interface."
+msgid "🌐 Browse the song in the web with the link."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
+msgid "📱 Easy-to-use user interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr ""
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:26
+#: data/io.github.seadve.Mousai.appdata.xml.in:27
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts.ui:12
+#: data/ui/shortcuts_window.ui:12
 msgid "General"
 msgstr "Všeobecné"
 
-#: data/ui/shortcuts.ui:17
+#: data/ui/shortcuts_window.ui:17
 msgid "Open menu"
 msgstr "Otvoriť menu"
 
-#: data/ui/shortcuts.ui:24
+#: data/ui/shortcuts_window.ui:24
 msgid "Show keyboard shortcuts"
 msgstr "Zobraziť klávesové skratky"
 
-#: data/ui/shortcuts.ui:31
+#: data/ui/shortcuts_window.ui:31
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: data/ui/shortcuts.ui:39
+#: data/ui/shortcuts_window.ui:39
 msgid "Controls"
 msgstr ""
 
-#: data/ui/shortcuts.ui:44
+#: data/ui/shortcuts_window.ui:44
 msgid "Start listening"
 msgstr ""
 
-#: data/ui/shortcuts.ui:51
+#: data/ui/shortcuts_window.ui:51
 msgid "Cancel listening"
 msgstr ""
 
-#: data/ui/shortcuts.ui:59
+#: data/ui/shortcuts_window.ui:59
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: data/ui/shortcuts.ui:64
+#: data/ui/shortcuts_window.ui:64
 msgid "Clear song history"
 msgstr ""
 
-#: data/ui/shortcuts.ui:71
+#: data/ui/shortcuts_window.ui:71
 msgid "Reset token value"
 msgstr ""
 
-#: data/ui/welcome.ui:18
+#: data/ui/token_dialog.ui:16
 msgid "Welcome to Mousai"
 msgstr ""
 
-#: data/ui/welcome.ui:37
+#: data/ui/token_dialog.ui:29
 msgid "Enter a valid token"
 msgstr ""
 
-#: data/ui/welcome.ui:43
+#: data/ui/token_dialog.ui:35
 msgid "Submit"
 msgstr ""
 
 #. Do not translate the link, only 'their website'
-#: data/ui/welcome.ui:61
+#: data/ui/token_dialog.ui:49
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
 
-#: data/ui/window.ui:25
+#: data/ui/song_row.ui:13
+msgid "Open in Browser"
+msgstr ""
+
+#: data/ui/song_row.ui:21
+msgid "Play preview"
+msgstr ""
+
+#: data/ui/main_window.ui:20
 msgid "Listen"
 msgstr ""
 
-#: data/ui/window.ui:38
+#: data/ui/main_window.ui:21
+msgid "Start Identifying Music"
+msgstr ""
+
+#: data/ui/main_window.ui:46
 msgid "Cancel"
 msgstr "Zrušiť"
 
+#: data/ui/main_window.ui:47
+msgid "Cancel the Recording"
+msgstr ""
+
+#: data/ui/main_window.ui:72
+msgid "Main Menu"
+msgstr ""
+
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:108
+#: data/ui/main_window.ui:120
 msgid "Start Mousaing!"
 msgstr ""
 
-#: data/ui/window.ui:109
-msgid "Click the listen button to start"
+#: data/ui/main_window.ui:121
+msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/window.ui:116
+#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
 msgid "Muted"
 msgstr ""
 
-#: data/ui/window.ui:128
+#: data/ui/main_window.ui:146
 msgid "Clear Song History"
 msgstr ""
 
-#: data/ui/window.ui:132
+#: data/ui/main_window.ui:150
 msgid "Reset Token"
 msgstr ""
 
-#: data/ui/window.ui:138
+#: data/ui/main_window.ui:156
 msgid "Keyboard Shortcuts"
 msgstr "Klávesové skratky"
 
-#: data/ui/window.ui:142
+#: data/ui/main_window.ui:160
 msgid "About Mousai"
+msgstr ""
+
+#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
+#: src/widgets/main_window.py:80
+msgid "Listening"
+msgstr ""
+
+#: src/widgets/main_window.py:99
+msgid "Sorry"
+msgstr ""
+
+#: src/widgets/main_window.py:103
+msgid "The song was not recognized."
+msgstr ""
+
+#: src/widgets/main_window.py:105
+msgid "Something went wrong."
 msgstr ""
 
 #: src/main.py:107
@@ -187,15 +228,3 @@ msgstr "MartinIIOT (https://github.com/MartinIIOT)"
 #: src/main.py:110
 msgid "GitHub"
 msgstr "GitHub"
-
-#: src/window.py:79
-msgid "Sorry!"
-msgstr ""
-
-#: src/window.py:83
-msgid "The song was not recognized."
-msgstr ""
-
-#: src/window.py:85
-msgid "Something went wrong."
-msgstr ""

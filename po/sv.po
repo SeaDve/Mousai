@@ -2,15 +2,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Luna Jernberg <droidbittin@gmail.com>, 2021.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 08:50+0800\n"
-"PO-Revision-Date: 2021-05-21 20:37+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
-"\n"
+"POT-Creation-Date: 2021-05-22 09:16+0800\n"
+"PO-Revision-Date: 2021-05-22 01:17+0000\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,122 +59,163 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Identifiera låtens titel och artist inom några sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song with the Album art in a history."
+msgid "🎸 Store the identified song including the Album art in history"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
-msgid "🌐 Play the identified song in your browser."
-msgstr "🌐 Spela den identifierade låten i din webbläsare."
+msgid "🎼 Preview the identified song with the native player."
+msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
+msgid "🌐 Browse the song in the web with the link."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Lättanvänt användargränssnitt."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Användarvänliga kortkommandon."
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:26
+#: data/io.github.seadve.Mousai.appdata.xml.in:27
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts.ui:12
+#: data/ui/shortcuts_window.ui:12
 msgid "General"
 msgstr "Allmänt"
 
-#: data/ui/shortcuts.ui:17
+#: data/ui/shortcuts_window.ui:17
 msgid "Open menu"
 msgstr "Öppna menyn"
 
-#: data/ui/shortcuts.ui:24
+#: data/ui/shortcuts_window.ui:24
 msgid "Show keyboard shortcuts"
 msgstr "Visa tangentbordsgenvägar"
 
-#: data/ui/shortcuts.ui:31
+#: data/ui/shortcuts_window.ui:31
 msgid "Quit"
 msgstr "Avsluta"
 
-#: data/ui/shortcuts.ui:39
+#: data/ui/shortcuts_window.ui:39
 msgid "Controls"
 msgstr "Kontroller"
 
-#: data/ui/shortcuts.ui:44
+#: data/ui/shortcuts_window.ui:44
 msgid "Start listening"
 msgstr "Börja lyssna"
 
-#: data/ui/shortcuts.ui:51
+#: data/ui/shortcuts_window.ui:51
 msgid "Cancel listening"
 msgstr "Sluta lyssna"
 
-#: data/ui/shortcuts.ui:59
+#: data/ui/shortcuts_window.ui:59
 msgid "Settings"
 msgstr "Inställningar"
 
-#: data/ui/shortcuts.ui:64
+#: data/ui/shortcuts_window.ui:64
 msgid "Clear song history"
 msgstr "Rensa låthistorik"
 
-#: data/ui/shortcuts.ui:71
+#: data/ui/shortcuts_window.ui:71
 msgid "Reset token value"
 msgstr "Återställ tokenvärde"
 
-#: data/ui/welcome.ui:18
+#: data/ui/token_dialog.ui:16
 msgid "Welcome to Mousai"
 msgstr "Välkommen till Mousai"
 
-#: data/ui/welcome.ui:37
+#: data/ui/token_dialog.ui:29
 msgid "Enter a valid token"
 msgstr "Ange en giltig token"
 
-#: data/ui/welcome.ui:43
+#: data/ui/token_dialog.ui:35
 msgid "Submit"
 msgstr "Skicka"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/welcome.ui:61
+#: data/ui/token_dialog.ui:49
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
 
-#: data/ui/window.ui:25
+#: data/ui/song_row.ui:13
+msgid "Open in Browser"
+msgstr ""
+
+#: data/ui/song_row.ui:21
+msgid "Play preview"
+msgstr ""
+
+#: data/ui/main_window.ui:20
 msgid "Listen"
 msgstr "Lyssna"
 
-#: data/ui/window.ui:38
+#: data/ui/main_window.ui:21
+msgid "Start Identifying Music"
+msgstr ""
+
+#: data/ui/main_window.ui:46
 msgid "Cancel"
 msgstr "Avbryt"
 
+#: data/ui/main_window.ui:47
+msgid "Cancel the Recording"
+msgstr ""
+
+#: data/ui/main_window.ui:72
+msgid "Main Menu"
+msgstr ""
+
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/window.ui:108
+#: data/ui/main_window.ui:120
 msgid "Start Mousaing!"
 msgstr "Börja Mousaing!"
 
-#: data/ui/window.ui:109
-msgid "Click the listen button to start"
-msgstr "Klicka på lyssna knappen för att starta"
+#: data/ui/main_window.ui:121
+msgid "Click the listen button to start."
+msgstr ""
 
-#: data/ui/window.ui:116
+#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
 msgid "Muted"
 msgstr "Tystad"
 
-#: data/ui/window.ui:128
+#: data/ui/main_window.ui:146
 msgid "Clear Song History"
 msgstr "Rensa låthistorik"
 
-#: data/ui/window.ui:132
+#: data/ui/main_window.ui:150
 msgid "Reset Token"
 msgstr "Återställ Token"
 
-#: data/ui/window.ui:138
+#: data/ui/main_window.ui:156
 msgid "Keyboard Shortcuts"
 msgstr "Tangenbordsgenvägar"
 
-#: data/ui/window.ui:142
+#: data/ui/main_window.ui:160
 msgid "About Mousai"
 msgstr "Om Mousai"
+
+#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
+#: src/widgets/main_window.py:80
+msgid "Listening"
+msgstr ""
+
+#: src/widgets/main_window.py:99
+msgid "Sorry"
+msgstr ""
+
+#: src/widgets/main_window.py:103
+msgid "The song was not recognized."
+msgstr "Låten kändes inte igen."
+
+#: src/widgets/main_window.py:105
+msgid "Something went wrong."
+msgstr "Något gick fel."
 
 #: src/main.py:107
 msgid "Copyright 2021 Dave Patrick"
@@ -182,25 +224,20 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:109
 msgid "translator-credits"
-msgstr ""
-"Åke Engelbrektson &lt;eson@svenskasprakfiler.se&gt;\n"
-"Luna Jernberg &lt;droidbittin@gmail.com&gt;"
+msgstr "Åke Engelbrektson &lt;eson@svenskasprakfiler.se&gt;"
 
 #: src/main.py:110
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/window.py:79
-msgid "Sorry!"
-msgstr "Förlåt!"
+#~ msgid "🌐 Play the identified song in your browser."
+#~ msgstr "🌐 Spela den identifierade låten i din webbläsare."
 
-#: src/window.py:83
-msgid "The song was not recognized."
-msgstr "Låten kändes inte igen."
+#~ msgid "Click the listen button to start"
+#~ msgstr "Klicka på lyssna knappen för att starta"
 
-#: src/window.py:85
-msgid "Something went wrong."
-msgstr "Något gick fel."
+#~ msgid "Sorry!"
+#~ msgstr "Förlåt!"
 
 #~ msgid "Recording"
 #~ msgstr "Spelar in"
