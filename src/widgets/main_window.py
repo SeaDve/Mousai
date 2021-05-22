@@ -47,25 +47,51 @@ class MainWindow(Adw.ApplicationWindow):
         self.voice_recorder.connect('record-done', self.on_record_done)
         self.voice_recorder.connect('notify::peak', self.on_peak_changed)
 
+        self.setup_actions()
         self.return_default_page()
         self.load_window_size()
         self.load_memory_list()
 
-    @Gtk.Template.Callback()
-    def on_start_button_clicked(self, button):
-        self.voice_recorder.start()
-        self.main_stack.set_visible_child_name('recording')
-        self.listen_cancel_stack.set_visible_child_name('cancel')
+    def setup_actions(self):
+        action = Gio.SimpleAction.new('clear-history', None)
+        action.connect('activate', lambda *_: self.clear_memory_list())
+        self.add_action(action)
 
-    @Gtk.Template.Callback()
-    def on_cancel_button_clicked(self, button):
-        self.voice_recorder.cancel()
-        self.return_default_page()
+        action = Gio.SimpleAction.new('quit', None)
+        action.connect('activate', lambda *_: self.close())
+        self.add_action(action)
 
-    @Gtk.Template.Callback()
-    def on_quit(self, window=None):
-        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', self.memory_list))
-        self.save_window_size()
+    def new_song_row(self, song):
+        song_row = SongRow(*song)
+        self.history_model.insert(0, song_row)
+
+    def return_default_page(self):
+        if self.memory_list:
+            self.main_stack.set_visible_child_name('main-screen')
+        else:
+            self.main_stack.set_visible_child_name('empty-state')
+        self.listen_cancel_stack.set_visible_child_name('listen')
+
+    def load_memory_list(self):
+        for song in self.memory_list:
+            self.new_song_row(song.values())
+
+    def clear_memory_list(self):
+        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', []))
+        self.memory_list = []
+        self.history_model.remove_all()
+        self.main_stack.set_visible_child_name('empty-state')
+
+    def save_window_size(self):
+        size = (
+            self.get_size(Gtk.Orientation.HORIZONTAL),
+            self.get_size(Gtk.Orientation.VERTICAL)
+        )
+        self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
+
+    def load_window_size(self):
+        size = self.settings.get_value('window-size')
+        self.set_default_size(*size)
 
     def on_peak_changed(self, recorder, peak):
         peak = recorder.peak
@@ -124,34 +150,18 @@ class MainWindow(Adw.ApplicationWindow):
             self.memory_list.pop(song_link_index)
             self.load_memory_list()
 
-    def new_song_row(self, song):
-        song_row = SongRow(*song)
-        self.history_model.insert(0, song_row)
+    @Gtk.Template.Callback()
+    def on_quit(self, window):
+        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', self.memory_list))
+        self.save_window_size()
 
-    def return_default_page(self):
-        if self.memory_list:
-            self.main_stack.set_visible_child_name('main-screen')
-        else:
-            self.main_stack.set_visible_child_name('empty-state')
-        self.listen_cancel_stack.set_visible_child_name('listen')
+    @Gtk.Template.Callback()
+    def on_start_button_clicked(self, button):
+        self.voice_recorder.start()
+        self.main_stack.set_visible_child_name('recording')
+        self.listen_cancel_stack.set_visible_child_name('cancel')
 
-    def load_memory_list(self):
-        for song in self.memory_list:
-            self.new_song_row(song.values())
-
-    def clear_memory_list(self):
-        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', []))
-        self.memory_list = []
-        self.history_model.remove_all()
-        self.main_stack.set_visible_child_name('empty-state')
-
-    def save_window_size(self):
-        size = (
-            self.get_size(Gtk.Orientation.HORIZONTAL),
-            self.get_size(Gtk.Orientation.VERTICAL)
-        )
-        self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
-
-    def load_window_size(self):
-        size = self.settings.get_value('window-size')
-        self.set_default_size(*size)
+    @Gtk.Template.Callback()
+    def on_cancel_button_clicked(self, button):
+        self.voice_recorder.cancel()
+        self.return_default_page()

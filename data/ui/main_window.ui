@@ -142,7 +142,7 @@
   <menu id="menu">
     <section>
       <item>
-        <attribute name="action">app.clear-history</attribute>
+        <attribute name="action">win.clear-history</attribute>
         <attribute name="label" translatable="yes">Clear Song History</attribute>
       </item>
       <item>
