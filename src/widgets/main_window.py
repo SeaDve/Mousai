@@ -107,7 +107,7 @@ class MainWindow(Adw.ApplicationWindow):
             error.connect('response', lambda *_: error.close())
         else:
             if image_src := result['image_src']:
-                icon_dir = f'{Utils.get_tmp_dir()}/{song[0]}{song[1]}.jpg'
+                icon_dir = f'{Utils.get_tmp_dir()}/{song.title}{song.artist}.jpg'
                 Utils.download_image(image_src, icon_dir)
 
             self.remove_duplicates(song.song_link)
