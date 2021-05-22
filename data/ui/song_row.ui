@@ -7,11 +7,13 @@
     <child>
       <object class="GtkBox">
         <property name="valign">center</property>
-        <property name="spacing">6</property>
+        <style>
+          <class name="linked"/>
+        </style>
         <child>
           <object class="GtkButton" id="open_link_button">
             <property name="tooltip-text" translatable="yes">Open in Browser</property>
-            <property name="icon-name">insert-link-symbolic</property>
+            <property name="icon-name">external-link-symbolic</property>
             <signal name="clicked" handler="on_open_link_button_clicked" swapped="no"/>
           </object>
         </child>
