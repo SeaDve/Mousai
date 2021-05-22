@@ -20,7 +20,7 @@
             <property name="action-name">but.play</property>
             <property name="tooltip-text" translatable="yes">Play preview</property>
             <binding name="icon-name">
-              <closure type="gchararray" function="get_icon">
+              <closure type="gchararray" function="get_playback_icon">
                 <lookup name="is-stopped">button_player</lookup>
               </closure>
             </binding>

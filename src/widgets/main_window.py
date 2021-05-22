@@ -117,7 +117,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.return_default_page()
 
     def remove_duplicates(self, song_id):
-        song_link_list = [item['song_link'] for item in self.memory_list]
+        song_link_list = [song['song_link'] for song in self.memory_list]
         if song_id in song_link_list:
             self.history_model.remove_all()
             song_link_index = song_link_list.index(song_id)

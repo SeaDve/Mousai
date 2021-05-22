@@ -52,5 +52,5 @@ class SongRow(Adw.ActionRow):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
 
     @Gtk.Template.Callback()
-    def get_icon(self, self_, is_stopped):
+    def get_playback_icon(self, self_, is_stopped):
         return 'media-playback-stop-symbolic' if is_stopped else 'media-playback-start-symbolic'
