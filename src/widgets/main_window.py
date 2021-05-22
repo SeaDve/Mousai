@@ -30,7 +30,6 @@ Song = namedtuple('Song', 'title artist song_link audio_src')
 class MainWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'MainWindow'
 
-    listen_cancel_stack = Gtk.Template.Child()
     main_stack = Gtk.Template.Child()
     recording_box = Gtk.Template.Child()
     history_listbox = Gtk.Template.Child()
@@ -70,7 +69,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.main_stack.set_visible_child_name('main-screen')
         else:
             self.main_stack.set_visible_child_name('empty-state')
-        self.listen_cancel_stack.set_visible_child_name('listen')
 
     def load_memory_list(self):
         for song in self.memory_list:
@@ -159,9 +157,16 @@ class MainWindow(Adw.ApplicationWindow):
     def on_start_button_clicked(self, button):
         self.voice_recorder.start()
         self.main_stack.set_visible_child_name('recording')
-        self.listen_cancel_stack.set_visible_child_name('cancel')
 
     @Gtk.Template.Callback()
     def on_cancel_button_clicked(self, button):
         self.voice_recorder.cancel()
         self.return_default_page()
+
+    @Gtk.Template.Callback()
+    def get_menu_button_visibility(self, window, visible_child):
+        return visible_child in ['empty-state', 'main-screen']
+
+    @Gtk.Template.Callback()
+    def get_visible_button(self, window, visible_child):
+        return 'listen' if visible_child in ['empty-state', 'main-screen'] else 'cancel'
