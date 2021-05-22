@@ -169,4 +169,4 @@ class MainWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def get_visible_button(self, window, visible_child):
-        return 'listen' if visible_child in ['empty-state', 'main-screen'] else 'cancel'
+        return 'cancel' if visible_child == 'recording' else 'listen'
