@@ -36,7 +36,7 @@ Note: This uses the API of audd.io, so it is necessary to login to their site to
 
 Why you will love Mousai?
 * 🎵 Identify the title and artist of the song within seconds.
-* 🎸 Store the identified song including the Album art in history.
+* 🎸 Store the identified song including the album art in history.
 * 🎼 Preview the identified song with the native player.
 * 🌐 Browse the song in the web with the link.
 * 📱 Easy-to-use user interface.
