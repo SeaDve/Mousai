@@ -42,6 +42,27 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.0" date="2021-05-22">
+      <description>
+        <p>A release containing exciting new features and fixes!</p>
+        <ul>
+          <li>New built-in player for the identified music</li>
+          <li>Much improved UI, especially with GTK4</li>
+          <li>Much improved recorder efficiency</li>
+          <li>It now saves the window size</li>
+          <li>Several minor bug fixes</li>
+          <li>Updated Dutch translations</li>
+          <li>Updated German translations</li>
+          <li>Updated Spanish translations</li>
+          <li>Updated Italian translations</li>
+          <li>Updated Filipino translations</li>
+          <li>Updated Turkish translations</li>
+          <li>Updated French translations</li>
+          <li>Updated Norwegian Bokmål translations</li>
+          <li>Updated Portuguese (Brazil) translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.2" date="2021-05-05">
       <description>
         <p>Not a big release, but it has some notable changes:</p>
