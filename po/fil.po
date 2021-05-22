@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-22 09:35+0800\n"
-"PO-Revision-Date: 2021-05-22 01:39+0000\n"
+"PO-Revision-Date: 2021-05-22 01:44+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -65,7 +65,7 @@ msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 I-store ang na-identify na kanta kasama ang album art."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
