@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:31+0800\n"
-"PO-Revision-Date: 2021-05-13 12:47+0000\n"
+"POT-Creation-Date: 2021-05-22 09:35+0800\n"
+"PO-Revision-Date: 2021-05-22 01:39+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -64,16 +64,16 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song including the album art in history"
+msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 I-preview ang kanta gamit ang built-in na player."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 I-browse ang kanta sa internet gamit ang link."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
@@ -154,11 +154,11 @@ msgstr ""
 
 #: data/ui/song_row.ui:13
 msgid "Open in Browser"
-msgstr ""
+msgstr "Buksan sa Browser"
 
 #: data/ui/song_row.ui:21
 msgid "Play preview"
-msgstr ""
+msgstr "I-play ang preview"
 
 #: data/ui/main_window.ui:20
 msgid "Listen"
@@ -166,7 +166,7 @@ msgstr "Makinig"
 
 #: data/ui/main_window.ui:21
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Magsimula"
 
 #: data/ui/main_window.ui:46
 msgid "Cancel"
@@ -174,11 +174,11 @@ msgstr "Ikansela"
 
 #: data/ui/main_window.ui:47
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "I-kansela ang pag-record"
 
 #: data/ui/main_window.ui:72
 msgid "Main Menu"
-msgstr ""
+msgstr "Pangunahing Menu"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:120
@@ -187,7 +187,7 @@ msgstr "Magsimulang magmousai!"
 
 #: data/ui/main_window.ui:121
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Pindutin ang listen button upang magsimula."
 
 #: data/ui/main_window.ui:132 src/widgets/main_window.py:83
 msgid "Muted"
@@ -216,7 +216,7 @@ msgstr "Nakikinig"
 
 #: src/widgets/main_window.py:99
 msgid "Sorry"
-msgstr ""
+msgstr "Paumanhin"
 
 #: src/widgets/main_window.py:103
 msgid "The song was not recognized."
@@ -238,6 +238,9 @@ msgstr "Dave Patrick"
 #: src/main.py:110
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "🎸 Store the identified song including the album art in history"
+#~ msgstr "🎸 I-store and na-identify na kanta kasama ang album art"
 
 #~ msgid "🎸 Store the identified song with the Album art in a history."
 #~ msgstr "🎸 Ilagay sa isang history and nadiskubreng kanta."

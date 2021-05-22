@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:31+0800\n"
+"POT-Creation-Date: 2021-05-22 09:35+0800\n"
 "PO-Revision-Date: 2021-05-08 17:32+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
@@ -63,7 +63,7 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Şarkının adını ve sanatçısını saniyeler içinde tanımlayın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song including the album art in history"
+msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16

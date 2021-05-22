@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:31+0800\n"
+"POT-Creation-Date: 2021-05-22 09:35+0800\n"
 "PO-Revision-Date: 2021-05-16 01:37+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
@@ -66,7 +66,7 @@ msgstr ""
 "🎵 Identifica el título y el artista de la canción en cuestión de segundos."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song including the album art in history"
+msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
