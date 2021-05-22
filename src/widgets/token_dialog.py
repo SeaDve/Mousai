@@ -23,6 +23,7 @@ class TokenDialog(Gtk.Dialog):
     __gtype_name__ = 'TokenDialog'
 
     token_entry = Gtk.Template.Child()
+    submit_button = Gtk.Template.Child()
 
     def __init__(self, settings):
         super().__init__()
@@ -35,6 +36,15 @@ class TokenDialog(Gtk.Dialog):
         self.set_titlebar(placeholder)
 
     @Gtk.Template.Callback()
-    def on_submit_button_clicked(self, button):
-        self.settings.set_string('token-value', self.token_entry.get_text())
-        self.close()
+    def on_submit_button_clicked(self, _):
+        if self.submit_button.get_sensitive():
+            self.settings.set_string('token-value', self.token_entry.get_text())
+            self.close()
+
+    @Gtk.Template.Callback()
+    def on_text_changed(self, entry):
+        if clickable := entry.get_text_length() in (0, 32):
+            entry.remove_css_class('error')
+        else:
+            entry.add_css_class('error')
+        self.submit_button.set_sensitive(clickable)

@@ -11,7 +11,7 @@
           <class name="linked"/>
         </style>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="open_link_button">
             <property name="tooltip-text" translatable="yes">Open in Browser</property>
             <property name="icon-name">external-link-symbolic</property>
             <signal name="clicked" handler="on_open_link_button_clicked" swapped="no"/>
