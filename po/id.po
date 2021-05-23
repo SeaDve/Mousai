@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:35+0800\n"
-"PO-Revision-Date: 2021-05-18 15:34+0000\n"
+"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"PO-Revision-Date: 2021-05-23 02:24+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
 msgid "Identify any songs in seconds"
 msgstr "Kenali lagu apa saja dalam hitungan detik"
 
@@ -130,11 +130,11 @@ msgstr "Hapus riwayat lagu"
 msgid "Reset token value"
 msgstr "Setel ulang nilai token"
 
-#: data/ui/token_dialog.ui:16
+#: data/ui/token_dialog.ui:15
 msgid "Welcome to Mousai"
 msgstr "Selamat datang di Mousai"
 
-#: data/ui/token_dialog.ui:29
+#: data/ui/token_dialog.ui:28
 msgid "Enter a valid token"
 msgstr "Masukkan token yang valid"
 
@@ -153,91 +153,91 @@ msgstr ""
 "href=\"https://dashboard.audd.io/\">situs mereka</a>untuk mendapatkan token. "
 "Jika dibiarkan kosong anda akan diberi masa ujicoba per hari."
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:15
 msgid "Open in Browser"
-msgstr ""
+msgstr "Buka di Browser"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:23
 msgid "Play preview"
-msgstr ""
+msgstr "Putar tinjauan"
 
-#: data/ui/main_window.ui:20
+#: data/ui/main_window.ui:24
 msgid "Listen"
 msgstr "Dengarkan"
 
-#: data/ui/main_window.ui:21
+#: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Mulai Mengidentifikasi Musik"
 
-#: data/ui/main_window.ui:46
+#: data/ui/main_window.ui:50
 msgid "Cancel"
 msgstr "Batal"
 
-#: data/ui/main_window.ui:47
+#: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Batal Perekaman"
 
-#: data/ui/main_window.ui:72
+#: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu Utama"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:120
+#: data/ui/main_window.ui:123
 msgid "Start Mousaing!"
 msgstr "Mulai Mousaing!"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Klik tombol dengarkan untuk memulai."
 
-#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
 msgid "Muted"
 msgstr "Disenyapkan"
 
-#: data/ui/main_window.ui:146
+#: data/ui/main_window.ui:149
 msgid "Clear Song History"
 msgstr "Hapus Riwayat Lagu"
 
-#: data/ui/main_window.ui:150
+#: data/ui/main_window.ui:153
 msgid "Reset Token"
 msgstr "Setel Ulang Token"
 
-#: data/ui/main_window.ui:156
+#: data/ui/main_window.ui:159
 msgid "Keyboard Shortcuts"
 msgstr "Pintasan Keyboard"
 
-#: data/ui/main_window.ui:160
+#: data/ui/main_window.ui:163
 msgid "About Mousai"
 msgstr "Tentang Mousai"
 
-#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
-#: src/widgets/main_window.py:80
+#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
+#: src/widgets/main_window.py:113
 msgid "Listening"
 msgstr "Mendengarkan"
 
-#: src/widgets/main_window.py:99
+#: src/widgets/main_window.py:132
 msgid "Sorry"
-msgstr ""
+msgstr "Maaf"
 
-#: src/widgets/main_window.py:103
+#: src/widgets/main_window.py:136
 msgid "The song was not recognized."
 msgstr "Lagu tidak dikenali."
 
-#: src/widgets/main_window.py:105
+#: src/widgets/main_window.py:138
 msgid "Something went wrong."
 msgstr "Ada yang salah."
 
-#: src/main.py:107
+#: src/main.py:105
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Hak Cipta 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:109
+#: src/main.py:107
 #, fuzzy
 msgid "translator-credits"
 msgstr "kredit-penerjemah"
 
-#: src/main.py:110
+#: src/main.py:108
 msgid "GitHub"
 msgstr "GitHub"
 

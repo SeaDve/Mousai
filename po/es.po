@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021.
 # robert schneider <robertschv@gmail.com>, 2021.
+# Sergio Varela <sergitroll9@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:35+0800\n"
-"PO-Revision-Date: 2021-05-16 01:37+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
+"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"PO-Revision-Date: 2021-05-23 02:24+0000\n"
+"Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
 ">\n"
 "Language: es\n"
@@ -29,7 +30,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Música;Canción;Identificar;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
 msgid "Identify any songs in seconds"
 msgstr "Identifique cualquier canción en segundos"
 
@@ -68,14 +69,16 @@ msgstr ""
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
+"🎸 Guarda la canción identificada incluyendo la caratula del álbum en el "
+"historial."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Previsualiza la canción identificada con el reproductor nativo."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Navega por la canción en la web con el enlace."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
@@ -130,11 +133,11 @@ msgstr "Borrar el historial de canciones"
 msgid "Reset token value"
 msgstr "Restablecer el valor del token"
 
-#: data/ui/token_dialog.ui:16
+#: data/ui/token_dialog.ui:15
 msgid "Welcome to Mousai"
 msgstr "Bienvenido/a a Mousai"
 
-#: data/ui/token_dialog.ui:29
+#: data/ui/token_dialog.ui:28
 msgid "Enter a valid token"
 msgstr "Introduzca un token válido"
 
@@ -154,90 +157,90 @@ msgstr ""
 "obtener un token. Si dejas esto en blanco, obtendrás unas cuantas pruebas al "
 "día."
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:15
 msgid "Open in Browser"
-msgstr ""
+msgstr "Abrir en el navegador"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:23
 msgid "Play preview"
-msgstr ""
+msgstr "Reproducir la vista previa"
 
-#: data/ui/main_window.ui:20
+#: data/ui/main_window.ui:24
 msgid "Listen"
 msgstr "Escuchar"
 
-#: data/ui/main_window.ui:21
+#: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Empezar a identificar la música"
 
-#: data/ui/main_window.ui:46
+#: data/ui/main_window.ui:50
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: data/ui/main_window.ui:47
+#: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Cancelar la grabación"
 
-#: data/ui/main_window.ui:72
+#: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr ""
+msgstr "Menú principal"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:120
+#: data/ui/main_window.ui:123
 msgid "Start Mousaing!"
 msgstr "¡Comienza a Mousaiar!"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Pulsa el botón de escuchar para empezar."
 
-#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
 msgid "Muted"
 msgstr "Silenciado"
 
-#: data/ui/main_window.ui:146
+#: data/ui/main_window.ui:149
 msgid "Clear Song History"
 msgstr "Limpiar el historial de canciones"
 
-#: data/ui/main_window.ui:150
+#: data/ui/main_window.ui:153
 msgid "Reset Token"
 msgstr "Reiniciar el token"
 
-#: data/ui/main_window.ui:156
+#: data/ui/main_window.ui:159
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
-#: data/ui/main_window.ui:160
+#: data/ui/main_window.ui:163
 msgid "About Mousai"
 msgstr "Acerca de Mousai"
 
-#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
-#: src/widgets/main_window.py:80
+#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
+#: src/widgets/main_window.py:113
 msgid "Listening"
 msgstr "Escuchando"
 
-#: src/widgets/main_window.py:99
+#: src/widgets/main_window.py:132
 msgid "Sorry"
-msgstr ""
+msgstr "Lo siento"
 
-#: src/widgets/main_window.py:103
+#: src/widgets/main_window.py:136
 msgid "The song was not recognized."
 msgstr "No se reconoció la canción."
 
-#: src/widgets/main_window.py:105
+#: src/widgets/main_window.py:138
 msgid "Something went wrong."
 msgstr "Algo salió mal."
 
-#: src/main.py:107
+#: src/main.py:105
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:109
+#: src/main.py:107
 msgid "translator-credits"
 msgstr "Óscar Fernández Díaz"
 
-#: src/main.py:110
+#: src/main.py:108
 msgid "GitHub"
 msgstr "GitHub"
 

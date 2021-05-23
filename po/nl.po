@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:35+0800\n"
-"PO-Revision-Date: 2021-05-18 15:34+0000\n"
+"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"PO-Revision-Date: 2021-05-23 02:24+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Muziek;Song;Nummer;Identificeren;Herkennen;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
 msgid "Identify any songs in seconds"
 msgstr "Vind elk nummer in een mum van tijd"
 
@@ -66,15 +66,15 @@ msgstr "🎵 Vind de naam van een nummer en artiest in een mum van tijd."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Bewaar het herkende nummer, inclusief albumhoes, in de geschiedenis."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Beluister het herkende nummer met de muziekspeler."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Zoek het nummer op op internet middels de link."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
@@ -129,11 +129,11 @@ msgstr "Geschiedenis wissen"
 msgid "Reset token value"
 msgstr "Toegangssleutel herstellen"
 
-#: data/ui/token_dialog.ui:16
+#: data/ui/token_dialog.ui:15
 msgid "Welcome to Mousai"
 msgstr "Welkom bij Mousai"
 
-#: data/ui/token_dialog.ui:29
+#: data/ui/token_dialog.ui:28
 msgid "Enter a valid token"
 msgstr "Voer een geldige sleutel in"
 
@@ -153,90 +153,90 @@ msgstr ""
 "ophalen. Als je hier niks invult, dan kun je de dienst slechts een paar keer "
 "per dag gebruiken."
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:15
 msgid "Open in Browser"
-msgstr ""
+msgstr "Openen in webbrowser"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:23
 msgid "Play preview"
-msgstr ""
+msgstr "Beluisteren"
 
-#: data/ui/main_window.ui:20
+#: data/ui/main_window.ui:24
 msgid "Listen"
 msgstr "Luisteren"
 
-#: data/ui/main_window.ui:21
+#: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Ga aan de slag"
 
-#: data/ui/main_window.ui:46
+#: data/ui/main_window.ui:50
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: data/ui/main_window.ui:47
+#: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Opname afbreken"
 
-#: data/ui/main_window.ui:72
+#: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr ""
+msgstr "Hoofdmenu"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:120
+#: data/ui/main_window.ui:123
 msgid "Start Mousaing!"
 msgstr "Beginnen met Mousaïng!"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Klik op de luisterknop om te starten."
 
-#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
 msgid "Muted"
 msgstr "Gedempt"
 
-#: data/ui/main_window.ui:146
+#: data/ui/main_window.ui:149
 msgid "Clear Song History"
 msgstr "Geschiedenis wissen"
 
-#: data/ui/main_window.ui:150
+#: data/ui/main_window.ui:153
 msgid "Reset Token"
 msgstr "Toegangssleutel herstellen"
 
-#: data/ui/main_window.ui:156
+#: data/ui/main_window.ui:159
 msgid "Keyboard Shortcuts"
 msgstr "Sneltoetsen"
 
-#: data/ui/main_window.ui:160
+#: data/ui/main_window.ui:163
 msgid "About Mousai"
 msgstr "Over Mousai"
 
-#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
-#: src/widgets/main_window.py:80
+#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
+#: src/widgets/main_window.py:113
 msgid "Listening"
 msgstr "Bezig met luisteren"
 
-#: src/widgets/main_window.py:99
+#: src/widgets/main_window.py:132
 msgid "Sorry"
-msgstr ""
+msgstr "Sorry"
 
-#: src/widgets/main_window.py:103
+#: src/widgets/main_window.py:136
 msgid "The song was not recognized."
 msgstr "Het nummer werd niet herkend."
 
-#: src/widgets/main_window.py:105
+#: src/widgets/main_window.py:138
 msgid "Something went wrong."
 msgstr "Er is iets misgegaan."
 
-#: src/main.py:107
+#: src/main.py:105
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:109
+#: src/main.py:107
 msgid "translator-credits"
-msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+msgstr "Heimen Stoffels &lt;vistausss@fastmail.com&gt;"
 
-#: src/main.py:110
+#: src/main.py:108
 msgid "GitHub"
 msgstr "GitHub"
 

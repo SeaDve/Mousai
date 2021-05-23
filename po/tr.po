@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-22 09:35+0800\n"
-"PO-Revision-Date: 2021-05-08 17:32+0000\n"
+"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"PO-Revision-Date: 2021-05-23 02:24+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
 ">\n"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Müzik;Şarkı;Tanımla;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:104
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
 msgid "Identify any songs in seconds"
 msgstr "Herhangi bir şarkıyı saniyeler içinde tanımlayın"
 
@@ -65,14 +65,15 @@ msgstr "🎵 Şarkının adını ve sanatçısını saniyeler içinde tanımlay�
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
+"🎸 Albüm görseli dahil olmak üzere tanımlanmış şarkıyı geçmişte saklayın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Tanımlanan şarkıyı yerel oynatıcıyla ön izleyin."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Web bağlantısıyla şarkıya göz atın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
@@ -127,11 +128,11 @@ msgstr "Şarkı geçmişini temizle"
 msgid "Reset token value"
 msgstr "Belirteç değerini sıfırla"
 
-#: data/ui/token_dialog.ui:16
+#: data/ui/token_dialog.ui:15
 msgid "Welcome to Mousai"
 msgstr "Mousai'ye hoş geldiniz"
 
-#: data/ui/token_dialog.ui:29
+#: data/ui/token_dialog.ui:28
 msgid "Enter a valid token"
 msgstr "Geçerli bir belirteç girin"
 
@@ -150,92 +151,92 @@ msgstr ""
 "\"https://dashboard.audd.io/\">web sitelerinde</a> oturum açıp bir belirteç "
 "almak gerekir. Bunu boş bırakmak size günde birkaç deneme verecektir."
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:15
 msgid "Open in Browser"
-msgstr ""
+msgstr "Tarayıcıda Aç"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:23
 msgid "Play preview"
-msgstr ""
+msgstr "Ön izlemeyi oynat"
 
-#: data/ui/main_window.ui:20
+#: data/ui/main_window.ui:24
 msgid "Listen"
 msgstr "Dinle"
 
-#: data/ui/main_window.ui:21
+#: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Müzik Tanımlamayı Başlat"
 
-#: data/ui/main_window.ui:46
+#: data/ui/main_window.ui:50
 msgid "Cancel"
 msgstr "İptal"
 
-#: data/ui/main_window.ui:47
+#: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Kaydı İptal Et"
 
-#: data/ui/main_window.ui:72
+#: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr ""
+msgstr "Ana Menü"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:120
+#: data/ui/main_window.ui:123
 msgid "Start Mousaing!"
-msgstr "Mousai yapmaya başla!"
+msgstr "Mousai Yapmaya Başla!"
 
-#: data/ui/main_window.ui:121
+#: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Başlamak için dinle düğmesine tıklayın."
 
-#: data/ui/main_window.ui:132 src/widgets/main_window.py:83
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
 msgid "Muted"
 msgstr "Sesi kapatıldı"
 
-#: data/ui/main_window.ui:146
+#: data/ui/main_window.ui:149
 msgid "Clear Song History"
 msgstr "Şarkı Geçmişini Temizle"
 
-#: data/ui/main_window.ui:150
+#: data/ui/main_window.ui:153
 msgid "Reset Token"
 msgstr "Belirteci Sıfırla"
 
-#: data/ui/main_window.ui:156
+#: data/ui/main_window.ui:159
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: data/ui/main_window.ui:160
+#: data/ui/main_window.ui:163
 msgid "About Mousai"
 msgstr "Mousai Hakkında"
 
-#: src/widgets/main_window.py:74 src/widgets/main_window.py:77
-#: src/widgets/main_window.py:80
+#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
+#: src/widgets/main_window.py:113
 msgid "Listening"
 msgstr "Dinliyor"
 
-#: src/widgets/main_window.py:99
+#: src/widgets/main_window.py:132
 msgid "Sorry"
-msgstr ""
+msgstr "Üzgünüm"
 
-#: src/widgets/main_window.py:103
+#: src/widgets/main_window.py:136
 msgid "The song was not recognized."
 msgstr "Şarkı tanınmadı."
 
-#: src/widgets/main_window.py:105
+#: src/widgets/main_window.py:138
 msgid "Something went wrong."
 msgstr "Bir şeyler yanlış gitti."
 
-#: src/main.py:107
+#: src/main.py:105
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Telif hakkı 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:109
+#: src/main.py:107
 msgid "translator-credits"
 msgstr ""
 "Ümit Solmaz\n"
 "Oğuz Ersen"
 
-#: src/main.py:110
+#: src/main.py:108
 msgid "GitHub"
 msgstr "GitHub"
 
