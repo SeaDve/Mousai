@@ -9,6 +9,17 @@
       <object class="GtkWindowHandle">
         <child>
           <object class="GtkOverlay">
+            <child type="overlay">
+              <object class="GtkHeaderBar">
+                <property name="valign">start</property>
+                <property name="title-widget">
+                  <object class="GtkBox"/>
+                </property>
+                <style>
+                  <class name="flat"/>
+                </style>
+              </object>
+            </child>
             <child>
               <object class="AdwStatusPage">
                 <property name="icon-name">io.github.seadve.Mousai</property>
@@ -56,14 +67,6 @@
                     </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child type="overlay">
-              <object class="GtkHeaderBar">
-                <property name="valign">start</property>
-                <style>
-                  <class name="flat"/>
-                </style>
               </object>
             </child>
           </object>
