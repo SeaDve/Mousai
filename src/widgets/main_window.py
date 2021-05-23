@@ -64,6 +64,14 @@ class MainWindow(Adw.ApplicationWindow):
         song_row = SongRow(*song)
         self.history_model.insert(0, song_row)
 
+    def remove_duplicates(self, song_id):
+        song_link_list = [song['song_link'] for song in self.memory_list]
+        if song_id in song_link_list:
+            self.history_model.remove_all()
+            song_link_index = song_link_list.index(song_id)
+            self.memory_list.pop(song_link_index)
+            self.load_memory_list()
+
     def return_default_page(self):
         if self.memory_list:
             self.main_stack.set_visible_child_name('main-screen')
@@ -141,14 +149,6 @@ class MainWindow(Adw.ApplicationWindow):
 
         self.return_default_page()
 
-    def remove_duplicates(self, song_id):
-        song_link_list = [song['song_link'] for song in self.memory_list]
-        if song_id in song_link_list:
-            self.history_model.remove_all()
-            song_link_index = song_link_list.index(song_id)
-            self.memory_list.pop(song_link_index)
-            self.load_memory_list()
-
     @Gtk.Template.Callback()
     def on_quit(self, window):
         self.settings.set_value('memory-list', GLib.Variant('aa{ss}', self.memory_list))
@@ -157,8 +157,8 @@ class MainWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
         self.voice_recorder.start()
-        self.lookup_action('clear-history').set_enabled(False)
         self.main_stack.set_visible_child_name('recording')
+        self.lookup_action('clear-history').set_enabled(False)
 
     @Gtk.Template.Callback()
     def on_cancel_button_clicked(self, button):
