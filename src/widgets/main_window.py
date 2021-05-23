@@ -69,6 +69,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.main_stack.set_visible_child_name('main-screen')
         else:
             self.main_stack.set_visible_child_name('empty-state')
+        self.lookup_action('clear-history').set_enabled(True)
 
     def load_memory_list(self):
         for song in self.memory_list:
@@ -156,6 +157,7 @@ class MainWindow(Adw.ApplicationWindow):
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):
         self.voice_recorder.start()
+        self.lookup_action('clear-history').set_enabled(False)
         self.main_stack.set_visible_child_name('recording')
 
     @Gtk.Template.Callback()
