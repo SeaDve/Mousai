@@ -80,8 +80,7 @@ class VoiceRecorder(GObject.GObject):
     def _on_gst_message(self, bus, message):
         t = message.type
         if t == Gst.MessageType.ELEMENT:
-            peak = message.get_structure().get_value('peak')[0]
-            self.set_property('peak', peak)
+            self.peak = message.get_structure().get_value('peak')[0]
         elif t == Gst.MessageType.EOS:
             self.stop()
         elif t == Gst.MessageType.ERROR:
