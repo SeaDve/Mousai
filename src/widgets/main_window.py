@@ -65,12 +65,12 @@ class MainWindow(Adw.ApplicationWindow):
         self.history_model.insert(0, song_row)
 
     def remove_duplicates(self, song_id):
-        song_link_list = [song['song_link'] for song in self.memory_list]
-        if song_id in song_link_list:
-            self.history_model.remove_all()
-            song_link_index = song_link_list.index(song_id)
-            self.memory_list.pop(song_link_index)
-            self.load_memory_list()
+        for index, song in enumerate(self.memory_list):
+            if song['song_link'] == song_id:
+                self.history_model.remove_all()
+                self.memory_list.pop(index)
+                self.load_memory_list()
+                break
 
     def return_default_page(self):
         if self.memory_list:
