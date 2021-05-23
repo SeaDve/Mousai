@@ -42,6 +42,17 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.1" date="2021-05-23">
+      <description>
+        <p>This contains some fixes for the last update:</p>
+        <ul>
+          <li>Improved UI icons</li>
+          <li>Minor performance improvements</li>
+          <li>Added token checker</li>
+          <li>Fixed a bug when clearing history while listening</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.0" date="2021-05-22">
       <description>
         <p>A release containing exciting new features and fixes!</p>
