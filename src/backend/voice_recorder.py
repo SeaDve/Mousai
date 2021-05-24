@@ -92,7 +92,8 @@ class VoiceRecorder(GObject.GObject):
         audio_caps = Gst.Caps.from_string('audio/x-opus')
         encoding_profile = GstPbutils.EncodingAudioProfile.new(audio_caps, None, None, 1)
         container_caps = Gst.Caps.from_string('application/ogg')
-        container_profile = GstPbutils.EncodingContainerProfile.new('record', None, container_caps, None)
+        container_profile = GstPbutils.EncodingContainerProfile.new('record', None,
+                                                                    container_caps, None)
         container_profile.add_profile(encoding_profile)
         return container_profile
 
