@@ -62,6 +62,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def new_song_row(self, song):
         song_row = SongRow(*song)
+        self.main_stack.connect('notify::visible-child-name', song_row.on_window_recording)
         self.history_model.insert(0, song_row)
 
     def remove_duplicates(self, song_id):

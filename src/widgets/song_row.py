@@ -47,6 +47,10 @@ class SongRow(Adw.ActionRow):
             return None
         return pixbuf
 
+    def on_window_recording(self, stack, _):
+        if self.button_player.is_stopped and stack.get_visible_child_name() == 'recording':
+            self.button_player.is_stopped = False
+
     @Gtk.Template.Callback()
     def on_open_link_button_clicked(self, button):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
