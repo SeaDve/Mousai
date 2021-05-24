@@ -48,16 +48,17 @@ class Utils:
     @staticmethod
     def _get_audio_src(url):
         try:
-            page = requests.get(url, timeout=5)
+            page = requests.get(url)
             track = re.findall(r'tracks = .*;', page.text)[0] \
                 .replace('tracks = ', '') \
                 .replace(';', '')
             track = json.loads(track)[0]['sample']['src']
-        except Exception:
-            return ''
-        else:
             return track
+        except Exception as e:
+            print(e)
+            return ''
 
+    @staticmethod
     def _get_image_src(res):
         try:
             return res['spotify']['album']['images'][2]['url']
