@@ -122,12 +122,12 @@ class MainWindow(Adw.ApplicationWindow):
     def on_record_done(self, recorder):
         song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
         token = self.settings.get_string('token-value')
-        output = Utils.guess_song(song_file, token)
+        output, image_src = Utils.guess_song(song_file, token)
         status = output['status']
 
         try:
             result = output['result']
-            song = Song(*list(result.values())[:-1])
+            song = Song(*result.values())
         except (AttributeError, KeyError):
             error = Gtk.MessageDialog(transient_for=self, modal=True,
                                       buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
@@ -140,7 +140,7 @@ class MainWindow(Adw.ApplicationWindow):
             error.present()
             error.connect('response', lambda *_: error.close())
         else:
-            if image_src := result['image_src']:
+            if image_src:
                 icon_dir = f'{Utils.get_tmp_dir()}/{song.title}{song.artist}.jpg'
                 Utils.download_image(image_src, icon_dir)
 

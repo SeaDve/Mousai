@@ -29,6 +29,7 @@ class Utils:
     def _simplify(res):
         status = res['status']
         output = {'status': status}
+        image_src = None
         if status == 'success':
             if song_result := res['result']:
                 song_link = song_result['song_link']
@@ -36,14 +37,14 @@ class Utils:
                     'title': song_result['title'],
                     'artist': song_result['artist'],
                     'song_link': song_link,
-                    'audio_src': Utils._get_audio_src(song_link),
-                    'image_src': Utils._get_image_src(song_result)
+                    'audio_src': Utils._get_audio_src(song_link)
                 }
+                image_src = Utils._get_image_src(song_result)
             else:
                 output['result'] = None
         else:
             output['error_message'] = res['error']['error_message']
-        return output
+        return output, image_src
 
     @staticmethod
     def _get_audio_src(url):
