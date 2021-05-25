@@ -18,7 +18,6 @@
 from gi.repository import Gst, GObject, Gtk
 
 
-@Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/button_player.ui')
 class ButtonPlayer(Gtk.Button):
     __gtype_name__ = 'ButtonPlayer'
 
