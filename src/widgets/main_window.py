@@ -19,11 +19,10 @@ from collections import namedtuple
 
 from gi.repository import GLib, Gtk, Adw, Gio
 
+from mousai.widgets.song import Song
 from mousai.widgets.song_row import SongRow
 from mousai.backend.voice_recorder import VoiceRecorder
 from mousai.backend.utils import Utils
-
-Song = namedtuple('Song', 'title artist song_link audio_src')
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/main_window.ui')
@@ -39,8 +38,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.settings = settings
         self.memory_list = list(self.settings.get_value('memory-list'))
 
-        self.history_model = Gio.ListStore.new(SongRow)
-        self.history_listbox.bind_model(self.history_model, lambda song: song)
+        self.history_model = Gio.ListStore.new(Song)
+        self.history_listbox.bind_model(self.history_model, self.new_song_row)
 
         self.voice_recorder = VoiceRecorder()
         self.voice_recorder.connect('record-done', self.on_record_done)
@@ -61,9 +60,9 @@ class MainWindow(Adw.ApplicationWindow):
         self.add_action(action)
 
     def new_song_row(self, song):
-        song_row = SongRow(*song)
+        song_row = SongRow(song)
         self.main_stack.connect('notify::visible-child-name', song_row.on_window_recording)
-        self.history_model.insert(0, song_row)
+        return song_row
 
     def remove_duplicates(self, song_id):
         for index, song in enumerate(self.memory_list):
@@ -81,8 +80,9 @@ class MainWindow(Adw.ApplicationWindow):
         self.lookup_action('clear-history').set_enabled(True)
 
     def load_memory_list(self):
-        for song in self.memory_list:
-            self.new_song_row(song.values())
+        for saved_songs in self.memory_list:
+            song = Song(*saved_songs.values())
+            self.history_model.insert(0, song)
 
     def clear_memory_list(self):
         self.settings.set_value('memory-list', GLib.Variant('aa{ss}', []))
@@ -145,7 +145,7 @@ class MainWindow(Adw.ApplicationWindow):
                 Utils.download_image(image_src, icon_dir)
 
             self.remove_duplicates(song.song_link)
-            self.new_song_row(song)
+            self.history_model.insert(0, song)
             self.memory_list.append(dict(song._asdict()))
 
         self.return_default_page()

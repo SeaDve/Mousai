@@ -21,7 +21,7 @@ from gi.repository import Gst, GObject, Gtk
 class ButtonPlayer(Gtk.Button):
     __gtype_name__ = 'ButtonPlayer'
 
-    is_stopped = GObject.Property(type=bool, default=False, flags=GObject.ParamFlags.READWRITE)
+    is_stopped = GObject.Property(type=bool, default=False)
 
     def __init__(self):
         super().__init__()

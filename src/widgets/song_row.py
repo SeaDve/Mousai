@@ -28,14 +28,15 @@ class SongRow(Adw.ActionRow):
     song_icon = Gtk.Template.Child()
     button_player = Gtk.Template.Child()
 
-    def __init__(self, title, artist, song_link, song_src=''):
+    def __init__(self, song):
         super().__init__()
 
-        self.props.title = title
-        self.props.subtitle = artist
-        self.song_link = song_link
+        self.props.title = song.title
+        self.props.subtitle = song.artist
+        self.song_link = song.song_link
+        self.song_src = song.song_src
 
-        self.button_player.set_song_src(song_src)
+        self.button_player.set_song_src(self.song_src)
         self.add_prefix(self.song_icon)
         self.song_icon.set_image_load_func(self.load_song_icon)
 

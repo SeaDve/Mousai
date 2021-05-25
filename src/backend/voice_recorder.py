@@ -27,7 +27,7 @@ from mousai.backend.utils import Utils
 class VoiceRecorder(GObject.GObject):
     __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
 
-    peak = GObject.Property(type=float, flags=GObject.ParamFlags.READWRITE)
+    peak = GObject.Property(type=float)
 
     def __init__(self):
         super().__init__()
