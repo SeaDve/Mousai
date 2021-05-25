@@ -36,7 +36,6 @@ class MainWindow(Adw.ApplicationWindow):
     def __init__(self, settings, **kwargs):
         super().__init__(**kwargs)
         self.settings = settings
-        self.memory_list = list(self.settings.get_value('memory-list'))
 
         self.history_model = Gio.ListStore.new(Song)
         self.history_listbox.bind_model(self.history_model, self.new_song_row)
@@ -46,13 +45,13 @@ class MainWindow(Adw.ApplicationWindow):
         self.voice_recorder.connect('notify::peak', self.on_peak_changed)
 
         self.setup_actions()
-        self.return_default_page()
         self.load_window_size()
-        self.load_memory_list()
+        self.load_history()
+        self.return_default_page()
 
     def setup_actions(self):
         action = Gio.SimpleAction.new('clear-history', None)
-        action.connect('activate', lambda *_: self.clear_memory_list())
+        action.connect('activate', lambda *_: self.clear_history())
         self.add_action(action)
 
         action = Gio.SimpleAction.new('quit', None)
@@ -65,28 +64,24 @@ class MainWindow(Adw.ApplicationWindow):
         return song_row
 
     def remove_duplicates(self, song_id):
-        for index, song in enumerate(self.memory_list):
-            if song['song_link'] == song_id:
-                self.history_model.remove_all()
-                self.memory_list.pop(index)
-                self.load_memory_list()
+        for index, song in enumerate(self.history_model):
+            if song.song_link == song_id:
+                self.history_model.remove(index)
                 break
 
     def return_default_page(self):
-        if self.memory_list:
+        if self.history_model:
             self.main_stack.set_visible_child_name('main-screen')
         else:
             self.main_stack.set_visible_child_name('empty-state')
         self.lookup_action('clear-history').set_enabled(True)
 
-    def load_memory_list(self):
-        for saved_songs in self.memory_list:
+    def load_history(self):
+        for saved_songs in list(self.settings.get_value('memory-list')):
             song = Song(*saved_songs.values())
-            self.history_model.insert(0, song)
+            self.history_model.append(song)
 
-    def clear_memory_list(self):
-        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', []))
-        self.memory_list = []
+    def clear_history(self):
         self.history_model.remove_all()
         self.main_stack.set_visible_child_name('empty-state')
 
@@ -146,13 +141,13 @@ class MainWindow(Adw.ApplicationWindow):
 
             self.remove_duplicates(song.song_link)
             self.history_model.insert(0, song)
-            self.memory_list.append(dict(song._asdict()))
 
         self.return_default_page()
 
     @Gtk.Template.Callback()
     def on_quit(self, window):
-        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', self.memory_list))
+        songs_list = [dict(song) for song in self.history_model]
+        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', songs_list))
         self.save_window_size()
 
     @Gtk.Template.Callback()

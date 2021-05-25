@@ -33,3 +33,9 @@ class Song(GObject.GObject):
         self.artist = artist
         self.song_link = song_link
         self.song_src = song_src
+
+    def __iter__(self):
+        yield 'title', self.title
+        yield 'artist', self.artist
+        yield 'song_link', self.song_link
+        yield 'song_src', self.song_src
