@@ -61,12 +61,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.main_stack.connect('notify::visible-child-name', song_row.on_window_recording)
         return song_row
 
-    def remove_duplicates(self, song_id):
-        for index, song in enumerate(self.history_model):
-            if song.song_link == song_id:
-                self.history_model.remove(index)
-                break
-
     def return_default_page(self):
         if self.history_model:
             self.main_stack.set_visible_child_name('main-screen')
@@ -79,9 +73,19 @@ class MainWindow(Adw.ApplicationWindow):
             song = Song(*saved_songs.values())
             self.history_model.append(song)
 
+    def remove_duplicates(self, song_id):
+        for index, song in enumerate(self.history_model):
+            if song.song_link == song_id:
+                self.history_model.remove(index)
+                break
+
     def clear_history(self):
         self.history_model.remove_all()
         self.main_stack.set_visible_child_name('empty-state')
+
+    def load_window_size(self):
+        size = self.settings.get_value('window-size')
+        self.set_default_size(*size)
 
     def save_window_size(self):
         size = (
@@ -89,10 +93,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.get_size(Gtk.Orientation.VERTICAL)
         )
         self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
-
-    def load_window_size(self):
-        size = self.settings.get_value('window-size')
-        self.set_default_size(*size)
 
     def on_peak_changed(self, recorder, peak):
         peak = recorder.peak
