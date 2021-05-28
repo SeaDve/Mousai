@@ -38,9 +38,9 @@ class SongRow(Adw.ActionRow):
 
         self.button_player.set_song_src(self.song_src)
         self.add_prefix(self.song_icon)
-        self.song_icon.set_custom_image(self.load_song_icon())
+        self.song_icon.set_custom_image(self.get_song_icon())
 
-    def load_song_icon(self):
+    def get_song_icon(self):
         path = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'
         file = Gio.File.new_for_path(path)
         try:
