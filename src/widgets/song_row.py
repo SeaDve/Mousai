@@ -44,10 +44,9 @@ class SongRow(Adw.ActionRow):
         path = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'
         file = Gio.File.new_for_path(path)
         try:
-            pixbuf = Gdk.Texture.new_from_file(file)
+            return Gdk.Texture.new_from_file(file)
         except GLib.Error:
             return None
-        return pixbuf
 
     def on_window_recording(self, stack, _):
         if self.button_player.is_stopped and stack.get_visible_child_name() == 'recording':
