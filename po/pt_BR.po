@@ -7,9 +7,9 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-05-23 02:24+0000\n"
-"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
-"com>\n"
+"PO-Revision-Date: 2021-05-28 15:32+0000\n"
+"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>"
+"\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -83,7 +83,7 @@ msgstr "📱 Interface de usuário fácil de usar."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr "⌨️ Atalhos de teclado fáceis de usar."
+msgstr "⌨️ Atalhos de teclado amigáveis."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:27
@@ -96,11 +96,11 @@ msgstr "Geral"
 
 #: data/ui/shortcuts_window.ui:17
 msgid "Open menu"
-msgstr "Abrir o menu"
+msgstr "Abrir menu"
 
 #: data/ui/shortcuts_window.ui:24
 msgid "Show keyboard shortcuts"
-msgstr "Mostrar atalhos de teclado"
+msgstr "Mostrar atalhos do teclado"
 
 #: data/ui/shortcuts_window.ui:31
 msgid "Quit"
@@ -188,7 +188,7 @@ msgstr "Comece a Mousaiar!"
 
 #: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr "Clique no botão de ouvir para começar."
+msgstr "Clique no botão escutar para começar."
 
 #: data/ui/main_window.ui:135 src/widgets/main_window.py:116
 msgid "Muted"
@@ -204,7 +204,7 @@ msgstr "Reiniciar token"
 
 #: data/ui/main_window.ui:159
 msgid "Keyboard Shortcuts"
-msgstr "Atalhos de teclado"
+msgstr "Atalhos do Teclado"
 
 #: data/ui/main_window.ui:163
 msgid "About Mousai"
