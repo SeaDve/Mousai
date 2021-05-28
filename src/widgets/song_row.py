@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GdkPixbuf, Gio, Gtk, Adw, GLib
+from gi.repository import Gio, Gtk, Adw, GLib, Gdk
 
 from mousai.backend.utils import Utils
 from mousai.widgets.button_player import ButtonPlayer  # noqa: F401
@@ -38,12 +38,13 @@ class SongRow(Adw.ActionRow):
 
         self.button_player.set_song_src(self.song_src)
         self.add_prefix(self.song_icon)
-        self.song_icon.set_image_load_func(self.load_song_icon)
+        self.song_icon.set_custom_image(self.load_song_icon())
 
-    def load_song_icon(self, size):
+    def load_song_icon(self):
+        path = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'
+        file = Gio.File.new_for_path(path)
         try:
-            file_name = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file(file_name)
+            pixbuf = Gdk.Texture.new_from_file(file)
         except GLib.Error:
             return None
         return pixbuf
