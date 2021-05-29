@@ -5,7 +5,6 @@
     "sdk" : "org.gnome.Sdk",
     "command" : "mousai",
     "finish-args" : [
-
         "--share=network",
         "--device=dri",
         "--share=ipc",
