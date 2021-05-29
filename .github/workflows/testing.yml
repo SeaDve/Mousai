@@ -56,4 +56,5 @@ jobs:
       with:
         bundle: "Mousai-dev.flatpak"
         manifest-path: "io.github.seadve.Mousai.json"
+        cache-key: flatpak-builder-${{ github.sha }}
         run-tests: "true"
