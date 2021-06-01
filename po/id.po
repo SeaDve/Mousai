@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-05-23 02:24+0000\n"
+"PO-Revision-Date: 2021-06-01 07:32+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
@@ -75,7 +75,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Jelajahi lagu di web dengan tautannya."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
