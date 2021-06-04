@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-05-24 16:32+0000\n"
-"Last-Translator: Heinrich Heinzer <heinrich.heinzer@gmail.com>\n"
+"PO-Revision-Date: 2021-06-04 21:55+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
 "\n"
 "Language: de\n"
@@ -72,14 +72,17 @@ msgstr ""
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
+"🎸 Speichere das identifizierte Lied einschließlich des Albumcovers im "
+"Verlauf."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
 msgstr ""
+"🎼 Gib eine Vorschau des identifizierten Titels mit dem nativen Player wieder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Durchsuche das Lied im Web mit dem Link."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
@@ -153,6 +156,9 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai benutzt die APIs von audd.io, dafür ist es nötig sich auf <a href="
+"\"https://dashboard.audd.io/\">ihrer Webseite anzumelden</a> und ein token "
+"zu erzeugen. Ohne token sind einige Versuche pro Tag möglich."
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -218,7 +224,7 @@ msgstr "Hört gerade an"
 
 #: src/widgets/main_window.py:132
 msgid "Sorry"
-msgstr ""
+msgstr "Entschuldigung"
 
 #: src/widgets/main_window.py:136
 msgid "The song was not recognized."
