@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-05-23 02:24+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"PO-Revision-Date: 2021-06-05 22:32+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -171,7 +171,7 @@ msgstr "Ascolta"
 
 #: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr "Inizia a Identificare la Musica"
+msgstr "Inizia a identificare la musica"
 
 #: data/ui/main_window.ui:50
 msgid "Cancel"
@@ -179,11 +179,11 @@ msgstr "Annulla"
 
 #: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr "Annulla la Registrazione"
+msgstr "Annulla la registrazione"
 
 #: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr "Menu Principale"
+msgstr "Menu principale"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:123

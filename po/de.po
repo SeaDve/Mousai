@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-06-04 21:55+0000\n"
+"PO-Revision-Date: 2021-06-05 22:32+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
 "\n"
@@ -157,16 +157,16 @@ msgid ""
 "this blank will give you a few trials per day."
 msgstr ""
 "Mousai benutzt die APIs von audd.io, dafür ist es nötig sich auf <a href="
-"\"https://dashboard.audd.io/\">ihrer Webseite anzumelden</a> und ein token "
-"zu erzeugen. Ohne token sind einige Versuche pro Tag möglich."
+"\"https://dashboard.audd.io/\">ihrer Website anzumelden</a> und ein Token zu "
+"erzeugen. Ohne Token sind einige Versuche pro Tag möglich."
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
-msgstr ""
+msgstr "Im Browser öffnen"
 
 #: data/ui/song_row.ui:23
 msgid "Play preview"
-msgstr ""
+msgstr "Vorschau abspielen"
 
 #: data/ui/main_window.ui:24
 msgid "Listen"
@@ -174,7 +174,7 @@ msgstr "Anhören"
 
 #: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Beginne mit der Identifizierung von Musik"
 
 #: data/ui/main_window.ui:50
 msgid "Cancel"
@@ -182,7 +182,7 @@ msgstr "Abbrechen"
 
 #: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Aufnahme abbrechen"
 
 #: data/ui/main_window.ui:76
 msgid "Main Menu"
@@ -195,7 +195,7 @@ msgstr "Fang an zu Mousaien!"
 
 #: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Klicke auf die Anhören-Schaltfläche, um zu starten."
 
 #: data/ui/main_window.ui:135 src/widgets/main_window.py:116
 msgid "Muted"
