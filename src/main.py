@@ -45,7 +45,7 @@ class Application(Gtk.Application):
         if not win:
             win = MainWindow(self.settings, application=self)
             if not self.settings.get_string('token-value'):
-                GLib.timeout_add(5, lambda: self.show_token_window())
+                GLib.timeout_add(5, self.show_token_window)
         win.present()
 
     def setup_actions(self):
