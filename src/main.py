@@ -49,30 +49,21 @@ class Application(Gtk.Application):
         win.present()
 
     def setup_actions(self):
-        simple_actions = [
-            ('show-token', self.show_token_window, ('<Ctrl>Delete',)),
-            ('show-shortcuts', self.show_shortcuts_window, ('<Ctrl>question',)),
-            ('show-about', self.show_about_dialog, None),
-        ]
+        action = Gio.SimpleAction.new('show-token', None)
+        action.connect('activate', self.show_token_window)
+        self.add_action(action)
 
-        for action, callback, accel in simple_actions:
-            simple_action = Gio.SimpleAction.new(action, None)
-            simple_action.connect('activate', callback)
-            self.add_action(simple_action)
-            if accel:
-                self.set_accels_for_action(f'app.{action}', accel)
+        action = Gio.SimpleAction.new('show-about', None)
+        action.connect('activate', self.show_about_dialog)
+        self.add_action(action)
 
+        self.set_accels_for_action('app.show-token', ('<Ctrl><Ctrl>Delete',))
+        self.set_accels_for_action('win.show-help-overlay', ('<Ctrl>question',))
         self.set_accels_for_action('win.clear-history', ('<Ctrl>BackSpace',))
         self.set_accels_for_action('win.quit', ('<Ctrl>q',))
 
     def show_token_window(self, action=None, param=None):
         window = TokenDialog(self.settings)
-        window.set_transient_for(self.get_active_window())
-        window.present()
-
-    def show_shortcuts_window(self, action, param):
-        builder = Gtk.Builder.new_from_resource('/io/github/seadve/Mousai/ui/shortcuts_window.ui')
-        window = builder.get_object('shortcuts')
         window.set_transient_for(self.get_active_window())
         window.present()
 

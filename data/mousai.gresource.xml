@@ -2,8 +2,8 @@
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai">
     <file preprocess="xml-stripblanks">ui/main_window.ui</file>
-    <file preprocess="xml-stripblanks">ui/shortcuts_window.ui</file>
     <file preprocess="xml-stripblanks">ui/token_dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/help_overlay.ui</file>
     <file preprocess="xml-stripblanks">ui/song_row.ui</file>
     <file preprocess="xml-stripblanks">icons/scalable/status/external-link-symbolic.svg</file>
     <file>ui/style.css</file>
