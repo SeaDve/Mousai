@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-05-23 02:24+0000\n"
+"PO-Revision-Date: 2021-06-20 15:35+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.7\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -78,7 +78,7 @@ msgstr "🌐 Zoek het nummer op op internet middels de link."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
-msgstr "📱 Eenvoudig vormgegeven."
+msgstr "📱 Eenvoudige vormgeving;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
@@ -234,7 +234,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:107
 msgid "translator-credits"
-msgstr "Heimen Stoffels &lt;vistausss@fastmail.com&gt;"
+msgstr "Heimen Stoffels <vistausss@fastmail.com>"
 
 #: src/main.py:108
 msgid "GitHub"

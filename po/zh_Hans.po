@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-05-01 19:42+0000\n"
+"PO-Revision-Date: 2021-06-20 15:35+0000\n"
 "Last-Translator: TheInterestingSoul <wangpy01@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.7\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -171,7 +171,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:123
