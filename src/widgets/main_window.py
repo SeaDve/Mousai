@@ -78,10 +78,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.set_default_size(*size)
 
     def save_window_size(self):
-        size = (
-            self.get_size(Gtk.Orientation.HORIZONTAL),
-            self.get_size(Gtk.Orientation.VERTICAL)
-        )
+        size = self.get_width(), self.get_height()
         self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
 
     def on_peak_changed(self, recorder, peak):
