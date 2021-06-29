@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-23 10:20+0800\n"
-"PO-Revision-Date: 2021-06-01 07:32+0000\n"
+"PO-Revision-Date: 2021-06-29 14:33+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.7.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -66,8 +66,9 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Kenali judul dan artis dari sebuah lagu dalam hitungan detik."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+#, fuzzy
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Simpan lagu yang telah dikenali termasuk seni albumnya di riwayat."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
@@ -233,9 +234,8 @@ msgstr "Hak Cipta 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:107
-#, fuzzy
 msgid "translator-credits"
-msgstr "kredit-penerjemah"
+msgstr "liimee"
 
 #: src/main.py:108
 msgid "GitHub"
