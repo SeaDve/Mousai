@@ -1,7 +1,7 @@
 data/io.github.seadve.Mousai.desktop.in
 data/io.github.seadve.Mousai.appdata.xml.in
 data/io.github.seadve.Mousai.gschema.xml
-data/ui/shortcuts_window.ui
+data/ui/help_overlay.ui
 data/ui/token_dialog.ui
 data/ui/song_row.ui
 data/ui/main_window.ui
