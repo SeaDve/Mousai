@@ -36,3 +36,7 @@ class TokenDialog(Adw.ApplicationWindow):
         else:
             entry.add_css_class('error')
         self.submit_button.set_sensitive(clickable)
+
+    @Gtk.Template.Callback()
+    def on_released_notify(self, gesture, n_press, x, y):
+        self.lookup_action('dont-show-token-dialog').activate()
