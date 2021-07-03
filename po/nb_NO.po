@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 08:49+0800\n"
-"PO-Revision-Date: 2021-05-18 15:34+0000\n"
+"PO-Revision-Date: 2021-07-03 11:03+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
 "mousai/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -66,15 +66,15 @@ msgstr "🎵 Identifiser tittel og artist for for en sang på sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Lagre identifisert spor (inkludert omslag) i historikk."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Forhåndsvis identifisert spor med innebygd avspiller."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Utforsk sporet på nettet med lenken."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
@@ -154,16 +154,19 @@ msgstr ""
 "stå tomt gir deg et par forsøk per dag."
 
 #: data/ui/token_dialog.ui:83
+#, fuzzy
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Ikke vis ved oppstart"
 
 #: data/ui/song_row.ui:15
+#, fuzzy
 msgid "Open in Browser"
-msgstr ""
+msgstr "Åpne i nettleser"
 
 #: data/ui/song_row.ui:23
+#, fuzzy
 msgid "Play preview"
-msgstr ""
+msgstr "Avspillingsforhåndsvising"
 
 #: data/ui/main_window.ui:24
 msgid "Listen"
@@ -171,7 +174,7 @@ msgstr "Lytt"
 
 #: data/ui/main_window.ui:25
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Start identifisering av musikk"
 
 #: data/ui/main_window.ui:50
 msgid "Cancel"
@@ -179,11 +182,11 @@ msgstr "Avbryt"
 
 #: data/ui/main_window.ui:51
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Avbryt opptaket"
 
 #: data/ui/main_window.ui:76
 msgid "Main Menu"
-msgstr ""
+msgstr "Hovedmeny"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:123
@@ -192,7 +195,7 @@ msgstr "Start Mousaing."
 
 #: data/ui/main_window.ui:124
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Klikk på lytteknappen for å starte."
 
 #: data/ui/main_window.ui:135 src/widgets/main_window.py:97
 msgid "Muted"
@@ -222,7 +225,7 @@ msgstr "Lytting"
 
 #: src/widgets/main_window.py:113
 msgid "Sorry"
-msgstr ""
+msgstr "Beklager"
 
 #: src/widgets/main_window.py:117
 msgid "The song was not recognized."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 08:49+0800\n"
-"PO-Revision-Date: 2021-06-23 13:32+0000\n"
+"PO-Revision-Date: 2021-07-03 11:03+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.1-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -155,7 +155,7 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:83
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Niet tonen na opstarten"
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -238,7 +238,7 @@ msgstr "Copyright 2021, Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:84
 msgid "translator-credits"
-msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+msgstr "Heimen Stoffels &lt;vistausss@fastmail.com&gt;"
 
 #: src/main.py:85
 msgid "GitHub"
