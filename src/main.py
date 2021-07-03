@@ -44,7 +44,8 @@ class Application(Gtk.Application):
         win = self.props.active_window
         if not win:
             win = MainWindow(self.settings, application=self)
-            if not self.settings.get_string('token-value'):
+            if not self.settings.get_string('token-value') and \
+               not self.settings.get_boolean('dont-show-token-dialog'):
                 GLib.timeout_add(5, self.show_token_window)
         win.present()
 

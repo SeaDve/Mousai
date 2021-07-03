@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gtk
+from gi.repository import Adw, Gtk, Gio
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/token_dialog.ui')
-class TokenDialog(Gtk.Dialog):
+class TokenDialog(Adw.ApplicationWindow):
     __gtype_name__ = 'TokenDialog'
 
     token_entry = Gtk.Template.Child()
@@ -16,10 +16,12 @@ class TokenDialog(Gtk.Dialog):
         self.settings = settings
         self.token_entry.set_text(self.settings.get_string('token-value'))
 
-        # Workaround to hide titlebar
-        placeholder = Gtk.Box()
-        placeholder.set_visible(False)
-        self.set_titlebar(placeholder)
+        action = Gio.SimpleAction.new('close', None)
+        action.connect('activate', lambda *_: self.destroy())
+        self.add_action(action)
+
+        action = self.settings.create_action('dont-show-token-dialog')
+        self.add_action(action)
 
     @Gtk.Template.Callback()
     def on_submit_button_clicked(self, _):

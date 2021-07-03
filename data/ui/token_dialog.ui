@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="TokenDialog" parent="GtkDialog">
+  <template class="TokenDialog" parent="AdwApplicationWindow">
     <property name="modal">True</property>
     <property name="default-width">550</property>
-    <property name="default-height">450</property>
+    <property name="default-height">460</property>
+    <child>
+      <object class="GtkShortcutController">
+        <property name="scope">managed</property>
+          <child>
+            <object class="GtkShortcut">
+              <property name="trigger">Escape</property>
+              <property name="action">action(win.close)</property>
+            </object>
+          </child>
+        </object>
+      </child>
     <child>
       <object class="GtkWindowHandle">
         <child>
@@ -30,7 +41,7 @@
                     <child>
                       <object class="GtkBox">
                         <property name="orientation">vertical</property>
-                        <property name="spacing">24</property>
+                        <property name="spacing">18</property>
                         <child>
                           <object class="GtkBox">
                             <child>
@@ -61,6 +72,22 @@
                             <property name="use-markup">True</property>
                             <property name="justify">center</property>
                             <property name="wrap">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">Do not show at startup</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkCheckButton">
+                                <property name="action-name">win.dont-show-token-dialog</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
