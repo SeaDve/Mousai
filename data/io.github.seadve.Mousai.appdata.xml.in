@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.2" date="2021-07-03">
+      <description>
+        <p>This update contains minor fixes:</p>
+        <ul>
+          <li>Added option to not show token dialog at startup</li>
+          <li>Minor performance improvements</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.1" date="2021-05-23">
       <description>
         <p>This contains some fixes for the last update:</p>
