@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"POT-Creation-Date: 2021-07-03 08:49+0800\n"
 "PO-Revision-Date: 2021-05-23 02:24+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Müzik;Şarkı;Tanımla;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
 msgid "Identify any songs in seconds"
 msgstr "Herhangi bir şarkıyı saniyeler içinde tanımlayın"
 
@@ -88,60 +88,60 @@ msgstr "⌨️ Kullanıcı dostu klavye kısayolları."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts_window.ui:12
+#: data/ui/help_overlay.ui:10
 msgid "General"
 msgstr "Genel"
 
-#: data/ui/shortcuts_window.ui:17
+#: data/ui/help_overlay.ui:14
 msgid "Open menu"
 msgstr "Menüyü aç"
 
-#: data/ui/shortcuts_window.ui:24
+#: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
 msgstr "Klavye kısayollarını göster"
 
-#: data/ui/shortcuts_window.ui:31
+#: data/ui/help_overlay.ui:26
 msgid "Quit"
 msgstr "Çıkış"
 
-#: data/ui/shortcuts_window.ui:39
+#: data/ui/help_overlay.ui:33
 msgid "Controls"
 msgstr "Denetimler"
 
-#: data/ui/shortcuts_window.ui:44
+#: data/ui/help_overlay.ui:37
 msgid "Start listening"
 msgstr "Dinlemeye başla"
 
-#: data/ui/shortcuts_window.ui:51
+#: data/ui/help_overlay.ui:43
 msgid "Cancel listening"
 msgstr "Dinlemeyi iptal et"
 
-#: data/ui/shortcuts_window.ui:59
+#: data/ui/help_overlay.ui:50
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: data/ui/shortcuts_window.ui:64
+#: data/ui/help_overlay.ui:54
 msgid "Clear song history"
 msgstr "Şarkı geçmişini temizle"
 
-#: data/ui/shortcuts_window.ui:71
+#: data/ui/help_overlay.ui:60
 msgid "Reset token value"
 msgstr "Belirteç değerini sıfırla"
 
-#: data/ui/token_dialog.ui:15
+#: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
 msgstr "Mousai'ye hoş geldiniz"
 
-#: data/ui/token_dialog.ui:28
+#: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
 msgstr "Geçerli bir belirteç girin"
 
-#: data/ui/token_dialog.ui:35
+#: data/ui/token_dialog.ui:57
 msgid "Submit"
 msgstr "Gönder"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/token_dialog.ui:49
+#: data/ui/token_dialog.ui:71
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
@@ -150,6 +150,10 @@ msgstr ""
 "Mousai, çalışmak için audd.io API'lerini kullanır, bu nedenle <a href="
 "\"https://dashboard.audd.io/\">web sitelerinde</a> oturum açıp bir belirteç "
 "almak gerekir. Bunu boş bırakmak size günde birkaç deneme verecektir."
+
+#: data/ui/token_dialog.ui:83
+msgid "Do not show at startup"
+msgstr ""
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -188,7 +192,7 @@ msgstr "Mousai Yapmaya Başla!"
 msgid "Click the listen button to start."
 msgstr "Başlamak için dinle düğmesine tıklayın."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
 msgid "Muted"
 msgstr "Sesi kapatıldı"
 
@@ -208,35 +212,35 @@ msgstr "Klavye Kısayolları"
 msgid "About Mousai"
 msgstr "Mousai Hakkında"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
+#: src/widgets/main_window.py:94
 msgid "Listening"
 msgstr "Dinliyor"
 
-#: src/widgets/main_window.py:132
+#: src/widgets/main_window.py:113
 msgid "Sorry"
 msgstr "Üzgünüm"
 
-#: src/widgets/main_window.py:136
+#: src/widgets/main_window.py:117
 msgid "The song was not recognized."
 msgstr "Şarkı tanınmadı."
 
-#: src/widgets/main_window.py:138
+#: src/widgets/main_window.py:119
 msgid "Something went wrong."
 msgstr "Bir şeyler yanlış gitti."
 
-#: src/main.py:105
+#: src/main.py:82
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Telif hakkı 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:107
+#: src/main.py:84
 msgid "translator-credits"
 msgstr ""
 "Ümit Solmaz\n"
 "Oğuz Ersen"
 
-#: src/main.py:108
+#: src/main.py:85
 msgid "GitHub"
 msgstr "GitHub"
 

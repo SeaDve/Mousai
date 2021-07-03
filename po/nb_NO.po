@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"POT-Creation-Date: 2021-07-03 08:49+0800\n"
 "PO-Revision-Date: 2021-05-18 15:34+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musikk;Sang;Identifisering;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
 msgid "Identify any songs in seconds"
 msgstr "Identifiser sanger på sekunder"
 
@@ -89,60 +89,60 @@ msgstr "⌨️ Brukervennlige tastatursnarveier"
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts_window.ui:12
+#: data/ui/help_overlay.ui:10
 msgid "General"
 msgstr "Generelt"
 
-#: data/ui/shortcuts_window.ui:17
+#: data/ui/help_overlay.ui:14
 msgid "Open menu"
 msgstr "Åpne meny"
 
-#: data/ui/shortcuts_window.ui:24
+#: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
 msgstr "Vis tastatursnarveier"
 
-#: data/ui/shortcuts_window.ui:31
+#: data/ui/help_overlay.ui:26
 msgid "Quit"
 msgstr "Avslutt"
 
-#: data/ui/shortcuts_window.ui:39
+#: data/ui/help_overlay.ui:33
 msgid "Controls"
 msgstr "Kontroller"
 
-#: data/ui/shortcuts_window.ui:44
+#: data/ui/help_overlay.ui:37
 msgid "Start listening"
 msgstr "Begynn lyttingen"
 
-#: data/ui/shortcuts_window.ui:51
+#: data/ui/help_overlay.ui:43
 msgid "Cancel listening"
 msgstr "Avbryt lytting"
 
-#: data/ui/shortcuts_window.ui:59
+#: data/ui/help_overlay.ui:50
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: data/ui/shortcuts_window.ui:64
+#: data/ui/help_overlay.ui:54
 msgid "Clear song history"
 msgstr "Tøm sanghistorikk"
 
-#: data/ui/shortcuts_window.ui:71
+#: data/ui/help_overlay.ui:60
 msgid "Reset token value"
 msgstr "Tilbakestill symbolverdi"
 
-#: data/ui/token_dialog.ui:15
+#: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
 msgstr "Velkommen til Mousai"
 
-#: data/ui/token_dialog.ui:28
+#: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
 msgstr "Skriv inn et gyldig symbol"
 
-#: data/ui/token_dialog.ui:35
+#: data/ui/token_dialog.ui:57
 msgid "Submit"
 msgstr "Send inn"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/token_dialog.ui:49
+#: data/ui/token_dialog.ui:71
 #, fuzzy
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
@@ -152,6 +152,10 @@ msgstr ""
 "Mousai bruker audd.io-API-et, så du må logge inn på <a href=\"https://"
 "dashboard.audd.io/\">nettsiden deres</a> for å hente et symbol. Å la dette "
 "stå tomt gir deg et par forsøk per dag."
+
+#: data/ui/token_dialog.ui:83
+msgid "Do not show at startup"
+msgstr ""
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -190,7 +194,7 @@ msgstr "Start Mousaing."
 msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
 msgid "Muted"
 msgstr "Forstummet"
 
@@ -210,34 +214,34 @@ msgstr "Tastatursnarveier"
 msgid "About Mousai"
 msgstr "Om Mousai"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
+#: src/widgets/main_window.py:94
 #, fuzzy
 msgid "Listening"
 msgstr "Lytting"
 
-#: src/widgets/main_window.py:132
+#: src/widgets/main_window.py:113
 msgid "Sorry"
 msgstr ""
 
-#: src/widgets/main_window.py:136
+#: src/widgets/main_window.py:117
 msgid "The song was not recognized."
 msgstr "Gjenkjenner ikke sangen."
 
-#: src/widgets/main_window.py:138
+#: src/widgets/main_window.py:119
 msgid "Something went wrong."
 msgstr "Noe gikk galt."
 
-#: src/main.py:105
+#: src/main.py:82
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Opphavsrett © 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:107
+#: src/main.py:84
 msgid "translator-credits"
 msgstr "Allan Nordhøy"
 
-#: src/main.py:108
+#: src/main.py:85
 msgid "GitHub"
 msgstr "GitHub"
 

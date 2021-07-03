@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"POT-Creation-Date: 2021-07-03 08:49+0800\n"
 "PO-Revision-Date: 2021-05-28 15:32+0000\n"
-"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>"
-"\n"
+"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
+"com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Musica;Identificar;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
 msgid "Identify any songs in seconds"
 msgstr "Identifique qualquer música em segundos"
 
@@ -90,60 +90,60 @@ msgstr "⌨️ Atalhos de teclado amigáveis."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts_window.ui:12
+#: data/ui/help_overlay.ui:10
 msgid "General"
 msgstr "Geral"
 
-#: data/ui/shortcuts_window.ui:17
+#: data/ui/help_overlay.ui:14
 msgid "Open menu"
 msgstr "Abrir menu"
 
-#: data/ui/shortcuts_window.ui:24
+#: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
 msgstr "Mostrar atalhos do teclado"
 
-#: data/ui/shortcuts_window.ui:31
+#: data/ui/help_overlay.ui:26
 msgid "Quit"
 msgstr "Sair"
 
-#: data/ui/shortcuts_window.ui:39
+#: data/ui/help_overlay.ui:33
 msgid "Controls"
 msgstr "Controles"
 
-#: data/ui/shortcuts_window.ui:44
+#: data/ui/help_overlay.ui:37
 msgid "Start listening"
 msgstr "Começar a escutar"
 
-#: data/ui/shortcuts_window.ui:51
+#: data/ui/help_overlay.ui:43
 msgid "Cancel listening"
 msgstr "Parar de escutar"
 
-#: data/ui/shortcuts_window.ui:59
+#: data/ui/help_overlay.ui:50
 msgid "Settings"
 msgstr "Configurações"
 
-#: data/ui/shortcuts_window.ui:64
+#: data/ui/help_overlay.ui:54
 msgid "Clear song history"
 msgstr "Limpar histórico de música"
 
-#: data/ui/shortcuts_window.ui:71
+#: data/ui/help_overlay.ui:60
 msgid "Reset token value"
 msgstr "Redefinir o valor do token"
 
-#: data/ui/token_dialog.ui:15
+#: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
 msgstr "Bem-vindo ao Mousai"
 
-#: data/ui/token_dialog.ui:28
+#: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
 msgstr "Entre com um token válido"
 
-#: data/ui/token_dialog.ui:35
+#: data/ui/token_dialog.ui:57
 msgid "Submit"
 msgstr "Enviar"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/token_dialog.ui:49
+#: data/ui/token_dialog.ui:71
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
@@ -152,6 +152,10 @@ msgstr ""
 "O Mousai usa APIs audd.io para funcionar, então é necessário fazer o login "
 "no <a href=\"https://dashboard.audd.io/\"> site </a> e obter um token. "
 "Deixar este campo em branco resultará em algumas tentativas por dia."
+
+#: data/ui/token_dialog.ui:83
+msgid "Do not show at startup"
+msgstr ""
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -190,7 +194,7 @@ msgstr "Comece a Mousaiar!"
 msgid "Click the listen button to start."
 msgstr "Clique no botão escutar para começar."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
 msgid "Muted"
 msgstr "Mudo"
 
@@ -210,33 +214,33 @@ msgstr "Atalhos do Teclado"
 msgid "About Mousai"
 msgstr "Sobre o Mousai"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
+#: src/widgets/main_window.py:94
 msgid "Listening"
 msgstr "Escutando"
 
-#: src/widgets/main_window.py:132
+#: src/widgets/main_window.py:113
 msgid "Sorry"
 msgstr "Desculpe"
 
-#: src/widgets/main_window.py:136
+#: src/widgets/main_window.py:117
 msgid "The song was not recognized."
 msgstr "A música não foi reconhecida."
 
-#: src/widgets/main_window.py:138
+#: src/widgets/main_window.py:119
 msgid "Something went wrong."
 msgstr "Algo deu errado."
 
-#: src/main.py:105
+#: src/main.py:82
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:107
+#: src/main.py:84
 msgid "translator-credits"
 msgstr "Vitor Cardoso"
 
-#: src/main.py:108
+#: src/main.py:85
 msgid "GitHub"
 msgstr "GitHub"
 

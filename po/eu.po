@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"POT-Creation-Date: 2021-07-03 08:49+0800\n"
 "PO-Revision-Date: 2021-05-23 02:24+0000\n"
 "Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/kooha/mousai/eu/"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musika;Abestia;Identifikatu;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
 msgid "Identify any songs in seconds"
 msgstr "Edozein abesti identifikatzen du segundotan"
 
@@ -92,60 +92,60 @@ msgstr "⌨️ Teklatu bidezko lasterketak, erraz erabiltzeko modukoak."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts_window.ui:12
+#: data/ui/help_overlay.ui:10
 msgid "General"
 msgstr "Orokorra"
 
-#: data/ui/shortcuts_window.ui:17
+#: data/ui/help_overlay.ui:14
 msgid "Open menu"
 msgstr "Ireki menua"
 
-#: data/ui/shortcuts_window.ui:24
+#: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
 msgstr "Erakutsi teklatu-lasterbideak"
 
-#: data/ui/shortcuts_window.ui:31
+#: data/ui/help_overlay.ui:26
 msgid "Quit"
 msgstr "Utzi"
 
-#: data/ui/shortcuts_window.ui:39
+#: data/ui/help_overlay.ui:33
 msgid "Controls"
 msgstr "Kontrolak"
 
-#: data/ui/shortcuts_window.ui:44
+#: data/ui/help_overlay.ui:37
 msgid "Start listening"
 msgstr "Entzuten hasi"
 
-#: data/ui/shortcuts_window.ui:51
+#: data/ui/help_overlay.ui:43
 msgid "Cancel listening"
 msgstr "Bertan behera utzi entzuketa"
 
-#: data/ui/shortcuts_window.ui:59
+#: data/ui/help_overlay.ui:50
 msgid "Settings"
 msgstr "Doikuntzak"
 
-#: data/ui/shortcuts_window.ui:64
+#: data/ui/help_overlay.ui:54
 msgid "Clear song history"
 msgstr "Abestien historia ezabatu"
 
-#: data/ui/shortcuts_window.ui:71
+#: data/ui/help_overlay.ui:60
 msgid "Reset token value"
 msgstr "Tokenaren balioa berrezartu"
 
-#: data/ui/token_dialog.ui:15
+#: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
 msgstr "Ongi etorri Mousaira"
 
-#: data/ui/token_dialog.ui:28
+#: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
 msgstr "Sartu baliozko token bat"
 
-#: data/ui/token_dialog.ui:35
+#: data/ui/token_dialog.ui:57
 msgid "Submit"
 msgstr "Bidali"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/token_dialog.ui:49
+#: data/ui/token_dialog.ui:71
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
@@ -154,6 +154,10 @@ msgstr ""
 "Mousaik audd.io APIak erabiltzen ditu funtzionatzeko, beraz, saioa hasi "
 "behar da <a href=\"https://dashboard.audd.io /\">bere webgunean</a> eta "
 "token bat lortu. Hau zuriz uzten baduzu, egunean froga batzuk lortuko dituzu."
+
+#: data/ui/token_dialog.ui:83
+msgid "Do not show at startup"
+msgstr ""
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -192,7 +196,7 @@ msgstr "Hasi Mousaing!"
 msgid "Click the listen button to start."
 msgstr "Hasteko, sakatu entzuteko botoia."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
 msgid "Muted"
 msgstr "Isilduta"
 
@@ -212,32 +216,32 @@ msgstr "Teklatu-lasterbideak"
 msgid "About Mousai"
 msgstr "Mousairi buruz"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
+#: src/widgets/main_window.py:94
 msgid "Listening"
 msgstr "Entzuten"
 
-#: src/widgets/main_window.py:132
+#: src/widgets/main_window.py:113
 msgid "Sorry"
 msgstr "Barkatu"
 
-#: src/widgets/main_window.py:136
+#: src/widgets/main_window.py:117
 msgid "The song was not recognized."
 msgstr "Abestia ezin izan da ezagutu."
 
-#: src/widgets/main_window.py:138
+#: src/widgets/main_window.py:119
 msgid "Something went wrong."
 msgstr "Zerbait gaizki atera da."
 
-#: src/main.py:105
+#: src/main.py:82
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright © 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:107
+#: src/main.py:84
 msgid "translator-credits"
 msgstr "Sergio Varela (https://hosted.weblate.org/user/IngrownMink4/)"
 
-#: src/main.py:108
+#: src/main.py:85
 msgid "GitHub"
 msgstr "GitHub"

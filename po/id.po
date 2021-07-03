@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-23 10:20+0800\n"
+"POT-Creation-Date: 2021-07-03 08:49+0800\n"
 "PO-Revision-Date: 2021-06-29 14:33+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:102
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
 msgid "Identify any songs in seconds"
 msgstr "Kenali lagu apa saja dalam hitungan detik"
 
@@ -91,60 +91,60 @@ msgstr "⌨️ Pintasan keyboard yang bersahabat."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/shortcuts_window.ui:12
+#: data/ui/help_overlay.ui:10
 msgid "General"
 msgstr "Umum"
 
-#: data/ui/shortcuts_window.ui:17
+#: data/ui/help_overlay.ui:14
 msgid "Open menu"
 msgstr "Buka menu"
 
-#: data/ui/shortcuts_window.ui:24
+#: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
 msgstr "Tampilkan pintasan keyboard"
 
-#: data/ui/shortcuts_window.ui:31
+#: data/ui/help_overlay.ui:26
 msgid "Quit"
 msgstr "Keluar"
 
-#: data/ui/shortcuts_window.ui:39
+#: data/ui/help_overlay.ui:33
 msgid "Controls"
 msgstr "Kontrol"
 
-#: data/ui/shortcuts_window.ui:44
+#: data/ui/help_overlay.ui:37
 msgid "Start listening"
 msgstr "Mulai mendengarkan"
 
-#: data/ui/shortcuts_window.ui:51
+#: data/ui/help_overlay.ui:43
 msgid "Cancel listening"
 msgstr "Batal mendengarkan"
 
-#: data/ui/shortcuts_window.ui:59
+#: data/ui/help_overlay.ui:50
 msgid "Settings"
 msgstr "Pengaturan"
 
-#: data/ui/shortcuts_window.ui:64
+#: data/ui/help_overlay.ui:54
 msgid "Clear song history"
 msgstr "Hapus riwayat lagu"
 
-#: data/ui/shortcuts_window.ui:71
+#: data/ui/help_overlay.ui:60
 msgid "Reset token value"
 msgstr "Setel ulang nilai token"
 
-#: data/ui/token_dialog.ui:15
+#: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
 msgstr "Selamat datang di Mousai"
 
-#: data/ui/token_dialog.ui:28
+#: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
 msgstr "Masukkan token yang valid"
 
-#: data/ui/token_dialog.ui:35
+#: data/ui/token_dialog.ui:57
 msgid "Submit"
 msgstr "Kirim"
 
 #. Do not translate the link, only 'their website'
-#: data/ui/token_dialog.ui:49
+#: data/ui/token_dialog.ui:71
 msgid ""
 "Mousai uses audd.io APIs to work, so it is required to login to <a href="
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
@@ -153,6 +153,10 @@ msgstr ""
 "Mousai menggunakan API audd.io untuk bekerja, jadi anda perlu login ke<a "
 "href=\"https://dashboard.audd.io/\">situs mereka</a>untuk mendapatkan token. "
 "Jika dibiarkan kosong anda akan diberi masa ujicoba per hari."
+
+#: data/ui/token_dialog.ui:83
+msgid "Do not show at startup"
+msgstr ""
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
@@ -191,7 +195,7 @@ msgstr "Mulai Mousaing!"
 msgid "Click the listen button to start."
 msgstr "Klik tombol dengarkan untuk memulai."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
 msgid "Muted"
 msgstr "Disenyapkan"
 
@@ -211,33 +215,33 @@ msgstr "Pintasan Keyboard"
 msgid "About Mousai"
 msgstr "Tentang Mousai"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
+#: src/widgets/main_window.py:94
 msgid "Listening"
 msgstr "Mendengarkan"
 
-#: src/widgets/main_window.py:132
+#: src/widgets/main_window.py:113
 msgid "Sorry"
 msgstr "Maaf"
 
-#: src/widgets/main_window.py:136
+#: src/widgets/main_window.py:117
 msgid "The song was not recognized."
 msgstr "Lagu tidak dikenali."
 
-#: src/widgets/main_window.py:138
+#: src/widgets/main_window.py:119
 msgid "Something went wrong."
 msgstr "Ada yang salah."
 
-#: src/main.py:105
+#: src/main.py:82
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Hak Cipta 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:107
+#: src/main.py:84
 msgid "translator-credits"
 msgstr "liimee"
 
-#: src/main.py:108
+#: src/main.py:85
 msgid "GitHub"
 msgstr "GitHub"
 
