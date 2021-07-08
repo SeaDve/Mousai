@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 08:49+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: robert schneider <robertschv@gmail.com>\n"
+"PO-Revision-Date: 2021-07-08 21:34+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
 "Language: es\n"
@@ -159,7 +159,7 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:83
 msgid "Do not show at startup"
-msgstr ""
+msgstr "No mostrar al inicio"
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
