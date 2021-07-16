@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # telmo bruno silva seabra <telmoseabra@petalmail.com>, 2021.
+# Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 08:49+0800\n"
-"PO-Revision-Date: 2021-07-07 11:21+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-07-16 05:34+0000\n"
+"Last-Translator: Unai Hernández Minaberry <unihernandez22@gmail.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/kooha/mousai/"
 "eo/>\n"
 "Language: eo\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -80,23 +81,23 @@ msgstr ""
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:27
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/help_overlay.ui:10
 msgid "General"
-msgstr ""
+msgstr "Ĝenerala"
 
 #: data/ui/help_overlay.ui:14
 msgid "Open menu"
-msgstr ""
+msgstr "Aperti menuon"
 
 #: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
-msgstr ""
+msgstr "Elmontri klavarajn kurtvojojn"
 
 #: data/ui/help_overlay.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "Lasi"
 
 #: data/ui/help_overlay.ui:33
 msgid "Controls"

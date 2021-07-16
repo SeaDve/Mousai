@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>, 2021.
+# Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 08:49+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>\n"
+"PO-Revision-Date: 2021-07-16 05:34+0000\n"
+"Last-Translator: Unai Hernández Minaberry <unihernandez22@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
 "\n"
 "Language: fr\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -27,7 +28,7 @@ msgstr "Mousai"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr "Shazam;Musique;Chanson;Identifier;"
+msgstr "Shazam ;Musique ;Chanson ;Identifier;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
 msgid "Identify any songs in seconds"
@@ -159,7 +160,7 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:83
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Ne pas afficher au démarrage"
 
 #: data/ui/song_row.ui:15
 msgid "Open in Browser"
