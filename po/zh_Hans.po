@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # TheInterestingSoul <wangpy01@outlook.com>, 2021.
+# Zhou Nan <zhounan@nfschina.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-03 08:49+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-07-21 06:32+0000\n"
+"Last-Translator: Zhou Nan <zhounan@nfschina.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -75,7 +76,7 @@ msgstr "📱 易于使用的用户界面。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr "⌨️ 友好易记的快捷键。"
+msgstr "⌨️ 用户友好的键盘快捷键。"
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:27
@@ -84,7 +85,7 @@ msgstr "Dave Patrick"
 
 #: data/ui/help_overlay.ui:10
 msgid "General"
-msgstr "一般"
+msgstr "通用"
 
 #: data/ui/help_overlay.ui:14
 msgid "Open menu"
@@ -92,7 +93,7 @@ msgstr "打开菜单"
 
 #: data/ui/help_overlay.ui:20
 msgid "Show keyboard shortcuts"
-msgstr "显示快捷键列表"
+msgstr "显示键盘快捷键"
 
 #: data/ui/help_overlay.ui:26
 msgid "Quit"
@@ -197,7 +198,7 @@ msgstr "重置令牌"
 
 #: data/ui/main_window.ui:159
 msgid "Keyboard Shortcuts"
-msgstr "键盘快捷键"
+msgstr "快捷键"
 
 #: data/ui/main_window.ui:163
 msgid "About Mousai"
@@ -222,12 +223,12 @@ msgstr "识别时出现了问题。"
 
 #: src/main.py:82
 msgid "Copyright 2021 Dave Patrick"
-msgstr "版权所有 © 2021 Dave Patrick"
+msgstr "版权所有: Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:84
 msgid "translator-credits"
-msgstr "有趣的灵魂 (@TheInterestingSoul)"
+msgstr "Zhou Nan <zhounan@nfschina.com>"
 
 #: src/main.py:85
 msgid "GitHub"
