@@ -42,6 +42,20 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.3" date="2021-07-28">
+      <description>
+        <p>This update contains translations and minor fixes:</p>
+        <ul>
+          <li>Better user experience with token dialog</li>
+          <li>Updated Dutch translations</li>
+          <li>Updated Italian translations</li>
+          <li>Updated Turkish translations</li>
+          <li>Updated Spanish translations</li>
+          <li>Updated Esperanto translations</li>
+          <li>Updated French translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.2" date="2021-07-03">
       <description>
         <p>This update contains minor fixes:</p>
