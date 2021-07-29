@@ -58,7 +58,7 @@ class Application(Gtk.Application):
         action.connect('activate', self.show_about_dialog)
         self.add_action(action)
 
-        self.set_accels_for_action('app.show-token', ('<Ctrl><Ctrl>Delete',))
+        self.set_accels_for_action('app.show-token', ('<Ctrl>Delete',))
         self.set_accels_for_action('win.show-help-overlay', ('<Ctrl>question',))
         self.set_accels_for_action('win.clear-history', ('<Ctrl>BackSpace',))
         self.set_accels_for_action('win.quit', ('<Ctrl>q',))
