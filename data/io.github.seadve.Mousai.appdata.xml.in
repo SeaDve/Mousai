@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.4" date="2021-08-03">
+      <description>
+        <p>This update contains translations and minor ui fixes:</p>
+        <ul>
+          <li>Minor user interface improvements</li>
+          <li>Updated Swedish translations</li>
+          <li>Updated Norwegian Bokmål translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.3" date="2021-07-28">
       <description>
         <p>This update contains translations and minor fixes:</p>
