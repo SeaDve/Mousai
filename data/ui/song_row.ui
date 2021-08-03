@@ -7,11 +7,9 @@
     <child>
       <object class="GtkBox">
         <property name="valign">center</property>
-        <style>
-          <class name="linked"/>
-        </style>
         <child>
           <object class="GtkButton" id="open_link_button">
+            <property name="has-frame">False</property>
             <property name="tooltip-text" translatable="yes">Open in Browser</property>
             <property name="icon-name">external-link-symbolic</property>
             <signal name="clicked" handler="on_open_link_button_clicked" swapped="no"/>
@@ -19,6 +17,7 @@
         </child>
         <child>
           <object class="ButtonPlayer" id="button_player">
+            <property name="has-frame">False</property>
             <property name="action-name">but.play</property>
             <property name="tooltip-text" translatable="yes">Play preview</property>
             <binding name="icon-name">
