@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-03 08:49+0800\n"
+"POT-Creation-Date: 2021-08-03 16:41+0800\n"
 "PO-Revision-Date: 2021-07-07 11:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,8 @@ msgstr "🎵 Определите название и исполнителя п�
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
-msgstr "🎸 Храните идентифицированную песню, включая обложку альбома, в истории."
+msgstr ""
+"🎸 Храните идентифицированную песню, включая обложку альбома, в истории."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
@@ -156,15 +157,15 @@ msgstr ""
 "href=\"https://dashboard.audd.io/\">их сайт</a> и получить токен. Если "
 "оставить это значение пустым, вы получите несколько пробных запусков в день."
 
-#: data/ui/token_dialog.ui:83
+#: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
 msgstr ""
 
-#: data/ui/song_row.ui:15
+#: data/ui/song_row.ui:13
 msgid "Open in Browser"
 msgstr "Открыть в браузере"
 
-#: data/ui/song_row.ui:23
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr ""
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-03 08:49+0800\n"
+"POT-Creation-Date: 2021-08-03 16:41+0800\n"
 "PO-Revision-Date: 2021-07-07 11:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -152,15 +152,15 @@ msgstr ""
 "kumuha ng token. Kapag wala kang linagay, magkakaroon ka lamang ng iilang "
 "trials kada araw."
 
-#: data/ui/token_dialog.ui:83
+#: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
 msgstr "Huwag ipakitang muli"
 
-#: data/ui/song_row.ui:15
+#: data/ui/song_row.ui:13
 msgid "Open in Browser"
 msgstr "Buksan sa Browser"
 
-#: data/ui/song_row.ui:23
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr "I-play ang preview"
 

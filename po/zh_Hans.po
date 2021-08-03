@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-03 08:49+0800\n"
+"POT-Creation-Date: 2021-08-03 16:41+0800\n"
 "PO-Revision-Date: 2021-07-21 06:32+0000\n"
 "Last-Translator: Zhou Nan <zhounan@nfschina.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -42,13 +42,16 @@ msgid ""
 "Mousai is a simple application that can identify song similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
-msgstr "Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“侦听”按钮，然后等待几秒钟。它将神奇地反馈该歌曲的标题和艺术家！"
+msgstr ""
+"Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“侦听”按钮，然后等待几秒"
+"钟。它将神奇地反馈该歌曲的标题和艺术家！"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to login to their "
 "site to get more trials."
-msgstr "请注意：本软件使用了 audd.io 的 API，因此你需要登录才能获取更多的使用机会。"
+msgstr ""
+"请注意：本软件使用了 audd.io 的 API，因此你需要登录才能获取更多的使用机会。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -143,15 +146,15 @@ msgid ""
 "this blank will give you a few trials per day."
 msgstr ""
 
-#: data/ui/token_dialog.ui:83
+#: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
 msgstr ""
 
-#: data/ui/song_row.ui:15
+#: data/ui/song_row.ui:13
 msgid "Open in Browser"
 msgstr ""
 
-#: data/ui/song_row.ui:23
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr ""
 

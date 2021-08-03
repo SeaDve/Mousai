@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-03 08:49+0800\n"
+"POT-Creation-Date: 2021-08-03 16:41+0800\n"
 "PO-Revision-Date: 2021-07-30 08:34+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -149,21 +149,21 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai bruker audd.io-API-et, så du må logge inn på <a href=\"https"
-"://dashboard.audd.io/\">nettsiden deres</a> for å hente et symbol. Å la "
-"dette stå tomt gir deg et par forsøk per dag."
+"Mousai bruker audd.io-API-et, så du må logge inn på <a href=\"https://"
+"dashboard.audd.io/\">nettsiden deres</a> for å hente et symbol. Å la dette "
+"stå tomt gir deg et par forsøk per dag."
 
-#: data/ui/token_dialog.ui:83
+#: data/ui/token_dialog.ui:88
 #, fuzzy
 msgid "Do not show at startup"
 msgstr "Ikke vis ved oppstart"
 
-#: data/ui/song_row.ui:15
+#: data/ui/song_row.ui:13
 #, fuzzy
 msgid "Open in Browser"
 msgstr "Åpne i nettleser"
 
-#: data/ui/song_row.ui:23
+#: data/ui/song_row.ui:22
 #, fuzzy
 msgid "Play preview"
 msgstr "Avspillingsforhåndsvising"

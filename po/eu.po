@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-03 08:49+0800\n"
+"POT-Creation-Date: 2021-08-03 16:41+0800\n"
 "PO-Revision-Date: 2021-07-07 11:21+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Basque <https://hosted.weblate.org/projects/kooha/mousai/eu/>"
-"\n"
+"Language-Team: Basque <https://hosted.weblate.org/projects/kooha/mousai/eu/"
+">\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,15 +155,15 @@ msgstr ""
 "behar da <a href=\"https://dashboard.audd.io /\">bere webgunean</a> eta "
 "token bat lortu. Hau zuriz uzten baduzu, egunean froga batzuk lortuko dituzu."
 
-#: data/ui/token_dialog.ui:83
+#: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
 msgstr ""
 
-#: data/ui/song_row.ui:15
+#: data/ui/song_row.ui:13
 msgid "Open in Browser"
 msgstr "Ireki nabigatzailean"
 
-#: data/ui/song_row.ui:23
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr "Aurretiazko bista erreproduzitu"
 
