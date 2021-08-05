@@ -82,12 +82,12 @@ class VoiceRecorder(GObject.GObject):
         self.highest_peak = DEFAULT_PEAK
 
     def cancel(self):
-        self.close_pipeline()
         self.timer.cancel()
+        self.close_pipeline()
 
     def stop(self):
-        self.close_pipeline()
         self.emit('record-done', self.highest_peak)
+        self.close_pipeline()
 
     def _on_gst_message(self, bus, message):
         t = message.type
