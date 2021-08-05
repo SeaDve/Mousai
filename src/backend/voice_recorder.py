@@ -12,9 +12,9 @@ from mousai.backend.timer import Timer
 
 
 class VoiceRecorder(GObject.GObject):
-    __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
+    __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, (float,))}
 
-    peak = GObject.Property(type=float)
+    _peak = highest_peak = -349.99
     _state = Gst.State.NULL
 
     def __init__(self):
@@ -46,6 +46,17 @@ class VoiceRecorder(GObject.GObject):
         self._state = pipeline_state
         self.pipeline.set_state(pipeline_state)
 
+    @GObject.Property(type=float, default=_peak)
+    def peak(self):
+        return self._peak
+
+    @peak.setter  # type: ignore
+    def peak(self, peak):
+        self._peak = peak
+
+        if peak >= self.highest_peak:
+            self.highest_peak = peak
+
     def start(self):
         self.record_bus = self.pipeline.get_bus()
         self.record_bus.add_signal_watch()
@@ -72,12 +83,12 @@ class VoiceRecorder(GObject.GObject):
         self.props.state = Gst.State.NULL
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
-        self.emit('record-done')
+        self.emit('record-done', self.highest_peak)
 
     def _on_gst_message(self, bus, message):
         t = message.type
         if t == Gst.MessageType.ELEMENT:
-            self.peak = message.get_structure().get_value('peak')[0]
+            self.props.peak = message.get_structure().get_value('peak')[0]
         elif t == Gst.MessageType.EOS:
             self.stop()
         elif t == Gst.MessageType.ERROR:

@@ -100,7 +100,12 @@ class MainWindow(Adw.ApplicationWindow):
         self.recording_box.set_icon_name(icon_name)
         self.recording_box.set_title(title)
 
-    def on_record_done(self, recorder):
+    def on_record_done(self, recorder, highest_peak):
+        if highest_peak < -349:
+            self.show_error("No audio detected", "Your microphone may be disconnected")
+            self.return_default_page()
+            return
+
         song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
         token = self.settings.get_string('token-value')
         output, image_src = Utils.guess_song(song_file, token)
@@ -110,16 +115,14 @@ class MainWindow(Adw.ApplicationWindow):
             result = output['result']
             song = Song(*result.values())
         except (AttributeError, KeyError):
-            error = Gtk.MessageDialog(transient_for=self, modal=True,
-                                      buttons=Gtk.ButtonsType.OK, title=_("Sorry"))
             if status == 'error':
-                error.props.text = output['error_message']
+                error_subtitle = output['error_message']
             elif status == 'success' and not result:
-                error.props.text = _("The song was not recognized.")
+                error_subtitle = _("The song was not recognized.")
             else:
-                error.props.text = _("Something went wrong.")
-            error.present()
-            error.connect('response', lambda *_: error.close())
+                error_subtitle = _("Something went wrong.")
+
+            self.show_error(_("Sorry!"), error_subtitle)
         else:
             if image_src:
                 icon_dir = f'{Utils.get_tmp_dir()}/{song.title}{song.artist}.jpg'
@@ -138,6 +141,13 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             self.voice_recorder.cancel()
             self.return_default_page()
+
+    def show_error(self, title, subtitle):
+        error = Gtk.MessageDialog(transient_for=self, modal=True,
+                                  buttons=Gtk.ButtonsType.OK, title=title)
+        error.props.text = subtitle
+        error.present()
+        error.connect('response', lambda *_: error.close())
 
     @Gtk.Template.Callback()
     def get_visible_button(self, window, visible_child):
