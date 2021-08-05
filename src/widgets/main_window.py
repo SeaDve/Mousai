@@ -102,7 +102,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_record_done(self, recorder, highest_peak):
         if highest_peak < -349:
-            self.show_error("No audio detected", "Your microphone may be disconnected")
+            self.show_error(_("No audio detected"), _("Your microphone may be disconnected."))
             self.return_default_page()
             return
 
