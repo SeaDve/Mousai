@@ -34,10 +34,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.return_default_page()
 
     def setup_actions(self):
-        builder = Gtk.Builder.new_from_resource('/io/github/seadve/Mousai/ui/help_overlay.ui')
-        help_overlay = builder.get_object('help_overlay')
-        self.set_help_overlay(help_overlay)
-
         action = Gio.SimpleAction.new('clear-history', None)
         action.connect('activate', lambda *_: self.clear_history())
         self.add_action(action)
