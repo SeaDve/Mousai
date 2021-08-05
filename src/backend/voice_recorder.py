@@ -79,15 +79,16 @@ class VoiceRecorder(GObject.GObject):
         self.props.state = Gst.State.NULL
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
-        self.highest_peak = DEFAULT_PEAK
 
     def cancel(self):
-        self.timer.cancel()
         self.close_pipeline()
+        self.timer.cancel()
+        self.highest_peak = DEFAULT_PEAK
 
     def stop(self):
-        self.emit('record-done', self.highest_peak)
         self.close_pipeline()
+        self.emit('record-done', self.highest_peak)
+        self.highest_peak = DEFAULT_PEAK
 
     def _on_gst_message(self, bus, message):
         t = message.type
