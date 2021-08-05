@@ -58,14 +58,6 @@ class Utils:
 
     @staticmethod
     def guess_song(song_file, token):
-        if not Utils.check_has_audio(song_file):
-            return Utils._simplify({
-                'status': 'error', 'error': {
-                    'error_message': "No audio detected. Your microphone may "
-                                     "be disconnected or not detected."
-                }
-            })
-
         data = {'api_token': token, 'return': 'spotify'}
         files = {'file': open(song_file, 'rb')}
         try:
@@ -81,21 +73,3 @@ class Utils:
         if not directory:
             directory = ''
         return f'{directory}/tmp'
-
-    @staticmethod
-    def check_has_audio(filename):
-        import subprocess
-
-        result = subprocess.run(
-            [
-                "ffprobe", "-v", "error", "-show_entries", "format=nb_streams",
-                "-of", "default=noprint_wrappers=1:nokey=1", filename
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT
-        )
-
-        try:
-            return int(result.stdout) - 1
-        except ValueError:
-            return False
