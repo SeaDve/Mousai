@@ -6,19 +6,25 @@
 <p align="center"><strong>Identify any songs in seconds</strong></p>
 
 <p align="center">
-  <a href="https://flathub.org/apps/details/io.github.seadve.Mousai"><img width="200" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.png"/></a>
+  <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
+    <img width="200" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.png"/>
+  </a>
+  <br>
+  <a href="https://liberapay.com/SeaDve/donate">
+    <img src="https://liberapay.com/assets/widgets/donate.svg" alt="Donate using Liberapay">
+  </a>
 </p>
 
 <br>
 <p align="center">
-  <a href="https://liberapay.com/SeaDve/">
-    <img src="https://img.shields.io/liberapay/receives/SeaDve.svg?logo=liberapay">
-  </a>
   <a href="https://hosted.weblate.org/engage/kooha/">
     <img src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg" alt="Translation status"  />
   </a>
   <a href="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml">
     <img src="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml/badge.svg" alt="CI status"/>
+  </a>
+  <a href="https://repology.org/project/breathing/versions">
+    <img src="https://repology.org/badge/tiny-repos/breathing.svg" alt="Packaging status">
   </a>
 </p>
 
