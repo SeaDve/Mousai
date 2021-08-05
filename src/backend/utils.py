@@ -69,7 +69,7 @@ class Utils:
 
     @staticmethod
     def get_tmp_dir():
-        directory = GLib.getenv('XDG_CACHE_HOME')
+        directory = GLib.get_user_cache_dir()
         if not directory:
             directory = ''
         return f'{directory}/tmp'
