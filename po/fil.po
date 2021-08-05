@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 16:41+0800\n"
+"POT-Creation-Date: 2021-08-05 13:49+0800\n"
 "PO-Revision-Date: 2021-07-07 11:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Tunog;Kanta;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
 msgid "Identify any songs in seconds"
 msgstr "Alamin ang kanta sa kaunting sandali"
 
@@ -88,45 +88,41 @@ msgstr "⌨️ Madaling gamiting mga keyboard shortcuts."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/help_overlay.ui:10
+#: data/ui/shortcuts.ui:10
 msgid "General"
 msgstr "Pangkalahatan"
 
-#: data/ui/help_overlay.ui:14
-msgid "Open menu"
-msgstr "Buksan ang menu"
+#: data/ui/shortcuts.ui:14
+msgid "Open Menu"
+msgstr ""
 
-#: data/ui/help_overlay.ui:20
-msgid "Show keyboard shortcuts"
-msgstr "Ipakita ang mga keyboard shortcut"
+#: data/ui/shortcuts.ui:20
+msgid "Show Keyboard Shortcuts"
+msgstr ""
 
-#: data/ui/help_overlay.ui:26
+#: data/ui/shortcuts.ui:26
 msgid "Quit"
 msgstr "Isara"
 
-#: data/ui/help_overlay.ui:33
+#: data/ui/shortcuts.ui:33
 msgid "Controls"
 msgstr "Mga controls"
 
-#: data/ui/help_overlay.ui:37
-msgid "Start listening"
-msgstr "Magsimulang makinig"
+#: data/ui/shortcuts.ui:37
+msgid "Toggle Listen"
+msgstr ""
 
-#: data/ui/help_overlay.ui:43
-msgid "Cancel listening"
-msgstr "Ikansela ang pagkinig"
-
-#: data/ui/help_overlay.ui:50
+#: data/ui/shortcuts.ui:44
 msgid "Settings"
 msgstr "Mga Opsyon"
 
-#: data/ui/help_overlay.ui:54
-msgid "Clear song history"
-msgstr "Burahin ang history"
+#: data/ui/shortcuts.ui:48 data/ui/main_window.ui:126
+msgid "Clear Song History"
+msgstr "Burahin Ang History"
 
-#: data/ui/help_overlay.ui:60
-msgid "Reset token value"
-msgstr "I-reset ang token"
+#: data/ui/shortcuts.ui:54
+msgid "Reset Token Value"
+msgstr ""
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -164,84 +160,98 @@ msgstr "Buksan sa Browser"
 msgid "Play preview"
 msgstr "I-play ang preview"
 
-#: data/ui/main_window.ui:24
+#: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Makinig"
 
-#: data/ui/main_window.ui:25
+#: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
 msgstr "Magsimula"
 
-#: data/ui/main_window.ui:50
+#: data/ui/main_window.ui:38
 msgid "Cancel"
 msgstr "Ikansela"
 
-#: data/ui/main_window.ui:51
+#: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
 msgstr "I-kansela ang pag-record"
 
-#: data/ui/main_window.ui:76
+#: data/ui/main_window.ui:53
 msgid "Main Menu"
 msgstr "Pangunahing Menu"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:123
+#: data/ui/main_window.ui:100
 msgid "Start Mousaing!"
 msgstr "Magsimulang magmousai!"
 
-#: data/ui/main_window.ui:124
+#: data/ui/main_window.ui:101
 msgid "Click the listen button to start."
 msgstr "Pindutin ang listen button upang magsimula."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:98
 msgid "Muted"
 msgstr "Naka-mute"
 
-#: data/ui/main_window.ui:149
-msgid "Clear Song History"
-msgstr "Burahin Ang History"
-
-#: data/ui/main_window.ui:153
+#: data/ui/main_window.ui:130
 msgid "Reset Token"
 msgstr "I-reset Ang Token"
 
-#: data/ui/main_window.ui:159
+#: data/ui/main_window.ui:136
 msgid "Keyboard Shortcuts"
 msgstr "Mga keyboard shortcut"
 
-#: data/ui/main_window.ui:163
+#: data/ui/main_window.ui:140
 msgid "About Mousai"
 msgstr "Tungkol sa Mousai"
 
-#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
-#: src/widgets/main_window.py:94
+#: src/widgets/main_window.py:89 src/widgets/main_window.py:92
+#: src/widgets/main_window.py:95
 msgid "Listening"
 msgstr "Nakikinig"
 
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:114
 msgid "Sorry"
 msgstr "Paumanhin"
 
-#: src/widgets/main_window.py:117
+#: src/widgets/main_window.py:118
 msgid "The song was not recognized."
 msgstr "Ang kanta ay hindi makilala."
 
-#: src/widgets/main_window.py:119
+#: src/widgets/main_window.py:120
 msgid "Something went wrong."
 msgstr "Parang may mali."
 
-#: src/main.py:82
+#: src/main.py:87
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Kopirayt 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:84
+#: src/main.py:89
 msgid "translator-credits"
 msgstr "Dave Patrick"
 
-#: src/main.py:85
+#: src/main.py:90
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Open menu"
+#~ msgstr "Buksan ang menu"
+
+#~ msgid "Show keyboard shortcuts"
+#~ msgstr "Ipakita ang mga keyboard shortcut"
+
+#~ msgid "Start listening"
+#~ msgstr "Magsimulang makinig"
+
+#~ msgid "Cancel listening"
+#~ msgstr "Ikansela ang pagkinig"
+
+#~ msgid "Clear song history"
+#~ msgstr "Burahin ang history"
+
+#~ msgid "Reset token value"
+#~ msgstr "I-reset ang token"
 
 #~ msgid "🎸 Store the identified song including the album art in history"
 #~ msgstr "🎸 I-store and na-identify na kanta kasama ang album art"

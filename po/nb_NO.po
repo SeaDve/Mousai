@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 16:41+0800\n"
+"POT-Creation-Date: 2021-08-05 13:49+0800\n"
 "PO-Revision-Date: 2021-07-30 08:34+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musikk;Sang;Identifisering;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
 msgid "Identify any songs in seconds"
 msgstr "Identifiser sanger på sekunder"
 
@@ -89,45 +89,41 @@ msgstr "⌨️ Brukervennlige tastatursnarveier"
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/help_overlay.ui:10
+#: data/ui/shortcuts.ui:10
 msgid "General"
 msgstr "Generelt"
 
-#: data/ui/help_overlay.ui:14
-msgid "Open menu"
-msgstr "Åpne meny"
+#: data/ui/shortcuts.ui:14
+msgid "Open Menu"
+msgstr ""
 
-#: data/ui/help_overlay.ui:20
-msgid "Show keyboard shortcuts"
-msgstr "Vis tastatursnarveier"
+#: data/ui/shortcuts.ui:20
+msgid "Show Keyboard Shortcuts"
+msgstr ""
 
-#: data/ui/help_overlay.ui:26
+#: data/ui/shortcuts.ui:26
 msgid "Quit"
 msgstr "Avslutt"
 
-#: data/ui/help_overlay.ui:33
+#: data/ui/shortcuts.ui:33
 msgid "Controls"
 msgstr "Kontroller"
 
-#: data/ui/help_overlay.ui:37
-msgid "Start listening"
-msgstr "Begynn lyttingen"
+#: data/ui/shortcuts.ui:37
+msgid "Toggle Listen"
+msgstr ""
 
-#: data/ui/help_overlay.ui:43
-msgid "Cancel listening"
-msgstr "Avbryt lytting"
-
-#: data/ui/help_overlay.ui:50
+#: data/ui/shortcuts.ui:44
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: data/ui/help_overlay.ui:54
-msgid "Clear song history"
+#: data/ui/shortcuts.ui:48 data/ui/main_window.ui:126
+msgid "Clear Song History"
 msgstr "Tøm sanghistorikk"
 
-#: data/ui/help_overlay.ui:60
-msgid "Reset token value"
-msgstr "Tilbakestill symbolverdi"
+#: data/ui/shortcuts.ui:54
+msgid "Reset Token Value"
+msgstr ""
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -168,85 +164,99 @@ msgstr "Åpne i nettleser"
 msgid "Play preview"
 msgstr "Avspillingsforhåndsvising"
 
-#: data/ui/main_window.ui:24
+#: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Lytt"
 
-#: data/ui/main_window.ui:25
+#: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
 msgstr "Start identifisering av musikk"
 
-#: data/ui/main_window.ui:50
+#: data/ui/main_window.ui:38
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: data/ui/main_window.ui:51
+#: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
 msgstr "Avbryt opptaket"
 
-#: data/ui/main_window.ui:76
+#: data/ui/main_window.ui:53
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:123
+#: data/ui/main_window.ui:100
 msgid "Start Mousaing!"
 msgstr "Start Mousaing."
 
-#: data/ui/main_window.ui:124
+#: data/ui/main_window.ui:101
 msgid "Click the listen button to start."
 msgstr "Klikk på lytteknappen for å starte."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:98
 msgid "Muted"
 msgstr "Forstummet"
 
-#: data/ui/main_window.ui:149
-msgid "Clear Song History"
-msgstr "Tøm sanghistorikk"
-
-#: data/ui/main_window.ui:153
+#: data/ui/main_window.ui:130
 msgid "Reset Token"
 msgstr "Tilbakestill symbol"
 
-#: data/ui/main_window.ui:159
+#: data/ui/main_window.ui:136
 msgid "Keyboard Shortcuts"
 msgstr "Tastatursnarveier"
 
-#: data/ui/main_window.ui:163
+#: data/ui/main_window.ui:140
 msgid "About Mousai"
 msgstr "Om Mousai"
 
-#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
-#: src/widgets/main_window.py:94
+#: src/widgets/main_window.py:89 src/widgets/main_window.py:92
+#: src/widgets/main_window.py:95
 #, fuzzy
 msgid "Listening"
 msgstr "Lytting"
 
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:114
 msgid "Sorry"
 msgstr "Beklager"
 
-#: src/widgets/main_window.py:117
+#: src/widgets/main_window.py:118
 msgid "The song was not recognized."
 msgstr "Gjenkjenner ikke sangen."
 
-#: src/widgets/main_window.py:119
+#: src/widgets/main_window.py:120
 msgid "Something went wrong."
 msgstr "Noe gikk galt."
 
-#: src/main.py:82
+#: src/main.py:87
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Opphavsrett © 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:84
+#: src/main.py:89
 msgid "translator-credits"
 msgstr "Allan Nordhøy"
 
-#: src/main.py:85
+#: src/main.py:90
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Open menu"
+#~ msgstr "Åpne meny"
+
+#~ msgid "Show keyboard shortcuts"
+#~ msgstr "Vis tastatursnarveier"
+
+#~ msgid "Start listening"
+#~ msgstr "Begynn lyttingen"
+
+#~ msgid "Cancel listening"
+#~ msgstr "Avbryt lytting"
+
+#~ msgid "Clear song history"
+#~ msgstr "Tøm sanghistorikk"
+
+#~ msgid "Reset token value"
+#~ msgstr "Tilbakestill symbolverdi"
 
 #~ msgid "🎸 Store the identified song with the Album art in a history."
 #~ msgstr "🎸 Lagre identifisert sang med omslag i historikken."

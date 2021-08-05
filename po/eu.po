@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 16:41+0800\n"
+"POT-Creation-Date: 2021-08-05 13:49+0800\n"
 "PO-Revision-Date: 2021-07-07 11:21+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/kooha/mousai/eu/"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musika;Abestia;Identifikatu;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
 msgid "Identify any songs in seconds"
 msgstr "Edozein abesti identifikatzen du segundotan"
 
@@ -92,45 +92,41 @@ msgstr "⌨️ Teklatu bidezko lasterketak, erraz erabiltzeko modukoak."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/help_overlay.ui:10
+#: data/ui/shortcuts.ui:10
 msgid "General"
 msgstr "Orokorra"
 
-#: data/ui/help_overlay.ui:14
-msgid "Open menu"
-msgstr "Ireki menua"
+#: data/ui/shortcuts.ui:14
+msgid "Open Menu"
+msgstr ""
 
-#: data/ui/help_overlay.ui:20
-msgid "Show keyboard shortcuts"
-msgstr "Erakutsi teklatu-lasterbideak"
+#: data/ui/shortcuts.ui:20
+msgid "Show Keyboard Shortcuts"
+msgstr ""
 
-#: data/ui/help_overlay.ui:26
+#: data/ui/shortcuts.ui:26
 msgid "Quit"
 msgstr "Utzi"
 
-#: data/ui/help_overlay.ui:33
+#: data/ui/shortcuts.ui:33
 msgid "Controls"
 msgstr "Kontrolak"
 
-#: data/ui/help_overlay.ui:37
-msgid "Start listening"
-msgstr "Entzuten hasi"
+#: data/ui/shortcuts.ui:37
+msgid "Toggle Listen"
+msgstr ""
 
-#: data/ui/help_overlay.ui:43
-msgid "Cancel listening"
-msgstr "Bertan behera utzi entzuketa"
-
-#: data/ui/help_overlay.ui:50
+#: data/ui/shortcuts.ui:44
 msgid "Settings"
 msgstr "Doikuntzak"
 
-#: data/ui/help_overlay.ui:54
-msgid "Clear song history"
+#: data/ui/shortcuts.ui:48 data/ui/main_window.ui:126
+msgid "Clear Song History"
 msgstr "Abestien historia ezabatu"
 
-#: data/ui/help_overlay.ui:60
-msgid "Reset token value"
-msgstr "Tokenaren balioa berrezartu"
+#: data/ui/shortcuts.ui:54
+msgid "Reset Token Value"
+msgstr ""
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -167,81 +163,95 @@ msgstr "Ireki nabigatzailean"
 msgid "Play preview"
 msgstr "Aurretiazko bista erreproduzitu"
 
-#: data/ui/main_window.ui:24
+#: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Entzun"
 
-#: data/ui/main_window.ui:25
+#: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
 msgstr "Musika identifikatzen hastea"
 
-#: data/ui/main_window.ui:50
+#: data/ui/main_window.ui:38
 msgid "Cancel"
 msgstr "Ezeztatu"
 
-#: data/ui/main_window.ui:51
+#: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
 msgstr "Grabazioa bertan behera utzi"
 
-#: data/ui/main_window.ui:76
+#: data/ui/main_window.ui:53
 msgid "Main Menu"
 msgstr "Menu nagusia"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:123
+#: data/ui/main_window.ui:100
 msgid "Start Mousaing!"
 msgstr "Hasi Mousaing!"
 
-#: data/ui/main_window.ui:124
+#: data/ui/main_window.ui:101
 msgid "Click the listen button to start."
 msgstr "Hasteko, sakatu entzuteko botoia."
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:98
 msgid "Muted"
 msgstr "Isilduta"
 
-#: data/ui/main_window.ui:149
-msgid "Clear Song History"
-msgstr "Abestien historia ezabatu"
-
-#: data/ui/main_window.ui:153
+#: data/ui/main_window.ui:130
 msgid "Reset Token"
 msgstr "Berrabiarazi tokena"
 
-#: data/ui/main_window.ui:159
+#: data/ui/main_window.ui:136
 msgid "Keyboard Shortcuts"
 msgstr "Teklatu-lasterbideak"
 
-#: data/ui/main_window.ui:163
+#: data/ui/main_window.ui:140
 msgid "About Mousai"
 msgstr "Mousairi buruz"
 
-#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
-#: src/widgets/main_window.py:94
+#: src/widgets/main_window.py:89 src/widgets/main_window.py:92
+#: src/widgets/main_window.py:95
 msgid "Listening"
 msgstr "Entzuten"
 
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:114
 msgid "Sorry"
 msgstr "Barkatu"
 
-#: src/widgets/main_window.py:117
+#: src/widgets/main_window.py:118
 msgid "The song was not recognized."
 msgstr "Abestia ezin izan da ezagutu."
 
-#: src/widgets/main_window.py:119
+#: src/widgets/main_window.py:120
 msgid "Something went wrong."
 msgstr "Zerbait gaizki atera da."
 
-#: src/main.py:82
+#: src/main.py:87
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright © 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:84
+#: src/main.py:89
 msgid "translator-credits"
 msgstr "Sergio Varela (https://hosted.weblate.org/user/IngrownMink4/)"
 
-#: src/main.py:85
+#: src/main.py:90
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Open menu"
+#~ msgstr "Ireki menua"
+
+#~ msgid "Show keyboard shortcuts"
+#~ msgstr "Erakutsi teklatu-lasterbideak"
+
+#~ msgid "Start listening"
+#~ msgstr "Entzuten hasi"
+
+#~ msgid "Cancel listening"
+#~ msgstr "Bertan behera utzi entzuketa"
+
+#~ msgid "Clear song history"
+#~ msgstr "Abestien historia ezabatu"
+
+#~ msgid "Reset token value"
+#~ msgstr "Tokenaren balioa berrezartu"

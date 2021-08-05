@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-03 16:41+0800\n"
+"POT-Creation-Date: 2021-08-05 13:49+0800\n"
 "PO-Revision-Date: 2021-08-02 06:32+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Låt;Identifiera;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:79
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
 msgid "Identify any songs in seconds"
 msgstr "Identifiera alla låtar på några sekunder"
 
@@ -83,45 +83,41 @@ msgstr "⌨️ Användarvänliga kortkommandon."
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
-#: data/ui/help_overlay.ui:10
+#: data/ui/shortcuts.ui:10
 msgid "General"
 msgstr "Allmänt"
 
-#: data/ui/help_overlay.ui:14
-msgid "Open menu"
-msgstr "Öppna menyn"
+#: data/ui/shortcuts.ui:14
+msgid "Open Menu"
+msgstr ""
 
-#: data/ui/help_overlay.ui:20
-msgid "Show keyboard shortcuts"
-msgstr "Visa tangentbordsgenvägar"
+#: data/ui/shortcuts.ui:20
+msgid "Show Keyboard Shortcuts"
+msgstr ""
 
-#: data/ui/help_overlay.ui:26
+#: data/ui/shortcuts.ui:26
 msgid "Quit"
 msgstr "Avsluta"
 
-#: data/ui/help_overlay.ui:33
+#: data/ui/shortcuts.ui:33
 msgid "Controls"
 msgstr "Kontroller"
 
-#: data/ui/help_overlay.ui:37
-msgid "Start listening"
-msgstr "Börja lyssna"
+#: data/ui/shortcuts.ui:37
+msgid "Toggle Listen"
+msgstr ""
 
-#: data/ui/help_overlay.ui:43
-msgid "Cancel listening"
-msgstr "Sluta lyssna"
-
-#: data/ui/help_overlay.ui:50
+#: data/ui/shortcuts.ui:44
 msgid "Settings"
 msgstr "Inställningar"
 
-#: data/ui/help_overlay.ui:54
-msgid "Clear song history"
+#: data/ui/shortcuts.ui:48 data/ui/main_window.ui:126
+msgid "Clear Song History"
 msgstr "Rensa låthistorik"
 
-#: data/ui/help_overlay.ui:60
-msgid "Reset token value"
-msgstr "Återställ tokenvärde"
+#: data/ui/shortcuts.ui:54
+msgid "Reset Token Value"
+msgstr ""
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -155,84 +151,98 @@ msgstr ""
 msgid "Play preview"
 msgstr ""
 
-#: data/ui/main_window.ui:24
+#: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Lyssna"
 
-#: data/ui/main_window.ui:25
+#: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
 msgstr ""
 
-#: data/ui/main_window.ui:50
+#: data/ui/main_window.ui:38
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: data/ui/main_window.ui:51
+#: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
 msgstr ""
 
-#: data/ui/main_window.ui:76
+#: data/ui/main_window.ui:53
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:123
+#: data/ui/main_window.ui:100
 msgid "Start Mousaing!"
 msgstr "Börja Mousaing!"
 
-#: data/ui/main_window.ui:124
+#: data/ui/main_window.ui:101
 msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/main_window.ui:135 src/widgets/main_window.py:97
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:98
 msgid "Muted"
 msgstr "Tystad"
 
-#: data/ui/main_window.ui:149
-msgid "Clear Song History"
-msgstr "Rensa låthistorik"
-
-#: data/ui/main_window.ui:153
+#: data/ui/main_window.ui:130
 msgid "Reset Token"
 msgstr "Återställ Token"
 
-#: data/ui/main_window.ui:159
+#: data/ui/main_window.ui:136
 msgid "Keyboard Shortcuts"
 msgstr "Tangenbordsgenvägar"
 
-#: data/ui/main_window.ui:163
+#: data/ui/main_window.ui:140
 msgid "About Mousai"
 msgstr "Om Mousai"
 
-#: src/widgets/main_window.py:88 src/widgets/main_window.py:91
-#: src/widgets/main_window.py:94
+#: src/widgets/main_window.py:89 src/widgets/main_window.py:92
+#: src/widgets/main_window.py:95
 msgid "Listening"
 msgstr ""
 
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:114
 msgid "Sorry"
 msgstr ""
 
-#: src/widgets/main_window.py:117
+#: src/widgets/main_window.py:118
 msgid "The song was not recognized."
 msgstr "Låten kändes inte igen."
 
-#: src/widgets/main_window.py:119
+#: src/widgets/main_window.py:120
 msgid "Something went wrong."
 msgstr "Något gick fel."
 
-#: src/main.py:82
+#: src/main.py:87
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:84
+#: src/main.py:89
 msgid "translator-credits"
 msgstr "Åke Engelbrektson <eson@svenskasprakfiler.se>"
 
-#: src/main.py:85
+#: src/main.py:90
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Open menu"
+#~ msgstr "Öppna menyn"
+
+#~ msgid "Show keyboard shortcuts"
+#~ msgstr "Visa tangentbordsgenvägar"
+
+#~ msgid "Start listening"
+#~ msgstr "Börja lyssna"
+
+#~ msgid "Cancel listening"
+#~ msgstr "Sluta lyssna"
+
+#~ msgid "Clear song history"
+#~ msgstr "Rensa låthistorik"
+
+#~ msgid "Reset token value"
+#~ msgstr "Återställ tokenvärde"
 
 #~ msgid "🌐 Play the identified song in your browser."
 #~ msgstr "🌐 Spela den identifierade låten i din webbläsare."
