@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import GLib, Gtk, Adw, Gio
+from gi.repository import GLib, Gtk, Adw, Gio, Gst
 
 from mousai.widgets.song import Song
 from mousai.widgets.song_row import SongRow
@@ -41,6 +41,10 @@ class MainWindow(Adw.ApplicationWindow):
     def setup_actions(self):
         action = Gio.SimpleAction.new('clear-history', None)
         action.connect('activate', lambda *_: self.clear_history())
+        self.add_action(action)
+
+        action = Gio.SimpleAction.new('toggle-listen', None)
+        action.connect('activate', self.on_toggle_listen)
         self.add_action(action)
 
     def new_song_row(self, song):
@@ -126,16 +130,14 @@ class MainWindow(Adw.ApplicationWindow):
 
         self.return_default_page()
 
-    @Gtk.Template.Callback()
-    def on_start_button_clicked(self, button):
-        self.voice_recorder.start()
-        self.main_stack.set_visible_child_name('recording')
-        self.lookup_action('clear-history').set_enabled(False)
-
-    @Gtk.Template.Callback()
-    def on_cancel_button_clicked(self, button):
-        self.voice_recorder.cancel()
-        self.return_default_page()
+    def on_toggle_listen(self, action, param):
+        if self.voice_recorder.props.state == Gst.State.NULL:
+            self.voice_recorder.start()
+            self.main_stack.set_visible_child_name('recording')
+            self.lookup_action('clear-history').set_enabled(False)
+        else:
+            self.voice_recorder.cancel()
+            self.return_default_page()
 
     @Gtk.Template.Callback()
     def get_visible_button(self, window, visible_child):

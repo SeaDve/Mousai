@@ -11,13 +11,13 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="accelerator">F10</property>
-                <property name="title" translatable="yes">Open menu</property>
+                <property name="title" translatable="yes">Open Menu</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="action-name">win.show-help-overlay</property>
-                <property name="title" translatable="yes">Show keyboard shortcuts</property>
+                <property name="title" translatable="yes">Show Keyboard Shortcuts</property>
               </object>
             </child>
             <child>
@@ -33,14 +33,8 @@
             <property name="title" translatable="yes">Controls</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;r</property>
-                <property name="title" translatable="yes">Start listening</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;c</property>
-                <property name="title" translatable="yes">Cancel listening</property>
+                <property name="action-name">win.toggle-listen</property>
+                <property name="title" translatable="yes">Toggle Listen</property>
               </object>
             </child>
           </object>
@@ -51,13 +45,13 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="action-name">win.clear-history</property>
-                <property name="title" translatable="yes">Clear song history</property>
+                <property name="title" translatable="yes">Clear Song History</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="action-name">app.show-token</property>
-                <property name="title" translatable="yes">Reset token value</property>
+                <property name="title" translatable="yes">Reset Token Value</property>
               </object>
             </child>
           </object>

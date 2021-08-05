@@ -22,21 +22,10 @@
                       <object class="GtkButton">
                         <property name="label" translatable="yes">Listen</property>
                         <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
-                        <signal name="clicked" handler="on_start_button_clicked" swapped="no"/>
+                        <property name="action-name">win.toggle-listen</property>
                         <style>
                           <class name="suggested-action"/>
                         </style>
-                        <child>
-                          <object class="GtkShortcutController">
-                            <property name="scope">managed</property>
-                            <child>
-                              <object class="GtkShortcut">
-                                <property name="trigger">&lt;Control&gt;r</property>
-                                <property name="action">activate</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
                       </object>
                     </property>
                   </object>
@@ -48,21 +37,10 @@
                       <object class="GtkButton">
                         <property name="label" translatable="yes">Cancel</property>
                         <property name="tooltip-text" translatable="yes">Cancel the Recording</property>
-                        <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
+                        <property name="action-name">win.toggle-listen</property>
                         <style>
                           <class name="destructive-action"/>
                         </style>
-                        <child>
-                          <object class="GtkShortcutController">
-                            <property name="scope">managed</property>
-                            <child>
-                              <object class="GtkShortcut">
-                                <property name="trigger">&lt;Control&gt;c</property>
-                                <property name="action">activate</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
                       </object>
                     </property>
                   </object>

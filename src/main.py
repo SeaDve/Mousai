@@ -64,6 +64,7 @@ class Application(Gtk.Application):
 
         self.set_accels_for_action('win.clear-history', ('<Primary>BackSpace',))
         self.set_accels_for_action('win.show-help-overlay', ('<Primary>question',))
+        self.set_accels_for_action('win.toggle-listen', ('<Primary>r',))
         self.set_accels_for_action('app.show-token', ('<Primary>Delete',))
         self.set_accels_for_action('app.quit', ('<Primary>q',))
 

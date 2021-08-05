@@ -15,6 +15,7 @@ class VoiceRecorder(GObject.GObject):
     __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, ())}
 
     peak = GObject.Property(type=float)
+    _state = Gst.State.NULL
 
     def __init__(self):
         super().__init__()
@@ -36,6 +37,15 @@ class VoiceRecorder(GObject.GObject):
         self.src.link(audio_convert)
         audio_convert.link_filtered(self.level, caps)
 
+    @GObject.Property(type=Gst.State, default=_state)
+    def state(self):
+        return self._state
+
+    @state.setter  # type: ignore
+    def state(self, pipeline_state):
+        self._state = pipeline_state
+        self.pipeline.set_state(pipeline_state)
+
     def start(self):
         self.record_bus = self.pipeline.get_bus()
         self.record_bus.add_signal_watch()
@@ -47,19 +57,19 @@ class VoiceRecorder(GObject.GObject):
         self.level.link(self.encodebin)
         self.encodebin.link(self.filesink)
 
-        self.pipeline.set_state(Gst.State.PLAYING)
+        self.props.state = Gst.State.PLAYING
 
         self.timer = Timer(self.stop)
         self.timer.start(5)
 
     def cancel(self):
-        self.pipeline.set_state(Gst.State.NULL)
+        self.props.state = Gst.State.NULL
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
         self.timer.cancel()
 
     def stop(self):
-        self.pipeline.set_state(Gst.State.NULL)
+        self.props.state = Gst.State.NULL
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
         self.emit('record-done')
