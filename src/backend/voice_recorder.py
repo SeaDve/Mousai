@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from subprocess import PIPE, Popen
+import subprocess
 
 import gi
 gi.require_version('GstPbutils', '1.0')
@@ -86,10 +86,9 @@ class VoiceRecorder(GObject.GObject):
 
     @staticmethod
     def get_default_audio_input():
-        pactl_output = Popen(
-            'pactl info | tail -n +14 | cut -d" " -f3',
-            shell=True,
-            text=True,
-            stdout=PIPE
-        ).stdout.read().rstrip()
-        return pactl_output
+        pactl_output = subprocess.run(
+            ['/usr/bin/pactl', 'info'],
+            stdout=subprocess.PIPE,
+            text=True
+        ).stdout.splitlines()
+        return pactl_output[13].split()[2]
