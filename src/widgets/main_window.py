@@ -33,13 +33,14 @@ class MainWindow(Adw.ApplicationWindow):
         self.load_history()
         self.return_default_page()
 
+    def do_close_request(self):
+        songs_list = [dict(song) for song in self.history_model]
+        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', songs_list))
+        self.save_window_size()
+
     def setup_actions(self):
         action = Gio.SimpleAction.new('clear-history', None)
         action.connect('activate', lambda *_: self.clear_history())
-        self.add_action(action)
-
-        action = Gio.SimpleAction.new('quit', None)
-        action.connect('activate', lambda *_: self.close())
         self.add_action(action)
 
     def new_song_row(self, song):
@@ -124,12 +125,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.history_model.insert(0, song)
 
         self.return_default_page()
-
-    @Gtk.Template.Callback()
-    def on_quit(self, window):
-        songs_list = [dict(song) for song in self.history_model]
-        self.settings.set_value('memory-list', GLib.Variant('aa{ss}', songs_list))
-        self.save_window_size()
 
     @Gtk.Template.Callback()
     def on_start_button_clicked(self, button):

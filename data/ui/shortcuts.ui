@@ -16,13 +16,13 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;question</property>
+                <property name="action-name">win.show-help-overlay</property>
                 <property name="title" translatable="yes">Show keyboard shortcuts</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;q</property>
+                <property name="action-name">app.quit</property>
                 <property name="title" translatable="yes">Quit</property>
               </object>
             </child>
@@ -50,13 +50,13 @@
             <property name="title" translatable="yes">Settings</property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;BackSpace</property>
+                <property name="action-name">win.clear-history</property>
                 <property name="title" translatable="yes">Clear song history</property>
               </object>
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="accelerator">&lt;ctrl&gt;Delete</property>
+                <property name="action-name">app.show-token</property>
                 <property name="title" translatable="yes">Reset token value</property>
               </object>
             </child>

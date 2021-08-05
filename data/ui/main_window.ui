@@ -2,7 +2,6 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="MainWindow" parent="AdwApplicationWindow">
-    <signal name="close-request" handler="on_quit" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>

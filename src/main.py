@@ -58,10 +58,14 @@ class Application(Gtk.Application):
         action.connect('activate', self.show_about_dialog)
         self.add_action(action)
 
-        self.set_accels_for_action('app.show-token', ('<Primary>Delete',))
-        self.set_accels_for_action('win.show-help-overlay', ('<Primary>question',))
+        action = Gio.SimpleAction.new('quit', None)
+        action.connect('activate', self.on_quit)
+        self.add_action(action)
+
         self.set_accels_for_action('win.clear-history', ('<Primary>BackSpace',))
-        self.set_accels_for_action('win.quit', ('<Primary>q',))
+        self.set_accels_for_action('win.show-help-overlay', ('<Primary>question',))
+        self.set_accels_for_action('app.show-token', ('<Primary>Delete',))
+        self.set_accels_for_action('app.quit', ('<Primary>q',))
 
     def show_token_window(self, action=None, param=None):
         window = TokenDialog(self.settings)
@@ -85,6 +89,10 @@ class Application(Gtk.Application):
         about.set_website_label(_("GitHub"))
         about.set_website("https://github.com/SeaDve/Mousai")
         about.present()
+
+    def on_quit(self, action, param):
+        self.get_active_window().close()
+        self.quit()
 
 
 def main(version):
