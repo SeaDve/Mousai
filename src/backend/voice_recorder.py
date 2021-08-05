@@ -10,11 +10,13 @@ from gi.repository import Gst, GstPbutils, GObject
 from mousai.backend.utils import Utils
 from mousai.backend.timer import Timer
 
+DEFAULT_PEAK = -349.99
+
 
 class VoiceRecorder(GObject.GObject):
     __gsignals__ = {'record-done': (GObject.SIGNAL_RUN_LAST, None, (float,))}
 
-    _peak = highest_peak = -349.99
+    _peak = highest_peak = DEFAULT_PEAK
     _state = Gst.State.NULL
 
     def __init__(self):
@@ -73,16 +75,18 @@ class VoiceRecorder(GObject.GObject):
         self.timer = Timer(self.stop)
         self.timer.start(5)
 
-    def cancel(self):
+    def close_pipeline(self):
         self.props.state = Gst.State.NULL
         self.record_bus.remove_watch()
         self.record_bus.disconnect(self.handler_id)
+        self.highest_peak = DEFAULT_PEAK
+
+    def cancel(self):
+        self.close_pipeline()
         self.timer.cancel()
 
     def stop(self):
-        self.props.state = Gst.State.NULL
-        self.record_bus.remove_watch()
-        self.record_bus.disconnect(self.handler_id)
+        self.close_pipeline()
         self.emit('record-done', self.highest_peak)
 
     def _on_gst_message(self, bus, message):
