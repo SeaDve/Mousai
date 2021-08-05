@@ -5,9 +5,10 @@ from subprocess import PIPE, Popen
 
 import gi
 gi.require_version('GstPbutils', '1.0')
-from gi.repository import GLib, Gst, GstPbutils, GObject
+from gi.repository import Gst, GstPbutils, GObject
 
 from mousai.backend.utils import Utils
+from mousai.backend.timer import Timer
 
 
 class VoiceRecorder(GObject.GObject):
@@ -92,24 +93,3 @@ class VoiceRecorder(GObject.GObject):
             stdout=PIPE
         ).stdout.read().rstrip()
         return pactl_output
-
-
-class Timer:
-    def __init__(self, function):
-        self.function = function
-        self.cancelled = False
-
-    def _update_time(self):
-        if self.time_delay == 10 or self.cancelled:
-            if not self.cancelled:
-                self.function()
-            return False
-        self.time_delay -= 10
-        return True
-
-    def start(self, time_delay):
-        self.time_delay = time_delay * 100
-        GLib.timeout_add(100, self._update_time)
-
-    def cancel(self):
-        self.cancelled = True
