@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('Adw', '1')
-from gi.repository import Gtk, Gio, GLib, Adw, Gst
+from gi.repository import Gtk, Gio, GLib, Adw, Gst, Gdk
 
 from mousai.widgets.main_window import MainWindow
 from mousai.widgets.token_dialog import TokenDialog
