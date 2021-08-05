@@ -7,7 +7,7 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Gst', '1.0')
 gi.require_version('Adw', '1')
-from gi.repository import Gtk, Gdk, Gio, GLib, Adw, Gst
+from gi.repository import Gtk, Gio, GLib, Adw, Gst
 
 from mousai.widgets.main_window import MainWindow
 from mousai.widgets.token_dialog import TokenDialog
@@ -15,7 +15,7 @@ from mousai.widgets.token_dialog import TokenDialog
 Gst.init(None)
 
 
-class Application(Gtk.Application):
+class Application(Adw.Application):
     def __init__(self, version):
         super().__init__(application_id='io.github.seadve.Mousai',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
@@ -23,22 +23,12 @@ class Application(Gtk.Application):
         self.version = version
 
         GLib.set_application_name("Mousai")
-        GLib.set_prgname('io.github.seadve.Mousai')
 
     def do_startup(self):
-        Gtk.Application.do_startup(self)
-
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_resource('/io/github/seadve/Mousai/ui/style.css')
-        display = Gdk.Display.get_default()
-        Gtk.StyleContext.add_provider_for_display(
-            display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
-        )
+        Adw.Application.do_startup(self)
 
         self.settings = Gio.Settings.new('io.github.seadve.Mousai')
         self.setup_actions()
-
-        Adw.init()
 
     def do_activate(self):
         win = self.props.active_window

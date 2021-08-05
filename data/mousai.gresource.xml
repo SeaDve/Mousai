@@ -6,6 +6,6 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/song_row.ui</file>
     <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/external-link-symbolic.svg</file>
-    <file compressed="true">ui/style.css</file>
+    <file compressed="true" alias="style.css">ui/style.css</file>
   </gresource>
 </gresources>
