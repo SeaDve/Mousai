@@ -49,7 +49,7 @@
           <li>Added the ability to select preferred audio source (Either microphone or from desktop audio)</li>
           <li>Added animation when playing a song</li>
           <li>Check if there is an audio detected before sending request</li>
-          <li>Fixed not responsing issue when the internet is slow</li>
+          <li>Fixed not responding issue when the internet is slow</li>
           <li>Fix multiple songs playing at once</li>
           <li>Updated Filipino translations</li>
           <li>Updated Turkish translations</li>
