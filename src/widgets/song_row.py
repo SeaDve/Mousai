@@ -13,6 +13,7 @@ class SongRow(Adw.ActionRow):
                     'stop': (GObject.SIGNAL_RUN_LAST, None, ())}
 
     song_icon = Gtk.Template.Child()
+    play_pause_button = Gtk.Template.Child()
 
     is_playing = GObject.Property(type=bool, default=False)
 
@@ -24,7 +25,7 @@ class SongRow(Adw.ActionRow):
         self.song_link = song.song_link
         self.song_src = song.song_src
 
-        self.set_sensitive(self.song_src)
+        self.play_pause_button.set_sensitive(self.song_src)
         self.add_prefix(self.song_icon)
         self.song_icon.set_custom_image(self.get_song_icon())
 
