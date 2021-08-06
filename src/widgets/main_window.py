@@ -126,7 +126,9 @@ class MainWindow(Adw.ApplicationWindow):
             self.return_default_page()
             return
 
-        thread = threading.Thread(target=self.guess_song)
+        song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
+        token = self.settings.get_string('token-value')
+        thread = threading.Thread(target=self.guess_song, args=(song_file, token))
         thread.start()
 
     def on_toggle_listen(self, action, param):
@@ -155,9 +157,7 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             return default_speaker
 
-    def guess_song(self):
-        song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
-        token = self.settings.get_string('token-value')
+    def guess_song(self, song_file, token):
         output, image_src = Utils.guess_song(song_file, token)
         GLib.idle_add(self.update_history, output, image_src)
 
