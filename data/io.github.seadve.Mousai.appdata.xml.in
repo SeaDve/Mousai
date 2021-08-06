@@ -42,6 +42,21 @@
   </screenshots>
 
   <releases>
+    <release version="0.5.0" date="2021-08-06">
+      <description>
+        <p>A semi-big release containing new features and major bug fixes:</p>
+        <ul>
+          <li>Added the ability to select preferred audio source (Either microphone or from desktop audio)</li>
+          <li>Added animation when playing a song</li>
+          <li>Check if there is an audio detected before sending request</li>
+          <li>Fixed not responsing issue when the internet is slow</li>
+          <li>Fix multiple songs playing at once</li>
+          <li>Updated Filipino translations</li>
+          <li>Updated Turkish translations</li>
+          <li>Updated Dutch translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.4" date="2021-08-03">
       <description>
         <p>This update contains translations and minor ui fixes:</p>
