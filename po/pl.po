@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 18:31+0800\n"
+"POT-Creation-Date: 2021-08-06 19:38+0800\n"
 "PO-Revision-Date: 2021-07-07 11:21+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/kooha/mousai/pl/"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:118
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:116
 msgid "Muted"
 msgstr ""
 
@@ -213,28 +213,28 @@ msgstr ""
 msgid "_About Mousai"
 msgstr ""
 
-#: src/widgets/main_window.py:109 src/widgets/main_window.py:112
-#: src/widgets/main_window.py:115
+#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
+#: src/widgets/main_window.py:113
 msgid "Listening"
 msgstr ""
 
-#: src/widgets/main_window.py:125
+#: src/widgets/main_window.py:123
 msgid "No audio detected"
 msgstr ""
 
-#: src/widgets/main_window.py:125
+#: src/widgets/main_window.py:123
 msgid "Please check your audio device."
 msgstr ""
 
-#: src/widgets/main_window.py:174
+#: src/widgets/main_window.py:172
 msgid "The song was not recognized."
 msgstr ""
 
-#: src/widgets/main_window.py:176
+#: src/widgets/main_window.py:174
 msgid "Something went wrong."
 msgstr ""
 
-#: src/widgets/main_window.py:178
+#: src/widgets/main_window.py:176
 msgid "Sorry!"
 msgstr ""
 
