@@ -57,9 +57,8 @@ class MainWindow(Adw.ApplicationWindow):
 
     def new_song_row(self, song):
         song_row = SongRow(song)
-        song_row.connect('play', self.on_song_row_play)
-        song_row.connect('stop', self.on_song_row_stop)
-        self.song_player.connect('stopped', song_row.on_stop_playing)
+        song_row.connect('notify::is-playing', self.on_song_row_notify_is_playing)
+        self.song_player.connect('stopped', song_row.on_song_player_stopped)
         return song_row
 
     def return_default_page(self):
@@ -93,12 +92,12 @@ class MainWindow(Adw.ApplicationWindow):
         size = self.get_width(), self.get_height()
         self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
 
-    def on_song_row_play(self, song_row, song_src):
+    def on_song_row_notify_is_playing(self, song_row, pspec):
+        # Signal other buttons to stop before playing
         self.song_player.stop()
-        self.song_player.play(song_src)
 
-    def on_song_row_stop(self, song_row):
-        self.song_player.stop()
+        if song_row.props.is_playing:
+            self.song_player.play(song_row.song_src)
 
     def on_peak_changed(self, recorder, peak):
         peak = recorder.peak

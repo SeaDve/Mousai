@@ -9,8 +9,6 @@ from mousai.backend.utils import Utils
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/song_row.ui')
 class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
-    __gsignals__ = {'play': (GObject.SIGNAL_RUN_LAST, None, (str,)),
-                    'stop': (GObject.SIGNAL_RUN_LAST, None, ())}
 
     song_icon = Gtk.Template.Child()
     play_pause_button = Gtk.Template.Child()
@@ -49,7 +47,7 @@ class SongRow(Adw.ActionRow):
         except GLib.Error:
             return None
 
-    def on_stop_playing(self, song_player, song_src):
+    def on_song_player_stopped(self, song_player, song_src):
         if song_src != self.song_src:
             return
 
@@ -57,12 +55,7 @@ class SongRow(Adw.ActionRow):
 
     @Gtk.Template.Callback()
     def on_play_pause_button_clicked(self, button):
-        if self.props.is_playing:
-            self.props.is_playing = False
-            self.emit('stop')
-        else:
-            self.props.is_playing = True
-            self.emit('play', self.song_src)
+        self.props.is_playing = not self.props.is_playing
 
     @Gtk.Template.Callback()
     def on_open_link_button_clicked(self, button):
