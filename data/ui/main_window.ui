@@ -134,6 +134,8 @@
           <attribute name="target">speaker</attribute>
         </item>
       </submenu>
+    </section>
+    <section>
       <item>
         <attribute name="action">win.clear-history</attribute>
         <attribute name="label" translatable="yes">_Clear Song History</attribute>
