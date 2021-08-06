@@ -1,18 +1,20 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gio, Gtk, Adw, GLib, Gdk
+from gi.repository import Gio, Gtk, Adw, GLib, Gdk, GObject
 
 from mousai.backend.utils import Utils
-from mousai.widgets.button_player import ButtonPlayer  # noqa: F401
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/song_row.ui')
 class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
+    __gsignals__ = {'play': (GObject.SIGNAL_RUN_LAST, None, (str,)),
+                    'stop': (GObject.SIGNAL_RUN_LAST, None, ())}
 
     song_icon = Gtk.Template.Child()
-    button_player = Gtk.Template.Child()
+
+    is_playing = GObject.Property(type=bool, default=False)
 
     def __init__(self, song):
         super().__init__()
@@ -22,7 +24,7 @@ class SongRow(Adw.ActionRow):
         self.song_link = song.song_link
         self.song_src = song.song_src
 
-        self.button_player.set_song_src(self.song_src)
+        self.set_sensitive(self.song_src)
         self.add_prefix(self.song_icon)
         self.song_icon.set_custom_image(self.get_song_icon())
 
@@ -34,14 +36,25 @@ class SongRow(Adw.ActionRow):
         except GLib.Error:
             return None
 
-    def on_window_recording(self, stack, _):
-        if self.button_player.is_stopped and stack.get_visible_child_name() == 'recording':
-            self.button_player.is_stopped = False
+    def on_stop_playing(self, song_player, song_src):
+        if song_src != self.song_src:
+            return
+
+        self.props.is_playing = False
+
+    @Gtk.Template.Callback()
+    def on_play_pause_button_clicked(self, button):
+        if self.props.is_playing:
+            self.props.is_playing = False
+            self.emit('stop')
+        else:
+            self.props.is_playing = True
+            self.emit('play', self.song_src)
 
     @Gtk.Template.Callback()
     def on_open_link_button_clicked(self, button):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
 
     @Gtk.Template.Callback()
-    def get_playback_icon(self, self_, is_stopped):
-        return 'media-playback-stop-symbolic' if is_stopped else 'media-playback-start-symbolic'
+    def get_play_pause_button_icon_name(self, button, is_playing):
+        return 'media-playback-stop-symbolic' if is_playing else 'media-playback-start-symbolic'

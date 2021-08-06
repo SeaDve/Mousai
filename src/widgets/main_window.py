@@ -9,6 +9,7 @@ from mousai.widgets.song import Song
 from mousai.widgets.song_row import SongRow
 from mousai.backend.voice_recorder import VoiceRecorder
 from mousai.backend.utils import Utils
+from mousai.backend.song_player import SongPlayer
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/main_window.ui')
@@ -25,6 +26,8 @@ class MainWindow(Adw.ApplicationWindow):
 
         self.history_model = Gio.ListStore.new(Song)
         self.history_listbox.bind_model(self.history_model, self.new_song_row)
+
+        self.song_player = SongPlayer()
 
         self.voice_recorder = VoiceRecorder()
         self.voice_recorder.connect('record-done', self.on_record_done)
@@ -54,7 +57,9 @@ class MainWindow(Adw.ApplicationWindow):
 
     def new_song_row(self, song):
         song_row = SongRow(song)
-        self.main_stack.connect('notify::visible-child-name', song_row.on_window_recording)
+        song_row.connect('play', self.on_song_row_play)
+        song_row.connect('stop', self.on_song_row_stop)
+        self.song_player.connect('stopped', song_row.on_stop_playing)
         return song_row
 
     def return_default_page(self):
@@ -78,6 +83,7 @@ class MainWindow(Adw.ApplicationWindow):
     def clear_history(self):
         self.history_model.remove_all()
         self.main_stack.set_visible_child_name('empty-state')
+        self.song_player.stop()
 
     def load_window_size(self):
         size = self.settings.get_value('window-size')
@@ -86,6 +92,15 @@ class MainWindow(Adw.ApplicationWindow):
     def save_window_size(self):
         size = self.get_width(), self.get_height()
         self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
+
+    def on_song_row_play(self, song_row, song_src):
+        if self.song_player.props.state == Gst.State.PLAYING:
+            self.song_player.stop()
+
+        self.song_player.play(song_src)
+
+    def on_song_row_stop(self, song_row):
+        self.song_player.stop()
 
     def on_peak_changed(self, recorder, peak):
         peak = recorder.peak
@@ -119,6 +134,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.voice_recorder.start(self.get_preferred_default_audio_source())
             self.main_stack.set_visible_child_name('recording')
             self.lookup_action('clear-history').set_enabled(False)
+            self.song_player.stop()
         else:
             self.voice_recorder.cancel()
             self.return_default_page()
