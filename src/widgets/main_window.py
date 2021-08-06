@@ -138,8 +138,6 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_toggle_listen(self, action, param):
         if self.voice_recorder.props.state == Gst.State.NULL:
-            print(self.get_preferred_default_audio_source())
-
             self.voice_recorder.start(self.get_preferred_default_audio_source())
             self.main_stack.set_visible_child_name('recording')
             self.lookup_action('clear-history').set_enabled(False)
