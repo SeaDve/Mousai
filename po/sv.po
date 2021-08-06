@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-05 20:45+0800\n"
+"POT-Creation-Date: 2021-08-06 08:31+0800\n"
 "PO-Revision-Date: 2021-08-06 00:25+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
-"\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,7 +92,7 @@ msgid "Open Menu"
 msgstr "Öppna menyn"
 
 #: data/ui/shortcuts.ui:20
-msgid "Show Keyboard Shortcuts"
+msgid "Show Shortcuts"
 msgstr ""
 
 #: data/ui/shortcuts.ui:26
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Settings"
 msgstr "Inställningar"
 
-#: data/ui/shortcuts.ui:48 data/ui/main_window.ui:126
+#: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
 msgstr "Rensa låthistorik"
 
@@ -180,44 +180,60 @@ msgstr "Börja Mousaing!"
 msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:98
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:101
 msgid "Muted"
 msgstr "Tystad"
 
-#: data/ui/main_window.ui:130
-msgid "Reset Token"
-msgstr "Återställ Token"
+#: data/ui/main_window.ui:125
+msgid "_Preferred Audio Source"
+msgstr ""
 
-#: data/ui/main_window.ui:136
-msgid "Keyboard Shortcuts"
-msgstr "Tangenbordsgenvägar"
+#: data/ui/main_window.ui:127
+msgid "Microphone"
+msgstr ""
 
-#: data/ui/main_window.ui:140
-msgid "About Mousai"
-msgstr "Om Mousai"
+#: data/ui/main_window.ui:132
+msgid "Desktop Audio"
+msgstr ""
 
-#: src/widgets/main_window.py:89 src/widgets/main_window.py:92
-#: src/widgets/main_window.py:95
+#: data/ui/main_window.ui:141
+msgid "_Clear Song History"
+msgstr ""
+
+#: data/ui/main_window.ui:145
+msgid "_Reset Token"
+msgstr ""
+
+#: data/ui/main_window.ui:151
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: data/ui/main_window.ui:155
+msgid "_About Mousai"
+msgstr ""
+
+#: src/widgets/main_window.py:92 src/widgets/main_window.py:95
+#: src/widgets/main_window.py:98
 msgid "Listening"
 msgstr ""
 
-#: src/widgets/main_window.py:105
+#: src/widgets/main_window.py:108
 msgid "No audio detected"
 msgstr ""
 
-#: src/widgets/main_window.py:105
+#: src/widgets/main_window.py:108
 msgid "Your microphone may be disconnected."
 msgstr ""
 
-#: src/widgets/main_window.py:121
+#: src/widgets/main_window.py:124
 msgid "The song was not recognized."
 msgstr "Låten kändes inte igen."
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:126
 msgid "Something went wrong."
 msgstr "Något gick fel."
 
-#: src/widgets/main_window.py:125
+#: src/widgets/main_window.py:128
 msgid "Sorry!"
 msgstr "Förlåt!"
 
@@ -233,6 +249,15 @@ msgstr "Åke Engelbrektson <eson@svenskasprakfiler.se>"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Reset Token"
+#~ msgstr "Återställ Token"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Tangenbordsgenvägar"
+
+#~ msgid "About Mousai"
+#~ msgstr "Om Mousai"
 
 #~ msgid "Open menu"
 #~ msgstr "Öppna menyn"
