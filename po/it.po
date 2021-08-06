@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-05 13:49+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"POT-Creation-Date: 2021-08-05 20:45+0800\n"
+"PO-Revision-Date: 2021-08-06 00:25+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musica;Canzone;Identificare;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
 msgstr "Identifica qualsiasi canzone in pochi secondi"
 
@@ -100,11 +100,11 @@ msgstr "Generale"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Apri Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Keyboard Shortcuts"
-msgstr ""
+msgstr "Mostra scorciatoie da tastiera"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -183,7 +183,7 @@ msgstr "Annulla la registrazione"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr "Menu principale"
+msgstr "Menu Principale"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:100
@@ -215,32 +215,43 @@ msgstr "A proposito di Mousai"
 msgid "Listening"
 msgstr "Sto ascoltando"
 
-#: src/widgets/main_window.py:114
-msgid "Sorry"
-msgstr "Scusa"
+#: src/widgets/main_window.py:105
+msgid "No audio detected"
+msgstr ""
 
-#: src/widgets/main_window.py:118
+#: src/widgets/main_window.py:105
+msgid "Your microphone may be disconnected."
+msgstr ""
+
+#: src/widgets/main_window.py:121
 msgid "The song was not recognized."
 msgstr "La canzone non è stata riconosciuta."
 
-#: src/widgets/main_window.py:120
+#: src/widgets/main_window.py:123
 msgid "Something went wrong."
 msgstr "Qualcosa è andato storto."
 
-#: src/main.py:87
+#: src/widgets/main_window.py:125
+msgid "Sorry!"
+msgstr "Mi dispiace!"
+
+#: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:89
+#: src/main.py:79
 msgid "translator-credits"
 msgstr ""
 "Albano Battistella\n"
 "Nicolas Mariniello"
 
-#: src/main.py:90
+#: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Sorry"
+#~ msgstr "Scusa"
 
 #~ msgid "Open menu"
 #~ msgstr "Apri il menù"
@@ -270,9 +281,6 @@ msgstr "GitHub"
 
 #~ msgid "Click the listen button to start"
 #~ msgstr "Premi il pulsante di ascolto per iniziare"
-
-#~ msgid "Sorry!"
-#~ msgstr "Mi dispiace!"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""

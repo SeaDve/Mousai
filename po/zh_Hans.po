@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-05 13:49+0800\n"
+"POT-Creation-Date: 2021-08-05 20:45+0800\n"
 "PO-Revision-Date: 2021-07-21 06:32+0000\n"
 "Last-Translator: Zhou Nan <zhounan@nfschina.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
 msgstr "一个迅速听歌识曲的软件"
 
@@ -204,28 +204,36 @@ msgstr "关于 Mousai"
 msgid "Listening"
 msgstr "正在侦听"
 
-#: src/widgets/main_window.py:114
-msgid "Sorry"
+#: src/widgets/main_window.py:105
+msgid "No audio detected"
 msgstr ""
 
-#: src/widgets/main_window.py:118
+#: src/widgets/main_window.py:105
+msgid "Your microphone may be disconnected."
+msgstr ""
+
+#: src/widgets/main_window.py:121
 msgid "The song was not recognized."
 msgstr "无识别结果。"
 
-#: src/widgets/main_window.py:120
+#: src/widgets/main_window.py:123
 msgid "Something went wrong."
 msgstr "识别时出现了问题。"
 
-#: src/main.py:87
+#: src/widgets/main_window.py:125
+msgid "Sorry!"
+msgstr "抱歉！"
+
+#: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "版权所有: Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:89
+#: src/main.py:79
 msgid "translator-credits"
 msgstr "Zhou Nan <zhounan@nfschina.com>"
 
-#: src/main.py:90
+#: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -255,9 +263,6 @@ msgstr "GitHub"
 
 #~ msgid "Click the listen button to start"
 #~ msgstr "点击该按钮以开始"
-
-#~ msgid "Sorry!"
-#~ msgstr "抱歉！"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""

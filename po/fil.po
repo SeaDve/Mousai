@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-05 13:49+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2021-08-05 20:45+0800\n"
+"PO-Revision-Date: 2021-08-05 12:46+0000\n"
+"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Tunog;Kanta;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
 msgstr "Alamin ang kanta sa kaunting sandali"
 
@@ -94,11 +94,11 @@ msgstr "Pangkalahatan"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Buksan ang Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Keyboard Shortcuts"
-msgstr ""
+msgstr "Ipakita ang mga Shortcuts"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -110,7 +110,7 @@ msgstr "Mga controls"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "I-toggle ang Pakikinig"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -122,7 +122,7 @@ msgstr "Burahin Ang History"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "I-reset ang Token"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -210,30 +210,41 @@ msgstr "Tungkol sa Mousai"
 msgid "Listening"
 msgstr "Nakikinig"
 
-#: src/widgets/main_window.py:114
-msgid "Sorry"
-msgstr "Paumanhin"
+#: src/widgets/main_window.py:105
+msgid "No audio detected"
+msgstr ""
 
-#: src/widgets/main_window.py:118
+#: src/widgets/main_window.py:105
+msgid "Your microphone may be disconnected."
+msgstr ""
+
+#: src/widgets/main_window.py:121
 msgid "The song was not recognized."
 msgstr "Ang kanta ay hindi makilala."
 
-#: src/widgets/main_window.py:120
+#: src/widgets/main_window.py:123
 msgid "Something went wrong."
 msgstr "Parang may mali."
 
-#: src/main.py:87
+#: src/widgets/main_window.py:125
+msgid "Sorry!"
+msgstr "Paumanhin!"
+
+#: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Kopirayt 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:89
+#: src/main.py:79
 msgid "translator-credits"
 msgstr "Dave Patrick"
 
-#: src/main.py:90
+#: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Sorry"
+#~ msgstr "Paumanhin"
 
 #~ msgid "Open menu"
 #~ msgstr "Buksan ang menu"
@@ -264,9 +275,6 @@ msgstr "GitHub"
 
 #~ msgid "Click the listen button to start"
 #~ msgstr "Pindutin ang button sa pagkinig upang magsimula"
-
-#~ msgid "Sorry!"
-#~ msgstr "Paumanhin!"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""

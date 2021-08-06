@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-05 13:49+0800\n"
+"POT-Creation-Date: 2021-08-05 20:45+0800\n"
 "PO-Revision-Date: 2021-07-07 11:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -28,7 +28,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;Musica;Identificar;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:84
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
 msgstr "Identifique qualquer música em segundos"
 
@@ -210,30 +210,41 @@ msgstr "Sobre o Mousai"
 msgid "Listening"
 msgstr "Escutando"
 
-#: src/widgets/main_window.py:114
-msgid "Sorry"
-msgstr "Desculpe"
+#: src/widgets/main_window.py:105
+msgid "No audio detected"
+msgstr ""
 
-#: src/widgets/main_window.py:118
+#: src/widgets/main_window.py:105
+msgid "Your microphone may be disconnected."
+msgstr ""
+
+#: src/widgets/main_window.py:121
 msgid "The song was not recognized."
 msgstr "A música não foi reconhecida."
 
-#: src/widgets/main_window.py:120
+#: src/widgets/main_window.py:123
 msgid "Something went wrong."
 msgstr "Algo deu errado."
 
-#: src/main.py:87
+#: src/widgets/main_window.py:125
+msgid "Sorry!"
+msgstr "Desculpa!"
+
+#: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:89
+#: src/main.py:79
 msgid "translator-credits"
 msgstr "Vitor Cardoso"
 
-#: src/main.py:90
+#: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Sorry"
+#~ msgstr "Desculpe"
 
 #~ msgid "Open menu"
 #~ msgstr "Abrir menu"
@@ -262,9 +273,6 @@ msgstr "GitHub"
 
 #~ msgid "Click the listen button to start"
 #~ msgstr "Clique no botão escutar para iniciar"
-
-#~ msgid "Sorry!"
-#~ msgstr "Desculpa!"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""
