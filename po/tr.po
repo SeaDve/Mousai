@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:31+0800\n"
+"POT-Creation-Date: 2021-08-06 11:41+0800\n"
 "PO-Revision-Date: 2021-08-05 12:46+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
@@ -230,7 +230,7 @@ msgid "No audio detected"
 msgstr ""
 
 #: src/widgets/main_window.py:108
-msgid "Your microphone may be disconnected."
+msgid "Please check your audio device."
 msgstr ""
 
 #: src/widgets/main_window.py:124

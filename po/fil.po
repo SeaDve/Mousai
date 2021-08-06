@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 08:31+0800\n"
-"PO-Revision-Date: 2021-08-05 12:46+0000\n"
+"POT-Creation-Date: 2021-08-06 11:41+0800\n"
+"PO-Revision-Date: 2021-08-06 03:42+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -98,7 +98,7 @@ msgstr "Buksan ang Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Ipakita ang mga Shortcuts"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -195,31 +195,31 @@ msgstr "Naka-mute"
 
 #: data/ui/main_window.ui:125
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Gustong Source ng Tunog"
 
 #: data/ui/main_window.ui:127
 msgid "Microphone"
-msgstr ""
+msgstr "Mikropono"
 
 #: data/ui/main_window.ui:132
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Tunog ng Desktop"
 
 #: data/ui/main_window.ui:141
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Burahin ang History"
 
 #: data/ui/main_window.ui:145
 msgid "_Reset Token"
-msgstr ""
+msgstr "_I-reset ang Token"
 
 #: data/ui/main_window.ui:151
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Mga Shortcut sa Keyboard"
 
 #: data/ui/main_window.ui:155
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Tungkol sa Mousai"
 
 #: src/widgets/main_window.py:92 src/widgets/main_window.py:95
 #: src/widgets/main_window.py:98
@@ -228,10 +228,10 @@ msgstr "Nakikinig"
 
 #: src/widgets/main_window.py:108
 msgid "No audio detected"
-msgstr ""
+msgstr "Hindi ma-detect ang audio"
 
 #: src/widgets/main_window.py:108
-msgid "Your microphone may be disconnected."
+msgid "Please check your audio device."
 msgstr ""
 
 #: src/widgets/main_window.py:124
@@ -258,6 +258,9 @@ msgstr "Dave Patrick"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Your microphone may be disconnected."
+#~ msgstr "Baka nakadiskonekta ang iyong mikropono."
 
 #~ msgid "Show Keyboard Shortcuts"
 #~ msgstr "Ipakita ang mga Shortcuts"
