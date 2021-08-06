@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 11:41+0800\n"
-"PO-Revision-Date: 2021-08-05 12:46+0000\n"
+"POT-Creation-Date: 2021-08-06 14:44+0800\n"
+"PO-Revision-Date: 2021-08-06 06:44+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
 ">\n"
@@ -48,11 +48,9 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
-"Note: This uses the API of audd.io, so it is necessary to login to their "
+"Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme almak için "
-"sitelerinde oturum açmak gerekir."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -98,7 +96,7 @@ msgstr "Menüyü Aç"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Kısayolları Göster"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -155,7 +153,7 @@ msgstr "Başlangıçta gösterme"
 msgid "Open in Browser"
 msgstr "Tarayıcıda Aç"
 
-#: data/ui/song_row.ui:22
+#: data/ui/song_row.ui:21
 msgid "Play preview"
 msgstr "Ön izlemeyi oynat"
 
@@ -188,60 +186,60 @@ msgstr "Mousai Yapmaya Başla!"
 msgid "Click the listen button to start."
 msgstr "Başlamak için dinle düğmesine tıklayın."
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:101
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:118
 msgid "Muted"
 msgstr "Sesi kapatıldı"
 
 #: data/ui/main_window.ui:125
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "Tercih Edilen Ses _Kaynağı"
 
 #: data/ui/main_window.ui:127
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:132
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Masaüstü Sesi"
 
 #: data/ui/main_window.ui:141
 msgid "_Clear Song History"
-msgstr ""
+msgstr "Şarkı Geçmişini _Temizle"
 
 #: data/ui/main_window.ui:145
 msgid "_Reset Token"
-msgstr ""
+msgstr "Belirteci _Sıfırla"
 
 #: data/ui/main_window.ui:151
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Klavye Kısayolları"
 
 #: data/ui/main_window.ui:155
 msgid "_About Mousai"
-msgstr ""
+msgstr "Mousai _Hakkında"
 
-#: src/widgets/main_window.py:92 src/widgets/main_window.py:95
-#: src/widgets/main_window.py:98
+#: src/widgets/main_window.py:109 src/widgets/main_window.py:112
+#: src/widgets/main_window.py:115
 msgid "Listening"
 msgstr "Dinliyor"
 
-#: src/widgets/main_window.py:108
+#: src/widgets/main_window.py:125
 msgid "No audio detected"
-msgstr ""
+msgstr "Ses algılanmadı"
 
-#: src/widgets/main_window.py:108
+#: src/widgets/main_window.py:125
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Lütfen ses aygıtınızı gözden geçirin."
 
-#: src/widgets/main_window.py:124
+#: src/widgets/main_window.py:174
 msgid "The song was not recognized."
 msgstr "Şarkı tanınmadı."
 
-#: src/widgets/main_window.py:126
+#: src/widgets/main_window.py:176
 msgid "Something went wrong."
 msgstr "Bir şeyler yanlış gitti."
 
-#: src/widgets/main_window.py:128
+#: src/widgets/main_window.py:178
 msgid "Sorry!"
 msgstr "Üzgünüm!"
 
@@ -259,6 +257,13 @@ msgstr ""
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid ""
+#~ "Note: This uses the API of audd.io, so it is necessary to login to their "
+#~ "site to get more trials."
+#~ msgstr ""
+#~ "Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme almak "
+#~ "için sitelerinde oturum açmak gerekir."
 
 #~ msgid "Show Keyboard Shortcuts"
 #~ msgstr "Klavye Kısayollarını Göster"

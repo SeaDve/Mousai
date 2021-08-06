@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 11:41+0800\n"
-"PO-Revision-Date: 2021-08-06 03:42+0000\n"
+"POT-Creation-Date: 2021-08-06 14:44+0800\n"
+"PO-Revision-Date: 2021-08-06 06:44+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -49,11 +49,9 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
-"Note: This uses the API of audd.io, so it is necessary to login to their "
+"Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Paalala: Gumagamit ito ng API ng audd.io, kaya kinakailangan na maglogin sa "
-"kanilang site upang makatanggap ng mas maraming trials."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -156,7 +154,7 @@ msgstr "Huwag ipakitang muli"
 msgid "Open in Browser"
 msgstr "Buksan sa Browser"
 
-#: data/ui/song_row.ui:22
+#: data/ui/song_row.ui:21
 msgid "Play preview"
 msgstr "I-play ang preview"
 
@@ -189,7 +187,7 @@ msgstr "Magsimulang magmousai!"
 msgid "Click the listen button to start."
 msgstr "Pindutin ang listen button upang magsimula."
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:101
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:118
 msgid "Muted"
 msgstr "Naka-mute"
 
@@ -221,28 +219,28 @@ msgstr "_Mga Shortcut sa Keyboard"
 msgid "_About Mousai"
 msgstr "_Tungkol sa Mousai"
 
-#: src/widgets/main_window.py:92 src/widgets/main_window.py:95
-#: src/widgets/main_window.py:98
+#: src/widgets/main_window.py:109 src/widgets/main_window.py:112
+#: src/widgets/main_window.py:115
 msgid "Listening"
 msgstr "Nakikinig"
 
-#: src/widgets/main_window.py:108
+#: src/widgets/main_window.py:125
 msgid "No audio detected"
 msgstr "Hindi ma-detect ang audio"
 
-#: src/widgets/main_window.py:108
+#: src/widgets/main_window.py:125
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Paki-check ang iyong audio-device."
 
-#: src/widgets/main_window.py:124
+#: src/widgets/main_window.py:174
 msgid "The song was not recognized."
 msgstr "Ang kanta ay hindi makilala."
 
-#: src/widgets/main_window.py:126
+#: src/widgets/main_window.py:176
 msgid "Something went wrong."
 msgstr "Parang may mali."
 
-#: src/widgets/main_window.py:128
+#: src/widgets/main_window.py:178
 msgid "Sorry!"
 msgstr "Paumanhin!"
 
@@ -258,6 +256,13 @@ msgstr "Dave Patrick"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid ""
+#~ "Note: This uses the API of audd.io, so it is necessary to login to their "
+#~ "site to get more trials."
+#~ msgstr ""
+#~ "Paalala: Gumagamit ito ng API ng audd.io, kaya kinakailangan na maglogin "
+#~ "sa kanilang site upang makatanggap ng mas maraming trials."
 
 #~ msgid "Your microphone may be disconnected."
 #~ msgstr "Baka nakadiskonekta ang iyong mikropono."

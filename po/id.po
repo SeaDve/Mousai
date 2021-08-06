@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 11:41+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2021-08-06 14:44+0800\n"
+"PO-Revision-Date: 2021-08-06 06:45+0000\n"
+"Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -51,11 +51,9 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
-"Note: This uses the API of audd.io, so it is necessary to login to their "
+"Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Catatan: Ini menggunakan API dari audd.io, disarankan untuk masuk ke situs "
-"mereka agar mendapatkan lebih banyak percobaan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -97,11 +95,11 @@ msgstr "Umum"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Buka Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Tampilkan Pintasan"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -152,13 +150,13 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Jangan tampilkan saat diluncurkan"
 
 #: data/ui/song_row.ui:13
 msgid "Open in Browser"
 msgstr "Buka di Browser"
 
-#: data/ui/song_row.ui:22
+#: data/ui/song_row.ui:21
 msgid "Play preview"
 msgstr "Putar tinjauan"
 
@@ -191,25 +189,25 @@ msgstr "Mulai Mousaing!"
 msgid "Click the listen button to start."
 msgstr "Klik tombol dengarkan untuk memulai."
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:101
+#: data/ui/main_window.ui:112 src/widgets/main_window.py:118
 msgid "Muted"
 msgstr "Disenyapkan"
 
 #: data/ui/main_window.ui:125
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Sumber Audio Utama"
 
 #: data/ui/main_window.ui:127
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:132
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Audio Desktop"
 
 #: data/ui/main_window.ui:141
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Hapus Riwayat Lagu"
 
 #: data/ui/main_window.ui:145
 msgid "_Reset Token"
@@ -217,34 +215,34 @@ msgstr ""
 
 #: data/ui/main_window.ui:151
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Pintasan Papan Ketik"
 
 #: data/ui/main_window.ui:155
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Tentang Mousai"
 
-#: src/widgets/main_window.py:92 src/widgets/main_window.py:95
-#: src/widgets/main_window.py:98
+#: src/widgets/main_window.py:109 src/widgets/main_window.py:112
+#: src/widgets/main_window.py:115
 msgid "Listening"
 msgstr "Mendengarkan"
 
-#: src/widgets/main_window.py:108
+#: src/widgets/main_window.py:125
 msgid "No audio detected"
 msgstr ""
 
-#: src/widgets/main_window.py:108
+#: src/widgets/main_window.py:125
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Harap periksa perangkat audio Anda."
 
-#: src/widgets/main_window.py:124
+#: src/widgets/main_window.py:174
 msgid "The song was not recognized."
 msgstr "Lagu tidak dikenali."
 
-#: src/widgets/main_window.py:126
+#: src/widgets/main_window.py:176
 msgid "Something went wrong."
 msgstr "Ada yang salah."
 
-#: src/widgets/main_window.py:128
+#: src/widgets/main_window.py:178
 msgid "Sorry!"
 msgstr "Maaf!"
 
@@ -260,6 +258,13 @@ msgstr "liimee"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid ""
+#~ "Note: This uses the API of audd.io, so it is necessary to login to their "
+#~ "site to get more trials."
+#~ msgstr ""
+#~ "Catatan: Ini menggunakan API dari audd.io, disarankan untuk masuk ke "
+#~ "situs mereka agar mendapatkan lebih banyak percobaan."
 
 #~ msgid "Reset Token"
 #~ msgstr "Setel Ulang Token"
