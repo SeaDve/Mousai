@@ -31,6 +31,9 @@ class SongPlayer(GObject.GObject):
         self.props.state = Gst.State.PLAYING
 
     def stop(self):
+        if self.props.state == Gst.State.NULL:
+            return
+
         self.props.state = Gst.State.NULL
         self.play_bus.remove_watch()
         self.play_bus.disconnect(self.handler_id)

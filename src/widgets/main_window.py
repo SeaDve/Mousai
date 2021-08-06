@@ -94,9 +94,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.settings.set_value('window-size', GLib.Variant('ai', [*size]))
 
     def on_song_row_play(self, song_row, song_src):
-        if self.song_player.props.state == Gst.State.PLAYING:
-            self.song_player.stop()
-
+        self.song_player.stop()
         self.song_player.play(song_src)
 
     def on_song_row_stop(self, song_row):
