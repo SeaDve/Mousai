@@ -6,32 +6,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 19:38+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-08-07 07:18+0800\n"
+"PO-Revision-Date: 2021-08-06 23:19+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/"
+">\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;musica;cançon;identificar;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Identificatz una cançon en unas segondas"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Descobrissètz las cançons que vos agradarà conéisser gràcia a una interfàcia "
+"facila de bon utilizar."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -45,10 +50,12 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Nòta : utiliza las API de audd.io, es doncas necessari de se marcar sus lor "
+"site per obténer mai d’ensages."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Perqué aimaretz Mousai ?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
@@ -77,27 +84,27 @@ msgstr ""
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:27
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Dobrir lo menú"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Afichar los acorchis"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "Sortir"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "Contraròtles"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
@@ -105,27 +112,27 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "Escafar l’istoric de cançons"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Reïnicializarla valor del geton"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "La benvenguda a Mousai"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Picatz un geton valid"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "Sometre"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -137,111 +144,111 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Afichar pas a l’aviada"
 
 #: data/ui/song_row.ui:13
 msgid "Open in Browser"
-msgstr ""
+msgstr "Dobrir una fenèstra de navigador"
 
 #: data/ui/song_row.ui:21
 msgid "Play preview"
-msgstr ""
+msgstr "Legir un apercebut"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "Escotar"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Començatz d’identificar de cançons"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
-msgstr ""
+msgstr "Anullar"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Anullar l’enregistrament"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "Menú principal"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Començatz a Mousainejar !"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Clicatz lo boton Escotar per començar."
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
-msgstr ""
+msgstr "Mut"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Font àudio preferida"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Microfòn"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Àudio del burèu"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Escafar l’istoric de cançons"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "Reïnicializar geton"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Acorchis de clavièr"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_A prepaus de Mousai"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
+#: src/widgets/main_window.py:112
 msgid "Listening"
-msgstr ""
+msgstr "En escota"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Cap d’àudio pas detectat"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Verificatz vòstre periferic àudio."
 
-#: src/widgets/main_window.py:172
+#: src/widgets/main_window.py:171
 msgid "The song was not recognized."
-msgstr ""
+msgstr "La cançon es pas estada reconeguda."
 
-#: src/widgets/main_window.py:174
+#: src/widgets/main_window.py:173
 msgid "Something went wrong."
-msgstr ""
+msgstr "Quicòm a trucat."
 
-#: src/widgets/main_window.py:176
+#: src/widgets/main_window.py:175
 msgid "Sorry!"
-msgstr ""
+msgstr "O planhèm !"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr ""
+msgstr "Quentin PAGÈS"
 
 #: src/main.py:80
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"

@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Jan Novák <novak@silen.org>, 2021.
+# Vojtěch Perník <translations@pervoj.cz>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 19:38+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Jan Novák <novak@silen.org>\n"
+"POT-Creation-Date: 2021-08-07 07:18+0800\n"
+"PO-Revision-Date: 2021-08-06 23:19+0000\n"
+"Last-Translator: Vojtěch Perník <translations@pervoj.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -20,20 +21,20 @@ msgstr ""
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;SoundHound;Hudba;Píseň;Identifikovat;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Identifikujte jakoukoli skladbu během několika sekund"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr ""
+msgstr "Objevte skladby, které se vám líbí, díky snadno použitelnému rozhraní."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -41,40 +42,45 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai je jednoduchá aplikace, která dokáže identifikovat skladbu podobně "
+"jako Shazam nebo SoundHound. Klikněte na tlačítko poslechu a počkejte "
+"několik sekund. Magicky vrátí název a interpreta písně!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Poznámka: Aplikace používá API audd.io, takže je nutné přihlásit se na "
+"jejich web, abyste získali vyšší počet použití."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Proč budete milovat Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Během několika sekund identifikujte název a interpreta skladby."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Uložte identifikovanou skladbu včetně obalu alba do historie."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Přehrajte si identifikovanou skladbu s nativním přehrávačem."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Vyhledejte skladbu na internetu pomocí odkazu."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Snadno použitelné uživatelské rozhraní."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Uživatelsky přívětivé klávesové zkratky."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:27
@@ -87,23 +93,23 @@ msgstr "Obecné"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Otevřít menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Zobrazit zkratky"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr "Vypnout"
+msgstr "Ukončit"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "Ovládání"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Zapnout/vypnout poslouchání"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -111,23 +117,23 @@ msgstr "Nastavení"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "Vymazat historii skladeb"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Resetovat hodnotu tokenu"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Vítejte v Mousai"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Zadejte platný token"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "Odeslat"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -136,26 +142,29 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai ke své práci používá API audd.io, takže je nutné se přihlásit na <a "
+"href=\"https://dashboard.audd.io/\">jejich web</a> a získat token. Ponecháte-"
+"li toto pole prázdné, můžete službu využít jen párkrát denně."
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Nezobrazovat při spuštění"
 
 #: data/ui/song_row.ui:13
 msgid "Open in Browser"
-msgstr ""
+msgstr "Otevřít v prohlížeči"
 
 #: data/ui/song_row.ui:21
 msgid "Play preview"
-msgstr ""
+msgstr "Přehrát ukázku"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "Poslouchat"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Začněte identifikovat hudbu"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
@@ -163,77 +172,77 @@ msgstr "Zrušit"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Zrušit nahrávání"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "Hlavní Menu"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Začít Mousaiovat!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Začněte kliknutím na tlačítko poslouchat."
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
-msgstr ""
+msgstr "Ztlumeno"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Preferovaný zdroj zvuku"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Zvuk z plochy"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Vynazat historii skladeb"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Resetovat token"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Klávesové zkratky"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_O aplikaci Mousai"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
+#: src/widgets/main_window.py:112
 msgid "Listening"
-msgstr ""
+msgstr "Poslouchání"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Nebylo detekováno žádné audio"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Zkontrolujte prosím své zvukové zařízení."
 
-#: src/widgets/main_window.py:172
+#: src/widgets/main_window.py:171
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Píseň nebyla rozpoznána."
 
-#: src/widgets/main_window.py:174
+#: src/widgets/main_window.py:173
 msgid "Something went wrong."
-msgstr ""
+msgstr "Něco se pokazilo."
 
-#: src/widgets/main_window.py:176
+#: src/widgets/main_window.py:175
 msgid "Sorry!"
-msgstr ""
+msgstr "Omlouváme se!"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
@@ -242,7 +251,9 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr "Jan Novák <novak@silen.org>"
+msgstr ""
+"Jan Novák <novak@silen.org>\n"
+"Vojtěch Perník <translations@pervoj.cz>"
 
 #: src/main.py:80
 msgid "GitHub"

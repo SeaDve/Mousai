@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 19:38+0800\n"
+"POT-Creation-Date: 2021-08-07 07:18+0800\n"
 "PO-Revision-Date: 2021-07-21 06:32+0000\n"
 "Last-Translator: Zhou Nan <zhounan@nfschina.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -182,7 +182,7 @@ msgstr "开始听歌识曲吧！"
 msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
 msgstr ""
 
@@ -214,28 +214,28 @@ msgstr ""
 msgid "_About Mousai"
 msgstr ""
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
+#: src/widgets/main_window.py:112
 msgid "Listening"
 msgstr "正在侦听"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "No audio detected"
 msgstr ""
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "Please check your audio device."
 msgstr ""
 
-#: src/widgets/main_window.py:172
+#: src/widgets/main_window.py:171
 msgid "The song was not recognized."
 msgstr "无识别结果。"
 
-#: src/widgets/main_window.py:174
+#: src/widgets/main_window.py:173
 msgid "Something went wrong."
 msgstr "识别时出现了问题。"
 
-#: src/widgets/main_window.py:176
+#: src/widgets/main_window.py:175
 msgid "Sorry!"
 msgstr "抱歉！"
 

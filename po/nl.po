@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 19:38+0800\n"
-"PO-Revision-Date: 2021-08-05 12:47+0000\n"
+"POT-Creation-Date: 2021-08-07 07:18+0800\n"
+"PO-Revision-Date: 2021-08-06 23:19+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -35,8 +35,8 @@ msgstr "Vind elk nummer in een mum van tijd"
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
-"Ontdek namen van nummers die je al lang wilde weten, allemaal in een "
-"eenvoudig te gebruiken toepassing."
+"Ontdek namen van nummers die je al lang wilde weten middels een eenvoudig te "
+"gebruiken toepassing."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -53,6 +53,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Let op: Mousai gebruikt de api van auddi.io. Log in op hun website om meer "
+"proeftijd te krijgen."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -97,7 +99,7 @@ msgstr "Menu openen"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Sneltoetsen tonen"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -188,60 +190,60 @@ msgstr "Beginnen met Mousaïng!"
 msgid "Click the listen button to start."
 msgstr "Klik op de luisterknop om te starten."
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:116
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
 msgstr "Gedempt"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "Voorkeursaudio_bron"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Microfoon"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Bureaubladaudio"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "Ges_chiedenis wissen"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "Standaard toegangssleutel he_rstellen"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "Snel_toetsen"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "Over Mous_ai"
 
-#: src/widgets/main_window.py:107 src/widgets/main_window.py:110
-#: src/widgets/main_window.py:113
+#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
+#: src/widgets/main_window.py:112
 msgid "Listening"
 msgstr "Bezig met luisteren"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Geen audio gedetecteerd"
 
-#: src/widgets/main_window.py:123
+#: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Controleer je audio-apparaat."
 
-#: src/widgets/main_window.py:172
+#: src/widgets/main_window.py:171
 msgid "The song was not recognized."
 msgstr "Het nummer werd niet herkend."
 
-#: src/widgets/main_window.py:174
+#: src/widgets/main_window.py:173
 msgid "Something went wrong."
 msgstr "Er is iets misgegaan."
 
-#: src/widgets/main_window.py:176
+#: src/widgets/main_window.py:175
 msgid "Sorry!"
 msgstr "Sorry!"
 
