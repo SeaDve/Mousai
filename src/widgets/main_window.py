@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import threading
+
 from gi.repository import GLib, Gtk, Adw, Gio, Gst
 
 from mousai.widgets.song import Song
@@ -109,32 +111,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.return_default_page()
             return
 
-        song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
-        token = self.settings.get_string('token-value')
-        output, image_src = Utils.guess_song(song_file, token)
-        status = output['status']
-
-        try:
-            result = output['result']
-            song = Song(*result.values())
-        except (AttributeError, KeyError):
-            if status == 'error':
-                error_subtitle = output['error_message']
-            elif status == 'success' and not result:
-                error_subtitle = _("The song was not recognized.")
-            else:
-                error_subtitle = _("Something went wrong.")
-
-            self.show_error(_("Sorry!"), error_subtitle)
-        else:
-            if image_src:
-                icon_dir = f'{Utils.get_tmp_dir()}/{song.title}{song.artist}.jpg'
-                Utils.download_image(image_src, icon_dir)
-
-            self.remove_duplicates(song.song_link)
-            self.history_model.insert(0, song)
-
-        self.return_default_page()
+        thread = threading.Thread(target=self.guess_song)
+        thread.start()
 
     def on_toggle_listen(self, action, param):
         if self.voice_recorder.props.state == Gst.State.NULL:
@@ -160,6 +138,37 @@ class MainWindow(Adw.ApplicationWindow):
             return default_mic
         else:
             return default_speaker
+
+    def guess_song(self):
+        song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
+        token = self.settings.get_string('token-value')
+        output, image_src = Utils.guess_song(song_file, token)
+        GLib.idle_add(self.update_history, output, image_src)
+
+    def update_history(self, output, image_src):
+        status = output['status']
+
+        try:
+            result = output['result']
+            song = Song(*result.values())
+        except (AttributeError, KeyError):
+            if status == 'error':
+                error_subtitle = output['error_message']
+            elif status == 'success' and not result:
+                error_subtitle = _("The song was not recognized.")
+            else:
+                error_subtitle = _("Something went wrong.")
+
+            self.show_error(_("Sorry!"), error_subtitle)
+        else:
+            if image_src:
+                icon_dir = f'{Utils.get_tmp_dir()}/{song.title}{song.artist}.jpg'
+                Utils.download_image(image_src, icon_dir)
+
+            self.remove_duplicates(song.song_link)
+            self.history_model.insert(0, song)
+
+        self.return_default_page()
 
     @Gtk.Template.Callback()
     def get_visible_button(self, window, visible_child):
