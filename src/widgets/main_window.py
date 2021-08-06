@@ -47,6 +47,9 @@ class MainWindow(Adw.ApplicationWindow):
         action.connect('activate', self.on_toggle_listen)
         self.add_action(action)
 
+        action = self.settings.create_action('preferred-audio-source')
+        self.add_action(action)
+
     def new_song_row(self, song):
         song_row = SongRow(song)
         self.main_stack.connect('notify::visible-child-name', song_row.on_window_recording)
@@ -135,7 +138,9 @@ class MainWindow(Adw.ApplicationWindow):
 
     def on_toggle_listen(self, action, param):
         if self.voice_recorder.props.state == Gst.State.NULL:
-            self.voice_recorder.start()
+            print(self.get_preferred_default_audio_source())
+
+            self.voice_recorder.start(self.get_preferred_default_audio_source())
             self.main_stack.set_visible_child_name('recording')
             self.lookup_action('clear-history').set_enabled(False)
         else:
@@ -148,6 +153,15 @@ class MainWindow(Adw.ApplicationWindow):
         error.props.text = subtitle
         error.present()
         error.connect('response', lambda *_: error.close())
+
+    def get_preferred_default_audio_source(self):
+        preferred_audio_source = self.settings.get_string('preferred-audio-source')
+        default_speaker, default_mic = Utils.get_default_audio_sources()
+
+        if preferred_audio_source == "mic":
+            return default_mic
+        else:
+            return default_speaker
 
     @Gtk.Template.Callback()
     def get_visible_button(self, window, visible_child):

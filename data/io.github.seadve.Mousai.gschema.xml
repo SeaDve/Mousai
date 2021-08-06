@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="mousai">
   <schema id="io.github.seadve.Mousai" path="/io/github/seadve/Mousai/">
+    <key type="s" name="preferred-audio-source">
+      <choices>
+        <choice value="mic"/>
+        <choice value="speaker"/>
+      </choices>
+      <default>"mic"</default>
+    </key>
     <key type="s" name="token-value">
       <default>""</default>
     </key>

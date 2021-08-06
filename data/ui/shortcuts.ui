@@ -17,7 +17,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="action-name">win.show-help-overlay</property>
-                <property name="title" translatable="yes">Show Keyboard Shortcuts</property>
+                <property name="title" translatable="yes">Show Shortcuts</property>
               </object>
             </child>
             <child>

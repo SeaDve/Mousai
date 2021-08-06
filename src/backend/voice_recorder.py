@@ -1,8 +1,6 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import subprocess
-
 import gi
 gi.require_version('GstPbutils', '1.0')
 from gi.repository import Gst, GstPbutils, GObject
@@ -59,12 +57,12 @@ class VoiceRecorder(GObject.GObject):
         if peak >= self.highest_peak:
             self.highest_peak = peak
 
-    def start(self):
+    def start(self, audio_source):
         self.record_bus = self.pipeline.get_bus()
         self.record_bus.add_signal_watch()
         self.handler_id = self.record_bus.connect('message', self._on_gst_message)
 
-        self.src.set_property('device', self.get_default_audio_input())
+        self.src.set_property('device', audio_source)
         self.encodebin.set_property('profile', self.get_profile())
         self.filesink.set_property('location', f'{Utils.get_tmp_dir()}/mousaitmp.ogg')
         self.level.link(self.encodebin)
@@ -109,12 +107,3 @@ class VoiceRecorder(GObject.GObject):
                                                                     container_caps, None)
         container_profile.add_profile(encoding_profile)
         return container_profile
-
-    @staticmethod
-    def get_default_audio_input():
-        pactl_output = subprocess.run(
-            ['/usr/bin/pactl', 'info'],
-            stdout=subprocess.PIPE,
-            text=True
-        ).stdout.splitlines()
-        return pactl_output[13].split()[2]

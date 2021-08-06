@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: Copyright 2021 SeaDve
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import subprocess
 import json
 import requests
 import re
@@ -73,3 +74,14 @@ class Utils:
         if not directory:
             directory = ''
         return f'{directory}/tmp'
+
+    @staticmethod
+    def get_default_audio_sources():
+        pactl_output = subprocess.run(
+            ['/usr/bin/pactl', 'info'],
+            stdout=subprocess.PIPE,
+            text=True
+        ).stdout.splitlines()
+        default_sink = f'{pactl_output[12].split()[2]}.monitor'
+        default_source = pactl_output[13].split()[2]
+        return default_sink, default_source

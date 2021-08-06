@@ -121,23 +121,36 @@
   </template>
   <menu id="menu">
     <section>
+      <submenu>
+        <attribute name="label" translatable="yes">_Preferred Audio Source</attribute>
+        <item>
+          <attribute name="label" translatable="yes">Microphone</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">mic</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Desktop Audio</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">speaker</attribute>
+        </item>
+      </submenu>
       <item>
         <attribute name="action">win.clear-history</attribute>
-        <attribute name="label" translatable="yes">Clear Song History</attribute>
+        <attribute name="label" translatable="yes">_Clear Song History</attribute>
       </item>
       <item>
         <attribute name="action">app.show-token</attribute>
-        <attribute name="label" translatable="yes">Reset Token</attribute>
+        <attribute name="label" translatable="yes">_Reset Token</attribute>
       </item>
     </section>
     <section>
       <item>
         <attribute name="action">win.show-help-overlay</attribute>
-        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
       </item>
       <item>
         <attribute name="action">app.show-about</attribute>
-        <attribute name="label" translatable="yes">About Mousai</attribute>
+        <attribute name="label" translatable="yes">_About Mousai</attribute>
       </item>
     </section>
   </menu>
