@@ -42,7 +42,7 @@ class SongPlayer(GObject.GObject):
             err, debug = message.parse_error()
             print("Error: %s" % err, debug)
         elif t == Gst.MessageType.EOS:
-            self.is_stopped = False
+            self.stop()
         elif t == Gst.MessageType.BUFFERING:
             percent = message.parse_buffering()
             if percent < 100:
