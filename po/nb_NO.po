@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 14:44+0800\n"
+"POT-Creation-Date: 2021-08-06 18:31+0800\n"
 "PO-Revision-Date: 2021-07-30 08:34+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -183,43 +183,43 @@ msgid "Main Menu"
 msgstr "Hovedmeny"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:100
+#: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
 msgstr "Start Mousaing."
 
-#: data/ui/main_window.ui:101
+#: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
 msgstr "Klikk på lytteknappen for å starte."
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:118
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:118
 msgid "Muted"
 msgstr "Forstummet"
 
-#: data/ui/main_window.ui:125
+#: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
 msgstr ""
 
-#: data/ui/main_window.ui:127
+#: data/ui/main_window.ui:123
 msgid "Microphone"
 msgstr ""
 
-#: data/ui/main_window.ui:132
+#: data/ui/main_window.ui:128
 msgid "Desktop Audio"
 msgstr ""
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:137
 msgid "_Clear Song History"
 msgstr ""
 
-#: data/ui/main_window.ui:145
+#: data/ui/main_window.ui:141
 msgid "_Reset Token"
 msgstr ""
 
-#: data/ui/main_window.ui:151
+#: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: data/ui/main_window.ui:155
+#: data/ui/main_window.ui:151
 msgid "_About Mousai"
 msgstr ""
 

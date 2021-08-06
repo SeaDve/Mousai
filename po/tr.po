@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 14:44+0800\n"
-"PO-Revision-Date: 2021-08-06 06:44+0000\n"
+"POT-Creation-Date: 2021-08-06 18:31+0800\n"
+"PO-Revision-Date: 2021-08-06 10:35+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
 ">\n"
@@ -51,6 +51,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme almak için "
+"sitelerinde oturum açmak gerekir."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -178,43 +180,43 @@ msgid "Main Menu"
 msgstr "Ana Menü"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:100
+#: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
 msgstr "Mousai Yapmaya Başla!"
 
-#: data/ui/main_window.ui:101
+#: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
 msgstr "Başlamak için dinle düğmesine tıklayın."
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:118
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:118
 msgid "Muted"
 msgstr "Sesi kapatıldı"
 
-#: data/ui/main_window.ui:125
+#: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
 msgstr "Tercih Edilen Ses _Kaynağı"
 
-#: data/ui/main_window.ui:127
+#: data/ui/main_window.ui:123
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: data/ui/main_window.ui:132
+#: data/ui/main_window.ui:128
 msgid "Desktop Audio"
 msgstr "Masaüstü Sesi"
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:137
 msgid "_Clear Song History"
 msgstr "Şarkı Geçmişini _Temizle"
 
-#: data/ui/main_window.ui:145
+#: data/ui/main_window.ui:141
 msgid "_Reset Token"
 msgstr "Belirteci _Sıfırla"
 
-#: data/ui/main_window.ui:151
+#: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
 msgstr "_Klavye Kısayolları"
 
-#: data/ui/main_window.ui:155
+#: data/ui/main_window.ui:151
 msgid "_About Mousai"
 msgstr "Mousai _Hakkında"
 

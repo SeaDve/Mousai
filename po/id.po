@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 14:44+0800\n"
+"POT-Creation-Date: 2021-08-06 18:31+0800\n"
 "PO-Revision-Date: 2021-08-06 06:45+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -181,43 +181,43 @@ msgid "Main Menu"
 msgstr "Menu Utama"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:100
+#: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
 msgstr "Mulai Mousaing!"
 
-#: data/ui/main_window.ui:101
+#: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
 msgstr "Klik tombol dengarkan untuk memulai."
 
-#: data/ui/main_window.ui:112 src/widgets/main_window.py:118
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:118
 msgid "Muted"
 msgstr "Disenyapkan"
 
-#: data/ui/main_window.ui:125
+#: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
 msgstr "_Sumber Audio Utama"
 
-#: data/ui/main_window.ui:127
+#: data/ui/main_window.ui:123
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: data/ui/main_window.ui:132
+#: data/ui/main_window.ui:128
 msgid "Desktop Audio"
 msgstr "Audio Desktop"
 
-#: data/ui/main_window.ui:141
+#: data/ui/main_window.ui:137
 msgid "_Clear Song History"
 msgstr "_Hapus Riwayat Lagu"
 
-#: data/ui/main_window.ui:145
+#: data/ui/main_window.ui:141
 msgid "_Reset Token"
 msgstr ""
 
-#: data/ui/main_window.ui:151
+#: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
 msgstr "_Pintasan Papan Ketik"
 
-#: data/ui/main_window.ui:155
+#: data/ui/main_window.ui:151
 msgid "_About Mousai"
 msgstr "_Tentang Mousai"
 
