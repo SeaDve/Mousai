@@ -38,7 +38,7 @@ Mousai is a simple application that can identify songs similar to Shazam. Just
 click the listen button, and then wait a few seconds. It will magically return
 the title and artist of that song!
 
-Note: This uses the API of audd.io, so it is necessary to login to their site to get more trials.
+Note: This uses the API of audd.io, so it is necessary to log in to their site to get more trials.
 
 Why you will love Mousai?
 * 🎵 Identify the title and artist of the song within seconds.
