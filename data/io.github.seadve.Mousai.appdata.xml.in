@@ -51,6 +51,7 @@
           <li>Check if there is an audio detected before sending request</li>
           <li>Fixed not responding issue when the internet is slow</li>
           <li>Fix multiple songs playing at once</li>
+          <li>Added Czech translations</li>
           <li>Updated Filipino translations</li>
           <li>Updated Turkish translations</li>
           <li>Updated Dutch translations</li>
