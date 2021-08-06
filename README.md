@@ -23,8 +23,8 @@
   <a href="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml">
     <img src="https://github.com/SeaDve/Mousai/actions/workflows/testing.yml/badge.svg" alt="CI status"/>
   </a>
-  <a href="https://repology.org/project/breathing/versions">
-    <img src="https://repology.org/badge/tiny-repos/breathing.svg" alt="Packaging status">
+  <a href="https://repology.org/project/mousai/versions">
+    <img src="https://repology.org/badge/tiny-repos/mousai.svg" alt="Packaging status">
   </a>
 </p>
 
