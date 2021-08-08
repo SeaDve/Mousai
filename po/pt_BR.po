@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>, 2021.
+# Dave Patrick <davecruz48@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-08-08 23:19+0000\n"
+"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -257,8 +258,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr "Vitor Cardoso /n"
-"Tiago Lucas Flach"
+msgstr "Vitor Cardoso /nTiago Lucas Flach"
 
 #: src/main.py:80
 msgid "GitHub"
