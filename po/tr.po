@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 07:18+0800\n"
+"POT-Creation-Date: 2021-08-08 20:39+0800\n"
 "PO-Revision-Date: 2021-08-06 10:35+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
@@ -63,28 +63,32 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Şarkının adını ve sanatçısını saniyeler içinde tanımlayın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎙️ Use your microphone or audio from desktop."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
 "🎸 Albüm görseli dahil olmak üzere tanımlanmış şarkıyı geçmişte saklayın."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:16
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr "🎼 Tanımlanan şarkıyı yerel oynatıcıyla ön izleyin."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:17
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
 msgstr "🌐 Web bağlantısıyla şarkıya göz atın."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Kullanımı kolay kullanıcı arayüzü."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:19
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Kullanıcı dostu klavye kısayolları."
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:27
+#: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -151,11 +155,11 @@ msgstr ""
 msgid "Do not show at startup"
 msgstr "Başlangıçta gösterme"
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:14
 msgid "Open in Browser"
 msgstr "Tarayıcıda Aç"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr "Ön izlemeyi oynat"
 

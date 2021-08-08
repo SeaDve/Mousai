@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 07:18+0800\n"
+"POT-Creation-Date: 2021-08-08 20:39+0800\n"
 "PO-Revision-Date: 2021-08-07 17:17+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
-"Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/>"
-"\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/"
+">\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,32 +62,37 @@ msgstr "Perqué aimaretz Mousai ?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr "🎵 Identificatz lo títol e l’artista de la cançon en un par de segondas."
+msgstr ""
+"🎵 Identificatz lo títol e l’artista de la cançon en un par de segondas."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎙️ Use your microphone or audio from desktop."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
 "🎸 Gardatz la cançon identificada en inclusent la cobertura de l’album dins "
 "l’istoric."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:16
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr "🎼 Previsualizatz la cançon identificada amb un lector natiu."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:17
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
 msgstr "🌐 Cercatz la cançon pel web amb un ligam."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Interfàcia de bon utilizar."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:19
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Acorchis clavièr simples."
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:27
+#: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -155,11 +160,11 @@ msgstr ""
 msgid "Do not show at startup"
 msgstr "Afichar pas a l’aviada"
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:14
 msgid "Open in Browser"
 msgstr "Dobrir una fenèstra de navigador"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr "Legir un apercebut"
 

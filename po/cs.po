@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 07:18+0800\n"
+"POT-Creation-Date: 2021-08-08 20:39+0800\n"
 "PO-Revision-Date: 2021-08-06 23:19+0000\n"
 "Last-Translator: Vojtěch Perník <translations@pervoj.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
@@ -63,27 +63,31 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Během několika sekund identifikujte název a interpreta skladby."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎙️ Use your microphone or audio from desktop."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr "🎸 Uložte identifikovanou skladbu včetně obalu alba do historie."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:16
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr "🎼 Přehrajte si identifikovanou skladbu s nativním přehrávačem."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:17
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
 msgstr "🌐 Vyhledejte skladbu na internetu pomocí odkazu."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Snadno použitelné uživatelské rozhraní."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:19
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Uživatelsky přívětivé klávesové zkratky."
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:27
+#: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -150,11 +154,11 @@ msgstr ""
 msgid "Do not show at startup"
 msgstr "Nezobrazovat při spuštění"
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:14
 msgid "Open in Browser"
 msgstr "Otevřít v prohlížeči"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr "Přehrát ukázku"
 

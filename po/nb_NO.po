@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 07:18+0800\n"
-"PO-Revision-Date: 2021-07-30 08:34+0000\n"
+"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"PO-Revision-Date: 2021-08-08 12:43+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
 "mousai/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.2-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -53,6 +53,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Merk dette bruker API-et til audd.io, så du må logge inn på siden deres for "
+"å få flere prøveperioder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -63,27 +65,31 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Identifiser tittel og artist for en sang på sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎙️ Use your microphone or audio from desktop."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr "🎸 Lagre identifisert spor (inkludert omslag) i historikk."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:16
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr "🎼 Forhåndsvis identifisert spor med innebygd avspiller."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:17
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
 msgstr "🌐 Utforsk sporet på nettet med lenken."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Enkelt brukergrensesnitt"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:19
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Brukervennlige tastatursnarveier"
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:27
+#: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -93,11 +99,11 @@ msgstr "Generelt"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Åpne menyen"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Vis snarveier"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -109,7 +115,7 @@ msgstr "Kontroller"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Veksle lytting"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -121,7 +127,7 @@ msgstr "Tøm sanghistorikk"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Tilbakestill symbol-verdi"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -152,12 +158,12 @@ msgstr ""
 msgid "Do not show at startup"
 msgstr "Ikke vis ved oppstart"
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:14
 #, fuzzy
 msgid "Open in Browser"
 msgstr "Åpne i nettleser"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:22
 #, fuzzy
 msgid "Play preview"
 msgstr "Avspillingsforhåndsvising"
@@ -197,31 +203,31 @@ msgstr "Forstummet"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Foretrukket lydstyrke"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Skrivebordslyd"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Tøm sporhistorikk"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Tilbakestill symbol"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Tastatursnarveier"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Om Mousai"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
@@ -231,11 +237,11 @@ msgstr "Lytting"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Ingen lyd oppdaget"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Sjekk din lydenhet."
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."

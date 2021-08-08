@@ -6,32 +6,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-07 07:18+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"PO-Revision-Date: 2021-08-08 12:43+0000\n"
+"Last-Translator: 小山田純 <oyamada.junjun@outlook.jp>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Music;Song;Identify;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "数秒であらゆる曲を識別"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr ""
+msgstr "使いやすいインターフェイスで、気になる曲を見つけてみましょう。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -39,6 +42,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousaiは、Shazamのように曲を認識できるシンプルなアプリケーションです。認識ボ"
+"タンをクリックして、数秒待つだけ。魔法のように、その曲のタイトルとアーティス"
+"トを教えてくれます！"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -48,52 +54,57 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Mousaiの好きなところは？"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 曲のタイトルやアーティストを数秒で特定できること。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
-msgid "🎸 Store the identified song including the album art in history."
+msgid "🎙️ Use your microphone or audio from desktop."
 msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
-msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgid "🎸 Store the identified song including the album art in history."
+msgstr "🎸 認識された曲の履歴（ジャケットを含めて）が、保存されること。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
-msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgid "🎼 Preview the identified song with the native player."
+msgstr "🎼 認識された曲をネイティブプレーヤーで試聴することができること。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
-msgid "📱 Easy-to-use user interface."
+msgid "🌐 Browse the song in the web with the link."
 msgstr ""
+"🌐 リンクをクリックすることで、様々なサービスでその曲を聴くことができること。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
+msgid "📱 Easy-to-use user interface."
+msgstr "📱 使いやすいインターフェイス"
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ ユーザーフレンドリーなキーボードショートカット"
 
 #. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:27
+#: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "メニューを開く"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "ショートカット一覧"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "終了"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
@@ -105,27 +116,27 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "曲の履歴をすべて消去"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "トークンの値をリセット"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Mousaiにようこそ！"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "有効なトークンを入力"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "送信"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -137,27 +148,27 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "次回の起動時には表示しない"
 
-#: data/ui/song_row.ui:13
+#: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "ブラウザで開く"
 
-#: data/ui/song_row.ui:21
+#: data/ui/song_row.ui:22
 msgid "Play preview"
 msgstr ""
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "認識"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "曲の認識を始める"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
@@ -165,32 +176,32 @@ msgstr ""
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "メインメニュー"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Start Mousaing!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "「認識」ボタンをクリックしてはじめよう。"
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
-msgstr ""
+msgstr "ミュート"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "オーディオソースを選択"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "マイク"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "デスクトップオーディオ"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
@@ -206,42 +217,42 @@ msgstr ""
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Mousaiについて"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
 msgid "Listening"
-msgstr ""
+msgstr "認識中"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "音声が検出されません"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "オーディオデバイスを確認してください。"
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."
-msgstr ""
+msgstr "この曲は認識できませんでした。"
 
 #: src/widgets/main_window.py:173
 msgid "Something went wrong."
-msgstr ""
+msgstr "何かが間違っていました。"
 
 #: src/widgets/main_window.py:175
 msgid "Sorry!"
-msgstr ""
+msgstr "申し訳ありません!"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr ""
+msgstr "小山田 純"
 
 #: src/main.py:80
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
