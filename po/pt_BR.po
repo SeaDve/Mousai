@@ -52,6 +52,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Observação: Isto utiliza a API de audd.io, por isso é necessário fazer login "
+"em seu site para obter mais testes."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -63,7 +65,7 @@ msgstr "🎵 Identifique o título e o artista da música em segundos."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Use seu microfone ou áudio do desktop."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -97,11 +99,11 @@ msgstr "Geral"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Abrir Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Mostrar atalhos"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -113,7 +115,7 @@ msgstr "Controles"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Escutar"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -125,7 +127,7 @@ msgstr "Limpar histórico de músicas"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Redefinir o valor do token"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -152,7 +154,7 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Não mostrar na inicialização"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
@@ -197,31 +199,31 @@ msgstr "Mudo"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Fonte de Áudio Preferida"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Microfone"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Áudio do Desktop"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Limpar Histórico de Som"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Reiniciar Token"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Atalhos do teclado"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Sobre o Mousai"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
@@ -230,11 +232,11 @@ msgstr "Escutando"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Nenhum áudio detectado"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Verifique seu dispositivo de áudio."
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."
@@ -256,6 +258,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #: src/main.py:79
 msgid "translator-credits"
 msgstr "Vitor Cardoso"
+msgstr "Tiago Lucas Flach"
 
 #: src/main.py:80
 msgid "GitHub"
