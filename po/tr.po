@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-08-06 10:35+0000\n"
+"PO-Revision-Date: 2021-08-08 23:19+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,7 @@ msgstr "🎵 Şarkının adını ve sanatçısını saniyeler içinde tanımlay�
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Mikrofonunuzu veya masaüstünün sesini kullanın."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
