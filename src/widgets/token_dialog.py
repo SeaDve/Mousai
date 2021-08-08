@@ -28,6 +28,8 @@ class TokenDialog(Adw.ApplicationWindow):
         if self.submit_button.get_sensitive():
             self.settings.set_string('token-value', self.token_entry.get_text())
             self.close()
+        else:
+            self.get_surface().beep()
 
     @Gtk.Template.Callback()
     def on_text_changed(self, entry):
