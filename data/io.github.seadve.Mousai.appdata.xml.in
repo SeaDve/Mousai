@@ -43,6 +43,20 @@
   </screenshots>
 
   <releases>
+    <release version="0.5.2" date="2021-08-10">
+      <description>
+        <p>This is a small update with miscellaneous improvements:</p>
+        <ul>
+          <li>Added a beep sound when trying to do something</li>
+          <li>Added Finnish translations</li>
+          <li>Updated Turkish translations</li>
+          <li>Updated Portuguese (Brazil) translations</li>
+          <li>Updated Spanish translations</li>
+          <li>Updated Dutch translations</li>
+          <li>Updated Filipino translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.1" date="2021-08-08">
       <description>
         <p>This is a small update with miscellaneous improvements:</p>
