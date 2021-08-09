@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-08-08 12:43+0000\n"
+"PO-Revision-Date: 2021-08-08 23:19+0000\n"
 "Last-Translator: 小山田純 <oyamada.junjun@outlook.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
@@ -145,6 +145,8 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousaiはaudd.ioのAPIを利用しているため、<a href=\"https://dashboard.audd.io/\""
+">ウェブサイト</a>にログインしてトークンを取得する必要があります。トークンを入力しないと、1日に数回しか使うことができません。"
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
@@ -172,7 +174,7 @@ msgstr "キャンセル"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "認識をキャンセル"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
@@ -205,15 +207,15 @@ msgstr "デスクトップオーディオ"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_曲の履歴をすべて消去"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_トークンをリセット"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_キーボードショートカット"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
