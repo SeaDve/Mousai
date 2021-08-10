@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-08-08 23:19+0000\n"
+"PO-Revision-Date: 2021-08-10 12:33+0000\n"
 "Last-Translator: 小山田純 <oyamada.junjun@outlook.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr ""
+msgstr "注：Mousaiは、audd.ioのAPIを使用しているため、より多い回数使用するためには、audDのサイトにログインする必要があります。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -62,7 +62,7 @@ msgstr "🎵 曲のタイトルやアーティストを数秒で特定できる�
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ マイクまたはデスクトップ上のオーディオで、認識できること。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -108,11 +108,11 @@ msgstr "終了"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "操作"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "認識　開始/停止"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -146,7 +146,7 @@ msgid ""
 "this blank will give you a few trials per day."
 msgstr ""
 "Mousaiはaudd.ioのAPIを利用しているため、<a href=\"https://dashboard.audd.io/\""
-">ウェブサイト</a>にログインしてトークンを取得する必要があります。トークンを入力しないと、1日に数回しか使うことができません。"
+">audDのウェブサイト</a>にログインしてトークンを取得する必要があります。トークンを入力しないと、1日に数回しか使うことができません。"
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
@@ -158,7 +158,7 @@ msgstr "ブラウザで開く"
 
 #: data/ui/song_row.ui:22
 msgid "Play preview"
-msgstr ""
+msgstr "試聴"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
@@ -178,7 +178,7 @@ msgstr "認識をキャンセル"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr "メインメニュー"
+msgstr "メニュー"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
@@ -224,7 +224,7 @@ msgstr "_Mousaiについて"
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
 msgid "Listening"
-msgstr "認識中"
+msgstr "認識中..."
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
