@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the mousai package.
 # Artem <KovalevArtem.ru@gmail.com>, 2021.
 # Чтабс <chtabs2k19@gmail.com>, 2021.
+# Noel Fritz <toro_75@yahoo.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/"
-">\n"
+"PO-Revision-Date: 2021-08-12 20:34+0000\n"
+"Last-Translator: Noel Fritz <toro_75@yahoo.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,24 +86,27 @@ msgstr "🌐 Просмотрите песню в Интернете с помо
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr "📱 Простой в использовании пользовательский интерфейс."
+msgstr "Лёгкий в использовании интерфейс"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
+#, fuzzy
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr "⌨️ Удобные сочетания клавиш."
+msgstr "Лёгкие сочетания клавиш"
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr "Dave Patrick"
+msgstr "Дэйв Патрик"
 
 #: data/ui/shortcuts.ui:10
+#, fuzzy
 msgid "General"
-msgstr "Общие"
+msgstr "Основное"
 
 #: data/ui/shortcuts.ui:14
+#, fuzzy
 msgid "Open Menu"
-msgstr ""
+msgstr "Открыть меню"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
