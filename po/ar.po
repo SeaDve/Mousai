@@ -7,31 +7,35 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-08-14 10:55+0000\n"
+"Last-Translator: Mehdi Essalehi <messalehi2001@outlook.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;موسيقى;أغنية;تعريف;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "عرف أي أغنية في ثوانٍ"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr ""
+msgstr "إكتشف أغانٍ تتشوق لمعرفتها بواجهة سهلة اﻹستعمال."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -39,97 +43,101 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai تطبيق بإمكانه تعريف أغانٍ مثل Shazam. انقر فقط على زر الإستماع، ثم "
+"انتظر بضع ثوانٍ. سيعرفك بعنوان وفنان الأغنية!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"ملاحظة: هذا التطبيق يستعمل واجهة برمجة تطبيق audd.io (أي API)، لذا يجب تسجيل "
+"الدخول لموقعهم لأخذ المزيد من مدد التجريب."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "لماذا ستحب Mousai؟"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 عرف عنوان وفنان الأغنية في ثوانٍ."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ استعمل الميكروفون أو الصوت الصادر من حاسوبك."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 خزن الأغاني المعرفة مع صورة الألبوم في سجل التعريفات."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "عاين الأغاني المعرفة بالمشغل المحلي."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "تصفح الأغنية على الأنترنيت باستعمال الرابط."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 واجهة سهلة الإستعمال."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ إختصارات على لوحة المفاتيح سهلة اﻹستعمال."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "افتح القائمة"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "إظهار اﻹختصارات"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "الخروج"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "تحَكم"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "تبديل إلى اﻹستماع"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "إعدادات"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "مسح سجل الأغاني"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "إعادة ضبط الرمز"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "مرحبا بك في Mousai"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "أدخل رمزاً صالحاً"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "إرسال"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -138,114 +146,117 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"ملاحظة: هذا التطبيق يستعمل واجهة برمجة تطبيق audd.io (أي API)، لذا يجب تسجيل "
+"الدخول <a href=\"https://dashboard.audd.io/\">لموقعهم</a> لأخذ المزيد من مدد "
+"التجريب."
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "عدم اﻹظهار عند تشغيل النظام"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "الفتح في المتصفح"
 
 #: data/ui/song_row.ui:22
 msgid "Play preview"
-msgstr ""
+msgstr "تشغيل العينة"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "اﻹستماع"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "البدأ في تعريف الموسيقى"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "إلغاء التسجيل"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "القائمة الرئيسة"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "البدأ في التعريف!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "إضغط غلى زر اﻹستماع للبدأ."
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
-msgstr ""
+msgstr "صامت"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_مصدر الصوت المُفضل"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "ميكروفون"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "صوت الحاسوب"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_مسح سجل الأغاني"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "__إعادة ضبط الرمز"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_إختصارات لوحة المفاتيح"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_حول Mousai"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
 msgid "Listening"
-msgstr ""
+msgstr "جاري الإستماع"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "لا صوت مستَمع"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "المرجو التأكد من جهاز الصوت."
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."
-msgstr ""
+msgstr "لم يتم التعرف على الأغنية."
 
 #: src/widgets/main_window.py:173
 msgid "Something went wrong."
-msgstr ""
+msgstr "حدث خطأ ما."
 
 #: src/widgets/main_window.py:175
 msgid "Sorry!"
-msgstr ""
+msgstr "عذراً!"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "الحقوق 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr ""
+msgstr "Mehdi Essalehi"
 
 #: src/main.py:80
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
