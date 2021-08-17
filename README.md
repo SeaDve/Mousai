@@ -68,8 +68,8 @@ GNOME Builder is the environment used for developing this application. It can us
 ```
 git clone https://github.com/SeaDve/Mousai.git
 cd Mousai
-meson builddir --prefix=/usr/local
-ninja -C builddir install
+meson _build --prefix=/usr/local
+ninja -C _build install
 ```
 
 
