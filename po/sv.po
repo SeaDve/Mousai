@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-08-08 12:43+0000\n"
-"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
-">\n"
+"PO-Revision-Date: 2021-08-18 12:55+0000\n"
+"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -68,7 +68,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Förhandsgranska den identifierade låten med den inbyggda spelaren."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
@@ -93,7 +93,7 @@ msgstr "Allmänt"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr "Öppna menyn"
+msgstr "Öppna meny"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
@@ -145,15 +145,15 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Visa inte vid start"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "Öppna i Webbläsare"
 
 #: data/ui/song_row.ui:22
 msgid "Play preview"
-msgstr ""
+msgstr "Spela förhandsvisning"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
@@ -161,7 +161,7 @@ msgstr "Lyssna"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Börja identifiera musik"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
@@ -169,7 +169,7 @@ msgstr "Avbryt"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Avbryt inspelningen"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
@@ -190,11 +190,11 @@ msgstr "Tystad"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Föredragen ljudkälla"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
@@ -202,7 +202,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Rensa sånghistorik"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
@@ -214,20 +214,20 @@ msgstr "_Tangentbordsgenvägar"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Om Mousai"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
 msgid "Listening"
-msgstr ""
+msgstr "Lyssnar"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Inget ljud har upptäckts"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Kontrollera din ljudenhet."
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."
@@ -248,7 +248,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr "Åke Engelbrektson <eson@svenskasprakfiler.se>"
+msgstr "Luna Jernberg"
 
 #: src/main.py:80
 msgid "GitHub"
