@@ -7,7 +7,6 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/playback_indicator.ui</file>
     <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/external-link-symbolic.svg</file>
-    <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/playing-paused-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/playing-00-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/playing-01-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/playing-02-symbolic.svg</file>
