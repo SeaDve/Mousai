@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GObject, Gio, Adw
+from gi.repository import Gtk, GObject, Adw
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/playback_indicator.ui')

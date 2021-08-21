@@ -4,7 +4,7 @@
 from gi.repository import Gio, Gtk, Adw, GLib, Gdk, GObject
 
 from mousai.backend.utils import Utils
-from mousai.widgets.playback_indicator import PlaybackIndicator
+from mousai.widgets.playback_indicator import PlaybackIndicator   # noqa: F401
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/song_row.ui')
