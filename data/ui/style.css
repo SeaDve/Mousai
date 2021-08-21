@@ -3,8 +3,7 @@ playbackindicator {
 }
 
 playbackindicator.active {
-  animation: playing 2s linear infinite;
-  -gtk-icon-source: -gtk-icontheme("playing-00-symbolic");
+  animation: playing 1.8s linear infinite;
 }
 
 @keyframes playing {
