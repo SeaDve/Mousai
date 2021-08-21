@@ -4,7 +4,6 @@
     <child>
       <object class="GtkSpinner" id="spinner">
         <property name="css-name">playbackindicator</property>
-        <property name="width-request">24</property>
         <binding name="spinning">
           <lookup name="is-active">MousaiPlaybackIndicator</lookup>
         </binding>

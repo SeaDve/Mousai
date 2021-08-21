@@ -11,7 +11,6 @@ from mousai.widgets.playback_indicator import PlaybackIndicator
 class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
 
-    prefix = Gtk.Template.Child()
     song_icon = Gtk.Template.Child()
     play_pause_button = Gtk.Template.Child()
 
@@ -26,7 +25,7 @@ class SongRow(Adw.ActionRow):
         self.song_src = song.song_src
 
         self.play_pause_button.set_sensitive(self.song_src)
-        self.add_prefix(self.prefix)
+        self.add_prefix(self.song_icon)
         self.song_icon.set_custom_image(self.get_song_icon())
 
     def get_song_icon(self):
@@ -52,5 +51,9 @@ class SongRow(Adw.ActionRow):
         Gio.AppInfo.launch_default_for_uri(self.song_link)
 
     @Gtk.Template.Callback()
-    def get_play_pause_button_icon_name(self, button, is_playing):
-        return 'media-playback-stop-symbolic' if is_playing else 'media-playback-start-symbolic'
+    def get_play_pause_button_visible_child_name(self, button, is_playing):
+        return 'playing' if is_playing else 'stopped'
+
+    @Gtk.Template.Callback()
+    def get_play_pause_button_tooltip_text(self, button, is_playing):
+        return 'Stop Preview' if is_playing else 'Play Preview'
