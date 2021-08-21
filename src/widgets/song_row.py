@@ -56,4 +56,4 @@ class SongRow(Adw.ActionRow):
 
     @Gtk.Template.Callback()
     def get_play_pause_button_tooltip_text(self, button, is_playing):
-        return 'Stop Preview' if is_playing else 'Play Preview'
+        return _("Stop Preview") if is_playing else _("Play Preview")

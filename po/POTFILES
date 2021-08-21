@@ -6,4 +6,5 @@ data/ui/token_dialog.ui
 data/ui/song_row.ui
 data/ui/main_window.ui
 src/widgets/main_window.py
+src/widgets/song_row.py
 src/main.py
