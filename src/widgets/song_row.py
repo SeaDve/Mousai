@@ -4,16 +4,18 @@
 from gi.repository import Gio, Gtk, Adw, GLib, Gdk, GObject
 
 from mousai.backend.utils import Utils
+from mousai.widgets.playback_indicator import PlaybackIndicator
 
 
 @Gtk.Template(resource_path='/io/github/seadve/Mousai/ui/song_row.ui')
 class SongRow(Adw.ActionRow):
     __gtype_name__ = 'SongRow'
 
+    prefix = Gtk.Template.Child()
     song_icon = Gtk.Template.Child()
     play_pause_button = Gtk.Template.Child()
 
-    _is_playing = False
+    is_playing = GObject.Property(type=bool, default=False)
 
     def __init__(self, song):
         super().__init__()
@@ -24,20 +26,8 @@ class SongRow(Adw.ActionRow):
         self.song_src = song.song_src
 
         self.play_pause_button.set_sensitive(self.song_src)
-        self.add_prefix(self.song_icon)
+        self.add_prefix(self.prefix)
         self.song_icon.set_custom_image(self.get_song_icon())
-
-    @GObject.Property(type=bool, default=_is_playing)
-    def is_playing(self):
-        return self._is_playing
-
-    @is_playing.setter  # type: ignore
-    def is_playing(self, is_playing):
-        self._is_playing = is_playing
-        if is_playing:
-            self.song_icon.add_css_class('playing')
-        else:
-            self.song_icon.remove_css_class('playing')
 
     def get_song_icon(self):
         path = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'

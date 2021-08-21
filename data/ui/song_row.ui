@@ -31,8 +31,20 @@
       </object>
     </child>
   </template>
-  <object class="AdwAvatar" id="song_icon">
-    <property name="icon-name">emblem-music-symbolic</property>
-    <property name="size">42</property>
+  <object class="GtkOverlay" id="prefix">
+    <child type="overlay">
+      <object class="MousaiPlaybackIndicator">
+        <property name="halign">center</property>
+        <binding name="is-active">
+          <lookup name="is-playing">SongRow</lookup>
+        </binding>
+      </object>
+    </child>
+    <child>
+      <object class="AdwAvatar" id="song_icon">
+        <property name="icon-name">emblem-music-symbolic</property>
+        <property name="size">42</property>
+      </object>
+    </child>
   </object>
 </interface>
