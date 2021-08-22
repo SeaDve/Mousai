@@ -43,6 +43,21 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.0" date="2021-08-22">
+      <description>
+        <p>This release contains UI and translation improvements:</p>
+        <ul>
+          <li>Improved playing animation</li>
+          <li>Minor performance improvements</li>
+          <li>Updated Occitan translations</li>
+          <li>Updated Ukrainian translations</li>
+          <li>Updated Arabic translations</li>
+          <li>Updated German translations</li>
+          <li>Updated Filipino translations</li>
+          <li>Updated Dutch translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.2" date="2021-08-10">
       <description>
         <p>This is a small update with miscellaneous improvements:</p>
