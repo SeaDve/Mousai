@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
 "PO-Revision-Date: 2021-08-08 23:19+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -161,10 +161,6 @@ msgstr "Não mostrar na inicialização"
 msgid "Open in Browser"
 msgstr "Abrir no Navegador"
 
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "Tocar pré-visualização"
-
 #: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Escutar"
@@ -251,6 +247,14 @@ msgstr "Algo deu errado."
 msgid "Sorry!"
 msgstr "Desculpa!"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -265,6 +269,9 @@ msgstr ""
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "Tocar pré-visualização"
 
 #~ msgid ""
 #~ "Note: This uses the API of audd.io, so it is necessary to login to their "

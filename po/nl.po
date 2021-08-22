@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
-"PO-Revision-Date: 2021-08-08 23:19+0000\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
+"PO-Revision-Date: 2021-08-22 01:08+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -161,10 +161,6 @@ msgstr "Niet tonen na opstarten"
 msgid "Open in Browser"
 msgstr "Openen in webbrowser"
 
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "Beluisteren"
-
 #: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Luisteren"
@@ -251,6 +247,14 @@ msgstr "Er is iets misgegaan."
 msgid "Sorry!"
 msgstr "Sorry!"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr "Voorvertoning stoppen"
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr "Voorvertonen"
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021, Dave Patrick"
@@ -263,6 +267,9 @@ msgstr "Heimen Stoffels &lt;vistausss@fastmail.com&gt;"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "Beluisteren"
 
 #~ msgid ""
 #~ "Note: This uses the API of audd.io, so it is necessary to login to their "

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
 "PO-Revision-Date: 2021-08-06 23:19+0000\n"
 "Last-Translator: Vojtěch Perník <translations@pervoj.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
@@ -158,10 +158,6 @@ msgstr "Nezobrazovat při spuštění"
 msgid "Open in Browser"
 msgstr "Otevřít v prohlížeči"
 
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "Přehrát ukázku"
-
 #: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Poslouchat"
@@ -248,6 +244,14 @@ msgstr "Něco se pokazilo."
 msgid "Sorry!"
 msgstr "Omlouváme se!"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -262,6 +266,9 @@ msgstr ""
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "Přehrát ukázku"
 
 #~ msgid "Keyboard Shortcuts"
 #~ msgstr "Klávesové zkratky"

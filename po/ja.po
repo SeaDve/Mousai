@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
 "PO-Revision-Date: 2021-08-10 12:33+0000\n"
 "Last-Translator: 小山田純 <oyamada.junjun@outlook.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
@@ -50,7 +50,9 @@ msgstr ""
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr "注：Mousaiは、audd.ioのAPIを使用しているため、より多い回数使用するためには、audDのサイトにログインする必要があります。"
+msgstr ""
+"注：Mousaiは、audd.ioのAPIを使用しているため、より多い回数使用するためには、"
+"audDのサイトにログインする必要があります。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -145,8 +147,9 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousaiはaudd.ioのAPIを利用しているため、<a href=\"https://dashboard.audd.io/\""
-">audDのウェブサイト</a>にログインしてトークンを取得する必要があります。トークンを入力しないと、1日に数回しか使うことができません。"
+"Mousaiはaudd.ioのAPIを利用しているため、<a href=\"https://dashboard.audd.io/"
+"\">audDのウェブサイト</a>にログインしてトークンを取得する必要があります。トー"
+"クンを入力しないと、1日に数回しか使うことができません。"
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
@@ -155,10 +158,6 @@ msgstr "次回の起動時には表示しない"
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
 msgstr "ブラウザで開く"
-
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "試聴"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
@@ -246,6 +245,14 @@ msgstr "何かが間違っていました。"
 msgid "Sorry!"
 msgstr "申し訳ありません!"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -258,3 +265,6 @@ msgstr "小山田 純"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "試聴"

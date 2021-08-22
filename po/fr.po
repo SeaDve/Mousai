@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
 "PO-Revision-Date: 2021-07-16 05:34+0000\n"
 "Last-Translator: Unai Hernández Minaberry <unihernandez22@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
@@ -164,10 +164,6 @@ msgstr "Ne pas afficher au démarrage"
 msgid "Open in Browser"
 msgstr "Ouvrir dans le navigateur"
 
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "Lire l’aperçu"
-
 #: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Écouter"
@@ -254,6 +250,14 @@ msgstr "Quelque chose s'est mal passé."
 msgid "Sorry!"
 msgstr "Désolé !"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -266,6 +270,9 @@ msgstr "J. Lavoie"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "Lire l’aperçu"
 
 #~ msgid ""
 #~ "Note: This uses the API of audd.io, so it is necessary to login to their "

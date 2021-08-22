@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
 "PO-Revision-Date: 2021-08-19 13:35+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
-"\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -151,10 +151,6 @@ msgstr "Visa inte vid start"
 msgid "Open in Browser"
 msgstr "Öppna i Webbläsare"
 
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "Spela förhandsvisning"
-
 #: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Lyssna"
@@ -241,6 +237,14 @@ msgstr "Något gick fel."
 msgid "Sorry!"
 msgstr "Förlåt!"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -253,6 +257,9 @@ msgstr ""
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "Spela förhandsvisning"
 
 #~ msgid "Reset Token"
 #~ msgstr "Återställ Token"

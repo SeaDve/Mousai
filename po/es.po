@@ -9,12 +9,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 20:39+0800\n"
+"POT-Creation-Date: 2021-08-21 20:19+0800\n"
 "PO-Revision-Date: 2021-08-08 23:19+0000\n"
 "Last-Translator: Chardinson De la cruz Ventura "
 "<chardinsondelacruzventura@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
-"\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -167,10 +167,6 @@ msgstr "No mostrar al inicio"
 msgid "Open in Browser"
 msgstr "Abrir en el navegador"
 
-#: data/ui/song_row.ui:22
-msgid "Play preview"
-msgstr "Reproducir la vista previa"
-
 #: data/ui/main_window.ui:23
 msgid "Listen"
 msgstr "Escuchar"
@@ -257,6 +253,14 @@ msgstr "Algo salió mal."
 msgid "Sorry!"
 msgstr "¡Lo sentimos!"
 
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
@@ -269,6 +273,9 @@ msgstr "Óscar Fernández Díaz"
 #: src/main.py:80
 msgid "GitHub"
 msgstr "GitHub"
+
+#~ msgid "Play preview"
+#~ msgstr "Reproducir la vista previa"
 
 #~ msgid ""
 #~ "Note: This uses the API of audd.io, so it is necessary to login to their "
