@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-21 20:19+0800\n"
-"PO-Revision-Date: 2021-08-10 12:33+0000\n"
-"Last-Translator: Nicolas Mariniello <seldon1000@tutanota.com>\n"
+"PO-Revision-Date: 2021-08-22 11:33+0200\n"
+"Last-Translator: ALbano Battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
 ">\n"
 "Language: it\n"
@@ -253,11 +253,11 @@ msgstr "Mi dispiace!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Ferma anteprima"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Avvia Anteprima"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
