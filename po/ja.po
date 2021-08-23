@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-21 20:19+0800\n"
-"PO-Revision-Date: 2021-08-10 12:33+0000\n"
+"PO-Revision-Date: 2021-08-22 09:10+0000\n"
 "Last-Translator: 小山田純 <oyamada.junjun@outlook.jp>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -247,11 +247,11 @@ msgstr "申し訳ありません!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "停止"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "試聴"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
