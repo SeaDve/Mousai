@@ -43,6 +43,14 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.2" date="2021-08-25">
+      <description>
+        <p>This is a fix release:</p>
+        <ul>
+          <li>Fix missing temporary directory</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.1" date="2021-08-24">
       <description>
         <p>This release contains bug fixes and translations updates:</p>
