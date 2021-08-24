@@ -6,6 +6,7 @@ import json
 import requests
 import re
 import urllib.request
+from pathlib import Path
 
 from gi.repository import GLib
 
@@ -69,11 +70,11 @@ class Utils:
             return Utils._simplify(res)
 
     @staticmethod
-    def get_tmp_dir():
-        directory = GLib.get_user_cache_dir()
-        if not directory:
-            directory = ''
-        return f'{directory}/tmp'
+    def get_tmp_dir() -> Path:
+        root_tmp_dir = Path(GLib.get_user_cache_dir() or '/tmp')
+        tmp_dir = root_tmp_dir / 'tmp'
+        tmp_dir.mkdir(parents=True, exist_ok=True)
+        return tmp_dir
 
     @staticmethod
     def get_default_audio_sources():

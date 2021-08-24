@@ -29,8 +29,8 @@ class SongRow(Adw.ActionRow):
         self.song_icon.set_custom_image(self.get_song_icon())
 
     def get_song_icon(self):
-        path = f'{Utils.get_tmp_dir()}/{self.props.title}{self.props.subtitle}.jpg'
-        file = Gio.File.new_for_path(path)
+        path = Utils.get_tmp_dir() / f'{self.props.title}{self.props.subtitle}.jpg'
+        file = Gio.File.new_for_path(str(path))
         try:
             return Gdk.Texture.new_from_file(file)
         except GLib.Error:

@@ -64,7 +64,7 @@ class VoiceRecorder(GObject.GObject):
 
         self.src.set_property('device', audio_source)
         self.encodebin.set_property('profile', self.get_profile())
-        self.filesink.set_property('location', f'{Utils.get_tmp_dir()}/mousaitmp.ogg')
+        self.filesink.set_property('location', Utils.get_tmp_dir() / 'mousaitmp.ogg')
         self.level.link(self.encodebin)
         self.encodebin.link(self.filesink)
 

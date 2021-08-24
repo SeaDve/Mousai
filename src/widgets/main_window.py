@@ -125,7 +125,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.return_default_page()
             return
 
-        song_file = f'{Utils.get_tmp_dir()}/mousaitmp.ogg'
+        song_file = Utils.get_tmp_dir() / 'mousaitmp.ogg'
         token = self.settings.get_string('token-value')
         thread = threading.Thread(target=self.guess_song, args=(song_file, token))
         thread.start()
@@ -177,7 +177,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.show_error(_("Sorry!"), error_subtitle)
         else:
             if image_src:
-                icon_dir = f'{Utils.get_tmp_dir()}/{song.title}{song.artist}.jpg'
+                icon_dir = Utils.get_tmp_dir() / f'{song.title}{song.artist}.jpg'
                 Utils.download_image(image_src, icon_dir)
 
             self.remove_duplicates(song.song_link)
