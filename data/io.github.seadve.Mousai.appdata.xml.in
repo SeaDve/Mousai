@@ -43,6 +43,17 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.1" date="2021-08-24">
+      <description>
+        <p>This release contains bug fixes and translations updates:</p>
+        <ul>
+          <li>Fixed missiong icon on XFCE (thanks to @apandada1)</li>
+          <li>Updated Italian translations</li>
+          <li>Updated Spanish translations</li>
+          <li>Updated Japanese translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.0" date="2021-08-22">
       <description>
         <p>This release contains UI and translation improvements:</p>
