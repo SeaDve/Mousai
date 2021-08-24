@@ -24,6 +24,8 @@ class MainWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         self.settings = settings
 
+        self.set_default_icon_name('io.github.seadve.Mousai')
+
         self.history_model = Gio.ListStore.new(Song)
         self.history_listbox.bind_model(self.history_model, self.new_song_row)
 
