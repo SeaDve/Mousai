@@ -23,6 +23,7 @@ class Application(Adw.Application):
         self.version = version
 
         GLib.set_application_name("Mousai")
+        GLib.set_prgname('io.github.seadve.Mousai')
 
     def do_startup(self):
         Adw.Application.do_startup(self)
