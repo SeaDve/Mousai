@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-21 20:19+0800\n"
-"PO-Revision-Date: 2021-08-14 10:55+0000\n"
+"PO-Revision-Date: 2021-08-26 07:35+0000\n"
 "Last-Translator: Nico <d3sox@protonmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
-">\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -48,9 +48,9 @@ msgid ""
 "return the title and artist of that song!"
 msgstr ""
 "Mousai ist eine einfache Anwendung, die Lieder ähnlich wie Shazam "
-"identifizieren kann. Klicke einfach auf die Schaltfläche „Anhören“, und "
-"warte dann ein paar Sekunden. Es wird auf magische Weise den Titel und den "
-"Interpreten dieses Liedes zurückgeben!"
+"identifizieren kann. Klicke einfach auf die Schaltfläche „Zuhören“ und warte "
+"ein paar Sekunden. Es wird auf magische Weise den Titel und den Interpreten "
+"dieses Liedes anzeigen!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -58,11 +58,11 @@ msgid ""
 "site to get more trials."
 msgstr ""
 "Hinweis: Mousai benutzt die API von audd.io, daher ist es notwendig dort "
-"einen Account anzulegen um mehr kostenlose Erkennungen zu bekommen."
+"einen Account anzulegen, um mehr kostenlose Erkennungen zu bekommen."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr "Warum wirst du Mousai lieben?"
+msgstr "Warum du Mousai lieben wirst?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
@@ -83,15 +83,16 @@ msgstr ""
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr ""
-"🎼 Gib eine Vorschau des identifizierten Titels mit dem nativen Player wieder."
+"🎼 Höre dir eine Vorschau des identifizierten Titels mit dem nativen Player "
+"an."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr "🌐 Durchsuche das Lied im Web mit dem Link."
+msgstr "🌐 Suche das Lied im Web mit dem Link."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr "📱 Benutzerfreundliche Benutzeroberfläche."
+msgstr "📱 Benutzerfreundliche Oberfläche."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
@@ -171,7 +172,7 @@ msgstr "Im Browser öffnen"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr "Anhören"
+msgstr "Zuhören"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
@@ -196,7 +197,7 @@ msgstr "Fang an zu Mousaien!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr "Klicke auf die Anhören-Schaltfläche, um zu starten."
+msgstr "Klicke auf die Zuhören-Schaltfläche, um zu starten."
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
@@ -257,11 +258,11 @@ msgstr "Entschuldigung!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Vorschau stoppen"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Vorschau abspielen"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
