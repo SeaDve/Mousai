@@ -43,6 +43,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.3" date="2021-08-27">
+      <description>
+        <p>This is a minor release containing updated translations:</p>
+        <ul>
+          <li>Updated Finnish translations</li>
+          <li>Updated German translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.2" date="2021-08-25">
       <description>
         <p>This is a fix release:</p>
