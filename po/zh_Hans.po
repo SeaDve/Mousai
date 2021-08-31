@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # TheInterestingSoul <wangpy01@outlook.com>, 2021.
 # Zhou Nan <zhounan@nfschina.com>, 2021.
+# Zhongrui Cao <zhongrui.cao@suse.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-21 20:19+0800\n"
-"PO-Revision-Date: 2021-07-21 06:32+0000\n"
-"Last-Translator: Zhou Nan <zhounan@nfschina.com>\n"
+"PO-Revision-Date: 2021-08-31 05:54+0000\n"
+"Last-Translator: Zhongrui Cao <zhongrui.cao@suse.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.2-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -50,7 +51,7 @@ msgstr ""
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr ""
+msgstr "注意：此操作会使用audd.io的接口，所以多次使用需要登陆到他们的网站。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -62,19 +63,19 @@ msgstr "🎵 在几秒内识别歌曲与作曲家。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️使用您电脑上的麦克风或音频。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸保存识别出的歌曲和专辑封面到历史记录中。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼使用本地播放器预览识别出的歌曲。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐使用链接在网上浏览歌曲。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
@@ -95,11 +96,11 @@ msgstr "通用"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "打开菜单"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "显示快捷键"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -111,7 +112,7 @@ msgstr "控制"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "切换聆听"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -123,7 +124,7 @@ msgstr "清除识别历史"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "重置令牌值"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -144,14 +145,16 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai需要audd.io的接口才能运行，所以需要您登陆到<a href=\"https://dashboard.audd.io/\""
+">他们的网站</a>并且获取一个令牌。不填这个选项您也拥有一天几次的识别次数。"
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "不在启动时显示"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "在浏览器中打开"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
@@ -159,7 +162,7 @@ msgstr "侦听"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "开始识别"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
@@ -167,7 +170,7 @@ msgstr "取消"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "取消录音"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
@@ -180,39 +183,39 @@ msgstr "开始听歌识曲吧！"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "点击聆听按钮开始。"
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:115
 msgid "Muted"
-msgstr ""
+msgstr "已静音"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "首选音频源"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "麦克风"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "电脑音频"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "清除歌曲历史"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "重置令牌"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "快捷键"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "关于Mousai"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
@@ -221,11 +224,11 @@ msgstr "正在侦听"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "未检测到音频"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "请检查您的音频设备。"
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."
@@ -241,11 +244,11 @@ msgstr "抱歉！"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "停止预览"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "播放预览"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
@@ -254,7 +257,9 @@ msgstr "版权所有: Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
 msgid "translator-credits"
-msgstr "Zhou Nan <zhounan@nfschina.com>"
+msgstr ""
+"Zhou Nan &lt;zhounan@nfschina.com&gt;\n"
+"Zhongrui Cao &lt;zhongrui.cao@suse.com&gt;"
 
 #: src/main.py:80
 msgid "GitHub"

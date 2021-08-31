@@ -1,29 +1,28 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Adam Hulewicz <dontbesoso@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-21 20:19+0800\n"
-"PO-Revision-Date: 2021-07-07 11:21+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/kooha/mousai/pl/"
-">\n"
+"PO-Revision-Date: 2021-08-31 05:54+0000\n"
+"Last-Translator: Adam Hulewicz <dontbesoso@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/kooha/mousai/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
@@ -86,23 +85,23 @@ msgstr ""
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Otwórz menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Pokaż skróty klawiaturowe"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "Zakończ"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
@@ -114,7 +113,7 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
@@ -170,7 +169,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu główne"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
@@ -248,7 +247,7 @@ msgstr ""
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Prawa autorskie 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:79
@@ -257,4 +256,4 @@ msgstr ""
 
 #: src/main.py:80
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"

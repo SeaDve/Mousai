@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-08-21 20:19+0800\n"
-"PO-Revision-Date: 2021-08-21 12:20+0000\n"
+"PO-Revision-Date: 2021-08-31 05:54+0000\n"
 "Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
-"Language-Team: Basque <https://hosted.weblate.org/projects/kooha/mousai/eu/"
-">\n"
+"Language-Team: Basque <https://hosted.weblate.org/projects/kooha/mousai/eu/>"
+"\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,6 +53,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Oharra: honek audidd.io APIa erabiltzen du, eta, beraz, beharrezkoa da saioa "
+"bere lekuan hastea proba gehiago lortzeko."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -65,7 +67,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Erabili zure mikrofonoa edo idazmahaiko audioa."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -116,7 +118,7 @@ msgstr "Kontrolak"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Entzutea txandakatu"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -128,7 +130,7 @@ msgstr "Abestien historia ezabatu"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Token-aren balioa berrezartu"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -155,7 +157,7 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Ez erakutsi hasieran"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
@@ -196,23 +198,23 @@ msgstr "Isilduta"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Audio-iturri gogokoena"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofonoa"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Mahaigaineko audioa"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Abestien historia ezabatu"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Birezarri Token"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
@@ -220,7 +222,7 @@ msgstr "_Teklatu-lasterbideak"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Mousairi buruz"
 
 #: src/widgets/main_window.py:106 src/widgets/main_window.py:109
 #: src/widgets/main_window.py:112
@@ -229,11 +231,11 @@ msgstr "Entzuten"
 
 #: src/widgets/main_window.py:122
 msgid "No audio detected"
-msgstr ""
+msgstr "Ez da audiorik detektatu"
 
 #: src/widgets/main_window.py:122
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Egiaztatu zure audio-gailua."
 
 #: src/widgets/main_window.py:171
 msgid "The song was not recognized."
@@ -245,15 +247,15 @@ msgstr "Zerbait gaizki atera da."
 
 #: src/widgets/main_window.py:175
 msgid "Sorry!"
-msgstr ""
+msgstr "Sentitzen dugu!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Gelditu aurreko bista"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Aurretiazko bista erreproduzitu"
 
 #: src/main.py:77
 msgid "Copyright 2021 Dave Patrick"
