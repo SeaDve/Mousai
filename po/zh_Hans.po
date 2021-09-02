@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-21 20:19+0800\n"
+"POT-Creation-Date: 2021-09-02 07:59+0800\n"
 "PO-Revision-Date: 2021-08-31 05:54+0000\n"
 "Last-Translator: Zhongrui Cao <zhongrui.cao@suse.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -30,7 +30,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
 msgstr "一个迅速听歌识曲的软件"
 
@@ -145,8 +145,9 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai需要audd.io的接口才能运行，所以需要您登陆到<a href=\"https://dashboard.audd.io/\""
-">他们的网站</a>并且获取一个令牌。不填这个选项您也拥有一天几次的识别次数。"
+"Mousai需要audd.io的接口才能运行，所以需要您登陆到<a href=\"https://dashboard."
+"audd.io/\">他们的网站</a>并且获取一个令牌。不填这个选项您也拥有一天几次的识别"
+"次数。"
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
@@ -185,7 +186,7 @@ msgstr "开始听歌识曲吧！"
 msgid "Click the listen button to start."
 msgstr "点击聆听按钮开始。"
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
 msgstr "已静音"
 
@@ -217,28 +218,28 @@ msgstr "快捷键"
 msgid "_About Mousai"
 msgstr "关于Mousai"
 
-#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
-#: src/widgets/main_window.py:112
+#: src/widgets/main_window.py:108 src/widgets/main_window.py:111
+#: src/widgets/main_window.py:114
 msgid "Listening"
 msgstr "正在侦听"
 
-#: src/widgets/main_window.py:122
+#: src/widgets/main_window.py:124
 msgid "No audio detected"
 msgstr "未检测到音频"
 
-#: src/widgets/main_window.py:122
+#: src/widgets/main_window.py:124
 msgid "Please check your audio device."
 msgstr "请检查您的音频设备。"
 
-#: src/widgets/main_window.py:171
+#: src/widgets/main_window.py:173
 msgid "The song was not recognized."
 msgstr "无识别结果。"
 
-#: src/widgets/main_window.py:173
+#: src/widgets/main_window.py:175
 msgid "Something went wrong."
 msgstr "识别时出现了问题。"
 
-#: src/widgets/main_window.py:175
+#: src/widgets/main_window.py:177
 msgid "Sorry!"
 msgstr "抱歉！"
 
@@ -250,18 +251,18 @@ msgstr "停止预览"
 msgid "Play Preview"
 msgstr "播放预览"
 
-#: src/main.py:77
+#: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
 msgstr "版权所有: Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:79
+#: src/main.py:80
 msgid "translator-credits"
 msgstr ""
 "Zhou Nan &lt;zhounan@nfschina.com&gt;\n"
 "Zhongrui Cao &lt;zhongrui.cao@suse.com&gt;"
 
-#: src/main.py:80
+#: src/main.py:81
 msgid "GitHub"
 msgstr "GitHub"
 

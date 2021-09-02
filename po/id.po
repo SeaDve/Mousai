@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-21 20:19+0800\n"
+"POT-Creation-Date: 2021-09-02 07:59+0800\n"
 "PO-Revision-Date: 2021-08-31 05:54+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
 msgstr "Kenali lagu apa saja dalam hitungan detik"
 
@@ -191,7 +191,7 @@ msgstr "Mulai Mousaing!"
 msgid "Click the listen button to start."
 msgstr "Klik tombol dengarkan untuk memulai."
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
 msgstr "Disenyapkan"
 
@@ -223,28 +223,28 @@ msgstr "_Pintasan Papan Ketik"
 msgid "_About Mousai"
 msgstr "_Tentang Mousai"
 
-#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
-#: src/widgets/main_window.py:112
+#: src/widgets/main_window.py:108 src/widgets/main_window.py:111
+#: src/widgets/main_window.py:114
 msgid "Listening"
 msgstr "Mendengarkan"
 
-#: src/widgets/main_window.py:122
+#: src/widgets/main_window.py:124
 msgid "No audio detected"
 msgstr ""
 
-#: src/widgets/main_window.py:122
+#: src/widgets/main_window.py:124
 msgid "Please check your audio device."
 msgstr "Harap periksa perangkat audio Anda."
 
-#: src/widgets/main_window.py:171
+#: src/widgets/main_window.py:173
 msgid "The song was not recognized."
 msgstr "Lagu tidak dikenali."
 
-#: src/widgets/main_window.py:173
+#: src/widgets/main_window.py:175
 msgid "Something went wrong."
 msgstr "Ada yang salah."
 
-#: src/widgets/main_window.py:175
+#: src/widgets/main_window.py:177
 msgid "Sorry!"
 msgstr "Maaf!"
 
@@ -256,16 +256,16 @@ msgstr ""
 msgid "Play Preview"
 msgstr ""
 
-#: src/main.py:77
+#: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Hak Cipta 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:79
+#: src/main.py:80
 msgid "translator-credits"
 msgstr "liimee"
 
-#: src/main.py:80
+#: src/main.py:81
 msgid "GitHub"
 msgstr "GitHub"
 

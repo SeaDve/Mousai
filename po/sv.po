@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-21 20:19+0800\n"
+"POT-Creation-Date: 2021-09-02 07:59+0800\n"
 "PO-Revision-Date: 2021-08-19 13:35+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Låt;Identifiera;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:74
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
 msgstr "Identifiera alla låtar på några sekunder"
 
@@ -180,7 +180,7 @@ msgstr "Börja Mousaing!"
 msgid "Click the listen button to start."
 msgstr ""
 
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:115
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
 msgstr "Tystad"
 
@@ -212,28 +212,28 @@ msgstr "_Tangentbordsgenvägar"
 msgid "_About Mousai"
 msgstr "_Om Mousai"
 
-#: src/widgets/main_window.py:106 src/widgets/main_window.py:109
-#: src/widgets/main_window.py:112
+#: src/widgets/main_window.py:108 src/widgets/main_window.py:111
+#: src/widgets/main_window.py:114
 msgid "Listening"
 msgstr "Lyssnar"
 
-#: src/widgets/main_window.py:122
+#: src/widgets/main_window.py:124
 msgid "No audio detected"
 msgstr "Inget ljud har upptäckts"
 
-#: src/widgets/main_window.py:122
+#: src/widgets/main_window.py:124
 msgid "Please check your audio device."
 msgstr "Kontrollera din ljudenhet."
 
-#: src/widgets/main_window.py:171
+#: src/widgets/main_window.py:173
 msgid "The song was not recognized."
 msgstr "Låten kändes inte igen."
 
-#: src/widgets/main_window.py:173
+#: src/widgets/main_window.py:175
 msgid "Something went wrong."
 msgstr "Något gick fel."
 
-#: src/widgets/main_window.py:175
+#: src/widgets/main_window.py:177
 msgid "Sorry!"
 msgstr "Förlåt!"
 
@@ -245,16 +245,16 @@ msgstr ""
 msgid "Play Preview"
 msgstr ""
 
-#: src/main.py:77
+#: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
 msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:79
+#: src/main.py:80
 msgid "translator-credits"
 msgstr ""
 
-#: src/main.py:80
+#: src/main.py:81
 msgid "GitHub"
 msgstr "GitHub"
 
