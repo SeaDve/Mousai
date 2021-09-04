@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-31 05:54+0000\n"
+"PO-Revision-Date: 2021-09-04 10:33+0000\n"
 "Last-Translator: Zhongrui Cao <zhongrui.cao@suse.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
@@ -43,9 +43,7 @@ msgid ""
 "Mousai is a simple application that can identify song similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
-msgstr ""
-"Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“侦听”按钮，然后等待几秒"
-"钟。它将神奇地反馈该歌曲的标题和艺术家！"
+msgstr "Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“聆听”按钮，然后等待几秒钟。它将神奇地反馈该歌曲的标题和艺术家！"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
@@ -159,7 +157,7 @@ msgstr "在浏览器中打开"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr "侦听"
+msgstr "聆听"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
@@ -188,7 +186,7 @@ msgstr "点击聆听按钮开始。"
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
-msgstr "已静音"
+msgstr "没有声音"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
@@ -221,7 +219,7 @@ msgstr "关于Mousai"
 #: src/widgets/main_window.py:108 src/widgets/main_window.py:111
 #: src/widgets/main_window.py:114
 msgid "Listening"
-msgstr "正在侦听"
+msgstr "正在聆听"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"

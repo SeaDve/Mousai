@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021.
 # liimee <alt3753.7@gmail.com>, 2021.
+# Sucipto <show.cheap@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-31 05:54+0000\n"
-"Last-Translator: liimee <alt3753.7@gmail.com>\n"
+"PO-Revision-Date: 2021-09-04 10:33+0000\n"
+"Last-Translator: Sucipto <show.cheap@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -67,7 +68,7 @@ msgstr "🎵 Kenali judul dan artis dari sebuah lagu dalam hitungan detik."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Gunakan mikrofon atau suara anda dari desktop."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 #, fuzzy
