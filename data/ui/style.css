@@ -1,3 +1,8 @@
+/*
+ * Credits from https://github.com/elementary/music
+ * Including the SVG files in gresources
+ */
+
 playbackindicator {
   color: @accent_bg_color;
 }
