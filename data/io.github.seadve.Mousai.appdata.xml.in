@@ -43,6 +43,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.5" date="2021-09-08">
+      <description>
+        <p>This is a very minor release containing translations update:</p>
+        <ul>
+          <li>Updated Chinese (Simplified) translations</li>
+          <li>Updated Indonesian translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.4" date="2021-09-02">
       <description>
         <p>This update contains new translations:</p>
