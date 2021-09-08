@@ -83,6 +83,7 @@ class Utils:
             stdout=subprocess.PIPE,
             text=True
         ).stdout.splitlines()
-        default_sink = f'{pactl_output[12].split()[2]}.monitor'
-        default_source = pactl_output[13].split()[2]
+        default_sink = f'{pactl_output[12].split()[-1]}.monitor'
+        default_source = pactl_output[13].split()[-1]
+
         return default_sink, default_source
