@@ -43,6 +43,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.6" date="2021-09-08">
+      <description>
+        <p>This update contains a fix and translation updates:</p>
+        <ul>
+          <li>Fixed wrong audio source</li>
+          <li>Updated Italian translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.5" date="2021-09-08">
       <description>
         <p>This is a very minor release containing translations update:</p>
