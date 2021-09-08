@@ -5,21 +5,22 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # albanobattistella <albano_battistella@hotmail.com>, 2021.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
+# Michael Moroni <michaelmoroni@disroot.org>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-22 11:33+0200\n"
-"Last-Translator: ALbano Battistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"PO-Revision-Date: 2021-09-08 07:33+0000\n"
+"Last-Translator: Michael Moroni <michaelmoroni@disroot.org>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -183,7 +184,7 @@ msgstr "Annulla la registrazione"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr "Menu Principale"
+msgstr "Menù principale"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
@@ -268,7 +269,8 @@ msgstr "Copyright 2021 Dave Patrick"
 msgid "translator-credits"
 msgstr ""
 "Nicolas Mariniello\n"
-"Albano Battistella"
+"Albano Battistella\n"
+"Michael Moroni"
 
 #: src/main.py:81
 msgid "GitHub"
