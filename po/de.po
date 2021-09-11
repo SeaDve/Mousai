@@ -5,21 +5,22 @@
 # Andy Pillip <p@pvse.com>, 2021.
 # Heinrich Heinzer <heinrich.heinzer@gmail.com>, 2021.
 # Nico <d3sox@protonmail.com>, 2021.
+# Milo Ivir <mail@milotype.de>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-26 07:35+0000\n"
-"Last-Translator: Nico <d3sox@protonmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
-">\n"
+"PO-Revision-Date: 2021-09-11 17:33+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -271,7 +272,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr "Übersetzer Credits"
+msgstr "Jonathan Haas"
 
 #: src/main.py:81
 msgid "GitHub"
