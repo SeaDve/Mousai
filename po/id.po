@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-09-04 10:33+0000\n"
-"Last-Translator: Sucipto <show.cheap@gmail.com>\n"
+"PO-Revision-Date: 2021-09-15 06:35+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -71,13 +71,12 @@ msgid "🎙️ Use your microphone or audio from desktop."
 msgstr "🎙️ Gunakan mikrofon atau suara anda dari desktop."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
-#, fuzzy
 msgid "🎸 Store the identified song including the album art in history."
-msgstr "🎸 Simpan lagu yang telah dikenali termasuk seni albumnya di riwayat."
+msgstr "🎸 Simpan lagu yang telah dikenali termasuk cover albumnya di riwayat."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Pratinjau lagu yang dikenali dengan pemutar bawaan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
@@ -118,7 +117,7 @@ msgstr "Kontrol"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Beralih ke Listen"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -130,7 +129,7 @@ msgstr "Hapus Riwayat Lagu"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Setel Ulang Nilai Token"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -214,7 +213,7 @@ msgstr "_Hapus Riwayat Lagu"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Setel Ulang Token"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
@@ -231,7 +230,7 @@ msgstr "Mendengarkan"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
-msgstr ""
+msgstr "Tidak ada audio yang terdeteksi"
 
 #: src/widgets/main_window.py:124
 msgid "Please check your audio device."
@@ -251,11 +250,11 @@ msgstr "Maaf!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Hentikan Pratinjau"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Putar Pratinjau"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
