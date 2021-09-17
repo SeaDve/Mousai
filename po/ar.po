@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-09-15 06:35+0000\n"
+"PO-Revision-Date: 2021-09-17 09:34+0000\n"
 "Last-Translator: Muhammad Yasser <iamrokt@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
 "\n"
@@ -98,7 +98,7 @@ msgstr "عام"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr "افتح القائمة"
+msgstr "فتح القائمة"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
@@ -106,7 +106,7 @@ msgstr "إظهار الإختصارات"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr "الخروج"
+msgstr "خروج"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
@@ -118,7 +118,7 @@ msgstr "تبديل إلى اﻹستماع"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr "إعدادات"
+msgstr "الإعدادات"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
@@ -177,7 +177,7 @@ msgstr "إلغاء التسجيل"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr "القائمة الرئيسة"
+msgstr "القائمة الرئيسية"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
@@ -247,20 +247,20 @@ msgstr "عذراً!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "إيقاف المعاينة"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "تشغيل المعاينة"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
-msgstr "الحقوق  لصالح  Dave Patrick لعام 2021"
+msgstr "الحقوق Dave Patrick 2021"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr "Mehdi Essalehi, Muhammad Yasser"
+msgstr "Mehdi Essalehi,Muhammad Yasser"
 
 #: src/main.py:81
 msgid "GitHub"
