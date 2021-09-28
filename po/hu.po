@@ -1,0 +1,255 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mousai package.
+# Balázs Úr <balazs@urbalazs.hu>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: mousai\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-02 07:59+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/io.github.seadve.Mousai.desktop.in:3
+#: data/io.github.seadve.Mousai.appdata.xml.in:6
+msgid "Mousai"
+msgstr ""
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.seadve.Mousai.desktop.in:11
+msgid "Shazam;Music;Song;Identify;"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
+msgid "Identify any songs in seconds"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:9
+msgid "Discover songs you are aching to know with an easy-to-use interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:10
+msgid ""
+"Mousai is a simple application that can identify song similar to Shazam. "
+"Just click the listen button, and then wait a few seconds. It will magically "
+"return the title and artist of that song!"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:11
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to log in to their "
+"site to get more trials."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:12
+msgid "Why you will love Mousai?"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:14
+msgid "🎵 Identify the title and artist of the song within seconds."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:15
+msgid "🎙️ Use your microphone or audio from desktop."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:16
+msgid "🎸 Store the identified song including the album art in history."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:17
+msgid "🎼 Preview the identified song with the native player."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:18
+msgid "🌐 Browse the song in the web with the link."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:19
+msgid "📱 Easy-to-use user interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.appdata.xml.in:20
+msgid "⌨️ User-friendly keyboard shortcuts."
+msgstr ""
+
+#. Translators: please do NOT translate this
+#: data/io.github.seadve.Mousai.appdata.xml.in:28
+msgid "Dave Patrick"
+msgstr ""
+
+#: data/ui/shortcuts.ui:10
+msgid "General"
+msgstr ""
+
+#: data/ui/shortcuts.ui:14
+msgid "Open Menu"
+msgstr ""
+
+#: data/ui/shortcuts.ui:20
+msgid "Show Shortcuts"
+msgstr ""
+
+#: data/ui/shortcuts.ui:26
+msgid "Quit"
+msgstr ""
+
+#: data/ui/shortcuts.ui:33
+msgid "Controls"
+msgstr ""
+
+#: data/ui/shortcuts.ui:37
+msgid "Toggle Listen"
+msgstr ""
+
+#: data/ui/shortcuts.ui:44
+msgid "Settings"
+msgstr ""
+
+#: data/ui/shortcuts.ui:48
+msgid "Clear Song History"
+msgstr ""
+
+#: data/ui/shortcuts.ui:54
+msgid "Reset Token Value"
+msgstr ""
+
+#: data/ui/token_dialog.ui:37
+msgid "Welcome to Mousai"
+msgstr ""
+
+#: data/ui/token_dialog.ui:50
+msgid "Enter a valid token"
+msgstr ""
+
+#: data/ui/token_dialog.ui:57
+msgid "Submit"
+msgstr ""
+
+#. Do not translate the link, only 'their website'
+#: data/ui/token_dialog.ui:71
+msgid ""
+"Mousai uses audd.io APIs to work, so it is required to login to <a href="
+"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+"this blank will give you a few trials per day."
+msgstr ""
+
+#: data/ui/token_dialog.ui:88
+msgid "Do not show at startup"
+msgstr ""
+
+#: data/ui/song_row.ui:14
+msgid "Open in Browser"
+msgstr ""
+
+#: data/ui/main_window.ui:23
+msgid "Listen"
+msgstr ""
+
+#: data/ui/main_window.ui:24
+msgid "Start Identifying Music"
+msgstr ""
+
+#: data/ui/main_window.ui:38
+msgid "Cancel"
+msgstr ""
+
+#: data/ui/main_window.ui:39
+msgid "Cancel the Recording"
+msgstr ""
+
+#: data/ui/main_window.ui:53
+msgid "Main Menu"
+msgstr ""
+
+#. Mousaing is not a real word, but it is supposed to be a verb
+#: data/ui/main_window.ui:96
+msgid "Start Mousaing!"
+msgstr ""
+
+#: data/ui/main_window.ui:97
+msgid "Click the listen button to start."
+msgstr ""
+
+#: data/ui/main_window.ui:108 src/widgets/main_window.py:117
+msgid "Muted"
+msgstr ""
+
+#: data/ui/main_window.ui:121
+msgid "_Preferred Audio Source"
+msgstr ""
+
+#: data/ui/main_window.ui:123
+msgid "Microphone"
+msgstr ""
+
+#: data/ui/main_window.ui:128
+msgid "Desktop Audio"
+msgstr ""
+
+#: data/ui/main_window.ui:137
+msgid "_Clear Song History"
+msgstr ""
+
+#: data/ui/main_window.ui:141
+msgid "_Reset Token"
+msgstr ""
+
+#: data/ui/main_window.ui:147
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: data/ui/main_window.ui:151
+msgid "_About Mousai"
+msgstr ""
+
+#: src/widgets/main_window.py:108 src/widgets/main_window.py:111
+#: src/widgets/main_window.py:114
+msgid "Listening"
+msgstr ""
+
+#: src/widgets/main_window.py:124
+msgid "No audio detected"
+msgstr ""
+
+#: src/widgets/main_window.py:124
+msgid "Please check your audio device."
+msgstr ""
+
+#: src/widgets/main_window.py:173
+msgid "The song was not recognized."
+msgstr ""
+
+#: src/widgets/main_window.py:175
+msgid "Something went wrong."
+msgstr ""
+
+#: src/widgets/main_window.py:177
+msgid "Sorry!"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Stop Preview"
+msgstr ""
+
+#: src/widgets/song_row.py:59
+msgid "Play Preview"
+msgstr ""
+
+#: src/main.py:78
+msgid "Copyright 2021 Dave Patrick"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: src/main.py:80
+msgid "translator-credits"
+msgstr ""
+
+#: src/main.py:81
+msgid "GitHub"
+msgstr ""
