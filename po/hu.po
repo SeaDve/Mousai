@@ -7,31 +7,36 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-09-29 06:37+0000\n"
+"Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/kooha/mousai/"
+"hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Zene;Hang;Dal;Azonosítás;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Bármilyen dal azonosítása másodpercek alatt"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Egy könnyen használható felületen fedezze fel azokat a dalokat, amelyeket "
+"már nagyon szeretne megismerni."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -39,97 +44,102 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"A Mousai egy egyszerű alkalmazás, amely a Shazamhoz hasonlóan képes "
+"azonosítani a dalokat. Egyszerűen kattintson a hallgatás gombra, majd várjon "
+"néhány másodpercet. Varázslatos módon visszaadja a dal címét és előadóját!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Megjegyzés: ez az alkalmazás az audd.io API-ját használja, ezért be kell "
+"jelentkezni az oldalukra, hogy további próbákhoz jusson."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Miért fogja szeretni a Mousai alkalmazást?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 A dal címének és előadójának azonosítása másodpercek alatt."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ A mikrofon vagy az asztali környezetből érkező hang használata."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Az azonosított dal és az album borítójának tárolása az előzményekben."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Az azonosított dal előnézete a natív lejátszóval."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 A dal tallózása a weben a hivatkozás használatával."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Egyszerűen használható felhasználói felület."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Felhasználóbarát gyorsbillentyűk."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr ""
+msgstr "Általános"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Menü megnyitása"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Gyorsbillentyűk megjelenítése"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "Kilépés"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "Vezérlők"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Hallgatás ki- és bekapcsolása"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "Beállítások"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "Dalok előzményeinek törlése"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Token értékének visszaállítása"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Üdvözli a Mousai!"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Adjon meg egy érvényes tokent"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "Elküldés"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -138,118 +148,122 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"A Mousai az audd.io API-jait használja a működéshez, ezért be kell "
+"jelentkeznie a <a href=\"https://dashboard.audd.io/\">weboldalukra</a>, és "
+"be kell szereznie egy tokent. Ha ezt üresen hagyja, akkor csak néhány "
+"próbálkozása lehet naponta."
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Ne jelenítse meg indításkor"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "Megnyitás a böngészőben"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "Hallgatás"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Zene azonosításának indítása"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "A felvétel megszakítása"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "Főmenü"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Kezdjen mousaizni!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Kattintson a hallgatás gombra a kezdéshez."
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
-msgstr ""
+msgstr "Némítva"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Előnyben részesített hangforrás"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Asztali hang"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Dalok előzményeinek törlése"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Token visszaállítása"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Gyorsbillentyűk"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "A Mousai _névjegye"
 
 #: src/widgets/main_window.py:108 src/widgets/main_window.py:111
 #: src/widgets/main_window.py:114
 msgid "Listening"
-msgstr ""
+msgstr "Hallgatás"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
-msgstr ""
+msgstr "Nem észlelhető hang"
 
 #: src/widgets/main_window.py:124
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Ellenőrizze a hangeszközét."
 
 #: src/widgets/main_window.py:173
 msgid "The song was not recognized."
-msgstr ""
+msgstr "A dal nem lett felismerve."
 
 #: src/widgets/main_window.py:175
 msgid "Something went wrong."
-msgstr ""
+msgstr "Valami elromlott."
 
 #: src/widgets/main_window.py:177
 msgid "Sorry!"
-msgstr ""
+msgstr "Elnézést!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Előnézet leállítása"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Előnézet lejátszása"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr ""
+msgstr "Úr Balázs &lt;balazs@urbalazs.hu&gt;"
 
 #: src/main.py:81
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
