@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # 小山田純 <oyamada.junjun@outlook.jp>, 2021.
+# Ryo Nakano <ryonakaknock3@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-22 09:10+0000\n"
-"Last-Translator: 小山田純 <oyamada.junjun@outlook.jp>\n"
+"PO-Revision-Date: 2021-10-07 00:03+0000\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
 "Language: ja\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -102,7 +103,7 @@ msgstr "メニューを開く"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr "ショートカット一覧"
+msgstr "ショートカット一覧を表示"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -214,7 +215,7 @@ msgstr "_トークンをリセット"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr "_キーボードショートカット"
+msgstr "キーボードショートカット(_K)"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
@@ -260,7 +261,9 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr "小山田 純"
+msgstr ""
+"小山田 純,\n"
+"Ryo Nakano"
 
 #: src/main.py:81
 msgid "GitHub"
