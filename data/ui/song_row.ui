@@ -4,6 +4,12 @@
   <template class="SongRow" parent="AdwActionRow">
     <property name="can-focus">True</property>
     <property name="activatable-widget">open_link_button</property>
+    <child type="prefix">
+      <object class="AdwAvatar" id="song_icon">
+        <property name="icon-name">emblem-music-symbolic</property>
+        <property name="size">42</property>
+      </object>
+    </child>
     <child>
       <object class="GtkBox">
         <property name="valign">center</property>
@@ -63,8 +69,4 @@
       </object>
     </child>
   </template>
-  <object class="AdwAvatar" id="song_icon">
-    <property name="icon-name">emblem-music-symbolic</property>
-    <property name="size">42</property>
-  </object>
 </interface>

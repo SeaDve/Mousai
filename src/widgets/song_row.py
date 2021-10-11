@@ -25,7 +25,6 @@ class SongRow(Adw.ActionRow):
         self.song_src = song.song_src
 
         self.play_pause_button.set_sensitive(self.song_src)
-        self.add_prefix(self.song_icon)
         self.song_icon.set_custom_image(self.get_song_icon())
 
     def get_song_icon(self):
