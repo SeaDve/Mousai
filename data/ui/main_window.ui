@@ -52,7 +52,7 @@
                 <property name="menu-model">menu</property>
                 <property name="tooltip-text" translatable="yes">Main Menu</property>
                 <property name="icon-name">open-menu-symbolic</property>
-                <!-- <accelerator key="F10" signal="activate"/> -->
+                <property name="primary">True</property>
               </object>
             </child>
           </object>
