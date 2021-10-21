@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the mousai package.
 # Jan Novák <novak@silen.org>, 2021.
 # Vojtěch Perník <translations@pervoj.cz>, 2021.
+# Petr Šimáček <petr.simacek@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-06 23:19+0000\n"
-"Last-Translator: Vojtěch Perník <translations@pervoj.cz>\n"
+"PO-Revision-Date: 2021-10-21 04:36+0000\n"
+"Last-Translator: Petr Šimáček <petr.simacek@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -64,7 +65,7 @@ msgstr "🎵 Během několika sekund identifikujte název a interpreta skladby."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "Použít mikrofon nebo zvuk z počítače."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -246,11 +247,11 @@ msgstr "Omlouváme se!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Zastavit náhled"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Přehrát náhled"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
