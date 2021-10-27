@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-08 12:43+0000\n"
+"PO-Revision-Date: 2021-10-27 12:34+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
 "mousai/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -65,8 +65,9 @@ msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Identifiser tittel og artist for en sang på sekunder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
+#, fuzzy
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ bruk mikrofonen din eller lyd fra skrivebordet."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
