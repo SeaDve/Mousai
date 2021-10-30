@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>, 2021.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
+# Davi Patricio <davipatricio@pm.me>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-08 23:19+0000\n"
-"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
+"PO-Revision-Date: 2021-10-30 11:35+0000\n"
+"Last-Translator: Davi Patricio <davipatricio@pm.me>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -208,11 +209,11 @@ msgstr "Áudio do Desktop"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr "_Limpar Histórico de Som"
+msgstr "_Limpar Histórico de Músicas"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr "_Reiniciar Token"
+msgstr "_Redefinir Token"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
@@ -249,11 +250,11 @@ msgstr "Desculpa!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Parar Prévia"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Tocar Prévia"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
