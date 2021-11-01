@@ -4,13 +4,14 @@
 # Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>, 2021.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Davi Patricio <davipatricio@pm.me>, 2021.
+# inkhorn <inkhorn@hostux.ninja>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-10-30 11:35+0000\n"
-"Last-Translator: Davi Patricio <davipatricio@pm.me>\n"
+"PO-Revision-Date: 2021-11-01 12:36+0000\n"
+"Last-Translator: inkhorn <inkhorn@hostux.ninja>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -258,14 +259,12 @@ msgstr "Tocar Prévia"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
-msgstr "Copyright 2021 Dave Patrick"
+msgstr "Direitos autorais 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr ""
-"Vitor Cardoso\n"
-"Tiago Lucas Flach"
+msgstr "Vitor Cardoso /nTiago Lucas Flach, inkhorn"
 
 #: src/main.py:81
 msgid "GitHub"
