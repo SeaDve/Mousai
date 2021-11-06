@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-07-07 11:20+0000\n"
+"PO-Revision-Date: 2021-11-06 00:41+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/kooha/mousai/"
 "pt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -97,11 +97,11 @@ msgstr "Geral"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Abrir Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Mostrar atalhos"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -213,7 +213,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Atalhos do teclado"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
