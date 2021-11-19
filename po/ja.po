@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-11-01 12:36+0000\n"
-"Last-Translator: Kaz Sibuya <sibuyakazokuu@gmail.com>\n"
+"PO-Revision-Date: 2021-11-19 03:51+0000\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
 "Language: ja\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -196,7 +196,7 @@ msgstr "ミュート"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr "オーディオソースを選択"
+msgstr "オーディオソースを選択(_P)"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
@@ -208,11 +208,11 @@ msgstr "デスクトップオーディオ"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr "_曲の履歴をすべて消去"
+msgstr "曲の履歴をすべて消去(_C)"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr "_トークンをリセット"
+msgstr "トークンをリセット(_R)"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
@@ -220,12 +220,12 @@ msgstr "キーボードショートカット(_K)"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr "_Mousaiについて"
+msgstr "Mousaiについて(_A)"
 
 #: src/widgets/main_window.py:108 src/widgets/main_window.py:111
 #: src/widgets/main_window.py:114
 msgid "Listening"
-msgstr "認識中..."
+msgstr "認識中"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
@@ -241,11 +241,11 @@ msgstr "この曲は認識できませんでした。"
 
 #: src/widgets/main_window.py:175
 msgid "Something went wrong."
-msgstr "何かが間違っていました。"
+msgstr "問題が発生しました。"
 
 #: src/widgets/main_window.py:177
 msgid "Sorry!"
-msgstr "申し訳ありません!"
+msgstr "申し訳ありません！"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
@@ -264,8 +264,7 @@ msgstr "Copyright 2021 Dave Patrick"
 msgid "translator-credits"
 msgstr ""
 "小山田 純,\n"
-"Ryo Nakano\n"
-"\n"
+"Ryo Nakano,\n"
 "Kaz Sibuya"
 
 #: src/main.py:81
