@@ -4,21 +4,22 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>, 2021.
 # Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
+# Maxime Leroy <lisacintosh@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-07-16 05:34+0000\n"
-"Last-Translator: Unai Hernández Minaberry <unihernandez22@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2021-12-17 07:51+0000\n"
+"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7.2-dev\n"
+"X-Generator: Weblate 4.10\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -56,6 +57,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Note: Ceci utilise l'API de audd.io, il est donc nécessaire de s'identifier "
+"sur leur site pour obtenir plus d'essais."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -67,7 +70,7 @@ msgstr "🎵 Identifiez le titre et l'artiste de la chanson en quelques secondes
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Utiliser votre microphone ou l'audio du Bureau."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -102,11 +105,11 @@ msgstr "Général"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Ouvrir le menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Afficher les raccourcis clavier"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
