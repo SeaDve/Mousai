@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-12-17 07:51+0000\n"
+"PO-Revision-Date: 2021-12-19 06:52+0000\n"
 "Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
 "\n"
@@ -109,7 +109,7 @@ msgstr "Ouvrir le menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr "Afficher les raccourcis clavier"
+msgstr "Afficher les raccourcis"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -121,7 +121,7 @@ msgstr "Contrôles"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Dés/activer l'écoute"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -133,7 +133,7 @@ msgstr "Effacer l'historique des chansons"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Réinitialiser la valeur du jeton"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
@@ -202,31 +202,31 @@ msgstr "En sourdine"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "Source audio _préférée"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Microphone"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Audio du Bureau"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "Effa_cer l'historique des sons"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Réinitialiser jeton"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Raccourcis clavier"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_À propos de Mousai"
 
 #: src/widgets/main_window.py:108 src/widgets/main_window.py:111
 #: src/widgets/main_window.py:114
@@ -235,11 +235,11 @@ msgstr "À l'ecoute"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
-msgstr ""
+msgstr "Aucune source audio détectée"
 
 #: src/widgets/main_window.py:124
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Veuillez vérifier votre périphérique audio."
 
 #: src/widgets/main_window.py:173
 msgid "The song was not recognized."
@@ -255,11 +255,11 @@ msgstr "Désolé !"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Arrêter l'aperçu"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Jouer l'aperçu"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
