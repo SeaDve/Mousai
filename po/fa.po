@@ -4,21 +4,22 @@
 # سهیل خانعلی‌پور <soheil@disroot.org>, 2021.
 # Soheil Khanalipur <soheil@disroot.org>, 2021.
 # عبدالرئوف عابدی <abdolraoofabedi@gmail.com>, 2021.
+# MSKF <walkingdeadstudio@outlook.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-26 07:35+0000\n"
-"Last-Translator: عبدالرئوف عابدی <abdolraoofabedi@gmail.com>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
-">\n"
+"PO-Revision-Date: 2022-01-01 15:52+0000\n"
+"Last-Translator: MSKF <walkingdeadstudio@outlook.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
+"\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -90,7 +91,7 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr "فَراگیر"
+msgstr "عمومی"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
@@ -114,7 +115,7 @@ msgstr ""
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr "ساماندهی"
+msgstr "تنظیمات"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
@@ -253,7 +254,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr "مترجم-اعتبار"
+msgstr ""
 
 #: src/main.py:81
 msgid "GitHub"
