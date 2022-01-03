@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2022-01-02 00:31+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-01-03 10:53+0000\n"
+"Last-Translator: Fran Diéguez <fran.dieguez@mabishu.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/kooha/mousai/gl/"
 ">\n"
 "Language: gl\n"
@@ -262,7 +262,7 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr "Fran Diéguez &lt;frandieguez@gnome.org&gt;, 2021"
+msgstr "Fran Diéguez &lt;fran.dieguez@gnome.org&gt;, 2021"
 
 #: src/main.py:81
 msgid "GitHub"
