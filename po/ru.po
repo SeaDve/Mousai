@@ -9,17 +9,17 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-08-12 20:34+0000\n"
-"Last-Translator: Noel Fritz <toro_75@yahoo.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/"
-">\n"
+"PO-Revision-Date: 2022-01-09 01:55+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -110,7 +110,7 @@ msgstr "Открыть меню"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Показывать ярлыки"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
@@ -222,7 +222,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Комбинации клавиш"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
