@@ -1,16 +1,16 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Luna Jernberg <droidbittin@gmail.com>, 2021.
+# Luna Jernberg <droidbittin@gmail.com>, 2021, 2022.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
-# Kristoffer Grundström <swedishsailfishosuser@tutanota.com>, 2021.
+# Kristoffer Grundström <swedishsailfishosuser@tutanota.com>, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-10-22 15:39+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"PO-Revision-Date: 2022-01-10 13:54+0000\n"
+"Last-Translator: Kristoffer Grundström <swedishsailfishosuser@tutanota.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
 "\n"
 "Language: sv\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -56,6 +56,8 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Notera att: Det här använder API:et för audd.io så det är nödvändigt att "
+"logga in på deras sidan för att hämta fler prov-perioder."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -116,7 +118,7 @@ msgstr "Kontroller"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Växla Lyssna"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -189,7 +191,7 @@ msgstr "Börja Mousaing!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Klicka på lyssna-knappen för att starta."
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
@@ -263,7 +265,9 @@ msgstr "Copyright 2021 Dave Patrick"
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr "Kristoffer Grundström"
+msgstr ""
+"Kristoffer Grundström\n"
+"Luna Jernberg"
 
 #: src/main.py:81
 msgid "GitHub"
