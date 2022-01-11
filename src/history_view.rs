@@ -99,6 +99,7 @@ impl HistoryView {
         });
 
         imp.model.replace(model.cloned());
+        self.notify("model");
     }
 
     pub fn model(&self) -> Option<SongList> {
