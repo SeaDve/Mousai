@@ -23,3 +23,4 @@ base64 = "0.13.0"
 pulsectl-rs = "0.3.2"
 futures-channel = "0.3.18"
 tokio = { version = "1.2", features = ["rt", "rt-multi-thread"] }
+downcast-rs = "1.2.0"

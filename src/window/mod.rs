@@ -159,11 +159,9 @@ impl Window {
                 recognizer.cancel().await;
                 log::info!("Cancelled recognizing");
             }));
-        } else {
-            if let Err(err) = imp.recognizer.listen() {
-                self.show_error(&gettext("Failed to start recording"), &err.to_string());
-                log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
-            }
+        } else if let Err(err) = imp.recognizer.listen() {
+            self.show_error(&gettext("Failed to start recording"), &err.to_string());
+            log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
         }
     }
 

@@ -22,6 +22,7 @@ mod application;
 mod config;
 mod core;
 mod model;
+mod provider;
 mod recognizer;
 mod utils;
 mod window;
