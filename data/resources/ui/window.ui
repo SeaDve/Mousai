@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <menu id="primary_menu">
+  <menu id="menu">
     <section>
       <item>
         <attribute name="label" translatable="yes">_Preferences</attribute>
@@ -22,25 +22,55 @@
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkHeaderBar">
+            <child>
+              <object class="GtkButton" id="listen_button">
+                <property name="action-name">win.toggle-listen</property>
+              </object>
+            </child>
             <child type="end">
               <object class="GtkMenuButton" id="appmenu_button">
                 <property name="icon-name">open-menu-symbolic</property>
-                <property name="menu-model">primary_menu</property>
+                <property name="tooltip-text" translatable="yes">Main Menu</property>
+                <property name="menu-model">menu</property>
+                <property name="primary">True</property>
               </object>
             </child>
           </object>
         </child>
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="propagate-natural-height">True</property>
-            <property name="child">
-              <object class="MsaiHistoryView" id="history_view">
-                <property name="margin-top">12</property>
-                <property name="margin-bottom">12</property>
-                <property name="margin-start">12</property>
-                <property name="margin-end">12</property>
+          <object class="GtkStack" id="stack">
+            <property name="vexpand">True</property>
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkScrolledWindow" id="main_page">
+                <property name="child">
+                  <object class="AdwClamp">
+                    <property name="child">
+                      <object class="MsaiHistoryView" id="history_view">
+                        <property name="valign">start</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                      </object>
+                    </property>
+                  </object>
+                </property>
               </object>
-            </property>
+            </child>
+            <child>
+              <object class="AdwStatusPage" id="empty_page">
+                <property name="icon-name">emblem-music-symbolic</property>
+                <property name="title" translatable="yes">Start Identifying Music!</property>
+                <property name="description" translatable="yes">Click the listen button to start.</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwStatusPage" id="listening_page">
+                <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
+                <property name="title" translatable="yes">Muted</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

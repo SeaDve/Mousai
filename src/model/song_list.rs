@@ -55,10 +55,24 @@ impl SongList {
 
     pub fn append(&self, song: Song) {
         let imp = imp::SongList::from_instance(self);
-
         imp.list.borrow_mut().insert(song.id(), song);
 
         self.items_changed(self.n_items() - 1, 0, 1);
+    }
+
+    /// This is more efficient than `SongList::append` since it emits `items-changed` only once
+    pub fn append_many(&self, songs: &[Song]) {
+        let imp = imp::SongList::from_instance(self);
+
+        {
+            let mut list = imp.list.borrow_mut();
+
+            for song in songs {
+                list.insert(song.id(), song.clone());
+            }
+        }
+
+        self.items_changed(self.n_items() - 1, 0, songs.len() as u32);
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
@@ -83,12 +97,18 @@ impl SongList {
     }
 }
 
+impl Default for SongList {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
-    fn properties() {
+    fn append_and_remove() {
         let song_list = SongList::new();
         assert!(song_list.is_empty());
 
@@ -108,5 +128,16 @@ mod test {
         assert_eq!(song_list.remove(&song_2.id()), Some(song_2));
 
         assert!(song_list.is_empty());
+    }
+
+    #[test]
+    fn append_many() {
+        let song_list = SongList::new();
+        assert!(song_list.is_empty());
+
+        let songs = [Song::new("1", "", ""), Song::new("2", "", "")];
+        song_list.append_many(&songs);
+
+        assert_eq!(song_list.n_items(), 2);
     }
 }

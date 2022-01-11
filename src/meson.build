@@ -19,6 +19,8 @@ run_command(
 )
 
 rust_sources = files(
+  'core/aud_d.rs',
+  'core/mod.rs',
   'model/mod.rs',
   'model/song.rs',
   'model/song_id.rs',
@@ -28,6 +30,7 @@ rust_sources = files(
   'application.rs',
   'config.rs',
   'main.rs',
+  'utils.rs',
 )
 
 sources = [rust_sources, cargo_sources]

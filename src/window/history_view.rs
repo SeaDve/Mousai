@@ -121,3 +121,9 @@ impl HistoryView {
         row.upcast()
     }
 }
+
+impl Default for HistoryView {
+    fn default() -> Self {
+        Self::new()
+    }
+}
