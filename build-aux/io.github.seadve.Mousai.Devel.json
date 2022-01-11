@@ -8,6 +8,7 @@
     "finish-args" : [
         "--device=dri",
         "--socket=fallback-x11",
+        "--socket=pulseaudio",
         "--socket=wayland",
         "--env=RUST_LOG=mousai=debug",
         "--env=G_MESSAGES_DEBUG=none",

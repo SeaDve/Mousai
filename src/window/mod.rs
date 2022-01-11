@@ -12,7 +12,7 @@ use gtk::{
 use std::cell::Cell;
 
 use self::history_view::HistoryView;
-use crate::{config::PROFILE, Application};
+use crate::{config::PROFILE, recognizer::Recognizer, Application};
 
 mod imp {
     use super::*;
@@ -36,6 +36,8 @@ mod imp {
         pub listening_page: TemplateChild<adw::StatusPage>,
 
         pub is_listening: Cell<bool>,
+
+        pub recognizer: Recognizer,
     }
 
     #[glib::object_subclass]
@@ -47,7 +49,9 @@ mod imp {
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
 
-            klass.install_property_action("win.toggle-listen", "is-listening");
+            klass.install_action("win.toggle-listen", None, |obj, _, _| {
+                obj.on_toggle_listen();
+            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -99,10 +103,9 @@ mod imp {
                 obj.add_css_class("devel");
             }
 
+            obj.setup_bindings();
             obj.setup_history_view();
             obj.load_window_size();
-
-            obj.set_is_listening(false);
         }
     }
 
@@ -148,6 +151,33 @@ impl Window {
         imp.is_listening.get()
     }
 
+    fn on_toggle_listen(&self) {
+        let imp = imp::Window::from_instance(self);
+
+        if imp.recognizer.is_listening() {
+            let ctx = glib::MainContext::default();
+            ctx.spawn_local(clone!(@weak self as obj => async move {
+                let imp = imp::Window::from_instance(&obj);
+
+                match imp.recognizer.stop().await  {
+                    Ok(song) => {
+                        imp.history_view.model().expect("No model found on history_view").append(song);
+                    }
+                    Err(err) => {
+                    // TODO improve errors (more specific)
+                    obj.show_error(&gettext("Something went wrong"), &err.to_string());
+                    log::error!("Something went wrong: {:?} \n(dbg {:#?})", err, err);
+                    }
+                }
+            }));
+        } else {
+            if let Err(err) = imp.recognizer.start() {
+                self.show_error(&gettext("Failed to start recording"), &err.to_string());
+                log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
+            }
+        }
+    }
+
     fn update_listen_button(&self) {
         let imp = imp::Window::from_instance(self);
 
@@ -185,6 +215,30 @@ impl Window {
         } else {
             imp.stack.set_visible_child(&imp.empty_page.get());
         }
+    }
+
+    fn show_error(&self, text: &str, secondary_text: &str) {
+        let error_dialog = gtk::MessageDialogBuilder::new()
+            .text(text)
+            .secondary_text(secondary_text)
+            .buttons(gtk::ButtonsType::Ok)
+            .message_type(gtk::MessageType::Error)
+            .modal(true)
+            .transient_for(self)
+            .build();
+
+        error_dialog.connect_response(|error_dialog, _| error_dialog.destroy());
+        error_dialog.present();
+    }
+
+    fn setup_bindings(&self) {
+        let imp = imp::Window::from_instance(self);
+
+        imp.recognizer
+            .bind_property("is-listening", self, "is-listening")
+            .flags(glib::BindingFlags::SYNC_CREATE)
+            .build()
+            .unwrap();
     }
 
     fn setup_history_view(&self) {

@@ -4,7 +4,7 @@ use serde_json::json;
 
 use std::path::Path;
 
-use crate::utils;
+use crate::{utils, RUNTIME};
 
 #[derive(Debug, Deserialize)]
 pub struct Image {
@@ -59,14 +59,21 @@ impl AudD {
             "audio": utils::file_to_base64(path).await?,
         });
 
-        let client = Client::new();
-        let response = client
-            .post("https://api.audd.io/")
-            .body(data.to_string())
-            .send()
-            .await?;
+        let response = RUNTIME
+            .spawn(async move {
+                Client::new()
+                    .post("https://api.audd.io/")
+                    .body(data.to_string())
+                    .send()
+                    .await
+            })
+            .await
+            .unwrap()?;
 
-        let response: Response = response.json().await?;
+        let response: Response = RUNTIME
+            .spawn(async move { response.json().await })
+            .await
+            .unwrap()?;
 
         anyhow::ensure!(response.status == "success", "Unable to recognize song");
 

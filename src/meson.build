@@ -20,6 +20,8 @@ run_command(
 
 rust_sources = files(
   'core/aud_d.rs',
+  'core/audio_recorder.rs',
+  'core/audio_recording.rs',
   'core/mod.rs',
   'model/mod.rs',
   'model/song.rs',

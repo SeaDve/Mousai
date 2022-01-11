@@ -22,14 +22,19 @@ mod application;
 mod config;
 mod core;
 mod model;
+mod recognizer;
 mod utils;
 mod window;
 
 use gettextrs::{gettext, LocaleCategory};
 use gtk::{gio, glib};
+use once_cell::sync::Lazy;
 
 use self::application::Application;
 use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
+
+pub static RUNTIME: Lazy<tokio::runtime::Runtime> =
+    Lazy::new(|| tokio::runtime::Runtime::new().unwrap());
 
 fn main() {
     pretty_env_logger::init();
@@ -41,6 +46,7 @@ fn main() {
     glib::set_application_name(&gettext("Mousai"));
 
     gtk::init().expect("Unable to start GTK4");
+    gst::init().expect("Unable to start GStreamer");
 
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
