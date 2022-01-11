@@ -1,0 +1,6 @@
+data/io.github.seadve.Mousai.desktop.in.in
+data/io.github.seadve.Mousai.gschema.xml.in
+data/io.github.seadve.Mousai.metainfo.xml.in.in
+data/resources/ui/shortcuts.ui
+data/resources/ui/window.ui
+src/application.rs
