@@ -160,7 +160,8 @@ impl Song {
     }
 
     pub fn id(&self) -> SongId {
-        SongId::new(&self.title())
+        // Song's info_link is unique to every song
+        SongId::new(&self.info_link())
     }
 }
 

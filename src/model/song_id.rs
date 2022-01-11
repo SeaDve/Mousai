@@ -10,9 +10,9 @@ impl std::fmt::Debug for SongId {
 }
 
 impl SongId {
-    pub fn new(string: &str) -> Self {
+    pub(super) fn new(info_link: &str) -> Self {
         Self {
-            id: Box::from(string),
+            id: Box::from(info_link),
         }
     }
 }
