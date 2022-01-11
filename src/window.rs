@@ -1,27 +1,17 @@
 use adw::subclass::prelude::*;
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 
-use crate::{
-    config::{APP_ID, PROFILE},
-    Application,
-};
+use crate::{config::PROFILE, history_view::HistoryView, Application};
 
 mod imp {
     use super::*;
     use gtk::CompositeTemplate;
 
-    #[derive(Debug, CompositeTemplate)]
+    #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
-        pub settings: gio::Settings,
-    }
-
-    impl Default for Window {
-        fn default() -> Self {
-            Self {
-                settings: gio::Settings::new(APP_ID),
-            }
-        }
+        #[template_child]
+        pub history_view: TemplateChild<HistoryView>,
     }
 
     #[glib::object_subclass]
@@ -47,6 +37,7 @@ mod imp {
                 obj.add_css_class("devel");
             }
 
+            obj.setup_history_view();
             obj.load_window_size();
         }
     }
@@ -77,26 +68,35 @@ impl Window {
         glib::Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
-    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+    fn setup_history_view(&self) {
         let imp = imp::Window::from_instance(self);
+
+        let model = crate::model::SongList::new();
+        model.append(crate::model::Song::new("A song", "Someone", ""));
+        model.append(crate::model::Song::new("Another song", "Someone else", ""));
+
+        imp.history_view.set_model(Some(&model));
+    }
+
+    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+        let settings = Application::default().settings();
 
         let (width, height) = self.default_size();
 
-        imp.settings.set_int("window-width", width)?;
-        imp.settings.set_int("window-height", height)?;
+        settings.set_int("window-width", width)?;
+        settings.set_int("window-height", height)?;
 
-        imp.settings
-            .set_boolean("is-maximized", self.is_maximized())?;
+        settings.set_boolean("is-maximized", self.is_maximized())?;
 
         Ok(())
     }
 
     fn load_window_size(&self) {
-        let imp = imp::Window::from_instance(self);
+        let settings = Application::default().settings();
 
-        let width = imp.settings.int("window-width");
-        let height = imp.settings.int("window-height");
-        let is_maximized = imp.settings.boolean("is-maximized");
+        let width = settings.int("window-width");
+        let height = settings.int("window-height");
+        let is_maximized = settings.boolean("is-maximized");
 
         self.set_default_size(width, height);
 

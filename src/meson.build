@@ -25,6 +25,7 @@ rust_sources = files(
   'model/song_list.rs',
   'application.rs',
   'config.rs',
+  'history_view.rs',
   'main.rs',
   'window.rs',
 )

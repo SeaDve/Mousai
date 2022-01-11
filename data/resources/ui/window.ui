@@ -31,11 +31,16 @@
           </object>
         </child>
         <child>
-          <object class="GtkLabel" id="label">
-            <property name="label" translatable="yes">Hello world!</property>
-            <style>
-              <class name="title-header"/>
-            </style>
+          <object class="GtkScrolledWindow">
+            <property name="propagate-natural-height">True</property>
+            <property name="child">
+              <object class="MsaiHistoryView" id="history_view">
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+              </object>
+            </property>
           </object>
         </child>
       </object>

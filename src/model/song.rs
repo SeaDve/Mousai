@@ -32,28 +32,34 @@ mod imp {
                         "Title",
                         "Title of the song",
                         None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT,
+                        glib::ParamFlags::READWRITE
+                            | glib::ParamFlags::EXPLICIT_NOTIFY
+                            | glib::ParamFlags::CONSTRUCT,
                     ),
                     glib::ParamSpec::new_string(
                         "artist",
                         "Artish",
                         "Artist of the song",
                         None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT,
+                        glib::ParamFlags::READWRITE
+                            | glib::ParamFlags::EXPLICIT_NOTIFY
+                            | glib::ParamFlags::CONSTRUCT,
                     ),
                     glib::ParamSpec::new_string(
                         "info-link",
                         "Info Link",
                         "Link to website containing song information",
                         None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT,
+                        glib::ParamFlags::READWRITE
+                            | glib::ParamFlags::EXPLICIT_NOTIFY
+                            | glib::ParamFlags::CONSTRUCT,
                     ),
                     glib::ParamSpec::new_string(
                         "playback-link",
                         "Playback Link",
                         "Link containing an excerpt of the song",
                         None,
-                        glib::ParamFlags::READWRITE,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
                 ]
             });
@@ -106,7 +112,7 @@ glib::wrapper! {
 
 impl Song {
     pub fn new(title: &str, artist: &str, info_link: &str) -> Self {
-        glib::Object::new::<Self>(&[
+        glib::Object::new(&[
             ("title", &title.to_string()),
             ("artist", &artist.to_string()),
             ("info-link", &info_link.to_string()),
@@ -160,7 +166,7 @@ impl Song {
     }
 
     pub fn id(&self) -> SongId {
-        todo!();
+        SongId::new(&self.title())
     }
 }
 

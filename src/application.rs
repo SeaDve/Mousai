@@ -17,9 +17,19 @@ mod imp {
     use glib::WeakRef;
     use once_cell::sync::OnceCell;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug)]
     pub struct Application {
         pub window: OnceCell<WeakRef<Window>>,
+        pub settings: gio::Settings,
+    }
+
+    impl Default for Application {
+        fn default() -> Self {
+            Self {
+                window: OnceCell::new(),
+                settings: gio::Settings::new(APP_ID),
+            }
+        }
     }
 
     #[glib::object_subclass]
@@ -32,7 +42,9 @@ mod imp {
     impl ObjectImpl for Application {}
 
     impl ApplicationImpl for Application {
-        fn activate(&self, app: &Self::Type) {
+        fn activate(&self, obj: &Self::Type) {
+            self.parent_activate(obj);
+
             if let Some(window) = self.window.get() {
                 let window = window.upgrade().unwrap();
                 window.show();
@@ -40,21 +52,21 @@ mod imp {
                 return;
             }
 
-            let window = Window::new(app);
+            let window = Window::new(obj);
             self.window
                 .set(window.downgrade())
                 .expect("Window already set.");
 
-            app.main_window().present();
+            obj.main_window().present();
         }
 
-        fn startup(&self, app: &Self::Type) {
-            self.parent_startup(app);
+        fn startup(&self, obj: &Self::Type) {
+            self.parent_startup(obj);
 
             gtk::Window::set_default_icon_name(APP_ID);
 
-            app.setup_gactions();
-            app.setup_accels();
+            obj.setup_gactions();
+            obj.setup_accels();
         }
     }
 
@@ -78,6 +90,19 @@ impl Application {
         .expect("Application initialization failed...")
     }
 
+    pub fn settings(&self) -> gio::Settings {
+        let imp = imp::Application::from_instance(self);
+        imp.settings.clone()
+    }
+
+    pub fn run(&self) {
+        log::info!("Mousai ({})", APP_ID);
+        log::info!("Version: {} ({})", VERSION, PROFILE);
+        log::info!("Datadir: {}", PKGDATADIR);
+
+        ApplicationExtManual::run(self);
+    }
+
     fn main_window(&self) -> Window {
         let imp = imp::Application::from_instance(self);
         imp.window.get().unwrap().upgrade().unwrap()
@@ -85,16 +110,15 @@ impl Application {
 
     fn setup_gactions(&self) {
         let action_quit = gio::SimpleAction::new("quit", None);
-        action_quit.connect_activate(clone!(@weak self as app => move |_, _| {
-            // This is needed to trigger the delete event and saving the window state
-            app.main_window().close();
-            app.quit();
+        action_quit.connect_activate(clone!(@weak self as obj => move |_, _| {
+            obj.main_window().close();
+            obj.quit();
         }));
         self.add_action(&action_quit);
 
         let action_about = gio::SimpleAction::new("about", None);
-        action_about.connect_activate(clone!(@weak self as app => move |_, _| {
-            app.show_about_dialog();
+        action_about.connect_activate(clone!(@weak self as obj => move |_, _| {
+            obj.show_about_dialog();
         }));
         self.add_action(&action_about);
     }
@@ -121,12 +145,10 @@ impl Application {
 
         dialog.show();
     }
+}
 
-    pub fn run(&self) {
-        log::info!("Mousai ({})", APP_ID);
-        log::info!("Version: {} ({})", VERSION, PROFILE);
-        log::info!("Datadir: {}", PKGDATADIR);
-
-        ApplicationExtManual::run(self);
+impl Default for Application {
+    fn default() -> Self {
+        gio::Application::default().unwrap().downcast().unwrap()
     }
 }
