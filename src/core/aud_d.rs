@@ -36,7 +36,8 @@ pub struct Data {
 
 #[derive(Debug, Deserialize)]
 pub struct Response {
-    pub result: Data,
+    #[serde(rename(deserialize = "result"))]
+    pub data: Option<Data>,
     pub status: String,
 }
 
@@ -71,7 +72,11 @@ impl AudD {
             .unwrap()?;
 
         let response: Response = RUNTIME
-            .spawn(async move { response.json().await })
+            .spawn(async move {
+                let full = response.bytes().await.unwrap();
+                dbg!(&full);
+                serde_json::from_slice(&full)
+            })
             .await
             .unwrap()?;
 

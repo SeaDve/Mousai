@@ -128,6 +128,8 @@ impl AudioRecorder {
                 log::warn!("Failed to delete recording: {:?}", err);
             }
         }
+
+        log::info!("Cancelled recording");
     }
 
     pub fn state(&self) -> gst::State {

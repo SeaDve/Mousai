@@ -135,14 +135,19 @@ impl Recognizer {
         let imp = imp::Recognizer::from_instance(self);
 
         let recording = imp.audio_recorder.stop().await?;
+
+        // TODO add a trait that has `recognize` method that returns a Song
+        let response = AudD::new(None).recognize(recording.path()).await?;
+
         self.set_is_listening(false);
 
-        let response = AudD::new(None).recognize(recording.path()).await?;
-        Ok(Song::new(
-            &response.result.title,
-            &response.result.artist,
-            &response.result.info_link,
-        ))
+        response
+            .data
+            .map(|data| Song::new(&data.title, &data.artist, &data.info_link))
+            .ok_or_else(|| {
+                // TODO handle this in AudD recognize method
+                anyhow::anyhow!("Cannot recognize song")
+            })
     }
 
     pub async fn cancel(&self) {
