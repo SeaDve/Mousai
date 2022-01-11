@@ -1,21 +1,32 @@
 use gst_pbutils::prelude::*;
-use gtk::{glib, subclass::prelude::*};
+use gtk::{
+    glib::{self, clone},
+    subclass::prelude::*,
+};
 
-use std::{cell::Cell, path::PathBuf};
+use std::{
+    cell::{Cell, RefCell},
+    path::PathBuf,
+    time::Duration,
+};
 
 use crate::{
     core::{AudD, AudioRecorder},
     model::Song,
 };
 
+const DEFAULT_LISTEN_DURATION: Duration = Duration::from_secs(5);
+
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default)]
     pub struct Recognizer {
         pub is_listening: Cell<bool>,
 
+        pub source_id: RefCell<Option<glib::SourceId>>,
         pub audio_recorder: AudioRecorder,
     }
 
@@ -27,6 +38,13 @@ mod imp {
     }
 
     impl ObjectImpl for Recognizer {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder("listen-done", &[], <()>::static_type().into()).build()]
+            });
+            SIGNALS.as_ref()
+        }
+
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![glib::ParamSpec::new_boolean(
@@ -74,6 +92,18 @@ impl Recognizer {
         glib::Object::new::<Self>(&[]).expect("Failed to create Recognizer.")
     }
 
+    pub fn connect_listen_done<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_local("listen-done", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            f(&obj);
+            None
+        })
+        .unwrap()
+    }
+
     pub fn set_is_listening(&self, is_listening: bool) {
         let imp = imp::Recognizer::from_instance(self);
         imp.is_listening.set(is_listening);
@@ -85,16 +115,23 @@ impl Recognizer {
         imp.is_listening.get()
     }
 
-    pub fn start(&self) -> anyhow::Result<()> {
+    pub fn listen(&self) -> anyhow::Result<()> {
         let imp = imp::Recognizer::from_instance(self);
 
         imp.audio_recorder.start(Self::tmp_path())?;
         self.set_is_listening(true);
 
+        imp.source_id.replace(Some(glib::timeout_add_local_once(
+            DEFAULT_LISTEN_DURATION,
+            clone!(@weak self as obj => move || {
+                obj.emit_by_name("listen-done", &[]).unwrap();
+            }),
+        )));
+
         Ok(())
     }
 
-    pub async fn stop(&self) -> anyhow::Result<Song> {
+    pub async fn listen_finish(&self) -> anyhow::Result<Song> {
         let imp = imp::Recognizer::from_instance(self);
 
         let recording = imp.audio_recorder.stop().await?;
@@ -106,6 +143,18 @@ impl Recognizer {
             &response.result.artist,
             &response.result.info_link,
         ))
+    }
+
+    pub async fn cancel(&self) {
+        let imp = imp::Recognizer::from_instance(self);
+
+        self.set_is_listening(false);
+
+        if let Some(source_id) = imp.source_id.take() {
+            glib::source_remove(source_id);
+        }
+
+        imp.audio_recorder.cancel().await;
     }
 
     fn tmp_path() -> PathBuf {

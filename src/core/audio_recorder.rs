@@ -22,7 +22,6 @@ mod imp {
 
         pub recording: RefCell<Option<AudioRecording>>,
         pub pipeline: RefCell<Option<gst::Pipeline>>,
-        pub source_id: RefCell<Option<glib::SourceId>>,
         pub sender: RefCell<Option<Sender<anyhow::Result<AudioRecording>>>>,
         pub receiver: RefCell<Option<Receiver<anyhow::Result<AudioRecording>>>>,
     }
@@ -207,10 +206,6 @@ impl AudioRecorder {
         let imp = imp::AudioRecorder::from_instance(self);
 
         if let Some(pipeline) = imp.pipeline.take() {
-            if let Some(source_id) = imp.source_id.take() {
-                glib::source_remove(source_id); // TODO replace with `source_id.remove();` on gtk-rs 0.4.0
-            }
-
             pipeline.set_state(gst::State::Null).unwrap();
 
             let bus = pipeline.bus().unwrap();

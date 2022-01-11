@@ -12,7 +12,7 @@ use gtk::{
 use std::cell::Cell;
 
 use self::history_view::HistoryView;
-use crate::{config::PROFILE, recognizer::Recognizer, Application};
+use crate::{config::PROFILE, recognizer::Recognizer, spawn, Application};
 
 mod imp {
     use super::*;
@@ -103,9 +103,9 @@ mod imp {
                 obj.add_css_class("devel");
             }
 
-            obj.setup_bindings();
-            obj.setup_history_view();
             obj.load_window_size();
+            obj.setup_history_view();
+            obj.setup_recognizer();
         }
     }
 
@@ -155,27 +155,35 @@ impl Window {
         let imp = imp::Window::from_instance(self);
 
         if imp.recognizer.is_listening() {
-            let ctx = glib::MainContext::default();
-            ctx.spawn_local(clone!(@weak self as obj => async move {
-                let imp = imp::Window::from_instance(&obj);
-
-                match imp.recognizer.stop().await  {
-                    Ok(song) => {
-                        imp.history_view.model().expect("No model found on history_view").append(song);
-                    }
-                    Err(err) => {
-                    // TODO improve errors (more specific)
-                    obj.show_error(&gettext("Something went wrong"), &err.to_string());
-                    log::error!("Something went wrong: {:?} \n(dbg {:#?})", err, err);
-                    }
-                }
+            spawn!(clone!(@weak imp.recognizer as recognizer => async move {
+                recognizer.cancel().await;
+                log::info!("Cancelled recognizing");
             }));
         } else {
-            if let Err(err) = imp.recognizer.start() {
+            if let Err(err) = imp.recognizer.listen() {
                 self.show_error(&gettext("Failed to start recording"), &err.to_string());
                 log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
             }
         }
+    }
+
+    fn on_listen_done(&self, recognizer: &Recognizer) {
+        spawn!(clone!(@weak recognizer, @weak self as obj => async move {
+            let imp = imp::Window::from_instance(&obj);
+
+            log::info!("Listen done");
+
+            match recognizer.listen_finish().await {
+                Ok(song) => {
+                    imp.history_view.model().expect("No model found on history_view").append(song);
+                }
+                Err(err) => {
+                    // TODO improve errors (more specific)
+                    obj.show_error(&gettext("Something went wrong"), &err.to_string());
+                    log::error!("Something went wrong: {:?} \n(dbg {:#?})", err, err);
+                }
+            }
+        }));
     }
 
     fn update_listen_button(&self) {
@@ -231,31 +239,6 @@ impl Window {
         error_dialog.present();
     }
 
-    fn setup_bindings(&self) {
-        let imp = imp::Window::from_instance(self);
-
-        imp.recognizer
-            .bind_property("is-listening", self, "is-listening")
-            .flags(glib::BindingFlags::SYNC_CREATE)
-            .build()
-            .unwrap();
-    }
-
-    fn setup_history_view(&self) {
-        let imp = imp::Window::from_instance(self);
-
-        let model = crate::model::SongList::new();
-
-        model.append(crate::model::Song::new("A song", "Someone", ""));
-        model.append(crate::model::Song::new("Another song", "Someone else", ""));
-
-        model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_stack();
-        }));
-
-        imp.history_view.set_model(Some(&model));
-    }
-
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let settings = Application::default().settings();
 
@@ -281,5 +264,35 @@ impl Window {
         if is_maximized {
             self.maximize();
         }
+    }
+
+    fn setup_history_view(&self) {
+        let imp = imp::Window::from_instance(self);
+
+        let model = crate::model::SongList::new();
+
+        model.append(crate::model::Song::new("A song", "Someone", ""));
+        model.append(crate::model::Song::new("Another song", "Someone else", ""));
+
+        model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
+            obj.update_stack();
+        }));
+
+        imp.history_view.set_model(Some(&model));
+    }
+
+    fn setup_recognizer(&self) {
+        let imp = imp::Window::from_instance(self);
+
+        imp.recognizer
+            .bind_property("is-listening", self, "is-listening")
+            .flags(glib::BindingFlags::SYNC_CREATE)
+            .build()
+            .unwrap();
+
+        imp.recognizer
+            .connect_listen_done(clone!(@weak self as obj => move |recognizer| {
+                obj.on_listen_done(recognizer);
+            }));
     }
 }
