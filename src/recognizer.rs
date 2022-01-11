@@ -139,6 +139,7 @@ impl Recognizer {
         // TODO add a trait that has `recognize` method that returns a Song
         let response = AudD::new(None).recognize(recording.path()).await?;
 
+        // TODO this will not get called when `AudioRecorder::stop` or AudD::recognize failed
         self.set_is_listening(false);
 
         response
