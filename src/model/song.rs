@@ -105,6 +105,8 @@ glib::wrapper! {
 }
 
 impl Song {
+    /// The parameter `info_link` must be unique to each [`Song`] so that [`SongList`] will
+    /// treat them different
     pub fn new(title: &str, artist: &str, info_link: &str) -> Self {
         glib::Object::new(&[
             ("title", &title.to_string()),

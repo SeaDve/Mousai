@@ -53,26 +53,45 @@ impl SongList {
         glib::Object::new(&[]).expect("Failed to create SongList.")
     }
 
-    pub fn append(&self, song: Song) {
+    /// If an equivalent [`Song`] already exists in the list, it returns false leaving the original
+    /// value in the list. Otherwise, it inserts the new [`Song`] and returns true.
+    ///
+    /// The equivalence of the [`Song`] depends on their [`SongId`]
+    pub fn append(&self, song: Song) -> bool {
         let imp = imp::SongList::from_instance(self);
-        imp.list.borrow_mut().insert(song.id(), song);
 
-        self.items_changed(self.n_items() - 1, 0, 1);
+        let is_appended = imp.list.borrow_mut().insert(song.id(), song).is_none();
+
+        if is_appended {
+            self.items_changed(self.n_items() - 1, 0, 1);
+        }
+
+        is_appended
     }
 
-    /// This is more efficient than `SongList::append` since it emits `items-changed` only once
-    pub fn append_many(&self, songs: &[Song]) {
+    /// It tries to append all [`Song`]s. When any of the song already exist, it returns false
+    /// leaving the original value of the existing [`Song`]s. If all [`Song`]s are unique, it
+    /// returns true.
+    ///
+    /// This is more efficient than [`SongList::append`] since it emits `items-changed` only once
+    pub fn append_many(&self, songs: &[Song]) -> bool {
         let imp = imp::SongList::from_instance(self);
+
+        let mut appended = 0;
 
         {
             let mut list = imp.list.borrow_mut();
 
             for song in songs {
-                list.insert(song.id(), song.clone());
+                if list.insert(song.id(), song.clone()).is_none() {
+                    appended += 1;
+                }
             }
         }
 
-        self.items_changed(self.n_items() - 1, 0, songs.len() as u32);
+        self.items_changed(self.n_items() - 1, 0, appended);
+
+        appended as usize == songs.len()
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
@@ -113,10 +132,10 @@ mod test {
         assert!(song_list.is_empty());
 
         let song_1 = Song::new("1", "1", "1");
-        song_list.append(song_1.clone());
+        assert!(song_list.append(song_1.clone()));
 
         let song_2 = Song::new("2", "2", "2");
-        song_list.append(song_2.clone());
+        assert!(song_list.append(song_2.clone()));
 
         assert!(!song_list.is_empty());
         assert_eq!(song_list.n_items(), 2);
@@ -135,9 +154,15 @@ mod test {
         let song_list = SongList::new();
         assert!(song_list.is_empty());
 
-        let songs = [Song::new("1", "", ""), Song::new("2", "", "")];
-        song_list.append_many(&songs);
-
+        let songs = [Song::new("1", "1", "1"), Song::new("2", "2", "2")];
+        assert!(song_list.append_many(&songs));
         assert_eq!(song_list.n_items(), 2);
+
+        let more_songs = [
+            Song::new("", "", "SameInfoLink"),
+            Song::new("", "", "SameInfoLink"),
+        ];
+        assert!(!song_list.append_many(&more_songs));
+        assert_eq!(song_list.n_items(), 3);
     }
 }

@@ -269,8 +269,12 @@ impl Window {
 
         let model = crate::model::SongList::new();
 
-        model.append(crate::model::Song::new("A song", "Someone", ""));
-        model.append(crate::model::Song::new("Another song", "Someone else", ""));
+        model.append(crate::model::Song::new("A song", "Someone", "A link"));
+        model.append(crate::model::Song::new(
+            "Another song",
+            "Someone else",
+            "Another link",
+        ));
 
         model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             obj.update_stack();
