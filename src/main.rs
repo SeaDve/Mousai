@@ -1,5 +1,6 @@
 mod application;
 mod config;
+mod model;
 mod window;
 
 use gettextrs::{gettext, LocaleCategory};

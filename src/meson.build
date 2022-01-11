@@ -19,6 +19,10 @@ run_command(
 )
 
 rust_sources = files(
+  'model/mod.rs',
+  'model/song.rs',
+  'model/song_id.rs',
+  'model/song_list.rs',
   'application.rs',
   'config.rs',
   'main.rs',
