@@ -32,27 +32,21 @@ mod imp {
                         "Title",
                         "Title of the song",
                         None,
-                        glib::ParamFlags::READWRITE
-                            | glib::ParamFlags::EXPLICIT_NOTIFY
-                            | glib::ParamFlags::CONSTRUCT,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
                     glib::ParamSpec::new_string(
                         "artist",
                         "Artish",
                         "Artist of the song",
                         None,
-                        glib::ParamFlags::READWRITE
-                            | glib::ParamFlags::EXPLICIT_NOTIFY
-                            | glib::ParamFlags::CONSTRUCT,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
                     glib::ParamSpec::new_string(
                         "info-link",
                         "Info Link",
                         "Link to website containing song information",
                         None,
-                        glib::ParamFlags::READWRITE
-                            | glib::ParamFlags::EXPLICIT_NOTIFY
-                            | glib::ParamFlags::CONSTRUCT,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
                     glib::ParamSpec::new_string(
                         "playback-link",
