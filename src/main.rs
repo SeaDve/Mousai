@@ -1,6 +1,5 @@
 mod application;
 mod config;
-mod history_view;
 mod model;
 mod window;
 

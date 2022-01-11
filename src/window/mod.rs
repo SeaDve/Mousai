@@ -1,7 +1,10 @@
+mod history_view;
+
 use adw::subclass::prelude::*;
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 
-use crate::{config::PROFILE, history_view::HistoryView, Application};
+use self::history_view::HistoryView;
+use crate::{config::PROFILE, Application};
 
 mod imp {
     use super::*;

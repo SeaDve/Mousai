@@ -23,11 +23,11 @@ rust_sources = files(
   'model/song.rs',
   'model/song_id.rs',
   'model/song_list.rs',
+  'window/history_view.rs',
+  'window/mod.rs',
   'application.rs',
   'config.rs',
-  'history_view.rs',
   'main.rs',
-  'window.rs',
 )
 
 sources = [rust_sources, cargo_sources]
