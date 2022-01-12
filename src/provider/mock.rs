@@ -1,6 +1,7 @@
 use async_trait::async_trait;
+use rand::Rng;
 
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
+use std::time::Duration;
 
 use super::Provider;
 use crate::{core::AudioRecording, model::Song};
@@ -11,15 +12,25 @@ pub struct Mock;
 #[async_trait(?Send)]
 impl Provider for Mock {
     async fn recognize(&self, _: &AudioRecording) -> anyhow::Result<Song> {
-        let now = SystemTime::now();
+        let rand_title: String = rand::thread_rng()
+            .sample_iter(&rand::distributions::Alphanumeric)
+            .take(30)
+            .map(char::from)
+            .collect();
 
-        let since_the_epoch = now.duration_since(UNIX_EPOCH)?;
+        let rand_artist: String = rand::thread_rng()
+            .sample_iter(&rand::distributions::Alphanumeric)
+            .take(30)
+            .map(char::from)
+            .collect();
 
-        Ok(Song::new(
-            "A song",
-            "Sang by me",
-            &since_the_epoch.as_secs().to_string(),
-        ))
+        let rand_link: String = rand::thread_rng()
+            .sample_iter(&rand::distributions::Alphanumeric)
+            .take(30)
+            .map(char::from)
+            .collect();
+
+        Ok(Song::new(&rand_title, &rand_artist, &rand_link))
     }
 
     fn listen_duration(&self) -> Duration {
