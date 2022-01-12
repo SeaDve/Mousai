@@ -52,7 +52,7 @@ mod imp {
                     "Is Listening",
                     "Whether Self is in listening state",
                     false,
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    glib::ParamFlags::READABLE,
                 )]
             });
             PROPERTIES.as_ref()
@@ -102,12 +102,6 @@ impl Recognizer {
             None
         })
         .unwrap()
-    }
-
-    pub fn set_is_listening(&self, is_listening: bool) {
-        let imp = imp::Recognizer::from_instance(self);
-        imp.is_listening.set(is_listening);
-        self.notify("is-listening");
     }
 
     pub fn is_listening(&self) -> bool {
@@ -161,6 +155,12 @@ impl Recognizer {
         }
 
         imp.audio_recorder.cancel().await;
+    }
+
+    fn set_is_listening(&self, is_listening: bool) {
+        let imp = imp::Recognizer::from_instance(self);
+        imp.is_listening.set(is_listening);
+        self.notify("is-listening");
     }
 
     fn tmp_path() -> PathBuf {

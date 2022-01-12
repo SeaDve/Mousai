@@ -77,21 +77,21 @@ impl SongList {
     pub fn append_many(&self, songs: &[Song]) -> bool {
         let imp = imp::SongList::from_instance(self);
 
-        let mut appended = 0;
+        let mut n_appended = 0;
 
         {
             let mut list = imp.list.borrow_mut();
 
             for song in songs {
                 if list.insert(song.id(), song.clone()).is_none() {
-                    appended += 1;
+                    n_appended += 1;
                 }
             }
         }
 
-        self.items_changed(self.n_items() - 1, 0, appended);
+        self.items_changed(self.n_items() - 1, 0, n_appended);
 
-        appended as usize == songs.len()
+        n_appended as usize == songs.len()
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
