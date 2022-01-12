@@ -7,27 +7,36 @@ use gtk::{
 use std::{
     cell::{Cell, RefCell},
     path::PathBuf,
-    time::Duration,
 };
 
 use crate::{
-    core::{AudD, AudioRecorder},
+    core::AudioRecorder,
     model::Song,
+    provider::{AudD, Provider},
 };
-
-const DEFAULT_LISTEN_DURATION: Duration = Duration::from_secs(5);
 
 mod imp {
     use super::*;
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
     pub struct Recognizer {
         pub is_listening: Cell<bool>,
 
         pub source_id: RefCell<Option<glib::SourceId>>,
+        pub provider: RefCell<Box<dyn Provider>>,
         pub audio_recorder: AudioRecorder,
+    }
+
+    impl Default for Recognizer {
+        fn default() -> Self {
+            Self {
+                is_listening: Cell::default(),
+                source_id: RefCell::default(),
+                provider: RefCell::new(Box::new(AudD::default())),
+                audio_recorder: AudioRecorder::default(),
+            }
+        }
     }
 
     #[glib::object_subclass]
@@ -104,6 +113,11 @@ impl Recognizer {
         .unwrap()
     }
 
+    pub fn set_provider(&self, provider: Box<dyn Provider>) {
+        let imp = imp::Recognizer::from_instance(self);
+        imp.provider.replace(provider);
+    }
+
     pub fn is_listening(&self) -> bool {
         let imp = imp::Recognizer::from_instance(self);
         imp.is_listening.get()
@@ -116,7 +130,7 @@ impl Recognizer {
         self.set_is_listening(true);
 
         imp.source_id.replace(Some(glib::timeout_add_local_once(
-            DEFAULT_LISTEN_DURATION,
+            imp.provider.borrow().listen_duration(),
             clone!(@weak self as obj => move || {
                 obj.emit_by_name("listen-done", &[]).unwrap();
             }),
@@ -128,21 +142,23 @@ impl Recognizer {
     pub async fn listen_finish(&self) -> anyhow::Result<Song> {
         let imp = imp::Recognizer::from_instance(self);
 
-        let recording = imp.audio_recorder.stop().await?;
+        let recording = imp.audio_recorder.stop().await.map_err(|err| {
+            self.set_is_listening(false);
+            err
+        })?;
 
-        // TODO add a trait that has `recognize` method that returns a Song
-        let response = AudD::new(None).recognize(recording.path()).await?;
+        let provider = imp.provider.borrow();
 
-        // TODO this will not get called when `AudioRecorder::stop` or AudD::recognize failed
+        log::debug!("provider: {:?}", provider);
+
+        let song = provider.recognize(&recording).await.map_err(|err| {
+            self.set_is_listening(false);
+            err
+        })?;
+
         self.set_is_listening(false);
 
-        response
-            .data
-            .map(|data| Song::new(&data.title, &data.artist, &data.info_link))
-            .ok_or_else(|| {
-                // TODO handle this in AudD recognize method
-                anyhow::anyhow!("Cannot recognize song")
-            })
+        Ok(song)
     }
 
     pub async fn cancel(&self) {

@@ -1,10 +1,12 @@
+use async_trait::async_trait;
 use reqwest::Client;
 use serde::Deserialize;
 use serde_json::json;
 
-use std::path::Path;
+use std::time::Duration;
 
-use crate::{utils, RUNTIME};
+use super::Provider;
+use crate::{core::AudioRecording, model::Song, utils, RUNTIME};
 
 #[derive(Debug, Deserialize)]
 pub struct Image {
@@ -52,12 +54,15 @@ impl AudD {
             api_token: api_token.unwrap_or_default().to_string(),
         }
     }
+}
 
-    pub async fn recognize(&self, path: impl AsRef<Path>) -> anyhow::Result<Response> {
+#[async_trait(?Send)]
+impl Provider for AudD {
+    async fn recognize(&self, recording: &AudioRecording) -> anyhow::Result<Song> {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify",
-            "audio": utils::file_to_base64(path).await?,
+            "audio": utils::file_to_base64(recording.path()).await?,
         });
 
         let response = RUNTIME
@@ -80,8 +85,26 @@ impl AudD {
             .await
             .unwrap()?;
 
-        anyhow::ensure!(response.status == "success", "Unable to recognize song");
+        anyhow::ensure!(
+            response.status == "success",
+            "Returned {} as status",
+            response.status
+        );
 
-        Ok(response)
+        let data = response
+            .data
+            .ok_or(anyhow::anyhow!("Cannot recognize song"))?;
+
+        Ok(Song::new(&data.title, &data.artist, &data.info_link))
+    }
+
+    fn listen_duration(&self) -> Duration {
+        Duration::from_secs(5)
+    }
+}
+
+impl Default for AudD {
+    fn default() -> Self {
+        Self::new(None)
     }
 }

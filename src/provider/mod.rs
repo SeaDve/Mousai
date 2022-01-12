@@ -1,12 +1,20 @@
-use std::path::Path;
+mod aud_d;
+mod mock;
 
+pub use self::{aud_d::AudD, mock::Mock};
+
+use async_trait::async_trait;
 use downcast_rs::{impl_downcast, Downcast};
 
-use crate::model::Song;
+use std::time::Duration;
 
-pub trait Provider: Downcast {
-    // TODO consider inputting bytes directly
-    fn recognize(&self, path: &Path) -> anyhow::Result<Song>;
+use crate::{core::AudioRecording, model::Song};
+
+#[async_trait(?Send)]
+pub trait Provider: Downcast + std::fmt::Debug {
+    async fn recognize(&self, recording: &AudioRecording) -> anyhow::Result<Song>;
+
+    fn listen_duration(&self) -> Duration;
 }
 
 impl_downcast!(Provider);
@@ -17,19 +25,31 @@ mod test {
 
     #[test]
     fn downcast() {
+        #[derive(Debug)]
         struct ProviderOne;
 
+        #[async_trait(?Send)]
         impl Provider for ProviderOne {
-            fn recognize(&self, _: &Path) -> anyhow::Result<Song> {
+            async fn recognize(&self, _: &AudioRecording) -> anyhow::Result<Song> {
                 Ok(Song::new("", "", ""))
+            }
+
+            fn listen_duration(&self) -> Duration {
+                Duration::ZERO
             }
         }
 
+        #[derive(Debug)]
         struct ProviderTwo;
 
+        #[async_trait(?Send)]
         impl Provider for ProviderTwo {
-            fn recognize(&self, _: &Path) -> anyhow::Result<Song> {
+            async fn recognize(&self, _: &AudioRecording) -> anyhow::Result<Song> {
                 Ok(Song::new("", "", ""))
+            }
+
+            fn listen_duration(&self) -> Duration {
+                Duration::ZERO
             }
         }
 

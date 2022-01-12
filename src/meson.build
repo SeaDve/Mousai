@@ -19,7 +19,6 @@ run_command(
 )
 
 rust_sources = files(
-  'core/aud_d.rs',
   'core/audio_recorder.rs',
   'core/audio_recording.rs',
   'core/mod.rs',
@@ -27,6 +26,9 @@ rust_sources = files(
   'model/song.rs',
   'model/song_id.rs',
   'model/song_list.rs',
+  'provider/aud_d.rs',
+  'provider/mock.rs',
+  'provider/mod.rs',
   'window/history_view.rs',
   'window/mod.rs',
   'application.rs',
