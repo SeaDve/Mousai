@@ -41,14 +41,31 @@
               <object class="GtkScrolledWindow" id="main_page">
                 <property name="hscrollbar-policy">never</property>
                 <property name="child">
-                  <object class="AdwClamp">
+                  <object class="AdwClampScrollable">
                     <property name="child">
-                      <object class="MsaiHistoryView" id="history_view">
-                        <property name="valign">start</property>
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
+                      <object class="GtkGridView" id="history_view">
+                        <property name="factory">
+                          <object class="GtkBuilderListItemFactory">
+                            <property name="bytes"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="activatable">False</property>
+    <property name="child">
+      <object class="MsaiSongCell">
+        <binding name="song">
+          <lookup name="item">GtkListItem</lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
+                         ]]></property>
+                          </object>
+                        </property>
+                        <style>
+                          <class name="history-view"/>
+                        </style>
                       </object>
                     </property>
                   </object>

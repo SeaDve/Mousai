@@ -1,0 +1,7 @@
+.history-view {
+  padding: 6px;
+}
+
+.history-view > child {
+  padding: 6px;
+}

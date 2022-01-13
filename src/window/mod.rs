@@ -1,4 +1,4 @@
-mod history_view;
+mod song_cell;
 
 use adw::subclass::prelude::*;
 use gettextrs::gettext;
@@ -8,11 +8,12 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use once_cell::unsync::OnceCell;
 
 use std::cell::Cell;
 
-use self::history_view::HistoryView;
-use crate::{config::PROFILE, recognizer::Recognizer, spawn, Application};
+use self::song_cell::SongCell;
+use crate::{config::PROFILE, model::SongList, recognizer::Recognizer, spawn, Application};
 
 mod imp {
     use super::*;
@@ -23,7 +24,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
         #[template_child]
-        pub history_view: TemplateChild<HistoryView>,
+        pub history_view: TemplateChild<gtk::GridView>,
         #[template_child]
         pub listen_button: TemplateChild<gtk::Button>,
         #[template_child]
@@ -37,6 +38,7 @@ mod imp {
 
         pub is_listening: Cell<bool>,
 
+        pub history: OnceCell<SongList>,
         pub recognizer: Recognizer,
     }
 
@@ -47,6 +49,7 @@ mod imp {
         type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
+            SongCell::static_type();
             Self::bind_template(klass);
 
             klass.install_action("win.toggle-listen", None, |obj, _, _| {
@@ -62,13 +65,24 @@ mod imp {
     impl ObjectImpl for Window {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpec::new_boolean(
-                    "is-listening",
-                    "Is Listening",
-                    "Whether Self is in listening state",
-                    false,
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                )]
+                vec![
+                    glib::ParamSpec::new_boolean(
+                        "is-listening",
+                        "Is Listening",
+                        "Whether Self is in listening state",
+                        false,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                    glib::ParamSpec::new_object(
+                        "history",
+                        "History",
+                        "History of last identified songs",
+                        SongList::static_type(),
+                        glib::ParamFlags::READWRITE
+                            | glib::ParamFlags::EXPLICIT_NOTIFY
+                            | glib::ParamFlags::CONSTRUCT_ONLY,
+                    ),
+                ]
             });
             PROPERTIES.as_ref()
         }
@@ -85,6 +99,10 @@ mod imp {
                     let is_listening = value.get().unwrap();
                     obj.set_is_listening(is_listening);
                 }
+                "history" => {
+                    let history = value.get().unwrap();
+                    obj.set_history(history);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -92,6 +110,7 @@ mod imp {
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "is-listening" => obj.is_listening().to_value(),
+                "history" => obj.history().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -131,8 +150,14 @@ glib::wrapper! {
 }
 
 impl Window {
-    pub fn new(app: &Application) -> Self {
-        glib::Object::new(&[("application", app)]).expect("Failed to create Window")
+    pub fn new(app: &Application, history: &SongList) -> Self {
+        glib::Object::new(&[("application", app), ("history", history)])
+            .expect("Failed to create Window")
+    }
+
+    pub fn history(&self) -> SongList {
+        let imp = imp::Window::from_instance(self);
+        imp.history.get().unwrap().clone()
     }
 
     pub fn set_is_listening(&self, is_listening: bool) {
@@ -151,6 +176,12 @@ impl Window {
         imp.is_listening.get()
     }
 
+    fn set_history(&self, history: SongList) {
+        let imp = imp::Window::from_instance(self);
+        imp.history.set(history).unwrap();
+        self.notify("history");
+    }
+
     fn on_toggle_listen(&self) {
         let imp = imp::Window::from_instance(self);
 
@@ -167,13 +198,11 @@ impl Window {
 
     fn on_listen_done(&self, recognizer: &Recognizer) {
         spawn!(clone!(@weak recognizer, @weak self as obj => async move {
-            let imp = imp::Window::from_instance(&obj);
-
             log::info!("Listen done");
 
             match recognizer.listen_finish().await {
                 Ok(song) => {
-                    imp.history_view.model().expect("No model found on history_view").append(song);
+                    obj.history().append(song);
                 }
                 Err(err) => {
                     // TODO improve errors (more specific)
@@ -212,14 +241,10 @@ impl Window {
             return;
         }
 
-        if let Some(ref model) = imp.history_view.model() {
-            if model.is_empty() {
-                imp.stack.set_visible_child(&imp.empty_page.get());
-            } else {
-                imp.stack.set_visible_child(&imp.main_page.get());
-            }
-        } else {
+        if self.history().is_empty() {
             imp.stack.set_visible_child(&imp.empty_page.get());
+        } else {
+            imp.stack.set_visible_child(&imp.main_page.get());
         }
     }
 
@@ -267,20 +292,15 @@ impl Window {
     fn setup_history_view(&self) {
         let imp = imp::Window::from_instance(self);
 
-        let model = crate::model::SongList::new();
-
-        model.append(crate::model::Song::new("A song", "Someone", "A link"));
-        model.append(crate::model::Song::new(
-            "Another song",
-            "Someone else",
-            "Another link",
-        ));
+        let model = self.history();
 
         model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             obj.update_stack();
         }));
 
-        imp.history_view.set_model(Some(&model));
+        let selection_model = gtk::NoSelection::new(Some(&model));
+
+        imp.history_view.set_model(Some(&selection_model));
     }
 
     fn setup_recognizer(&self) {

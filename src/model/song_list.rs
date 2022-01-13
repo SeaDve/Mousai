@@ -74,8 +74,10 @@ impl SongList {
     /// returns true.
     ///
     /// This is more efficient than [`SongList::append`] since it emits `items-changed` only once
-    pub fn append_many(&self, songs: &[Song]) -> bool {
+    pub fn append_many(&self, songs: Vec<Song>) -> bool {
         let imp = imp::SongList::from_instance(self);
+
+        let initial_songs_len = songs.len();
 
         let mut n_appended = 0;
 
@@ -83,7 +85,7 @@ impl SongList {
             let mut list = imp.list.borrow_mut();
 
             for song in songs {
-                if list.insert(song.id(), song.clone()).is_none() {
+                if list.insert(song.id(), song).is_none() {
                     n_appended += 1;
                 }
             }
@@ -91,7 +93,7 @@ impl SongList {
 
         self.items_changed(self.n_items() - 1, 0, n_appended);
 
-        n_appended as usize == songs.len()
+        n_appended as usize == initial_songs_len
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
@@ -154,15 +156,15 @@ mod test {
         let song_list = SongList::new();
         assert!(song_list.is_empty());
 
-        let songs = [Song::new("1", "1", "1"), Song::new("2", "2", "2")];
-        assert!(song_list.append_many(&songs));
+        let songs = vec![Song::new("1", "1", "1"), Song::new("2", "2", "2")];
+        assert!(song_list.append_many(songs));
         assert_eq!(song_list.n_items(), 2);
 
-        let more_songs = [
+        let more_songs = vec![
             Song::new("", "", "SameInfoLink"),
             Song::new("", "", "SameInfoLink"),
         ];
-        assert!(!song_list.append_many(&more_songs));
+        assert!(!song_list.append_many(more_songs));
         assert_eq!(song_list.n_items(), 3);
     }
 }

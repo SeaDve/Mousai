@@ -52,7 +52,38 @@ mod imp {
                 return;
             }
 
-            let window = Window::new(obj);
+            ///////
+
+            let mut songs = Vec::new();
+
+            for i in 0..100 {
+                use rand::Rng;
+
+                let rand_title: String = rand::thread_rng()
+                    .sample_iter(&rand::distributions::Alphanumeric)
+                    .take(rand::thread_rng().gen_range(5..10))
+                    .map(char::from)
+                    .collect();
+
+                let rand_artist: String = rand::thread_rng()
+                    .sample_iter(&rand::distributions::Alphanumeric)
+                    .take(rand::thread_rng().gen_range(10..15))
+                    .map(char::from)
+                    .collect();
+
+                songs.push(crate::model::Song::new(
+                    &rand_title,
+                    &rand_artist,
+                    &i.to_string(),
+                ));
+            }
+
+            let history = crate::model::SongList::new();
+            history.append_many(songs);
+
+            ///////
+
+            let window = Window::new(obj, &history);
             self.window
                 .set(window.downgrade())
                 .expect("Window already set.");
