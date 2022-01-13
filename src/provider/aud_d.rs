@@ -38,10 +38,54 @@ pub struct Data {
 }
 
 #[derive(Debug, Deserialize)]
+pub struct Error {
+    #[serde(rename(deserialize = "error_code"))]
+    pub code: u16,
+    #[serde(rename(deserialize = "error_message"))]
+    pub message: String,
+}
+
+/// If `status` is `success` `data` is `Some` and `error is `None`. On the other hand, if status is
+/// `error` it is the opposite.
+///
+/// Thus `data` and `error` are mutually exclusive.
+#[derive(Debug, Deserialize)]
 pub struct Response {
+    status: String,
     #[serde(rename(deserialize = "result"))]
-    pub data: Option<Data>,
-    pub status: String,
+    data: Option<Data>,
+    error: Option<Error>,
+}
+
+impl Response {
+    pub fn into_enum(self) -> ResponseEnum {
+        match self.status.as_str() {
+            "success" => {
+                if let Some(data) = self.data {
+                    ResponseEnum::Success(data)
+                } else {
+                    // TODO improve error handling, create an error enum to handle each error codes
+                    ResponseEnum::Error(Error {
+                        code: u16::MAX,
+                        message: "No matches found".into(),
+                    })
+                }
+            }
+            "error" => ResponseEnum::Error(self.error.unwrap()),
+            other => ResponseEnum::Error(Error {
+                code: u16::MAX,
+                message: format!(
+                    "You have reached an impossible error with status: {}",
+                    other
+                ),
+            }),
+        }
+    }
+}
+
+pub enum ResponseEnum {
+    Success(Data),
+    Error(Error),
 }
 
 #[derive(Debug)]
@@ -59,17 +103,12 @@ impl AudD {
     fn handle_json(json_bytes: &Bytes) -> anyhow::Result<Song> {
         let response: Response = serde_json::from_slice(json_bytes)?;
 
-        anyhow::ensure!(
-            response.status == "success",
-            "Returned {} as status",
-            response.status
-        );
-
-        let data = response
-            .data
-            .ok_or(anyhow::anyhow!("Cannot recognize song"))?;
-
-        Ok(Song::new(&data.title, &data.artist, &data.info_link))
+        match response.into_enum() {
+            ResponseEnum::Success(data) => {
+                Ok(Song::new(&data.title, &data.artist, &data.info_link))
+            }
+            ResponseEnum::Error(err) => Err(anyhow::anyhow!("Error {}: {}", err.code, err.message)),
+        }
     }
 }
 
@@ -119,7 +158,7 @@ mod test {
     // TODO implement test using `handle_response` method
 
     #[test]
-    fn not_recognized() {
+    fn no_matches() {
         "{\"status\":\"success\",\"result\":null}";
     }
 
