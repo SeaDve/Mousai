@@ -108,7 +108,7 @@ impl HistoryView {
     }
 
     fn create_widget_func(song: &Song) -> gtk::Widget {
-        let row = adw::ExpanderRow::new();
+        let row = adw::ExpanderRow::builder().activatable(false).build();
 
         song.bind_property("title", &row, "title")
             .flags(glib::BindingFlags::SYNC_CREATE)

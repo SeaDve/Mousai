@@ -34,7 +34,7 @@ use once_cell::sync::Lazy;
 use self::application::Application;
 use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
-pub static RUNTIME: Lazy<tokio::runtime::Runtime> =
+static RUNTIME: Lazy<tokio::runtime::Runtime> =
     Lazy::new(|| tokio::runtime::Runtime::new().unwrap());
 
 fn main() {

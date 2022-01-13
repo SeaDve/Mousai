@@ -6,6 +6,7 @@
     </property>
     <child>
       <object class="GtkListBox" id="list_box">
+        <property name="selection-mode">none</property>
         <style>
           <class name="boxed-list"/>
         </style>

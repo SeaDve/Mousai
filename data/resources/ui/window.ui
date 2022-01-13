@@ -39,6 +39,7 @@
             <property name="transition-type">crossfade</property>
             <child>
               <object class="GtkScrolledWindow" id="main_page">
+                <property name="hscrollbar-policy">never</property>
                 <property name="child">
                   <object class="AdwClamp">
                     <property name="child">
