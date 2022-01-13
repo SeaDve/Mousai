@@ -56,7 +56,7 @@ mod imp {
 
             let mut songs = Vec::new();
 
-            for i in 0..100 {
+            for i in 0..2 {
                 use rand::Rng;
 
                 let rand_title: String = rand::thread_rng()

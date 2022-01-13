@@ -5,3 +5,7 @@
 .history-view > child {
   padding: 6px;
 }
+
+.playback-button {
+  padding: 6px;
+}
