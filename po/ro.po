@@ -7,31 +7,38 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-01-13 04:53+0000\n"
+"Last-Translator: Daniel <danny3@tutanota.com>\n"
+"Language-Team: Romanian <https://hosted.weblate.org/projects/kooha/mousai/ro/"
+">\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
+#, fuzzy
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Muzică;Cântec;Melodie;Identificare;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Identifică oricare cântec în secunde"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Discoperă cântece pe care abia aștepți să le cunoști intr-o interfață ușor "
+"de folosit."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -39,97 +46,105 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai este o aplicație simplă care poate identifica un cântec la fel ca "
+"Shazam. Doar dați clic pe bunul de ascultare, și apoi așteptați câteva "
+"secunde. Va întoarce în mod magic titlul și artistul acelui cântec!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Atenție: Este folosit interfața de programare aplicații (API) a serviciului "
+"audd.io, așa că este necesar să vă autentificați pe situl lor pentru a putea "
+"avea mai multe încercări."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "De ce o să iubiți Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Identifică titlul și artistul cântecului în secunde."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Folosește microfonul sau sunetul sistemului."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Stochează cântecul identifical incluzând arta albumului în istoric."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Previzualizați cântecul identificat cu redatorul nativ."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Răsfoiți cântecul pe internet cu legătura."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Interfața cu utilizatorul ușor de folosit."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Scurtături de la tastatură ușoare de folosit."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
+#, fuzzy
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
+#, fuzzy
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Deschide meniul"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Arată scurtăturile"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "Închide programul"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "Controale"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Comută ascultarea"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "Stabiliri"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "Curăță istoricul cântecelor"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Restabilește valoarea token-ului"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Bun venit la Mousai"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Introduceți un token valid"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "Trimite"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -141,115 +156,117 @@ msgstr ""
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Nu arăta la pornire"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "Deschide în navigator"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "Ascultă"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Pornește identificarea muzicii"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
-msgstr ""
+msgstr "Renunță"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Renunță la înregistrare"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "Meniul principal"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Pornește Mouzicirea!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Dați clic pe butonul ascultă pentru a începe."
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
-msgstr ""
+msgstr "Tăcut"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "Sursa audio _preferată"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Microfonul"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Sunetul sistemului"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Curăță istoricul cântecelor"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Restabilește tokenu-ul"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "Scurtături _tastatură"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Despre Mousai"
 
 #: src/widgets/main_window.py:108 src/widgets/main_window.py:111
 #: src/widgets/main_window.py:114
 msgid "Listening"
-msgstr ""
+msgstr "Se ascultă"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
-msgstr ""
+msgstr "Niciun sunet detectat"
 
 #: src/widgets/main_window.py:124
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Verificați dispozitivul de sunet."
 
 #: src/widgets/main_window.py:173
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Cântecul nu a fost recunoscut."
 
 #: src/widgets/main_window.py:175
 msgid "Something went wrong."
-msgstr ""
+msgstr "Ceva a mers greșit."
 
 #: src/widgets/main_window.py:177
 msgid "Sorry!"
-msgstr ""
+msgstr "Ne pare rău!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Oprește previzualizarea"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Redă previzualizarea"
 
 #: src/main.py:78
+#, fuzzy
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Drept de autor 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr ""
+msgstr "Danny3"
 
 #: src/main.py:81
+#, fuzzy
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
