@@ -106,6 +106,8 @@ mod imp {
                 obj.add_css_class("devel");
             }
 
+            self.history_view.remove_css_class("view");
+
             obj.load_window_size();
 
             match obj.load_history() {
@@ -113,8 +115,8 @@ mod imp {
                 Err(err) => log::error!("Failed to load history: {:?}", err),
             }
 
-            obj.setup_recognizer();
             obj.setup_history_view();
+            obj.setup_recognizer();
         }
     }
 
