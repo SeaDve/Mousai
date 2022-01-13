@@ -65,24 +65,13 @@ mod imp {
     impl ObjectImpl for Window {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    glib::ParamSpec::new_boolean(
-                        "is-listening",
-                        "Is Listening",
-                        "Whether Self is in listening state",
-                        false,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
-                    glib::ParamSpec::new_object(
-                        "history",
-                        "History",
-                        "History of last identified songs",
-                        SongList::static_type(),
-                        glib::ParamFlags::READWRITE
-                            | glib::ParamFlags::EXPLICIT_NOTIFY
-                            | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                ]
+                vec![glib::ParamSpec::new_boolean(
+                    "is-listening",
+                    "Is Listening",
+                    "Whether Self is in listening state",
+                    false,
+                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                )]
             });
             PROPERTIES.as_ref()
         }
@@ -99,10 +88,6 @@ mod imp {
                     let is_listening = value.get().unwrap();
                     obj.set_is_listening(is_listening);
                 }
-                "history" => {
-                    let history = value.get().unwrap();
-                    obj.set_history(history);
-                }
                 _ => unimplemented!(),
             }
         }
@@ -110,7 +95,6 @@ mod imp {
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "is-listening" => obj.is_listening().to_value(),
-                "history" => obj.history().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -123,19 +107,29 @@ mod imp {
             }
 
             obj.load_window_size();
-            obj.setup_history_view();
+
+            match obj.load_history() {
+                Ok(history) => self.history.set(history).unwrap(),
+                Err(err) => log::error!("Failed to load history: {:?}", err),
+            }
+
             obj.setup_recognizer();
+            obj.setup_history_view();
         }
     }
 
     impl WidgetImpl for Window {}
     impl WindowImpl for Window {
-        fn close_request(&self, window: &Self::Type) -> gtk::Inhibit {
-            if let Err(err) = window.save_window_size() {
+        fn close_request(&self, obj: &Self::Type) -> gtk::Inhibit {
+            if let Err(err) = obj.save_window_size() {
                 log::warn!("Failed to save window state, {:?}", &err);
             }
 
-            self.parent_close_request(window)
+            if let Err(err) = obj.save_history() {
+                log::error!("Failed to save history: {:?}", err);
+            }
+
+            self.parent_close_request(obj)
         }
     }
 
@@ -150,14 +144,8 @@ glib::wrapper! {
 }
 
 impl Window {
-    pub fn new(app: &Application, history: &SongList) -> Self {
-        glib::Object::new(&[("application", app), ("history", history)])
-            .expect("Failed to create Window")
-    }
-
-    pub fn history(&self) -> SongList {
-        let imp = imp::Window::from_instance(self);
-        imp.history.get().unwrap().clone()
+    pub fn new(app: &Application) -> Self {
+        glib::Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
     pub fn set_is_listening(&self, is_listening: bool) {
@@ -176,10 +164,9 @@ impl Window {
         imp.is_listening.get()
     }
 
-    fn set_history(&self, history: SongList) {
+    fn history(&self) -> SongList {
         let imp = imp::Window::from_instance(self);
-        imp.history.set(history).unwrap();
-        self.notify("history");
+        imp.history.get().unwrap().clone()
     }
 
     fn on_toggle_listen(&self) {
@@ -262,16 +249,17 @@ impl Window {
         error_dialog.present();
     }
 
-    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+    fn load_history(&self) -> anyhow::Result<SongList> {
         let settings = Application::default().settings();
+        let json_str = settings.string("history");
+        let history: SongList = serde_json::from_str(&json_str)?;
+        Ok(history)
+    }
 
-        let (width, height) = self.default_size();
-
-        settings.set_int("window-width", width)?;
-        settings.set_int("window-height", height)?;
-
-        settings.set_boolean("is-maximized", self.is_maximized())?;
-
+    fn save_history(&self) -> anyhow::Result<()> {
+        let json_str = serde_json::to_string(&self.history())?;
+        let settings = Application::default().settings();
+        settings.set_string("history", &json_str)?;
         Ok(())
     }
 
@@ -287,6 +275,19 @@ impl Window {
         if is_maximized {
             self.maximize();
         }
+    }
+
+    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+        let settings = Application::default().settings();
+
+        let (width, height) = self.default_size();
+
+        settings.set_int("window-width", width)?;
+        settings.set_int("window-height", height)?;
+
+        settings.set_boolean("is-maximized", self.is_maximized())?;
+
+        Ok(())
     }
 
     fn setup_history_view(&self) {

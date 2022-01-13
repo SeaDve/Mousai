@@ -1,4 +1,5 @@
 use gtk::{glib, prelude::*, subclass::prelude::*};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
@@ -8,12 +9,17 @@ mod imp {
     use super::*;
     use once_cell::sync::Lazy;
 
+    #[derive(Debug, Default, Serialize, Deserialize)]
+    pub struct SongInner {
+        pub title: String,
+        pub artist: String,
+        pub info_link: String,
+        pub playback_link: Option<String>,
+    }
+
     #[derive(Debug, Default)]
     pub struct Song {
-        pub title: RefCell<String>,
-        pub artist: RefCell<String>,
-        pub info_link: RefCell<String>,
-        pub playback_link: RefCell<Option<String>>,
+        pub inner: RefCell<SongInner>,
     }
 
     #[glib::object_subclass]
@@ -118,52 +124,69 @@ impl Song {
 
     pub fn set_title(&self, title: &str) {
         let imp = imp::Song::from_instance(self);
-        imp.title.replace(title.to_string());
+        imp.inner.borrow_mut().title = title.to_string();
         self.notify("title");
     }
 
     pub fn title(&self) -> String {
         let imp = imp::Song::from_instance(self);
-        imp.title.borrow().clone()
+        imp.inner.borrow().title.clone()
     }
 
     pub fn set_artist(&self, artist: &str) {
         let imp = imp::Song::from_instance(self);
-        imp.artist.replace(artist.to_string());
+        imp.inner.borrow_mut().artist = artist.to_string();
         self.notify("artist");
     }
 
     pub fn artist(&self) -> String {
         let imp = imp::Song::from_instance(self);
-        imp.artist.borrow().clone()
+        imp.inner.borrow().artist.clone()
     }
 
     pub fn set_info_link(&self, info_link: &str) {
         let imp = imp::Song::from_instance(self);
-        imp.info_link.replace(info_link.to_string());
+        imp.inner.borrow_mut().info_link = info_link.to_string();
         self.notify("info-link");
     }
 
     pub fn info_link(&self) -> String {
         let imp = imp::Song::from_instance(self);
-        imp.info_link.borrow().clone()
+        imp.inner.borrow().info_link.clone()
     }
 
     pub fn set_playback_link(&self, playback_link: Option<&str>) {
         let imp = imp::Song::from_instance(self);
-        imp.playback_link
-            .replace(playback_link.map(|pl| pl.to_string()));
+        imp.inner.borrow_mut().playback_link = playback_link.map(str::to_string);
         self.notify("playback-link");
     }
 
     pub fn playback_link(&self) -> Option<String> {
         let imp = imp::Song::from_instance(self);
-        imp.playback_link.borrow().clone()
+        imp.inner.borrow().playback_link.clone()
     }
 
     pub fn id(&self) -> SongId {
         // Song's info_link is unique to every song
         SongId::new(&self.info_link())
+    }
+}
+
+impl Serialize for Song {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        let imp = imp::Song::from_instance(self);
+        imp.inner.serialize(serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for Song {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let song_inner = imp::SongInner::deserialize(deserializer)?;
+
+        let song: Song = glib::Object::new(&[]).expect("Failed to create Song.");
+        imp::Song::from_instance(&song).inner.replace(song_inner);
+
+        Ok(song)
     }
 }
 

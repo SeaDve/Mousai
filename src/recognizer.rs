@@ -143,6 +143,7 @@ impl Recognizer {
         Ok(())
     }
 
+    #[allow(clippy::await_holding_refcell_ref)]
     pub async fn listen_finish(&self) -> anyhow::Result<Song> {
         let imp = imp::Recognizer::from_instance(self);
 

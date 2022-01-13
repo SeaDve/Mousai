@@ -1,6 +1,7 @@
 use adw::subclass::prelude::*;
 use gtk::{gio, glib, prelude::*};
 use indexmap::IndexMap;
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
@@ -91,7 +92,9 @@ impl SongList {
             }
         }
 
-        self.items_changed(self.n_items() - 1, 0, n_appended);
+        if n_appended > 0 {
+            self.items_changed(self.n_items() - 1, 0, n_appended);
+        }
 
         n_appended as usize == initial_songs_len
     }
@@ -121,6 +124,24 @@ impl SongList {
 impl Default for SongList {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl Serialize for SongList {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        let imp = imp::SongList::from_instance(self);
+        serializer.collect_seq(imp.list.borrow().values())
+    }
+}
+
+impl<'de> Deserialize<'de> for SongList {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let songs: Vec<Song> = Vec::deserialize(deserializer)?;
+
+        let song_list = SongList::new();
+        song_list.append_many(songs);
+
+        Ok(song_list)
     }
 }
 

@@ -57,7 +57,7 @@ impl AudD {
     }
 
     fn handle_json(json_bytes: &Bytes) -> anyhow::Result<Song> {
-        let response: Response = serde_json::from_slice(&json_bytes)?;
+        let response: Response = serde_json::from_slice(json_bytes)?;
 
         anyhow::ensure!(
             response.status == "success",

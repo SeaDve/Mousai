@@ -15,7 +15,7 @@ use crate::{
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use once_cell::sync::OnceCell;
+    use once_cell::unsync::OnceCell;
 
     #[derive(Debug)]
     pub struct Application {
@@ -52,38 +52,7 @@ mod imp {
                 return;
             }
 
-            ///////
-
-            let mut songs = Vec::new();
-
-            for i in 0..2 {
-                use rand::Rng;
-
-                let rand_title: String = rand::thread_rng()
-                    .sample_iter(&rand::distributions::Alphanumeric)
-                    .take(rand::thread_rng().gen_range(5..10))
-                    .map(char::from)
-                    .collect();
-
-                let rand_artist: String = rand::thread_rng()
-                    .sample_iter(&rand::distributions::Alphanumeric)
-                    .take(rand::thread_rng().gen_range(10..15))
-                    .map(char::from)
-                    .collect();
-
-                songs.push(crate::model::Song::new(
-                    &rand_title,
-                    &rand_artist,
-                    &i.to_string(),
-                ));
-            }
-
-            let history = crate::model::SongList::new();
-            history.append_many(songs);
-
-            ///////
-
-            let window = Window::new(obj, &history);
+            let window = Window::new(obj);
             self.window
                 .set(window.downgrade())
                 .expect("Window already set.");
@@ -139,25 +108,6 @@ impl Application {
         imp.window.get().unwrap().upgrade().unwrap()
     }
 
-    fn setup_gactions(&self) {
-        let action_quit = gio::SimpleAction::new("quit", None);
-        action_quit.connect_activate(clone!(@weak self as obj => move |_, _| {
-            obj.main_window().close();
-            obj.quit();
-        }));
-        self.add_action(&action_quit);
-
-        let action_about = gio::SimpleAction::new("about", None);
-        action_about.connect_activate(clone!(@weak self as obj => move |_, _| {
-            obj.show_about_dialog();
-        }));
-        self.add_action(&action_about);
-    }
-
-    fn setup_accels(&self) {
-        self.set_accels_for_action("app.quit", &["<primary>q"]);
-    }
-
     fn show_about_dialog(&self) {
         let dialog = gtk::AboutDialog::builder()
             .transient_for(&self.main_window())
@@ -175,6 +125,25 @@ impl Application {
             .build();
 
         dialog.show();
+    }
+
+    fn setup_gactions(&self) {
+        let action_quit = gio::SimpleAction::new("quit", None);
+        action_quit.connect_activate(clone!(@weak self as obj => move |_, _| {
+            obj.main_window().close();
+            obj.quit();
+        }));
+        self.add_action(&action_quit);
+
+        let action_about = gio::SimpleAction::new("about", None);
+        action_about.connect_activate(clone!(@weak self as obj => move |_, _| {
+            obj.show_about_dialog();
+        }));
+        self.add_action(&action_about);
+    }
+
+    fn setup_accels(&self) {
+        self.set_accels_for_action("app.quit", &["<primary>q"]);
     }
 }
 
