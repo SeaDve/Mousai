@@ -83,20 +83,16 @@ impl Provider for AudD {
         });
 
         let server_response = RUNTIME
-            .spawn(async move {
+            .spawn(
                 Client::new()
                     .post("https://api.audd.io/")
                     .body(data.to_string())
-                    .send()
-                    .await
-            })
+                    .send(),
+            )
             .await
             .unwrap()?;
 
-        let bytes = RUNTIME
-            .spawn(async move { server_response.bytes().await.unwrap() })
-            .await
-            .unwrap();
+        let bytes = RUNTIME.spawn(server_response.bytes()).await.unwrap()?;
 
         match std::str::from_utf8(&bytes) {
             Ok(string) => log::debug!("server_response: {}", string),
