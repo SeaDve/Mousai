@@ -126,7 +126,11 @@ impl Recognizer {
     pub fn listen(&self) -> anyhow::Result<()> {
         let imp = imp::Recognizer::from_instance(self);
 
-        imp.audio_recorder.start(Self::tmp_path())?;
+        let tmp_path = Self::tmp_path();
+
+        log::info!("Saving temporary file at `{}`", tmp_path.display());
+
+        imp.audio_recorder.start(&tmp_path)?;
         self.set_is_listening(true);
 
         imp.source_id.replace(Some(glib::timeout_add_local_once(

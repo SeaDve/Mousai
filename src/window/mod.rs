@@ -132,7 +132,7 @@ mod imp {
     impl WindowImpl for Window {
         fn close_request(&self, window: &Self::Type) -> gtk::Inhibit {
             if let Err(err) = window.save_window_size() {
-                log::warn!("Failed to save window state, {}", &err);
+                log::warn!("Failed to save window state, {:?}", &err);
             }
 
             self.parent_close_request(window)

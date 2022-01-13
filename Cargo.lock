@@ -1026,6 +1026,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "base64",
+ "bytes",
  "downcast-rs",
  "futures-channel",
  "gettext-rs",

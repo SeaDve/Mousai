@@ -252,7 +252,11 @@ impl AudioRecorder {
                 Continue(false)
             }
             MessageView::Error(err) => {
-                log::error!("Error from record bus: {:?} (debug {:?})", err.error(), err);
+                log::error!(
+                    "Error from record bus: {:?} (debug {:#?})",
+                    err.error(),
+                    err
+                );
 
                 let _recording = self.cleanup_and_take_recording();
 
