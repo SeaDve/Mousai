@@ -17,7 +17,7 @@
       <description></description>
     </key>
     <key name="history" type="s">
-      <default>""</default>
+      <default>"[]"</default>
       <summary>Contains recently recognized songs</summary>
       <description></description>
     </key>
