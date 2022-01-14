@@ -7,31 +7,34 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-01-14 08:55+0000\n"
+"Last-Translator: drwshh <dxrwish0201@outlook.com>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/kooha/mousai/ms/>\n"
 "Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.10.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;Muzik;Lagu;Kenalpasti;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
-msgstr ""
+msgstr "Kenalpasti apa sahaja lagu dalam beberapa saat"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Temui lagu yang anda ingin tahu dengan antara muka yang mudah digunakan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -39,97 +42,102 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai adalah aplikasi mudah yang boleh mengenal pasti lagu serupa dengan "
+"Shazam. Cuma klik butang dengar, dan kemudian tunggu beberapa saat. Ia "
+"secara ajaib akan mengembalikan tajuk dan artis lagu itu!"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Nota: Ini menggunakan API audd.io, jadi anda perlu log masuk ke laman mereka "
+"untuk mendapatkan lebih banyak percubaan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Mengapa anda akan menyukai Mousai?"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr ""
+msgstr "🎵 Kenalpasti tajuk dan artis lagu dalam beberapa saat."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr ""
+msgstr "🎙️ Guna mikrofon anda atau audio dari komputer."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
-msgstr ""
+msgstr "🎸 Simpan lagu yang dikenalpasti termasuk seni album dalam sejarah."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr ""
+msgstr "🎼 Pratonton lagu yang dikenalpasti menggunakan pemain asli."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
+msgstr "🌐 Layari lagu tersebut di dalam web dengan pautan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Antara muka yang mudah untuk digunakan."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Pintasan papan kekunci yang mesra pengguna."
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "Buka Menu"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Tunjuk Pintasan"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "Keluar"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
-msgstr ""
+msgstr "Kawalan"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Tukar Dengar"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
-msgstr ""
+msgstr "Tetapan"
 
 #: data/ui/shortcuts.ui:48
 msgid "Clear Song History"
-msgstr ""
+msgstr "Kosongkan Sejarah Lagu"
 
 #: data/ui/shortcuts.ui:54
 msgid "Reset Token Value"
-msgstr ""
+msgstr "Tetapkan Semula Nilai Token"
 
 #: data/ui/token_dialog.ui:37
 msgid "Welcome to Mousai"
-msgstr ""
+msgstr "Selamat Datang ke Mousai"
 
 #: data/ui/token_dialog.ui:50
 msgid "Enter a valid token"
-msgstr ""
+msgstr "Masukkan token yang sah"
 
 #: data/ui/token_dialog.ui:57
 msgid "Submit"
-msgstr ""
+msgstr "Hantar"
 
 #. Do not translate the link, only 'their website'
 #: data/ui/token_dialog.ui:71
@@ -138,118 +146,121 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
+"Mousai uses audd.io APIs to work, so it is required to login to <a href="
+"\"https://dashboard.audd.io/\">laman mereka</a> and get a token. Leaving "
+"this blank will give you a few trials per day."
 
 #: data/ui/token_dialog.ui:88
 msgid "Do not show at startup"
-msgstr ""
+msgstr "Jangan tunjukkan pada permulaan"
 
 #: data/ui/song_row.ui:14
 msgid "Open in Browser"
-msgstr ""
+msgstr "Buka dalam Pelayar"
 
 #: data/ui/main_window.ui:23
 msgid "Listen"
-msgstr ""
+msgstr "Dengar"
 
 #: data/ui/main_window.ui:24
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Mula Mengenalpasti Muzik"
 
 #: data/ui/main_window.ui:38
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 #: data/ui/main_window.ui:39
 msgid "Cancel the Recording"
-msgstr ""
+msgstr "Batalkan rakaman"
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu Utama"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
 msgid "Start Mousaing!"
-msgstr ""
+msgstr "Mula meMousaing!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Klik butang dengar untuk mula."
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
-msgstr ""
+msgstr "Disenyapkan"
 
 #: data/ui/main_window.ui:121
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Keutamaan Sumber Audio"
 
 #: data/ui/main_window.ui:123
 msgid "Microphone"
-msgstr ""
+msgstr "Mikrofon"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Audio Komputer"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
-msgstr ""
+msgstr "_Bersihkan Sejarah Lagu"
 
 #: data/ui/main_window.ui:141
 msgid "_Reset Token"
-msgstr ""
+msgstr "_Tetapkan Token semula"
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Pintasan Kekunci"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Tentang Mousai"
 
 #: src/widgets/main_window.py:108 src/widgets/main_window.py:111
 #: src/widgets/main_window.py:114
 msgid "Listening"
-msgstr ""
+msgstr "Sedang mendengar"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
-msgstr ""
+msgstr "Tiada audio dikesan"
 
 #: src/widgets/main_window.py:124
 msgid "Please check your audio device."
-msgstr ""
+msgstr "Sila semak peranti audio anda."
 
 #: src/widgets/main_window.py:173
 msgid "The song was not recognized."
-msgstr ""
+msgstr "Lagu tidak dikenali."
 
 #: src/widgets/main_window.py:175
 msgid "Something went wrong."
-msgstr ""
+msgstr "Sesuatu telah berlaku."
 
 #: src/widgets/main_window.py:177
 msgid "Sorry!"
-msgstr ""
+msgstr "Maaf!"
 
 #: src/widgets/song_row.py:59
 msgid "Stop Preview"
-msgstr ""
+msgstr "Hentikan Pratonton"
 
 #: src/widgets/song_row.py:59
 msgid "Play Preview"
-msgstr ""
+msgstr "Mainkan Pratonton"
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "Hak Cipta 2021 Dave Patrick"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr ""
+msgstr "M. Darwish"
 
 #: src/main.py:81
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
