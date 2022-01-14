@@ -10,15 +10,17 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use std::cell::Cell;
-
 use self::song_cell::SongCell;
-use crate::{config::PROFILE, model::SongList, recognizer::Recognizer, spawn, Application};
+use crate::{
+    config::PROFILE,
+    model::SongList,
+    recognizer::{Recognizer, RecognizerState},
+    spawn, Application,
+};
 
 mod imp {
     use super::*;
     use gtk::CompositeTemplate;
-    use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
@@ -35,8 +37,8 @@ mod imp {
         pub empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
         pub listening_page: TemplateChild<adw::StatusPage>,
-
-        pub is_listening: Cell<bool>,
+        #[template_child]
+        pub recognizing_page: TemplateChild<adw::StatusPage>,
 
         pub history: OnceCell<SongList>,
         pub recognizer: Recognizer,
@@ -63,42 +65,6 @@ mod imp {
     }
 
     impl ObjectImpl for Window {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpec::new_boolean(
-                    "is-listening",
-                    "Is Listening",
-                    "Whether Self is in listening state",
-                    false,
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                )]
-            });
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
-            match pspec.name() {
-                "is-listening" => {
-                    let is_listening = value.get().unwrap();
-                    obj.set_is_listening(is_listening);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            match pspec.name() {
-                "is-listening" => obj.is_listening().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
@@ -117,6 +83,9 @@ mod imp {
 
             obj.setup_history_view();
             obj.setup_recognizer();
+
+            obj.update_stack();
+            obj.update_listen_button();
         }
     }
 
@@ -150,22 +119,6 @@ impl Window {
         glib::Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
-    pub fn set_is_listening(&self, is_listening: bool) {
-        let imp = imp::Window::from_instance(self);
-        imp.is_listening.set(is_listening);
-        self.notify("is-listening");
-
-        log::debug!("is_listening: {}", is_listening);
-
-        self.update_listen_button();
-        self.update_stack();
-    }
-
-    pub fn is_listening(&self) -> bool {
-        let imp = imp::Window::from_instance(self);
-        imp.is_listening.get()
-    }
-
     fn history(&self) -> SongList {
         let imp = imp::Window::from_instance(self);
         imp.history.get().unwrap().clone()
@@ -174,14 +127,20 @@ impl Window {
     fn on_toggle_listen(&self) {
         let imp = imp::Window::from_instance(self);
 
-        if imp.recognizer.is_listening() {
-            spawn!(clone!(@weak imp.recognizer as recognizer => async move {
-                recognizer.cancel().await;
-                log::info!("Cancelled recognizing");
-            }));
-        } else if let Err(err) = imp.recognizer.listen() {
-            self.show_error(&gettext("Failed to start recording"), &err.to_string());
-            log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
+        match imp.recognizer.state() {
+            RecognizerState::Listening => {
+                spawn!(clone!(@weak imp.recognizer as recognizer => async move {
+                    recognizer.cancel().await;
+                    log::info!("Cancelled recognizing");
+                }));
+            }
+            RecognizerState::Null => {
+                if let Err(err) = imp.recognizer.listen() {
+                    self.show_error(&gettext("Failed to start recording"), &err.to_string());
+                    log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
+                }
+            }
+            RecognizerState::Recognizing => (),
         }
     }
 
@@ -205,29 +164,46 @@ impl Window {
     fn update_listen_button(&self) {
         let imp = imp::Window::from_instance(self);
 
-        if self.is_listening() {
-            imp.listen_button.remove_css_class("suggested-action");
-            imp.listen_button.add_css_class("destructive-action");
+        match imp.recognizer.state() {
+            RecognizerState::Null => {
+                self.action_set_enabled("win.toggle-listen", true);
 
-            imp.listen_button.set_label(&gettext("Cancel"));
-            imp.listen_button
-                .set_tooltip_text(Some(&gettext("Start Identifying Music")));
-        } else {
-            imp.listen_button.remove_css_class("destructive-action");
-            imp.listen_button.add_css_class("suggested-action");
+                imp.listen_button.remove_css_class("destructive-action");
+                imp.listen_button.add_css_class("suggested-action");
 
-            imp.listen_button.set_label(&gettext("Listen"));
-            imp.listen_button
-                .set_tooltip_text(Some(&gettext("Cancel Listening")));
+                imp.listen_button.set_label(&gettext("Listen"));
+                imp.listen_button
+                    .set_tooltip_text(Some(&gettext("Cancel Listening")));
+            }
+            RecognizerState::Listening => {
+                self.action_set_enabled("win.toggle-listen", true);
+
+                imp.listen_button.remove_css_class("suggested-action");
+                imp.listen_button.add_css_class("destructive-action");
+
+                imp.listen_button.set_label(&gettext("Cancel"));
+                imp.listen_button
+                    .set_tooltip_text(Some(&gettext("Start Identifying Music")));
+            }
+            RecognizerState::Recognizing => {
+                self.action_set_enabled("win.toggle-listen", false);
+            }
         }
     }
 
     fn update_stack(&self) {
         let imp = imp::Window::from_instance(self);
 
-        if self.is_listening() {
-            imp.stack.set_visible_child(&imp.listening_page.get());
-            return;
+        match imp.recognizer.state() {
+            RecognizerState::Listening => {
+                imp.stack.set_visible_child(&imp.listening_page.get());
+                return;
+            }
+            RecognizerState::Recognizing => {
+                imp.stack.set_visible_child(&imp.recognizing_page.get());
+                return;
+            }
+            RecognizerState::Null => (),
         }
 
         if self.history().is_empty() {
@@ -310,10 +286,10 @@ impl Window {
         let imp = imp::Window::from_instance(self);
 
         imp.recognizer
-            .bind_property("is-listening", self, "is-listening")
-            .flags(glib::BindingFlags::SYNC_CREATE)
-            .build()
-            .unwrap();
+            .connect_state_notify(clone!(@weak self as obj => move |_| {
+                obj.update_stack();
+                obj.update_listen_button();
+            }));
 
         imp.recognizer
             .connect_listen_done(clone!(@weak self as obj => move |recognizer| {

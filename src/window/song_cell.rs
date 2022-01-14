@@ -88,6 +88,10 @@ impl SongCell {
     }
 
     pub fn set_song(&self, song: Option<Song>) {
+        if song == self.song() {
+            return;
+        }
+
         let imp = imp::SongCell::from_instance(self);
         imp.song.replace(song);
         self.notify("song");

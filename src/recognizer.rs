@@ -15,13 +15,27 @@ use crate::{
     provider::{AudD, Provider},
 };
 
+#[derive(Debug, Clone, Copy, glib::GEnum, PartialEq)]
+#[genum(type_name = "MsaiRecognizerState")]
+pub enum RecognizerState {
+    Null,
+    Listening,
+    Recognizing,
+}
+
+impl Default for RecognizerState {
+    fn default() -> Self {
+        Self::Null
+    }
+}
+
 mod imp {
     use super::*;
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
     pub struct Recognizer {
-        pub is_listening: Cell<bool>,
+        pub state: Cell<RecognizerState>,
 
         pub source_id: RefCell<Option<glib::SourceId>>,
         pub provider: RefCell<Box<dyn Provider>>,
@@ -31,7 +45,7 @@ mod imp {
     impl Default for Recognizer {
         fn default() -> Self {
             Self {
-                is_listening: Cell::default(),
+                state: Cell::default(),
                 source_id: RefCell::default(),
                 provider: RefCell::new(Box::new(AudD::default())),
                 audio_recorder: AudioRecorder::default(),
@@ -56,11 +70,12 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpec::new_boolean(
-                    "is-listening",
-                    "Is Listening",
-                    "Whether Self is in listening state",
-                    false,
+                vec![glib::ParamSpec::new_enum(
+                    "state",
+                    "State",
+                    "Current state of Self",
+                    RecognizerState::static_type(),
+                    RecognizerState::default() as i32,
                     glib::ParamFlags::READABLE,
                 )]
             });
@@ -75,9 +90,9 @@ mod imp {
             pspec: &glib::ParamSpec,
         ) {
             match pspec.name() {
-                "is-listening" => {
-                    let is_listening = value.get().unwrap();
-                    obj.set_is_listening(is_listening);
+                "state" => {
+                    let state = value.get().unwrap();
+                    obj.set_state(state);
                 }
                 _ => unimplemented!(),
             }
@@ -85,7 +100,7 @@ mod imp {
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
-                "is-listening" => obj.is_listening().to_value(),
+                "state" => obj.state().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -113,14 +128,21 @@ impl Recognizer {
         .unwrap()
     }
 
+    pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("state"), move |obj, _| f(obj))
+    }
+
     pub fn set_provider(&self, provider: Box<dyn Provider>) {
         let imp = imp::Recognizer::from_instance(self);
         imp.provider.replace(provider);
     }
 
-    pub fn is_listening(&self) -> bool {
+    pub fn state(&self) -> RecognizerState {
         let imp = imp::Recognizer::from_instance(self);
-        imp.is_listening.get()
+        imp.state.get()
     }
 
     pub fn listen(&self) -> anyhow::Result<()> {
@@ -131,7 +153,7 @@ impl Recognizer {
         log::info!("Saving temporary file at `{}`", tmp_path.display());
 
         imp.audio_recorder.start(&tmp_path)?;
-        self.set_is_listening(true);
+        self.set_state(RecognizerState::Listening);
 
         imp.source_id.replace(Some(glib::timeout_add_local_once(
             imp.provider.borrow().listen_duration(),
@@ -148,7 +170,7 @@ impl Recognizer {
         let imp = imp::Recognizer::from_instance(self);
 
         let recording = imp.audio_recorder.stop().await.map_err(|err| {
-            self.set_is_listening(false);
+            self.set_state(RecognizerState::Null);
             err
         })?;
 
@@ -156,12 +178,14 @@ impl Recognizer {
 
         log::debug!("provider: {:?}", provider);
 
+        self.set_state(RecognizerState::Recognizing);
+
         let song = provider.recognize(&recording).await.map_err(|err| {
-            self.set_is_listening(false);
+            self.set_state(RecognizerState::Null);
             err
         })?;
 
-        self.set_is_listening(false);
+        self.set_state(RecognizerState::Null);
 
         Ok(song)
     }
@@ -169,7 +193,7 @@ impl Recognizer {
     pub async fn cancel(&self) {
         let imp = imp::Recognizer::from_instance(self);
 
-        self.set_is_listening(false);
+        self.set_state(RecognizerState::Null);
 
         if let Some(source_id) = imp.source_id.take() {
             glib::source_remove(source_id);
@@ -178,10 +202,14 @@ impl Recognizer {
         imp.audio_recorder.cancel().await;
     }
 
-    fn set_is_listening(&self, is_listening: bool) {
+    fn set_state(&self, state: RecognizerState) {
+        if state == self.state() {
+            return;
+        }
+
         let imp = imp::Recognizer::from_instance(self);
-        imp.is_listening.set(is_listening);
-        self.notify("is-listening");
+        imp.state.set(state);
+        self.notify("state");
     }
 
     fn tmp_path() -> PathBuf {
