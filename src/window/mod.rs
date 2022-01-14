@@ -173,7 +173,7 @@ impl Window {
 
                 imp.listen_button.set_label(&gettext("Listen"));
                 imp.listen_button
-                    .set_tooltip_text(Some(&gettext("Cancel Listening")));
+                    .set_tooltip_text(Some(&gettext("Start Identifying Music")));
             }
             RecognizerState::Listening => {
                 self.action_set_enabled("win.toggle-listen", true);
@@ -183,7 +183,7 @@ impl Window {
 
                 imp.listen_button.set_label(&gettext("Cancel"));
                 imp.listen_button
-                    .set_tooltip_text(Some(&gettext("Start Identifying Music")));
+                    .set_tooltip_text(Some(&gettext("Cancel Listening")));
             }
             RecognizerState::Recognizing => {
                 self.action_set_enabled("win.toggle-listen", false);
