@@ -29,6 +29,7 @@ rust_sources = files(
   'provider/aud_d.rs',
   'provider/mock.rs',
   'provider/mod.rs',
+  'window/audio_visualizer.rs',
   'window/mod.rs',
   'window/song_cell.rs',
   'application.rs',

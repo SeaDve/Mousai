@@ -202,6 +202,11 @@ impl Recognizer {
         imp.audio_recorder.cancel().await;
     }
 
+    pub fn audio_recorder(&self) -> &AudioRecorder {
+        let imp = imp::Recognizer::from_instance(self);
+        &imp.audio_recorder
+    }
+
     fn set_state(&self, state: RecognizerState) {
         if state == self.state() {
             return;

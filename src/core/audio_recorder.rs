@@ -14,6 +14,7 @@ use super::AudioRecording;
 
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default)]
@@ -34,6 +35,13 @@ mod imp {
     }
 
     impl ObjectImpl for AudioRecorder {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder("stopped", &[], <()>::static_type().into()).build()]
+            });
+            SIGNALS.as_ref()
+        }
+
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![glib::ParamSpec::new_double(
@@ -67,16 +75,28 @@ impl AudioRecorder {
         glib::Object::new::<Self>(&[]).expect("Failed to create AudioRecorder.")
     }
 
-    pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_stopped<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
     {
-        self.connect_notify_local(Some("peak"), move |obj, _| f(obj))
+        self.connect_local("stopped", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            f(&obj);
+            None
+        })
+        .unwrap()
     }
 
     pub fn peak(&self) -> f64 {
         let imp = imp::AudioRecorder::from_instance(self);
         imp.peak.get()
+    }
+
+    pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("peak"), move |obj, _| f(obj))
     }
 
     pub fn start(&self, path: impl AsRef<Path>) -> anyhow::Result<()> {
@@ -213,6 +233,8 @@ impl AudioRecorder {
             let bus = pipeline.bus().unwrap();
             bus.remove_watch().unwrap();
         }
+
+        self.emit_by_name("stopped", &[]).unwrap();
 
         imp.recording.take()
     }

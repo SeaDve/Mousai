@@ -1,3 +1,4 @@
+mod audio_visualizer;
 mod song_cell;
 
 use adw::subclass::prelude::*;
@@ -10,7 +11,7 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use self::song_cell::SongCell;
+use self::{audio_visualizer::AudioVisualizer, song_cell::SongCell};
 use crate::{
     config::PROFILE,
     model::SongList,
@@ -36,9 +37,11 @@ mod imp {
         #[template_child]
         pub empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
-        pub listening_page: TemplateChild<adw::StatusPage>,
+        pub listening_page: TemplateChild<gtk::Box>,
         #[template_child]
         pub recognizing_page: TemplateChild<adw::StatusPage>,
+        #[template_child]
+        pub visualizer: TemplateChild<AudioVisualizer>,
 
         pub history: OnceCell<SongList>,
         pub recognizer: Recognizer,
@@ -83,6 +86,7 @@ mod imp {
 
             obj.setup_history_view();
             obj.setup_recognizer();
+            obj.setup_visualizer();
 
             obj.update_stack();
             obj.update_listen_button();
@@ -295,5 +299,24 @@ impl Window {
             .connect_listen_done(clone!(@weak self as obj => move |recognizer| {
                 obj.on_listen_done(recognizer);
             }));
+    }
+
+    fn setup_visualizer(&self) {
+        let imp = imp::Window::from_instance(self);
+
+        let recorder = imp.recognizer.audio_recorder();
+
+        recorder.connect_peak_notify(clone!(@weak self as obj => move |recorder| {
+            let imp = imp::Window::from_instance(&obj);
+
+            let peak = 10_f64.powf(recorder.peak() / 20.0);
+            imp.visualizer.push_peak(peak as f32);
+        }));
+
+        recorder.connect_stopped(clone!(@weak self as obj => move |_| {
+            let imp = imp::Window::from_instance(&obj);
+
+            imp.visualizer.clear_peaks();
+        }));
     }
 }
