@@ -34,6 +34,6 @@ impl Provider for Mock {
     }
 
     fn listen_duration(&self) -> Duration {
-        Duration::from_secs(2)
+        Duration::from_secs(10000)
     }
 }

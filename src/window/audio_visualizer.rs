@@ -78,9 +78,13 @@ impl AudioVisualizer {
     }
 
     fn on_snapshot(&self, snapshot: &gtk::Snapshot) {
-        let max_height = self.allocated_height() as f32;
+        if self.peaks().len() as i32 > self.allocated_width() / (2 * GUTTER as i32) {
+            self.peaks_mut().pop_front();
+        }
+
+        let max_height = self.height() as f32;
         let v_center = max_height / 2.0;
-        let h_center = self.allocated_width() as f32 / 2.0;
+        let h_center = self.width() as f32 / 2.0;
 
         let mut pointer_a = h_center;
         let mut pointer_b = h_center;
@@ -91,8 +95,8 @@ impl AudioVisualizer {
         for (index, peak) in peaks.iter().rev().enumerate() {
             // This makes both sides decrease logarithmically.
             // Starts at index 2 because log0 is undefined and log1 is 0.
-            // Multiply by 6.0 to compensate on log.
-            let peak_max_height = max_height.log(index as f32 + 2.0) * peak * 6.0;
+            // Multiply by 12.0 to compensate on log.
+            let peak_max_height = max_height.log(index as f32 + 2.0) * peak * 18.0;
 
             let top_point = v_center + peak_max_height;
             let this_height = -2.0 * peak_max_height;
