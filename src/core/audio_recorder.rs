@@ -203,7 +203,7 @@ impl AudioRecorder {
                 );
                 pulsesrc.set_property("device", audio_source_name)?;
             }
-            Err(err) => log::warn!("Failed to set pulsesrc device: {:?}", err),
+            Err(err) => log::warn!("Failed to get default source name: {:?}", err),
         }
 
         encodebin.set_property("profile", &Self::default_encodebin_profile())?;
