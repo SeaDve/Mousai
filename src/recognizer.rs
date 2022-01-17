@@ -133,8 +133,8 @@ impl Recognizer {
         self.connect_notify_local(Some("state"), move |obj, _| f(obj))
     }
 
-    pub fn set_provider(&self, provider: Box<dyn Provider>) {
-        self.imp().provider.replace(provider);
+    pub fn set_provider(&self, provider: impl Provider + 'static) {
+        self.imp().provider.replace(Box::new(provider));
     }
 
     pub fn state(&self) -> RecognizerState {
