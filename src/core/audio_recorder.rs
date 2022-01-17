@@ -62,6 +62,10 @@ mod imp {
                 _ => unimplemented!(),
             }
         }
+
+        fn dispose(&self, obj: &Self::Type) {
+            let _recording = obj.cleanup_and_take_recording();
+        }
     }
 }
 
