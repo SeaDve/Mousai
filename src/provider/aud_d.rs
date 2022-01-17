@@ -45,7 +45,7 @@ pub struct Error {
     pub message: String,
 }
 
-/// If `status` is `success` `data` is `Some` and `error is `None`. On the other hand, if status is
+/// If `status` is `success` `data` is `Some` and `error` is `None`. On the other hand, if status is
 /// `error` it is the opposite.
 ///
 /// Thus `data` and `error` are mutually exclusive.
@@ -61,15 +61,16 @@ impl Response {
     pub fn into_enum(self) -> ResponseEnum {
         match self.status.as_str() {
             "success" => {
-                if let Some(data) = self.data {
-                    ResponseEnum::Success(data)
-                } else {
-                    // TODO improve error handling, create an error enum to handle each error codes
-                    ResponseEnum::Error(Error {
-                        code: u16::MAX,
-                        message: "No matches found".into(),
-                    })
-                }
+                // TODO improve error handling, create an error enum to handle each error codes
+                self.data.map_or_else(
+                    || {
+                        ResponseEnum::Error(Error {
+                            code: u16::MAX,
+                            message: "No matches found".into(),
+                        })
+                    },
+                    ResponseEnum::Success,
+                )
             }
             "error" => ResponseEnum::Error(self.error.unwrap()),
             other => ResponseEnum::Error(Error {

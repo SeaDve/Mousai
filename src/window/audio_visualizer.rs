@@ -94,7 +94,7 @@ impl AudioVisualizer {
 
             // Add feathering on both sides
             let alpha = 1.0 - (index as f32 / peaks_len as f32);
-            let color = gdk::RGBA::new(0.1, 0.45, 0.8, alpha).clone();
+            let color = gdk::RGBA::new(0.1, 0.45, 0.8, alpha);
 
             snapshot.append_color(&color, &rect_a);
             snapshot.append_color(&color, &rect_b);
