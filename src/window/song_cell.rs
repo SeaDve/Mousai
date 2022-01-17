@@ -33,7 +33,7 @@ mod imp {
     impl ObjectImpl for SongCell {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpec::new_object(
+                vec![glib::ParamSpecObject::new(
                     "song",
                     "Song",
                     "Song represented by Self",
@@ -92,14 +92,12 @@ impl SongCell {
             return;
         }
 
-        let imp = imp::SongCell::from_instance(self);
-        imp.song.replace(song);
+        self.imp().song.replace(song);
         self.notify("song");
     }
 
     pub fn song(&self) -> Option<Song> {
-        let imp = imp::SongCell::from_instance(self);
-        imp.song.borrow().clone()
+        self.imp().song.borrow().clone()
     }
 }
 

@@ -26,35 +26,34 @@ mod imp {
     impl ObjectSubclass for Song {
         const NAME: &'static str = "MsaiSong";
         type Type = super::Song;
-        type ParentType = glib::Object;
     }
 
     impl ObjectImpl for Song {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    glib::ParamSpec::new_string(
+                    glib::ParamSpecString::new(
                         "title",
                         "Title",
                         "Title of the song",
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
-                    glib::ParamSpec::new_string(
+                    glib::ParamSpecString::new(
                         "artist",
                         "Artish",
                         "Artist of the song",
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
-                    glib::ParamSpec::new_string(
+                    glib::ParamSpecString::new(
                         "info-link",
                         "Info Link",
                         "Link to website containing song information",
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
-                    glib::ParamSpec::new_string(
+                    glib::ParamSpecString::new(
                         "playback-link",
                         "Playback Link",
                         "Link containing an excerpt of the song",
@@ -123,47 +122,39 @@ impl Song {
     }
 
     pub fn set_title(&self, title: &str) {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow_mut().title = title.to_string();
+        self.imp().inner.borrow_mut().title = title.to_string();
         self.notify("title");
     }
 
     pub fn title(&self) -> String {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow().title.clone()
+        self.imp().inner.borrow().title.clone()
     }
 
     pub fn set_artist(&self, artist: &str) {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow_mut().artist = artist.to_string();
+        self.imp().inner.borrow_mut().artist = artist.to_string();
         self.notify("artist");
     }
 
     pub fn artist(&self) -> String {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow().artist.clone()
+        self.imp().inner.borrow().artist.clone()
     }
 
     pub fn set_info_link(&self, info_link: &str) {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow_mut().info_link = info_link.to_string();
+        self.imp().inner.borrow_mut().info_link = info_link.to_string();
         self.notify("info-link");
     }
 
     pub fn info_link(&self) -> String {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow().info_link.clone()
+        self.imp().inner.borrow().info_link.clone()
     }
 
     pub fn set_playback_link(&self, playback_link: Option<&str>) {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow_mut().playback_link = playback_link.map(str::to_string);
+        self.imp().inner.borrow_mut().playback_link = playback_link.map(str::to_string);
         self.notify("playback-link");
     }
 
     pub fn playback_link(&self) -> Option<String> {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.borrow().playback_link.clone()
+        self.imp().inner.borrow().playback_link.clone()
     }
 
     pub fn id(&self) -> SongId {
@@ -174,8 +165,7 @@ impl Song {
 
 impl Serialize for Song {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let imp = imp::Song::from_instance(self);
-        imp.inner.serialize(serializer)
+        self.imp().inner.serialize(serializer)
     }
 }
 
@@ -184,7 +174,7 @@ impl<'de> Deserialize<'de> for Song {
         let song_inner = imp::SongInner::deserialize(deserializer)?;
 
         let song: Song = glib::Object::new(&[]).expect("Failed to create Song.");
-        imp::Song::from_instance(&song).inner.replace(song_inner);
+        song.imp().inner.replace(song_inner);
 
         Ok(song)
     }

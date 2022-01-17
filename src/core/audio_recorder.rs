@@ -31,7 +31,6 @@ mod imp {
     impl ObjectSubclass for AudioRecorder {
         const NAME: &'static str = "MsaiAudioRecorder";
         type Type = super::AudioRecorder;
-        type ParentType = glib::Object;
     }
 
     impl ObjectImpl for AudioRecorder {
@@ -44,7 +43,7 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpec::new_double(
+                vec![glib::ParamSpecDouble::new(
                     "peak",
                     "Peak",
                     "Current volume peak while recording",
@@ -84,12 +83,10 @@ impl AudioRecorder {
             f(&obj);
             None
         })
-        .unwrap()
     }
 
     pub fn peak(&self) -> f64 {
-        let imp = imp::AudioRecorder::from_instance(self);
-        imp.peak.get()
+        self.imp().peak.get()
     }
 
     pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
@@ -111,7 +108,7 @@ impl AudioRecorder {
         )
         .unwrap();
 
-        let imp = imp::AudioRecorder::from_instance(self);
+        let imp = self.imp();
         imp.pipeline.replace(Some(pipeline));
         imp.recording.replace(Some(new_recording));
 
@@ -133,13 +130,12 @@ impl AudioRecorder {
             .expect("Pipeline not setup")
             .send_event(gst::event::Eos::new());
 
-        let imp = imp::AudioRecorder::from_instance(self);
-        let receiver = imp.receiver.take().unwrap();
+        let receiver = self.imp().receiver.take().unwrap();
         receiver.await.unwrap()
     }
 
     pub async fn cancel(&self) {
-        let imp = imp::AudioRecorder::from_instance(self);
+        let imp = self.imp();
         imp.sender.replace(None);
         imp.receiver.replace(None);
 
@@ -160,8 +156,7 @@ impl AudioRecorder {
     }
 
     fn pipeline(&self) -> Option<gst::Pipeline> {
-        let imp = imp::AudioRecorder::from_instance(self);
-        imp.pipeline.borrow().as_ref().cloned()
+        self.imp().pipeline.borrow().as_ref().cloned()
     }
 
     fn default_audio_source_name() -> anyhow::Result<String> {
@@ -173,17 +168,15 @@ impl AudioRecorder {
     }
 
     fn default_encodebin_profile() -> gst_pbutils::EncodingContainerProfile {
-        let encoding_profile = gst_pbutils::EncodingAudioProfileBuilder::new()
-            .format(&gst::Caps::builder("audio/x-opus").build())
+        let audio_caps = gst::Caps::new_simple("audio/x-opus", &[]);
+        let encoding_profile = gst_pbutils::EncodingAudioProfile::builder(&audio_caps)
             .presence(1)
-            .build()
-            .unwrap();
+            .build();
 
-        gst_pbutils::EncodingContainerProfileBuilder::new()
-            .format(&gst::Caps::builder("application/ogg").build())
+        let container_caps = gst::Caps::new_simple("application/ogg", &[]);
+        gst_pbutils::EncodingContainerProfile::builder(&container_caps)
             .add_profile(&encoding_profile)
             .build()
-            .unwrap()
     }
 
     fn default_pipeline(recording_path: &Path) -> anyhow::Result<gst::Pipeline> {
@@ -201,13 +194,13 @@ impl AudioRecorder {
                     "Pipeline setup with pulsesrc device name `{}`",
                     audio_source_name
                 );
-                pulsesrc.set_property("device", audio_source_name)?;
+                pulsesrc.set_property("device", audio_source_name);
             }
             Err(err) => log::warn!("Failed to get default source name: {:?}", err),
         }
 
-        encodebin.set_property("profile", &Self::default_encodebin_profile())?;
-        filesink.set_property("location", recording_path.to_str().unwrap())?;
+        encodebin.set_property("profile", &Self::default_encodebin_profile());
+        filesink.set_property("location", recording_path.to_str().unwrap());
 
         let elements = [&pulsesrc, &audioconvert, &level, &encodebin, &filesink];
         pipeline.add_many(&elements)?;
@@ -225,7 +218,7 @@ impl AudioRecorder {
     }
 
     fn cleanup_and_take_recording(&self) -> Option<AudioRecording> {
-        let imp = imp::AudioRecorder::from_instance(self);
+        let imp = self.imp();
 
         if let Some(pipeline) = imp.pipeline.take() {
             pipeline.set_state(gst::State::Null).unwrap();
@@ -234,7 +227,7 @@ impl AudioRecorder {
             bus.remove_watch().unwrap();
         }
 
-        self.emit_by_name("stopped", &[]).unwrap();
+        self.emit_by_name::<()>("stopped", &[]);
 
         imp.recording.take()
     }
@@ -256,8 +249,7 @@ impl AudioRecorder {
                     .get::<f64>()
                     .unwrap();
 
-                let imp = imp::AudioRecorder::from_instance(self);
-                imp.peak.set(peak);
+                self.imp().peak.set(peak);
                 self.notify("peak");
 
                 Continue(true)
@@ -267,8 +259,7 @@ impl AudioRecorder {
 
                 let recording = self.cleanup_and_take_recording();
 
-                let imp = imp::AudioRecorder::from_instance(self);
-                let sender = imp.sender.take().unwrap();
+                let sender = self.imp().sender.take().unwrap();
                 sender.send(Ok(recording.unwrap())).unwrap();
 
                 Continue(false)
@@ -282,8 +273,7 @@ impl AudioRecorder {
 
                 let _recording = self.cleanup_and_take_recording();
 
-                let imp = imp::AudioRecorder::from_instance(self);
-                let sender = imp.sender.take().unwrap();
+                let sender = self.imp().sender.take().unwrap();
                 sender.send(Err(err.error().into())).unwrap();
 
                 Continue(false)

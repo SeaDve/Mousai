@@ -15,8 +15,8 @@ use crate::{
     provider::{AudD, Provider},
 };
 
-#[derive(Debug, Clone, Copy, glib::GEnum, PartialEq)]
-#[genum(type_name = "MsaiRecognizerState")]
+#[derive(Debug, Clone, Copy, glib::Enum, PartialEq)]
+#[enum_type(name = "MsaiRecognizerState")]
 pub enum RecognizerState {
     Null,
     Listening,
@@ -57,7 +57,6 @@ mod imp {
     impl ObjectSubclass for Recognizer {
         const NAME: &'static str = "MsaiRecognizer";
         type Type = super::Recognizer;
-        type ParentType = glib::Object;
     }
 
     impl ObjectImpl for Recognizer {
@@ -70,7 +69,7 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpec::new_enum(
+                vec![glib::ParamSpecEnum::new(
                     "state",
                     "State",
                     "Current state of Self",
@@ -125,7 +124,6 @@ impl Recognizer {
             f(&obj);
             None
         })
-        .unwrap()
     }
 
     pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
@@ -136,17 +134,15 @@ impl Recognizer {
     }
 
     pub fn set_provider(&self, provider: Box<dyn Provider>) {
-        let imp = imp::Recognizer::from_instance(self);
-        imp.provider.replace(provider);
+        self.imp().provider.replace(provider);
     }
 
     pub fn state(&self) -> RecognizerState {
-        let imp = imp::Recognizer::from_instance(self);
-        imp.state.get()
+        self.imp().state.get()
     }
 
     pub fn listen(&self) -> anyhow::Result<()> {
-        let imp = imp::Recognizer::from_instance(self);
+        let imp = self.imp();
 
         let tmp_path = Self::tmp_path();
 
@@ -158,7 +154,7 @@ impl Recognizer {
         imp.source_id.replace(Some(glib::timeout_add_local_once(
             imp.provider.borrow().listen_duration(),
             clone!(@weak self as obj => move || {
-                obj.emit_by_name("listen-done", &[]).unwrap();
+                obj.emit_by_name::<()>("listen-done", &[]);
             }),
         )));
 
@@ -167,7 +163,7 @@ impl Recognizer {
 
     #[allow(clippy::await_holding_refcell_ref)]
     pub async fn listen_finish(&self) -> anyhow::Result<Song> {
-        let imp = imp::Recognizer::from_instance(self);
+        let imp = self.imp();
 
         let recording = imp.audio_recorder.stop().await.map_err(|err| {
             self.set_state(RecognizerState::Null);
@@ -191,20 +187,19 @@ impl Recognizer {
     }
 
     pub async fn cancel(&self) {
-        let imp = imp::Recognizer::from_instance(self);
+        let imp = self.imp();
 
         self.set_state(RecognizerState::Null);
 
         if let Some(source_id) = imp.source_id.take() {
-            glib::source_remove(source_id);
+            source_id.remove();
         }
 
         imp.audio_recorder.cancel().await;
     }
 
     pub fn audio_recorder(&self) -> &AudioRecorder {
-        let imp = imp::Recognizer::from_instance(self);
-        &imp.audio_recorder
+        &self.imp().audio_recorder
     }
 
     fn set_state(&self, state: RecognizerState) {
@@ -212,8 +207,7 @@ impl Recognizer {
             return;
         }
 
-        let imp = imp::Recognizer::from_instance(self);
-        imp.state.set(state);
+        self.imp().state.set(state);
         self.notify("state");
     }
 

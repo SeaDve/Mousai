@@ -22,9 +22,7 @@ impl AudioRecording {
     }
 
     pub async fn delete(&self) -> anyhow::Result<()> {
-        self.file
-            .delete_async_future(glib::PRIORITY_DEFAULT_IDLE)
-            .await?;
+        self.file.delete_future(glib::PRIORITY_DEFAULT_IDLE).await?;
 
         Ok(())
     }

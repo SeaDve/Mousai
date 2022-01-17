@@ -19,7 +19,6 @@ mod imp {
     impl ObjectSubclass for SongList {
         const NAME: &'static str = "MsaiSongList";
         type Type = super::SongList;
-        type ParentType = glib::Object;
         type Interfaces = (gio::ListModel,);
     }
 
@@ -59,9 +58,12 @@ impl SongList {
     ///
     /// The equivalence of the [`Song`] depends on their [`SongId`]
     pub fn append(&self, song: Song) -> bool {
-        let imp = imp::SongList::from_instance(self);
-
-        let is_appended = imp.list.borrow_mut().insert(song.id(), song).is_none();
+        let is_appended = self
+            .imp()
+            .list
+            .borrow_mut()
+            .insert(song.id(), song)
+            .is_none();
 
         if is_appended {
             self.items_changed(self.n_items() - 1, 0, 1);
@@ -76,14 +78,12 @@ impl SongList {
     ///
     /// This is more efficient than [`SongList::append`] since it emits `items-changed` only once
     pub fn append_many(&self, songs: Vec<Song>) -> bool {
-        let imp = imp::SongList::from_instance(self);
-
         let initial_songs_len = songs.len();
 
         let mut n_appended = 0;
 
         {
-            let mut list = imp.list.borrow_mut();
+            let mut list = self.imp().list.borrow_mut();
 
             for song in songs {
                 if list.insert(song.id(), song).is_none() {
@@ -100,9 +100,7 @@ impl SongList {
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
-        let imp = imp::SongList::from_instance(self);
-
-        let removed = imp.list.borrow_mut().shift_remove_full(song_id);
+        let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
         if let Some((position, _, _)) = removed {
             self.items_changed(position as u32, 1, 0);
@@ -112,8 +110,7 @@ impl SongList {
     }
 
     pub fn get(&self, note_id: &SongId) -> Option<Song> {
-        let imp = imp::SongList::from_instance(self);
-        imp.list.borrow().get(note_id).cloned()
+        self.imp().list.borrow().get(note_id).cloned()
     }
 
     pub fn is_empty(&self) -> bool {
@@ -129,8 +126,7 @@ impl Default for SongList {
 
 impl Serialize for SongList {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        let imp = imp::SongList::from_instance(self);
-        serializer.collect_seq(imp.list.borrow().values())
+        serializer.collect_seq(self.imp().list.borrow().values())
     }
 }
 

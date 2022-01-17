@@ -124,12 +124,11 @@ impl Window {
     }
 
     fn history(&self) -> SongList {
-        let imp = imp::Window::from_instance(self);
-        imp.history.get().unwrap().clone()
+        self.imp().history.get().unwrap().clone()
     }
 
     fn on_toggle_listen(&self) {
-        let imp = imp::Window::from_instance(self);
+        let imp = self.imp();
 
         match imp.recognizer.state() {
             RecognizerState::Listening => {
@@ -166,7 +165,7 @@ impl Window {
     }
 
     fn update_listen_button(&self) {
-        let imp = imp::Window::from_instance(self);
+        let imp = self.imp();
 
         match imp.recognizer.state() {
             RecognizerState::Null => {
@@ -196,7 +195,7 @@ impl Window {
     }
 
     fn update_stack(&self) {
-        let imp = imp::Window::from_instance(self);
+        let imp = self.imp();
 
         match imp.recognizer.state() {
             RecognizerState::Listening => {
@@ -218,7 +217,7 @@ impl Window {
     }
 
     fn show_error(&self, text: &str, secondary_text: &str) {
-        let error_dialog = gtk::MessageDialogBuilder::new()
+        let error_dialog = gtk::MessageDialog::builder()
             .text(text)
             .secondary_text(secondary_text)
             .buttons(gtk::ButtonsType::Ok)
@@ -273,8 +272,6 @@ impl Window {
     }
 
     fn setup_history_view(&self) {
-        let imp = imp::Window::from_instance(self);
-
         let model = self.history();
 
         model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
@@ -283,11 +280,11 @@ impl Window {
 
         let selection_model = gtk::NoSelection::new(Some(&model));
 
-        imp.history_view.set_model(Some(&selection_model));
+        self.imp().history_view.set_model(Some(&selection_model));
     }
 
     fn setup_recognizer(&self) {
-        let imp = imp::Window::from_instance(self);
+        let imp = self.imp();
 
         imp.recognizer
             .connect_state_notify(clone!(@weak self as obj => move |_| {
@@ -302,21 +299,15 @@ impl Window {
     }
 
     fn setup_visualizer(&self) {
-        let imp = imp::Window::from_instance(self);
-
-        let recorder = imp.recognizer.audio_recorder();
+        let recorder = self.imp().recognizer.audio_recorder();
 
         recorder.connect_peak_notify(clone!(@weak self as obj => move |recorder| {
-            let imp = imp::Window::from_instance(&obj);
-
             let peak = 10_f64.powf(recorder.peak() / 20.0);
-            imp.visualizer.push_peak(peak as f32);
+            obj.imp().visualizer.push_peak(peak as f32);
         }));
 
         recorder.connect_stopped(clone!(@weak self as obj => move |_| {
-            let imp = imp::Window::from_instance(&obj);
-
-            imp.visualizer.clear_peaks();
+            obj.imp().visualizer.clear_peaks();
         }));
     }
 }

@@ -91,8 +91,7 @@ impl Application {
     }
 
     pub fn settings(&self) -> gio::Settings {
-        let imp = imp::Application::from_instance(self);
-        imp.settings.clone()
+        self.imp().settings.clone()
     }
 
     pub fn run(&self) {
@@ -104,8 +103,7 @@ impl Application {
     }
 
     fn main_window(&self) -> Window {
-        let imp = imp::Application::from_instance(self);
-        imp.window.get().unwrap().upgrade().unwrap()
+        self.imp().window.get().unwrap().upgrade().unwrap()
     }
 
     fn show_about_dialog(&self) {
