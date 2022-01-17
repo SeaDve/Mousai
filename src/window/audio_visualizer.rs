@@ -70,10 +70,6 @@ impl AudioVisualizer {
     }
 
     fn on_snapshot(&self, snapshot: &gtk::Snapshot) {
-        if self.peaks().len() as i32 > self.allocated_width() / (2 * GUTTER as i32) {
-            self.peaks_mut().pop_front();
-        }
-
         let max_height = self.height() as f32;
         let v_center = max_height / 2.0;
         let h_center = self.width() as f32 / 2.0;

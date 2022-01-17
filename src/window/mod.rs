@@ -296,6 +296,8 @@ impl Window {
             .connect_listen_done(clone!(@weak self as obj => move |recognizer| {
                 obj.on_listen_done(recognizer);
             }));
+
+        imp.recognizer.set_provider(Box::new(crate::provider::Mock));
     }
 
     fn setup_visualizer(&self) {
