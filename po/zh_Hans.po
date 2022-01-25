@@ -5,13 +5,14 @@
 # Zhou Nan <zhounan@nfschina.com>, 2021.
 # Zhongrui Cao <zhongrui.cao@suse.com>, 2021.
 # WhiredPlanck <fungdaat31@outlook.com>, 2021.
+# yzqzss <yzqzss@othing.xyz>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-09-22 12:37+0000\n"
-"Last-Translator: WhiredPlanck <fungdaat31@outlook.com>\n"
+"PO-Revision-Date: 2022-01-25 20:56+0000\n"
+"Last-Translator: yzqzss <yzqzss@othing.xyz>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -50,7 +51,7 @@ msgstr "Mousai 是一个与 Shazam 类似的听歌识曲软件，只需单击“
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr "注意：此操作使用 audd.io 的 API，所以多次使用需要登陆到他们的网站。"
+msgstr "注意：此操作使用 audd.io 的 API，所以多次使用需要登录到他们的网站。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
@@ -144,7 +145,7 @@ msgid ""
 "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
 "this blank will give you a few trials per day."
 msgstr ""
-"Mousai 使用 audd.io 的 API 来工作，所以需要您登陆到<a href=\"https://dashboard.audd.io/\""
+"Mousai 使用 audd.io 的 API 来工作，所以需要您登录到<a href=\"https://dashboard.audd.io/\""
 ">他们的网站</a>并且获取一个令牌。留空您也有一天几次的试用识别次数。"
 
 #: data/ui/token_dialog.ui:88
