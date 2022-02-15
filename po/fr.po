@@ -5,13 +5,14 @@
 # SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>, 2021.
 # Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
 # Maxime Leroy <lisacintosh@gmail.com>, 2021.
+# Magik Leo <magikleo.yopmail@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-12-19 06:52+0000\n"
-"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
+"PO-Revision-Date: 2022-02-15 00:54+0000\n"
+"Last-Translator: Magik Leo <magikleo.yopmail@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
 "\n"
 "Language: fr\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -57,7 +58,7 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Note: Ceci utilise l'API de audd.io, il est donc nécessaire de s'identifier "
+"Note : Ceci utilise l'API de audd.io, il est donc nécessaire de s'identifier "
 "sur leur site pour obtenir plus d'essais."
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
