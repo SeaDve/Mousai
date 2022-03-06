@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2022-01-01 15:52+0000\n"
+"PO-Revision-Date: 2022-03-06 09:57+0000\n"
 "Last-Translator: MSKF <walkingdeadstudio@outlook.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
 "\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -87,7 +87,7 @@ msgstr ""
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
 msgid "Dave Patrick"
-msgstr ""
+msgstr "دِیو پاتریک"
 
 #: data/ui/shortcuts.ui:10
 msgid "General"
@@ -95,15 +95,15 @@ msgstr "عمومی"
 
 #: data/ui/shortcuts.ui:14
 msgid "Open Menu"
-msgstr ""
+msgstr "گشودن فهرست"
 
 #: data/ui/shortcuts.ui:20
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "نمایش میان‌برها"
 
 #: data/ui/shortcuts.ui:26
 msgid "Quit"
-msgstr ""
+msgstr "ترک"
 
 #: data/ui/shortcuts.ui:33
 msgid "Controls"
@@ -171,7 +171,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:53
 msgid "Main Menu"
-msgstr ""
+msgstr "فهرست اصلی"
 
 #. Mousaing is not a real word, but it is supposed to be a verb
 #: data/ui/main_window.ui:96
@@ -208,7 +208,7 @@ msgstr ""
 
 #: data/ui/main_window.ui:147
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_میان‌برهای صفحه‌کلید"
 
 #: data/ui/main_window.ui:151
 msgid "_About Mousai"
@@ -249,12 +249,12 @@ msgstr ""
 
 #: src/main.py:78
 msgid "Copyright 2021 Dave Patrick"
-msgstr ""
+msgstr "حق رونوشت ۲۰۲۱ دِیو پاتریک"
 
 #. Translators: Replace "translator-credits" with your names, one name per line
 #: src/main.py:80
 msgid "translator-credits"
-msgstr ""
+msgstr "محمدصالح کامیاب"
 
 #: src/main.py:81
 msgid "GitHub"
