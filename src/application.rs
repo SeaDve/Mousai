@@ -86,7 +86,7 @@ impl Application {
             ("flags", &gio::ApplicationFlags::empty()),
             ("resource-base-path", &Some("/io/github/seadve/Mousai/")),
         ])
-        .expect("Application initialization failed...")
+        .expect("Application initialization failed.")
     }
 
     pub fn settings(&self) -> gio::Settings {

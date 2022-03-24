@@ -3,7 +3,7 @@ project(
   'rust',
   version: '0.1.0',
   license: 'GPL-3.0-or-later',
-  meson_version: '>= 0.50',
+  meson_version: '>= 0.59',
 )
 
 i18n = import('i18n')
@@ -24,13 +24,8 @@ glib_compile_schemas = find_program('glib-compile-schemas', required: true)
 desktop_file_validate = find_program('desktop-file-validate', required: false)
 appstream_util = find_program('appstream-util', required: false)
 cargo = find_program('cargo', required: true)
-cargo_script = find_program('build-aux/cargo.py')
 
 version = meson.project_version()
-version_array = version.split('.')
-major_version = version_array[0].to_int()
-minor_version = version_array[1].to_int()
-version_micro = version_array[2].to_int()
 
 prefix = get_option('prefix')
 bindir = prefix / get_option('bindir')
@@ -39,7 +34,7 @@ localedir = prefix / get_option('localedir')
 datadir = prefix / get_option('datadir')
 pkgdatadir = datadir / meson.project_name()
 iconsdir = datadir / 'icons'
-podir = meson.source_root() / 'po'
+podir = meson.project_source_root() / 'po'
 gettext_package = meson.project_name()
 
 if get_option('profile') == 'development'
@@ -59,8 +54,8 @@ endif
 
 meson.add_dist_script(
   'build-aux/dist-vendor.sh',
-  meson.build_root() / 'meson-dist' / meson.project_name() + '-' + version,
-  meson.source_root()
+  meson.project_build_root() / 'meson-dist' / meson.project_name() + '-' + version,
+  meson.project_source_root()
 )
 
 if get_option('profile') == 'development'
@@ -69,13 +64,13 @@ if get_option('profile') == 'development'
   run_command('cp', '-f', 'hooks/pre-commit.hook', '.git/hooks/pre-commit')
 endif
 
-cargo_sources = files(
-  'Cargo.toml',
-  'Cargo.lock',
-)
-
 subdir('data')
 subdir('po')
 subdir('src')
 
-meson.add_install_script('build-aux/meson_post_install.py')
+gnome.post_install(
+  gtk_update_icon_cache: true,
+  glib_compile_schemas: true,
+  update_desktop_database: true,
+)
+
