@@ -2,6 +2,21 @@
 <interface>
   <menu id="menu">
     <section>
+      <submenu>
+        <attribute name="label" translatable="yes">_Preferred Audio Source</attribute>
+        <item>
+          <attribute name="label" translatable="yes">Microphone</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">microphone</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Desktop Audio</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">desktop-audio</attribute>
+        </item>
+      </submenu>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
@@ -47,7 +62,8 @@
                       <object class="GtkGridView" id="history_view">
                         <property name="factory">
                           <object class="GtkBuilderListItemFactory">
-                            <property name="bytes"><![CDATA[
+                            <property name="bytes">
+                              <![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="GtkListItem">
@@ -61,7 +77,8 @@
     </property>
   </template>
 </interface>
-                         ]]></property>
+                         ]]>
+                            </property>
                           </object>
                         </property>
                         <style>

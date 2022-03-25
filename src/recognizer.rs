@@ -1,6 +1,7 @@
 use gst_pbutils::prelude::*;
 use gtk::{
     glib::{self, clone},
+    prelude::*,
     subclass::prelude::*,
 };
 
@@ -13,6 +14,7 @@ use crate::{
     core::AudioRecorder,
     model::Song,
     provider::{AudD, Provider},
+    Application,
 };
 
 #[derive(Debug, Clone, Copy, glib::Enum, PartialEq)]
@@ -148,6 +150,17 @@ impl Recognizer {
 
         log::info!("Saving temporary file at `{}`", tmp_path.display());
 
+        match default_device_name() {
+            Ok(ref device_name) => {
+                log::info!("Audio recorder setup with device name `{}`", device_name);
+                imp.audio_recorder.set_device_name(Some(device_name));
+            }
+            Err(err) => {
+                log::warn!("Failed to get default source name: {:?}", err);
+                imp.audio_recorder.set_device_name(None);
+            }
+        }
+
         imp.audio_recorder.start(&tmp_path)?;
         self.set_state(RecognizerState::Listening);
 
@@ -222,4 +235,24 @@ impl Default for Recognizer {
     fn default() -> Self {
         Self::new()
     }
+}
+
+fn default_device_name() -> anyhow::Result<String> {
+    let settings = Application::default().settings();
+    let server_info = pulsectl::controllers::SourceController::create()?.get_server_info()?;
+
+    let device_name = match settings.string("preferred-audio-source").as_str() {
+        "microphone" => server_info.default_source_name,
+        "desktop-audio" => server_info
+            .default_sink_name
+            .map(|sink_name| format!("{sink_name}.monitor")),
+        unknown_device_name => {
+            log::warn!(
+                "Unknown device name `{unknown_device_name}`. Used default_source_name instead."
+            );
+            server_info.default_source_name
+        }
+    };
+
+    device_name.ok_or_else(|| anyhow::anyhow!("Default audio source name not found"))
 }

@@ -21,5 +21,14 @@
       <summary>Contains recently recognized songs</summary>
       <description></description>
     </key>
+    <key name="preferred-audio-source" type="s">
+      <choices>
+        <choice value="microphone"/>
+        <choice value="desktop-audio"/>
+      </choices>
+      <default>"microphone"</default>
+      <summary>Preferred audio source to use in recording audio</summary>
+      <description></description>
+    </key>
   </schema>
 </schemalist>

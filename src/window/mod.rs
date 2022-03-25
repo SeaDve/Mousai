@@ -71,6 +71,11 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
+            let preferred_audio_source_action = Application::default()
+                .settings()
+                .create_action("preferred-audio-source");
+            obj.add_action(&preferred_audio_source_action);
+
             if PROFILE == "Devel" {
                 obj.add_css_class("devel");
             }

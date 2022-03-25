@@ -20,6 +20,7 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct AudioRecorder {
         pub peak: Cell<f64>,
+        pub device_name: RefCell<Option<String>>,
 
         pub recording: RefCell<Option<AudioRecording>>,
         pub pipeline: RefCell<Option<gst::Pipeline>>,
@@ -43,22 +44,48 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecDouble::new(
-                    "peak",
-                    "Peak",
-                    "Current volume peak while recording",
-                    f64::MIN,
-                    f64::MAX,
-                    0.0,
-                    glib::ParamFlags::READABLE,
-                )]
+                vec![
+                    glib::ParamSpecDouble::new(
+                        "peak",
+                        "Peak",
+                        "Current volume peak while recording",
+                        f64::MIN,
+                        f64::MAX,
+                        0.0,
+                        glib::ParamFlags::READABLE,
+                    ),
+                    glib::ParamSpecString::new(
+                        "device-name",
+                        "Device Name",
+                        "The device name pulsesrc will use",
+                        None,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                ]
             });
             PROPERTIES.as_ref()
+        }
+
+        fn set_property(
+            &self,
+            obj: &Self::Type,
+            _id: usize,
+            value: &glib::Value,
+            pspec: &glib::ParamSpec,
+        ) {
+            match pspec.name() {
+                "device-name" => {
+                    let device_name = value.get().unwrap();
+                    obj.set_device_name(device_name);
+                }
+                _ => unimplemented!(),
+            }
         }
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "peak" => obj.peak().to_value(),
+                "device-name" => obj.device_name().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -93,6 +120,18 @@ impl AudioRecorder {
         self.imp().peak.get()
     }
 
+    pub fn device_name(&self) -> Option<String> {
+        self.imp().device_name.borrow().clone()
+    }
+
+    pub fn set_device_name(&self, device_name: Option<&str>) {
+        self.imp()
+            .device_name
+            .replace(device_name.map(|device_name| device_name.to_string()));
+
+        self.notify("device-name");
+    }
+
     pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
@@ -102,7 +141,7 @@ impl AudioRecorder {
 
     pub fn start(&self, path: impl AsRef<Path>) -> anyhow::Result<()> {
         let new_recording = AudioRecording::new(path.as_ref());
-        let pipeline = Self::default_pipeline(&new_recording.path())?;
+        let pipeline = default_pipeline(&new_recording.path(), self.device_name().as_deref())?;
 
         let bus = pipeline.bus().unwrap();
         bus.add_watch_local(
@@ -161,64 +200,6 @@ impl AudioRecorder {
 
     fn pipeline(&self) -> Option<gst::Pipeline> {
         self.imp().pipeline.borrow().as_ref().cloned()
-    }
-
-    fn default_audio_source_name() -> anyhow::Result<String> {
-        let server_info = pulsectl::controllers::SourceController::create()?.get_server_info()?;
-
-        server_info
-            .default_source_name
-            .ok_or_else(|| anyhow::anyhow!("Default audio source name not found"))
-    }
-
-    fn default_encodebin_profile() -> gst_pbutils::EncodingContainerProfile {
-        let audio_caps = gst::Caps::new_simple("audio/x-opus", &[]);
-        let encoding_profile = gst_pbutils::EncodingAudioProfile::builder(&audio_caps)
-            .presence(1)
-            .build();
-
-        let container_caps = gst::Caps::new_simple("application/ogg", &[]);
-        gst_pbutils::EncodingContainerProfile::builder(&container_caps)
-            .add_profile(&encoding_profile)
-            .build()
-    }
-
-    fn default_pipeline(recording_path: &Path) -> anyhow::Result<gst::Pipeline> {
-        let pipeline = gst::Pipeline::new(None);
-
-        let pulsesrc = gst::ElementFactory::make("pulsesrc", None)?;
-        let audioconvert = gst::ElementFactory::make("audioconvert", None)?;
-        let level = gst::ElementFactory::make("level", None)?;
-        let encodebin = gst::ElementFactory::make("encodebin", None)?;
-        let filesink = gst::ElementFactory::make("filesink", None)?;
-
-        match Self::default_audio_source_name() {
-            Ok(ref audio_source_name) => {
-                log::info!(
-                    "Pipeline setup with pulsesrc device name `{}`",
-                    audio_source_name
-                );
-                pulsesrc.set_property("device", audio_source_name);
-            }
-            Err(err) => log::warn!("Failed to get default source name: {:?}", err),
-        }
-
-        encodebin.set_property("profile", &Self::default_encodebin_profile());
-        filesink.set_property("location", recording_path.to_str().unwrap());
-
-        let elements = [&pulsesrc, &audioconvert, &level, &encodebin, &filesink];
-        pipeline.add_many(&elements)?;
-
-        pulsesrc.link(&audioconvert)?;
-        audioconvert.link_filtered(&level, &gst::Caps::builder("audio/x-raw").build())?;
-        level.link(&encodebin)?;
-        encodebin.link(&filesink)?;
-
-        for e in elements {
-            e.sync_state_with_parent()?;
-        }
-
-        Ok(pipeline)
     }
 
     fn cleanup_and_take_recording(&self) -> Option<AudioRecording> {
@@ -307,4 +288,47 @@ impl Default for AudioRecorder {
     fn default() -> Self {
         Self::new()
     }
+}
+
+fn default_pipeline(
+    recording_path: &Path,
+    device_name: Option<&str>,
+) -> anyhow::Result<gst::Pipeline> {
+    let pipeline = gst::Pipeline::new(None);
+
+    let pulsesrc = gst::ElementFactory::make("pulsesrc", None)?;
+    let audioconvert = gst::ElementFactory::make("audioconvert", None)?;
+    let level = gst::ElementFactory::make("level", None)?;
+    let encodebin = gst::ElementFactory::make("encodebin", None)?;
+    let filesink = gst::ElementFactory::make("filesink", None)?;
+
+    let encodebin_profile = {
+        let audio_caps = gst::Caps::new_simple("audio/x-opus", &[]);
+        let encoding_profile = gst_pbutils::EncodingAudioProfile::builder(&audio_caps)
+            .presence(1)
+            .build();
+
+        let container_caps = gst::Caps::new_simple("application/ogg", &[]);
+        gst_pbutils::EncodingContainerProfile::builder(&container_caps)
+            .add_profile(&encoding_profile)
+            .build()
+    };
+
+    pulsesrc.set_property("device", device_name);
+    encodebin.set_property("profile", encodebin_profile);
+    filesink.set_property("location", recording_path.to_str().unwrap());
+
+    let elements = [&pulsesrc, &audioconvert, &level, &encodebin, &filesink];
+    pipeline.add_many(&elements)?;
+
+    pulsesrc.link(&audioconvert)?;
+    audioconvert.link_filtered(&level, &gst::Caps::builder("audio/x-raw").build())?;
+    level.link(&encodebin)?;
+    encodebin.link(&filesink)?;
+
+    for e in elements {
+        e.sync_state_with_parent()?;
+    }
+
+    Ok(pipeline)
 }
