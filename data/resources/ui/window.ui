@@ -122,8 +122,7 @@
             </child>
             <child>
               <object class="AdwStatusPage" id="recognizing_page">
-                <property name="icon-name">microphone-sensitivity-muted-symbolic</property>
-                <property name="title" translatable="yes">Recognizing</property>
+                <property name="title" translatable="yes">Recognizing…</property>
               </object>
             </child>
           </object>

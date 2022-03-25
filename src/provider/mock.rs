@@ -1,4 +1,5 @@
 use async_trait::async_trait;
+use gtk::glib;
 use rand::Rng;
 
 use std::time::Duration;
@@ -30,10 +31,12 @@ impl Provider for Mock {
             .map(char::from)
             .collect();
 
+        glib::timeout_future(Duration::from_secs(1)).await;
+
         Ok(Song::new(&rand_title, &rand_artist, &rand_link))
     }
 
     fn listen_duration(&self) -> Duration {
-        Duration::from_secs(10000)
+        Duration::from_secs(3)
     }
 }
