@@ -308,7 +308,7 @@ impl Window {
 
         recorder.connect_peak_notify(clone!(@weak self as obj => move |recorder| {
             let peak = 10_f64.powf(recorder.peak() / 20.0);
-            obj.imp().visualizer.push_peak(peak as f32);
+            obj.imp().visualizer.push_peak(peak as f64);
         }));
 
         recorder.connect_stopped(clone!(@weak self as obj => move |_| {

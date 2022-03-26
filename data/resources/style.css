@@ -1,3 +1,7 @@
+audiovisualizer {
+  color: @accent_color;
+}
+
 .history-view {
   padding: 6px;
 }

@@ -1,20 +1,20 @@
 // Based on code from GNOME Sound Recorder GPLv3
-// Modified to be bidirectional and use snapshots instead of cairo
+// Modified to be bidirectional
 // See https://gitlab.gnome.org/GNOME/gnome-sound-recorder/-/blob/master/src/waveform.js
 
-use gtk::{gdk, glib, graphene, prelude::*, subclass::prelude::*};
+use gtk::{cairo, glib, graphene, prelude::*, subclass::prelude::*};
 
 use std::{cell::RefCell, collections::VecDeque};
 
-const GUTTER: f32 = 6.0;
-const WIDTH: f32 = 2.0;
+const GUTTER: f64 = 9.0;
+const LINE_WIDTH: f64 = 3.0;
 
 mod imp {
     use super::*;
 
     #[derive(Debug, Default)]
     pub struct AudioVisualizer {
-        pub peaks: RefCell<VecDeque<f32>>,
+        pub peaks: RefCell<VecDeque<f64>>,
     }
 
     #[glib::object_subclass]
@@ -22,6 +22,10 @@ mod imp {
         const NAME: &'static str = "MsaiAudioVisualizer";
         type Type = super::AudioVisualizer;
         type ParentType = gtk::Widget;
+
+        fn class_init(klass: &mut Self::Class) {
+            klass.set_css_name("audiovisualizer");
+        }
     }
 
     impl ObjectImpl for AudioVisualizer {}
@@ -43,7 +47,7 @@ impl AudioVisualizer {
         glib::Object::new(&[]).expect("Failed to create AudioVisualizer")
     }
 
-    pub fn push_peak(&self, peak: f32) {
+    pub fn push_peak(&self, peak: f64) {
         let mut peaks = self.peaks_mut();
 
         if peaks.len() as i32 > self.allocated_width() / (2 * GUTTER as i32) {
@@ -61,43 +65,55 @@ impl AudioVisualizer {
         self.queue_draw();
     }
 
-    fn peaks(&self) -> std::cell::Ref<VecDeque<f32>> {
+    fn peaks(&self) -> std::cell::Ref<VecDeque<f64>> {
         self.imp().peaks.borrow()
     }
 
-    fn peaks_mut(&self) -> std::cell::RefMut<VecDeque<f32>> {
+    fn peaks_mut(&self) -> std::cell::RefMut<VecDeque<f64>> {
         self.imp().peaks.borrow_mut()
     }
 
     fn on_snapshot(&self, snapshot: &gtk::Snapshot) {
-        let max_height = self.height() as f32;
-        let v_center = max_height / 2.0;
-        let h_center = self.width() as f32 / 2.0;
+        let width = self.width();
+        let height = self.height();
+        let color = self.style_context().color();
 
-        let mut pointer_a = h_center;
-        let mut pointer_b = h_center;
+        let bounds = graphene::Rect::new(0.0, 0.0, width as f32, height as f32);
+        let ctx = snapshot.append_cairo(&bounds);
+        ctx.set_line_cap(cairo::LineCap::Round);
+        ctx.set_line_width(LINE_WIDTH);
+
+        let max_height = height as f64;
+        let v_center = max_height / 2.0;
+        let h_center = width as f64 / 2.0;
 
         let peaks = self.peaks();
         let peaks_len = peaks.len();
 
+        let mut pointer_a = h_center;
+        let mut pointer_b = h_center;
+
         for (index, peak) in peaks.iter().rev().enumerate() {
-            // This makes both sides decrease logarithmically.
-            // Starts at index 2 because log0 is undefined and log1 is 0.
-            // Multiply by 12.0 to compensate on log.
-            let peak_max_height = max_height.log(index as f32 + 2.0) * peak * 18.0;
-
-            let top_point = v_center + peak_max_height;
-            let this_height = -2.0 * peak_max_height;
-
-            let rect_a = graphene::Rect::new(pointer_a, top_point, WIDTH, this_height);
-            let rect_b = graphene::Rect::new(pointer_b, top_point, WIDTH, this_height);
-
             // Add feathering on both sides
-            let alpha = 1.0 - (index as f32 / peaks_len as f32);
-            let color = gdk::RGBA::new(0.1, 0.45, 0.8, alpha);
+            let alpha = 1.0 - (index as f64 / peaks_len as f64);
+            ctx.set_source_rgba(
+                color.red() as f64,
+                color.green() as f64,
+                color.blue() as f64,
+                alpha,
+            );
 
-            snapshot.append_color(&color, &rect_a);
-            snapshot.append_color(&color, &rect_b);
+            // Creates a logarithmic decrease
+            // Starts at index 2 because log0 is undefined and log1 is 0
+            let this_max_height = max_height.log(index as f64 + 2.0) * 18.0;
+
+            ctx.move_to(pointer_a, v_center + peak * this_max_height);
+            ctx.line_to(pointer_a, v_center - peak * this_max_height);
+            ctx.stroke().unwrap();
+
+            ctx.move_to(pointer_b, v_center + peak * this_max_height);
+            ctx.line_to(pointer_b, v_center - peak * this_max_height);
+            ctx.stroke().unwrap();
 
             pointer_a += GUTTER;
             pointer_b -= GUTTER;
