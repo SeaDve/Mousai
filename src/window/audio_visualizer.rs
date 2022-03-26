@@ -93,30 +93,31 @@ impl AudioVisualizer {
         let mut pointer_a = h_center;
         let mut pointer_b = h_center;
 
-        for (index, peak) in peaks.iter().rev().enumerate() {
-            // Add feathering on both sides
-            let alpha = 1.0 - (index as f64 / peaks_len as f64);
+        for (index, peak) in peaks.iter().enumerate().rev() {
             ctx.set_source_rgba(
                 color.red() as f64,
                 color.green() as f64,
                 color.blue() as f64,
-                alpha,
+                index as f64 / peaks_len as f64, // Adds feathering on both sides
             );
 
-            // Creates a logarithmic decrease
-            // Starts at index 2 because log0 is undefined and log1 is 0
-            let this_max_height = max_height.log(index as f64 + 2.0) * 18.0;
+            let this_peak_max_height =
+                ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
 
-            ctx.move_to(pointer_a, v_center + peak * this_max_height);
-            ctx.line_to(pointer_a, v_center - peak * this_max_height);
+            ctx.move_to(pointer_a, v_center + peak * this_peak_max_height);
+            ctx.line_to(pointer_a, v_center - peak * this_peak_max_height);
             ctx.stroke().unwrap();
 
-            ctx.move_to(pointer_b, v_center + peak * this_max_height);
-            ctx.line_to(pointer_b, v_center - peak * this_max_height);
+            ctx.move_to(pointer_b, v_center + peak * this_peak_max_height);
+            ctx.line_to(pointer_b, v_center - peak * this_peak_max_height);
             ctx.stroke().unwrap();
 
             pointer_a += GUTTER;
             pointer_b -= GUTTER;
         }
     }
+}
+
+fn ease_in_quad(x: f64) -> f64 {
+    x * x
 }
