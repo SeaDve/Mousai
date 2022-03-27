@@ -8,6 +8,20 @@
     </property>
     <child>
       <object class="GtkHeaderBar">
+        <property name="title-widget">
+          <object class="AdwWindowTitle">
+            <binding name="title">
+              <lookup name="title">
+                <lookup name="song">MsaiSongPage</lookup>
+              </lookup>
+            </binding>
+            <binding name="subtitle">
+              <lookup name="artist">
+                <lookup name="song">MsaiSongPage</lookup>
+              </lookup>
+            </binding>
+          </object>
+        </property>
         <child>
           <object class="GtkButton">
             <property name="icon-name">go-previous-symbolic</property>
