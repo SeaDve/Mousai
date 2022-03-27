@@ -1,4 +1,7 @@
-use gtk::gio::{self, prelude::*};
+use gtk::{
+    gio::{self, prelude::*},
+    glib,
+};
 
 use std::path::Path;
 
@@ -15,7 +18,7 @@ macro_rules! spawn {
     };
 }
 
-pub async fn file_to_base64(path: impl AsRef<Path>) -> anyhow::Result<String> {
+pub async fn file_to_base64(path: impl AsRef<Path>) -> Result<String, glib::Error> {
     let file = gio::File::for_path(path.as_ref());
     let (contents, _) = file.load_contents_future().await?;
     Ok(base64::encode(contents))

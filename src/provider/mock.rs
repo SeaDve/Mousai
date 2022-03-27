@@ -4,7 +4,7 @@ use rand::Rng;
 
 use std::time::Duration;
 
-use super::Provider;
+use super::{Provider, ProviderError};
 use crate::{core::AudioRecording, model::Song};
 
 #[derive(Debug)]
@@ -12,7 +12,7 @@ pub struct Mock;
 
 #[async_trait(?Send)]
 impl Provider for Mock {
-    async fn recognize(&self, _: &AudioRecording) -> anyhow::Result<Song> {
+    async fn recognize(&self, _: &AudioRecording) -> Result<Song, ProviderError> {
         let rand_title: String = rand::thread_rng()
             .sample_iter(&rand::distributions::Alphanumeric)
             .take(30)
