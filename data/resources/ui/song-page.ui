@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiSongPage" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBoxLayout">
+        <property name="orientation">vertical</property>
+      </object>
+    </property>
+    <child>
+      <object class="GtkHeaderBar">
+        <child>
+          <object class="GtkButton">
+            <property name="icon-name">go-previous-symbolic</property>
+            <property name="action-name">win.navigate-to-main-page</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox">
+            <child>
+              <object class="GtkFrame">
+                <property name="child">
+                  <object class="GtkImage">
+                    <property name="pixel-size">180</property>
+                    <property name="file">/home/dave/p.jpg</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">3</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="xalign">0.5</property>
+                    <property name="ellipsize">end</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="lines">2</property>
+                    <binding name="label">
+                      <lookup name="title">
+                        <lookup name="song">MsaiSongPage</lookup>
+                      </lookup>
+                    </binding>
+                    <style>
+                      <class name="heading"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="xalign">0.5</property>
+                    <property name="ellipsize">end</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="lines">2</property>
+                    <binding name="label">
+                      <lookup name="artist">
+                        <lookup name="song">MsaiSongPage</lookup>
+                      </lookup>
+                    </binding>
+                    <style>
+                      <class name="caption"/>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox"></object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <menu id="menu">
+    <section>
+      <submenu>
+        <attribute name="label" translatable="yes">_Preferred Audio Source</attribute>
+        <item>
+          <attribute name="label" translatable="yes">Microphone</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">microphone</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Desktop Audio</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">desktop-audio</attribute>
+        </item>
+      </submenu>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_About Mousai</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+  <template class="MsaiMainPage" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBoxLayout">
+        <property name="orientation">vertical</property>
+      </object>
+    </property>
+    <child>
+      <object class="GtkHeaderBar">
+        <child>
+          <object class="GtkButton" id="listen_button">
+            <property name="action-name">main-page.toggle-listen</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkMenuButton" id="appmenu_button">
+            <property name="icon-name">open-menu-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Main Menu</property>
+            <property name="menu-model">menu</property>
+            <property name="primary">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="vexpand">True</property>
+        <property name="transition-type">crossfade</property>
+        <child>
+          <object class="GtkScrolledWindow" id="main_page">
+            <property name="hscrollbar-policy">never</property>
+            <property name="child">
+              <object class="AdwClampScrollable">
+                <property name="maximum-size">1000</property>
+                <property name="child">
+                  <object class="GtkGridView" id="history_view">
+                    <property name="single-click-activate">True</property>
+                    <property name="factory">
+                      <object class="GtkBuilderListItemFactory">
+                        <property name="bytes">
+                          <![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="GtkListItem">
+    <property name="child">
+      <object class="MsaiSongCell">
+        <binding name="song">
+          <lookup name="item">GtkListItem</lookup>
+        </binding>
+      </object>
+    </property>
+  </template>
+</interface>
+                        ]]>
+                        </property>
+                      </object>
+                    </property>
+                    <style>
+                      <class name="history-view"/>
+                    </style>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage" id="empty_page">
+            <property name="icon-name">emblem-music-symbolic</property>
+            <property name="title" translatable="yes">Start Identifying Music!</property>
+            <property name="description" translatable="yes">Click the listen button to start.</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="listening_page">
+            <property name="margin-top">24</property>
+            <property name="margin-bottom">24</property>
+            <property name="valign">center</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="MsaiAudioVisualizer" id="visualizer">
+                <property name="width-request">300</property>
+                <property name="height-request">240</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Listening…</property>
+                <style>
+                  <class name="title-1"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage" id="recognizing_page">
+            <property name="title" translatable="yes">Recognizing…</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

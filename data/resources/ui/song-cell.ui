@@ -2,78 +2,75 @@
 <interface>
   <template class="MsaiSongCell" parent="GtkWidget">
     <property name="layout-manager">
-      <object class="GtkBinLayout"/>
+      <object class="GtkBoxLayout">
+        <property name="orientation">vertical</property>
+        <property name="spacing">6</property>
+      </object>
     </property>
+    <child>
+      <object class="GtkFrame">
+        <property name="halign">center</property>
+        <property name="child">
+          <object class="GtkOverlay">
+            <property name="child">
+              <object class="GtkImage">
+                <property name="pixel-size">180</property>
+                <property name="file">/home/dave/p.jpg</property>
+              </object>
+            </property>
+            <child type="overlay">
+              <object class="GtkButton">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="icon-name">media-playback-start-symbolic</property>
+                <style>
+                  <class name="playback-button"/>
+                  <class name="osd"/>
+                  <class name="circular"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </child>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
+        <property name="spacing">3</property>
         <child>
-          <object class="GtkFrame">
-            <property name="halign">center</property>
-            <property name="child">
-              <object class="GtkOverlay">
-                <property name="child">
-                  <object class="GtkImage">
-                    <property name="pixel-size">180</property>
-                    <property name="file">/home/dave/p.jpg</property>
-                  </object>
-                </property>
-                <child type="overlay">
-                  <object class="GtkButton">
-                    <property name="halign">center</property>
-                    <property name="valign">center</property>
-                    <property name="icon-name">media-playback-start-symbolic</property>
-                    <style>
-                      <class name="playback-button"/>
-                      <class name="osd"/>
-                      <class name="circular"/>
-                    </style>
-                  </object>
-                </child>
-              </object>
-            </property>
+          <object class="GtkLabel">
+            <property name="xalign">0.5</property>
+            <property name="ellipsize">end</property>
+            <property name="wrap">True</property>
+            <property name="wrap-mode">word</property>
+            <property name="lines">2</property>
+            <binding name="label">
+              <lookup name="title">
+                <lookup name="song">MsaiSongCell</lookup>
+              </lookup>
+            </binding>
+            <style>
+              <class name="heading"/>
+            </style>
           </object>
         </child>
         <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="spacing">3</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="xalign">0.5</property>
-                <property name="ellipsize">end</property>
-                <property name="wrap">True</property>
-                <property name="wrap-mode">word</property>
-                <property name="lines">2</property>
-                <binding name="label">
-                  <lookup name="title">
-                    <lookup name="song">MsaiSongCell</lookup>
-                  </lookup>
-                </binding>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="xalign">0.5</property>
-                <property name="ellipsize">end</property>
-                <property name="wrap">True</property>
-                <property name="wrap-mode">word</property>
-                <property name="lines">2</property>
-                <binding name="label">
-                  <lookup name="artist">
-                    <lookup name="song">MsaiSongCell</lookup>
-                  </lookup>
-                </binding>
-                <style>
-                  <class name="caption"/>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+          <object class="GtkLabel">
+            <property name="xalign">0.5</property>
+            <property name="ellipsize">end</property>
+            <property name="wrap">True</property>
+            <property name="wrap-mode">word</property>
+            <property name="lines">2</property>
+            <binding name="label">
+              <lookup name="artist">
+                <lookup name="song">MsaiSongCell</lookup>
+              </lookup>
+            </binding>
+            <style>
+              <class name="caption"/>
+              <class name="dim-label"/>
+            </style>
           </object>
         </child>
       </object>
