@@ -78,6 +78,8 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
+            obj.add_css_class("view");
+
             match obj.load_history() {
                 Ok(history) => self.history.set(history).unwrap(),
                 Err(err) => {
