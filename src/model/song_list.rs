@@ -5,6 +5,8 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
+use crate::core::DateTime;
+
 use super::{Song, SongId};
 
 mod imp {
@@ -53,23 +55,27 @@ impl SongList {
         glib::Object::new(&[]).expect("Failed to create SongList.")
     }
 
-    /// If an equivalent [`Song`] already exists in the list, it returns false leaving the original
-    /// value in the list. Otherwise, it inserts the new [`Song`] and returns true.
+    /// If an equivalent [`Song`] already exists in the list, it returns false updating the original
+    /// value in the list. Otherwise, it inserts the new [`Song`] at the end and returns true.
+    ///
+    /// Update the [`Song`]'s `last-heard` value when the song already exist.
     ///
     /// The equivalence of the [`Song`] depends on their [`SongId`]
     pub fn append(&self, song: Song) -> bool {
-        let is_appended = self
-            .imp()
-            .list
-            .borrow_mut()
-            .insert(song.id(), song)
-            .is_none();
+        let song_clone = song.clone();
 
-        if is_appended {
-            self.items_changed(self.n_items() - 1, 0, 1);
+        let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
+
+        if last_value.is_some() {
+            // FIXME handle this outside this function
+            song_clone.set_last_heard(DateTime::now());
+            self.items_changed(position as u32, 1, 1);
+            return false;
         }
 
-        is_appended
+        self.items_changed(position as u32, 0, 1);
+
+        true
     }
 
     /// It tries to append all [`Song`]s. When any of the song already exist, it returns false
