@@ -4,13 +4,16 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::cell::RefCell;
 
 use super::SongId;
+use crate::core::DateTime;
 
 mod imp {
     use super::*;
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, Serialize, Deserialize)]
+    #[serde(default)]
     pub struct SongInner {
+        pub last_heard: DateTime,
         pub title: String,
         pub artist: String,
         pub info_link: String,
@@ -32,6 +35,13 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
+                    glib::ParamSpecBoxed::new(
+                        "last-heard",
+                        "Last Heard",
+                        "The DateTime when this was last heard",
+                        DateTime::static_type(),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
                     glib::ParamSpecString::new(
                         "title",
                         "Title",
@@ -41,7 +51,7 @@ mod imp {
                     ),
                     glib::ParamSpecString::new(
                         "artist",
-                        "Artish",
+                        "Artist",
                         "Artist of the song",
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
@@ -73,6 +83,10 @@ mod imp {
             pspec: &glib::ParamSpec,
         ) {
             match pspec.name() {
+                "last-heard" => {
+                    let last_heard = value.get().unwrap();
+                    obj.set_last_heard(last_heard);
+                }
                 "title" => {
                     let title = value.get().unwrap();
                     obj.set_title(title);
@@ -95,6 +109,7 @@ mod imp {
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
+                "last-heard" => obj.last_heard().to_value(),
                 "title" => obj.title().to_value(),
                 "artist" => obj.artist().to_value(),
                 "info-link" => obj.info_link().to_value(),
@@ -111,14 +126,26 @@ glib::wrapper! {
 
 impl Song {
     /// The parameter `info_link` must be unique to each [`Song`] so that [`SongList`] will
-    /// treat them different
+    /// treat them different.
+    ///
+    /// The last heard will be the `DateTime` when this is constructed
     pub fn new(title: &str, artist: &str, info_link: &str) -> Self {
-        glib::Object::new(&[
-            ("title", &title.to_string()),
-            ("artist", &artist.to_string()),
-            ("info-link", &info_link.to_string()),
-        ])
-        .expect("Failed to create Song.")
+        glib::Object::builder()
+            .property("last-heard", DateTime::now())
+            .property("title", title)
+            .property("artist", artist)
+            .property("info-link", info_link)
+            .build()
+            .expect("Failed to create Song.")
+    }
+
+    pub fn set_last_heard(&self, last_heard: DateTime) {
+        self.imp().inner.borrow_mut().last_heard = last_heard;
+        self.notify("last-heard");
+    }
+
+    pub fn last_heard(&self) -> DateTime {
+        self.imp().inner.borrow().last_heard
     }
 
     pub fn set_title(&self, title: &str) {

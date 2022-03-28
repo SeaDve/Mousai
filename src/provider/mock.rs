@@ -34,10 +34,16 @@ impl Provider for Mock {
 
         glib::timeout_future(Duration::from_secs(1)).await;
 
+        log::info!(
+            "Recognized Song: {} - {}",
+            rand_song.artist(),
+            rand_song.title()
+        );
+
         Ok(rand_song)
     }
 
     fn listen_duration(&self) -> Duration {
-        Duration::from_secs(3)
+        Duration::from_secs(1)
     }
 }

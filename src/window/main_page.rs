@@ -254,13 +254,20 @@ impl MainPage {
     }
 
     fn setup_history_view(&self) {
-        let model = self.history();
+        let history = self.history();
 
-        model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
+        history.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             obj.update_stack();
         }));
 
-        let selection_model = gtk::NoSelection::new(Some(&model));
+        let sorter = gtk::CustomSorter::new(move |obj1, obj2| {
+            let song_1 = obj1.downcast_ref::<Song>().unwrap();
+            let song_2 = obj2.downcast_ref::<Song>().unwrap();
+            song_2.last_heard().cmp(&song_1.last_heard()).into()
+        });
+        let sort_model = gtk::SortListModel::new(Some(&history), Some(&sorter));
+
+        let selection_model = gtk::NoSelection::new(Some(&sort_model));
 
         let history_view = self.imp().history_view.get();
         history_view.set_model(Some(&selection_model));
