@@ -237,6 +237,7 @@ impl Default for Recognizer {
     }
 }
 
+// FIXME handle this inside `audio_recorder`
 fn default_device_name() -> anyhow::Result<String> {
     let settings = Application::default().settings();
     let server_info = pulsectl::controllers::SourceController::create()?.get_server_info()?;

@@ -56,6 +56,7 @@
       </object>
     </child>
     <child>
+      <!-- FIXME Inline this in the headerbar -->
       <object class="GtkSearchBar">
         <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create"/>
         <property name="child">
