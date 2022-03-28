@@ -10,20 +10,13 @@ use std::time::Duration;
 use crate::{core::AudioRecording, model::Song};
 
 // TODO: more generic error, so it won't have to be an enum for each provider
-#[derive(Debug)]
+#[derive(Debug, thiserror::Error)]
 pub enum ProviderError {
+    #[error("AudD Provider Error: {0}")]
     AudD(aud_d::Error),
+    #[error("Other Provider Error: {0}")]
+    Other(String),
 }
-
-impl std::fmt::Display for ProviderError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::AudD(err) => std::fmt::Display::fmt(err, f),
-        }
-    }
-}
-
-impl std::error::Error for ProviderError {}
 
 #[async_trait(?Send)]
 pub trait Provider: std::fmt::Debug {
