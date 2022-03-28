@@ -27,6 +27,11 @@ impl Provider for Mock {
                 "https://lis.tn/ScarsToYourBeautiful",
             ),
             Song::new("Beautiful Sunday", "Daniel Boone", "https://lis.tn/YTuccJ"),
+            Song::new(
+                "The Night We Met",
+                "Lord Huron",
+                "https://lis.tn/TheNightWeMet",
+            ),
         ]
         .choose(&mut rand::thread_rng())
         .cloned()
