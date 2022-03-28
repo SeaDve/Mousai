@@ -27,6 +27,8 @@ mod imp {
         #[template_child]
         pub listen_button: TemplateChild<gtk::Button>,
         #[template_child]
+        pub search_entry: TemplateChild<gtk::SearchEntry>,
+        #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub main_page: TemplateChild<gtk::ScrolledWindow>,
@@ -254,22 +256,37 @@ impl MainPage {
     }
 
     fn setup_history_view(&self) {
+        let imp = self.imp();
         let history = self.history();
 
         history.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             obj.update_stack();
         }));
 
-        let sorter = gtk::CustomSorter::new(move |obj1, obj2| {
-            let song_1 = obj1.downcast_ref::<Song>().unwrap();
-            let song_2 = obj2.downcast_ref::<Song>().unwrap();
+        let filter = gtk::CustomFilter::new(
+            clone!(@weak self as obj => @default-return false, move |item| {
+                let search_text = obj.imp().search_entry.text().to_lowercase();
+                let song = item.downcast_ref::<Song>().unwrap();
+                song.title().to_lowercase().contains(&search_text) || song.artist().to_lowercase().contains(&search_text)
+            }),
+        );
+        let filter_model = gtk::FilterListModel::new(Some(&history), Some(&filter));
+
+        imp.search_entry
+            .connect_search_changed(clone!(@weak filter => move |_| {
+                filter.changed(gtk::FilterChange::Different);
+            }));
+
+        let sorter = gtk::CustomSorter::new(|item_1, item_2| {
+            let song_1 = item_1.downcast_ref::<Song>().unwrap();
+            let song_2 = item_2.downcast_ref::<Song>().unwrap();
             song_2.last_heard().cmp(&song_1.last_heard()).into()
         });
-        let sort_model = gtk::SortListModel::new(Some(&history), Some(&sorter));
+        let sort_model = gtk::SortListModel::new(Some(&filter_model), Some(&sorter));
 
         let selection_model = gtk::NoSelection::new(Some(&sort_model));
 
-        let history_view = self.imp().history_view.get();
+        let history_view = imp.history_view.get();
         history_view.set_model(Some(&selection_model));
         history_view.connect_activate(clone!(@weak self as obj => move |_, index| {
             match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {

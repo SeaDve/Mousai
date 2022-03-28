@@ -48,6 +48,21 @@
             <property name="primary">True</property>
           </object>
         </child>
+        <child type="end">
+          <object class="GtkToggleButton" id="search_button">
+            <property name="icon-name">system-search-symbolic</property>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSearchBar">
+        <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create"/>
+        <property name="child">
+          <object class="GtkSearchEntry" id="search_entry">
+            <property name="placeholder-text" translatable="yes">Enter song or artist name</property>
+          </object>
+        </property>
       </object>
     </child>
     <child>
