@@ -11,6 +11,6 @@ albumart > frame {
 }
 
 .history-view > child {
-  padding: 6px;
   margin: 6px;
+  padding: 6px;
 }
