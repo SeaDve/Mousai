@@ -15,12 +15,14 @@ use crate::{core::AudioRecording, model::Song, utils, RUNTIME};
 
 #[derive(Debug)]
 pub struct AudD {
+    client: Client,
     api_token: String,
 }
 
 impl AudD {
     pub fn new(api_token: Option<&str>) -> Self {
         Self {
+            client: Client::new(),
             api_token: api_token.unwrap_or_default().to_string(),
         }
     }
@@ -39,8 +41,7 @@ impl AudD {
 
         let server_response = RUNTIME
             .spawn(
-                // FIXME construct only one client for this struct
-                Client::new()
+                self.client
                     .post("https://api.audd.io/")
                     .body(data.to_string())
                     .send(),
