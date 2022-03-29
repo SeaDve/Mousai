@@ -1,7 +1,7 @@
+use adw::prelude::*;
 use gettextrs::gettext;
 use gtk::{
     glib::{self, clone},
-    prelude::*,
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -35,13 +35,14 @@ mod imp {
         #[template_child]
         pub empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
-        pub listening_page: TemplateChild<gtk::Box>,
+        pub busy_page: TemplateChild<gtk::Box>,
         #[template_child]
-        pub recognizing_page: TemplateChild<adw::StatusPage>,
+        pub busy_page_title: TemplateChild<gtk::Label>,
         #[template_child]
         pub visualizer: TemplateChild<AudioVisualizer>,
 
         pub history: OnceCell<SongList>,
+        pub recognizing_animation: OnceCell<adw::TimedAnimation>,
         pub recognizer: Recognizer,
     }
 
@@ -145,6 +146,7 @@ impl MainPage {
     }
 
     fn show_error(&self, text: &str, secondary_text: &str) {
+        // TODO Use less distractive errors
         let error_dialog = gtk::MessageDialog::builder()
             .text(text)
             .secondary_text(secondary_text)
@@ -208,7 +210,7 @@ impl MainPage {
 
         match imp.recognizer.state() {
             RecognizerState::Null => {
-                self.action_set_enabled("win.toggle-listen", true);
+                self.action_set_enabled("main-page.toggle-listen", true);
 
                 imp.listen_button.remove_css_class("destructive-action");
                 imp.listen_button.add_css_class("suggested-action");
@@ -218,7 +220,7 @@ impl MainPage {
                     .set_tooltip_text(Some(&gettext("Start Identifying Music")));
             }
             RecognizerState::Listening => {
-                self.action_set_enabled("win.toggle-listen", true);
+                self.action_set_enabled("main-page.toggle-listen", true);
 
                 imp.listen_button.remove_css_class("suggested-action");
                 imp.listen_button.add_css_class("destructive-action");
@@ -228,7 +230,7 @@ impl MainPage {
                     .set_tooltip_text(Some(&gettext("Cancel Listening")));
             }
             RecognizerState::Recognizing => {
-                self.action_set_enabled("win.toggle-listen", false);
+                self.action_set_enabled("main-page.toggle-listen", false);
             }
         }
     }
@@ -238,14 +240,45 @@ impl MainPage {
 
         match imp.recognizer.state() {
             RecognizerState::Listening => {
-                imp.stack.set_visible_child(&imp.listening_page.get());
+                if let Some(recognizing_animation) = imp.recognizing_animation.get() {
+                    imp.visualizer.clear_peaks();
+                    recognizing_animation.pause();
+                }
+
+                imp.busy_page_title.set_label(&gettext("Listening…"));
+                imp.stack.set_visible_child(&imp.busy_page.get());
                 return;
             }
             RecognizerState::Recognizing => {
-                imp.stack.set_visible_child(&imp.recognizing_page.get());
+                let animation = imp.recognizing_animation.get_or_init(|| {
+                    adw::TimedAnimation::builder()
+                        .widget(&imp.visualizer.get())
+                        .value_from(0.0)
+                        .value_to(0.6)
+                        .duration(1500)
+                        .target(&adw::CallbackAnimationTarget::new(Some(Box::new(
+                            clone!(@weak self as obj => move |value| {
+                                obj.imp().visualizer.push_peak(value);
+                            }),
+                        ))))
+                        .easing(adw::Easing::EaseOutExpo)
+                        .repeat_count(u32::MAX)
+                        .alternate(true)
+                        .build()
+                });
+                imp.visualizer.clear_peaks();
+                animation.play();
+
+                imp.busy_page_title.set_label(&gettext("Recognizing…"));
+                imp.stack.set_visible_child(&imp.busy_page.get());
                 return;
             }
-            RecognizerState::Null => (),
+            RecognizerState::Null => {
+                if let Some(recognizing_animation) = imp.recognizing_animation.get() {
+                    imp.visualizer.clear_peaks();
+                    recognizing_animation.pause();
+                }
+            }
         }
 
         if self.history().is_empty() {

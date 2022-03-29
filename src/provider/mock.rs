@@ -59,7 +59,7 @@ impl Provider for Mock {
         .cloned()
         .ok_or_else(|| ProviderError::Other("Failed to generate random song".into()))?;
 
-        glib::timeout_future(Duration::from_secs(1)).await;
+        glib::timeout_future(Duration::from_secs(5)).await;
 
         log::info!(
             "Recognized Song: {} - {}",
@@ -71,6 +71,6 @@ impl Provider for Mock {
     }
 
     fn listen_duration(&self) -> Duration {
-        Duration::from_secs(1)
+        Duration::from_secs(5)
     }
 }

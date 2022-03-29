@@ -6,8 +6,8 @@ use gtk::{cairo, glib, graphene, prelude::*, subclass::prelude::*};
 
 use std::{cell::RefCell, collections::VecDeque};
 
-const GUTTER: f64 = 9.0;
-const LINE_WIDTH: f64 = 3.0;
+const GUTTER: f64 = 10.0;
+const LINE_WIDTH: f64 = 6.0;
 
 mod imp {
     use super::*;

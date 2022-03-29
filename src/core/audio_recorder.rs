@@ -8,6 +8,7 @@ use gtk::{
 use std::{
     cell::{Cell, RefCell},
     path::Path,
+    time::Duration,
 };
 
 use super::AudioRecording;
@@ -315,6 +316,8 @@ fn default_pipeline(
     };
 
     pulsesrc.set_property("device", device_name);
+    level.set_property("interval", Duration::from_millis(80).as_nanos() as u64);
+    level.set_property("peak-ttl", Duration::from_millis(80).as_nanos() as u64);
     encodebin.set_property("profile", encodebin_profile);
     filesink.set_property("location", recording_path.to_str().unwrap());
 
