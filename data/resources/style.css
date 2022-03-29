@@ -2,6 +2,10 @@ audiovisualizer {
   color: @accent_color;
 }
 
+albumart > frame {
+  border: none;
+}
+
 .history-view {
   padding: 6px;
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiAlbumArt" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="GtkFrame">
+        <property name="halign">center</property>
+        <property name="child">
+          <object class="GtkImage" id="inner">
+            <property name="pixel-size">180</property>
+          </object>
+        </property>
+        <style>
+          <class name="card"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>

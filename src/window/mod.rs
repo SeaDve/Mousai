@@ -1,3 +1,4 @@
+mod album_art;
 mod audio_visualizer;
 mod main_page;
 mod song_cell;

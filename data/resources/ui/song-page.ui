@@ -37,12 +37,8 @@
           <object class="GtkBox">
             <property name="spacing">12</property>
             <child>
-              <object class="GtkFrame">
-                <property name="child">
-                  <object class="GtkImage" id="album_art">
-                    <property name="pixel-size">180</property>
-                  </object>
-                </property>
+              <object class="MsaiAlbumArt" id="album_art">
+                <property name="pixel-size">180</property>
               </object>
             </child>
             <child>

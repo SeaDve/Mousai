@@ -8,29 +8,24 @@
       </object>
     </property>
     <child>
-      <object class="GtkFrame">
-        <property name="halign">center</property>
+      <object class="GtkOverlay">
         <property name="child">
-          <object class="GtkOverlay">
-            <property name="child">
-              <object class="GtkImage" id="album_art">
-                <property name="pixel-size">180</property>
-              </object>
-            </property>
-            <child type="overlay">
-              <object class="GtkButton">
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="icon-name">media-playback-start-symbolic</property>
-                <style>
-                  <class name="playback-button"/>
-                  <class name="osd"/>
-                  <class name="circular"/>
-                </style>
-              </object>
-            </child>
+          <object class="MsaiAlbumArt" id="album_art">
+            <property name="pixel-size">180</property>
           </object>
         </property>
+        <child type="overlay">
+          <object class="GtkButton">
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="icon-name">media-playback-start-symbolic</property>
+            <style>
+              <class name="playback-button"/>
+              <class name="osd"/>
+              <class name="circular"/>
+            </style>
+          </object>
+        </child>
       </object>
     </child>
     <child>
