@@ -1,4 +1,4 @@
-use gtk::{gdk, glib};
+use gtk::{gdk, glib, prelude::*};
 use reqwest::Client;
 
 use std::{collections::HashMap, sync::Mutex};
@@ -27,9 +27,22 @@ impl AlbumArtManager {
                 .store
                 .lock()
                 .expect("Failed to lock album art store mutex");
-            if let Some(paintable) = store.get(&song.id()) {
-                return Ok(paintable.clone());
+            if let Some(texture) = store.get(&song.id()) {
+                return Ok(texture.clone());
             }
+        }
+
+        // FIXME more reliable way to create unique cache path
+        let cache_path = glib::user_cache_dir().join(song.id().try_to_string()?);
+
+        if let Ok(texture) = gdk::Texture::from_filename(&cache_path) {
+            let mut store = self
+                .store
+                .lock()
+                .expect("Failed to lock album art store mutex");
+            store.insert(song.id(), texture.clone());
+
+            return Ok(texture);
         }
 
         if let Some(album_art_link) = song.album_art_link() {
@@ -39,8 +52,8 @@ impl AlbumArtManager {
             let bytes = RUNTIME.spawn(response.bytes()).await??;
             log::info!("Downloaded album art link from `{album_art_link}`");
 
-            // TODO cache downloads on disk
             let texture = gdk::Texture::from_bytes(&glib::Bytes::from_owned(bytes))?;
+            texture.save_to_png(cache_path)?;
 
             {
                 let mut store = self

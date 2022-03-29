@@ -15,6 +15,14 @@ impl SongId {
             id: Box::from(info_link),
         }
     }
+
+    pub fn try_to_string(&self) -> anyhow::Result<String> {
+        self.id
+            .split('/')
+            .last()
+            .map(|last| last.to_string())
+            .ok_or_else(|| anyhow::anyhow!("Invalid Song Id"))
+    }
 }
 
 #[cfg(test)]
