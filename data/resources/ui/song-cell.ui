@@ -31,7 +31,6 @@
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <property name="spacing">3</property>
         <child>
           <object class="GtkLabel">
             <property name="xalign">0.5</property>
@@ -44,9 +43,6 @@
                 <lookup name="song">MsaiSongCell</lookup>
               </lookup>
             </binding>
-            <style>
-              <class name="heading"/>
-            </style>
           </object>
         </child>
         <child>

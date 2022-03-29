@@ -74,15 +74,12 @@
           <object class="GtkScrolledWindow" id="main_page">
             <property name="hscrollbar-policy">never</property>
             <property name="child">
-              <object class="AdwClampScrollable">
-                <property name="maximum-size">1000</property>
-                <property name="child">
-                  <object class="GtkGridView" id="history_view">
-                    <property name="single-click-activate">True</property>
-                    <property name="factory">
-                      <object class="GtkBuilderListItemFactory">
-                        <property name="bytes">
-                          <![CDATA[
+              <object class="GtkGridView" id="history_view">
+                <property name="single-click-activate">True</property>
+                <property name="factory">
+                  <object class="GtkBuilderListItemFactory">
+                    <property name="bytes">
+                      <![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="GtkListItem">
@@ -96,14 +93,12 @@
   </template>
 </interface>
                         ]]>
-                        </property>
-                      </object>
                     </property>
-                    <style>
-                      <class name="history-view"/>
-                    </style>
                   </object>
                 </property>
+                <style>
+                  <class name="history-view"/>
+                </style>
               </object>
             </property>
           </object>
