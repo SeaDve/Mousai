@@ -110,9 +110,7 @@ impl SongPage {
 
         if let Some(ref song) = song {
             spawn!(clone!(@weak self as obj, @weak song => async move {
-                if let Some(album_art) = song.album_art().await {
-                    obj.imp().album_art.set_paintable(Some(&album_art));
-                }
+                obj.imp().album_art.set_paintable(song.album_art().await.as_ref());
             }));
         } else {
             imp.album_art.set_paintable(gdk::Paintable::NONE);
