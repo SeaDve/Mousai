@@ -20,18 +20,40 @@ impl Provider for Mock {
                 "https://lis.tn/EineKleineNachtmusik",
             ),
             Song::new("Make You Mine", "Public", "https://lis.tn/FUYgUV"),
-            Song::new("Amnesia", "5 Seconds Of Summer", "https://lis.tn/WSKAzD"),
-            Song::new(
-                "Scars To Your Beautiful",
-                "Alessia Cara",
-                "https://lis.tn/ScarsToYourBeautiful",
-            ),
-            Song::new("Beautiful Sunday", "Daniel Boone", "https://lis.tn/YTuccJ"),
-            Song::new(
-                "The Night We Met",
-                "Lord Huron",
-                "https://lis.tn/TheNightWeMet",
-            ),
+            {
+                let song = Song::new("Amnesia", "5 Seconds Of Summer", "https://lis.tn/WSKAzD");
+                song.set_album_art_link(Some(
+                    "https://i.scdn.co/image/ab67616d0000b27393432e914046a003229378da",
+                ));
+                song
+            },
+            {
+                let song = Song::new(
+                    "Scars To Your Beautiful",
+                    "Alessia Cara",
+                    "https://lis.tn/ScarsToYourBeautiful",
+                );
+                song.set_album_art_link(Some(
+                    "https://i.scdn.co/image/ab67616d0000b273e3ae597159d6c2541c4ee61b",
+                ));
+                song
+            },
+            {
+                let song = Song::new("Beautiful Sunday", "Daniel Boone", "https://lis.tn/YTuccJ");
+                song.set_album_art_link(Some(
+                    "https://i.scdn.co/image/ab67616d0000b273db8f64a52a4ec4cde9a9528a",
+                ));
+                song
+            },
+            {
+                let song = Song::new(
+                    "The Night We Met",
+                    "Lord Huron",
+                    "https://lis.tn/TheNightWeMet",
+                );
+                song.set_album_art_link(Some("https://some.invalid.link"));
+                song
+            },
         ]
         .choose(&mut rand::thread_rng())
         .cloned()

@@ -1,8 +1,13 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk::{
+    gdk,
+    glib::{self, clone},
+    prelude::*,
+    subclass::prelude::*,
+};
 
 use std::cell::RefCell;
 
-use crate::model::Song;
+use crate::{model::Song, spawn};
 
 mod imp {
     use super::*;
@@ -12,6 +17,9 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
+        #[template_child]
+        pub album_art: TemplateChild<gtk::Image>,
+
         pub song: RefCell<Option<Song>>,
     }
 
@@ -98,7 +106,19 @@ impl SongPage {
             return;
         }
 
-        self.imp().song.replace(song);
+        let imp = self.imp();
+
+        if let Some(ref song) = song {
+            spawn!(clone!(@weak self as obj, @weak song => async move {
+                if let Some(album_art) = song.album_art().await {
+                    obj.imp().album_art.set_paintable(Some(&album_art));
+                }
+            }));
+        } else {
+            imp.album_art.set_paintable(gdk::Paintable::NONE);
+        }
+
+        imp.song.replace(song);
         self.notify("song");
     }
 

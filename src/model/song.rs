@@ -1,10 +1,13 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk::{gdk, glib, prelude::*, subclass::prelude::*};
+use once_cell::sync::Lazy;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
 use super::SongId;
-use crate::core::DateTime;
+use crate::{album_art_manager::AlbumArtManager, core::DateTime};
+
+static ALBUM_ART_MANAGER: Lazy<AlbumArtManager> = Lazy::new(AlbumArtManager::new);
 
 mod imp {
     use super::*;
@@ -17,6 +20,7 @@ mod imp {
         pub title: String,
         pub artist: String,
         pub info_link: String,
+        pub album_art_link: Option<String>,
         pub playback_link: Option<String>,
     }
 
@@ -64,6 +68,13 @@ mod imp {
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
                     glib::ParamSpecString::new(
+                        "album-art-link",
+                        "Album Art Link",
+                        "Link where the album art can be downloaded",
+                        None,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                    glib::ParamSpecString::new(
                         "playback-link",
                         "Playback Link",
                         "Link containing an excerpt of the song",
@@ -99,6 +110,10 @@ mod imp {
                     let info_link = value.get().unwrap();
                     obj.set_info_link(info_link);
                 }
+                "album-art-link" => {
+                    let album_art_link = value.get().unwrap();
+                    obj.set_album_art_link(album_art_link);
+                }
                 "playback-link" => {
                     let playback_link = value.get().unwrap();
                     obj.set_playback_link(playback_link);
@@ -113,6 +128,7 @@ mod imp {
                 "title" => obj.title().to_value(),
                 "artist" => obj.artist().to_value(),
                 "info-link" => obj.info_link().to_value(),
+                "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
                 _ => unimplemented!(),
             }
@@ -175,6 +191,15 @@ impl Song {
         self.imp().inner.borrow().info_link.clone()
     }
 
+    pub fn set_album_art_link(&self, album_art_link: Option<&str>) {
+        self.imp().inner.borrow_mut().album_art_link = album_art_link.map(str::to_string);
+        self.notify("album-art-link");
+    }
+
+    pub fn album_art_link(&self) -> Option<String> {
+        self.imp().inner.borrow().album_art_link.clone()
+    }
+
     pub fn set_playback_link(&self, playback_link: Option<&str>) {
         self.imp().inner.borrow_mut().playback_link = playback_link.map(str::to_string);
         self.notify("playback-link");
@@ -187,6 +212,14 @@ impl Song {
     pub fn id(&self) -> SongId {
         // Song's info_link is unique to every song
         SongId::new(&self.info_link())
+    }
+
+    pub async fn album_art(&self) -> Option<gdk::Texture> {
+        ALBUM_ART_MANAGER
+            .get_or_init(self)
+            .await
+            .map_err(|err| log::debug!("Song doesn't return an album art because {err}"))
+            .ok()
     }
 }
 

@@ -39,6 +39,7 @@ impl AudD {
 
         let server_response = RUNTIME
             .spawn(
+                // FIXME construct only one client for this struct
                 Client::new()
                     .post("https://api.audd.io/")
                     .body(data.to_string())
@@ -55,8 +56,15 @@ impl AudD {
         }
 
         let data = Self::parse(&bytes)?;
+        let song = Song::new(&data.title, &data.artist, &data.info_link);
 
-        Ok(Song::new(&data.title, &data.artist, &data.info_link))
+        if let Some(spotify_data) = data.spotify_data {
+            if let Some(image) = spotify_data.album.images.get(0) {
+                song.set_album_art_link(Some(&image.url));
+            }
+        }
+
+        Ok(song)
     }
 }
 

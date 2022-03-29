@@ -13,9 +13,8 @@
         <property name="child">
           <object class="GtkOverlay">
             <property name="child">
-              <object class="GtkImage">
+              <object class="GtkImage" id="album_art">
                 <property name="pixel-size">180</property>
-                <property name="file">/home/dave/p.jpg</property>
               </object>
             </property>
             <child type="overlay">
