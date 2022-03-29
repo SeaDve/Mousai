@@ -18,7 +18,11 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/album-art.ui")]
     pub struct AlbumArt {
         #[template_child]
-        pub inner: TemplateChild<gtk::Image>,
+        pub stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub image: TemplateChild<gtk::Image>,
+        #[template_child]
+        pub placeholder: TemplateChild<gtk::Image>,
 
         pub song: RefCell<Option<Song>>,
     }
@@ -122,10 +126,16 @@ impl AlbumArt {
 
         if let Some(ref song) = song {
             spawn!(clone!(@weak self as obj, @weak song => async move {
-                obj.imp().inner.set_paintable(song.album_art().await.as_ref());
+                let imp = obj.imp();
+                if let Some(ref album_art) = song.album_art().await {
+                    imp.image.set_paintable(Some(album_art));
+                    imp.stack.set_visible_child(&imp.image.get());
+                } else {
+                    obj.clear();
+                }
             }));
         } else {
-            imp.inner.set_paintable(gdk::Paintable::NONE);
+            self.clear();
         }
 
         imp.song.replace(song);
@@ -137,12 +147,18 @@ impl AlbumArt {
     }
 
     pub fn set_pixel_size(&self, pixel_size: i32) {
-        self.imp().inner.set_pixel_size(pixel_size);
+        self.imp().image.set_pixel_size(pixel_size);
         self.notify("pixel-size");
     }
 
     pub fn pixel_size(&self) -> i32 {
-        self.imp().inner.pixel_size()
+        self.imp().image.pixel_size()
+    }
+
+    fn clear(&self) {
+        let imp = self.imp();
+        imp.image.set_paintable(gdk::Paintable::NONE);
+        imp.stack.set_visible_child(&imp.placeholder.get());
     }
 }
 

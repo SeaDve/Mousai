@@ -8,8 +8,22 @@
       <object class="GtkFrame">
         <property name="halign">center</property>
         <property name="child">
-          <object class="GtkImage" id="inner">
-            <property name="pixel-size">180</property>
+          <object class="GtkStack" id="stack">
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkImage" id="placeholder">
+                <property name="icon-name">emblem-music-symbolic</property>
+                <property name="pixel-size">60</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage" id="image">
+                <property name="pixel-size">180</property>
+              </object>
+            </child>
           </object>
         </property>
         <style>
