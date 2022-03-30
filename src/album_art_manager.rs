@@ -15,7 +15,7 @@ pub struct AlbumArtManager {
 
 impl AlbumArtManager {
     pub fn new() -> Self {
-        AlbumArtManager {
+        Self {
             store: Mutex::new(HashMap::new()),
             client: Client::new(),
         }

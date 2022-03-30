@@ -16,6 +16,7 @@ impl SongId {
         }
     }
 
+    // FIXME: Remove this and move album art cache path handling in song directly
     pub fn try_to_string(&self) -> anyhow::Result<String> {
         self.id
             .split('/')
