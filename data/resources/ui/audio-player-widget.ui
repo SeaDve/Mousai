@@ -76,6 +76,13 @@
           <object class="GtkBox">
             <property name="spacing">6</property>
             <child>
+              <object class="GtkSpinner" id="buffering_spinner">
+                <property name="margin-end">9</property>
+                <property name="width-request">18</property>
+                <property name="height-request">18</property>
+              </object>
+            </child>
+            <child>
               <object class="GtkButton" id="playback_button">
                 <property name="valign">center</property>
                 <property name="action-name">audio-player-widget.toggle-playback</property>

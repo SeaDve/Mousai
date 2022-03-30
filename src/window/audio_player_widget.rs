@@ -25,6 +25,8 @@ mod imp {
         #[template_child]
         pub album_art: TemplateChild<AlbumArt>,
         #[template_child]
+        pub buffering_spinner: TemplateChild<gtk::Spinner>,
+        #[template_child]
         pub playback_button: TemplateChild<gtk::Button>,
         #[template_child]
         pub playback_position_scale: TemplateChild<gtk::Scale>,
@@ -111,6 +113,11 @@ mod imp {
 
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
+
+            self.audio_player
+                .bind_property("is-buffering", &self.buffering_spinner.get(), "spinning")
+                .flags(glib::BindingFlags::SYNC_CREATE)
+                .build();
 
             obj.setup_audio_player();
 

@@ -39,6 +39,7 @@ mod imp {
 
         pub state: Cell<PlaybackState>,
         pub uri: RefCell<String>,
+        pub is_buffering: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -65,6 +66,13 @@ mod imp {
                         "Current uri being played in the player",
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                    glib::ParamSpecBoolean::new(
+                        "is-buffering",
+                        "Is Buffering",
+                        "Whether this is buffering",
+                        false,
+                        glib::ParamFlags::READABLE,
                     ),
                 ]
             });
@@ -97,6 +105,7 @@ mod imp {
             match pspec.name() {
                 "state" => obj.state().to_value(),
                 "uri" => obj.uri().to_value(),
+                "is-buffering" => obj.is_buffering().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -140,6 +149,8 @@ impl AudioPlayer {
             PlaybackState::Stopped => {
                 player.set_state(gst::State::Null)?;
                 log::info!("Player state changed to Stopped");
+
+                self.set_buffering(false);
 
                 // Changing the state to NULL flushes the pipeline.
                 // Thus, the change message never arrives.
@@ -187,6 +198,10 @@ impl AudioPlayer {
         self.imp().uri.borrow().clone()
     }
 
+    pub fn is_buffering(&self) -> bool {
+        self.imp().is_buffering.get()
+    }
+
     pub fn seek(&self, position: ClockTime) -> anyhow::Result<()> {
         let position: gst::ClockTime = position.try_into()?;
 
@@ -220,6 +235,17 @@ impl AudioPlayer {
         Ok(discover_info
             .duration()
             .map_or(ClockTime::ZERO, |ct| ct.into()))
+    }
+
+    fn set_buffering(&self, is_buffering: bool) {
+        let imp = self.imp();
+
+        if imp.is_buffering.get() == is_buffering {
+            return;
+        }
+
+        imp.is_buffering.set(is_buffering);
+        self.notify("is-buffering");
     }
 
     fn get_or_try_init_player(&self) -> anyhow::Result<&gst::Pipeline> {
@@ -259,10 +285,11 @@ impl AudioPlayer {
                     message.percent(),
                 );
 
-                // TODO: show in UI
                 if message.percent() < 100 {
+                    self.set_buffering(true);
                     self.set_state(PlaybackState::Paused);
                 } else {
+                    self.set_buffering(false);
                     self.set_state(PlaybackState::Playing);
                 }
             }
