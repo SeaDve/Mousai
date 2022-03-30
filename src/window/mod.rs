@@ -14,10 +14,9 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use self::{
-    audio_player_widget::AudioPlayerWidget, main_page::MainPage, song_cell::SongCell,
-    song_page::SongPage,
-};
+use std::{cell::RefCell, rc::Rc};
+
+use self::{audio_player_widget::AudioPlayerWidget, main_page::MainPage, song_page::SongPage};
 use crate::{config::PROFILE, model::Song, Application};
 
 mod imp {
@@ -46,7 +45,6 @@ mod imp {
         type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
-            SongCell::static_type();
             Self::bind_template(klass);
 
             klass.install_action("win.navigate-to-main-page", None, move |obj, _, _| {
@@ -112,6 +110,28 @@ impl Window {
 
     pub fn audio_player_widget(&self) -> AudioPlayerWidget {
         self.imp().audio_player_widget.clone()
+    }
+
+    async fn wait_for_realize(&self) {
+        if self.is_realized() {
+            return;
+        }
+
+        let handler_id = Rc::new(RefCell::new(None));
+        let handler_id_clone = handler_id.clone();
+
+        let future: gio::GioFuture<_, _, _, i32> =
+            gio::GioFuture::new(self, move |obj, _, send| {
+                let send = RefCell::new(Some(send));
+                handler_id_clone.replace(Some(
+                    obj.connect_realize(move |_| send.take().unwrap().resolve(Ok(()))),
+                ));
+            });
+        let _ = Box::pin(future).await;
+
+        if let Some(handler_id) = handler_id.take() {
+            self.disconnect(handler_id);
+        }
     }
 
     fn setup_signals(&self) {

@@ -121,3 +121,9 @@ impl AudioVisualizer {
 fn ease_in_quad(x: f64) -> f64 {
     x * x
 }
+
+impl Default for AudioVisualizer {
+    fn default() -> Self {
+        Self::new()
+    }
+}

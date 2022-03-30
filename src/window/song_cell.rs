@@ -1,12 +1,17 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk::{
+    glib::{self, clone},
+    prelude::*,
+    subclass::prelude::*,
+};
 
 use std::cell::RefCell;
 
-use super::{album_art::AlbumArt, Window};
-use crate::model::Song;
+use super::{album_art::AlbumArt, audio_player_widget::AudioPlayerWidget};
+use crate::{core::PlaybackState, model::Song};
 
 mod imp {
     use super::*;
+    use glib::WeakRef;
     use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
@@ -19,6 +24,8 @@ mod imp {
         pub toggle_playback_button: TemplateChild<gtk::Button>,
 
         pub song: RefCell<Option<Song>>,
+        pub audio_player_widget: RefCell<Option<WeakRef<AudioPlayerWidget>>>,
+        pub state_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
     }
 
     #[glib::object_subclass]
@@ -48,7 +55,7 @@ mod imp {
                 vec![glib::ParamSpecObject::new(
                     "song",
                     "Song",
-                    "Song represented by Self",
+                    "Song represented by self",
                     Song::static_type(),
                     glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                 )]
@@ -124,21 +131,75 @@ impl SongCell {
         self.imp().song.borrow().clone()
     }
 
+    pub fn bind(&self, audio_player_widget: Option<&AudioPlayerWidget>) {
+        if let Some(audio_player_widget) = audio_player_widget {
+            self.update_toggle_playback_button(audio_player_widget);
+
+            let imp = self.imp();
+            imp.state_notify_handler_id
+                .replace(Some(audio_player_widget.connect_state_notify(
+                    clone!(@weak self as obj, @weak audio_player_widget => move |_| {
+                        obj.update_toggle_playback_button(&audio_player_widget);
+                    }),
+                )));
+            imp.audio_player_widget
+                .replace(Some(audio_player_widget.downgrade()));
+        }
+    }
+
+    pub fn unbind(&self) {
+        let imp = self.imp();
+        if let Some(handler_id) = imp.state_notify_handler_id.take() {
+            if let Some(audio_player_widget) = imp
+                .audio_player_widget
+                .take()
+                .and_then(|audio_player_widget| audio_player_widget.upgrade())
+            {
+                audio_player_widget.disconnect(handler_id);
+            }
+        }
+    }
+
     fn toggle_playback(&self) -> anyhow::Result<()> {
-        if let Some(audio_player_widget) = self
-            .root()
-            .and_then(|root| root.downcast::<Window>().ok())
-            .map(|window| window.audio_player_widget())
+        if let Some(ref audio_player_widget) = self
+            .imp()
+            .audio_player_widget
+            .borrow()
+            .as_ref()
+            .and_then(|audio_player_widget| audio_player_widget.upgrade())
         {
             if let Some(song) = self.song() {
-                audio_player_widget.set_song(Some(song))?;
-                audio_player_widget.play()?;
+                if audio_player_widget.state() == PlaybackState::Playing
+                    && audio_player_widget.is_current_playing(&song)
+                {
+                    audio_player_widget.pause()?;
+                } else {
+                    audio_player_widget.set_song(Some(song))?;
+                    audio_player_widget.play()?;
+                }
             }
-            Ok(())
-        } else {
-            Err(anyhow::anyhow!(
-                "Failed to toggle playback: AudioPlayerWidget was not found"
-            ))
+        }
+
+        Ok(())
+    }
+
+    fn update_toggle_playback_button(&self, audio_player_widget: &AudioPlayerWidget) {
+        if let Some(ref song) = self.song() {
+            let toggle_playback_button = &self.imp().toggle_playback_button;
+
+            if !audio_player_widget.is_current_playing(song) {
+                toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                return;
+            }
+
+            match audio_player_widget.state() {
+                PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
+                    toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                }
+                PlaybackState::Playing => {
+                    toggle_playback_button.set_icon_name("media-playback-pause-symbolic");
+                }
+            }
         }
     }
 

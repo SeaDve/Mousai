@@ -115,3 +115,9 @@ impl TimeLabel {
         self.set_time(ClockTime::ZERO);
     }
 }
+
+impl Default for TimeLabel {
+    fn default() -> Self {
+        Self::new()
+    }
+}

@@ -1,4 +1,3 @@
-#![allow(clippy::new_without_default)]
 #![warn(clippy::doc_markdown)]
 #![warn(clippy::missing_const_for_fn)]
 #![warn(clippy::or_fun_call)]

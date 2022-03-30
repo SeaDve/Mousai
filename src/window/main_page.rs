@@ -6,7 +6,7 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use super::{audio_visualizer::AudioVisualizer, Window};
+use super::{audio_visualizer::AudioVisualizer, song_cell::SongCell, Window};
 use crate::{
     model::{Song, SongList},
     recognizer::{Recognizer, RecognizerState},
@@ -339,7 +339,44 @@ impl MainPage {
         let selection_model = gtk::NoSelection::new(Some(&sort_model));
 
         let history_view = imp.history_view.get();
+
+        let factory = gtk::SignalListItemFactory::new();
+        factory.connect_setup(|_, list_item| {
+            let song_cell = SongCell::new();
+
+            list_item
+                .property_expression("item")
+                .bind(&song_cell, "song", glib::Object::NONE);
+
+            list_item.set_child(Some(&song_cell));
+        });
+        factory.connect_bind(clone!(@weak self as obj => move |_, list_item| {
+            let song_cell: SongCell = list_item
+                .child()
+                .and_then(|widget| widget.downcast().ok())
+                .expect("HistoryView list item should have a child of SongCell");
+
+            if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
+                // FIXME: less hacky way to setup audio player widget
+                spawn!(async move {
+                    window.wait_for_realize().await;
+                    song_cell.bind(Some(&window.audio_player_widget()));
+                });
+            } else {
+                log::error!("Cannot bind SongCell to AudioPlayerWidget: MainPage doesn't have root");
+            }
+        }));
+        factory.connect_unbind(|_, list_item| {
+            let song_cell: SongCell = list_item
+                .child()
+                .and_then(|widget| widget.downcast().ok())
+                .expect("HistoryView list item should have a child of SongCell");
+            song_cell.unbind();
+        });
+
+        history_view.set_factory(Some(&factory));
         history_view.set_model(Some(&selection_model));
+
         history_view.connect_activate(clone!(@weak self as obj => move |_, index| {
             match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {
                 Some(ref song) => obj.emit_by_name("song-activated", &[song]),

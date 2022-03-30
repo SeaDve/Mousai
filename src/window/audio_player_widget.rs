@@ -75,13 +75,23 @@ mod imp {
     impl ObjectImpl for AudioPlayerWidget {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecObject::new(
-                    "song",
-                    "Song",
-                    "Song represented by Self",
-                    Song::static_type(),
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                )]
+                vec![
+                    glib::ParamSpecObject::new(
+                        "song",
+                        "Song",
+                        "Song represented by Self",
+                        Song::static_type(),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                    glib::ParamSpecEnum::new(
+                        "state",
+                        "State",
+                        "Current state of the widget",
+                        PlaybackState::static_type(),
+                        PlaybackState::default() as i32,
+                        glib::ParamFlags::READABLE,
+                    ),
+                ]
             });
             PROPERTIES.as_ref()
         }
@@ -107,6 +117,7 @@ mod imp {
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "song" => obj.song().to_value(),
+                "state" => obj.state().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -118,6 +129,11 @@ mod imp {
                 .bind_property("is-buffering", &self.buffering_spinner.get(), "spinning")
                 .flags(glib::BindingFlags::SYNC_CREATE)
                 .build();
+
+            self.audio_player
+                .connect_state_notify(clone!(@weak obj => move |_| {
+                    obj.notify("state");
+                }));
 
             obj.setup_audio_player();
 
@@ -188,10 +204,29 @@ impl AudioPlayerWidget {
         self.imp().song.borrow().clone()
     }
 
+    pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("state"), move |obj, _| f(obj))
+    }
+
+    pub fn state(&self) -> PlaybackState {
+        self.imp().audio_player.state()
+    }
+
     pub fn play(&self) -> anyhow::Result<()> {
         self.imp()
             .audio_player
             .try_set_state(PlaybackState::Playing)
+    }
+
+    pub fn pause(&self) -> anyhow::Result<()> {
+        self.imp().audio_player.try_set_state(PlaybackState::Paused)
+    }
+
+    pub fn is_current_playing(&self, song: &Song) -> bool {
+        self.song().as_ref() == Some(song)
     }
 
     fn set_playback_position_scale_value_blocking(&self, value: f64) {
