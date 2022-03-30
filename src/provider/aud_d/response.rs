@@ -17,6 +17,7 @@ pub struct SpotifyData {
     pub album: Album,
     pub disc_number: u32,
     pub track_number: u32,
+    pub preview_url: String,
 }
 
 #[derive(Debug, Deserialize)]

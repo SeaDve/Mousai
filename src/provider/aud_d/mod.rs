@@ -35,7 +35,7 @@ impl AudD {
     async fn recognize_inner(&self, recording: &AudioRecording) -> Result<Song, Error> {
         let data = json!({
             "api_token": self.api_token,
-            "return": "spotify",
+            "return": "spotify,apple_music,musicbrainz",
             "audio": utils::file_to_base64(recording.path()).await.map_err(Error::FileConvert)?,
         });
 
@@ -60,8 +60,14 @@ impl AudD {
         let song = Song::new(&data.title, &data.artist, &data.info_link);
 
         if let Some(spotify_data) = data.spotify_data {
+            // TODO: Get album art link from other providers too
             if let Some(image) = spotify_data.album.images.get(0) {
                 song.set_album_art_link(Some(&image.url));
+            }
+
+            // TODO: Get playback link from other providers too
+            if !spotify_data.preview_url.is_empty() {
+                song.set_playback_link(Some(&spotify_data.preview_url));
             }
         }
 

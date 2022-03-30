@@ -25,6 +25,9 @@ impl Provider for Mock {
                 song.set_album_art_link(Some(
                     "https://i.scdn.co/image/ab67616d0000b27393432e914046a003229378da",
                 ));
+                song.set_playback_link(Some(
+                    "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/9d/bf/3f/9dbf3f13-ae71-816f-44c1-9a6c4358e0b2/mzaf_10286406549181982375.plus.aac.p.m4a",
+                ));
                 song
             },
             {
@@ -43,6 +46,7 @@ impl Provider for Mock {
                 song.set_album_art_link(Some(
                     "https://i.scdn.co/image/ab67616d0000b273db8f64a52a4ec4cde9a9528a",
                 ));
+                song.set_playback_link(Some("https://p.scdn.co/mp3-preview/b2fa24732fe08a251b0c8d44774f37fd55378378?cid=e44e7b8278114c7db211c00ea273ac69"));
                 song
             },
             {
@@ -59,7 +63,7 @@ impl Provider for Mock {
         .cloned()
         .ok_or_else(|| ProviderError::Other("Failed to generate random song".into()))?;
 
-        glib::timeout_future(Duration::from_secs(5)).await;
+        glib::timeout_future(Duration::from_secs(1)).await;
 
         log::info!(
             "Recognized Song: {} - {}",
@@ -71,6 +75,6 @@ impl Provider for Mock {
     }
 
     fn listen_duration(&self) -> Duration {
-        Duration::from_secs(5)
+        Duration::from_secs(1)
     }
 }
