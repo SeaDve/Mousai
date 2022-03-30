@@ -191,8 +191,7 @@ impl AudioPlayerWidget {
     pub fn play(&self) -> anyhow::Result<()> {
         self.imp()
             .audio_player
-            .try_set_state(PlaybackState::Playing)?;
-        Ok(())
+            .try_set_state(PlaybackState::Playing)
     }
 
     fn set_playback_position_scale_value_blocking(&self, value: f64) {

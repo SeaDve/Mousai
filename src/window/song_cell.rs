@@ -136,7 +136,9 @@ impl SongCell {
             }
             Ok(())
         } else {
-            Err(anyhow::anyhow!("AudioPlayerWidget was not found"))
+            Err(anyhow::anyhow!(
+                "Failed to toggle playback: AudioPlayerWidget was not found"
+            ))
         }
     }
 

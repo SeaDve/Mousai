@@ -164,6 +164,21 @@ impl MainPage {
         error_dialog.present();
     }
 
+    fn stop_audio_player(&self) -> anyhow::Result<()> {
+        if let Some(audio_player_widget) = self
+            .root()
+            .and_then(|root| root.downcast::<Window>().ok())
+            .map(|window| window.audio_player_widget())
+        {
+            audio_player_widget.set_song(None)?;
+            Ok(())
+        } else {
+            Err(anyhow::anyhow!(
+                "Failed stop audio player: AudioPlayerWidget was not found"
+            ))
+        }
+    }
+
     fn history(&self) -> SongList {
         self.imp().history.get().unwrap().clone()
     }
@@ -179,6 +194,10 @@ impl MainPage {
                 }));
             }
             RecognizerState::Null => {
+                if let Err(err) = self.stop_audio_player() {
+                    log::warn!("Failed to stop player before listening: {err:?}");
+                }
+
                 if let Err(err) = imp.recognizer.listen() {
                     self.show_error(&gettext("Failed to start recording"), &err.to_string());
                     log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
