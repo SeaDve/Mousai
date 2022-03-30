@@ -91,6 +91,13 @@ mod imp {
                         PlaybackState::default() as i32,
                         glib::ParamFlags::READABLE,
                     ),
+                    glib::ParamSpecBoolean::new(
+                        "is-buffering",
+                        "Is Buffering",
+                        "Whether this is buffering",
+                        false,
+                        glib::ParamFlags::READABLE,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -118,6 +125,7 @@ mod imp {
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "state" => obj.state().to_value(),
+                "is-buffering" => obj.is_buffering().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -133,6 +141,11 @@ mod imp {
             self.audio_player
                 .connect_state_notify(clone!(@weak obj => move |_| {
                     obj.notify("state");
+                }));
+
+            self.audio_player
+                .connect_is_buffering_notify(clone!(@weak obj => move |_| {
+                    obj.notify("is-buffering");
                 }));
 
             obj.setup_audio_player();
@@ -213,6 +226,17 @@ impl AudioPlayerWidget {
 
     pub fn state(&self) -> PlaybackState {
         self.imp().audio_player.state()
+    }
+
+    pub fn connect_is_buffering_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("is-buffering"), move |obj, _| f(obj))
+    }
+
+    pub fn is_buffering(&self) -> bool {
+        self.imp().audio_player.is_buffering()
     }
 
     pub fn play(&self) -> anyhow::Result<()> {

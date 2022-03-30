@@ -21,11 +21,16 @@ mod imp {
         #[template_child]
         pub album_art: TemplateChild<AlbumArt>,
         #[template_child]
+        pub playback_stack: TemplateChild<gtk::Stack>,
+        #[template_child]
         pub toggle_playback_button: TemplateChild<gtk::Button>,
+        #[template_child]
+        pub buffering_spinner: TemplateChild<gtk::Spinner>,
 
         pub song: RefCell<Option<Song>>,
         pub audio_player_widget: RefCell<Option<WeakRef<AudioPlayerWidget>>>,
         pub state_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
+        pub is_buffering_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
     }
 
     #[glib::object_subclass]
@@ -89,7 +94,7 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            obj.update_toggle_playback_button_visibility();
+            obj.update_playback_stack_visibility();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -122,7 +127,7 @@ impl SongCell {
         imp.album_art.set_song(song.clone());
 
         imp.song.replace(song);
-        self.update_toggle_playback_button_visibility();
+        self.update_playback_stack_visibility();
 
         self.notify("song");
     }
@@ -133,15 +138,22 @@ impl SongCell {
 
     pub fn bind(&self, audio_player_widget: Option<&AudioPlayerWidget>) {
         if let Some(audio_player_widget) = audio_player_widget {
-            self.update_toggle_playback_button(audio_player_widget);
+            self.update_playback_ui(audio_player_widget);
 
             let imp = self.imp();
             imp.state_notify_handler_id
                 .replace(Some(audio_player_widget.connect_state_notify(
                     clone!(@weak self as obj, @weak audio_player_widget => move |_| {
-                        obj.update_toggle_playback_button(&audio_player_widget);
+                        obj.update_playback_ui(&audio_player_widget);
                     }),
                 )));
+            imp.is_buffering_notify_handler_id.replace(Some(
+                audio_player_widget.connect_is_buffering_notify(
+                    clone!(@weak self as obj, @weak audio_player_widget => move |_| {
+                        obj.update_playback_ui(&audio_player_widget);
+                    }),
+                ),
+            ));
             imp.audio_player_widget
                 .replace(Some(audio_player_widget.downgrade()));
         }
@@ -183,14 +195,27 @@ impl SongCell {
         Ok(())
     }
 
-    fn update_toggle_playback_button(&self, audio_player_widget: &AudioPlayerWidget) {
+    fn update_playback_ui(&self, audio_player_widget: &AudioPlayerWidget) {
         if let Some(ref song) = self.song() {
-            let toggle_playback_button = &self.imp().toggle_playback_button;
+            let imp = self.imp();
+            let toggle_playback_button = &imp.toggle_playback_button.get();
+            let buffering_spinner = &imp.buffering_spinner.get();
 
             if !audio_player_widget.is_current_playing(song) {
                 toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                imp.playback_stack.set_visible_child(toggle_playback_button);
+                buffering_spinner.set_spinning(false);
                 return;
             }
+
+            if audio_player_widget.is_buffering() {
+                imp.playback_stack.set_visible_child(buffering_spinner);
+                buffering_spinner.set_spinning(true);
+                return;
+            }
+
+            imp.playback_stack.set_visible_child(toggle_playback_button);
+            buffering_spinner.set_spinning(true);
 
             match audio_player_widget.state() {
                 PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
@@ -203,9 +228,9 @@ impl SongCell {
         }
     }
 
-    fn update_toggle_playback_button_visibility(&self) {
+    fn update_playback_stack_visibility(&self) {
         self.imp()
-            .toggle_playback_button
+            .playback_stack
             .set_visible(self.song().and_then(|song| song.playback_link()).is_some());
     }
 }

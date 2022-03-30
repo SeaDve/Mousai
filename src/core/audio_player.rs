@@ -198,6 +198,13 @@ impl AudioPlayer {
         self.imp().uri.borrow().clone()
     }
 
+    pub fn connect_is_buffering_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("is-buffering"), move |obj, _| f(obj))
+    }
+
     pub fn is_buffering(&self) -> bool {
         self.imp().is_buffering.get()
     }

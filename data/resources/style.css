@@ -6,6 +6,10 @@ albumart > frame {
   border: none;
 }
 
+stack .circular {
+  border-radius: 99999px;
+}
+
 /* MainPage */
 
 .history-view {

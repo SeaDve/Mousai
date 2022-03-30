@@ -19,7 +19,11 @@ impl Provider for Mock {
                 "The London Symphony Orchestra",
                 "https://lis.tn/EineKleineNachtmusik",
             ),
-            Song::new("Make You Mine", "Public", "https://lis.tn/FUYgUV"),
+            {
+                let song = Song::new("Make You Mine", "Public", "https://lis.tn/FUYgUV");
+                song.set_playback_link(Some("https://listen.hs.llnwd.net/g3/prvw/1/3/1/4/2/1119824131.mp3"));
+                song
+            },
             {
                 let song = Song::new("Amnesia", "5 Seconds Of Summer", "https://lis.tn/WSKAzD");
                 song.set_album_art_link(Some(
@@ -39,6 +43,7 @@ impl Provider for Mock {
                 song.set_album_art_link(Some(
                     "https://i.scdn.co/image/ab67616d0000b273e3ae597159d6c2541c4ee61b",
                 ));
+                song.set_playback_link(Some("https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/22/67/5a/22675a39-eaa1-1059-f59f-9663fbbb513a/mzaf_9692204965232946435.plus.aac.p.m4a"));
                 song
             },
             {

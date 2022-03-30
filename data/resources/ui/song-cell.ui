@@ -16,12 +16,24 @@
           </object>
         </property>
         <child type="overlay">
-          <object class="GtkButton" id="toggle_playback_button">
-            <property name="margin-end">12</property>
-            <property name="margin-bottom">12</property>
+          <object class="GtkStack" id="playback_stack">
             <property name="halign">end</property>
             <property name="valign">end</property>
-            <property name="action-name">song-cell.toggle-playback</property>
+            <property name="margin-end">12</property>
+            <property name="margin-bottom">12</property>
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkSpinner" id="buffering_spinner">
+                <property name="valign">center</property>
+                <property name="width-request">24</property>
+                <property name="height-request">24</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="toggle_playback_button">
+                <property name="action-name">song-cell.toggle-playback</property>
+              </object>
+            </child>
             <style>
               <class name="osd"/>
               <class name="circular"/>
