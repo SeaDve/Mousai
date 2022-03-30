@@ -6,6 +6,8 @@ albumart > frame {
   border: none;
 }
 
+/* MainPage */
+
 .history-view {
   padding: 24px;
 }
@@ -13,4 +15,32 @@ albumart > frame {
 .history-view > child {
   margin: 6px;
   padding: 6px;
+}
+
+/* AudioPlayerWidget */
+
+.playback-button {
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.playback-position-scale {
+  padding: 0;
+  min-height: 6px;
+}
+
+.playback-position-scale trough,
+.playback-position-scale highlight {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  min-height: 6px;
+  transition: min-height 100ms ease-out;
+}
+
+.playback-position-scale:hover trough,
+.playback-position-scale:hover highlight,
+.playback-position-scale:active trough,
+.playback-position-scale:active highlight {
+  min-height: 12px;
 }

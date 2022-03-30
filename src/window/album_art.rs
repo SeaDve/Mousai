@@ -148,6 +148,7 @@ impl AlbumArt {
 
     pub fn set_pixel_size(&self, pixel_size: i32) {
         self.imp().image.set_pixel_size(pixel_size);
+        self.imp().placeholder.set_pixel_size(pixel_size / 3);
         self.notify("pixel-size");
     }
 

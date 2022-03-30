@@ -1,8 +1,10 @@
 mod album_art;
+mod audio_player_widget;
 mod audio_visualizer;
 mod main_page;
 mod song_cell;
 mod song_page;
+mod time_label;
 
 use adw::subclass::prelude::*;
 use gtk::{
@@ -12,8 +14,11 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use self::{main_page::MainPage, song_cell::SongCell, song_page::SongPage};
-use crate::{config::PROFILE, Application};
+use self::{
+    audio_player_widget::AudioPlayerWidget, main_page::MainPage, song_cell::SongCell,
+    song_page::SongPage,
+};
+use crate::{config::PROFILE, model::Song, Application};
 
 mod imp {
     use super::*;
@@ -23,11 +28,15 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
         #[template_child]
+        pub flap: TemplateChild<adw::Flap>,
+        #[template_child]
         pub main_stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub main_page: TemplateChild<MainPage>,
         #[template_child]
         pub song_page: TemplateChild<SongPage>,
+        #[template_child]
+        pub audio_player_widget: TemplateChild<AudioPlayerWidget>,
     }
 
     #[glib::object_subclass]
@@ -65,6 +74,8 @@ mod imp {
             }
 
             obj.setup_signals();
+            obj.setup_bindings();
+
             obj.load_window_size();
         }
     }
@@ -99,7 +110,11 @@ impl Window {
         glib::Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
-    pub fn setup_signals(&self) {
+    pub fn audio_player_widget(&self) -> AudioPlayerWidget {
+        self.imp().audio_player_widget.clone()
+    }
+
+    fn setup_signals(&self) {
         self.imp()
             .main_page
             .connect_song_activated(clone!(@weak self as obj => move |_, song| {
@@ -107,6 +122,18 @@ impl Window {
                 imp.song_page.set_song(Some(song.clone()));
                 imp.main_stack.set_visible_child(&imp.song_page.get());
             }));
+    }
+
+    fn setup_bindings(&self) {
+        let imp = self.imp();
+        imp.audio_player_widget
+            .bind_property("song", &imp.flap.get(), "reveal-flap")
+            .transform_to(|_, value| {
+                let song: Option<Song> = value.get().unwrap();
+                Some(song.is_some().to_value())
+            })
+            .flags(glib::BindingFlags::SYNC_CREATE)
+            .build();
     }
 
     fn load_window_size(&self) {

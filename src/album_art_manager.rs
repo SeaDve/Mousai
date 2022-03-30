@@ -74,7 +74,7 @@ impl AlbumArtManager {
                 store.insert(song_id, texture);
             }
             Err(err) => {
-                log::error!("Failed to get a lock of AlbumArtManager store Mutex: {err}");
+                log::error!("Failed to get a lock of AlbumArtManager store Mutex: {err:?}");
             }
         }
     }

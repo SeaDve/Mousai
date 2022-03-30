@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiTimeLabel" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="GtkLabel" id="label">
+        <style>
+          <class name="numeric"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>

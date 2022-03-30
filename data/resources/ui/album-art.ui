@@ -13,7 +13,6 @@
             <child>
               <object class="GtkImage" id="placeholder">
                 <property name="icon-name">emblem-music-symbolic</property>
-                <property name="pixel-size">60</property>
                 <style>
                   <class name="dim-label"/>
                 </style>

@@ -218,7 +218,7 @@ impl Song {
         ALBUM_ART_MANAGER
             .get_or_init(self)
             .await
-            .map_err(|err| log::debug!("Song doesn't return an album art because {err}"))
+            .map_err(|err| log::debug!("Song doesn't return an album art because {err:?}"))
             .ok()
     }
 }

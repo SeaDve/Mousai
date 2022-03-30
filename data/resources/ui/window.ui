@@ -2,14 +2,24 @@
 <interface>
   <template class="MsaiWindow" parent="AdwApplicationWindow">
     <property name="content">
-      <object class="GtkStack" id="main_stack">
-        <property name="transition-type">over-left-right</property>
-        <child>
-          <object class="MsaiMainPage" id="main_page"/>
-        </child>
-        <child>
-          <object class="MsaiSongPage" id="song_page"/>
-        </child>
+      <object class="AdwFlap" id="flap">
+        <property name="orientation">vertical</property>
+        <property name="flap-position">end</property>
+        <property name="fold-policy">never</property>
+        <property name="content">
+          <object class="GtkStack" id="main_stack">
+            <property name="transition-type">over-left-right</property>
+            <child>
+              <object class="MsaiMainPage" id="main_page"/>
+            </child>
+            <child>
+              <object class="MsaiSongPage" id="song_page"/>
+            </child>
+          </object>
+        </property>
+        <property name="flap">
+          <object class="MsaiAudioPlayerWidget" id="audio_player_widget"/>
+        </property>
       </object>
     </property>
   </template>

@@ -324,7 +324,7 @@ impl MainPage {
         history_view.connect_activate(clone!(@weak self as obj => move |_, index| {
             match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {
                 Some(ref song) => obj.emit_by_name("song-activated", &[song]),
-                None => log::warn!("Activated `{index}`, but found no song.")
+                None => log::error!("Activated `{index}`, but found no song.")
             }
         }));
     }

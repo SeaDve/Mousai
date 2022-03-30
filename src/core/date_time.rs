@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(
     Debug, Clone, Copy, glib::Boxed, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord,
 )]
-#[boxed_type(name = "NwtyDateTime")]
+#[boxed_type(name = "MsaiDateTime")]
 #[serde(transparent)]
 pub struct DateTime(chrono::DateTime<Local>);
 

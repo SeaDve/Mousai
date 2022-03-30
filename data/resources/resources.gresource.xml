@@ -2,10 +2,12 @@
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai/">
     <file compressed="true" preprocess="xml-stripblanks">ui/album-art.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/audio-player-widget.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/main-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-cell.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-page.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/time-label.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/window.ui</file>
     <file compressed="true">style.css</file>
   </gresource>
