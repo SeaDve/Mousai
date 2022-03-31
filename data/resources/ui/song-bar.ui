@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiAudioPlayerWidget" parent="GtkWidget">
+  <template class="MsaiSongBar" parent="GtkWidget">
     <property name="layout-manager">
       <object class="GtkBoxLayout">
         <property name="orientation">vertical</property>
@@ -31,6 +31,7 @@
         <child type="start">
           <object class="GtkBox">
             <property name="spacing">12</property>
+            <!-- TODO: Make this clickable then enter SongPage -->
             <child>
               <object class="MsaiAlbumArt" id="album_art">
                 <property name="pixel-size">42</property>
@@ -47,7 +48,7 @@
                     <property name="ellipsize">end</property>
                     <binding name="label">
                       <lookup name="title">
-                        <lookup name="song">MsaiAudioPlayerWidget</lookup>
+                        <lookup name="song">MsaiSongBar</lookup>
                       </lookup>
                     </binding>
                   </object>
@@ -59,7 +60,7 @@
                     <property name="ellipsize">end</property>
                     <binding name="label">
                       <lookup name="artist">
-                        <lookup name="song">MsaiAudioPlayerWidget</lookup>
+                        <lookup name="song">MsaiSongBar</lookup>
                       </lookup>
                     </binding>
                     <style>
@@ -85,7 +86,7 @@
             <child>
               <object class="GtkButton" id="playback_button">
                 <property name="valign">center</property>
-                <property name="action-name">audio-player-widget.toggle-playback</property>
+                <property name="action-name">song-bar.toggle-playback</property>
                 <style>
                   <class name="circular"/>
                   <class name="playback-button"/>
@@ -95,7 +96,7 @@
             <child>
               <object class="GtkButton">
                 <property name="valign">center</property>
-                <property name="action-name">audio-player-widget.clear</property>
+                <property name="action-name">song-bar.clear</property>
                 <property name="icon-name">media-playback-stop-symbolic</property>
                 <style>
                   <class name="circular"/>

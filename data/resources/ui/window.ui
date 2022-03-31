@@ -18,7 +18,7 @@
           </object>
         </property>
         <property name="flap">
-          <object class="MsaiAudioPlayerWidget" id="audio_player_widget"/>
+          <object class="MsaiSongBar" id="song_bar"/>
         </property>
       </object>
     </property>

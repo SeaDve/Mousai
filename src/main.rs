@@ -23,6 +23,7 @@ mod core;
 mod model;
 mod provider;
 mod recognizer;
+mod song_player;
 mod utils;
 mod window;
 

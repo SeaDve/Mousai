@@ -6,8 +6,8 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use super::{album_art::AlbumArt, audio_player_widget::AudioPlayerWidget};
-use crate::{core::PlaybackState, model::Song};
+use super::album_art::AlbumArt;
+use crate::{core::PlaybackState, model::Song, song_player::SongPlayer};
 
 mod imp {
     use super::*;
@@ -28,7 +28,7 @@ mod imp {
         pub buffering_spinner: TemplateChild<gtk::Spinner>,
 
         pub song: RefCell<Option<Song>>,
-        pub audio_player_widget: RefCell<Option<WeakRef<AudioPlayerWidget>>>,
+        pub player: RefCell<Option<WeakRef<SongPlayer>>>,
         pub state_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
         pub is_buffering_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
     }
@@ -136,58 +136,50 @@ impl SongCell {
         self.imp().song.borrow().clone()
     }
 
-    pub fn bind(&self, audio_player_widget: Option<&AudioPlayerWidget>) {
-        if let Some(audio_player_widget) = audio_player_widget {
-            self.update_playback_ui(audio_player_widget);
+    pub fn bind(&self, player: Option<&SongPlayer>) {
+        if let Some(player) = player {
+            self.update_playback_ui(player);
 
             let imp = self.imp();
             imp.state_notify_handler_id
-                .replace(Some(audio_player_widget.connect_state_notify(
-                    clone!(@weak self as obj, @weak audio_player_widget => move |_| {
-                        obj.update_playback_ui(&audio_player_widget);
+                .replace(Some(player.connect_state_notify(
+                    clone!(@weak self as obj, @weak player => move |_| {
+                        obj.update_playback_ui(&player);
                     }),
                 )));
-            imp.is_buffering_notify_handler_id.replace(Some(
-                audio_player_widget.connect_is_buffering_notify(
-                    clone!(@weak self as obj, @weak audio_player_widget => move |_| {
-                        obj.update_playback_ui(&audio_player_widget);
+            imp.is_buffering_notify_handler_id
+                .replace(Some(player.connect_is_buffering_notify(
+                    clone!(@weak self as obj, @weak player => move |_| {
+                        obj.update_playback_ui(&player);
                     }),
-                ),
-            ));
-            imp.audio_player_widget
-                .replace(Some(audio_player_widget.downgrade()));
+                )));
+            imp.player.replace(Some(player.downgrade()));
         }
     }
 
     pub fn unbind(&self) {
         let imp = self.imp();
         if let Some(handler_id) = imp.state_notify_handler_id.take() {
-            if let Some(audio_player_widget) = imp
-                .audio_player_widget
-                .take()
-                .and_then(|audio_player_widget| audio_player_widget.upgrade())
-            {
-                audio_player_widget.disconnect(handler_id);
+            if let Some(player) = imp.player.take().and_then(|player| player.upgrade()) {
+                player.disconnect(handler_id);
             }
         }
     }
 
     fn toggle_playback(&self) -> anyhow::Result<()> {
-        if let Some(ref audio_player_widget) = self
+        if let Some(ref player) = self
             .imp()
-            .audio_player_widget
+            .player
             .borrow()
             .as_ref()
-            .and_then(|audio_player_widget| audio_player_widget.upgrade())
+            .and_then(|player| player.upgrade())
         {
             if let Some(song) = self.song() {
-                if audio_player_widget.state() == PlaybackState::Playing
-                    && audio_player_widget.is_current_playing(&song)
-                {
-                    audio_player_widget.pause()?;
+                if player.state() == PlaybackState::Playing && player.is_current_playing(&song) {
+                    player.pause()?;
                 } else {
-                    audio_player_widget.set_song(Some(song))?;
-                    audio_player_widget.play()?;
+                    player.set_song(Some(song))?;
+                    player.play()?;
                 }
             }
         }
@@ -195,20 +187,20 @@ impl SongCell {
         Ok(())
     }
 
-    fn update_playback_ui(&self, audio_player_widget: &AudioPlayerWidget) {
+    fn update_playback_ui(&self, player: &SongPlayer) {
         if let Some(ref song) = self.song() {
             let imp = self.imp();
             let toggle_playback_button = &imp.toggle_playback_button.get();
             let buffering_spinner = &imp.buffering_spinner.get();
 
-            if !audio_player_widget.is_current_playing(song) {
+            if !player.is_current_playing(song) {
                 toggle_playback_button.set_icon_name("media-playback-start-symbolic");
                 imp.playback_stack.set_visible_child(toggle_playback_button);
                 buffering_spinner.set_spinning(false);
                 return;
             }
 
-            if audio_player_widget.is_buffering() {
+            if player.is_buffering() {
                 imp.playback_stack.set_visible_child(buffering_spinner);
                 buffering_spinner.set_spinning(true);
                 return;
@@ -217,7 +209,7 @@ impl SongCell {
             imp.playback_stack.set_visible_child(toggle_playback_button);
             buffering_spinner.set_spinning(true);
 
-            match audio_player_widget.state() {
+            match player.state() {
                 PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
                     toggle_playback_button.set_icon_name("media-playback-start-symbolic");
                 }

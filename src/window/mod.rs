@@ -1,7 +1,7 @@
 mod album_art;
-mod audio_player_widget;
 mod audio_visualizer;
 mod main_page;
+mod song_bar;
 mod song_cell;
 mod song_page;
 mod time_label;
@@ -14,10 +14,8 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use std::{cell::RefCell, rc::Rc};
-
-use self::{audio_player_widget::AudioPlayerWidget, main_page::MainPage, song_page::SongPage};
-use crate::{config::PROFILE, model::Song, Application};
+use self::{main_page::MainPage, song_bar::SongBar, song_page::SongPage};
+use crate::{config::PROFILE, model::Song, song_player::SongPlayer, Application};
 
 mod imp {
     use super::*;
@@ -35,7 +33,9 @@ mod imp {
         #[template_child]
         pub song_page: TemplateChild<SongPage>,
         #[template_child]
-        pub audio_player_widget: TemplateChild<AudioPlayerWidget>,
+        pub song_bar: TemplateChild<SongBar>,
+
+        pub player: SongPlayer,
     }
 
     #[glib::object_subclass]
@@ -70,6 +70,8 @@ mod imp {
             if PROFILE == "Devel" {
                 obj.add_css_class("devel");
             }
+
+            self.song_bar.bind_player(&self.player);
 
             obj.setup_signals();
             obj.setup_bindings();
@@ -108,30 +110,8 @@ impl Window {
         glib::Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
-    pub fn audio_player_widget(&self) -> AudioPlayerWidget {
-        self.imp().audio_player_widget.clone()
-    }
-
-    async fn wait_for_realize(&self) {
-        if self.is_realized() {
-            return;
-        }
-
-        let handler_id = Rc::new(RefCell::new(None));
-        let handler_id_clone = handler_id.clone();
-
-        let future: gio::GioFuture<_, _, _, i32> =
-            gio::GioFuture::new(self, move |obj, _, send| {
-                let send = RefCell::new(Some(send));
-                handler_id_clone.replace(Some(
-                    obj.connect_realize(move |_| send.take().unwrap().resolve(Ok(()))),
-                ));
-            });
-        let _ = Box::pin(future).await;
-
-        if let Some(handler_id) = handler_id.take() {
-            self.disconnect(handler_id);
-        }
+    pub fn player(&self) -> SongPlayer {
+        self.imp().player.clone()
     }
 
     fn setup_signals(&self) {
@@ -146,7 +126,7 @@ impl Window {
 
     fn setup_bindings(&self) {
         let imp = self.imp();
-        imp.audio_player_widget
+        imp.player
             .bind_property("song", &imp.flap.get(), "reveal-flap")
             .transform_to(|_, value| {
                 let song: Option<Song> = value.get().unwrap();

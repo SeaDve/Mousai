@@ -164,13 +164,13 @@ impl MainPage {
         error_dialog.present();
     }
 
-    fn stop_audio_player(&self) -> anyhow::Result<()> {
-        if let Some(audio_player_widget) = self
+    fn stop_player(&self) -> anyhow::Result<()> {
+        if let Some(player) = self
             .root()
             .and_then(|root| root.downcast::<Window>().ok())
-            .map(|window| window.audio_player_widget())
+            .map(|window| window.player())
         {
-            audio_player_widget.set_song(None)?;
+            player.set_song(None)?;
             Ok(())
         } else {
             Err(anyhow::anyhow!(
@@ -194,7 +194,7 @@ impl MainPage {
                 }));
             }
             RecognizerState::Null => {
-                if let Err(err) = self.stop_audio_player() {
+                if let Err(err) = self.stop_player() {
                     log::warn!("Failed to stop player before listening: {err:?}");
                 }
 
@@ -357,11 +357,7 @@ impl MainPage {
                 .expect("HistoryView list item should have a child of SongCell");
 
             if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
-                // FIXME: less hacky way to setup audio player widget
-                spawn!(async move {
-                    window.wait_for_realize().await;
-                    song_cell.bind(Some(&window.audio_player_widget()));
-                });
+                song_cell.bind(Some(&window.player()));
             } else {
                 log::error!("Cannot bind SongCell to AudioPlayerWidget: MainPage doesn't have root");
             }
