@@ -284,7 +284,7 @@ impl SongPlayer {
     fn update_mpris_playback_status(&self) {
         let mpris_player = self.mpris_player();
         mpris_player.set_playback_status(match self.imp().audio_player.state() {
-            PlaybackState::Stopped | PlaybackState::Loading => MprisPlaybackStatus::Paused,
+            PlaybackState::Stopped | PlaybackState::Loading => MprisPlaybackStatus::Stopped,
             PlaybackState::Playing => MprisPlaybackStatus::Playing,
             PlaybackState::Paused => MprisPlaybackStatus::Paused,
         });
