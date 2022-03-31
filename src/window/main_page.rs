@@ -213,6 +213,7 @@ impl MainPage {
 
             match recognizer.listen_finish().await {
                 Ok(song) => {
+                    obj.emit_by_name::<()>("song-activated", &[&song]);
                     obj.history().append(song);
                 }
                 Err(err) => {
@@ -375,7 +376,7 @@ impl MainPage {
 
         history_view.connect_activate(clone!(@weak self as obj => move |_, index| {
             match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {
-                Some(ref song) => obj.emit_by_name("song-activated", &[song]),
+                Some(ref song) => obj.emit_by_name::<()>("song-activated", &[song]),
                 None => log::error!("Activated `{index}`, but found no song.")
             }
         }));
