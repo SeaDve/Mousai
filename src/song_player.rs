@@ -213,6 +213,7 @@ impl SongPlayer {
     }
 
     pub async fn duration(&self) -> anyhow::Result<ClockTime> {
+        // TODO cache duration. Invalidate it on song changed
         self.imp().audio_player.duration().await
     }
 
