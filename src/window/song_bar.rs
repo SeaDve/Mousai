@@ -162,7 +162,6 @@ impl SongBar {
                 })
             );
         } else {
-            imp.playback_position_label.reset();
             imp.duration_label.reset();
         }
 
@@ -282,8 +281,6 @@ impl SongBar {
 
         match state {
             PlaybackState::Stopped | PlaybackState::Loading => {
-                self.set_playback_position_scale_value_blocking(0.0);
-                imp.playback_position_label.reset();
                 imp.playback_position_scale.set_sensitive(false);
             }
             PlaybackState::Playing | PlaybackState::Paused => {

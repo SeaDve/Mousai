@@ -56,7 +56,7 @@ mod imp {
                 .set(window.downgrade())
                 .expect("Window already set.");
 
-            obj.main_window().present();
+            window.present();
         }
 
         fn startup(&self, obj: &Self::Type) {
@@ -101,13 +101,12 @@ impl Application {
         ApplicationExtManual::run(self);
     }
 
-    fn main_window(&self) -> Window {
-        self.imp().window.get().unwrap().upgrade().unwrap()
+    pub fn main_window(&self) -> Option<Window> {
+        self.imp().window.get().and_then(|window| window.upgrade())
     }
 
     fn show_about_dialog(&self) {
         let dialog = gtk::AboutDialog::builder()
-            .transient_for(&self.main_window())
             .modal(true)
             .comments(&gettext("Identify any songs in seconds"))
             .version(VERSION)
@@ -120,14 +119,16 @@ impl Application {
             .website("https://github.com/SeaDve/Mousai")
             .website_label(&gettext("GitHub"))
             .build();
-
+        dialog.set_transient_for(self.main_window().as_ref());
         dialog.present();
     }
 
     fn setup_gactions(&self) {
         let action_quit = gio::SimpleAction::new("quit", None);
         action_quit.connect_activate(clone!(@weak self as obj => move |_, _| {
-            obj.main_window().close();
+            if let Some(ref main_window) = obj.main_window() {
+                main_window.close();
+            }
             obj.quit();
         }));
         self.add_action(&action_quit);

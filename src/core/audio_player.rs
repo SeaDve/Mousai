@@ -219,6 +219,10 @@ impl AudioPlayer {
     }
 
     pub fn query_position(&self) -> anyhow::Result<ClockTime> {
+        if self.state() == PlaybackState::Stopped {
+            return Ok(ClockTime::ZERO);
+        }
+
         match self
             .get_or_try_init_player()?
             .query_position::<gst::ClockTime>()

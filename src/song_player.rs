@@ -3,12 +3,16 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use mpris_player::{Metadata as MprisMetadata, MprisPlayer, PlaybackStatus as MprisPlaybackStatus};
+use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, time::Duration};
+use std::{cell::RefCell, sync::Arc, time::Duration};
 
 use crate::{
+    config::APP_ID,
     core::{AudioPlayer, ClockTime, PlaybackState},
     model::Song,
+    spawn, Application,
 };
 
 mod imp {
@@ -19,6 +23,7 @@ mod imp {
     pub struct SongPlayer {
         pub song: RefCell<Option<Song>>,
         pub audio_player: AudioPlayer,
+        pub mpris_player: OnceCell<Arc<MprisPlayer>>,
     }
 
     #[glib::object_subclass]
@@ -98,6 +103,14 @@ mod imp {
 
             self.audio_player
                 .connect_state_notify(clone!(@weak obj => move |_| {
+                    obj.update_mpris_playback_status();
+                    obj.update_mpris_can_pause();
+
+                    if matches!(obj.imp().audio_player.state(), PlaybackState::Stopped) {
+                        obj.update_mpris_position();
+                        obj.notify("position");
+                    }
+
                     obj.notify("state");
                 }));
 
@@ -106,11 +119,12 @@ mod imp {
                     obj.notify("is-buffering");
                 }));
 
-            // Notify position every 500ms
+            // Notify position every 200ms
             glib::timeout_add_local(
-                Duration::from_millis(500),
+                Duration::from_millis(200),
                 clone!(@weak obj => @default-return Continue(false), move || {
                     if obj.imp().audio_player.state() == PlaybackState::Playing {
+                        obj.update_mpris_position();
                         obj.notify("position");
                     }
 
@@ -147,6 +161,9 @@ impl SongPlayer {
         }
 
         imp.song.replace(song);
+        self.update_mpris_metadata();
+        self.update_mpris_can_play();
+
         self.notify("song");
 
         Ok(())
@@ -215,6 +232,114 @@ impl SongPlayer {
 
     pub fn seek(&self, position: ClockTime) -> anyhow::Result<()> {
         self.imp().audio_player.seek(position)
+    }
+
+    fn update_mpris_metadata(&self) {
+        let mpris_player = self.mpris_player();
+
+        if let Some(song) = self.song() {
+            spawn!(clone!(@weak self as obj => async move {
+                // TODO: Fill in the Nones
+                let duration = obj
+                    .imp()
+                    .audio_player
+                    .duration()
+                    .await
+                    .map(|duration| duration.as_micros() as i64)
+                    .ok();
+
+                obj.mpris_player().set_metadata(MprisMetadata {
+                    length: duration,
+                    art_url: song.album_art_link(),
+                    album: None,
+                    album_artist: None,
+                    artist: Some(vec![song.artist()]),
+                    composer: None,
+                    disc_number: None,
+                    genre: None,
+                    title: Some(song.title()),
+                    track_number: None,
+                    url: None,
+                });
+            }));
+        } else {
+            mpris_player.set_metadata(MprisMetadata::new());
+        }
+    }
+
+    fn update_mpris_position(&self) {
+        self.mpris_player()
+            .set_position(self.position().as_micros() as i64);
+    }
+
+    fn update_mpris_can_play(&self) {
+        self.mpris_player().set_can_play(self.song().is_some());
+    }
+
+    fn update_mpris_can_pause(&self) {
+        self.mpris_player()
+            .set_can_pause(matches!(self.state(), PlaybackState::Playing));
+    }
+
+    fn update_mpris_playback_status(&self) {
+        let mpris_player = self.mpris_player();
+        mpris_player.set_playback_status(match self.imp().audio_player.state() {
+            PlaybackState::Stopped | PlaybackState::Loading => MprisPlaybackStatus::Paused,
+            PlaybackState::Playing => MprisPlaybackStatus::Playing,
+            PlaybackState::Paused => MprisPlaybackStatus::Paused,
+        });
+    }
+
+    fn mpris_player(&self) -> &Arc<MprisPlayer> {
+        self.imp().mpris_player.get_or_init(|| {
+            let mpris_player = MprisPlayer::new(APP_ID.into(), "Mousai".into(), APP_ID.into());
+
+            mpris_player.set_can_raise(true);
+            mpris_player.set_can_seek(true);
+            mpris_player.set_can_set_fullscreen(false);
+            mpris_player.set_can_go_previous(false);
+            mpris_player.set_can_go_next(false);
+
+            mpris_player.connect_raise(|| {
+                Application::default().activate();
+            });
+
+            mpris_player.connect_play_pause(clone!(@weak self as obj => move || {
+                if obj.state() == PlaybackState::Playing {
+                    obj.pause().unwrap_or_else(|err| log::warn!("Failed to pause SongPlayer: {err:?}"));
+                } else {
+                    obj.play().unwrap_or_else(|err| log::warn!("Failed to play SongPlayer: {err:?}"));
+                }
+            }));
+
+            mpris_player.connect_play(clone!(@weak self as obj => move || {
+                obj.play().unwrap_or_else(|err| log::warn!("Failed to play SongPlayer: {err:?}"));
+            }));
+
+            mpris_player.connect_stop(clone!(@weak self as obj => move || {
+                obj.set_song(None).unwrap_or_else(|err| log::warn!("Failed to stop and clear song: {err:?}"));
+            }));
+
+            mpris_player.connect_pause(clone!(@weak self as obj => move || {
+                obj.pause().unwrap_or_else(|err| log::warn!("Failed to pause SongPlayer: {err:?}"));
+            }));
+
+            mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
+                let offset = ClockTime::from_micros(offset_micros.abs() as u64);
+                let current_position = obj.position();
+
+                let new_position = if offset_micros < 0 {
+                    current_position - offset
+                } else {
+                    current_position + offset
+                };
+                obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
+            }));
+
+            log::info!("Done setting up MPRIS server");
+
+            mpris_player
+        })
     }
 }
 

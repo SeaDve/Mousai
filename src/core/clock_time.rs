@@ -18,12 +18,36 @@ impl ClockTime {
         Self(Duration::from_secs(secs))
     }
 
+    pub const fn from_micros(micros: u64) -> Self {
+        Self(Duration::from_micros(micros))
+    }
+
     pub fn as_secs_f64(&self) -> f64 {
         self.0.as_secs_f64()
     }
 
     pub const fn as_secs(&self) -> u64 {
         self.0.as_secs()
+    }
+
+    pub const fn as_micros(&self) -> u128 {
+        self.0.as_micros()
+    }
+}
+
+impl std::ops::Add for ClockTime {
+    type Output = Self;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Self(self.0.add(rhs.0))
+    }
+}
+
+impl std::ops::Sub for ClockTime {
+    type Output = Self;
+
+    fn sub(self, rhs: Self) -> Self::Output {
+        Self(self.0.sub(rhs.0))
     }
 }
 
