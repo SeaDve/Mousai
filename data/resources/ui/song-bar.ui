@@ -25,7 +25,7 @@
     <child>
       <object class="GtkCenterBox">
         <property name="margin-start">6</property>
-        <property name="margin-end">6</property>
+        <property name="margin-end">12</property>
         <property name="margin-top">6</property>
         <property name="margin-bottom">6</property>
         <child type="start">
@@ -77,6 +77,7 @@
             </property>
             <style>
               <class name="flat"/>
+              <class name="activate-song-button"/>
             </style>
           </object>
         </child>
