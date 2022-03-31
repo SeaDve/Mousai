@@ -115,8 +115,16 @@ impl Window {
     }
 
     fn setup_signals(&self) {
-        self.imp()
-            .main_page
+        let imp = self.imp();
+
+        imp.main_page
+            .connect_song_activated(clone!(@weak self as obj => move |_, song| {
+                let imp = obj.imp();
+                imp.song_page.set_song(Some(song.clone()));
+                imp.main_stack.set_visible_child(&imp.song_page.get());
+            }));
+
+        imp.song_bar
             .connect_song_activated(clone!(@weak self as obj => move |_, song| {
                 let imp = obj.imp();
                 imp.song_page.set_song(Some(song.clone()));

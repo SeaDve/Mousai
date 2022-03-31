@@ -17,6 +17,7 @@ use crate::{
 
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
     use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
@@ -62,6 +63,12 @@ mod imp {
                     log::info!("Failed to clear SongBar song: {err:?}");
                 }
             });
+
+            klass.install_action("song-bar.activate-song", None, |obj, _, _| {
+                if let Some(ref song) = obj.song() {
+                    obj.emit_by_name::<()>("song-activated", &[song]);
+                }
+            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -70,6 +77,18 @@ mod imp {
     }
 
     impl ObjectImpl for SongBar {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder(
+                    "song-activated",
+                    &[Song::static_type().into()],
+                    <()>::static_type().into(),
+                )
+                .build()]
+            });
+            SIGNALS.as_ref()
+        }
+
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![glib::ParamSpecObject::new(
@@ -141,6 +160,18 @@ glib::wrapper! {
 impl SongBar {
     pub fn new() -> Self {
         glib::Object::new(&[]).expect("Failed to create SongBar")
+    }
+
+    pub fn connect_song_activated<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, &Song) + 'static,
+    {
+        self.connect_local("song-activated", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            let song = values[1].get::<Song>().unwrap();
+            f(&obj, &song);
+            None
+        })
     }
 
     pub fn set_song(&self, song: Option<Song>) -> anyhow::Result<()> {

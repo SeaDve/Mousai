@@ -24,53 +24,60 @@
     </child>
     <child>
       <object class="GtkCenterBox">
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
         <child type="start">
-          <object class="GtkBox">
-            <property name="spacing">12</property>
-            <!-- TODO: Make this clickable then enter SongPage -->
-            <child>
-              <object class="MsaiAlbumArt" id="album_art">
-                <property name="pixel-size">42</property>
-              </object>
-            </child>
-            <child>
+          <object class="GtkButton">
+            <property name="action-name">song-bar.activate-song</property>
+            <property name="child">
               <object class="GtkBox">
-                <property name="valign">center</property>
-                <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="justify">left</property>
-                    <property name="xalign">0</property>
-                    <property name="ellipsize">end</property>
-                    <binding name="label">
-                      <lookup name="title">
-                        <lookup name="song">MsaiSongBar</lookup>
-                      </lookup>
-                    </binding>
+                  <object class="MsaiAlbumArt" id="album_art">
+                    <property name="pixel-size">42</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="justify">left</property>
-                    <property name="xalign">0</property>
-                    <property name="ellipsize">end</property>
-                    <binding name="label">
-                      <lookup name="artist">
-                        <lookup name="song">MsaiSongBar</lookup>
-                      </lookup>
-                    </binding>
-                    <style>
-                      <class name="caption"/>
-                      <class name="dim-label"/>
-                    </style>
+                  <object class="GtkBox">
+                    <property name="valign">center</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="justify">left</property>
+                        <property name="xalign">0</property>
+                        <property name="ellipsize">end</property>
+                        <binding name="label">
+                          <lookup name="title">
+                            <lookup name="song">MsaiSongBar</lookup>
+                          </lookup>
+                        </binding>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="justify">left</property>
+                        <property name="xalign">0</property>
+                        <property name="ellipsize">end</property>
+                        <binding name="label">
+                          <lookup name="artist">
+                            <lookup name="song">MsaiSongBar</lookup>
+                          </lookup>
+                        </binding>
+                        <style>
+                          <class name="caption"/>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
+            <style>
+              <class name="flat"/>
+            </style>
           </object>
         </child>
         <child type="center">
