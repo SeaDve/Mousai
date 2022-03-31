@@ -250,7 +250,7 @@ impl SongPlayer {
 
                 obj.mpris_player().set_metadata(MprisMetadata {
                     length: duration,
-                    art_url: song.album_art_link(),
+                    art_url: song.album_art_link(), // FIXME: Use in disk cache instead of the link
                     album: None,
                     album_artist: None,
                     artist: Some(vec![song.artist()]),
