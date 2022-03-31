@@ -33,21 +33,13 @@ impl ClockTime {
     pub const fn as_micros(&self) -> u128 {
         self.0.as_micros()
     }
-}
 
-impl std::ops::Add for ClockTime {
-    type Output = Self;
-
-    fn add(self, rhs: Self) -> Self::Output {
-        Self(self.0.add(rhs.0))
+    pub const fn saturating_add(&self, rhs: Self) -> Self {
+        Self(self.0.saturating_add(rhs.0))
     }
-}
 
-impl std::ops::Sub for ClockTime {
-    type Output = Self;
-
-    fn sub(self, rhs: Self) -> Self::Output {
-        Self(self.0.sub(rhs.0))
+    pub const fn saturating_sub(&self, rhs: Self) -> Self {
+        Self(self.0.saturating_sub(rhs.0))
     }
 }
 

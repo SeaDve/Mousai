@@ -329,9 +329,9 @@ impl SongPlayer {
                 let current_position = obj.position();
 
                 let new_position = if offset_micros < 0 {
-                    current_position - offset
+                    current_position.saturating_sub(offset)
                 } else {
-                    current_position + offset
+                    current_position.saturating_add(offset)
                 };
                 obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
             }));
