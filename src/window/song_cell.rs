@@ -159,8 +159,12 @@ impl SongCell {
 
     pub fn unbind(&self) {
         let imp = self.imp();
-        if let Some(handler_id) = imp.state_notify_handler_id.take() {
-            if let Some(player) = imp.player.take().and_then(|player| player.upgrade()) {
+
+        if let Some(player) = imp.player.take().and_then(|player| player.upgrade()) {
+            if let Some(handler_id) = imp.state_notify_handler_id.take() {
+                player.disconnect(handler_id);
+            }
+            if let Some(handler_id) = imp.is_buffering_notify_handler_id.take() {
                 player.disconnect(handler_id);
             }
         }
