@@ -8,7 +8,7 @@ use gtk::{
 use std::cell::RefCell;
 
 use super::album_art::AlbumArt;
-use crate::{core::PlaybackState, model::Song, song_player::SongPlayer};
+use crate::{core::PlaybackState, model::Song, song_player::SongPlayer, Application};
 
 mod imp {
     use super::*;
@@ -46,6 +46,9 @@ mod imp {
             klass.install_action("song-cell.toggle-playback", None, move |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
                     log::warn!("Failed to toggle playback: {err:?}");
+                    if let Some(window) = Application::default().main_window() {
+                        window.show_error(&err.to_string());
+                    }
                 }
             });
         }

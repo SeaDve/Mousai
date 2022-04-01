@@ -13,7 +13,7 @@ use crate::{
     core::{ClockTime, PlaybackState},
     model::Song,
     song_player::SongPlayer,
-    spawn,
+    spawn, Application,
 };
 
 mod imp {
@@ -56,6 +56,9 @@ mod imp {
             klass.install_action("song-bar.toggle-playback", None, move |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
                     log::warn!("Failed to toggle playback: {err:?}");
+                    if let Some(window) = Application::default().main_window() {
+                        window.show_error(&err.to_string());
+                    }
                 }
             });
 

@@ -85,6 +85,7 @@ mod imp {
                 Ok(history) => self.history.set(history).unwrap(),
                 Err(err) => {
                     log::error!("Failed to load history: {:?}", err);
+                    obj.show_error(&gettext("Failed to load history"));
                     self.history.set(SongList::default()).unwrap();
                 }
             }
@@ -143,12 +144,11 @@ impl MainPage {
         Ok(history)
     }
 
-    fn show_error(&self, text: &str, secondary_text: &str) {
+    fn show_error(&self, message: &str) {
         if let Some(window) = Application::default().main_window() {
-            let toast = adw::Toast::builder()
-                .title(&format!("{text}: {secondary_text}"))
-                .build();
-            window.add_toast(&toast);
+            window.show_error(message);
+        } else {
+            log::warn!("Failed to show error: Found no MainWindow");
         }
     }
 
@@ -187,7 +187,7 @@ impl MainPage {
                 }
 
                 if let Err(err) = imp.recognizer.listen() {
-                    self.show_error(&gettext("Failed to start recording"), &err.to_string());
+                    self.show_error(&gettext!("Failed to start recording: {}", err));
                     log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
                 }
             }
@@ -206,8 +206,8 @@ impl MainPage {
                 }
                 Err(err) => {
                     // TODO improve errors (more specific)
-                    obj.show_error(&gettext("Something went wrong"), &err.to_string());
                     log::error!("Something went wrong: {:?} \n(dbg {:#?})", err, err);
+                    obj.show_error(&gettext!("Something went wrong: {}", err));
                 }
             }
         }));

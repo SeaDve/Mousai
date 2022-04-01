@@ -120,13 +120,20 @@ impl Window {
         self.imp().toast_overlay.add_toast(toast);
     }
 
+    pub fn show_error(&self, message: &str) {
+        let toast = adw::Toast::builder()
+            .title(message)
+            .priority(adw::ToastPriority::High)
+            .build();
+        self.add_toast(&toast);
+    }
+
     fn setup_signals(&self) {
         let imp = self.imp();
 
         imp.player
             .connect_error(clone!(@weak self as obj => move |_, error| {
-                let toast = adw::Toast::builder().title(&error.to_string()).build();
-                obj.add_toast(&toast);
+                obj.show_error(&error.to_string());
             }));
 
         imp.main_page
