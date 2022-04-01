@@ -34,80 +34,138 @@
       </object>
     </property>
     <child>
-      <object class="GtkHeaderBar">
-        <child>
-          <object class="GtkButton" id="listen_button">
-            <property name="action-name">main-page.toggle-listen</property>
-          </object>
-        </child>
-        <child type="end">
-          <object class="GtkMenuButton" id="appmenu_button">
-            <property name="icon-name">open-menu-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Main Menu</property>
-            <property name="menu-model">menu</property>
-            <property name="primary">True</property>
-          </object>
-        </child>
-        <child type="end">
-          <object class="GtkToggleButton" id="search_button">
-            <property name="icon-name">system-search-symbolic</property>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <!-- FIXME Inline this in the headerbar -->
-      <object class="GtkSearchBar">
-        <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create"/>
-        <property name="child">
-          <object class="GtkSearchEntry" id="search_entry">
-            <property name="placeholder-text" translatable="yes">Enter song or artist name</property>
-          </object>
-        </property>
-      </object>
-    </child>
-    <child>
       <object class="GtkStack" id="stack">
-        <property name="vexpand">True</property>
         <property name="transition-type">crossfade</property>
         <child>
-          <object class="GtkScrolledWindow" id="main_page">
-            <property name="hscrollbar-policy">never</property>
-            <property name="child">
-              <object class="GtkGridView" id="history_view">
-                <property name="single-click-activate">True</property>
-                <style>
-                  <class name="history-view"/>
-                </style>
+          <object class="GtkBox" id="main_page">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkHeaderBar">
+                <child>
+                  <object class="GtkButton">
+                    <property name="action-name">main-page.toggle-listen</property>
+                    <property name="label" translatable="yes">Listen</property>
+                    <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Main Menu</property>
+                    <property name="menu-model">menu</property>
+                    <property name="primary">True</property>
+                  </object>
+                </child>
+                <child type="end">
+                  <object class="GtkToggleButton" id="search_button">
+                    <property name="icon-name">system-search-symbolic</property>
+                  </object>
+                </child>
               </object>
-            </property>
+            </child>
+            <child>
+              <!-- TODO Maybe inline this in the headerbar -->
+              <object class="GtkSearchBar">
+                <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create"/>
+                <property name="child">
+                  <object class="GtkSearchEntry" id="search_entry">
+                    <property name="placeholder-text" translatable="yes">Enter song or artist name</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="vexpand">True</property>
+                <property name="hscrollbar-policy">never</property>
+                <property name="child">
+                  <object class="GtkGridView" id="history_view">
+                    <property name="single-click-activate">True</property>
+                    <style>
+                      <class name="history-view"/>
+                    </style>
+                  </object>
+                </property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="AdwStatusPage" id="empty_page">
-            <property name="icon-name">emblem-music-symbolic</property>
-            <property name="title" translatable="yes">Start Identifying Music!</property>
-            <property name="description" translatable="yes">Click the listen button to start.</property>
+          <object class="GtkBox" id="empty_page">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkHeaderBar">
+                <child>
+                  <object class="GtkButton">
+                    <property name="action-name">main-page.toggle-listen</property>
+                    <property name="label" translatable="yes">Listen</property>
+                    <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+                <child type="end">
+                  <object class="GtkMenuButton">
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Main Menu</property>
+                    <property name="menu-model">menu</property>
+                    <property name="primary">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwStatusPage">
+                <property name="vexpand">True</property>
+                <property name="icon-name">emblem-music-symbolic</property>
+                <property name="title" translatable="yes">Start Identifying Music!</property>
+                <property name="description" translatable="yes">Click the listen button to start.</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
           <object class="GtkBox" id="busy_page">
-            <property name="margin-top">24</property>
-            <property name="margin-bottom">24</property>
-            <property name="valign">center</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">24</property>
             <child>
-              <object class="MsaiAudioVisualizer" id="visualizer">
-                <property name="width-request">300</property>
-                <property name="height-request">240</property>
+              <object class="GtkHeaderBar">
+                <child>
+                  <object class="GtkButton">
+                    <property name="action-name">main-page.toggle-listen</property>
+                    <property name="label" translatable="yes">Cancel</property>
+                    <property name="tooltip-text" translatable="yes">Cancel Listening</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="busy_page_title">
-                <style>
-                  <class name="title-1"/>
-                </style>
+              <object class="GtkBox">
+                <property name="margin-top">24</property>
+                <property name="margin-bottom">24</property>
+                <property name="vexpand">True</property>
+                <property name="valign">center</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">24</property>
+                <child>
+                  <object class="MsaiAudioVisualizer" id="visualizer">
+                    <property name="width-request">300</property>
+                    <property name="height-request">240</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="busy_page_title">
+                    <style>
+                      <class name="title-1"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

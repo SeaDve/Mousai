@@ -25,15 +25,13 @@ mod imp {
         #[template_child]
         pub history_view: TemplateChild<gtk::GridView>,
         #[template_child]
-        pub listen_button: TemplateChild<gtk::Button>,
-        #[template_child]
         pub search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub main_page: TemplateChild<gtk::ScrolledWindow>,
+        pub main_page: TemplateChild<gtk::Box>,
         #[template_child]
-        pub empty_page: TemplateChild<adw::StatusPage>,
+        pub empty_page: TemplateChild<gtk::Box>,
         #[template_child]
         pub busy_page: TemplateChild<gtk::Box>,
         #[template_child]
@@ -96,7 +94,7 @@ mod imp {
             obj.setup_visualizer();
 
             obj.update_stack();
-            obj.update_listen_button();
+            obj.update_toggle_listen_action();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -225,29 +223,10 @@ impl MainPage {
         }));
     }
 
-    fn update_listen_button(&self) {
-        let imp = self.imp();
-
-        match imp.recognizer.state() {
-            RecognizerState::Null => {
+    fn update_toggle_listen_action(&self) {
+        match self.imp().recognizer.state() {
+            RecognizerState::Null | RecognizerState::Listening => {
                 self.action_set_enabled("main-page.toggle-listen", true);
-
-                imp.listen_button.remove_css_class("destructive-action");
-                imp.listen_button.add_css_class("suggested-action");
-
-                imp.listen_button.set_label(&gettext("Listen"));
-                imp.listen_button
-                    .set_tooltip_text(Some(&gettext("Start Identifying Music")));
-            }
-            RecognizerState::Listening => {
-                self.action_set_enabled("main-page.toggle-listen", true);
-
-                imp.listen_button.remove_css_class("suggested-action");
-                imp.listen_button.add_css_class("destructive-action");
-
-                imp.listen_button.set_label(&gettext("Cancel"));
-                imp.listen_button
-                    .set_tooltip_text(Some(&gettext("Cancel Listening")));
             }
             RecognizerState::Recognizing => {
                 self.action_set_enabled("main-page.toggle-listen", false);
@@ -388,7 +367,7 @@ impl MainPage {
         imp.recognizer
             .connect_state_notify(clone!(@weak self as obj => move |_| {
                 obj.update_stack();
-                obj.update_listen_button();
+                obj.update_toggle_listen_action();
             }));
 
         imp.recognizer
