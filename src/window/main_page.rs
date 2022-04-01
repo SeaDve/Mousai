@@ -144,22 +144,12 @@ impl MainPage {
     }
 
     fn show_error(&self, text: &str, secondary_text: &str) {
-        // TODO Use less distractive errors
-        let error_dialog = gtk::MessageDialog::builder()
-            .text(text)
-            .secondary_text(secondary_text)
-            .buttons(gtk::ButtonsType::Ok)
-            .message_type(gtk::MessageType::Error)
-            .modal(true)
-            .build();
-
-        error_dialog.set_transient_for(
-            self.root()
-                .and_then(|root| root.downcast::<Window>().ok())
-                .as_ref(),
-        );
-        error_dialog.connect_response(|error_dialog, _| error_dialog.destroy());
-        error_dialog.present();
+        if let Some(window) = Application::default().main_window() {
+            let toast = adw::Toast::builder()
+                .title(&format!("{text}: {secondary_text}"))
+                .build();
+            window.add_toast(&toast);
+        }
     }
 
     fn stop_player(&self) -> anyhow::Result<()> {

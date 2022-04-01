@@ -25,9 +25,11 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
         #[template_child]
+        pub toast_overlay: TemplateChild<adw::ToastOverlay>,
+        #[template_child]
         pub flap: TemplateChild<adw::Flap>,
         #[template_child]
-        pub main_stack: TemplateChild<gtk::Stack>,
+        pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub main_page: TemplateChild<MainPage>,
         #[template_child]
@@ -49,7 +51,7 @@ mod imp {
 
             klass.install_action("win.navigate-to-main-page", None, move |obj, _, _| {
                 let imp = obj.imp();
-                imp.main_stack.set_visible_child(&imp.main_page.get());
+                imp.stack.set_visible_child(&imp.main_page.get());
             });
         }
 
@@ -114,21 +116,31 @@ impl Window {
         self.imp().player.clone()
     }
 
+    pub fn add_toast(&self, toast: &adw::Toast) {
+        self.imp().toast_overlay.add_toast(toast);
+    }
+
     fn setup_signals(&self) {
         let imp = self.imp();
+
+        imp.player
+            .connect_error(clone!(@weak self as obj => move |_, error| {
+                let toast = adw::Toast::builder().title(&error.to_string()).build();
+                obj.add_toast(&toast);
+            }));
 
         imp.main_page
             .connect_song_activated(clone!(@weak self as obj => move |_, song| {
                 let imp = obj.imp();
                 imp.song_page.set_song(Some(song.clone()));
-                imp.main_stack.set_visible_child(&imp.song_page.get());
+                imp.stack.set_visible_child(&imp.song_page.get());
             }));
 
         imp.song_bar
             .connect_song_activated(clone!(@weak self as obj => move |_, song| {
                 let imp = obj.imp();
                 imp.song_page.set_song(Some(song.clone()));
-                imp.main_stack.set_visible_child(&imp.song_page.get());
+                imp.stack.set_visible_child(&imp.song_page.get());
             }));
     }
 

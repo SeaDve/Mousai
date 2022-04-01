@@ -31,6 +31,7 @@ impl Default for PlaybackState {
 
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default)]
@@ -49,6 +50,18 @@ mod imp {
     }
 
     impl ObjectImpl for AudioPlayer {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder(
+                    "error",
+                    &[glib::Error::static_type().into()],
+                    <()>::static_type().into(),
+                )
+                .build()]
+            });
+            SIGNALS.as_ref()
+        }
+
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
@@ -127,6 +140,18 @@ glib::wrapper! {
 impl AudioPlayer {
     pub fn new() -> Self {
         glib::Object::new(&[]).expect("Failed to create AudioPlayer.")
+    }
+
+    pub fn connect_error<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, &glib::Error) + 'static,
+    {
+        self.connect_local("error", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            let song = values[1].get::<glib::Error>().unwrap();
+            f(&obj, &song);
+            None
+        })
     }
 
     pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
@@ -314,6 +339,8 @@ impl AudioPlayer {
             MessageView::Error(ref message) => {
                 let error = message.error();
                 let debug = message.debug();
+
+                self.emit_by_name::<()>("error", &[&error]);
 
                 log::warn!(
                     "Error from element `{}`: {:?}",
