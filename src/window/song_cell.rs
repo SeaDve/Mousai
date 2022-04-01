@@ -180,7 +180,7 @@ impl SongCell {
             .and_then(|player| player.upgrade())
         {
             if let Some(song) = self.song() {
-                if player.state() == PlaybackState::Playing && player.is_current_playing(&song) {
+                if player.state() == PlaybackState::Playing && player.is_active_song(&song) {
                     player.pause()?;
                 } else {
                     player.set_song(Some(song))?;
@@ -198,32 +198,23 @@ impl SongCell {
             let toggle_playback_button = &imp.toggle_playback_button.get();
             let buffering_spinner = &imp.buffering_spinner.get();
 
-            if !player.is_current_playing(song) {
-                toggle_playback_button.set_icon_name("media-playback-start-symbolic");
-                toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
-                imp.playback_stack.set_visible_child(toggle_playback_button);
-                buffering_spinner.set_spinning(false);
-                return;
-            }
+            let is_active_song = player.is_active_song(song);
 
-            if player.is_buffering() {
-                imp.playback_stack.set_visible_child(buffering_spinner);
+            if is_active_song && player.is_buffering() {
                 buffering_spinner.set_spinning(true);
+                imp.playback_stack.set_visible_child(buffering_spinner);
                 return;
             }
 
             imp.playback_stack.set_visible_child(toggle_playback_button);
-            buffering_spinner.set_spinning(true);
+            buffering_spinner.set_spinning(false);
 
-            match player.state() {
-                PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
-                    toggle_playback_button.set_icon_name("media-playback-start-symbolic");
-                    toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
-                }
-                PlaybackState::Playing => {
-                    toggle_playback_button.set_icon_name("media-playback-pause-symbolic");
-                    toggle_playback_button.set_tooltip_text(Some(&gettext("Pause")));
-                }
+            if is_active_song && player.state() == PlaybackState::Playing {
+                toggle_playback_button.set_icon_name("media-playback-pause-symbolic");
+                toggle_playback_button.set_tooltip_text(Some(&gettext("Pause")));
+            } else {
+                toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
             }
         }
     }

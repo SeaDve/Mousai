@@ -217,7 +217,7 @@ impl SongPlayer {
         self.imp().audio_player.duration().await
     }
 
-    pub fn is_current_playing(&self, song: &Song) -> bool {
+    pub fn is_active_song(&self, song: &Song) -> bool {
         self.song().as_ref() == Some(song)
     }
 
