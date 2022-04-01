@@ -1,3 +1,4 @@
+use gettextrs::gettext;
 use gtk::{
     glib::{self, clone},
     prelude::*,
@@ -199,6 +200,7 @@ impl SongCell {
 
             if !player.is_current_playing(song) {
                 toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
                 imp.playback_stack.set_visible_child(toggle_playback_button);
                 buffering_spinner.set_spinning(false);
                 return;
@@ -216,9 +218,11 @@ impl SongCell {
             match player.state() {
                 PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
                     toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                    toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
                 }
                 PlaybackState::Playing => {
                     toggle_playback_button.set_icon_name("media-playback-pause-symbolic");
+                    toggle_playback_button.set_tooltip_text(Some(&gettext("Pause")));
                 }
             }
         }

@@ -24,6 +24,7 @@
         </property>
         <child>
           <object class="GtkButton">
+            <property name="tooltip-text" translatable="yes">Return to Main Page</property>
             <property name="icon-name">go-previous-symbolic</property>
             <property name="action-name">win.navigate-to-main-page</property>
           </object>

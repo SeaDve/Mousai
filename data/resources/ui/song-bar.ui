@@ -30,6 +30,7 @@
         <property name="margin-bottom">6</property>
         <child type="start">
           <object class="GtkButton">
+            <property name="tooltip-text" translatable="yes">Show Song Information</property>
             <property name="action-name">song-bar.activate-song</property>
             <property name="child">
               <object class="GtkBox">
@@ -103,6 +104,7 @@
             </child>
             <child>
               <object class="GtkButton">
+                <property name="tooltip-text" translatable="yes">Stop</property>
                 <property name="valign">center</property>
                 <property name="action-name">song-bar.clear</property>
                 <property name="icon-name">media-playback-stop-symbolic</property>

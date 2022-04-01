@@ -1,3 +1,4 @@
+use gettextrs::gettext;
 use gtk::{
     glib::{self, clone},
     prelude::*,
@@ -323,10 +324,13 @@ impl SongBar {
             PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
                 imp.playback_button
                     .set_icon_name("media-playback-start-symbolic");
+                imp.playback_button.set_tooltip_text(Some(&gettext("Play")));
             }
             PlaybackState::Playing => {
                 imp.playback_button
                     .set_icon_name("media-playback-pause-symbolic");
+                imp.playback_button
+                    .set_tooltip_text(Some(&gettext("Pause")));
             }
         }
     }

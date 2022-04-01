@@ -43,9 +43,9 @@
               <object class="GtkHeaderBar">
                 <child>
                   <object class="GtkButton">
-                    <property name="action-name">main-page.toggle-listen</property>
-                    <property name="label" translatable="yes">Listen</property>
                     <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
+                    <property name="label" translatable="yes">Listen</property>
+                    <property name="action-name">main-page.toggle-listen</property>
                     <style>
                       <class name="suggested-action"/>
                     </style>
@@ -53,14 +53,15 @@
                 </child>
                 <child type="end">
                   <object class="GtkMenuButton">
-                    <property name="icon-name">open-menu-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Main Menu</property>
+                    <property name="icon-name">open-menu-symbolic</property>
                     <property name="menu-model">menu</property>
                     <property name="primary">True</property>
                   </object>
                 </child>
                 <child type="end">
                   <object class="GtkToggleButton" id="search_button">
+                    <property name="tooltip-text" translatable="yes">Search for Music</property>
                     <property name="icon-name">system-search-symbolic</property>
                   </object>
                 </child>
@@ -100,9 +101,9 @@
               <object class="GtkHeaderBar">
                 <child>
                   <object class="GtkButton">
-                    <property name="action-name">main-page.toggle-listen</property>
-                    <property name="label" translatable="yes">Listen</property>
                     <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
+                    <property name="label" translatable="yes">Listen</property>
+                    <property name="action-name">main-page.toggle-listen</property>
                     <style>
                       <class name="suggested-action"/>
                     </style>
@@ -110,8 +111,8 @@
                 </child>
                 <child type="end">
                   <object class="GtkMenuButton">
-                    <property name="icon-name">open-menu-symbolic</property>
                     <property name="tooltip-text" translatable="yes">Main Menu</property>
+                    <property name="icon-name">open-menu-symbolic</property>
                     <property name="menu-model">menu</property>
                     <property name="primary">True</property>
                   </object>
@@ -135,9 +136,9 @@
               <object class="GtkHeaderBar">
                 <child>
                   <object class="GtkButton">
-                    <property name="action-name">main-page.toggle-listen</property>
-                    <property name="label" translatable="yes">Cancel</property>
                     <property name="tooltip-text" translatable="yes">Cancel Listening</property>
+                    <property name="label" translatable="yes">Cancel</property>
+                    <property name="action-name">main-page.toggle-listen</property>
                     <style>
                       <class name="destructive-action"/>
                     </style>
