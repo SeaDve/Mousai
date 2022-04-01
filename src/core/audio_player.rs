@@ -201,6 +201,10 @@ impl AudioPlayer {
     }
 
     pub fn set_uri(&self, uri: &str) -> anyhow::Result<()> {
+        if uri == self.uri().as_str() {
+            return Ok(());
+        }
+
         log::debug!("Setting uri to `{uri}`");
 
         let player = self.get_or_try_init_player()?;
