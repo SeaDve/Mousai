@@ -45,18 +45,9 @@ mod imp {
         fn activate(&self, obj: &Self::Type) {
             self.parent_activate(obj);
 
-            if let Some(window) = self.window.get() {
-                let window = window.upgrade().unwrap();
+            if let Some(window) = obj.main_window() {
                 window.present();
-                return;
             }
-
-            let window = Window::new(obj);
-            self.window
-                .set(window.downgrade())
-                .expect("Window already set.");
-
-            window.present();
         }
 
         fn startup(&self, obj: &Self::Type) {
@@ -102,7 +93,17 @@ impl Application {
     }
 
     pub fn main_window(&self) -> Option<Window> {
-        self.imp().window.get().and_then(|window| window.upgrade())
+        let main_window = self
+            .imp()
+            .window
+            .get_or_init(|| Window::new(self).downgrade())
+            .upgrade();
+
+        if main_window.is_none() {
+            log::warn!("Failed to upgrade WeakRef<Window>");
+        }
+
+        main_window
     }
 
     fn show_about_dialog(&self) {

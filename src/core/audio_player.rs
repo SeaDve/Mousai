@@ -358,7 +358,7 @@ impl AudioPlayer {
                     self.imp().state.set(state);
                     self.notify("state");
                 } else {
-                    log::warn!("Got on StateChanged message even player is not initialized");
+                    log::warn!("Got an StateChanged message even player is not initialized");
                 }
             }
             _ => (),
