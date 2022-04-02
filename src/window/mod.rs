@@ -8,14 +8,16 @@ mod time_label;
 
 use adw::subclass::prelude::*;
 use gtk::{
-    gio,
+    gdk, gio,
     glib::{self, clone},
     prelude::*,
     subclass::prelude::*,
 };
 
 use self::{main_page::MainPage, song_bar::SongBar, song_page::SongPage};
-use crate::{config::PROFILE, model::Song, song_player::SongPlayer, Application};
+use crate::{
+    config::PROFILE, core::PlaybackState, model::Song, song_player::SongPlayer, Application,
+};
 
 mod imp {
     use super::*;
@@ -47,11 +49,42 @@ mod imp {
         type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
+            klass.bind_template();
+            klass.bind_template_instance_callbacks();
 
-            klass.install_action("win.navigate-to-main-page", None, move |obj, _, _| {
+            klass.install_action("win.navigate-to-main-page", None, |obj, _, _| {
                 let imp = obj.imp();
                 imp.stack.set_visible_child(&imp.main_page.get());
+            });
+
+            klass.install_action("win.toggle-playback", None, |obj, _, _| {
+                let player = obj.player();
+
+                let res = if player.state() == PlaybackState::Playing {
+                    player.pause()
+                } else {
+                    player.play()
+                };
+
+                if let Err(err) = res {
+                    log::warn!("Failed to toggle playback: {err:?}");
+                    obj.show_error(&err.to_string());
+                }
+            });
+
+            klass.install_action("win.stop-playback", None, |obj, _, _| {
+                if let Err(err) = obj.imp().player.set_song(None) {
+                    log::warn!("Failed to stop player: {err:?}");
+                }
+            });
+
+            klass.install_action("win.toggle-listen", None, |obj, _, _| {
+                obj.imp().main_page.toggle_listen();
+            });
+
+            klass.install_action("win.toggle-search", None, |obj, _, _| {
+                let search_bar = obj.imp().main_page.search_bar();
+                search_bar.set_search_mode(!search_bar.is_search_mode());
             });
         }
 
@@ -79,6 +112,8 @@ mod imp {
             obj.setup_bindings();
 
             obj.load_window_size();
+            obj.update_toggle_playback_action();
+            obj.update_main_page_actions();
         }
     }
 
@@ -128,8 +163,57 @@ impl Window {
         self.add_toast(&toast);
     }
 
+    fn load_window_size(&self) {
+        let settings = Application::default().settings();
+
+        let width = settings.int("window-width");
+        let height = settings.int("window-height");
+        let is_maximized = settings.boolean("is-maximized");
+
+        self.set_default_size(width, height);
+
+        if is_maximized {
+            self.maximize();
+        }
+    }
+
+    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+        let settings = Application::default().settings();
+
+        let (width, height) = self.default_size();
+
+        settings.set_int("window-width", width)?;
+        settings.set_int("window-height", height)?;
+
+        settings.set_boolean("is-maximized", self.is_maximized())?;
+
+        Ok(())
+    }
+
+    fn update_toggle_playback_action(&self) {
+        self.action_set_enabled("win.toggle-playback", self.player().song().is_some());
+    }
+
+    fn update_main_page_actions(&self) {
+        let imp = self.imp();
+        let is_main_page_visible =
+            imp.stack.visible_child().as_ref() == Some(imp.main_page.get().upcast_ref());
+        self.action_set_enabled("win.toggle-listen", is_main_page_visible);
+        self.action_set_enabled("win.toggle-search", is_main_page_visible);
+    }
+
     fn setup_signals(&self) {
         let imp = self.imp();
+
+        imp.stack
+            .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
+                obj.update_main_page_actions();
+            }));
+
+        imp.player
+            .connect_song_notify(clone!(@weak self as obj => move |_| {
+                obj.update_toggle_playback_action();
+            }));
 
         imp.player
             .connect_error(clone!(@weak self as obj => move |_, error| {
@@ -162,31 +246,32 @@ impl Window {
             .flags(glib::BindingFlags::SYNC_CREATE)
             .build();
     }
+}
 
-    fn load_window_size(&self) {
-        let settings = Application::default().settings();
+#[gtk::template_callbacks]
+impl Window {
+    #[template_callback]
+    fn key_pressed(&self, keyval: gdk::Key, _keycode: u32, state: gdk::ModifierType) -> bool {
+        if let Some(unicode) = keyval.to_unicode() {
+            let search_bar = self.imp().main_page.search_bar();
+            if !search_bar.is_search_mode()
+                && keyval != gdk::Key::space
+                && (state.contains(gdk::ModifierType::SHIFT_MASK) || state.is_empty())
+                && unicode.is_alphanumeric()
+            {
+                if let Some(search_entry) = search_bar
+                    .child()
+                    .and_then(|child| child.downcast::<gtk::SearchEntry>().ok())
+                {
+                    search_entry.set_text(&unicode.to_string());
+                    search_entry.set_position(1);
+                    search_bar.set_search_mode(true);
+                    return true;
+                }
 
-        let width = settings.int("window-width");
-        let height = settings.int("window-height");
-        let is_maximized = settings.boolean("is-maximized");
-
-        self.set_default_size(width, height);
-
-        if is_maximized {
-            self.maximize();
+                log::error!("MainPage's SearchBar is expect to have a child of SearchEntry");
+            }
         }
-    }
-
-    fn save_window_size(&self) -> Result<(), glib::BoolError> {
-        let settings = Application::default().settings();
-
-        let (width, height) = self.default_size();
-
-        settings.set_int("window-width", width)?;
-        settings.set_int("window-height", height)?;
-
-        settings.set_boolean("is-maximized", self.is_maximized())?;
-
-        Ok(())
+        false
     }
 }

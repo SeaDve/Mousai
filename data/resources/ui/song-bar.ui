@@ -95,7 +95,7 @@
             <child>
               <object class="GtkButton" id="playback_button">
                 <property name="valign">center</property>
-                <property name="action-name">song-bar.toggle-playback</property>
+                <property name="action-name">win.toggle-playback</property>
                 <style>
                   <class name="circular"/>
                   <class name="playback-button"/>

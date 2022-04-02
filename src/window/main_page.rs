@@ -25,6 +25,8 @@ mod imp {
         #[template_child]
         pub history_view: TemplateChild<gtk::GridView>,
         #[template_child]
+        pub search_bar: TemplateChild<gtk::SearchBar>,
+        #[template_child]
         pub search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
@@ -51,11 +53,7 @@ mod imp {
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
-
-            klass.install_action("main-page.toggle-listen", None, |obj, _, _| {
-                obj.on_toggle_listen();
-            });
+            klass.bind_template();
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -137,6 +135,32 @@ impl MainPage {
         Ok(())
     }
 
+    pub fn search_bar(&self) -> gtk::SearchBar {
+        self.imp().search_bar.get()
+    }
+
+    pub fn toggle_listen(&self) {
+        let imp = self.imp();
+
+        match imp.recognizer.state() {
+            RecognizerState::Listening => {
+                spawn!(clone!(@weak imp.recognizer as recognizer => async move {
+                    recognizer.cancel().await;
+                    log::info!("Cancelled recognizing");
+                }));
+            }
+            RecognizerState::Null => {
+                self.activate_action("win.stop-playback", None).unwrap();
+
+                if let Err(err) = imp.recognizer.listen() {
+                    self.show_error(&gettext!("Failed to start recording: {}", err));
+                    log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
+                }
+            }
+            RecognizerState::Recognizing => (),
+        }
+    }
+
     fn load_history(&self) -> anyhow::Result<SongList> {
         let settings = Application::default().settings();
         let json_str = settings.string("history");
@@ -152,47 +176,8 @@ impl MainPage {
         }
     }
 
-    fn stop_player(&self) -> anyhow::Result<()> {
-        if let Some(player) = self
-            .root()
-            .and_then(|root| root.downcast::<Window>().ok())
-            .map(|window| window.player())
-        {
-            player.set_song(None)?;
-            Ok(())
-        } else {
-            Err(anyhow::anyhow!(
-                "Failed stop audio player: AudioPlayerWidget was not found"
-            ))
-        }
-    }
-
     fn history(&self) -> SongList {
         self.imp().history.get().unwrap().clone()
-    }
-
-    fn on_toggle_listen(&self) {
-        let imp = self.imp();
-
-        match imp.recognizer.state() {
-            RecognizerState::Listening => {
-                spawn!(clone!(@weak imp.recognizer as recognizer => async move {
-                    recognizer.cancel().await;
-                    log::info!("Cancelled recognizing");
-                }));
-            }
-            RecognizerState::Null => {
-                if let Err(err) = self.stop_player() {
-                    log::warn!("Failed to stop player before listening: {err:?}");
-                }
-
-                if let Err(err) = imp.recognizer.listen() {
-                    self.show_error(&gettext!("Failed to start recording: {}", err));
-                    log::error!("Failed to start recording: {:?} \n(dbg {:#?})", err, err);
-                }
-            }
-            RecognizerState::Recognizing => (),
-        }
     }
 
     fn on_listen_done(&self, recognizer: &Recognizer) {
@@ -216,10 +201,10 @@ impl MainPage {
     fn update_toggle_listen_action(&self) {
         match self.imp().recognizer.state() {
             RecognizerState::Null | RecognizerState::Listening => {
-                self.action_set_enabled("main-page.toggle-listen", true);
+                self.action_set_enabled("win.toggle-listen", true);
             }
             RecognizerState::Recognizing => {
-                self.action_set_enabled("main-page.toggle-listen", false);
+                self.action_set_enabled("win.toggle-listen", false);
             }
         }
     }

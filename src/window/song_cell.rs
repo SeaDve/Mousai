@@ -41,9 +41,9 @@ mod imp {
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
+            klass.bind_template();
 
-            klass.install_action("song-cell.toggle-playback", None, move |obj, _, _| {
+            klass.install_action("song-cell.toggle-playback", None, |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
                     log::warn!("Failed to toggle playback: {err:?}");
                     if let Some(window) = Application::default().main_window() {

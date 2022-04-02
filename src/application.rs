@@ -143,6 +143,10 @@ impl Application {
 
     fn setup_accels(&self) {
         self.set_accels_for_action("app.quit", &["<Control>q"]);
+        self.set_accels_for_action("win.navigate-to-main-page", &["<Alt>Left"]);
+        self.set_accels_for_action("win.toggle-playback", &["space"]);
+        self.set_accels_for_action("win.toggle-listen", &["<Control>l"]);
+        self.set_accels_for_action("win.toggle-search", &["<Control>f"]);
     }
 }
 

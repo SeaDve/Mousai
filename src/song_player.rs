@@ -174,6 +174,13 @@ impl SongPlayer {
         })
     }
 
+    pub fn connect_song_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("song"), move |obj, _| f(obj))
+    }
+
     pub fn set_song(&self, song: Option<Song>) -> anyhow::Result<()> {
         if song == self.song() {
             return Ok(());

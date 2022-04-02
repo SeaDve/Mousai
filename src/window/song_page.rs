@@ -1,4 +1,4 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk::{gdk, glib, prelude::*, subclass::prelude::*};
 
 use std::cell::RefCell;
 
@@ -26,7 +26,18 @@ mod imp {
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
+            klass.bind_template();
+
+            klass.add_binding(
+                gdk::Key::Escape,
+                gdk::ModifierType::empty(),
+                |obj, _| {
+                    obj.activate_action("win.navigate-to-main-page", None)
+                        .unwrap();
+                    true
+                },
+                None,
+            );
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {

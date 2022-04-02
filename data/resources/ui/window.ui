@@ -26,5 +26,11 @@
         </property>
       </object>
     </property>
+    <child>
+      <object class="GtkEventControllerKey">
+        <property name="propagation-phase">capture</property>
+        <signal name="key-pressed" handler="key_pressed" swapped="yes"/>
+      </object>
+    </child>
   </template>
 </interface>

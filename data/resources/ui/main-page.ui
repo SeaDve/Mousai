@@ -45,7 +45,7 @@
                   <object class="GtkButton">
                     <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
                     <property name="label" translatable="yes">Listen</property>
-                    <property name="action-name">main-page.toggle-listen</property>
+                    <property name="action-name">win.toggle-listen</property>
                     <style>
                       <class name="suggested-action"/>
                     </style>
@@ -69,8 +69,8 @@
             </child>
             <child>
               <!-- TODO Maybe inline this in the headerbar -->
-              <object class="GtkSearchBar">
-                <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create"/>
+              <object class="GtkSearchBar" id="search_bar">
+                <property name="search-mode-enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create | bidirectional"/>
                 <property name="child">
                   <object class="GtkSearchEntry" id="search_entry">
                     <property name="placeholder-text" translatable="yes">Enter song or artist name</property>
@@ -103,7 +103,7 @@
                   <object class="GtkButton">
                     <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
                     <property name="label" translatable="yes">Listen</property>
-                    <property name="action-name">main-page.toggle-listen</property>
+                    <property name="action-name">win.toggle-listen</property>
                     <style>
                       <class name="suggested-action"/>
                     </style>
@@ -138,7 +138,7 @@
                   <object class="GtkButton">
                     <property name="tooltip-text" translatable="yes">Cancel Listening</property>
                     <property name="label" translatable="yes">Cancel</property>
-                    <property name="action-name">main-page.toggle-listen</property>
+                    <property name="action-name">win.toggle-listen</property>
                     <style>
                       <class name="destructive-action"/>
                     </style>

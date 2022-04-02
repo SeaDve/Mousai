@@ -13,7 +13,7 @@ use crate::{
     core::{ClockTime, PlaybackState},
     model::Song,
     song_player::SongPlayer,
-    spawn, Application,
+    spawn,
 };
 
 mod imp {
@@ -51,18 +51,9 @@ mod imp {
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
+            klass.bind_template();
 
-            klass.install_action("song-bar.toggle-playback", None, move |obj, _, _| {
-                if let Err(err) = obj.toggle_playback() {
-                    log::warn!("Failed to toggle playback: {err:?}");
-                    if let Some(window) = Application::default().main_window() {
-                        window.show_error(&err.to_string());
-                    }
-                }
-            });
-
-            klass.install_action("song-bar.clear", None, move |obj, _, _| {
+            klass.install_action("song-bar.clear", None, |obj, _, _| {
                 if let Err(err) = obj.set_song(None) {
                     log::info!("Failed to clear SongBar song: {err:?}");
                 }
@@ -256,18 +247,6 @@ impl SongBar {
         imp.playback_position_scale.unblock_signal(scale_handler_id);
     }
 
-    fn toggle_playback(&self) -> anyhow::Result<()> {
-        let player = self.player();
-
-        if player.state() == PlaybackState::Playing {
-            player.pause()?;
-        } else {
-            player.play()?;
-        }
-
-        Ok(())
-    }
-
     fn on_playback_position_scale_value_changed(&self, scale: &gtk::Scale) {
         let imp = self.imp();
 
@@ -345,7 +324,6 @@ impl SongBar {
     fn update_actions_sensitivity(&self) {
         let has_song = self.song().is_some();
         self.imp().playback_position_scale.set_sensitive(has_song);
-        self.action_set_enabled("song-bar.toggle-playback", has_song);
         self.action_set_enabled("song-bar.clear", has_song);
     }
 }
