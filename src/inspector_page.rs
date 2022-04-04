@@ -107,7 +107,7 @@ impl InspectorPage {
             {
                 PROVIDER_MANAGER.set_active(item.value().into());
             } else {
-                log::warn!("OHMG");
+                log::warn!("provider_row doesn't have a valid selected item");
                 PROVIDER_MANAGER.reset_active();
             }
         });

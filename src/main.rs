@@ -36,7 +36,7 @@ use gtk::{
 use once_cell::sync::Lazy;
 
 use self::application::Application;
-use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
+use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 use self::inspector_page::InspectorPage;
 
 static RUNTIME: Lazy<tokio::runtime::Runtime> =
@@ -61,7 +61,7 @@ fn main() {
         gio::IOExtensionPoint::implement(
             "gtk-inspector-page",
             InspectorPage::static_type(),
-            "Mousai",
+            APP_ID,
             10,
         );
     }
