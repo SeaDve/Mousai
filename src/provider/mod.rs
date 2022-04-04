@@ -37,7 +37,7 @@ impl Default for ProviderType {
 impl From<i32> for ProviderType {
     fn from(val: i32) -> Self {
         use glib::translate::TryFromGlib;
-        unsafe { Self::try_from_glib(dbg!(val)) }
+        unsafe { Self::try_from_glib(val) }
             .unwrap_or_else(|err| panic!("Failed to turn `{val}` into ProviderType: {err:?}"))
     }
 }
