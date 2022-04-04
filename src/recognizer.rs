@@ -1,9 +1,11 @@
+use gettextrs::gettext;
 use gst_pbutils::prelude::*;
 use gtk::{
     glib::{self, clone},
     prelude::*,
     subclass::prelude::*,
 };
+use once_cell::sync::Lazy;
 
 use std::{
     cell::{Cell, RefCell},
@@ -11,11 +13,17 @@ use std::{
 };
 
 use crate::{
-    core::AudioRecorder,
+    core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
     provider::{AudD, Provider},
-    Application,
+    spawn, utils, Application,
 };
+
+static TMP_RECORDING_PATH: Lazy<PathBuf> = Lazy::new(|| {
+    let mut tmp_path = glib::tmp_dir();
+    tmp_path.push("tmp_recording.ogg");
+    tmp_path
+});
 
 #[derive(Debug, Clone, Copy, glib::Enum, PartialEq)]
 #[enum_type(name = "MsaiRecognizerState")]
@@ -36,23 +44,13 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
+    #[derive(Debug, Default)]
     pub struct Recognizer {
         pub state: Cell<RecognizerState>,
 
-        pub source_id: RefCell<Option<glib::SourceId>>,
-        pub provider: RefCell<Box<dyn Provider>>,
         pub audio_recorder: AudioRecorder,
-    }
-
-    impl Default for Recognizer {
-        fn default() -> Self {
-            Self {
-                state: Cell::default(),
-                source_id: RefCell::default(),
-                provider: RefCell::new(Box::new(AudD::default())),
-                audio_recorder: AudioRecorder::default(),
-            }
-        }
+        pub cancellable: RefCell<Option<Cancellable>>,
+        pub source_id: RefCell<Option<glib::SourceId>>,
     }
 
     #[glib::object_subclass]
@@ -64,7 +62,12 @@ mod imp {
     impl ObjectImpl for Recognizer {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("listen-done", &[], <()>::static_type().into()).build()]
+                vec![Signal::builder(
+                    "song-recognized",
+                    &[Song::static_type().into()],
+                    <()>::static_type().into(),
+                )
+                .build()]
             });
             SIGNALS.as_ref()
         }
@@ -117,13 +120,14 @@ impl Recognizer {
         glib::Object::new::<Self>(&[]).expect("Failed to create Recognizer.")
     }
 
-    pub fn connect_listen_done<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
     where
-        F: Fn(&Self) + 'static,
+        F: Fn(&Self, &Song) + 'static,
     {
-        self.connect_local("listen-done", true, move |values| {
+        self.connect_local("song-recognized", true, move |values| {
             let obj = values[0].get::<Self>().unwrap();
-            f(&obj);
+            let song = values[1].get::<Song>().unwrap();
+            f(&obj, &song);
             None
         })
     }
@@ -135,84 +139,93 @@ impl Recognizer {
         self.connect_notify_local(Some("state"), move |obj, _| f(obj))
     }
 
-    pub fn set_provider(&self, provider: impl Provider + 'static) {
-        self.imp().provider.replace(Box::new(provider));
-    }
-
     pub fn state(&self) -> RecognizerState {
         self.imp().state.get()
     }
 
-    pub fn listen(&self) -> anyhow::Result<()> {
+    pub fn audio_recorder(&self) -> &AudioRecorder {
+        &self.imp().audio_recorder
+    }
+
+    pub async fn toggle_recognize(&self) -> anyhow::Result<()> {
         let imp = self.imp();
 
-        let tmp_path = Self::tmp_path();
-
-        log::info!("Saving temporary file at `{}`", tmp_path.display());
-
-        match default_device_name() {
-            Ok(ref device_name) => {
-                log::info!("Audio recorder setup with device name `{}`", device_name);
-                imp.audio_recorder.set_device_name(Some(device_name));
+        match self.state() {
+            RecognizerState::Listening | RecognizerState::Recognizing => {
+                if let Some(cancellable) = imp.cancellable.take() {
+                    cancellable.cancel();
+                }
             }
-            Err(err) => {
-                log::warn!("Failed to get default source name: {:?}", err);
-                imp.audio_recorder.set_device_name(None);
+            RecognizerState::Null => {
+                let cancellable = Cancellable::default();
+                imp.cancellable
+                    .replace(Some(Cancellable::clone(&cancellable)));
+
+                if let Err(err) = self.recognize(&cancellable).await {
+                    if let Some(cancelled) = err.downcast_ref::<Cancelled>() {
+                        log::info!("{}", cancelled);
+                    } else {
+                        return Err(err);
+                    }
+                }
             }
         }
-
-        imp.audio_recorder.start(&tmp_path)?;
-        self.set_state(RecognizerState::Listening);
-
-        imp.source_id.replace(Some(glib::timeout_add_local_once(
-            imp.provider.borrow().listen_duration(),
-            clone!(@weak self as obj => move || {
-                obj.emit_by_name::<()>("listen-done", &[]);
-            }),
-        )));
 
         Ok(())
     }
 
-    #[allow(clippy::await_holding_refcell_ref)]
-    pub async fn listen_finish(&self) -> anyhow::Result<Song> {
+    async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
+        self.update_audio_recorder_device_name();
+
         let imp = self.imp();
+
+        log::info!(
+            "Saving temporary file at `{}`",
+            TMP_RECORDING_PATH.display()
+        );
+
+        if let Err(err) = imp.audio_recorder.start(TMP_RECORDING_PATH.as_path()) {
+            self.set_state(RecognizerState::Null);
+            return Err(err);
+        }
+
+        self.set_state(RecognizerState::Listening);
+        let provider = AudD::default();
+        let listen_duration = provider.listen_duration();
+
+        cancellable.connect_cancelled(clone!(@weak self as obj => move |_| {
+            spawn!(async move {
+                obj.imp().audio_recorder.cancel();
+                obj.set_state(RecognizerState::Null);
+            });
+        }));
+
+        if cancellable.is_cancelled()
+            || utils::timeout_future(listen_duration, &cancellable.new_child())
+                .await
+                .is_err()
+        {
+            return Err(Cancelled::new(&gettext("Cancelled recording")).into());
+        }
 
         let recording = imp.audio_recorder.stop().await.map_err(|err| {
             self.set_state(RecognizerState::Null);
             err
         })?;
 
-        let provider = imp.provider.borrow();
-
-        log::debug!("provider: {:?}", provider);
-
         self.set_state(RecognizerState::Recognizing);
-
-        let song = provider.recognize(&recording).await.map_err(|err| {
-            self.set_state(RecognizerState::Null);
-            err
-        })?;
+        log::debug!("provider: {:?}", provider);
+        let song = provider.recognize(&recording).await;
 
         self.set_state(RecognizerState::Null);
 
-        Ok(song)
-    }
-
-    pub async fn cancel(&self) {
-        let imp = self.imp();
-
-        self.set_state(RecognizerState::Null);
-
-        if let Some(source_id) = imp.source_id.take() {
-            source_id.remove();
+        if cancellable.is_cancelled() {
+            return Err(Cancelled::new(&gettext("Cancelled recognizing")).into());
         }
 
-        imp.audio_recorder.cancel().await;
-    }
+        self.emit_by_name::<()>("song-recognized", &[&song?]);
 
-    pub fn audio_recorder(&self) -> &AudioRecorder {
-        &self.imp().audio_recorder
+        Ok(())
     }
 
     fn set_state(&self, state: RecognizerState) {
@@ -224,10 +237,19 @@ impl Recognizer {
         self.notify("state");
     }
 
-    fn tmp_path() -> PathBuf {
-        let mut tmp_path = glib::tmp_dir();
-        tmp_path.push("tmp_recording.ogg");
-        tmp_path
+    fn update_audio_recorder_device_name(&self) {
+        let imp = self.imp();
+
+        match default_device_name() {
+            Ok(ref device_name) => {
+                log::info!("Audio recorder setup with device name `{}`", device_name);
+                imp.audio_recorder.set_device_name(Some(device_name));
+            }
+            Err(err) => {
+                log::warn!("Failed to get default source name: {:?}", err);
+                imp.audio_recorder.set_device_name(None);
+            }
+        }
     }
 }
 

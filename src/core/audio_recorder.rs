@@ -8,10 +8,76 @@ use gtk::{
 use std::{
     cell::{Cell, RefCell},
     path::Path,
+    rc::Rc,
     time::Duration,
 };
 
 use super::AudioRecording;
+
+type RecordingItemSender = Rc<RefCell<Option<Sender<anyhow::Result<DoneRecording>>>>>;
+
+#[derive(Debug)]
+struct DoneRecording;
+
+#[derive(Debug)]
+struct RecordingItem {
+    inner: AudioRecording,
+    pipeline: gst::Pipeline,
+    receiver: RefCell<Option<Receiver<anyhow::Result<DoneRecording>>>>,
+}
+
+impl RecordingItem {
+    pub fn new(
+        path: impl AsRef<Path>,
+        device_name: Option<&str>,
+        watch_func: impl Fn(&gst::Message, &RecordingItemSender) -> Continue + 'static,
+    ) -> anyhow::Result<Self> {
+        let (sender, receiver) = oneshot::channel();
+        let sender = Rc::new(RefCell::new(Some(sender)));
+
+        let pipeline = default_pipeline(path.as_ref(), device_name)?;
+        pipeline
+            .bus()
+            .unwrap()
+            .add_watch_local(
+                clone!(@strong sender => @default-return Continue(false), move |_, message| {
+                    watch_func(message, &sender)
+                }),
+            )
+            .unwrap();
+
+        Ok(Self {
+            inner: AudioRecording::new(path.as_ref()),
+            pipeline,
+            receiver: RefCell::new(Some(receiver)),
+        })
+    }
+
+    pub const fn pipeline(&self) -> &gst::Pipeline {
+        &self.pipeline
+    }
+
+    pub async fn audio_recording(self) -> anyhow::Result<AudioRecording> {
+        self.receiver
+            .take()
+            .ok_or_else(|| anyhow::anyhow!("Dropped receiver"))?
+            .await??;
+        self.teardown_pipeline()?;
+        Ok(self.inner)
+    }
+
+    pub fn cleanup(self) {
+        if let Err(err) = self.teardown_pipeline() {
+            log::warn!("Failed to teardown pipeline during RecordingItem cleanup: {err:?}");
+        }
+    }
+
+    fn teardown_pipeline(&self) -> anyhow::Result<()> {
+        self.pipeline.set_state(gst::State::Null)?;
+        let _ = self.pipeline.bus().unwrap().remove_watch();
+        Ok(())
+    }
+}
 
 mod imp {
     use super::*;
@@ -20,13 +86,10 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct AudioRecorder {
-        pub peak: Cell<f64>,
-        pub device_name: RefCell<Option<String>>,
+        pub(super) peak: Cell<f64>,
+        pub(super) device_name: RefCell<Option<String>>,
 
-        pub recording: RefCell<Option<AudioRecording>>,
-        pub pipeline: RefCell<Option<gst::Pipeline>>,
-        pub sender: RefCell<Option<Sender<anyhow::Result<AudioRecording>>>>,
-        pub receiver: RefCell<Option<Receiver<anyhow::Result<AudioRecording>>>>,
+        pub(super) recording_item: RefCell<Option<RecordingItem>>,
     }
 
     #[glib::object_subclass]
@@ -91,8 +154,10 @@ mod imp {
             }
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            let _recording = obj.cleanup_and_take_recording();
+        fn dispose(&self, _obj: &Self::Type) {
+            if let Some(recording_item) = self.recording_item.take() {
+                recording_item.cleanup();
+            }
         }
     }
 }
@@ -117,6 +182,13 @@ impl AudioRecorder {
         })
     }
 
+    pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("peak"), move |obj, _| f(obj))
+    }
+
     pub fn peak(&self) -> f64 {
         self.imp().peak.get()
     }
@@ -133,92 +205,51 @@ impl AudioRecorder {
         self.notify("device-name");
     }
 
-    pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("peak"), move |obj, _| f(obj))
-    }
-
     pub fn start(&self, path: impl AsRef<Path>) -> anyhow::Result<()> {
-        let new_recording = AudioRecording::new(path.as_ref());
-        let pipeline = default_pipeline(&new_recording.path(), self.device_name().as_deref())?;
+        if let Some(recording_item) = self.imp().recording_item.take() {
+            recording_item.cleanup();
+        }
 
-        let bus = pipeline.bus().unwrap();
-        bus.add_watch_local(
-            clone!(@weak self as obj => @default-return Continue(false), move |_, message| {
-                obj.handle_bus_message(message)
+        let recording_item = RecordingItem::new(
+            path,
+            self.device_name().as_deref(),
+            clone!(@weak self as obj => @default-return Continue(false), move |message, sender| {
+                obj.handle_bus_message(message, sender)
             }),
-        )
-        .unwrap();
+        )?;
 
         let imp = self.imp();
-        imp.pipeline.replace(Some(pipeline));
-        imp.recording.replace(Some(new_recording));
+        imp.recording_item.replace(Some(recording_item));
 
-        let (sender, receiver) = oneshot::channel();
-        imp.sender.replace(Some(sender));
-        imp.receiver.replace(Some(receiver));
-
-        let pipeline = imp.pipeline.borrow();
-        let pipeline = pipeline.as_ref().unwrap();
-
-        pipeline.set_state(gst::State::Playing)?;
+        imp.recording_item
+            .borrow()
+            .as_ref()
+            .unwrap()
+            .pipeline()
+            .set_state(gst::State::Playing)?;
 
         Ok(())
     }
 
     pub async fn stop(&self) -> anyhow::Result<AudioRecording> {
-        log::info!("Sending EOS event to pipeline");
-        self.pipeline()
-            .expect("Pipeline not setup")
-            .send_event(gst::event::Eos::new());
-
-        let receiver = self.imp().receiver.take().unwrap();
-        receiver.await.unwrap()
-    }
-
-    pub async fn cancel(&self) {
-        let imp = self.imp();
-        imp.sender.replace(None);
-        imp.receiver.replace(None);
-
-        if let Some(recording) = self.cleanup_and_take_recording() {
-            if let Err(err) = recording.delete().await {
-                log::warn!("Failed to delete recording: {:?}", err);
-            }
+        if let Some(recording_item) = self.imp().recording_item.take() {
+            log::info!("Sending EOS event to pipeline");
+            recording_item.pipeline().send_event(gst::event::Eos::new());
+            recording_item.audio_recording().await
+        } else {
+            Err(anyhow::anyhow!("No pipeline setup"))
         }
-
-        log::info!("Cancelled recording");
     }
 
-    pub fn state(&self) -> gst::State {
-        self.pipeline().map_or(gst::State::Null, |pipeline| {
-            let (_ret, current, _pending) = pipeline.state(None);
-            current
-        })
-    }
-
-    fn pipeline(&self) -> Option<gst::Pipeline> {
-        self.imp().pipeline.borrow().as_ref().cloned()
-    }
-
-    fn cleanup_and_take_recording(&self) -> Option<AudioRecording> {
-        let imp = self.imp();
-
-        if let Some(pipeline) = imp.pipeline.take() {
-            pipeline.set_state(gst::State::Null).unwrap();
-
-            let bus = pipeline.bus().unwrap();
-            bus.remove_watch().unwrap();
+    pub fn cancel(&self) {
+        if let Some(recording_item) = self.imp().recording_item.take() {
+            recording_item.cleanup();
         }
 
         self.emit_by_name::<()>("stopped", &[]);
-
-        imp.recording.take()
     }
 
-    fn handle_bus_message(&self, message: &gst::Message) -> Continue {
+    fn handle_bus_message(&self, message: &gst::Message, sender: &RecordingItemSender) -> Continue {
         use gst::MessageView;
 
         match message.view() {
@@ -243,10 +274,8 @@ impl AudioRecorder {
             MessageView::Eos(_) => {
                 log::info!("Eos signal received from record bus");
 
-                let recording = self.cleanup_and_take_recording();
-
-                let sender = self.imp().sender.take().unwrap();
-                sender.send(Ok(recording.unwrap())).unwrap();
+                sender.take().unwrap().send(Ok(DoneRecording)).unwrap();
+                self.emit_by_name::<()>("stopped", &[]);
 
                 Continue(false)
             }
@@ -257,20 +286,23 @@ impl AudioRecorder {
                     err
                 );
 
-                let _recording = self.cleanup_and_take_recording();
-
-                let sender = self.imp().sender.take().unwrap();
-                sender.send(Err(err.error().into())).unwrap();
+                sender
+                    .take()
+                    .unwrap()
+                    .send(Err(err.error().into()))
+                    .unwrap();
+                self.emit_by_name::<()>("stopped", &[]);
 
                 Continue(false)
             }
             MessageView::StateChanged(sc) => {
                 if message.src().as_ref()
-                    == Some(
-                        self.pipeline()
-                            .expect("Pipeline not setup")
-                            .upcast_ref::<gst::Object>(),
-                    )
+                    == self
+                        .imp()
+                        .recording_item
+                        .borrow()
+                        .as_ref()
+                        .map(|recording_item| recording_item.pipeline().upcast_ref::<gst::Object>())
                 {
                     log::info!(
                         "Pipeline state set from `{:?}` -> `{:?}`",

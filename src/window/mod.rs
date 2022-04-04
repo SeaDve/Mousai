@@ -1,25 +1,35 @@
 mod album_art;
 mod audio_visualizer;
-mod main_page;
+mod history_view;
+mod recognizer_view;
 mod song_bar;
 mod song_cell;
 mod song_page;
 mod time_label;
 
 use adw::subclass::prelude::*;
+use gettextrs::gettext;
 use gtk::{
     gdk, gio,
     glib::{self, clone},
     prelude::*,
     subclass::prelude::*,
 };
+use once_cell::unsync::OnceCell;
 
-use self::{main_page::MainPage, song_bar::SongBar, song_page::SongPage};
+use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
-    config::PROFILE, core::PlaybackState, model::Song, song_player::SongPlayer, Application,
+    config::PROFILE,
+    core::PlaybackState,
+    model::{Song, SongList},
+    recognizer::{Recognizer, RecognizerState},
+    song_player::SongPlayer,
+    Application,
 };
 
 mod imp {
+    use crate::spawn;
+
     use super::*;
     use gtk::CompositeTemplate;
 
@@ -31,15 +41,17 @@ mod imp {
         #[template_child]
         pub flap: TemplateChild<adw::Flap>,
         #[template_child]
+        pub song_bar: TemplateChild<SongBar>,
+        #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub main_page: TemplateChild<MainPage>,
+        pub main_view: TemplateChild<HistoryView>,
         #[template_child]
-        pub song_page: TemplateChild<SongPage>,
-        #[template_child]
-        pub song_bar: TemplateChild<SongBar>,
+        pub recognizer_view: TemplateChild<RecognizerView>,
 
+        pub recognizer: Recognizer,
         pub player: SongPlayer,
+        pub history: OnceCell<SongList>,
     }
 
     #[glib::object_subclass]
@@ -53,8 +65,7 @@ mod imp {
             klass.bind_template_instance_callbacks();
 
             klass.install_action("win.navigate-to-main-page", None, |obj, _, _| {
-                let imp = obj.imp();
-                imp.stack.set_visible_child(&imp.main_page.get());
+                obj.imp().main_view.show_history();
             });
 
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
@@ -73,17 +84,25 @@ mod imp {
             });
 
             klass.install_action("win.stop-playback", None, |obj, _, _| {
-                if let Err(err) = obj.imp().player.set_song(None) {
+                if let Err(err) = obj.imp().player.stop() {
                     log::warn!("Failed to stop player: {err:?}");
                 }
             });
 
             klass.install_action("win.toggle-listen", None, |obj, _, _| {
-                obj.imp().main_page.toggle_listen();
+                spawn!(clone!(@weak obj => async move {
+                    if let Err(err) = obj.imp().player.stop() {
+                        log::warn!("Failed to stop player before toggling listen: {err:?}");
+                    }
+                    if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
+                        log::error!("Failed to start recognizing: {:?}", err);
+                        obj.show_error(&gettext!("Failed to start recognizing: {}", err));
+                    }
+                }));
             });
 
             klass.install_action("win.toggle-search", None, |obj, _, _| {
-                let search_bar = obj.imp().main_page.search_bar();
+                let search_bar = obj.imp().main_view.search_bar();
                 search_bar.set_search_mode(!search_bar.is_search_mode());
             });
         }
@@ -107,13 +126,17 @@ mod imp {
             }
 
             self.song_bar.bind_player(&self.player);
+            self.main_view.bind_song_list(obj.history());
+            self.recognizer_view.bind_recognizer(&self.recognizer);
 
             obj.setup_signals();
             obj.setup_bindings();
 
             obj.load_window_size();
+            obj.update_stack();
             obj.update_toggle_playback_action();
-            obj.update_main_page_actions();
+            obj.update_toggle_listen_action();
+            obj.update_toggle_search_action();
         }
     }
 
@@ -124,7 +147,7 @@ mod imp {
                 log::warn!("Failed to save window state, {:?}", &err);
             }
 
-            if let Err(err) = self.main_page.save_history() {
+            if let Err(err) = obj.history().save_to_settings() {
                 log::error!("Failed to save history: {:?}", err);
             }
 
@@ -163,6 +186,16 @@ impl Window {
         self.add_toast(&toast);
     }
 
+    fn history(&self) -> &SongList {
+        self.imp().history.get_or_init(|| {
+            SongList::load_from_settings().unwrap_or_else(|err| {
+                log::error!("Failed to load SongList from settings: {err:?}");
+                self.show_error(&gettext("Failed to load history"));
+                SongList::default()
+            })
+        })
+    }
+
     fn load_window_size(&self) {
         let settings = Application::default().settings();
 
@@ -190,25 +223,44 @@ impl Window {
         Ok(())
     }
 
+    fn update_toggle_listen_action(&self) {
+        match self.imp().recognizer.state() {
+            RecognizerState::Null | RecognizerState::Listening => {
+                self.action_set_enabled("win.toggle-listen", true);
+            }
+            RecognizerState::Recognizing => {
+                // TODO: Fix cancellation during recognizing state in recognizer.rs and remove this
+                self.action_set_enabled("win.toggle-listen", false);
+            }
+        }
+    }
+
     fn update_toggle_playback_action(&self) {
         self.action_set_enabled("win.toggle-playback", self.player().song().is_some());
     }
 
-    fn update_main_page_actions(&self) {
+    fn update_toggle_search_action(&self) {
         let imp = self.imp();
         let is_main_page_visible =
-            imp.stack.visible_child().as_ref() == Some(imp.main_page.get().upcast_ref());
-        self.action_set_enabled("win.toggle-listen", is_main_page_visible);
+            imp.stack.visible_child().as_ref() == Some(imp.main_view.get().upcast_ref());
         self.action_set_enabled("win.toggle-search", is_main_page_visible);
+    }
+
+    fn update_stack(&self) {
+        let imp = self.imp();
+
+        match imp.recognizer.state() {
+            RecognizerState::Listening | RecognizerState::Recognizing => {
+                imp.stack.set_visible_child(&imp.recognizer_view.get());
+            }
+            RecognizerState::Null => {
+                imp.stack.set_visible_child(&imp.main_view.get());
+            }
+        }
     }
 
     fn setup_signals(&self) {
         let imp = self.imp();
-
-        imp.stack
-            .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
-                obj.update_main_page_actions();
-            }));
 
         imp.player
             .connect_song_notify(clone!(@weak self as obj => move |_| {
@@ -220,18 +272,26 @@ impl Window {
                 obj.show_error(&error.to_string());
             }));
 
-        imp.main_page
-            .connect_song_activated(clone!(@weak self as obj => move |_, song| {
-                let imp = obj.imp();
-                imp.song_page.set_song(Some(song.clone()));
-                imp.stack.set_visible_child(&imp.song_page.get());
+        imp.recognizer
+            .connect_state_notify(clone!(@weak self as obj => move |_| {
+                obj.update_toggle_listen_action();
+                obj.update_stack();
+            }));
+
+        imp.recognizer
+            .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
+                obj.history().append(song.clone());
+                obj.imp().main_view.show_song(song);
             }));
 
         imp.song_bar
             .connect_song_activated(clone!(@weak self as obj => move |_, song| {
-                let imp = obj.imp();
-                imp.song_page.set_song(Some(song.clone()));
-                imp.stack.set_visible_child(&imp.song_page.get());
+                obj.imp().main_view.show_song(song);
+            }));
+
+        imp.stack
+            .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
+                obj.update_toggle_search_action();
             }));
     }
 
@@ -253,7 +313,7 @@ impl Window {
     #[template_callback]
     fn key_pressed(&self, keyval: gdk::Key, _keycode: u32, state: gdk::ModifierType) -> bool {
         if let Some(unicode) = keyval.to_unicode() {
-            let search_bar = self.imp().main_page.search_bar();
+            let search_bar = self.imp().main_view.search_bar();
             if !search_bar.is_search_mode()
                 && keyval != gdk::Key::space
                 && (state.contains(gdk::ModifierType::SHIFT_MASK) || state.is_empty())

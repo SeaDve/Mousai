@@ -10,12 +10,12 @@
             <property name="fold-policy">never</property>
             <property name="content">
               <object class="GtkStack" id="stack">
-                <property name="transition-type">over-left-right</property>
+                <property name="transition-type">crossfade</property>
                 <child>
-                  <object class="MsaiMainPage" id="main_page"/>
+                  <object class="MsaiHistoryView" id="main_view"/>
                 </child>
                 <child>
-                  <object class="MsaiSongPage" id="song_page"/>
+                  <object class="MsaiRecognizerView" id="recognizer_view"/>
                 </child>
               </object>
             </property>

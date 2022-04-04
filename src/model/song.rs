@@ -11,7 +11,6 @@ static ALBUM_ART_MANAGER: Lazy<AlbumArtManager> = Lazy::new(AlbumArtManager::new
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, Serialize, Deserialize)]
     #[serde(default)]

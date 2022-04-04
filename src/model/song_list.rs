@@ -5,7 +5,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
-use crate::core::DateTime;
+use crate::{core::DateTime, Application};
 
 use super::{Song, SongId};
 
@@ -51,8 +51,19 @@ glib::wrapper! {
 }
 
 impl SongList {
-    pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongList.")
+    /// Load a [`SongList`](SongList) from application settings `history` key
+    pub fn load_from_settings() -> anyhow::Result<Self> {
+        let json_str = Application::default().settings().string("history");
+        Ok(serde_json::from_str(&json_str)?)
+    }
+
+    /// Save to application settings `history` key
+    pub fn save_to_settings(&self) -> anyhow::Result<()> {
+        let json_str = serde_json::to_string(&self)?;
+        Application::default()
+            .settings()
+            .set_string("history", &json_str)?;
+        Ok(())
     }
 
     /// If an equivalent [`Song`] already exists in the list, it returns false updating the original
@@ -126,7 +137,7 @@ impl SongList {
 
 impl Default for SongList {
     fn default() -> Self {
-        Self::new()
+        glib::Object::new(&[]).expect("Failed to create SongList.")
     }
 }
 
@@ -140,7 +151,7 @@ impl<'de> Deserialize<'de> for SongList {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let songs: Vec<Song> = Vec::deserialize(deserializer)?;
 
-        let song_list = SongList::new();
+        let song_list = SongList::default();
         song_list.append_many(songs);
 
         Ok(song_list)
@@ -153,7 +164,7 @@ mod test {
 
     #[test]
     fn append_and_remove() {
-        let song_list = SongList::new();
+        let song_list = SongList::default();
         assert!(song_list.is_empty());
 
         let song_1 = Song::new("1", "1", "1");
@@ -176,7 +187,7 @@ mod test {
 
     #[test]
     fn append_many() {
-        let song_list = SongList::new();
+        let song_list = SongList::default();
         assert!(song_list.is_empty());
 
         let songs = vec![Song::new("1", "1", "1"), Song::new("2", "2", "2")];

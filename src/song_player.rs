@@ -168,8 +168,8 @@ impl SongPlayer {
     {
         self.connect_local("error", true, move |values| {
             let obj = values[0].get::<Self>().unwrap();
-            let song = values[1].get::<glib::Error>().unwrap();
-            f(&obj, &song);
+            let error = values[1].get::<glib::Error>().unwrap();
+            f(&obj, &error);
             None
         })
     }
@@ -268,6 +268,10 @@ impl SongPlayer {
         self.imp().audio_player.try_set_state(PlaybackState::Paused)
     }
 
+    pub fn stop(&self) -> anyhow::Result<()> {
+        self.set_song(None)
+    }
+
     pub fn seek(&self, position: ClockTime) -> anyhow::Result<()> {
         self.imp().audio_player.seek(position)
     }
@@ -355,7 +359,7 @@ impl SongPlayer {
             }));
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
-                obj.set_song(None).unwrap_or_else(|err| log::warn!("Failed to stop and clear song: {err:?}"));
+                obj.stop().unwrap_or_else(|err| log::warn!("Failed to stop SongPlayer: {err:?}"));
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
