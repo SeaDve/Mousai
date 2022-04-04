@@ -48,6 +48,8 @@ impl AlbumArtManager {
             ),
         }
 
+        // FIXME thumbnail can be downloaded twice when it is not in disk and tried to
+        // call this again before it has finished downloading.
         if let Some(album_art_link) = song.album_art_link() {
             let response = RUNTIME
                 .spawn(self.client.get(&album_art_link).send())
