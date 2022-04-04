@@ -20,6 +20,7 @@ mod album_art_manager;
 mod application;
 mod config;
 mod core;
+mod inspector_page;
 mod model;
 mod provider;
 mod recognizer;
@@ -28,11 +29,15 @@ mod utils;
 mod window;
 
 use gettextrs::{gettext, LocaleCategory};
-use gtk::{gio, glib};
+use gtk::{
+    gio,
+    glib::{self, prelude::*},
+};
 use once_cell::sync::Lazy;
 
 use self::application::Application;
 use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
+use self::inspector_page::InspectorPage;
 
 static RUNTIME: Lazy<tokio::runtime::Runtime> =
     Lazy::new(|| tokio::runtime::Runtime::new().unwrap());
@@ -51,6 +56,15 @@ fn main() {
 
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
+
+    if gio::IOExtensionPoint::lookup("gtk-inspector-page").is_some() {
+        gio::IOExtensionPoint::implement(
+            "gtk-inspector-page",
+            InspectorPage::static_type(),
+            "Mousai",
+            10,
+        );
+    }
 
     let app = Application::new();
     app.run();

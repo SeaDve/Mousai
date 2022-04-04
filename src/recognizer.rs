@@ -15,7 +15,7 @@ use std::{
 use crate::{
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
-    provider::{AudD, Provider},
+    provider::PROVIDER_MANAGER,
     spawn, utils, Application,
 };
 
@@ -190,7 +190,8 @@ impl Recognizer {
         }
 
         self.set_state(RecognizerState::Listening);
-        let provider = AudD::default();
+        let provider = PROVIDER_MANAGER.active().to_provider();
+        log::debug!("provider: {:?}", provider);
         let listen_duration = provider.listen_duration();
 
         cancellable.connect_cancelled(clone!(@weak self as obj => move |_| {
@@ -214,7 +215,6 @@ impl Recognizer {
         })?;
 
         self.set_state(RecognizerState::Recognizing);
-        log::debug!("provider: {:?}", provider);
         let song = provider.recognize(&recording).await;
 
         self.set_state(RecognizerState::Null);

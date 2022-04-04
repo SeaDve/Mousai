@@ -316,7 +316,7 @@ impl Window {
             let search_bar = self.imp().main_view.search_bar();
             if !search_bar.is_search_mode()
                 && keyval != gdk::Key::space
-                && (state.contains(gdk::ModifierType::SHIFT_MASK) || state.is_empty())
+                && ((state == gdk::ModifierType::SHIFT_MASK) || state.is_empty())
                 && unicode.is_alphanumeric()
             {
                 if let Some(search_entry) = search_bar

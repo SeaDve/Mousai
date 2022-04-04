@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiInspectorPage" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Developer Settings</property>
+            <property name="description" translatable="yes">These will be reset upon closing the inspector.</property>
+            <child>
+              <object class="AdwComboRow" id="provider_row">
+                <property name="title" translatable="yes">Recognizer Provider</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

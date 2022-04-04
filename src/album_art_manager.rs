@@ -1,7 +1,7 @@
 use gtk::{gdk, gio, glib, prelude::*};
 use reqwest::Client;
 
-use std::{collections::HashMap, sync::Mutex};
+use std::{collections::HashMap, sync::RwLock};
 
 use crate::{
     model::{Song, SongId},
@@ -9,14 +9,14 @@ use crate::{
 };
 
 pub struct AlbumArtManager {
-    store: Mutex<HashMap<SongId, gdk::Texture>>,
+    store: RwLock<HashMap<SongId, gdk::Texture>>,
     client: reqwest::Client,
 }
 
 impl AlbumArtManager {
     pub fn new() -> Self {
         Self {
-            store: Mutex::new(HashMap::new()),
+            store: RwLock::new(HashMap::new()),
             client: Client::new(),
         }
     }
@@ -25,8 +25,8 @@ impl AlbumArtManager {
         {
             let store = self
                 .store
-                .lock()
-                .expect("Failed to lock album art store mutex");
+                .read()
+                .expect("Failed to read album art store RwLock");
             if let Some(texture) = store.get(&song.id()) {
                 return Ok(texture.clone());
             }
@@ -69,12 +69,12 @@ impl AlbumArtManager {
     }
 
     fn try_insert(&self, song_id: SongId, texture: gdk::Texture) {
-        match self.store.lock() {
+        match self.store.write() {
             Ok(mut store) => {
                 store.insert(song_id, texture);
             }
             Err(err) => {
-                log::error!("Failed to get a lock of AlbumArtManager store Mutex: {err:?}");
+                log::error!("Failed to write to AlbumArtManager store RwLock: {err:?}");
             }
         }
     }
