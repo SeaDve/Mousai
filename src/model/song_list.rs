@@ -1,7 +1,6 @@
 use adw::subclass::prelude::*;
 use gtk::{gio, glib, prelude::*};
 use indexmap::IndexMap;
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
@@ -53,16 +52,22 @@ glib::wrapper! {
 impl SongList {
     /// Load a [`SongList`](SongList) from application settings `history` key
     pub fn load_from_settings() -> anyhow::Result<Self> {
-        let json_str = Application::default().settings().string("history");
-        Ok(serde_json::from_str(&json_str)?)
+        let songs: Vec<Song> =
+            serde_json::from_str(&Application::default().settings().string("history"))?;
+
+        let obj = Self::default();
+        obj.append_many(songs);
+
+        Ok(obj)
     }
 
     /// Save to application settings `history` key
     pub fn save_to_settings(&self) -> anyhow::Result<()> {
-        let json_str = serde_json::to_string(&self)?;
+        let list = self.imp().list.borrow();
+        let songs = list.values().collect::<Vec<_>>();
         Application::default()
             .settings()
-            .set_string("history", &json_str)?;
+            .set_string("history", &serde_json::to_string(&songs)?)?;
         Ok(())
     }
 
@@ -138,23 +143,6 @@ impl SongList {
 impl Default for SongList {
     fn default() -> Self {
         glib::Object::new(&[]).expect("Failed to create SongList.")
-    }
-}
-
-impl Serialize for SongList {
-    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.collect_seq(self.imp().list.borrow().values())
-    }
-}
-
-impl<'de> Deserialize<'de> for SongList {
-    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let songs: Vec<Song> = Vec::deserialize(deserializer)?;
-
-        let song_list = SongList::default();
-        song_list.append_many(songs);
-
-        Ok(song_list)
     }
 }
 
