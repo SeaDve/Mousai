@@ -36,7 +36,7 @@
             </child>
             <style>
               <class name="osd"/>
-              <class name="circular"/>
+              <class name="buffering-button"/>
             </style>
           </object>
         </child>

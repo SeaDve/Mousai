@@ -6,11 +6,7 @@ albumart > frame {
   border: none;
 }
 
-stack .circular {
-  border-radius: 99999px;
-}
-
-/* MainPage */
+/* HistoryView */
 
 .history-view {
   padding: 24px;
@@ -19,6 +15,16 @@ stack .circular {
 .history-view > child {
   margin: 6px;
   padding: 6px;
+}
+
+/* SongCell */
+
+.buffering-button {
+  border-radius: 99999px;
+}
+
+.buffering-button > button {
+  background: none;
 }
 
 /* SongBar */
