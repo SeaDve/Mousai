@@ -165,9 +165,8 @@ impl AlbumArt {
 
     fn set_paintable(&self, paintable: &impl IsA<gdk::Paintable>) {
         let imp = self.imp();
-        let visible_child = imp.stack.visible_child();
 
-        if visible_child.as_ref() == Some(imp.image_a.upcast_ref()) {
+        if imp.stack.visible_child().as_ref() == Some(imp.image_a.upcast_ref()) {
             imp.image_b.set_paintable(Some(paintable));
             imp.stack.set_visible_child(&imp.image_b.get());
         } else {

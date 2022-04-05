@@ -7,12 +7,11 @@ mod song_cell;
 mod song_page;
 mod time_label;
 
-use adw::subclass::prelude::*;
+use adw::{prelude::*, subclass::prelude::*};
 use gettextrs::gettext;
 use gtk::{
     gdk, gio,
     glib::{self, clone},
-    prelude::*,
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -21,7 +20,7 @@ use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar:
 use crate::{
     config::PROFILE,
     core::PlaybackState,
-    model::{Song, SongList},
+    model::SongList,
     recognizer::{Recognizer, RecognizerState},
     song_player::SongPlayer,
     Application,
@@ -130,9 +129,9 @@ mod imp {
             self.recognizer_view.bind_recognizer(&self.recognizer);
 
             obj.setup_signals();
-            obj.setup_bindings();
 
             obj.load_window_size();
+            obj.update_flap();
             obj.update_stack();
             obj.update_toggle_playback_action();
             obj.update_toggle_listen_action();
@@ -265,6 +264,7 @@ impl Window {
         imp.player
             .connect_song_notify(clone!(@weak self as obj => move |_| {
                 obj.update_toggle_playback_action();
+                obj.update_flap();
             }));
 
         imp.player
@@ -289,22 +289,21 @@ impl Window {
                 obj.imp().main_view.show_song(song);
             }));
 
+        imp.main_view
+            .connect_selection_mode_notify(clone!(@weak self as obj => move |_| {
+                obj.update_flap();
+            }));
+
         imp.stack
             .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
                 obj.update_toggle_search_action();
             }));
     }
 
-    fn setup_bindings(&self) {
+    fn update_flap(&self) {
         let imp = self.imp();
-        imp.player
-            .bind_property("song", &imp.flap.get(), "reveal-flap")
-            .transform_to(|_, value| {
-                let song: Option<Song> = value.get().unwrap();
-                Some(song.is_some().to_value())
-            })
-            .flags(glib::BindingFlags::SYNC_CREATE)
-            .build();
+        imp.flap
+            .set_reveal_flap(self.player().song().is_some() && !imp.main_view.is_selection_mode());
     }
 }
 
@@ -321,6 +320,15 @@ impl Window {
             && !imp.main_view.is_on_song_page()
         {
             search_bar.set_search_mode(false);
+            return true;
+        }
+
+        if keyval == gdk::Key::Escape
+            && state == gdk::ModifierType::empty()
+            && imp.main_view.is_selection_mode()
+            && !imp.main_view.is_on_song_page()
+        {
+            imp.main_view.stop_selection_mode();
             return true;
         }
 
@@ -343,6 +351,7 @@ impl Window {
                 log::error!("MainPage's SearchBar is expect to have a child of SearchEntry");
             }
         }
+
         false
     }
 }
