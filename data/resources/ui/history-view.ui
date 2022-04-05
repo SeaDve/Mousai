@@ -83,7 +83,7 @@
                     </child>
                     <child type="end">
                       <object class="GtkToggleButton">
-                        <property name="tooltip-text" translatable="yes">Search for Music</property>
+                        <property name="tooltip-text" translatable="yes">Search for Songs</property>
                         <property name="icon-name">system-search-symbolic</property>
                         <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
                       </object>
@@ -106,7 +106,7 @@
                     </child>
                     <child type="end">
                       <object class="GtkToggleButton">
-                        <property name="tooltip-text" translatable="yes">Search for Music</property>
+                        <property name="tooltip-text" translatable="yes">Search for Songs</property>
                         <property name="icon-name">system-search-symbolic</property>
                         <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
                       </object>
