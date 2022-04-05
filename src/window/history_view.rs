@@ -3,31 +3,37 @@ use gtk::{
     glib::{self, clone},
     subclass::prelude::*,
 };
+use once_cell::unsync::OnceCell;
 
 use super::{song_cell::SongCell, song_page::SongPage, Window};
 use crate::model::{Song, SongList};
 
 mod imp {
     use super::*;
+    use glib::WeakRef;
     use gtk::CompositeTemplate;
 
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/history-view.ui")]
     pub struct HistoryView {
         #[template_child]
-        pub grid: TemplateChild<gtk::GridView>,
+        pub stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub history_stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub main_page: TemplateChild<gtk::Box>,
         #[template_child]
         pub search_bar: TemplateChild<gtk::SearchBar>,
         #[template_child]
         pub search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
-        pub stack: TemplateChild<gtk::Stack>,
-        #[template_child]
-        pub main_page: TemplateChild<gtk::Box>,
+        pub grid: TemplateChild<gtk::GridView>,
         #[template_child]
         pub empty_page: TemplateChild<gtk::Box>,
         #[template_child]
         pub song_page: TemplateChild<SongPage>,
+
+        pub song_list: OnceCell<WeakRef<SongList>>,
     }
 
     #[glib::object_subclass]
@@ -53,7 +59,7 @@ mod imp {
 
             obj.setup_grid();
 
-            obj.update_stack();
+            obj.show_history();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -81,13 +87,14 @@ impl HistoryView {
     }
 
     pub fn show_history(&self) {
-        self.update_stack();
+        let imp = self.imp();
+        self.update_history_stack();
+        imp.stack.set_visible_child(&imp.history_stack.get());
     }
 
     pub fn show_song(&self, song: &Song) {
         let imp = self.imp();
         imp.song_page.set_song(Some(song.clone()));
-        // TODO: Use slide transition when going to song page
         imp.stack.set_visible_child(&imp.song_page.get());
     }
 
@@ -96,7 +103,7 @@ impl HistoryView {
         let imp = self.imp();
 
         song_list.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_stack();
+            obj.update_history_stack();
         }));
 
         let filter = gtk::CustomFilter::new(
@@ -131,20 +138,23 @@ impl HistoryView {
             }
         }));
 
-        self.update_stack();
+        imp.song_list.set(song_list.downgrade()).unwrap();
+
+        self.update_history_stack();
     }
 
-    fn update_stack(&self) {
+    fn update_history_stack(&self) {
         let imp = self.imp();
         let is_model_empty = imp
-            .grid
-            .model()
+            .song_list
+            .get()
+            .and_then(|song_list| song_list.upgrade())
             .map_or_else(|| true, |model| model.n_items() == 0);
 
         if is_model_empty {
-            imp.stack.set_visible_child(&imp.empty_page.get());
+            imp.history_stack.set_visible_child(&imp.empty_page.get());
         } else {
-            imp.stack.set_visible_child(&imp.main_page.get());
+            imp.history_stack.set_visible_child(&imp.main_page.get());
         }
     }
 
