@@ -19,21 +19,26 @@ mod imp {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub history_stack: TemplateChild<gtk::Stack>,
-        #[template_child]
-        pub main_page: TemplateChild<gtk::Box>,
+        pub history_child: TemplateChild<gtk::Box>,
         #[template_child]
         pub search_bar: TemplateChild<gtk::SearchBar>,
         #[template_child]
         pub search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
+        pub history_stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub main_page: TemplateChild<gtk::ScrolledWindow>,
+        #[template_child]
         pub grid: TemplateChild<gtk::GridView>,
         #[template_child]
-        pub empty_page: TemplateChild<gtk::Box>,
+        pub empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
-        pub song_page: TemplateChild<SongPage>,
+        pub empty_search_page: TemplateChild<adw::StatusPage>,
+        #[template_child]
+        pub song_child: TemplateChild<SongPage>,
 
         pub song_list: OnceCell<WeakRef<SongList>>,
+        pub filter_model: OnceCell<WeakRef<gtk::FilterListModel>>,
     }
 
     #[glib::object_subclass]
@@ -88,19 +93,19 @@ impl HistoryView {
 
     pub fn is_on_song_page(&self) -> bool {
         let imp = self.imp();
-        imp.stack.visible_child().as_ref() == Some(imp.song_page.upcast_ref())
+        imp.stack.visible_child().as_ref() == Some(imp.song_child.upcast_ref())
     }
 
     pub fn show_history(&self) {
         let imp = self.imp();
         self.update_history_stack();
-        imp.stack.set_visible_child(&imp.history_stack.get());
+        imp.stack.set_visible_child(&imp.history_child.get());
     }
 
     pub fn show_song(&self, song: &Song) {
         let imp = self.imp();
-        imp.song_page.set_song(Some(song.clone()));
-        imp.stack.set_visible_child(&imp.song_page.get());
+        imp.song_child.set_song(Some(song.clone()));
+        imp.stack.set_visible_child(&imp.song_child.get());
     }
 
     // Must only be called once
@@ -119,6 +124,10 @@ impl HistoryView {
             }),
         );
         let filter_model = gtk::FilterListModel::new(Some(song_list), Some(&filter));
+
+        filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
+            obj.update_history_stack();
+        }));
 
         imp.search_entry
             .connect_search_changed(clone!(@weak filter => move |_| {
@@ -144,19 +153,32 @@ impl HistoryView {
         }));
 
         imp.song_list.set(song_list.downgrade()).unwrap();
+        imp.filter_model.set(filter_model.downgrade()).unwrap();
 
         self.update_history_stack();
     }
 
     fn update_history_stack(&self) {
         let imp = self.imp();
-        let is_model_empty = imp
+
+        let is_search_mode = self.search_bar().is_search_mode();
+
+        let is_song_list_empty = imp
             .song_list
             .get()
             .and_then(|song_list| song_list.upgrade())
             .map_or_else(|| true, |model| model.n_items() == 0);
 
-        if is_model_empty {
+        let is_filter_model_empty = imp
+            .filter_model
+            .get()
+            .and_then(|filter_model| filter_model.upgrade())
+            .map_or_else(|| true, |model| model.n_items() == 0);
+
+        if is_search_mode && is_filter_model_empty {
+            imp.history_stack
+                .set_visible_child(&imp.empty_search_page.get());
+        } else if is_song_list_empty && !is_search_mode {
             imp.history_stack.set_visible_child(&imp.empty_page.get());
         } else {
             imp.history_stack.set_visible_child(&imp.main_page.get());
