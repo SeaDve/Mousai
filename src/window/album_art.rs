@@ -20,7 +20,9 @@ mod imp {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub image: TemplateChild<gtk::Image>,
+        pub image_a: TemplateChild<gtk::Image>,
+        #[template_child]
+        pub image_b: TemplateChild<gtk::Image>,
         #[template_child]
         pub placeholder: TemplateChild<gtk::Image>,
 
@@ -122,14 +124,10 @@ impl AlbumArt {
             return;
         }
 
-        let imp = self.imp();
-
         if let Some(ref song) = song {
             spawn!(clone!(@weak self as obj, @weak song => async move {
-                let imp = obj.imp();
                 if let Some(ref album_art) = song.album_art().await {
-                    imp.image.set_paintable(Some(album_art));
-                    imp.stack.set_visible_child(&imp.image.get());
+                    obj.set_paintable(album_art);
                 } else {
                     obj.clear();
                 }
@@ -138,7 +136,7 @@ impl AlbumArt {
             self.clear();
         }
 
-        imp.song.replace(song);
+        self.imp().song.replace(song);
         self.notify("song");
     }
 
@@ -147,19 +145,35 @@ impl AlbumArt {
     }
 
     pub fn set_pixel_size(&self, pixel_size: i32) {
-        self.imp().image.set_pixel_size(pixel_size);
-        self.imp().placeholder.set_pixel_size(pixel_size / 3);
+        let imp = self.imp();
+        imp.image_a.set_pixel_size(pixel_size);
+        imp.image_b.set_pixel_size(pixel_size);
+        imp.placeholder.set_pixel_size(pixel_size / 3);
         self.notify("pixel-size");
     }
 
     pub fn pixel_size(&self) -> i32 {
-        self.imp().image.pixel_size()
+        self.imp().image_a.pixel_size()
     }
 
     fn clear(&self) {
         let imp = self.imp();
-        imp.image.set_paintable(gdk::Paintable::NONE);
+        imp.image_a.set_paintable(gdk::Paintable::NONE);
+        imp.image_b.set_paintable(gdk::Paintable::NONE);
         imp.stack.set_visible_child(&imp.placeholder.get());
+    }
+
+    fn set_paintable(&self, paintable: &impl IsA<gdk::Paintable>) {
+        let imp = self.imp();
+        let visible_child = imp.stack.visible_child();
+
+        if visible_child.as_ref() == Some(imp.image_a.upcast_ref()) {
+            imp.image_b.set_paintable(Some(paintable));
+            imp.stack.set_visible_child(&imp.image_b.get());
+        } else {
+            imp.image_a.set_paintable(Some(paintable));
+            imp.stack.set_visible_child(&imp.image_a.get());
+        }
     }
 }
 
