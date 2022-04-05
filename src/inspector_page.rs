@@ -1,6 +1,8 @@
 use adw::prelude::*;
 use gtk::{glib, subclass::prelude::*};
 
+use std::cell::RefCell;
+
 use crate::provider::{ProviderType, PROVIDER_MANAGER};
 
 const INSPECTOR_TITLE: &str = "Mousai";
@@ -15,6 +17,8 @@ mod imp {
     pub struct InspectorPage {
         #[template_child]
         pub provider_row: TemplateChild<adw::ComboRow>,
+
+        pub object: RefCell<Option<glib::Object>>,
     }
 
     #[glib::object_subclass]
@@ -35,20 +39,48 @@ mod imp {
     impl ObjectImpl for InspectorPage {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecString::new(
-                    "title",
-                    "Title",
-                    "Title of this inspector page",
-                    Some(INSPECTOR_TITLE),
-                    glib::ParamFlags::READABLE,
-                )]
+                vec![
+                    glib::ParamSpecString::new(
+                        "title",
+                        "Title",
+                        "Title of this inspector page",
+                        Some(INSPECTOR_TITLE),
+                        glib::ParamFlags::READABLE,
+                    ),
+                    // gtk-inspector-page uses this property
+                    // So add it to avoid warnings
+                    glib::ParamSpecObject::new(
+                        "object",
+                        "Object",
+                        "Object",
+                        glib::Object::static_type(),
+                        glib::ParamFlags::READWRITE,
+                    ),
+                ]
             });
             PROPERTIES.as_ref()
+        }
+
+        fn set_property(
+            &self,
+            _obj: &Self::Type,
+            _id: usize,
+            value: &glib::Value,
+            pspec: &glib::ParamSpec,
+        ) {
+            match pspec.name() {
+                "object" => {
+                    let object = value.get().unwrap();
+                    self.object.replace(object);
+                }
+                _ => unimplemented!(),
+            }
         }
 
         fn property(&self, _obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "title" => INSPECTOR_TITLE.to_value(),
+                "object" => self.object.borrow().to_value(),
                 _ => unimplemented!(),
             }
         }
