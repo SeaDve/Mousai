@@ -55,7 +55,7 @@ impl AlbumArtManager {
                 .spawn(self.client.get(&album_art_link).send())
                 .await??;
             let bytes = RUNTIME.spawn(response.bytes()).await??;
-            log::info!("Downloaded album art link from `{album_art_link}`");
+            log::info!("Downloaded album art from link `{album_art_link}`");
 
             let texture = gdk::Texture::from_bytes(&glib::Bytes::from_owned(bytes))?;
             texture.save_to_png(cache_path)?;
