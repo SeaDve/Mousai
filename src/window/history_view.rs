@@ -130,6 +130,11 @@ mod imp {
 
             obj.setup_grid();
 
+            self.search_bar
+                .connect_search_mode_enabled_notify(clone!(@weak obj => move |_| {
+                    obj.update_history_stack();
+                }));
+
             obj.update_selection_mode_menu_button();
             obj.update_remove_selected_songs_action();
             obj.update_selection_mode_ui();
