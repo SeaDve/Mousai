@@ -298,6 +298,16 @@ impl Window {
             .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
                 obj.update_toggle_search_action();
             }));
+
+        self.history()
+            .connect_removed(clone!(@weak self as obj => move |_, song| {
+                let player = obj.player();
+                if player.is_active_song(song) {
+                    if let Err(err) = player.stop() {
+                        log::warn!("Failed to stop player while deleting the active song: {err:?}");
+                    }
+                }
+            }));
     }
 
     fn update_flap(&self) {

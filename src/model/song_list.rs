@@ -10,6 +10,8 @@ use super::{Song, SongId};
 
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
 
     #[derive(Debug, Default)]
     pub struct SongList {
@@ -23,7 +25,19 @@ mod imp {
         type Interfaces = (gio::ListModel,);
     }
 
-    impl ObjectImpl for SongList {}
+    impl ObjectImpl for SongList {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder(
+                    "removed",
+                    &[Song::static_type().into()],
+                    <()>::static_type().into(),
+                )
+                .build()]
+            });
+            SIGNALS.as_ref()
+        }
+    }
 
     impl ListModelImpl for SongList {
         fn item_type(&self, _list_model: &Self::Type) -> glib::Type {
@@ -124,7 +138,8 @@ impl SongList {
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
-        if let Some((position, _, _)) = removed {
+        if let Some((position, _, ref song)) = removed {
+            self.emit_by_name::<()>("removed", &[song]);
             self.items_changed(position as u32, 1, 0);
         }
 
@@ -137,6 +152,18 @@ impl SongList {
 
     pub fn is_empty(&self) -> bool {
         self.n_items() == 0
+    }
+
+    pub fn connect_removed<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, &Song) + 'static,
+    {
+        self.connect_local("removed", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            let song = values[1].get::<Song>().unwrap();
+            f(&obj, &song);
+            None
+        })
     }
 }
 

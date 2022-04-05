@@ -148,8 +148,8 @@ impl AudioPlayer {
     {
         self.connect_local("error", true, move |values| {
             let obj = values[0].get::<Self>().unwrap();
-            let song = values[1].get::<glib::Error>().unwrap();
-            f(&obj, &song);
+            let error = values[1].get::<glib::Error>().unwrap();
+            f(&obj, &error);
             None
         })
     }
