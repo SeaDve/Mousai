@@ -312,8 +312,19 @@ impl Window {
 impl Window {
     #[template_callback]
     fn key_pressed(&self, keyval: gdk::Key, _keycode: u32, state: gdk::ModifierType) -> bool {
+        let imp = self.imp();
+        let search_bar = imp.main_view.search_bar();
+
+        if keyval == gdk::Key::Escape
+            && state == gdk::ModifierType::empty()
+            && search_bar.is_search_mode()
+            && !imp.main_view.is_on_song_page()
+        {
+            search_bar.set_search_mode(false);
+            return true;
+        }
+
         if let Some(unicode) = keyval.to_unicode() {
-            let search_bar = self.imp().main_view.search_bar();
             if !search_bar.is_search_mode()
                 && keyval != gdk::Key::space
                 && ((state == gdk::ModifierType::SHIFT_MASK) || state.is_empty())

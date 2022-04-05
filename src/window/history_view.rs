@@ -86,6 +86,11 @@ impl HistoryView {
         self.imp().search_bar.get()
     }
 
+    pub fn is_on_song_page(&self) -> bool {
+        let imp = self.imp();
+        imp.stack.visible_child().as_ref() == Some(imp.song_page.upcast_ref())
+    }
+
     pub fn show_history(&self) {
         let imp = self.imp();
         self.update_history_stack();
