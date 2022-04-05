@@ -130,11 +130,6 @@ mod imp {
 
             obj.setup_grid();
 
-            self.search_bar
-                .connect_search_mode_enabled_notify(clone!(@weak obj => move |_| {
-                    obj.update_history_stack();
-                }));
-
             obj.update_selection_mode_menu_button();
             obj.update_remove_selected_songs_action();
             obj.update_selection_mode_ui();
@@ -217,10 +212,12 @@ impl HistoryView {
             obj.update_history_stack();
         }));
 
-        imp.search_entry
-            .connect_search_changed(clone!(@weak filter => move |_| {
+        imp.search_entry.connect_search_changed(
+            clone!(@weak self as obj, @weak filter => move |_| {
                 filter.changed(gtk::FilterChange::Different);
-            }));
+                obj.update_history_stack();
+            }),
+        );
 
         let sorter = gtk::CustomSorter::new(|item_1, item_2| {
             let song_1 = item_1.downcast_ref::<Song>().unwrap();
@@ -336,24 +333,24 @@ impl HistoryView {
     fn update_history_stack(&self) {
         let imp = self.imp();
 
-        let is_search_mode = self.search_bar().is_search_mode();
+        let search_text = imp.search_entry.text();
 
-        let is_song_list_empty = imp
-            .song_list
-            .get()
-            .and_then(|song_list| song_list.upgrade())
-            .map_or_else(|| true, |model| model.n_items() == 0);
-
-        let is_filter_model_empty = imp
+        if imp
             .filter_model
             .get()
             .and_then(|filter_model| filter_model.upgrade())
-            .map_or_else(|| true, |model| model.n_items() == 0);
-
-        if is_search_mode && is_filter_model_empty {
+            .map_or(true, |filter_model| filter_model.n_items() == 0)
+            && !search_text.is_empty()
+        {
             imp.history_stack
                 .set_visible_child(&imp.empty_search_page.get());
-        } else if is_song_list_empty && !is_search_mode {
+        } else if imp
+            .song_list
+            .get()
+            .and_then(|song_list| song_list.upgrade())
+            .map_or(true, |song_list| song_list.n_items() == 0)
+            && search_text.is_empty()
+        {
             imp.history_stack.set_visible_child(&imp.empty_page.get());
         } else {
             imp.history_stack.set_visible_child(&imp.main_page.get());
