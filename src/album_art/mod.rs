@@ -12,7 +12,7 @@ use std::{fs, path::PathBuf};
 use self::store::Store;
 use crate::model::{Song, SongId};
 
-static CACHE_STORE: Lazy<Store> = Lazy::new(Store::default);
+static CACHE: Lazy<Store> = Lazy::new(Store::default);
 
 /// Cache a texture into a static store for song
 #[derive(Debug, Clone)]
@@ -57,7 +57,7 @@ impl AlbumArt {
     }
 
     pub async fn texture(&self) -> anyhow::Result<gdk::Texture> {
-        CACHE_STORE.get_or_try_load(self).await
+        CACHE.get_or_try_load(self).await
     }
 }
 
