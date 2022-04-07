@@ -2,7 +2,7 @@ use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use std::cell::RefCell;
 
-use super::album_art::AlbumArt;
+use super::album_cover::AlbumCover;
 use crate::model::Song;
 
 mod imp {
@@ -14,7 +14,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
         #[template_child]
-        pub album_art: TemplateChild<AlbumArt>,
+        pub album_art: TemplateChild<AlbumCover>,
 
         pub song: RefCell<Option<Song>>,
     }

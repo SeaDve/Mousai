@@ -2,7 +2,7 @@ audiovisualizer {
   color: @accent_color;
 }
 
-albumart > frame {
+albumcover>frame {
   border: none;
 }
 
@@ -12,7 +12,7 @@ albumart > frame {
   padding: 24px;
 }
 
-.history-view > child {
+.history-view>child {
   margin: 6px;
   padding: 6px;
 }
@@ -23,7 +23,7 @@ albumart > frame {
   border-radius: 99999px;
 }
 
-.buffering-button > button {
+.buffering-button>button {
   background: none;
 }
 

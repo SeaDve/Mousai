@@ -16,7 +16,7 @@
 #![warn(clippy::if_not_else)]
 #![warn(clippy::doc_markdown)]
 
-mod album_art_manager;
+mod album_art;
 mod application;
 mod config;
 mod core;

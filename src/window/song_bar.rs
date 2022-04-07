@@ -8,7 +8,7 @@ use once_cell::unsync::OnceCell;
 
 use std::{cell::RefCell, time::Duration};
 
-use super::{album_art::AlbumArt, time_label::TimeLabel};
+use super::{album_cover::AlbumCover, time_label::TimeLabel};
 use crate::{
     core::{ClockTime, PlaybackState},
     model::Song,
@@ -26,7 +26,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
     pub struct SongBar {
         #[template_child]
-        pub album_art: TemplateChild<AlbumArt>,
+        pub album_art: TemplateChild<AlbumCover>,
         #[template_child]
         pub buffering_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]

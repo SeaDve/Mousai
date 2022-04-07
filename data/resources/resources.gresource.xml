@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai/">
-    <file compressed="true" preprocess="xml-stripblanks">ui/album-art.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/album-cover.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/inspector-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognizer-view.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/history-view.ui</file>

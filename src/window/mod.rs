@@ -1,4 +1,4 @@
-mod album_art;
+mod album_cover;
 mod audio_visualizer;
 mod history_view;
 mod recognizer_view;

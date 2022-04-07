@@ -1,13 +1,12 @@
-use gtk::{gdk, glib, prelude::*, subclass::prelude::*};
+use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::sync::Lazy;
+use once_cell::unsync::OnceCell;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
 use super::SongId;
-use crate::{album_art_manager::AlbumArtManager, core::DateTime};
-
-static ALBUM_ART_MANAGER: Lazy<AlbumArtManager> = Lazy::new(AlbumArtManager::new);
+use crate::{album_art::AlbumArt, core::DateTime};
 
 mod imp {
     use super::*;
@@ -26,6 +25,7 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct Song {
         pub inner: RefCell<SongInner>,
+        pub album_art: OnceCell<AlbumArt>,
     }
 
     #[glib::object_subclass]
@@ -213,12 +213,10 @@ impl Song {
         SongId::new(&self.info_link())
     }
 
-    pub async fn album_art(&self) -> Option<gdk::Texture> {
-        ALBUM_ART_MANAGER
-            .get_or_init(self)
-            .await
-            .map_err(|err| log::debug!("Song doesn't return an album art because {err:?}"))
-            .ok()
+    pub fn album_art(&self) -> anyhow::Result<&AlbumArt> {
+        self.imp()
+            .album_art
+            .get_or_try_init(|| AlbumArt::for_song(self))
     }
 }
 

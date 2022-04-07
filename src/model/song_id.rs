@@ -1,11 +1,17 @@
-#[derive(Hash, PartialEq, Eq)]
+#[derive(Clone, Hash, PartialEq, Eq)]
 pub struct SongId {
     id: Box<str>,
 }
 
 impl std::fmt::Debug for SongId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        std::fmt::Debug::fmt(&self.id, f)
+        f.debug_tuple("SongId").field(&self.id).finish()
+    }
+}
+
+impl std::fmt::Display for SongId {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        std::fmt::Display::fmt(&self.id, f)
     }
 }
 
@@ -14,15 +20,6 @@ impl SongId {
         Self {
             id: Box::from(info_link),
         }
-    }
-
-    // FIXME: Remove this and move album art cache path handling in song directly
-    pub fn try_to_string(&self) -> anyhow::Result<String> {
-        self.id
-            .split('/')
-            .last()
-            .map(|last| last.to_string())
-            .ok_or_else(|| anyhow::anyhow!("Invalid Song Id"))
     }
 }
 

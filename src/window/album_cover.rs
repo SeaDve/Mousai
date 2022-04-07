@@ -15,8 +15,8 @@ mod imp {
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, CompositeTemplate)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/album-art.ui")]
-    pub struct AlbumArt {
+    #[template(resource = "/io/github/seadve/Mousai/ui/album-cover.ui")]
+    pub struct AlbumCover {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -30,15 +30,15 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for AlbumArt {
-        const NAME: &'static str = "MsaiAlbumArt";
-        type Type = super::AlbumArt;
+    impl ObjectSubclass for AlbumCover {
+        const NAME: &'static str = "MsaiAlbumCover";
+        type Type = super::AlbumCover;
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
 
-            klass.set_css_name("albumart");
+            klass.set_css_name("albumcover");
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -46,7 +46,7 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for AlbumArt {
+    impl ObjectImpl for AlbumCover {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
@@ -106,17 +106,17 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for AlbumArt {}
+    impl WidgetImpl for AlbumCover {}
 }
 
 glib::wrapper! {
-    pub struct AlbumArt(ObjectSubclass<imp::AlbumArt>)
+    pub struct AlbumCover(ObjectSubclass<imp::AlbumCover>)
         @extends gtk::Widget;
 }
 
-impl AlbumArt {
+impl AlbumCover {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create AlbumArt")
+        glib::Object::new(&[]).expect("Failed to create AlbumCover")
     }
 
     pub fn set_song(&self, song: Option<Song>) {
@@ -126,10 +126,12 @@ impl AlbumArt {
 
         if let Some(ref song) = song {
             spawn!(clone!(@weak self as obj, @weak song => async move {
-                if let Some(ref album_art) = song.album_art().await {
-                    obj.set_paintable(album_art);
-                } else {
-                    obj.clear();
+                match texture_for_song(&song).await {
+                    Ok(ref texture) => obj.set_paintable(texture),
+                    Err(err) => {
+                        log::warn!("Failed to load texture: {err:?}");
+                        obj.clear();
+                    }
                 }
             }));
         } else {
@@ -176,8 +178,12 @@ impl AlbumArt {
     }
 }
 
-impl Default for AlbumArt {
+impl Default for AlbumCover {
     fn default() -> Self {
         Self::new()
     }
+}
+
+async fn texture_for_song(song: &Song) -> anyhow::Result<gdk::Texture> {
+    Ok(song.album_art()?.texture().await?)
 }

@@ -7,7 +7,7 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use super::album_art::AlbumArt;
+use super::album_cover::AlbumCover;
 use crate::{core::PlaybackState, model::Song, song_player::SongPlayer, Application};
 
 mod imp {
@@ -20,7 +20,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-cell.ui")]
     pub struct SongCell {
         #[template_child]
-        pub album_art: TemplateChild<AlbumArt>,
+        pub album_art: TemplateChild<AlbumCover>,
         #[template_child]
         pub playback_stack: TemplateChild<gtk::Stack>,
         #[template_child]

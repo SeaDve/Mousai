@@ -11,7 +11,7 @@
       <object class="GtkOverlay">
         <property name="halign">center</property>
         <property name="child">
-          <object class="MsaiAlbumArt" id="album_art">
+          <object class="MsaiAlbumCover" id="album_art">
             <property name="pixel-size">180</property>
           </object>
         </property>
