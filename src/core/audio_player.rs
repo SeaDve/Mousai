@@ -321,7 +321,7 @@ impl AudioPlayer {
             MessageView::Buffering(ref message) => {
                 let (mode, avg_in, avg_out, buffering_left) = message.buffering_stats();
                 log::debug!(
-                    "AudioPlayer is buffering; percent `{}`; mode `{mode:?}`; avg_in `{avg_in}`; avg_out `{avg_out}`; buffering_left `{buffering_left}`",
+                    "Buffering ({} %); mode `{mode:?}`; avg_in `{avg_in}`; avg_out `{avg_out}`; buffering_left `{buffering_left}`",
                     message.percent(),
                 );
 
