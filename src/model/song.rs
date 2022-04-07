@@ -6,7 +6,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::cell::RefCell;
 
 use super::SongId;
-use crate::{album_art::AlbumArt, core::DateTime};
+use crate::{core::DateTime, AlbumArt};
 
 mod imp {
     use super::*;

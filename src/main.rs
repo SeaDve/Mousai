@@ -35,6 +35,7 @@ use gtk::{
 };
 use once_cell::sync::Lazy;
 
+use self::album_art::AlbumArt;
 use self::application::Application;
 use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 use self::inspector_page::InspectorPage;
@@ -56,6 +57,10 @@ fn main() {
 
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
+
+    if let Err(err) = AlbumArt::init_cache_dir() {
+        log::error!("Failed to initialize AlbumArt cache dir: {err:?}");
+    }
 
     if gio::IOExtensionPoint::lookup("gtk-inspector-page").is_some() {
         gio::IOExtensionPoint::implement(

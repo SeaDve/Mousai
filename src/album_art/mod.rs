@@ -7,12 +7,12 @@ use gtk::{
 };
 use once_cell::sync::Lazy;
 
-use std::path::PathBuf;
+use std::{fs, path::PathBuf};
 
 use self::store::Store;
 use crate::model::{Song, SongId};
 
-static CACHE_STORE: Lazy<Store> = Lazy::new(Store::new);
+static CACHE_STORE: Lazy<Store> = Lazy::new(Store::default);
 
 /// Cache a texture into a static store for song
 #[derive(Debug, Clone)]
@@ -23,9 +23,14 @@ pub struct AlbumArt {
 }
 
 impl AlbumArt {
+    pub fn init_cache_dir() -> anyhow::Result<()> {
+        let cache_dir = default_album_art_cache_dir();
+        Ok(fs::create_dir_all(cache_dir)?)
+    }
+
     pub fn for_song(song: &Song) -> anyhow::Result<Self> {
         let cache_path = {
-            let mut path = glib::user_cache_dir();
+            let mut path = default_album_art_cache_dir();
             path.push(song.id().to_string().replace("/", "-"));
             path
         };
@@ -54,4 +59,10 @@ impl AlbumArt {
     pub async fn texture(&self) -> anyhow::Result<gdk::Texture> {
         CACHE_STORE.get_or_try_load(self).await
     }
+}
+
+fn default_album_art_cache_dir() -> PathBuf {
+    let mut path = glib::user_cache_dir();
+    path.push("album_art_cache");
+    path
 }
