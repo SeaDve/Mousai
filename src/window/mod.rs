@@ -38,15 +38,15 @@ mod imp {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
-        pub flap: TemplateChild<adw::Flap>,
-        #[template_child]
-        pub song_bar: TemplateChild<SongBar>,
-        #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub main_view: TemplateChild<HistoryView>,
         #[template_child]
         pub recognizer_view: TemplateChild<RecognizerView>,
+        #[template_child]
+        pub song_bar_revealer: TemplateChild<gtk::Revealer>,
+        #[template_child]
+        pub song_bar: TemplateChild<SongBar>,
 
         pub recognizer: Recognizer,
         pub player: SongPlayer,
@@ -131,7 +131,7 @@ mod imp {
             obj.setup_signals();
 
             obj.load_window_size();
-            obj.update_flap();
+            obj.update_song_bar_revealer();
             obj.update_stack();
             obj.update_toggle_playback_action();
             obj.update_toggle_listen_action();
@@ -264,7 +264,7 @@ impl Window {
         imp.player
             .connect_song_notify(clone!(@weak self as obj => move |_| {
                 obj.update_toggle_playback_action();
-                obj.update_flap();
+                obj.update_song_bar_revealer();
             }));
 
         imp.player
@@ -291,7 +291,7 @@ impl Window {
 
         imp.main_view
             .connect_selection_mode_notify(clone!(@weak self as obj => move |_| {
-                obj.update_flap();
+                obj.update_song_bar_revealer();
             }));
 
         imp.stack
@@ -310,10 +310,10 @@ impl Window {
             }));
     }
 
-    fn update_flap(&self) {
+    fn update_song_bar_revealer(&self) {
         let imp = self.imp();
-        imp.flap
-            .set_reveal_flap(self.player().song().is_some() && !imp.main_view.is_selection_mode());
+        imp.song_bar_revealer
+            .set_reveal_child(self.player().song().is_some() && !imp.main_view.is_selection_mode());
     }
 }
 
