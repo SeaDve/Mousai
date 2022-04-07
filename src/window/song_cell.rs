@@ -20,7 +20,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-cell.ui")]
     pub struct SongCell {
         #[template_child]
-        pub album_art: TemplateChild<AlbumCover>,
+        pub album_cover: TemplateChild<AlbumCover>,
         #[template_child]
         pub playback_stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -128,7 +128,7 @@ impl SongCell {
 
         let imp = self.imp();
 
-        imp.album_art.set_song(song.clone());
+        imp.album_cover.set_song(song.clone());
 
         imp.song.replace(song);
         self.update_playback_stack_visibility();

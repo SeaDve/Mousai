@@ -14,7 +14,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
         #[template_child]
-        pub album_art: TemplateChild<AlbumCover>,
+        pub album_cover: TemplateChild<AlbumCover>,
 
         pub song: RefCell<Option<Song>>,
     }
@@ -104,7 +104,7 @@ impl SongPage {
 
         let imp = self.imp();
 
-        imp.album_art.set_song(song.clone());
+        imp.album_cover.set_song(song.clone());
 
         imp.song.replace(song);
         self.notify("song");

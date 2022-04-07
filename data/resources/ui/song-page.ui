@@ -38,7 +38,7 @@
           <object class="GtkBox">
             <property name="spacing">12</property>
             <child>
-              <object class="MsaiAlbumCover" id="album_art">
+              <object class="MsaiAlbumCover" id="album_cover">
                 <property name="pixel-size">180</property>
               </object>
             </child>

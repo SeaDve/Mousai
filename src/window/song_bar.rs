@@ -26,7 +26,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
     pub struct SongBar {
         #[template_child]
-        pub album_art: TemplateChild<AlbumCover>,
+        pub album_cover: TemplateChild<AlbumCover>,
         #[template_child]
         pub buffering_spinner: TemplateChild<gtk::Spinner>,
         #[template_child]
@@ -133,7 +133,7 @@ mod imp {
                 ))
                 .unwrap();
 
-            obj.update_album_art();
+            obj.update_album_cover();
             obj.update_actions_sensitivity();
         }
 
@@ -193,7 +193,7 @@ impl SongBar {
 
         imp.song.replace(song);
 
-        self.update_album_art();
+        self.update_album_cover();
         self.update_actions_sensitivity();
 
         self.notify("song");
@@ -317,8 +317,8 @@ impl SongBar {
         }
     }
 
-    fn update_album_art(&self) {
-        self.imp().album_art.set_song(self.song());
+    fn update_album_cover(&self) {
+        self.imp().album_cover.set_song(self.song());
     }
 
     fn update_actions_sensitivity(&self) {
