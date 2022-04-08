@@ -106,8 +106,7 @@
                             <property name="transition-type">crossfade</property>
                             <child>
                               <object class="GtkButton" id="toggle_playback_button">
-                                <!-- <property name="action-name">song-cell.toggle-playback</property> -->
-                                <property name="icon-name">media-playback-start-symbolic</property>
+                                <property name="action-name">song-page.toggle-playback</property>
                                 <style>
                                   <class name="circular"/>
                                 </style>

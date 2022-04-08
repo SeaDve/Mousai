@@ -1,13 +1,19 @@
 use adw::prelude::*;
-use gtk::{glib, subclass::prelude::*};
+use gettextrs::gettext;
+use gtk::{
+    glib::{self, clone},
+    subclass::prelude::*,
+};
+use once_cell::unsync::OnceCell;
 
 use std::cell::RefCell;
 
 use super::{album_cover::AlbumCover, information_row::InformationRow};
-use crate::model::Song;
+use crate::{core::PlaybackState, model::Song, song_player::SongPlayer, Application};
 
 mod imp {
     use super::*;
+    use glib::WeakRef;
     use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
@@ -22,8 +28,15 @@ mod imp {
         pub album_row: TemplateChild<InformationRow>,
         #[template_child]
         pub release_date_row: TemplateChild<InformationRow>,
+        #[template_child]
+        pub playback_stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub toggle_playback_button: TemplateChild<gtk::Button>,
+        #[template_child]
+        pub buffering_spinner: TemplateChild<gtk::Spinner>,
 
         pub song: RefCell<Option<Song>>,
+        pub player: OnceCell<WeakRef<SongPlayer>>,
     }
 
     #[glib::object_subclass]
@@ -34,6 +47,15 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+
+            klass.install_action("song-page.toggle-playback", None, |obj, _, _| {
+                if let Err(err) = obj.toggle_playback() {
+                    log::warn!("Failed to toggle playback: {err:?}");
+                    if let Some(window) = Application::default().main_window() {
+                        window.show_error(&err.to_string());
+                    }
+                }
+            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -113,12 +135,82 @@ impl SongPage {
         imp.song.replace(song.clone());
         imp.album_cover.set_song(song);
         self.update_information();
+        self.update_playback_ui();
 
         self.notify("song");
     }
 
     pub fn song(&self) -> Option<Song> {
         self.imp().song.borrow().clone()
+    }
+
+    /// Must only be called once.
+    pub fn bind_player(&self, player: &SongPlayer) {
+        player.connect_state_notify(clone!(@weak self as obj => move |_| {
+            obj.update_playback_ui();
+        }));
+
+        player.connect_is_buffering_notify(clone!(@weak self as obj => move |_| {
+            obj.update_playback_ui();
+        }));
+
+        self.imp().player.set(player.downgrade()).unwrap();
+
+        self.update_playback_ui();
+    }
+
+    fn toggle_playback(&self) -> anyhow::Result<()> {
+        if let Some(ref player) = self.imp().player.get().and_then(|player| player.upgrade()) {
+            if let Some(song) = self.song() {
+                if player.state() == PlaybackState::Playing && player.is_active_song(&song) {
+                    player.pause()?;
+                } else {
+                    player.set_song(Some(song))?;
+                    player.play()?;
+                }
+            }
+        }
+
+        Ok(())
+    }
+
+    fn update_playback_ui(&self) {
+        let imp = self.imp();
+        let song = self.song();
+
+        imp.playback_stack.set_visible(
+            song.as_ref()
+                .and_then(|song| song.playback_link())
+                .is_some(),
+        );
+
+        if let Some(ref song) = song {
+            if let Some(player) = imp.player.get().and_then(|player| player.upgrade()) {
+                let toggle_playback_button = &imp.toggle_playback_button.get();
+                let buffering_spinner = &imp.buffering_spinner.get();
+
+                let is_active_song = player.is_active_song(song);
+
+                if is_active_song && player.is_buffering() {
+                    buffering_spinner.set_spinning(true);
+                    imp.playback_stack.set_visible_child(buffering_spinner);
+                    return;
+                }
+
+                imp.playback_stack.set_visible_child(toggle_playback_button);
+                buffering_spinner.set_spinning(false);
+
+                if is_active_song && player.state() == PlaybackState::Playing {
+                    toggle_playback_button.set_icon_name("media-playback-pause-symbolic");
+                    toggle_playback_button.set_tooltip_text(Some(&gettext("Pause")));
+                } else {
+                    toggle_playback_button.set_icon_name("media-playback-start-symbolic");
+                    toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
+                }
+            } else {
+                log::error!("Either the player was dropped or not binded in SongPage");
+            }
+        }
     }
 
     fn update_information(&self) {

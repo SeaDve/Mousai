@@ -17,16 +17,6 @@ albumcover > frame {
   padding: 6px;
 }
 
-/* SongCell */
-
-.buffering-button {
-  border-radius: 99999px;
-}
-
-.buffering-button > button {
-  background: none;
-}
-
 /* SongBar */
 
 .activate-song-button {
@@ -57,4 +47,14 @@ albumcover > frame {
 .playback-position-scale:active trough,
 .playback-position-scale:active highlight {
   min-height: 12px;
+}
+
+/* SongCell */
+
+.buffering-button {
+  border-radius: 99999px;
+}
+
+.buffering-button > button {
+  background: none;
 }

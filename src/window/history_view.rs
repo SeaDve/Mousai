@@ -9,7 +9,10 @@ use once_cell::unsync::OnceCell;
 use std::cell::Cell;
 
 use super::{song_cell::SongCell, song_page::SongPage, Window};
-use crate::model::{Song, SongList};
+use crate::{
+    model::{Song, SongList},
+    song_player::SongPlayer,
+};
 
 mod imp {
     use super::*;
@@ -190,6 +193,11 @@ impl HistoryView {
         let imp = self.imp();
         imp.song_child.set_song(Some(song.clone()));
         imp.stack.set_visible_child(&imp.song_child.get());
+    }
+
+    // Must only be called once
+    pub fn bind_player(&self, player: &SongPlayer) {
+        self.imp().song_child.bind_player(player);
     }
 
     // Must only be called once

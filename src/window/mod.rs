@@ -126,6 +126,7 @@ mod imp {
             }
 
             self.song_bar.bind_player(&self.player);
+            self.main_view.bind_player(&self.player);
             self.main_view.bind_song_list(obj.history());
             self.recognizer_view.bind_recognizer(&self.recognizer);
 
