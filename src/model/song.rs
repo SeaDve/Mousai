@@ -51,50 +51,50 @@ mod imp {
                         "title",
                         "Title",
                         "Title of the song",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        Some(""),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
                         "artist",
                         "Artist",
                         "Artist of the song",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        Some(""),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
                         "album",
                         "Album",
                         "Album",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        Some(""),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
                         "release-date",
                         "Release Date",
                         "Release Date",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        Some(""),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
                         "info-link",
                         "Info Link",
                         "Link to website containing song information",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        Some(""),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
                         "album-art-link",
                         "Album Art Link",
                         "Link where the album art can be downloaded",
                         None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
                         "playback-link",
                         "Playback Link",
                         "Link containing an excerpt of the song",
                         None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                 ]
             });
@@ -115,31 +115,31 @@ mod imp {
                 }
                 "title" => {
                     let title = value.get().unwrap();
-                    obj.set_title(title);
+                    self.inner.borrow_mut().title = title;
                 }
                 "artist" => {
                     let artist = value.get().unwrap();
-                    obj.set_artist(artist);
+                    self.inner.borrow_mut().artist = artist;
                 }
                 "album" => {
                     let album = value.get().unwrap();
-                    obj.set_album(album);
+                    self.inner.borrow_mut().album = album;
                 }
                 "release-date" => {
                     let release_date = value.get().unwrap();
-                    obj.set_release_date(release_date);
+                    self.inner.borrow_mut().release_date = release_date;
                 }
                 "info-link" => {
                     let info_link = value.get().unwrap();
-                    obj.set_info_link(info_link);
+                    self.inner.borrow_mut().info_link = info_link;
                 }
                 "album-art-link" => {
                     let album_art_link = value.get().unwrap();
-                    obj.set_album_art_link(album_art_link);
+                    self.inner.borrow_mut().album_art_link = album_art_link;
                 }
                 "playback-link" => {
                     let playback_link = value.get().unwrap();
-                    obj.set_playback_link(playback_link);
+                    self.inner.borrow_mut().playback_link = playback_link;
                 }
                 _ => unimplemented!(),
             }
@@ -170,22 +170,14 @@ impl Song {
     /// treat them different.
     ///
     /// The last heard will be the `DateTime` when this is constructed
-    pub fn new(
-        title: &str,
-        artist: &str,
-        info_link: &str,
-        album: &str,
-        release_date: &str,
-    ) -> Self {
-        glib::Object::builder()
-            .property("last-heard", DateTime::now())
-            .property("title", title)
-            .property("artist", artist)
-            .property("info-link", info_link)
-            .property("album", album)
-            .property("release-date", release_date)
-            .build()
-            .expect("Failed to create Song.")
+    pub fn builder<'a>(
+        title: &'a str,
+        artist: &'a str,
+        album: &'a str,
+        release_date: &'a str,
+        info_link: &'a str,
+    ) -> SongBuilder {
+        SongBuilder::new(title, artist, album, release_date, info_link)
     }
 
     pub fn set_last_heard(&self, last_heard: DateTime) {
@@ -197,63 +189,28 @@ impl Song {
         self.imp().inner.borrow().last_heard
     }
 
-    pub fn set_title(&self, title: &str) {
-        self.imp().inner.borrow_mut().title = title.to_string();
-        self.notify("title");
-    }
-
     pub fn title(&self) -> String {
         self.imp().inner.borrow().title.clone()
-    }
-
-    pub fn set_artist(&self, artist: &str) {
-        self.imp().inner.borrow_mut().artist = artist.to_string();
-        self.notify("artist");
     }
 
     pub fn artist(&self) -> String {
         self.imp().inner.borrow().artist.clone()
     }
 
-    pub fn set_album(&self, album: &str) {
-        self.imp().inner.borrow_mut().album = album.to_string();
-        self.notify("album");
-    }
-
     pub fn album(&self) -> String {
         self.imp().inner.borrow().album.clone()
-    }
-
-    pub fn set_release_date(&self, release_date: &str) {
-        self.imp().inner.borrow_mut().release_date = release_date.to_string();
-        self.notify("release-date");
     }
 
     pub fn release_date(&self) -> String {
         self.imp().inner.borrow().release_date.clone()
     }
 
-    pub fn set_info_link(&self, info_link: &str) {
-        self.imp().inner.borrow_mut().info_link = info_link.to_string();
-        self.notify("info-link");
-    }
-
     pub fn info_link(&self) -> String {
         self.imp().inner.borrow().info_link.clone()
     }
 
-    pub fn set_album_art_link(&self, album_art_link: Option<&str>) {
-        self.imp().inner.borrow_mut().album_art_link = album_art_link.map(str::to_string);
-        self.notify("album-art-link");
-    }
-
     pub fn album_art_link(&self) -> Option<String> {
         self.imp().inner.borrow().album_art_link.clone()
-    }
-
-    pub fn set_playback_link(&self, playback_link: Option<&str>) {
-        self.imp().inner.borrow_mut().playback_link = playback_link.map(str::to_string);
-        self.notify("playback-link");
     }
 
     pub fn playback_link(&self) -> Option<String> {
@@ -280,12 +237,54 @@ impl Serialize for Song {
 
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let song_inner = imp::SongInner::deserialize(deserializer)?;
-
-        let song: Song = glib::Object::new(&[]).expect("Failed to create Song.");
-        song.imp().inner.replace(song_inner);
-
+        let song: Self = glib::Object::new(&[]).expect("Failed to create song.");
+        song.imp()
+            .inner
+            .replace(imp::SongInner::deserialize(deserializer)?);
         Ok(song)
+    }
+}
+
+pub struct SongBuilder {
+    properties: Vec<(&'static str, glib::Value)>,
+}
+
+impl SongBuilder {
+    pub fn new(
+        title: &str,
+        artist: &str,
+        album: &str,
+        release_date: &str,
+        info_link: &str,
+    ) -> Self {
+        Self {
+            properties: vec![
+                ("title", title.to_value()),
+                ("artist", artist.to_value()),
+                ("album", album.to_value()),
+                ("release-date", release_date.to_value()),
+                ("info-link", info_link.to_value()),
+            ],
+        }
+    }
+
+    pub fn album_art_link(&mut self, album_art_link: &str) -> &mut Self {
+        self.properties
+            .push(("album-art-link", album_art_link.to_value()));
+        self
+    }
+
+    pub fn playback_link(&mut self, playback_link: &str) -> &mut Self {
+        self.properties
+            .push(("playback-link", playback_link.to_value()));
+        self
+    }
+
+    pub fn build(&self) -> Song {
+        glib::Object::with_values(Song::static_type(), &self.properties)
+            .expect("Failed to create Song.")
+            .downcast()
+            .unwrap()
     }
 }
 
@@ -295,39 +294,23 @@ mod test {
 
     #[test]
     fn properties() {
-        let song = Song::new(
+        let song = Song::builder(
             "Some song",
             "Someone",
             "https://somewhere.com",
             "SomeAlbum",
             "00-00-0000",
-        );
+        )
+        .album_art_link("https://album.png")
+        .playback_link("https://test.mp3")
+        .build();
+
         assert_eq!(song.title(), "Some song");
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date(), "00-00-0000");
         assert_eq!(song.info_link(), "https://somewhere.com");
-        assert_eq!(song.playback_link(), None);
-
-        song.set_title("New title");
-        assert_eq!(song.title(), "New title");
-
-        song.set_artist("New artist");
-        assert_eq!(song.artist(), "New artist");
-
-        song.set_album("New album");
-        assert_eq!(song.album(), "New album");
-
-        song.set_release_date("00-00-0001");
-        assert_eq!(song.release_date(), "00-00-0001");
-
-        song.set_info_link("New info link");
-        assert_eq!(song.info_link(), "New info link");
-
-        song.set_playback_link(Some("https:://playbacklink.somewhere.com"));
-        assert_eq!(
-            song.playback_link().as_deref(),
-            Some("https:://playbacklink.somewhere.com")
-        );
+        assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
+        assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
     }
 }

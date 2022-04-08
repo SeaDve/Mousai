@@ -28,27 +28,27 @@ impl AudD {
     }
 
     fn handle_data(data: Data) -> Song {
-        let song = Song::new(
+        let mut song_builder = Song::builder(
             &data.title,
             &data.artist,
-            &data.info_link,
             &data.album,
             &data.release_date,
+            &data.info_link,
         );
 
         if let Some(spotify_data) = data.spotify_data {
             // TODO: Get album art link from other providers too
             if let Some(image) = spotify_data.album.images.get(0) {
-                song.set_album_art_link(Some(&image.url));
+                song_builder.album_art_link(&image.url);
             }
 
             // TODO: Get playback link from other providers too
             if !spotify_data.preview_url.is_empty() {
-                song.set_playback_link(Some(&spotify_data.preview_url));
+                song_builder.playback_link(&spotify_data.preview_url);
             }
         }
 
-        song
+        song_builder.build()
     }
 
     async fn recognize_inner(&self, recording: &AudioRecording) -> Result<Song, Error> {
