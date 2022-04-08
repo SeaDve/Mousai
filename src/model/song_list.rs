@@ -182,10 +182,10 @@ mod test {
         let song_list = SongList::default();
         assert!(song_list.is_empty());
 
-        let song_1 = Song::new("1", "1", "1");
+        let song_1 = Song::new("1", "1", "1", "1", "1");
         assert!(song_list.append(song_1.clone()));
 
-        let song_2 = Song::new("2", "2", "2");
+        let song_2 = Song::new("2", "2", "2", "2", "2");
         assert!(song_list.append(song_2.clone()));
 
         assert!(!song_list.is_empty());
@@ -205,13 +205,16 @@ mod test {
         let song_list = SongList::default();
         assert!(song_list.is_empty());
 
-        let songs = vec![Song::new("1", "1", "1"), Song::new("2", "2", "2")];
+        let songs = vec![
+            Song::new("1", "1", "1", "1", "1"),
+            Song::new("2", "2", "2", "2", "1"),
+        ];
         assert!(song_list.append_many(songs));
         assert_eq!(song_list.n_items(), 2);
 
         let more_songs = vec![
-            Song::new("", "", "SameInfoLink"),
-            Song::new("", "", "SameInfoLink"),
+            Song::new("", "", "SameInfoLink", "", ""),
+            Song::new("", "", "SameInfoLink", "", ""),
         ];
         assert!(!song_list.append_many(more_songs));
         assert_eq!(song_list.n_items(), 3);

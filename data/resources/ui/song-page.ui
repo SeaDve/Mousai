@@ -32,62 +32,143 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">12</property>
-            <child>
-              <object class="MsaiAlbumCover" id="album_cover">
-                <property name="pixel-size">180</property>
-              </object>
-            </child>
-            <child>
+      <object class="GtkScrolledWindow">
+        <property name="vexpand">True</property>
+        <property name="child">
+          <object class="AdwClamp">
+            <property name="maximum-size">800</property>
+            <property name="child">
               <object class="GtkBox">
+                <property name="margin-start">24</property>
+                <property name="margin-end">24</property>
+                <property name="margin-top">24</property>
+                <property name="margin-bottom">24</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">6</property>
+                <property name="spacing">12</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="ellipsize">end</property>
-                    <property name="wrap">True</property>
-                    <property name="wrap-mode">word</property>
-                    <property name="lines">2</property>
-                    <binding name="label">
-                      <lookup name="title">
-                        <lookup name="song">MsaiSongPage</lookup>
-                      </lookup>
-                    </binding>
-                    <style>
-                      <class name="title-1"/>
-                    </style>
+                  <object class="GtkBox">
+                    <property name="spacing">24</property>
+                    <child>
+                      <object class="MsaiAlbumCover" id="album_cover">
+                        <property name="pixel-size">180</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="hexpand">True</property>
+                                <property name="xalign">0</property>
+                                <property name="ellipsize">end</property>
+                                <property name="wrap">True</property>
+                                <property name="wrap-mode">word</property>
+                                <property name="lines">2</property>
+                                <binding name="label">
+                                  <lookup name="title">
+                                    <lookup name="song">MsaiSongPage</lookup>
+                                  </lookup>
+                                </binding>
+                                <style>
+                                  <class name="title-1"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="hexpand">True</property>
+                                <property name="xalign">0</property>
+                                <property name="ellipsize">end</property>
+                                <property name="wrap">True</property>
+                                <property name="wrap-mode">word</property>
+                                <property name="lines">2</property>
+                                <binding name="label">
+                                  <lookup name="artist">
+                                    <lookup name="song">MsaiSongPage</lookup>
+                                  </lookup>
+                                </binding>
+                                <style>
+                                  <class name="title-4"/>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkStack" id="playback_stack">
+                            <property name="halign">start</property>
+                            <property name="transition-type">crossfade</property>
+                            <child>
+                              <object class="GtkButton" id="toggle_playback_button">
+                                <!-- <property name="action-name">song-cell.toggle-playback</property> -->
+                                <property name="icon-name">media-playback-start-symbolic</property>
+                                <style>
+                                  <class name="circular"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkSpinner" id="buffering_spinner">
+                                <property name="valign">center</property>
+                                <property name="width-request">24</property>
+                                <property name="height-request">24</property>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="playback-button"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="ellipsize">end</property>
-                    <property name="wrap">True</property>
-                    <property name="wrap-mode">word</property>
-                    <property name="lines">2</property>
-                    <binding name="label">
-                      <lookup name="artist">
-                        <lookup name="song">MsaiSongPage</lookup>
-                      </lookup>
-                    </binding>
-                    <style>
-                      <class name="title-4"/>
-                      <class name="dim-label"/>
-                    </style>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Information</property>
+                        <child>
+                          <object class="MsaiInformationRow" id="last_heard_row">
+                            <property name="title" translatable="yes">Last Heard</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="MsaiInformationRow" id="album_row">
+                            <property name="title" translatable="yes">Album</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="MsaiInformationRow" id="release_date_row">
+                            <property name="title" translatable="yes">Release Date</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Listen</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label">Hi</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
           </object>
-        </child>
-        <child>
-          <object class="GtkBox"></object>
-        </child>
+        </property>
       </object>
     </child>
   </template>

@@ -1,5 +1,4 @@
 mod aud_d;
-mod mock;
 
 use async_trait::async_trait;
 use gtk::glib;
@@ -7,7 +6,7 @@ use once_cell::sync::Lazy;
 
 use std::{sync::RwLock, time::Duration};
 
-use self::{aud_d::AudD, mock::Mock};
+use self::aud_d::{AudD, AudDMock};
 use crate::{core::AudioRecording, model::Song};
 
 pub static PROVIDER_MANAGER: Lazy<ProviderManager> = Lazy::new(ProviderManager::default);
@@ -16,14 +15,14 @@ pub static PROVIDER_MANAGER: Lazy<ProviderManager> = Lazy::new(ProviderManager::
 #[enum_type(name = "MsaiProviderType")]
 pub enum ProviderType {
     AudD,
-    Mock,
+    AudDMock,
 }
 
 impl ProviderType {
     pub fn to_provider(self) -> Box<dyn Provider> {
         match self {
             Self::AudD => Box::new(AudD::default()),
-            Self::Mock => Box::new(Mock),
+            Self::AudDMock => Box::new(AudDMock),
         }
     }
 }
@@ -67,8 +66,6 @@ impl ProviderManager {
 pub enum ProviderError {
     #[error("AudD Provider Error: {0}")]
     AudD(aud_d::Error),
-    #[error("Other Provider Error: {0}")]
-    Other(String),
 }
 
 #[async_trait(?Send)]

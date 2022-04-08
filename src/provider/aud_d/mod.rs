@@ -1,15 +1,15 @@
 mod error;
+mod mock;
 mod response;
 
 use async_trait::async_trait;
-use bytes::Bytes;
 use reqwest::Client;
 use serde_json::json;
 
 use std::time::Duration;
 
-pub use self::error::Error;
 use self::response::{Data, Response};
+pub use self::{error::Error, mock::AudDMock};
 use super::{Provider, ProviderError};
 use crate::{core::AudioRecording, model::Song, utils, RUNTIME};
 
@@ -27,9 +27,28 @@ impl AudD {
         }
     }
 
-    fn parse(json_bytes: &Bytes) -> Result<Data, Error> {
-        let response: Response = serde_json::from_slice(json_bytes)?;
-        Ok(response.data()?)
+    fn handle_data(data: Data) -> Song {
+        let song = Song::new(
+            &data.title,
+            &data.artist,
+            &data.info_link,
+            &data.album,
+            &data.release_date,
+        );
+
+        if let Some(spotify_data) = data.spotify_data {
+            // TODO: Get album art link from other providers too
+            if let Some(image) = spotify_data.album.images.get(0) {
+                song.set_album_art_link(Some(&image.url));
+            }
+
+            // TODO: Get playback link from other providers too
+            if !spotify_data.preview_url.is_empty() {
+                song.set_playback_link(Some(&spotify_data.preview_url));
+            }
+        }
+
+        song
     }
 
     async fn recognize_inner(&self, recording: &AudioRecording) -> Result<Song, Error> {
@@ -56,22 +75,7 @@ impl AudD {
             Err(err) => log::warn!("Failed to get str from `Bytes`: {:?}", err),
         }
 
-        let data = Self::parse(&bytes)?;
-        let song = Song::new(&data.title, &data.artist, &data.info_link);
-
-        if let Some(spotify_data) = data.spotify_data {
-            // TODO: Get album art link from other providers too
-            if let Some(image) = spotify_data.album.images.get(0) {
-                song.set_album_art_link(Some(&image.url));
-            }
-
-            // TODO: Get playback link from other providers too
-            if !spotify_data.preview_url.is_empty() {
-                song.set_playback_link(Some(&spotify_data.preview_url));
-            }
-        }
-
-        Ok(song)
+        Ok(Self::handle_data(Response::parse(&bytes)?.data()?))
     }
 }
 
@@ -100,7 +104,7 @@ mod test {
     use error::AudDError;
 
     fn parse_response(response: &'static str) -> Result<Data, Error> {
-        AudD::parse(&Bytes::from_static(response.as_bytes()))
+        Ok(Response::parse(&response.as_bytes())?.data()?)
     }
 
     #[test]

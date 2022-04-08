@@ -1,8 +1,9 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use adw::prelude::*;
+use gtk::{glib, subclass::prelude::*};
 
 use std::cell::RefCell;
 
-use super::album_cover::AlbumCover;
+use super::{album_cover::AlbumCover, information_row::InformationRow};
 use crate::model::Song;
 
 mod imp {
@@ -15,6 +16,12 @@ mod imp {
     pub struct SongPage {
         #[template_child]
         pub album_cover: TemplateChild<AlbumCover>,
+        #[template_child]
+        pub last_heard_row: TemplateChild<InformationRow>,
+        #[template_child]
+        pub album_row: TemplateChild<InformationRow>,
+        #[template_child]
+        pub release_date_row: TemplateChild<InformationRow>,
 
         pub song: RefCell<Option<Song>>,
     }
@@ -103,15 +110,29 @@ impl SongPage {
         }
 
         let imp = self.imp();
+        imp.song.replace(song.clone());
+        imp.album_cover.set_song(song);
+        self.update_information();
 
-        imp.album_cover.set_song(song.clone());
-
-        imp.song.replace(song);
         self.notify("song");
     }
 
     pub fn song(&self) -> Option<Song> {
         self.imp().song.borrow().clone()
+    }
+
+    fn update_information(&self) {
+        let song = match self.song() {
+            Some(song) => song,
+            None => return,
+        };
+
+        let imp = self.imp();
+
+        imp.last_heard_row
+            .set_data(&song.last_heard().fuzzy_display());
+        imp.album_row.set_data(&song.album());
+        imp.release_date_row.set_data(&song.release_date());
     }
 }
 

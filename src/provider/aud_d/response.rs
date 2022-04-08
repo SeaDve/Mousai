@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-use super::error::AudDError;
+use super::error::{AudDError, Error};
 
 #[derive(Debug, Deserialize)]
 pub struct Image {
@@ -24,6 +24,9 @@ pub struct SpotifyData {
 pub struct Data {
     pub title: String,
     pub artist: String,
+    pub album: String,
+    /// In format of ISO-8601 (%Y-%m-%d)
+    pub release_date: String,
     pub timecode: String,
     #[serde(rename(deserialize = "song_link"))]
     pub info_link: String,
@@ -63,6 +66,10 @@ pub struct Response {
 }
 
 impl Response {
+    pub fn parse(slice: &[u8]) -> Result<Self, Error> {
+        Ok(serde_json::from_slice(slice)?)
+    }
+
     pub fn data(self) -> Result<Data, AudDError> {
         match self.status.as_str() {
             "success" => self.data.map_or_else(|| Err(AudDError::NoMatches), Ok),

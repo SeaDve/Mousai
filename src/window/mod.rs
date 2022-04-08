@@ -1,6 +1,7 @@
 mod album_cover;
 mod audio_visualizer;
 mod history_view;
+mod information_row;
 mod recognizer_view;
 mod song_bar;
 mod song_cell;

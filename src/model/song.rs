@@ -17,6 +17,8 @@ mod imp {
         pub last_heard: DateTime,
         pub title: String,
         pub artist: String,
+        pub album: String,
+        pub release_date: String,
         pub info_link: String,
         pub album_art_link: Option<String>,
         pub playback_link: Option<String>,
@@ -56,6 +58,20 @@ mod imp {
                         "artist",
                         "Artist",
                         "Artist of the song",
+                        None,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                    glib::ParamSpecString::new(
+                        "album",
+                        "Album",
+                        "Album",
+                        None,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
+                    glib::ParamSpecString::new(
+                        "release-date",
+                        "Release Date",
+                        "Release Date",
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
@@ -105,6 +121,14 @@ mod imp {
                     let artist = value.get().unwrap();
                     obj.set_artist(artist);
                 }
+                "album" => {
+                    let album = value.get().unwrap();
+                    obj.set_album(album);
+                }
+                "release-date" => {
+                    let release_date = value.get().unwrap();
+                    obj.set_release_date(release_date);
+                }
                 "info-link" => {
                     let info_link = value.get().unwrap();
                     obj.set_info_link(info_link);
@@ -126,6 +150,8 @@ mod imp {
                 "last-heard" => obj.last_heard().to_value(),
                 "title" => obj.title().to_value(),
                 "artist" => obj.artist().to_value(),
+                "album" => obj.album().to_value(),
+                "release-date" => obj.release_date().to_value(),
                 "info-link" => obj.info_link().to_value(),
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
@@ -144,12 +170,20 @@ impl Song {
     /// treat them different.
     ///
     /// The last heard will be the `DateTime` when this is constructed
-    pub fn new(title: &str, artist: &str, info_link: &str) -> Self {
+    pub fn new(
+        title: &str,
+        artist: &str,
+        info_link: &str,
+        album: &str,
+        release_date: &str,
+    ) -> Self {
         glib::Object::builder()
             .property("last-heard", DateTime::now())
             .property("title", title)
             .property("artist", artist)
             .property("info-link", info_link)
+            .property("album", album)
+            .property("release-date", release_date)
             .build()
             .expect("Failed to create Song.")
     }
@@ -179,6 +213,24 @@ impl Song {
 
     pub fn artist(&self) -> String {
         self.imp().inner.borrow().artist.clone()
+    }
+
+    pub fn set_album(&self, album: &str) {
+        self.imp().inner.borrow_mut().album = album.to_string();
+        self.notify("album");
+    }
+
+    pub fn album(&self) -> String {
+        self.imp().inner.borrow().album.clone()
+    }
+
+    pub fn set_release_date(&self, release_date: &str) {
+        self.imp().inner.borrow_mut().release_date = release_date.to_string();
+        self.notify("release-date");
+    }
+
+    pub fn release_date(&self) -> String {
+        self.imp().inner.borrow().release_date.clone()
     }
 
     pub fn set_info_link(&self, info_link: &str) {
@@ -243,9 +295,17 @@ mod test {
 
     #[test]
     fn properties() {
-        let song = Song::new("Some song", "Someone", "https://somewhere.com");
+        let song = Song::new(
+            "Some song",
+            "Someone",
+            "https://somewhere.com",
+            "SomeAlbum",
+            "00-00-0000",
+        );
         assert_eq!(song.title(), "Some song");
         assert_eq!(song.artist(), "Someone");
+        assert_eq!(song.album(), "SomeAlbum");
+        assert_eq!(song.release_date(), "00-00-0000");
         assert_eq!(song.info_link(), "https://somewhere.com");
         assert_eq!(song.playback_link(), None);
 
@@ -254,6 +314,12 @@ mod test {
 
         song.set_artist("New artist");
         assert_eq!(song.artist(), "New artist");
+
+        song.set_album("New album");
+        assert_eq!(song.album(), "New album");
+
+        song.set_release_date("00-00-0001");
+        assert_eq!(song.release_date(), "00-00-0001");
 
         song.set_info_link("New info link");
         assert_eq!(song.info_link(), "New info link");
