@@ -178,6 +178,8 @@ impl SongBar {
 
         self.player().set_song(song.clone())?;
 
+        imp.duration_label.reset();
+
         if song.is_some() {
             spawn!(
                 glib::PRIORITY_DEFAULT_IDLE,
@@ -187,8 +189,6 @@ impl SongBar {
                     }
                 })
             );
-        } else {
-            imp.duration_label.reset();
         }
 
         imp.song.replace(song);
