@@ -53,7 +53,6 @@ impl AudD {
         )));
 
         if let Some(spotify_data) = data.spotify_data {
-            // TODO: Get album art link from other providers too
             if let Some(image) = spotify_data.album.images.get(0) {
                 album_images.push(image.url.clone());
             }
