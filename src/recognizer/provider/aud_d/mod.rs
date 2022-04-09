@@ -13,7 +13,9 @@ pub use self::{error::Error, mock::AudDMock};
 use super::{Provider, ProviderError};
 use crate::{
     core::AudioRecording,
-    model::external_link::{AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink},
+    model::external_link::{
+        AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
+    },
     model::{Song, SongId},
     utils, RUNTIME,
 };
@@ -40,6 +42,8 @@ impl AudD {
             &data.album,
             &data.release_date,
         );
+        let mut playback_links = Vec::new();
+        let mut album_images = Vec::new();
 
         song_builder.external_link(AudDExternalLink::new(&data.info_link));
 
@@ -51,17 +55,40 @@ impl AudD {
         if let Some(spotify_data) = data.spotify_data {
             // TODO: Get album art link from other providers too
             if let Some(image) = spotify_data.album.images.get(0) {
-                song_builder.album_art_link(&image.url);
+                album_images.push(image.url.clone());
             }
 
-            // TODO: Get playback link from other providers too
             if !spotify_data.preview_url.is_empty() {
-                song_builder.playback_link(&spotify_data.preview_url);
+                playback_links.push(spotify_data.preview_url);
             }
 
             song_builder.external_link(SpotifyExternalLink::new(
                 &spotify_data.external_urls.spotify,
             ));
+        }
+
+        if let Some(mut apple_music_data) = data.apple_music_data {
+            song_builder.external_link(AppleMusicExternalLink::new(&apple_music_data.url));
+
+            if let Some(playback_preview) = apple_music_data.previews.pop() {
+                playback_links.push(playback_preview.url);
+            }
+
+            album_images.push(
+                apple_music_data
+                    .artwork
+                    .url
+                    .replace("{w}", "600")
+                    .replace("{h}", "600"),
+            );
+        }
+
+        if let Some(album_image) = album_images.first() {
+            song_builder.album_art_link(album_image);
+        }
+
+        if let Some(playback_link) = playback_links.first() {
+            song_builder.playback_link(playback_link);
         }
 
         song_builder.build()

@@ -3,6 +3,23 @@ use serde::Deserialize;
 use super::error::{AudDError, Error};
 
 #[derive(Debug, Deserialize)]
+pub struct Preview {
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Artwork {
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct AppleMusicData {
+    pub previews: Vec<Preview>,
+    pub url: String,
+    pub artwork: Artwork,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct Image {
     pub url: String,
 }
@@ -40,6 +57,8 @@ pub struct Data {
     pub info_link: String,
     #[serde(rename(deserialize = "spotify"))]
     pub spotify_data: Option<SpotifyData>,
+    #[serde(rename(deserialize = "apple_music"))]
+    pub apple_music_data: Option<AppleMusicData>,
 }
 
 #[derive(Debug, Deserialize)]

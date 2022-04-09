@@ -1,3 +1,4 @@
+mod apple_music;
 mod aud_d;
 mod spotify;
 mod youtube;
@@ -6,7 +7,8 @@ use gtk::glib::{self, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 
 pub use self::{
-    aud_d::AudDExternalLink, spotify::SpotifyExternalLink, youtube::YoutubeExternalLink,
+    apple_music::AppleMusicExternalLink, aud_d::AudDExternalLink, spotify::SpotifyExternalLink,
+    youtube::YoutubeExternalLink,
 };
 
 #[typetag::serde]

@@ -17,37 +17,48 @@ albumcover > frame {
 
 /* TODO improve styling. Maybe add icons too */
 
+.external-link-cell.applemusic {
+	background: linear-gradient(180deg, #fb5b73 30%, #fa243c 100%);
+	color: white;
+}
+.external-link-cell.applemusic:hover {
+	background: linear-gradient(180deg, shade(#fb5b73, 1.07) 30%, shade(#fa243c, 1.07) 100%);
+}
+.external-link-cell.applemusic:active {
+	background: linear-gradient(180deg, shade(#fb5b73, .97) 30%, shade(#fa243c, 1.07) 100%);
+}
+
 .external-link-cell.audd {
-	background: linear-gradient(75deg, #f9e2a7 0%, #eb5ec3 50%, #6d53e0 100%);
-	color: #393484;
+	background: linear-gradient(180deg, #ee1c52 30%, #c12279 100%);
+	color: white;
 }
 .external-link-cell.audd:hover {
-	background: linear-gradient(75deg, shade(#f9e2a7, 1.07) 0%, shade(#eb5ec3, 1.07) 50%, shade(#6d53e0, 1.07) 100%);
+	background: linear-gradient(180deg, shade(#ee1c52, 1.07) 30%, shade(#c12279, 1.07) 100%);
 }
 .external-link-cell.audd:active {
-	background: linear-gradient(75deg, shade(#f9e2a7, .97) 0%, shade(#eb5ec3, .95) 50%, shade(#6d53e0, 1.07) 100%);
+	background: linear-gradient(180deg, shade(#ee1c52, .97) 30%, shade(#c12279, .95) 100%);
 }
 
 .external-link-cell.spotify {
-	background: linear-gradient(180deg, @green_4 30%, @green_5 100%);
+	background: #1dd05d;
 	color: white;
 }
 .external-link-cell.spotify:hover {
-	background: linear-gradient(180deg, shade(@green_4, 1.06) 30%, shade(@green_5, 1.06) 100%);
+	background: shade(#1dd05d, 1.06);
 }
 .external-link-cell.spotify:active {
-	background: linear-gradient(180deg, shade(@green_4, .95) 30%, shade(@green_5, .95) 100%);
+	background: shade(#1dd05d, 0.95);
 }
 
 .external-link-cell.youtube {
-	background: linear-gradient(80deg, @red_4 30%, @red_5 100%);
+	background: #f70000;
 	color: white;
 }
 .external-link-cell.youtube:hover {
-	background: linear-gradient(80deg, shade(@red_4, 1.06) 30%, shade(@red_5, 1.06) 100%);
+	background: shade(#f70000, 1.15);
 }
 .external-link-cell.youtube:active {
-	background: linear-gradient(80deg, shade(@red_4, .95) 30%, shade(@red_5, .95) 100%);
+	background: shade(#f70000, 0.95);
 }
 
 /* HistoryView */
