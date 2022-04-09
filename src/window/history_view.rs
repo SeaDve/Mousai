@@ -195,12 +195,12 @@ impl HistoryView {
         imp.stack.set_visible_child(&imp.song_child.get());
     }
 
-    // Must only be called once
+    /// Must only be called once
     pub fn bind_player(&self, player: &SongPlayer) {
         self.imp().song_child.bind_player(player);
     }
 
-    // Must only be called once
+    /// Must only be called once
     pub fn bind_song_list(&self, song_list: &SongList) {
         let imp = self.imp();
 
