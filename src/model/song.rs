@@ -170,12 +170,12 @@ impl Song {
     /// treat them different.
     ///
     /// The last heard will be the `DateTime` when this is constructed
-    pub fn builder<'a>(
-        title: &'a str,
-        artist: &'a str,
-        album: &'a str,
-        release_date: &'a str,
-        info_link: &'a str,
+    pub fn builder(
+        title: &str,
+        artist: &str,
+        album: &str,
+        release_date: &str,
+        info_link: &str,
     ) -> SongBuilder {
         SongBuilder::new(title, artist, album, release_date, info_link)
     }
