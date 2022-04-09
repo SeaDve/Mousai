@@ -297,9 +297,9 @@ mod test {
         let song = Song::builder(
             "Some song",
             "Someone",
-            "https://somewhere.com",
             "SomeAlbum",
             "00-00-0000",
+            "https://somewhere.com",
         )
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")

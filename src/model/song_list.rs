@@ -207,7 +207,7 @@ mod test {
 
         let songs = vec![
             Song::builder("1", "1", "1", "1", "1").build(),
-            Song::builder("2", "2", "2", "2", "1").build(),
+            Song::builder("2", "2", "2", "2", "2").build(),
         ];
         assert!(song_list.append_many(songs));
         assert_eq!(song_list.n_items(), 2);
