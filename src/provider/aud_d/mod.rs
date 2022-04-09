@@ -11,7 +11,11 @@ use std::time::Duration;
 use self::response::{Data, Response};
 pub use self::{error::Error, mock::AudDMock};
 use super::{Provider, ProviderError};
-use crate::{core::AudioRecording, model::Song, utils, RUNTIME};
+use crate::{
+    core::AudioRecording,
+    model::{Song, SongId},
+    utils, RUNTIME,
+};
 
 #[derive(Debug)]
 pub struct AudD {
@@ -29,11 +33,11 @@ impl AudD {
 
     fn handle_data(data: Data) -> Song {
         let mut song_builder = Song::builder(
+            &SongId::from(data.info_link), // Info link is unique to every song
             &data.title,
             &data.artist,
             &data.album,
             &data.release_date,
-            &data.info_link,
         );
 
         if let Some(spotify_data) = data.spotify_data {

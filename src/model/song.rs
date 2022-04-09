@@ -14,12 +14,12 @@ mod imp {
     #[derive(Debug, Default, Serialize, Deserialize)]
     #[serde(default)]
     pub struct SongInner {
+        pub id: SongId,
         pub last_heard: DateTime,
         pub title: String,
         pub artist: String,
         pub album: String,
         pub release_date: String,
-        pub info_link: String,
         pub album_art_link: Option<String>,
         pub playback_link: Option<String>,
     }
@@ -40,6 +40,13 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
+                    glib::ParamSpecBoxed::new(
+                        "id",
+                        "Id",
+                        "Id",
+                        SongId::static_type(),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
+                    ),
                     glib::ParamSpecBoxed::new(
                         "last-heard",
                         "Last Heard",
@@ -76,13 +83,6 @@ mod imp {
                         glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
                     glib::ParamSpecString::new(
-                        "info-link",
-                        "Info Link",
-                        "Link to website containing song information",
-                        Some(""),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
                         "album-art-link",
                         "Album Art Link",
                         "Link where the album art can be downloaded",
@@ -109,6 +109,10 @@ mod imp {
             pspec: &glib::ParamSpec,
         ) {
             match pspec.name() {
+                "id" => {
+                    let id = value.get().unwrap();
+                    self.inner.borrow_mut().id = id;
+                }
                 "last-heard" => {
                     let last_heard = value.get().unwrap();
                     obj.set_last_heard(last_heard);
@@ -129,10 +133,6 @@ mod imp {
                     let release_date = value.get().unwrap();
                     self.inner.borrow_mut().release_date = release_date;
                 }
-                "info-link" => {
-                    let info_link = value.get().unwrap();
-                    self.inner.borrow_mut().info_link = info_link;
-                }
                 "album-art-link" => {
                     let album_art_link = value.get().unwrap();
                     self.inner.borrow_mut().album_art_link = album_art_link;
@@ -147,12 +147,12 @@ mod imp {
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
+                "id" => obj.id().to_value(),
                 "last-heard" => obj.last_heard().to_value(),
                 "title" => obj.title().to_value(),
                 "artist" => obj.artist().to_value(),
                 "album" => obj.album().to_value(),
                 "release-date" => obj.release_date().to_value(),
-                "info-link" => obj.info_link().to_value(),
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
                 _ => unimplemented!(),
@@ -166,18 +166,28 @@ glib::wrapper! {
 }
 
 impl Song {
-    /// The parameter `info_link` must be unique to each [`Song`] so that [`SongList`] will
+    /// The parameter `SongID` must be unique to each [`Song`] so that [`SongList`] will
     /// treat them different.
     ///
     /// The last heard will be the `DateTime` when this is constructed
     pub fn builder(
+        id: &SongId,
         title: &str,
         artist: &str,
         album: &str,
         release_date: &str,
-        info_link: &str,
     ) -> SongBuilder {
-        SongBuilder::new(title, artist, album, release_date, info_link)
+        SongBuilder::new(id, title, artist, album, release_date)
+    }
+
+    pub fn id(&self) -> SongId {
+        let id = self.imp().inner.borrow().id.clone();
+
+        if id.is_default() {
+            log::warn!("SongId is was found in default. It should have been set on the construct.");
+        }
+
+        id
     }
 
     pub fn set_last_heard(&self, last_heard: DateTime) {
@@ -205,21 +215,12 @@ impl Song {
         self.imp().inner.borrow().release_date.clone()
     }
 
-    pub fn info_link(&self) -> String {
-        self.imp().inner.borrow().info_link.clone()
-    }
-
     pub fn album_art_link(&self) -> Option<String> {
         self.imp().inner.borrow().album_art_link.clone()
     }
 
     pub fn playback_link(&self) -> Option<String> {
         self.imp().inner.borrow().playback_link.clone()
-    }
-
-    pub fn id(&self) -> SongId {
-        // Song's info_link is unique to every song
-        SongId::new(&self.info_link())
     }
 
     pub fn album_art(&self) -> anyhow::Result<&AlbumArt> {
@@ -237,10 +238,10 @@ impl Serialize for Song {
 
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let song: Self = glib::Object::new(&[]).expect("Failed to create song.");
-        song.imp()
-            .inner
-            .replace(imp::SongInner::deserialize(deserializer)?);
+        let deserialized_inner = imp::SongInner::deserialize(deserializer)?;
+        let song: Self =
+            glib::Object::new(&[("id", &deserialized_inner.id)]).expect("Failed to create song.");
+        song.imp().inner.replace(deserialized_inner);
         Ok(song)
     }
 }
@@ -250,20 +251,14 @@ pub struct SongBuilder {
 }
 
 impl SongBuilder {
-    pub fn new(
-        title: &str,
-        artist: &str,
-        album: &str,
-        release_date: &str,
-        info_link: &str,
-    ) -> Self {
+    pub fn new(id: &SongId, title: &str, artist: &str, album: &str, release_date: &str) -> Self {
         Self {
             properties: vec![
+                ("id", id.to_value()),
                 ("title", title.to_value()),
                 ("artist", artist.to_value()),
                 ("album", album.to_value()),
                 ("release-date", release_date.to_value()),
-                ("info-link", info_link.to_value()),
             ],
         }
     }
@@ -295,11 +290,11 @@ mod test {
     #[test]
     fn properties() {
         let song = Song::builder(
+            &SongId::from("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
             "00-00-0000",
-            "https://somewhere.com",
         )
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")
@@ -309,7 +304,6 @@ mod test {
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date(), "00-00-0000");
-        assert_eq!(song.info_link(), "https://somewhere.com");
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
     }

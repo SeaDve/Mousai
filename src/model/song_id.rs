@@ -1,4 +1,9 @@
-#[derive(Clone, Hash, PartialEq, Eq)]
+use gtk::glib;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
+#[boxed_type(name = "MsaiSongId")]
+#[serde(transparent)]
 pub struct SongId {
     id: Box<str>,
 }
@@ -15,11 +20,28 @@ impl std::fmt::Display for SongId {
     }
 }
 
+impl Default for SongId {
+    fn default() -> Self {
+        Self::from(
+            chrono::Local::now()
+                .format("Default-%Y-%m-%d-%H-%M-%S-%f-Default")
+                .to_string(),
+        )
+    }
+}
+
 impl SongId {
-    pub(super) fn new(info_link: &str) -> Self {
+    /// This must be unique to every song.
+    ///
+    /// Unique str must not start or end with `Default`.
+    pub fn from(unique_str: impl Into<Box<str>>) -> Self {
         Self {
-            id: Box::from(info_link),
+            id: unique_str.into(),
         }
+    }
+
+    pub fn is_default(&self) -> bool {
+        self.id.starts_with("Default") && self.id.ends_with("Default")
     }
 }
 
@@ -29,20 +51,53 @@ mod test {
     use std::collections::HashMap;
 
     #[test]
+    fn equality() {
+        assert_eq!(SongId::from("A"), SongId::from("A"));
+        assert_eq!(SongId::from("B"), SongId::from("B"));
+
+        assert_ne!(SongId::from("A"), SongId::from("B"));
+        assert_ne!(SongId::from("A"), SongId::from("B"));
+    }
+
+    #[test]
+    fn serialize() {
+        assert_eq!(
+            serde_json::to_string(&SongId::from("A")).unwrap().as_str(),
+            "\"A\"",
+        );
+
+        assert_eq!(
+            serde_json::to_string(&SongId::from("BB8"))
+                .unwrap()
+                .as_str(),
+            "\"BB8\""
+        );
+    }
+
+    #[test]
+    fn deserialize() {
+        assert_eq!(SongId::from("A"), serde_json::from_str("\"A\"").unwrap());
+        assert_eq!(
+            SongId::from("BB8"),
+            serde_json::from_str("\"BB8\"").unwrap()
+        );
+    }
+
+    #[test]
     fn hash_map() {
         let mut hash_map = HashMap::new();
 
-        let id_0 = SongId::new("Id0");
+        let id_0 = SongId::from("Id0");
         hash_map.insert(&id_0, 0);
 
-        let id_1 = SongId::new("Id1");
+        let id_1 = SongId::from("Id1");
         hash_map.insert(&id_1, 1);
 
-        let id_2 = SongId::new("Id2");
+        let id_2 = SongId::from("Id2");
         hash_map.insert(&id_2, 2);
 
         assert_eq!(hash_map.get(&id_0), Some(&0));
         assert_eq!(hash_map.get(&id_1), Some(&1));
-        assert_eq!(hash_map.get(&SongId::new("Id2")), Some(&2));
+        assert_eq!(hash_map.get(&SongId::from("Id2")), Some(&2));
     }
 }
