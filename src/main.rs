@@ -29,16 +29,12 @@ mod utils;
 mod window;
 
 use gettextrs::{gettext, LocaleCategory};
-use gtk::{
-    gio,
-    glib::{self, prelude::*},
-};
+use gtk::{gio, glib};
 use once_cell::sync::Lazy;
 
 use self::album_art::AlbumArt;
 use self::application::Application;
-use self::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
-use self::inspector_page::InspectorPage;
+use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
 static RUNTIME: Lazy<tokio::runtime::Runtime> =
     Lazy::new(|| tokio::runtime::Runtime::new().unwrap());
@@ -59,15 +55,6 @@ fn main() {
 
     if let Err(err) = AlbumArt::init_cache_dir() {
         log::error!("Failed to initialize AlbumArt cache dir: {err:?}");
-    }
-
-    if gio::IOExtensionPoint::lookup("gtk-inspector-page").is_some() {
-        gio::IOExtensionPoint::implement(
-            "gtk-inspector-page",
-            InspectorPage::static_type(),
-            APP_ID,
-            10,
-        );
     }
 
     let app = Application::new();
