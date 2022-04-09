@@ -29,7 +29,7 @@ impl Store {
         }
 
         if let Some(texture) = self.store_get(&album_art.song_id) {
-            return Ok(texture.clone());
+            return Ok(texture);
         }
 
         let (sender, receiver) = oneshot::channel();
@@ -64,7 +64,7 @@ impl Store {
 
         let _ = sender.send(());
 
-        return Ok(texture);
+        Ok(texture)
     }
 
     fn store_get(&self, id: &SongId) -> Option<gdk::Texture> {

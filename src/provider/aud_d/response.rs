@@ -22,11 +22,13 @@ pub struct SpotifyData {
 
 #[derive(Debug, Deserialize)]
 pub struct Data {
-    pub title: String,
     pub artist: String,
+    pub title: String,
     pub album: String,
     /// In format of ISO-8601 (%Y-%m-%d)
     pub release_date: String,
+    // TODO consider showing this in the ui
+    pub label: String,
     pub timecode: String,
     #[serde(rename(deserialize = "song_link"))]
     pub info_link: String,

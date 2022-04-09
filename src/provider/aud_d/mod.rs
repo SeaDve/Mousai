@@ -104,7 +104,7 @@ mod test {
     use error::AudDError;
 
     fn parse_response(response: &'static str) -> Result<Data, Error> {
-        Ok(Response::parse(&response.as_bytes())?.data()?)
+        Ok(Response::parse(response.as_bytes())?.data()?)
     }
 
     #[test]
