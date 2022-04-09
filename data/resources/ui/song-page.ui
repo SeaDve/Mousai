@@ -134,6 +134,19 @@
                     <property name="spacing">12</property>
                     <child>
                       <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Listen</property>
+                        <child>
+                          <object class="GtkFlowBox" id="external_links_box">
+                            <property name="selection-mode">none</property>
+                            <property name="activate-on-single-click">True</property>
+                            <property name="column-spacing">6</property>
+                            <property name="row-spacing">6</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup">
                         <property name="title" translatable="yes">Information</property>
                         <child>
                           <object class="MsaiInformationRow" id="last_heard_row">
@@ -148,16 +161,6 @@
                         <child>
                           <object class="MsaiInformationRow" id="release_date_row">
                             <property name="title" translatable="yes">Release Date</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwPreferencesGroup">
-                        <property name="title" translatable="yes">Listen</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="label">Hi</property>
                           </object>
                         </child>
                       </object>

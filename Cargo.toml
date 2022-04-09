@@ -28,3 +28,5 @@ rand = "0.8.5"
 thiserror = "1.0.30"
 chrono = { version = "0.4.19", features = ["serde"] }
 mpris-player = "0.6.1"
+typetag = "0.1.8"
+percent-encoding = "2.1.0"

@@ -6,6 +6,44 @@ albumcover > frame {
   border: none;
 }
 
+/* ExternalLinkCell */
+
+.external-link-cell {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-right: 36px;
+  padding-left: 36px;
+}
+
+/* TODO improve styling. Maybe add icons too */
+
+.external-link-cell.audd {
+	background: linear-gradient(75deg, #f9e2a7 0%, #eb5ec3 50%, #6d53e0 100%);
+	color: #393484;
+}
+.external-link-cell.audd:hover {
+	background: linear-gradient(75deg, shade(#f9e2a7, 1.07) 0%, shade(#eb5ec3, 1.07) 50%, shade(#6d53e0, 1.07) 100%);
+}
+.external-link-cell.audd:active {
+	background: linear-gradient(75deg, shade(#f9e2a7, .97) 0%, shade(#eb5ec3, .95) 50%, shade(#6d53e0, 1.07) 100%);
+}
+
+.external-link-cell.spotify {
+	background: linear-gradient(180deg, @green_4 30%, @green_5 100%);
+	color: white;
+}
+.external-link-cell.spotify:hover {
+	background: linear-gradient(180deg, shade(@green_4, 1.06) 30%, shade(@green_5, 1.06) 100%);
+}
+.external-link-cell.spotify:active {
+	background: linear-gradient(180deg, shade(@green_4, .95) 30%, shade(@green_5, .95) 100%);
+}
+
+.external-link-cell.youtube {
+  background-color: @red_3;
+  color: white;
+}
+
 /* HistoryView */
 
 .history-view {

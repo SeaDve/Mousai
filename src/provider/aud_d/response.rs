@@ -13,11 +13,17 @@ pub struct Album {
 }
 
 #[derive(Debug, Deserialize)]
+pub struct ExternalUrls {
+    pub spotify: String,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct SpotifyData {
     pub album: Album,
     pub disc_number: u32,
     pub track_number: u32,
     pub preview_url: String,
+    pub external_urls: ExternalUrls,
 }
 
 #[derive(Debug, Deserialize)]

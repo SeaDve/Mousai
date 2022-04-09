@@ -5,7 +5,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;
 
-use super::SongId;
+use super::{external_link::ExternalLink, ExternalLinkList, SongId};
 use crate::{core::DateTime, AlbumArt};
 
 mod imp {
@@ -20,6 +20,7 @@ mod imp {
         pub artist: String,
         pub album: String,
         pub release_date: String,
+        pub external_links: ExternalLinkList,
         pub album_art_link: Option<String>,
         pub playback_link: Option<String>,
     }
@@ -82,6 +83,13 @@ mod imp {
                         Some(""),
                         glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
+                    glib::ParamSpecObject::new(
+                        "external-links",
+                        "External Links",
+                        "External Links",
+                        ExternalLinkList::static_type(),
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
+                    ),
                     glib::ParamSpecString::new(
                         "album-art-link",
                         "Album Art Link",
@@ -133,6 +141,10 @@ mod imp {
                     let release_date = value.get().unwrap();
                     self.inner.borrow_mut().release_date = release_date;
                 }
+                "external-links" => {
+                    let external_links = value.get().unwrap();
+                    self.inner.borrow_mut().external_links = external_links;
+                }
                 "album-art-link" => {
                     let album_art_link = value.get().unwrap();
                     self.inner.borrow_mut().album_art_link = album_art_link;
@@ -153,6 +165,7 @@ mod imp {
                 "artist" => obj.artist().to_value(),
                 "album" => obj.album().to_value(),
                 "release-date" => obj.release_date().to_value(),
+                "external-links" => obj.external_links().to_value(),
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
                 _ => unimplemented!(),
@@ -215,6 +228,10 @@ impl Song {
         self.imp().inner.borrow().release_date.clone()
     }
 
+    pub fn external_links(&self) -> ExternalLinkList {
+        self.imp().inner.borrow().external_links.clone()
+    }
+
     pub fn album_art_link(&self) -> Option<String> {
         self.imp().inner.borrow().album_art_link.clone()
     }
@@ -239,8 +256,11 @@ impl Serialize for Song {
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_inner = imp::SongInner::deserialize(deserializer)?;
-        let song: Self =
-            glib::Object::new(&[("id", &deserialized_inner.id)]).expect("Failed to create song.");
+        let song: Self = glib::Object::new(&[
+            ("id", &deserialized_inner.id),
+            ("external-links", &deserialized_inner.external_links),
+        ])
+        .expect("Failed to create song.");
         song.imp().inner.replace(deserialized_inner);
         Ok(song)
     }
@@ -248,6 +268,7 @@ impl<'de> Deserialize<'de> for Song {
 
 pub struct SongBuilder {
     properties: Vec<(&'static str, glib::Value)>,
+    external_links: ExternalLinkList,
 }
 
 impl SongBuilder {
@@ -260,6 +281,7 @@ impl SongBuilder {
                 ("album", album.to_value()),
                 ("release-date", release_date.to_value()),
             ],
+            external_links: ExternalLinkList::default(),
         }
     }
 
@@ -275,7 +297,14 @@ impl SongBuilder {
         self
     }
 
-    pub fn build(&self) -> Song {
+    pub fn external_link(&mut self, external_link: impl ExternalLink + 'static) -> &mut Self {
+        self.external_links.push(external_link);
+        self
+    }
+
+    pub fn build(&mut self) -> Song {
+        self.properties
+            .push(("external-links", self.external_links.to_value()));
         glib::Object::with_values(Song::static_type(), &self.properties)
             .expect("Failed to create Song.")
             .downcast()

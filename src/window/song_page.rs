@@ -8,8 +8,15 @@ use once_cell::unsync::OnceCell;
 
 use std::cell::RefCell;
 
-use super::{album_cover::AlbumCover, information_row::InformationRow};
-use crate::{core::PlaybackState, model::Song, song_player::SongPlayer, Application};
+use super::{
+    album_cover::AlbumCover, external_link_cell::ExternalLinkCell, information_row::InformationRow,
+};
+use crate::{
+    core::PlaybackState,
+    model::{ExternalLinkWrapper, Song},
+    song_player::SongPlayer,
+    Application,
+};
 
 mod imp {
     use super::*;
@@ -23,17 +30,19 @@ mod imp {
         #[template_child]
         pub album_cover: TemplateChild<AlbumCover>,
         #[template_child]
+        pub playback_stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub toggle_playback_button: TemplateChild<gtk::Button>,
+        #[template_child]
+        pub buffering_spinner: TemplateChild<gtk::Spinner>,
+        #[template_child]
         pub last_heard_row: TemplateChild<InformationRow>,
         #[template_child]
         pub album_row: TemplateChild<InformationRow>,
         #[template_child]
         pub release_date_row: TemplateChild<InformationRow>,
         #[template_child]
-        pub playback_stack: TemplateChild<gtk::Stack>,
-        #[template_child]
-        pub toggle_playback_button: TemplateChild<gtk::Button>,
-        #[template_child]
-        pub buffering_spinner: TemplateChild<gtk::Spinner>,
+        pub external_links_box: TemplateChild<gtk::FlowBox>,
 
         pub song: RefCell<Option<Song>>,
         pub player: OnceCell<WeakRef<SongPlayer>>,
@@ -104,6 +113,16 @@ mod imp {
             self.parent_constructed(obj);
 
             obj.add_css_class("view");
+
+            self.external_links_box
+                .connect_child_activated(|_, box_child| {
+                    if let Some(external_link_cell) = box_child
+                        .child()
+                        .and_then(|child| child.downcast::<ExternalLinkCell>().ok())
+                    {
+                        external_link_cell.external_link().inner().activate();
+                    }
+                });
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -136,6 +155,7 @@ impl SongPage {
         imp.album_cover.set_song(song);
         self.update_information();
         self.update_playback_ui();
+        self.update_external_links();
 
         self.notify("song");
     }
@@ -210,6 +230,17 @@ impl SongPage {
             } else {
                 log::error!("Either the player was dropped or not binded in SongPage");
             }
+        }
+    }
+
+    fn update_external_links(&self) {
+        if let Some(song) = self.song() {
+            self.imp()
+                .external_links_box
+                .bind_model(Some(&song.external_links()), |item| {
+                    let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
+                    ExternalLinkCell::new(wrapper).upcast()
+                });
         }
     }
 

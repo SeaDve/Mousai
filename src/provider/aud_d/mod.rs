@@ -13,6 +13,7 @@ pub use self::{error::Error, mock::AudDMock};
 use super::{Provider, ProviderError};
 use crate::{
     core::AudioRecording,
+    model::external_link::{AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink},
     model::{Song, SongId},
     utils, RUNTIME,
 };
@@ -33,12 +34,19 @@ impl AudD {
 
     fn handle_data(data: Data) -> Song {
         let mut song_builder = Song::builder(
-            &SongId::from(data.info_link), // Info link is unique to every song
+            &SongId::from(data.info_link.as_str()), // Info link is unique to every song
             &data.title,
             &data.artist,
             &data.album,
             &data.release_date,
         );
+
+        song_builder.external_link(AudDExternalLink::new(&data.info_link));
+
+        song_builder.external_link(YoutubeExternalLink::new(&format!(
+            "{} {}",
+            data.title, data.artist
+        )));
 
         if let Some(spotify_data) = data.spotify_data {
             // TODO: Get album art link from other providers too
@@ -50,6 +58,10 @@ impl AudD {
             if !spotify_data.preview_url.is_empty() {
                 song_builder.playback_link(&spotify_data.preview_url);
             }
+
+            song_builder.external_link(SpotifyExternalLink::new(
+                &spotify_data.external_urls.spotify,
+            ));
         }
 
         song_builder.build()
