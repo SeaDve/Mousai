@@ -121,6 +121,8 @@ mod imp {
                         .and_then(|child| child.downcast::<ExternalLinkCell>().ok())
                     {
                         external_link_cell.external_link().inner().activate();
+                    } else {
+                        log::error!("Failed to activate external link: The FlowBoxChild does not have a child of ExternalLinkCell");
                     }
                 });
         }

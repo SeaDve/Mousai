@@ -96,7 +96,7 @@ impl Serialize for ExternalLinkList {
 
 impl<'de> Deserialize<'de> for ExternalLinkList {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let external_links = Vec::<Box<dyn ExternalLink>>::deserialize(deserializer)?;
+        let external_links: Vec<Box<dyn ExternalLink>> = Vec::deserialize(deserializer)?;
         let obj = ExternalLinkList::default();
         obj.push_many(external_links);
         Ok(obj)

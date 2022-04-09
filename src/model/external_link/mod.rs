@@ -9,7 +9,7 @@ pub use self::{
     aud_d::AudDExternalLink, spotify::SpotifyExternalLink, youtube::YoutubeExternalLink,
 };
 
-#[typetag::serde(tag = "type")]
+#[typetag::serde]
 pub trait ExternalLink: std::fmt::Debug {
     /// This will be called when the link is activated
     fn activate(&self);
