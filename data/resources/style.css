@@ -40,8 +40,14 @@ albumcover > frame {
 }
 
 .external-link-cell.youtube {
-  background-color: @red_3;
-  color: white;
+	background: linear-gradient(80deg, @red_4 30%, @red_5 100%);
+	color: white;
+}
+.external-link-cell.youtube:hover {
+	background: linear-gradient(80deg, shade(@red_4, 1.06) 30%, shade(@red_5, 1.06) 100%);
+}
+.external-link-cell.youtube:active {
+	background: linear-gradient(80deg, shade(@red_4, .95) 30%, shade(@red_5, .95) 100%);
 }
 
 /* HistoryView */
