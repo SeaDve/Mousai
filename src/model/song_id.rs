@@ -1,22 +1,14 @@
 use gtk::glib;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
 #[boxed_type(name = "MsaiSongId")]
 #[serde(transparent)]
-pub struct SongId {
-    id: Box<str>,
-}
-
-impl std::fmt::Debug for SongId {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_tuple("SongId").field(&self.id).finish()
-    }
-}
+pub struct SongId(Box<str>);
 
 impl std::fmt::Display for SongId {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        std::fmt::Display::fmt(&self.id, f)
+        std::fmt::Display::fmt(&self.0, f)
     }
 }
 
@@ -35,13 +27,11 @@ impl SongId {
     ///
     /// Unique str must not start or end with `Default`.
     pub fn from(unique_str: impl Into<Box<str>>) -> Self {
-        Self {
-            id: unique_str.into(),
-        }
+        Self(unique_str.into())
     }
 
     pub fn is_default(&self) -> bool {
-        self.id.starts_with("Default") && self.id.ends_with("Default")
+        self.0.starts_with("Default") && self.0.ends_with("Default")
     }
 }
 
