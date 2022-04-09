@@ -1,3 +1,5 @@
+mod provider;
+
 use gettextrs::gettext;
 use gst_pbutils::prelude::*;
 use gtk::{
@@ -12,10 +14,10 @@ use std::{
     path::PathBuf,
 };
 
+pub use self::provider::{ProviderType, PROVIDER_MANAGER};
 use crate::{
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
-    provider::PROVIDER_MANAGER,
     spawn, utils, Application,
 };
 

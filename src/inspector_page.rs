@@ -3,7 +3,7 @@ use gtk::{glib, subclass::prelude::*};
 
 use std::cell::RefCell;
 
-use crate::provider::{ProviderType, PROVIDER_MANAGER};
+use crate::recognizer::{ProviderType, PROVIDER_MANAGER};
 
 const INSPECTOR_TITLE: &str = "Mousai";
 

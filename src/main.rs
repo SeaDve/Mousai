@@ -22,7 +22,6 @@ mod config;
 mod core;
 mod inspector_page;
 mod model;
-mod provider;
 mod recognizer;
 mod song_player;
 mod utils;
