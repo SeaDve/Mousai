@@ -34,7 +34,7 @@ impl AudD {
         }
     }
 
-    fn handle_data(data: Data) -> Song {
+    fn build_song_from_data(data: Data) -> Song {
         let mut song_builder = Song::builder(
             &SongId::from(data.info_link.as_str()), // Info link is unique to every song
             &data.title,
@@ -117,16 +117,17 @@ impl AudD {
             Err(err) => log::warn!("Failed to get str from `Bytes`: {:?}", err),
         }
 
-        Ok(Self::handle_data(Response::parse(&bytes)?.data()?))
+        Ok(Self::build_song_from_data(Response::parse(&bytes)?.data()?))
     }
 }
 
 #[async_trait(?Send)]
 impl Provider for AudD {
     async fn recognize(&self, recording: &AudioRecording) -> Result<Song, ProviderError> {
-        self.recognize_inner(recording)
-            .await
-            .map_err(ProviderError::AudD)
+        self.recognize_inner(recording).await.map_err(|err| {
+            log::error!("Failed to recognize: {err:?}");
+            err.into()
+        })
     }
 
     fn listen_duration(&self) -> Duration {

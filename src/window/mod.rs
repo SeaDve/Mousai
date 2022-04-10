@@ -97,8 +97,8 @@ mod imp {
                         log::warn!("Failed to stop player before toggling listen: {err:?}");
                     }
                     if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
-                        log::error!("Failed to start recognizing: {:?}", err);
-                        obj.show_error(&gettext!("Failed to start recognizing: {}", err));
+                        log::error!("Failed to toggle recognize: {:?}", err);
+                        obj.show_error(&err.to_string());
                     }
                 }));
             });

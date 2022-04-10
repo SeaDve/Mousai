@@ -1,4 +1,7 @@
+use gettextrs::gettext;
 use gtk::glib;
+
+use super::ProviderError;
 
 #[derive(Debug)]
 pub enum AudDError {
@@ -36,5 +39,40 @@ pub enum Error {
 impl From<AudDError> for Error {
     fn from(err: AudDError) -> Self {
         Self::AudD(err)
+    }
+}
+
+impl From<Error> for ProviderError {
+    fn from(this: Error) -> Self {
+        match this {
+            Error::Parse(_) => ProviderError::Other(gettext(
+                "Failed to parse response. Please report this to Mousai's bug tracker.",
+            )),
+            Error::FileConvert(_) => ProviderError::Other(gettext(
+                "Failed to convert file. Please report this to Mousai's bug tracker.",
+            )),
+            Error::Reqwest(err) => {
+                if err.is_connect() {
+                    ProviderError::Connection(gettext("Failed to create connection to the server."))
+                } else if err.is_timeout() {
+                    ProviderError::Connection(gettext(
+                        "Connection timeout reached. Please try again.",
+                    ))
+                } else {
+                    ProviderError::Connection(err.to_string())
+                }
+            }
+            Error::AudD(err) => match err {
+                AudDError::NoMatches => ProviderError::NoMatches,
+                AudDError::InvalidToken => ProviderError::InvalidToken,
+                AudDError::DailyLimitReached => {
+                    ProviderError::NoToken(gettext("Daily limit has been reached."))
+                }
+                AudDError::Fingerprint(_) => ProviderError::Other(gettext(
+                    "Failed to fingerprint audio. There may be no sound heard.",
+                )),
+                AudDError::Other(other) => ProviderError::Other(other),
+            },
+        }
     }
 }
