@@ -13,6 +13,8 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/external-link-cell.ui")]
     pub struct ExternalLinkCell {
         #[template_child]
+        pub image: TemplateChild<gtk::Image>,
+        #[template_child]
         pub label: TemplateChild<gtk::Label>,
 
         pub external_link: OnceCell<WeakRef<ExternalLinkWrapper>>,
@@ -78,6 +80,7 @@ mod imp {
 
             obj.add_css_class(external_link.css_class());
             obj.set_tooltip_text(Some(&external_link.tooltip_text()));
+            self.image.set_icon_name(Some(external_link.icon_name()));
             self.label.set_label(&external_link.name());
         }
 

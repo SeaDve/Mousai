@@ -44,7 +44,7 @@
                 <property name="margin-top">24</property>
                 <property name="margin-bottom">24</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
+                <property name="spacing">24</property>
                 <child>
                   <object class="GtkBox">
                     <property name="spacing">24</property>
@@ -129,40 +129,34 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">12</property>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Listen</property>
                     <child>
-                      <object class="AdwPreferencesGroup">
-                        <property name="title" translatable="yes">Listen</property>
-                        <child>
-                          <object class="GtkFlowBox" id="external_links_box">
-                            <property name="selection-mode">none</property>
-                            <property name="activate-on-single-click">True</property>
-                            <property name="column-spacing">6</property>
-                            <property name="row-spacing">6</property>
-                          </object>
-                        </child>
+                      <object class="GtkFlowBox" id="external_links_box">
+                        <property name="selection-mode">none</property>
+                        <property name="activate-on-single-click">True</property>
+                        <property name="column-spacing">6</property>
+                        <property name="row-spacing">6</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Information</property>
+                    <child>
+                      <object class="MsaiInformationRow" id="last_heard_row">
+                        <property name="title" translatable="yes">Last Heard</property>
                       </object>
                     </child>
                     <child>
-                      <object class="AdwPreferencesGroup">
-                        <property name="title" translatable="yes">Information</property>
-                        <child>
-                          <object class="MsaiInformationRow" id="last_heard_row">
-                            <property name="title" translatable="yes">Last Heard</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="MsaiInformationRow" id="album_row">
-                            <property name="title" translatable="yes">Album</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="MsaiInformationRow" id="release_date_row">
-                            <property name="title" translatable="yes">Release Date</property>
-                          </object>
-                        </child>
+                      <object class="MsaiInformationRow" id="album_row">
+                        <property name="title" translatable="yes">Album</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="MsaiInformationRow" id="release_date_row">
+                        <property name="title" translatable="yes">Release Date</property>
                       </object>
                     </child>
                   </object>

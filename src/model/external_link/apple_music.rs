@@ -31,6 +31,10 @@ impl ExternalLink for AppleMusicExternalLink {
         gettext("Browse on Apple Music")
     }
 
+    fn icon_name(&self) -> &'static str {
+        "music-note-symbolic"
+    }
+
     fn css_class(&self) -> &'static str {
         "applemusic"
     }

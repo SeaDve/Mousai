@@ -8,15 +8,6 @@ albumcover > frame {
 
 /* ExternalLinkCell */
 
-.external-link-cell {
-  padding-top: 24px;
-  padding-bottom: 24px;
-  padding-right: 36px;
-  padding-left: 36px;
-}
-
-/* TODO improve styling. Maybe add icons too */
-
 .external-link-cell.applemusic {
 	background: linear-gradient(180deg, #fb5b73 30%, #fa243c 100%);
 	color: white;

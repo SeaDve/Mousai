@@ -5,10 +5,26 @@
       <object class="GtkBinLayout"/>
     </property>
     <child>
-      <object class="GtkLabel" id="label">
-        <style>
-          <class name="title-2"/>
-        </style>
+      <object class="GtkBox">
+        <property name="spacing">12</property>
+        <property name="margin-start">36</property>
+        <property name="margin-end">36</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">24</property>
+        <property name="halign">center</property>
+        <child>
+          <object class="GtkImage" id="image">
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label">
+            <property name="valign">center</property>
+            <style>
+              <class name="title-2"/>
+            </style>
+          </object>
+        </child>
       </object>
     </child>
     <style>

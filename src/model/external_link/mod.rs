@@ -22,6 +22,9 @@ pub trait ExternalLink: std::fmt::Debug {
     /// Text that will be shown when hovered in the UI
     fn tooltip_text(&self) -> String;
 
+    /// Icon name to lookup that will be displayed in the UI
+    fn icon_name(&self) -> &'static str;
+
     /// The css class use for the widget of this
     fn css_class(&self) -> &'static str;
 }

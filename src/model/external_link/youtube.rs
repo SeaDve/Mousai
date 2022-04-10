@@ -41,6 +41,10 @@ impl ExternalLink for YoutubeExternalLink {
         gettext("Search on YouTube")
     }
 
+    fn icon_name(&self) -> &'static str {
+        "media-playback-start-symbolic"
+    }
+
     fn css_class(&self) -> &'static str {
         "youtube"
     }

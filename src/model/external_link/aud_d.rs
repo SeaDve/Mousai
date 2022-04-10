@@ -31,6 +31,10 @@ impl ExternalLink for AudDExternalLink {
         gettext("Browse on AudD")
     }
 
+    fn icon_name(&self) -> &'static str {
+        "microphone-symbolic"
+    }
+
     fn css_class(&self) -> &'static str {
         "audd"
     }

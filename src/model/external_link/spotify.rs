@@ -31,6 +31,10 @@ impl ExternalLink for SpotifyExternalLink {
         gettext("Listen on Spotify")
     }
 
+    fn icon_name(&self) -> &'static str {
+        "network-wireless-symbolic"
+    }
+
     fn css_class(&self) -> &'static str {
         "spotify"
     }
