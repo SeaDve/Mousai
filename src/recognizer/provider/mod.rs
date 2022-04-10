@@ -76,10 +76,25 @@ impl From<i32> for ProviderType {
     }
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct ProviderManager {
     active: RwLock<ProviderType>,
     test_mode: RwLock<TestProviderMode>,
+    test_listen_duration: RwLock<Duration>,
+    test_recognize_duration: RwLock<Duration>,
+}
+
+impl Default for ProviderManager {
+    fn default() -> Self {
+        let obj = Self {
+            active: Default::default(),
+            test_mode: Default::default(),
+            test_listen_duration: Default::default(),
+            test_recognize_duration: Default::default(),
+        };
+        obj.reset_test_durations();
+        obj
+    }
 }
 
 impl ProviderManager {
@@ -88,25 +103,44 @@ impl ProviderManager {
     }
 
     pub fn set_active(&self, new_value: ProviderType) {
-        let mut active = self.active.write().unwrap();
-        *active = new_value;
-    }
-
-    pub fn reset_active(&self) {
-        self.set_active(ProviderType::default());
+        *self.active.write().unwrap() = new_value;
     }
 
     pub fn test_mode(&self) -> TestProviderMode {
         *self.test_mode.read().unwrap()
     }
 
-    pub fn set_test_mode(&self, new_test_mode: TestProviderMode) {
-        let mut test_mode = self.test_mode.write().unwrap();
-        *test_mode = new_test_mode;
+    pub fn set_test_mode(&self, new_value: TestProviderMode) {
+        *self.test_mode.write().unwrap() = new_value;
+    }
+
+    pub fn test_listen_duration(&self) -> Duration {
+        *self.test_listen_duration.read().unwrap()
+    }
+
+    pub fn set_test_listen_duration(&self, new_value: Duration) {
+        *self.test_listen_duration.write().unwrap() = new_value;
+    }
+
+    pub fn test_recognize_duration(&self) -> Duration {
+        *self.test_recognize_duration.read().unwrap()
+    }
+
+    pub fn set_test_recognize_duration(&self, new_value: Duration) {
+        *self.test_recognize_duration.write().unwrap() = new_value;
+    }
+
+    pub fn reset_active(&self) {
+        self.set_active(ProviderType::default());
     }
 
     pub fn reset_test_mode(&self) {
         self.set_test_mode(TestProviderMode::default());
+    }
+
+    pub fn reset_test_durations(&self) {
+        self.set_test_listen_duration(Duration::from_secs(1));
+        self.set_test_recognize_duration(Duration::from_secs(1));
     }
 }
 

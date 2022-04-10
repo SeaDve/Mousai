@@ -59,7 +59,7 @@ impl AudDMock {
 #[async_trait(?Send)]
 impl Provider for AudDMock {
     async fn recognize(&self, _: &AudioRecording) -> Result<Song, ProviderError> {
-        glib::timeout_future(Duration::from_secs(1)).await;
+        glib::timeout_future(PROVIDER_MANAGER.test_recognize_duration()).await;
         Ok(AudD::build_song_from_data(self.random_data().map_err(
             |err| {
                 log::error!("Failed to recognize: {err:?}");
@@ -69,7 +69,7 @@ impl Provider for AudDMock {
     }
 
     fn listen_duration(&self) -> Duration {
-        Duration::from_secs(1)
+        PROVIDER_MANAGER.test_listen_duration()
     }
 
     fn is_test(&self) -> bool {
