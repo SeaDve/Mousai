@@ -6,7 +6,10 @@ use gtk::{
 
 use reqwest::Client;
 
-use std::{collections::HashMap, sync::RwLock};
+use std::{
+    collections::HashMap,
+    sync::{Mutex, RwLock},
+};
 
 use super::AlbumArt;
 use crate::{model::SongId, RUNTIME};
@@ -14,7 +17,7 @@ use crate::{model::SongId, RUNTIME};
 #[derive(Default)]
 pub struct Store {
     store: RwLock<HashMap<SongId, gdk::Texture>>,
-    loading: RwLock<HashMap<SongId, Receiver<()>>>,
+    loading: Mutex<HashMap<SongId, Receiver<()>>>,
     client: Client,
 }
 
@@ -89,7 +92,7 @@ impl Store {
     }
 
     fn loading_insert(&self, id: SongId, receiver: Receiver<()>) {
-        match self.loading.write() {
+        match self.loading.lock() {
             Ok(mut loading) => {
                 loading.insert(id, receiver);
             }
@@ -100,7 +103,7 @@ impl Store {
     }
 
     fn loading_remove(&self, id: &SongId) -> Option<Receiver<()>> {
-        match self.loading.write() {
+        match self.loading.lock() {
             Ok(mut loading) => loading.remove(id),
             Err(err) => {
                 log::error!("Failed to remove receiver on loading map: {err:?}");
