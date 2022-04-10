@@ -53,7 +53,7 @@ impl From<Error> for ProviderError {
             )),
             Error::Reqwest(err) => {
                 if err.is_connect() {
-                    ProviderError::Connection(gettext("Failed to create connection to the server."))
+                    ProviderError::Connection(gettext("Failed to connect to the server."))
                 } else if err.is_timeout() {
                     ProviderError::Connection(gettext(
                         "Connection timeout reached. Please try again.",
