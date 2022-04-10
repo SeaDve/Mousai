@@ -314,7 +314,10 @@ impl SongBar {
         }
 
         match player.state() {
-            PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
+            PlaybackState::Loading => {
+                imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
+            }
+            PlaybackState::Stopped | PlaybackState::Paused => {
                 imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
             PlaybackState::Playing => {

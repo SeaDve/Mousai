@@ -197,10 +197,11 @@ impl SongCell {
         if let Some(ref song) = self.song() {
             let imp = self.imp();
             let is_active_song = player.is_active_song(song);
+            let player_state = player.state();
 
-            if is_active_song && player.is_buffering() {
+            if is_active_song && (player.is_buffering() || player_state == PlaybackState::Loading) {
                 imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
-            } else if is_active_song && player.state() == PlaybackState::Playing {
+            } else if is_active_song && player_state == PlaybackState::Playing {
                 imp.playback_button.set_mode(PlaybackButtonMode::Pause);
             } else {
                 imp.playback_button.set_mode(PlaybackButtonMode::Play);
