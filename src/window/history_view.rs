@@ -331,6 +331,7 @@ impl HistoryView {
         if is_selection_mode {
             imp.header_bar_stack
                 .set_visible_child(&imp.selection_mode_header_bar.get());
+            imp.grid.grab_focus();
         } else {
             imp.header_bar_stack
                 .set_visible_child(&imp.main_header_bar.get());
