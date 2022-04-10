@@ -320,6 +320,8 @@ impl HistoryView {
 
         self.imp().is_selection_mode.set(is_selection_mode);
         self.update_selection_mode_ui();
+        self.update_selection_mode_menu_button();
+        self.update_remove_selected_songs_action();
 
         self.notify("is-selection-mode");
     }
