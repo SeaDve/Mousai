@@ -133,6 +133,10 @@ impl Provider for AudD {
     fn listen_duration(&self) -> Duration {
         Duration::from_secs(5)
     }
+
+    fn is_test(&self) -> bool {
+        false
+    }
 }
 
 impl Default for AudD {

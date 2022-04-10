@@ -14,7 +14,7 @@ use std::{
     path::PathBuf,
 };
 
-pub use self::provider::{ProviderType, PROVIDER_MANAGER};
+pub use self::provider::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
 use crate::{
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,

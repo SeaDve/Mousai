@@ -1,9 +1,12 @@
 use adw::prelude::*;
-use gtk::{glib, subclass::prelude::*};
+use gtk::{
+    glib::{self, clone},
+    subclass::prelude::*,
+};
 
 use std::cell::RefCell;
 
-use crate::recognizer::{ProviderType, PROVIDER_MANAGER};
+use crate::recognizer::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
 
 const INSPECTOR_TITLE: &str = "Mousai";
 
@@ -17,6 +20,8 @@ mod imp {
     pub struct InspectorPage {
         #[template_child]
         pub provider_row: TemplateChild<adw::ComboRow>,
+        #[template_child]
+        pub test_provider_row: TemplateChild<adw::ComboRow>,
 
         pub object: RefCell<Option<glib::Object>>,
     }
@@ -89,6 +94,9 @@ mod imp {
             self.parent_constructed(obj);
 
             obj.setup_provider_row();
+            obj.setup_test_provider_row();
+
+            obj.update_test_provider_row_sensitivity();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -97,6 +105,7 @@ mod imp {
             }
 
             PROVIDER_MANAGER.reset_active();
+            PROVIDER_MANAGER.reset_test_mode();
         }
     }
 
@@ -111,6 +120,18 @@ glib::wrapper! {
 impl InspectorPage {
     pub fn new() -> Self {
         glib::Object::new(&[]).expect("Failed to create InspectorPage")
+    }
+
+    fn update_test_provider_row_sensitivity(&self) {
+        let imp = self.imp();
+        imp.test_provider_row.set_sensitive(
+            imp.provider_row
+                .selected_item()
+                .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
+                .map_or(false, |item| {
+                    ProviderType::from(item.value()).to_provider().is_test()
+                }),
+        );
     }
 
     fn setup_provider_row(&self) {
@@ -132,17 +153,54 @@ impl InspectorPage {
                 glib::closure!(|list_item: adw::EnumListItem| { list_item.name() }),
             )));
 
-        imp.provider_row.connect_selected_notify(|provider_row| {
-            if let Some(ref item) = provider_row
-                .selected_item()
-                .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
-            {
-                PROVIDER_MANAGER.set_active(item.value().into());
-            } else {
-                log::warn!("provider_row doesn't have a valid selected item");
-                PROVIDER_MANAGER.reset_active();
-            }
-        });
+        imp.provider_row
+            .connect_selected_notify(clone!(@weak self as obj => move |provider_row| {
+                if let Some(ref item) = provider_row
+                    .selected_item()
+                    .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
+                {
+                    obj.update_test_provider_row_sensitivity();
+                    PROVIDER_MANAGER.set_active(item.value().into());
+                } else {
+                    log::warn!("provider_row doesn't have a valid selected item");
+                    PROVIDER_MANAGER.reset_active();
+                }
+            }));
+    }
+
+    fn setup_test_provider_row(&self) {
+        let imp = self.imp();
+
+        imp.test_provider_row
+            .set_model(Some(&adw::EnumListModel::new(
+                TestProviderMode::static_type(),
+            )));
+
+        imp.test_provider_row
+            .set_selected(PROVIDER_MANAGER.test_mode() as u32);
+
+        imp.test_provider_row
+            .set_expression(Some(&gtk::ClosureExpression::new::<
+                glib::GString,
+                _,
+                gtk::Expression,
+            >(
+                [],
+                glib::closure!(|list_item: adw::EnumListItem| { list_item.name() }),
+            )));
+
+        imp.test_provider_row
+            .connect_selected_notify(|test_provider_row| {
+                if let Some(ref item) = test_provider_row
+                    .selected_item()
+                    .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
+                {
+                    PROVIDER_MANAGER.set_test_mode(item.value().into());
+                } else {
+                    log::warn!("test_provider_row doesn't have a valid selected item");
+                    PROVIDER_MANAGER.reset_test_mode();
+                }
+            });
     }
 }
 

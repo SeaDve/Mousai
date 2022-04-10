@@ -8,11 +8,16 @@
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Developer Settings</property>
-            <property name="description" translatable="yes">These will be reset upon closing the inspector.</property>
+            <property name="title">Developer Settings</property>
+            <property name="description">These will be reset upon closing the inspector.</property>
             <child>
               <object class="AdwComboRow" id="provider_row">
-                <property name="title" translatable="yes">Recognizer Provider</property>
+                <property name="title">Recognizer Provider</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwComboRow" id="test_provider_row">
+                <property name="title">Test Recognizer Provider Mode</property>
               </object>
             </child>
           </object>
