@@ -326,16 +326,18 @@ impl HistoryView {
 
     fn update_selection_mode_ui(&self) {
         let imp = self.imp();
+        let is_selection_mode = self.is_selection_mode();
 
-        if self.is_selection_mode() {
+        if is_selection_mode {
             imp.header_bar_stack
                 .set_visible_child(&imp.selection_mode_header_bar.get());
-            imp.selection_mode_bar.set_revealed(true);
         } else {
             imp.header_bar_stack
                 .set_visible_child(&imp.main_header_bar.get());
-            imp.selection_mode_bar.set_revealed(false);
         }
+
+        imp.selection_mode_bar.set_revealed(is_selection_mode);
+        imp.grid.set_enable_rubberband(is_selection_mode);
     }
 
     fn update_history_stack(&self) {
