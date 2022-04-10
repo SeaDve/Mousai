@@ -3,6 +3,7 @@ mod audio_visualizer;
 mod external_link_cell;
 mod history_view;
 mod information_row;
+mod playback_button;
 mod recognizer_view;
 mod song_bar;
 mod song_cell;

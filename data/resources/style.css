@@ -1,9 +1,20 @@
+albumcover > frame {
+  border: none;
+}
+
 audiovisualizer {
   color: @accent_color;
 }
 
-albumcover > frame {
-  border: none;
+playbackbutton > button {
+  padding: 5px;
+}
+playbackbutton.osd > button {
+  background: none;
+}
+playbackbutton.circular,
+playbackbutton.circular > button  {
+  border-radius: 99999px;
 }
 
 /* ExternalLinkCell */
@@ -69,11 +80,6 @@ albumcover > frame {
   padding: 6px;
 }
 
-.playback-button {
-  min-width: 40px;
-  min-height: 40px;
-}
-
 .playback-position-scale {
   padding: 0;
   min-height: 6px;
@@ -95,12 +101,3 @@ albumcover > frame {
   min-height: 12px;
 }
 
-/* SongCell */
-
-.buffering-button {
-  border-radius: 99999px;
-}
-
-.buffering-button > button {
-  background: none;
-}

@@ -1,4 +1,3 @@
-use gettextrs::gettext;
 use gtk::{
     glib::{self, clone},
     prelude::*,
@@ -7,7 +6,10 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use super::album_cover::AlbumCover;
+use super::{
+    album_cover::AlbumCover,
+    playback_button::{PlaybackButton, PlaybackButtonMode},
+};
 use crate::{core::PlaybackState, model::Song, song_player::SongPlayer, Application};
 
 mod imp {
@@ -22,11 +24,7 @@ mod imp {
         #[template_child]
         pub album_cover: TemplateChild<AlbumCover>,
         #[template_child]
-        pub playback_stack: TemplateChild<gtk::Stack>,
-        #[template_child]
-        pub toggle_playback_button: TemplateChild<gtk::Button>,
-        #[template_child]
-        pub buffering_spinner: TemplateChild<gtk::Spinner>,
+        pub playback_button: TemplateChild<PlaybackButton>,
 
         pub song: RefCell<Option<Song>>,
         pub player: RefCell<Option<WeakRef<SongPlayer>>>,
@@ -98,7 +96,7 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            obj.update_playback_stack_visibility();
+            obj.update_playback_button_visibility();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -131,7 +129,7 @@ impl SongCell {
         imp.album_cover.set_song(song.clone());
 
         imp.song.replace(song);
-        self.update_playback_stack_visibility();
+        self.update_playback_button_visibility();
 
         self.notify("song");
     }
@@ -198,33 +196,21 @@ impl SongCell {
     fn update_playback_ui(&self, player: &SongPlayer) {
         if let Some(ref song) = self.song() {
             let imp = self.imp();
-            let toggle_playback_button = &imp.toggle_playback_button.get();
-            let buffering_spinner = &imp.buffering_spinner.get();
-
             let is_active_song = player.is_active_song(song);
 
             if is_active_song && player.is_buffering() {
-                buffering_spinner.set_spinning(true);
-                imp.playback_stack.set_visible_child(buffering_spinner);
-                return;
-            }
-
-            imp.playback_stack.set_visible_child(toggle_playback_button);
-            buffering_spinner.set_spinning(false);
-
-            if is_active_song && player.state() == PlaybackState::Playing {
-                toggle_playback_button.set_icon_name("media-playback-pause-symbolic");
-                toggle_playback_button.set_tooltip_text(Some(&gettext("Pause")));
+                imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
+            } else if is_active_song && player.state() == PlaybackState::Playing {
+                imp.playback_button.set_mode(PlaybackButtonMode::Pause);
             } else {
-                toggle_playback_button.set_icon_name("media-playback-start-symbolic");
-                toggle_playback_button.set_tooltip_text(Some(&gettext("Play")));
+                imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
         }
     }
 
-    fn update_playback_stack_visibility(&self) {
+    fn update_playback_button_visibility(&self) {
         self.imp()
-            .playback_stack
+            .playback_button
             .set_visible(self.song().and_then(|song| song.playback_link()).is_some());
     }
 }

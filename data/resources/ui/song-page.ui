@@ -101,26 +101,13 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkStack" id="playback_stack">
+                          <object class="MsaiPlaybackButton" id="playback_button">
                             <property name="halign">start</property>
-                            <property name="transition-type">crossfade</property>
-                            <child>
-                              <object class="GtkButton" id="toggle_playback_button">
-                                <property name="action-name">song-page.toggle-playback</property>
-                                <style>
-                                  <class name="circular"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSpinner" id="buffering_spinner">
-                                <property name="valign">center</property>
-                                <property name="width-request">24</property>
-                                <property name="height-request">24</property>
-                              </object>
-                            </child>
+                            <property name="width-request">40</property>
+                            <property name="height-request">40</property>
+                            <property name="action-name">song-page.toggle-playback</property>
                             <style>
-                              <class name="playback-button"/>
+                              <class name="circular"/>
                             </style>
                           </object>
                         </child>

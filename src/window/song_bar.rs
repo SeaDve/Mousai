@@ -1,4 +1,3 @@
-use gettextrs::gettext;
 use gtk::{
     glib::{self, clone},
     prelude::*,
@@ -8,7 +7,11 @@ use once_cell::unsync::OnceCell;
 
 use std::{cell::RefCell, time::Duration};
 
-use super::{album_cover::AlbumCover, time_label::TimeLabel};
+use super::{
+    album_cover::AlbumCover,
+    playback_button::{PlaybackButton, PlaybackButtonMode},
+    time_label::TimeLabel,
+};
 use crate::{
     core::{ClockTime, PlaybackState},
     model::Song,
@@ -28,9 +31,7 @@ mod imp {
         #[template_child]
         pub album_cover: TemplateChild<AlbumCover>,
         #[template_child]
-        pub buffering_spinner: TemplateChild<gtk::Spinner>,
-        #[template_child]
-        pub playback_button: TemplateChild<gtk::Button>,
+        pub playback_button: TemplateChild<PlaybackButton>,
         #[template_child]
         pub playback_position_scale: TemplateChild<gtk::Scale>,
         #[template_child]
@@ -212,24 +213,25 @@ impl SongBar {
         imp.player.set(player.clone()).unwrap();
 
         player
-            .bind_property("is-buffering", &imp.buffering_spinner.get(), "spinning")
-            .flags(glib::BindingFlags::SYNC_CREATE)
-            .build();
-
-        player
             .bind_property("song", self, "song")
             .flags(glib::BindingFlags::SYNC_CREATE)
             .build();
 
+        player.connect_is_buffering_notify(clone!(@weak self as obj => move |_| {
+            obj.update_playback_button();
+        }));
+
         player.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_state_ui();
+            obj.update_playback_position_scale_sensitivity();
+            obj.update_playback_button();
         }));
 
         player.connect_position_notify(clone!(@weak self as obj => move |_| {
             obj.update_playback_position_ui();
         }));
 
-        self.update_playback_state_ui();
+        self.update_playback_position_scale_sensitivity();
+        self.update_playback_button();
     }
 
     fn player(&self) -> &SongPlayer {
@@ -289,11 +291,10 @@ impl SongBar {
         self.imp().playback_position_label.set_time(position);
     }
 
-    fn update_playback_state_ui(&self) {
+    fn update_playback_position_scale_sensitivity(&self) {
         let imp = self.imp();
-        let state = self.player().state();
 
-        match state {
+        match self.player().state() {
             PlaybackState::Stopped | PlaybackState::Loading => {
                 imp.playback_position_scale.set_sensitive(false);
             }
@@ -301,18 +302,23 @@ impl SongBar {
                 imp.playback_position_scale.set_sensitive(true);
             }
         }
+    }
 
-        match state {
+    fn update_playback_button(&self) {
+        let imp = self.imp();
+        let player = self.player();
+
+        if player.is_buffering() {
+            imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
+            return;
+        }
+
+        match player.state() {
             PlaybackState::Stopped | PlaybackState::Paused | PlaybackState::Loading => {
-                imp.playback_button
-                    .set_icon_name("media-playback-start-symbolic");
-                imp.playback_button.set_tooltip_text(Some(&gettext("Play")));
+                imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
             PlaybackState::Playing => {
-                imp.playback_button
-                    .set_icon_name("media-playback-pause-symbolic");
-                imp.playback_button
-                    .set_tooltip_text(Some(&gettext("Pause")));
+                imp.playback_button.set_mode(PlaybackButtonMode::Pause);
             }
         }
     }

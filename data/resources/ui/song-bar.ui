@@ -86,19 +86,13 @@
           <object class="GtkBox">
             <property name="spacing">6</property>
             <child>
-              <object class="GtkSpinner" id="buffering_spinner">
-                <property name="margin-end">9</property>
-                <property name="width-request">18</property>
-                <property name="height-request">18</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="playback_button">
+              <object class="MsaiPlaybackButton" id="playback_button">
                 <property name="valign">center</property>
+                <property name="width-request">40</property>
+                <property name="height-request">40</property>
                 <property name="action-name">win.toggle-playback</property>
                 <style>
                   <class name="circular"/>
-                  <class name="playback-button"/>
                 </style>
               </object>
             </child>
