@@ -38,19 +38,15 @@ impl Store {
         let (sender, receiver) = oneshot::channel();
         self.loading_insert(album_art.song_id.clone(), receiver);
 
-        let cache_path = &album_art.cache_path;
+        let cache_file = gio::File::for_path(&album_art.cache_path);
 
-        match gio::File::for_path(cache_path).load_bytes_future().await {
+        match cache_file.load_bytes_future().await {
             Ok((ref bytes, _)) => {
                 let texture = gdk::Texture::from_bytes(bytes)?;
                 self.store_insert(album_art.song_id.clone(), texture.clone());
                 return Ok(texture);
             }
-            Err(err) => log::warn!(
-                "Failed to load file from path `{}`: {:?}",
-                cache_path.display(),
-                err
-            ),
+            Err(err) => log::warn!("Failed to load file from `{}`: {:?}", cache_file.uri(), err),
         }
 
         let download_url = &album_art.download_url;
@@ -61,11 +57,15 @@ impl Store {
         log::info!("Downloaded album art from link `{download_url}`");
 
         let texture = gdk::Texture::from_bytes(&glib::Bytes::from_owned(bytes))?;
-        texture.save_to_png(cache_path)?;
-
         self.store_insert(album_art.song_id.clone(), texture.clone());
 
         let _ = sender.send(());
+
+        let texture_bytes = texture.save_to_png_bytes();
+        cache_file
+            .replace_contents_future(texture_bytes, None, false, gio::FileCreateFlags::NONE)
+            .await
+            .map_err(|(_, err)| err)?;
 
         Ok(texture)
     }
