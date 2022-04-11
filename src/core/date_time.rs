@@ -24,20 +24,12 @@ impl DateTime {
     pub fn fuzzy_display(&self) -> String {
         let now = Local::now();
 
-        let is_today = now.date() == self.0.date();
-        let duration = now.signed_duration_since(self.0);
-
-        let hours_difference = duration.num_hours();
-        let week_difference = duration.num_weeks();
-
-        if is_today {
-            self.0.format("%I∶%M") // 08:10
-        } else if hours_difference <= 30 {
-            self.0.format("yesterday")
-        } else if week_difference <= 52 {
-            self.0.format("%B %d") // September 03
+        if self.0.date() == now.date() {
+            self.0.format("today at %R") // today at 08:10
+        } else if now.signed_duration_since(self.0).num_hours() <= 30 {
+            self.0.format("yesterday at %R") // yesterday at 08:10
         } else {
-            self.0.format("%B %d %Y") // September 03 1920
+            self.0.format("%F") // 2001-07-08
         }
         .to_string()
     }
