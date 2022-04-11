@@ -2,14 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # 小山田純 <oyamada.junjun@outlook.jp>, 2021.
-# Ryo Nakano <ryonakaknock3@gmail.com>, 2021.
+# Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022.
 # Kaz Sibuya <sibuyakazokuu@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-02 07:59+0800\n"
-"PO-Revision-Date: 2021-11-19 03:51+0000\n"
+"PO-Revision-Date: 2022-04-11 06:06+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in:3
 #: data/io.github.seadve.Mousai.appdata.xml.in:6
@@ -28,15 +28,16 @@ msgstr "Mousai"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in:11
 msgid "Shazam;Music;Song;Identify;"
-msgstr "Shazam;Music;Song;Identify;"
+msgstr "音楽;ミュージック;曲;認識;識別;Shazam;Music;Song;Identify;"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
 msgid "Identify any songs in seconds"
-msgstr "数秒であらゆる曲を識別"
+msgstr "瞬時に曲名を認識します"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr "使いやすいインターフェイスで、気になる曲を見つけてみましょう。"
+msgstr "曲名がわからないモヤモヤをスッキリさせましょう。インターフェースも使いやすい"
+"です。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:10
 msgid ""
@@ -52,42 +53,40 @@ msgstr ""
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr ""
-"注：Mousaiは、audd.ioのAPIを使用しているため、より多い回数使用するためには、"
-"audDのサイトにログインする必要があります。"
+msgstr "注：Mousaiはaudd.ioのAPIを使用しているため、継続して利用するには、audDのサイ"
+"トにログインする必要があります。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:12
 msgid "Why you will love Mousai?"
-msgstr "Mousaiの好きなところは？"
+msgstr "Mousaiを使う理由"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr "🎵 曲のタイトルやアーティストを数秒で特定できること。"
+msgstr "🎵 曲のタイトルやアーティストを数秒で特定できます。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr "🎙️ マイクまたはデスクトップ上のオーディオで、認識できること。"
+msgstr "🎙️ マイクおよびPC内部からの音を使って認識できます。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:16
 msgid "🎸 Store the identified song including the album art in history."
-msgstr "🎸 認識された曲の履歴（ジャケットを含めて）が、保存されること。"
+msgstr "🎸 認識した曲は、ジャケットを含め履歴に保存されます。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:17
 msgid "🎼 Preview the identified song with the native player."
-msgstr "🎼 認識された曲をネイティブプレーヤーで試聴することができること。"
+msgstr "🎼 認識した曲をネイティブプレーヤーで試聴できます。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:18
 msgid "🌐 Browse the song in the web with the link."
-msgstr ""
-"🌐 リンクをクリックすることで、様々なサービスでその曲を聴くことができること。"
+msgstr "🌐 リンクをクリックすると、様々なサービスでその曲を聴けます。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr "📱 使いやすいインターフェイス"
+msgstr "📱 使いやすいインターフェース。"
 
 #: data/io.github.seadve.Mousai.appdata.xml.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr "⌨️ ユーザーフレンドリーなキーボードショートカット"
+msgstr "⌨️ ユーザーフレンドリーなキーボードショートカット。"
 
 #. Translators: please do NOT translate this
 #: data/io.github.seadve.Mousai.appdata.xml.in:28
@@ -116,7 +115,7 @@ msgstr "操作"
 
 #: data/ui/shortcuts.ui:37
 msgid "Toggle Listen"
-msgstr "認識　開始/停止"
+msgstr "認識を開始/停止"
 
 #: data/ui/shortcuts.ui:44
 msgid "Settings"
@@ -188,7 +187,7 @@ msgstr "Start Mousaing!"
 
 #: data/ui/main_window.ui:97
 msgid "Click the listen button to start."
-msgstr "「認識」ボタンをクリックしてはじめよう。"
+msgstr "“認識”ボタンをクリックして開始します。"
 
 #: data/ui/main_window.ui:108 src/widgets/main_window.py:117
 msgid "Muted"
@@ -204,7 +203,7 @@ msgstr "マイク"
 
 #: data/ui/main_window.ui:128
 msgid "Desktop Audio"
-msgstr "デスクトップオーディオ"
+msgstr "PC内部の音"
 
 #: data/ui/main_window.ui:137
 msgid "_Clear Song History"
@@ -229,7 +228,7 @@ msgstr "認識中"
 
 #: src/widgets/main_window.py:124
 msgid "No audio detected"
-msgstr "音声が検出されません"
+msgstr "音声を検出できません"
 
 #: src/widgets/main_window.py:124
 msgid "Please check your audio device."
