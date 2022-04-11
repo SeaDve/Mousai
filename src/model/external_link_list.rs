@@ -46,6 +46,12 @@ glib::wrapper! {
 }
 
 impl ExternalLinkList {
+    pub fn new(items: Vec<Box<dyn ExternalLink>>) -> Self {
+        let obj = Self::default();
+        obj.push_many(items);
+        obj
+    }
+
     pub fn push(&self, external_link: impl ExternalLink + 'static) {
         self.imp()
             .0
@@ -97,9 +103,7 @@ impl Serialize for ExternalLinkList {
 impl<'de> Deserialize<'de> for ExternalLinkList {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let external_links: Vec<Box<dyn ExternalLink>> = Vec::deserialize(deserializer)?;
-        let obj = ExternalLinkList::default();
-        obj.push_many(external_links);
-        Ok(obj)
+        Ok(ExternalLinkList::new(external_links))
     }
 }
 

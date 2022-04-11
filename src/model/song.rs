@@ -268,7 +268,7 @@ impl<'de> Deserialize<'de> for Song {
 
 pub struct SongBuilder {
     properties: Vec<(&'static str, glib::Value)>,
-    external_links: ExternalLinkList,
+    external_links: Vec<Box<dyn ExternalLink>>,
 }
 
 impl SongBuilder {
@@ -281,7 +281,7 @@ impl SongBuilder {
                 ("album", album.to_value()),
                 ("release-date", release_date.to_value()),
             ],
-            external_links: ExternalLinkList::default(),
+            external_links: Vec::new(),
         }
     }
 
@@ -298,13 +298,15 @@ impl SongBuilder {
     }
 
     pub fn external_link(&mut self, external_link: impl ExternalLink + 'static) -> &mut Self {
-        self.external_links.push(external_link);
+        self.external_links.push(Box::new(external_link));
         self
     }
 
     pub fn build(&mut self) -> Song {
-        self.properties
-            .push(("external-links", self.external_links.to_value()));
+        self.properties.push((
+            "external-links",
+            ExternalLinkList::new(std::mem::take(&mut self.external_links)).to_value(),
+        ));
         glib::Object::with_values(Song::static_type(), &self.properties)
             .expect("Failed to create Song.")
             .downcast()
