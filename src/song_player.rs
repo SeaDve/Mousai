@@ -293,7 +293,7 @@ impl SongPlayer {
                 obj.mpris_player().set_metadata(MprisMetadata {
                     length: duration,
                     art_url: song.album_art().map(|album_art| album_art.uri()).ok(),
-                    album: None,
+                    album: Some(song.album()),
                     album_artist: None,
                     artist: Some(vec![song.artist()]),
                     composer: None,
