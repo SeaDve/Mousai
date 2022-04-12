@@ -13,10 +13,9 @@ use super::{
     time_label::TimeLabel,
 };
 use crate::{
-    core::{ClockTime, PlaybackState},
+    core::ClockTime,
     model::Song,
-    song_player::SongPlayer,
-    spawn,
+    song_player::{PlayerState, SongPlayer},
 };
 
 mod imp {
@@ -178,20 +177,6 @@ impl SongBar {
         let imp = self.imp();
 
         self.player().set_song(song.clone())?;
-
-        imp.duration_label.reset();
-
-        if song.is_some() {
-            spawn!(
-                glib::PRIORITY_DEFAULT_IDLE,
-                clone!(@weak self as obj => async move {
-                    if let Err(err) = obj.update_duration_label().await {
-                        log::warn!("Failed to update playback duration label: {err:?}");
-                    }
-                })
-            );
-        }
-
         imp.song.replace(song);
 
         self.update_album_cover();
@@ -217,17 +202,21 @@ impl SongBar {
             .flags(glib::BindingFlags::SYNC_CREATE)
             .build();
 
-        player.connect_is_buffering_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_button();
-        }));
-
         player.connect_state_notify(clone!(@weak self as obj => move |_| {
             obj.update_playback_position_scale_sensitivity();
             obj.update_playback_button();
         }));
 
-        player.connect_position_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_position_ui();
+        player.connect_position_changed(clone!(@weak self as obj => move |_, position| {
+            obj.set_playback_position_scale_value_blocking(position.as_secs_f64());
+            obj.imp().playback_position_label.set_time(*position);
+        }));
+
+        player.connect_duration_changed(clone!(@weak self as obj => move |_, duration| {
+            let imp = obj.imp();
+            let seconds = duration.as_secs_f64();
+            imp.playback_position_scale.set_range(0.0, seconds);
+            imp.duration_label.set_time(*duration);
         }));
 
         self.update_playback_position_scale_sensitivity();
@@ -272,33 +261,14 @@ impl SongBar {
             )));
     }
 
-    async fn update_duration_label(&self) -> anyhow::Result<()> {
-        let imp = self.imp();
-
-        let duration = self.player().duration().await?;
-
-        let seconds = duration.as_secs_f64();
-        imp.playback_position_scale.set_range(0.0, seconds);
-
-        imp.duration_label.set_time(duration);
-
-        Ok(())
-    }
-
-    fn update_playback_position_ui(&self) {
-        let position = self.player().position();
-        self.set_playback_position_scale_value_blocking(position.as_secs_f64());
-        self.imp().playback_position_label.set_time(position);
-    }
-
     fn update_playback_position_scale_sensitivity(&self) {
         let imp = self.imp();
 
         match self.player().state() {
-            PlaybackState::Stopped | PlaybackState::Loading => {
+            PlayerState::Stopped => {
                 imp.playback_position_scale.set_sensitive(false);
             }
-            PlaybackState::Playing | PlaybackState::Paused => {
+            PlayerState::Playing | PlayerState::Paused | PlayerState::Buffering => {
                 imp.playback_position_scale.set_sensitive(true);
             }
         }
@@ -306,21 +276,15 @@ impl SongBar {
 
     fn update_playback_button(&self) {
         let imp = self.imp();
-        let player = self.player();
 
-        if player.is_buffering() {
-            imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
-            return;
-        }
-
-        match player.state() {
-            PlaybackState::Loading => {
+        match self.player().state() {
+            PlayerState::Buffering => {
                 imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
             }
-            PlaybackState::Stopped | PlaybackState::Paused => {
+            PlayerState::Stopped | PlayerState::Paused => {
                 imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
-            PlaybackState::Playing => {
+            PlayerState::Playing => {
                 imp.playback_button.set_mode(PlaybackButtonMode::Pause);
             }
         }

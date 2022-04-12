@@ -21,6 +21,16 @@ macro_rules! spawn {
     };
 }
 
+/// Send something to a [`glib::Sender`](glib::Sender)
+#[macro_export]
+macro_rules! send {
+    ($sender:expr, $action:expr) => {
+        if let Err(err) = $sender.send($action) {
+            log::error!("Failed to send \"{}\" action: {err:?}", stringify!($action));
+        }
+    };
+}
+
 pub async fn timeout_future(
     interval: Duration,
     cancellable: &Cancellable,

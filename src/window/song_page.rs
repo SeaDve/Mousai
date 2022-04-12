@@ -14,9 +14,8 @@ use super::{
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
 use crate::{
-    core::PlaybackState,
     model::{ExternalLinkWrapper, Song},
-    song_player::SongPlayer,
+    song_player::{PlayerState, SongPlayer},
     Application,
 };
 
@@ -170,10 +169,6 @@ impl SongPage {
             obj.update_playback_ui();
         }));
 
-        player.connect_is_buffering_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_ui();
-        }));
-
         self.imp().player.set(player.downgrade()).unwrap();
 
         self.update_playback_ui();
@@ -182,11 +177,11 @@ impl SongPage {
     fn toggle_playback(&self) -> anyhow::Result<()> {
         if let Some(ref player) = self.imp().player.get().and_then(|player| player.upgrade()) {
             if let Some(song) = self.song() {
-                if player.state() == PlaybackState::Playing && player.is_active_song(&song) {
-                    player.pause()?;
+                if player.state() == PlayerState::Playing && player.is_active_song(&song) {
+                    player.pause();
                 } else {
                     player.set_song(Some(song))?;
-                    player.play()?;
+                    player.play();
                 }
             }
         }
@@ -209,11 +204,9 @@ impl SongPage {
                 let is_active_song = player.is_active_song(song);
                 let player_state = player.state();
 
-                if is_active_song
-                    && (player.is_buffering() || player_state == PlaybackState::Loading)
-                {
+                if is_active_song && player_state == PlayerState::Buffering {
                     imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
-                } else if is_active_song && player_state == PlaybackState::Playing {
+                } else if is_active_song && player_state == PlayerState::Playing {
                     imp.playback_button.set_mode(PlaybackButtonMode::Pause);
                 } else {
                     imp.playback_button.set_mode(PlaybackButtonMode::Play);

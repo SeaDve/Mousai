@@ -22,10 +22,9 @@ use once_cell::unsync::OnceCell;
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
-    core::PlaybackState,
     model::SongList,
     recognizer::{Recognizer, RecognizerState},
-    song_player::SongPlayer,
+    song_player::{PlayerState, SongPlayer},
     Application,
 };
 
@@ -73,16 +72,11 @@ mod imp {
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
                 let player = obj.player();
 
-                let res = if player.state() == PlaybackState::Playing {
-                    player.pause()
+                if player.state() == PlayerState::Playing {
+                    player.pause();
                 } else {
-                    player.play()
+                    player.play();
                 };
-
-                if let Err(err) = res {
-                    log::warn!("Failed to toggle playback: {err:?}");
-                    obj.show_error(&err.to_string());
-                }
             });
 
             klass.install_action("win.stop-playback", None, |obj, _, _| {
@@ -273,6 +267,7 @@ impl Window {
 
         imp.player
             .connect_error(clone!(@weak self as obj => move |_, error| {
+                log::error!("Player error: {error:?}");
                 obj.show_error(&error.to_string());
             }));
 

@@ -10,7 +10,11 @@ use super::{
     album_cover::AlbumCover,
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
-use crate::{core::PlaybackState, model::Song, song_player::SongPlayer, Application};
+use crate::{
+    model::Song,
+    song_player::{PlayerState, SongPlayer},
+    Application,
+};
 
 mod imp {
     use super::*;
@@ -29,7 +33,6 @@ mod imp {
         pub song: RefCell<Option<Song>>,
         pub player: RefCell<Option<WeakRef<SongPlayer>>>,
         pub state_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
-        pub is_buffering_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
     }
 
     #[glib::object_subclass]
@@ -149,12 +152,6 @@ impl SongCell {
                         obj.update_playback_ui(&player);
                     }),
                 )));
-            imp.is_buffering_notify_handler_id
-                .replace(Some(player.connect_is_buffering_notify(
-                    clone!(@weak self as obj, @weak player => move |_| {
-                        obj.update_playback_ui(&player);
-                    }),
-                )));
             imp.player.replace(Some(player.downgrade()));
         }
     }
@@ -164,9 +161,6 @@ impl SongCell {
 
         if let Some(player) = imp.player.take().and_then(|player| player.upgrade()) {
             if let Some(handler_id) = imp.state_notify_handler_id.take() {
-                player.disconnect(handler_id);
-            }
-            if let Some(handler_id) = imp.is_buffering_notify_handler_id.take() {
                 player.disconnect(handler_id);
             }
         }
@@ -181,11 +175,11 @@ impl SongCell {
             .and_then(|player| player.upgrade())
         {
             if let Some(song) = self.song() {
-                if player.state() == PlaybackState::Playing && player.is_active_song(&song) {
-                    player.pause()?;
+                if player.state() == PlayerState::Playing && player.is_active_song(&song) {
+                    player.pause();
                 } else {
                     player.set_song(Some(song))?;
-                    player.play()?;
+                    player.play();
                 }
             }
         }
@@ -199,9 +193,9 @@ impl SongCell {
             let is_active_song = player.is_active_song(song);
             let player_state = player.state();
 
-            if is_active_song && (player.is_buffering() || player_state == PlaybackState::Loading) {
+            if is_active_song && player_state == PlayerState::Buffering {
                 imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
-            } else if is_active_song && player_state == PlaybackState::Playing {
+            } else if is_active_song && player_state == PlayerState::Playing {
                 imp.playback_button.set_mode(PlaybackButtonMode::Pause);
             } else {
                 imp.playback_button.set_mode(PlaybackButtonMode::Play);
