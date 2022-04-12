@@ -6,13 +6,17 @@ use gtk::{
 use mpris_player::{Metadata as MprisMetadata, MprisPlayer, PlaybackStatus as MprisPlaybackStatus};
 use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, sync::Arc, time::Duration};
+use std::{
+    cell::{Cell, RefCell},
+    sync::Arc,
+    time::Duration,
+};
 
 use crate::{
     config::APP_ID,
     core::{AudioPlayer, ClockTime, PlaybackState},
     model::Song,
-    spawn, Application,
+    spawn, Application, THREAD_POOL,
 };
 
 mod imp {
@@ -23,6 +27,7 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct SongPlayer {
         pub song: RefCell<Option<Song>>,
+        pub duration: Cell<Option<ClockTime>>,
         pub audio_player: AudioPlayer,
         pub mpris_player: OnceCell<Arc<MprisPlayer>>,
     }
@@ -197,6 +202,9 @@ impl SongPlayer {
             imp.audio_player.set_uri(&playback_link)?;
         }
 
+        // Invalidate duration
+        imp.duration.take();
+
         imp.song.replace(song);
         self.update_mpris_metadata();
         self.update_mpris_can_play();
@@ -250,8 +258,29 @@ impl SongPlayer {
     }
 
     pub async fn duration(&self) -> anyhow::Result<ClockTime> {
-        // TODO cache duration. Invalidate it on song changed
-        self.imp().audio_player.duration().await
+        let imp = self.imp();
+
+        if let Some(duration) = imp.duration.get() {
+            return Ok(duration);
+        }
+
+        let playback_link = self
+            .song()
+            .and_then(|song| song.playback_link())
+            .ok_or_else(|| {
+                anyhow::anyhow!("No song is currently playing or it doesn't have a playback link.")
+            })?;
+
+        let discoverer_info = THREAD_POOL
+            .push_future(move || -> anyhow::Result<gst_pbutils::DiscovererInfo> {
+                let timeout = gst::ClockTime::from_seconds(10);
+                Ok(gst_pbutils::Discoverer::new(timeout)?.discover_uri(&playback_link)?)
+            })?
+            .await?;
+
+        Ok(discoverer_info
+            .duration()
+            .map_or(ClockTime::ZERO, |clock_time| clock_time.into()))
     }
 
     pub fn is_active_song(&self, song: &Song) -> bool {
@@ -283,12 +312,10 @@ impl SongPlayer {
             spawn!(clone!(@weak self as obj => async move {
                 // TODO: Fill in the Nones
                 let duration = obj
-                    .imp()
-                    .audio_player
                     .duration()
                     .await
-                    .map(|duration| duration.as_micros() as i64)
-                    .ok();
+                    .ok()
+                    .map(|duration| duration.as_micros() as i64);
 
                 obj.mpris_player().set_metadata(MprisMetadata {
                     length: duration,

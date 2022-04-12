@@ -1,5 +1,5 @@
 use gettextrs::gettext;
-use gtk::glib;
+use gtk::{gio, glib};
 
 use super::ProviderError;
 
@@ -29,11 +29,14 @@ pub enum Error {
 
     /// Request sepecific errors
     #[error("Failed to create request: {0}")]
-    Reqwest(#[from] reqwest::Error),
+    Soup(glib::Error),
 
     /// AudD specific errors
     #[error("AudD specific error: {0:?}")]
     AudD(AudDError),
+
+    #[error("{0}")]
+    Other(String),
 }
 
 impl From<AudDError> for Error {
@@ -51,13 +54,12 @@ impl From<Error> for ProviderError {
             Error::FileConvert(_) => ProviderError::Other(gettext(
                 "Failed to convert file. Please report this to Mousai's bug tracker.",
             )),
-            Error::Reqwest(err) => {
-                if err.is_connect() {
+            Error::Soup(err) => {
+                if matches!(
+                    err.kind::<gio::ResolverError>(),
+                    Some(gio::ResolverError::TemporaryFailure)
+                ) {
                     ProviderError::Connection(gettext("Failed to connect to the server."))
-                } else if err.is_timeout() {
-                    ProviderError::Connection(gettext(
-                        "Connection timeout reached. Please try again.",
-                    ))
                 } else {
                     ProviderError::Connection(err.to_string())
                 }
@@ -73,6 +75,7 @@ impl From<Error> for ProviderError {
                 )),
                 AudDError::Other(other) => ProviderError::Other(other),
             },
+            Error::Other(err) => ProviderError::Other(err),
         }
     }
 }

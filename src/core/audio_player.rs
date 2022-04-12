@@ -12,7 +12,6 @@ use once_cell::unsync::OnceCell;
 use std::cell::{Cell, RefCell};
 
 use super::ClockTime;
-use crate::RUNTIME;
 
 #[derive(Debug, Clone, Copy, PartialEq, glib::Enum)]
 #[enum_type(name = "AudioPlayerPlaybackState")]
@@ -259,22 +258,6 @@ impl AudioPlayer {
             Some(clock_time) => Ok(clock_time.into()),
             None => Err(anyhow::anyhow!("Failed to query position")),
         }
-    }
-
-    pub async fn duration(&self) -> anyhow::Result<ClockTime> {
-        let uri = self.uri();
-
-        let discover_info = RUNTIME
-            .spawn_blocking(move || {
-                let timeout = gst::ClockTime::from_seconds(10);
-                let discoverer = gst_pbutils::Discoverer::new(timeout).unwrap();
-                discoverer.discover_uri(&uri)
-            })
-            .await??;
-
-        Ok(discover_info
-            .duration()
-            .map_or(ClockTime::ZERO, |ct| ct.into()))
     }
 
     fn set_buffering(&self, is_buffering: bool) {

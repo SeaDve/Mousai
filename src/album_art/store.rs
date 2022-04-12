@@ -3,8 +3,7 @@ use gtk::{
     gdk::{self, prelude::*},
     gio, glib,
 };
-
-use reqwest::Client;
+use soup::prelude::*;
 
 use std::{
     collections::HashMap,
@@ -12,13 +11,12 @@ use std::{
 };
 
 use super::AlbumArt;
-use crate::{model::SongId, RUNTIME};
+use crate::{model::SongId, Application};
 
 #[derive(Default)]
 pub struct Store {
     store: RwLock<HashMap<SongId, gdk::Texture>>,
     loading: Mutex<HashMap<SongId, Receiver<()>>>,
-    client: Client,
 }
 
 impl Store {
@@ -50,13 +48,17 @@ impl Store {
         }
 
         let download_url = &album_art.download_url;
-        let response = RUNTIME
-            .spawn(self.client.get(download_url).send())
-            .await??;
-        let bytes = RUNTIME.spawn(response.bytes()).await??;
+
+        let bytes = Application::default()
+            .session()
+            .send_and_read_future(
+                &soup::Message::new("GET", download_url)?,
+                glib::PRIORITY_DEFAULT,
+            )
+            .await?;
         log::info!("Downloaded album art from link `{download_url}`");
 
-        let texture = gdk::Texture::from_bytes(&glib::Bytes::from_owned(bytes))?;
+        let texture = gdk::Texture::from_bytes(&bytes)?;
         self.store_insert(album_art.song_id.clone(), texture.clone());
 
         let _ = sender.send(());

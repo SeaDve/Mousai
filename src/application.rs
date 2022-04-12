@@ -21,6 +21,7 @@ mod imp {
     #[derive(Debug)]
     pub struct Application {
         pub window: OnceCell<WeakRef<Window>>,
+        pub session: OnceCell<soup::Session>,
         pub settings: gio::Settings,
     }
 
@@ -28,6 +29,7 @@ mod imp {
         fn default() -> Self {
             Self {
                 window: OnceCell::new(),
+                session: OnceCell::new(),
                 settings: gio::Settings::new(APP_ID),
             }
         }
@@ -106,6 +108,10 @@ impl Application {
         }
 
         main_window
+    }
+
+    pub fn session(&self) -> &soup::Session {
+        self.imp().session.get_or_init(soup::Session::new)
     }
 
     fn show_about_dialog(&self) {

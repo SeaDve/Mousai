@@ -3,8 +3,9 @@ mod mock;
 mod response;
 
 use async_trait::async_trait;
-use reqwest::Client;
+use gtk::glib;
 use serde_json::json;
+use soup::prelude::*;
 
 use std::time::Duration;
 
@@ -17,19 +18,17 @@ use crate::{
         AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
     },
     model::{Song, SongId},
-    utils, RUNTIME,
+    utils, Application,
 };
 
 #[derive(Debug)]
 pub struct AudD {
-    client: Client,
     api_token: String,
 }
 
 impl AudD {
     pub fn new(api_token: Option<&str>) -> Self {
         Self {
-            client: Client::new(),
             api_token: api_token.unwrap_or_default().to_string(),
         }
     }
@@ -100,17 +99,15 @@ impl AudD {
             "audio": utils::file_to_base64(recording.path()).await.map_err(Error::FileConvert)?,
         });
 
-        let server_response = RUNTIME
-            .spawn(
-                self.client
-                    .post("https://api.audd.io/")
-                    .body(data.to_string())
-                    .send(),
-            )
-            .await
-            .unwrap()?;
+        let message = soup::Message::new("POST", "https://api.audd.io/")
+            .map_err(|err| Error::Other(err.to_string()))?;
+        message.set_request_body_from_bytes(None, Some(&glib::Bytes::from_owned(data.to_string())));
 
-        let bytes = RUNTIME.spawn(server_response.bytes()).await.unwrap()?;
+        let bytes = Application::default()
+            .session()
+            .send_and_read_future(&message, glib::PRIORITY_DEFAULT)
+            .await
+            .map_err(Error::Soup)?;
 
         match std::str::from_utf8(&bytes) {
             Ok(string) => log::debug!("server_response: {}", string),
