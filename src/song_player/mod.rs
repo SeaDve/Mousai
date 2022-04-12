@@ -18,12 +18,12 @@ pub use self::state::PlayerState;
 use crate::{config::APP_ID, core::ClockTime, model::Song, send, Application};
 
 #[derive(Debug)]
-enum PlayerMessage {
-    State(PlayerState),
+enum Message {
+    PositionUpdated(Option<ClockTime>),
+    DurationChanged(Option<ClockTime>),
+    StateChanged(PlayerState),
     Error(glib::Error),
     Warning(glib::Error),
-    Position(Option<ClockTime>),
-    Duration(Option<ClockTime>),
 }
 
 mod imp {
@@ -351,11 +351,22 @@ impl SongPlayer {
         self.mpris_player().set_metadata(current_metadata);
     }
 
-    fn handle_player_message(&self, message: &PlayerMessage) {
+    fn handle_player_message(&self, message: &Message) {
         let imp = self.imp();
 
         match message {
-            PlayerMessage::State(new_state) => {
+            Message::PositionUpdated(position) => {
+                self.mpris_player()
+                    .set_position(position.map_or(0, |position| position.as_micros() as i64));
+                self.emit_by_name::<()>("position-changed", &[&position.unwrap_or_default()]);
+            }
+            Message::DurationChanged(duration) => {
+                imp.metadata.borrow_mut().length =
+                    Some(duration.unwrap_or_default().as_micros() as i64);
+                self.push_mpris_metadata();
+                self.emit_by_name::<()>("duration-changed", &[&duration.unwrap_or_default()]);
+            }
+            Message::StateChanged(new_state) => {
                 let old_state = imp.state.get();
                 log::info!("State changed from `{old_state:?}` -> `{new_state:?}`");
 
@@ -373,22 +384,11 @@ impl SongPlayer {
 
                 self.notify("state");
             }
-            PlayerMessage::Error(ref error) => {
+            Message::Error(ref error) => {
                 self.emit_by_name::<()>("error", &[error]);
             }
-            PlayerMessage::Warning(ref warning) => {
+            Message::Warning(ref warning) => {
                 self.emit_by_name::<()>("error", &[warning]);
-            }
-            PlayerMessage::Position(position) => {
-                self.mpris_player()
-                    .set_position(position.map_or(0, |position| position.as_micros() as i64));
-                self.emit_by_name::<()>("position-changed", &[&position.unwrap_or_default()]);
-            }
-            PlayerMessage::Duration(duration) => {
-                imp.metadata.borrow_mut().length =
-                    Some(duration.unwrap_or_default().as_micros() as i64);
-                self.push_mpris_metadata();
-                self.emit_by_name::<()>("duration-changed", &[&duration.unwrap_or_default()]);
             }
         }
     }
@@ -399,28 +399,28 @@ impl SongPlayer {
         let (sender, receiver) = glib::MainContext::channel(glib::PRIORITY_DEFAULT);
 
         imp.player
-            .connect_state_changed(clone!(@strong sender => move |_, state| {
-                send!(sender, PlayerMessage::State(state.into()));
-            }));
-
-        imp.player
             .connect_position_updated(clone!(@strong sender => move |_, position| {
-                send!(sender, PlayerMessage::Position(position.map(|position| position.into())));
+                send!(sender, Message::PositionUpdated(position.map(|position| position.into())));
             }));
 
         imp.player
             .connect_duration_changed(clone!(@strong sender => move |_, duration| {
-                send!(sender, PlayerMessage::Duration(duration.map(|duration| duration.into())));
+                send!(sender, Message::DurationChanged(duration.map(|duration| duration.into())));
+            }));
+
+        imp.player
+            .connect_state_changed(clone!(@strong sender => move |_, state| {
+                send!(sender, Message::StateChanged(state.into()));
             }));
 
         imp.player
             .connect_error(clone!(@strong sender => move |_, error| {
-                send!(sender, PlayerMessage::Error(error.clone()));
+                send!(sender, Message::Error(error.clone()));
             }));
 
         imp.player
             .connect_warning(clone!(@strong sender => move |_, error| {
-                send!(sender, PlayerMessage::Warning(error.clone()));
+                send!(sender, Message::Warning(error.clone()));
             }));
 
         imp.player

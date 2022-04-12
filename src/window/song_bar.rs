@@ -214,8 +214,7 @@ impl SongBar {
 
         player.connect_duration_changed(clone!(@weak self as obj => move |_, duration| {
             let imp = obj.imp();
-            let seconds = duration.as_secs_f64();
-            imp.playback_position_scale.set_range(0.0, seconds);
+            imp.playback_position_scale.set_range(0.0, duration.as_secs_f64());
             imp.duration_label.set_time(*duration);
         }));
 
