@@ -31,7 +31,7 @@ impl AlbumArt {
     pub fn for_song(song: &Song) -> anyhow::Result<Self> {
         let cache_path = {
             let mut path = default_album_art_cache_dir();
-            path.push(song.id().to_string().replace("/", "-"));
+            path.push(song.id().to_string().replace('/', "-"));
             path
         };
 

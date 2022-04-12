@@ -185,5 +185,5 @@ impl Default for AlbumCover {
 }
 
 async fn texture_for_song(song: &Song) -> anyhow::Result<gdk::Texture> {
-    Ok(song.album_art()?.texture().await?)
+    song.album_art()?.texture().await
 }
