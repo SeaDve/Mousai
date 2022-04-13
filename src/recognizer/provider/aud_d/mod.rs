@@ -47,8 +47,8 @@ impl AudD {
         song_builder.external_link(AudDExternalLink::new(&data.info_link));
 
         song_builder.external_link(YoutubeExternalLink::new(&format!(
-            "{} {}",
-            data.title, data.artist
+            "{} - {}",
+            data.artist, data.title,
         )));
 
         if let Some(spotify_data) = data.spotify_data {
