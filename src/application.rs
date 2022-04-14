@@ -88,6 +88,18 @@ impl Application {
         self.imp().settings.clone()
     }
 
+    pub fn session(&self) -> &soup::Session {
+        self.imp().session.get_or_init(soup::Session::new)
+    }
+
+    pub fn show_error(&self, message: &str) {
+        if let Some(window) = self.main_window() {
+            window.show_error(message);
+        } else {
+            log::warn!("Failed to show error: MainWindow doesn't exist");
+        }
+    }
+
     pub fn run(&self) {
         log::info!("Mousai ({})", APP_ID);
         log::info!("Version: {} ({})", VERSION, PROFILE);
@@ -96,7 +108,7 @@ impl Application {
         ApplicationExtManual::run(self);
     }
 
-    pub fn main_window(&self) -> Option<Window> {
+    fn main_window(&self) -> Option<Window> {
         let main_window = self
             .imp()
             .window
@@ -108,10 +120,6 @@ impl Application {
         }
 
         main_window
-    }
-
-    pub fn session(&self) -> &soup::Session {
-        self.imp().session.get_or_init(soup::Session::new)
     }
 
     fn show_about_dialog(&self) {

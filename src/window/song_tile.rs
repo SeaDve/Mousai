@@ -47,9 +47,7 @@ mod imp {
             klass.install_action("song-tile.toggle-playback", None, |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
                     log::warn!("Failed to toggle playback: {err:?}");
-                    if let Some(window) = Application::default().main_window() {
-                        window.show_error(&err.to_string());
-                    }
+                    Application::default().show_error(&err.to_string());
                 }
             });
         }

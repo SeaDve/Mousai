@@ -1,5 +1,4 @@
-use adw::subclass::prelude::*;
-use gtk::{gio, glib, prelude::*};
+use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::RefCell;

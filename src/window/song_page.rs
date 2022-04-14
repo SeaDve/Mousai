@@ -1,7 +1,8 @@
-use adw::prelude::*;
+use gettextrs::gettext;
 use gtk::{
     gio,
     glib::{self, clone},
+    prelude::*,
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -17,7 +18,7 @@ use super::{
 use crate::{
     model::{ExternalLinkWrapper, Song},
     song_player::{PlayerState, SongPlayer},
-    Application,
+    spawn, Application,
 };
 
 mod imp {
@@ -58,9 +59,7 @@ mod imp {
             klass.install_action("song-page.toggle-playback", None, |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
                     log::warn!("Failed to toggle playback: {err:?}");
-                    if let Some(window) = Application::default().main_window() {
-                        window.show_error(&err.to_string());
-                    }
+                    Application::default().show_error(&err.to_string());
                 }
             });
         }
@@ -118,9 +117,17 @@ mod imp {
                         .child()
                         .and_then(|child| child.downcast::<ExternalLinkTile>().ok())
                     {
-                        let uri = external_link_tile.external_link().inner().uri();
-                        gio::AppInfo::launch_default_for_uri(&uri, gio::AppLaunchContext::NONE)
-                            .unwrap_or_else(|err| log::warn!("Failed to activate uri `{uri}`: {err:?}"));
+                        spawn!(async move {
+                            let external_link_wrapper = external_link_tile.external_link();
+                            let external_link = external_link_wrapper.inner();
+                            let uri = external_link.uri();
+
+                            if let Err(err) = gio::AppInfo::launch_default_for_uri_future(&uri, gio::AppLaunchContext::NONE).await
+                            {
+                                log::warn!("Failed to launch default for uri `{uri}`: {err:?}");
+                                Application::default().show_error(&gettext!("Failed to launch {}", external_link.name()));
+                            }
+                        });
                     } else {
                         log::error!("Failed to activate external link: The FlowBoxChild does not have a child of ExternalLinkTile");
                     }
