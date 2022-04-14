@@ -9,7 +9,7 @@ use std::cell::RefCell;
 
 use super::{
     album_cover::AlbumCover,
-    external_link_cell::ExternalLinkCell,
+    external_link_tile::ExternalLinkTile,
     information_row::InformationRow,
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
@@ -113,13 +113,13 @@ mod imp {
 
             self.external_links_box
                 .connect_child_activated(|_, box_child| {
-                    if let Some(external_link_cell) = box_child
+                    if let Some(external_link_tile) = box_child
                         .child()
-                        .and_then(|child| child.downcast::<ExternalLinkCell>().ok())
+                        .and_then(|child| child.downcast::<ExternalLinkTile>().ok())
                     {
-                        external_link_cell.external_link().inner().activate();
+                        external_link_tile.external_link().inner().activate();
                     } else {
-                        log::error!("Failed to activate external link: The FlowBoxChild does not have a child of ExternalLinkCell");
+                        log::error!("Failed to activate external link: The FlowBoxChild does not have a child of ExternalLinkTile");
                     }
                 });
         }
@@ -223,7 +223,7 @@ impl SongPage {
                 .external_links_box
                 .bind_model(Some(&song.external_links()), |item| {
                     let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
-                    ExternalLinkCell::new(wrapper).upcast()
+                    ExternalLinkTile::new(wrapper).upcast()
                 });
         }
     }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiExternalLinkCell" parent="GtkWidget">
+  <template class="MsaiExternalLinkTile" parent="GtkWidget">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>
@@ -28,7 +28,7 @@
       </object>
     </child>
     <style>
-      <class name="external-link-cell"/>
+      <class name="external-link-tile"/>
       <class name="card"/>
       <class name="activatable"/>
     </style>

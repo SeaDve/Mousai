@@ -10,8 +10,8 @@ mod imp {
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, CompositeTemplate)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/external-link-cell.ui")]
-    pub struct ExternalLinkCell {
+    #[template(resource = "/io/github/seadve/Mousai/ui/external-link-tile.ui")]
+    pub struct ExternalLinkTile {
         #[template_child]
         pub image: TemplateChild<gtk::Image>,
         #[template_child]
@@ -21,9 +21,9 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for ExternalLinkCell {
-        const NAME: &'static str = "MsaiExternalLinkCell";
-        type Type = super::ExternalLinkCell;
+    impl ObjectSubclass for ExternalLinkTile {
+        const NAME: &'static str = "MsaiExternalLinkTile";
+        type Type = super::ExternalLinkTile;
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
@@ -35,7 +35,7 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ExternalLinkCell {
+    impl ObjectImpl for ExternalLinkTile {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![glib::ParamSpecObject::new(
@@ -91,18 +91,18 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for ExternalLinkCell {}
+    impl WidgetImpl for ExternalLinkTile {}
 }
 
 glib::wrapper! {
-    pub struct ExternalLinkCell(ObjectSubclass<imp::ExternalLinkCell>)
+    pub struct ExternalLinkTile(ObjectSubclass<imp::ExternalLinkTile>)
         @extends gtk::Widget;
 }
 
-impl ExternalLinkCell {
+impl ExternalLinkTile {
     pub fn new(external_link: &ExternalLinkWrapper) -> Self {
         glib::Object::new(&[("external-link", external_link)])
-            .expect("Failed to create ExternalLinkCell")
+            .expect("Failed to create ExternalLinkTile")
     }
 
     pub fn external_link(&self) -> ExternalLinkWrapper {

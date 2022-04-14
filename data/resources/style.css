@@ -17,49 +17,49 @@ playbackbutton.circular > button  {
   border-radius: 99999px;
 }
 
-/* ExternalLinkCell */
+/* ExternalLinkTile */
 
-.external-link-cell.applemusic {
+.external-link-tile.applemusic {
 	background: linear-gradient(180deg, #fb5b73 30%, #fa243c 100%);
 	color: white;
 }
-.external-link-cell.applemusic:hover {
+.external-link-tile.applemusic:hover {
 	background: linear-gradient(180deg, shade(#fb5b73, 1.07) 30%, shade(#fa243c, 1.07) 100%);
 }
-.external-link-cell.applemusic:active {
+.external-link-tile.applemusic:active {
 	background: linear-gradient(180deg, shade(#fb5b73, .97) 30%, shade(#fa243c, 1.07) 100%);
 }
 
-.external-link-cell.audd {
+.external-link-tile.audd {
 	background: linear-gradient(180deg, #ee1c52 30%, #c12279 100%);
 	color: white;
 }
-.external-link-cell.audd:hover {
+.external-link-tile.audd:hover {
 	background: linear-gradient(180deg, shade(#ee1c52, 1.07) 30%, shade(#c12279, 1.07) 100%);
 }
-.external-link-cell.audd:active {
+.external-link-tile.audd:active {
 	background: linear-gradient(180deg, shade(#ee1c52, .97) 30%, shade(#c12279, .95) 100%);
 }
 
-.external-link-cell.spotify {
+.external-link-tile.spotify {
 	background: #1dd05d;
 	color: white;
 }
-.external-link-cell.spotify:hover {
+.external-link-tile.spotify:hover {
 	background: shade(#1dd05d, 1.06);
 }
-.external-link-cell.spotify:active {
+.external-link-tile.spotify:active {
 	background: shade(#1dd05d, 0.95);
 }
 
-.external-link-cell.youtube {
+.external-link-tile.youtube {
 	background: #f70000;
 	color: white;
 }
-.external-link-cell.youtube:hover {
+.external-link-tile.youtube:hover {
 	background: shade(#f70000, 1.15);
 }
-.external-link-cell.youtube:active {
+.external-link-tile.youtube:active {
 	background: shade(#f70000, 0.95);
 }
 
