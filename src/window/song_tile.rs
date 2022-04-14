@@ -23,8 +23,8 @@ mod imp {
     use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, CompositeTemplate)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/song-cell.ui")]
-    pub struct SongCell {
+    #[template(resource = "/io/github/seadve/Mousai/ui/song-tile.ui")]
+    pub struct SongTile {
         #[template_child]
         pub album_cover: TemplateChild<AlbumCover>,
         #[template_child]
@@ -36,15 +36,15 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for SongCell {
-        const NAME: &'static str = "MsaiSongCell";
-        type Type = super::SongCell;
+    impl ObjectSubclass for SongTile {
+        const NAME: &'static str = "MsaiSongTile";
+        type Type = super::SongTile;
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
 
-            klass.install_action("song-cell.toggle-playback", None, |obj, _, _| {
+            klass.install_action("song-tile.toggle-playback", None, |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
                     log::warn!("Failed to toggle playback: {err:?}");
                     if let Some(window) = Application::default().main_window() {
@@ -59,7 +59,7 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for SongCell {
+    impl ObjectImpl for SongTile {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![glib::ParamSpecObject::new(
@@ -109,17 +109,17 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for SongCell {}
+    impl WidgetImpl for SongTile {}
 }
 
 glib::wrapper! {
-    pub struct SongCell(ObjectSubclass<imp::SongCell>)
+    pub struct SongTile(ObjectSubclass<imp::SongTile>)
         @extends gtk::Widget;
 }
 
-impl SongCell {
+impl SongTile {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongCell")
+        glib::Object::new(&[]).expect("Failed to create SongTile")
     }
 
     pub fn set_song(&self, song: Option<Song>) {
@@ -210,7 +210,7 @@ impl SongCell {
     }
 }
 
-impl Default for SongCell {
+impl Default for SongTile {
     fn default() -> Self {
         Self::new()
     }

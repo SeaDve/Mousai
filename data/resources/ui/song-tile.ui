@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiSongCell" parent="GtkWidget">
+  <template class="MsaiSongTile" parent="GtkWidget">
     <property name="layout-manager">
       <object class="GtkBoxLayout">
         <property name="orientation">vertical</property>
@@ -21,7 +21,7 @@
             <property name="valign">end</property>
             <property name="margin-end">12</property>
             <property name="margin-bottom">12</property>
-            <property name="action-name">song-cell.toggle-playback</property>
+            <property name="action-name">song-tile.toggle-playback</property>
             <style>
               <class name="osd"/>
               <class name="circular"/>
@@ -43,7 +43,7 @@
             <property name="lines">2</property>
             <binding name="label">
               <lookup name="title">
-                <lookup name="song">MsaiSongCell</lookup>
+                <lookup name="song">MsaiSongTile</lookup>
               </lookup>
             </binding>
           </object>
@@ -58,7 +58,7 @@
             <property name="lines">2</property>
             <binding name="label">
               <lookup name="artist">
-                <lookup name="song">MsaiSongCell</lookup>
+                <lookup name="song">MsaiSongTile</lookup>
               </lookup>
             </binding>
             <style>

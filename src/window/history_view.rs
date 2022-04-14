@@ -8,7 +8,7 @@ use once_cell::unsync::OnceCell;
 
 use std::cell::Cell;
 
-use super::{song_cell::SongCell, song_page::SongPage, Window};
+use super::{song_page::SongPage, song_tile::SongTile, Window};
 use crate::{
     model::{Song, SongList},
     song_player::SongPlayer,
@@ -405,10 +405,10 @@ impl HistoryView {
     fn setup_grid(&self) {
         let factory = gtk::SignalListItemFactory::new();
         factory.connect_setup(clone!(@weak self as obj => move |_, list_item| {
-            let song_cell = SongCell::new();
+            let song_tile = SongTile::new();
             list_item
                 .property_expression("item")
-                .bind(&song_cell, "song", glib::Object::NONE);
+                .bind(&song_tile, "song", glib::Object::NONE);
 
             let check_button = gtk::CheckButton::builder()
                 .css_classes(vec!["selection-mode".into()])
@@ -435,33 +435,33 @@ impl HistoryView {
                 glib::Object::NONE,
             );
 
-            let overlay = gtk::Overlay::builder().child(&song_cell).build();
+            let overlay = gtk::Overlay::builder().child(&song_tile).build();
             overlay.add_overlay(&check_button);
             list_item.set_child(Some(&overlay));
         }));
         factory.connect_bind(clone!(@weak self as obj => move |_, list_item| {
-            let song_cell: SongCell = list_item
+            let song_tile: SongTile = list_item
                 .child()
                 .and_then(|widget| widget.downcast::<gtk::Overlay>().ok())
                 .and_then(|overlay| overlay.child())
                 .and_then(|child| child.downcast().ok())
-                .expect("HistoryView list item should have widget tree of gtk::Overlay > SongCell");
+                .expect("HistoryView list item should have widget tree of gtk::Overlay > SongTile");
 
             if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
-                song_cell.bind(Some(&window.player()));
+                song_tile.bind(Some(&window.player()));
             } else {
-                log::error!("Cannot bind SongCell to AudioPlayerWidget: HistoryView doesn't have root");
+                log::error!("Cannot bind SongTile to AudioPlayerWidget: HistoryView doesn't have root");
             }
         }));
         factory.connect_unbind(|_, list_item| {
-            let song_cell: SongCell = list_item
+            let song_tile: SongTile = list_item
                 .child()
                 .and_then(|widget| widget.downcast::<gtk::Overlay>().ok())
                 .and_then(|overlay| overlay.child())
                 .and_then(|child| child.downcast().ok())
-                .expect("HistoryView list item should have widget tree of gtk::Overlay > SongCell");
+                .expect("HistoryView list item should have widget tree of gtk::Overlay > SongTile");
 
-            song_cell.unbind();
+            song_tile.unbind();
         });
 
         let grid = self.imp().grid.get();

@@ -12,7 +12,7 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/recognizer-view.ui</file>
     <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-bar.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">ui/song-cell.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/song-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/time-label.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/window.ui</file>

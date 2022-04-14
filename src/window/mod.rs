@@ -6,8 +6,8 @@ mod information_row;
 mod playback_button;
 mod recognizer_view;
 mod song_bar;
-mod song_cell;
 mod song_page;
+mod song_tile;
 mod time_label;
 
 use adw::{prelude::*, subclass::prelude::*};
