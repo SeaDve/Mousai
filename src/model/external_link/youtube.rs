@@ -1,5 +1,4 @@
 use gettextrs::gettext;
-use gtk::gio;
 use serde::{Deserialize, Serialize};
 
 use super::ExternalLink;
@@ -19,18 +18,12 @@ impl YoutubeExternalLink {
 
 #[typetag::serde]
 impl ExternalLink for YoutubeExternalLink {
-    fn activate(&self) {
+    fn uri(&self) -> String {
         let encoded = percent_encoding::utf8_percent_encode(
             &self.search_term,
             percent_encoding::NON_ALPHANUMERIC,
-        )
-        .to_string();
-
-        gio::AppInfo::launch_default_for_uri(
-            &format!("https://www.youtube.com/results?search_query={encoded}"),
-            gio::AppLaunchContext::NONE,
-        )
-        .unwrap();
+        );
+        format!("https://www.youtube.com/results?search_query={encoded}")
     }
 
     fn name(&self) -> String {

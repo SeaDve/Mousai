@@ -117,8 +117,8 @@ mod test {
 
     #[typetag::serde]
     impl ExternalLink for TestExternalLink {
-        fn activate(&self) {
-            log::info!("Activate");
+        fn uri(&self) -> String {
+            "Test".to_string()
         }
 
         fn name(&self) -> String {

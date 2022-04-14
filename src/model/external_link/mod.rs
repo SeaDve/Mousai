@@ -13,8 +13,8 @@ pub use self::{
 
 #[typetag::serde]
 pub trait ExternalLink: std::fmt::Debug {
-    /// This will be called when the link is activated
-    fn activate(&self);
+    /// The uri to launch when this is activated
+    fn uri(&self) -> String;
 
     /// The visible label of this in the UI
     fn name(&self) -> String;

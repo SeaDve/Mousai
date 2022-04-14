@@ -1,5 +1,4 @@
 use gettextrs::gettext;
-use gtk::gio;
 use serde::{Deserialize, Serialize};
 
 use super::ExternalLink;
@@ -19,8 +18,8 @@ impl AudDExternalLink {
 
 #[typetag::serde]
 impl ExternalLink for AudDExternalLink {
-    fn activate(&self) {
-        gio::AppInfo::launch_default_for_uri(&self.uri, gio::AppLaunchContext::NONE).unwrap();
+    fn uri(&self) -> String {
+        self.uri.to_string()
     }
 
     fn name(&self) -> String {

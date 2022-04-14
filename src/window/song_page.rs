@@ -1,5 +1,6 @@
 use adw::prelude::*;
 use gtk::{
+    gio,
     glib::{self, clone},
     subclass::prelude::*,
 };
@@ -117,7 +118,9 @@ mod imp {
                         .child()
                         .and_then(|child| child.downcast::<ExternalLinkTile>().ok())
                     {
-                        external_link_tile.external_link().inner().activate();
+                        let uri = external_link_tile.external_link().inner().uri();
+                        gio::AppInfo::launch_default_for_uri(&uri, gio::AppLaunchContext::NONE)
+                            .unwrap_or_else(|err| log::warn!("Failed to activate uri `{uri}`: {err:?}"));
                     } else {
                         log::error!("Failed to activate external link: The FlowBoxChild does not have a child of ExternalLinkTile");
                     }
