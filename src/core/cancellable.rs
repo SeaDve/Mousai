@@ -46,6 +46,7 @@ impl std::fmt::Debug for Cancellable {
 impl Cancellable {
     pub fn cancel(&self) {
         if self.is_cancelled() {
+            log::warn!("Trying to cancel a cancelled cancellable");
             return;
         }
 
