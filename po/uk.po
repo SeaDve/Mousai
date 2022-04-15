@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 07:59+0800\n"
+"POT-Creation-Date: 2022-04-15 12:47+0800\n"
 "PO-Revision-Date: 2021-09-25 22:38+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -19,26 +19,47 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.9-dev\n"
 
-#: data/io.github.seadve.Mousai.desktop.in:3
-#: data/io.github.seadve.Mousai.appdata.xml.in:6
+#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
 msgid "Mousai"
 msgstr "Mousai"
 
+#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
+msgid "Identify songs in seconds"
+msgstr ""
+
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in:11
+#: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Music;Song;Identify;"
 msgstr "Шазам;Музика;Пісня;Визначити;Shazam;Music;Song;Identify;"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:7 src/main.py:75
-msgid "Identify any songs in seconds"
-msgstr "Визначте будь-які пісні за лічені секунди"
+#: data/io.github.seadve.Mousai.gschema.xml.in:6
+msgid "Default window width"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:9
+#: data/io.github.seadve.Mousai.gschema.xml.in:10
+msgid "Default window height"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:14
+msgid "Default window maximized behaviour"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:18
+msgid "Contains recently recognized songs"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:26
+msgid "Preferred audio source to use in recording audio"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
 "Знаходьте пісні, які ви хочете дізнатись за допомогою простого інтерфейсу."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
 "Mousai is a simple application that can identify song similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -48,7 +69,7 @@ msgstr ""
 "Shazam. Просто натисніть кнопку прослуховування, а потім зачекайте кілька "
 "секунд. Трохи чаклунства і ви отримаєте назву й виконавця цієї пісні!"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -56,216 +77,435 @@ msgstr ""
 "Примітка: Застосовано API audd.io, тому необхідно увійти на їхній сайт, щоб "
 "отримати більше часу користування."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid "Why you will love Mousai?"
 msgstr "Чому ви вподобаєте Mousai?"
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr "🎵 Визначає назву та виконавця пісні за лічені секунди."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
 msgstr "🎙️ Використовує мікрофон або звук зі стільниці."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr "🎸 Зберігає визначену пісню, включно з обкладинками альбомів у історії."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr "🎼 Попереднє прослуховування визначеної пісні у вбудованому програвачі."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:18
-msgid "🌐 Browse the song in the web with the link."
-msgstr "🌐 Перегляд пісні в інтернеті за посиланням."
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+msgid "🌐 Browse and listen the song from different providers."
+msgstr ""
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
 msgstr "📱 Простий користувацький інтерфейс."
 
-#: data/io.github.seadve.Mousai.appdata.xml.in:20
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Зручні комбінації клавіш."
 
-#. Translators: please do NOT translate this
-#: data/io.github.seadve.Mousai.appdata.xml.in:28
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:292
 msgid "Dave Patrick"
 msgstr "Дейв Патрік"
 
-#: data/ui/shortcuts.ui:10
-msgid "General"
-msgstr "Загальні"
-
-#: data/ui/shortcuts.ui:14
-msgid "Open Menu"
-msgstr "Відкрити меню"
-
-#: data/ui/shortcuts.ui:20
-msgid "Show Shortcuts"
-msgstr "Показати комбінації клавіш"
-
-#: data/ui/shortcuts.ui:26
-msgid "Quit"
-msgstr "Вийти"
-
-#: data/ui/shortcuts.ui:33
-msgid "Controls"
-msgstr "Керування"
-
-#: data/ui/shortcuts.ui:37
-msgid "Toggle Listen"
-msgstr "Почати/зупинити прослуховування"
-
-#: data/ui/shortcuts.ui:44
-msgid "Settings"
-msgstr "Налаштування"
-
-#: data/ui/shortcuts.ui:48
-msgid "Clear Song History"
-msgstr "Очистити історію пісень"
-
-#: data/ui/shortcuts.ui:54
-msgid "Reset Token Value"
-msgstr "Скинути значення токена"
-
-#: data/ui/token_dialog.ui:37
-msgid "Welcome to Mousai"
-msgstr "Вітаємо у Mousai"
-
-#: data/ui/token_dialog.ui:50
-msgid "Enter a valid token"
-msgstr "Введіть дійсний токен"
-
-#: data/ui/token_dialog.ui:57
-msgid "Submit"
-msgstr "Надіслати"
-
-#. Do not translate the link, only 'their website'
-#: data/ui/token_dialog.ui:71
-msgid ""
-"Mousai uses audd.io APIs to work, so it is required to login to <a href="
-"\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
-"this blank will give you a few trials per day."
-msgstr ""
-"Mousai застосовує audd.io API для роботи, тому потрібно увійти на <a href="
-"\"https://dashboard.audd.io/\">їхній вебсайт</a> і отримати токен. Залишивши "
-"це поле порожнім ви зможете виконувати кілька випробувальних пошуків на день."
-
-#: data/ui/token_dialog.ui:88
-msgid "Do not show at startup"
-msgstr "Не показувати під час запуску"
-
-#: data/ui/song_row.ui:14
-msgid "Open in Browser"
-msgstr "Відкрити у переглядачі"
-
-#: data/ui/main_window.ui:23
-msgid "Listen"
-msgstr "Слухати"
-
-#: data/ui/main_window.ui:24
-msgid "Start Identifying Music"
-msgstr "Почати визначення музики"
-
-#: data/ui/main_window.ui:38
-msgid "Cancel"
-msgstr "Скасувати"
-
-#: data/ui/main_window.ui:39
-msgid "Cancel the Recording"
-msgstr "Скасування записування"
-
-#: data/ui/main_window.ui:53
-msgid "Main Menu"
-msgstr "Головне меню"
-
-#. Mousaing is not a real word, but it is supposed to be a verb
-#: data/ui/main_window.ui:96
-msgid "Start Mousaing!"
-msgstr "Почати Музинг!"
-
-#: data/ui/main_window.ui:97
-msgid "Click the listen button to start."
-msgstr "Натисніть кнопку прослуховування, щоб розпочати."
-
-#: data/ui/main_window.ui:108 src/widgets/main_window.py:117
-msgid "Muted"
-msgstr "Звук вимкнено"
-
-#: data/ui/main_window.ui:121
+#: data/resources/ui/history-view.ui:6
 msgid "_Preferred Audio Source"
 msgstr "_Бажане джерело звуку"
 
-#: data/ui/main_window.ui:123
+#: data/resources/ui/history-view.ui:8
 msgid "Microphone"
 msgstr "Мікрофон"
 
-#: data/ui/main_window.ui:128
+#: data/resources/ui/history-view.ui:13
 msgid "Desktop Audio"
 msgstr "Звук зі стільниці"
 
-#: data/ui/main_window.ui:137
-msgid "_Clear Song History"
-msgstr "_Очистити історію пісень"
-
-#: data/ui/main_window.ui:141
-msgid "_Reset Token"
-msgstr "_Скинути токен"
-
-#: data/ui/main_window.ui:147
+#: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбінації клавіш"
 
-#: data/ui/main_window.ui:151
+#: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
 msgstr "_Про Mousai"
 
-#: src/widgets/main_window.py:108 src/widgets/main_window.py:111
-#: src/widgets/main_window.py:114
-msgid "Listening"
-msgstr "Прослуховування"
+#: data/resources/ui/history-view.ui:33
+msgid "Select _All"
+msgstr ""
 
-#: src/widgets/main_window.py:124
-msgid "No audio detected"
-msgstr "Звуків не виявлено"
+#: data/resources/ui/history-view.ui:37
+msgid "Select _None"
+msgstr ""
 
-#: src/widgets/main_window.py:124
-msgid "Please check your audio device."
-msgstr "Перевірте пристрій звуку."
+#: data/resources/ui/history-view.ui:61
+msgid "Start Identifying Music"
+msgstr "Почати визначення музики"
 
-#: src/widgets/main_window.py:173
-msgid "The song was not recognized."
-msgstr "Пісню не розпізнано."
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:120
+msgid "Listen"
+msgstr "Слухати"
 
-#: src/widgets/main_window.py:175
-msgid "Something went wrong."
-msgstr "Щось пішло шкереберть."
+#: data/resources/ui/history-view.ui:71
+msgid "Open Main Menu"
+msgstr ""
 
-#: src/widgets/main_window.py:177
-msgid "Sorry!"
-msgstr "Перепрошуємо!"
+#: data/resources/ui/history-view.ui:79
+msgid "Select"
+msgstr ""
 
-#: src/widgets/song_row.py:59
-msgid "Stop Preview"
-msgstr "Зупинити попередній перегляд"
+#: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
+msgid "Search for Songs"
+msgstr ""
 
-#: src/widgets/song_row.py:59
-msgid "Play Preview"
-msgstr "Відтворити попередній перегляд"
+#: data/resources/ui/history-view.ui:102
+msgid "Cancel Select"
+msgstr ""
 
-#: src/main.py:78
-msgid "Copyright 2021 Dave Patrick"
-msgstr "Авторське право 2021 Дейв Патрік"
+#: data/resources/ui/history-view.ui:103
+#: data/resources/ui/recognizer-view.ui:14
+msgid "Cancel"
+msgstr "Скасувати"
 
-#. Translators: Replace "translator-credits" with your names, one name per line
-#: src/main.py:80
+#: data/resources/ui/history-view.ui:123
+msgid "Enter song or artist name"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:148
+msgid "Start Identifying Music!"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:149
+msgid "Click the listen button to start."
+msgstr "Натисніть кнопку прослуховування, щоб розпочати."
+
+#: data/resources/ui/history-view.ui:156
+msgid "No Results Found"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:157
+msgid "Try a different search."
+msgstr ""
+
+#: data/resources/ui/history-view.ui:166
+msgid "Remove Song From History"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:167
+msgid "Remove"
+msgstr ""
+
+#: data/resources/ui/recognizer-view.ui:13
+msgid "Cancel Listening"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:14
+msgctxt "shortcut window"
+msgid "Open Main Menu"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:20
+msgctxt "shortcut window"
+msgid "Search"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:26
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:40
+msgctxt "shortcut window"
+msgid "Controls"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:43
+msgctxt "shortcut window"
+msgid "Toggle Listen"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:49
+msgctxt "shortcut window"
+msgid "Toggle Playback"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:57
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:60
+msgctxt "shortcut window"
+msgid "Go Back"
+msgstr ""
+
+#: data/resources/ui/song-bar.ui:33
+msgid "Show Song Information"
+msgstr ""
+
+#: data/resources/ui/song-bar.ui:101
+msgid "Stop"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:27
+msgid "Return to Main Page"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:133
+msgid "Information"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:136
+msgid "Last Heard"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:141
+msgid "Album"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:146
+msgid "Release Date"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names. Put a comma between.
+#: src/application.rs:133
 msgid "translator-credits"
 msgstr "Ihor Hordiichuk &lt;igor_ck@outlook.com&gt;"
 
-#: src/main.py:81
+#: src/application.rs:134
+msgid "Copyright 2022 Dave Patrick"
+msgstr ""
+
+#: src/application.rs:137
 msgid "GitHub"
 msgstr "GitHub"
+
+#: src/model/external_link/apple_music.rs:26
+msgid "Apple Music"
+msgstr ""
+
+#: src/model/external_link/apple_music.rs:30
+msgid "Browse on Apple Music"
+msgstr ""
+
+#: src/model/external_link/aud_d.rs:26
+msgid "AudD"
+msgstr ""
+
+#: src/model/external_link/aud_d.rs:30
+msgid "Browse on AudD"
+msgstr ""
+
+#: src/model/external_link/spotify.rs:26
+msgid "Spotify"
+msgstr ""
+
+#: src/model/external_link/spotify.rs:30
+msgid "Listen on Spotify"
+msgstr ""
+
+#: src/model/external_link/youtube.rs:30
+msgid "YouTube"
+msgstr ""
+
+#: src/model/external_link/youtube.rs:34
+msgid "Search on YouTube"
+msgstr ""
+
+#: src/recognizer/mod.rs:211
+msgid "Cancelled recording"
+msgstr ""
+
+#: src/recognizer/mod.rs:225
+msgid "Cancelled recognizing"
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:52
+msgid "Failed to parse response. Please report this to Mousai's bug tracker."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:55
+msgid "Failed to convert file. Please report this to Mousai's bug tracker."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:62
+msgid "Failed to connect to the server."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:71
+msgid "Daily limit has been reached."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:74
+msgid "Failed to fingerprint audio. There may be no sound heard."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:160
+msgid "{} Check your internet connection."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:162
+msgid "No matches found for this song."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:164
+msgid "{} Input an API token in the preferences."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:167
+msgid "Please input a valid API token."
+msgstr ""
+
+#: src/window/history_view.rs:382
+msgid "Click on items to select them"
+msgstr ""
+
+#: src/window/history_view.rs:384
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/window/mod.rs:190
+msgid "Failed to load history"
+msgstr ""
+
+#: src/window/playback_button.rs:165
+msgid "Play"
+msgstr ""
+
+#: src/window/playback_button.rs:172
+msgid "Pause"
+msgstr ""
+
+#: src/window/recognizer_view.rs:101
+msgid "Listening…"
+msgstr ""
+
+#: src/window/recognizer_view.rs:123
+msgid "Recognizing…"
+msgstr ""
+
+#: src/window/song_page.rs:128
+msgid "Failed to launch {}"
+msgstr ""
+
+#~ msgid "Identify any songs in seconds"
+#~ msgstr "Визначте будь-які пісні за лічені секунди"
+
+#~ msgid "🌐 Browse the song in the web with the link."
+#~ msgstr "🌐 Перегляд пісні в інтернеті за посиланням."
+
+#~ msgid "General"
+#~ msgstr "Загальні"
+
+#~ msgid "Open Menu"
+#~ msgstr "Відкрити меню"
+
+#~ msgid "Show Shortcuts"
+#~ msgstr "Показати комбінації клавіш"
+
+#~ msgid "Quit"
+#~ msgstr "Вийти"
+
+#~ msgid "Controls"
+#~ msgstr "Керування"
+
+#~ msgid "Toggle Listen"
+#~ msgstr "Почати/зупинити прослуховування"
+
+#~ msgid "Settings"
+#~ msgstr "Налаштування"
+
+#~ msgid "Clear Song History"
+#~ msgstr "Очистити історію пісень"
+
+#~ msgid "Reset Token Value"
+#~ msgstr "Скинути значення токена"
+
+#~ msgid "Welcome to Mousai"
+#~ msgstr "Вітаємо у Mousai"
+
+#~ msgid "Enter a valid token"
+#~ msgstr "Введіть дійсний токен"
+
+#~ msgid "Submit"
+#~ msgstr "Надіслати"
+
+#~ msgid ""
+#~ "Mousai uses audd.io APIs to work, so it is required to login to <a href="
+#~ "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
+#~ "this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Mousai застосовує audd.io API для роботи, тому потрібно увійти на <a href="
+#~ "\"https://dashboard.audd.io/\">їхній вебсайт</a> і отримати токен. "
+#~ "Залишивши це поле порожнім ви зможете виконувати кілька випробувальних "
+#~ "пошуків на день."
+
+#~ msgid "Do not show at startup"
+#~ msgstr "Не показувати під час запуску"
+
+#~ msgid "Open in Browser"
+#~ msgstr "Відкрити у переглядачі"
+
+#~ msgid "Cancel the Recording"
+#~ msgstr "Скасування записування"
+
+#~ msgid "Main Menu"
+#~ msgstr "Головне меню"
+
+#~ msgid "Start Mousaing!"
+#~ msgstr "Почати Музинг!"
+
+#~ msgid "Muted"
+#~ msgstr "Звук вимкнено"
+
+#~ msgid "_Clear Song History"
+#~ msgstr "_Очистити історію пісень"
+
+#~ msgid "_Reset Token"
+#~ msgstr "_Скинути токен"
+
+#~ msgid "Listening"
+#~ msgstr "Прослуховування"
+
+#~ msgid "No audio detected"
+#~ msgstr "Звуків не виявлено"
+
+#~ msgid "Please check your audio device."
+#~ msgstr "Перевірте пристрій звуку."
+
+#~ msgid "The song was not recognized."
+#~ msgstr "Пісню не розпізнано."
+
+#~ msgid "Something went wrong."
+#~ msgstr "Щось пішло шкереберть."
+
+#~ msgid "Sorry!"
+#~ msgstr "Перепрошуємо!"
+
+#~ msgid "Stop Preview"
+#~ msgstr "Зупинити попередній перегляд"
+
+#~ msgid "Play Preview"
+#~ msgstr "Відтворити попередній перегляд"
+
+#~ msgid "Copyright 2021 Dave Patrick"
+#~ msgstr "Авторське право 2021 Дейв Патрік"
 
 #~ msgid "Play preview"
 #~ msgstr "Відтворити короткий приклад"
