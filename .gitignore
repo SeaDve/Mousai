@@ -10,3 +10,4 @@ src/config.rs
 .flatpak/
 vendor
 .vscode/
+__pycache__
