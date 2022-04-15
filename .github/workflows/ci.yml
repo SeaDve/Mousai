@@ -6,17 +6,6 @@ on:
 name: CI
 
 jobs:
-  codespell:
-    name: Codespell
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: codespell-project/actions-codespell@master
-        with:
-          check_filenames: true
-          ignore_words_list: "crate,ser"
-          skip: "*.svg,*.po"
-
   rustfmt:
     name: Rustfmt
     runs-on: ubuntu-20.04
@@ -33,17 +22,25 @@ jobs:
       - name: Run cargo fmt
         run: cargo fmt --all -- --check
 
+  typos:
+    name: Typos
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check for typos
+        uses: crate-ci/typos@master
+
   flatpak:
     name: Flatpak
     runs-on: ubuntu-20.04
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-40
+      image: bilelmoussaoui/flatpak-github-actions:gnome-42
       options: --privileged
     steps:
-    - uses: actions/checkout@v2
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
-      with:
-        bundle: mousai.flatpak
-        manifest-path: build-aux/io.github.seadve.Mousai.Devel.json
-        run-tests: true
-        cache-key: flatpak-builder-${{ github.sha }}
+      - uses: actions/checkout@v2
+      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle: mousai.flatpak
+          manifest-path: build-aux/io.github.seadve.Mousai.Devel.json
+          run-tests: true
+          cache-key: flatpak-builder-${{ github.sha }}
