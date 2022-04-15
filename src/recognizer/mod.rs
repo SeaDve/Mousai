@@ -1,7 +1,6 @@
 mod provider;
 
 use gettextrs::gettext;
-use gst_pbutils::prelude::*;
 use gtk::{
     glib::{self, clone},
     prelude::*,
