@@ -1,33 +1,22 @@
-#!/usr/bin/env python3
-# Depends on: build-aux/checks.py
+#!/usr/bin/env bash
 
-import sys
+BOLD_RED="\033[1;31m"
+BOLD_GREEN="\033[1;32m"
+ENDC="\033[0m"
 
-sys.path.append("./build-aux")
+RUNNING="   ${BOLD_GREEN}RUNNING${ENDC}"
+CREATING="  ${BOLD_GREEN}CREATING${ENDC}"
+ABORTING="  ${BOLD_RED}ABORTING${ENDC}"
 
-import checks  # noqa: E402
-from checks import BOLD_GREEN, BOLD_RED, ENDC, RUNNING  # noqa: E402
+curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python
 
-CREATING = f"  {BOLD_GREEN}CREATING{ENDC}"
-ABORTING = f"  {BOLD_RED}ABORTING{ENDC}"
-
-
-def main() -> int:
-    print(f"{RUNNING} pre-commit hook (To ignore, run `git commit --no-verify`)")
-
-    ret = checks.main(None)
-
-    if ret == 0:
-        print("")
-        print(f"{CREATING} commit")
-    else:
-        print("")
-        print(
-            f"{ABORTING} commit, please fix the above issues. To ignore, rerun commit with '--no-verify'"
-        )
-
-    return ret
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+if [ $? -eq 0 ]
+then
+  echo -e "${CREATING} commit"
+  echo
+  exit 0
+else
+  echo -e "${ABORTING} commit, please fix the above issues. To ignore, rerun commit with '--no-verify'"
+  echo
+  exit 1
+fi
