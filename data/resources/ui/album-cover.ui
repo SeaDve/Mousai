@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiAlbumCover" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="GtkFrame">
+        <property name="halign">center</property>
+        <property name="child">
+          <object class="GtkStack" id="stack">
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkImage" id="placeholder">
+                <property name="icon-name">emblem-music-symbolic</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage" id="image_a">
+                <property name="pixel-size">180</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkImage" id="image_b">
+                <property name="pixel-size">180</property>
+              </object>
+            </child>
+          </object>
+        </property>
+        <style>
+          <class name="card"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <menu id="menu">
+    <section>
+      <submenu>
+        <attribute name="label" translatable="yes">_Preferred Audio Source</attribute>
+        <item>
+          <attribute name="label" translatable="yes">Microphone</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">microphone</attribute>
+        </item>
+        <item>
+          <attribute name="label" translatable="yes">Desktop Audio</attribute>
+          <attribute name="action">win.preferred-audio-source</attribute>
+          <attribute name="target">desktop-audio</attribute>
+        </item>
+      </submenu>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_About Mousai</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="selection_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Select _All</attribute>
+        <attribute name="action">history-view.select-all</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Select _None</attribute>
+        <attribute name="action">history-view.select-none</attribute>
+      </item>
+    </section>
+  </menu>
+  <template class="MsaiHistoryView" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBoxLayout">
+        <property name="orientation">vertical</property>
+      </object>
+    </property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="transition-type">over-left-right</property>
+        <child>
+          <object class="GtkBox" id="history_child">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkStack" id="header_bar_stack">
+                <property name="transition-type">crossfade</property>
+                <child>
+                  <object class="GtkHeaderBar" id="main_header_bar">
+                    <child>
+                      <object class="GtkButton">
+                        <property name="tooltip-text" translatable="yes">Start Identifying Music</property>
+                        <property name="label" translatable="yes">Listen</property>
+                        <property name="action-name">win.toggle-listen</property>
+                        <style>
+                          <class name="suggested-action"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="tooltip-text" translatable="yes">Open Main Menu</property>
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="menu-model">menu</property>
+                        <property name="primary">True</property>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkButton">
+                        <property name="tooltip-text" translatable="yes">Select</property>
+                        <property name="icon-name">selection-mode-symbolic</property>
+                        <property name="action-name">history-view.toggle-selection-mode</property>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkToggleButton">
+                        <property name="tooltip-text" translatable="yes">Search for Songs</property>
+                        <property name="icon-name">system-search-symbolic</property>
+                        <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkHeaderBar" id="selection_mode_header_bar">
+                    <property name="title-widget">
+                      <object class="GtkMenuButton" id="selection_mode_menu_button">
+                        <property name="menu-model">selection_menu</property>
+                      </object>
+                    </property>
+                    <child type="end">
+                      <object class="GtkButton">
+                        <property name="tooltip-text" translatable="yes">Cancel Select</property>
+                        <property name="label" translatable="yes">Cancel</property>
+                        <property name="action-name">history-view.toggle-selection-mode</property>
+                      </object>
+                    </child>
+                    <child type="end">
+                      <object class="GtkToggleButton">
+                        <property name="tooltip-text" translatable="yes">Search for Songs</property>
+                        <property name="icon-name">system-search-symbolic</property>
+                        <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <!-- TODO Maybe inline this in the headerbar -->
+              <object class="GtkSearchBar" id="search_bar">
+                <property name="child">
+                  <object class="GtkSearchEntry" id="search_entry">
+                    <property name="placeholder-text" translatable="yes">Enter song or artist name</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStack" id="history_stack">
+                <property name="transition-type">crossfade</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="main_page">
+                    <property name="vexpand">True</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="child">
+                      <object class="GtkGridView" id="grid">
+                        <style>
+                          <class name="history-view"/>
+                        </style>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwStatusPage" id="empty_page">
+                    <property name="vexpand">True</property>
+                    <property name="icon-name">emblem-music-symbolic</property>
+                    <property name="title" translatable="yes">Start Identifying Music!</property>
+                    <property name="description" translatable="yes">Click the listen button to start.</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwStatusPage" id="empty_search_page">
+                    <property name="vexpand">True</property>
+                    <property name="icon-name">system-search-symbolic</property>
+                    <property name="title" translatable="yes">No Results Found</property>
+                    <property name="description" translatable="yes">Try a different search.</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkActionBar" id="selection_mode_bar">
+                <child>
+                  <object class="GtkButton">
+                    <property name="tooltip-text" translatable="yes">Remove Song From History</property>
+                    <property name="label" translatable="yes">Remove</property>
+                    <property name="action-name">history-view.remove-selected-songs</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="MsaiSongPage" id="song_child"/>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

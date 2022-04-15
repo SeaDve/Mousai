@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiInformationRow" parent="AdwActionRow">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child type="suffix">
+      <object class="GtkLabel" id="data_label">
+        <property name="xalign">1</property>
+        <property name="ellipsize">end</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
+      </object>
+    </child>
+  </template>
+</interface>

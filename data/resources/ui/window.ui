@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiWindow" parent="AdwApplicationWindow">
+    <property name="content">
+      <object class="AdwToastOverlay" id="toast_overlay">
+        <property name="child">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkStack" id="stack">
+                <property name="vexpand">True</property>
+                <property name="transition-type">crossfade</property>
+                <child>
+                  <object class="MsaiHistoryView" id="main_view"/>
+                </child>
+                <child>
+                  <object class="MsaiRecognizerView" id="recognizer_view"/>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkRevealer" id="song_bar_revealer">
+                <property name="overflow">visible</property>
+                <property name="transition-type">slide-up</property>
+                <property name="child">
+                  <object class="MsaiSongBar" id="song_bar"/>
+                </property>
+              </object>
+            </child>
+          </object>
+        </property>
+      </object>
+    </property>
+    <child>
+      <object class="GtkEventControllerKey">
+        <property name="propagation-phase">capture</property>
+        <signal name="key-pressed" handler="key_pressed" swapped="yes"/>
+      </object>
+    </child>
+  </template>
+</interface>

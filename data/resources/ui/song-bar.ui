@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiSongBar" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBoxLayout">
+        <property name="orientation">vertical</property>
+      </object>
+    </property>
+    <child>
+      <object class="GtkScale" id="playback_position_scale">
+        <property name="hexpand">True</property>
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="upper">100</property>
+            <property name="value">0</property>
+            <property name="step-increment">1</property>
+            <property name="page-increment">10</property>
+          </object>
+        </property>
+        <style>
+          <class name="playback-position-scale"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkCenterBox">
+        <property name="margin-start">6</property>
+        <property name="margin-end">12</property>
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
+        <child type="start">
+          <object class="GtkButton">
+            <property name="tooltip-text" translatable="yes">Show Song Information</property>
+            <property name="action-name">song-bar.activate-song</property>
+            <property name="child">
+              <object class="GtkBox">
+                <property name="spacing">12</property>
+                <child>
+                  <object class="MsaiAlbumCover" id="album_cover">
+                    <property name="pixel-size">42</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="valign">center</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="justify">left</property>
+                        <property name="xalign">0</property>
+                        <property name="ellipsize">end</property>
+                        <binding name="label">
+                          <lookup name="title">
+                            <lookup name="song">MsaiSongBar</lookup>
+                          </lookup>
+                        </binding>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="justify">left</property>
+                        <property name="xalign">0</property>
+                        <property name="ellipsize">end</property>
+                        <binding name="label">
+                          <lookup name="artist">
+                            <lookup name="song">MsaiSongBar</lookup>
+                          </lookup>
+                        </binding>
+                        <style>
+                          <class name="caption"/>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+            <style>
+              <class name="flat"/>
+              <class name="activate-song-button"/>
+            </style>
+          </object>
+        </child>
+        <child type="center">
+          <object class="GtkBox">
+            <property name="spacing">6</property>
+            <child>
+              <object class="MsaiPlaybackButton" id="playback_button">
+                <property name="valign">center</property>
+                <property name="width-request">40</property>
+                <property name="height-request">40</property>
+                <property name="action-name">win.toggle-playback</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="tooltip-text" translatable="yes">Stop</property>
+                <property name="valign">center</property>
+                <property name="action-name">song-bar.clear</property>
+                <property name="icon-name">media-playback-stop-symbolic</property>
+                <style>
+                  <class name="circular"/>
+                  <class name="flat"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkBox">
+            <property name="spacing">3</property>
+            <child>
+              <object class="MsaiTimeLabel" id="playback_position_label">
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">/</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="MsaiTimeLabel" id="duration_label">
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

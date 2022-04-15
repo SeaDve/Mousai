@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiExternalLinkTile" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="GtkBox">
+        <property name="spacing">12</property>
+        <property name="margin-start">36</property>
+        <property name="margin-end">36</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">24</property>
+        <property name="halign">center</property>
+        <child>
+          <object class="GtkImage" id="image">
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label">
+            <property name="valign">center</property>
+            <style>
+              <class name="title-2"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="external-link-tile"/>
+      <class name="card"/>
+      <class name="activatable"/>
+    </style>
+  </template>
+</interface>

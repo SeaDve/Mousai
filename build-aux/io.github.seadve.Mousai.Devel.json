@@ -1,0 +1,42 @@
+{
+    "app-id": "io.github.seadve.Mousai.Devel",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "42",
+    "sdk": "org.gnome.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command": "mousai",
+    "finish-args": [
+        "--device=dri",
+        "--share=network",
+        "--socket=fallback-x11",
+        "--socket=pulseaudio",
+        "--socket=wayland",
+        "--env=RUST_LOG=mousai=debug",
+        "--env=G_MESSAGES_DEBUG=none",
+        "--env=RUST_BACKTRACE=1"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "build-args": [
+            "--share=network"
+        ]
+    },
+    "modules": [
+        {
+            "name": "mousai",
+            "buildsystem": "meson",
+            "run-tests": true,
+            "config-opts": [
+                "-Dprofile=development"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "../"
+                }
+            ]
+        }
+    ]
+}

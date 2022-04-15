@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schemalist>
+  <schema path="/io/github/seadve/Mousai/" id="@app-id@" gettext-domain="@gettext-package@">
+    <key name="window-width" type="i">
+      <default>600</default>
+      <summary>Default window width</summary>
+      <description>Default window width</description>
+    </key>
+    <key name="window-height" type="i">
+      <default>400</default>
+      <summary>Default window height</summary>
+      <description>Default window height</description>
+    </key>
+    <key name="is-maximized" type="b">
+      <default>false</default>
+      <summary>Default window maximized behaviour</summary>
+      <description></description>
+    </key>
+    <key name="history" type="s">
+      <default>"[]"</default>
+      <summary>Contains recently recognized songs</summary>
+      <description></description>
+    </key>
+    <key name="preferred-audio-source" type="s">
+      <choices>
+        <choice value="microphone"/>
+        <choice value="desktop-audio"/>
+      </choices>
+      <default>"microphone"</default>
+      <summary>Preferred audio source to use in recording audio</summary>
+      <description></description>
+    </key>
+  </schema>
+</schemalist>

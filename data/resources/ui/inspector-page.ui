@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiInspectorPage" parent="GtkWidget">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Recognizer Developer Settings</property>
+            <property name="description">These will be reset upon closing the inspector.</property>
+            <child>
+              <object class="AdwComboRow" id="provider_row">
+                <property name="title">Provider</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwComboRow" id="test_provider_mode_row">
+                <property name="title">Test Provider Mode</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="test_listen_duration_row">
+                <property name="title">Test Listen Duration (seconds)</property>
+                <child type="suffix">
+                  <object class="GtkSpinButton" id="test_listen_duration_button">
+                    <property name="valign">center</property>
+                    <property name="snap-to-ticks">True</property>
+                    <property name="numeric">True</property>
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="lower">1</property>
+                        <property name="upper">999999</property>
+                        <property name="step-increment">1</property>
+                        <property name="page-increment">10</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="test_recognize_duration_row">
+                <property name="title">Test Recognize Duration (seconds)</property>
+                <child type="suffix">
+                  <object class="GtkSpinButton" id="test_recognize_duration_button">
+                    <property name="valign">center</property>
+                    <property name="snap-to-ticks">True</property>
+                    <property name="numeric">True</property>
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="upper">999999</property>
+                        <property name="step-increment">1</property>
+                        <property name="page-increment">10</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
