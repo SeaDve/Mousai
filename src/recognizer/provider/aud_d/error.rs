@@ -27,7 +27,7 @@ pub enum Error {
     #[error("Failed to convert file to base 64: {0}")]
     FileConvert(glib::Error),
 
-    /// Request sepecific errors
+    /// Request specific errors
     #[error("Failed to create request: {0}")]
     Soup(glib::Error),
 

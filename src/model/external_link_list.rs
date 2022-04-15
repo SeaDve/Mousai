@@ -184,7 +184,7 @@ mod test {
     }
 
     #[test]
-    fn items_changed_push_many_had_someting() {
+    fn items_changed_push_many_had_something() {
         let list = ExternalLinkList::default();
         list.push(TestExternalLink);
         assert_eq!(list.n_items(), 1);
