@@ -17,7 +17,7 @@ pub use self::provider::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
 use crate::{
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
-    spawn, utils, Application,
+    utils, Application,
 };
 
 static TMP_RECORDING_PATH: Lazy<PathBuf> = Lazy::new(|| {
@@ -196,14 +196,12 @@ impl Recognizer {
         let listen_duration = provider.listen_duration();
 
         cancellable.connect_cancelled(clone!(@weak self as obj => move |_| {
-            spawn!(async move {
-                obj.imp().audio_recorder.cancel();
-                obj.set_state(RecognizerState::Null);
-            });
+            obj.imp().audio_recorder.cancel();
+            obj.set_state(RecognizerState::Null);
         }));
 
         if cancellable.is_cancelled()
-            || utils::timeout_future(listen_duration, &cancellable.new_child())
+            || utils::timeout_future(listen_duration, cancellable)
                 .await
                 .is_err()
         {

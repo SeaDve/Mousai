@@ -32,7 +32,6 @@ pub struct Cancellable(Rc<CancellableInner>);
 #[derive(Default)]
 struct CancellableInner {
     callbacks: RefCell<Vec<CancelledCallback>>,
-    children: RefCell<Vec<Cancellable>>,
     is_cancelled: Cell<bool>,
 }
 
@@ -45,27 +44,12 @@ impl std::fmt::Debug for Cancellable {
 }
 
 impl Cancellable {
-    pub fn new_child(&self) -> Self {
-        let child = Cancellable::default();
-
-        if self.is_cancelled() {
-            child.cancel();
-        }
-
-        self.0.children.borrow_mut().push(child.clone());
-        child
-    }
-
     pub fn cancel(&self) {
         if self.is_cancelled() {
             return;
         }
 
         self.0.is_cancelled.set(true);
-
-        for child in self.0.children.borrow().iter() {
-            child.cancel();
-        }
 
         for callback in self.0.callbacks.take().into_iter() {
             callback(self);
