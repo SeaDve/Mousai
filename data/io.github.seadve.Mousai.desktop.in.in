@@ -1,11 +1,12 @@
 [Desktop Entry]
 Name=Mousai
-Comment=Write a GTK + Rust application
+Comment=Identify songs in seconds
 Type=Application
 Exec=mousai
 Terminal=false
-Categories=GNOME;GTK;
-Keywords=Gnome;GTK;
-# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Categories=GNOME;GTK;Utility;
+# Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+Keywords=Shazam;Music;Song;Identify;
 Icon=@icon@
 StartupNotify=true
+X-Purism-FormFactor=Workstation;Mobile;

@@ -125,7 +125,7 @@ impl Application {
     fn show_about_dialog(&self) {
         let dialog = gtk::AboutDialog::builder()
             .modal(true)
-            .comments(&gettext("Identify any songs in seconds"))
+            .comments(&gettext("Identify songs in seconds"))
             .version(VERSION)
             .logo_icon_name(APP_ID)
             .authors(vec!["Dave Patrick".into()])
