@@ -3,6 +3,7 @@
   <gresource prefix="/io/github/seadve/Mousai/">
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/microphone-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/music-note-symbolic.svg</file>
+    <file compressed="true">style.css</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/album-cover.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/external-link-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/history-view.ui</file>
@@ -12,10 +13,9 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/recognizer-view.ui</file>
     <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-bar.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">ui/song-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-page.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/song-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/time-label.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/window.ui</file>
-    <file compressed="true">style.css</file>
   </gresource>
 </gresources>

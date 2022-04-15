@@ -6,6 +6,14 @@ on:
 name: CI
 
 jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run checks.py
+        run: python build-aux/checks.py --verbose --skip-rustfmt --skip-typos
+
   rustfmt:
     name: Rustfmt
     runs-on: ubuntu-20.04

@@ -1,57 +1,33 @@
-#!/bin/sh
-# Source: https://gitlab.gnome.org/GNOME/fractal/blob/master/hooks/pre-commit.hook
+#!/usr/bin/env python3
+# Depends on: build-aux/checks.py
 
-install_rustfmt() {
-    if ! which rustup &> /dev/null; then
-        curl https://sh.rustup.rs -sSf  | sh -s -- -y
-        export PATH=$PATH:$HOME/.cargo/bin
-        if ! which rustup &> /dev/null; then
-            echo "Failed to install rustup. Performing the commit without style checking."
-            exit 0
-        fi
-    fi
+import sys
 
-    if ! rustup component list|grep rustfmt &> /dev/null; then
-        echo "Installing rustfmt…"
-        rustup component add rustfmt
-    fi
-}
+sys.path.append("./build-aux")
 
-if ! which cargo >/dev/null 2>&1 || ! cargo fmt --help >/dev/null 2>&1; then
-    echo "Unable to check the project’s code style, because rustfmt could not be run."
+import checks  # noqa: E402
+from checks import BOLD_GREEN, BOLD_RED, ENDC, RUNNING  # noqa: E402
 
-    if [ ! -t 1 ]; then
-        # No input is possible
-        echo "Performing commit."
-        exit 0
-    fi
+CREATING = f"  {BOLD_GREEN}CREATING{ENDC}"
+ABORTING = f"  {BOLD_RED}ABORTING{ENDC}"
 
-    echo ""
-    echo "y: Install rustfmt via rustup"
-    echo "n: Don't install rustfmt and perform the commit"
-    echo "Q: Don't install rustfmt and abort the commit"
 
-    echo ""
-    while true
-    do
-        echo -n "Install rustfmt via rustup? [y/n/Q]: "; read yn < /dev/tty
-        case $yn in
-            [Yy]* ) install_rustfmt; break;;
-            [Nn]* ) echo "Performing commit."; exit 0;;
-            [Qq]* | "" ) echo "Aborting commit."; exit -1 >/dev/null 2>&1;;
-            * ) echo "Invalid input";;
-        esac
-    done
+def main() -> int:
+    print(f"{RUNNING} pre-commit hook (To ignore, run `git commit --no-verify`)")
 
-fi
+    ret = checks.main(None)
 
-echo "--Checking style--"
-cargo fmt --all -- --check
-if test $? != 0; then
-    echo "--Checking style fail--"
-    echo "Please fix the above issues, either manually or by running: cargo fmt --all"
+    if ret == 0:
+        print("")
+        print(f"{CREATING} commit")
+    else:
+        print("")
+        print(
+            f"{ABORTING} commit, please fix the above issues. To ignore, rerun commit with '--no-verify'"
+        )
 
-    exit -1
-else
-    echo "--Checking style pass--"
-fi
+    return ret
+
+
+if __name__ == "__main__":
+    sys.exit(main())
