@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run checks.py
-        run: python build-aux/checks.py --verbose --skip-rustfmt --skip-typos
+        run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos
 
   rustfmt:
     name: Rustfmt
