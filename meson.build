@@ -13,8 +13,8 @@ base_id = 'io.github.seadve.Mousai'
 
 dependency('glib-2.0', version: '>= 2.66')
 dependency('gio-2.0', version: '>= 2.66')
-dependency('gtk4', version: '>= 4.4.0')
-dependency('libadwaita-1', version: '>= 1.0.0.alpha.4',)
+dependency('gtk4', version: '>= 4.6')
+dependency('libadwaita-1', version: '>= 1.0',)
 dependency('gstreamer-1.0', version: '>= 1.18')
 dependency('gstreamer-base-1.0', version: '>= 1.18')
 dependency('gstreamer-plugins-base-1.0', version: '>= 1.18')
