@@ -221,13 +221,7 @@ impl SongPlayer {
                 .map(|album_art| album_art.uri()),
             album: song.as_ref().map(|song| song.album()),
             album_artist: None,
-            artist: Some({
-                let mut list = Vec::new();
-                if let Some(artist) = song.as_ref().map(|song| song.artist()) {
-                    list.push(artist);
-                }
-                list
-            }),
+            artist: song.as_ref().map(|song| vec![song.artist()]),
             composer: None,
             disc_number: None,
             genre: None,
