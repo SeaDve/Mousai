@@ -209,6 +209,7 @@ impl SongPlayer {
                 anyhow::anyhow!("Trying to set a song to audio player without playback link")
             })?;
             imp.player.set_uri(Some(&playback_link));
+            log::info!("Uri set to {playback_link}");
         }
 
         // TODO Fill up nones
@@ -425,7 +426,7 @@ impl SongPlayer {
 
         imp.player
             .connect_buffering(clone!(@strong sender => move |_, percent| {
-                log::debug!("Player buffering ({percent} %)");
+                log::debug!("Buffering ({percent}%)");
             }));
 
         receiver.attach(
