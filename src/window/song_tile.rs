@@ -3,6 +3,7 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use once_cell::unsync::OnceCell;
 
 use std::cell::RefCell;
 
@@ -26,13 +27,12 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-tile.ui")]
     pub struct SongTile {
         #[template_child]
-        pub album_cover: TemplateChild<AlbumCover>,
+        pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
-        pub playback_button: TemplateChild<PlaybackButton>,
+        pub(super) playback_button: TemplateChild<PlaybackButton>,
 
-        pub song: RefCell<Option<Song>>,
-        pub player: RefCell<Option<WeakRef<SongPlayer>>>,
-        pub state_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
+        pub(super) song: RefCell<Option<Song>>,
+        pub(super) player: OnceCell<WeakRef<SongPlayer>>,
     }
 
     #[glib::object_subclass]
@@ -139,39 +139,19 @@ impl SongTile {
         self.imp().song.borrow().clone()
     }
 
-    pub fn bind(&self, player: Option<&SongPlayer>) {
-        if let Some(player) = player {
-            self.update_playback_ui(player);
+    /// Must only be called once.
+    pub fn bind_player(&self, player: &SongPlayer) {
+        player.connect_state_notify(clone!(@weak self as obj, @weak player => move |_| {
+            obj.update_playback_ui(&player);
+        }));
 
-            let imp = self.imp();
-            imp.state_notify_handler_id
-                .replace(Some(player.connect_state_notify(
-                    clone!(@weak self as obj, @weak player => move |_| {
-                        obj.update_playback_ui(&player);
-                    }),
-                )));
-            imp.player.replace(Some(player.downgrade()));
-        }
-    }
+        self.imp().player.set(player.downgrade()).unwrap();
 
-    pub fn unbind(&self) {
-        let imp = self.imp();
-
-        if let Some(player) = imp.player.take().and_then(|player| player.upgrade()) {
-            if let Some(handler_id) = imp.state_notify_handler_id.take() {
-                player.disconnect(handler_id);
-            }
-        }
+        self.update_playback_ui(player);
     }
 
     fn toggle_playback(&self) -> anyhow::Result<()> {
-        if let Some(ref player) = self
-            .imp()
-            .player
-            .borrow()
-            .as_ref()
-            .and_then(|player| player.upgrade())
-        {
+        if let Some(ref player) = self.imp().player.get().and_then(|player| player.upgrade()) {
             if let Some(song) = self.song() {
                 if player.state() == PlayerState::Playing && player.is_active_song(&song) {
                     player.pause();

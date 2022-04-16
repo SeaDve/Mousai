@@ -406,6 +406,11 @@ impl HistoryView {
         let factory = gtk::SignalListItemFactory::new();
         factory.connect_setup(clone!(@weak self as obj => move |_, list_item| {
             let song_tile = SongTile::new();
+            if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
+                song_tile.bind_player(&window.player());
+            } else {
+                log::error!("Cannot bind SongTile to SongPlayer: HistoryView doesn't have root");
+            }
             list_item
                 .property_expression("item")
                 .bind(&song_tile, "song", glib::Object::NONE);
@@ -439,30 +444,6 @@ impl HistoryView {
             overlay.add_overlay(&check_button);
             list_item.set_child(Some(&overlay));
         }));
-        factory.connect_bind(clone!(@weak self as obj => move |_, list_item| {
-            let song_tile: SongTile = list_item
-                .child()
-                .and_then(|widget| widget.downcast::<gtk::Overlay>().ok())
-                .and_then(|overlay| overlay.child())
-                .and_then(|child| child.downcast().ok())
-                .expect("HistoryView list item should have widget tree of gtk::Overlay > SongTile");
-
-            if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
-                song_tile.bind(Some(&window.player()));
-            } else {
-                log::error!("Cannot bind SongTile to AudioPlayerWidget: HistoryView doesn't have root");
-            }
-        }));
-        factory.connect_unbind(|_, list_item| {
-            let song_tile: SongTile = list_item
-                .child()
-                .and_then(|widget| widget.downcast::<gtk::Overlay>().ok())
-                .and_then(|overlay| overlay.child())
-                .and_then(|child| child.downcast().ok())
-                .expect("HistoryView list item should have widget tree of gtk::Overlay > SongTile");
-
-            song_tile.unbind();
-        });
 
         let grid = self.imp().grid.get();
         grid.set_factory(Some(&factory));
