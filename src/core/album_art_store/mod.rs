@@ -17,10 +17,10 @@ use std::{
 
 pub use self::album_art::AlbumArt;
 
-#[derive(Debug, Default, glib::Downgrade)]
+#[derive(Debug)]
 pub struct AlbumArtStore(Rc<AlbumArtStoreInner>);
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 struct AlbumArtStoreInner {
     session: soup::Session,
     store: RefCell<HashMap<String, gdk::Texture>>,
