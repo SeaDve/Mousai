@@ -109,6 +109,14 @@ impl Application {
         }
     }
 
+    pub fn add_toast(&self, toast: &adw::Toast) {
+        if let Some(window) = self.main_window() {
+            window.add_toast(toast);
+        } else {
+            log::warn!("Failed to add toast: MainWindow doesn't exist");
+        }
+    }
+
     pub fn run(&self) {
         log::info!("Mousai ({})", APP_ID);
         log::info!("Version: {} ({})", VERSION, PROFILE);

@@ -6,12 +6,13 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use std::cell::Cell;
+use std::cell::{Cell, RefCell};
 
 use super::{song_page::SongPage, song_tile::SongTile, Window};
 use crate::{
     model::{Song, SongList},
     song_player::SongPlayer,
+    Application,
 };
 
 mod imp {
@@ -58,6 +59,8 @@ mod imp {
         pub song_list: OnceCell<WeakRef<SongList>>,
         pub filter_model: OnceCell<WeakRef<gtk::FilterListModel>>,
         pub selection_model: OnceCell<WeakRef<gtk::MultiSelection>>,
+        pub removed_purgatory: RefCell<Vec<Song>>,
+        pub undo_remove_toast: RefCell<Option<adw::Toast>>,
     }
 
     #[glib::object_subclass]
@@ -87,16 +90,8 @@ mod imp {
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
-                if let Some(song_list) = obj
-                    .imp()
-                    .song_list
-                    .get()
-                    .and_then(|song_list| song_list.upgrade())
-                {
-                    obj.snapshot_selected_songs().iter().for_each(|song| {
-                        song_list.remove(&song.id());
-                    });
-                }
+                obj.remove_selected_songs();
+                obj.show_undo_remove_toast();
             });
         }
 
@@ -269,25 +264,38 @@ impl HistoryView {
         self.update_history_stack();
     }
 
-    fn select_all(&self) {
-        if let Some(selection_model) = self
-            .imp()
-            .selection_model
+    pub fn undo_remove(&self) {
+        let imp = self.imp();
+
+        if let Some(song_list) = imp
+            .song_list
             .get()
-            .and_then(|model| model.upgrade())
+            .and_then(|song_list| song_list.upgrade())
         {
-            selection_model.select_all();
+            // FIXME: Use SongList::append_many here
+            for song in imp.removed_purgatory.take() {
+                song_list.append(song);
+            }
         }
     }
 
-    fn unselect_all(&self) {
-        if let Some(selection_model) = self
-            .imp()
-            .selection_model
+    fn remove_selected_songs(&self) {
+        let imp = self.imp();
+
+        if let Some(song_list) = imp
+            .song_list
             .get()
-            .and_then(|model| model.upgrade())
+            .and_then(|song_list| song_list.upgrade())
         {
-            selection_model.unselect_all();
+            let mut removed_songs = self
+                .snapshot_selected_songs()
+                .iter()
+                .filter_map(|selected_song| song_list.remove(&selected_song.id()))
+                .collect::<Vec<_>>();
+
+            imp.removed_purgatory
+                .borrow_mut()
+                .append(&mut removed_songs);
         }
     }
 
@@ -313,6 +321,28 @@ impl HistoryView {
             })
     }
 
+    fn select_all(&self) {
+        if let Some(selection_model) = self
+            .imp()
+            .selection_model
+            .get()
+            .and_then(|model| model.upgrade())
+        {
+            selection_model.select_all();
+        }
+    }
+
+    fn unselect_all(&self) {
+        if let Some(selection_model) = self
+            .imp()
+            .selection_model
+            .get()
+            .and_then(|model| model.upgrade())
+        {
+            selection_model.unselect_all();
+        }
+    }
+
     fn set_selection_mode(&self, is_selection_mode: bool) {
         if is_selection_mode == self.is_selection_mode() {
             return;
@@ -324,6 +354,39 @@ impl HistoryView {
         self.update_remove_selected_songs_action();
 
         self.notify("is-selection-mode");
+    }
+
+    fn show_undo_remove_toast(&self) {
+        let imp = self.imp();
+
+        if imp.undo_remove_toast.borrow().is_none() {
+            let toast = adw::Toast::builder()
+                .priority(adw::ToastPriority::High)
+                .button_label(&gettext("_Undo"))
+                .action_name("undo-remove-toast.dismiss")
+                .build();
+
+            toast.connect_dismissed(clone!(@weak self as obj => move |_| {
+                let imp = obj.imp();
+                imp.removed_purgatory.borrow_mut().clear();
+                imp.undo_remove_toast.take();
+            }));
+
+            Application::default().add_toast(&toast);
+
+            imp.undo_remove_toast.replace(Some(toast));
+        }
+
+        // Add this point we should already have a toast setup
+        if let Some(ref toast) = *imp.undo_remove_toast.borrow() {
+            let n_removed = imp.removed_purgatory.borrow().len();
+            toast.set_title(&ngettext!(
+                "Removed {} song",
+                "Removed {} songs",
+                n_removed as u32,
+                n_removed
+            ));
+        }
     }
 
     fn update_selection_mode_ui(&self) {
