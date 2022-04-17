@@ -101,7 +101,7 @@ impl AlbumArtStore {
     pub fn new(session: soup::Session) -> anyhow::Result<Self> {
         let cache_dir = {
             let mut path = glib::user_cache_dir();
-            path.push("album_art_cache");
+            path.push("mousai/album_art_cache");
             path
         };
 
