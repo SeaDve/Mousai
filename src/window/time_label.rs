@@ -100,7 +100,7 @@ impl TimeLabel {
         let seconds = time.as_secs();
         let seconds_display = seconds % 60;
         let minutes_display = seconds / 60;
-        let formatted_time = format!("{:02}∶{:02}", minutes_display, seconds_display);
+        let formatted_time = format!("{}∶{:02}", minutes_display, seconds_display);
         imp.label.set_label(&formatted_time);
 
         imp.time.set(time);
