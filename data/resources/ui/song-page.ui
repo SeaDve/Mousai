@@ -36,6 +36,13 @@
             <property name="action-name">song-page.remove-song</property>
           </object>
         </child>
+        <child type="end">
+          <object class="GtkButton">
+            <property name="tooltip-text" translatable="yes">Copy</property>
+            <property name="icon-name">edit-copy-symbolic</property>
+            <property name="action-name">song-page.copy-song</property>
+          </object>
+        </child>
       </object>
     </child>
     <child>

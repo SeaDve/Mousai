@@ -1,6 +1,6 @@
 use gettextrs::gettext;
 use gtk::{
-    gio,
+    gdk, gio,
     glib::{self, clone},
     prelude::*,
     subclass::prelude::*,
@@ -69,6 +69,23 @@ mod imp {
                     obj.activate_action("win.navigate-to-main-page", None)
                         .unwrap();
                     obj.set_song(None);
+                }
+            });
+
+            klass.install_action("song-page.copy-song", None, |obj, _, _| {
+                if let Some(song) = obj.song() {
+                    if let Some(display) = gdk::Display::default() {
+                        display.clipboard().set_text(&format!(
+                            "{} - {}",
+                            song.artist(),
+                            song.title()
+                        ));
+
+                        let toast = adw::Toast::new(&gettext("Copied song"));
+                        Application::default().add_toast(&toast);
+                    }
+                } else {
+                    log::warn!("Failed to copy-song: There is no active song in SongPage");
                 }
             });
         }
