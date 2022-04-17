@@ -26,6 +26,9 @@
   <a href="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml">
     <img src="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml/badge.svg" alt="CI status"/>
   </a>
+  <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
+    <img src="https://img.shields.io/badge/dynamic/json?color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.downloads_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai" alt="Flathub downloads">
+  </a>
   <a href="https://repology.org/project/mousai/versions">
     <img src="https://repology.org/badge/tiny-repos/mousai.svg" alt="Packaging status">
   </a>
