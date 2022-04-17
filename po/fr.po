@@ -6,21 +6,22 @@
 # Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
 # Maxime Leroy <lisacintosh@gmail.com>, 2021.
 # Magik Leo <magikleo.yopmail@gmail.com>, 2022.
+# matb <perso@mathieu-bousquet.fr>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2022-02-15 00:54+0000\n"
-"Last-Translator: Magik Leo <magikleo.yopmail@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2022-04-17 10:10+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -39,23 +40,23 @@ msgstr "Shazam ;Musique ;Chanson ;Identifier;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Default window width"
-msgstr ""
+msgstr "Largeur de fenêtre par défaut"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:10
 msgid "Default window height"
-msgstr ""
+msgstr "Hauteur de fenêtre par défaut"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:14
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Comportement par défaut de la fenêtre maximisée"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:18
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Contient les chansons récemment identifiées"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Source audio préférée à utiliser pour l'enregistrement audio"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -106,7 +107,7 @@ msgstr "🎼 Prévisualisez la chanson identifiée avec le lecteur natif."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "Parcourez et écoutez les chansons à partir de différents fournisseurs."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -134,7 +135,7 @@ msgstr "Audio du Bureau"
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
-msgstr "_Raccourcis clavier"
+msgstr "_Raccourcis Clavier"
 
 #: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
@@ -142,11 +143,11 @@ msgstr "_À propos de Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "Tout sélectionner"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "Ne rien sélectionner"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -158,11 +159,11 @@ msgstr "Écouter"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Ouvrir le menu principal"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
@@ -170,7 +171,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Annuler la sélection"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -179,11 +180,11 @@ msgstr "Annuler"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Entrez le nom de la chanson ou de l'artiste"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Commencez à identifier la musique !"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -191,48 +192,48 @@ msgstr "Cliquez sur le bouton d’écoute pour commencer."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Aucun résultat trouvé"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Essayez une autre recherche."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Remove Song From History"
-msgstr ""
+msgstr "Supprimer la chanson de l'historique"
 
 #: data/resources/ui/history-view.ui:167
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Annuler l'écoute"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Ouvrir le menu principal"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Rechercher"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Afficher les raccourcis"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -242,30 +243,30 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Activer ou désactiver l'écoute"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Activer ou désactiver la lecture"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Navigation"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Précédent"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Afficher les informations sur la chanson"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "Arrêter"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
