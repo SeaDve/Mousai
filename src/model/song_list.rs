@@ -128,7 +128,7 @@ impl SongList {
         }
 
         if n_appended > 0 {
-            self.items_changed(self.n_items() - 1, 0, n_appended);
+            self.items_changed(self.n_items() - n_appended, 0, n_appended);
         }
 
         n_appended as usize == initial_songs_len

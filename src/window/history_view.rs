@@ -282,10 +282,7 @@ impl HistoryView {
             .get()
             .and_then(|song_list| song_list.upgrade())
         {
-            // FIXME: Use SongList::append_many here
-            for song in imp.removed_purgatory.take() {
-                song_list.append(song);
-            }
+            song_list.append_many(imp.removed_purgatory.take());
         }
     }
 
