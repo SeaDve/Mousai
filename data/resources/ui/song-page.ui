@@ -29,6 +29,13 @@
             <property name="action-name">win.navigate-to-main-page</property>
           </object>
         </child>
+        <child type="end">
+          <object class="GtkButton">
+            <property name="tooltip-text" translatable="yes">Remove From History</property>
+            <property name="icon-name">user-trash-symbolic</property>
+            <property name="action-name">song-page.remove-song</property>
+          </object>
+        </child>
       </object>
     </child>
     <child>

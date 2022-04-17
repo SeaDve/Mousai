@@ -90,7 +90,11 @@ mod imp {
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
-                obj.remove_selected_songs();
+                obj.snapshot_selected_songs()
+                    .iter()
+                    .for_each(|selected_song| {
+                        obj.remove_song(selected_song);
+                    });
                 obj.show_undo_remove_toast();
             });
         }
@@ -127,6 +131,12 @@ mod imp {
             obj.add_css_class("view");
 
             obj.setup_grid();
+
+            self.song_child
+                .connect_song_removed(clone!(@weak obj => move |_, song| {
+                    obj.remove_song(song);
+                    obj.show_undo_remove_toast();
+                }));
 
             obj.update_selection_mode_menu_button();
             obj.update_remove_selected_songs_action();
@@ -279,7 +289,7 @@ impl HistoryView {
         }
     }
 
-    fn remove_selected_songs(&self) {
+    fn remove_song(&self, song: &Song) {
         let imp = self.imp();
 
         if let Some(song_list) = imp
@@ -287,15 +297,11 @@ impl HistoryView {
             .get()
             .and_then(|song_list| song_list.upgrade())
         {
-            let mut removed_songs = self
-                .snapshot_selected_songs()
-                .iter()
-                .filter_map(|selected_song| song_list.remove(&selected_song.id()))
-                .collect::<Vec<_>>();
-
-            imp.removed_purgatory
-                .borrow_mut()
-                .append(&mut removed_songs);
+            if let Some(removed_song) = song_list.remove(&song.id()) {
+                imp.removed_purgatory.borrow_mut().push(removed_song);
+            }
+        } else {
+            log::warn!("Failed to remove song: SongList not found");
         }
     }
 

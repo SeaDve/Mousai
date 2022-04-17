@@ -23,7 +23,7 @@ use crate::{
 
 mod imp {
     use super::*;
-    use glib::WeakRef;
+    use glib::{subclass::Signal, WeakRef};
     use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
@@ -62,6 +62,15 @@ mod imp {
                     Application::default().show_error(&err.to_string());
                 }
             });
+
+            klass.install_action("song-page.remove-song", None, |obj, _, _| {
+                if let Some(ref song) = obj.song() {
+                    obj.emit_by_name::<()>("song-removed", &[song]);
+                    obj.activate_action("win.navigate-to-main-page", None)
+                        .unwrap();
+                    obj.set_song(None);
+                }
+            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -70,6 +79,18 @@ mod imp {
     }
 
     impl ObjectImpl for SongPage {
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder(
+                    "song-removed",
+                    &[Song::static_type().into()],
+                    <()>::static_type().into(),
+                )
+                .build()]
+            });
+            SIGNALS.as_ref()
+        }
+
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![glib::ParamSpecObject::new(
@@ -152,6 +173,18 @@ glib::wrapper! {
 impl SongPage {
     pub fn new() -> Self {
         glib::Object::new(&[]).expect("Failed to create SongPage")
+    }
+
+    pub fn connect_song_removed<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, &Song) + 'static,
+    {
+        self.connect_local("song-removed", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            let song = values[1].get::<Song>().unwrap();
+            f(&obj, &song);
+            None
+        })
     }
 
     pub fn set_song(&self, song: Option<Song>) {
