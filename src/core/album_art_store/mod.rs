@@ -42,6 +42,8 @@ impl AlbumArtStoreInner {
             let _ = receiver.await;
         }
 
+        // TODO Add max loading texture at a certain point of time
+
         if let Some(texture) = self.store.borrow().get(download_url) {
             return Ok(texture.clone());
         }
