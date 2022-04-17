@@ -24,6 +24,7 @@ enum Message {
     StateChanged(PlayerState),
     Error(glib::Error),
     Warning(glib::Error),
+    EndOfStream,
 }
 
 mod imp {
@@ -369,13 +370,6 @@ impl SongPlayer {
                     .set_can_pause(matches!(new_state, PlayerState::Playing));
                 self.mpris_player().set_playback_status(self.state().into());
 
-                if matches!(new_state, PlayerState::Stopped) {
-                    let position = self.position().unwrap_or_default();
-                    self.mpris_player()
-                        .set_position(position.as_micros() as i64);
-                    self.emit_by_name::<()>("position-changed", &[&position]);
-                }
-
                 self.notify("state");
             }
             Message::Error(ref error) => {
@@ -385,6 +379,10 @@ impl SongPlayer {
             Message::Warning(ref warning) => {
                 log::warn!("Gstreamer: {warning:?}");
                 self.emit_by_name::<()>("error", &[warning]);
+            }
+            Message::EndOfStream => {
+                self.mpris_player().set_position(0);
+                self.emit_by_name::<()>("position-changed", &[&ClockTime::ZERO]);
             }
         }
     }
@@ -422,6 +420,11 @@ impl SongPlayer {
         imp.player
             .connect_buffering(clone!(@strong sender => move |_, percent| {
                 log::debug!("Buffering ({percent}%)");
+            }));
+
+        imp.player
+            .connect_end_of_stream(clone!(@strong sender => move |_| {
+                send!(sender, Message::EndOfStream);
             }));
 
         receiver.attach(
