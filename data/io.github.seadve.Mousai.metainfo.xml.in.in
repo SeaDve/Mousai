@@ -42,7 +42,12 @@
         <p>This update contains huge UI updates and fixes:</p>
         <ul>
           <li>New UI</li>
-          <li>Bug Fixes</li>
+          <li>Added ability to seek on the Player</li>
+          <li>Added section to browse song information and checkout providers</li>
+          <li>Added ability to remove individual song from history</li>
+          <li>Added search from the history</li>
+          <li>Added ability to copy song from the UI</li>
+          <li>A lot of bug fixes</li>
         </ul>
       </description>
     </release>
