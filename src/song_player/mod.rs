@@ -379,9 +379,11 @@ impl SongPlayer {
                 self.notify("state");
             }
             Message::Error(ref error) => {
+                log::error!("Gstreamer: {error:?}");
                 self.emit_by_name::<()>("error", &[error]);
             }
             Message::Warning(ref warning) => {
+                log::warn!("Gstreamer: {warning:?}");
                 self.emit_by_name::<()>("error", &[warning]);
             }
         }

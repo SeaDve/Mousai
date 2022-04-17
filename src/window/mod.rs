@@ -271,7 +271,6 @@ impl Window {
 
         imp.player
             .connect_error(clone!(@weak self as obj => move |_, error| {
-                log::error!("Player error: {error:?}");
                 obj.show_error(&error.to_string());
             }));
 
