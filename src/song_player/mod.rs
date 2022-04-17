@@ -210,25 +210,24 @@ impl SongPlayer {
             })?;
             imp.player.set_uri(Some(&playback_link));
             log::info!("Uri set to {playback_link}");
-        }
 
-        // TODO Fill up nones
-        imp.metadata.replace(MprisMetadata {
-            length: None,
-            art_url: song
-                .as_ref()
-                .and_then(|song| song.album_art().ok())
-                .map(|album_art| album_art.uri()),
-            album: song.as_ref().map(|song| song.album()),
-            album_artist: None,
-            artist: song.as_ref().map(|song| vec![song.artist()]),
-            composer: None,
-            disc_number: None,
-            genre: None,
-            title: song.as_ref().map(|song| song.title()),
-            track_number: None,
-            url: None,
-        });
+            // TODO Fill up nones
+            imp.metadata.replace(MprisMetadata {
+                length: None,
+                art_url: song.album_art().ok().map(|album_art| album_art.uri()),
+                album: Some(song.album()),
+                album_artist: None,
+                artist: Some(vec![song.artist()]),
+                composer: None,
+                disc_number: None,
+                genre: None,
+                title: Some(song.title()),
+                track_number: None,
+                url: None,
+            });
+        } else {
+            imp.metadata.replace(MprisMetadata::new());
+        }
         self.push_mpris_metadata();
         self.mpris_player().set_can_play(song.as_ref().is_some());
 
