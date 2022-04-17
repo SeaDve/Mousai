@@ -4,7 +4,9 @@
     "runtime-version": "42",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.rust-stable"
+        "org.freedesktop.Sdk.Extension.rust-stable",
+        // Remove this and /usr/lib/sdk/llvm13/bin in append-path on gcc 12.1
+        "org.freedesktop.Sdk.Extension.llvm13"
     ],
     "command": "mousai",
     "finish-args": [
@@ -18,7 +20,8 @@
         "--env=RUST_BACKTRACE=1"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "append-ld-library-path": "/usr/lib/sdk/llvm13/lib",
+        "append-path": "/usr/lib/sdk/llvm13/bin:/usr/lib/sdk/rust-stable/bin",
         "build-args": [
             "--share=network"
         ]
