@@ -5,7 +5,6 @@
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable",
-        // Remove this and /usr/lib/sdk/llvm13/bin in append-path on gcc 12.1
         "org.freedesktop.Sdk.Extension.llvm13"
     ],
     "command": "mousai",
