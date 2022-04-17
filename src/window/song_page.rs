@@ -81,7 +81,7 @@ mod imp {
                             song.title()
                         ));
 
-                        let toast = adw::Toast::new(&gettext("Copied song"));
+                        let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
                         Application::default().add_toast(&toast);
                     }
                 } else {
