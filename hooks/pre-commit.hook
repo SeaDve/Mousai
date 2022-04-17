@@ -17,6 +17,7 @@ then
   exit 1
 fi
 
+echo -e "${RUNNING} pre-commit hook (To ignore, run 'git commit --no-verify')"
 printf '%s' "$script" | python -
 
 if [ $? -ne 0 ]
