@@ -203,7 +203,6 @@ impl SongBar {
             .build();
 
         player.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_position_scale_sensitivity();
             obj.update_playback_button();
         }));
 
@@ -215,7 +214,6 @@ impl SongBar {
             obj.update_duration_ui();
         }));
 
-        self.update_playback_position_scale_sensitivity();
         self.update_playback_button();
         self.update_position_ui();
         self.update_duration_ui();
@@ -271,19 +269,6 @@ impl SongBar {
         imp.playback_position_scale
             .set_range(0.0, duration.as_secs_f64());
         imp.duration_label.set_time(duration);
-    }
-
-    fn update_playback_position_scale_sensitivity(&self) {
-        let imp = self.imp();
-
-        match self.player().state() {
-            PlayerState::Stopped => {
-                imp.playback_position_scale.set_sensitive(false);
-            }
-            PlayerState::Playing | PlayerState::Paused | PlayerState::Buffering => {
-                imp.playback_position_scale.set_sensitive(true);
-            }
-        }
     }
 
     fn update_playback_button(&self) {

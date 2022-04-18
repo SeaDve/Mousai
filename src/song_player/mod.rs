@@ -214,7 +214,9 @@ impl SongPlayer {
             imp.metadata.replace(MprisMetadata::new());
         }
         self.push_mpris_metadata();
-        self.mpris_player().set_can_play(song.as_ref().is_some());
+        let mpris_player = self.mpris_player();
+        mpris_player.set_can_play(song.as_ref().is_some());
+        mpris_player.set_can_seek(song.as_ref().is_some());
 
         imp.song.replace(song);
 
@@ -277,6 +279,10 @@ impl SongPlayer {
     }
 
     pub fn seek(&self, position: ClockTime) -> anyhow::Result<()> {
+        if matches!(self.state(), PlayerState::Stopped) {
+            self.pause();
+        }
+
         let position = position.try_into()?;
         self.imp().player.seek(position);
         Ok(())
@@ -332,17 +338,14 @@ impl SongPlayer {
             }));
 
             mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
-                if let Some(current_position) = obj.position() {
-                    let offset = ClockTime::from_micros(offset_micros.abs() as u64);
-                    let new_position = if offset_micros < 0 {
-                        current_position.saturating_sub(offset)
-                    } else {
-                        current_position.saturating_add(offset)
-                    };
-                    obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
+                let current_position = obj.position().unwrap_or_default();
+                let offset = ClockTime::from_micros(offset_micros.abs() as u64);
+                let new_position = if offset_micros < 0 {
+                    current_position.saturating_sub(offset)
                 } else {
-                    log::warn!("Trying to seek player to offset position without current position");
-                }
+                    current_position.saturating_add(offset)
+                };
+                obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
             }));
 
             log::info!("Done setting up MPRIS server");
