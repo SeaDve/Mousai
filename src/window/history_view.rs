@@ -164,9 +164,7 @@ mod imp {
                     obj.show_undo_remove_toast();
                 }));
 
-            obj.update_selection_mode_menu_button();
-            obj.update_copy_selected_song_action();
-            obj.update_remove_selected_songs_action();
+            obj.update_selection_actions();
             obj.update_selection_mode_ui();
             obj.show_history();
         }
@@ -270,16 +268,12 @@ impl HistoryView {
         let selection_model = gtk::MultiSelection::new(Some(&sort_model));
         selection_model.connect_selection_changed(clone!(@weak self as obj => move |_, _, _| {
             if obj.is_selection_mode() {
-                obj.update_selection_mode_menu_button();
-                obj.update_copy_selected_song_action();
-                obj.update_remove_selected_songs_action();
+                obj.update_selection_actions();
             }
         }));
         selection_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             if obj.is_selection_mode() {
-                obj.update_selection_mode_menu_button();
-                obj.update_copy_selected_song_action();
-                obj.update_remove_selected_songs_action();
+                obj.update_selection_actions();
             }
         }));
 
@@ -382,9 +376,7 @@ impl HistoryView {
 
         self.imp().is_selection_mode.set(is_selection_mode);
         self.update_selection_mode_ui();
-        self.update_selection_mode_menu_button();
-        self.update_copy_selected_song_action();
-        self.update_remove_selected_songs_action();
+        self.update_selection_actions();
 
         self.notify("is-selection-mode");
     }
@@ -466,7 +458,7 @@ impl HistoryView {
         }
     }
 
-    fn update_selection_mode_menu_button(&self) {
+    fn update_selection_actions(&self) {
         let imp = self.imp();
         let selection_size = imp
             .selection_model
@@ -474,39 +466,19 @@ impl HistoryView {
             .and_then(|model| model.upgrade())
             .map_or(0, |model| model.selection().size());
 
-        let label = match selection_size {
-            0 => gettext("Click on items to select them"),
-            1.. => ngettext!(
-                "Selected {} song",
-                "Selected {} songs",
-                selection_size as u32,
-                selection_size
-            ),
-        };
+        self.action_set_enabled("history-view.copy-selected-song", selection_size == 1);
+        self.action_set_enabled("history-view.remove-selected-songs", selection_size != 0);
 
-        imp.selection_mode_menu_button.set_label(&label);
-    }
-
-    fn update_copy_selected_song_action(&self) {
-        let has_one_selected = self
-            .imp()
-            .selection_model
-            .get()
-            .and_then(|model| model.upgrade())
-            .map_or(true, |model| model.selection().size() == 1);
-
-        self.action_set_enabled("history-view.copy-selected-song", has_one_selected);
-    }
-
-    fn update_remove_selected_songs_action(&self) {
-        let is_selection_empty = self
-            .imp()
-            .selection_model
-            .get()
-            .and_then(|model| model.upgrade())
-            .map_or(true, |model| model.selection().is_empty());
-
-        self.action_set_enabled("history-view.remove-selected-songs", !is_selection_empty);
+        imp.selection_mode_menu_button
+            .set_label(&match selection_size {
+                0 => gettext("Click on items to select them"),
+                1.. => ngettext!(
+                    "Selected {} song",
+                    "Selected {} songs",
+                    selection_size as u32,
+                    selection_size
+                ),
+            });
     }
 
     fn setup_grid(&self) {
