@@ -234,6 +234,7 @@ impl SongPlayer {
 
         imp.song.replace(song);
 
+        self.emit_by_name::<()>("position-changed", &[&ClockTime::ZERO]);
         self.emit_by_name::<()>("duration-changed", &[&ClockTime::ZERO]);
         self.notify("song");
 
@@ -381,6 +382,7 @@ impl SongPlayer {
                 self.emit_by_name::<()>("error", &[warning]);
             }
             Message::EndOfStream => {
+                log::info!("Got end of stream message");
                 self.mpris_player().set_position(0);
                 self.emit_by_name::<()>("position-changed", &[&ClockTime::ZERO]);
             }
