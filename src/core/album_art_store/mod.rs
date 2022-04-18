@@ -34,7 +34,8 @@ impl AlbumArtStoreInner {
         download_url: &str,
         cache_path: &Path,
     ) -> anyhow::Result<gdk::Texture> {
-        if let Some(receiver) = self.loading.borrow_mut().remove(download_url) {
+        let receiver = { self.loading.borrow_mut().remove(download_url) };
+        if let Some(receiver) = receiver {
             // If there are currently loading AlbumArt, wait
             // for it to finish and be stored before checking if
             // it exist. This is to prevent loading the same
