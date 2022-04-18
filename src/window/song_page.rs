@@ -85,7 +85,7 @@ mod imp {
                         Application::default().add_toast(&toast);
                     }
                 } else {
-                    log::warn!("Failed to copy-song: There is no active song in SongPage");
+                    log::error!("Failed to copy song: There is no active song in SongPage");
                 }
             });
         }

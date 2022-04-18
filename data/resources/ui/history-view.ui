@@ -163,12 +163,16 @@
               <object class="GtkActionBar" id="selection_mode_bar">
                 <child>
                   <object class="GtkButton">
+                    <property name="tooltip-text" translatable="yes">Copy Song</property>
+                    <property name="icon-name">edit-copy-symbolic</property>
+                    <property name="action-name">history-view.copy-selected-song</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
                     <property name="tooltip-text" translatable="yes">Remove Song From History</property>
-                    <property name="label" translatable="yes">Remove</property>
+                    <property name="icon-name">user-trash-symbolic</property>
                     <property name="action-name">history-view.remove-selected-songs</property>
-                    <style>
-                      <class name="destructive-action"/>
-                    </style>
                   </object>
                 </child>
               </object>

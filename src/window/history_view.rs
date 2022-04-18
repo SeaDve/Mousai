@@ -1,6 +1,7 @@
 use adw::prelude::*;
 use gettextrs::{gettext, ngettext};
 use gtk::{
+    gdk,
     glib::{self, clone},
     subclass::prelude::*,
 };
@@ -89,6 +90,31 @@ mod imp {
                 obj.unselect_all();
             });
 
+            klass.install_action("history-view.copy-selected-song", None, |obj, _, _| {
+                let selected_songs = obj.snapshot_selected_songs();
+
+                if selected_songs.len() > 1 {
+                    log::error!(
+                        "Copying should not be allowed when there is more than one selected."
+                    );
+                }
+
+                if let Some(song) = selected_songs.get(0) {
+                    if let Some(display) = gdk::Display::default() {
+                        display.clipboard().set_text(&format!(
+                            "{} - {}",
+                            song.artist(),
+                            song.title()
+                        ));
+
+                        let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
+                        Application::default().add_toast(&toast);
+                    }
+                } else {
+                    log::error!("Failed to copy song: There is no selected song");
+                }
+            });
+
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
                 obj.snapshot_selected_songs()
                     .iter()
@@ -139,6 +165,7 @@ mod imp {
                 }));
 
             obj.update_selection_mode_menu_button();
+            obj.update_copy_selected_song_action();
             obj.update_remove_selected_songs_action();
             obj.update_selection_mode_ui();
             obj.show_history();
@@ -244,12 +271,14 @@ impl HistoryView {
         selection_model.connect_selection_changed(clone!(@weak self as obj => move |_, _, _| {
             if obj.is_selection_mode() {
                 obj.update_selection_mode_menu_button();
+                obj.update_copy_selected_song_action();
                 obj.update_remove_selected_songs_action();
             }
         }));
         selection_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             if obj.is_selection_mode() {
                 obj.update_selection_mode_menu_button();
+                obj.update_copy_selected_song_action();
                 obj.update_remove_selected_songs_action();
             }
         }));
@@ -354,6 +383,7 @@ impl HistoryView {
         self.imp().is_selection_mode.set(is_selection_mode);
         self.update_selection_mode_ui();
         self.update_selection_mode_menu_button();
+        self.update_copy_selected_song_action();
         self.update_remove_selected_songs_action();
 
         self.notify("is-selection-mode");
@@ -455,6 +485,17 @@ impl HistoryView {
         };
 
         imp.selection_mode_menu_button.set_label(&label);
+    }
+
+    fn update_copy_selected_song_action(&self) {
+        let has_one_selected = self
+            .imp()
+            .selection_model
+            .get()
+            .and_then(|model| model.upgrade())
+            .map_or(true, |model| model.selection().size() == 1);
+
+        self.action_set_enabled("history-view.copy-selected-song", has_one_selected);
     }
 
     fn update_remove_selected_songs_action(&self) {
