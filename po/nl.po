@@ -2,21 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Heimen Stoffels <vistausss@outlook.com>, 2021.
-# Heimen Stoffels <vistausss@fastmail.com>, 2021.
+# Heimen Stoffels <vistausss@fastmail.com>, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2021-08-22 01:08+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -26,7 +26,7 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Identificeer nummers in luttele seconden"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
@@ -35,23 +35,23 @@ msgstr "Shazam;Muziek;Song;Nummer;Identificeren;Herkennen;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Default window width"
-msgstr ""
+msgstr "Standaard vensterbreedte"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:10
 msgid "Default window height"
-msgstr ""
+msgstr "Standaard vensterhoogte"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:14
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Standaard maximaliseergedrag"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:18
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Bevat onlangs herkende nummers"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Voorkeursbron voor audio-opname"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -100,6 +100,7 @@ msgstr "🎼 Beluister het herkende nummer met de muziekspeler."
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
 msgstr ""
+"🌐 Vind informatie over en beluister het nummer bij verschillende diensten."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -135,11 +136,11 @@ msgstr "Over Mous_ai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "_Alles selecteren"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "_Niets selecteren"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -151,19 +152,19 @@ msgstr "Luisteren"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Hoofdmenu openen"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Selecteren"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Zoeken naar nummers"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Niets selecteren"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -172,11 +173,11 @@ msgstr "Annuleren"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Voer de naam in van een nummer of artiest"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Ga aan de slag!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -184,101 +185,101 @@ msgstr "Klik op de luisterknop om te starten."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Er zijn geen zoekresultaten"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Probeer een andere zoekopdracht."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Remove Song From History"
-msgstr ""
+msgstr "Nummer verwijderen uit geschiedenis"
 
 #: data/resources/ui/history-view.ui:167
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Stoppen met luisteren"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Hoofdmenu openen"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Sneltoetsen tonen"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Bediening"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Luisteren aan/uit"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Afspelen/Pauzeren"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Navigatie"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Ga terug"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Nummerinformatie tonen"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "Stoppen"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Terug naar hoofdscherm"
 
 #: data/resources/ui/song-page.ui:133
 msgid "Information"
-msgstr ""
+msgstr "Informatie"
 
 #: data/resources/ui/song-page.ui:136
 msgid "Last Heard"
-msgstr ""
+msgstr "Laatst beluisterd"
 
 #: data/resources/ui/song-page.ui:141
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song-page.ui:146
 msgid "Release Date"
-msgstr ""
+msgstr "Uitgavedatum"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:133
@@ -287,7 +288,7 @@ msgstr "Heimen Stoffels &lt;vistausss@fastmail.com&gt;"
 
 #: src/application.rs:134
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2022 Dave Patrick"
 
 #: src/application.rs:137
 msgid "GitHub"
@@ -295,113 +296,117 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Bekijken op Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Bekijken op AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Beluisteren op Spotify"
 
 #: src/model/external_link/youtube.rs:30
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:34
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Zoeken op YouTube"
 
 #: src/recognizer/mod.rs:211
 msgid "Cancelled recording"
-msgstr ""
+msgstr "De opname is afgebroken"
 
 #: src/recognizer/mod.rs:225
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "De herkenning is afgebroken"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"Het antwoord kan niet worden verwerkt. Meld deze bug op Mousai's bugtracker."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Het bestand kan niet worden geconverteerd. Meld deze bug op Mousai's "
+"bugtracker."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Er kan geen verbinding worden gemaakt met de server."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Het daglimiet is bereikt."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"De audio kan niet worden geverifeerd; er wordt mogelijk niks afgespeeld."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Controleer je internetverbinding."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Er zijn geen overeenkomstige nummers gevonden."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Voer een api-sleutel in in de voorkeuren."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Voer een geldige api-sleutel in."
 
 #: src/window/history_view.rs:382
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Klik op items om ze te selecteren"
 
 #: src/window/history_view.rs:384
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} nummer geselecteerd"
+msgstr[1] "{} nummers geselecteerd"
 
 #: src/window/mod.rs:190
 msgid "Failed to load history"
-msgstr ""
+msgstr "De geschiedenis kan niet worden geladen"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Afspelen"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Pauzeren"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Bezig met luisteren…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Bezig met herkennen…"
 
 #: src/window/song_page.rs:128
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "{} kan niet worden gestart"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Vind elk nummer in een mum van tijd"

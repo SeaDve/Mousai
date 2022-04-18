@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021.
+# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021, 2022.
 # robert schneider <robertschv@gmail.com>, 2021.
 # Sergio Varela <sergitroll9@gmail.com>, 2021.
 # Chardinson De la cruz Ventura <chardinsondelacruzventura@gmail.com>, 2021.
@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2021-09-17 09:34+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
-">\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -29,7 +29,7 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Identificar canciones en segundos"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
@@ -38,23 +38,23 @@ msgstr "Shazam;Música;Canción;Identificar;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Default window width"
-msgstr ""
+msgstr "Ancho predeterminado de ventana"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:10
 msgid "Default window height"
-msgstr ""
+msgstr "Alto predeterminado de ventana"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:14
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Comportamiento predeterminado de ventana maximizada"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:18
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Contiene canciones recientemente reconocidas"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Fuente de audio preferida para usar en la grabación de audio"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -105,7 +105,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 Explore y escuche la canción de diferentes proveedores."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -141,11 +141,11 @@ msgstr "_Acerca de Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "Seleccionar _todo"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "Seleccionar _ninguna"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -157,19 +157,19 @@ msgstr "Escuchar"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Abrir menú principal"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Buscar canciones"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Cancelar selección"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -178,11 +178,11 @@ msgstr "Cancelar"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Introduzca el nombre de la canción o del artista"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "¡Empiece a identificar música!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -190,101 +190,101 @@ msgstr "Pulse el botón de escuchar para empezar."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "No se han encontrado resultados"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Intente una búsqueda diferente."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Remove Song From History"
-msgstr ""
+msgstr "Quitar canción del historial"
 
 #: data/resources/ui/history-view.ui:167
 msgid "Remove"
-msgstr ""
+msgstr "Quitar"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Cancelar escucha"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Abrir menú principal"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Mostrar atajos"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Salir"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Controles"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Conmutar escucha"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Conmutar reproducción"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Navegación"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Volver"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Mostrar información de la canción"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "Detener"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Volver a la página principal"
 
 #: data/resources/ui/song-page.ui:133
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
 #: data/resources/ui/song-page.ui:136
 msgid "Last Heard"
-msgstr ""
+msgstr "Último escuchado"
 
 #: data/resources/ui/song-page.ui:141
 msgid "Album"
-msgstr ""
+msgstr "Álbum"
 
 #: data/resources/ui/song-page.ui:146
 msgid "Release Date"
-msgstr ""
+msgstr "Fecha de publicación"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:133
@@ -293,7 +293,7 @@ msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
 
 #: src/application.rs:134
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2022 Dave Patrick"
 
 #: src/application.rs:137
 msgid "GitHub"
@@ -301,113 +301,119 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Explorar en Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Explorar en AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Escuchar en Spotify"
 
 #: src/model/external_link/youtube.rs:30
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:34
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Buscar en YouTube"
 
 #: src/recognizer/mod.rs:211
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Grabación cancelada"
 
 #: src/recognizer/mod.rs:225
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Reconocimiento cancelado"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"No se ha podido analizar la respuesta. Por favor, informe de esto en el "
+"registro de errores de Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"No se ha podido convertir el archivo. Por favor, informe de esto en el "
+"registro de errores de Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "No se ha podido conectar con el servidor."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Se ha alcanzado el límite diario."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Fallo en la identificación del audio. Es posible que no se escuche ningún "
+"sonido."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Compruebe su conexión a Internet."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "No se han encontrado coincidencias para esta canción."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Introduzca un testigo de la API en las preferencias."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Por favor, introduzca un testigo de API válido."
 
 #: src/window/history_view.rs:382
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Haga clic en los elementos para seleccionarlos"
 
 #: src/window/history_view.rs:384
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} canción seleccionada"
+msgstr[1] "{} canciones seleccionadas"
 
 #: src/window/mod.rs:190
 msgid "Failed to load history"
-msgstr ""
+msgstr "Fallo al cargar el historial"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Reproducir"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Escuchando…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Reconociendo…"
 
 #: src/window/song_page.rs:128
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Fallo al lanzar {}"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Identifique cualquier canción en segundos"

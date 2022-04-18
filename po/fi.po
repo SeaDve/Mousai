@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2021-08-26 07:35+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
-">\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -207,7 +207,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Yleiset"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -222,12 +222,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Näytä pikanäppäimet"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Lopeta"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -260,7 +260,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "Pysäytä"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"

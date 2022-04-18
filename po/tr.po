@@ -2,21 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Oğuz Ersen <oguzersen@protonmail.com>, 2021.
+# Oğuz Ersen <oguz@ersen.moe>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2021-08-27 18:32+0000\n"
-"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
-">\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -26,7 +27,7 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Şarkıları saniyeler içinde tanıyın"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
@@ -35,23 +36,23 @@ msgstr "Shazam;Music;Song;Identify;Müzik;Şarkı;Tanımla;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Default window width"
-msgstr ""
+msgstr "Öntanımlı pencere genişliği"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:10
 msgid "Default window height"
-msgstr ""
+msgstr "Öntanımlı pencere yüksekliği"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:14
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Öntanımlı pencere büyütme davranışı"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:18
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Yakın zamanda tanınan şarkıları içerir"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Ses kaydederken kullanılacak tercih edilen ses kaynağı"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -98,7 +99,7 @@ msgstr "🎼 Tanımlanan şarkıyı yerel oynatıcıyla ön izleyin."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 Farklı sağlayıcılardan şarkılara göz atın ve dinleyin."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -134,11 +135,11 @@ msgstr "Mousai _Hakkında"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "_Tümünü Seç"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "_Hiçbirini Seçme"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -150,19 +151,19 @@ msgstr "Dinle"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Ana Menüyü Aç"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Seç"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Şarkı Ara"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Seçimi İptal Et"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -171,11 +172,11 @@ msgstr "İptal"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Şarkı veya sanatçı adı girin"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Müzik Tanımaya Başla!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -183,101 +184,101 @@ msgstr "Başlamak için dinle düğmesine tıklayın."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Sonuç Bulunamadı"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Farklı bir arama deneyin."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Remove Song From History"
-msgstr ""
+msgstr "Şarkıyı Geçmişten Kaldır"
 
 #: data/resources/ui/history-view.ui:167
 msgid "Remove"
-msgstr ""
+msgstr "Kaldır"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Dinlemeyi İptal Et"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Ana Menüyü Aç"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Kısayolları Göster"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Çıkış"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Denetimler"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Dinlemeyi Aç/Kapat"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Oynatmayı Aç/Kapat"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Gezinme"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Geri Dön"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Şarkı Bilgilerini Göster"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "Durdur"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Ana Sayfaya Dön"
 
 #: data/resources/ui/song-page.ui:133
 msgid "Information"
-msgstr ""
+msgstr "Bilgi"
 
 #: data/resources/ui/song-page.ui:136
 msgid "Last Heard"
-msgstr ""
+msgstr "Son Duyulan"
 
 #: data/resources/ui/song-page.ui:141
 msgid "Album"
-msgstr ""
+msgstr "Albüm"
 
 #: data/resources/ui/song-page.ui:146
 msgid "Release Date"
-msgstr ""
+msgstr "Yayın Tarihi"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:133
@@ -288,7 +289,7 @@ msgstr ""
 
 #: src/application.rs:134
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Telif Hakkı 2022 Dave Patrick"
 
 #: src/application.rs:137
 msgid "GitHub"
@@ -296,113 +297,115 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Müzik"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Apple Müzikte Göz At"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "AudD'de Göz At"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Spotify'da Dinle"
 
 #: src/model/external_link/youtube.rs:30
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:34
 msgid "Search on YouTube"
-msgstr ""
+msgstr "YouTube'da Ara"
 
 #: src/recognizer/mod.rs:211
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Kayıt iptal edildi"
 
 #: src/recognizer/mod.rs:225
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Tanıma iptal edildi"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"Yanıt ayrıştırılamadı. Lütfen bunu Mousai'nin hata izleyicisinde bildirin."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Dosya dönüştürülemedi. Lütfen bunu Mousai'nin hata izleyicisinde bildirin."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Sunucuya bağlanılamadı."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Günlük sınıra ulaşıldı."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
-msgstr ""
+msgstr "Ses parmak izi alınamadı. Ses duyulmamış olabilir."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} İnternet bağlantınızı gözden geçirin."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Bu şarkı için herhangi bir eşleşme bulunamadı."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Tercihlerde bir API belirteci girin."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Lütfen geçerli bir API belirteci girin."
 
 #: src/window/history_view.rs:382
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Seçmek için ögelere tıklayın"
 
 #: src/window/history_view.rs:384
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} şarkı seçildi"
+msgstr[1] "{} şarkı seçildi"
 
 #: src/window/mod.rs:190
 msgid "Failed to load history"
-msgstr ""
+msgstr "Geçmiş yüklenemedi"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Oynat"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Duraklat"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Dinleniyor…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Tanınıyor…"
 
 #: src/window/song_page.rs:128
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "{} başlatılamadı"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Herhangi bir şarkıyı saniyeler içinde tanımlayın"

@@ -9,17 +9,17 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2022-01-25 20:56+0000\n"
-"Last-Translator: Carlod <carlod@disroot.org>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/kooha/mousai/pl/"
-">\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/kooha/mousai/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -206,7 +206,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -221,12 +221,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Pokaż skróty klawiszowe"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Zakończ"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -259,7 +259,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "Zakończ"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"

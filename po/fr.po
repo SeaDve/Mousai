@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2022-04-17 10:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: matb <perso@mathieu-bousquet.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
 "\n"
 "Language: fr\n"
@@ -31,7 +31,7 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Identifier vos chansons en quelques secondes"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
@@ -167,7 +167,7 @@ msgstr "Sélectionner"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Rechercher des titres"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
@@ -238,7 +238,7 @@ msgstr "Quitter"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Contrôles"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
@@ -270,32 +270,32 @@ msgstr "Arrêter"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Retour à la page principale"
 
 #: data/resources/ui/song-page.ui:133
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: data/resources/ui/song-page.ui:136
 msgid "Last Heard"
-msgstr ""
+msgstr "Dernières chansons écoutées"
 
 #: data/resources/ui/song-page.ui:141
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song-page.ui:146
 msgid "Release Date"
-msgstr ""
+msgstr "Date de sortie"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:133
 msgid "translator-credits"
-msgstr "J. Lavoie"
+msgstr "J. Lavoie, M. Bousquet"
 
 #: src/application.rs:134
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Droits d'auteur 2022 Dave Patrick"
 
 #: src/application.rs:137
 msgid "GitHub"
@@ -303,113 +303,118 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Parcourir sur Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Parcourir sur AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Écouter sur Spotify"
 
 #: src/model/external_link/youtube.rs:30
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:34
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Rechercher sur YouTube"
 
 #: src/recognizer/mod.rs:211
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Enregistrements annulés"
 
 #: src/recognizer/mod.rs:225
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Identifications annulées"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"Impossible d’analyser le résultat. Veuillez le signaler au traqueur de "
+"bogues de Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Impossible de convertir le fichier. Veuillez le signaler au traqueur de "
+"bogues de Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Impossible de se connecter au serveur."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "La limite quotidienne a été atteinte."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Échec de la reconnaissance audio. Il se peut qu'aucun son ne soit entendu."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Vérifiez votre connection internet."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Aucune correspondance trouvée pour cette chanson."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Ajouter un jeton API dans les préférences."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Veuillez saisir un jeton d'API valide."
 
 #: src/window/history_view.rs:382
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Cliquez sur les éléments pour les sélectionner"
 
 #: src/window/history_view.rs:384
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Titre sélectionné"
+msgstr[1] "Titres sélectionnés"
 
 #: src/window/mod.rs:190
 msgid "Failed to load history"
-msgstr ""
+msgstr "Échec du chargement de l'historique"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Lecture"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Écoute en cours…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "En cours d'identification…"
 
 #: src/window/song_page.rs:128
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Échec du démarrage {}"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Identifiez n'importe quelle chanson en quelques secondes"

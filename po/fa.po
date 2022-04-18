@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2022-03-06 09:57+0000\n"
-"Last-Translator: MSKF <walkingdeadstudio@outlook.com>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
-">\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
+"\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -201,7 +201,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "عمومی"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -216,12 +216,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "نمایش میان‌برها"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "ترک"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -254,7 +254,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "توقف"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"

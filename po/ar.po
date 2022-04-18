@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-15 12:47+0800\n"
-"PO-Revision-Date: 2021-09-17 09:34+0000\n"
-"Last-Translator: Muhammad Yasser <iamrokt@gmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/"
-">\n"
+"PO-Revision-Date: 2022-04-18 11:07+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
@@ -204,7 +204,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "عام"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -219,12 +219,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "إظهار الإختصارات"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "خروج"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -257,7 +257,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr ""
+msgstr "أوقف"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
