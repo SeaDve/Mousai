@@ -19,7 +19,6 @@
         "--env=RUST_BACKTRACE=1"
     ],
     "build-options": {
-        "append-ld-library-path": "/usr/lib/sdk/llvm13/lib",
         "append-path": "/usr/lib/sdk/llvm13/bin:/usr/lib/sdk/rust-stable/bin",
         "build-args": [
             "--share=network"
