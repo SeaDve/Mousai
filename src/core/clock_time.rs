@@ -4,7 +4,7 @@ use std::time::Duration;
 
 /// A boxed [`Duration`](Duration)
 #[derive(Debug, Default, Clone, Copy, glib::Boxed)]
-#[boxed_type(name = "MsaiClockTime")]
+#[boxed_type(name = "MsaiClockTime", nullable)]
 pub struct ClockTime(Duration);
 
 impl ClockTime {

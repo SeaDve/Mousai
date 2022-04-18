@@ -260,14 +260,14 @@ impl SongBar {
     }
 
     fn update_position_ui(&self) {
-        let position = self.player().position();
+        let position = self.player().position().unwrap_or_default();
         self.set_playback_position_scale_value_blocking(position.as_secs_f64());
         self.imp().playback_position_label.set_time(position);
     }
 
     fn update_duration_ui(&self) {
         let imp = self.imp();
-        let duration = self.player().duration();
+        let duration = self.player().duration().unwrap_or_default();
         imp.playback_position_scale
             .set_range(0.0, duration.as_secs_f64());
         imp.duration_label.set_time(duration);

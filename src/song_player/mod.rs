@@ -186,6 +186,8 @@ impl SongPlayer {
         let imp = self.imp();
 
         imp.player.stop();
+        self.set_position(None);
+        self.set_duration(None);
 
         if let Some(ref song) = song {
             let playback_link = song.playback_link().ok_or_else(|| {
@@ -217,8 +219,6 @@ impl SongPlayer {
         imp.song.replace(song);
 
         self.notify("song");
-        self.set_position(ClockTime::ZERO);
-        self.set_duration(ClockTime::ZERO);
 
         Ok(())
     }
@@ -245,18 +245,8 @@ impl SongPlayer {
         self.connect_notify_local(Some("position"), move |obj, _| f(obj))
     }
 
-    pub fn position(&self) -> ClockTime {
-        if self.state() == PlayerState::Stopped {
-            return ClockTime::ZERO;
-        }
-
-        let imp = self.imp();
-
-        if let Some(position) = imp.position.get() {
-            return position;
-        }
-
-        imp.player.position().unwrap_or_default().into()
+    pub fn position(&self) -> Option<ClockTime> {
+        self.imp().position.get()
     }
 
     pub fn connect_duration_notify<F>(&self, f: F) -> glib::SignalHandlerId
@@ -266,18 +256,8 @@ impl SongPlayer {
         self.connect_notify_local(Some("duration"), move |obj, _| f(obj))
     }
 
-    pub fn duration(&self) -> ClockTime {
-        if self.song().is_none() {
-            return ClockTime::ZERO;
-        }
-
-        let imp = self.imp();
-
-        if let Some(duration) = imp.duration.get() {
-            return duration;
-        }
-
-        imp.player.duration().unwrap_or_default().into()
+    pub fn duration(&self) -> Option<ClockTime> {
+        self.imp().duration.get()
     }
 
     pub fn is_active_song(&self, song: &Song) -> bool {
@@ -302,17 +282,17 @@ impl SongPlayer {
         Ok(())
     }
 
-    fn set_position(&self, position: ClockTime) {
-        self.imp().position.set(Some(position));
+    fn set_position(&self, position: Option<ClockTime>) {
+        self.imp().position.set(position);
         self.mpris_player()
-            .set_position(position.as_micros() as i64);
+            .set_position(position.unwrap_or_default().as_micros() as i64);
         self.notify("position");
     }
 
-    fn set_duration(&self, duration: ClockTime) {
+    fn set_duration(&self, duration: Option<ClockTime>) {
         let imp = self.imp();
-        imp.duration.set(Some(duration));
-        imp.metadata.borrow_mut().length = Some(duration.as_micros() as i64);
+        imp.duration.set(duration);
+        imp.metadata.borrow_mut().length = duration.map(|duration| duration.as_micros() as i64);
         self.push_mpris_metadata();
         self.notify("duration");
     }
@@ -352,14 +332,17 @@ impl SongPlayer {
             }));
 
             mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
-                let current_position = obj.position();
-                let offset = ClockTime::from_micros(offset_micros.abs() as u64);
-                let new_position = if offset_micros < 0 {
-                    current_position.saturating_sub(offset)
+                if let Some(current_position) = obj.position() {
+                    let offset = ClockTime::from_micros(offset_micros.abs() as u64);
+                    let new_position = if offset_micros < 0 {
+                        current_position.saturating_sub(offset)
+                    } else {
+                        current_position.saturating_add(offset)
+                    };
+                    obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
                 } else {
-                    current_position.saturating_add(offset)
-                };
-                obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
+                    log::warn!("Trying to seek player to offset position without current position");
+                }
             }));
 
             log::info!("Done setting up MPRIS server");
@@ -378,18 +361,10 @@ impl SongPlayer {
 
         match message {
             Message::PositionUpdated(position) => {
-                if let Some(position) = position {
-                    self.set_position(*position);
-                } else {
-                    self.set_position(ClockTime::ZERO);
-                }
+                self.set_position(*position);
             }
             Message::DurationChanged(duration) => {
-                if let Some(duration) = duration {
-                    self.set_duration(*duration);
-                } else {
-                    self.set_duration(ClockTime::ZERO);
-                }
+                self.set_duration(*duration);
             }
             Message::StateChanged(new_state) => {
                 let old_state = imp.state.get();
@@ -412,7 +387,7 @@ impl SongPlayer {
             }
             Message::EndOfStream => {
                 log::info!("Got end of stream message");
-                self.set_position(ClockTime::ZERO);
+                self.set_position(None);
             }
         }
     }
