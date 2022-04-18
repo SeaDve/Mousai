@@ -169,8 +169,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton">
-                    <property name="tooltip-text" translatable="yes">Remove Song From History</property>
+                  <object class="GtkButton" id="remove_selected_songs_button">
                     <property name="icon-name">user-trash-symbolic</property>
                     <property name="action-name">history-view.remove-selected-songs</property>
                   </object>

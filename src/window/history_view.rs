@@ -40,6 +40,8 @@ mod imp {
         #[template_child]
         pub selection_mode_bar: TemplateChild<gtk::ActionBar>,
         #[template_child]
+        pub remove_selected_songs_button: TemplateChild<gtk::Button>,
+        #[template_child]
         pub search_bar: TemplateChild<gtk::SearchBar>,
         #[template_child]
         pub search_entry: TemplateChild<gtk::SearchEntry>,
@@ -479,6 +481,13 @@ impl HistoryView {
                     selection_size
                 ),
             });
+
+        imp.remove_selected_songs_button
+            .set_tooltip_text(Some(&ngettext(
+                "Remove Song From History",
+                "Remove Songs From History",
+                selection_size as u32,
+            )));
     }
 
     fn setup_grid(&self) {
