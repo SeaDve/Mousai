@@ -207,19 +207,18 @@ impl SongBar {
             obj.update_playback_button();
         }));
 
-        player.connect_position_changed(clone!(@weak self as obj => move |_, position| {
-            obj.set_playback_position_scale_value_blocking(position.as_secs_f64());
-            obj.imp().playback_position_label.set_time(*position);
+        player.connect_position_notify(clone!(@weak self as obj => move |_| {
+            obj.update_position_ui();
         }));
 
-        player.connect_duration_changed(clone!(@weak self as obj => move |_, duration| {
-            let imp = obj.imp();
-            imp.playback_position_scale.set_range(0.0, duration.as_secs_f64());
-            imp.duration_label.set_time(*duration);
+        player.connect_duration_notify(clone!(@weak self as obj => move |_| {
+            obj.update_duration_ui();
         }));
 
         self.update_playback_position_scale_sensitivity();
         self.update_playback_button();
+        self.update_position_ui();
+        self.update_duration_ui();
     }
 
     fn player(&self) -> &SongPlayer {
@@ -258,6 +257,20 @@ impl SongBar {
                     }
                 }),
             )));
+    }
+
+    fn update_position_ui(&self) {
+        let position = self.player().position();
+        self.set_playback_position_scale_value_blocking(position.as_secs_f64());
+        self.imp().playback_position_label.set_time(position);
+    }
+
+    fn update_duration_ui(&self) {
+        let imp = self.imp();
+        let duration = self.player().duration();
+        imp.playback_position_scale
+            .set_range(0.0, duration.as_secs_f64());
+        imp.duration_label.set_time(duration);
     }
 
     fn update_playback_position_scale_sensitivity(&self) {
