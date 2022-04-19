@@ -283,8 +283,9 @@ impl SongPlayer {
             self.pause();
         }
 
-        let position = position.try_into()?;
-        self.imp().player.seek(position);
+        log::debug!("Seeking to {position:?}");
+
+        self.imp().player.seek(position.try_into()?);
         Ok(())
     }
 
