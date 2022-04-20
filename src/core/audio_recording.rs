@@ -26,4 +26,9 @@ impl AudioRecording {
 
         Ok(())
     }
+
+    pub async fn to_base_64(&self) -> Result<String, glib::Error> {
+        let (contents, _) = self.file.load_contents_future().await?;
+        Ok(glib::base64_encode(&contents).into())
+    }
 }

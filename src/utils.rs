@@ -1,10 +1,7 @@
 use futures_channel::oneshot;
-use gtk::{
-    gio::{self, prelude::*},
-    glib,
-};
+use gtk::glib;
 
-use std::{cell::Cell, path::Path, rc::Rc, time::Duration};
+use std::{cell::Cell, rc::Rc, time::Duration};
 
 use crate::core::{Cancellable, Cancelled};
 
@@ -31,6 +28,8 @@ macro_rules! send {
     };
 }
 
+/// Like [`glib::timeout_future`] but terminates immediately after `cancellable`
+/// is cancelled and return an error.
 pub async fn timeout_future(
     interval: Duration,
     cancellable: &Cancellable,
@@ -53,10 +52,4 @@ pub async fn timeout_future(
     });
 
     receiver.await.map_err(|_| Cancelled::default())
-}
-
-pub async fn file_to_base64(path: impl AsRef<Path>) -> Result<String, glib::Error> {
-    let file = gio::File::for_path(path.as_ref());
-    let (contents, _) = file.load_contents_future().await?;
-    Ok(base64::encode(contents))
 }

@@ -18,7 +18,7 @@ use crate::{
         AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
     },
     model::{Song, SongId},
-    utils, Application,
+    Application,
 };
 
 #[derive(Debug)]
@@ -96,7 +96,7 @@ impl AudD {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz",
-            "audio": utils::file_to_base64(recording.path()).await.map_err(Error::FileConvert)?,
+            "audio": recording.to_base_64().await.map_err(Error::FileConvert)?,
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/")
