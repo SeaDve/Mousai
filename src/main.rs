@@ -17,8 +17,8 @@ mod config;
 mod core;
 mod inspector_page;
 mod model;
+mod player;
 mod recognizer;
-mod song_player;
 mod utils;
 mod window;
 

@@ -13,7 +13,7 @@ use super::{
 };
 use crate::{
     model::Song,
-    song_player::{PlayerState, SongPlayer},
+    player::{Player, PlayerState},
     Application,
 };
 
@@ -32,7 +32,7 @@ mod imp {
         pub(super) playback_button: TemplateChild<PlaybackButton>,
 
         pub(super) song: RefCell<Option<Song>>,
-        pub(super) player: OnceCell<WeakRef<SongPlayer>>,
+        pub(super) player: OnceCell<WeakRef<Player>>,
     }
 
     #[glib::object_subclass]
@@ -140,7 +140,7 @@ impl SongTile {
     }
 
     /// Must only be called once.
-    pub fn bind_player(&self, player: &SongPlayer) {
+    pub fn bind_player(&self, player: &Player) {
         player.connect_state_notify(clone!(@weak self as obj, @weak player => move |_| {
             obj.update_playback_ui(&player);
         }));
@@ -165,7 +165,7 @@ impl SongTile {
         Ok(())
     }
 
-    fn update_playback_ui(&self, player: &SongPlayer) {
+    fn update_playback_ui(&self, player: &Player) {
         if let Some(ref song) = self.song() {
             let imp = self.imp();
             let is_active_song = player.is_active_song(song);

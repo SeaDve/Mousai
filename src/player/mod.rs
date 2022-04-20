@@ -33,18 +33,18 @@ mod imp {
     use once_cell::sync::Lazy;
 
     #[derive(Debug)]
-    pub struct SongPlayer {
+    pub struct Player {
         pub(super) song: RefCell<Option<Song>>,
         pub(super) state: Cell<PlayerState>,
         pub(super) position: Cell<Option<ClockTime>>,
         pub(super) duration: Cell<Option<ClockTime>>,
 
         pub(super) metadata: RefCell<MprisMetadata>,
-        pub(super) player: gst_player::Player,
+        pub(super) gst_player: gst_player::Player,
         pub(super) mpris_player: OnceCell<Arc<MprisPlayer>>,
     }
 
-    impl Default for SongPlayer {
+    impl Default for Player {
         fn default() -> Self {
             Self {
                 song: RefCell::default(),
@@ -52,19 +52,19 @@ mod imp {
                 position: Cell::default(),
                 duration: Cell::default(),
                 metadata: RefCell::new(MprisMetadata::new()),
-                player: gst_player::Player::new(None, None),
+                gst_player: gst_player::Player::new(None, None),
                 mpris_player: OnceCell::default(),
             }
         }
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for SongPlayer {
-        const NAME: &'static str = "MsaiSongPlayer";
-        type Type = super::SongPlayer;
+    impl ObjectSubclass for Player {
+        const NAME: &'static str = "MsaiPlayer";
+        type Type = super::Player;
     }
 
-    impl ObjectImpl for SongPlayer {
+    impl ObjectImpl for Player {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder(
@@ -125,7 +125,7 @@ mod imp {
                 "song" => {
                     let song = value.get().unwrap();
                     if let Err(err) = obj.set_song(song) {
-                        log::warn!("Failed to set song to SongPlayer: {err:?}");
+                        log::warn!("Failed to set song to Player: {err:?}");
                     }
                 }
                 _ => unimplemented!(),
@@ -151,12 +151,12 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct SongPlayer(ObjectSubclass<imp::SongPlayer>);
+    pub struct Player(ObjectSubclass<imp::Player>);
 }
 
-impl SongPlayer {
+impl Player {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongPlayer")
+        glib::Object::new(&[]).expect("Failed to create Player")
     }
 
     pub fn connect_error<F>(&self, f: F) -> glib::SignalHandlerId
@@ -185,7 +185,7 @@ impl SongPlayer {
 
         let imp = self.imp();
 
-        imp.player.stop();
+        imp.gst_player.stop();
         self.set_position(None);
         self.set_duration(None);
 
@@ -193,7 +193,7 @@ impl SongPlayer {
             let playback_link = song.playback_link().ok_or_else(|| {
                 anyhow::anyhow!("Trying to set a song to audio player without playback link")
             })?;
-            imp.player.set_uri(Some(&playback_link));
+            imp.gst_player.set_uri(Some(&playback_link));
             log::info!("Uri set to {playback_link}");
 
             // TODO Fill up nones
@@ -267,11 +267,11 @@ impl SongPlayer {
     }
 
     pub fn play(&self) {
-        self.imp().player.play();
+        self.imp().gst_player.play();
     }
 
     pub fn pause(&self) {
-        self.imp().player.pause();
+        self.imp().gst_player.pause();
     }
 
     pub fn stop(&self) -> anyhow::Result<()> {
@@ -285,7 +285,7 @@ impl SongPlayer {
 
         log::debug!("Seeking to {position:?}");
 
-        self.imp().player.seek(position.try_into()?);
+        self.imp().gst_player.seek(position.try_into()?);
         Ok(())
     }
 
@@ -401,37 +401,37 @@ impl SongPlayer {
 
         let (sender, receiver) = glib::MainContext::channel(glib::PRIORITY_DEFAULT);
 
-        imp.player
+        imp.gst_player
             .connect_position_updated(clone!(@strong sender => move |_, position| {
                 send!(sender, Message::PositionUpdated(position.map(|position| position.into())));
             }));
 
-        imp.player
+        imp.gst_player
             .connect_duration_changed(clone!(@strong sender => move |_, duration| {
                 send!(sender, Message::DurationChanged(duration.map(|duration| duration.into())));
             }));
 
-        imp.player
+        imp.gst_player
             .connect_state_changed(clone!(@strong sender => move |_, state| {
                 send!(sender, Message::StateChanged(state.into()));
             }));
 
-        imp.player
+        imp.gst_player
             .connect_error(clone!(@strong sender => move |_, error| {
                 send!(sender, Message::Error(error.clone()));
             }));
 
-        imp.player
+        imp.gst_player
             .connect_warning(clone!(@strong sender => move |_, error| {
                 send!(sender, Message::Warning(error.clone()));
             }));
 
-        imp.player
+        imp.gst_player
             .connect_buffering(clone!(@strong sender => move |_, percent| {
                 log::debug!("Buffering ({percent}%)");
             }));
 
-        imp.player
+        imp.gst_player
             .connect_end_of_stream(clone!(@strong sender => move |_| {
                 send!(sender, Message::EndOfStream);
             }));
@@ -446,7 +446,7 @@ impl SongPlayer {
     }
 }
 
-impl Default for SongPlayer {
+impl Default for Player {
     fn default() -> Self {
         Self::new()
     }

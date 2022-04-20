@@ -23,8 +23,8 @@ use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar:
 use crate::{
     config::PROFILE,
     model::SongList,
+    player::{Player, PlayerState},
     recognizer::{Recognizer, RecognizerState},
-    song_player::{PlayerState, SongPlayer},
     Application,
 };
 
@@ -51,7 +51,7 @@ mod imp {
         pub song_bar: TemplateChild<SongBar>,
 
         pub recognizer: Recognizer,
-        pub player: SongPlayer,
+        pub player: Player,
         pub history: OnceCell<SongList>,
     }
 
@@ -171,7 +171,7 @@ impl Window {
         glib::Object::new(&[("application", app)]).expect("Failed to create Window")
     }
 
-    pub fn player(&self) -> SongPlayer {
+    pub fn player(&self) -> Player {
         self.imp().player.clone()
     }
 

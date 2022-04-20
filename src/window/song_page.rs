@@ -17,7 +17,7 @@ use super::{
 };
 use crate::{
     model::{ExternalLinkWrapper, Song},
-    song_player::{PlayerState, SongPlayer},
+    player::{Player, PlayerState},
     spawn, Application,
 };
 
@@ -44,7 +44,7 @@ mod imp {
         pub external_links_box: TemplateChild<gtk::FlowBox>,
 
         pub song: RefCell<Option<Song>>,
-        pub player: OnceCell<WeakRef<SongPlayer>>,
+        pub player: OnceCell<WeakRef<Player>>,
     }
 
     #[glib::object_subclass]
@@ -224,7 +224,7 @@ impl SongPage {
     }
 
     /// Must only be called once.
-    pub fn bind_player(&self, player: &SongPlayer) {
+    pub fn bind_player(&self, player: &Player) {
         player.connect_state_notify(clone!(@weak self as obj => move |_| {
             obj.update_playback_ui();
         }));

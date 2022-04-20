@@ -15,7 +15,7 @@ use super::{
 use crate::{
     core::ClockTime,
     model::Song,
-    song_player::{PlayerState, SongPlayer},
+    player::{Player, PlayerState},
 };
 
 mod imp {
@@ -41,7 +41,7 @@ mod imp {
         pub song: RefCell<Option<Song>>,
         pub scale_handler_id: OnceCell<glib::SignalHandlerId>,
         pub seek_timeout_id: RefCell<Option<glib::SourceId>>,
-        pub player: OnceCell<SongPlayer>,
+        pub player: OnceCell<Player>,
     }
 
     #[glib::object_subclass]
@@ -192,7 +192,7 @@ impl SongBar {
     }
 
     /// Must only be called once.
-    pub fn bind_player(&self, player: &SongPlayer) {
+    pub fn bind_player(&self, player: &Player) {
         let imp = self.imp();
 
         imp.player.set(player.clone()).unwrap();
@@ -219,10 +219,10 @@ impl SongBar {
         self.update_duration_ui();
     }
 
-    fn player(&self) -> &SongPlayer {
+    fn player(&self) -> &Player {
         self.imp().player.get_or_init(|| {
-            log::error!("SongPlayer was not bound in SongBar. Creating a default one.");
-            SongPlayer::default()
+            log::error!("Player was not bound in SongBar. Creating a default one.");
+            Player::default()
         })
     }
 

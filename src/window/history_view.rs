@@ -12,7 +12,7 @@ use std::cell::{Cell, RefCell};
 use super::{song_page::SongPage, song_tile::SongTile, Window};
 use crate::{
     model::{Song, SongList},
-    song_player::SongPlayer,
+    player::Player,
     Application,
 };
 
@@ -228,7 +228,7 @@ impl HistoryView {
     }
 
     /// Must only be called once
-    pub fn bind_player(&self, player: &SongPlayer) {
+    pub fn bind_player(&self, player: &Player) {
         self.imp().song_child.bind_player(player);
     }
 
@@ -497,7 +497,7 @@ impl HistoryView {
             if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
                 song_tile.bind_player(&window.player());
             } else {
-                log::error!("Cannot bind SongTile to SongPlayer: HistoryView doesn't have root");
+                log::error!("Cannot bind SongTile to Player: HistoryView doesn't have root");
             }
             list_item
                 .property_expression("item")
