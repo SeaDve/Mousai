@@ -21,8 +21,7 @@ mod imp {
         pub(super) peak: Cell<f64>,
         pub(super) device_name: RefCell<Option<String>>,
 
-        pub(super) pipeline: RefCell<Option<gst::Pipeline>>,
-        pub(super) stream: RefCell<Option<gio::MemoryOutputStream>>,
+        pub(super) current: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
     }
 
     #[glib::object_subclass]
@@ -142,7 +141,7 @@ impl AudioRecorder {
     pub fn start(&self) -> anyhow::Result<()> {
         let imp = self.imp();
 
-        if imp.pipeline.borrow().is_some() || imp.stream.borrow().is_some() {
+        if imp.current.borrow().is_some() {
             log::warn!("Tried to start another recording without stopping existing one");
             self.cancel();
         }
@@ -161,24 +160,19 @@ impl AudioRecorder {
             .unwrap();
         pipeline.set_state(gst::State::Playing)?;
 
-        imp.stream.replace(Some(stream));
-        imp.pipeline.replace(Some(pipeline));
+        imp.current.replace(Some((pipeline, stream)));
         Ok(())
     }
 
     pub async fn stop(&self) -> anyhow::Result<AudioRecording> {
         let imp = self.imp();
 
-        let pipeline = imp
-            .pipeline
+        let (pipeline, stream) = imp
+            .current
             .take()
-            .ok_or_else(|| anyhow::anyhow!("No pipeline found"))?;
-        pipeline.set_state(gst::State::Null)?;
+            .ok_or_else(|| anyhow::anyhow!("No current recording found"))?;
 
-        let stream = imp
-            .stream
-            .take()
-            .ok_or_else(|| anyhow::anyhow!("No stream found"))?;
+        pipeline.set_state(gst::State::Null)?;
         stream.close_future(glib::PRIORITY_HIGH).await?;
 
         self.emit_by_name::<()>("stopped", &[]);
@@ -196,16 +190,12 @@ impl AudioRecorder {
     fn cancel_inner(&self) -> anyhow::Result<()> {
         let imp = self.imp();
 
-        let pipeline = imp
-            .pipeline
+        let (pipeline, stream) = imp
+            .current
             .take()
-            .ok_or_else(|| anyhow::anyhow!("No pipeline found"))?;
-        pipeline.set_state(gst::State::Null)?;
+            .ok_or_else(|| anyhow::anyhow!("No current recording found"))?;
 
-        let stream = imp
-            .stream
-            .take()
-            .ok_or_else(|| anyhow::anyhow!("No stream found"))?;
+        pipeline.set_state(gst::State::Null)?;
         stream.close(gio::Cancellable::NONE)?;
 
         self.emit_by_name::<()>("stopped", &[]);
@@ -255,10 +245,10 @@ impl AudioRecorder {
                 if message.src().as_ref()
                     == self
                         .imp()
-                        .pipeline
+                        .current
                         .borrow()
                         .as_ref()
-                        .map(|pipeline| pipeline.upcast_ref::<gst::Object>())
+                        .map(|(pipeline, _)| pipeline.upcast_ref::<gst::Object>())
                 {
                     log::info!(
                         "Pipeline state set from `{:?}` -> `{:?}`",
