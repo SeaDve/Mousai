@@ -96,7 +96,7 @@ impl AudD {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz",
-            "audio": recording.to_base_64().await.map_err(Error::FileConvert)?,
+            "audio": recording.to_base_64().map_err(Error::FileConvert)?,
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/")

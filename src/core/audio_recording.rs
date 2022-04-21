@@ -6,7 +6,7 @@ pub struct AudioRecording {
 }
 
 impl AudioRecording {
-    pub async fn to_base_64(&self) -> Result<String, glib::Error> {
+    pub fn to_base_64(&self) -> Result<String, glib::Error> {
         Ok(glib::base64_encode(&self.bytes).into())
     }
 }

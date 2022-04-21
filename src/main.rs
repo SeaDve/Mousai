@@ -11,6 +11,7 @@
 #![warn(clippy::unreadable_literal)]
 #![warn(clippy::if_not_else)]
 #![warn(clippy::doc_markdown)]
+#![warn(clippy::unused_async)]
 
 mod application;
 mod config;
