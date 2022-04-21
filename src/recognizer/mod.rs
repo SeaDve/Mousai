@@ -6,12 +6,8 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use once_cell::sync::Lazy;
 
-use std::{
-    cell::{Cell, RefCell},
-    path::PathBuf,
-};
+use std::cell::{Cell, RefCell};
 
 pub use self::provider::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
 use crate::{
@@ -19,12 +15,6 @@ use crate::{
     model::Song,
     utils, Application,
 };
-
-static TMP_RECORDING_PATH: Lazy<PathBuf> = Lazy::new(|| {
-    let mut tmp_path = glib::tmp_dir();
-    tmp_path.push("tmp_recording.ogg");
-    tmp_path
-});
 
 #[derive(Debug, Clone, Copy, glib::Enum, PartialEq)]
 #[enum_type(name = "MsaiRecognizerState")]
@@ -180,12 +170,7 @@ impl Recognizer {
 
         let imp = self.imp();
 
-        log::info!(
-            "Saving temporary file at `{}`",
-            TMP_RECORDING_PATH.display()
-        );
-
-        if let Err(err) = imp.audio_recorder.start(TMP_RECORDING_PATH.as_path()) {
+        if let Err(err) = imp.audio_recorder.start() {
             self.set_state(RecognizerState::Null);
             return Err(err);
         }

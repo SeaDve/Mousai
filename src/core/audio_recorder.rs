@@ -1,83 +1,15 @@
-use futures_channel::oneshot::{self, Receiver, Sender};
 use gst_pbutils::prelude::*;
 use gtk::{
-    glib::{self, clone},
-    subclass::prelude::*,
+    gio::{self, prelude::*},
+    glib::{self, clone, subclass::prelude::*},
 };
 
 use std::{
     cell::{Cell, RefCell},
-    path::Path,
-    rc::Rc,
     time::Duration,
 };
 
 use super::AudioRecording;
-
-type RecordingItemSender = Rc<RefCell<Option<Sender<anyhow::Result<DoneRecording>>>>>;
-
-#[derive(Debug)]
-struct DoneRecording;
-
-#[derive(Debug)]
-struct RecordingItem {
-    inner: AudioRecording,
-    pipeline: gst::Pipeline,
-    receiver: RefCell<Option<Receiver<anyhow::Result<DoneRecording>>>>,
-}
-
-impl RecordingItem {
-    pub fn new(
-        path: impl AsRef<Path>,
-        device_name: Option<&str>,
-        watch_func: impl Fn(&gst::Message, &RecordingItemSender) -> Continue + 'static,
-    ) -> anyhow::Result<Self> {
-        let (sender, receiver) = oneshot::channel();
-        let sender = Rc::new(RefCell::new(Some(sender)));
-
-        let pipeline = default_pipeline(path.as_ref(), device_name)?;
-        pipeline
-            .bus()
-            .unwrap()
-            .add_watch_local(
-                clone!(@strong sender => @default-return Continue(false), move |_, message| {
-                    watch_func(message, &sender)
-                }),
-            )
-            .unwrap();
-
-        Ok(Self {
-            inner: AudioRecording::new(path.as_ref()),
-            pipeline,
-            receiver: RefCell::new(Some(receiver)),
-        })
-    }
-
-    pub const fn pipeline(&self) -> &gst::Pipeline {
-        &self.pipeline
-    }
-
-    pub async fn audio_recording(self) -> anyhow::Result<AudioRecording> {
-        self.receiver
-            .take()
-            .ok_or_else(|| anyhow::anyhow!("Dropped receiver"))?
-            .await??;
-        self.teardown_pipeline()?;
-        Ok(self.inner)
-    }
-
-    pub fn cleanup(self) {
-        if let Err(err) = self.teardown_pipeline() {
-            log::warn!("Failed to teardown pipeline during RecordingItem cleanup: {err:?}");
-        }
-    }
-
-    fn teardown_pipeline(&self) -> anyhow::Result<()> {
-        self.pipeline.set_state(gst::State::Null)?;
-        let _ = self.pipeline.bus().unwrap().remove_watch();
-        Ok(())
-    }
-}
 
 mod imp {
     use super::*;
@@ -89,7 +21,8 @@ mod imp {
         pub(super) peak: Cell<f64>,
         pub(super) device_name: RefCell<Option<String>>,
 
-        pub(super) recording_item: RefCell<Option<RecordingItem>>,
+        pub(super) pipeline: RefCell<Option<gst::Pipeline>>,
+        pub(super) stream: RefCell<Option<gio::MemoryOutputStream>>,
     }
 
     #[glib::object_subclass]
@@ -154,10 +87,8 @@ mod imp {
             }
         }
 
-        fn dispose(&self, _obj: &Self::Type) {
-            if let Some(recording_item) = self.recording_item.take() {
-                recording_item.cleanup();
-            }
+        fn dispose(&self, obj: &Self::Type) {
+            obj.cancel();
         }
     }
 }
@@ -198,58 +129,91 @@ impl AudioRecorder {
     }
 
     pub fn set_device_name(&self, device_name: Option<&str>) {
+        if device_name == self.device_name().as_deref() {
+            return;
+        }
+
         self.imp()
             .device_name
             .replace(device_name.map(|device_name| device_name.to_string()));
-
         self.notify("device-name");
     }
 
-    pub fn start(&self, path: impl AsRef<Path>) -> anyhow::Result<()> {
-        if let Some(recording_item) = self.imp().recording_item.take() {
-            recording_item.cleanup();
+    pub fn start(&self) -> anyhow::Result<()> {
+        let imp = self.imp();
+
+        if imp.pipeline.borrow().is_some() || imp.stream.borrow().is_some() {
+            self.cancel();
         }
 
-        let recording_item = RecordingItem::new(
-            path,
-            self.device_name().as_deref(),
-            clone!(@weak self as obj => @default-return Continue(false), move |message, sender| {
-                obj.handle_bus_message(message, sender)
-            }),
-        )?;
+        let stream = gio::MemoryOutputStream::new_resizable();
+        let pipeline = default_pipeline(&stream, self.device_name().as_deref())?;
 
-        let imp = self.imp();
-        imp.recording_item.replace(Some(recording_item));
-
-        imp.recording_item
-            .borrow()
-            .as_ref()
+        pipeline
+            .bus()
             .unwrap()
-            .pipeline()
-            .set_state(gst::State::Playing)?;
+            .add_watch_local(
+                clone!(@weak self as obj => @default-return Continue(false), move |_, message|  {
+                    obj.handle_bus_message(message)
+                }),
+            )
+            .unwrap();
+        pipeline.set_state(gst::State::Playing)?;
 
+        imp.stream.replace(Some(stream));
+        imp.pipeline.replace(Some(pipeline));
         Ok(())
     }
 
     pub async fn stop(&self) -> anyhow::Result<AudioRecording> {
-        if let Some(recording_item) = self.imp().recording_item.take() {
-            log::info!("Sending EOS event to pipeline");
-            recording_item.pipeline().send_event(gst::event::Eos::new());
-            recording_item.audio_recording().await
-        } else {
-            Err(anyhow::anyhow!("No pipeline setup"))
-        }
+        let imp = self.imp();
+
+        let pipeline = imp
+            .pipeline
+            .take()
+            .ok_or_else(|| anyhow::anyhow!("No pipeline found"))?;
+        pipeline.set_state(gst::State::Null)?;
+
+        let stream = imp
+            .stream
+            .take()
+            .ok_or_else(|| anyhow::anyhow!("No stream found"))?;
+        stream.close_future(glib::PRIORITY_HIGH).await?;
+
+        self.emit_by_name::<()>("stopped", &[]);
+        let _ = pipeline.bus().unwrap().remove_watch();
+
+        Ok(stream.steal_as_bytes().into())
     }
 
     pub fn cancel(&self) {
-        if let Some(recording_item) = self.imp().recording_item.take() {
-            recording_item.cleanup();
+        if let Err(err) = self.cancel_inner() {
+            log::warn!("Failed to cancel recording: {err:?}");
         }
-
-        self.emit_by_name::<()>("stopped", &[]);
     }
 
-    fn handle_bus_message(&self, message: &gst::Message, sender: &RecordingItemSender) -> Continue {
+    fn cancel_inner(&self) -> anyhow::Result<()> {
+        let imp = self.imp();
+
+        let pipeline = imp
+            .pipeline
+            .take()
+            .ok_or_else(|| anyhow::anyhow!("No pipeline found"))?;
+        pipeline.set_state(gst::State::Null)?;
+
+        let stream = imp
+            .stream
+            .take()
+            .ok_or_else(|| anyhow::anyhow!("No stream found"))?;
+        stream.close(gio::Cancellable::NONE)?;
+
+        self.emit_by_name::<()>("stopped", &[]);
+        let _ = pipeline.bus().unwrap().remove_watch();
+
+        Ok(())
+    }
+
+    fn handle_bus_message(&self, message: &gst::Message) -> Continue {
         use gst::MessageView;
 
         match message.view() {
@@ -273,10 +237,6 @@ impl AudioRecorder {
             }
             MessageView::Eos(_) => {
                 log::info!("Eos signal received from record bus");
-
-                sender.take().unwrap().send(Ok(DoneRecording)).unwrap();
-                self.emit_by_name::<()>("stopped", &[]);
-
                 Continue(false)
             }
             MessageView::Error(err) => {
@@ -286,12 +246,7 @@ impl AudioRecorder {
                     err
                 );
 
-                sender
-                    .take()
-                    .unwrap()
-                    .send(Err(err.error().into()))
-                    .unwrap();
-                self.emit_by_name::<()>("stopped", &[]);
+                self.cancel();
 
                 Continue(false)
             }
@@ -299,10 +254,10 @@ impl AudioRecorder {
                 if message.src().as_ref()
                     == self
                         .imp()
-                        .recording_item
+                        .pipeline
                         .borrow()
                         .as_ref()
-                        .map(|recording_item| recording_item.pipeline().upcast_ref::<gst::Object>())
+                        .map(|pipeline| pipeline.upcast_ref::<gst::Object>())
                 {
                     log::info!(
                         "Pipeline state set from `{:?}` -> `{:?}`",
@@ -324,7 +279,7 @@ impl Default for AudioRecorder {
 }
 
 fn default_pipeline(
-    recording_path: &Path,
+    stream: &gio::MemoryOutputStream,
     device_name: Option<&str>,
 ) -> anyhow::Result<gst::Pipeline> {
     let pipeline = gst::Pipeline::new(None);
@@ -333,7 +288,7 @@ fn default_pipeline(
     let audioconvert = gst::ElementFactory::make("audioconvert", None)?;
     let level = gst::ElementFactory::make("level", None)?;
     let encodebin = gst::ElementFactory::make("encodebin", None)?;
-    let filesink = gst::ElementFactory::make("filesink", None)?;
+    let giostreamsink = gst::ElementFactory::make("giostreamsink", None)?;
 
     let encodebin_profile = {
         let audio_caps = gst::Caps::new_simple("audio/x-opus", &[]);
@@ -351,15 +306,15 @@ fn default_pipeline(
     level.set_property("interval", Duration::from_millis(80).as_nanos() as u64);
     level.set_property("peak-ttl", Duration::from_millis(80).as_nanos() as u64);
     encodebin.set_property("profile", encodebin_profile);
-    filesink.set_property("location", recording_path.to_str().unwrap());
+    giostreamsink.set_property("stream", stream);
 
-    let elements = [&pulsesrc, &audioconvert, &level, &encodebin, &filesink];
+    let elements = [&pulsesrc, &audioconvert, &level, &encodebin, &giostreamsink];
     pipeline.add_many(&elements)?;
 
     pulsesrc.link(&audioconvert)?;
     audioconvert.link_filtered(&level, &gst::Caps::builder("audio/x-raw").build())?;
     level.link(&encodebin)?;
-    encodebin.link(&filesink)?;
+    encodebin.link(&giostreamsink)?;
 
     for e in elements {
         e.sync_state_with_parent()?;
