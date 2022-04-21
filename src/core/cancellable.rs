@@ -5,7 +5,7 @@ use std::{
     rc::Rc,
 };
 
-#[derive(thiserror::Error, Debug, Default)]
+#[derive(Debug, Default)]
 pub struct Cancelled(Option<String>);
 
 impl Cancelled {
@@ -23,6 +23,8 @@ impl std::fmt::Display for Cancelled {
         }
     }
 }
+
+impl std::error::Error for Cancelled {}
 
 type CancelledCallback = Box<dyn FnOnce(&Cancellable) + 'static>;
 
