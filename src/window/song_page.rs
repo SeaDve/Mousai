@@ -160,6 +160,10 @@ mod imp {
                             let external_link = external_link_wrapper.inner();
                             let uri = external_link.uri();
 
+                            if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
+                                log::warn!("Trying to launch an invalid Uri: {err:?}");
+                            }
+
                             if let Err(err) = gio::AppInfo::launch_default_for_uri_future(&uri, gio::AppLaunchContext::NONE).await
                             {
                                 log::warn!("Failed to launch default for uri `{uri}`: {err:?}");

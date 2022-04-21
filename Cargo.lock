@@ -976,7 +976,6 @@ dependencies = [
  "log",
  "mpris-player",
  "once_cell",
- "percent-encoding",
  "pretty_env_logger",
  "pulsectl-rs",
  "rand",
@@ -1118,12 +1117,6 @@ name = "paste"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0c520e05135d6e763148b6426a837e239041653ba7becd2e538c076c738025fc"
-
-[[package]]
-name = "percent-encoding"
-version = "2.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d4fd5641d01c8f18a23da7b6fe29298ff4b55afcccdf78973b24cf3175fee32e"
 
 [[package]]
 name = "pest"

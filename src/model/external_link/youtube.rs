@@ -1,4 +1,5 @@
 use gettextrs::gettext;
+use gtk::glib;
 use serde::{Deserialize, Serialize};
 
 use super::ExternalLink;
@@ -19,11 +20,8 @@ impl YoutubeExternalLink {
 #[typetag::serde]
 impl ExternalLink for YoutubeExternalLink {
     fn uri(&self) -> String {
-        let encoded = percent_encoding::utf8_percent_encode(
-            &self.search_term,
-            percent_encoding::NON_ALPHANUMERIC,
-        );
-        format!("https://www.youtube.com/results?search_query={encoded}")
+        let escaped_search_term = glib::Uri::escape_string(&self.search_term, None, true);
+        format!("https://www.youtube.com/results?search_query={escaped_search_term}")
     }
 
     fn name(&self) -> String {
