@@ -178,7 +178,13 @@ impl AudioRecorder {
         self.emit_by_name::<()>("stopped", &[]);
         let _ = pipeline.bus().unwrap().remove_watch();
 
-        Ok(stream.steal_as_bytes().into())
+        let bytes = stream.steal_as_bytes();
+        log::info!(
+            "Recorded audio with size {}",
+            glib::format_size(bytes.len() as u64)
+        );
+
+        Ok(bytes.into())
     }
 
     pub fn cancel(&self) {
