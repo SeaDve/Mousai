@@ -143,6 +143,7 @@ impl AudioRecorder {
         let imp = self.imp();
 
         if imp.pipeline.borrow().is_some() || imp.stream.borrow().is_some() {
+            log::warn!("Tried to start another recording without stopping existing one");
             self.cancel();
         }
 
