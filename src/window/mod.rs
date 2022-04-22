@@ -181,7 +181,7 @@ impl Window {
 
     pub fn show_error(&self, message: &str) {
         let toast = adw::Toast::builder()
-            .title(message)
+            .title(&glib::markup_escape_text(message))
             .priority(adw::ToastPriority::High)
             .build();
         self.add_toast(&toast);
