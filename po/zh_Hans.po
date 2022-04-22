@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-15 12:47+0800\n"
+"POT-Creation-Date: 2022-04-22 08:24+0800\n"
 "PO-Revision-Date: 2022-04-18 11:07+0000\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -24,12 +24,12 @@ msgstr ""
 "X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
 msgstr "几秒钟内识别歌曲"
 
@@ -39,22 +39,24 @@ msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
+#: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
 msgstr "默认窗口宽度"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:10
+#: data/io.github.seadve.Mousai.gschema.xml.in:11
+#: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
 msgstr "默认窗口高度"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:14
+#: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
 msgstr "默认窗口最大化行为"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:18
+#: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
 msgstr "包含最近识别的歌曲"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:26
+#: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
 msgstr "录制音频时优先使用的音频源"
 
@@ -109,7 +111,7 @@ msgstr "📱 易于使用的用户界面。"
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ 用户友好的键盘快捷键。"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:292
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -145,7 +147,7 @@ msgstr "不选(_N)"
 msgid "Start Identifying Music"
 msgstr "开始识别音乐"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:120
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:134
 msgid "Listen"
 msgstr "聆听"
 
@@ -191,12 +193,8 @@ msgid "Try a different search."
 msgstr "请尝试不同搜索。"
 
 #: data/resources/ui/history-view.ui:166
-msgid "Remove Song From History"
-msgstr "从历史记录移除歌曲"
-
-#: data/resources/ui/history-view.ui:167
-msgid "Remove"
-msgstr "移除"
+msgid "Copy Song"
+msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -264,24 +262,32 @@ msgstr "停止"
 msgid "Return to Main Page"
 msgstr "返回主页面"
 
-#: data/resources/ui/song-page.ui:133
+#: data/resources/ui/song-page.ui:34
+msgid "Remove From History"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:41
+msgid "Copy"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:147
 msgid "Information"
 msgstr "信息"
 
-#: data/resources/ui/song-page.ui:136
+#: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
 msgstr "上次收听"
 
-#: data/resources/ui/song-page.ui:141
+#: data/resources/ui/song-page.ui:155
 msgid "Album"
 msgstr "专辑"
 
-#: data/resources/ui/song-page.ui:146
+#: data/resources/ui/song-page.ui:160
 msgid "Release Date"
 msgstr "发布日期"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:133
+#: src/application.rs:150
 msgid "translator-credits"
 msgstr ""
 "Zhou Nan &lt;zhounan@nfschina.com&gt;\n"
@@ -289,11 +295,11 @@ msgstr ""
 "WhiredPlanck &lt;wplanck@aosc.io&gt;\n"
 "lumingzh &lt;lumingzh@qq.com&gt;"
 
-#: src/application.rs:134
+#: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
 msgstr "版权所有 © 2022 Dave Patrick"
 
-#: src/application.rs:137
+#: src/application.rs:154
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -321,19 +327,19 @@ msgstr "Spotify"
 msgid "Listen on Spotify"
 msgstr "收听 Spotify"
 
-#: src/model/external_link/youtube.rs:30
+#: src/model/external_link/youtube.rs:28
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/model/external_link/youtube.rs:34
+#: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
 msgstr "搜索 YouTube"
 
-#: src/recognizer/mod.rs:211
+#: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
 msgstr "已取消录制"
 
-#: src/recognizer/mod.rs:225
+#: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
 msgstr "已取消识别"
 
@@ -373,16 +379,35 @@ msgstr "{} 在首选项中输入 API 令牌。"
 msgid "Please input a valid API token."
 msgstr "请输入有效的 API 令牌。"
 
-#: src/window/history_view.rs:382
+#: src/window/history_view.rs:112 src/window/song_page.rs:84
+msgid "Copied song to clipboard"
+msgstr ""
+
+#: src/window/history_view.rs:392
+msgid "_Undo"
+msgstr ""
+
+#: src/window/history_view.rs:411
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] ""
+
+#: src/window/history_view.rs:476
 msgid "Click on items to select them"
 msgstr "在项目上点击来选择它们"
 
-#: src/window/history_view.rs:384
+#: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "已选择 {} 首歌曲"
 
-#: src/window/mod.rs:190
+#: src/window/history_view.rs:487
+#, fuzzy
+msgid "Remove Song From History"
+msgid_plural "Remove Songs From History"
+msgstr[0] "从历史记录移除歌曲"
+
+#: src/window/mod.rs:194
 msgid "Failed to load history"
 msgstr "加载历史记录失败"
 
@@ -402,9 +427,12 @@ msgstr "正在收听…"
 msgid "Recognizing…"
 msgstr "正在识别…"
 
-#: src/window/song_page.rs:128
+#: src/window/song_page.rs:170
 msgid "Failed to launch {}"
 msgstr "启动 {} 失败"
+
+#~ msgid "Remove"
+#~ msgstr "移除"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "一个迅速听歌识曲的软件"

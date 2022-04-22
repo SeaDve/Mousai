@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-15 12:47+0800\n"
+"POT-Creation-Date: 2022-04-22 08:24+0800\n"
 "PO-Revision-Date: 2022-04-18 11:07+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -21,12 +21,12 @@ msgstr ""
 "X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
 msgstr ""
 
@@ -36,22 +36,24 @@ msgid "Shazam;Music;Song;Identify;"
 msgstr "Shazam;Musik;Lagu;Identifikasi;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
+#: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:10
+#: data/io.github.seadve.Mousai.gschema.xml.in:11
+#: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:14
+#: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:18
+#: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:26
+#: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
 msgstr ""
 
@@ -111,7 +113,7 @@ msgstr "📱 Antarmuka yang mudah digunakan."
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Pintasan keyboard yang bersahabat."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:292
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
 msgid "Dave Patrick"
 msgstr "Dave Patrick"
 
@@ -147,7 +149,7 @@ msgstr ""
 msgid "Start Identifying Music"
 msgstr "Mulai Mengidentifikasi Musik"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:120
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:134
 msgid "Listen"
 msgstr "Dengarkan"
 
@@ -193,11 +195,7 @@ msgid "Try a different search."
 msgstr ""
 
 #: data/resources/ui/history-view.ui:166
-msgid "Remove Song From History"
-msgstr ""
-
-#: data/resources/ui/history-view.ui:167
-msgid "Remove"
+msgid "Copy Song"
 msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
@@ -266,32 +264,40 @@ msgstr "Berhenti"
 msgid "Return to Main Page"
 msgstr ""
 
-#: data/resources/ui/song-page.ui:133
+#: data/resources/ui/song-page.ui:34
+msgid "Remove From History"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:41
+msgid "Copy"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:147
 msgid "Information"
 msgstr ""
 
-#: data/resources/ui/song-page.ui:136
+#: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
 msgstr ""
 
-#: data/resources/ui/song-page.ui:141
+#: data/resources/ui/song-page.ui:155
 msgid "Album"
 msgstr ""
 
-#: data/resources/ui/song-page.ui:146
+#: data/resources/ui/song-page.ui:160
 msgid "Release Date"
 msgstr ""
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:133
+#: src/application.rs:150
 msgid "translator-credits"
 msgstr "liimee"
 
-#: src/application.rs:134
+#: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
 msgstr ""
 
-#: src/application.rs:137
+#: src/application.rs:154
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -319,19 +325,19 @@ msgstr ""
 msgid "Listen on Spotify"
 msgstr ""
 
-#: src/model/external_link/youtube.rs:30
+#: src/model/external_link/youtube.rs:28
 msgid "YouTube"
 msgstr ""
 
-#: src/model/external_link/youtube.rs:34
+#: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
 msgstr ""
 
-#: src/recognizer/mod.rs:211
+#: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
 msgstr ""
 
-#: src/recognizer/mod.rs:225
+#: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
 msgstr ""
 
@@ -371,16 +377,34 @@ msgstr ""
 msgid "Please input a valid API token."
 msgstr ""
 
-#: src/window/history_view.rs:382
+#: src/window/history_view.rs:112 src/window/song_page.rs:84
+msgid "Copied song to clipboard"
+msgstr ""
+
+#: src/window/history_view.rs:392
+msgid "_Undo"
+msgstr ""
+
+#: src/window/history_view.rs:411
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] ""
+
+#: src/window/history_view.rs:476
 msgid "Click on items to select them"
 msgstr ""
 
-#: src/window/history_view.rs:384
+#: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] ""
 
-#: src/window/mod.rs:190
+#: src/window/history_view.rs:487
+msgid "Remove Song From History"
+msgid_plural "Remove Songs From History"
+msgstr[0] ""
+
+#: src/window/mod.rs:194
 msgid "Failed to load history"
 msgstr ""
 
@@ -400,7 +424,7 @@ msgstr ""
 msgid "Recognizing…"
 msgstr ""
 
-#: src/window/song_page.rs:128
+#: src/window/song_page.rs:170
 msgid "Failed to launch {}"
 msgstr ""
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-15 12:47+0800\n"
+"POT-Creation-Date: 2022-04-22 08:24+0800\n"
 "PO-Revision-Date: 2022-04-18 11:07+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -20,12 +20,12 @@ msgstr ""
 "X-Generator: Weblate 4.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:40
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:128
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
 msgstr "Визначайте пісні за лічені секунди"
 
@@ -35,22 +35,24 @@ msgid "Shazam;Music;Song;Identify;"
 msgstr "Шазам;Музика;Пісня;Визначити;Shazam;Music;Song;Identify;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
+#: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
 msgstr "Типова ширина вікна"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:10
+#: data/io.github.seadve.Mousai.gschema.xml.in:11
+#: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
 msgstr "Типова висота вікна"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:14
+#: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
 msgstr "Типова поведінка розгорнутого вікна"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:18
+#: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
 msgstr "Містить нещодавно визначені пісні"
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:26
+#: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
 msgstr "Бажане джерело звуку для запису звуку"
 
@@ -109,7 +111,7 @@ msgstr "📱 Простий користувацький інтерфейс."
 msgid "⌨️ User-friendly keyboard shortcuts."
 msgstr "⌨️ Зручні комбінації клавіш."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:292
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
 msgid "Dave Patrick"
 msgstr "Дейв Патрік"
 
@@ -145,7 +147,7 @@ msgstr "Ска_сувати вибір"
 msgid "Start Identifying Music"
 msgstr "Почати визначення музики"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:120
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:134
 msgid "Listen"
 msgstr "Слухати"
 
@@ -191,12 +193,8 @@ msgid "Try a different search."
 msgstr "Спробуйте інший пошук."
 
 #: data/resources/ui/history-view.ui:166
-msgid "Remove Song From History"
-msgstr "Прибрати пісню з історії"
-
-#: data/resources/ui/history-view.ui:167
-msgid "Remove"
-msgstr "Прибрати"
+msgid "Copy Song"
+msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -264,32 +262,40 @@ msgstr "Зупинити"
 msgid "Return to Main Page"
 msgstr "Повернутися на головну сторінку"
 
-#: data/resources/ui/song-page.ui:133
+#: data/resources/ui/song-page.ui:34
+msgid "Remove From History"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:41
+msgid "Copy"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:147
 msgid "Information"
 msgstr "Інформація"
 
-#: data/resources/ui/song-page.ui:136
+#: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
 msgstr "Останнє прослуховування"
 
-#: data/resources/ui/song-page.ui:141
+#: data/resources/ui/song-page.ui:155
 msgid "Album"
 msgstr "Альбом"
 
-#: data/resources/ui/song-page.ui:146
+#: data/resources/ui/song-page.ui:160
 msgid "Release Date"
 msgstr "Дата випуску"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:133
+#: src/application.rs:150
 msgid "translator-credits"
 msgstr "Ihor Hordiichuk &lt;igor_ck@outlook.com&gt;"
 
-#: src/application.rs:134
+#: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
 msgstr "Авторські права 2022 Dave Patrick"
 
-#: src/application.rs:137
+#: src/application.rs:154
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -317,19 +323,19 @@ msgstr "Spotify"
 msgid "Listen on Spotify"
 msgstr "Слухати на Spotify"
 
-#: src/model/external_link/youtube.rs:30
+#: src/model/external_link/youtube.rs:28
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/model/external_link/youtube.rs:34
+#: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
 msgstr "Пошук на YouTube"
 
-#: src/recognizer/mod.rs:211
+#: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
 msgstr "Скасований запис"
 
-#: src/recognizer/mod.rs:225
+#: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
 msgstr "Скасоване розпізнавання"
 
@@ -373,18 +379,41 @@ msgstr "{} Уведіть токени API у налаштуваннях."
 msgid "Please input a valid API token."
 msgstr "Введіть дійсний токен API."
 
-#: src/window/history_view.rs:382
+#: src/window/history_view.rs:112 src/window/song_page.rs:84
+msgid "Copied song to clipboard"
+msgstr ""
+
+#: src/window/history_view.rs:392
+msgid "_Undo"
+msgstr ""
+
+#: src/window/history_view.rs:411
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/window/history_view.rs:476
 msgid "Click on items to select them"
 msgstr "Натисніть на елементи, щоб вибрати їх"
 
-#: src/window/history_view.rs:384
+#: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "Вибрана {} пісня"
 msgstr[1] "Вибрано {} пісні"
 msgstr[2] "Вибрано {} пісень"
 
-#: src/window/mod.rs:190
+#: src/window/history_view.rs:487
+#, fuzzy
+msgid "Remove Song From History"
+msgid_plural "Remove Songs From History"
+msgstr[0] "Прибрати пісню з історії"
+msgstr[1] "Прибрати пісню з історії"
+msgstr[2] "Прибрати пісню з історії"
+
+#: src/window/mod.rs:194
 msgid "Failed to load history"
 msgstr "Не вдалося завантажити історію"
 
@@ -404,9 +433,12 @@ msgstr "Прослуховування…"
 msgid "Recognizing…"
 msgstr "Розпізнавання…"
 
-#: src/window/song_page.rs:128
+#: src/window/song_page.rs:170
 msgid "Failed to launch {}"
 msgstr "Не вдалося запустити {}"
+
+#~ msgid "Remove"
+#~ msgstr "Прибрати"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Визначте будь-які пісні за лічені секунди"
