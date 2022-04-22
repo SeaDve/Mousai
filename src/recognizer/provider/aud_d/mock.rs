@@ -47,7 +47,7 @@ impl AudDMock {
 
         let random_response = raw_responses
             .get(glib::random_int_range(0, raw_responses.len() as i32) as usize)
-            .expect("Random response vec is empty");
+            .expect("Out of bound index from the raw responses");
 
         log::debug!("random_response: {}", random_response);
 
