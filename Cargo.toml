@@ -22,7 +22,6 @@ anyhow = "1.0.56"
 pulsectl-rs = "0.3.2"
 futures-channel = "0.3.21"
 async-trait = "0.1.53"
-rand = "0.8.5"
 thiserror = "1.0.30"
 chrono = { version = "0.4.19", features = ["serde"] }
 mpris-player = "0.6.1"

@@ -1,6 +1,5 @@
 use async_trait::async_trait;
 use gtk::glib;
-use rand::seq::SliceRandom;
 
 use std::time::Duration;
 
@@ -47,8 +46,8 @@ impl AudDMock {
         }
 
         let random_response = raw_responses
-            .choose(&mut rand::thread_rng())
-            .expect("Failed to get choose random from raw responses");
+            .get(glib::random_int_range(0, raw_responses.len() as i32) as usize)
+            .expect("Random response vec is empty");
 
         log::debug!("random_response: {}", random_response);
 
