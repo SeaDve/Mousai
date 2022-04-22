@@ -78,6 +78,7 @@ playbackbutton.circular > button  {
 
 .activate-song-button {
   padding: 6px;
+  padding-right: 12px;
 }
 
 .playback-position-scale {
