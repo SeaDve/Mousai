@@ -111,7 +111,7 @@ impl RecognizerView {
                                 obj.imp().visualizer.push_peak(value);
                             }),
                         ))))
-                        .easing(adw::Easing::EaseOutExpo)
+                        .easing(adw::Easing::EaseOutBack)
                         .repeat_count(u32::MAX)
                         .alternate(true)
                         .build()
