@@ -333,19 +333,16 @@ impl HistoryView {
             .get()
             .and_then(|model| model.upgrade())
             .map_or(Vec::new(), |selection_model| {
-                let mut selected_songs = Vec::new();
-                for position in 0..selection_model.n_items() {
-                    if selection_model.is_selected(position) {
-                        selected_songs.push(
-                            selection_model
-                                .item(position)
-                                .unwrap()
-                                .downcast::<Song>()
-                                .unwrap(),
-                        );
-                    }
-                }
-                selected_songs
+                (0..selection_model.n_items())
+                    .filter(|position| selection_model.is_selected(*position))
+                    .map(|position| {
+                        selection_model
+                            .item(position)
+                            .unwrap()
+                            .downcast::<Song>()
+                            .unwrap()
+                    })
+                    .collect::<Vec<_>>()
             })
     }
 
