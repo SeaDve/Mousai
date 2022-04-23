@@ -81,6 +81,10 @@ impl AudD {
             );
         }
 
+        if let Some(lyrics_data) = data.lyrics_data {
+            song_builder.lyrics(&lyrics_data.lyrics);
+        }
+
         if let Some(album_image) = album_images.first() {
             song_builder.album_art_link(album_image);
         }
@@ -95,7 +99,7 @@ impl AudD {
     async fn recognize_inner(&self, recording: &AudioRecording) -> Result<Song, Error> {
         let data = json!({
             "api_token": self.api_token,
-            "return": "spotify,apple_music,musicbrainz",
+            "return": "spotify,apple_music,musicbrainz,lyrics",
             "audio": recording.to_base_64().map_err(Error::FileConvert)?,
         });
 

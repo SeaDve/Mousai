@@ -3,6 +3,13 @@ use serde::Deserialize;
 use super::error::{AudDError, Error};
 
 #[derive(Debug, Deserialize)]
+pub struct LyricsData {
+    pub lyrics: String,
+    /// A json string containing `provider` and `url` field
+    pub media: String,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct Preview {
     pub url: String,
 }
@@ -59,6 +66,8 @@ pub struct Data {
     pub spotify_data: Option<SpotifyData>,
     #[serde(rename(deserialize = "apple_music"))]
     pub apple_music_data: Option<AppleMusicData>,
+    #[serde(rename(deserialize = "lyrics"))]
+    pub lyrics_data: Option<LyricsData>,
 }
 
 #[derive(Debug, Deserialize)]

@@ -42,9 +42,14 @@ mod imp {
         pub release_date_row: TemplateChild<InformationRow>,
         #[template_child]
         pub external_links_box: TemplateChild<gtk::FlowBox>,
+        #[template_child]
+        pub lyrics_group: TemplateChild<adw::PreferencesGroup>,
+        #[template_child]
+        pub lyrics_label: TemplateChild<gtk::Label>,
 
         pub song: RefCell<Option<Song>>,
         pub player: OnceCell<WeakRef<Player>>,
+        pub bindings: RefCell<Vec<glib::Binding>>,
     }
 
     #[glib::object_subclass]
@@ -215,6 +220,32 @@ impl SongPage {
 
         let imp = self.imp();
         imp.song.replace(song.clone());
+
+        {
+            let mut bindings = imp.bindings.borrow_mut();
+
+            for binding in bindings.drain(..) {
+                binding.unbind();
+            }
+
+            if let Some(ref song) = song {
+                bindings.push(
+                    song.bind_property("lyrics", &imp.lyrics_label.get(), "label")
+                        .flags(glib::BindingFlags::SYNC_CREATE)
+                        .build(),
+                );
+                bindings.push(
+                    song.bind_property("lyrics", &imp.lyrics_group.get(), "visible")
+                        .transform_to(|_, value| {
+                            let lyrics = value.get::<Option<String>>().unwrap();
+                            Some(lyrics.is_some().to_value())
+                        })
+                        .flags(glib::BindingFlags::SYNC_CREATE)
+                        .build(),
+                );
+            }
+        }
+
         imp.album_cover.set_song(song);
         self.update_information();
         self.update_playback_ui();

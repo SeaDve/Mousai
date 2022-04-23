@@ -26,6 +26,7 @@ mod imp {
         pub external_links: ExternalLinkList,
         pub album_art_link: Option<String>,
         pub playback_link: Option<String>,
+        pub lyrics: Option<String>,
     }
 
     #[derive(Debug, Default)]
@@ -107,6 +108,13 @@ mod imp {
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
                     ),
+                    glib::ParamSpecString::new(
+                        "lyrics",
+                        "Lyrics",
+                        "Lyrics",
+                        None,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -156,6 +164,10 @@ mod imp {
                     let playback_link = value.get().unwrap();
                     self.inner.borrow_mut().playback_link = playback_link;
                 }
+                "lyrics" => {
+                    let lyrics = value.get().unwrap();
+                    obj.set_lyrics(lyrics);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -171,6 +183,7 @@ mod imp {
                 "external-links" => obj.external_links().to_value(),
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
+                "lyrics" => obj.lyrics().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -243,6 +256,15 @@ impl Song {
         self.imp().inner.borrow().playback_link.clone()
     }
 
+    pub fn set_lyrics(&self, lyrics: Option<&str>) {
+        self.imp().inner.borrow_mut().lyrics = lyrics.map(|lyrics| lyrics.to_string());
+        self.notify("lyrics");
+    }
+
+    pub fn lyrics(&self) -> Option<String> {
+        self.imp().inner.borrow().lyrics.clone()
+    }
+
     pub fn album_art(&self) -> anyhow::Result<&AlbumArt> {
         let album_art_link = self
             .album_art_link()
@@ -306,6 +328,11 @@ impl SongBuilder {
         self
     }
 
+    pub fn lyrics(&mut self, lyrics: &str) -> &mut Self {
+        self.properties.push(("lyrics", lyrics.to_value()));
+        self
+    }
+
     pub fn external_link(&mut self, external_link: impl ExternalLink + 'static) -> &mut Self {
         self.external_links.push(Box::new(external_link));
         self
@@ -338,6 +365,7 @@ mod test {
         )
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")
+        .lyrics("Some song lyrics")
         .build();
 
         assert_eq!(song.title(), "Some song");
@@ -346,5 +374,6 @@ mod test {
         assert_eq!(song.release_date(), "00-00-0000");
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
+        assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
     }
 }

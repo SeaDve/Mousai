@@ -162,6 +162,17 @@
                     </child>
                   </object>
                 </child>
+                <child>
+                  <object class="AdwPreferencesGroup" id="lyrics_group">
+                    <property name="title" translatable="yes">Lyrics</property>
+                    <child>
+                      <object class="GtkLabel" id="lyrics_label">
+                        <property name="wrap">True</property>
+                        <property name="justify">center</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </property>
           </object>
