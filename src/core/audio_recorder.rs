@@ -4,10 +4,7 @@ use gtk::{
     glib::{self, clone, subclass::prelude::*},
 };
 
-use std::{
-    cell::{Cell, RefCell},
-    time::Duration,
-};
+use std::{cell::RefCell, time::Duration};
 
 use super::AudioRecording;
 
@@ -18,7 +15,6 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct AudioRecorder {
-        pub(super) peak: Cell<f64>,
         pub(super) device_name: RefCell<Option<String>>,
 
         pub(super) current: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
@@ -33,31 +29,28 @@ mod imp {
     impl ObjectImpl for AudioRecorder {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("stopped", &[], <()>::static_type().into()).build()]
+                vec![
+                    Signal::builder("stopped", &[], <()>::static_type().into()).build(),
+                    Signal::builder(
+                        "peak",
+                        &[f64::static_type().into()],
+                        <()>::static_type().into(),
+                    )
+                    .build(),
+                ]
             });
             SIGNALS.as_ref()
         }
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    glib::ParamSpecDouble::new(
-                        "peak",
-                        "Peak",
-                        "Current volume peak while recording",
-                        f64::MIN,
-                        f64::MAX,
-                        0.0,
-                        glib::ParamFlags::READABLE,
-                    ),
-                    glib::ParamSpecString::new(
-                        "device-name",
-                        "Device Name",
-                        "The device name pulsesrc will use",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
-                ]
+                vec![glib::ParamSpecString::new(
+                    "device-name",
+                    "Device Name",
+                    "The device name pulsesrc will use",
+                    None,
+                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                )]
             });
             PROPERTIES.as_ref()
         }
@@ -80,7 +73,6 @@ mod imp {
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
-                "peak" => obj.peak().to_value(),
                 "device-name" => obj.device_name().to_value(),
                 _ => unimplemented!(),
             }
@@ -112,15 +104,16 @@ impl AudioRecorder {
         })
     }
 
-    pub fn connect_peak_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_peak<F>(&self, f: F) -> glib::SignalHandlerId
     where
-        F: Fn(&Self) + 'static,
+        F: Fn(&Self, f64) + 'static,
     {
-        self.connect_notify_local(Some("peak"), move |obj, _| f(obj))
-    }
-
-    pub fn peak(&self) -> f64 {
-        self.imp().peak.get()
+        self.connect_local("peak", true, move |values| {
+            let obj = values[0].get::<Self>().unwrap();
+            let peak = values[1].get::<f64>().unwrap();
+            f(&obj, peak);
+            None
+        })
     }
 
     pub fn device_name(&self) -> Option<String> {
@@ -214,21 +207,20 @@ impl AudioRecorder {
         use gst::MessageView;
 
         match message.view() {
-            MessageView::Element(_) => {
-                let peak = message
-                    .structure()
-                    .unwrap()
-                    .value("peak")
-                    .unwrap()
-                    .get::<glib::ValueArray>()
-                    .unwrap()
-                    .nth(0)
-                    .unwrap()
-                    .get::<f64>()
-                    .unwrap();
-
-                self.imp().peak.set(peak);
-                self.notify("peak");
+            MessageView::Element(element) => {
+                if let Some(structure) = element.structure() {
+                    if structure.has_name("level") {
+                        let peak = structure
+                            .get::<&glib::ValueArray>("peak")
+                            .unwrap()
+                            .nth(0)
+                            .unwrap()
+                            .get::<f64>()
+                            .unwrap();
+                        let normalized_peak = 10_f64.powf(peak / 20.0);
+                        self.emit_by_name::<()>("peak", &[&normalized_peak]);
+                    }
+                }
 
                 Continue(true)
             }

@@ -68,9 +68,8 @@ impl RecognizerView {
         }));
 
         let audio_recorder = recognizer.audio_recorder();
-        audio_recorder.connect_peak_notify(clone!(@weak self as obj => move |recorder| {
-            let peak = 10_f64.powf(recorder.peak() / 20.0);
-            obj.imp().visualizer.push_peak(peak as f64);
+        audio_recorder.connect_peak(clone!(@weak self as obj => move |_, peak| {
+            obj.imp().visualizer.push_peak(peak);
         }));
         audio_recorder.connect_stopped(clone!(@weak self as obj => move |_| {
             obj.imp().visualizer.clear_peaks();
