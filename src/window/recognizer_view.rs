@@ -104,7 +104,7 @@ impl RecognizerView {
                     adw::TimedAnimation::builder()
                         .widget(&imp.visualizer.get())
                         .value_from(0.0)
-                        .value_to(0.6)
+                        .value_to(0.8)
                         .duration(1500)
                         .target(&adw::CallbackAnimationTarget::new(Some(Box::new(
                             clone!(@weak self as obj => move |value| {
