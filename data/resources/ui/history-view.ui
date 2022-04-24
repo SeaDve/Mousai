@@ -144,7 +144,6 @@
                 <child>
                   <object class="AdwStatusPage" id="empty_page">
                     <property name="vexpand">True</property>
-                    <property name="icon-name">emblem-music-symbolic</property>
                     <property name="title" translatable="yes">Start Identifying Music!</property>
                     <property name="description" translatable="yes">Click the listen button to start.</property>
                   </object>
