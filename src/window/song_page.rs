@@ -154,31 +154,33 @@ mod imp {
 
             obj.add_css_class("view");
 
-            self.external_links_box
-                .connect_child_activated(|_, box_child| {
-                    if let Some(external_link_tile) = box_child
-                        .child()
-                        .and_then(|child| child.downcast::<ExternalLinkTile>().ok())
+            self.external_links_box.connect_child_activated(|_, child| {
+                let external_link_tile = child
+                    .clone()
+                    .downcast::<ExternalLinkTile>()
+                    .expect("Expected `ExternalLinkTile` as child");
+
+                spawn!(async move {
+                    let external_link_wrapper = external_link_tile.external_link();
+                    let external_link = external_link_wrapper.inner();
+                    let uri = external_link.uri();
+
+                    if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
+                        log::warn!("Trying to launch an invalid Uri: {err:?}");
+                    }
+
+                    if let Err(err) = gio::AppInfo::launch_default_for_uri_future(
+                        &uri,
+                        gio::AppLaunchContext::NONE,
+                    )
+                    .await
                     {
-                        spawn!(async move {
-                            let external_link_wrapper = external_link_tile.external_link();
-                            let external_link = external_link_wrapper.inner();
-                            let uri = external_link.uri();
-
-                            if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
-                                log::warn!("Trying to launch an invalid Uri: {err:?}");
-                            }
-
-                            if let Err(err) = gio::AppInfo::launch_default_for_uri_future(&uri, gio::AppLaunchContext::NONE).await
-                            {
-                                log::warn!("Failed to launch default for uri `{uri}`: {err:?}");
-                                Application::default().show_error(&gettext!("Failed to launch {}", external_link.name()));
-                            }
-                        });
-                    } else {
-                        log::error!("Failed to activate external link: The FlowBoxChild does not have a child of ExternalLinkTile");
+                        log::warn!("Failed to launch default for uri `{uri}`: {err:?}");
+                        Application::default()
+                            .show_error(&gettext!("Failed to launch {}", external_link.name()));
                     }
                 });
+            });
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -313,14 +315,13 @@ impl SongPage {
     }
 
     fn update_external_links(&self) {
-        if let Some(song) = self.song() {
-            self.imp()
-                .external_links_box
-                .bind_model(Some(&song.external_links()), |item| {
-                    let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
-                    ExternalLinkTile::new(wrapper).upcast()
-                });
-        }
+        self.imp().external_links_box.bind_model(
+            self.song().map(|song| song.external_links()).as_ref(),
+            |item| {
+                let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
+                ExternalLinkTile::new(wrapper).upcast()
+            },
+        );
     }
 
     fn update_information(&self) {

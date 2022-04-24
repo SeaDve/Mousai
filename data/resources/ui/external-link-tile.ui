@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiExternalLinkTile" parent="GtkWidget">
-    <property name="layout-manager">
-      <object class="GtkBinLayout"/>
-    </property>
-    <child>
+  <template class="MsaiExternalLinkTile" parent="GtkFlowBoxChild">
+    <property name="child">
       <object class="GtkBox">
         <property name="spacing">12</property>
         <property name="margin-start">36</property>
@@ -26,11 +23,10 @@
           </object>
         </child>
       </object>
-    </child>
+    </property>
     <style>
       <class name="external-link-tile"/>
       <class name="card"/>
-      <class name="activatable"/>
     </style>
   </template>
 </interface>

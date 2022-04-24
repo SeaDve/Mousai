@@ -24,7 +24,7 @@ mod imp {
     impl ObjectSubclass for ExternalLinkTile {
         const NAME: &'static str = "MsaiExternalLinkTile";
         type Type = super::ExternalLinkTile;
-        type ParentType = gtk::Widget;
+        type ParentType = gtk::FlowBoxChild;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
@@ -83,20 +83,15 @@ mod imp {
             self.image.set_icon_name(Some(external_link.icon_name()));
             self.label.set_label(&external_link.name());
         }
-
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
-                child.unparent();
-            }
-        }
     }
 
     impl WidgetImpl for ExternalLinkTile {}
+    impl FlowBoxChildImpl for ExternalLinkTile {}
 }
 
 glib::wrapper! {
     pub struct ExternalLinkTile(ObjectSubclass<imp::ExternalLinkTile>)
-        @extends gtk::Widget;
+        @extends gtk::Widget, gtk::FlowBoxChild;
 }
 
 impl ExternalLinkTile {
