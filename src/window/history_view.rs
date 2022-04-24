@@ -164,6 +164,14 @@ mod imp {
                     obj.show_undo_remove_toast();
                 }));
 
+            self.stack
+                .connect_transition_running_notify(clone!(@weak obj => move |stack| {
+                    let imp = obj.imp();
+                    if !stack.is_transition_running() && stack.visible_child().as_ref() == Some(imp.history_child.upcast_ref()) {
+                        imp.song_child.set_song(None);
+                    }
+                }));
+
             obj.update_selection_actions();
             obj.update_selection_mode_ui();
             obj.show_history();
@@ -216,7 +224,6 @@ impl HistoryView {
     pub fn show_history(&self) {
         let imp = self.imp();
         self.update_history_stack();
-        imp.song_child.set_song(None);
         imp.stack.set_visible_child(&imp.history_child.get());
     }
 
