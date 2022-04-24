@@ -64,7 +64,7 @@ impl RecognizerView {
     /// Must be only called once
     pub fn bind_recognizer(&self, recognizer: &Recognizer) {
         recognizer.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_stack();
+            obj.update_ui();
         }));
 
         let audio_recorder = recognizer.audio_recorder();
@@ -77,7 +77,7 @@ impl RecognizerView {
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 
-        self.update_stack();
+        self.update_ui();
     }
 
     fn recognizer(&self) -> &Recognizer {
@@ -87,7 +87,7 @@ impl RecognizerView {
         })
     }
 
-    fn update_stack(&self) {
+    fn update_ui(&self) {
         let imp = self.imp();
 
         match self.recognizer().state() {
