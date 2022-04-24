@@ -2,7 +2,7 @@ mod state;
 
 use gst_player::prelude::*;
 use gtk::{
-    glib::{self, clone},
+    glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
@@ -163,12 +163,13 @@ impl Player {
     where
         F: Fn(&Self, &glib::Error) + 'static,
     {
-        self.connect_local("error", true, move |values| {
-            let obj = values[0].get::<Self>().unwrap();
-            let error = values[1].get::<glib::Error>().unwrap();
-            f(&obj, &error);
-            None
-        })
+        self.connect_closure(
+            "error",
+            true,
+            closure_local!(|obj: &Self, error: &glib::Error| {
+                f(obj, error);
+            }),
+        )
     }
 
     pub fn connect_song_notify<F>(&self, f: F) -> glib::SignalHandlerId

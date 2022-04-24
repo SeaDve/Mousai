@@ -1,4 +1,9 @@
-use gtk::{gio, glib, prelude::*, subclass::prelude::*};
+use gtk::{
+    gio,
+    glib::{self, closure_local},
+    prelude::*,
+    subclass::prelude::*,
+};
 use indexmap::IndexMap;
 
 use std::cell::RefCell;
@@ -157,12 +162,13 @@ impl SongList {
     where
         F: Fn(&Self, &Song) + 'static,
     {
-        self.connect_local("removed", true, move |values| {
-            let obj = values[0].get::<Self>().unwrap();
-            let song = values[1].get::<Song>().unwrap();
-            f(&obj, &song);
-            None
-        })
+        self.connect_closure(
+            "removed",
+            true,
+            closure_local!(|obj: &Self, song: &Song| {
+                f(obj, song);
+            }),
+        )
     }
 }
 

@@ -1,7 +1,7 @@
 use gst_pbutils::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
-    glib::{self, clone, subclass::prelude::*},
+    glib::{self, clone, closure_local, subclass::prelude::*},
 };
 
 use std::{cell::RefCell, time::Duration};
@@ -97,23 +97,26 @@ impl AudioRecorder {
     where
         F: Fn(&Self) + 'static,
     {
-        self.connect_local("stopped", true, move |values| {
-            let obj = values[0].get::<Self>().unwrap();
-            f(&obj);
-            None
-        })
+        self.connect_closure(
+            "stopped",
+            true,
+            closure_local!(|obj: &Self| {
+                f(obj);
+            }),
+        )
     }
 
     pub fn connect_peak<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self, f64) + 'static,
     {
-        self.connect_local("peak", true, move |values| {
-            let obj = values[0].get::<Self>().unwrap();
-            let peak = values[1].get::<f64>().unwrap();
-            f(&obj, peak);
-            None
-        })
+        self.connect_closure(
+            "peak",
+            true,
+            closure_local!(|obj: &Self, peak: f64| {
+                f(obj, peak);
+            }),
+        )
     }
 
     pub fn device_name(&self) -> Option<String> {

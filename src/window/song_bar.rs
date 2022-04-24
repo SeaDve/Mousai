@@ -1,5 +1,5 @@
 use gtk::{
-    glib::{self, clone},
+    glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
@@ -161,12 +161,13 @@ impl SongBar {
     where
         F: Fn(&Self, &Song) + 'static,
     {
-        self.connect_local("song-activated", true, move |values| {
-            let obj = values[0].get::<Self>().unwrap();
-            let song = values[1].get::<Song>().unwrap();
-            f(&obj, &song);
-            None
-        })
+        self.connect_closure(
+            "song-activated",
+            true,
+            closure_local!(|obj: &Self, song: &Song| {
+                f(obj, song);
+            }),
+        )
     }
 
     pub fn set_song(&self, song: Option<Song>) -> anyhow::Result<()> {

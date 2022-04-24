@@ -2,7 +2,7 @@ mod provider;
 
 use gettextrs::gettext;
 use gtk::{
-    glib::{self, clone},
+    glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
@@ -115,12 +115,13 @@ impl Recognizer {
     where
         F: Fn(&Self, &Song) + 'static,
     {
-        self.connect_local("song-recognized", true, move |values| {
-            let obj = values[0].get::<Self>().unwrap();
-            let song = values[1].get::<Song>().unwrap();
-            f(&obj, &song);
-            None
-        })
+        self.connect_closure(
+            "song-recognized",
+            true,
+            closure_local!(|obj: &Self, song: &Song| {
+                f(obj, song);
+            }),
+        )
     }
 
     pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
