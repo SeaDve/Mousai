@@ -152,8 +152,6 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            obj.add_css_class("view");
-
             self.external_links_box.connect_child_activated(|_, child| {
                 let external_link_tile = child
                     .clone()

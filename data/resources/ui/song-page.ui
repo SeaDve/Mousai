@@ -6,6 +6,9 @@
         <property name="orientation">vertical</property>
       </object>
     </property>
+    <style>
+      <class name="background"/>
+    </style>
     <child>
       <object class="GtkHeaderBar">
         <property name="title-widget">

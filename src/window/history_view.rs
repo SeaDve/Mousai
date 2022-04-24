@@ -156,8 +156,6 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            obj.add_css_class("view");
-
             obj.setup_grid();
 
             self.song_child
