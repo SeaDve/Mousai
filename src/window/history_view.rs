@@ -11,6 +11,7 @@ use std::cell::{Cell, RefCell};
 
 use super::{song_page::SongPage, song_tile::SongTile, Window};
 use crate::{
+    config::APP_ID,
     model::{Song, SongList},
     player::Player,
     Application,
@@ -156,6 +157,7 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
+            self.empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
 
             self.song_child
