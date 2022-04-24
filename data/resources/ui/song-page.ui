@@ -165,20 +165,10 @@
                 <child>
                   <object class="AdwPreferencesGroup" id="lyrics_group">
                     <property name="title" translatable="yes">Lyrics</property>
-                    <property name="header-suffix">
-                      <object class="GtkButton">
-                        <property name="tooltip-text" translatable="yes">Copy Lyrics</property>
-                        <property name="icon-name">edit-copy-symbolic</property>
-                        <property name="action-name">song-page.copy-song-lyrics</property>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </property>
                     <child>
                       <object class="GtkLabel" id="lyrics_label">
                         <property name="wrap">True</property>
-                        <property name="justify">center</property>
+                        <property name="xalign">0</property>
                         <style>
                           <class name="lyrics-label"/>
                         </style>
