@@ -216,6 +216,7 @@ impl HistoryView {
     pub fn show_history(&self) {
         let imp = self.imp();
         self.update_history_stack();
+        imp.song_child.set_song(None);
         imp.stack.set_visible_child(&imp.history_child.get());
     }
 
