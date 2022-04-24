@@ -93,6 +93,18 @@ mod imp {
                     log::error!("Failed to copy song: There is no active song in SongPage");
                 }
             });
+
+            klass.install_action("song-page.copy-song-lyrics", None, |obj, _, _| {
+                if let Some(ref lyrics) = obj.song().and_then(|song| song.lyrics()) {
+                    if let Some(display) = gdk::Display::default() {
+                        display.clipboard().set_text(lyrics);
+                        let toast = adw::Toast::new(&gettext("Copied lyrics to clipboard"));
+                        Application::default().add_toast(&toast);
+                    }
+                } else {
+                    log::error!("Failed to copy song: There is no active song in SongPage");
+                }
+            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {

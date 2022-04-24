@@ -102,3 +102,9 @@ playbackbutton.circular > button  {
   min-height: 12px;
 }
 
+/* SongPage */
+
+.lyrics-label {
+  line-height: 2em;
+}
+
