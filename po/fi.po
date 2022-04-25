@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2021.
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
-">\n"
+"PO-Revision-Date: 2022-04-25 19:08+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -26,7 +26,7 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Tunnista kappaleet sekunneissa"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
@@ -38,12 +38,12 @@ msgstr ""
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
-msgstr ""
+msgstr "Ikkunan oletusleveys"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr ""
+msgstr "Ikkunan oletuskorkeus"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
@@ -103,7 +103,7 @@ msgstr "🎼 Kuuntele esimakua tunnistetusta kappaleesta."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 Selaa ja kuuntele kappaleita eri palveluntarjoajilta."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -139,11 +139,11 @@ msgstr "_Tietoja - Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "Valitse _kaikki"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "Älä valitse _mitään"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -155,19 +155,19 @@ msgstr "Kuuntele"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Avaa päävalikko"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Valitse"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Etsi kappaleita"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Peru valinta"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -176,11 +176,11 @@ msgstr "Peru"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Kirjoita kappaleen tai esittäjän nimi"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Aloita musiikin tunnistaminen!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -188,19 +188,19 @@ msgstr "Napsauta kuuntelupainiketta aloittaaksesi."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Tuloksia ei löytynyt"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Kokeile eri hakuehtoja."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Kopioi kappale"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Peru kuuntelu"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -210,12 +210,12 @@ msgstr "Yleiset"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Avaa päävalikko"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Etsi"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
@@ -230,31 +230,31 @@ msgstr "Lopeta"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Ohjaimet"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Kuuntelu päälle/pois"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Toisto päälle/pois"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Liikkuminen"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Siirry takaisin"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Näytä kappaleen tiedot"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
@@ -262,31 +262,31 @@ msgstr "Pysäytä"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Palaa pääsivulle"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Poista historiasta"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Kopioi"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
-msgstr ""
+msgstr "Tiedot"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
-msgstr ""
+msgstr "Viimeksi kuultu"
 
 #: data/resources/ui/song-page.ui:155
 msgid "Album"
-msgstr ""
+msgstr "Albumi"
 
 #: data/resources/ui/song-page.ui:160
 msgid "Release Date"
-msgstr ""
+msgstr "Julkaisupäivä"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:150
@@ -295,7 +295,7 @@ msgstr "Jiri Grönroos"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Tekijänoikeus 2022 Dave Patrick"
 
 #: src/application.rs:154
 msgid "GitHub"
@@ -303,133 +303,136 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Selaa Apple Musicissa"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Selaa AudD:ssä"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Kuuntele Spotifyssa"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Etsi YouTubesta"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Peru nauhoitus"
 
 #: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Peru tunnistaminen"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"Vastauksen jäsentäminen epäonnistui. Ilmoita asiasta Mousain vikaseurantaan."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Tiedoston muuntaminen epäonnistui. Ilmoita asiasta Mousain vikaseurantaan."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Palvelimeen yhdistäminen epäonnistui."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Päivittäinen raja tuli täyteen."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Äänen sormenjäljittäminen epäonnistui. Kenties ääntä ei kuulunut lainkaan."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Tarkista internetyhteyden toimivuus."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Tälle kappaleelle ei löytynyt vastaavuuksia."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Syötä rajapintapoletti asetuksissa."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Anna kelvollinen rajapintapoletti."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Kopioitu kappale leikepöydälle"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Kumoa"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poistettu {} kappale"
+msgstr[1] "Poistettu {} kappaletta"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Napsauta kohteita valitaksesi ne"
 
 #: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valittu {} kappale"
+msgstr[1] "Valittu {} kappaletta"
 
 #: src/window/history_view.rs:487
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Poista kappale historiasta"
+msgstr[1] "Poista kappaleet historiasta"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
-msgstr ""
+msgstr "Historian lataaminen epäonnistui"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Toista"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Keskeytä"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Kuunnellaan…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Tunnistetaan…"
 
 #: src/window/song_page.rs:170
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Ei voitu käynnistää {}"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Tunnista mikä tahansa kappale sekunneissa"

@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-04-25 19:08+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -195,7 +195,7 @@ msgstr "Probeer een andere zoekopdracht."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Nummer kopiëren"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -265,11 +265,11 @@ msgstr "Terug naar hoofdscherm"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Verwijderen uit geschiedenis"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Kopiëren"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
@@ -382,17 +382,17 @@ msgstr "Voer een geldige api-sleutel in."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Het nummer is gekopieerd naar het klembord"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Ongedaan maken"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Er is {} nummer verwijderd"
+msgstr[1] "Er zijn {} nummers verwijderd"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -405,11 +405,10 @@ msgstr[0] "{} nummer geselecteerd"
 msgstr[1] "{} nummers geselecteerd"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Nummer verwijderen uit geschiedenis"
-msgstr[1] "Nummer verwijderen uit geschiedenis"
+msgstr[1] "Nummers verwijderen uit geschiedenis"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"

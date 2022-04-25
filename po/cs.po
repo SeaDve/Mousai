@@ -4,20 +4,21 @@
 # Jan Novák <novak@silen.org>, 2021.
 # Vojtěch Perník <translations@pervoj.cz>, 2021, 2022.
 # Petr Šimáček <petr.simacek@gmail.com>, 2021.
+# multiflexi <multi.flexi@seznam.cz>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-04-25 19:08+0000\n"
+"Last-Translator: multiflexi <multi.flexi@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -193,7 +194,7 @@ msgstr "Zkuste jiné vyhledávání."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Kopírovat skladbu"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -263,11 +264,11 @@ msgstr "Zpět na hlavní stránku"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Odstranit z historie"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Kopírovat"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
@@ -363,6 +364,7 @@ msgstr "Dosažen denní limit."
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Audio se nepodařilo identifikovat. Je možné, že nebyl zaznamenán žádný zvuk."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
@@ -382,18 +384,18 @@ msgstr "Prosím, zadejte platný token API."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Skladba zkopírována do schránky"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Zpět"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odstraněna {} skladba"
+msgstr[1] "Odstraněny {} skladby"
+msgstr[2] "Odstraněno {} skladeb"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -407,12 +409,11 @@ msgstr[1] "Vybrány {} skladby"
 msgstr[2] "Vybráno {} skladeb"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Odebrat skladbu z historie"
-msgstr[1] "Odebrat skladbu z historie"
-msgstr[2] "Odebrat skladbu z historie"
+msgstr[1] "Odebrat skladby z historie"
+msgstr[2] "Odebrat skladby z historie"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"

@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-04-25 19:08+0000\n"
+"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -194,7 +194,7 @@ msgstr "Спробуйте інший пошук."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Копіювати пісню"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -264,11 +264,11 @@ msgstr "Повернутися на головну сторінку"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Прибрати з історії"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Копіювати"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
@@ -381,18 +381,18 @@ msgstr "Введіть дійсний токен API."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Пісню скопійовано до буфера обміну"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Скасувати"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Вилучено {} пісню"
+msgstr[1] "Вилучено {} пісні"
+msgstr[2] "Вилучено {} пісень"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -406,12 +406,11 @@ msgstr[1] "Вибрано {} пісні"
 msgstr[2] "Вибрано {} пісень"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] "Прибрати пісню з історії"
-msgstr[1] "Прибрати пісню з історії"
-msgstr[2] "Прибрати пісню з історії"
+msgstr[0] "Вилучити пісню з історії"
+msgstr[1] "Вилучити пісні з історії"
+msgstr[2] "Вилучити пісні з історії"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
