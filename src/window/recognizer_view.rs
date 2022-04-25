@@ -87,45 +87,43 @@ impl RecognizerView {
         })
     }
 
+    fn recognizing_animation(&self) -> &adw::TimedAnimation {
+        let imp = self.imp();
+        imp.recognizing_animation.get_or_init(|| {
+            adw::TimedAnimation::builder()
+                .widget(&imp.visualizer.get())
+                .value_from(0.0)
+                .value_to(0.8)
+                .duration(1500)
+                .target(&adw::CallbackAnimationTarget::new(Some(Box::new(
+                    clone!(@weak self as obj => move |value| {
+                        obj.imp().visualizer.push_peak(value);
+                    }),
+                ))))
+                .easing(adw::Easing::EaseOutBack)
+                .repeat_count(u32::MAX)
+                .alternate(true)
+                .build()
+        })
+    }
+
     fn update_ui(&self) {
         let imp = self.imp();
 
         match self.recognizer().state() {
             RecognizerState::Listening => {
-                if let Some(recognizing_animation) = imp.recognizing_animation.get() {
-                    imp.visualizer.clear_peaks();
-                    recognizing_animation.pause();
-                }
-
+                imp.visualizer.clear_peaks();
+                self.recognizing_animation().pause();
                 imp.title.set_label(&gettext("Listening…"));
             }
             RecognizerState::Recognizing => {
-                let animation = imp.recognizing_animation.get_or_init(|| {
-                    adw::TimedAnimation::builder()
-                        .widget(&imp.visualizer.get())
-                        .value_from(0.0)
-                        .value_to(0.8)
-                        .duration(1500)
-                        .target(&adw::CallbackAnimationTarget::new(Some(Box::new(
-                            clone!(@weak self as obj => move |value| {
-                                obj.imp().visualizer.push_peak(value);
-                            }),
-                        ))))
-                        .easing(adw::Easing::EaseOutBack)
-                        .repeat_count(u32::MAX)
-                        .alternate(true)
-                        .build()
-                });
                 imp.visualizer.clear_peaks();
-                animation.play();
-
+                self.recognizing_animation().play();
                 imp.title.set_label(&gettext("Recognizing…"));
             }
             RecognizerState::Null => {
-                if let Some(recognizing_animation) = imp.recognizing_animation.get() {
-                    imp.visualizer.clear_peaks();
-                    recognizing_animation.pause();
-                }
+                imp.visualizer.clear_peaks();
+                self.recognizing_animation().pause();
             }
         }
     }
