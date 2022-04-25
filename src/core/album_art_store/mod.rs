@@ -108,6 +108,8 @@ impl AlbumArtStore {
 
         fs::create_dir_all(&cache_dir)?;
 
+        // TODO Remove cache on low memory
+
         Ok(Self(Rc::new(AlbumArtStoreInner {
             session,
             store: RefCell::default(),
