@@ -6,7 +6,7 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use super::audio_visualizer::AudioVisualizer;
+use super::waveform::Waveform;
 use crate::recognizer::{Recognizer, RecognizerState};
 
 mod imp {
@@ -19,7 +19,7 @@ mod imp {
         #[template_child]
         pub(super) title: TemplateChild<gtk::Label>,
         #[template_child]
-        pub(super) visualizer: TemplateChild<AudioVisualizer>,
+        pub(super) waveform: TemplateChild<Waveform>,
 
         pub(super) recognizing_animation: OnceCell<adw::TimedAnimation>,
         pub(super) recognizer: OnceCell<Recognizer>,
@@ -69,10 +69,10 @@ impl RecognizerView {
 
         let audio_recorder = recognizer.audio_recorder();
         audio_recorder.connect_peak(clone!(@weak self as obj => move |_, peak| {
-            obj.imp().visualizer.push_peak(peak);
+            obj.imp().waveform.push_peak(peak);
         }));
         audio_recorder.connect_stopped(clone!(@weak self as obj => move |_| {
-            obj.imp().visualizer.clear_peaks();
+            obj.imp().waveform.clear_peaks();
         }));
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
@@ -91,13 +91,13 @@ impl RecognizerView {
         let imp = self.imp();
         imp.recognizing_animation.get_or_init(|| {
             adw::TimedAnimation::builder()
-                .widget(&imp.visualizer.get())
+                .widget(&imp.waveform.get())
                 .value_from(0.0)
                 .value_to(0.8)
                 .duration(1500)
                 .target(&adw::CallbackAnimationTarget::new(Some(Box::new(
                     clone!(@weak self as obj => move |value| {
-                        obj.imp().visualizer.push_peak(value);
+                        obj.imp().waveform.push_peak(value);
                     }),
                 ))))
                 .easing(adw::Easing::EaseOutBack)
@@ -112,17 +112,17 @@ impl RecognizerView {
 
         match self.recognizer().state() {
             RecognizerState::Listening => {
-                imp.visualizer.clear_peaks();
+                imp.waveform.clear_peaks();
                 self.recognizing_animation().pause();
                 imp.title.set_label(&gettext("Listening…"));
             }
             RecognizerState::Recognizing => {
-                imp.visualizer.clear_peaks();
+                imp.waveform.clear_peaks();
                 self.recognizing_animation().play();
                 imp.title.set_label(&gettext("Recognizing…"));
             }
             RecognizerState::Null => {
-                imp.visualizer.clear_peaks();
+                imp.waveform.clear_peaks();
                 self.recognizing_animation().pause();
             }
         }

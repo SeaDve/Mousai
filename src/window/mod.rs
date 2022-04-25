@@ -1,5 +1,4 @@
 mod album_cover;
-mod audio_visualizer;
 mod external_link_tile;
 mod history_view;
 mod information_row;
@@ -9,6 +8,7 @@ mod song_bar;
 mod song_page;
 mod song_tile;
 mod time_label;
+mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};
 use gettextrs::gettext;

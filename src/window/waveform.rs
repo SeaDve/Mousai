@@ -13,24 +13,24 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default)]
-    pub struct AudioVisualizer {
+    pub struct Waveform {
         pub peaks: RefCell<VecDeque<f64>>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for AudioVisualizer {
-        const NAME: &'static str = "MsaiAudioVisualizer";
-        type Type = super::AudioVisualizer;
+    impl ObjectSubclass for Waveform {
+        const NAME: &'static str = "MsaiWaveform";
+        type Type = super::Waveform;
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
-            klass.set_css_name("audiovisualizer");
+            klass.set_css_name("waveform");
         }
     }
 
-    impl ObjectImpl for AudioVisualizer {}
+    impl ObjectImpl for Waveform {}
 
-    impl WidgetImpl for AudioVisualizer {
+    impl WidgetImpl for Waveform {
         fn snapshot(&self, obj: &Self::Type, snapshot: &gtk::Snapshot) {
             obj.on_snapshot(snapshot);
         }
@@ -38,13 +38,13 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct AudioVisualizer(ObjectSubclass<imp::AudioVisualizer>)
+    pub struct Waveform(ObjectSubclass<imp::Waveform>)
         @extends gtk::Widget;
 }
 
-impl AudioVisualizer {
+impl Waveform {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create AudioVisualizer")
+        glib::Object::new(&[]).expect("Failed to create Waveform")
     }
 
     pub fn push_peak(&self, peak: f64) {
@@ -122,7 +122,7 @@ fn ease_in_quad(x: f64) -> f64 {
     x * x
 }
 
-impl Default for AudioVisualizer {
+impl Default for Waveform {
     fn default() -> Self {
         Self::new()
     }

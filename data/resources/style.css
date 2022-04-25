@@ -2,7 +2,7 @@ albumcover > frame {
   border: none;
 }
 
-audiovisualizer {
+waveform {
   color: @accent_color;
 }
 
