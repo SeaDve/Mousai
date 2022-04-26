@@ -12,7 +12,7 @@ use std::cell::{Cell, RefCell};
 
 pub use self::provider::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
 use crate::{
-    core::{AudioRecorder, Cancellable, Cancelled},
+    core::{AudioDeviceClass, AudioRecorder, Cancellable, Cancelled},
     model::Song,
     utils, Application,
 };
@@ -253,8 +253,8 @@ fn default_device_name() -> anyhow::Result<String> {
             .string("preferred-audio-source")
             .as_str()
         {
-            "microphone" => "Audio/Source",
-            "desktop-audio" => "Audio/Sink",
+            "microphone" => AudioDeviceClass::Source,
+            "desktop-audio" => AudioDeviceClass::Sink,
             unknown_device_name => anyhow::bail!(
                 "Found invalid key `{unknown_device_name}` on `preferred-audio-source`"
             ),
@@ -262,14 +262,14 @@ fn default_device_name() -> anyhow::Result<String> {
     };
 
     let device_monitor = gst::DeviceMonitor::new();
-    device_monitor.add_filter(Some("Audio/Source"), None);
-    device_monitor.add_filter(Some("Audio/Sink"), None);
+    device_monitor.add_filter(Some(AudioDeviceClass::Source.as_str()), None);
+    device_monitor.add_filter(Some(AudioDeviceClass::Sink.as_str()), None);
     device_monitor.start()?;
 
-    log::info!("Finding device name for class `{preferred_device_class}`");
+    log::info!("Finding device name for class `{preferred_device_class:?}`");
 
     for device in device_monitor.devices() {
-        let device_class = device.device_class();
+        let device_class = AudioDeviceClass::for_str(&device.device_class())?;
 
         if device_class == preferred_device_class {
             let properties = device
@@ -282,7 +282,7 @@ fn default_device_name() -> anyhow::Result<String> {
                 let mut node_name = properties.get::<String>("node.name")?;
 
                 // FIXME test this with actual mic
-                if device_class == "Audio/Sink" {
+                if device_class == AudioDeviceClass::Sink {
                     node_name.push_str(".monitor");
                 }
 
@@ -293,6 +293,6 @@ fn default_device_name() -> anyhow::Result<String> {
 
     device_monitor.stop();
     Err(anyhow::anyhow!(
-        "Failed to found audio device for class `{preferred_device_class}`"
+        "Failed to found audio device for class `{preferred_device_class:?}`"
     ))
 }
