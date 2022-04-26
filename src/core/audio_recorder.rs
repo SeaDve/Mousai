@@ -286,7 +286,7 @@ fn default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Resu
         if device_class == preferred_device_class {
             let properties = device
                 .properties()
-                .ok_or_else(|| anyhow::anyhow!("Found no property for device"))?;
+                .ok_or_else(|| anyhow::anyhow!("No properties found for device"))?;
 
             if properties.get::<bool>("is-default")? {
                 device_monitor.stop();
