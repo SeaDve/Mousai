@@ -1,5 +1,5 @@
 use gtk::glib;
-use serde::{de, ser, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 /// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, glib::Boxed, PartialEq, Eq, PartialOrd, Ord)]
@@ -17,7 +17,11 @@ impl DateTime {
         Self(glib::DateTime::now_local().expect("You are somehow on year 9999"))
     }
 
-    pub fn fuzzy_display(&self) -> String {
+    pub fn parse_from_iso8601(text: &str) -> Result<Self, glib::BoolError> {
+        glib::DateTime::from_iso8601(text, Some(&glib::TimeZone::local())).map(Self)
+    }
+
+    pub fn fuzzy_display(&self) -> glib::GString {
         let now = Self::now();
 
         if self.0.ymd() == now.0.ymd() {
@@ -28,7 +32,12 @@ impl DateTime {
             self.0.format("%F") // 2001-07-08
         }
         .expect("DateTime formatting error")
-        .to_string()
+    }
+
+    pub fn to_iso8601(&self) -> glib::GString {
+        self.0
+            .format_iso8601()
+            .expect("Failed to construct date from iso6801")
     }
 
     pub fn format(&self, format: &str) -> Result<glib::GString, glib::BoolError> {
@@ -38,12 +47,7 @@ impl DateTime {
 
 impl Serialize for DateTime {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_str(
-            &self
-                .0
-                .format_iso8601()
-                .map_err(|_| ser::Error::custom("Failed to format date to iso8601"))?,
-        )
+        serializer.serialize_str(&self.to_iso8601())
     }
 }
 
@@ -60,9 +64,8 @@ impl<'de> de::Visitor<'de> for DateTimeVisitor {
     where
         E: de::Error,
     {
-        glib::DateTime::from_iso8601(value, Some(&glib::TimeZone::local()))
+        DateTime::parse_from_iso8601(value)
             .map_err(|_| de::Error::custom("Failed to parse date from iso8601"))
-            .map(DateTime)
     }
 }
 
