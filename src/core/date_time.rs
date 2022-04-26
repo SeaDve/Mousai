@@ -1,7 +1,7 @@
 use gtk::glib;
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de, ser, Deserialize, Deserializer, Serialize, Serializer};
 
-/// A local [`glib::DateTime`] that implements serde traits
+/// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, glib::Boxed, PartialEq, Eq, PartialOrd, Ord)]
 #[boxed_type(name = "MsaiDateTime")]
 pub struct DateTime(glib::DateTime);
@@ -38,21 +38,36 @@ impl DateTime {
 
 impl Serialize for DateTime {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        self.0
-            .format_iso8601()
-            .map_err(|_| serde::ser::Error::custom("Failed to format date to iso8601"))?
-            .serialize(serializer)
+        serializer.serialize_str(
+            &self
+                .0
+                .format_iso8601()
+                .map_err(|_| ser::Error::custom("Failed to format date to iso8601"))?,
+        )
+    }
+}
+
+struct DateTimeVisitor;
+
+impl<'de> de::Visitor<'de> for DateTimeVisitor {
+    type Value = DateTime;
+
+    fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+        formatter.write_str("an iso8601 formatted date and time string")
+    }
+
+    fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        glib::DateTime::from_iso8601(value, Some(&glib::TimeZone::local()))
+            .map_err(|_| de::Error::custom("Failed to parse date from iso8601"))
+            .map(DateTime)
     }
 }
 
 impl<'de> Deserialize<'de> for DateTime {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        Ok(Self(
-            glib::DateTime::from_iso8601(
-                &String::deserialize(deserializer)?,
-                Some(&glib::TimeZone::local()),
-            )
-            .map_err(|_| serde::de::Error::custom("Failed to parse date from iso8601"))?,
-        ))
+        deserializer.deserialize_str(DateTimeVisitor)
     }
 }
