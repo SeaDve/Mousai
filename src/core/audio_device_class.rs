@@ -1,7 +1,16 @@
-#[derive(Debug, PartialEq, Eq)]
+use gtk::glib;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[enum_type(name = "MsaiAudioDeviceClass")]
 pub enum AudioDeviceClass {
     Source,
     Sink,
+}
+
+impl Default for AudioDeviceClass {
+    fn default() -> Self {
+        Self::Source
+    }
 }
 
 impl AudioDeviceClass {
@@ -13,7 +22,7 @@ impl AudioDeviceClass {
         }
     }
 
-    pub const fn as_str(&self) -> &'static str {
+    pub const fn as_str(self) -> &'static str {
         match self {
             Self::Source => "Audio/Source",
             Self::Sink => "Audio/Sink",

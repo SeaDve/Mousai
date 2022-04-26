@@ -4,9 +4,12 @@ use gtk::{
     glib::{self, clone, closure_local, subclass::prelude::*},
 };
 
-use std::{cell::RefCell, time::Duration};
+use std::{
+    cell::{Cell, RefCell},
+    time::Duration,
+};
 
-use super::AudioRecording;
+use super::{AudioDeviceClass, AudioRecording};
 
 mod imp {
     use super::*;
@@ -15,7 +18,7 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct AudioRecorder {
-        pub(super) device_name: RefCell<Option<String>>,
+        pub(super) device_class: Cell<AudioDeviceClass>,
 
         pub(super) current: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
     }
@@ -44,11 +47,12 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecString::new(
-                    "device-name",
-                    "Device Name",
-                    "The device name pulsesrc will use",
-                    None,
+                vec![glib::ParamSpecEnum::new(
+                    "device-class",
+                    "Device Class",
+                    "The device class to look for",
+                    AudioDeviceClass::static_type(),
+                    AudioDeviceClass::default() as i32,
                     glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                 )]
             });
@@ -63,9 +67,9 @@ mod imp {
             pspec: &glib::ParamSpec,
         ) {
             match pspec.name() {
-                "device-name" => {
-                    let device_name = value.get().unwrap();
-                    obj.set_device_name(device_name);
+                "device-class" => {
+                    let device_class = value.get().unwrap();
+                    obj.set_device_class(device_class);
                 }
                 _ => unimplemented!(),
             }
@@ -73,7 +77,7 @@ mod imp {
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
-                "device-name" => obj.device_name().to_value(),
+                "device-class" => obj.device_class().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -119,19 +123,17 @@ impl AudioRecorder {
         )
     }
 
-    pub fn device_name(&self) -> Option<String> {
-        self.imp().device_name.borrow().clone()
+    pub fn device_class(&self) -> AudioDeviceClass {
+        self.imp().device_class.get()
     }
 
-    pub fn set_device_name(&self, device_name: Option<&str>) {
-        if device_name == self.device_name().as_deref() {
+    pub fn set_device_class(&self, device_class: AudioDeviceClass) {
+        if device_class == self.device_class() {
             return;
         }
 
-        self.imp()
-            .device_name
-            .replace(device_name.map(|device_name| device_name.to_string()));
-        self.notify("device-name");
+        self.imp().device_class.set(device_class);
+        self.notify("device-class");
     }
 
     pub fn start(&self) -> anyhow::Result<()> {
@@ -143,7 +145,7 @@ impl AudioRecorder {
         }
 
         let stream = gio::MemoryOutputStream::new_resizable();
-        let pipeline = default_pipeline(&stream, self.device_name().as_deref())?;
+        let pipeline = default_pipeline(&stream, self.device_class())?;
 
         pipeline
             .bus()
@@ -270,9 +272,46 @@ impl Default for AudioRecorder {
     }
 }
 
+fn default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Result<String> {
+    let device_monitor = gst::DeviceMonitor::new();
+    device_monitor.add_filter(Some(AudioDeviceClass::Source.as_str()), None);
+    device_monitor.add_filter(Some(AudioDeviceClass::Sink.as_str()), None);
+    device_monitor.start()?;
+
+    log::info!("Finding device name for class `{preferred_device_class:?}`");
+
+    for device in device_monitor.devices() {
+        let device_class = AudioDeviceClass::for_str(&device.device_class())?;
+
+        if device_class == preferred_device_class {
+            let properties = device
+                .properties()
+                .ok_or_else(|| anyhow::anyhow!("Found no property for device"))?;
+
+            if properties.get::<bool>("is-default")? {
+                device_monitor.stop();
+
+                let mut node_name = properties.get::<String>("node.name")?;
+
+                // FIXME test this with actual mic
+                if device_class == AudioDeviceClass::Sink {
+                    node_name.push_str(".monitor");
+                }
+
+                return Ok(node_name);
+            }
+        }
+    }
+
+    device_monitor.stop();
+    Err(anyhow::anyhow!(
+        "Failed to found audio device for class `{preferred_device_class:?}`"
+    ))
+}
+
 fn default_pipeline(
     stream: &gio::MemoryOutputStream,
-    device_name: Option<&str>,
+    preferred_device_class: AudioDeviceClass,
 ) -> anyhow::Result<gst::Pipeline> {
     let pipeline = gst::Pipeline::new(None);
 
@@ -294,7 +333,16 @@ fn default_pipeline(
             .build()
     };
 
-    pulsesrc.set_property("device", device_name);
+    match default_device_name(preferred_device_class) {
+        Ok(ref device_name) => {
+            log::info!("Using device `{device_name}` for recording");
+            pulsesrc.set_property("device", device_name);
+        }
+        Err(err) => {
+            log::warn!("Failed to get default device name: {err:?}");
+        }
+    }
+
     level.set_property("interval", Duration::from_millis(80).as_nanos() as u64);
     level.set_property("peak-ttl", Duration::from_millis(80).as_nanos() as u64);
     encodebin.set_property("profile", encodebin_profile);

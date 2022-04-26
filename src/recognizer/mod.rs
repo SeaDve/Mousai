@@ -168,9 +168,24 @@ impl Recognizer {
     }
 
     async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
-        self.update_audio_recorder_device_name();
-
         let imp = self.imp();
+
+        imp.audio_recorder.set_device_class(
+            match Application::default()
+                .settings()
+                .string("preferred-audio-source")
+                .as_str()
+            {
+                "microphone" => AudioDeviceClass::Source,
+                "desktop-audio" => AudioDeviceClass::Sink,
+                unknown_device_name => {
+                    log::error!(
+                        "Found invalid key `{unknown_device_name}` for `preferred-audio-source`. Using defaults."
+                    );
+                    AudioDeviceClass::default()
+                }
+            },
+        );
 
         if let Err(err) = imp.audio_recorder.start() {
             self.set_state(RecognizerState::Null);
@@ -222,77 +237,10 @@ impl Recognizer {
         self.imp().state.set(state);
         self.notify("state");
     }
-
-    fn update_audio_recorder_device_name(&self) {
-        let imp = self.imp();
-
-        match default_device_name() {
-            Ok(ref device_name) => {
-                log::info!("Audio recorder setup with device name `{}`", device_name);
-                imp.audio_recorder.set_device_name(Some(device_name));
-            }
-            Err(err) => {
-                log::warn!("Failed to get default source name: {:?}", err);
-                imp.audio_recorder.set_device_name(None);
-            }
-        }
-    }
 }
 
 impl Default for Recognizer {
     fn default() -> Self {
         Self::new()
     }
-}
-
-// FIXME handle this inside `audio_recorder`
-fn default_device_name() -> anyhow::Result<String> {
-    let preferred_device_class = {
-        match Application::default()
-            .settings()
-            .string("preferred-audio-source")
-            .as_str()
-        {
-            "microphone" => AudioDeviceClass::Source,
-            "desktop-audio" => AudioDeviceClass::Sink,
-            unknown_device_name => anyhow::bail!(
-                "Found invalid key `{unknown_device_name}` on `preferred-audio-source`"
-            ),
-        }
-    };
-
-    let device_monitor = gst::DeviceMonitor::new();
-    device_monitor.add_filter(Some(AudioDeviceClass::Source.as_str()), None);
-    device_monitor.add_filter(Some(AudioDeviceClass::Sink.as_str()), None);
-    device_monitor.start()?;
-
-    log::info!("Finding device name for class `{preferred_device_class:?}`");
-
-    for device in device_monitor.devices() {
-        let device_class = AudioDeviceClass::for_str(&device.device_class())?;
-
-        if device_class == preferred_device_class {
-            let properties = device
-                .properties()
-                .ok_or_else(|| anyhow::anyhow!("Found no property for device"))?;
-
-            if properties.get::<bool>("is-default")? {
-                device_monitor.stop();
-
-                let mut node_name = properties.get::<String>("node.name")?;
-
-                // FIXME test this with actual mic
-                if device_class == AudioDeviceClass::Sink {
-                    node_name.push_str(".monitor");
-                }
-
-                return Ok(node_name);
-            }
-        }
-    }
-
-    device_monitor.stop();
-    Err(anyhow::anyhow!(
-        "Failed to found audio device for class `{preferred_device_class:?}`"
-    ))
 }
