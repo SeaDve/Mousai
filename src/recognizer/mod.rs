@@ -1,6 +1,7 @@
 mod provider;
 
 use gettextrs::gettext;
+use gst::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
     prelude::*,
@@ -246,21 +247,52 @@ impl Default for Recognizer {
 
 // FIXME handle this inside `audio_recorder`
 fn default_device_name() -> anyhow::Result<String> {
-    let settings = Application::default().settings();
-    let server_info = pulsectl::controllers::SourceController::create()?.get_server_info()?;
-
-    let device_name = match settings.string("preferred-audio-source").as_str() {
-        "microphone" => server_info.default_source_name,
-        "desktop-audio" => server_info
-            .default_sink_name
-            .map(|sink_name| format!("{sink_name}.monitor")),
-        unknown_device_name => {
-            log::warn!(
-                "Unknown device name `{unknown_device_name}`. Used default_source_name instead."
-            );
-            server_info.default_source_name
+    let preferred_device_class = {
+        match Application::default()
+            .settings()
+            .string("preferred-audio-source")
+            .as_str()
+        {
+            "microphone" => "Audio/Source",
+            "desktop-audio" => "Audio/Sink",
+            unknown_device_name => anyhow::bail!(
+                "Found invalid key `{unknown_device_name}` on `preferred-audio-source`"
+            ),
         }
     };
 
-    device_name.ok_or_else(|| anyhow::anyhow!("Default audio source name not found"))
+    let device_monitor = gst::DeviceMonitor::new();
+    device_monitor.add_filter(Some("Audio/Source"), None);
+    device_monitor.add_filter(Some("Audio/Sink"), None);
+    device_monitor.start()?;
+
+    log::info!("Finding device name for class `{preferred_device_class}`");
+
+    for device in device_monitor.devices() {
+        let device_class = device.device_class();
+
+        if device_class == preferred_device_class {
+            let properties = device
+                .properties()
+                .ok_or_else(|| anyhow::anyhow!("Found no property for device"))?;
+
+            if properties.get::<bool>("is-default")? {
+                device_monitor.stop();
+
+                let mut node_name = properties.get::<String>("node.name")?;
+
+                // FIXME test this with actual mic
+                if device_class == "Audio/Sink" {
+                    node_name.push_str(".monitor");
+                }
+
+                return Ok(node_name);
+            }
+        }
+    }
+
+    device_monitor.stop();
+    Err(anyhow::anyhow!(
+        "Failed to found audio device for class `{preferred_device_class}`"
+    ))
 }
