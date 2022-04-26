@@ -1,6 +1,8 @@
 use gtk::glib;
 use serde::{Deserialize, Serialize};
 
+use crate::core::DateTime;
+
 #[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
 #[boxed_type(name = "MsaiSongId")]
 #[serde(transparent)]
@@ -15,9 +17,9 @@ impl std::fmt::Display for SongId {
 impl Default for SongId {
     fn default() -> Self {
         Self::from(
-            chrono::Local::now()
+            DateTime::now()
                 .format("Default-%Y-%m-%d-%H-%M-%S-%f-Default")
-                .to_string(),
+                .expect("DateTime formatting error"),
         )
     }
 }
@@ -39,6 +41,18 @@ impl SongId {
 mod test {
     use super::*;
     use std::collections::HashMap;
+
+    #[test]
+    fn default() {
+        assert!(SongId::default().is_default());
+        assert!(!SongId::from("A").is_default());
+    }
+
+    #[test]
+    fn unique_default() {
+        assert_ne!(SongId::default(), SongId::default());
+        assert_ne!(SongId::default(), SongId::default());
+    }
 
     #[test]
     fn equality() {

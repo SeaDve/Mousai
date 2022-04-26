@@ -225,7 +225,7 @@ impl Song {
     }
 
     pub fn last_heard(&self) -> DateTime {
-        self.imp().inner.borrow().last_heard
+        self.imp().inner.borrow().last_heard.clone()
     }
 
     pub fn title(&self) -> String {
