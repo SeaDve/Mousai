@@ -145,7 +145,7 @@ impl AudioRecorder {
         }
 
         let stream = gio::MemoryOutputStream::new_resizable();
-        let pipeline = default_pipeline(&stream, self.device_class())?;
+        let pipeline = create_pipeline(&stream, self.device_class())?;
 
         pipeline
             .bus()
@@ -272,7 +272,7 @@ impl Default for AudioRecorder {
     }
 }
 
-fn default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Result<String> {
+fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Result<String> {
     let device_monitor = gst::DeviceMonitor::new();
     device_monitor.add_filter(Some(AudioDeviceClass::Source.as_str()), None);
     device_monitor.add_filter(Some(AudioDeviceClass::Sink.as_str()), None);
@@ -309,7 +309,7 @@ fn default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Resu
     ))
 }
 
-fn default_pipeline(
+fn create_pipeline(
     stream: &gio::MemoryOutputStream,
     preferred_device_class: AudioDeviceClass,
 ) -> anyhow::Result<gst::Pipeline> {
@@ -333,7 +333,7 @@ fn default_pipeline(
             .build()
     };
 
-    match default_device_name(preferred_device_class) {
+    match find_default_device_name(preferred_device_class) {
         Ok(ref device_name) => {
             log::info!("Using device `{device_name}` for recording");
             pulsesrc.set_property("device", device_name);
