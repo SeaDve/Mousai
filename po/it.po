@@ -6,21 +6,22 @@
 # albanobattistella <albano_battistella@hotmail.com>, 2021.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Michael Moroni <michaelmoroni@disroot.org>, 2021.
+# Andrea Brandi <git@andreabrandi.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"PO-Revision-Date: 2022-04-29 23:11+0000\n"
+"Last-Translator: Andrea Brandi <git@andreabrandi.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -30,34 +31,34 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Identifica le canzoni in pochi secondi"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Music;Song;Identify;"
-msgstr "Shazam;Musica;Canzone;Identificare;"
+msgstr "Shazam;Musica;Canzone;Identifica;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
-msgstr ""
+msgstr "Larghezza predefinita della finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr ""
+msgstr "Altezza predefinita della finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Comportamento predefinito della finestra ingrandita"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Contiene brani identificati di recente"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Sorgente audio preferita da utilizzare durante la registrazione"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -107,7 +108,7 @@ msgstr "🎼 Visualizza l'anteprima del brano identificato con il lettore nativo
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 Esplora e ascolta la canzone da diversi fornitori."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -123,7 +124,7 @@ msgstr "Dave Patrick"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferred Audio Source"
-msgstr "_Sorgente audio preferita"
+msgstr "Sorgente _audio preferita"
 
 #: data/resources/ui/history-view.ui:8
 msgid "Microphone"
@@ -135,19 +136,19 @@ msgstr "Audio Desktop"
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
-msgstr "_Scorciatoie da Tastiera"
+msgstr "_Scorciatoie da tastiera"
 
 #: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
-msgstr "_A proposito di Mousai"
+msgstr "_Informazioni su Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "_Seleziona tutto"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "_Deseleziona tutto"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -159,19 +160,19 @@ msgstr "Ascolta"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Apri menu principale"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Seleziona"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Cerca brani"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Annulla selezione"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -180,11 +181,11 @@ msgstr "Annulla"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Inserisci il nome del brano o dell'artista"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Inizia a identificare la musica!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -192,19 +193,19 @@ msgstr "Fare clic sul pulsante di ascolto per iniziare."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Nessun risultato trovato"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Prova un'altra ricerca."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Copia brano"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Interrompi ascolto"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -214,17 +215,17 @@ msgstr "Generale"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Apri menu principale"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Ricerca"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Mostra Scorciatoie"
+msgstr "Mostra scorciatoie"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -234,31 +235,31 @@ msgstr "Esci"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Controlli"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Attiva/disattiva ascolto"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Attiva/disattiva riproduzione"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Navigazione"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Torna indietro"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Mostra informazioni sul brano"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
@@ -266,31 +267,31 @@ msgstr "Ferma"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Torna alla pagina principale"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Rimuovi dalla cronologia"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
-msgstr ""
+msgstr "Informazioni"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
-msgstr ""
+msgstr "Ultimo ascolto"
 
 #: data/resources/ui/song-page.ui:155
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song-page.ui:160
 msgid "Release Date"
-msgstr ""
+msgstr "Data di uscita"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:150
@@ -298,11 +299,12 @@ msgid "translator-credits"
 msgstr ""
 "Nicolas Mariniello\n"
 "Albano Battistella\n"
-"Michael Moroni"
+"Michael Moroni\n"
+"Andrea Brandi"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2022 Dave Patrick"
 
 #: src/application.rs:154
 msgid "GitHub"
@@ -310,133 +312,137 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Esplora su Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Esplora su AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Ascolta su Spotify"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Cerca su YouTube"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Registrazione annullata"
 
 #: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Riconoscimento annullato"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
-msgstr ""
+msgstr "Impossibile analizzare. Segnalare il problema al bug tracker di Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Impossibile convertire il file. Segnalare il problema al bug tracker di "
+"Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Impossibile connettersi al server."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "È stato raggiunto il limite giornaliero."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Impossibile analizzare l'impronta audio. Controllare che il suono sia "
+"presente."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Controllare la connessione a internet."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Nessuna corrispondenza trovata per questo brano."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Inserire un token API nelle preferenze."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Inserire un token API valido."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Brano copiato negli appunti"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Annulla"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} brano rimosso"
+msgstr[1] "{} brani rimossi"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Fare clic sugli elementi per selezionarli"
 
 #: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} brano selezionato"
+msgstr[1] "{} brani selezionati"
 
 #: src/window/history_view.rs:487
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Rimuovi brano dalla cronologia"
+msgstr[1] "Rimuovi brani dalla cronologia"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
-msgstr ""
+msgstr "Impossibile caricare la cronologia"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Riproduci"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "In ascolto…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Riconoscimento…"
 
 #: src/window/song_page.rs:170
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Impossibile avviare {}"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Identifica qualsiasi canzone in pochi secondi"

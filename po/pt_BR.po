@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-21 21:06+0000\n"
-"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail."
-"com>\n"
+"PO-Revision-Date: 2022-04-29 23:11+0000\n"
+"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>"
+"\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -198,7 +198,7 @@ msgstr "Tente uma pesquisa diferente."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Copiar música"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -268,11 +268,11 @@ msgstr "Retornar a página principal"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Remover do histórico"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
@@ -297,7 +297,7 @@ msgstr "Vitor Cardoso, Tiago Lucas Flach, inkhorn"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2022 Dave Patrick"
 
 #: src/application.rs:154
 msgid "GitHub"
@@ -305,7 +305,7 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
@@ -313,7 +313,7 @@ msgstr "Navegue no Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
@@ -321,7 +321,7 @@ msgstr "Navegue no AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
@@ -329,7 +329,7 @@ msgstr "Escutar no Spotify"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
@@ -385,17 +385,17 @@ msgstr "Insira um token de API válido."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Música copiada para a área de transferência"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Desfazer"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Música {} removida"
+msgstr[1] "Músicas {} removidas"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -408,11 +408,10 @@ msgstr[0] "Música {} selecionada"
 msgstr[1] "Músicas {} selecionadas"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Remover música do histórico"
-msgstr[1] "Remover música do histórico"
+msgstr[1] "Remover músicas do histórico"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
