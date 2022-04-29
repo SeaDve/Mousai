@@ -90,8 +90,7 @@ impl Waveform {
         let peaks = self.peaks();
         let peaks_len = peaks.len();
 
-        let mut pointer_a = h_center;
-        let mut pointer_b = h_center;
+        let mut pointer = h_center;
 
         for (index, peak) in peaks.iter().enumerate().rev() {
             ctx.set_source_rgba(
@@ -101,19 +100,17 @@ impl Waveform {
                 index as f64 / peaks_len as f64, // Adds feathering on both sides
             );
 
-            let this_peak_max_height =
-                ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
+            let peak_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
 
-            ctx.move_to(pointer_a, v_center + peak * this_peak_max_height);
-            ctx.line_to(pointer_a, v_center - peak * this_peak_max_height);
+            ctx.move_to(pointer, v_center + peak_height);
+            ctx.line_to(pointer, v_center - peak_height);
             ctx.stroke().unwrap();
 
-            ctx.move_to(pointer_b, v_center + peak * this_peak_max_height);
-            ctx.line_to(pointer_b, v_center - peak * this_peak_max_height);
+            ctx.move_to(2.0 * h_center - pointer, v_center + peak_height);
+            ctx.line_to(2.0 * h_center - pointer, v_center - peak_height);
             ctx.stroke().unwrap();
 
-            pointer_a += GUTTER;
-            pointer_b -= GUTTER;
+            pointer += GUTTER;
         }
     }
 }
