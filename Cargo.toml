@@ -17,11 +17,11 @@ gst_player = { package = "gstreamer-player", version = "0.18.0" }
 adw = { package = "libadwaita", version = "0.1.1" }
 gtk = { version = "0.4.7", package = "gtk4", features = ["v4_6"] }
 indexmap = "1.8.1"
-serde = { version = "1.0.136", features = ["derive"] }
-serde_json = "1.0.79"
+serde = { version = "1.0.137", features = ["derive"] }
+serde_json = "1.0.80"
 anyhow = "1.0.57"
 futures-channel = "0.3.21"
 async-trait = "0.1.53"
-thiserror = "1.0.30"
+thiserror = "1.0.31"
 mpris-player = "0.6.1"
 typetag = "0.1.8"
