@@ -293,7 +293,6 @@ fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow:
 
                 let mut node_name = properties.get::<String>("node.name")?;
 
-                // FIXME test this with actual mic
                 if device_class == AudioDeviceClass::Sink {
                     node_name.push_str(".monitor");
                 }
