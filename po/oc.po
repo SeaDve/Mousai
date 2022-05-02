@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-30 16:11+0000\n"
+"PO-Revision-Date: 2022-05-02 13:15+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/>"
 "\n"
@@ -345,10 +345,14 @@ msgstr "Reconeissença anullada"
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"Fracàs de l’analisi del resultat. Volgatz senhalar aquò al traçador d’"
+"avarias de Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Conversion del fichièr impossibla. Volgatz senhalar aquò al traçador d’"
+"avarias de Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
@@ -356,11 +360,13 @@ msgstr "Fracàs de la connexion al servidor."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Limit jornalièr atengut."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Fracàs de la reconeissença de l’àudio. Benlèu que cap de son es estat "
+"entendut."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
@@ -372,7 +378,7 @@ msgstr "Cap de correspondéncia pas trobada per aquesta cançon"
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Apondre un geton API dins las preferéncias."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
@@ -380,17 +386,17 @@ msgstr "Mercés de fornir un geton d’API valid"
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Cançon copiada al quichapapièrs"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Anullar"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} cançon suprimida"
+msgstr[1] "{} cançons suprimidas"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -403,11 +409,10 @@ msgstr[0] "{} cançon seleccionada"
 msgstr[1] "{} cançons seleccionadas"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Escafar la cançon de l’istoric"
-msgstr[1] "Escafar la cançon de l’istoric"
+msgstr[1] "Escafar las cançons de l’istoric"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
