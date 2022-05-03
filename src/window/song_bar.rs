@@ -251,9 +251,7 @@ impl SongBar {
                 Duration::from_millis(20),
                 clone!(@weak self as obj => move || {
                     obj.imp().seek_timeout_id.replace(None);
-                    if let Err(err) = obj.player().seek(ClockTime::from_secs_f64(value)) {
-                        log::warn!("Failed to seek to `{value}` secs: {err:?}");
-                    }
+                    obj.player().seek(ClockTime::from_secs_f64(value));
                 }),
             )));
     }

@@ -41,10 +41,15 @@ impl From<gst::ClockTime> for ClockTime {
     }
 }
 
-impl TryFrom<ClockTime> for gst::ClockTime {
-    type Error = anyhow::Error;
+impl From<ClockTime> for gst::ClockTime {
+    fn from(value: ClockTime) -> Self {
+        let nanos = value.0.as_nanos();
 
-    fn try_from(value: ClockTime) -> Result<Self, Self::Error> {
-        gst::ClockTime::try_from(value.0).map_err(|err| err.into())
+        // Note: `std::u64::MAX` is `ClockTime::None`.
+        if nanos >= std::u64::MAX as u128 {
+            return gst::ClockTime::from_nseconds(std::u64::MAX - 1);
+        }
+
+        gst::ClockTime::from_nseconds(nanos as u64)
     }
 }

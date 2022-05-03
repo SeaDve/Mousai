@@ -279,15 +279,14 @@ impl Player {
         self.set_song(None)
     }
 
-    pub fn seek(&self, position: ClockTime) -> anyhow::Result<()> {
+    pub fn seek(&self, position: ClockTime) {
         if matches!(self.state(), PlayerState::Stopped) {
             self.pause();
         }
 
         log::debug!("Seeking to {position:?}");
 
-        self.imp().gst_player.seek(position.try_into()?);
-        Ok(())
+        self.imp().gst_player.seek(position.into());
     }
 
     fn set_position(&self, position: Option<ClockTime>) {
@@ -342,7 +341,7 @@ impl Player {
             mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
                 let current_micros = obj.position().unwrap_or_default().as_micros() as i64;
                 let new_position = ClockTime::from_micros(current_micros.saturating_add(offset_micros) as u64);
-                obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
+                obj.seek(new_position);
             }));
 
             log::info!("Done setting up MPRIS server");
