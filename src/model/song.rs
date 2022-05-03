@@ -270,7 +270,7 @@ impl Song {
 
         Ok(Application::default()
             .album_art_store()?
-            .get_or_try_init(&album_art_link))
+            .get_or_init(&album_art_link))
     }
 }
 

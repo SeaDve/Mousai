@@ -33,7 +33,7 @@ impl AlbumArtStore {
         })
     }
 
-    pub fn get_or_try_init(&self, download_url: &str) -> Rc<AlbumArt> {
+    pub fn get_or_init(&self, download_url: &str) -> Rc<AlbumArt> {
         Rc::clone(
             self.inner
                 .borrow_mut()
