@@ -340,13 +340,8 @@ impl Player {
             }));
 
             mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
-                let current_position = obj.position().unwrap_or_default();
-                let offset = ClockTime::from_micros(offset_micros.abs() as u64);
-                let new_position = if offset_micros < 0 {
-                    current_position.saturating_sub(offset)
-                } else {
-                    current_position.saturating_add(offset)
-                };
+                let current_micros = obj.position().unwrap_or_default().as_micros() as i64;
+                let new_position = ClockTime::from_micros(current_micros.saturating_add(offset_micros) as u64);
                 obj.seek(new_position).unwrap_or_else(|err| log::warn!("Failed to seek to position: {err:?}"));
             }));
 

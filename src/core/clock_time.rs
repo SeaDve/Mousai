@@ -33,14 +33,6 @@ impl ClockTime {
     pub const fn as_micros(&self) -> u128 {
         self.0.as_micros()
     }
-
-    pub const fn saturating_add(&self, rhs: Self) -> Self {
-        Self(self.0.saturating_add(rhs.0))
-    }
-
-    pub const fn saturating_sub(&self, rhs: Self) -> Self {
-        Self(self.0.saturating_sub(rhs.0))
-    }
 }
 
 impl From<gst::ClockTime> for ClockTime {
