@@ -16,7 +16,6 @@ pub struct AlbumArt {
 
 impl AlbumArt {
     pub(super) fn new(session: &soup::Session, download_url: &str, cache_path: &Path) -> Self {
-        // TODO Remove cache on low memory
         Self {
             session: session.clone(),
             download_url: download_url.to_string(),
@@ -35,8 +34,6 @@ impl AlbumArt {
     }
 
     pub async fn texture(&self) -> anyhow::Result<&gdk::Texture> {
-        // TODO Add max loading texture at a certain point of time
-
         if let Some(receiver) = self.loading.take() {
             // If there are currently loading AlbumArt, wait
             // for it to finish and be stored before checking if

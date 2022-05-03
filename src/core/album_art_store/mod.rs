@@ -21,6 +21,8 @@ pub struct AlbumArtStore {
 
 impl AlbumArtStore {
     pub fn new(session: &soup::Session) -> io::Result<Self> {
+        // TODO Remove from store on low memory
+
         fs::create_dir_all(CACHE_DIR.as_path())?;
 
         Ok(Self {
