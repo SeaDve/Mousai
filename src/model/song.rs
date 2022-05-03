@@ -6,10 +6,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::cell::RefCell;
 
 use super::{external_link::ExternalLink, ExternalLinkList, SongId};
-use crate::{
-    core::{AlbumArt, DateTime},
-    Application,
-};
+use crate::{core::DateTime, AlbumArt};
 
 mod imp {
     use super::*;
@@ -270,11 +267,10 @@ impl Song {
             .album_art_link()
             .ok_or_else(|| anyhow::anyhow!("Song doesn't have an album art link"))?;
 
-        self.imp().album_art.get_or_try_init(|| {
-            Application::default()
-                .album_art_store()
-                .map(|store| store.get(&album_art_link))
-        })
+        Ok(self
+            .imp()
+            .album_art
+            .get_or_init(|| AlbumArt::new(&album_art_link)))
     }
 }
 
