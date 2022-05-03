@@ -13,7 +13,6 @@
 #![warn(clippy::doc_markdown)]
 #![warn(clippy::unused_async)]
 
-mod album_art;
 mod application;
 mod config;
 mod core;
@@ -27,7 +26,6 @@ mod window;
 use gettextrs::{gettext, LocaleCategory};
 use gtk::{gio, glib};
 
-use self::album_art::AlbumArt;
 use self::application::Application;
 use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
@@ -44,8 +42,6 @@ fn main() {
 
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
-
-    AlbumArt::init_cache_dir().expect("Failed to initialize album art cache dir");
 
     let app = Application::new();
     app.run();

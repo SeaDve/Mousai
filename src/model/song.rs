@@ -1,12 +1,14 @@
 use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::sync::Lazy;
-use once_cell::unsync::OnceCell;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-use std::cell::RefCell;
+use std::{cell::RefCell, rc::Rc};
 
 use super::{external_link::ExternalLink, ExternalLinkList, SongId};
-use crate::{core::DateTime, AlbumArt};
+use crate::{
+    core::{AlbumArt, DateTime},
+    Application,
+};
 
 mod imp {
     use super::*;
@@ -29,7 +31,6 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct Song {
         pub inner: RefCell<SongInner>,
-        pub album_art: OnceCell<AlbumArt>,
     }
 
     #[glib::object_subclass]
@@ -262,15 +263,14 @@ impl Song {
         self.imp().inner.borrow().lyrics.clone()
     }
 
-    pub fn album_art(&self) -> anyhow::Result<&AlbumArt> {
+    pub fn album_art(&self) -> anyhow::Result<Rc<AlbumArt>> {
         let album_art_link = self
             .album_art_link()
             .ok_or_else(|| anyhow::anyhow!("Song doesn't have an album art link"))?;
 
-        Ok(self
-            .imp()
-            .album_art
-            .get_or_init(|| AlbumArt::new(&album_art_link)))
+        Ok(Application::default()
+            .album_art_store()?
+            .get_or_try_init(&album_art_link))
     }
 }
 

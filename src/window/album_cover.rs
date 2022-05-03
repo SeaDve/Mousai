@@ -123,15 +123,25 @@ impl AlbumCover {
         }
 
         if let Some(ref song) = song {
-            spawn!(clone!(@weak self as obj, @weak song => async move {
-                match texture_for_song(&song).await {
-                    Ok(texture) => obj.set_paintable(texture),
-                    Err(err) => {
-                        log::warn!("Failed to load texture: {err:?}");
-                        obj.clear();
-                    }
+            match song.album_art() {
+                Ok(album_art) => {
+                    spawn!(clone!(@weak self as obj, @weak album_art => async move {
+                        match album_art.texture().await {
+                            Ok(texture) => {
+                                obj.set_paintable(texture);
+                            }
+                            Err(err) => {
+                                log::warn!("Failed to load texture: {err:?}");
+                                obj.clear();
+                            }
+                        }
+                    }));
                 }
-            }));
+                Err(err) => {
+                    log::warn!("Failed to get song album art: {err:?}");
+                    self.clear();
+                }
+            }
         } else {
             self.clear();
         }
@@ -180,8 +190,4 @@ impl Default for AlbumCover {
     fn default() -> Self {
         Self::new()
     }
-}
-
-async fn texture_for_song(song: &Song) -> anyhow::Result<&gdk::Texture> {
-    song.album_art()?.texture().await
 }

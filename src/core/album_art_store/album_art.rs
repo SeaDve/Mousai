@@ -1,20 +1,13 @@
 use futures_channel::oneshot::{self, Receiver};
 use gtk::{gdk, gio, glib, prelude::*};
-use once_cell::{sync::Lazy, unsync::OnceCell};
+use once_cell::unsync::OnceCell;
 use soup::prelude::*;
 
-use std::{cell::RefCell, fs, io, path::PathBuf};
-
-use crate::Application;
-
-static CACHE_DIR: Lazy<PathBuf> = Lazy::new(|| {
-    let mut path = glib::user_cache_dir();
-    path.push("mousai/album_art_cache");
-    path
-});
+use std::{cell::RefCell, path::Path};
 
 #[derive(Debug)]
 pub struct AlbumArt {
+    session: soup::Session,
     download_url: String,
     cache_file: gio::File,
     cache: OnceCell<gdk::Texture>,
@@ -22,17 +15,12 @@ pub struct AlbumArt {
 }
 
 impl AlbumArt {
-    pub fn init_cache_dir() -> io::Result<()> {
-        fs::create_dir_all(CACHE_DIR.as_path())
-    }
-
-    pub fn new(download_url: &str) -> Self {
+    pub(super) fn new(session: &soup::Session, download_url: &str, cache_path: &Path) -> Self {
         // TODO Remove cache on low memory
-        let cache_path = CACHE_DIR.join(download_url.to_string().replace('/', "-"));
-
         Self {
+            session: session.clone(),
             download_url: download_url.to_string(),
-            cache_file: gio::File::for_path(&cache_path),
+            cache_file: gio::File::for_path(cache_path),
             cache: OnceCell::new(),
             loading: RefCell::default(),
         }
@@ -76,8 +64,8 @@ impl AlbumArt {
             ),
         }
 
-        let bytes = Application::default()
-            .session()
+        let bytes = self
+            .session
             .send_and_read_future(
                 &soup::Message::new("GET", &self.download_url)?,
                 glib::PRIORITY_DEFAULT,

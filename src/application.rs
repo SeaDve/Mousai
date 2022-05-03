@@ -9,6 +9,7 @@ use gtk::{
 
 use crate::{
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
+    core::AlbumArtStore,
     inspector_page::InspectorPage,
     window::Window,
 };
@@ -22,6 +23,7 @@ mod imp {
     pub struct Application {
         pub window: OnceCell<WeakRef<Window>>,
         pub session: OnceCell<soup::Session>,
+        pub album_art_store: OnceCell<AlbumArtStore>,
         pub settings: gio::Settings,
     }
 
@@ -30,6 +32,7 @@ mod imp {
             Self {
                 window: OnceCell::new(),
                 session: OnceCell::new(),
+                album_art_store: OnceCell::new(),
                 settings: gio::Settings::new(APP_ID),
             }
         }
@@ -90,6 +93,13 @@ impl Application {
 
     pub fn session(&self) -> &soup::Session {
         self.imp().session.get_or_init(soup::Session::new)
+    }
+
+    pub fn album_art_store(&self) -> anyhow::Result<&AlbumArtStore> {
+        Ok(self
+            .imp()
+            .album_art_store
+            .get_or_try_init(|| AlbumArtStore::new(self.session()))?)
     }
 
     pub fn show_error(&self, message: &str) {
