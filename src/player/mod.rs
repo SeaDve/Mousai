@@ -309,7 +309,6 @@ impl Player {
             let mpris_player = MprisPlayer::new(APP_ID.into(), "Mousai".into(), APP_ID.into());
 
             mpris_player.set_can_raise(true);
-            mpris_player.set_can_seek(true);
             mpris_player.set_can_set_fullscreen(false);
             mpris_player.set_can_go_previous(false);
             mpris_player.set_can_go_next(false);
