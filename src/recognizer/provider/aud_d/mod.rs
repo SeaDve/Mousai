@@ -82,7 +82,9 @@ impl AudD {
         }
 
         if let Some(lyrics_data) = data.lyrics_data {
-            song_builder.lyrics(&lyrics_data.lyrics);
+            if !lyrics_data.lyrics.is_empty() {
+                song_builder.lyrics(&lyrics_data.lyrics);
+            }
         }
 
         if let Some(album_image) = album_images.first() {
