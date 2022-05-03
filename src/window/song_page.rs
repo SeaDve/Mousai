@@ -18,7 +18,7 @@ use super::{
 use crate::{
     model::{ExternalLinkWrapper, Song},
     player::{Player, PlayerState},
-    spawn, Application,
+    utils, Application,
 };
 
 mod imp {
@@ -158,7 +158,7 @@ mod imp {
                     .downcast::<ExternalLinkTile>()
                     .expect("Expected `ExternalLinkTile` as child");
 
-                spawn!(async move {
+                utils::spawn(async move {
                     let external_link_wrapper = external_link_tile.external_link();
                     let external_link = external_link_wrapper.inner();
                     let uri = external_link.uri();

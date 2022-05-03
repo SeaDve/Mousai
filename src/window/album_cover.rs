@@ -7,7 +7,7 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use crate::{model::Song, spawn};
+use crate::{model::Song, utils};
 
 mod imp {
     use super::*;
@@ -125,7 +125,7 @@ impl AlbumCover {
         if let Some(ref song) = song {
             match song.album_art() {
                 Ok(album_art) => {
-                    spawn!(clone!(@weak self as obj, @weak album_art => async move {
+                    utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
                         match album_art.texture().await {
                             Ok(texture) => {
                                 obj.set_paintable(texture);

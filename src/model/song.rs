@@ -193,7 +193,7 @@ glib::wrapper! {
 }
 
 impl Song {
-    /// The parameter `SongID` must be unique to each [`Song`] so that [`SongList`] will
+    /// The parameter `SongID` must be unique to each [`Song`] so that [`crate::model::SongList`] will
     /// treat them different.
     ///
     /// The last heard will be the `DateTime` when this is constructed

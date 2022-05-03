@@ -5,20 +5,7 @@ use std::{cell::Cell, rc::Rc, time::Duration};
 
 use crate::core::{Cancellable, Cancelled};
 
-/// Spawns a future in the main context
-#[macro_export]
-macro_rules! spawn {
-    ($future:expr) => {
-        let ctx = glib::MainContext::default();
-        ctx.spawn_local($future);
-    };
-    ($priority:expr, $future:expr) => {
-        let ctx = glib::MainContext::default();
-        ctx.spawn_local_with_priority($priority, $future);
-    };
-}
-
-/// Send something to a [`glib::Sender`](glib::Sender)
+/// Send something to a [`glib::Sender`]
 #[macro_export]
 macro_rules! send {
     ($sender:expr, $action:expr) => {
@@ -26,6 +13,12 @@ macro_rules! send {
             log::error!("Failed to send \"{}\" action: {err:?}", stringify!($action));
         }
     };
+}
+
+/// Spawns a future in the default [`glib::MainContext`]
+pub fn spawn<F: std::future::Future<Output = ()> + 'static>(fut: F) {
+    let ctx = glib::MainContext::default();
+    ctx.spawn_local(fut);
 }
 
 /// Like [`glib::timeout_future`] but terminates immediately after `cancellable`

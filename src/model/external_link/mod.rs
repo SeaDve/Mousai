@@ -45,7 +45,7 @@ mod imp {
 }
 
 glib::wrapper! {
-    /// GObject wrapper for [`ExternalLink`](ExternalLink)
+    /// GObject wrapper for [`ExternalLink`]
     pub struct ExternalLinkWrapper(ObjectSubclass<imp::ExternalLinkWrapper>);
 }
 

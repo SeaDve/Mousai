@@ -25,12 +25,10 @@ use crate::{
     model::SongList,
     player::{Player, PlayerState},
     recognizer::{Recognizer, RecognizerState},
-    Application,
+    utils, Application,
 };
 
 mod imp {
-    use crate::spawn;
-
     use super::*;
     use gtk::CompositeTemplate;
 
@@ -86,7 +84,7 @@ mod imp {
             });
 
             klass.install_action("win.toggle-listen", None, |obj, _, _| {
-                spawn!(clone!(@weak obj => async move {
+                utils::spawn(clone!(@weak obj => async move {
                     if let Err(err) = obj.imp().player.stop() {
                         log::warn!("Failed to stop player before toggling listen: {err:?}");
                     }

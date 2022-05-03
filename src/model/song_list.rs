@@ -68,7 +68,7 @@ glib::wrapper! {
 }
 
 impl SongList {
-    /// Load a [`SongList`](SongList) from application settings `history` key
+    /// Load a [`SongList`] from application settings `history` key
     pub fn load_from_settings() -> anyhow::Result<Self> {
         let songs: Vec<Song> =
             serde_json::from_str(&Application::default().settings().string("history"))?;
