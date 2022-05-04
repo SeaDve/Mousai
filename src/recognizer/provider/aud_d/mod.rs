@@ -108,6 +108,7 @@ impl AudD {
         let message = soup::Message::new("POST", "https://api.audd.io/")
             .map_err(|err| Error::Other(err.to_string()))?;
         message.set_request_body_from_bytes(None, Some(&glib::Bytes::from_owned(data.to_string())));
+        message.set_priority(soup::MessagePriority::High);
 
         let bytes = Application::default()
             .session()
