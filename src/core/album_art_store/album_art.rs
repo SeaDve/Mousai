@@ -34,6 +34,10 @@ impl AlbumArt {
     }
 
     pub async fn texture(&self) -> anyhow::Result<&gdk::Texture> {
+        // FIXME this guard won't work if there would be three
+        // same time caller to this functions since the second
+        // one would take the receiver. Thus, there won't be a
+        // guard for the third one.
         if let Some(receiver) = self.loading.take() {
             // If there are currently loading AlbumArt, wait
             // for it to finish and be stored before checking if
