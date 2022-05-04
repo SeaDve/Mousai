@@ -11,6 +11,7 @@ use crate::{
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::AlbumArtStore,
     inspector_page::InspectorPage,
+    settings::Settings,
     window::Window,
 };
 
@@ -19,23 +20,12 @@ mod imp {
     use glib::WeakRef;
     use once_cell::unsync::OnceCell;
 
-    #[derive(Debug)]
+    #[derive(Debug, Default)]
     pub struct Application {
         pub window: OnceCell<WeakRef<Window>>,
         pub session: OnceCell<soup::Session>,
         pub album_art_store: OnceCell<AlbumArtStore>,
-        pub settings: gio::Settings,
-    }
-
-    impl Default for Application {
-        fn default() -> Self {
-            Self {
-                window: OnceCell::new(),
-                session: OnceCell::new(),
-                album_art_store: OnceCell::new(),
-                settings: gio::Settings::new(APP_ID),
-            }
-        }
+        pub settings: Settings,
     }
 
     #[glib::object_subclass]
@@ -87,7 +77,7 @@ impl Application {
         .expect("Application initialization failed.")
     }
 
-    pub fn settings(&self) -> gio::Settings {
+    pub fn settings(&self) -> Settings {
         self.imp().settings.clone()
     }
 

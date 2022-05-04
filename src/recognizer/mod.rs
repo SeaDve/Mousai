@@ -4,7 +4,6 @@ use gettextrs::gettext;
 use gst::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
-    prelude::*,
     subclass::prelude::*,
 };
 
@@ -12,7 +11,7 @@ use std::cell::{Cell, RefCell};
 
 pub use self::provider::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
 use crate::{
-    core::{AudioDeviceClass, AudioRecorder, Cancellable, Cancelled},
+    core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
     utils, Application,
 };
@@ -170,22 +169,8 @@ impl Recognizer {
     async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
         let imp = self.imp();
 
-        imp.audio_recorder.set_device_class(
-            match Application::default()
-                .settings()
-                .string("preferred-audio-source")
-                .as_str()
-            {
-                "microphone" => AudioDeviceClass::Source,
-                "desktop-audio" => AudioDeviceClass::Sink,
-                unknown_device_name => {
-                    log::error!(
-                        "Found invalid key `{unknown_device_name}` for `preferred-audio-source`. Using defaults."
-                    );
-                    AudioDeviceClass::default()
-                }
-            },
-        );
+        imp.audio_recorder
+            .set_device_class(Application::default().settings().preferred_audio_source());
 
         if let Err(err) = imp.audio_recorder.start() {
             self.set_state(RecognizerState::Null);

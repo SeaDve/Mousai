@@ -198,13 +198,9 @@ impl Window {
     fn load_window_size(&self) {
         let settings = Application::default().settings();
 
-        let width = settings.int("window-width");
-        let height = settings.int("window-height");
-        let is_maximized = settings.boolean("is-maximized");
+        self.set_default_size(settings.window_width(), settings.window_height());
 
-        self.set_default_size(width, height);
-
-        if is_maximized {
+        if settings.is_maximized() {
             self.maximize();
         }
     }
@@ -214,10 +210,10 @@ impl Window {
 
         let (width, height) = self.default_size();
 
-        settings.set_int("window-width", width)?;
-        settings.set_int("window-height", height)?;
+        settings.set_window_width(width)?;
+        settings.set_window_height(height)?;
 
-        settings.set_boolean("is-maximized", self.is_maximized())?;
+        settings.set_maximized(self.is_maximized())?;
 
         Ok(())
     }

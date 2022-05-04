@@ -70,8 +70,7 @@ glib::wrapper! {
 impl SongList {
     /// Load a [`SongList`] from application settings `history` key
     pub fn load_from_settings() -> anyhow::Result<Self> {
-        let songs: Vec<Song> =
-            serde_json::from_str(&Application::default().settings().string("history"))?;
+        let songs: Vec<Song> = serde_json::from_str(&Application::default().settings().history())?;
 
         let obj = Self::default();
         obj.append_many(songs);
@@ -85,7 +84,7 @@ impl SongList {
         let songs = list.values().collect::<Vec<_>>();
         Application::default()
             .settings()
-            .set_string("history", &serde_json::to_string(&songs)?)?;
+            .set_history(&serde_json::to_string(&songs)?)?;
         Ok(())
     }
 
