@@ -7,13 +7,14 @@
 # Maxime Leroy <lisacintosh@gmail.com>, 2021.
 # Magik Leo <magikleo.yopmail@gmail.com>, 2022.
 # matb <perso@mathieu-bousquet.fr>, 2022.
+# Mathieu B. <perso@mathieu-bousquet.fr>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-05-02 13:15+0000\n"
-"Last-Translator: matb <perso@mathieu-bousquet.fr>\n"
+"PO-Revision-Date: 2022-05-05 18:13+0000\n"
+"Last-Translator: Mathieu B. <perso@mathieu-bousquet.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
 "\n"
 "Language: fr\n"
@@ -395,7 +396,7 @@ msgstr "Chanson copiée dans le presse-papiers"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr "Annuler"
+msgstr "A_nnuler"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
