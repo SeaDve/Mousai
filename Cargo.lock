@@ -480,9 +480,9 @@ dependencies = [
 
 [[package]]
 name = "gsettings-macro"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e6e9ffda148ada8450120bb819f5e3779f9625ebe88711ea0d2388a51e26567"
+checksum = "ec88057da76ede5b6a2a9a9a632ac8d7fa60ab7e1566387bc2a8c08ddc4009b1"
 dependencies = [
  "anyhow",
  "heck 0.4.0",

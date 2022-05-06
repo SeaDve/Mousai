@@ -1,4 +1,4 @@
-use gtk::gio::{self, prelude::*};
+use gtk::gio;
 
 use crate::{config::APP_ID, core::AudioDeviceClass};
 
