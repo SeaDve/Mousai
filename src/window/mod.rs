@@ -213,7 +213,7 @@ impl Window {
         settings.set_window_width(width)?;
         settings.set_window_height(height)?;
 
-        settings.set_maximized(self.is_maximized())?;
+        settings.set_is_maximized(self.is_maximized())?;
 
         Ok(())
     }

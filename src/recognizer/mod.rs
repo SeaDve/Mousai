@@ -169,8 +169,12 @@ impl Recognizer {
     async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
         let imp = self.imp();
 
-        imp.audio_recorder
-            .set_device_class(Application::default().settings().preferred_audio_source());
+        imp.audio_recorder.set_device_class(
+            Application::default()
+                .settings()
+                .preferred_audio_source()
+                .into(),
+        );
 
         if let Err(err) = imp.audio_recorder.start() {
             self.set_state(RecognizerState::Null);
