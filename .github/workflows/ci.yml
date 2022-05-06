@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - name: Download dependencies
+        run: sudo apt -y install gtk4-devel
       - name: Run checks.py
         run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos
 
