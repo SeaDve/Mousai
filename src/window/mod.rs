@@ -116,7 +116,7 @@ mod imp {
 
             let preferred_audio_source_action = Application::default()
                 .settings()
-                .create_action("preferred-audio-source");
+                .create_preferred_audio_source_action();
             obj.add_action(&preferred_audio_source_action);
 
             if PROFILE == "Devel" {
@@ -210,10 +210,10 @@ impl Window {
 
         let (width, height) = self.default_size();
 
-        settings.set_window_width(width)?;
-        settings.set_window_height(height)?;
+        settings.try_set_window_width(width)?;
+        settings.try_set_window_height(height)?;
 
-        settings.set_is_maximized(self.is_maximized())?;
+        settings.try_set_is_maximized(self.is_maximized())?;
 
         Ok(())
     }

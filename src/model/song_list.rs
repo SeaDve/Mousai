@@ -84,7 +84,7 @@ impl SongList {
         let songs = list.values().collect::<Vec<_>>();
         Application::default()
             .settings()
-            .set_history(&serde_json::to_string(&songs)?)?;
+            .try_set_history(&serde_json::to_string(&songs)?)?;
         Ok(())
     }
 

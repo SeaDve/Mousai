@@ -480,20 +480,18 @@ dependencies = [
 
 [[package]]
 name = "gsettings-macro"
-version = "0.1.2"
+version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec88057da76ede5b6a2a9a9a632ac8d7fa60ab7e1566387bc2a8c08ddc4009b1"
+checksum = "80a7828fd6140ec99bc9f7e4afb9831a3bd0290555b2ad0a06d77bce322a301f"
 dependencies = [
  "anyhow",
  "heck 0.4.0",
  "proc-macro-error",
  "proc-macro2",
- "quickxml_to_serde",
+ "quick-xml",
  "quote",
  "serde",
- "serde_json",
  "syn",
- "typetag",
 ]
 
 [[package]]
@@ -727,7 +725,7 @@ dependencies = [
  "proc-macro-crate 1.1.3",
  "proc-macro-error",
  "proc-macro2",
- "quick-xml 0.22.0",
+ "quick-xml",
  "quote",
  "syn",
 ]
@@ -922,15 +920,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "minidom"
-version = "0.12.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe549115a674f5ec64c754d85e37d6f42664bd0ef4ffb62b619489ad99c6cb1a"
-dependencies = [
- "quick-xml 0.17.2",
 ]
 
 [[package]]
@@ -1183,32 +1172,12 @@ checksum = "a1d01941d82fa2ab50be1e79e6714289dd7cde78eba4c074bc5a4374f650dfe0"
 
 [[package]]
 name = "quick-xml"
-version = "0.17.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe1e430bdcf30c9fdc25053b9c459bb1a4672af4617b6c783d7d91dc17c6bbb0"
-dependencies = [
- "memchr",
-]
-
-[[package]]
-name = "quick-xml"
 version = "0.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8533f14c8382aaad0d592c812ac3b826162128b65662331e1127b45c3d18536b"
 dependencies = [
  "memchr",
-]
-
-[[package]]
-name = "quickxml_to_serde"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26f35112b35480fd72f63444289083eeedbd61d13907c82c4309f0ccda35e244"
-dependencies = [
- "minidom",
  "serde",
- "serde_derive",
- "serde_json",
 ]
 
 [[package]]
