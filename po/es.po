@@ -3,23 +3,23 @@
 # This file is distributed under the same license as the mousai package.
 # Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021, 2022.
 # robert schneider <robertschv@gmail.com>, 2021.
-# Sergio Varela <sergitroll9@gmail.com>, 2021.
+# Sergio Varela <sergitroll9@gmail.com>, 2021, 2022.
 # Chardinson De la cruz Ventura <chardinsondelacruzventura@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
-">\n"
+"PO-Revision-Date: 2022-05-11 12:13+0000\n"
+"Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -200,7 +200,7 @@ msgstr "Intente una búsqueda diferente."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Copiar canción"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -270,11 +270,11 @@ msgstr "Volver a la página principal"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Eliminar del historial"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
@@ -389,17 +389,17 @@ msgstr "Por favor, introduzca un testigo de API válido."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Copiar la canción en el portapapeles"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Revertir"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} canción eliminada"
+msgstr[1] "{} canciones eliminadas"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -412,11 +412,10 @@ msgstr[0] "{} canción seleccionada"
 msgstr[1] "{} canciones seleccionadas"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] "Quitar canción del historial"
-msgstr[1] "Quitar canción del historial"
+msgstr[0] "Eliminar canción del historial"
+msgstr[1] "Eliminar canciones del historial"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
