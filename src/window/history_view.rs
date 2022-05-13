@@ -319,6 +319,14 @@ impl HistoryView {
         }
     }
 
+    pub fn scroll_to_top(&self) {
+        let item_position = 0_u32.to_variant();
+        self.imp()
+            .grid
+            .activate_action("list.scroll-to-item", Some(&item_position))
+            .unwrap();
+    }
+
     fn remove_song(&self, song: &Song) {
         let imp = self.imp();
 

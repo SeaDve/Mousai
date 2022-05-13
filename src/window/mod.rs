@@ -277,7 +277,9 @@ impl Window {
         imp.recognizer
             .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
                 obj.history().append(song.clone());
-                obj.imp().main_view.show_song(song);
+                let main_view = &obj.imp().main_view;
+                main_view.show_song(song);
+                main_view.scroll_to_top();
             }));
 
         imp.song_bar
