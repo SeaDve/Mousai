@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-05-11 12:13+0000\n"
+"PO-Revision-Date: 2022-05-13 18:15+0000\n"
 "Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -44,7 +44,7 @@ msgstr "Ancho predeterminado de ventana"
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr "Alto predeterminado de ventana"
+msgstr "Altura predeterminada de ventana"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
