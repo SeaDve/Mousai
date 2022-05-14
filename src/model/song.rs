@@ -2,7 +2,10 @@ use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-use std::{cell::RefCell, rc::Rc};
+use std::{
+    cell::{Cell, RefCell},
+    rc::Rc,
+};
 
 use super::{external_link::ExternalLink, ExternalLinkList, SongId};
 use crate::{
@@ -31,6 +34,7 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct Song {
         pub inner: RefCell<SongInner>,
+        pub is_newly_recognized: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -113,6 +117,13 @@ mod imp {
                         None,
                         glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
                     ),
+                    glib::ParamSpecBoolean::new(
+                        "is-newly-recognized",
+                        "Is Newly Recognized",
+                        "Is Newly Recognized",
+                        false,
+                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
+                    ),
                 ]
             });
             PROPERTIES.as_ref()
@@ -166,6 +177,10 @@ mod imp {
                     let lyrics = value.get().unwrap();
                     obj.set_lyrics(lyrics);
                 }
+                "is-newly-recognized" => {
+                    let is_newly_recognized = value.get().unwrap();
+                    obj.set_is_newly_recognized(is_newly_recognized);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -182,6 +197,7 @@ mod imp {
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
                 "lyrics" => obj.lyrics().to_value(),
+                "is-newly-recognized" => obj.is_newly_recognized().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -217,8 +233,8 @@ impl Song {
         id
     }
 
-    pub fn set_last_heard(&self, last_heard: DateTime) {
-        self.imp().inner.borrow_mut().last_heard = last_heard;
+    pub fn set_last_heard(&self, value: DateTime) {
+        self.imp().inner.borrow_mut().last_heard = value;
         self.notify("last-heard");
     }
 
@@ -254,13 +270,26 @@ impl Song {
         self.imp().inner.borrow().playback_link.clone()
     }
 
-    pub fn set_lyrics(&self, lyrics: Option<&str>) {
-        self.imp().inner.borrow_mut().lyrics = lyrics.map(|lyrics| lyrics.to_string());
+    pub fn set_lyrics(&self, value: Option<&str>) {
+        self.imp().inner.borrow_mut().lyrics = value.map(|lyrics| lyrics.to_string());
         self.notify("lyrics");
     }
 
     pub fn lyrics(&self) -> Option<String> {
         self.imp().inner.borrow().lyrics.clone()
+    }
+
+    pub fn is_newly_recognized(&self) -> bool {
+        self.imp().is_newly_recognized.get()
+    }
+
+    pub fn set_is_newly_recognized(&self, value: bool) {
+        if value == self.is_newly_recognized() {
+            return;
+        }
+
+        self.imp().is_newly_recognized.set(value);
+        self.notify("is-newly-recognized");
     }
 
     pub fn album_art(&self) -> anyhow::Result<Rc<AlbumArt>> {
@@ -312,25 +341,29 @@ impl SongBuilder {
         }
     }
 
-    pub fn album_art_link(&mut self, album_art_link: &str) -> &mut Self {
+    pub fn newly_recognized(&mut self, value: bool) -> &mut Self {
         self.properties
-            .push(("album-art-link", album_art_link.to_value()));
+            .push(("is-newly-recognized", value.to_value()));
         self
     }
 
-    pub fn playback_link(&mut self, playback_link: &str) -> &mut Self {
-        self.properties
-            .push(("playback-link", playback_link.to_value()));
+    pub fn album_art_link(&mut self, value: &str) -> &mut Self {
+        self.properties.push(("album-art-link", value.to_value()));
         self
     }
 
-    pub fn lyrics(&mut self, lyrics: &str) -> &mut Self {
-        self.properties.push(("lyrics", lyrics.to_value()));
+    pub fn playback_link(&mut self, value: &str) -> &mut Self {
+        self.properties.push(("playback-link", value.to_value()));
         self
     }
 
-    pub fn external_link(&mut self, external_link: impl ExternalLink + 'static) -> &mut Self {
-        self.external_links.push(Box::new(external_link));
+    pub fn lyrics(&mut self, value: &str) -> &mut Self {
+        self.properties.push(("lyrics", value.to_value()));
+        self
+    }
+
+    pub fn external_link(&mut self, value: impl ExternalLink + 'static) -> &mut Self {
+        self.external_links.push(Box::new(value));
         self
     }
 
@@ -362,6 +395,7 @@ mod test {
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")
         .lyrics("Some song lyrics")
+        .newly_recognized(true)
         .build();
 
         assert_eq!(song.title(), "Some song");
@@ -371,5 +405,6 @@ mod test {
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
+        assert!(song.is_newly_recognized());
     }
 }

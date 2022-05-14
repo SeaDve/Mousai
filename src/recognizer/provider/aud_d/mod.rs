@@ -41,6 +41,9 @@ impl AudD {
             &data.album,
             &data.release_date,
         );
+
+        song_builder.newly_recognized(true);
+
         let mut playback_links = Vec::new();
         let mut album_images = Vec::new();
 

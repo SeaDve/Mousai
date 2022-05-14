@@ -104,3 +104,13 @@ playbackbutton.circular > button  {
   line-height: 1.8em;
 }
 
+/* SongTile */
+
+label.new {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+

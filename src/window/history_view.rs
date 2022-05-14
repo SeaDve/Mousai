@@ -233,6 +233,9 @@ impl HistoryView {
         let imp = self.imp();
         imp.song_child.set_song(Some(song.clone()));
         imp.stack.set_visible_child(&imp.song_child.get());
+
+        // User is already aware of the newly recognized song, so unset it.
+        song.set_is_newly_recognized(false);
     }
 
     /// Must only be called once

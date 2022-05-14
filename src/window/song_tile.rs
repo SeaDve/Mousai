@@ -29,10 +29,13 @@ mod imp {
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
+        pub(super) new_label: TemplateChild<gtk::Label>,
+        #[template_child]
         pub(super) playback_button: TemplateChild<PlaybackButton>,
 
         pub(super) song: RefCell<Option<Song>>,
         pub(super) player: OnceCell<WeakRef<Player>>,
+        pub(super) bindings: RefCell<Vec<glib::Binding>>,
     }
 
     #[glib::object_subclass]
@@ -126,6 +129,22 @@ impl SongTile {
         }
 
         let imp = self.imp();
+
+        {
+            let mut bindings = imp.bindings.borrow_mut();
+
+            for binding in bindings.drain(..) {
+                binding.unbind();
+            }
+
+            if let Some(ref song) = song {
+                bindings.push(
+                    song.bind_property("is-newly-recognized", &imp.new_label.get(), "visible")
+                        .flags(glib::BindingFlags::SYNC_CREATE)
+                        .build(),
+                );
+            }
+        }
 
         imp.album_cover.set_song(song.clone());
 
