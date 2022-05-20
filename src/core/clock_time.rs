@@ -47,7 +47,7 @@ impl From<ClockTime> for gst::ClockTime {
 
         // Note: `std::u64::MAX` is `ClockTime::None`.
         if nanos >= std::u64::MAX as u128 {
-            return gst::ClockTime::from_nseconds(std::u64::MAX - 1);
+            return gst::ClockTime::MAX;
         }
 
         gst::ClockTime::from_nseconds(nanos as u64)
