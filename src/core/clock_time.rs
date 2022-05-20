@@ -37,7 +37,7 @@ impl ClockTime {
 
 impl From<gst::ClockTime> for ClockTime {
     fn from(value: gst::ClockTime) -> Self {
-        Self(value.into())
+        Self(Duration::from(value))
     }
 }
 
@@ -51,5 +51,31 @@ impl From<ClockTime> for gst::ClockTime {
         }
 
         gst::ClockTime::from_nseconds(nanos as u64)
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    macro_rules! assert_eq_gst {
+        ($this:expr, $gst:expr) => {
+            assert_eq!($this.0.as_nanos(), $gst.nseconds() as u128);
+        };
+    }
+
+    #[test]
+    fn zero() {
+        assert_eq_gst!(ClockTime::ZERO, gst::ClockTime::ZERO);
+    }
+
+    #[test]
+    fn gst_conversion() {
+        let std = Duration::from_nanos(123);
+        let gst = gst::ClockTime::try_from(std).unwrap();
+        let this = ClockTime(std);
+
+        assert_eq_gst!(this, gst);
+        assert_eq_gst!(ClockTime::from(gst), gst::ClockTime::from(this));
     }
 }
