@@ -72,10 +72,22 @@ mod test {
     #[test]
     fn gst_conversion() {
         let std = Duration::from_nanos(123);
-        let gst = gst::ClockTime::try_from(std).unwrap();
         let this = ClockTime(std);
+        let gst = gst::ClockTime::try_from(std).unwrap();
 
         assert_eq_gst!(this, gst);
         assert_eq_gst!(ClockTime::from(gst), gst::ClockTime::from(this));
+    }
+
+    #[test]
+    fn gst_conversion_max_handling() {
+        let this_max = ClockTime(Duration::from_nanos(std::u64::MAX));
+        let gst_from_this_max = gst::ClockTime::from(this_max);
+
+        assert_eq!(gst::ClockTime::MAX, gst_from_this_max);
+        assert_eq_gst!(
+            ClockTime(Duration::from_nanos(std::u64::MAX - 1)),
+            gst_from_this_max
+        );
     }
 }
