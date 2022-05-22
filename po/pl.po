@@ -4,13 +4,14 @@
 # Adam Hulewicz <dontbesoso@gmail.com>, 2021.
 # Radosław Korotkiewicz <Ezioleq@wp.pl>, 2022.
 # Carlod <carlod@disroot.org>, 2022.
+# gnu-ewm <gnu.ewm@protonmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-05-17 11:16+0000\n"
-"Last-Translator: Carlod <carlod@disroot.org>\n"
+"PO-Revision-Date: 2022-05-22 22:17+0000\n"
+"Last-Translator: gnu-ewm <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/kooha/mousai/pl/>"
 "\n"
 "Language: pl\n"
@@ -48,15 +49,15 @@ msgstr "Domyślna wysokość okna"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Domyślne zachowanie zmaksymalizowanego okna"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Zawiera ostatnio rozpoznane utwory"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Preferowane źródło dźwięku do nagrywania dźwięku"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -102,7 +103,7 @@ msgstr "🎼 Posłuchaj podglądu znalezionych piosenek w natywnym odtwarzaczu."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 Przeglądaj i słuchaj utworów od różnych dostawców."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -187,7 +188,7 @@ msgstr "Kliknij przycisku słuchaj aby zacząć."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Nie znaleziono żadnych wyników"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
@@ -257,7 +258,7 @@ msgstr "Pokaż informacje o piosence"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
-msgstr "Zakończ"
+msgstr "Zatrzymaj"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
@@ -290,7 +291,7 @@ msgstr "Data wydania"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:150
 msgid "translator-credits"
-msgstr "Radek Raczkowski,Adam Hulewicz,Radosław Korotkiewicz"
+msgstr "Radek Raczkowski, Adam Hulewicz, Radosław Korotkiewicz"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
