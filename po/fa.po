@@ -5,54 +5,55 @@
 # Soheil Khanalipur <soheil@disroot.org>, 2021.
 # عبدالرئوف عابدی <abdolraoofabedi@gmail.com>, 2021.
 # MSKF <walkingdeadstudio@outlook.com>, 2022.
+# MEgooneh <mohammad.erfan.gooneh@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
-">\n"
+"PO-Revision-Date: 2022-05-24 01:19+0000\n"
+"Last-Translator: MEgooneh <mohammad.erfan.gooneh@gmail.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
+"\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
 msgid "Mousai"
-msgstr ""
+msgstr "موسای"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "شناسایی آهنگ ها در ثانیه"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Music;Song;Identify;"
-msgstr ""
+msgstr "Shazam;موسیقی;آهنگ;شناسایی;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
-msgstr ""
+msgstr "پیش فرض عرض پنجره"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr ""
+msgstr "پیش فرض طول پنجره"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "رفتار حداکثری پنجره پیش‌فرض"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "حاوی آهنگ های اخیراً شناخته شده است"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
