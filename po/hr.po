@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-05-24 01:19+0000\n"
+"PO-Revision-Date: 2022-05-26 09:18+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/kooha/mousai/hr/"
 ">\n"
@@ -46,7 +46,7 @@ msgstr "Standardna visina prozora"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Standardno ponašanje potpuno rastvorenog prozora"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
@@ -54,7 +54,7 @@ msgstr "Sadrži nedavno prepoznate pjesme"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Preferirani izvor zvuka za snimanje zvuka"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -161,11 +161,11 @@ msgstr "Odaberi"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Traži pjesme"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Prekini odabir"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -174,11 +174,11 @@ msgstr "Odustani"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Upiši pjesmu ili ime izvođača"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Pokreni prepoznavanje glazbe!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
@@ -186,19 +186,19 @@ msgstr "Počni pritiskom gumba za slušanje."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr ""
+msgstr "Nema rezultata"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
-msgstr ""
+msgstr "Pokušaj s jednom drugom pretragom."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Kopiraj pjesmu"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Prekini slušati"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -208,12 +208,12 @@ msgstr "Opće"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Otvori glavni izbornik"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Pretraga"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
@@ -228,31 +228,31 @@ msgstr "Zatvori program"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Upravljački elementi"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Uključi/Isključi slušanje"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Uključi/Isključi reprodukciju"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Navigacija"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Idi natrag"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Pokaži podatke pjesme"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
@@ -260,31 +260,31 @@ msgstr "Prekini"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Vrati se na glavnu stranicu"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Ukloni iz povijesti"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Kopiraj"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
-msgstr ""
+msgstr "Informacije"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
-msgstr ""
+msgstr "Zadnje slušanje"
 
 #: data/resources/ui/song-page.ui:155
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song-page.ui:160
 msgid "Release Date"
-msgstr ""
+msgstr "Datum izdanja"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:150
@@ -293,7 +293,7 @@ msgstr "Milo Ivir &lt;mail@milotype.de&gt;"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Autorska prava 2022. Dave Patrick"
 
 #: src/application.rs:154
 msgid "GitHub"
@@ -301,136 +301,140 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple glazba"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Pretraži „Apple glazba”"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Pretraži AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Slušaj na Spotify"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Pretraži YouTube"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Snimanje je prekinuto"
 
 #: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Prepoznavanje je prekinuto"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
 msgstr ""
+"Neuspjela obrada odgovora. Prijevi problem Mousai sustavu za praćenje "
+"grešaka."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
 msgstr ""
+"Neuspjelo konvertiranje datoteke. Prijevi problem Mousai sustavu za praćenje "
+"grešaka."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Neuspjelo povezivanje s poslužiteljem."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Dnevno ograničenje je dosegnuto."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
-msgstr ""
+msgstr "Neuspjelo prepoznavanje zvuka. Možda se ne čuje nikakav zvuk."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Provjeri vezu s internetom."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Nema poklapanja za ovu pjesmu."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Unesi API token u postavkama."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Unesi ispravni API token."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Pjesma je kopirana u međuspremnik"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Poništi"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Uklonjena je {} pjesma"
+msgstr[1] "Uklonjene su {} pjesme"
+msgstr[2] "Uklonjeno je {} pjesama"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Za biranje elemenata pritisni ih"
 
 #: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odabrana je {} pjesma"
+msgstr[1] "Odabrane se {} pjesme"
+msgstr[2] "Odabrano je {} pjesama"
 
 #: src/window/history_view.rs:487
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Ukloni pjesmu iz povijesti"
+msgstr[1] "Ukloni pjesme iz povijesti"
+msgstr[2] "Ukloni pjesme iz povijesti"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
-msgstr ""
+msgstr "Neuspjelo učitavanje povijesti"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Reproduciraj"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Zaustavi"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Slušanje …"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Prepoznavanje …"
 
 #: src/window/song_page.rs:170
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Neuspjelo pokretanje {}"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Prepoznaj pjesme u trenu"
