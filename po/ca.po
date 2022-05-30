@@ -1,0 +1,421 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mousai package.
+# Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: mousai\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-22 08:24+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
+msgid "Mousai"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
+msgid "Identify songs in seconds"
+msgstr ""
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.seadve.Mousai.desktop.in.in:10
+msgid "Shazam;Music;Song;Identify;"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:6
+#: data/io.github.seadve.Mousai.gschema.xml.in:7
+msgid "Default window width"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:11
+#: data/io.github.seadve.Mousai.gschema.xml.in:12
+msgid "Default window height"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:16
+msgid "Default window maximized behaviour"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:21
+msgid "Contains recently recognized songs"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:30
+msgid "Preferred audio source to use in recording audio"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+msgid "Discover songs you are aching to know with an easy-to-use interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+msgid ""
+"Mousai is a simple application that can identify song similar to Shazam. "
+"Just click the listen button, and then wait a few seconds. It will magically "
+"return the title and artist of that song!"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to log in to their "
+"site to get more trials."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+msgid "Why you will love Mousai?"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+msgid "🎵 Identify the title and artist of the song within seconds."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+msgid "🎙️ Use your microphone or audio from desktop."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+msgid "🎸 Store the identified song including the album art in history."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+msgid "🎼 Preview the identified song with the native player."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+msgid "🌐 Browse and listen the song from different providers."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+msgid "📱 Easy-to-use user interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
+msgid "⌨️ User-friendly keyboard shortcuts."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
+msgid "Dave Patrick"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:6
+msgid "_Preferred Audio Source"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:8
+msgid "Microphone"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:13
+msgid "Desktop Audio"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:21
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:25
+msgid "_About Mousai"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:33
+msgid "Select _All"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:37
+msgid "Select _None"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:61
+msgid "Start Identifying Music"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:134
+msgid "Listen"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:71
+msgid "Open Main Menu"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:79
+msgid "Select"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
+msgid "Search for Songs"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:102
+msgid "Cancel Select"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:103
+#: data/resources/ui/recognizer-view.ui:14
+msgid "Cancel"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:123
+msgid "Enter song or artist name"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:148
+msgid "Start Identifying Music!"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:149
+msgid "Click the listen button to start."
+msgstr ""
+
+#: data/resources/ui/history-view.ui:156
+msgid "No Results Found"
+msgstr ""
+
+#: data/resources/ui/history-view.ui:157
+msgid "Try a different search."
+msgstr ""
+
+#: data/resources/ui/history-view.ui:166
+msgid "Copy Song"
+msgstr ""
+
+#: data/resources/ui/recognizer-view.ui:13
+msgid "Cancel Listening"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:14
+msgctxt "shortcut window"
+msgid "Open Main Menu"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:20
+msgctxt "shortcut window"
+msgid "Search"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:26
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:40
+msgctxt "shortcut window"
+msgid "Controls"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:43
+msgctxt "shortcut window"
+msgid "Toggle Listen"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:49
+msgctxt "shortcut window"
+msgid "Toggle Playback"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:57
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:60
+msgctxt "shortcut window"
+msgid "Go Back"
+msgstr ""
+
+#: data/resources/ui/song-bar.ui:33
+msgid "Show Song Information"
+msgstr ""
+
+#: data/resources/ui/song-bar.ui:101
+msgid "Stop"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:27
+msgid "Return to Main Page"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:34
+msgid "Remove From History"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:41
+msgid "Copy"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:147
+msgid "Information"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:150
+msgid "Last Heard"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:155
+msgid "Album"
+msgstr ""
+
+#: data/resources/ui/song-page.ui:160
+msgid "Release Date"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names. Put a comma between.
+#: src/application.rs:150
+msgid "translator-credits"
+msgstr ""
+
+#: src/application.rs:151
+msgid "Copyright 2022 Dave Patrick"
+msgstr ""
+
+#: src/application.rs:154
+msgid "GitHub"
+msgstr ""
+
+#: src/model/external_link/apple_music.rs:26
+msgid "Apple Music"
+msgstr ""
+
+#: src/model/external_link/apple_music.rs:30
+msgid "Browse on Apple Music"
+msgstr ""
+
+#: src/model/external_link/aud_d.rs:26
+msgid "AudD"
+msgstr ""
+
+#: src/model/external_link/aud_d.rs:30
+msgid "Browse on AudD"
+msgstr ""
+
+#: src/model/external_link/spotify.rs:26
+msgid "Spotify"
+msgstr ""
+
+#: src/model/external_link/spotify.rs:30
+msgid "Listen on Spotify"
+msgstr ""
+
+#: src/model/external_link/youtube.rs:28
+msgid "YouTube"
+msgstr ""
+
+#: src/model/external_link/youtube.rs:32
+msgid "Search on YouTube"
+msgstr ""
+
+#: src/recognizer/mod.rs:193
+msgid "Cancelled recording"
+msgstr ""
+
+#: src/recognizer/mod.rs:207
+msgid "Cancelled recognizing"
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:52
+msgid "Failed to parse response. Please report this to Mousai's bug tracker."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:55
+msgid "Failed to convert file. Please report this to Mousai's bug tracker."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:62
+msgid "Failed to connect to the server."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:71
+msgid "Daily limit has been reached."
+msgstr ""
+
+#: src/recognizer/provider/aud_d/error.rs:74
+msgid "Failed to fingerprint audio. There may be no sound heard."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:160
+msgid "{} Check your internet connection."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:162
+msgid "No matches found for this song."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:164
+msgid "{} Input an API token in the preferences."
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:167
+msgid "Please input a valid API token."
+msgstr ""
+
+#: src/window/history_view.rs:112 src/window/song_page.rs:84
+msgid "Copied song to clipboard"
+msgstr ""
+
+#: src/window/history_view.rs:392
+msgid "_Undo"
+msgstr ""
+
+#: src/window/history_view.rs:411
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/history_view.rs:476
+msgid "Click on items to select them"
+msgstr ""
+
+#: src/window/history_view.rs:478
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/history_view.rs:487
+msgid "Remove Song From History"
+msgid_plural "Remove Songs From History"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/mod.rs:194
+msgid "Failed to load history"
+msgstr ""
+
+#: src/window/playback_button.rs:165
+msgid "Play"
+msgstr ""
+
+#: src/window/playback_button.rs:172
+msgid "Pause"
+msgstr ""
+
+#: src/window/recognizer_view.rs:101
+msgid "Listening…"
+msgstr ""
+
+#: src/window/recognizer_view.rs:123
+msgid "Recognizing…"
+msgstr ""
+
+#: src/window/song_page.rs:170
+msgid "Failed to launch {}"
+msgstr ""
