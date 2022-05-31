@@ -4,7 +4,7 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Andy Pillip <p@pvse.com>, 2021.
 # Heinrich Heinzer <heinrich.heinzer@gmail.com>, 2021.
-# Nico <d3sox@protonmail.com>, 2021.
+# Nico <d3sox@protonmail.com>, 2021, 2022.
 # Milo Ivir <mail@milotype.de>, 2021.
 # sal0max <msal.coding@gmail.com>, 2022.
 msgid ""
@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-19 14:07+0000\n"
-"Last-Translator: sal0max <msal.coding@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
-">\n"
+"PO-Revision-Date: 2022-05-31 05:18+0000\n"
+"Last-Translator: Nico <d3sox@protonmail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -206,7 +206,7 @@ msgstr "Eine andere Suche versuchen."
 
 #: data/resources/ui/history-view.ui:166
 msgid "Copy Song"
-msgstr ""
+msgstr "Lied kopieren"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -276,11 +276,11 @@ msgstr "Zurück zur Hauptseite"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Aus dem Verlauf entfernen"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
@@ -395,17 +395,17 @@ msgstr "Bitte einen gültigen API-Schlüssen eingeben."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Lied in die Zwischenablage kopiert"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Rückgängig"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} Lied entfernt"
+msgstr[1] "{} Lieder entfernt"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
@@ -418,11 +418,10 @@ msgstr[0] "{} Lied ausgewählt"
 msgstr[1] "{} Lieder ausgewählt"
 
 #: src/window/history_view.rs:487
-#, fuzzy
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Lied aus dem Verlauf entfernen"
-msgstr[1] "Lied aus dem Verlauf entfernen"
+msgstr[1] "Lieder aus dem Verlauf entfernen"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"

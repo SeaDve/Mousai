@@ -5,13 +5,14 @@
 # robert schneider <robertschv@gmail.com>, 2021.
 # Sergio Varela <sergitroll9@gmail.com>, 2021, 2022.
 # Chardinson De la cruz Ventura <chardinsondelacruzventura@gmail.com>, 2021.
+# Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-05-13 18:15+0000\n"
-"Last-Translator: Sergio Varela <sergitroll9@gmail.com>\n"
+"PO-Revision-Date: 2022-05-31 05:18+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
 "Language: es\n"
@@ -147,7 +148,7 @@ msgstr "Seleccionar _todo"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr "Seleccionar _ninguna"
+msgstr "No seleccionar _ninguna"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
