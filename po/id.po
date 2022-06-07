@@ -4,13 +4,14 @@
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021, 2022.
 # liimee <alt3753.7@gmail.com>, 2021.
 # Sucipto <show.cheap@gmail.com>, 2021.
+# Hervy Qurrotul Ainur Rozi <hervyqa@proton.me>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-05-28 00:17+0000\n"
-"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
+"PO-Revision-Date: 2022-06-07 04:19+0000\n"
+"Last-Translator: Hervy Qurrotul Ainur Rozi <hervyqa@proton.me>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -250,11 +251,11 @@ msgstr "Navigasi"
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Kembali"
 
 #: data/resources/ui/song-bar.ui:33
 msgid "Show Song Information"
-msgstr ""
+msgstr "Tampilkan Informasi Lagu"
 
 #: data/resources/ui/song-bar.ui:101
 msgid "Stop"
@@ -262,40 +263,40 @@ msgstr "Berhenti"
 
 #: data/resources/ui/song-page.ui:27
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Kembali ke Halaman Utama"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr ""
+msgstr "Hapus dari Riwayat"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 #: data/resources/ui/song-page.ui:147
 msgid "Information"
-msgstr ""
+msgstr "Informasi"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Last Heard"
-msgstr ""
+msgstr "Terakhir Didengar"
 
 #: data/resources/ui/song-page.ui:155
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song-page.ui:160
 msgid "Release Date"
-msgstr ""
+msgstr "Tanggal Rilis"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:150
 msgid "translator-credits"
-msgstr "liimee"
+msgstr "kredit-penerjemah"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Hak Cipta 2022 Dave Patrick"
 
 #: src/application.rs:154
 msgid "GitHub"
@@ -303,130 +304,131 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Jelajahi di Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Jelajadi di AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Dengarkan di Spotify"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Cari di YouTube"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Perekaman dibatalkan"
 
 #: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Pengenalan dibatalkan"
 
 #: src/recognizer/provider/aud_d/error.rs:52
 msgid "Failed to parse response. Please report this to Mousai's bug tracker."
-msgstr ""
+msgstr "Gagal mengurai tanggapan. Silakan laporkan ini ke pelacak kutu Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:55
 msgid "Failed to convert file. Please report this to Mousai's bug tracker."
-msgstr ""
+msgstr "Gagal mengonversi berkas. Silakan laporkan ini ke pelacak kutu Mousai."
 
 #: src/recognizer/provider/aud_d/error.rs:62
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Gagal terhubung ke server."
 
 #: src/recognizer/provider/aud_d/error.rs:71
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Batas harian telah tercapai."
 
 #: src/recognizer/provider/aud_d/error.rs:74
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Gagal melakukan fingerprint audio. Mungkin tidak ada suara yang terdengar."
 
 #: src/recognizer/provider/mod.rs:160
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Periksa koneksi internet anda."
 
 #: src/recognizer/provider/mod.rs:162
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Tidak ada kecocokan yang ditemukan untuk lagu ini."
 
 #: src/recognizer/provider/mod.rs:164
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Masukkan token API di preferensi."
 
 #: src/recognizer/provider/mod.rs:167
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Harap masukkan token API yang valid."
 
 #: src/window/history_view.rs:112 src/window/song_page.rs:84
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Lagu yang disalin ke clipboard"
 
 #: src/window/history_view.rs:392
 msgid "_Undo"
-msgstr ""
+msgstr "_Batal"
 
 #: src/window/history_view.rs:411
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
+msgstr[0] "Lagu {} yang dihapus"
 
 #: src/window/history_view.rs:476
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Klik pada item untuk memilihnya"
 
 #: src/window/history_view.rs:478
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
+msgstr[0] "Lagu {} yang dipilih"
 
 #: src/window/history_view.rs:487
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
+msgstr[0] "Hapus Lagu Dari Riwayat"
 
 #: src/window/mod.rs:194
 msgid "Failed to load history"
-msgstr ""
+msgstr "Gagal memuat riwayat"
 
 #: src/window/playback_button.rs:165
 msgid "Play"
-msgstr ""
+msgstr "Mainkan"
 
 #: src/window/playback_button.rs:172
 msgid "Pause"
-msgstr ""
+msgstr "Berhenti"
 
 #: src/window/recognizer_view.rs:101
 msgid "Listening…"
-msgstr ""
+msgstr "Mendengarkan…"
 
 #: src/window/recognizer_view.rs:123
 msgid "Recognizing…"
-msgstr ""
+msgstr "Mengenali…"
 
 #: src/window/song_page.rs:170
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Gagal meluncurkan {}"
 
 #~ msgid "Identify any songs in seconds"
 #~ msgstr "Kenali lagu apa saja dalam hitungan detik"
