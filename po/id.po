@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021, 2022.
-# liimee <alt3753.7@gmail.com>, 2021.
+# liimee <alt3753.7@gmail.com>, 2021, 2022.
 # Sucipto <show.cheap@gmail.com>, 2021.
 # Hervy Qurrotul Ainur Rozi <hervyqa@proton.me>, 2022.
 msgid ""
@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-06-07 04:19+0000\n"
-"Last-Translator: Hervy Qurrotul Ainur Rozi <hervyqa@proton.me>\n"
+"PO-Revision-Date: 2022-06-18 00:18+0000\n"
+"Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -29,7 +29,7 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
 msgid "Identify songs in seconds"
-msgstr "Mengidentifikasi lagu dalam hitungan detik"
+msgstr "Identifikasi lagu dalam hitungan detik"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
@@ -189,7 +189,7 @@ msgstr "Klik tombol dengarkan untuk memulai."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
-msgstr "Nggak ketemu"
+msgstr "Tidak Ditemukan Hasil"
 
 #: data/resources/ui/history-view.ui:157
 msgid "Try a different search."
@@ -267,7 +267,7 @@ msgstr "Kembali ke Halaman Utama"
 
 #: data/resources/ui/song-page.ui:34
 msgid "Remove From History"
-msgstr "Hapus dari Riwayat"
+msgstr "Hapus Dari Riwayat"
 
 #: data/resources/ui/song-page.ui:41
 msgid "Copy"
@@ -292,7 +292,7 @@ msgstr "Tanggal Rilis"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:150
 msgid "translator-credits"
-msgstr "kredit-penerjemah"
+msgstr "@liimee, Hervy Qurrotul Ainur Rozi, Reza Almanda"
 
 #: src/application.rs:151
 msgid "Copyright 2022 Dave Patrick"
