@@ -14,7 +14,7 @@ jobs:
       - name: Download dependencies
         run: sudo apt -y install libgtk-4-dev
       - name: Run checks.py
-        run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos
+        run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos --skip-uifiles
 
   rustfmt:
     name: Rustfmt
