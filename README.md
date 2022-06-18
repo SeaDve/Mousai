@@ -35,7 +35,7 @@
 </p>
 
 <p align="center">
-  <img src="data/screenshots/preview.png" alt="Preview"/>
+  <img src="data/resources/screenshots/preview.png" alt="Preview"/>
 </p>
 
 Discover songs you are aching to know with an easy-to-use interface.
