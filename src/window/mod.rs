@@ -128,6 +128,10 @@ mod imp {
             self.main_view.bind_song_list(obj.history());
             self.recognizer_view.bind_recognizer(&self.recognizer);
 
+            self.main_view
+                .search_bar()
+                .set_key_capture_widget(Some(obj.upcast_ref::<gtk::Widget>()));
+
             obj.setup_signals();
 
             obj.load_window_size();
@@ -338,26 +342,6 @@ impl Window {
         {
             imp.main_view.stop_selection_mode();
             return true;
-        }
-
-        if let Some(unicode) = keyval.to_unicode() {
-            if !search_bar.is_search_mode()
-                && keyval != gdk::Key::space
-                && ((state == gdk::ModifierType::SHIFT_MASK) || state.is_empty())
-                && unicode.is_alphanumeric()
-            {
-                if let Some(search_entry) = search_bar
-                    .child()
-                    .and_then(|child| child.downcast::<gtk::SearchEntry>().ok())
-                {
-                    search_entry.set_text(&unicode.to_string());
-                    search_entry.set_position(1);
-                    search_bar.set_search_mode(true);
-                    return true;
-                }
-
-                log::error!("MainPage's SearchBar is expect to have a child of SearchEntry");
-            }
         }
 
         false
