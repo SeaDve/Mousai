@@ -328,20 +328,17 @@ impl Window {
 
         if keyval == gdk::Key::Escape
             && state == gdk::ModifierType::empty()
-            && search_bar.is_search_mode()
             && !imp.main_view.is_on_song_page()
         {
-            search_bar.set_search_mode(false);
-            return true;
-        }
+            if search_bar.is_search_mode() {
+                search_bar.set_search_mode(false);
+                return true;
+            }
 
-        if keyval == gdk::Key::Escape
-            && state == gdk::ModifierType::empty()
-            && imp.main_view.is_selection_mode()
-            && !imp.main_view.is_on_song_page()
-        {
-            imp.main_view.stop_selection_mode();
-            return true;
+            if imp.main_view.is_selection_mode() {
+                imp.main_view.stop_selection_mode();
+                return true;
+            }
         }
 
         false
