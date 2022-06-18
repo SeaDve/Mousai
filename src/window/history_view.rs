@@ -2,7 +2,7 @@ use adw::prelude::*;
 use gettextrs::{gettext, ngettext};
 use gtk::{
     gdk,
-    glib::{self, clone},
+    glib::{self, clone, closure},
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -251,21 +251,25 @@ impl HistoryView {
             obj.update_history_stack();
         }));
 
-        let filter = gtk::CustomFilter::new(
-            clone!(@weak self as obj => @default-return false, move |item| {
-                let search_text = obj.imp().search_entry.text().to_lowercase();
-                let song = item.downcast_ref::<Song>().unwrap();
-                song.title().to_lowercase().contains(&search_text) || song.artist().to_lowercase().contains(&search_text)
-            }),
-        );
+        let filter = gtk::StringFilter::builder()
+            .expression(
+                &gtk::ClosureExpression::new::<String, &[gtk::Expression], _>(
+                    &[],
+                    closure!(|song: Song| [song.title(), song.artist()].join("")),
+                ),
+            )
+            .match_mode(gtk::StringFilterMatchMode::Substring)
+            .ignore_case(true)
+            .build();
+
         let filter_model = gtk::FilterListModel::new(Some(song_list), Some(&filter));
         filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             obj.update_history_stack();
         }));
 
         imp.search_entry.connect_search_changed(
-            clone!(@weak self as obj, @weak filter => move |_| {
-                filter.changed(gtk::FilterChange::Different);
+            clone!(@weak self as obj, @weak filter => move |search_entry| {
+                filter.set_search(Some(&search_entry.text()));
                 obj.update_history_stack();
             }),
         );
