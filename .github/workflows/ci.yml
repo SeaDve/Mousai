@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
-      - name: Download dependencies
-        run: sudo apt -y install libgtk-4-dev
+      # FIXME uncomment when we don't --skip-uifiles anymore
+      # - name: Download dependencies
+      #   run: sudo apt -y install libgtk-4-dev
       - name: Run checks.py
         run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos --skip-uifiles
 
