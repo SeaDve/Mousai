@@ -5,7 +5,7 @@ use std::{cell::Cell, rc::Rc, time::Duration};
 
 use crate::core::{Cancellable, Cancelled};
 
-/// Send something to a [`glib::Sender`]
+/// Try send something through a some sender that has send method
 #[macro_export]
 macro_rules! send {
     ($sender:expr, $action:expr) => {
