@@ -7,13 +7,14 @@
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Michael Moroni <michaelmoroni@disroot.org>, 2021.
 # Andrea Brandi <git@andreabrandi.com>, 2022.
+# musiclover382 <mattiagiovanni.borda@icloud.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-04-22 08:24+0800\n"
-"PO-Revision-Date: 2022-04-29 23:11+0000\n"
-"Last-Translator: Andrea Brandi <git@andreabrandi.com>\n"
+"PO-Revision-Date: 2022-06-22 13:17+0000\n"
+"Last-Translator: musiclover382 <mattiagiovanni.borda@icloud.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
 "\n"
 "Language: it\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
@@ -36,7 +37,7 @@ msgstr "Identifica le canzoni in pochi secondi"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Music;Song;Identify;"
-msgstr "Shazam;Musica;Canzone;Identifica;"
+msgstr "Shazam;Music;Song;Identify;Musica;Canzone;Identifica;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -63,8 +64,8 @@ msgstr "Sorgente audio preferita da utilizzare durante la registrazione"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
-"Scopri le canzoni che non vedi l'ora di conoscere con un'interfaccia facile "
-"da usare."
+"Scopri il nome delle canzoni che stai cercando con un'interfaccia facile da "
+"usare."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
@@ -94,13 +95,13 @@ msgstr "🎵 Identifica il titolo e l'artista della canzone in pochi secondi."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr "🎙️ Usa il tuo microfono o l'audio dal desktop."
+msgstr "🎙️ Usa il microfono o l'audio dal desktop."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
 "🎸 Memorizza la canzone identificata, inclusa la copertina dell'album nella "
-"cronologiA."
+"cronologia."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Preview the identified song with the native player."
