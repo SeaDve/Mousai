@@ -88,7 +88,15 @@ impl AlbumArt {
     }
 
     fn set_and_get_cache(&self, texture: gdk::Texture) -> &gdk::Texture {
-        self.cache.set(texture).unwrap();
+        if let Err(texture) = self.cache.set(texture) {
+            // This would be infallible when the three concurrent caller on
+            // Self::texture is fixed.
+            log::error!(
+                "Cache was already set; is_same_instance = {}",
+                &texture == self.cache.get().unwrap()
+            );
+        }
+
         self.cache.get().unwrap()
     }
 }
