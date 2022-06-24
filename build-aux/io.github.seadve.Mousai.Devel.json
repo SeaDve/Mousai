@@ -5,7 +5,7 @@
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable",
-        "org.freedesktop.Sdk.Extension.llvm13"
+        "org.freedesktop.Sdk.Extension.llvm14"
     ],
     "command": "mousai",
     "finish-args": [
@@ -19,10 +19,14 @@
         "--env=RUST_BACKTRACE=1"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/llvm13/bin:/usr/lib/sdk/rust-stable/bin",
+        "append-path": "/usr/lib/sdk/llvm14/bin:/usr/lib/sdk/rust-stable/bin",
         "build-args": [
             "--share=network"
-        ]
+        ],
+        "env": {
+            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER": "clang",
+            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS": "-C link-arg=-fuse-ld=/usr/lib/sdk/rust-stable/bin/mold"
+        }
     },
     "modules": [
         {
