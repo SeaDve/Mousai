@@ -1,3 +1,4 @@
+use anyhow::Context;
 use gst_pbutils::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
@@ -308,17 +309,22 @@ fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow:
     ))
 }
 
+fn gst_element_factory_make(factory_name: &str) -> anyhow::Result<gst::Element> {
+    gst::ElementFactory::make(factory_name, None)
+        .with_context(|| format!("Failed to make `{}`", factory_name))
+}
+
 fn create_pipeline(
     stream: &gio::MemoryOutputStream,
     preferred_device_class: AudioDeviceClass,
 ) -> anyhow::Result<gst::Pipeline> {
     let pipeline = gst::Pipeline::new(None);
 
-    let pulsesrc = gst::ElementFactory::make("pulsesrc", None)?;
-    let audioconvert = gst::ElementFactory::make("audioconvert", None)?;
-    let level = gst::ElementFactory::make("level", None)?;
-    let encodebin = gst::ElementFactory::make("encodebin", None)?;
-    let giostreamsink = gst::ElementFactory::make("giostreamsink", None)?;
+    let pulsesrc = gst_element_factory_make("pulsesrc")?;
+    let audioconvert = gst_element_factory_make("audioconvert")?;
+    let level = gst_element_factory_make("level")?;
+    let encodebin = gst_element_factory_make("encodebin")?;
+    let giostreamsink = gst_element_factory_make("giostreamsink")?;
 
     let encodebin_profile = {
         let audio_caps = gst::Caps::new_simple("audio/x-opus", &[]);
