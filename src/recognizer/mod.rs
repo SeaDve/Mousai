@@ -9,7 +9,7 @@ use gtk::{
 
 use std::cell::{Cell, RefCell};
 
-pub use self::provider::{ProviderType, TestProviderMode, PROVIDER_MANAGER};
+pub use self::provider::{ProviderManager, ProviderType, TestProviderMode};
 use crate::{
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
@@ -182,7 +182,7 @@ impl Recognizer {
         }
 
         self.set_state(RecognizerState::Listening);
-        let provider = PROVIDER_MANAGER.active().to_provider();
+        let provider = ProviderManager::global().active().to_provider();
         log::debug!("provider: {:?}", provider);
         let listen_duration = provider.listen_duration();
 

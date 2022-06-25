@@ -7,7 +7,7 @@ use super::{AudD, Data, Error, Provider, ProviderError, Response};
 use crate::{
     core::AudioRecording,
     model::Song,
-    recognizer::provider::{TestProviderMode, PROVIDER_MANAGER},
+    recognizer::provider::{ProviderManager, TestProviderMode},
 };
 
 #[derive(Debug)]
@@ -15,7 +15,7 @@ pub struct AudDMock;
 
 impl AudDMock {
     fn random_data(&self) -> Result<Data, Error> {
-        let test_mode = PROVIDER_MANAGER.test_mode();
+        let test_mode = ProviderManager::global().test_mode();
 
         let mut raw_responses = Vec::new();
         if matches!(test_mode, TestProviderMode::Both)
@@ -59,7 +59,7 @@ impl AudDMock {
 #[async_trait(?Send)]
 impl Provider for AudDMock {
     async fn recognize(&self, _: &AudioRecording) -> Result<Song, ProviderError> {
-        glib::timeout_future(PROVIDER_MANAGER.test_recognize_duration()).await;
+        glib::timeout_future(ProviderManager::global().test_recognize_duration()).await;
         Ok(AudD::build_song_from_data(self.random_data().map_err(
             |err| {
                 log::error!("Failed to recognize: {err:?}");
@@ -69,7 +69,7 @@ impl Provider for AudDMock {
     }
 
     fn listen_duration(&self) -> Duration {
-        PROVIDER_MANAGER.test_listen_duration()
+        ProviderManager::global().test_listen_duration()
     }
 
     fn is_test(&self) -> bool {

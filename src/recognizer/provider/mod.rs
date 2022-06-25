@@ -3,14 +3,12 @@ mod aud_d;
 use async_trait::async_trait;
 use gettextrs::gettext;
 use gtk::glib;
-use once_cell::sync::Lazy;
+use once_cell::sync::OnceCell;
 
 use std::{sync::RwLock, time::Duration};
 
 use self::aud_d::{AudD, AudDMock};
 use crate::{core::AudioRecording, model::Song};
-
-pub static PROVIDER_MANAGER: Lazy<ProviderManager> = Lazy::new(ProviderManager::default);
 
 #[async_trait(?Send)]
 pub trait Provider: std::fmt::Debug {
@@ -84,20 +82,22 @@ pub struct ProviderManager {
     test_recognize_duration: RwLock<Duration>,
 }
 
-impl Default for ProviderManager {
-    fn default() -> Self {
-        let obj = Self {
-            active: Default::default(),
-            test_mode: Default::default(),
-            test_listen_duration: Default::default(),
-            test_recognize_duration: Default::default(),
-        };
-        obj.reset_test_durations();
-        obj
-    }
-}
-
 impl ProviderManager {
+    pub fn global() -> &'static Self {
+        static PROVIDER_MANAGER: OnceCell<ProviderManager> = OnceCell::new();
+
+        PROVIDER_MANAGER.get_or_init(|| {
+            let this = Self {
+                active: Default::default(),
+                test_mode: Default::default(),
+                test_listen_duration: Default::default(),
+                test_recognize_duration: Default::default(),
+            };
+            this.reset_test_durations();
+            this
+        })
+    }
+
     pub fn active(&self) -> ProviderType {
         *self.active.read().unwrap()
     }
