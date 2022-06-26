@@ -1,17 +1,40 @@
-use futures_channel::oneshot::{self, Receiver};
+use async_channel::Receiver;
 use gtk::{gdk, gio, glib, prelude::*};
 use once_cell::unsync::OnceCell;
 use soup::prelude::*;
 
 use std::{cell::RefCell, path::Path};
 
-#[derive(Debug)]
 pub struct AlbumArt {
     session: soup::Session,
     download_url: String,
     cache_file: gio::File,
     cache: OnceCell<gdk::Texture>,
     loading: RefCell<Option<Receiver<()>>>,
+}
+
+impl std::fmt::Debug for AlbumArt {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let is_receiver_closed = if let Some(ref receiver) = *self.loading.borrow() {
+            receiver.is_closed()
+        } else {
+            true
+        };
+
+        let n_receiver = if let Some(ref receiver) = *self.loading.borrow() {
+            receiver.receiver_count()
+        } else {
+            0
+        };
+
+        f.debug_struct("AlbumArt")
+            .field("download_url", &self.download_url)
+            .field("cache_uri", &self.cache_file.uri())
+            .field("loaded", &self.cache.get().is_some())
+            .field("receiver_closed", &is_receiver_closed)
+            .field("n_receiver", &n_receiver)
+            .finish()
+    }
 }
 
 impl AlbumArt {
@@ -34,23 +57,20 @@ impl AlbumArt {
     }
 
     pub async fn texture(&self) -> anyhow::Result<&gdk::Texture> {
-        // FIXME: This guard won't work if there would be three
-        // same time caller to this function since the second
-        // one would take the receiver. Thus, there won't be a
-        // guard for the third one.
-        if let Some(receiver) = self.loading.take() {
+        let receiver = self.loading.borrow().clone();
+        if let Some(receiver) = receiver {
             // If there are currently loading AlbumArt, wait
             // for it to finish and be stored before checking if
             // it exist. This is to prevent loading the same
             // album art twice on subsequent call on this function.
-            let _ = receiver.await;
+            let _ = receiver.recv().await;
         }
 
         if let Some(texture) = self.cache.get() {
             return Ok(texture);
         }
 
-        let (sender, receiver) = oneshot::channel();
+        let (sender, receiver) = async_channel::unbounded();
         self.loading.replace(Some(receiver));
 
         match self.cache_file.load_bytes_future().await {
@@ -89,8 +109,6 @@ impl AlbumArt {
 
     fn set_and_get_cache(&self, texture: gdk::Texture) -> &gdk::Texture {
         if let Err(texture) = self.cache.set(texture) {
-            // This would be infallible when the three concurrent caller on
-            // Self::texture is fixed.
             log::error!(
                 "Cache was already set; is_same_instance = {}",
                 &texture == self.cache.get().unwrap()
