@@ -136,13 +136,12 @@ mod imp {
     impl ObjectImpl for HistoryView {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecBoolean::new(
-                    "is-selection-mode",
-                    "Is Selection Mode",
-                    "Whether self is on selection mode",
-                    false,
-                    glib::ParamFlags::READABLE,
-                )]
+                vec![
+                    // Whether self is on selection mode
+                    glib::ParamSpecBoolean::builder("is-selection-mode")
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }

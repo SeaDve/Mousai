@@ -31,13 +31,12 @@ mod imp {
     impl ObjectImpl for InformationRow {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecString::new(
-                    "data",
-                    "Data",
-                    "Data",
-                    None,
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                )]
+                vec![
+                    // The value of the information
+                    glib::ParamSpecString::builder("data")
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }

@@ -47,83 +47,57 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    glib::ParamSpecBoxed::new(
-                        "id",
-                        "Id",
-                        "Id",
-                        SongId::static_type(),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecBoxed::new(
-                        "last-heard",
-                        "Last Heard",
-                        "The DateTime when this was last heard",
-                        DateTime::static_type(),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "title",
-                        "Title",
-                        "Title of the song",
-                        Some(""),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "artist",
-                        "Artist",
-                        "Artist of the song",
-                        Some(""),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "album",
-                        "Album",
-                        "Album",
-                        Some(""),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "release-date",
-                        "Release Date",
-                        "Release Date",
-                        Some(""),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecObject::new(
+                    // Unique ID
+                    glib::ParamSpecBoxed::builder("id", SongId::static_type())
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // DateTime when last heard
+                    glib::ParamSpecBoxed::builder("last-heard", DateTime::static_type())
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                    // Title of the song
+                    glib::ParamSpecString::builder("title")
+                        .default_value(Some(""))
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // Artist of the song
+                    glib::ParamSpecString::builder("artist")
+                        .default_value(Some(""))
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // Album where the song was from
+                    glib::ParamSpecString::builder("album")
+                        .default_value(Some(""))
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // Arbitrary string for release date
+                    glib::ParamSpecString::builder("release-date")
+                        .default_value(Some(""))
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // Links relevant to the song
+                    glib::ParamSpecObject::builder(
                         "external-links",
-                        "External Links",
-                        "External Links",
                         ExternalLinkList::static_type(),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "album-art-link",
-                        "Album Art Link",
-                        "Link where the album art can be downloaded",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "playback-link",
-                        "Playback Link",
-                        "Link containing an excerpt of the song",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                    ),
-                    glib::ParamSpecString::new(
-                        "lyrics",
-                        "Lyrics",
-                        "Lyrics",
-                        None,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
-                    glib::ParamSpecBoolean::new(
-                        "is-newly-recognized",
-                        "Is Newly Recognized",
-                        "Is Newly Recognized",
-                        false,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
+                    )
+                    .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                    .build(),
+                    // Link where the album art can be downloaded
+                    glib::ParamSpecString::builder("album-art-link")
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // Link containing an excerpt of the song
+                    glib::ParamSpecString::builder("playback-link")
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .build(),
+                    // Lyrics of the song
+                    glib::ParamSpecString::builder("lyrics")
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                    // Whether the song is recently recognized
+                    glib::ParamSpecBoolean::builder("is-newly-recognized")
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()

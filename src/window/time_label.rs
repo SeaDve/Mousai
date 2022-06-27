@@ -36,13 +36,12 @@ mod imp {
     impl ObjectImpl for TimeLabel {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecBoxed::new(
-                    "time",
-                    "Time",
-                    "Time being shown by label",
-                    ClockTime::static_type(),
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                )]
+                vec![
+                    // Time shown by Self
+                    glib::ParamSpecBoxed::builder("time", ClockTime::static_type())
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }

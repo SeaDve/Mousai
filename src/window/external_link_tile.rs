@@ -38,13 +38,15 @@ mod imp {
     impl ObjectImpl for ExternalLinkTile {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecObject::new(
-                    "external-link",
-                    "External Link",
-                    "External Link",
-                    ExternalLinkWrapper::static_type(),
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY,
-                )]
+                vec![
+                    // Link represented by Self
+                    glib::ParamSpecObject::builder(
+                        "external-link",
+                        ExternalLinkWrapper::static_type(),
+                    )
+                    .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                    .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }

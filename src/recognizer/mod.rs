@@ -65,14 +65,13 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecEnum::new(
-                    "state",
-                    "State",
-                    "Current state of Self",
-                    RecognizerState::static_type(),
-                    RecognizerState::default() as i32,
-                    glib::ParamFlags::READABLE,
-                )]
+                vec![
+                    // Current state of Self
+                    glib::ParamSpecEnum::builder("state", RecognizerState::static_type())
+                        .default_value(RecognizerState::default() as i32)
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }

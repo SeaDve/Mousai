@@ -48,14 +48,13 @@ mod imp {
 
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecEnum::new(
-                    "device-class",
-                    "Device Class",
-                    "The device class to look for",
-                    AudioDeviceClass::static_type(),
-                    AudioDeviceClass::default() as i32,
-                    glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                )]
+                vec![
+                    // The device class to look for
+                    glib::ParamSpecEnum::builder("device-class", AudioDeviceClass::static_type())
+                        .default_value(AudioDeviceClass::default() as i32)
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                ]
             });
             PROPERTIES.as_ref()
         }

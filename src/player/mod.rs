@@ -80,35 +80,23 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    glib::ParamSpecObject::new(
-                        "song",
-                        "Song",
-                        "Song represented by Self",
-                        Song::static_type(),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
-                    glib::ParamSpecEnum::new(
-                        "state",
-                        "State",
-                        "Current state of the player",
-                        PlayerState::static_type(),
-                        PlayerState::default() as i32,
-                        glib::ParamFlags::READABLE,
-                    ),
-                    glib::ParamSpecBoxed::new(
-                        "position",
-                        "Position",
-                        "Position",
-                        ClockTime::static_type(),
-                        glib::ParamFlags::READABLE,
-                    ),
-                    glib::ParamSpecBoxed::new(
-                        "duration",
-                        "Duration",
-                        "Duration",
-                        ClockTime::static_type(),
-                        glib::ParamFlags::READABLE,
-                    ),
+                    // Song being played by the player
+                    glib::ParamSpecObject::builder("song", Song::static_type())
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                    // Current state of the player
+                    glib::ParamSpecEnum::builder("state", PlayerState::static_type())
+                        .default_value(PlayerState::default() as i32)
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                    // Current position of the player
+                    glib::ParamSpecBoxed::builder("position", ClockTime::static_type())
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                    // Duration of the song
+                    glib::ParamSpecBoxed::builder("duration", ClockTime::static_type())
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()

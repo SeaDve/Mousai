@@ -48,22 +48,16 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    glib::ParamSpecObject::new(
-                        "song",
-                        "Song",
-                        "Song represented by Self",
-                        Song::static_type(),
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
-                    glib::ParamSpecInt::new(
-                        "pixel-size",
-                        "Pixel Size",
-                        "Pixel Size of the inner GtkImage",
-                        -1,
-                        i32::MAX,
-                        -1,
-                        glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY,
-                    ),
+                    // Song represented by Self
+                    glib::ParamSpecObject::builder("song", Song::static_type())
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
+                    // Pixel Size of the inner GtkImage
+                    glib::ParamSpecInt::builder("pixel-size")
+                        .minimum(-1)
+                        .default_value(-1)
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()

@@ -53,22 +53,13 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    glib::ParamSpecString::new(
-                        "title",
-                        "Title",
-                        "Title of this inspector page",
-                        Some(INSPECTOR_TITLE),
-                        glib::ParamFlags::READABLE,
-                    ),
-                    // gtk-inspector-page uses this property
-                    // So add it to avoid warnings
-                    glib::ParamSpecObject::new(
-                        "object",
-                        "Object",
-                        "Object",
-                        glib::Object::static_type(),
-                        glib::ParamFlags::READWRITE,
-                    ),
+                    // Title of this inspector page
+                    glib::ParamSpecString::builder("title")
+                        .default_value(Some(INSPECTOR_TITLE))
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                    // Property needed as a gtk-inspector-page
+                    glib::ParamSpecObject::builder("object", glib::Object::static_type()).build(),
                 ]
             });
             PROPERTIES.as_ref()
