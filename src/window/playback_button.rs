@@ -46,6 +46,7 @@ mod imp {
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
 
+            klass.set_accessible_role(gtk::AccessibleRole::Button);
             klass.set_css_name("playbackbutton");
         }
 
@@ -58,10 +59,12 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
+                    // State or mode of the button
                     glib::ParamSpecEnum::builder("mode", PlaybackButtonMode::static_type())
                         .default_value(PlaybackButtonMode::default() as i32)
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
+                    // Name of the action to trigger when clicked
                     glib::ParamSpecString::builder("action-name")
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),

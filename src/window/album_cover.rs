@@ -37,6 +37,8 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+
+            klass.set_accessible_role(gtk::AccessibleRole::Img);
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {

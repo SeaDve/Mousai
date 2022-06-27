@@ -53,6 +53,8 @@ mod imp {
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
 
+            klass.set_accessible_role(gtk::AccessibleRole::Group);
+
             klass.install_action("song-bar.clear", None, |obj, _, _| {
                 if let Err(err) = obj.set_song(None) {
                     log::info!("Failed to clear SongBar song: {err:?}");
