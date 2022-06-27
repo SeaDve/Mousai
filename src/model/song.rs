@@ -57,22 +57,18 @@ mod imp {
                         .build(),
                     // Title of the song
                     glib::ParamSpecString::builder("title")
-                        .default_value(Some(""))
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
                         .build(),
                     // Artist of the song
                     glib::ParamSpecString::builder("artist")
-                        .default_value(Some(""))
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
                         .build(),
                     // Album where the song was from
                     glib::ParamSpecString::builder("album")
-                        .default_value(Some(""))
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
                         .build(),
                     // Arbitrary string for release date
                     glib::ParamSpecString::builder("release-date")
-                        .default_value(Some(""))
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
                         .build(),
                     // Links relevant to the song
@@ -288,10 +284,17 @@ impl<'de> Deserialize<'de> for Song {
         let deserialized_inner = imp::SongInner::deserialize(deserializer)?;
         let song: Self = glib::Object::new(&[
             ("id", &deserialized_inner.id),
+            ("last-heard", &deserialized_inner.last_heard),
+            ("title", &deserialized_inner.title),
+            ("artist", &deserialized_inner.artist),
+            ("album", &deserialized_inner.album),
+            ("release-date", &deserialized_inner.release_date),
             ("external-links", &deserialized_inner.external_links),
+            ("album-art-link", &deserialized_inner.album_art_link),
+            ("playback-link", &deserialized_inner.playback_link),
+            ("lyrics", &deserialized_inner.lyrics),
         ])
         .expect("Failed to create song.");
-        song.imp().inner.replace(deserialized_inner);
         Ok(song)
     }
 }
@@ -380,5 +383,75 @@ mod test {
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
         assert!(song.is_newly_recognized());
+    }
+
+    #[test]
+    fn deserialize() {
+        let song: Song = serde_json::from_str(
+            r#"{
+                "id": "UniqueSongId",
+                "last_heard": "2022-05-14T10:15:37.798479+08",
+                "title": "Some song",
+                "artist": "Someone",
+                "album": "SomeAlbum",
+                "release_date": "00-00-0000",
+                "external_links": [
+                    {
+                        "AudDExternalLink": {
+                            "uri": "https://aud_d.link"
+                        }
+                    },
+                    {
+                        "YoutubeExternalLink": {
+                            "search_term": "Someone - Some song"
+                        }
+                    },
+                    {
+                        "SpotifyExternalLink": {
+                            "uri": "https://spotify.link"
+                        }
+                    },
+                    {
+                        "AppleMusicExternalLink": {
+                            "uri": "https://apple_music.link"
+                        }
+                    }
+                ],
+                "album_art_link": "https://album.png",
+                "playback_link": "https://test.mp3",
+                "lyrics": "Some song lyrics"
+            }"#,
+        )
+        .expect("Failed to deserialize song.");
+
+        assert_eq!(song.id(), SongId::from("UniqueSongId"));
+        assert_eq!(
+            song.last_heard().to_iso8601(),
+            "2022-05-14T10:15:37.798479+08"
+        );
+        assert_eq!(song.title(), "Some song");
+        assert_eq!(song.artist(), "Someone");
+        assert_eq!(song.album(), "SomeAlbum");
+        assert_eq!(song.release_date(), "00-00-0000");
+
+        assert_eq!(song.external_links().n_items(), 4);
+        assert_eq!(
+            song.external_links().get(0).unwrap().inner().uri(),
+            "https://aud_d.link"
+        );
+        assert_eq!(
+            song.external_links().get(2).unwrap().inner().uri(),
+            "https://spotify.link"
+        );
+        assert_eq!(
+            song.external_links().get(3).unwrap().inner().uri(),
+            "https://apple_music.link"
+        );
+
+        assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
+        assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
+        assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
+
+        assert!(!song.is_newly_recognized());
     }
 }

@@ -21,20 +21,17 @@ mod imp {
     impl ObjectImpl for ExternalLinkList {}
 
     impl ListModelImpl for ExternalLinkList {
-        fn item_type(&self, _list_model: &Self::Type) -> glib::Type {
+        fn item_type(&self, _this: &Self::Type) -> glib::Type {
             ExternalLinkWrapper::static_type()
         }
 
-        fn n_items(&self, _list_model: &Self::Type) -> u32 {
+        fn n_items(&self, _this: &Self::Type) -> u32 {
             self.0.borrow().len() as u32
         }
 
-        fn item(&self, _list_model: &Self::Type, position: u32) -> Option<glib::Object> {
-            self.0
-                .borrow()
-                .get(position as usize)
-                .map(|item| item.upcast_ref::<glib::Object>())
-                .cloned()
+        fn item(&self, this: &Self::Type, position: u32) -> Option<glib::Object> {
+            this.get(position as usize)
+                .map(|item| item.upcast::<glib::Object>())
         }
     }
 }
@@ -74,6 +71,10 @@ impl ExternalLinkList {
         if n_added != 0 {
             self.items_changed(first_appended_pos as u32, 0, n_added as u32);
         }
+    }
+
+    pub fn get(&self, position: usize) -> Option<ExternalLinkWrapper> {
+        self.imp().0.borrow().get(position).cloned()
     }
 
     pub fn is_empty(&self) -> bool {
