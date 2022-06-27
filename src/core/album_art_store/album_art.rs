@@ -67,11 +67,6 @@ impl AlbumArt {
         }
 
         if let Some(texture) = self.cache.get() {
-            // Since the cache is already loaded, the receiver to
-            // delay consecutive calls to this function is not
-            // needed anymore.
-            self.loading.replace(None);
-
             return Ok(texture);
         }
 
@@ -119,6 +114,11 @@ impl AlbumArt {
                 &texture == self.cache.get().unwrap()
             );
         }
+
+        // Since the cache is already loaded, the receiver to
+        // delay consecutive calls to Self::texture is not
+        // needed anymore.
+        self.loading.replace(None);
 
         self.cache.get().unwrap()
     }
