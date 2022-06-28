@@ -93,7 +93,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr "🎙️ Usa su micrófono o el audio del escritorio."
+msgstr "🎙️ Usa el micrófono o audio del escritorio."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -132,7 +132,7 @@ msgstr "Micrófono"
 
 #: data/resources/ui/history-view.ui:13
 msgid "Desktop Audio"
-msgstr "Audio del escritorio"
+msgstr "Escritorio"
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
@@ -189,7 +189,7 @@ msgstr "¡Empiece a identificar música!"
 
 #: data/resources/ui/history-view.ui:149
 msgid "Click the listen button to start."
-msgstr "Pulse el botón de escuchar para empezar."
+msgstr "Pulsar el botón de escuchar para empezar."
 
 #: data/resources/ui/history-view.ui:156
 msgid "No Results Found"
@@ -597,7 +597,7 @@ msgstr "Fallo al lanzar {}"
 #~ msgstr "🌐 Reproduce la canción identificada en su navegador."
 
 #~ msgid "Click the listen button to start"
-#~ msgstr "Pulse el botón de escuchar para empezar"
+#~ msgstr "Puls el botón de escuchar para empezar"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""
