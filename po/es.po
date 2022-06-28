@@ -597,7 +597,7 @@ msgstr "Fallo al lanzar {}"
 #~ msgstr "🌐 Reproduce la canción identificada en su navegador."
 
 #~ msgid "Click the listen button to start"
-#~ msgstr "Puls el botón de escuchar para empezar"
+#~ msgstr "Pulsar el botón de escuchar para empezar"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""
