@@ -1,8 +1,9 @@
 mod album_art;
 
+use anyhow::Context;
 use gtk::glib;
 
-use std::{cell::RefCell, collections::HashMap, fs, io, path::PathBuf, rc::Rc};
+use std::{cell::RefCell, collections::HashMap, fs, path::PathBuf, rc::Rc};
 
 pub use self::album_art::AlbumArt;
 
@@ -15,14 +16,19 @@ pub struct AlbumArtStore {
 
 impl AlbumArtStore {
     /// Initializes the cache dir.
-    pub fn new(session: &soup::Session) -> io::Result<Self> {
+    pub fn new(session: &soup::Session) -> anyhow::Result<Self> {
         let cache_dir = {
             let mut path = glib::user_cache_dir();
             path.push("mousai/album_art_cache");
             path
         };
 
-        fs::create_dir_all(&cache_dir)?;
+        fs::create_dir_all(&cache_dir).with_context(|| {
+            format!(
+                "Failed to create AlbumArt cache dir at `{}`",
+                cache_dir.display()
+            )
+        })?;
 
         // TODO Remove from store on low memory
 

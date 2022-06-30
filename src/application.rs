@@ -86,10 +86,9 @@ impl Application {
     }
 
     pub fn album_art_store(&self) -> anyhow::Result<&AlbumArtStore> {
-        Ok(self
-            .imp()
+        self.imp()
             .album_art_store
-            .get_or_try_init(|| AlbumArtStore::new(self.session()))?)
+            .get_or_try_init(|| AlbumArtStore::new(self.session()))
     }
 
     pub fn show_error(&self, message: &str) {
