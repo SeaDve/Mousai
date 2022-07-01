@@ -23,9 +23,9 @@ pub enum Error {
     #[error("Failed to parse response: {0}")]
     Parse(#[from] serde_json::Error),
 
-    /// Problem converting file into base64
-    #[error("Failed to convert file to base 64: {0}")]
-    FileConvert(glib::Error),
+    /// Problem in converting the AudioRecording to a recognizable format
+    #[error("Failed to convert AudioRecording to recognizable format: {0}")]
+    Convert(glib::Error),
 
     /// Request specific errors
     #[error("Failed to create request: {0}")]
@@ -51,7 +51,7 @@ impl From<Error> for ProviderError {
             Error::Parse(_) => ProviderError::Other(gettext(
                 "Failed to parse response. Please report this to Mousai's bug tracker.",
             )),
-            Error::FileConvert(_) => ProviderError::Other(gettext(
+            Error::Convert(_) => ProviderError::Other(gettext(
                 "Failed to convert file. Please report this to Mousai's bug tracker.",
             )),
             Error::Soup(err) => {
