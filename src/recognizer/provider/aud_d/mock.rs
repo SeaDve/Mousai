@@ -3,7 +3,7 @@ use gtk::glib;
 
 use std::time::Duration;
 
-use super::{AudD, Data, Error, Provider, ProviderError, Response};
+use super::{AudD, Data, Provider, ProviderError, Response};
 use crate::{
     core::AudioRecording,
     model::Song,
@@ -14,7 +14,7 @@ use crate::{
 pub struct AudDMock;
 
 impl AudDMock {
-    fn random_data(&self) -> Result<Data, Error> {
+    fn random_data(&self) -> Result<Data, ProviderError> {
         let test_mode = ProviderManager::global().test_mode();
 
         let mut raw_responses = Vec::new();
@@ -52,7 +52,7 @@ impl AudDMock {
 
         log::debug!("random_response: {}", random_response);
 
-        Ok(Response::parse(random_response.as_bytes())?.data()?)
+        Response::parse(random_response.as_bytes())?.data()
     }
 }
 
@@ -60,12 +60,7 @@ impl AudDMock {
 impl Provider for AudDMock {
     async fn recognize(&self, _: &AudioRecording) -> Result<Song, ProviderError> {
         glib::timeout_future(ProviderManager::global().test_recognize_duration()).await;
-        Ok(AudD::build_song_from_data(self.random_data().map_err(
-            |err| {
-                log::error!("Failed to recognize: {err:?}");
-                err
-            },
-        )?))
+        Ok(AudD::build_song_from_data(self.random_data()?))
     }
 
     fn listen_duration(&self) -> Duration {

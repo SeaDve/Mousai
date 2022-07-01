@@ -1,6 +1,7 @@
+use gettextrs::gettext;
 use serde::Deserialize;
 
-use super::error::{AudDError, Error};
+use super::ProviderError;
 
 #[derive(Debug, Deserialize)]
 pub struct LyricsData {
@@ -78,18 +79,6 @@ pub struct AudDRawError {
     pub message: String,
 }
 
-impl AudDRawError {
-    pub fn into_aud_d_error(self) -> AudDError {
-        // Based on https://docs.audd.io/#common-errors
-        match self.code {
-            901 => AudDError::DailyLimitReached,
-            900 => AudDError::InvalidToken,
-            300 => AudDError::Fingerprint(self.message),
-            other_code => AudDError::Other(format!("{} ({})", self.message, other_code)),
-        }
-    }
-}
-
 /// If `status` is `success` `data` is `Some` and `error` is `None`. On the other hand, if status is
 /// `error` it is the opposite.
 ///
@@ -103,18 +92,36 @@ pub struct Response {
 }
 
 impl Response {
-    pub fn parse(slice: &[u8]) -> Result<Self, Error> {
-        Ok(serde_json::from_slice(slice)?)
+    pub fn parse(slice: &[u8]) -> Result<Self, ProviderError> {
+        serde_json::from_slice(slice).map_err(|err| {
+            log::error!("Failed to parse response: {:?}", err);
+
+            ProviderError::Other(gettext(
+                "Failed to parse response. Please report this to Mousai's bug tracker",
+            ))
+        })
     }
 
-    pub fn data(self) -> Result<Data, AudDError> {
+    pub fn data(self) -> Result<Data, ProviderError> {
         match self.status.as_str() {
-            "success" => self.data.map_or_else(|| Err(AudDError::NoMatches), Ok),
+            "success" => self.data.map_or_else(|| Err(ProviderError::NoMatches), Ok),
             "error" => Err(self.error.map_or_else(
-                || AudDError::Other("Got `error` status, but no error".into()),
-                |error| error.into_aud_d_error(),
+                || ProviderError::Other("Got `error` status, but no error".into()),
+                |error| {
+                    // Based on https://docs.audd.io/#common-errors
+                    match error.code {
+                        901 => ProviderError::NoToken(gettext("Daily limit has been reached.")),
+                        900 => ProviderError::InvalidToken,
+                        300 => ProviderError::Other(gettext(
+                            "Failed to fingerprint audio. There may be no sound heard.",
+                        )),
+                        other_code => {
+                            ProviderError::Other(format!("{} ({})", error.message, other_code))
+                        }
+                    }
+                },
             )),
-            other => Err(AudDError::Other(format!(
+            other => Err(ProviderError::Other(gettext!(
                 "Got invalid status response of {}",
                 other
             ))),

@@ -1,16 +1,16 @@
-mod error;
 mod mock;
 mod response;
 
 use async_trait::async_trait;
-use gtk::glib;
+use gettextrs::gettext;
+use gtk::{gio, glib};
 use serde_json::json;
 use soup::prelude::*;
 
 use std::time::Duration;
 
+pub use self::mock::AudDMock;
 use self::response::{Data, Response};
-pub use self::{error::Error, mock::AudDMock};
 use super::{Provider, ProviderError};
 use crate::{
     core::AudioRecording,
@@ -100,16 +100,27 @@ impl AudD {
 
         song_builder.build()
     }
+}
 
-    async fn recognize_inner(&self, recording: &AudioRecording) -> Result<Song, Error> {
+#[async_trait(?Send)]
+impl Provider for AudD {
+    async fn recognize(&self, recording: &AudioRecording) -> Result<Song, ProviderError> {
+        let audio = recording.to_base_64().map_err(|err| {
+            log::error!("Failed to convert audio recording to base64: {:?}", err);
+
+            ProviderError::Other(gettext(
+                "Failed to convert the recording to base64. Please report this to Mousai's bug tracker.",
+            ))
+        })?;
+
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz,lyrics",
-            "audio": recording.to_base_64().map_err(Error::Convert)?,
+            "audio": audio,
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/")
-            .map_err(|err| Error::Other(err.to_string()))?;
+            .map_err(|err| ProviderError::Other(err.to_string()))?;
         message.set_request_body_from_bytes(None, Some(&glib::Bytes::from_owned(data.to_string())));
         message.set_priority(soup::MessagePriority::High);
 
@@ -117,7 +128,16 @@ impl AudD {
             .session()
             .send_and_read_future(&message, glib::PRIORITY_DEFAULT)
             .await
-            .map_err(Error::Soup)?;
+            .map_err(|err| {
+                if matches!(
+                    err.kind::<gio::ResolverError>(),
+                    Some(gio::ResolverError::TemporaryFailure)
+                ) {
+                    ProviderError::Connection(gettext("Failed to connect to the server."))
+                } else {
+                    ProviderError::Connection(err.to_string())
+                }
+            })?;
 
         match std::str::from_utf8(&bytes) {
             Ok(string) => log::debug!("server_response: {}", string),
@@ -125,16 +145,6 @@ impl AudD {
         }
 
         Ok(Self::build_song_from_data(Response::parse(&bytes)?.data()?))
-    }
-}
-
-#[async_trait(?Send)]
-impl Provider for AudD {
-    async fn recognize(&self, recording: &AudioRecording) -> Result<Song, ProviderError> {
-        self.recognize_inner(recording).await.map_err(|err| {
-            log::error!("Failed to recognize: {err:?}");
-            err.into()
-        })
     }
 
     fn listen_duration(&self) -> Duration {
@@ -155,47 +165,33 @@ impl Default for AudD {
 #[cfg(test)]
 mod test {
     use super::*;
-    use error::AudDError;
 
-    fn parse_response(response: &'static str) -> Result<Data, Error> {
-        Ok(Response::parse(response.as_bytes())?.data()?)
+    fn parse_response(response: &'static str) -> Result<Data, ProviderError> {
+        Response::parse(response.as_bytes())?.data()
     }
 
     #[test]
     fn no_matches() {
         let res = parse_response("{\"status\":\"success\",\"result\":null}");
-        assert!(matches!(
-            res.unwrap_err(),
-            Error::AudD(AudDError::NoMatches)
-        ));
+        assert_eq!(res.unwrap_err(), ProviderError::NoMatches);
     }
 
     #[test]
     fn daily_limit_reached() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":901,\"error_message\":\"Recognition failed: authorization failed: no api_token passed and the limit was reached. Get an api_token from dashboard.audd.io.\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
-        assert!(matches!(
-            res.unwrap_err(),
-            Error::AudD(AudDError::DailyLimitReached)
-        ));
+        assert!(matches!(res.unwrap_err(), ProviderError::NoToken(_)));
     }
 
     #[test]
     fn wrong_api_token() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":900,\"error_message\":\"Recognition failed: authorization failed: wrong api_token. Please check if your account is activated on dashboard.audd.io and has either a trial or an active subscription.\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
-        assert!(matches!(
-            res.unwrap_err(),
-            Error::AudD(AudDError::InvalidToken)
-        ));
+        assert_eq!(res.unwrap_err(), ProviderError::InvalidToken);
     }
 
     #[test]
     fn wrong_file_sent_or_audio_without_streams() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":300,\"error_message\":\"Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and \\u003caudio\\u003e/\\u003cvideo\\u003e tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
-
-        match res {
-            Err(Error::AudD(AudDError::Fingerprint(ref message))) => assert_eq!(message, "Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and <audio>/<video> tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/"),
-            invalid => panic!("Mismatched result. Got {:?}", invalid),
-        }
+        assert_eq!(res.unwrap_err(), ProviderError::Other("Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and <audio>/<video> tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/ (300)".to_string()));
     }
 
     #[test]

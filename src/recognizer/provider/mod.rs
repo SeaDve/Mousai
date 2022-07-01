@@ -134,7 +134,7 @@ impl ProviderManager {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum ProviderError {
     NoMatches,
     NoToken(String),
