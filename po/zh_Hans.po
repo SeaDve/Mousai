@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-22 08:24+0800\n"
+"POT-Creation-Date: 2022-07-01 13:36+0800\n"
 "PO-Revision-Date: 2022-04-25 19:08+0000\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -24,19 +24,19 @@ msgstr ""
 "X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
 msgid "Identify songs in seconds"
 msgstr "几秒钟内识别歌曲"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Music;Song;Identify;"
-msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
+msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -147,7 +147,7 @@ msgstr "不选(_N)"
 msgid "Start Identifying Music"
 msgstr "开始识别音乐"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:134
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "聆听"
 
@@ -176,23 +176,23 @@ msgstr "取消"
 msgid "Enter song or artist name"
 msgstr "输入歌曲或艺术家名字"
 
-#: data/resources/ui/history-view.ui:148
+#: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
 msgstr "开始识别音乐！"
 
-#: data/resources/ui/history-view.ui:149
+#: data/resources/ui/history-view.ui:148
 msgid "Click the listen button to start."
 msgstr "点击聆听按钮开始。"
 
-#: data/resources/ui/history-view.ui:156
+#: data/resources/ui/history-view.ui:155
 msgid "No Results Found"
 msgstr "未找到结果"
 
-#: data/resources/ui/history-view.ui:157
+#: data/resources/ui/history-view.ui:156
 msgid "Try a different search."
 msgstr "请尝试不同搜索。"
 
-#: data/resources/ui/history-view.ui:166
+#: data/resources/ui/history-view.ui:165
 msgid "Copy Song"
 msgstr "复制歌曲"
 
@@ -250,44 +250,52 @@ msgctxt "shortcut window"
 msgid "Go Back"
 msgstr "返回"
 
-#: data/resources/ui/song-bar.ui:33
+#: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
 msgstr "显示歌曲信息"
 
-#: data/resources/ui/song-bar.ui:101
+#: data/resources/ui/song-bar.ui:102
 msgid "Stop"
 msgstr "停止"
 
-#: data/resources/ui/song-page.ui:27
+#: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
 msgstr "返回主页面"
 
-#: data/resources/ui/song-page.ui:34
+#: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
 msgstr "从历史记录移除"
 
-#: data/resources/ui/song-page.ui:41
+#: data/resources/ui/song-page.ui:44
 msgid "Copy"
 msgstr "复制"
 
-#: data/resources/ui/song-page.ui:147
+#: data/resources/ui/song-page.ui:150
 msgid "Information"
 msgstr "信息"
 
-#: data/resources/ui/song-page.ui:150
+#: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
 msgstr "上次收听"
 
-#: data/resources/ui/song-page.ui:155
+#: data/resources/ui/song-page.ui:158
 msgid "Album"
 msgstr "专辑"
 
-#: data/resources/ui/song-page.ui:160
+#: data/resources/ui/song-page.ui:163
 msgid "Release Date"
 msgstr "发布日期"
 
+#: data/resources/ui/song-page.ui:170
+msgid "Lyrics"
+msgstr ""
+
+#: data/resources/ui/song-tile.ui:25
+msgid "New"
+msgstr ""
+
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:150
+#: src/application.rs:140
 msgid "translator-credits"
 msgstr ""
 "Zhou Nan &lt;zhounan@nfschina.com&gt;\n"
@@ -295,11 +303,11 @@ msgstr ""
 "WhiredPlanck &lt;wplanck@aosc.io&gt;\n"
 "lumingzh &lt;lumingzh@qq.com&gt;"
 
-#: src/application.rs:151
+#: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
 msgstr "版权所有 © 2022 Dave Patrick"
 
-#: src/application.rs:154
+#: src/application.rs:144
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -343,92 +351,108 @@ msgstr "已取消录制"
 msgid "Cancelled recognizing"
 msgstr "已取消识别"
 
-#: src/recognizer/provider/aud_d/error.rs:52
-msgid "Failed to parse response. Please report this to Mousai's bug tracker."
-msgstr "解析响应失败。请将此报告给 Mousai 的缺陷追踪器。"
+#: src/recognizer/provider/aud_d/mod.rs:112
+msgid ""
+"Failed to convert the recording to base64. Please report this to Mousai's "
+"bug tracker."
+msgstr ""
 
-#: src/recognizer/provider/aud_d/error.rs:55
-msgid "Failed to convert file. Please report this to Mousai's bug tracker."
-msgstr "转换文件失败。请将此报告给 Mousai 的缺陷追踪器。"
-
-#: src/recognizer/provider/aud_d/error.rs:62
+#: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
 msgstr "连接至服务器失败。"
 
-#: src/recognizer/provider/aud_d/error.rs:71
+#: src/recognizer/provider/aud_d/response.rs:100
+msgid "Failed to parse response. Please report this to Mousai's bug tracker"
+msgstr ""
+
+#: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
 msgstr "已达到每日限制。"
 
-#: src/recognizer/provider/aud_d/error.rs:74
+#: src/recognizer/provider/aud_d/response.rs:116
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr "识别音频失败。可能没有听到声音。"
 
-#: src/recognizer/provider/mod.rs:160
+#: src/recognizer/provider/aud_d/response.rs:125
+msgid "Got invalid status response of {}"
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
 msgstr "{} 请检查您的互联网连接。"
 
-#: src/recognizer/provider/mod.rs:162
+#: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
 msgstr "未找到该歌曲的匹配项。"
 
-#: src/recognizer/provider/mod.rs:164
+#: src/recognizer/provider/mod.rs:154
 msgid "{} Input an API token in the preferences."
 msgstr "{} 在首选项中输入 API 令牌。"
 
-#: src/recognizer/provider/mod.rs:167
+#: src/recognizer/provider/mod.rs:157
 msgid "Please input a valid API token."
 msgstr "请输入有效的 API 令牌。"
 
-#: src/window/history_view.rs:112 src/window/song_page.rs:84
+#: src/window/history_view.rs:113 src/window/song_page.rs:89
 msgid "Copied song to clipboard"
 msgstr "复制歌曲到剪贴板"
 
-#: src/window/history_view.rs:392
+#: src/window/history_view.rs:411
 msgid "_Undo"
 msgstr "撤销(_U)"
 
-#: src/window/history_view.rs:411
+#: src/window/history_view.rs:430
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
 msgstr[0] "移除了 {} 首歌曲"
 
-#: src/window/history_view.rs:476
+#: src/window/history_view.rs:495
 msgid "Click on items to select them"
 msgstr "在项目上点击来选择它们"
 
-#: src/window/history_view.rs:478
+#: src/window/history_view.rs:497
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "已选择 {} 首歌曲"
 
-#: src/window/history_view.rs:487
+#: src/window/history_view.rs:506
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "从历史记录移除歌曲"
 
-#: src/window/mod.rs:194
+#: src/window/mod.rs:196
 msgid "Failed to load history"
 msgstr "加载历史记录失败"
 
-#: src/window/playback_button.rs:165
+#: src/window/playback_button.rs:155
 msgid "Play"
 msgstr "播放"
 
-#: src/window/playback_button.rs:172
+#: src/window/playback_button.rs:162
 msgid "Pause"
 msgstr "暂停"
 
-#: src/window/recognizer_view.rs:101
+#: src/window/recognizer_view.rs:117
 msgid "Listening…"
 msgstr "正在收听…"
 
-#: src/window/recognizer_view.rs:123
+#: src/window/recognizer_view.rs:122
 msgid "Recognizing…"
 msgstr "正在识别…"
 
-#: src/window/song_page.rs:170
+#: src/window/song_page.rs:177
 msgid "Failed to launch {}"
 msgstr "启动 {} 失败"
+
+#~ msgid "Shazam;Music;Song;Identify;"
+#~ msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"
+
+#~ msgid ""
+#~ "Failed to parse response. Please report this to Mousai's bug tracker."
+#~ msgstr "解析响应失败。请将此报告给 Mousai 的缺陷追踪器。"
+
+#~ msgid "Failed to convert file. Please report this to Mousai's bug tracker."
+#~ msgstr "转换文件失败。请将此报告给 Mousai 的缺陷追踪器。"
 
 #~ msgid "Remove"
 #~ msgstr "移除"

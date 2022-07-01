@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-22 08:24+0800\n"
+"POT-Creation-Date: 2022-07-01 13:36+0800\n"
 "PO-Revision-Date: 2022-04-25 19:08+0000\n"
 "Last-Translator: multiflexi <multi.flexi@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/kooha/mousai/cs/>\n"
@@ -21,19 +21,19 @@ msgstr ""
 "X-Generator: Weblate 4.12.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:39
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:145
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
 msgid "Identify songs in seconds"
 msgstr "Identifikujte skladby během sekund"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Music;Song;Identify;"
-msgstr "Shazam;SoundHound;Hudba;Píseň;Identifikovat;"
+msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -147,7 +147,7 @@ msgstr "Z_rušit výběr"
 msgid "Start Identifying Music"
 msgstr "Začněte identifikovat hudbu"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:134
+#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "Poslouchat"
 
@@ -176,23 +176,23 @@ msgstr "Zrušit"
 msgid "Enter song or artist name"
 msgstr "Zadejte jméno skladby nebo interpreta"
 
-#: data/resources/ui/history-view.ui:148
+#: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
 msgstr "Začít identifikovávat hudbu!"
 
-#: data/resources/ui/history-view.ui:149
+#: data/resources/ui/history-view.ui:148
 msgid "Click the listen button to start."
 msgstr "Začněte kliknutím na tlačítko poslouchat."
 
-#: data/resources/ui/history-view.ui:156
+#: data/resources/ui/history-view.ui:155
 msgid "No Results Found"
 msgstr "Nebyly nalezeny žádné výsledky"
 
-#: data/resources/ui/history-view.ui:157
+#: data/resources/ui/history-view.ui:156
 msgid "Try a different search."
 msgstr "Zkuste jiné vyhledávání."
 
-#: data/resources/ui/history-view.ui:166
+#: data/resources/ui/history-view.ui:165
 msgid "Copy Song"
 msgstr "Kopírovat skladbu"
 
@@ -250,54 +250,62 @@ msgctxt "shortcut window"
 msgid "Go Back"
 msgstr "Zpět"
 
-#: data/resources/ui/song-bar.ui:33
+#: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
 msgstr "Zobrazit informace o skladbě"
 
-#: data/resources/ui/song-bar.ui:101
+#: data/resources/ui/song-bar.ui:102
 msgid "Stop"
 msgstr "Zastavit"
 
-#: data/resources/ui/song-page.ui:27
+#: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
 msgstr "Zpět na hlavní stránku"
 
-#: data/resources/ui/song-page.ui:34
+#: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
 msgstr "Odstranit z historie"
 
-#: data/resources/ui/song-page.ui:41
+#: data/resources/ui/song-page.ui:44
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: data/resources/ui/song-page.ui:147
+#: data/resources/ui/song-page.ui:150
 msgid "Information"
 msgstr "Informace"
 
-#: data/resources/ui/song-page.ui:150
+#: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
 msgstr "Naposledy poslouchané"
 
-#: data/resources/ui/song-page.ui:155
+#: data/resources/ui/song-page.ui:158
 msgid "Album"
 msgstr "Album"
 
-#: data/resources/ui/song-page.ui:160
+#: data/resources/ui/song-page.ui:163
 msgid "Release Date"
 msgstr "Datum vydání"
 
+#: data/resources/ui/song-page.ui:170
+msgid "Lyrics"
+msgstr ""
+
+#: data/resources/ui/song-tile.ui:25
+msgid "New"
+msgstr ""
+
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:150
+#: src/application.rs:140
 msgid "translator-credits"
 msgstr ""
 "Jan Novák <jan.novak@silen.org>\n"
 "Vojtěch Perník <translations@pervoj.cz>"
 
-#: src/application.rs:151
+#: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
 msgstr "Copyright 2022 Dave Patrick"
 
-#: src/application.rs:154
+#: src/application.rs:144
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -341,103 +349,119 @@ msgstr "Zrušené nahrávání"
 msgid "Cancelled recognizing"
 msgstr "Zrušené rozpoznávání"
 
-#: src/recognizer/provider/aud_d/error.rs:52
-msgid "Failed to parse response. Please report this to Mousai's bug tracker."
+#: src/recognizer/provider/aud_d/mod.rs:112
+msgid ""
+"Failed to convert the recording to base64. Please report this to Mousai's "
+"bug tracker."
 msgstr ""
-"Nepodařilo se načíst odpověď. Prosím, nahlaste to v záznamu chyb aplikace "
-"Mousai."
 
-#: src/recognizer/provider/aud_d/error.rs:55
-msgid "Failed to convert file. Please report this to Mousai's bug tracker."
-msgstr ""
-"Nepodařilo se převést soubor. Prosím, nahlaste to v záznamu chyb aplikace "
-"Mousai."
-
-#: src/recognizer/provider/aud_d/error.rs:62
+#: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
 msgstr "Nepodařilo se připojit k serveru."
 
-#: src/recognizer/provider/aud_d/error.rs:71
+#: src/recognizer/provider/aud_d/response.rs:100
+msgid "Failed to parse response. Please report this to Mousai's bug tracker"
+msgstr ""
+
+#: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
 msgstr "Dosažen denní limit."
 
-#: src/recognizer/provider/aud_d/error.rs:74
+#: src/recognizer/provider/aud_d/response.rs:116
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
 "Audio se nepodařilo identifikovat. Je možné, že nebyl zaznamenán žádný zvuk."
 
-#: src/recognizer/provider/mod.rs:160
+#: src/recognizer/provider/aud_d/response.rs:125
+msgid "Got invalid status response of {}"
+msgstr ""
+
+#: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
 msgstr "{} Zkontrolujte své připojení."
 
-#: src/recognizer/provider/mod.rs:162
+#: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
 msgstr "Pro tuto skladbu nebyla nalezena žádná shoda."
 
-#: src/recognizer/provider/mod.rs:164
+#: src/recognizer/provider/mod.rs:154
 msgid "{} Input an API token in the preferences."
 msgstr "{} Zadejte token API v předvolbách."
 
-#: src/recognizer/provider/mod.rs:167
+#: src/recognizer/provider/mod.rs:157
 msgid "Please input a valid API token."
 msgstr "Prosím, zadejte platný token API."
 
-#: src/window/history_view.rs:112 src/window/song_page.rs:84
+#: src/window/history_view.rs:113 src/window/song_page.rs:89
 msgid "Copied song to clipboard"
 msgstr "Skladba zkopírována do schránky"
 
-#: src/window/history_view.rs:392
+#: src/window/history_view.rs:411
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: src/window/history_view.rs:411
+#: src/window/history_view.rs:430
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
 msgstr[0] "Odstraněna {} skladba"
 msgstr[1] "Odstraněny {} skladby"
 msgstr[2] "Odstraněno {} skladeb"
 
-#: src/window/history_view.rs:476
+#: src/window/history_view.rs:495
 msgid "Click on items to select them"
 msgstr "Chcete-li vybrat položku, klikněte na ni"
 
-#: src/window/history_view.rs:478
+#: src/window/history_view.rs:497
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "Vybrána {} skladba"
 msgstr[1] "Vybrány {} skladby"
 msgstr[2] "Vybráno {} skladeb"
 
-#: src/window/history_view.rs:487
+#: src/window/history_view.rs:506
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Odebrat skladbu z historie"
 msgstr[1] "Odebrat skladby z historie"
 msgstr[2] "Odebrat skladby z historie"
 
-#: src/window/mod.rs:194
+#: src/window/mod.rs:196
 msgid "Failed to load history"
 msgstr "Nepodařilo se načíst historii"
 
-#: src/window/playback_button.rs:165
+#: src/window/playback_button.rs:155
 msgid "Play"
 msgstr "Přehrát"
 
-#: src/window/playback_button.rs:172
+#: src/window/playback_button.rs:162
 msgid "Pause"
 msgstr "Pozastavit"
 
-#: src/window/recognizer_view.rs:101
+#: src/window/recognizer_view.rs:117
 msgid "Listening…"
 msgstr "Poslouchám…"
 
-#: src/window/recognizer_view.rs:123
+#: src/window/recognizer_view.rs:122
 msgid "Recognizing…"
 msgstr "Rozpoznávám…"
 
-#: src/window/song_page.rs:170
+#: src/window/song_page.rs:177
 msgid "Failed to launch {}"
 msgstr "Nepodařilo se spustit {}"
+
+#~ msgid "Shazam;Music;Song;Identify;"
+#~ msgstr "Shazam;SoundHound;Hudba;Píseň;Identifikovat;"
+
+#~ msgid ""
+#~ "Failed to parse response. Please report this to Mousai's bug tracker."
+#~ msgstr ""
+#~ "Nepodařilo se načíst odpověď. Prosím, nahlaste to v záznamu chyb aplikace "
+#~ "Mousai."
+
+#~ msgid "Failed to convert file. Please report this to Mousai's bug tracker."
+#~ msgstr ""
+#~ "Nepodařilo se převést soubor. Prosím, nahlaste to v záznamu chyb aplikace "
+#~ "Mousai."
 
 #~ msgid "Remove"
 #~ msgstr "Odebrat"
