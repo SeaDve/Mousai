@@ -80,6 +80,7 @@ pub struct AudDRawError {
 
 impl AudDRawError {
     pub fn into_aud_d_error(self) -> AudDError {
+        // Based on https://docs.audd.io/#common-errors
         match self.code {
             901 => AudDError::DailyLimitReached,
             900 => AudDError::InvalidToken,
