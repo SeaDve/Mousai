@@ -1,6 +1,6 @@
 use gettextrs::gettext;
 use gtk::{
-    gdk, gio,
+    gdk,
     glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
@@ -166,9 +166,13 @@ mod imp {
                         log::warn!("Trying to launch an invalid Uri: {err:?}");
                     }
 
-                    if let Err(err) = gio::AppInfo::launch_default_for_uri_future(
+                    if let Err(err) = gtk::show_uri_full_future(
+                        external_link_tile
+                            .root()
+                            .and_then(|root| root.downcast::<gtk::Window>().ok())
+                            .as_ref(),
                         &uri,
-                        gio::AppLaunchContext::NONE,
+                        gdk::CURRENT_TIME,
                     )
                     .await
                     {
