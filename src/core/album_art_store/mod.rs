@@ -45,7 +45,9 @@ impl AlbumArtStore {
                 .borrow_mut()
                 .entry(download_url.to_string())
                 .or_insert_with_key(|download_url| {
-                    let cache_path = self.cache_dir.join(download_url.replace('/', "-"));
+                    let cache_path = self
+                        .cache_dir
+                        .join(download_url.replace('/', "-").replace('\0', ""));
                     Rc::new(AlbumArt::new(&self.session, download_url, &cache_path))
                 }),
         )
