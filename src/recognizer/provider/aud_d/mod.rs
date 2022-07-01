@@ -191,7 +191,12 @@ mod test {
     #[test]
     fn wrong_file_sent_or_audio_without_streams() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":300,\"error_message\":\"Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and \\u003caudio\\u003e/\\u003cvideo\\u003e tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
-        assert_eq!(res.unwrap_err(), ProviderError::Other("Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and <audio>/<video> tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/ (300)".to_string()));
+        assert_eq!(
+            res.unwrap_err(),
+            ProviderError::Other(
+                "Failed to fingerprint audio. There may be no sound heard.".to_string()
+            )
+        );
     }
 
     #[test]
