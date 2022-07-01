@@ -12,6 +12,7 @@
 #![warn(clippy::if_not_else)]
 #![warn(clippy::doc_markdown)]
 #![warn(clippy::unused_async)]
+#![allow(clippy::format_push_string)] // TODO remove once gettext-rs fixes macro issues
 
 mod application;
 mod config;
