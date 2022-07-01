@@ -16,18 +16,13 @@ use crate::{
     utils, Application,
 };
 
-#[derive(Debug, Clone, Copy, glib::Enum, PartialEq)]
+#[derive(Default, Debug, Clone, Copy, glib::Enum, PartialEq)]
 #[enum_type(name = "MsaiRecognizerState")]
 pub enum RecognizerState {
+    #[default]
     Null,
     Listening,
     Recognizing,
-}
-
-impl Default for RecognizerState {
-    fn default() -> Self {
-        Self::Null
-    }
 }
 
 mod imp {

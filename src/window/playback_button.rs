@@ -3,18 +3,13 @@ use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use std::cell::Cell;
 
-#[derive(Debug, Clone, Copy, PartialEq, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, glib::Enum)]
 #[enum_type(name = "MsaiPlaybackButtonMode")]
 pub enum PlaybackButtonMode {
+    #[default]
     Play,
     Pause,
     Buffering,
-}
-
-impl Default for PlaybackButtonMode {
-    fn default() -> Self {
-        Self::Play
-    }
 }
 
 mod imp {

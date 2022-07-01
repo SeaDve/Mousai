@@ -1,16 +1,11 @@
 use gtk::glib;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiAudioDeviceClass")]
 pub enum AudioDeviceClass {
+    #[default]
     Source,
     Sink,
-}
-
-impl Default for AudioDeviceClass {
-    fn default() -> Self {
-        Self::Source
-    }
 }
 
 impl AudioDeviceClass {

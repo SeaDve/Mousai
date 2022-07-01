@@ -1,19 +1,14 @@
 use gtk::glib;
 use mpris_player::PlaybackStatus;
 
-#[derive(Debug, Clone, Copy, PartialEq, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, glib::Enum)]
 #[enum_type(name = "MsaiPlaybackState")]
 pub enum PlayerState {
+    #[default]
     Stopped,
     Buffering,
     Paused,
     Playing,
-}
-
-impl Default for PlayerState {
-    fn default() -> Self {
-        Self::Stopped
-    }
 }
 
 impl From<gst_player::PlayerState> for PlayerState {

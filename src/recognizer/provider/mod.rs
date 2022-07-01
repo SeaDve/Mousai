@@ -22,18 +22,13 @@ pub trait Provider: std::fmt::Debug {
     fn is_test(&self) -> bool;
 }
 
-#[derive(Debug, Clone, Copy, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, glib::Enum)]
 #[enum_type(name = "MsaiTestProviderMode")]
 pub enum TestProviderMode {
     ErrorOnly,
+    #[default]
     ValidOnly,
     Both,
-}
-
-impl Default for TestProviderMode {
-    fn default() -> Self {
-        Self::ValidOnly
-    }
 }
 
 impl From<i32> for TestProviderMode {
@@ -44,9 +39,10 @@ impl From<i32> for TestProviderMode {
     }
 }
 
-#[derive(Debug, Clone, Copy, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, glib::Enum)]
 #[enum_type(name = "MsaiProviderType")]
 pub enum ProviderType {
+    #[default]
     AudD,
     AudDMock,
 }
@@ -57,12 +53,6 @@ impl ProviderType {
             Self::AudD => Box::new(AudD::default()),
             Self::AudDMock => Box::new(AudDMock),
         }
-    }
-}
-
-impl Default for ProviderType {
-    fn default() -> Self {
-        Self::AudD
     }
 }
 
