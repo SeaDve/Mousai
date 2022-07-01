@@ -6,6 +6,7 @@ data/resources/ui/recognizer-view.ui
 data/resources/ui/shortcuts.ui
 data/resources/ui/song-bar.ui
 data/resources/ui/song-page.ui
+data/resources/ui/song-tile.ui
 src/application.rs
 src/main.rs
 src/model/external_link/apple_music.rs
@@ -13,7 +14,8 @@ src/model/external_link/aud_d.rs
 src/model/external_link/spotify.rs
 src/model/external_link/youtube.rs
 src/recognizer/mod.rs
-src/recognizer/provider/aud_d/error.rs
+src/recognizer/provider/aud_d/mod.rs
+src/recognizer/provider/aud_d/response.rs
 src/recognizer/provider/mod.rs
 src/window/history_view.rs
 src/window/mod.rs
