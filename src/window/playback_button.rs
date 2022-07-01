@@ -164,8 +164,9 @@ impl PlaybackButton {
                 imp.spinner_child.set_spinning(false);
             }
             PlaybackButtonMode::Buffering => {
-                imp.spinner_child.set_spinning(true);
+                imp.button.set_tooltip_text(None);
                 imp.stack.set_visible_child(&imp.spinner_child.get());
+                imp.spinner_child.set_spinning(true);
             }
         }
     }
