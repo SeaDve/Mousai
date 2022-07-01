@@ -51,3 +51,16 @@ impl AlbumArtStore {
         )
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn null_bytes() {
+        let session = soup::Session::new();
+        let store = AlbumArtStore::new(&session).unwrap();
+
+        store.get_or_init("http://example.com/albu\0m.jpg");
+    }
+}
