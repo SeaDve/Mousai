@@ -1,5 +1,5 @@
 use anyhow::Context;
-use gst_pbutils::prelude::*;
+use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
     glib::{self, clone, closure_local, subclass::prelude::*},
@@ -322,20 +322,9 @@ fn create_pipeline(
     let pulsesrc = gst_element_factory_make("pulsesrc")?;
     let audioconvert = gst_element_factory_make("audioconvert")?;
     let level = gst_element_factory_make("level")?;
-    let encodebin = gst_element_factory_make("encodebin")?;
+    let opusenc = gst_element_factory_make("opusenc")?;
+    let oggmux = gst_element_factory_make("oggmux")?;
     let giostreamsink = gst_element_factory_make("giostreamsink")?;
-
-    let encodebin_profile = {
-        let audio_caps = gst::Caps::new_simple("audio/x-opus", &[]);
-        let encoding_profile = gst_pbutils::EncodingAudioProfile::builder(&audio_caps)
-            .presence(1)
-            .build();
-
-        let container_caps = gst::Caps::new_simple("application/ogg", &[]);
-        gst_pbutils::EncodingContainerProfile::builder(&container_caps)
-            .add_profile(&encoding_profile)
-            .build()
-    };
 
     match find_default_device_name(preferred_device_class) {
         Ok(ref device_name) => {
@@ -349,16 +338,23 @@ fn create_pipeline(
 
     level.set_property("interval", Duration::from_millis(80).as_nanos() as u64);
     level.set_property("peak-ttl", Duration::from_millis(80).as_nanos() as u64);
-    encodebin.set_property("profile", encodebin_profile);
     giostreamsink.set_property("stream", stream);
 
-    let elements = [&pulsesrc, &audioconvert, &level, &encodebin, &giostreamsink];
+    let elements = [
+        &pulsesrc,
+        &audioconvert,
+        &level,
+        &opusenc,
+        &oggmux,
+        &giostreamsink,
+    ];
     pipeline.add_many(&elements)?;
 
     pulsesrc.link(&audioconvert)?;
     audioconvert.link_filtered(&level, &gst::Caps::builder("audio/x-raw").build())?;
-    level.link(&encodebin)?;
-    encodebin.link(&giostreamsink)?;
+    level.link(&opusenc)?;
+    opusenc.link(&oggmux)?;
+    oggmux.link_filtered(&giostreamsink, &gst::Caps::builder("audio/ogg").build())?;
 
     for e in elements {
         e.sync_state_with_parent()?;

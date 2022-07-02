@@ -12,7 +12,6 @@ gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
 once_cell = "1.10.0"
 soup3 = "0.2.2"
 gst = { package = "gstreamer", version = "0.18.8" }
-gst_pbutils = { package = "gstreamer-pbutils", version = "0.18.7" }
 gst_player = { package = "gstreamer-player", version = "0.18.0" }
 adw = { package = "libadwaita", version = "0.1.1" }
 gtk = { version = "0.4.7", package = "gtk4", features = ["v4_6"] }
