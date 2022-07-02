@@ -24,7 +24,7 @@ mod imp {
         pub title: String,
         pub artist: String,
         pub album: String,
-        pub release_date: String,
+        pub release_date: Option<String>,
         pub external_links: ExternalLinkList,
         pub album_art_link: Option<String>,
         pub playback_link: Option<String>,
@@ -183,14 +183,8 @@ impl Song {
     /// treat them different.
     ///
     /// The last heard will be the `DateTime` when this is constructed
-    pub fn builder(
-        id: &SongId,
-        title: &str,
-        artist: &str,
-        album: &str,
-        release_date: &str,
-    ) -> SongBuilder {
-        SongBuilder::new(id, title, artist, album, release_date)
+    pub fn builder(id: &SongId, title: &str, artist: &str, album: &str) -> SongBuilder {
+        SongBuilder::new(id, title, artist, album)
     }
 
     pub fn id(&self) -> SongId {
@@ -224,7 +218,7 @@ impl Song {
         self.imp().inner.borrow().album.clone()
     }
 
-    pub fn release_date(&self) -> String {
+    pub fn release_date(&self) -> Option<String> {
         self.imp().inner.borrow().release_date.clone()
     }
 
@@ -305,14 +299,13 @@ pub struct SongBuilder {
 }
 
 impl SongBuilder {
-    pub fn new(id: &SongId, title: &str, artist: &str, album: &str, release_date: &str) -> Self {
+    pub fn new(id: &SongId, title: &str, artist: &str, album: &str) -> Self {
         Self {
             properties: vec![
                 ("id", id.to_value()),
                 ("title", title.to_value()),
                 ("artist", artist.to_value()),
                 ("album", album.to_value()),
-                ("release-date", release_date.to_value()),
             ],
             external_links: Vec::new(),
         }
@@ -321,6 +314,11 @@ impl SongBuilder {
     pub fn newly_recognized(&mut self, value: bool) -> &mut Self {
         self.properties
             .push(("is-newly-recognized", value.to_value()));
+        self
+    }
+
+    pub fn release_date(&mut self, value: &str) -> &mut Self {
+        self.properties.push(("release-date", value.to_value()));
         self
     }
 
@@ -367,8 +365,8 @@ mod test {
             "Some song",
             "Someone",
             "SomeAlbum",
-            "00-00-0000",
         )
+        .release_date("00-00-0000")
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")
         .lyrics("Some song lyrics")
@@ -378,7 +376,7 @@ mod test {
         assert_eq!(song.title(), "Some song");
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
-        assert_eq!(song.release_date(), "00-00-0000");
+        assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
@@ -432,7 +430,7 @@ mod test {
         assert_eq!(song.title(), "Some song");
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
-        assert_eq!(song.release_date(), "00-00-0000");
+        assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
 
         assert_eq!(song.external_links().n_items(), 4);
         assert_eq!(

@@ -39,8 +39,11 @@ impl AudD {
             &data.title,
             &data.artist,
             &data.album,
-            &data.release_date,
         );
+
+        if let Some(ref release_date) = data.release_date {
+            song_builder.release_date(release_date);
+        }
 
         song_builder.newly_recognized(true);
 

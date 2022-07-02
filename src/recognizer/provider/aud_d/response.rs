@@ -57,7 +57,7 @@ pub struct Data {
     pub title: String,
     pub album: String,
     /// In format of ISO-8601 (%Y-%m-%d)
-    pub release_date: String,
+    pub release_date: Option<String>,
     // TODO consider showing this in the ui
     pub label: String,
     pub timecode: String,

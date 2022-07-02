@@ -337,7 +337,14 @@ impl SongPage {
         imp.last_heard_row
             .set_data(&song.last_heard().fuzzy_display());
         imp.album_row.set_data(&song.album());
-        imp.release_date_row.set_data(&song.release_date());
+
+        if let Some(ref release_date) = song.release_date() {
+            imp.release_date_row.set_data(release_date);
+            imp.release_date_row.set_visible(true);
+        } else {
+            imp.release_date_row.set_visible(false);
+            imp.release_date_row.set_data("");
+        }
     }
 }
 
