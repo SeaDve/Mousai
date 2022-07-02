@@ -70,7 +70,7 @@ impl AlbumArt {
             return Ok(texture);
         }
 
-        let (sender, receiver) = async_channel::unbounded();
+        let (sender, receiver) = async_channel::bounded(1);
         self.loading.replace(Some(receiver));
 
         match self.cache_file.load_bytes_future().await {
