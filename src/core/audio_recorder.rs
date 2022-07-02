@@ -338,6 +338,7 @@ fn create_pipeline(
 
     level.set_property("interval", Duration::from_millis(80).as_nanos() as u64);
     level.set_property("peak-ttl", Duration::from_millis(80).as_nanos() as u64);
+    opusenc.set_property("bitrate", 16_000);
     giostreamsink.set_property("stream", stream);
 
     let elements = [
