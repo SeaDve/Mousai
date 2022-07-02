@@ -352,9 +352,15 @@ fn create_pipeline(
     pipeline.add_many(&elements)?;
 
     pulsesrc.link(&audioconvert)?;
-    audioconvert.link_filtered(&level, &gst::Caps::builder("audio/x-raw").build())?;
+    audioconvert.link_filtered(
+        &level,
+        &gst::Caps::builder("audio/x-raw")
+            .field("channels", 1)
+            .field("rate", 16_000)
+            .build(),
+    )?;
     level.link(&opusenc)?;
-    opusenc.link(&oggmux)?;
+    opusenc.link_filtered(&oggmux, &gst::Caps::builder("audio/x-opus").build())?;
     oggmux.link_filtered(&giostreamsink, &gst::Caps::builder("audio/ogg").build())?;
 
     for e in elements {
