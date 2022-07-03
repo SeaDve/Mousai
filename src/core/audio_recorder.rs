@@ -277,11 +277,14 @@ fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow:
     let device_monitor = gst::DeviceMonitor::new();
     device_monitor.add_filter(Some(AudioDeviceClass::Source.as_str()), None);
     device_monitor.add_filter(Some(AudioDeviceClass::Sink.as_str()), None);
+
     device_monitor.start()?;
+    let devices = device_monitor.devices();
+    device_monitor.stop();
 
     log::info!("Finding device name for class `{preferred_device_class:?}`");
 
-    for device in device_monitor.devices() {
+    for device in devices {
         let device_class = AudioDeviceClass::for_str(&device.device_class())?;
 
         if device_class == preferred_device_class {
@@ -290,8 +293,6 @@ fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow:
                 .ok_or_else(|| anyhow::anyhow!("No properties found for device"))?;
 
             if properties.get::<bool>("is-default")? {
-                device_monitor.stop();
-
                 let mut node_name = properties.get::<String>("node.name")?;
 
                 if device_class == AudioDeviceClass::Sink {
@@ -303,7 +304,6 @@ fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow:
         }
     }
 
-    device_monitor.stop();
     Err(anyhow::anyhow!(
         "Failed to found audio device for class `{preferred_device_class:?}`"
     ))
@@ -336,6 +336,7 @@ async fn create_pipeline(
             pulsesrc.set_property("device", device_name);
         }
         Err(err) => {
+            // TODO Show userfacing error
             log::warn!("Failed to get default device name: {err:?}");
         }
     }
