@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mousai package.
 # Nicolas Mariniello <seldon1000@tutanota.com>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
-# albanobattistella <albano_battistella@hotmail.com>, 2021.
+# albanobattistella <albano_battistella@hotmail.com>, 2021, 2022.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Michael Moroni <michaelmoroni@disroot.org>, 2021.
 # Andrea Brandi <git@andreabrandi.com>, 2022.
@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-06-22 13:17+0000\n"
-"Last-Translator: musiclover382 <mattiagiovanni.borda@icloud.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"PO-Revision-Date: 2022-07-03 13:16+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Identifica le canzoni in pochi secondi"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Musica;Canzone;Identifica;Riconoscimento;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -300,7 +300,7 @@ msgstr ""
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
-msgstr ""
+msgstr "Nuovo"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
@@ -364,6 +364,8 @@ msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Impossibile convertire la registrazione in base64. Si prega di segnalare "
+"questo al bug tracker di Mousai."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
@@ -372,6 +374,8 @@ msgstr "Impossibile connettersi al server."
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
+"Impossibile analizzare la risposta. Si prega di segnalare questo al bug "
+"tracker di Mousai"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -385,7 +389,7 @@ msgstr ""
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
-msgstr ""
+msgstr "Ha ricevuto una risposta di stato non valida di {}"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
