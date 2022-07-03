@@ -355,14 +355,14 @@ async fn create_pipeline(
     ];
     pipeline.add_many(&elements)?;
 
-    pulsesrc.link(&audioconvert)?;
-    audioconvert.link_filtered(
-        &level,
+    pulsesrc.link_filtered(
+        &audioconvert,
         &gst::Caps::builder("audio/x-raw")
             .field("channels", 1)
             .field("rate", 16_000)
             .build(),
     )?;
+    audioconvert.link(&level)?;
     level.link(&opusenc)?;
     opusenc.link_filtered(&oggmux, &gst::Caps::builder("audio/x-opus").build())?;
     oggmux.link_filtered(&giostreamsink, &gst::Caps::builder("audio/ogg").build())?;
