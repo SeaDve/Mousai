@@ -11,6 +11,7 @@ use std::{
 };
 
 use super::{AudioDeviceClass, AudioRecording};
+use crate::THREAD_POOL;
 
 mod imp {
     use super::*;
@@ -136,7 +137,7 @@ impl AudioRecorder {
         self.notify("device-class");
     }
 
-    pub fn start(&self) -> anyhow::Result<()> {
+    pub async fn start(&self) -> anyhow::Result<()> {
         let imp = self.imp();
 
         if imp.current.borrow().is_some() {
@@ -145,7 +146,7 @@ impl AudioRecorder {
         }
 
         let stream = gio::MemoryOutputStream::new_resizable();
-        let pipeline = create_pipeline(&stream, self.device_class())?;
+        let pipeline = create_pipeline(&stream, self.device_class()).await?;
 
         pipeline
             .bus()
@@ -313,7 +314,7 @@ fn gst_element_factory_make(factory_name: &str) -> anyhow::Result<gst::Element> 
         .with_context(|| format!("Failed to make `{}`", factory_name))
 }
 
-fn create_pipeline(
+async fn create_pipeline(
     stream: &gio::MemoryOutputStream,
     preferred_device_class: AudioDeviceClass,
 ) -> anyhow::Result<gst::Pipeline> {
@@ -326,7 +327,10 @@ fn create_pipeline(
     let oggmux = gst_element_factory_make("oggmux")?;
     let giostreamsink = gst_element_factory_make("giostreamsink")?;
 
-    match find_default_device_name(preferred_device_class) {
+    match THREAD_POOL
+        .push_future(move || find_default_device_name(preferred_device_class))?
+        .await
+    {
         Ok(ref device_name) => {
             log::info!("Using device `{device_name}` for recording");
             pulsesrc.set_property("device", device_name);

@@ -170,7 +170,7 @@ impl Recognizer {
                 .into(),
         );
 
-        if let Err(err) = imp.audio_recorder.start() {
+        if let Err(err) = imp.audio_recorder.start().await {
             self.set_state(RecognizerState::Null);
             return Err(err);
         }
