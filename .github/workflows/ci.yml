@@ -17,6 +17,12 @@ jobs:
       - name: Run checks.py
         run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos --skip-uifiles
 
+  cargo-deny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: EmbarkStudios/cargo-deny-action@v1
+
   rustfmt:
     name: Rustfmt
     runs-on: ubuntu-20.04
