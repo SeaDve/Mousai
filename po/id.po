@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-06-20 01:15+0000\n"
+"PO-Revision-Date: 2022-07-11 08:15+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
@@ -34,7 +34,7 @@ msgstr "Identifikasi lagu dalam hitungan detik"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Musik;Lagu;Kenali;Pengenalan;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -291,7 +291,7 @@ msgstr "Tanggal Rilis"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "Lirik"
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
@@ -358,6 +358,8 @@ msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Gagal mengonversikan rekaman ke base64. Harap laporkan ini ke pelacak bug "
+"Mousai."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
@@ -365,7 +367,7 @@ msgstr "Gagal terhubung ke server."
 
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
-msgstr ""
+msgstr "Gagal menguraikan jawaban. Harap laporkan ini ke pelacak bug Mousai"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -382,7 +384,7 @@ msgstr ""
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
-msgstr "{} Periksa koneksi internet anda."
+msgstr "{} Periksa koneksi internet Anda."
 
 #: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
