@@ -4,7 +4,7 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # SCOTT-HAMILTON <sgn.hamilton+github@protonmail.com>, 2021.
 # Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
-# Maxime Leroy <lisacintosh@gmail.com>, 2021.
+# Maxime Leroy <lisacintosh@gmail.com>, 2021, 2022.
 # Magik Leo <magikleo.yopmail@gmail.com>, 2022.
 # matb <perso@mathieu-bousquet.fr>, 2022.
 # Mathieu B. <perso@mathieu-bousquet.fr>, 2022.
@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-05-28 00:17+0000\n"
-"Last-Translator: gt <orenantao@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2022-07-14 05:20+0000\n"
+"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -38,7 +38,7 @@ msgstr "Identifier les chansons en quelques secondes"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Musique;Chanson;Identifier;Reconnaissance;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -299,11 +299,11 @@ msgstr "Date de sortie"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "Paroles"
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
-msgstr ""
+msgstr "Nouveau"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
@@ -363,6 +363,8 @@ msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Échec de conversion de l'enregistrement en base64. Veuillez le signaler au "
+"suiveur de bogues de Mousai."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
@@ -371,6 +373,8 @@ msgstr "Impossible de se connecter au serveur."
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
+"Échec d'interprétation de la réponse. Veuillez le signaler au suiveur de "
+"bogues de Mousai"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -383,7 +387,7 @@ msgstr ""
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
-msgstr ""
+msgstr "Status de réponse invalide pour {}"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
