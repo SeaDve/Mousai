@@ -6,7 +6,7 @@
       <summary>Default window width</summary>
       <description>Default window width</description>
     </key>
-    <key name="window-height" type="i">
+    <key name="window-height" type="u">
       <default>400</default>
       <summary>Default window height</summary>
       <description>Default window height</description>
