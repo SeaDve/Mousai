@@ -181,15 +181,19 @@ impl Default for SongList {
 mod test {
     use super::*;
 
+    fn new_test_song(id: &str) -> Song {
+        Song::builder(&SongId::from(id), id, id, id).build()
+    }
+
     #[test]
     fn append_and_remove() {
         let song_list = SongList::default();
         assert!(song_list.is_empty());
 
-        let song_1 = Song::builder(&SongId::from("1"), "1", "1", "1").build();
+        let song_1 = new_test_song("1");
         assert!(song_list.append(song_1.clone()));
 
-        let song_2 = Song::builder(&SongId::from("2"), "2", "2", "2").build();
+        let song_2 = new_test_song("2");
         assert!(song_list.append(song_2.clone()));
 
         assert!(!song_list.is_empty());
@@ -209,17 +213,11 @@ mod test {
         let song_list = SongList::default();
         assert!(song_list.is_empty());
 
-        let songs = vec![
-            Song::builder(&SongId::from("1"), "1", "1", "1").build(),
-            Song::builder(&SongId::from("2"), "2", "2", "2").build(),
-        ];
+        let songs = vec![new_test_song("1"), new_test_song("2")];
         assert!(song_list.append_many(songs));
         assert_eq!(song_list.n_items(), 2);
 
-        let more_songs = vec![
-            Song::builder(&SongId::from("SameId"), "1", "1", "1").build(),
-            Song::builder(&SongId::from("SameId"), "2", "2", "2").build(),
-        ];
+        let more_songs = vec![new_test_song("SameId"), new_test_song("SameId")];
         assert!(!song_list.append_many(more_songs));
         assert_eq!(song_list.n_items(), 3);
     }
