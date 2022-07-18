@@ -405,14 +405,20 @@ impl HistoryView {
             log::warn!("Failed to remove song: SongList not found");
         }
 
-        // Since the song is removed from history, the SongPage that
-        // contains it is dangling, so remove it.
-        let song_page_index_to_rm = imp.song_pages.borrow().iter().position(|(song_page, _)| {
-            song_page.song().map(|song_page_song| song_page_song.id()) == Some(song.id())
-        });
-        if let Some(index) = song_page_index_to_rm {
-            let song_page_item = imp.song_pages.borrow_mut().remove(index);
-            self.stack_remove_song_page_item(song_page_item);
+        // Since the song is removed from history, the `SongPage`s that
+        // contain it is dangling, so remove them.
+        let (drained, song_pages) = imp
+            .song_pages
+            .take()
+            .into_iter()
+            // FIXME use Vec::drain_filter
+            .partition(|(song_page, _)| {
+                song_page.song().map(|song_page_song| song_page_song.id()) == Some(song.id())
+            });
+        imp.song_pages.replace(song_pages);
+
+        for item in drained {
+            self.stack_remove_song_page_item(item);
         }
     }
 
