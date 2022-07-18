@@ -48,6 +48,7 @@ impl AlbumArt {
         }
     }
 
+    /// Whether the album art is loaded in memory.
     pub fn is_loaded(&self) -> bool {
         self.cache.get().is_some()
     }
