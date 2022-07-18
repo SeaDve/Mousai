@@ -633,3 +633,80 @@ impl Default for HistoryView {
         Self::new()
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    use crate::model::SongId;
+
+    fn new_test_song(id: &str) -> Song {
+        Song::builder(&SongId::from(id), id, id, id).build()
+    }
+
+    #[test]
+    fn push_and_pop_song_page() {
+        let song_list = SongList::default();
+
+        let song = new_test_song("1");
+        song_list.append(song.clone());
+
+        let view = HistoryView::new();
+        view.bind_song_list(&song_list);
+        assert!(!view.is_on_song_page());
+        assert_eq!(view.imp().stack.pages().n_items(), 1);
+
+        view.push_song_page(&song);
+        assert!(view.is_on_song_page());
+        assert_eq!(view.imp().stack.pages().n_items(), 2);
+
+        // Same song, n items should not change
+        view.push_song_page(&song);
+        assert_eq!(view.imp().stack.pages().n_items(), 2);
+
+        view.pop_song_page();
+        assert!(!view.is_on_song_page());
+        assert_eq!(view.imp().stack.pages().n_items(), 1);
+
+        // Popping with the history child as the last page
+        // should not change anything
+        view.pop_song_page();
+        assert!(!view.is_on_song_page());
+        assert_eq!(view.imp().stack.pages().n_items(), 1);
+    }
+
+    #[test]
+    fn push_and_pop_song_page_with_duplicate_non_adjacent() {
+        let song_list = SongList::default();
+
+        let song_1 = new_test_song("1");
+        song_list.append(song_1.clone());
+        let song_2 = new_test_song("2");
+        song_list.append(song_2.clone());
+        let song_3 = new_test_song("3");
+        song_list.append(song_3.clone());
+
+        let view = HistoryView::new();
+        view.bind_song_list(&song_list);
+        assert_eq!(view.imp().stack.pages().n_items(), 1);
+
+        view.push_song_page(&song_1);
+        assert_eq!(view.imp().stack.pages().n_items(), 2);
+
+        view.push_song_page(&song_2);
+        assert_eq!(view.imp().stack.pages().n_items(), 3);
+
+        view.push_song_page(&song_3);
+        assert_eq!(view.imp().stack.pages().n_items(), 4);
+
+        // Even song_1 was already added, it is still
+        // added as it is not adjacent to the other song_1
+        view.push_song_page(&song_1);
+        assert_eq!(view.imp().stack.pages().n_items(), 5);
+
+        // Since song_1 is added twice, it should reduce
+        // the number of pages by 2
+        view.remove_song(&song_1);
+        assert_eq!(view.imp().stack.pages().n_items(), 3);
+    }
+}
