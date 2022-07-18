@@ -638,14 +638,30 @@ impl Default for HistoryView {
 mod test {
     use super::*;
 
-    use crate::model::SongId;
+    use gtk::gio;
+
+    use std::sync::Once;
+
+    use crate::{model::SongId, RESOURCES_FILE};
+
+    static GRESOURCES_INIT: Once = Once::new();
 
     fn new_test_song(id: &str) -> Song {
         Song::builder(&SongId::from(id), id, id, id).build()
     }
 
+    fn init_gresources() {
+        GRESOURCES_INIT.call_once(|| {
+            let res =
+                gio::Resource::load(RESOURCES_FILE).expect("Tests could not load gresource file");
+            gio::resources_register(&res);
+        });
+    }
+
     #[gtk::test]
     fn push_and_pop_song_page() {
+        init_gresources();
+
         let song_list = SongList::default();
 
         let song = new_test_song("1");
@@ -677,6 +693,8 @@ mod test {
 
     #[gtk::test]
     fn push_and_pop_song_page_with_duplicate_non_adjacent() {
+        init_gresources();
+
         let song_list = SongList::default();
 
         let song_1 = new_test_song("1");
