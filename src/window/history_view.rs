@@ -56,15 +56,18 @@ mod imp {
         pub empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
         pub empty_search_page: TemplateChild<adw::StatusPage>,
-        #[template_child]
-        pub song_child: TemplateChild<SongPage>,
 
         pub is_selection_mode: Cell<bool>,
+
+        pub player: OnceCell<WeakRef<Player>>,
         pub song_list: OnceCell<WeakRef<SongList>>,
         pub filter_model: OnceCell<WeakRef<gtk::FilterListModel>>,
         pub selection_model: OnceCell<WeakRef<gtk::MultiSelection>>,
+
         pub removed_purgatory: RefCell<Vec<Song>>,
         pub undo_remove_toast: RefCell<Option<adw::Toast>>,
+
+        pub song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId)>>,
     }
 
     #[glib::object_subclass]
@@ -159,23 +162,11 @@ mod imp {
             self.empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
 
-            self.song_child
-                .connect_song_removed(clone!(@weak obj => move |_, song| {
-                    obj.remove_song(song);
-                    obj.show_undo_remove_toast();
-                }));
-
-            self.stack
-                .connect_transition_running_notify(clone!(@weak obj => move |stack| {
-                    let imp = obj.imp();
-                    if !stack.is_transition_running() && stack.visible_child().as_ref() == Some(imp.history_child.upcast_ref()) {
-                        imp.song_child.set_song(None);
-                    }
-                }));
-
             obj.update_selection_actions();
             obj.update_selection_mode_ui();
-            obj.show_history();
+
+            obj.update_history_stack();
+            self.stack.set_visible_child(&self.history_child.get());
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -219,19 +210,56 @@ impl HistoryView {
 
     pub fn is_on_song_page(&self) -> bool {
         let imp = self.imp();
-        imp.stack.visible_child().as_ref() == Some(imp.song_child.upcast_ref())
+        imp.stack
+            .visible_child()
+            .and_then(|child| child.downcast::<SongPage>().ok())
+            .is_some()
     }
 
-    pub fn show_history(&self) {
+    pub fn pop_song_page(&self) {
         let imp = self.imp();
-        self.update_history_stack();
-        imp.stack.set_visible_child(&imp.history_child.get());
+
+        let song_page_item = imp.song_pages.borrow_mut().pop();
+        if let Some(item) = song_page_item {
+            self.stack_remove_song_page_item(item);
+        } else {
+            self.update_history_stack();
+
+            if imp.stack.visible_child().as_ref() != Some(&imp.history_child.get().upcast()) {
+                log::error!(
+                    "Popped all song pages, but the history child is still not the visible child"
+                );
+            }
+        }
     }
 
-    pub fn show_song(&self, song: &Song) {
+    pub fn push_song_page(&self, song: &Song) {
         let imp = self.imp();
-        imp.song_child.set_song(Some(song.clone()));
-        imp.stack.set_visible_child(&imp.song_child.get());
+
+        // Return if the last SongPage's song is the same as the `song` argument.
+        if let Some((song_page, _)) = imp.song_pages.borrow().last() {
+            if Some(song.id()) == song_page.song().map(|song| song.id()) {
+                return;
+            }
+        }
+
+        let song_page = SongPage::new();
+        if let Some(ref player) = imp.player.get().and_then(|player| player.upgrade()) {
+            song_page.bind_player(player);
+        }
+        song_page.set_song(Some(song.clone()));
+        let song_removed_handler_id =
+            song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
+                obj.remove_song(song);
+                obj.show_undo_remove_toast();
+            }));
+
+        imp.stack.add_child(&song_page);
+        imp.stack.set_visible_child(&song_page);
+
+        imp.song_pages
+            .borrow_mut()
+            .push((song_page, song_removed_handler_id));
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_recognized(false);
@@ -239,7 +267,7 @@ impl HistoryView {
 
     /// Must only be called once
     pub fn bind_player(&self, player: &Player) {
-        self.imp().song_child.bind_player(player);
+        self.imp().player.set(player.downgrade()).unwrap();
     }
 
     /// Must only be called once
@@ -298,7 +326,7 @@ impl HistoryView {
         grid.connect_activate(
             clone!(@weak self as obj, @weak selection_model => move |_, index| {
                 match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {
-                    Some(ref song) => obj.show_song(song),
+                    Some(ref song) => obj.push_song_page(song),
                     None => log::error!("Activated `{index}`, but found no song.")
                 }
             }),
@@ -333,6 +361,23 @@ impl HistoryView {
             .unwrap();
     }
 
+    fn stack_remove_song_page_item(&self, item: (SongPage, glib::SignalHandlerId)) {
+        let (song_page, handler_id) = item;
+
+        let imp = self.imp();
+
+        imp.stack
+            .set_visible_child(&imp.song_pages.borrow().last().map_or_else(
+                || imp.history_child.get().upcast::<gtk::Widget>(),
+                |(song_page, _)| song_page.clone().upcast::<gtk::Widget>(),
+            ));
+        imp.stack.remove(&song_page);
+
+        song_page.disconnect(handler_id);
+        song_page.unbind_player();
+    }
+
+    /// Adds song to purgatory, and remove any active `SongPage`s that contain it.
     fn remove_song(&self, song: &Song) {
         let imp = self.imp();
 
@@ -346,6 +391,16 @@ impl HistoryView {
             }
         } else {
             log::warn!("Failed to remove song: SongList not found");
+        }
+
+        // Since the song is removed from history, the SongPage that
+        // contains it is dangling, so remove it.
+        let song_page_index_to_rm = imp.song_pages.borrow().iter().position(|(song_page, _)| {
+            song_page.song().map(|song_page_song| song_page_song.id()) == Some(song.id())
+        });
+        if let Some(index) = song_page_index_to_rm {
+            let song_page_item = imp.song_pages.borrow_mut().remove(index);
+            self.stack_remove_song_page_item(song_page_item);
         }
     }
 

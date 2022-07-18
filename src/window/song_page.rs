@@ -5,7 +5,6 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
 
 use std::cell::RefCell;
 
@@ -48,7 +47,7 @@ mod imp {
         pub lyrics_label: TemplateChild<gtk::Label>,
 
         pub song: RefCell<Option<Song>>,
-        pub player: OnceCell<WeakRef<Player>>,
+        pub player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
         pub bindings: RefCell<Vec<glib::Binding>>,
     }
 
@@ -71,9 +70,6 @@ mod imp {
             klass.install_action("song-page.remove-song", None, |obj, _, _| {
                 if let Some(ref song) = obj.song() {
                     obj.emit_by_name::<()>("song-removed", &[song]);
-                    obj.activate_action("win.navigate-to-main-page", None)
-                        .unwrap();
-                    obj.set_song(None);
                 }
             });
 
@@ -262,19 +258,38 @@ impl SongPage {
         self.imp().song.borrow().clone()
     }
 
-    /// Must only be called once.
+    /// Must only be called when no player is bound.
     pub fn bind_player(&self, player: &Player) {
-        player.connect_state_notify(clone!(@weak self as obj => move |_| {
+        let handler_id = player.connect_state_notify(clone!(@weak self as obj => move |_| {
             obj.update_playback_ui();
         }));
 
-        self.imp().player.set(player.downgrade()).unwrap();
+        self.imp()
+            .player
+            .replace(Some((player.downgrade(), handler_id)));
 
         self.update_playback_ui();
     }
 
+    pub fn unbind_player(&self) {
+        if let Some((player, handler_id)) = self.imp().player.take() {
+            if let Some(player) = player.upgrade() {
+                player.disconnect(handler_id);
+            }
+        }
+    }
+
+    /// Returns `None` when player is dropped or not bound.
+    fn player(&self) -> Option<Player> {
+        self.imp()
+            .player
+            .borrow()
+            .as_ref()
+            .and_then(|(player, _)| player.upgrade())
+    }
+
     fn toggle_playback(&self) -> anyhow::Result<()> {
-        if let Some(ref player) = self.imp().player.get().and_then(|player| player.upgrade()) {
+        if let Some(ref player) = self.player() {
             if let Some(song) = self.song() {
                 if player.state() == PlayerState::Playing && player.is_active_song(&song) {
                     player.pause();
@@ -299,7 +314,7 @@ impl SongPage {
         );
 
         if let Some(ref song) = song {
-            if let Some(player) = imp.player.get().and_then(|player| player.upgrade()) {
+            if let Some(player) = self.player() {
                 let is_active_song = player.is_active_song(song);
                 let player_state = player.state();
 
@@ -311,7 +326,7 @@ impl SongPage {
                     imp.playback_button.set_mode(PlaybackButtonMode::Play);
                 }
             } else {
-                log::error!("Either the player was dropped or not binded in SongPage");
+                log::error!("Either the player was dropped or not bound in SongPage");
             }
         }
     }

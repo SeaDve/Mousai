@@ -63,8 +63,8 @@ mod imp {
             klass.bind_template();
             klass.bind_template_instance_callbacks();
 
-            klass.install_action("win.navigate-to-main-page", None, |obj, _, _| {
-                obj.imp().main_view.show_history();
+            klass.install_action("win.navigate-back", None, |obj, _, _| {
+                obj.imp().main_view.pop_song_page();
             });
 
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
@@ -282,13 +282,13 @@ impl Window {
             .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
                 obj.history().append(song.clone());
                 let main_view = &obj.imp().main_view;
-                main_view.show_song(song);
+                main_view.push_song_page(song);
                 main_view.scroll_to_top();
             }));
 
         imp.song_bar
             .connect_song_activated(clone!(@weak self as obj => move |_, song| {
-                obj.imp().main_view.show_song(song);
+                obj.imp().main_view.push_song_page(song);
             }));
 
         imp.main_view

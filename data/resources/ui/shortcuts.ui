@@ -58,7 +58,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Go Back</property>
-                <property name="action-name">win.navigate-to-main-page</property>
+                <property name="action-name">win.navigate-back</property>
               </object>
             </child>
           </object>
