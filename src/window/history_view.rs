@@ -68,6 +68,7 @@ mod imp {
         pub undo_remove_toast: RefCell<Option<adw::Toast>>,
 
         pub song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId)>>,
+        pub pending_stack_remove_song_page: RefCell<Option<SongPage>>,
     }
 
     #[glib::object_subclass]
@@ -158,6 +159,16 @@ mod imp {
 
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
+
+            self.stack
+                .connect_transition_running_notify(clone!(@weak obj => move |stack| {
+                    let imp = obj.imp();
+                    if !stack.is_transition_running() {
+                        if let Some(song_page) = imp.pending_stack_remove_song_page.take() {
+                            stack.remove(&song_page);
+                        }
+                    }
+                }));
 
             self.empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
@@ -371,10 +382,11 @@ impl HistoryView {
                 || imp.history_child.get().upcast::<gtk::Widget>(),
                 |(song_page, _)| song_page.clone().upcast::<gtk::Widget>(),
             ));
-        imp.stack.remove(&song_page);
 
         song_page.disconnect(handler_id);
         song_page.unbind_player();
+
+        imp.pending_stack_remove_song_page.replace(Some(song_page));
     }
 
     /// Adds song to purgatory, and remove any active `SongPage`s that contain it.
