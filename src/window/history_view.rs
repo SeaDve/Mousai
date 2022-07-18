@@ -646,16 +646,20 @@ mod test {
 
     static GRESOURCES_INIT: Once = Once::new();
 
-    fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::from(id), id, id, id).build()
-    }
-
     fn init_gresources() {
         GRESOURCES_INIT.call_once(|| {
             let res =
                 gio::Resource::load(RESOURCES_FILE).expect("Tests could not load gresource file");
             gio::resources_register(&res);
         });
+    }
+
+    fn new_test_song(id: &str) -> Song {
+        Song::builder(&SongId::from(id), id, id, id).build()
+    }
+
+    fn n_song_pages(view: &HistoryView) -> usize {
+        view.imp().song_pages.borrow().len()
     }
 
     #[gtk::test]
@@ -670,25 +674,24 @@ mod test {
         let view = HistoryView::new();
         view.bind_song_list(&song_list);
         assert!(!view.is_on_song_page());
-        assert_eq!(view.imp().stack.pages().n_items(), 1);
+        assert_eq!(n_song_pages(&view), 0);
 
         view.push_song_page(&song);
         assert!(view.is_on_song_page());
-        assert_eq!(view.imp().stack.pages().n_items(), 2);
+        assert_eq!(n_song_pages(&view), 1);
 
         // Same song, n items should not change
         view.push_song_page(&song);
-        assert_eq!(view.imp().stack.pages().n_items(), 2);
+        assert_eq!(n_song_pages(&view), 1);
 
         view.pop_song_page();
         assert!(!view.is_on_song_page());
-        assert_eq!(view.imp().stack.pages().n_items(), 1);
+        assert_eq!(n_song_pages(&view), 0);
 
-        // Popping with the history child as the last page
-        // should not change anything
+        // Popping with empty song pages should not do anything
         view.pop_song_page();
         assert!(!view.is_on_song_page());
-        assert_eq!(view.imp().stack.pages().n_items(), 1);
+        assert_eq!(n_song_pages(&view), 0);
     }
 
     #[gtk::test]
@@ -706,31 +709,31 @@ mod test {
 
         let view = HistoryView::new();
         view.bind_song_list(&song_list);
-        assert_eq!(view.imp().stack.pages().n_items(), 1);
+        assert_eq!(n_song_pages(&view), 0);
 
         view.push_song_page(&song_1);
-        assert_eq!(view.imp().stack.pages().n_items(), 2);
+        assert_eq!(n_song_pages(&view), 1);
 
         view.push_song_page(&song_2);
-        assert_eq!(view.imp().stack.pages().n_items(), 3);
+        assert_eq!(n_song_pages(&view), 2);
 
         view.push_song_page(&song_3);
-        assert_eq!(view.imp().stack.pages().n_items(), 4);
+        assert_eq!(n_song_pages(&view), 3);
 
         // Even song_1 was already added, it is still
         // added as it is not adjacent to the other song_1
         view.push_song_page(&song_1);
-        assert_eq!(view.imp().stack.pages().n_items(), 5);
+        assert_eq!(n_song_pages(&view), 4);
 
         // Since song_1 is added twice, it should reduce
         // the number of pages by 2
         view.remove_song(&song_1);
-        assert_eq!(view.imp().stack.pages().n_items(), 3);
+        assert_eq!(n_song_pages(&view), 2);
 
         view.pop_song_page();
-        assert_eq!(view.imp().stack.pages().n_items(), 2);
+        assert_eq!(n_song_pages(&view), 1);
 
         view.remove_song(&song_2);
-        assert_eq!(view.imp().stack.pages().n_items(), 1);
+        assert_eq!(n_song_pages(&view), 0);
     }
 }
