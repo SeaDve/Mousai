@@ -7,7 +7,6 @@
     <property name="overflow">hidden</property>
     <child>
       <object class="GtkStack" id="stack">
-        <property name="transition-type">crossfade</property>
         <child>
           <object class="GtkImage" id="placeholder">
             <property name="icon-name">emblem-music-symbolic</property>

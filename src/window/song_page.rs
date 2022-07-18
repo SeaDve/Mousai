@@ -246,7 +246,16 @@ impl SongPage {
             }
         }
 
+        // Only crossfade when album art is not loaded to avoid
+        // unnecessary crossfading when the album art can be
+        // loaded immediately.
+        imp.album_cover.set_enable_crossfade(
+            song.as_ref()
+                .and_then(|song| song.album_art().ok())
+                .map_or(true, |album_art| !album_art.is_loaded()),
+        );
         imp.album_cover.set_song(song);
+
         self.update_information();
         self.update_playback_ui();
         self.update_external_links();

@@ -30,7 +30,7 @@ impl std::fmt::Debug for AlbumArt {
         f.debug_struct("AlbumArt")
             .field("download_url", &self.download_url)
             .field("cache_uri", &self.cache_file.uri())
-            .field("loaded", &self.cache.get().is_some())
+            .field("loaded", &self.is_loaded())
             .field("receiver_closed", &is_receiver_closed)
             .field("n_receiver", &n_receiver)
             .finish()
@@ -46,6 +46,10 @@ impl AlbumArt {
             cache: OnceCell::new(),
             loading: RefCell::default(),
         }
+    }
+
+    pub fn is_loaded(&self) -> bool {
+        self.cache.get().is_some()
     }
 
     pub fn uri(&self) -> String {

@@ -60,6 +60,11 @@ mod imp {
                         .default_value(-1)
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
+                    // Whether to animate when switching between textures
+                    glib::ParamSpecBoolean::builder("enable-crossfade")
+                        .default_value(true)
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
                 ]
             });
             PROPERTIES.as_ref()
@@ -81,6 +86,10 @@ mod imp {
                     let pixel_size = value.get().unwrap();
                     obj.set_pixel_size(pixel_size);
                 }
+                "enable-crossfade" => {
+                    let enable_crossfade = value.get().unwrap();
+                    obj.set_enable_crossfade(enable_crossfade);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -89,8 +98,15 @@ mod imp {
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "pixel-size" => obj.pixel_size().to_value(),
+                "enable-crossfade" => obj.enable_crossfade().to_value(),
                 _ => unimplemented!(),
             }
+        }
+
+        fn constructed(&self, obj: &Self::Type) {
+            self.parent_constructed(obj);
+
+            obj.set_enable_crossfade(true);
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -160,6 +176,19 @@ impl AlbumCover {
 
     pub fn pixel_size(&self) -> i32 {
         self.imp().image_a.pixel_size()
+    }
+
+    pub fn set_enable_crossfade(&self, enable_crossfade: bool) {
+        self.imp().stack.set_transition_type(if enable_crossfade {
+            gtk::StackTransitionType::Crossfade
+        } else {
+            gtk::StackTransitionType::None
+        });
+        self.notify("enable-crossfade");
+    }
+
+    pub fn enable_crossfade(&self) -> bool {
+        self.imp().stack.transition_type() == gtk::StackTransitionType::Crossfade
     }
 
     fn clear(&self) {
