@@ -644,7 +644,7 @@ mod test {
         Song::builder(&SongId::from(id), id, id, id).build()
     }
 
-    #[test]
+    #[gtk::test]
     fn push_and_pop_song_page() {
         let song_list = SongList::default();
 
@@ -675,7 +675,7 @@ mod test {
         assert_eq!(view.imp().stack.pages().n_items(), 1);
     }
 
-    #[test]
+    #[gtk::test]
     fn push_and_pop_song_page_with_duplicate_non_adjacent() {
         let song_list = SongList::default();
 
