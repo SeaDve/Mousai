@@ -9,6 +9,8 @@ use std::cell::RefCell;
 
 use crate::{model::Song, utils};
 
+const DEFAULT_ENABLE_CROSSFADE: bool = true;
+
 mod imp {
     use super::*;
     use gtk::CompositeTemplate;
@@ -62,7 +64,7 @@ mod imp {
                         .build(),
                     // Whether to animate when switching between textures
                     glib::ParamSpecBoolean::builder("enable-crossfade")
-                        .default_value(true)
+                        .default_value(DEFAULT_ENABLE_CROSSFADE)
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
                 ]
@@ -106,7 +108,7 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            obj.set_enable_crossfade(true);
+            obj.set_enable_crossfade(DEFAULT_ENABLE_CROSSFADE);
         }
 
         fn dispose(&self, obj: &Self::Type) {
