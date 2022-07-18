@@ -708,5 +708,11 @@ mod test {
         // the number of pages by 2
         view.remove_song(&song_1);
         assert_eq!(view.imp().stack.pages().n_items(), 3);
+
+        view.pop_song_page();
+        assert_eq!(view.imp().stack.pages().n_items(), 2);
+
+        view.remove_song(&song_2);
+        assert_eq!(view.imp().stack.pages().n_items(), 1);
     }
 }
