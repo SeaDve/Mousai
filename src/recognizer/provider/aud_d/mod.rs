@@ -129,7 +129,7 @@ impl Provider for AudD {
 
         let bytes = Application::default()
             .session()
-            .send_and_read_future(&message, glib::PRIORITY_DEFAULT)
+            .send_and_read_future(&message, glib::PRIORITY_HIGH)
             .await
             .map_err(|err| {
                 if matches!(
