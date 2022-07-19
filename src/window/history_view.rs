@@ -247,7 +247,7 @@ impl HistoryView {
     pub fn push_song_page(&self, song: &Song) {
         let imp = self.imp();
 
-        // Return if the last SongPage's song is the same as the `song` argument.
+        // Return if the last `SongPage`s song has the same id as the given song
         if let Some((song_page, _)) = imp.song_pages.borrow().last() {
             if Some(song.id()) == song_page.song().map(|song| song.id()) {
                 return;
