@@ -69,6 +69,23 @@ mod test {
     }
 
     #[test]
+    fn forward_slash() {
+        let session = soup::Session::new();
+        let store = AlbumArtStore::new(&session).unwrap();
+
+        let album_art = store.get_or_init("http://example.com/album.jpg");
+        assert!(!album_art
+            .cache_file()
+            .path()
+            .unwrap()
+            .file_name()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .contains('/'));
+    }
+
+    #[test]
     fn directory_path() {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session).unwrap();
