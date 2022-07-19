@@ -1,4 +1,3 @@
-#![warn(clippy::missing_const_for_fn)]
 #![warn(clippy::needless_pass_by_value)]
 #![warn(clippy::explicit_iter_loop)]
 #![warn(clippy::semicolon_if_nothing_returned)]
