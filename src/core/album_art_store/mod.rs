@@ -58,11 +58,25 @@ impl AlbumArtStore {
 mod test {
     use super::*;
 
+    use gtk::gio::prelude::FileExt;
+
     #[test]
     fn null_bytes() {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session).unwrap();
 
         store.get_or_init("http://example.com/albu\0m.jpg");
+    }
+
+    #[test]
+    fn directory_path() {
+        let session = soup::Session::new();
+        let store = AlbumArtStore::new(&session).unwrap();
+
+        let album_art = store.get_or_init(".");
+        assert!(!album_art.cache_file().path().unwrap().is_dir());
+
+        let album_art = store.get_or_init("..");
+        assert!(!album_art.cache_file().path().unwrap().is_dir());
     }
 }
