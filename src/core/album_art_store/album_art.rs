@@ -127,4 +127,9 @@ impl AlbumArt {
 
         self.cache.get().unwrap()
     }
+
+    #[cfg(test)]
+    pub fn cache_file(&self) -> &gio::File {
+        &self.cache_file
+    }
 }
