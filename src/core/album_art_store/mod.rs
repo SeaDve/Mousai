@@ -120,9 +120,9 @@ mod test {
         let store = AlbumArtStore::new(&session).unwrap();
 
         let album_art = store.get_or_init(".");
-        assert!(album_art.cache_file().path().unwrap().file_name().is_some());
+        assert!(!album_art.cache_file().path().unwrap().is_dir());
 
         let album_art = store.get_or_init("..");
-        assert!(album_art.cache_file().path().unwrap().file_name().is_some());
+        assert!(!album_art.cache_file().path().unwrap().is_dir());
     }
 }
