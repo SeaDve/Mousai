@@ -65,7 +65,16 @@ mod test {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session).unwrap();
 
-        store.get_or_init("http://example.com/albu\0m.jpg");
+        let album_art = store.get_or_init("http://example.com/albu\0m.jpg");
+        assert!(!album_art
+            .cache_file()
+            .path()
+            .unwrap()
+            .file_name()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .contains('\0'));
     }
 
     #[test]
