@@ -129,7 +129,38 @@ impl AlbumArt {
     }
 
     #[cfg(test)]
-    pub fn cache_file(&self) -> &gio::File {
+    pub(super) fn cache_file(&self) -> &gio::File {
         &self.cache_file
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    use gtk::glib;
+
+    #[test]
+    fn download() {
+        let session = soup::Session::new();
+        let download_url =
+            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+        let cache_path = glib::tmp_dir().join("image.png");
+
+        let album_art = AlbumArt::new(&session, download_url, &cache_path);
+        assert!(!album_art.is_loaded());
+        assert_eq!(album_art.uri(), download_url);
+
+        glib::MainContext::new().block_on(async move {
+            assert!(album_art.texture().await.is_ok());
+            assert!(album_art.is_loaded());
+            assert_eq!(album_art.uri(), gio::File::for_path(cache_path).uri());
+
+            // Multiple texture call yields the same instance of texture.
+            assert_eq!(
+                album_art.texture().await.unwrap(),
+                album_art.texture().await.unwrap()
+            );
+        });
     }
 }

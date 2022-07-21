@@ -80,6 +80,18 @@ mod test {
     use gtk::gio::prelude::FileExt;
 
     #[test]
+    fn identity() {
+        let session = soup::Session::new();
+        let store = AlbumArtStore::new(&session).unwrap();
+
+        let url = "https://example.com/album.jpg";
+        let access_1 = store.get_or_init(url).unwrap();
+        let access_2 = store.get_or_init(url).unwrap();
+        assert_eq!(access_1.cache_file().uri(), access_2.cache_file().uri());
+        assert!(Rc::ptr_eq(&access_1, &access_2));
+    }
+
+    #[test]
     fn null_bytes() {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session).unwrap();
