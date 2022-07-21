@@ -151,7 +151,7 @@ mod test {
         assert!(!album_art.is_loaded());
         assert_eq!(album_art.uri(), download_url);
 
-        glib::MainContext::new().block_on(async move {
+        glib::MainContext::default().block_on(async move {
             assert!(album_art.texture().await.is_ok());
             assert!(album_art.is_loaded());
             assert_eq!(album_art.uri(), gio::File::for_path(cache_path).uri());
