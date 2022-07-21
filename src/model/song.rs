@@ -337,6 +337,8 @@ impl SongBuilder {
         self
     }
 
+    /// Pushes an external link. Multiple calls to this won't overwrite
+    /// previews data.
     pub fn external_link(&mut self, value: impl ExternalLink + 'static) -> &mut Self {
         self.external_links.push(Box::new(value));
         self
