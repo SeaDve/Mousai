@@ -58,7 +58,7 @@ impl AudD {
         )));
 
         if let Some(spotify_data) = data.spotify_data {
-            if let Some(image) = spotify_data.album.images.get(0) {
+            if let Some(image) = spotify_data.album.images.first() {
                 album_images.push(image.url.clone());
             }
 

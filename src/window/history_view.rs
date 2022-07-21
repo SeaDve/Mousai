@@ -106,7 +106,7 @@ mod imp {
                     );
                 }
 
-                if let Some(song) = selected_songs.get(0) {
+                if let Some(song) = selected_songs.first() {
                     if let Some(display) = gdk::Display::default() {
                         display.clipboard().set_text(&format!(
                             "{} - {}",
