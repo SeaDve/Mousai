@@ -39,38 +39,37 @@ impl AlbumArtStore {
         })
     }
 
-    pub fn get_or_init(&self, download_url: &str) -> Rc<AlbumArt> {
-        Rc::clone(
-            self.inner
-                .borrow_mut()
-                .entry(download_url.to_string())
-                .or_insert_with_key(|download_url| {
-                    let cache_path = self.cache_path_for_url(download_url);
-                    Rc::new(AlbumArt::new(&self.session, download_url, &cache_path))
-                }),
-        )
-    }
+    pub fn get_or_init(&self, download_url: &str) -> anyhow::Result<Rc<AlbumArt>> {
+        use std::collections::hash_map::Entry;
 
-    /// Returns always the same path for the same download url.
-    fn cache_path_for_url(&self, download_url: &str) -> PathBuf {
-        let file_name = download_url.replace('/', "-").replace('\0', "");
+        match self.inner.borrow_mut().entry(download_url.to_string()) {
+            Entry::Occupied(entry) => Ok(Rc::clone(entry.get())),
+            Entry::Vacant(entry) => {
+                // Create a unique cache path for this download URL. Thus escape
+                // `/` as it is not allowed in a file name, and remove `\0` as
+                // gio::File::for_path() would crash with it.
+                let file_name = download_url.replace('/', "-").replace('\0', "");
 
-        let path = if file_name == "." {
-            log::error!("Found download url `.`");
-            self.cache_dir.join("dot")
-        } else if file_name == ".." {
-            log::error!("Found download url `..`");
-            self.cache_dir.join("dot-dot")
-        } else {
-            self.cache_dir.join(file_name)
-        };
+                anyhow::ensure!(
+                    file_name != "." && file_name != "..",
+                    "Download url cannot be `.` or `..`"
+                );
 
-        // Should be impossible, but to detect it just incase
-        if path.file_name().is_none() {
-            log::error!("Found no file name for cache path. Defaulting to `album_art`");
+                let cache_path = self.cache_dir.join(file_name);
+
+                // Should be practically impossible, but to detect it just incase
+                anyhow::ensure!(
+                    cache_path.file_name().is_some(),
+                    "Found no file name for created cache path"
+                );
+
+                Ok(Rc::clone(entry.insert(Rc::new(AlbumArt::new(
+                    &self.session,
+                    download_url,
+                    &cache_path,
+                )))))
+            }
         }
-
-        path
     }
 }
 
@@ -87,6 +86,7 @@ mod test {
 
         let album_art = store.get_or_init("http://example.com/albu\0m.jpg");
         assert!(!album_art
+            .unwrap()
             .cache_file()
             .path()
             .unwrap()
@@ -104,6 +104,7 @@ mod test {
 
         let album_art = store.get_or_init("http://example.com/album.jpg");
         assert!(!album_art
+            .unwrap()
             .cache_file()
             .path()
             .unwrap()
@@ -120,9 +121,9 @@ mod test {
         let store = AlbumArtStore::new(&session).unwrap();
 
         let album_art = store.get_or_init(".");
-        assert!(!album_art.cache_file().path().unwrap().is_dir());
+        assert!(album_art.is_err());
 
         let album_art = store.get_or_init("..");
-        assert!(!album_art.cache_file().path().unwrap().is_dir());
+        assert!(album_art.is_err());
     }
 }

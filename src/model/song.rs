@@ -261,9 +261,9 @@ impl Song {
             .album_art_link()
             .ok_or_else(|| anyhow::anyhow!("Song doesn't have an album art link"))?;
 
-        Ok(Application::default()
+        Application::default()
             .album_art_store()?
-            .get_or_init(&album_art_link))
+            .get_or_init(&album_art_link)
     }
 }
 
