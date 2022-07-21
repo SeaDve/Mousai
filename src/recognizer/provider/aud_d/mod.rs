@@ -132,10 +132,7 @@ impl Provider for AudD {
             .send_and_read_future(&message, glib::PRIORITY_HIGH)
             .await
             .map_err(|err| {
-                if matches!(
-                    err.kind::<gio::ResolverError>(),
-                    Some(gio::ResolverError::TemporaryFailure)
-                ) {
+                if err.matches(gio::ResolverError::TemporaryFailure) {
                     ProviderError::Connection(gettext("Failed to connect to the server."))
                 } else {
                     ProviderError::Connection(err.to_string())
