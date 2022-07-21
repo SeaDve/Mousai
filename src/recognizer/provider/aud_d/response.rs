@@ -6,7 +6,7 @@ use super::ProviderError;
 #[derive(Debug, Deserialize)]
 pub struct LyricsData {
     pub lyrics: String,
-    /// A json string containing `provider` and `url` field
+    /// A json object containing `provider` and `url` field
     pub media: String,
 }
 
