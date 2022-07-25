@@ -3,7 +3,7 @@ mod aud_d;
 use async_trait::async_trait;
 use gettextrs::gettext;
 use gtk::glib;
-use once_cell::sync::Lazy;
+use once_cell::sync::OnceCell;
 
 use std::{
     sync::{Mutex, MutexGuard},
@@ -78,10 +78,12 @@ pub struct ProviderManager {
 impl ProviderManager {
     /// Acquire lock to the global `ProviderManager`
     pub fn lock() -> MutexGuard<'static, Self> {
-        static PROVIDER_MANAGER: Lazy<Mutex<ProviderManager>> =
-            Lazy::new(|| Mutex::new(ProviderManager::default()));
+        static PROVIDER_MANAGER: OnceCell<Mutex<ProviderManager>> = OnceCell::new();
 
-        PROVIDER_MANAGER.lock().unwrap()
+        PROVIDER_MANAGER
+            .get_or_init(|| Mutex::new(ProviderManager::default()))
+            .lock()
+            .unwrap()
     }
 
     /// Reset all fields to their defaults
