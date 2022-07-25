@@ -147,13 +147,11 @@ mod tests {
 
     #[test]
     fn provider_manager_identity() {
-        let a = ProviderManager::lock();
-        assert_eq!(a.active, ProviderType::AudD);
+        let mut lock = ProviderManager::lock();
+        lock.active = ProviderType::AudDMock;
+        let active = lock.active;
+        drop(lock);
 
-        let mut b = ProviderManager::lock();
-        assert_eq!(a.active, b.active);
-
-        b.active = ProviderType::AudDMock;
-        assert_eq!(a.active, b.active);
+        assert_eq!(ProviderManager::lock().active, active);
     }
 }
