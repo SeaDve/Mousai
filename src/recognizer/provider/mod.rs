@@ -3,9 +3,12 @@ mod aud_d;
 use async_trait::async_trait;
 use gettextrs::gettext;
 use gtk::glib;
-use once_cell::sync::OnceCell;
+use once_cell::sync::Lazy;
 
-use std::{sync::RwLock, time::Duration};
+use std::{
+    sync::{Mutex, MutexGuard},
+    time::Duration,
+};
 
 use self::aud_d::{AudD, AudDMock};
 use crate::{core::AudioRecording, model::Song};
@@ -22,7 +25,7 @@ pub trait Provider: std::fmt::Debug {
     fn is_test(&self) -> bool;
 }
 
-#[derive(Default, Debug, Clone, Copy, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiTestProviderMode")]
 pub enum TestProviderMode {
     ErrorOnly,
@@ -39,7 +42,7 @@ impl From<i32> for TestProviderMode {
     }
 }
 
-#[derive(Default, Debug, Clone, Copy, glib::Enum)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiProviderType")]
 pub enum ProviderType {
     #[default]
@@ -64,73 +67,37 @@ impl From<i32> for ProviderType {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct ProviderManager {
-    active: RwLock<ProviderType>,
-    test_mode: RwLock<TestProviderMode>,
-    test_listen_duration: RwLock<Duration>,
-    test_recognize_duration: RwLock<Duration>,
+    pub active: ProviderType,
+    pub test_mode: TestProviderMode,
+    pub test_listen_duration: Duration,
+    pub test_recognize_duration: Duration,
 }
 
 impl ProviderManager {
-    pub fn global() -> &'static Self {
-        static PROVIDER_MANAGER: OnceCell<ProviderManager> = OnceCell::new();
+    /// Acquire lock to the global `ProviderManager`
+    pub fn lock() -> MutexGuard<'static, Self> {
+        static PROVIDER_MANAGER: Lazy<Mutex<ProviderManager>> =
+            Lazy::new(|| Mutex::new(ProviderManager::default()));
 
-        PROVIDER_MANAGER.get_or_init(|| {
-            let this = Self {
-                active: Default::default(),
-                test_mode: Default::default(),
-                test_listen_duration: Default::default(),
-                test_recognize_duration: Default::default(),
-            };
-            this.reset_test_durations();
-            this
-        })
+        PROVIDER_MANAGER.lock().unwrap()
     }
 
-    pub fn active(&self) -> ProviderType {
-        *self.active.read().unwrap()
+    /// Reset all fields to their defaults
+    pub fn reset(&mut self) {
+        *self = Self::default();
     }
+}
 
-    pub fn set_active(&self, new_value: ProviderType) {
-        *self.active.write().unwrap() = new_value;
-    }
-
-    pub fn test_mode(&self) -> TestProviderMode {
-        *self.test_mode.read().unwrap()
-    }
-
-    pub fn set_test_mode(&self, new_value: TestProviderMode) {
-        *self.test_mode.write().unwrap() = new_value;
-    }
-
-    pub fn test_listen_duration(&self) -> Duration {
-        *self.test_listen_duration.read().unwrap()
-    }
-
-    pub fn set_test_listen_duration(&self, new_value: Duration) {
-        *self.test_listen_duration.write().unwrap() = new_value;
-    }
-
-    pub fn test_recognize_duration(&self) -> Duration {
-        *self.test_recognize_duration.read().unwrap()
-    }
-
-    pub fn set_test_recognize_duration(&self, new_value: Duration) {
-        *self.test_recognize_duration.write().unwrap() = new_value;
-    }
-
-    pub fn reset_active(&self) {
-        self.set_active(ProviderType::default());
-    }
-
-    pub fn reset_test_mode(&self) {
-        self.set_test_mode(TestProviderMode::default());
-    }
-
-    pub fn reset_test_durations(&self) {
-        self.set_test_listen_duration(Duration::from_secs(1));
-        self.set_test_recognize_duration(Duration::from_secs(1));
+impl Default for ProviderManager {
+    fn default() -> Self {
+        Self {
+            active: ProviderType::default(),
+            test_mode: TestProviderMode::default(),
+            test_listen_duration: Duration::from_secs(1),
+            test_recognize_duration: Duration::from_secs(1),
+        }
     }
 }
 
@@ -161,3 +128,32 @@ impl std::fmt::Display for ProviderError {
 }
 
 impl std::error::Error for ProviderError {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn reset_provider_manager() {
+        let mut manager = ProviderManager::lock();
+        assert_eq!(*manager, ProviderManager::default());
+
+        manager.active = ProviderType::AudDMock;
+        assert_ne!(*manager, ProviderManager::default());
+
+        manager.reset();
+        assert_eq!(*manager, ProviderManager::default());
+    }
+
+    #[test]
+    fn provider_manager_identity() {
+        let a = ProviderManager::lock();
+        assert_eq!(a.active, ProviderType::AudD);
+
+        let mut b = ProviderManager::lock();
+        assert_eq!(a.active, b.active);
+
+        b.active = ProviderType::AudDMock;
+        assert_eq!(a.active, b.active);
+    }
+}

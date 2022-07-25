@@ -15,7 +15,7 @@ pub struct AudDMock;
 
 impl AudDMock {
     fn random_data(&self) -> Result<Data, ProviderError> {
-        let test_mode = ProviderManager::global().test_mode();
+        let test_mode = ProviderManager::lock().test_mode;
 
         let mut raw_responses = Vec::new();
         if matches!(test_mode, TestProviderMode::Both)
@@ -60,12 +60,13 @@ impl AudDMock {
 #[async_trait(?Send)]
 impl Provider for AudDMock {
     async fn recognize(&self, _: &AudioRecording) -> Result<Song, ProviderError> {
-        glib::timeout_future(ProviderManager::global().test_recognize_duration()).await;
+        let test_duration = ProviderManager::lock().test_recognize_duration;
+        glib::timeout_future(test_duration).await;
         Ok(AudD::build_song_from_data(self.random_data()?))
     }
 
     fn listen_duration(&self) -> Duration {
-        ProviderManager::global().test_listen_duration()
+        ProviderManager::lock().test_listen_duration
     }
 
     fn is_test(&self) -> bool {

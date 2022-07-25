@@ -176,7 +176,7 @@ impl Recognizer {
         }
 
         self.set_state(RecognizerState::Listening);
-        let provider = ProviderManager::global().active().to_provider();
+        let provider = ProviderManager::lock().active.to_provider();
         log::debug!("provider: {:?}", provider);
         let listen_duration = provider.listen_duration();
 
