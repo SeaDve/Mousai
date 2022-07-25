@@ -136,6 +136,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[serial_test::serial]
     fn reset_provider_manager() {
         let mut manager = ProviderManager::lock();
         assert_eq!(*manager, ProviderManager::default());
@@ -148,12 +149,17 @@ mod tests {
     }
 
     #[test]
+    #[serial_test::serial]
     fn provider_manager_identity() {
-        let mut lock = ProviderManager::lock();
-        lock.active = ProviderType::AudDMock;
-        let active = lock.active;
-        drop(lock);
+        let mut lock_a = ProviderManager::lock();
+        lock_a.active = ProviderType::AudDMock;
+        let active = lock_a.active;
+        drop(lock_a);
 
-        assert_eq!(ProviderManager::lock().active, active);
+        let mut lock_b = ProviderManager::lock();
+        assert_eq!(lock_b.active, active);
+
+        lock_b.reset();
+        assert_ne!(lock_b.active, active);
     }
 }
