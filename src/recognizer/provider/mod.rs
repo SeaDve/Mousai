@@ -67,7 +67,7 @@ impl From<i32> for ProviderType {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug)]
 pub struct ProviderManager {
     pub active: ProviderType,
     pub test_mode: TestProviderMode,
@@ -139,13 +139,13 @@ mod tests {
     #[serial_test::serial]
     fn reset_provider_manager() {
         let mut manager = ProviderManager::lock();
-        assert_eq!(*manager, ProviderManager::default());
+        assert_eq!(manager.active, Default::default());
 
         manager.active = ProviderType::AudDMock;
-        assert_ne!(*manager, ProviderManager::default());
+        assert_ne!(manager.active, Default::default());
 
         manager.reset();
-        assert_eq!(*manager, ProviderManager::default());
+        assert_eq!(manager.active, Default::default());
     }
 
     #[test]
