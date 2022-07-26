@@ -4,13 +4,14 @@
 # 小山田純 <oyamada.junjun@outlook.jp>, 2021.
 # Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022.
 # Kaz Sibuya <sibuyakazokuu@gmail.com>, 2021.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2022-07-26 16:20+0000\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
 "Language: ja\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -28,30 +29,30 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "数秒間で曲を特定します"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Music;Song;Identify;Recognition;音声;認識;曲名;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
-msgstr ""
+msgstr "標準のウインドウの幅"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr ""
+msgstr "標準のウインドウの高さ"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "ウィンドウが最大化したときの標準の挙動"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "最近識別した曲を含みます"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
@@ -77,8 +78,7 @@ msgstr ""
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr ""
-"注：Mousaiはaudd.ioのAPIを使用しているため、継続して利用するには、audDのサイ"
+msgstr "注：Mousaiはaudd.ioのAPIを使用しているため、継続して利用するには、AudDのサイ"
 "トにログインする必要があります。"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
@@ -103,7 +103,7 @@ msgstr "🎼 認識した曲をネイティブプレーヤーで試聴できま�
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 様々のプロバイダーで曲をブラウスし聞くことができます。"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
@@ -139,11 +139,11 @@ msgstr "Mousaiについて(_A)"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "すべて選択(_A)"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "すべて選択解除(_N)"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
@@ -155,19 +155,19 @@ msgstr "認識"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "メインメニューを開く"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "選択"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "曲を検索"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "選択解除"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -176,11 +176,11 @@ msgstr "キャンセル"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "曲やアーティストの名前を入力"
 
 #: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "曲の認識を始める！"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Click the listen button to start."
@@ -188,19 +188,19 @@ msgstr "“認識”ボタンをクリックして開始します。"
 
 #: data/resources/ui/history-view.ui:155
 msgid "No Results Found"
-msgstr ""
+msgstr "結果はありません"
 
 #: data/resources/ui/history-view.ui:156
 msgid "Try a different search."
-msgstr ""
+msgstr "検索を変えてみましょう。"
 
 #: data/resources/ui/history-view.ui:165
 msgid "Copy Song"
-msgstr ""
+msgstr "曲をコピー"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "認識をキャンセル"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -210,12 +210,12 @@ msgstr "一般"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "メインメニューを開く"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
@@ -230,7 +230,7 @@ msgstr "終了"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "コントロール"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
@@ -240,61 +240,61 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "再生を切り替え"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "ナビゲーション"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "戻る"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
-msgstr ""
+msgstr "曲の情報を表示"
 
 #: data/resources/ui/song-bar.ui:102
 msgid "Stop"
-msgstr "録画終了"
+msgstr "停止"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
-msgstr ""
+msgstr "ホームへ戻る"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
-msgstr ""
+msgstr "履歴から削除"
 
 #: data/resources/ui/song-page.ui:44
 msgid "Copy"
-msgstr ""
+msgstr "コピー"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Information"
-msgstr ""
+msgstr "情報"
 
 #: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
-msgstr ""
+msgstr "最後に聞いた曲"
 
 #: data/resources/ui/song-page.ui:158
 msgid "Album"
-msgstr ""
+msgstr "アルバム"
 
 #: data/resources/ui/song-page.ui:163
 msgid "Release Date"
-msgstr ""
+msgstr "リリース日"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "歌詞"
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
-msgstr ""
+msgstr "新規"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
@@ -302,11 +302,12 @@ msgid "translator-credits"
 msgstr ""
 "小山田 純,\n"
 "Ryo Nakano,\n"
-"Kaz Sibuya"
+"Kaz Sibuya,\n"
+"Kisaragi Hiu"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Copyright 2022 Dave Patrick"
 
 #: src/application.rs:144
 msgid "GitHub"
@@ -314,61 +315,62 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Apple Musicでブラウス"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "AudDでブラウス"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Spotifyで聞く"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "YouTubeで検索"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
-msgstr ""
+msgstr "レコーディングをキャンセルしました"
 
 #: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "識別をキャンセルしました"
 
 #: src/recognizer/provider/aud_d/mod.rs:112
 msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
-msgstr ""
+msgstr "レコーディングをbase64に変換できませんでした。Mousaiのバクトラッカーに "
+"報告してください。"
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "サーバに接続できませんでした。"
 
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
-msgstr ""
+msgstr "応答を解析できませんでした。Mousaiのバクトラッカーに報告してください"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "毎日のリミットに達しました。"
 
 #: src/recognizer/provider/aud_d/response.rs:116
 msgid "Failed to fingerprint audio. There may be no sound heard."
@@ -380,70 +382,70 @@ msgstr ""
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{}インターネット接続を確認してください。"
 
 #: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
-msgstr ""
+msgstr "この曲にマッチするものは見つかりませんでした。"
 
 #: src/recognizer/provider/mod.rs:154
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{}設定でAPIトークンを入力してください。"
 
 #: src/recognizer/provider/mod.rs:157
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "有効なAPIトークンを入力してください。"
 
 #: src/window/history_view.rs:113 src/window/song_page.rs:89
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "曲をクリップボードにコピーしました"
 
 #: src/window/history_view.rs:411
 msgid "_Undo"
-msgstr ""
+msgstr "元に戻す(_U)"
 
 #: src/window/history_view.rs:430
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
+msgstr[0] "{}曲を削除しました"
 
 #: src/window/history_view.rs:495
 msgid "Click on items to select them"
-msgstr ""
+msgstr "アイテムをクリックすると選択します"
 
 #: src/window/history_view.rs:497
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
+msgstr[0] "%1曲を選択しました"
 
 #: src/window/history_view.rs:506
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
+msgstr[0] "曲を履歴から削除"
 
 #: src/window/mod.rs:196
 msgid "Failed to load history"
-msgstr ""
+msgstr "履歴の読み込みに失敗しました"
 
 #: src/window/playback_button.rs:155
 msgid "Play"
-msgstr ""
+msgstr "再生"
 
 #: src/window/playback_button.rs:162
 msgid "Pause"
-msgstr ""
+msgstr "一時停止"
 
 #: src/window/recognizer_view.rs:117
 msgid "Listening…"
-msgstr ""
+msgstr "認識しています…"
 
 #: src/window/recognizer_view.rs:122
 msgid "Recognizing…"
-msgstr ""
+msgstr "識別しています…"
 
 #: src/window/song_page.rs:177
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "{}の起動に失敗しました"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "音楽;ミュージック;曲;認識;識別;Shazam;Music;Song;Identify;"
