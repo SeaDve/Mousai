@@ -95,11 +95,11 @@ impl RecognizerView {
                 .value_from(0.0)
                 .value_to(0.8)
                 .duration(1500)
-                .target(&adw::CallbackAnimationTarget::new(Some(Box::new(
+                .target(&adw::CallbackAnimationTarget::new(
                     clone!(@weak self as obj => move |value| {
                         obj.imp().waveform.push_peak(value);
                     }),
-                ))))
+                ))
                 .easing(adw::Easing::EaseOutBack)
                 .repeat_count(u32::MAX)
                 .alternate(true)

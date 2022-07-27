@@ -15,7 +15,6 @@ use gettextrs::gettext;
 use gtk::{
     gdk, gio,
     glib::{self, clone},
-    subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
 

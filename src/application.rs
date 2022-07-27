@@ -4,7 +4,6 @@ use gtk::{
     gio,
     glib::{self, clone},
     prelude::*,
-    subclass::prelude::*,
 };
 
 use crate::{
