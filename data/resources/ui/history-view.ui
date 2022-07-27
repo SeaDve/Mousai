@@ -134,6 +134,7 @@
                     <property name="hscrollbar-policy">never</property>
                     <property name="child">
                       <object class="GtkGridView" id="grid">
+                        <property name="min-columns">2</property>
                         <style>
                           <class name="history-view"/>
                         </style>
