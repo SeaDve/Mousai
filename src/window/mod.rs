@@ -30,7 +30,8 @@ use crate::{
     utils, Application,
 };
 
-const NARROW_ADAPTIVE_MODE_THRESHOLD: i32 = 600;
+// 570 is perfect to prevent three columns history grid view on narrow mode.
+const NARROW_ADAPTIVE_MODE_THRESHOLD: i32 = 570;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiAdaptiveMode")]
