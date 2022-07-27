@@ -6,7 +6,7 @@ use gtk::{
     prelude::*,
 };
 
-use std::path::Path;
+use std::{env, path::Path};
 
 use crate::{
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
@@ -218,6 +218,10 @@ impl Default for Application {
 
 fn debug_info() -> String {
     let is_flatpak = Path::new("/.flatpak-info").exists();
+    let distribution = distribution().unwrap_or_else(|| "<unknown>".into());
+    let desktop_session = env::var("DESKTOP_SESSION").unwrap_or_else(|_| "<unknown>".into());
+    let display_server = env::var("XDG_SESSION_TYPE").unwrap_or_else(|_| "<unknown>".into());
+
     let gtk_version = format!(
         "{}.{}.{}",
         gtk::major_version(),
@@ -242,12 +246,34 @@ fn debug_info() -> String {
 
     format!(
         r#"- Mousai {VERSION}
-
 - Flatpak: {is_flatpak}
+
+- Distribution: {distribution}
+- Desktop Session: {desktop_session}
+- Display Server: {display_server}
 
 - GTK {gtk_version}
 - Libadwaita {adw_version}
 - Libsoup {soup_version}
 - {gst_version_string}"#
     )
+}
+
+fn distribution() -> Option<String> {
+    use std::{
+        fs::File,
+        io::{prelude::*, BufReader},
+    };
+
+    let file = File::open("/etc/os-release").ok()?;
+
+    BufReader::new(file).lines().find_map(|line| {
+        let line = line.ok()?;
+        let (key, value) = line.split_once('=')?;
+        if key == "PRETTY_NAME" {
+            Some(value.trim_matches('\"').to_string())
+        } else {
+            None
+        }
+    })
 }
