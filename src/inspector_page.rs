@@ -62,6 +62,7 @@ mod imp {
                     glib::ParamSpecObject::builder("object", glib::Object::static_type()).build(),
                 ]
             });
+
             PROPERTIES.as_ref()
         }
 

@@ -74,6 +74,7 @@ mod imp {
                 )
                 .build()]
             });
+
             SIGNALS.as_ref()
         }
 
@@ -99,6 +100,7 @@ mod imp {
                         .build(),
                 ]
             });
+
             PROPERTIES.as_ref()
         }
 

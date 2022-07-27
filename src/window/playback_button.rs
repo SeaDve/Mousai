@@ -65,6 +65,7 @@ mod imp {
                         .build(),
                 ]
             });
+
             PROPERTIES.as_ref()
         }
 

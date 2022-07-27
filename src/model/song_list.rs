@@ -39,6 +39,7 @@ mod imp {
                 )
                 .build()]
             });
+
             SIGNALS.as_ref()
         }
     }
