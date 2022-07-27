@@ -11,7 +11,7 @@ use std::{
 use crate::config::{APP_ID, VERSION};
 
 pub fn present(transient_for: Option<&impl IsA<gtk::Window>>) {
-    let dialog = adw::AboutWindow::builder()
+    let win = adw::AboutWindow::builder()
         .modal(true)
         .application_icon(APP_ID)
         .application_name(&gettext("Mousai"))
@@ -27,23 +27,23 @@ pub fn present(transient_for: Option<&impl IsA<gtk::Window>>) {
         .debug_info_filename("mousai-debug-info")
         .build();
 
-    dialog.add_link(
+    win.add_link(
         &gettext("Donate (Liberapay)"),
         "https://liberapay.com/SeaDve",
     );
-    dialog.add_link(
+    win.add_link(
         &gettext("Donate (PayPal)"),
         "https://www.paypal.com/paypalme/sedve",
     );
 
-    dialog.add_link(&gettext("GitHub"), "https://github.com/SeaDve/Mousai");
-    dialog.add_link(
+    win.add_link(&gettext("GitHub"), "https://github.com/SeaDve/Mousai");
+    win.add_link(
         &gettext("Translate"),
         "https://hosted.weblate.org/projects/kooha/mousai",
     );
 
-    dialog.set_transient_for(transient_for);
-    dialog.present();
+    win.set_transient_for(transient_for);
+    win.present();
 }
 
 fn debug_info() -> String {
