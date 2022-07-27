@@ -1,9 +1,14 @@
 use gettextrs::gettext;
 use gtk::{glib::IsA, prelude::*};
 
-use crate::config::{APP_ID, VERSION};
+use std::{
+    env,
+    fs::File,
+    io::{prelude::*, BufReader},
+    path::Path,
+};
 
-use std::{env, path::Path};
+use crate::config::{APP_ID, VERSION};
 
 pub fn present(transient_for: Option<&impl IsA<gtk::Window>>) {
     let dialog = adw::AboutWindow::builder()
@@ -85,11 +90,6 @@ fn debug_info() -> String {
 }
 
 fn distribution_info() -> Option<String> {
-    use std::{
-        fs::File,
-        io::{prelude::*, BufReader},
-    };
-
     let file = File::open("/etc/os-release").ok()?;
 
     BufReader::new(file).lines().find_map(|line| {
