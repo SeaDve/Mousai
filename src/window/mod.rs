@@ -19,6 +19,8 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
+use std::cell::Cell;
+
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
@@ -28,9 +30,20 @@ use crate::{
     utils, Application,
 };
 
+const NARROW_ADAPTIVE_MODE_THRESHOLD: i32 = 600;
+
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[enum_type(name = "MsaiAdaptiveMode")]
+pub enum AdaptiveMode {
+    #[default]
+    Normal,
+    Narrow,
+}
+
 mod imp {
     use super::*;
     use gtk::CompositeTemplate;
+    use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
@@ -47,6 +60,8 @@ mod imp {
         pub song_bar_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
         pub song_bar: TemplateChild<SongBar>,
+
+        pub adaptive_mode: Cell<AdaptiveMode>,
 
         pub recognizer: Recognizer,
         pub player: Player,
@@ -111,6 +126,27 @@ mod imp {
     }
 
     impl ObjectImpl for Window {
+        fn properties() -> &'static [glib::ParamSpec] {
+            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
+                vec![
+                    // Current adapative mode
+                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::static_type())
+                        .default_value(AdaptiveMode::default() as i32)
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                ]
+            });
+
+            PROPERTIES.as_ref()
+        }
+
+        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            match pspec.name() {
+                "adaptive-mode" => obj.adaptive_mode().to_value(),
+                _ => unreachable!(),
+            }
+        }
+
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
@@ -143,7 +179,19 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for Window {}
+    impl WidgetImpl for Window {
+        fn realize(&self, obj: &Self::Type) {
+            self.parent_realize(obj);
+
+            obj.surface()
+                .connect_width_notify(clone!(@weak obj => move |_| {
+                    obj.update_adaptive_mode();
+                }));
+
+            obj.update_adaptive_mode();
+        }
+    }
+
     impl WindowImpl for Window {
         fn close_request(&self, obj: &Self::Type) -> gtk::Inhibit {
             if let Err(err) = obj.save_window_size() {
@@ -165,7 +213,7 @@ mod imp {
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,
-        @implements gio::ActionMap, gio::ActionGroup, gtk::Root;
+        @implements gio::ActionMap, gio::ActionGroup, gtk::Native, gtk::Root;
 }
 
 impl Window {
@@ -187,6 +235,17 @@ impl Window {
             .priority(adw::ToastPriority::High)
             .build();
         self.add_toast(&toast);
+    }
+
+    pub fn connect_adaptive_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("adaptive-mode"), move |obj, _| f(obj))
+    }
+
+    pub fn adaptive_mode(&self) -> AdaptiveMode {
+        self.imp().adaptive_mode.get()
     }
 
     fn history(&self) -> &SongList {
@@ -256,6 +315,23 @@ impl Window {
                 imp.stack.set_visible_child(&imp.main_view.get());
             }
         }
+    }
+
+    fn update_adaptive_mode(&self) {
+        let width = self.surface().width();
+
+        let adaptive_mode = if width < NARROW_ADAPTIVE_MODE_THRESHOLD {
+            AdaptiveMode::Narrow
+        } else {
+            AdaptiveMode::Normal
+        };
+
+        if adaptive_mode == self.adaptive_mode() {
+            return;
+        }
+
+        self.imp().adaptive_mode.set(adaptive_mode);
+        self.notify("adaptive-mode");
     }
 
     fn setup_signals(&self) {

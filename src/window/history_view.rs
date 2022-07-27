@@ -565,7 +565,7 @@ impl HistoryView {
 
         imp.selection_mode_menu_button
             .set_label(&match selection_size {
-                0 => gettext("Click on items to select them"),
+                0 => gettext("Select items"),
                 1.. => ngettext!(
                     "Selected {} song",
                     "Selected {} songs",
