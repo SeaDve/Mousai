@@ -248,7 +248,6 @@ fn debug_info() -> String {
 - GTK {gtk_version}
 - Libadwaita {adw_version}
 - Libsoup {soup_version}
-- {gst_version_string}
-"#
+- {gst_version_string}"#
     )
 }
