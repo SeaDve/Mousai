@@ -294,7 +294,7 @@
     <kudo>ModernToolkit</kudo>
     <kudo>HiDpiIcon</kudo>
   </kudos>
-  <developer_name>Dave Patrick</developer_name>
+  <developer_name>Dave Patrick Caberto</developer_name>
   <update_contact>davecruz48@gmail.com</update_contact>
   <translation type="gettext">@gettext-package@</translation>
   <launchable type="desktop-id">@app-id@.desktop</launchable>

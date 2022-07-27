@@ -129,20 +129,35 @@ impl Application {
     }
 
     fn show_about_dialog(&self) {
-        let dialog = gtk::AboutDialog::builder()
+        let dialog = adw::AboutWindow::builder()
             .modal(true)
-            .comments(&gettext("Identify songs in seconds"))
+            .application_icon(APP_ID)
+            .application_name(&gettext("Mousai"))
+            .developer_name(&gettext("Dave Patrick Caberto"))
             .version(VERSION)
-            .logo_icon_name(APP_ID)
-            .authors(vec!["Dave Patrick".into()])
+            .copyright(&gettext("© 2022 Dave Patrick Caberto"))
+            .issue_url("https://github.com/SeaDve/Mousai/issues")
+            .license_type(gtk::License::Gpl30)
             // Translators: Replace "translator-credits" with your names. Put a comma between.
             .translator_credits(&gettext("translator-credits"))
-            .copyright(&gettext("Copyright 2022 Dave Patrick"))
-            .license_type(gtk::License::Gpl30)
-            .website("https://github.com/SeaDve/Mousai")
-            .website_label(&gettext("GitHub"))
             .build();
         dialog.set_transient_for(self.main_window().as_ref());
+
+        dialog.add_link(
+            &gettext("Donate (Liberapay)"),
+            "https://liberapay.com/SeaDve",
+        );
+        dialog.add_link(
+            &gettext("Donate (PayPal)"),
+            "https://www.paypal.com/paypalme/sedve",
+        );
+
+        dialog.add_link(&gettext("GitHub"), "https://github.com/SeaDve/Mousai");
+        dialog.add_link(
+            &gettext("Translate"),
+            "https://hosted.weblate.org/projects/kooha/mousai",
+        );
+
         dialog.present();
     }
 
