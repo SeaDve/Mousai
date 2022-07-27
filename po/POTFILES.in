@@ -7,7 +7,7 @@ data/resources/ui/shortcuts.ui
 data/resources/ui/song-bar.ui
 data/resources/ui/song-page.ui
 data/resources/ui/song-tile.ui
-src/application.rs
+src/about_window.rs
 src/main.rs
 src/model/external_link/apple_music.rs
 src/model/external_link/aud_d.rs

@@ -9,7 +9,7 @@ assignees: ''
 **System Info**
 <!--
 Click on Mousai's Main Menu then go to Troubleshooting > Debugging
-Information, copy the text, and paste here.
+Information, copy the text, and paste it here.
 -->
 
 **Describe the bug**

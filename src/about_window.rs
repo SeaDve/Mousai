@@ -1,7 +1,7 @@
 use gettextrs::gettext;
 use gtk::{glib::IsA, prelude::*};
 
-use crate::config::{APP_ID, VERSION};
+use crate::config::{APP_ID, PROFILE, VERSION};
 
 use std::{env, path::Path};
 
@@ -70,7 +70,7 @@ fn debug_info() -> String {
     let gst_version_string = gst::version_string();
 
     format!(
-        r#"- Mousai {VERSION}
+        r#"- {APP_ID} {VERSION} ({PROFILE})
 - Flatpak: {is_flatpak}
 
 - Distribution: {distribution}
