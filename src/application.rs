@@ -6,6 +6,8 @@ use gtk::{
     prelude::*,
 };
 
+use std::path::Path;
+
 use crate::{
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::AlbumArtStore,
@@ -136,12 +138,14 @@ impl Application {
             .developer_name(&gettext("Dave Patrick Caberto"))
             .version(VERSION)
             .copyright(&gettext("© 2022 Dave Patrick Caberto"))
-            .issue_url("https://github.com/SeaDve/Mousai/issues")
             .license_type(gtk::License::Gpl30)
             // Translators: Replace "translator-credits" with your names. Put a comma between.
             .translator_credits(&gettext("translator-credits"))
+            .issue_url("https://github.com/SeaDve/Mousai/issues")
+            .support_url("https://github.com/SeaDve/Mousai/discussions")
+            .debug_info(&debug_info())
+            .debug_info_filename("mousai-debug-info")
             .build();
-        dialog.set_transient_for(self.main_window().as_ref());
 
         dialog.add_link(
             &gettext("Donate (Liberapay)"),
@@ -158,6 +162,7 @@ impl Application {
             "https://hosted.weblate.org/projects/kooha/mousai",
         );
 
+        dialog.set_transient_for(self.main_window().as_ref());
         dialog.present();
     }
 
@@ -209,4 +214,41 @@ impl Default for Application {
 
         gio::Application::default().unwrap().downcast().unwrap()
     }
+}
+
+fn debug_info() -> String {
+    let is_flatpak = Path::new("/.flatpak-info").exists();
+    let gtk_version = format!(
+        "{}.{}.{}",
+        gtk::major_version(),
+        gtk::minor_version(),
+        gtk::micro_version()
+    );
+    let adw_version = format!(
+        "{}.{}.{}",
+        adw::major_version(),
+        adw::minor_version(),
+        adw::micro_version()
+    );
+    let soup_version = unsafe {
+        format!(
+            "{}.{}.{}",
+            soup::soup_get_major_version(),
+            soup::soup_get_minor_version(),
+            soup::soup_get_micro_version()
+        )
+    };
+    let gst_version_string = gst::version_string();
+
+    format!(
+        r#"- Mousai {VERSION}
+
+- Flatpak: {is_flatpak}
+
+- GTK {gtk_version}
+- Libadwaita {adw_version}
+- Libsoup {soup_version}
+- {gst_version_string}
+"#
+    )
 }

@@ -33,8 +33,8 @@
   </screenshots>
   <url type="homepage">https://github.com/SeaDve/Mousai</url>
   <url type="bugtracker">https://github.com/SeaDve/Mousai/issues</url>
-  <url type="translate">https://hosted.weblate.org/projects/kooha/mousai/</url>
-  <url type="donation">https://liberapay.com/SeaDve/</url>
+  <url type="translate">https://hosted.weblate.org/projects/kooha/mousai</url>
+  <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
     <release version="0.7.0" date="2021-09-08">
