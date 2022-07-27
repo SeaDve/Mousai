@@ -13,6 +13,7 @@
 #![warn(clippy::unused_async)]
 #![allow(clippy::format_push_string)] // TODO remove once gettext-rs fixes macro issues
 
+mod about_window;
 mod application;
 mod config;
 mod core;
