@@ -62,7 +62,7 @@ playbackbutton.circular > button  {
 /* HistoryView */
 
 .history-view {
-  padding: 24px;
+  padding: 12px;
 }
 
 .history-view > child {

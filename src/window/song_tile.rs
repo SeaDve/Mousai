@@ -10,12 +10,16 @@ use std::cell::RefCell;
 use super::{
     album_cover::AlbumCover,
     playback_button::{PlaybackButton, PlaybackButtonMode},
+    AdaptiveMode, Window,
 };
 use crate::{
     model::Song,
     player::{Player, PlayerState},
     Application,
 };
+
+const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;
+const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
     use super::*;
@@ -110,7 +114,21 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for SongTile {}
+    impl WidgetImpl for SongTile {
+        fn realize(&self, obj: &Self::Type) {
+            self.parent_realize(obj);
+
+            if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
+                window.connect_adaptive_mode_notify(clone!(@weak obj => move |window| {
+                    obj.update_album_cover_pixel_size(window);
+                }));
+
+                obj.update_album_cover_pixel_size(&window);
+            } else {
+                log::error!("Failed to connect to Window.notify::adaptive-mode: SongTitle does not have a root");
+            }
+        }
+    }
 }
 
 glib::wrapper! {
@@ -204,6 +222,15 @@ impl SongTile {
         self.imp()
             .playback_button
             .set_visible(self.song().and_then(|song| song.playback_link()).is_some());
+    }
+
+    fn update_album_cover_pixel_size(&self, window: &Window) {
+        self.imp()
+            .album_cover
+            .set_pixel_size(match window.adaptive_mode() {
+                AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
+                AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
+            });
     }
 }
 
