@@ -68,7 +68,6 @@
                     <child>
                       <object class="MsaiAlbumCover" id="album_cover">
                         <property name="valign">center</property>
-                        <property name="pixel-size">180</property>
                       </object>
                     </child>
                     <child>
