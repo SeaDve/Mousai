@@ -124,7 +124,7 @@ mod imp {
 
                 obj.update_album_cover_pixel_size(&window);
             } else {
-                log::error!("Failed to connect to Window.notify::adaptive-mode: SongTitle does not have a root");
+                log::error!("Failed to connect to Window.notify::adaptive-mode: SongTile does not have a root");
             }
         }
     }
