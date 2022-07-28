@@ -174,7 +174,6 @@ mod imp {
             obj.update_song_bar_revealer();
             obj.update_stack();
             obj.update_toggle_playback_action();
-            obj.update_toggle_listen_action();
             obj.update_toggle_search_action();
         }
     }
@@ -281,18 +280,6 @@ impl Window {
         Ok(())
     }
 
-    fn update_toggle_listen_action(&self) {
-        match self.imp().recognizer.state() {
-            RecognizerState::Null | RecognizerState::Listening => {
-                self.action_set_enabled("win.toggle-listen", true);
-            }
-            RecognizerState::Recognizing => {
-                // TODO: Fix cancellation during recognizing state in recognizer.rs and remove this
-                self.action_set_enabled("win.toggle-listen", false);
-            }
-        }
-    }
-
     fn update_toggle_playback_action(&self) {
         self.action_set_enabled("win.toggle-playback", self.player().song().is_some());
     }
@@ -350,7 +337,6 @@ impl Window {
 
         imp.recognizer
             .connect_state_notify(clone!(@weak self as obj => move |_| {
-                obj.update_toggle_listen_action();
                 obj.update_stack();
             }));
 

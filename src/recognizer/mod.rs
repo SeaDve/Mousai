@@ -7,7 +7,10 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use std::cell::{Cell, RefCell};
+use std::{
+    cell::{Cell, RefCell},
+    rc::Rc,
+};
 
 pub use self::provider::{ProviderManager, ProviderType, TestProviderMode};
 use crate::{
@@ -163,6 +166,25 @@ impl Recognizer {
     }
 
     async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
+        struct Guard {
+            instance: Recognizer,
+        }
+
+        impl Guard {
+            fn new(recognizer: &Recognizer) -> Guard {
+                Guard {
+                    instance: recognizer.clone(),
+                }
+            }
+        }
+
+        impl Drop for Guard {
+            fn drop(&mut self) {
+                self.instance.imp().audio_recorder.cancel();
+                self.instance.set_state(RecognizerState::Null);
+            }
+        }
+
         let imp = self.imp();
 
         imp.audio_recorder.set_device_class(
@@ -172,19 +194,17 @@ impl Recognizer {
                 .into(),
         );
 
-        if let Err(err) = imp.audio_recorder.start().await {
-            self.set_state(RecognizerState::Null);
-            return Err(err);
-        }
+        let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
+
+        imp.audio_recorder.start().await?;
 
         self.set_state(RecognizerState::Listening);
         let provider = ProviderManager::lock().active.to_provider();
         log::debug!("provider: {:?}", provider);
         let listen_duration = provider.listen_duration();
 
-        cancellable.connect_cancelled(clone!(@weak self as obj => move |_| {
-            obj.imp().audio_recorder.cancel();
-            obj.set_state(RecognizerState::Null);
+        cancellable.connect_cancelled(clone!(@weak self as obj, @weak _guard => move |_| {
+            let _ = _guard.take();
         }));
 
         if cancellable.is_cancelled()
@@ -195,15 +215,10 @@ impl Recognizer {
             return Err(Cancelled::new(&gettext("Cancelled recording")).into());
         }
 
-        let recording = imp.audio_recorder.stop().await.map_err(|err| {
-            self.set_state(RecognizerState::Null);
-            err
-        })?;
+        let recording = imp.audio_recorder.stop().await?;
 
         self.set_state(RecognizerState::Recognizing);
         let song = provider.recognize(&recording).await;
-
-        self.set_state(RecognizerState::Null);
 
         if cancellable.is_cancelled() {
             return Err(Cancelled::new(&gettext("Cancelled recognizing")).into());
