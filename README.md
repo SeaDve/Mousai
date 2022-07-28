@@ -19,6 +19,7 @@
 </p>
 
 <br>
+
 <p align="center">
   <a href="https://hosted.weblate.org/engage/kooha">
     <img alt="Translation status" src="https://img.shields.io/weblate/progress/kooha?style=for-the-badge" height="20"/>
@@ -33,6 +34,8 @@
     <img alt="Packaging status" src="https://img.shields.io/repology/repositories/mousai?style=for-the-badge" height="20"/>
   </a>
 </p>
+
+<br>
 
 <p align="center">
   <img src="data/resources/screenshots/preview.png" alt="Preview"/>
