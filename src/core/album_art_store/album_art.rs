@@ -57,14 +57,14 @@ impl AlbumArt {
     }
 
     pub async fn texture(&self) -> anyhow::Result<&gdk::Texture> {
-        let receiver = self.loading.borrow().clone();
-        if let Some(receiver) = receiver {
-            // If there are currently loading AlbumArt, wait
-            // for it to finish and be stored before checking if
-            // it exist. This is to prevent loading the same
-            // album art twice on subsequent call on this function.
-            let _ = receiver.await;
-        }
+        // let receiver = self.loading.borrow().clone();
+        // if let Some(receiver) = receiver {
+        //     // If there are currently loading AlbumArt, wait
+        //     // for it to finish and be stored before checking if
+        //     // it exist. This is to prevent loading the same
+        //     // album art twice on subsequent call on this function.
+        //     let _ = receiver.await;
+        // }
 
         // Nothing should get passed this point while the
         // AlbumArt is already loading because of the guard above.
