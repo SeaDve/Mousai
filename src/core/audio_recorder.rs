@@ -150,6 +150,13 @@ impl AudioRecorder {
         let stream = gio::MemoryOutputStream::new_resizable();
         let pipeline = create_pipeline(&stream, self.device_class()).await?;
 
+        if imp.current.borrow().is_some() {
+            log::warn!(
+                "Another recording was started while another was awaiting during pipeline creation"
+            );
+            self.cancel();
+        }
+
         pipeline
             .bus()
             .unwrap()
