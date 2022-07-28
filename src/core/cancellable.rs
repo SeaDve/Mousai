@@ -1,5 +1,3 @@
-use gtk::glib;
-
 use std::{
     cell::{Cell, RefCell},
     rc::Rc,
@@ -28,7 +26,7 @@ impl std::error::Error for Cancelled {}
 
 type CancelledCallback = Box<dyn FnOnce(&Cancellable) + 'static>;
 
-#[derive(Default, Clone, glib::Downgrade)]
+#[derive(Default, Clone)]
 pub struct Cancellable(Rc<CancellableInner>);
 
 #[derive(Default)]
