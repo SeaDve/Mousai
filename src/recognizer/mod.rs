@@ -194,10 +194,14 @@ impl Recognizer {
                 .into(),
         );
 
+        let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
+
         self.set_state(RecognizerState::Listening);
         imp.audio_recorder.start().await?;
 
-        let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
+        if cancellable.is_cancelled() {
+            return Err(Cancelled::new("Stopped while starting to record").into());
+        }
 
         cancellable.connect_cancelled(clone!(@weak self as obj, @weak _guard => move |_| {
             let _ = _guard.take();
