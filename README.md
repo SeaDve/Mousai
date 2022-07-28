@@ -22,16 +22,16 @@
 
 <p align="center">
   <a href="https://hosted.weblate.org/engage/kooha">
-    <img alt="Translation status" src="https://img.shields.io/weblate/progress/kooha?style=for-the-badge" height="20"/>
+    <img alt="Translation status" src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg"/>
   </a>
   <a href="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml">
-    <img alt="Build status" src="https://img.shields.io/github/workflow/status/SeaDve/Mousai/CI/main?style=for-the-badge" height="20"/>
+    <img alt="Build status" src="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml/badge.svg"/>
   </a>
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
-    <img alt="Flathub downloads" src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai" height="20"/>
+    <img alt="Flathub downloads" src="https://img.shields.io/badge/dynamic/json?color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai"/>
   </a>
   <a href="https://repology.org/project/mousai/versions">
-    <img alt="Packaging status" src="https://img.shields.io/repology/repositories/mousai?style=for-the-badge" height="20"/>
+    <img alt="Packaging status" src="https://repology.org/badge/tiny-repos/mousai.svg"/>
   </a>
 </p>
 
