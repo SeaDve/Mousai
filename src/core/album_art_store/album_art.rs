@@ -163,4 +163,28 @@ mod test {
             );
         });
     }
+
+    #[test]
+    fn concurrent_downloads() {
+        let session = soup::Session::new();
+        let download_url =
+            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+        let cache_path = glib::tmp_dir().join("image.png");
+
+        let album_art = AlbumArt::new(&session, download_url, &cache_path);
+
+        glib::MainContext::default().block_on(async move {
+            let (res_1, res_2, res_3, res_4) = futures_util::join!(
+                album_art.texture(),
+                album_art.texture(),
+                album_art.texture(),
+                album_art.texture()
+            );
+
+            // Make sure all the textures are the same instance
+            assert_eq!(res_1.as_ref().unwrap(), &res_2.unwrap());
+            assert_eq!(res_1.as_ref().unwrap(), &res_3.unwrap());
+            assert_eq!(res_1.as_ref().unwrap(), &res_4.unwrap());
+        });
+    }
 }

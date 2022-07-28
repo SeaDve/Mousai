@@ -28,3 +28,4 @@ async-channel = "1.6.1"
 
 [dev-dependencies]
 serial_test = "0.8.0"
+futures-util = "0.3.21"
