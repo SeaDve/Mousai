@@ -10,27 +10,27 @@
 
 <p align="center">
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
-    <img width="200" alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-en.png"/>
+    <img alt="Download on Flathub" src="https://flathub.org/assets/badges/flathub-badge-i-en.svg" width="200"/>
   </a>
   <br>
   <a href="https://liberapay.com/SeaDve/donate">
-    <img src="https://liberapay.com/assets/widgets/donate.svg" alt="Donate using Liberapay">
+    <img alt="Donate through Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"/>
   </a>
 </p>
 
 <br>
 <p align="center">
-  <a href="https://hosted.weblate.org/engage/kooha/">
-    <img src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg" alt="Translation status"  />
+  <a href="https://hosted.weblate.org/engage/kooha">
+    <img alt="Translation status" src="https://img.shields.io/weblate/progress/kooha?style=for-the-badge" height="20"/>
   </a>
   <a href="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml">
-    <img src="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml/badge.svg" alt="CI status"/>
+    <img alt="Build status" src="https://img.shields.io/github/workflow/status/SeaDve/Mousai/CI/main?style=for-the-badge" height="20"/>
   </a>
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
-    <img src="https://img.shields.io/badge/dynamic/json?color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai" alt="Flathub downloads">
+    <img alt="Flathub downloads" src="https://img.shields.io/badge/dynamic/json?style=for-the-badge&color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai" height="20"/>
   </a>
   <a href="https://repology.org/project/mousai/versions">
-    <img src="https://repology.org/badge/tiny-repos/mousai.svg" alt="Packaging status">
+    <img alt="Packaging status" src="https://img.shields.io/repology/repositories/mousai?style=for-the-badge" height="20"/>
   </a>
 </p>
 
