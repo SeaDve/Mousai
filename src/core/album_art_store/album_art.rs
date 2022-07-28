@@ -75,6 +75,8 @@ impl AlbumArt {
             return Ok(texture);
         }
 
+        debug_assert!(self.loading.borrow().is_none());
+
         let (sender, receiver) = async_channel::bounded(1);
         self.loading.replace(Some(receiver));
 
@@ -141,11 +143,12 @@ mod test {
     use gtk::glib;
 
     #[test]
+    #[serial_test::serial]
     fn download() {
         let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-        let cache_path = glib::tmp_dir().join("image.png");
+        let cache_path = glib::tmp_dir().join("image-download.png");
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
         assert!(!album_art.is_loaded());
@@ -165,26 +168,29 @@ mod test {
     }
 
     #[test]
+    #[serial_test::serial]
     fn concurrent_downloads() {
         let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-        let cache_path = glib::tmp_dir().join("image.png");
+        let cache_path = glib::tmp_dir().join("image-concurrent_downloads.png");
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
 
         glib::MainContext::default().block_on(async move {
+            // Should not panic on the following line in `AlbumArt::texture`.
+            // debug_assert!(self.loading.borrow().is_none());
             let (res_1, res_2, res_3, res_4) = futures_util::join!(
                 album_art.texture(),
                 album_art.texture(),
                 album_art.texture(),
-                album_art.texture()
+                album_art.texture(),
             );
 
-            // Make sure all the textures are the same instance
-            assert_eq!(res_1.as_ref().unwrap(), &res_2.unwrap());
-            assert_eq!(res_1.as_ref().unwrap(), &res_3.unwrap());
-            assert_eq!(res_1.as_ref().unwrap(), &res_4.unwrap());
+            assert!(res_1.is_ok());
+            assert!(res_2.is_ok());
+            assert!(res_3.is_ok());
+            assert!(res_4.is_ok());
         });
     }
 }
