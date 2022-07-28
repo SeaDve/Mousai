@@ -137,6 +137,7 @@ impl AlbumArt {
 mod test {
     use super::*;
 
+    use futures_util::future;
     use gtk::glib;
 
     #[test]
@@ -177,17 +178,15 @@ mod test {
         glib::MainContext::default().block_on(async move {
             // Should not panic on the following line in `AlbumArt::texture`.
             // debug_assert!(self.loading.borrow().is_none());
-            let (res_1, res_2, res_3, res_4) = futures_util::join!(
+            let results = future::join_all(vec![
                 album_art.texture(),
                 album_art.texture(),
                 album_art.texture(),
                 album_art.texture(),
-            );
+            ])
+            .await;
 
-            assert!(res_1.is_ok());
-            assert!(res_2.is_ok());
-            assert!(res_3.is_ok());
-            assert!(res_4.is_ok());
+            assert!(results.iter().all(|r| r.is_ok()));
         });
     }
 }
