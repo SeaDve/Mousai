@@ -20,12 +20,11 @@ serde = { version = "1.0.137", features = ["derive"] }
 serde_json = "1.0.81"
 anyhow = "1.0.57"
 futures-channel = "0.3.21"
+futures-util = "0.3.21"
 async-trait = "0.1.53"
 mpris-player = "0.6.1"
 typetag = "0.2.0"
 gsettings-macro = "0.1.6"
-async-channel = "1.6.1"
 
 [dev-dependencies]
 serial_test = "0.8.0"
-futures-util = "0.3.21"

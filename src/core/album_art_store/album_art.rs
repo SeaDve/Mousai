@@ -1,4 +1,5 @@
-use async_channel::Receiver;
+use futures_channel::oneshot::{self, Receiver};
+use futures_util::future::{FutureExt, Shared};
 use gtk::{gdk, gio, glib, prelude::*};
 use once_cell::unsync::OnceCell;
 use soup::prelude::*;
@@ -10,29 +11,23 @@ pub struct AlbumArt {
     download_url: String,
     cache_file: gio::File,
     cache: OnceCell<gdk::Texture>,
-    loading: RefCell<Option<Receiver<()>>>,
+    loading: RefCell<Option<Shared<Receiver<()>>>>,
 }
 
 impl std::fmt::Debug for AlbumArt {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let is_receiver_closed = if let Some(ref receiver) = *self.loading.borrow() {
-            receiver.is_closed()
-        } else {
-            true
-        };
-
-        let n_receiver = if let Some(ref receiver) = *self.loading.borrow() {
-            receiver.receiver_count()
-        } else {
-            0
-        };
+        let receiver_strong_count = self
+            .loading
+            .borrow()
+            .as_ref()
+            .and_then(|r| r.strong_count())
+            .unwrap_or(0);
 
         f.debug_struct("AlbumArt")
             .field("download_url", &self.download_url)
             .field("cache_uri", &self.cache_file.uri())
             .field("loaded", &self.is_loaded())
-            .field("receiver_closed", &is_receiver_closed)
-            .field("n_receiver", &n_receiver)
+            .field("receiver_strong_count", &receiver_strong_count)
             .finish()
     }
 }
@@ -68,17 +63,19 @@ impl AlbumArt {
             // for it to finish and be stored before checking if
             // it exist. This is to prevent loading the same
             // album art twice on subsequent call on this function.
-            let _ = receiver.recv().await;
+            let _ = receiver.await;
         }
+
+        // Nothing should get passed this point while the
+        // AlbumArt is already loading because of the guard above.
+        debug_assert!(self.loading.borrow().is_none());
 
         if let Some(texture) = self.cache.get() {
             return Ok(texture);
         }
 
-        debug_assert!(self.loading.borrow().is_none());
-
-        let (sender, receiver) = async_channel::bounded(1);
-        self.loading.replace(Some(receiver));
+        let (sender, receiver) = oneshot::channel();
+        self.loading.replace(Some(receiver.shared()));
 
         match self.cache_file.load_bytes_future().await {
             Ok((ref bytes, _)) => {
