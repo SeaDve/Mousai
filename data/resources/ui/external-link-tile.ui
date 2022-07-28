@@ -4,10 +4,10 @@
     <property name="child">
       <object class="GtkBox">
         <property name="spacing">12</property>
-        <property name="margin-start">36</property>
-        <property name="margin-end">36</property>
-        <property name="margin-top">24</property>
-        <property name="margin-bottom">24</property>
+        <property name="margin-start">24</property>
+        <property name="margin-end">24</property>
+        <property name="margin-top">18</property>
+        <property name="margin-bottom">18</property>
         <property name="halign">center</property>
         <child>
           <object class="GtkImage" id="image">
