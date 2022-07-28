@@ -194,8 +194,8 @@ impl Recognizer {
                 .into(),
         );
 
-        imp.audio_recorder.start().await?;
         self.set_state(RecognizerState::Listening);
+        imp.audio_recorder.start().await?;
 
         let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
 
