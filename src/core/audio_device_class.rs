@@ -1,6 +1,6 @@
 use gtk::glib;
 
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiAudioDeviceClass")]
 pub enum AudioDeviceClass {
     #[default]
