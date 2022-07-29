@@ -34,7 +34,7 @@ mod imp {
         pub(super) state: Cell<RecognizerState>,
 
         pub(super) audio_recorder: AudioRecorder,
-        pub(super) cancellable: RefCell<Option<Cancellable>>,
+        pub(super) cancellable: RefCell<Option<Rc<Cancellable>>>,
     }
 
     #[glib::object_subclass]
@@ -143,9 +143,8 @@ impl Recognizer {
                 }
             }
             RecognizerState::Null => {
-                let cancellable = Cancellable::default();
-                imp.cancellable
-                    .replace(Some(Cancellable::clone(&cancellable)));
+                let cancellable = Rc::new(Cancellable::default());
+                imp.cancellable.replace(Some(Rc::clone(&cancellable)));
 
                 if let Err(err) = self.recognize(&cancellable).await {
                     if let Some(cancelled) = err.downcast_ref::<Cancelled>() {

@@ -1,7 +1,4 @@
-use std::{
-    cell::{Cell, RefCell},
-    rc::Rc,
-};
+use std::cell::{Cell, RefCell};
 
 #[derive(Debug, Default)]
 pub struct Cancelled(Option<String>);
@@ -26,11 +23,8 @@ impl std::error::Error for Cancelled {}
 
 type CancelledCallback = Box<dyn FnOnce(&Cancellable) + 'static>;
 
-#[derive(Default, Clone)]
-pub struct Cancellable(Rc<CancellableInner>);
-
 #[derive(Default)]
-struct CancellableInner {
+pub struct Cancellable {
     callbacks: RefCell<Vec<CancelledCallback>>,
     is_cancelled: Cell<bool>,
 }
@@ -50,18 +44,18 @@ impl Cancellable {
             return;
         }
 
-        self.0.is_cancelled.set(true);
+        self.is_cancelled.set(true);
 
-        for callback in self.0.callbacks.take().into_iter() {
+        for callback in self.callbacks.take().into_iter() {
             callback(self);
         }
     }
 
     pub fn is_cancelled(&self) -> bool {
-        self.0.is_cancelled.get()
+        self.is_cancelled.get()
     }
 
     pub fn connect_cancelled(&self, callback: impl FnOnce(&Self) + 'static) {
-        self.0.callbacks.borrow_mut().push(Box::new(callback));
+        self.callbacks.borrow_mut().push(Box::new(callback));
     }
 }
