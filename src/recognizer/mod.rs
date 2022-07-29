@@ -161,10 +161,6 @@ impl Recognizer {
     }
 
     async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
-        if self.state() != RecognizerState::Null {
-            return Err(Cancelled::new("Recognizer is not on null state").into());
-        }
-
         struct Guard {
             instance: Recognizer,
         }
@@ -182,6 +178,10 @@ impl Recognizer {
                 self.instance.imp().audio_recorder.cancel();
                 self.instance.set_state(RecognizerState::Null);
             }
+        }
+
+        if self.state() != RecognizerState::Null {
+            return Err(Cancelled::new("Recognizer is not on null state").into());
         }
 
         let imp = self.imp();

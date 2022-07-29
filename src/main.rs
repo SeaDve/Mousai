@@ -1,5 +1,6 @@
 #![warn(
     rust_2018_idioms,
+    clippy::items_after_statements,
     clippy::needless_pass_by_value,
     clippy::explicit_iter_loop,
     clippy::semicolon_if_nothing_returned,
