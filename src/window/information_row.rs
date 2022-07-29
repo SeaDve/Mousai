@@ -93,8 +93,8 @@ impl InformationRow {
         self.notify("data");
     }
 
-    pub fn data(&self) -> String {
-        self.imp().data_label.label().into()
+    pub fn data(&self) -> glib::GString {
+        self.imp().data_label.label()
     }
 }
 

@@ -192,7 +192,7 @@ impl AudioRecorder {
             glib::format_size(bytes.len() as u64)
         );
 
-        Ok(bytes.into())
+        Ok(AudioRecording::from(bytes))
     }
 
     pub fn cancel(&self) {

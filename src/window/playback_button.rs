@@ -142,8 +142,8 @@ impl PlaybackButton {
         self.notify("action-name");
     }
 
-    pub fn action_name(&self) -> Option<String> {
-        self.imp().button.action_name().map(|s| s.into())
+    pub fn action_name(&self) -> Option<glib::GString> {
+        self.imp().button.action_name()
     }
 
     fn update_ui(&self) {

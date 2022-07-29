@@ -119,7 +119,7 @@ impl Provider for AudD {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz,lyrics",
-            "audio": audio,
+            "audio": audio.as_str(),
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/")
