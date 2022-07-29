@@ -37,7 +37,7 @@ impl DateTime {
     pub fn to_iso8601(&self) -> glib::GString {
         self.0
             .format_iso8601()
-            .expect("Failed to construct date from iso6801")
+            .expect("Failed to format date to iso6801")
     }
 
     pub fn format(&self, format: &str) -> Result<glib::GString, glib::BoolError> {
