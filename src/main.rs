@@ -1,17 +1,19 @@
-#![warn(rust_2018_idioms)]
-#![warn(clippy::needless_pass_by_value)]
-#![warn(clippy::explicit_iter_loop)]
-#![warn(clippy::semicolon_if_nothing_returned)]
-#![warn(clippy::match_wildcard_for_single_variants)]
-#![warn(clippy::inefficient_to_string)]
-#![warn(clippy::map_unwrap_or)]
-#![warn(clippy::implicit_clone)]
-#![warn(clippy::struct_excessive_bools)]
-#![warn(clippy::trivially_copy_pass_by_ref)]
-#![warn(clippy::unreadable_literal)]
-#![warn(clippy::if_not_else)]
-#![warn(clippy::doc_markdown)]
-#![warn(clippy::unused_async)]
+#![warn(
+    rust_2018_idioms,
+    clippy::needless_pass_by_value,
+    clippy::explicit_iter_loop,
+    clippy::semicolon_if_nothing_returned,
+    clippy::match_wildcard_for_single_variants,
+    clippy::inefficient_to_string,
+    clippy::map_unwrap_or,
+    clippy::implicit_clone,
+    clippy::struct_excessive_bools,
+    clippy::trivially_copy_pass_by_ref,
+    clippy::unreadable_literal,
+    clippy::if_not_else,
+    clippy::doc_markdown,
+    clippy::unused_async
+)]
 #![allow(clippy::format_push_string)] // TODO remove once gettext-rs fixes macro issues
 
 mod about_window;
