@@ -166,7 +166,7 @@ impl InspectorPage {
                     ProviderManager::lock().active = item.value().into();
                 } else {
                     log::warn!("provider_row doesn't have a valid selected item");
-                    ProviderManager::lock().active = Default::default();
+                    ProviderManager::lock().active = ProviderType::default();
                 }
             }));
     }
@@ -201,7 +201,7 @@ impl InspectorPage {
                     ProviderManager::lock().test_mode = item.value().into();
                 } else {
                     log::warn!("test_provider_row doesn't have a valid selected item");
-                    ProviderManager::lock().test_mode = Default::default();
+                    ProviderManager::lock().test_mode = TestProviderMode::default();
                 }
             });
     }

@@ -139,13 +139,13 @@ mod tests {
     #[serial_test::serial]
     fn reset_provider_manager() {
         let mut manager = ProviderManager::lock();
-        assert_eq!(manager.active, Default::default());
+        assert_eq!(manager.active, ProviderType::default());
 
         manager.active = ProviderType::AudDMock;
-        assert_ne!(manager.active, Default::default());
+        assert_ne!(manager.active, ProviderType::default());
 
         manager.reset();
-        assert_eq!(manager.active, Default::default());
+        assert_eq!(manager.active, ProviderType::default());
     }
 
     #[test]
