@@ -18,7 +18,7 @@ mod imp {
 
     #[derive(Debug, Default, Serialize, Deserialize)]
     #[serde(default)]
-    pub struct SongInner {
+    pub(super) struct SongInner {
         pub id: SongId,
         pub last_heard: DateTime,
         pub title: String,
@@ -33,8 +33,8 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct Song {
-        pub inner: RefCell<SongInner>,
-        pub is_newly_recognized: Cell<bool>,
+        pub(super) inner: RefCell<SongInner>,
+        pub(super) is_newly_recognized: Cell<bool>,
     }
 
     #[glib::object_subclass]

@@ -19,19 +19,19 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/inspector-page.ui")]
     pub struct InspectorPage {
         #[template_child]
-        pub provider_row: TemplateChild<adw::ComboRow>,
+        pub(super) provider_row: TemplateChild<adw::ComboRow>,
         #[template_child]
-        pub test_provider_mode_row: TemplateChild<adw::ComboRow>,
+        pub(super) test_provider_mode_row: TemplateChild<adw::ComboRow>,
         #[template_child]
-        pub test_listen_duration_row: TemplateChild<adw::ActionRow>,
+        pub(super) test_listen_duration_row: TemplateChild<adw::ActionRow>,
         #[template_child]
-        pub test_listen_duration_button: TemplateChild<gtk::SpinButton>,
+        pub(super) test_listen_duration_button: TemplateChild<gtk::SpinButton>,
         #[template_child]
-        pub test_recognize_duration_row: TemplateChild<adw::ActionRow>,
+        pub(super) test_recognize_duration_row: TemplateChild<adw::ActionRow>,
         #[template_child]
-        pub test_recognize_duration_button: TemplateChild<gtk::SpinButton>,
+        pub(super) test_recognize_duration_button: TemplateChild<gtk::SpinButton>,
 
-        pub object: RefCell<Option<glib::Object>>,
+        pub(super) object: RefCell<Option<glib::Object>>,
     }
 
     #[glib::object_subclass]

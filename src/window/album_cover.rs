@@ -20,15 +20,15 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/album-cover.ui")]
     pub struct AlbumCover {
         #[template_child]
-        pub stack: TemplateChild<gtk::Stack>,
+        pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub image_a: TemplateChild<gtk::Image>,
+        pub(super) image_a: TemplateChild<gtk::Image>,
         #[template_child]
-        pub image_b: TemplateChild<gtk::Image>,
+        pub(super) image_b: TemplateChild<gtk::Image>,
         #[template_child]
-        pub placeholder: TemplateChild<gtk::Image>,
+        pub(super) placeholder: TemplateChild<gtk::Image>,
 
-        pub song: RefCell<Option<Song>>,
+        pub(super) song: RefCell<Option<Song>>,
     }
 
     #[glib::object_subclass]

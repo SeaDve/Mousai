@@ -27,48 +27,48 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/history-view.ui")]
     pub struct HistoryView {
         #[template_child]
-        pub stack: TemplateChild<gtk::Stack>,
+        pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub history_child: TemplateChild<gtk::Box>,
+        pub(super) history_child: TemplateChild<gtk::Box>,
         #[template_child]
-        pub header_bar_stack: TemplateChild<gtk::Stack>,
+        pub(super) header_bar_stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub main_header_bar: TemplateChild<gtk::HeaderBar>,
+        pub(super) main_header_bar: TemplateChild<gtk::HeaderBar>,
         #[template_child]
-        pub selection_mode_header_bar: TemplateChild<gtk::HeaderBar>,
+        pub(super) selection_mode_header_bar: TemplateChild<gtk::HeaderBar>,
         #[template_child]
-        pub selection_mode_menu_button: TemplateChild<gtk::MenuButton>,
+        pub(super) selection_mode_menu_button: TemplateChild<gtk::MenuButton>,
         #[template_child]
-        pub selection_mode_bar: TemplateChild<gtk::ActionBar>,
+        pub(super) selection_mode_bar: TemplateChild<gtk::ActionBar>,
         #[template_child]
-        pub remove_selected_songs_button: TemplateChild<gtk::Button>,
+        pub(super) remove_selected_songs_button: TemplateChild<gtk::Button>,
         #[template_child]
-        pub search_bar: TemplateChild<gtk::SearchBar>,
+        pub(super) search_bar: TemplateChild<gtk::SearchBar>,
         #[template_child]
-        pub search_entry: TemplateChild<gtk::SearchEntry>,
+        pub(super) search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
-        pub history_stack: TemplateChild<gtk::Stack>,
+        pub(super) history_stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub main_page: TemplateChild<gtk::ScrolledWindow>,
+        pub(super) main_page: TemplateChild<gtk::ScrolledWindow>,
         #[template_child]
-        pub grid: TemplateChild<gtk::GridView>,
+        pub(super) grid: TemplateChild<gtk::GridView>,
         #[template_child]
-        pub empty_page: TemplateChild<adw::StatusPage>,
+        pub(super) empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
-        pub empty_search_page: TemplateChild<adw::StatusPage>,
+        pub(super) empty_search_page: TemplateChild<adw::StatusPage>,
 
-        pub is_selection_mode: Cell<bool>,
+        pub(super) is_selection_mode: Cell<bool>,
 
-        pub player: OnceCell<WeakRef<Player>>,
-        pub song_list: OnceCell<WeakRef<SongList>>,
-        pub filter_model: OnceCell<WeakRef<gtk::FilterListModel>>,
-        pub selection_model: OnceCell<WeakRef<gtk::MultiSelection>>,
+        pub(super) player: OnceCell<WeakRef<Player>>,
+        pub(super) song_list: OnceCell<WeakRef<SongList>>,
+        pub(super) filter_model: OnceCell<WeakRef<gtk::FilterListModel>>,
+        pub(super) selection_model: OnceCell<WeakRef<gtk::MultiSelection>>,
 
-        pub removed_purgatory: RefCell<Vec<Song>>,
-        pub undo_remove_toast: RefCell<Option<adw::Toast>>,
+        pub(super) removed_purgatory: RefCell<Vec<Song>>,
+        pub(super) undo_remove_toast: RefCell<Option<adw::Toast>>,
 
-        pub song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId)>>,
-        pub pending_stack_remove_song_page: RefCell<Option<SongPage>>,
+        pub(super) song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId)>>,
+        pub(super) pending_stack_remove_song_page: RefCell<Option<SongPage>>,
     }
 
     #[glib::object_subclass]

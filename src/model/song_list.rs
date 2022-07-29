@@ -19,7 +19,7 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct SongList {
-        pub list: RefCell<IndexMap<SongId, Song>>,
+        pub(super) list: RefCell<IndexMap<SongId, Song>>,
     }
 
     #[glib::object_subclass]

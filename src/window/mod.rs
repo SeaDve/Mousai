@@ -49,23 +49,23 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
         #[template_child]
-        pub toast_overlay: TemplateChild<adw::ToastOverlay>,
+        pub(super) toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
-        pub stack: TemplateChild<gtk::Stack>,
+        pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub main_view: TemplateChild<HistoryView>,
+        pub(super) main_view: TemplateChild<HistoryView>,
         #[template_child]
-        pub recognizer_view: TemplateChild<RecognizerView>,
+        pub(super) recognizer_view: TemplateChild<RecognizerView>,
         #[template_child]
-        pub song_bar_revealer: TemplateChild<gtk::Revealer>,
+        pub(super) song_bar_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
-        pub song_bar: TemplateChild<SongBar>,
+        pub(super) song_bar: TemplateChild<SongBar>,
 
-        pub adaptive_mode: Cell<AdaptiveMode>,
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
-        pub recognizer: Recognizer,
-        pub player: Player,
-        pub history: OnceCell<SongList>,
+        pub(super) recognizer: Recognizer,
+        pub(super) player: Player,
+        pub(super) history: OnceCell<SongList>,
     }
 
     #[glib::object_subclass]

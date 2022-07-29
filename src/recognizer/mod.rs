@@ -31,10 +31,10 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct Recognizer {
-        pub state: Cell<RecognizerState>,
+        pub(super) state: Cell<RecognizerState>,
 
-        pub audio_recorder: AudioRecorder,
-        pub cancellable: RefCell<Option<Cancellable>>,
+        pub(super) audio_recorder: AudioRecorder,
+        pub(super) cancellable: RefCell<Option<Cancellable>>,
     }
 
     #[glib::object_subclass]

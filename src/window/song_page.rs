@@ -34,25 +34,25 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
         #[template_child]
-        pub album_cover: TemplateChild<AlbumCover>,
+        pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
-        pub playback_button: TemplateChild<PlaybackButton>,
+        pub(super) playback_button: TemplateChild<PlaybackButton>,
         #[template_child]
-        pub last_heard_row: TemplateChild<InformationRow>,
+        pub(super) last_heard_row: TemplateChild<InformationRow>,
         #[template_child]
-        pub album_row: TemplateChild<InformationRow>,
+        pub(super) album_row: TemplateChild<InformationRow>,
         #[template_child]
-        pub release_date_row: TemplateChild<InformationRow>,
+        pub(super) release_date_row: TemplateChild<InformationRow>,
         #[template_child]
-        pub external_links_box: TemplateChild<gtk::FlowBox>,
+        pub(super) external_links_box: TemplateChild<gtk::FlowBox>,
         #[template_child]
-        pub lyrics_group: TemplateChild<adw::PreferencesGroup>,
+        pub(super) lyrics_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
-        pub lyrics_label: TemplateChild<gtk::Label>,
+        pub(super) lyrics_label: TemplateChild<gtk::Label>,
 
-        pub song: RefCell<Option<Song>>,
-        pub player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
-        pub bindings: RefCell<Vec<glib::Binding>>,
+        pub(super) song: RefCell<Option<Song>>,
+        pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
+        pub(super) bindings: RefCell<Vec<glib::Binding>>,
     }
 
     #[glib::object_subclass]

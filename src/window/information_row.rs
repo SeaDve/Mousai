@@ -10,7 +10,7 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/information-row.ui")]
     pub struct InformationRow {
         #[template_child]
-        pub data_label: TemplateChild<gtk::Label>,
+        pub(super) data_label: TemplateChild<gtk::Label>,
     }
 
     #[glib::object_subclass]

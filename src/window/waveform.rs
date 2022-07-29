@@ -14,7 +14,7 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct Waveform {
-        pub peaks: RefCell<VecDeque<f64>>,
+        pub(super) peaks: RefCell<VecDeque<f64>>,
     }
 
     #[glib::object_subclass]

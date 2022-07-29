@@ -13,9 +13,9 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/time-label.ui")]
     pub struct TimeLabel {
         #[template_child]
-        pub label: TemplateChild<gtk::Label>,
+        pub(super) label: TemplateChild<gtk::Label>,
 
-        pub time: Cell<ClockTime>,
+        pub(super) time: Cell<ClockTime>,
     }
 
     #[glib::object_subclass]

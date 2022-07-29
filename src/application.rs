@@ -21,10 +21,10 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct Application {
-        pub window: OnceCell<WeakRef<Window>>,
-        pub session: OnceCell<soup::Session>,
-        pub album_art_store: OnceCell<AlbumArtStore>,
-        pub settings: Settings,
+        pub(super) window: OnceCell<WeakRef<Window>>,
+        pub(super) session: OnceCell<soup::Session>,
+        pub(super) album_art_store: OnceCell<AlbumArtStore>,
+        pub(super) settings: Settings,
     }
 
     #[glib::object_subclass]

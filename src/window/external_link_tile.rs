@@ -13,11 +13,11 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/external-link-tile.ui")]
     pub struct ExternalLinkTile {
         #[template_child]
-        pub image: TemplateChild<gtk::Image>,
+        pub(super) image: TemplateChild<gtk::Image>,
         #[template_child]
-        pub label: TemplateChild<gtk::Label>,
+        pub(super) label: TemplateChild<gtk::Label>,
 
-        pub external_link: OnceCell<WeakRef<ExternalLinkWrapper>>,
+        pub(super) external_link: OnceCell<WeakRef<ExternalLinkWrapper>>,
     }
 
     #[glib::object_subclass]

@@ -28,20 +28,20 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
     pub struct SongBar {
         #[template_child]
-        pub album_cover: TemplateChild<AlbumCover>,
+        pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
-        pub playback_button: TemplateChild<PlaybackButton>,
+        pub(super) playback_button: TemplateChild<PlaybackButton>,
         #[template_child]
-        pub playback_position_scale: TemplateChild<gtk::Scale>,
+        pub(super) playback_position_scale: TemplateChild<gtk::Scale>,
         #[template_child]
-        pub playback_position_label: TemplateChild<TimeLabel>,
+        pub(super) playback_position_label: TemplateChild<TimeLabel>,
         #[template_child]
-        pub duration_label: TemplateChild<TimeLabel>,
+        pub(super) duration_label: TemplateChild<TimeLabel>,
 
-        pub song: RefCell<Option<Song>>,
-        pub scale_handler_id: OnceCell<glib::SignalHandlerId>,
-        pub seek_timeout_id: RefCell<Option<glib::SourceId>>,
-        pub player: OnceCell<Player>,
+        pub(super) song: RefCell<Option<Song>>,
+        pub(super) scale_handler_id: OnceCell<glib::SignalHandlerId>,
+        pub(super) seek_timeout_id: RefCell<Option<glib::SourceId>>,
+        pub(super) player: OnceCell<Player>,
     }
 
     #[glib::object_subclass]
