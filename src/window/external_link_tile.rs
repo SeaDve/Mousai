@@ -104,12 +104,6 @@ impl ExternalLinkTile {
     }
 
     pub fn external_link(&self) -> ExternalLinkWrapper {
-        self.imp()
-            .external_link
-            .get()
-            .unwrap()
-            .clone()
-            .upgrade()
-            .unwrap()
+        self.imp().external_link.get().unwrap().upgrade().unwrap()
     }
 }
