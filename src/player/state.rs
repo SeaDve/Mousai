@@ -1,7 +1,7 @@
 use gtk::glib;
 use mpris_player::PlaybackStatus;
 
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiPlaybackState")]
 pub enum PlayerState {
     #[default]

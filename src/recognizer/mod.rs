@@ -15,7 +15,7 @@ use crate::{
     utils, Application,
 };
 
-#[derive(Default, Debug, Clone, Copy, glib::Enum, PartialEq)]
+#[derive(Debug, Default, Clone, Copy, glib::Enum, PartialEq)]
 #[enum_type(name = "MsaiRecognizerState")]
 pub enum RecognizerState {
     #[default]

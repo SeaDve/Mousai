@@ -25,7 +25,7 @@ pub trait Provider: std::fmt::Debug {
     fn is_test(&self) -> bool;
 }
 
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiTestProviderMode")]
 pub enum TestProviderMode {
     ErrorOnly,
@@ -42,7 +42,7 @@ impl From<i32> for TestProviderMode {
     }
 }
 
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiProviderType")]
 pub enum ProviderType {
     #[default]
