@@ -35,7 +35,6 @@ mod imp {
 
         pub audio_recorder: AudioRecorder,
         pub cancellable: RefCell<Option<Cancellable>>,
-        pub source_id: RefCell<Option<glib::SourceId>>,
     }
 
     #[glib::object_subclass]
