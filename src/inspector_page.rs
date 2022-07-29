@@ -149,11 +149,11 @@ impl InspectorPage {
         imp.provider_row
             .set_expression(Some(&gtk::ClosureExpression::new::<
                 glib::GString,
+                &[gtk::Expression],
                 _,
-                gtk::Expression,
             >(
-                [],
-                glib::closure!(|list_item: adw::EnumListItem| { list_item.name() }),
+                &[],
+                glib::closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
 
         imp.provider_row
@@ -185,11 +185,11 @@ impl InspectorPage {
         imp.test_provider_mode_row
             .set_expression(Some(&gtk::ClosureExpression::new::<
                 glib::GString,
+                &[gtk::Expression],
                 _,
-                gtk::Expression,
             >(
-                [],
-                glib::closure!(|list_item: adw::EnumListItem| { list_item.name() }),
+                &[],
+                glib::closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
 
         imp.test_provider_mode_row
