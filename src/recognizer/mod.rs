@@ -103,7 +103,7 @@ glib::wrapper! {
 
 impl Recognizer {
     pub fn new() -> Self {
-        glib::Object::new::<Self>(&[]).expect("Failed to create Recognizer.")
+        glib::Object::new(&[]).expect("Failed to create Recognizer.")
     }
 
     pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
