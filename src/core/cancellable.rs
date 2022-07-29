@@ -23,7 +23,7 @@ impl std::error::Error for Cancelled {}
 
 type CancelledCallback = Box<dyn FnOnce(&Cancellable) + 'static>;
 
-/// Single threaded cancellable.
+/// Single-threaded cancellable.
 #[derive(Default)]
 pub struct Cancellable {
     callbacks: RefCell<Vec<CancelledCallback>>,
@@ -59,11 +59,18 @@ impl Cancellable {
         self.is_cancelled.get()
     }
 
-    /// Register a callback to be called when the cancellable is cancelled.
+    /// Register a callback to be called when the cancellable is
+    /// cancelled. This would be called only once, even if the
+    /// cancellable is cancelled again.
     ///
-    /// This would be called only once, even if the cancellable is cancelled
-    /// again.
+    /// If the cancellable is already cancelled, the callback will
+    /// be called immediately.
     pub fn connect_cancelled(&self, callback: impl FnOnce(&Self) + 'static) {
+        if self.is_cancelled() {
+            callback(self);
+            return;
+        }
+
         self.callbacks.borrow_mut().push(Box::new(callback));
     }
 }
