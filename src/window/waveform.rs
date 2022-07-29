@@ -65,11 +65,11 @@ impl Waveform {
         self.queue_draw();
     }
 
-    fn peaks(&self) -> std::cell::Ref<VecDeque<f64>> {
+    fn peaks(&self) -> std::cell::Ref<'_, VecDeque<f64>> {
         self.imp().peaks.borrow()
     }
 
-    fn peaks_mut(&self) -> std::cell::RefMut<VecDeque<f64>> {
+    fn peaks_mut(&self) -> std::cell::RefMut<'_, VecDeque<f64>> {
         self.imp().peaks.borrow_mut()
     }
 

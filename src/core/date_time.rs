@@ -56,7 +56,7 @@ struct DateTimeVisitor;
 impl<'de> de::Visitor<'de> for DateTimeVisitor {
     type Value = DateTime;
 
-    fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         formatter.write_str("an iso8601 formatted date and time string")
     }
 

@@ -1,3 +1,4 @@
+#![warn(rust_2018_idioms)]
 #![warn(clippy::needless_pass_by_value)]
 #![warn(clippy::explicit_iter_loop)]
 #![warn(clippy::semicolon_if_nothing_returned)]
