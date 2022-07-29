@@ -386,7 +386,7 @@ impl Player {
     fn setup_player_signals(&self) {
         let imp = self.imp();
 
-        let (sender, receiver) = glib::MainContext::channel(glib::PRIORITY_DEFAULT);
+        let (sender, receiver) = glib::MainContext::sync_channel(glib::PRIORITY_DEFAULT, 5);
 
         imp.gst_player
             .connect_position_updated(clone!(@strong sender => move |_, position| {
