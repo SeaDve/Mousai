@@ -26,10 +26,10 @@ impl DateTime {
         let now = Self::now();
 
         if self.0.ymd() == now.0.ymd() {
-            // Translators: `%R` is replaced with 24-hour formatted date time (e.g., `13:21`)
+            // Translators: `%R` will be replaced with 24-hour formatted date time (e.g., `13:21`)
             self.0.format(&gettext("today at %R"))
         } else if now.0.difference(&self.0).as_hours() <= 30 {
-            // Translators: `%R` is replaced with 24-hour formatted date time (e.g., `13:21`)
+            // Translators: `%R` will be replaced with 24-hour formatted date time (e.g., `13:21`)
             self.0.format(&gettext("yesterday at %R"))
         } else {
             self.0.format("%F") // ISO 8601 (e.g., `2001-07-08`)
