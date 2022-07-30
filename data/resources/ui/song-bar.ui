@@ -124,7 +124,8 @@
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="label">/</property>
+                <!-- Translators: This is the separator in a playback status (e.g., 0:34 / 0:59) -->
+                <property name="label" translatable="yes">/</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
