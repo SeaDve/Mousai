@@ -16,7 +16,7 @@ src/model/external_link/spotify.rs
 src/model/external_link/youtube.rs
 src/recognizer/provider/aud_d/mod.rs
 src/recognizer/provider/aud_d/response.rs
-src/recognizer/provider/mod.rs
+src/recognizer/provider/error.rs
 src/window/history_view.rs
 src/window/mod.rs
 src/window/playback_button.rs
