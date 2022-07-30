@@ -25,6 +25,3 @@ async-trait = "0.1.53"
 mpris-player = "0.6.1"
 typetag = "0.2.0"
 gsettings-macro = "0.1.6"
-
-[dev-dependencies]
-serial_test = "0.8.0"

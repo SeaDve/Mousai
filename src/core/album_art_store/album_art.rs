@@ -140,8 +140,7 @@ mod test {
     use futures_util::future;
     use gtk::glib;
 
-    #[test]
-    #[serial_test::serial]
+    #[gtk::test] // Run in serial
     fn download() {
         let session = soup::Session::new();
         let download_url =
@@ -165,8 +164,7 @@ mod test {
         });
     }
 
-    #[test]
-    #[serial_test::serial]
+    #[gtk::test] // Run in serial
     fn concurrent_downloads() {
         let session = soup::Session::new();
         let download_url =

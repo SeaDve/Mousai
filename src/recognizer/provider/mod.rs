@@ -135,8 +135,7 @@ impl std::error::Error for ProviderError {}
 mod tests {
     use super::*;
 
-    #[test]
-    #[serial_test::serial]
+    #[gtk::test] // Run in serial
     fn reset_provider_manager() {
         let mut manager = ProviderManager::lock();
         assert_eq!(manager.active, ProviderType::default());
@@ -148,8 +147,7 @@ mod tests {
         assert_eq!(manager.active, ProviderType::default());
     }
 
-    #[test]
-    #[serial_test::serial]
+    #[gtk::test] // Run in serial
     fn provider_manager_identity() {
         let mut lock_a = ProviderManager::lock();
         lock_a.active = ProviderType::AudDMock;
