@@ -74,3 +74,30 @@ impl<'de> Deserialize<'de> for DateTime {
         deserializer.deserialize_str(DateTimeVisitor)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn serialize() {
+        let dt = DateTime::parse_from_iso8601("2022-07-28T08:23:28.623259+08").unwrap();
+        assert_eq!(
+            serde_json::to_string(&dt).unwrap(),
+            "\"2022-07-28T08:23:28.623259+08\"",
+        );
+
+        assert_eq!(dt.to_iso8601(), "2022-07-28T08:23:28.623259+08");
+    }
+
+    #[test]
+    fn deserialize() {
+        assert_eq!(
+            DateTime::parse_from_iso8601("2022-07-28T08:23:28.623259+08").unwrap(),
+            serde_json::from_str("\"2022-07-28T08:23:28.623259+08\"").unwrap()
+        );
+
+        assert!(DateTime::parse_from_iso8601("2022").is_err());
+        assert!(serde_json::from_str::<DateTime>("\"2022\"").is_err());
+    }
+}
