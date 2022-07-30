@@ -68,20 +68,20 @@ impl From<i32> for ProviderType {
 }
 
 #[derive(Debug)]
-pub struct ProviderManager {
+pub struct ProviderSettings {
     pub active: ProviderType,
     pub test_mode: TestProviderMode,
     pub test_listen_duration: Duration,
     pub test_recognize_duration: Duration,
 }
 
-impl ProviderManager {
-    /// Acquire lock to the global `ProviderManager`
+impl ProviderSettings {
+    /// Acquire lock to the global `ProviderSettings`
     pub fn lock() -> MutexGuard<'static, Self> {
-        static PROVIDER_MANAGER: OnceCell<Mutex<ProviderManager>> = OnceCell::new();
+        static INSTANCE: OnceCell<Mutex<ProviderSettings>> = OnceCell::new();
 
-        PROVIDER_MANAGER
-            .get_or_init(|| Mutex::new(ProviderManager::default()))
+        INSTANCE
+            .get_or_init(|| Mutex::new(ProviderSettings::default()))
             .lock()
             .unwrap()
     }
@@ -92,7 +92,7 @@ impl ProviderManager {
     }
 }
 
-impl Default for ProviderManager {
+impl Default for ProviderSettings {
     fn default() -> Self {
         Self {
             active: ProviderType::default(),
@@ -136,25 +136,25 @@ mod tests {
     use super::*;
 
     #[gtk::test] // Run in serial
-    fn reset_provider_manager() {
-        let mut manager = ProviderManager::lock();
-        assert_eq!(manager.active, ProviderType::default());
+    fn provider_settings_reset() {
+        let mut settings = ProviderSettings::lock();
+        assert_eq!(settings.active, ProviderType::default());
 
-        manager.active = ProviderType::AudDMock;
-        assert_ne!(manager.active, ProviderType::default());
+        settings.active = ProviderType::AudDMock;
+        assert_ne!(settings.active, ProviderType::default());
 
-        manager.reset();
-        assert_eq!(manager.active, ProviderType::default());
+        settings.reset();
+        assert_eq!(settings.active, ProviderType::default());
     }
 
     #[gtk::test] // Run in serial
-    fn provider_manager_identity() {
-        let mut lock_a = ProviderManager::lock();
+    fn provider_settings_identity() {
+        let mut lock_a = ProviderSettings::lock();
         lock_a.active = ProviderType::AudDMock;
         let active = lock_a.active;
         drop(lock_a);
 
-        let mut lock_b = ProviderManager::lock();
+        let mut lock_b = ProviderSettings::lock();
         assert_eq!(lock_b.active, active);
 
         lock_b.reset();

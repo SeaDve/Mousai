@@ -6,7 +6,7 @@ use gtk::{
 
 use std::{cell::RefCell, time::Duration};
 
-use crate::recognizer::{ProviderManager, ProviderType, TestProviderMode};
+use crate::recognizer::{ProviderSettings, ProviderType, TestProviderMode};
 
 const INSPECTOR_TITLE: &str = "Mousai";
 
@@ -105,7 +105,7 @@ mod imp {
                 child.unparent();
             }
 
-            ProviderManager::lock().reset();
+            ProviderSettings::lock().reset();
         }
     }
 
@@ -144,7 +144,7 @@ impl InspectorPage {
             .set_model(Some(&adw::EnumListModel::new(ProviderType::static_type())));
 
         imp.provider_row
-            .set_selected(ProviderManager::lock().active as u32);
+            .set_selected(ProviderSettings::lock().active as u32);
 
         imp.provider_row
             .set_expression(Some(&gtk::ClosureExpression::new::<
@@ -163,10 +163,10 @@ impl InspectorPage {
                     .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
                 {
                     obj.update_test_rows_sensitivity();
-                    ProviderManager::lock().active = item.value().into();
+                    ProviderSettings::lock().active = item.value().into();
                 } else {
                     log::warn!("provider_row doesn't have a valid selected item");
-                    ProviderManager::lock().active = ProviderType::default();
+                    ProviderSettings::lock().active = ProviderType::default();
                 }
             }));
     }
@@ -180,7 +180,7 @@ impl InspectorPage {
             )));
 
         imp.test_provider_mode_row
-            .set_selected(ProviderManager::lock().test_mode as u32);
+            .set_selected(ProviderSettings::lock().test_mode as u32);
 
         imp.test_provider_mode_row
             .set_expression(Some(&gtk::ClosureExpression::new::<
@@ -198,10 +198,10 @@ impl InspectorPage {
                     .selected_item()
                     .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
                 {
-                    ProviderManager::lock().test_mode = item.value().into();
+                    ProviderSettings::lock().test_mode = item.value().into();
                 } else {
                     log::warn!("test_provider_row doesn't have a valid selected item");
-                    ProviderManager::lock().test_mode = TestProviderMode::default();
+                    ProviderSettings::lock().test_mode = TestProviderMode::default();
                 }
             });
     }
@@ -210,20 +210,20 @@ impl InspectorPage {
         let imp = self.imp();
 
         imp.test_listen_duration_button
-            .set_value(ProviderManager::lock().test_listen_duration.as_secs() as f64);
+            .set_value(ProviderSettings::lock().test_listen_duration.as_secs() as f64);
 
         imp.test_listen_duration_button
             .connect_value_changed(|spin_button| {
-                ProviderManager::lock().test_listen_duration =
+                ProviderSettings::lock().test_listen_duration =
                     Duration::from_secs(spin_button.value_as_int() as u64);
             });
 
         imp.test_recognize_duration_button
-            .set_value(ProviderManager::lock().test_recognize_duration.as_secs() as f64);
+            .set_value(ProviderSettings::lock().test_recognize_duration.as_secs() as f64);
 
         imp.test_recognize_duration_button
             .connect_value_changed(|spin_button| {
-                ProviderManager::lock().test_recognize_duration =
+                ProviderSettings::lock().test_recognize_duration =
                     Duration::from_secs(spin_button.value_as_int() as u64);
             });
     }

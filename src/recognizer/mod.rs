@@ -8,7 +8,7 @@ use std::{
     rc::Rc,
 };
 
-pub use self::provider::{ProviderManager, ProviderType, TestProviderMode};
+pub use self::provider::{ProviderSettings, ProviderType, TestProviderMode};
 use crate::{
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
@@ -205,7 +205,7 @@ impl Recognizer {
             let _ = _guard.take();
         }));
 
-        let provider = ProviderManager::lock().active.to_provider();
+        let provider = ProviderSettings::lock().active.to_provider();
         log::debug!("provider: {:?}", provider);
 
         if cancellable.is_cancelled()
