@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
-      # FIXME uncomment when we don't --skip-uifiles anymore
+      # FIXME uncomment when we don't --skip ui_files anymore
       # - name: Download dependencies
       #   run: sudo apt -y install libgtk-4-dev
       - name: Run checks.py
-        run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip-rustfmt --skip-typos --skip-uifiles
+        run: curl https://raw.githubusercontent.com/SeaDve/scripts/main/checks.py | python - --verbose --skip rustfmt typos ui_files
 
   rustfmt:
     name: Rustfmt
