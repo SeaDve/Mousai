@@ -30,4 +30,4 @@ If applicable, add screenshots to help explain your problem.
 **Additional context**
 If applicable, please attach the logs from running Mousai in the
 terminal with the following environment variables: `RUST_BACKTRACE=1 RUST_LOG=mousai=debug`
-(e.g., `flatpak run io.github.seadve.Mousai).
+(e.g., `RUST_BACKTRACE=1 RUST_LOG=mousai=debug flatpak run io.github.seadve.Mousai`).
