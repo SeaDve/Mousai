@@ -284,8 +284,7 @@ impl Default for AudioRecorder {
 
 fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Result<String> {
     let device_monitor = gst::DeviceMonitor::new();
-    device_monitor.add_filter(Some(AudioDeviceClass::Source.as_str()), None);
-    device_monitor.add_filter(Some(AudioDeviceClass::Sink.as_str()), None);
+    device_monitor.add_filter(Some(preferred_device_class.as_str()), None);
 
     device_monitor.start()?;
     let devices = device_monitor.devices();
