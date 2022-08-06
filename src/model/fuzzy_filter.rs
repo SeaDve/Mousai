@@ -130,7 +130,7 @@ impl FuzzyFilter {
         };
 
         self.imp().search.replace(search);
-        self.changed(dbg!(change));
+        self.changed(change);
         self.notify("search");
     }
 }
@@ -206,7 +206,7 @@ mod tests {
             gtk::FilterChange::MoreStrict
         );
 
-        filter.set_search(Some("fo"));
+        filter.set_search(Some("f"));
         assert_eq!(
             calls_output.borrow_mut().pop().unwrap(),
             gtk::FilterChange::LessStrict
