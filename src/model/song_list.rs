@@ -8,7 +8,7 @@ use indexmap::IndexMap;
 
 use std::cell::RefCell;
 
-use crate::{core::DateTime, Application};
+use crate::Application;
 
 use super::{Song, SongId};
 
@@ -89,18 +89,15 @@ impl SongList {
         Ok(())
     }
 
-    /// If an equivalent [`Song`] already exists in the list, it returns false updating the original
-    /// value in the list. Otherwise, it inserts the new [`Song`] at the end and returns true.
+    /// If an equivalent [`Song`] already exists in the list, it returns false and updates
+    /// the original value in the list. Otherwise, it inserts the new [`Song`] at the end and
+    /// returns true.
     ///
-    /// The equivalence of the [`Song`] depends on their [`SongId`]
+    /// The equivalence of the [`Song`] depends on its [`SongId`]
     pub fn append(&self, song: Song) -> bool {
-        let song_clone = song.clone();
-
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
         if last_value.is_some() {
-            // FIXME handle this outside this function
-            song_clone.set_last_heard(DateTime::now());
             self.items_changed(position as u32, 1, 1);
             return false;
         }
@@ -116,7 +113,8 @@ impl SongList {
     /// If a [`Song`] is unique to the list, it is appended. Otherwise, the existing
     /// value will be updated.
     ///
-    /// This is more efficient than [`SongList::append`] since it emits `items-changed` only once
+    /// This is more efficient than [`SongList::append`] since it emits `items-changed`
+    /// only once if all appended [`Song`]s are unique.
     pub fn append_many(&self, songs: Vec<Song>) -> u32 {
         let mut n_appended = 0;
 
@@ -124,12 +122,14 @@ impl SongList {
             let mut list = self.imp().list.borrow_mut();
 
             for song in songs {
-                if list.insert(song.id(), song).is_none() {
-                    n_appended += 1;
-                } else {
-                    // FIXME add test for items_changed append_many duplicates
-                    log::error!("SongList::append_many does not emit items change on duplicate!");
+                let (position, last_value) = list.insert_full(song.id(), song);
+
+                if last_value.is_some() {
+                    self.items_changed(position as u32, 1, 1);
+                    continue;
                 }
+
+                n_appended += 1;
             }
         }
 
@@ -151,8 +151,12 @@ impl SongList {
         removed.map(|r| r.2)
     }
 
-    pub fn get(&self, note_id: &SongId) -> Option<Song> {
-        self.imp().list.borrow().get(note_id).cloned()
+    pub fn get(&self, song_id: &SongId) -> Option<Song> {
+        self.imp().list.borrow().get(song_id).cloned()
+    }
+
+    pub fn contains(&self, song_id: &SongId) -> bool {
+        self.imp().list.borrow().contains_key(song_id)
     }
 
     pub fn is_empty(&self) -> bool {
@@ -183,7 +187,10 @@ impl Default for SongList {
 mod test {
     use super::*;
 
-    use std::{cell::Cell, rc::Rc};
+    use std::{
+        cell::{Cell, RefCell},
+        rc::Rc,
+    };
 
     fn new_test_song(id: &str) -> Song {
         Song::builder(&SongId::from(id), id, id, id).build()
@@ -285,6 +292,36 @@ mod test {
         });
 
         song_list.append_many(vec![new_test_song("1"), new_test_song("2")]);
+    }
+
+    #[test]
+    fn items_changed_append_many_with_duplicates() {
+        let song_list = SongList::default();
+        song_list.append(new_test_song("0"));
+
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+
+        let calls_output_clone = Rc::clone(&calls_output);
+        song_list.connect_items_changed(move |_, index, removed, added| {
+            calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
+        });
+
+        assert_eq!(
+            song_list.append_many(vec![
+                new_test_song("0"),
+                new_test_song("1"),
+                new_test_song("2"),
+                new_test_song("2"),
+            ]),
+            2
+        );
+
+        let calls_output = calls_output.borrow();
+        assert_eq!(calls_output[0], (0, 1, 1)); // Updated SongId(0)
+        assert_eq!(calls_output[1], (2, 1, 1)); // Updated SongId(2)
+        assert_eq!(calls_output[2], (1, 0, 2)); // Collective emission
     }
 
     #[test]

@@ -23,6 +23,7 @@ use std::cell::Cell;
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
+    core::DateTime,
     model::SongList,
     player::{Player, PlayerState},
     recognizer::{Recognizer, RecognizerState},
@@ -342,7 +343,21 @@ impl Window {
 
         imp.recognizer
             .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
-                obj.history().append(song.clone());
+                let history = obj.history();
+                let contains_song = history.contains(&song.id());
+
+                if contains_song {
+                    song.set_last_heard(DateTime::now());
+                }
+
+                // We also need to emit items_changed and update
+                // to new properties, if any.
+                let is_appended = history.append(song.clone());
+
+                if contains_song == is_appended {
+                    log::error!("History already contains song, but it was still successfully appended");
+                }
+
                 let main_view = &obj.imp().main_view;
                 main_view.push_song_page(song);
                 main_view.scroll_to_top();
