@@ -82,17 +82,7 @@ mod imp {
         }
 
         fn order(&self, _sorter: &Self::Type) -> gtk::SorterOrder {
-            if self
-                .search
-                .borrow()
-                .as_ref()
-                .filter(|s| !s.is_empty())
-                .is_some()
-            {
-                gtk::SorterOrder::Partial
-            } else {
-                gtk::SorterOrder::Total
-            }
+            gtk::SorterOrder::Partial
         }
     }
 }
