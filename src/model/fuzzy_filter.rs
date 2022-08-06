@@ -12,7 +12,7 @@ mod imp {
     use super::*;
     use once_cell::sync::Lazy;
 
-    #[derive(Default)]
+    #[derive(Debug, Default)]
     pub struct FuzzyFilter {
         pub search: RefCell<Option<String>>,
     }
