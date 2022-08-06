@@ -92,8 +92,6 @@ impl SongList {
     /// If an equivalent [`Song`] already exists in the list, it returns false updating the original
     /// value in the list. Otherwise, it inserts the new [`Song`] at the end and returns true.
     ///
-    /// Update the [`Song`]'s `last-heard` value when the song already exist.
-    ///
     /// The equivalence of the [`Song`] depends on their [`SongId`]
     pub fn append(&self, song: Song) -> bool {
         let song_clone = song.clone();
@@ -112,14 +110,14 @@ impl SongList {
         true
     }
 
-    /// It tries to append all [`Song`]s. When any of the song already exist, it returns false
-    /// leaving the original value of the existing [`Song`]s. If all [`Song`]s are unique, it
-    /// returns true.
+    /// Tries to append all [`Song`]s and returns the number of [`Song`]s that were
+    /// successfully appended.
+    ///
+    /// If a [`Song`] is unique to the list, it is appended. Otherwise, the existing
+    /// value will be updated.
     ///
     /// This is more efficient than [`SongList::append`] since it emits `items-changed` only once
-    pub fn append_many(&self, songs: Vec<Song>) -> bool {
-        let initial_songs_len = songs.len();
-
+    pub fn append_many(&self, songs: Vec<Song>) -> u32 {
         let mut n_appended = 0;
 
         {
@@ -136,7 +134,7 @@ impl SongList {
             self.items_changed(self.n_items() - n_appended, 0, n_appended);
         }
 
-        n_appended as usize == initial_songs_len
+        n_appended
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
@@ -215,11 +213,11 @@ mod test {
         assert!(song_list.is_empty());
 
         let songs = vec![new_test_song("1"), new_test_song("2")];
-        assert!(song_list.append_many(songs));
+        assert_eq!(song_list.append_many(songs), 2);
         assert_eq!(song_list.n_items(), 2);
 
         let more_songs = vec![new_test_song("SameId"), new_test_song("SameId")];
-        assert!(!song_list.append_many(more_songs));
+        assert_eq!(song_list.append_many(more_songs), 1);
         assert_eq!(song_list.n_items(), 3);
     }
 }
