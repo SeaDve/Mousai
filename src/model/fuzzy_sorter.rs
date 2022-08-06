@@ -73,9 +73,9 @@ mod imp {
             let song_2 = item_2.downcast_ref::<Song>().unwrap();
 
             if let Some(search) = self.search.borrow().as_ref().filter(|s| !s.is_empty()) {
-                let item1_score = FUZZY_MATCHER.fuzzy_match(&song_1.search_term(), search);
-                let item2_score = FUZZY_MATCHER.fuzzy_match(&song_2.search_term(), search);
-                item2_score.cmp(&item1_score).into()
+                let song_1_score = FUZZY_MATCHER.fuzzy_match(&song_1.search_term(), search);
+                let song_2_score = FUZZY_MATCHER.fuzzy_match(&song_2.search_term(), search);
+                song_2_score.cmp(&song_1_score).into()
             } else {
                 song_2.last_heard().cmp(&song_1.last_heard()).into()
             }
