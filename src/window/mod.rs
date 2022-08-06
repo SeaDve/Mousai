@@ -350,8 +350,8 @@ impl Window {
                     song.set_last_heard(DateTime::now());
                 }
 
-                // We also need to emit items_changed and update
-                // to new properties, if any.
+                // We also need to emit items_changed to update sort list model
+                // order, and update to new properties if any.
                 let is_appended = history.append(song.clone());
 
                 if contains_song == is_appended {
