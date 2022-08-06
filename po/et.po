@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-08-06 00:23+0000\n"
+"Last-Translator: Henri <contact@hen.ee>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/kooha/mousai/et/"
+">\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -96,15 +98,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Lihtne kasutada."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Kasutajasõbralikud kiirklahvid."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferred Audio Source"
@@ -120,7 +122,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Kiirklahvid"
 
 #: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
@@ -194,7 +196,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Üldine"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -214,7 +216,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Lahku"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -247,7 +249,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:102
 msgid "Stop"
-msgstr ""
+msgstr "Peata"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
@@ -288,7 +290,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
 msgid "translator-credits"
-msgstr ""
+msgstr "Henri &lt;contact@hen.ee&gt;, 2022"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
@@ -296,7 +298,7 @@ msgstr ""
 
 #: src/application.rs:144
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
