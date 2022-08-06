@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: 2022  John Toohey <john_t@mailo.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use fuzzy_matcher::{skim::SkimMatcherV2, FuzzyMatcher};
+use fuzzy_matcher::FuzzyMatcher;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use std::cell::RefCell;
 
-use super::Song;
+use super::{Song, FUZZY_MATCHER};
 
 mod imp {
     use super::*;
@@ -73,9 +73,8 @@ mod imp {
             let song_2 = item_2.downcast_ref::<Song>().unwrap();
 
             if let Some(search) = self.search.borrow().as_ref().filter(|s| !s.is_empty()) {
-                let matcher = SkimMatcherV2::default();
-                let item1_score = matcher.fuzzy_match(&song_1.search_term(), search);
-                let item2_score = matcher.fuzzy_match(&song_2.search_term(), search);
+                let item1_score = FUZZY_MATCHER.fuzzy_match(&song_1.search_term(), search);
+                let item2_score = FUZZY_MATCHER.fuzzy_match(&song_2.search_term(), search);
                 item2_score.cmp(&item1_score).into()
             } else {
                 song_2.last_heard().cmp(&song_1.last_heard()).into()
