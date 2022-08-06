@@ -99,7 +99,7 @@ glib::wrapper! {
 
 impl FuzzyFilter {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create `AmberolFuzzyFilter`")
+        glib::Object::new(&[]).expect("Failed to create FuzzyFilter.")
     }
 
     pub fn search(&self) -> Option<String> {

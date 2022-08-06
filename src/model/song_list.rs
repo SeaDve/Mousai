@@ -353,4 +353,41 @@ mod test {
         assert!(song_list.remove(&SongId::from("0")).is_none());
         assert_eq!(n_called.get(), 0);
     }
+
+    #[test]
+    fn connect_removed_some() {
+        let song_list = SongList::default();
+        song_list.append(new_test_song("0"));
+
+        let n_called = Rc::new(Cell::new(0));
+
+        let n_called_clone = Rc::clone(&n_called);
+        song_list.connect_removed(move |_, song| {
+            assert_eq!(song.id(), SongId::from("0"));
+            n_called_clone.set(n_called_clone.get() + 1);
+        });
+
+        assert_eq!(n_called.get(), 0);
+        assert_eq!(
+            song_list.remove(&SongId::from("0")).unwrap().id(),
+            SongId::from("0")
+        );
+        assert_eq!(n_called.get(), 1);
+    }
+
+    #[test]
+    fn connect_removed_none() {
+        let song_list = SongList::default();
+
+        let n_called = Rc::new(Cell::new(0));
+
+        let n_called_clone = Rc::clone(&n_called);
+        song_list.connect_removed(move |_, _| {
+            n_called_clone.set(n_called_clone.get() + 1);
+        });
+
+        assert_eq!(n_called.get(), 0);
+        assert!(song_list.remove(&SongId::from("0")).is_none());
+        assert_eq!(n_called.get(), 0);
+    }
 }

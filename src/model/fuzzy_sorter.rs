@@ -105,7 +105,7 @@ glib::wrapper! {
 
 impl FuzzySorter {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create `AmberolFuzzySorter`")
+        glib::Object::new(&[]).expect("Failed to create FuzzySorter.")
     }
 
     pub fn search(&self) -> Option<String> {
