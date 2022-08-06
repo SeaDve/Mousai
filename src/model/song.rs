@@ -188,6 +188,11 @@ impl Song {
         SongBuilder::new(id, title, artist, album)
     }
 
+    /// String to match to when searching for self.
+    pub fn search_term(&self) -> String {
+        format!("{}{}", self.title(), self.artist())
+    }
+
     pub fn id(&self) -> SongId {
         let id = self.imp().inner.borrow().id.clone();
 

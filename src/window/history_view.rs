@@ -2,7 +2,7 @@ use adw::prelude::*;
 use gettextrs::{gettext, ngettext};
 use gtk::{
     gdk,
-    glib::{self, clone, closure},
+    glib::{self, clone},
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -12,7 +12,7 @@ use std::cell::{Cell, RefCell};
 use super::{song_page::SongPage, song_tile::SongTile, Window};
 use crate::{
     config::APP_ID,
-    model::{Song, SongList},
+    model::{FuzzyFilter, FuzzySorter, Song, SongList},
     player::Player,
     Application,
 };
@@ -290,16 +290,8 @@ impl HistoryView {
             obj.update_history_stack();
         }));
 
-        let filter = gtk::StringFilter::builder()
-            .expression(
-                &gtk::ClosureExpression::new::<String, &[gtk::Expression], _>(
-                    &[],
-                    closure!(|song: Song| [song.title(), song.artist()].join("")),
-                ),
-            )
-            .match_mode(gtk::StringFilterMatchMode::Substring)
-            .ignore_case(true)
-            .build();
+        let filter = FuzzyFilter::new();
+        let sorter = FuzzySorter::new();
 
         let filter_model = gtk::FilterListModel::new(Some(song_list), Some(&filter));
         filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
@@ -307,17 +299,14 @@ impl HistoryView {
         }));
 
         imp.search_entry.connect_search_changed(
-            clone!(@weak self as obj, @weak filter => move |search_entry| {
-                filter.set_search(Some(&search_entry.text()));
+            clone!(@weak self as obj, @weak filter, @weak sorter => move |search_entry| {
+                let text = search_entry.text();
+                filter.set_search(Some(&text));
+                sorter.set_search(Some(&text));
                 obj.update_history_stack();
             }),
         );
 
-        let sorter = gtk::CustomSorter::new(|item_1, item_2| {
-            let song_1 = item_1.downcast_ref::<Song>().unwrap();
-            let song_2 = item_2.downcast_ref::<Song>().unwrap();
-            song_2.last_heard().cmp(&song_1.last_heard()).into()
-        });
         let sort_model = gtk::SortListModel::new(Some(&filter_model), Some(&sorter));
 
         // FIXME save selection even when the song are filtered from FilterListModel
