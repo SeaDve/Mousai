@@ -118,3 +118,40 @@ impl Default for FuzzySorter {
         Self::new()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use crate::{core::DateTime, model::SongId};
+
+    fn new_test_song(last_heard: DateTime, search_term: &str) -> Song {
+        let song = Song::builder(&SongId::default(), search_term, search_term, "").build();
+        song.set_last_heard(last_heard);
+        song
+    }
+
+    #[test]
+    fn compare() {
+        let sorter = FuzzySorter::new();
+
+        let old = new_test_song(DateTime::now(), "old");
+        let new = new_test_song(DateTime::now(), "new");
+        assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Smaller);
+        assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Larger);
+        assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
+        assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
+
+        sorter.set_search(Some("new"));
+        assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Larger);
+        assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Smaller);
+        assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
+        assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
+
+        sorter.set_search(Some("old"));
+        assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Smaller);
+        assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Larger);
+        assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
+        assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
+    }
+}

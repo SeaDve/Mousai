@@ -107,14 +107,30 @@ impl FuzzyFilter {
     }
 
     pub fn set_search(&self, search: Option<&str>) {
+        let old_search = self.search();
         let search = search.map(|s| s.to_lowercase());
 
-        if self.search() == search {
+        if old_search == search {
             return;
         }
 
+        let change = match (&old_search, &search) {
+            (Some(old), Some(new)) => {
+                if old.starts_with(new) {
+                    gtk::FilterChange::LessStrict
+                } else if new.starts_with(old) {
+                    gtk::FilterChange::MoreStrict
+                } else {
+                    gtk::FilterChange::Different
+                }
+            }
+            (Some(..), None) => gtk::FilterChange::LessStrict,
+            (None, Some(..)) => gtk::FilterChange::MoreStrict,
+            (None, None) => return,
+        };
+
         self.imp().search.replace(search);
-        self.changed(gtk::FilterChange::Different);
+        self.changed(dbg!(change));
         self.notify("search");
     }
 }
@@ -122,5 +138,96 @@ impl FuzzyFilter {
 impl Default for FuzzyFilter {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use std::{cell::RefCell, rc::Rc};
+
+    use crate::model::SongId;
+
+    #[test]
+    fn strictness() {
+        let filter = FuzzyFilter::new();
+        assert_eq!(filter.strictness(), gtk::FilterMatch::All);
+
+        filter.set_search(Some("foo"));
+        assert_eq!(filter.strictness(), gtk::FilterMatch::Some);
+
+        filter.set_search(Some(""));
+        assert_eq!(filter.strictness(), gtk::FilterMatch::All);
+
+        filter.set_search(None);
+        assert_eq!(filter.strictness(), gtk::FilterMatch::All);
+    }
+
+    #[test]
+    fn match_() {
+        let filter = FuzzyFilter::new();
+        assert!(filter.match_(&Song::builder(&SongId::from("0"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::from("1"), "bar", "bar", "").build()));
+
+        filter.set_search(Some("foo"));
+        assert!(filter.match_(&Song::builder(&SongId::from("2"), "foo", "foo", "").build()));
+        assert!(!filter.match_(&Song::builder(&SongId::from("3"), "bar", "bar", "").build()));
+
+        filter.set_search(Some(""));
+        assert!(filter.match_(&Song::builder(&SongId::from("4"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::from("5"), "bar", "bar", "").build()));
+
+        filter.set_search(None);
+        assert!(filter.match_(&Song::builder(&SongId::from("6"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::from("7"), "bar", "bar", "").build()));
+    }
+
+    #[test]
+    fn changed() {
+        let filter = FuzzyFilter::new();
+
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+
+        let calls_output_clone = Rc::clone(&calls_output);
+        filter.connect_changed(move |_, change| {
+            calls_output_clone.borrow_mut().push(change);
+        });
+
+        filter.set_search(Some(""));
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::MoreStrict
+        );
+
+        filter.set_search(Some("foo"));
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::MoreStrict
+        );
+
+        filter.set_search(Some("fo"));
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::LessStrict
+        );
+
+        filter.set_search(Some("bar"));
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::Different
+        );
+
+        filter.set_search(Some("bars"));
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::MoreStrict
+        );
+
+        filter.set_search(None);
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::LessStrict
+        );
     }
 }
