@@ -302,7 +302,7 @@ impl HistoryView {
             clone!(@weak self as obj, @weak filter, @weak sorter => move |search_entry| {
                 let text = search_entry.text();
                 filter.set_search(Some(&text));
-                sorter.set_search(Some(&text));
+                sorter.set_search(&text);
                 obj.update_history_stack();
             }),
         );

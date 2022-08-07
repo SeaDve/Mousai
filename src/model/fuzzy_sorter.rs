@@ -1,4 +1,5 @@
-// SPDX-FileCopyrightText: 2022  John Toohey <john_t@mailo.com>
+// SPDX-FileCopyrightText: 2022 John Toohey <john_t@mailo.com>
+// SPDX-FileCopyrightText: 2022 Dave Patrick Caberto
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 use fuzzy_matcher::FuzzyMatcher;
@@ -14,7 +15,7 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct FuzzySorter {
-        pub search: RefCell<Option<String>>,
+        pub search: RefCell<String>,
     }
 
     #[glib::object_subclass]
@@ -47,8 +48,8 @@ mod imp {
         ) {
             match pspec.name() {
                 "search" => {
-                    let search = value.get::<Option<String>>().unwrap();
-                    obj.set_search(search.as_deref());
+                    let search = value.get().unwrap();
+                    obj.set_search(search);
                 }
                 _ => unimplemented!(),
             }
@@ -72,12 +73,14 @@ mod imp {
             let song_1 = item_1.downcast_ref::<Song>().unwrap();
             let song_2 = item_2.downcast_ref::<Song>().unwrap();
 
-            if let Some(search) = self.search.borrow().as_ref().filter(|s| !s.is_empty()) {
-                let song_1_score = FUZZY_MATCHER.fuzzy_match(&song_1.search_term(), search);
-                let song_2_score = FUZZY_MATCHER.fuzzy_match(&song_2.search_term(), search);
-                song_2_score.cmp(&song_1_score).into()
-            } else {
+            let search = self.search.borrow();
+
+            if search.is_empty() {
                 song_2.last_heard().cmp(&song_1.last_heard()).into()
+            } else {
+                let song_1_score = FUZZY_MATCHER.fuzzy_match(&song_1.search_term(), &search);
+                let song_2_score = FUZZY_MATCHER.fuzzy_match(&song_2.search_term(), &search);
+                song_2_score.cmp(&song_1_score).into()
             }
         }
 
@@ -98,16 +101,18 @@ impl FuzzySorter {
         glib::Object::new(&[]).expect("Failed to create FuzzySorter.")
     }
 
-    pub fn search(&self) -> Option<String> {
+    pub fn search(&self) -> String {
         self.imp().search.borrow().clone()
     }
 
-    pub fn set_search(&self, search: Option<&str>) {
-        if self.search().as_deref() == search {
+    /// If search is empty, the sorter will sort by last heard.
+    /// Otherwise, it will sort by the fuzzy match score.
+    pub fn set_search(&self, search: &str) {
+        if search == self.search() {
             return;
         }
 
-        self.imp().search.replace(search.map(|s| s.to_string()));
+        self.imp().search.replace(search.to_string());
         self.changed(gtk::SorterChange::Different);
         self.notify("search");
     }
@@ -139,21 +144,21 @@ mod tests {
         let new = new_test_song(DateTime::now(), "new");
 
         // Match search term, closer (old) song is sorted first (smaller)
-        sorter.set_search(Some("old"));
+        sorter.set_search("old");
         assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Smaller);
         assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Larger);
         assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
         assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
 
         // Match time, newer song is sorted first (smaller)
-        sorter.set_search(None);
+        sorter.set_search("");
         assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Larger);
         assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Smaller);
         assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
         assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
 
         // Match search term, closer (new) song is sorted first (smaller)
-        sorter.set_search(Some("new"));
+        sorter.set_search("new");
         assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Larger);
         assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Smaller);
         assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
