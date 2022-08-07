@@ -138,16 +138,17 @@ mod tests {
         let old = new_test_song(DateTime::now(), "old");
         let new = new_test_song(DateTime::now(), "new");
 
-        // Match time, newer song is sorted first (smaller)
-        assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Larger);
-        assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Smaller);
-        assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
-        assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
-
         // Match search term, closer (old) song is sorted first (smaller)
         sorter.set_search(Some("old"));
         assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Smaller);
         assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Larger);
+        assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
+        assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
+
+        // Match time, newer song is sorted first (smaller)
+        sorter.set_search(None);
+        assert_eq!(sorter.compare(&old, &new), gtk::Ordering::Larger);
+        assert_eq!(sorter.compare(&new, &old), gtk::Ordering::Smaller);
         assert_eq!(sorter.compare(&new, &new), gtk::Ordering::Equal);
         assert_eq!(sorter.compare(&old, &old), gtk::Ordering::Equal);
 
