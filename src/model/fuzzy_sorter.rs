@@ -15,7 +15,7 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct FuzzySorter {
-        pub search: RefCell<String>,
+        pub(super) search: RefCell<String>,
     }
 
     #[glib::object_subclass]
