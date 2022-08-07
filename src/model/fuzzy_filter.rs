@@ -1,4 +1,5 @@
-// SPDX-FileCopyrightText: 2022  John Toohey <john_t@mailo.com>
+// SPDX-FileCopyrightText: 2022 John Toohey <john_t@mailo.com>
+// SPDX-FileCopyrightText: 2022 Dave Patrick Caberto
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 use fuzzy_matcher::FuzzyMatcher;
@@ -14,7 +15,7 @@ mod imp {
 
     #[derive(Debug, Default)]
     pub struct FuzzyFilter {
-        pub search: RefCell<Option<String>>,
+        pub search: RefCell<String>,
     }
 
     #[glib::object_subclass]
@@ -47,8 +48,8 @@ mod imp {
         ) {
             match pspec.name() {
                 "search" => {
-                    let search = value.get::<Option<String>>().unwrap();
-                    obj.set_search(search.as_deref());
+                    let search = value.get().unwrap();
+                    obj.set_search(search);
                 }
                 _ => unimplemented!(),
             }
@@ -64,28 +65,24 @@ mod imp {
 
     impl FilterImpl for FuzzyFilter {
         fn strictness(&self, _filter: &Self::Type) -> gtk::FilterMatch {
-            if self
-                .search
-                .borrow()
-                .as_ref()
-                .filter(|s| !s.is_empty())
-                .is_some()
-            {
-                gtk::FilterMatch::Some
-            } else {
+            if self.search.borrow().is_empty() {
                 gtk::FilterMatch::All
+            } else {
+                gtk::FilterMatch::Some
             }
         }
 
         fn match_(&self, _filter: &Self::Type, song: &glib::Object) -> bool {
             let song = song.downcast_ref::<Song>().unwrap();
 
-            if let Some(search) = self.search.borrow().as_ref().filter(|s| !s.is_empty()) {
-                FUZZY_MATCHER
-                    .fuzzy_match(&song.search_term(), search)
-                    .is_some()
-            } else {
+            let search = self.search.borrow();
+
+            if search.is_empty() {
                 true
+            } else {
+                FUZZY_MATCHER
+                    .fuzzy_match(&song.search_term(), &search)
+                    .is_some()
             }
         }
     }
@@ -102,31 +99,26 @@ impl FuzzyFilter {
         glib::Object::new(&[]).expect("Failed to create FuzzyFilter.")
     }
 
-    pub fn search(&self) -> Option<String> {
+    pub fn search(&self) -> String {
         self.imp().search.borrow().clone()
     }
 
-    pub fn set_search(&self, search: Option<&str>) {
+    pub fn set_search(&self, search: &str) {
         let old_search = self.search();
-        let search = search.map(|s| s.to_lowercase());
+        let search = search.to_lowercase();
 
         if old_search == search {
             return;
         }
 
-        let change = match (&old_search, &search) {
-            (Some(old), Some(new)) => {
-                if old.starts_with(new) {
-                    gtk::FilterChange::LessStrict
-                } else if new.starts_with(old) {
-                    gtk::FilterChange::MoreStrict
-                } else {
-                    gtk::FilterChange::Different
-                }
-            }
-            (Some(..), None) => gtk::FilterChange::LessStrict,
-            (None, Some(..)) => gtk::FilterChange::MoreStrict,
-            (None, None) => return,
+        let change = if search.is_empty() {
+            gtk::FilterChange::LessStrict
+        } else if search.starts_with(&old_search) {
+            gtk::FilterChange::MoreStrict
+        } else if old_search.starts_with(&search) {
+            gtk::FilterChange::LessStrict
+        } else {
+            gtk::FilterChange::Different
         };
 
         self.imp().search.replace(search);
@@ -154,13 +146,13 @@ mod tests {
         let filter = FuzzyFilter::new();
         assert_eq!(filter.strictness(), gtk::FilterMatch::All);
 
-        filter.set_search(Some("foo"));
+        filter.set_search("foo");
         assert_eq!(filter.strictness(), gtk::FilterMatch::Some);
 
-        filter.set_search(Some(""));
-        assert_eq!(filter.strictness(), gtk::FilterMatch::All);
+        filter.set_search("bar");
+        assert_eq!(filter.strictness(), gtk::FilterMatch::Some);
 
-        filter.set_search(None);
+        filter.set_search("");
         assert_eq!(filter.strictness(), gtk::FilterMatch::All);
     }
 
@@ -170,15 +162,15 @@ mod tests {
         assert!(filter.match_(&Song::builder(&SongId::from("0"), "foo", "foo", "").build()));
         assert!(filter.match_(&Song::builder(&SongId::from("1"), "bar", "bar", "").build()));
 
-        filter.set_search(Some("foo"));
+        filter.set_search("foo");
         assert!(filter.match_(&Song::builder(&SongId::from("2"), "foo", "foo", "").build()));
         assert!(!filter.match_(&Song::builder(&SongId::from("3"), "bar", "bar", "").build()));
 
-        filter.set_search(Some(""));
-        assert!(filter.match_(&Song::builder(&SongId::from("4"), "foo", "foo", "").build()));
+        filter.set_search("bar");
+        assert!(!filter.match_(&Song::builder(&SongId::from("4"), "foo", "foo", "").build()));
         assert!(filter.match_(&Song::builder(&SongId::from("5"), "bar", "bar", "").build()));
 
-        filter.set_search(None);
+        filter.set_search("");
         assert!(filter.match_(&Song::builder(&SongId::from("6"), "foo", "foo", "").build()));
         assert!(filter.match_(&Song::builder(&SongId::from("7"), "bar", "bar", "").build()));
     }
@@ -193,38 +185,39 @@ mod tests {
         filter.connect_changed(move |_, change| {
             calls_output_clone.borrow_mut().push(change);
         });
+        assert!(filter.search().is_empty());
 
-        filter.set_search(Some(""));
+        filter.set_search("foo");
         assert_eq!(
             calls_output.borrow_mut().pop().unwrap(),
             gtk::FilterChange::MoreStrict
         );
 
-        filter.set_search(Some("foo"));
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::MoreStrict
-        );
-
-        filter.set_search(Some("f"));
+        filter.set_search("f");
         assert_eq!(
             calls_output.borrow_mut().pop().unwrap(),
             gtk::FilterChange::LessStrict
         );
 
-        filter.set_search(Some("bar"));
+        filter.set_search("bar");
         assert_eq!(
             calls_output.borrow_mut().pop().unwrap(),
             gtk::FilterChange::Different
         );
 
-        filter.set_search(Some("bars"));
+        filter.set_search("b");
+        assert_eq!(
+            calls_output.borrow_mut().pop().unwrap(),
+            gtk::FilterChange::LessStrict
+        );
+
+        filter.set_search("bars");
         assert_eq!(
             calls_output.borrow_mut().pop().unwrap(),
             gtk::FilterChange::MoreStrict
         );
 
-        filter.set_search(None);
+        filter.set_search("");
         assert_eq!(
             calls_output.borrow_mut().pop().unwrap(),
             gtk::FilterChange::LessStrict
