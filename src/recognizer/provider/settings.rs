@@ -75,9 +75,7 @@ impl ProviderSettings {
     pub fn reset(&mut self) {
         *self = Self::default();
     }
-}
 
-impl Default for ProviderSettings {
     fn default() -> Self {
         Self {
             active: ProviderType::default(),
