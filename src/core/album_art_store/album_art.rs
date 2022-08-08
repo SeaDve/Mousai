@@ -112,19 +112,23 @@ impl AlbumArt {
     }
 
     fn set_and_get_cache(&self, texture: gdk::Texture) -> &gdk::Texture {
-        if let Err(texture) = self.cache.set(texture) {
-            log::error!(
-                "Cache was already set; is_same_instance = {}",
-                &texture == self.cache.get().unwrap()
-            );
-        }
+        let ret = match self.cache.try_insert(texture) {
+            Ok(final_value) => final_value,
+            Err((final_value, texture)) => {
+                log::error!(
+                    "Cache was already set; is_same_instance = {}",
+                    final_value == &texture
+                );
+                final_value
+            }
+        };
 
         // Since the cache is already loaded, the receiver to
         // delay consecutive calls to Self::texture is not
         // needed anymore.
         self.loading.replace(None);
 
-        self.cache.get().unwrap()
+        ret
     }
 
     #[cfg(test)]
