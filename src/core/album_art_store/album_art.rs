@@ -144,8 +144,8 @@ mod test {
     use futures_util::future;
     use gtk::glib;
 
-    #[gtk::test] // Run in serial
-    fn download() {
+    #[gtk::test]
+    async fn download() {
         let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
@@ -155,21 +155,19 @@ mod test {
         assert!(!album_art.is_loaded());
         assert_eq!(album_art.uri(), download_url);
 
-        glib::MainContext::default().block_on(async move {
-            assert!(album_art.texture().await.is_ok());
-            assert!(album_art.is_loaded());
-            assert_eq!(album_art.uri(), gio::File::for_path(cache_path).uri());
+        assert!(album_art.texture().await.is_ok());
+        assert!(album_art.is_loaded());
+        assert_eq!(album_art.uri(), gio::File::for_path(cache_path).uri());
 
-            // Multiple texture call yields the same instance of texture.
-            assert_eq!(
-                album_art.texture().await.unwrap(),
-                album_art.texture().await.unwrap()
-            );
-        });
+        // Multiple texture call yields the same instance of texture.
+        assert_eq!(
+            album_art.texture().await.unwrap(),
+            album_art.texture().await.unwrap()
+        );
     }
 
-    #[gtk::test] // Run in serial
-    fn concurrent_downloads() {
+    #[gtk::test]
+    async fn concurrent_downloads() {
         let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
@@ -177,18 +175,16 @@ mod test {
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
 
-        glib::MainContext::default().block_on(async move {
-            // Should not panic on the following line in `AlbumArt::texture`.
-            // debug_assert!(self.loading.borrow().is_none());
-            let results = future::join_all(vec![
-                album_art.texture(),
-                album_art.texture(),
-                album_art.texture(),
-                album_art.texture(),
-            ])
-            .await;
+        // Should not panic on the following line in `AlbumArt::texture`.
+        // debug_assert!(self.loading.borrow().is_none());
+        let results = future::join_all(vec![
+            album_art.texture(),
+            album_art.texture(),
+            album_art.texture(),
+            album_art.texture(),
+        ])
+        .await;
 
-            assert!(results.iter().all(|r| r.is_ok()));
-        });
+        assert!(results.iter().all(|r| r.is_ok()));
     }
 }
