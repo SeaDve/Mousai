@@ -16,6 +16,7 @@ use super::{
     AdaptiveMode, Window,
 };
 use crate::{
+    core::BindingVec,
     model::{ExternalLinkWrapper, Song},
     player::{Player, PlayerState},
     utils, Application,
@@ -52,7 +53,7 @@ mod imp {
 
         pub(super) song: RefCell<Option<Song>>,
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
-        pub(super) bindings: RefCell<Vec<glib::Binding>>,
+        pub(super) bindings: BindingVec,
     }
 
     #[glib::object_subclass]
@@ -190,10 +191,6 @@ mod imp {
             while let Some(child) = obj.first_child() {
                 child.unparent();
             }
-
-            for binding in self.bindings.borrow_mut().drain(..) {
-                binding.unbind();
-            }
         }
     }
 
@@ -245,29 +242,23 @@ impl SongPage {
         let imp = self.imp();
         imp.song.replace(song.clone());
 
-        {
-            let mut bindings = imp.bindings.borrow_mut();
+        imp.bindings.unbind_all();
 
-            for binding in bindings.drain(..) {
-                binding.unbind();
-            }
-
-            if let Some(ref song) = song {
-                bindings.push(
-                    song.bind_property("lyrics", &imp.lyrics_label.get(), "label")
-                        .flags(glib::BindingFlags::SYNC_CREATE)
-                        .build(),
-                );
-                bindings.push(
-                    song.bind_property("lyrics", &imp.lyrics_group.get(), "visible")
-                        .transform_to(|_, value| {
-                            let lyrics = value.get::<Option<String>>().unwrap();
-                            Some(lyrics.is_some().to_value())
-                        })
-                        .flags(glib::BindingFlags::SYNC_CREATE)
-                        .build(),
-                );
-            }
+        if let Some(ref song) = song {
+            imp.bindings.push(
+                song.bind_property("lyrics", &imp.lyrics_label.get(), "label")
+                    .flags(glib::BindingFlags::SYNC_CREATE)
+                    .build(),
+            );
+            imp.bindings.push(
+                song.bind_property("lyrics", &imp.lyrics_group.get(), "visible")
+                    .transform_to(|_, value| {
+                        let lyrics = value.get::<Option<String>>().unwrap();
+                        Some(lyrics.is_some().to_value())
+                    })
+                    .flags(glib::BindingFlags::SYNC_CREATE)
+                    .build(),
+            );
         }
 
         // Only crossfade when album art is not loaded to avoid

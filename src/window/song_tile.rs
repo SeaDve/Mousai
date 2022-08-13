@@ -13,6 +13,7 @@ use super::{
     AdaptiveMode, Window,
 };
 use crate::{
+    core::BindingVec,
     model::Song,
     player::{Player, PlayerState},
     Application,
@@ -39,7 +40,7 @@ mod imp {
 
         pub(super) song: RefCell<Option<Song>>,
         pub(super) player: OnceCell<WeakRef<Player>>,
-        pub(super) bindings: RefCell<Vec<glib::Binding>>,
+        pub(super) bindings: BindingVec,
     }
 
     #[glib::object_subclass]
@@ -111,10 +112,6 @@ mod imp {
             while let Some(child) = obj.first_child() {
                 child.unparent();
             }
-
-            for binding in self.bindings.borrow_mut().drain(..) {
-                binding.unbind();
-            }
         }
     }
 
@@ -152,20 +149,14 @@ impl SongTile {
 
         let imp = self.imp();
 
-        {
-            let mut bindings = imp.bindings.borrow_mut();
+        imp.bindings.unbind_all();
 
-            for binding in bindings.drain(..) {
-                binding.unbind();
-            }
-
-            if let Some(ref song) = song {
-                bindings.push(
-                    song.bind_property("is-newly-recognized", &imp.new_label.get(), "visible")
-                        .flags(glib::BindingFlags::SYNC_CREATE)
-                        .build(),
-                );
-            }
+        if let Some(ref song) = song {
+            imp.bindings.push(
+                song.bind_property("is-newly-recognized", &imp.new_label.get(), "visible")
+                    .flags(glib::BindingFlags::SYNC_CREATE)
+                    .build(),
+            );
         }
 
         imp.album_cover.set_song(song.clone());
