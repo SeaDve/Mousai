@@ -264,23 +264,6 @@ impl HistoryView {
             .is_some()
     }
 
-    pub fn pop_song_page(&self) {
-        let imp = self.imp();
-
-        let song_page_item = imp.song_pages.borrow_mut().pop();
-        if let Some(item) = song_page_item {
-            self.stack_remove_song_page_item(item);
-        } else {
-            self.update_history_stack();
-
-            if imp.stack.visible_child().as_ref() != Some(&imp.history_child.get().upcast()) {
-                log::error!(
-                    "Popped all song pages, but the history child is still not the visible child"
-                );
-            }
-        }
-    }
-
     pub fn push_song_page(&self, song: &Song) {
         let imp = self.imp();
 
@@ -315,6 +298,23 @@ impl HistoryView {
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_recognized(false);
+    }
+
+    pub fn pop_song_page(&self) {
+        let imp = self.imp();
+
+        let song_page_item = imp.song_pages.borrow_mut().pop();
+        if let Some(item) = song_page_item {
+            self.stack_remove_song_page_item(item);
+        } else {
+            self.update_history_stack();
+
+            if imp.stack.visible_child().as_ref() != Some(&imp.history_child.get().upcast()) {
+                log::error!(
+                    "Popped all song pages, but the history child is still not the visible child"
+                );
+            }
+        }
     }
 
     /// Must only be called once
@@ -722,6 +722,7 @@ mod test {
         song_list.append(song.clone());
 
         let view = HistoryView::new();
+        view.bind_player(&Player::new());
         view.bind_song_list(&song_list);
         assert!(!view.is_on_song_page());
         assert_eq!(n_song_pages(&view), 0);
@@ -758,6 +759,7 @@ mod test {
         song_list.append(song_3.clone());
 
         let view = HistoryView::new();
+        view.bind_player(&Player::new());
         view.bind_song_list(&song_list);
         assert_eq!(n_song_pages(&view), 0);
 
