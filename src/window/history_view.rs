@@ -716,13 +716,14 @@ mod test {
     fn push_and_pop_song_page() {
         init_gresources();
 
+        let player = Player::new();
         let song_list = SongList::default();
 
         let song = new_test_song("1");
         song_list.append(song.clone());
 
         let view = HistoryView::new();
-        view.bind_player(&Player::new());
+        view.bind_player(&player);
         view.bind_song_list(&song_list);
         assert!(!view.is_on_song_page());
         assert_eq!(n_song_pages(&view), 0);
@@ -749,6 +750,7 @@ mod test {
     fn push_and_pop_song_page_with_duplicate_non_adjacent() {
         init_gresources();
 
+        let player = Player::new();
         let song_list = SongList::default();
 
         let song_1 = new_test_song("1");
@@ -759,7 +761,7 @@ mod test {
         song_list.append(song_3.clone());
 
         let view = HistoryView::new();
-        view.bind_player(&Player::new());
+        view.bind_player(&player);
         view.bind_song_list(&song_list);
         assert_eq!(n_song_pages(&view), 0);
 
