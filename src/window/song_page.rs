@@ -190,6 +190,10 @@ mod imp {
             while let Some(child) = obj.first_child() {
                 child.unparent();
             }
+
+            for binding in self.bindings.borrow_mut().drain(..) {
+                binding.unbind();
+            }
         }
     }
 
