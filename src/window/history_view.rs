@@ -9,7 +9,7 @@ use once_cell::unsync::OnceCell;
 
 use std::cell::{Cell, RefCell};
 
-use super::{song_page::SongPage, song_tile::SongTile, Window};
+use super::{song_page::SongPage, song_tile::SongTile, AdaptiveMode};
 use crate::{
     config::APP_ID,
     model::{FuzzyFilter, FuzzySorter, Song, SongList},
@@ -58,6 +58,7 @@ mod imp {
         pub(super) empty_search_page: TemplateChild<adw::StatusPage>,
 
         pub(super) is_selection_mode: Cell<bool>,
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         pub(super) player: OnceCell<WeakRef<Player>>,
         pub(super) song_list: OnceCell<WeakRef<SongList>>,
@@ -67,7 +68,7 @@ mod imp {
         pub(super) removed_purgatory: RefCell<Vec<Song>>,
         pub(super) undo_remove_toast: RefCell<Option<adw::Toast>>,
 
-        pub(super) song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId)>>,
+        pub(super) song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId, glib::Binding)>>,
         pub(super) pending_stack_remove_song_page: RefCell<Option<SongPage>>,
     }
 
@@ -145,15 +146,37 @@ mod imp {
                     glib::ParamSpecBoolean::builder("is-selection-mode")
                         .flags(glib::ParamFlags::READABLE)
                         .build(),
+                    // Current adapative mode
+                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::static_type())
+                        .default_value(AdaptiveMode::default() as i32)
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
                 ]
             });
 
             PROPERTIES.as_ref()
         }
 
+        fn set_property(
+            &self,
+            obj: &Self::Type,
+            _id: usize,
+            value: &glib::Value,
+            pspec: &glib::ParamSpec,
+        ) {
+            match pspec.name() {
+                "adaptive-mode" => {
+                    let adaptive_mode = value.get().unwrap();
+                    obj.set_adaptive_mode(adaptive_mode);
+                }
+                _ => unimplemented!(),
+            }
+        }
+
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "is-selection-mode" => obj.is_selection_mode().to_value(),
+                "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -212,6 +235,19 @@ impl HistoryView {
         self.imp().is_selection_mode.get()
     }
 
+    pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+        if adaptive_mode == self.adaptive_mode() {
+            return;
+        }
+
+        self.imp().adaptive_mode.set(adaptive_mode);
+        self.notify("adaptive-mode");
+    }
+
+    pub fn adaptive_mode(&self) -> AdaptiveMode {
+        self.imp().adaptive_mode.get()
+    }
+
     pub fn stop_selection_mode(&self) {
         self.set_selection_mode(false);
     }
@@ -249,29 +285,33 @@ impl HistoryView {
         let imp = self.imp();
 
         // Return if the last `SongPage`s song has the same id as the given song
-        if let Some((song_page, _)) = imp.song_pages.borrow().last() {
+        if let Some((song_page, ..)) = imp.song_pages.borrow().last() {
             if Some(song.id()) == song_page.song().map(|song| song.id()) {
                 return;
             }
         }
 
         let song_page = SongPage::new();
-        if let Some(ref player) = imp.player.get().and_then(|player| player.upgrade()) {
-            song_page.bind_player(player);
-        }
+        song_page.bind_player(&self.player());
         song_page.set_song(Some(song.clone()));
         let song_removed_handler_id =
             song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
                 obj.remove_song(song);
                 obj.show_undo_remove_toast();
             }));
+        let adaptive_mode_binding = self
+            .bind_property("adaptive-mode", &song_page, "adaptive-mode")
+            .flags(glib::BindingFlags::SYNC_CREATE)
+            .build();
 
         imp.stack.add_child(&song_page);
         imp.stack.set_visible_child(&song_page);
 
-        imp.song_pages
-            .borrow_mut()
-            .push((song_page, song_removed_handler_id));
+        imp.song_pages.borrow_mut().push((
+            song_page,
+            song_removed_handler_id,
+            adaptive_mode_binding,
+        ));
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_recognized(false);
@@ -362,19 +402,30 @@ impl HistoryView {
             .unwrap();
     }
 
-    fn stack_remove_song_page_item(&self, item: (SongPage, glib::SignalHandlerId)) {
-        let (song_page, handler_id) = item;
+    fn player(&self) -> Player {
+        self.imp()
+            .player
+            .get()
+            .expect("Player was not bound on HistoryView")
+            .upgrade()
+            .expect("Player was dropped")
+    }
+
+    fn stack_remove_song_page_item(&self, item: (SongPage, glib::SignalHandlerId, glib::Binding)) {
+        let (song_page, handler_id, binding) = item;
 
         let imp = self.imp();
 
         imp.stack
             .set_visible_child(&imp.song_pages.borrow().last().map_or_else(
                 || imp.history_child.get().upcast::<gtk::Widget>(),
-                |(song_page, _)| song_page.clone().upcast::<gtk::Widget>(),
+                |(song_page, ..)| song_page.clone().upcast::<gtk::Widget>(),
             ));
 
         song_page.disconnect(handler_id);
         song_page.unbind_player();
+
+        binding.unbind();
 
         imp.pending_stack_remove_song_page.replace(Some(song_page));
     }
@@ -402,7 +453,7 @@ impl HistoryView {
             .take()
             .into_iter()
             // FIXME use Vec::drain_filter
-            .partition(|(song_page, _)| {
+            .partition(|(song_page, ..)| {
                 song_page.song().map(|song_page_song| song_page_song.id()) == Some(song.id())
             });
         imp.song_pages.replace(song_pages);
@@ -576,11 +627,14 @@ impl HistoryView {
         let factory = gtk::SignalListItemFactory::new();
         factory.connect_setup(clone!(@weak self as obj => move |_, list_item| {
             let song_tile = SongTile::new();
-            if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
-                song_tile.bind_player(&window.player());
-            } else {
-                log::error!("Cannot bind SongTile to Player: HistoryView doesn't have root");
-            }
+            song_tile.bind_player(&obj.player());
+
+            obj.property_expression("adaptive-mode").bind(
+                &song_tile,
+                "adaptive-mode",
+                glib::Object::NONE,
+            );
+
             list_item
                 .property_expression("item")
                 .bind(&song_tile, "song", glib::Object::NONE);

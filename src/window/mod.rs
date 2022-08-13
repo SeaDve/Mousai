@@ -169,6 +169,10 @@ mod imp {
                 .search_bar()
                 .set_key_capture_widget(Some(obj.upcast_ref::<gtk::Widget>()));
 
+            obj.bind_property("adaptive-mode", &self.main_view.get(), "adaptive-mode")
+                .flags(glib::BindingFlags::SYNC_CREATE)
+                .build();
+
             obj.setup_signals();
 
             obj.load_window_size();

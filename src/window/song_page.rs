@@ -6,14 +6,14 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 
 use super::{
     album_cover::AlbumCover,
     external_link_tile::ExternalLinkTile,
     information_row::InformationRow,
     playback_button::{PlaybackButton, PlaybackButtonMode},
-    AdaptiveMode, Window,
+    AdaptiveMode,
 };
 use crate::{
     core::BindingVec,
@@ -52,6 +52,8 @@ mod imp {
         pub(super) lyrics_label: TemplateChild<gtk::Label>,
 
         pub(super) song: RefCell<Option<Song>>,
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
         pub(super) bindings: BindingVec,
     }
@@ -122,6 +124,11 @@ mod imp {
                     glib::ParamSpecObject::builder("song", Song::static_type())
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
+                    // Current adapative mode
+                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::static_type())
+                        .default_value(AdaptiveMode::default() as i32)
+                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .build(),
                 ]
             });
 
@@ -140,6 +147,10 @@ mod imp {
                     let song = value.get().unwrap();
                     obj.set_song(song);
                 }
+                "adaptive-mode" => {
+                    let adaptive_mode = value.get().unwrap();
+                    obj.set_adaptive_mode(adaptive_mode);
+                }
                 _ => unimplemented!(),
             }
         }
@@ -147,6 +158,7 @@ mod imp {
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "song" => obj.song().to_value(),
+                "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -194,21 +206,7 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for SongPage {
-        fn realize(&self, obj: &Self::Type) {
-            self.parent_realize(obj);
-
-            if let Some(window) = obj.root().and_then(|root| root.downcast::<Window>().ok()) {
-                window.connect_adaptive_mode_notify(clone!(@weak obj => move |window| {
-                    obj.update_album_cover_pixel_size(window);
-                }));
-
-                obj.update_album_cover_pixel_size(&window);
-            } else {
-                log::error!("Failed to connect to Window.notify::adaptive-mode: SongPage does not have a root");
-            }
-        }
-    }
+    impl WidgetImpl for SongPage {}
 }
 
 glib::wrapper! {
@@ -280,6 +278,26 @@ impl SongPage {
 
     pub fn song(&self) -> Option<Song> {
         self.imp().song.borrow().clone()
+    }
+
+    pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+        if adaptive_mode == self.adaptive_mode() {
+            return;
+        }
+
+        let imp = self.imp();
+
+        imp.album_cover.set_pixel_size(match adaptive_mode {
+            AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
+            AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
+        });
+
+        imp.adaptive_mode.set(adaptive_mode);
+        self.notify("adaptive-mode");
+    }
+
+    pub fn adaptive_mode(&self) -> AdaptiveMode {
+        self.imp().adaptive_mode.get()
     }
 
     /// Must only be called when no player is bound.
@@ -384,15 +402,6 @@ impl SongPage {
             imp.release_date_row.set_visible(false);
             imp.release_date_row.set_data("");
         }
-    }
-
-    fn update_album_cover_pixel_size(&self, window: &Window) {
-        self.imp()
-            .album_cover
-            .set_pixel_size(match window.adaptive_mode() {
-                AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
-                AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
-            });
     }
 }
 
