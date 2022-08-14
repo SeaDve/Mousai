@@ -369,30 +369,27 @@ impl SongPage {
     }
 
     fn update_information(&self) {
-        let song = match self.song() {
-            Some(song) => song,
-            None => return,
-        };
-
         let imp = self.imp();
 
-        imp.external_links_box
-            .bind_model(Some(&song.external_links()), |item| {
+        let song = self.song();
+        let song = song.as_ref();
+
+        imp.external_links_box.bind_model(
+            song.map(|song| song.external_links()).as_ref(),
+            |item| {
                 let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
                 ExternalLinkTile::new(wrapper).upcast()
-            });
+            },
+        );
 
-        imp.last_heard_row
-            .set_data(&song.last_heard().fuzzy_display());
-        imp.album_row.set_data(&song.album());
-
-        if let Some(ref release_date) = song.release_date() {
-            imp.release_date_row.set_data(release_date);
-            imp.release_date_row.set_visible(true);
-        } else {
-            imp.release_date_row.set_visible(false);
-            imp.release_date_row.set_data("");
-        }
+        imp.last_heard_row.set_data(
+            song.map(|song| song.last_heard().fuzzy_display())
+                .as_deref(),
+        );
+        imp.album_row
+            .set_data(song.map(|song| song.album()).as_deref());
+        imp.release_date_row
+            .set_data(song.and_then(|song| song.release_date()).as_deref());
     }
 
     fn update_album_cover_size(&self) {

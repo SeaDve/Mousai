@@ -1,6 +1,8 @@
 use adw::{prelude::*, subclass::prelude::*};
 use gtk::glib;
 
+use std::cell::RefCell;
+
 mod imp {
     use super::*;
     use gtk::CompositeTemplate;
@@ -11,6 +13,8 @@ mod imp {
     pub struct InformationRow {
         #[template_child]
         pub(super) data_label: TemplateChild<gtk::Label>,
+
+        pub(super) data: RefCell<Option<String>>,
     }
 
     #[glib::object_subclass]
@@ -32,7 +36,8 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    // The value of the information
+                    // The value of the information. If this is None or
+                    // empty, self will be hidden.
                     glib::ParamSpecString::builder("data")
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
@@ -65,6 +70,12 @@ mod imp {
             }
         }
 
+        fn constructed(&self, obj: &Self::Type) {
+            self.parent_constructed(obj);
+
+            obj.update_ui();
+        }
+
         fn dispose(&self, obj: &Self::Type) {
             while let Some(child) = obj.first_child() {
                 child.unparent();
@@ -88,13 +99,25 @@ impl InformationRow {
         glib::Object::new(&[]).expect("Failed to create InformationRow")
     }
 
-    pub fn set_data(&self, data: &str) {
-        self.imp().data_label.set_label(data);
+    pub fn set_data(&self, data: Option<&str>) {
+        if data == self.data().as_deref() {
+            return;
+        }
+
+        self.imp().data.replace(data.map(|data| data.to_string()));
+        self.update_ui();
         self.notify("data");
     }
 
-    pub fn data(&self) -> glib::GString {
-        self.imp().data_label.label()
+    pub fn data(&self) -> Option<String> {
+        self.imp().data.borrow().clone()
+    }
+
+    fn update_ui(&self) {
+        let data = self.data().filter(|data| !data.is_empty());
+
+        self.set_visible(data.is_some());
+        self.imp().data_label.set_text(&data.unwrap_or_default());
     }
 }
 
