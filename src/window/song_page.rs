@@ -197,6 +197,8 @@ mod imp {
                     }
                 });
             });
+
+            obj.update_album_cover_size();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -269,9 +271,9 @@ impl SongPage {
         );
         imp.album_cover.set_song(song);
 
-        self.update_information();
         self.update_playback_ui();
         self.update_external_links();
+        self.update_information();
 
         self.notify("song");
     }
@@ -285,14 +287,8 @@ impl SongPage {
             return;
         }
 
-        let imp = self.imp();
-
-        imp.album_cover.set_pixel_size(match adaptive_mode {
-            AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
-            AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
-        });
-
-        imp.adaptive_mode.set(adaptive_mode);
+        self.imp().adaptive_mode.set(adaptive_mode);
+        self.update_album_cover_size();
         self.notify("adaptive-mode");
     }
 
@@ -402,6 +398,15 @@ impl SongPage {
             imp.release_date_row.set_visible(false);
             imp.release_date_row.set_data("");
         }
+    }
+
+    fn update_album_cover_size(&self) {
+        self.imp()
+            .album_cover
+            .set_pixel_size(match self.adaptive_mode() {
+                AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
+                AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
+            });
     }
 }
 

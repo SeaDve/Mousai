@@ -118,6 +118,7 @@ mod imp {
             self.parent_constructed(obj);
 
             obj.update_playback_button_visibility();
+            obj.update_album_cover_size();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -174,14 +175,8 @@ impl SongTile {
             return;
         }
 
-        let imp = self.imp();
-
-        imp.album_cover.set_pixel_size(match adaptive_mode {
-            AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
-            AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
-        });
-
-        imp.adaptive_mode.set(adaptive_mode);
+        self.imp().adaptive_mode.set(adaptive_mode);
+        self.update_album_cover_size();
         self.notify("adaptive-mode");
     }
 
@@ -235,6 +230,15 @@ impl SongTile {
         self.imp()
             .playback_button
             .set_visible(self.song().and_then(|song| song.playback_link()).is_some());
+    }
+
+    fn update_album_cover_size(&self) {
+        self.imp()
+            .album_cover
+            .set_pixel_size(match self.adaptive_mode() {
+                AdaptiveMode::Normal => NORMAL_ALBUM_COVER_PIXEL_SIZE,
+                AdaptiveMode::Narrow => NARROW_ALBUM_COVER_PIXEL_SIZE,
+            });
     }
 }
 

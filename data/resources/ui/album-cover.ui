@@ -16,14 +16,10 @@
           </object>
         </child>
         <child>
-          <object class="GtkImage" id="image_a">
-            <property name="pixel-size">180</property>
-          </object>
+          <object class="GtkImage" id="image_a"/>
         </child>
         <child>
-          <object class="GtkImage" id="image_b">
-            <property name="pixel-size">180</property>
-          </object>
+          <object class="GtkImage" id="image_b"/>
         </child>
       </object>
     </child>
