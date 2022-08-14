@@ -272,7 +272,6 @@ impl SongPage {
         imp.album_cover.set_song(song);
 
         self.update_playback_ui();
-        self.update_external_links();
         self.update_information();
 
         self.notify("song");
@@ -369,16 +368,6 @@ impl SongPage {
         }
     }
 
-    fn update_external_links(&self) {
-        self.imp().external_links_box.bind_model(
-            self.song().map(|song| song.external_links()).as_ref(),
-            |item| {
-                let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
-                ExternalLinkTile::new(wrapper).upcast()
-            },
-        );
-    }
-
     fn update_information(&self) {
         let song = match self.song() {
             Some(song) => song,
@@ -386,6 +375,12 @@ impl SongPage {
         };
 
         let imp = self.imp();
+
+        imp.external_links_box
+            .bind_model(Some(&song.external_links()), |item| {
+                let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
+                ExternalLinkTile::new(wrapper).upcast()
+            });
 
         imp.last_heard_row
             .set_data(&song.last_heard().fuzzy_display());
