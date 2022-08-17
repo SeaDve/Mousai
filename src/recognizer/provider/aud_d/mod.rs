@@ -108,18 +108,10 @@ impl AudD {
 #[async_trait(?Send)]
 impl Provider for AudD {
     async fn recognize(&self, recording: &AudioRecording) -> Result<Song, ProviderError> {
-        let audio = recording.to_base_64().map_err(|err| {
-            log::error!("Failed to convert audio recording to base64: {:?}", err);
-
-            ProviderError::Other(gettext(
-                "Failed to convert the recording to base64. Please report this to Mousai's bug tracker.",
-            ))
-        })?;
-
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz,lyrics",
-            "audio": audio.as_str(),
+            "audio": recording.to_base_64().as_str(),
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/")
