@@ -52,7 +52,8 @@ mod imp {
 
             obj.setup_gactions();
             obj.setup_accels();
-            obj.setup_inspector_page();
+
+            setup_inspector_page();
         }
     }
 
@@ -152,19 +153,6 @@ impl Application {
         self.set_accels_for_action("win.toggle-listen", &["<Control>r"]);
         self.set_accels_for_action("win.toggle-search", &["<Control>f"]);
     }
-
-    fn setup_inspector_page(&self) {
-        if gio::IOExtensionPoint::lookup("gtk-inspector-page").is_some() {
-            gio::IOExtensionPoint::implement(
-                "gtk-inspector-page",
-                InspectorPage::static_type(),
-                APP_ID,
-                10,
-            );
-        } else {
-            log::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found.");
-        }
-    }
 }
 
 impl Default for Application {
@@ -175,5 +163,18 @@ impl Default for Application {
         );
 
         gio::Application::default().unwrap().downcast().unwrap()
+    }
+}
+
+fn setup_inspector_page() {
+    if gio::IOExtensionPoint::lookup("gtk-inspector-page").is_some() {
+        gio::IOExtensionPoint::implement(
+            "gtk-inspector-page",
+            InspectorPage::static_type(),
+            APP_ID,
+            10,
+        );
+    } else {
+        log::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found.");
     }
 }
