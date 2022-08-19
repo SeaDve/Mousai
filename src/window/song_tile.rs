@@ -1,4 +1,5 @@
 use gtk::{
+    gdk,
     glib::{self, clone, closure_local, WeakRef},
     prelude::*,
     subclass::prelude::*,
@@ -169,6 +170,17 @@ mod imp {
                 obj.update_select_button_visibility();
             }));
             obj.add_controller(&motion_controller);
+
+            let gesture_click = gtk::GestureClick::builder()
+                .button(gdk::BUTTON_SECONDARY)
+                .build();
+            gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
+                gesture.set_state(gtk::EventSequenceState::Claimed);
+                if obj.contains(x, y) {
+                    obj.emit_by_name::<()>("request-selection-mode", &[]);
+                }
+            }));
+            obj.add_controller(&gesture_click);
 
             self.select_button_active_notify_handler
                 .set(

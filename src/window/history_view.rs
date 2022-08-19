@@ -2,7 +2,7 @@ use adw::prelude::*;
 use gettextrs::{gettext, ngettext};
 use gtk::{
     gdk,
-    glib::{self, clone, closure_local},
+    glib::{self, clone, closure},
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -652,12 +652,18 @@ impl HistoryView {
             list_item
                 .property_expression("item")
                 .bind(&song_tile, "song", glib::Object::NONE);
-            list_item
-                .property_expression("selected")
-                .chain_closure::<bool>(closure_local!(@watch obj => move |_: Option<glib::Object>, selected: bool| {
-                    selected && obj.is_selection_mode()
-                }))
-                .bind(&song_tile, "is-selected", glib::Object::NONE);
+            gtk::ClosureExpression::new::<bool, _, _>(
+                [
+                    list_item.property_expression("selected"),
+                    obj.property_expression("is-selection-mode"),
+                ],
+                closure!(
+                    |_: Option<glib::Object>, selected: bool, is_selection_mode: bool| {
+                        selected && is_selection_mode
+                    }
+                ),
+            )
+            .bind(&song_tile, "is-selected", glib::Object::NONE);
             list_item.set_child(Some(&song_tile));
         }));
 
