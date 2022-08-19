@@ -82,12 +82,13 @@ mod imp {
             klass.bind_template();
 
             klass.install_action("history-view.toggle-selection-mode", None, |obj, _, _| {
-                if obj.is_selection_mode() {
-                    obj.set_selection_mode(false);
-                } else {
-                    obj.unselect_all();
-                    obj.set_selection_mode(true);
-                }
+                // I don't know why exactly getting `is_selection_mode` first
+                // before unselecting all, but it prevents flickering when cancelling
+                // selection mode; probably, because we also set selection mode
+                // on selection change callback.
+                let is_selection_mode = obj.is_selection_mode();
+                obj.unselect_all();
+                obj.set_selection_mode(!is_selection_mode);
             });
 
             klass.install_action("history-view.select-all", None, |obj, _, _| {
@@ -351,13 +352,21 @@ impl HistoryView {
 
         // FIXME save selection even when the song are filtered from FilterListModel
         let selection_model = gtk::MultiSelection::new(Some(&sort_model));
-        selection_model.connect_selection_changed(clone!(@weak self as obj => move |_, _, _| {
+        selection_model.connect_selection_changed(clone!(@weak self as obj => move |model, _, _| {
             if obj.is_selection_mode() {
+                if model.selection().size() == 0 {
+                    obj.set_selection_mode(false);
+                }
+
                 obj.update_selection_actions();
             }
         }));
-        selection_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
+        selection_model.connect_items_changed(clone!(@weak self as obj => move |model, _, _, _| {
             if obj.is_selection_mode() {
+                if model.selection().size() == 0 {
+                    obj.set_selection_mode(false);
+                }
+
                 obj.update_selection_actions();
             }
         }));
