@@ -1,6 +1,6 @@
 use adw::prelude::*;
 use gtk::{
-    glib::{self, clone},
+    glib::{self, clone, closure},
     subclass::prelude::*,
 };
 
@@ -153,7 +153,7 @@ impl InspectorPage {
                 _,
             >(
                 &[],
-                glib::closure!(|list_item: adw::EnumListItem| list_item.name()),
+                closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
 
         imp.provider_row
@@ -189,7 +189,7 @@ impl InspectorPage {
                 _,
             >(
                 &[],
-                glib::closure!(|list_item: adw::EnumListItem| list_item.name()),
+                closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
 
         imp.test_provider_mode_row
