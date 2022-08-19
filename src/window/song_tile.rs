@@ -182,6 +182,15 @@ mod imp {
             }));
             obj.add_controller(&gesture_click);
 
+            let gesture_long_press = gtk::GestureLongPress::builder().build();
+            gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
+                gesture.set_state(gtk::EventSequenceState::Claimed);
+                if obj.contains(x, y) {
+                    obj.emit_by_name::<()>("request-selection-mode", &[]);
+                }
+            }));
+            obj.add_controller(&gesture_long_press);
+
             self.select_button_active_notify_handler
                 .set(
                     self.select_button
