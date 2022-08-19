@@ -67,7 +67,7 @@ playbackbutton.circular > button  {
 
 .history-view > child {
   margin: 3px;
-  padding: 12px;
+  padding: 0px;
 }
 
 /* SongBar */

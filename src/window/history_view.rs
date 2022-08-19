@@ -2,7 +2,7 @@ use adw::prelude::*;
 use gettextrs::{gettext, ngettext};
 use gtk::{
     gdk,
-    glib::{self, clone},
+    glib::{self, clone, closure_local},
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -645,12 +645,18 @@ impl HistoryView {
                     }
                 }
             }));
+            song_tile.connect_request_selection_mode(clone!(@weak obj => move |_| {
+                obj.set_selection_mode(true);
+            }));
 
             list_item
                 .property_expression("item")
                 .bind(&song_tile, "song", glib::Object::NONE);
             list_item
                 .property_expression("selected")
+                .chain_closure::<bool>(closure_local!(@watch obj => move |_: Option<glib::Object>, selected: bool| {
+                    selected && obj.is_selection_mode()
+                }))
                 .bind(&song_tile, "is-selected", glib::Object::NONE);
             list_item.set_child(Some(&song_tile));
         }));

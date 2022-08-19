@@ -1,5 +1,5 @@
 use gtk::{
-    glib::{self, clone, WeakRef},
+    glib::{self, clone, closure_local, WeakRef},
     prelude::*,
     subclass::prelude::*,
 };
@@ -24,6 +24,7 @@ const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
     use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
@@ -49,6 +50,7 @@ mod imp {
         pub(super) player: OnceCell<WeakRef<Player>>,
         pub(super) select_button_active_notify_handler: OnceCell<glib::SignalHandlerId>,
         pub(super) bindings: BindingVec,
+        pub(super) contains_pointer: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -143,13 +145,39 @@ mod imp {
             }
         }
 
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![
+                    Signal::builder("request-selection-mode", &[], <()>::static_type().into())
+                        .build(),
+                ]
+            });
+
+            SIGNALS.as_ref()
+        }
+
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
+
+            let motion_controller = gtk::EventControllerMotion::new();
+            motion_controller.connect_enter(clone!(@weak obj => move |_, _, _| {
+                obj.imp().contains_pointer.set(true);
+                obj.update_select_button_visibility();
+            }));
+            motion_controller.connect_leave(clone!(@weak obj => move |_| {
+                obj.imp().contains_pointer.set(false);
+                obj.update_select_button_visibility();
+            }));
+            obj.add_controller(&motion_controller);
 
             self.select_button_active_notify_handler
                 .set(
                     self.select_button
-                        .connect_active_notify(clone!(@weak obj => move |_| {
+                        .connect_active_notify(clone!(@weak obj => move |button| {
+                            if button.is_active() && !obj.is_selection_mode() {
+                                obj.emit_by_name::<()>("request-selection-mode", &[]);
+                            }
+
                             obj.notify("is-active");
                         })),
                 )
@@ -272,6 +300,19 @@ impl SongTile {
         self.imp().adaptive_mode.get()
     }
 
+    pub fn connect_request_selection_mode<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_closure(
+            "request-selection-mode",
+            true,
+            closure_local!(|obj: &Self| {
+                f(obj);
+            }),
+        )
+    }
+
     /// Must only be called once.
     pub fn bind_player(&self, player: &Player) {
         player.connect_state_notify(clone!(@weak self as obj, @weak player => move |_| {
@@ -315,9 +356,10 @@ impl SongTile {
     }
 
     fn update_select_button_visibility(&self) {
-        self.imp()
-            .select_button_revealer
-            .set_reveal_child(self.is_selection_mode());
+        let imp = self.imp();
+
+        imp.select_button_revealer
+            .set_reveal_child(self.is_selection_mode() || imp.contains_pointer.get());
     }
 
     fn update_playback_button_visibility(&self) {
