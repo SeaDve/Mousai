@@ -2,79 +2,97 @@
 <interface>
   <template class="MsaiSongTile" parent="GtkWidget">
     <property name="layout-manager">
-      <object class="GtkBoxLayout">
-        <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
-      </object>
+      <object class="GtkBinLayout"/>
     </property>
     <child>
       <object class="GtkOverlay">
-        <property name="halign">center</property>
         <property name="child">
-          <object class="MsaiAlbumCover" id="album_cover"/>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkOverlay">
+                <property name="halign">center</property>
+                <property name="child">
+                  <object class="MsaiAlbumCover" id="album_cover"/>
+                </property>
+                <child type="overlay">
+                  <object class="GtkLabel" id="new_label">
+                    <property name="visible">False</property>
+                    <property name="halign">start</property>
+                    <property name="valign">start</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-top">12</property>
+                    <property name="label" translatable="yes">New</property>
+                    <style>
+                      <class name="new"/>
+                    </style>
+                  </object>
+                </child>
+                <child type="overlay">
+                  <object class="MsaiPlaybackButton" id="playback_button">
+                    <property name="halign">end</property>
+                    <property name="valign">end</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="action-name">song-tile.toggle-playback</property>
+                    <style>
+                      <class name="osd"/>
+                      <class name="circular"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="justify">center</property>
+                    <property name="xalign">0.5</property>
+                    <property name="ellipsize">end</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="lines">2</property>
+                    <binding name="label">
+                      <lookup name="title">
+                        <lookup name="song">MsaiSongTile</lookup>
+                      </lookup>
+                    </binding>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="justify">center</property>
+                    <property name="xalign">0.5</property>
+                    <property name="ellipsize">end</property>
+                    <property name="wrap">True</property>
+                    <property name="wrap-mode">word</property>
+                    <property name="lines">2</property>
+                    <binding name="label">
+                      <lookup name="artist">
+                        <lookup name="song">MsaiSongTile</lookup>
+                      </lookup>
+                    </binding>
+                    <style>
+                      <class name="caption"/>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
         </property>
         <child type="overlay">
-          <object class="GtkLabel" id="new_label">
-            <property name="visible">False</property>
-            <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="margin-start">12</property>
-            <property name="margin-top">12</property>
-            <property name="label" translatable="yes">New</property>
-            <style>
-              <class name="new"/>
-            </style>
-          </object>
-        </child>
-        <child type="overlay">
-          <object class="MsaiPlaybackButton" id="playback_button">
-            <property name="halign">end</property>
+          <object class="GtkCheckButton" id="select_button">
             <property name="valign">end</property>
+            <property name="halign">end</property>
             <property name="margin-end">12</property>
             <property name="margin-bottom">12</property>
-            <property name="action-name">song-tile.toggle-playback</property>
             <style>
-              <class name="osd"/>
-              <class name="circular"/>
-            </style>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="justify">center</property>
-            <property name="xalign">0.5</property>
-            <property name="ellipsize">end</property>
-            <property name="wrap">True</property>
-            <property name="wrap-mode">word</property>
-            <property name="lines">2</property>
-            <binding name="label">
-              <lookup name="title">
-                <lookup name="song">MsaiSongTile</lookup>
-              </lookup>
-            </binding>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel">
-            <property name="justify">center</property>
-            <property name="xalign">0.5</property>
-            <property name="ellipsize">end</property>
-            <property name="wrap">True</property>
-            <property name="wrap-mode">word</property>
-            <property name="lines">2</property>
-            <binding name="label">
-              <lookup name="artist">
-                <lookup name="song">MsaiSongTile</lookup>
-              </lookup>
-            </binding>
-            <style>
-              <class name="caption"/>
-              <class name="dim-label"/>
+              <class name="selection-mode"/>
             </style>
           </object>
         </child>

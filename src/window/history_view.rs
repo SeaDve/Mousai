@@ -629,44 +629,30 @@ impl HistoryView {
             let song_tile = SongTile::new();
             song_tile.bind_player(&obj.player());
 
-            obj.property_expression("adaptive-mode").bind(
-                &song_tile,
-                "adaptive-mode",
-                glib::Object::NONE,
-            );
-
-            list_item
-                .property_expression("item")
-                .bind(&song_tile, "song", glib::Object::NONE);
-
-            let check_button = gtk::CheckButton::builder()
-                .css_classes(vec!["selection-mode".into()])
-                .valign(gtk::Align::End)
-                .halign(gtk::Align::End)
-                .margin_end(12)
-                .margin_bottom(12)
+            obj.bind_property("is-selection-mode", &song_tile, "is-selection-mode")
+                .flags(glib::BindingFlags::SYNC_CREATE)
                 .build();
-            check_button.connect_active_notify(clone!(@weak obj, @weak list_item => move |check_button| {
+            obj.bind_property("adaptive-mode", &song_tile, "adaptive-mode")
+                .flags(glib::BindingFlags::SYNC_CREATE)
+                .build();
+
+            song_tile.connect_active_notify(clone!(@weak obj, @weak list_item => move |tile| {
                 if let Some(selection_model) = obj.imp().selection_model.get().and_then(|model| model.upgrade()) {
-                    if check_button.is_active() {
+                    if tile.is_active() {
                         selection_model.select_item(list_item.position(), false);
                     } else {
                         selection_model.unselect_item(list_item.position());
                     }
                 }
             }));
-            obj.bind_property("is-selection-mode", &check_button, "visible")
-                .flags(glib::BindingFlags::SYNC_CREATE)
-                .build();
-            list_item.property_expression("selected").bind(
-                &check_button,
-                "active",
-                glib::Object::NONE,
-            );
 
-            let overlay = gtk::Overlay::builder().child(&song_tile).build();
-            overlay.add_overlay(&check_button);
-            list_item.set_child(Some(&overlay));
+            list_item
+                .property_expression("item")
+                .bind(&song_tile, "song", glib::Object::NONE);
+            list_item
+                .property_expression("selected")
+                .bind(&song_tile, "is-selected", glib::Object::NONE);
+            list_item.set_child(Some(&song_tile));
         }));
 
         let grid = self.imp().grid.get();
