@@ -573,6 +573,7 @@ impl HistoryView {
 
         imp.selection_mode_bar.set_revealed(is_selection_mode);
         imp.grid.set_enable_rubberband(is_selection_mode);
+        imp.grid.set_single_click_activate(!is_selection_mode);
     }
 
     fn update_history_stack(&self) {
@@ -676,12 +677,7 @@ impl HistoryView {
             list_item.set_child(Some(&song_tile));
         }));
 
-        let grid = self.imp().grid.get();
-        grid.set_factory(Some(&factory));
-
-        self.bind_property("is-selection-mode", &grid, "single-click-activate")
-            .flags(glib::BindingFlags::SYNC_CREATE | glib::BindingFlags::INVERT_BOOLEAN)
-            .build();
+        self.imp().grid.set_factory(Some(&factory));
     }
 }
 
