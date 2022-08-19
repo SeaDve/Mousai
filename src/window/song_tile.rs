@@ -37,6 +37,8 @@ mod imp {
         #[template_child]
         pub(super) playback_button: TemplateChild<PlaybackButton>,
         #[template_child]
+        pub(super) select_button_revealer: TemplateChild<gtk::Revealer>,
+        #[template_child]
         pub(super) select_button: TemplateChild<gtk::CheckButton>,
 
         pub(super) song: RefCell<Option<Song>>,
@@ -314,8 +316,8 @@ impl SongTile {
 
     fn update_select_button_visibility(&self) {
         self.imp()
-            .select_button
-            .set_visible(self.is_selection_mode());
+            .select_button_revealer
+            .set_reveal_child(self.is_selection_mode());
     }
 
     fn update_playback_button_visibility(&self) {

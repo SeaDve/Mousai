@@ -86,14 +86,19 @@
           </object>
         </property>
         <child type="overlay">
-          <object class="GtkCheckButton" id="select_button">
+          <object class="GtkRevealer" id="select_button_revealer">
             <property name="valign">end</property>
             <property name="halign">end</property>
             <property name="margin-end">12</property>
             <property name="margin-bottom">12</property>
-            <style>
-              <class name="selection-mode"/>
-            </style>
+            <property name="transition-type">crossfade</property>
+            <property name="child">
+              <object class="GtkCheckButton" id="select_button">
+                <style>
+                  <class name="selection-mode"/>
+                </style>
+              </object>
+            </property>
           </object>
         </child>
       </object>
