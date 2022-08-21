@@ -9,13 +9,14 @@
 # matb <perso@mathieu-bousquet.fr>, 2022.
 # Mathieu B. <perso@mathieu-bousquet.fr>, 2022.
 # gt <orenantao@gmail.com>, 2022.
+# rene-coty <irenee.thirion@e.email>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-07-14 05:20+0000\n"
-"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
+"PO-Revision-Date: 2022-08-21 12:18+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
 "\n"
 "Language: fr\n"
@@ -387,7 +388,7 @@ msgstr ""
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
-msgstr "Status de réponse invalide pour {}"
+msgstr "Statut de réponse invalide pour {}"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
