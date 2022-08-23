@@ -7,13 +7,14 @@
 # WhiredPlanck <fungdaat31@outlook.com>, 2021.
 # yzqzss <yzqzss@othing.xyz>, 2022.
 # lumingzh <lumingzh@qq.com>, 2022.
+# Eric <alchemillatruth@purelymail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-07-31 03:18+0000\n"
-"Last-Translator: TheInterestingSoul <wangpy01@outlook.com>\n"
+"PO-Revision-Date: 2022-08-23 11:25+0000\n"
+"Last-Translator: Eric <alchemillatruth@purelymail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -364,7 +365,7 @@ msgstr "连接至服务器失败。"
 
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
-msgstr "回应解析失败。请将该问题反馈到 Mousai 开发者。"
+msgstr "无法解析响应。 请将此报告到 Mosai 的错误跟踪器"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
