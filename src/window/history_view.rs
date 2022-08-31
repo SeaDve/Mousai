@@ -532,7 +532,7 @@ impl HistoryView {
             let toast = adw::Toast::builder()
                 .priority(adw::ToastPriority::High)
                 .button_label(&gettext("_Undo"))
-                .action_name("undo-remove-toast.dismiss")
+                .action_name("undo-remove-toast.undo")
                 .build();
 
             toast.connect_dismissed(clone!(@weak self as obj => move |_| {

@@ -33,7 +33,7 @@ pub fn present(transient_for: Option<&impl IsA<gtk::Window>>) {
     );
     win.add_link(
         &gettext("Donate (PayPal)"),
-        "https://www.paypal.com/paypalme/sedve",
+        "https://www.paypal.com/paypalme/davecaberto",
     );
 
     win.add_link(&gettext("GitHub"), "https://github.com/SeaDve/Mousai");

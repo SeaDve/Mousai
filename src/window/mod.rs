@@ -116,7 +116,7 @@ mod imp {
                 search_bar.set_search_mode(!search_bar.is_search_mode());
             });
 
-            klass.install_action("undo-remove-toast.dismiss", None, |obj, _, _| {
+            klass.install_action("undo-remove-toast.undo", None, |obj, _, _| {
                 obj.imp().main_view.undo_remove();
             });
         }

@@ -88,7 +88,7 @@ mod imp {
                     glib::ParamSpecBoolean::builder("is-selected")
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
-                    // If self should be displayed as selected
+                    // If self is active
                     glib::ParamSpecBoolean::builder("is-active")
                         .flags(glib::ParamFlags::READABLE)
                         .build(),
