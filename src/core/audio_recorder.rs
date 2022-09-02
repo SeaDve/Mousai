@@ -10,8 +10,8 @@ use std::{
     time::Duration,
 };
 
-use super::{AudioDeviceClass, AudioRecording};
-use crate::THREAD_POOL;
+use super::AudioRecording;
+use crate::audio_device::{self, AudioDeviceClass};
 
 mod imp {
     use super::*;
@@ -282,41 +282,6 @@ impl Default for AudioRecorder {
     }
 }
 
-fn find_default_device_name(preferred_device_class: AudioDeviceClass) -> anyhow::Result<String> {
-    let device_monitor = gst::DeviceMonitor::new();
-    device_monitor.add_filter(Some(preferred_device_class.as_str()), None);
-
-    device_monitor.start()?;
-    let devices = device_monitor.devices();
-    device_monitor.stop();
-
-    log::info!("Finding device name for class `{preferred_device_class:?}`");
-
-    for device in devices {
-        let device_class = AudioDeviceClass::for_str(&device.device_class())?;
-
-        if device_class == preferred_device_class {
-            let properties = device
-                .properties()
-                .ok_or_else(|| anyhow::anyhow!("No properties found for device"))?;
-
-            if properties.get::<bool>("is-default")? {
-                let mut node_name = properties.get::<String>("node.name")?;
-
-                if device_class == AudioDeviceClass::Sink {
-                    node_name.push_str(".monitor");
-                }
-
-                return Ok(node_name);
-            }
-        }
-    }
-
-    Err(anyhow::anyhow!(
-        "Failed to found audio device for class `{preferred_device_class:?}`"
-    ))
-}
-
 fn gst_element_factory_make(factory_name: &str) -> anyhow::Result<gst::Element> {
     gst::ElementFactory::make(factory_name, None)
         .with_context(|| format!("Failed to make `{}`", factory_name))
@@ -335,10 +300,7 @@ async fn create_pipeline(
     let oggmux = gst_element_factory_make("oggmux")?;
     let giostreamsink = gst_element_factory_make("giostreamsink")?;
 
-    match THREAD_POOL
-        .push_future(move || find_default_device_name(preferred_device_class))?
-        .await
-    {
+    match audio_device::find_default_name(preferred_device_class).await {
         Ok(ref device_name) => {
             log::info!("Using device `{device_name}` for recording");
             pulsesrc.set_property("device", device_name);

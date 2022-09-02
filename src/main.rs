@@ -22,6 +22,7 @@
 
 mod about_window;
 mod application;
+mod audio_device;
 mod config;
 mod core;
 mod inspector_page;

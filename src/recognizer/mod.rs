@@ -10,8 +10,10 @@ use std::{
 
 pub use self::provider::{ProviderSettings, ProviderType, TestProviderMode};
 use crate::{
+    audio_device::AudioDeviceClass,
     core::{AudioRecorder, Cancellable, Cancelled},
     model::Song,
+    settings::PreferredAudioSource,
     utils, Application,
 };
 
@@ -186,10 +188,10 @@ impl Recognizer {
         let imp = self.imp();
 
         imp.audio_recorder.set_device_class(
-            Application::default()
-                .settings()
-                .preferred_audio_source()
-                .into(),
+            match Application::default().settings().preferred_audio_source() {
+                PreferredAudioSource::Microphone => AudioDeviceClass::Source,
+                PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
+            },
         );
 
         let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
