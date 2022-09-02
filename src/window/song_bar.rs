@@ -57,7 +57,7 @@ mod imp {
 
             klass.install_action("song-bar.clear", None, |obj, _, _| {
                 if let Err(err) = obj.set_song(None) {
-                    log::info!("Failed to clear SongBar song: {err:?}");
+                    log::warn!("Failed to clear SongBar song: {err:?}");
                 }
             });
 

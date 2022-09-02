@@ -185,7 +185,7 @@ impl Player {
                 anyhow::anyhow!("Trying to set a song to audio player without playback link")
             })?;
             imp.gst_player.set_uri(Some(&playback_link));
-            log::info!("Uri set to {playback_link}");
+            log::debug!("Uri set to {playback_link}");
 
             // TODO Fill up nones
             imp.metadata.replace(MprisMetadata {
@@ -336,7 +336,7 @@ impl Player {
                 obj.seek(new_position);
             }));
 
-            log::info!("Done setting up MPRIS server");
+            log::debug!("Done setting up MPRIS server");
 
             mpris_player
         })
@@ -359,7 +359,7 @@ impl Player {
             }
             Message::StateChanged(new_state) => {
                 let old_state = imp.state.get();
-                log::info!("State changed from `{old_state:?}` -> `{new_state:?}`");
+                log::debug!("State changed from `{old_state:?}` -> `{new_state:?}`");
 
                 imp.state.set(*new_state);
                 self.mpris_player()
@@ -377,7 +377,7 @@ impl Player {
                 self.emit_by_name::<()>("error", &[warning]);
             }
             Message::EndOfStream => {
-                log::info!("Got end of stream message");
+                log::debug!("Got end of stream message");
                 self.set_position(None);
             }
         }

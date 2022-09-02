@@ -150,7 +150,7 @@ impl Recognizer {
 
                 if let Err(err) = self.recognize(&cancellable).await {
                     if let Some(cancelled) = err.downcast_ref::<Cancelled>() {
-                        log::info!("Cancelled recognizing: {}", cancelled);
+                        log::debug!("Cancelled recognizing: {}", cancelled);
                     } else {
                         return Err(err);
                     }

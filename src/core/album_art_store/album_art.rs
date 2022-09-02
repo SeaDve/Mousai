@@ -96,7 +96,7 @@ impl AlbumArt {
                 glib::PRIORITY_DEFAULT,
             )
             .await?;
-        log::info!("Downloaded album art from link `{}`", self.download_url);
+        log::debug!("Downloaded album art from link `{}`", self.download_url);
 
         let texture = self.set_and_get_cache(gdk::Texture::from_bytes(&bytes)?);
 

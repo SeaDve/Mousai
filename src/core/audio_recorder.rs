@@ -187,7 +187,7 @@ impl AudioRecorder {
         let _ = pipeline.bus().unwrap().remove_watch();
 
         let bytes = stream.steal_as_bytes();
-        log::info!(
+        log::debug!(
             "Recorded audio with size {}",
             glib::format_size(bytes.len() as u64)
         );
@@ -240,7 +240,7 @@ impl AudioRecorder {
                 Continue(true)
             }
             MessageView::Eos(_) => {
-                log::info!("Eos signal received from record bus");
+                log::debug!("Eos signal received from record bus");
                 Continue(false)
             }
             MessageView::Error(err) => {
@@ -263,7 +263,7 @@ impl AudioRecorder {
                         .as_ref()
                         .map(|(pipeline, _)| pipeline.upcast_ref::<gst::Object>())
                 {
-                    log::info!(
+                    log::debug!(
                         "Pipeline state set from `{:?}` -> `{:?}`",
                         sc.old(),
                         sc.current()
@@ -302,7 +302,7 @@ async fn create_pipeline(
 
     match audio_device::find_default_name(preferred_device_class).await {
         Ok(ref device_name) => {
-            log::info!("Using device `{device_name}` for recording");
+            log::debug!("Using device `{device_name}` for recording");
             pulsesrc.set_property("device", device_name);
         }
         Err(err) => {
