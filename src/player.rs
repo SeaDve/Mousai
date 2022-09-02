@@ -1,12 +1,10 @@
-mod state;
-
 use gst_player::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
-use mpris_player::{Metadata as MprisMetadata, MprisPlayer};
+use mpris_player::{Metadata as MprisMetadata, MprisPlayer, PlaybackStatus as MprisPlaybackStatus};
 use once_cell::unsync::OnceCell;
 
 use std::{
@@ -14,7 +12,6 @@ use std::{
     sync::Arc,
 };
 
-pub use self::state::PlayerState;
 use crate::{config::APP_ID, core::ClockTime, model::Song, send, Application};
 
 #[derive(Debug)]
@@ -25,6 +22,16 @@ enum Message {
     Error(glib::Error),
     Warning(glib::Error),
     EndOfStream,
+}
+
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[enum_type(name = "MsaiPlayerState")]
+pub enum PlayerState {
+    #[default]
+    Stopped,
+    Buffering,
+    Paused,
+    Playing,
 }
 
 mod imp {
@@ -364,7 +371,11 @@ impl Player {
                 imp.state.set(*new_state);
                 self.mpris_player()
                     .set_can_pause(matches!(new_state, PlayerState::Playing));
-                self.mpris_player().set_playback_status(self.state().into());
+                self.mpris_player().set_playback_status(match self.state() {
+                    PlayerState::Stopped | PlayerState::Buffering => MprisPlaybackStatus::Stopped,
+                    PlayerState::Playing => MprisPlaybackStatus::Playing,
+                    PlayerState::Paused => MprisPlaybackStatus::Paused,
+                });
 
                 self.notify("state");
             }
@@ -400,7 +411,16 @@ impl Player {
 
         imp.gst_player
             .connect_state_changed(clone!(@strong sender => move |_, state| {
-                send!(sender, Message::StateChanged(state.into()));
+                send!(sender, Message::StateChanged(match state {
+                    gst_player::PlayerState::Stopped => PlayerState::Stopped,
+                    gst_player::PlayerState::Buffering => PlayerState::Buffering,
+                    gst_player::PlayerState::Paused => PlayerState::Paused,
+                    gst_player::PlayerState::Playing => PlayerState::Playing,
+                    _ => {
+                        log::warn!("Received unknown PlayerState `{state}`");
+                        return;
+                    }
+                }));
             }));
 
         imp.gst_player
