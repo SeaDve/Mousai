@@ -150,7 +150,7 @@ impl Recognizer {
 
                 if let Err(err) = self.recognize(&cancellable).await {
                     if let Some(cancelled) = err.downcast_ref::<Cancelled>() {
-                        log::debug!("Cancelled recognizing: {}", cancelled);
+                        tracing::debug!("Cancelled recognizing: {}", cancelled);
                     } else {
                         return Err(err);
                     }
@@ -208,7 +208,7 @@ impl Recognizer {
         }));
 
         let provider = ProviderSettings::lock().active.to_provider();
-        log::debug!("provider: {:?}", provider);
+        tracing::debug!(?provider);
 
         if cancellable.is_cancelled()
             || utils::timeout_future(provider.listen_duration(), cancellable)

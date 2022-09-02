@@ -132,8 +132,8 @@ impl Provider for AudD {
             })?;
 
         match std::str::from_utf8(&bytes) {
-            Ok(string) => log::debug!("server_response: {}", string),
-            Err(err) => log::warn!("Failed to get str from `Bytes`: {:?}", err),
+            Ok(string) => tracing::debug!(server_response = ?string),
+            Err(err) => tracing::warn!("Failed to get str from `Bytes`: {:?}", err),
         }
 
         Ok(Self::build_song_from_data(Response::parse(&bytes)?.data()?))

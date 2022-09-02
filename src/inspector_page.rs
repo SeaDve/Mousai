@@ -165,7 +165,7 @@ impl InspectorPage {
                     obj.update_test_rows_sensitivity();
                     ProviderSettings::lock().active = item.value().into();
                 } else {
-                    log::warn!("provider_row doesn't have a valid selected item");
+                    tracing::warn!("provider_row doesn't have a valid selected item");
                     ProviderSettings::lock().active = ProviderType::default();
                 }
             }));
@@ -200,7 +200,7 @@ impl InspectorPage {
                 {
                     ProviderSettings::lock().test_mode = item.value().into();
                 } else {
-                    log::warn!("test_provider_row doesn't have a valid selected item");
+                    tracing::warn!("test_provider_row doesn't have a valid selected item");
                     ProviderSettings::lock().test_mode = TestProviderMode::default();
                 }
             });

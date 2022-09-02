@@ -197,7 +197,9 @@ impl Song {
         let id = self.imp().inner.borrow().id.clone();
 
         if id.is_default() {
-            log::warn!("SongId was found in default. It should have been set on the construct.");
+            tracing::warn!(
+                "SongId was found in default. It should have been set on the construct."
+            );
         }
 
         id

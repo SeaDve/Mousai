@@ -94,7 +94,7 @@ pub struct Response {
 impl Response {
     pub fn parse(slice: &[u8]) -> Result<Self, ProviderError> {
         serde_json::from_slice(slice).map_err(|err| {
-            log::error!("Failed to parse response: {:?}", err);
+            tracing::error!("Failed to parse response: {:?}", err);
 
             ProviderError::Other(gettext(
                 "Failed to parse response. Please report this to Mousai's bug tracker",

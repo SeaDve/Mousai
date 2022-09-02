@@ -82,7 +82,7 @@ impl RecognizerView {
 
     fn recognizer(&self) -> &Recognizer {
         self.imp().recognizer.get_or_init(|| {
-            log::error!("Recognizer was not bound in RecognizerView. Creating a default one.");
+            tracing::error!("Recognizer was not bound in RecognizerView. Creating a default one.");
             Recognizer::default()
         })
     }

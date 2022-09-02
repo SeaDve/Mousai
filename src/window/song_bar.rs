@@ -57,7 +57,7 @@ mod imp {
 
             klass.install_action("song-bar.clear", None, |obj, _, _| {
                 if let Err(err) = obj.set_song(None) {
-                    log::warn!("Failed to clear SongBar song: {err:?}");
+                    tracing::warn!("Failed to clear SongBar song: {err:?}");
                 }
             });
 
@@ -111,7 +111,7 @@ mod imp {
                 "song" => {
                     let song = value.get().unwrap();
                     if let Err(err) = obj.set_song(song) {
-                        log::warn!("Failed to set song to SongBar: {err:?}");
+                        tracing::warn!("Failed to set song to SongBar: {err:?}");
                     }
                 }
                 _ => unimplemented!(),
@@ -225,7 +225,7 @@ impl SongBar {
 
     fn player(&self) -> &Player {
         self.imp().player.get_or_init(|| {
-            log::error!("Player was not bound in SongBar. Creating a default one.");
+            tracing::error!("Player was not bound in SongBar. Creating a default one.");
             Player::default()
         })
     }

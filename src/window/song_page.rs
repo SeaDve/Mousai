@@ -69,7 +69,7 @@ mod imp {
 
             klass.install_action("song-page.toggle-playback", None, |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
-                    log::warn!("Failed to toggle playback: {err:?}");
+                    tracing::warn!("Failed to toggle playback: {err:?}");
                     Application::default().show_error(&err.to_string());
                 }
             });
@@ -93,7 +93,7 @@ mod imp {
                         Application::default().add_toast(&toast);
                     }
                 } else {
-                    log::error!("Failed to copy song: There is no active song in SongPage");
+                    tracing::error!("Failed to copy song: There is no active song in SongPage");
                 }
             });
         }
@@ -178,7 +178,7 @@ mod imp {
                     let uri = external_link.uri();
 
                     if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
-                        log::warn!("Trying to launch an invalid Uri: {err:?}");
+                        tracing::warn!("Trying to launch an invalid Uri: {err:?}");
                     }
 
                     if let Err(err) = gtk::show_uri_full_future(
@@ -191,7 +191,7 @@ mod imp {
                     )
                     .await
                     {
-                        log::warn!("Failed to launch default for uri `{uri}`: {err:?}");
+                        tracing::warn!("Failed to launch default for uri `{uri}`: {err:?}");
                         Application::default()
                             .show_error(&gettext!("Failed to launch {}", external_link.name()));
                     }
@@ -363,7 +363,7 @@ impl SongPage {
                     imp.playback_button.set_mode(PlaybackButtonMode::Play);
                 }
             } else {
-                log::error!("Either the player was dropped or not bound in SongPage");
+                tracing::error!("Either the player was dropped or not bound in SongPage");
             }
         }
     }

@@ -37,8 +37,8 @@ pub async fn find_default_name(class: AudioDeviceClass) -> Result<String> {
     {
         Ok(res) => Ok(res),
         Err(err) => {
-            log::warn!("Failed to find default name using gstreamer: {:?}", err);
-            log::debug!("Manually using libpulse instead");
+            tracing::warn!("Failed to find default name using gstreamer: {:?}", err);
+            tracing::debug!("Manually using libpulse instead");
 
             let pa_context = pa::Context::connect().await?;
             pa_context.find_default_device_name(class).await
@@ -54,13 +54,13 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     let devices = device_monitor.devices();
     device_monitor.stop();
 
-    log::debug!("Finding device name for class `{:?}`", class);
+    tracing::debug!("Finding device name for class `{:?}`", class);
 
     for device in devices {
         let device_class = match AudioDeviceClass::for_str(&device.device_class()) {
             Some(device_class) => device_class,
             None => {
-                log::debug!(
+                tracing::debug!(
                     "Skipping device `{}` as it has unknown device class `{}`",
                     device.name(),
                     device.device_class()
@@ -76,7 +76,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
         let properties = match device.properties() {
             Some(properties) => properties,
             None => {
-                log::warn!(
+                tracing::warn!(
                     "Skipping device `{}` as it has no properties",
                     device.name()
                 );
@@ -87,7 +87,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
         let is_default = match properties.get::<bool>("is-default") {
             Ok(is_default) => is_default,
             Err(err) => {
-                log::warn!(
+                tracing::warn!(
                     "Skipping device `{}` as it has no `is-default` property. {:?}",
                     device.name(),
                     err
@@ -97,7 +97,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
         };
 
         if !is_default {
-            log::debug!(
+            tracing::debug!(
                 "Skipping device `{}` as it is not the default",
                 device.name()
             );
@@ -107,7 +107,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
         let mut node_name = match properties.get::<String>("node.name") {
             Ok(node_name) => node_name,
             Err(err) => {
-                log::warn!(
+                tracing::warn!(
                     "Skipping device `{}` as it has no node.name property. {:?}",
                     device.name(),
                     err
@@ -185,7 +185,7 @@ mod pa {
                 let _ = tx.start_send(());
             })));
 
-            log::debug!("Waiting for context server connection");
+            tracing::debug!("Waiting for context server connection");
 
             while rx.next().await.is_some() {
                 match inner.get_state() {
@@ -196,7 +196,7 @@ mod pa {
                 }
             }
 
-            log::debug!("Connected context to server");
+            tracing::debug!("Connected context to server");
 
             inner.set_state_callback(None);
 
@@ -211,7 +211,7 @@ mod pa {
                 let tx = if let Some(tx) = tx.take() {
                     tx
                 } else {
-                    log::error!("Called get_server_info twice!");
+                    tracing::error!("Called get_server_info twice!");
                     return;
                 };
 

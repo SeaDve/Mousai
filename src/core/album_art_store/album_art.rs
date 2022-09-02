@@ -82,7 +82,7 @@ impl AlbumArt {
                 let texture = gdk::Texture::from_bytes(bytes)?;
                 return Ok(self.set_and_get_cache(texture));
             }
-            Err(err) => log::warn!(
+            Err(err) => tracing::warn!(
                 "Failed to load file from `{}`: {:?}",
                 self.cache_file.uri(),
                 err
@@ -96,7 +96,7 @@ impl AlbumArt {
                 glib::PRIORITY_DEFAULT,
             )
             .await?;
-        log::debug!("Downloaded album art from link `{}`", self.download_url);
+        tracing::debug!(download_url = ?self.download_url, "Downloaded album art");
 
         let texture = self.set_and_get_cache(gdk::Texture::from_bytes(&bytes)?);
 
@@ -115,7 +115,7 @@ impl AlbumArt {
         let ret = match self.cache.try_insert(texture) {
             Ok(final_value) => final_value,
             Err((final_value, texture)) => {
-                log::error!(
+                tracing::error!(
                     "Cache was already set; is_same_instance = {}",
                     final_value == &texture
                 );

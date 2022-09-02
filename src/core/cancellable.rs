@@ -43,7 +43,7 @@ impl Cancellable {
     /// is a no-op.
     pub fn cancel(&self) {
         if self.is_cancelled() {
-            log::warn!("Trying to cancel a cancelled cancellable");
+            tracing::warn!("Trying to cancel a cancelled cancellable");
             return;
         }
 

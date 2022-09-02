@@ -10,7 +10,7 @@ use crate::core::{Cancellable, Cancelled};
 macro_rules! send {
     ($sender:expr, $action:expr) => {
         if let Err(err) = $sender.send($action) {
-            log::error!("Failed to send \"{}\" action: {err:?}", stringify!($action));
+            tracing::error!("Failed to send `{}` action: {:?}", stringify!($action), err);
         }
     };
 }

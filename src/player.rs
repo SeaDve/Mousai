@@ -21,7 +21,7 @@ enum Message {
     StateChanged(PlayerState),
     Error(glib::Error),
     Warning(glib::Error),
-    EndOfStream,
+    Eos,
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
@@ -122,7 +122,7 @@ mod imp {
                 "song" => {
                     let song = value.get().unwrap();
                     if let Err(err) = obj.set_song(song) {
-                        log::warn!("Failed to set song to Player: {err:?}");
+                        tracing::warn!("Failed to set song to Player: {err:?}");
                     }
                 }
                 _ => unimplemented!(),
@@ -192,7 +192,7 @@ impl Player {
                 anyhow::anyhow!("Trying to set a song to audio player without playback link")
             })?;
             imp.gst_player.set_uri(Some(&playback_link));
-            log::debug!("Uri set to {playback_link}");
+            tracing::debug!(uri = playback_link, "Uri changed");
 
             // TODO Fill up nones
             imp.metadata.replace(MprisMetadata {
@@ -284,7 +284,7 @@ impl Player {
             self.pause();
         }
 
-        log::debug!("Seeking to {position:?}");
+        tracing::debug!(?position, "Seeking");
 
         self.imp().gst_player.seek(position.into());
     }
@@ -330,7 +330,7 @@ impl Player {
             }));
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
-                obj.stop().unwrap_or_else(|err| log::warn!("Failed to stop player: {err:?}"));
+                obj.stop().unwrap_or_else(|err| tracing::warn!("Failed to stop player: {err:?}"));
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
@@ -343,7 +343,7 @@ impl Player {
                 obj.seek(new_position);
             }));
 
-            log::debug!("Done setting up MPRIS server");
+            tracing::debug!("Done setting up MPRIS server");
 
             mpris_player
         })
@@ -366,7 +366,7 @@ impl Player {
             }
             Message::StateChanged(new_state) => {
                 let old_state = imp.state.get();
-                log::debug!("State changed from `{old_state:?}` -> `{new_state:?}`");
+                tracing::debug!("State changed from `{:?}` -> `{:?}`", old_state, new_state);
 
                 imp.state.set(*new_state);
                 self.mpris_player()
@@ -380,15 +380,15 @@ impl Player {
                 self.notify("state");
             }
             Message::Error(ref error) => {
-                log::error!("Gstreamer: {error:?}");
+                tracing::error!(state = ?self.state(), "Received error message: {:?}", error);
                 self.emit_by_name::<()>("error", &[error]);
             }
             Message::Warning(ref warning) => {
-                log::warn!("Gstreamer: {warning:?}");
+                tracing::warn!("Received warning message: {:?}", warning);
                 self.emit_by_name::<()>("error", &[warning]);
             }
-            Message::EndOfStream => {
-                log::debug!("Got end of stream message");
+            Message::Eos => {
+                tracing::debug!("Received end of stream message");
                 self.set_position(None);
             }
         }
@@ -417,7 +417,7 @@ impl Player {
                     gst_player::PlayerState::Paused => PlayerState::Paused,
                     gst_player::PlayerState::Playing => PlayerState::Playing,
                     _ => {
-                        log::warn!("Received unknown PlayerState `{state}`");
+                        tracing::warn!("Received unknown PlayerState `{}`", state);
                         return;
                     }
                 }));
@@ -435,12 +435,12 @@ impl Player {
 
         imp.gst_player
             .connect_buffering(clone!(@strong sender => move |_, percent| {
-                log::debug!("Buffering ({percent}%)");
+                tracing::trace!("Buffering ({}%)", percent);
             }));
 
         imp.gst_player
             .connect_end_of_stream(clone!(@strong sender => move |_| {
-                send!(sender, Message::EndOfStream);
+                send!(sender, Message::Eos);
             }));
 
         receiver.attach(

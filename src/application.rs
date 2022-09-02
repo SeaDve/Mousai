@@ -95,7 +95,7 @@ impl Application {
         if let Some(window) = self.main_window() {
             window.show_error(message);
         } else {
-            log::warn!("Failed to show error: MainWindow doesn't exist");
+            tracing::warn!("Failed to show error: MainWindow doesn't exist");
         }
     }
 
@@ -103,14 +103,14 @@ impl Application {
         if let Some(window) = self.main_window() {
             window.add_toast(toast);
         } else {
-            log::warn!("Failed to add toast: MainWindow doesn't exist");
+            tracing::warn!("Failed to add toast: MainWindow doesn't exist");
         }
     }
 
     pub fn run(&self) {
-        log::info!("Mousai ({})", APP_ID);
-        log::info!("Version: {} ({})", VERSION, PROFILE);
-        log::info!("Datadir: {}", PKGDATADIR);
+        tracing::info!("Mousai ({})", APP_ID);
+        tracing::info!("Version: {} ({})", VERSION, PROFILE);
+        tracing::info!("Datadir: {}", PKGDATADIR);
 
         ApplicationExtManual::run(self);
     }
@@ -123,7 +123,7 @@ impl Application {
             .upgrade();
 
         if main_window.is_none() {
-            log::warn!("Failed to upgrade WeakRef<Window>");
+            tracing::warn!("Failed to upgrade WeakRef<Window>");
         }
 
         main_window
@@ -175,6 +175,6 @@ fn setup_inspector_page() {
             10,
         );
     } else {
-        log::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found.");
+        tracing::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found.");
     }
 }

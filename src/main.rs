@@ -43,7 +43,7 @@ use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 static THREAD_POOL: Lazy<glib::ThreadPool> = Lazy::new(|| glib::ThreadPool::shared(None).unwrap());
 
 fn main() {
-    pretty_env_logger::init();
+    tracing_subscriber::fmt::init();
 
     gettextrs::setlocale(LocaleCategory::LcAll, "");
     gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");

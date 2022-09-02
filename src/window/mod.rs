@@ -95,17 +95,17 @@ mod imp {
 
             klass.install_action("win.stop-playback", None, |obj, _, _| {
                 if let Err(err) = obj.imp().player.stop() {
-                    log::warn!("Failed to stop player: {err:?}");
+                    tracing::warn!("Failed to stop player: {err:?}");
                 }
             });
 
             klass.install_action("win.toggle-listen", None, |obj, _, _| {
                 utils::spawn(clone!(@weak obj => async move {
                     if let Err(err) = obj.imp().player.stop() {
-                        log::warn!("Failed to stop player before toggling listen: {err:?}");
+                        tracing::warn!("Failed to stop player before toggling listen: {err:?}");
                     }
                     if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
-                        log::error!("Failed to toggle recognize: {:?}", err);
+                        tracing::error!("Failed to toggle recognize: {:?}", err);
                         obj.show_error(&err.to_string());
                     }
                 }));
@@ -199,11 +199,11 @@ mod imp {
     impl WindowImpl for Window {
         fn close_request(&self, obj: &Self::Type) -> gtk::Inhibit {
             if let Err(err) = obj.save_window_size() {
-                log::warn!("Failed to save window state, {:?}", &err);
+                tracing::warn!("Failed to save window state, {:?}", &err);
             }
 
             if let Err(err) = obj.history().save_to_settings() {
-                log::error!("Failed to save history: {:?}", err);
+                tracing::error!("Failed to save history: {:?}", err);
             }
 
             self.parent_close_request(obj)
@@ -255,7 +255,7 @@ impl Window {
     fn history(&self) -> &SongList {
         self.imp().history.get_or_init(|| {
             SongList::load_from_settings().unwrap_or_else(|err| {
-                log::error!("Failed to load SongList from settings: {err:?}");
+                tracing::error!("Failed to load SongList from settings: {err:?}");
                 self.show_error(&gettext("Failed to load history"));
                 SongList::default()
             })
@@ -359,7 +359,7 @@ impl Window {
                 let is_appended = history.append(song.clone());
 
                 if contains_song == is_appended {
-                    log::error!("History already contains song, but it was still successfully appended");
+                    tracing::error!("History already contains song, but it was still successfully appended");
                 }
 
                 let main_view = &obj.imp().main_view;
@@ -387,7 +387,7 @@ impl Window {
                 let player = obj.player();
                 if player.is_active_song(song) {
                     if let Err(err) = player.stop() {
-                        log::warn!("Failed to stop player while deleting the active song: {err:?}");
+                        tracing::warn!("Failed to stop player while deleting the active song: {err:?}");
                     }
                 }
             }));

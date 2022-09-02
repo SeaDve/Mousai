@@ -103,7 +103,7 @@ mod imp {
                 let selected_songs = obj.snapshot_selected_songs();
 
                 if selected_songs.len() > 1 {
-                    log::error!(
+                    tracing::error!(
                         "Copying should not be allowed when there is more than one selected."
                     );
                 }
@@ -120,7 +120,7 @@ mod imp {
                         Application::default().add_toast(&toast);
                     }
                 } else {
-                    log::error!("Failed to copy song: There is no selected song");
+                    tracing::error!("Failed to copy song: There is no selected song");
                 }
             });
 
@@ -311,7 +311,7 @@ impl HistoryView {
             self.update_history_stack();
 
             if imp.stack.visible_child().as_ref() != Some(&imp.history_child.get().upcast()) {
-                log::error!(
+                tracing::error!(
                     "Popped all song pages, but the history child is still not the visible child"
                 );
             }
@@ -377,7 +377,7 @@ impl HistoryView {
             clone!(@weak self as obj, @weak selection_model => move |_, index| {
                 match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {
                     Some(ref song) => obj.push_song_page(song),
-                    None => log::error!("Activated `{index}`, but found no song.")
+                    None => tracing::error!("Activated `{index}`, but found no song.")
                 }
             }),
         );
@@ -452,7 +452,7 @@ impl HistoryView {
                 imp.removed_purgatory.borrow_mut().push(removed_song);
             }
         } else {
-            log::warn!("Failed to remove song: SongList not found");
+            tracing::warn!("Failed to remove song: SongList not found");
         }
 
         // Since the song is removed from history, the `SongPage`s that

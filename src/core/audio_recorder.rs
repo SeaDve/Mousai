@@ -143,7 +143,7 @@ impl AudioRecorder {
         let imp = self.imp();
 
         if imp.current.borrow().is_some() {
-            log::warn!("Tried to start another recording without stopping existing one");
+            tracing::warn!("Tried to start another recording without stopping existing one");
             self.cancel();
         }
 
@@ -151,7 +151,7 @@ impl AudioRecorder {
         let pipeline = create_pipeline(&stream, self.device_class()).await?;
 
         if imp.current.borrow().is_some() {
-            log::warn!(
+            tracing::warn!(
                 "Another recording was started while another was awaiting during pipeline creation"
             );
             self.cancel();
@@ -187,7 +187,7 @@ impl AudioRecorder {
         let _ = pipeline.bus().unwrap().remove_watch();
 
         let bytes = stream.steal_as_bytes();
-        log::debug!(
+        tracing::debug!(
             "Recorded audio with size {}",
             glib::format_size(bytes.len() as u64)
         );
@@ -197,7 +197,7 @@ impl AudioRecorder {
 
     pub fn cancel(&self) {
         if let Err(err) = self.cancel_inner() {
-            log::warn!("Failed to cancel recording: {err:?}");
+            tracing::warn!("Failed to cancel recording: {err:?}");
         }
     }
 
@@ -240,11 +240,11 @@ impl AudioRecorder {
                 Continue(true)
             }
             MessageView::Eos(_) => {
-                log::debug!("Eos signal received from record bus");
+                tracing::debug!("Eos signal received from record bus");
                 Continue(false)
             }
             MessageView::Error(err) => {
-                log::error!(
+                tracing::error!(
                     "Error from record bus: {:?} (debug {:#?})",
                     err.error(),
                     err
@@ -263,7 +263,7 @@ impl AudioRecorder {
                         .as_ref()
                         .map(|(pipeline, _)| pipeline.upcast_ref::<gst::Object>())
                 {
-                    log::debug!(
+                    tracing::debug!(
                         "Pipeline state set from `{:?}` -> `{:?}`",
                         sc.old(),
                         sc.current()
@@ -302,12 +302,12 @@ async fn create_pipeline(
 
     match audio_device::find_default_name(preferred_device_class).await {
         Ok(ref device_name) => {
-            log::debug!("Using device `{device_name}` for recording");
+            tracing::debug!("Using device `{device_name}` for recording");
             pulsesrc.set_property("device", device_name);
         }
         Err(err) => {
             // TODO Show userfacing error
-            log::warn!("Failed to get default device name: {err:?}");
+            tracing::warn!("Failed to get default device name: {err:?}");
         }
     }
 

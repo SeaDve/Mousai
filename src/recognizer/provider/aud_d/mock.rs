@@ -67,7 +67,7 @@ fn random_data() -> Result<Data, ProviderError> {
         .get(glib::random_int_range(0, raw_responses.len() as i32) as usize)
         .expect("Out of bound index from the raw responses");
 
-    log::debug!("random_response: {}", random_response);
+    tracing::debug!(random_response);
 
     Response::parse(random_response.as_bytes())?.data()
 }
