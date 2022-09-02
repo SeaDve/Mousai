@@ -823,6 +823,7 @@ dependencies = [
  "futures-util",
  "fuzzy-matcher",
  "gettext-rs",
+ "glib",
  "gsettings-macro",
  "gstreamer",
  "gstreamer-player",

@@ -16,7 +16,6 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
-    core::BindingVec,
     model::{ExternalLinkWrapper, Song},
     player::{Player, PlayerState},
     utils, Application,
@@ -55,7 +54,7 @@ mod imp {
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
-        pub(super) bindings: BindingVec,
+        pub(super) song_binding_group: glib::BindingGroup,
     }
 
     #[glib::object_subclass]
@@ -198,6 +197,17 @@ mod imp {
                 });
             });
 
+            self.song_binding_group
+                .bind("lyrics", &self.lyrics_label.get(), "label")
+                .build();
+            self.song_binding_group
+                .bind("lyrics", &self.lyrics_group.get(), "visible")
+                .transform_to(|_, value| {
+                    let lyrics = value.get::<Option<String>>().unwrap();
+                    Some(lyrics.is_some().to_value())
+                })
+                .build();
+
             obj.update_album_cover_size();
         }
 
@@ -242,24 +252,7 @@ impl SongPage {
         let imp = self.imp();
         imp.song.replace(song.clone());
 
-        imp.bindings.unbind_all();
-
-        if let Some(ref song) = song {
-            imp.bindings.push(
-                song.bind_property("lyrics", &imp.lyrics_label.get(), "label")
-                    .flags(glib::BindingFlags::SYNC_CREATE)
-                    .build(),
-            );
-            imp.bindings.push(
-                song.bind_property("lyrics", &imp.lyrics_group.get(), "visible")
-                    .transform_to(|_, value| {
-                        let lyrics = value.get::<Option<String>>().unwrap();
-                        Some(lyrics.is_some().to_value())
-                    })
-                    .flags(glib::BindingFlags::SYNC_CREATE)
-                    .build(),
-            );
-        }
+        imp.song_binding_group.set_source(song.as_ref());
 
         // Only crossfade when album art is not loaded to avoid
         // unnecessary crossfading when the album art can be

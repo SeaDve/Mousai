@@ -14,6 +14,7 @@ soup3 = "0.2.2"
 gst = { package = "gstreamer", version = "0.18.8" }
 gst_player = { package = "gstreamer-player", version = "0.18.0" }
 adw = { package = "libadwaita", version = "0.2.0-alpha.2", features = ["v1_2"] }
+glib = { version = "0.15.12", features = ["v2_72"]}
 gtk = { version = "0.4.7", package = "gtk4", features = ["v4_6"] }
 indexmap = "1.8.1"
 serde = { version = "1.0.137", features = ["derive"] }

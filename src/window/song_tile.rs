@@ -14,7 +14,6 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
-    core::BindingVec,
     model::Song,
     player::{Player, PlayerState},
     Application,
@@ -50,7 +49,7 @@ mod imp {
 
         pub(super) player: OnceCell<WeakRef<Player>>,
         pub(super) select_button_active_notify_handler: OnceCell<glib::SignalHandlerId>,
-        pub(super) bindings: BindingVec,
+        pub(super) song_binding_group: glib::BindingGroup,
         pub(super) contains_pointer: Cell<bool>,
     }
 
@@ -204,6 +203,10 @@ mod imp {
                 )
                 .unwrap();
 
+            self.song_binding_group
+                .bind("is-newly-recognized", &self.new_label.get(), "visible")
+                .build();
+
             obj.update_select_button_visibility();
             obj.update_playback_button_visibility();
             obj.update_album_cover_size();
@@ -236,15 +239,7 @@ impl SongTile {
 
         let imp = self.imp();
 
-        imp.bindings.unbind_all();
-
-        if let Some(ref song) = song {
-            imp.bindings.push(
-                song.bind_property("is-newly-recognized", &imp.new_label.get(), "visible")
-                    .flags(glib::BindingFlags::SYNC_CREATE)
-                    .build(),
-            );
-        }
+        imp.song_binding_group.set_source(song.as_ref());
 
         imp.album_cover.set_song(song.clone());
 
