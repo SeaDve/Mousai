@@ -221,6 +221,8 @@ impl AudioRecorder {
     fn handle_bus_message(&self, message: &gst::Message) -> Continue {
         use gst::MessageView;
 
+        let imp = self.imp();
+
         match message.view() {
             MessageView::Element(element) => {
                 if let Some(structure) = element.structure() {
@@ -241,14 +243,19 @@ impl AudioRecorder {
             }
             MessageView::Eos(_) => {
                 tracing::debug!("Eos signal received from record bus");
+
                 Continue(false)
             }
-            MessageView::Error(err) => {
-                tracing::error!(
-                    "Error from record bus: {:?} (debug {:#?})",
-                    err.error(),
-                    err
-                );
+            MessageView::Error(e) => {
+                let current_state = imp
+                    .current
+                    .borrow()
+                    .as_ref()
+                    .map(|(pipeline, _)| pipeline.state(None));
+
+                tracing::debug!(?current_state, debug = ?e.debug(), err = ?e.error(), "Received error at bus");
+
+                // TODO show user facing
 
                 self.cancel();
 
@@ -256,22 +263,43 @@ impl AudioRecorder {
             }
             MessageView::StateChanged(sc) => {
                 if message.src().as_ref()
-                    == self
-                        .imp()
+                    != imp
                         .current
                         .borrow()
                         .as_ref()
                         .map(|(pipeline, _)| pipeline.upcast_ref::<gst::Object>())
                 {
-                    tracing::debug!(
-                        "Pipeline state set from `{:?}` -> `{:?}`",
+                    tracing::trace!(
+                        "`{}` changed state from `{:?}` -> `{:?}`",
+                        message
+                            .src()
+                            .map_or_else(|| "<unknown source>".into(), |e| e.name()),
                         sc.old(),
-                        sc.current()
+                        sc.current(),
                     );
+                    return Continue(true);
                 }
+
+                tracing::debug!(
+                    "Pipeline changed state from `{:?}` -> `{:?}`",
+                    sc.old(),
+                    sc.current(),
+                );
+
                 Continue(true)
             }
-            _ => Continue(true),
+            MessageView::Warning(w) => {
+                tracing::warn!("Received warning message on bus: {:?}", w);
+                Continue(true)
+            }
+            MessageView::Info(i) => {
+                tracing::debug!("Received info message on bus: {:?}", i);
+                Continue(true)
+            }
+            other => {
+                tracing::trace!("Received other message on bus: {:?}", other);
+                Continue(true)
+            }
         }
     }
 }
