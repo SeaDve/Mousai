@@ -5,13 +5,14 @@
 # Чтабс <chtabs2k19@gmail.com>, 2021.
 # Noel Fritz <toro_75@yahoo.com>, 2021.
 # Daudix UFO <ddaudix@gmail.com>, 2022.
+# Vik <xasertop@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-08-29 21:21+0000\n"
-"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
+"PO-Revision-Date: 2022-09-02 15:22+0000\n"
+"Last-Translator: Vik <xasertop@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
 "\n"
 "Language: ru\n"
@@ -71,21 +72,21 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai - это простое приложение, похожее на Shazam, которое может определить "
-"песню. Просто нажмите кнопку прослушивания, а затем подождите несколько "
-"секунд. Это волшебным образом вернет название и исполнителя песни!"
+"Mousai — это простое приложение, похожее на Shazam, которое поможет "
+"определить песню. Просто нажмите кнопку прослушивания, а затем подождите "
+"несколько секунд. Это волшебным образом вернёт название и исполнителя песни!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Примечание. Здесь используется API audd.io, поэтому необходимо войти на их "
-"сайт, чтобы получить больше попыток."
+"Примечание: Здесь используется API audd.io, поэтому необходимо войти на их "
+"сайт, чтобы получить больше пробного времени."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid "Why you will love Mousai?"
-msgstr "Почему вы полюбите Mousai?"
+msgstr "За что вы полюбите Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
@@ -93,7 +94,7 @@ msgstr "🎵 Определите название и исполнителя п�
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
-msgstr "🎙️ Используйте свой микрофон или звук с рабочего стола."
+msgstr "🎙️ Используйте свой микрофон или звук с компьютера."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Store the identified song including the album art in history."
@@ -132,7 +133,7 @@ msgstr "Микрофон"
 
 #: data/resources/ui/history-view.ui:13
 msgid "Desktop Audio"
-msgstr "Звук с рабочего стола"
+msgstr "Звук с компьютера"
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
@@ -152,7 +153,7 @@ msgstr "Выбрать _Ничего"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
-msgstr "Начать распознование музыки"
+msgstr "Начать распознавание музыки"
 
 #: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -185,7 +186,7 @@ msgstr "Введите имя песни или исполнителя"
 
 #: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
-msgstr "Начните распозновать музыку!"
+msgstr "Начните распознавать музыку!"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Click the listen button to start."
@@ -225,7 +226,7 @@ msgstr "Поиск"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Показывать ярлыки"
+msgstr "Показать комбинации клавиш"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -295,16 +296,17 @@ msgstr "Дата выпуска"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "Лирика"
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
-msgstr ""
+msgstr "Новое"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
 msgid "translator-credits"
-msgstr "Ковалев Артем, Давид Лапшин"
+msgstr ""
+"Ковалев Артем, Давид Лапшин, ViktorOn &lt;https://github.com/viktoron&gt;"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
@@ -359,6 +361,8 @@ msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Не удалось преобразовать запись в base64. Пожалуйста, сообщите об этом в "
+"систему отслеживания ошибок Mousai."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
@@ -367,6 +371,8 @@ msgstr "Не удалось подключиться к серверу."
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
+"Не удалось обработать ответ. Пожалуйста, сообщите об этом в систему "
+"отслеживания ошибок Mousai"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -378,7 +384,7 @@ msgstr "Не удалось записать отпечаток звука. Зв
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
-msgstr ""
+msgstr "Получен недействительный ответ о статусе {}"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
