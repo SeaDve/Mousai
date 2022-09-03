@@ -75,7 +75,7 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            obj.reset();
+            obj.update_label();
         }
 
         fn dispose(&self, _obj: &Self::Type) {
@@ -97,15 +97,12 @@ impl TimeLabel {
     }
 
     pub fn set_time(&self, time: ClockTime) {
-        let imp = self.imp();
+        if time == self.time() {
+            return;
+        }
 
-        let seconds = time.as_secs();
-        let seconds_display = seconds % 60;
-        let minutes_display = seconds / 60;
-        let formatted_time = format!("{}∶{:02}", minutes_display, seconds_display);
-        imp.label.set_label(&formatted_time);
-
-        imp.time.set(time);
+        self.imp().time.set(time);
+        self.update_label();
         self.notify("time");
     }
 
@@ -115,6 +112,14 @@ impl TimeLabel {
 
     pub fn reset(&self) {
         self.set_time(ClockTime::ZERO);
+    }
+
+    fn update_label(&self) {
+        let seconds = self.time().as_secs();
+        let seconds_display = seconds % 60;
+        let minutes_display = seconds / 60;
+        let formatted_time = format!("{}∶{:02}", minutes_display, seconds_display);
+        self.imp().label.set_label(&formatted_time);
     }
 }
 

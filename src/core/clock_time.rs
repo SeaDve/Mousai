@@ -3,7 +3,7 @@ use gtk::glib;
 use std::time::Duration;
 
 /// A boxed [`Duration`]
-#[derive(Debug, Default, Clone, Copy, glib::Boxed)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Boxed)]
 #[boxed_type(name = "MsaiClockTime", nullable)]
 pub struct ClockTime(Duration);
 
