@@ -4,10 +4,7 @@
 
 use gtk::{cairo, glib, graphene, prelude::*, subclass::prelude::*};
 
-use std::{
-    cell::{Ref, RefCell, RefMut},
-    collections::VecDeque,
-};
+use std::{cell::RefCell, collections::VecDeque};
 
 const GUTTER: f64 = 10.0;
 const LINE_WIDTH: f64 = 6.0;
@@ -51,7 +48,7 @@ impl Waveform {
     }
 
     pub fn push_peak(&self, peak: f64) {
-        let mut peaks = self.peaks_mut();
+        let mut peaks = self.imp().peaks.borrow_mut();
 
         if peaks.len() as i32 > self.allocated_width() / (2 * GUTTER as i32) {
             peaks.pop_front();
@@ -63,17 +60,9 @@ impl Waveform {
     }
 
     pub fn clear_peaks(&self) {
-        self.peaks_mut().clear();
+        self.imp().peaks.borrow_mut().clear();
 
         self.queue_draw();
-    }
-
-    fn peaks(&self) -> Ref<'_, VecDeque<f64>> {
-        self.imp().peaks.borrow()
-    }
-
-    fn peaks_mut(&self) -> RefMut<'_, VecDeque<f64>> {
-        self.imp().peaks.borrow_mut()
     }
 
     fn on_snapshot(&self, snapshot: &gtk::Snapshot) {
@@ -90,7 +79,7 @@ impl Waveform {
         let v_center = max_height / 2.0;
         let h_center = width as f64 / 2.0;
 
-        let peaks = self.peaks();
+        let peaks = self.imp().peaks.borrow();
         let peaks_len = peaks.len();
 
         let mut pointer = h_center;
