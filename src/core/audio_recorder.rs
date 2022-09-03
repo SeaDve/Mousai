@@ -1,4 +1,4 @@
-use anyhow::Context;
+use anyhow::{anyhow, Context, Result};
 use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
@@ -139,7 +139,7 @@ impl AudioRecorder {
         self.notify("device-class");
     }
 
-    pub async fn start(&self) -> anyhow::Result<()> {
+    pub async fn start(&self) -> Result<()> {
         let imp = self.imp();
 
         if imp.current.borrow().is_some() {
@@ -172,13 +172,13 @@ impl AudioRecorder {
         Ok(())
     }
 
-    pub async fn stop(&self) -> anyhow::Result<AudioRecording> {
+    pub async fn stop(&self) -> Result<AudioRecording> {
         let imp = self.imp();
 
         let (pipeline, stream) = imp
             .current
             .take()
-            .ok_or_else(|| anyhow::anyhow!("No current recording found"))?;
+            .ok_or_else(|| anyhow!("No current recording found"))?;
 
         pipeline.set_state(gst::State::Null)?;
         stream.close_future(glib::PRIORITY_HIGH).await?;
@@ -201,13 +201,13 @@ impl AudioRecorder {
         }
     }
 
-    fn cancel_inner(&self) -> anyhow::Result<()> {
+    fn cancel_inner(&self) -> Result<()> {
         let imp = self.imp();
 
         let (pipeline, stream) = imp
             .current
             .take()
-            .ok_or_else(|| anyhow::anyhow!("No current recording found"))?;
+            .ok_or_else(|| anyhow!("No current recording found"))?;
 
         pipeline.set_state(gst::State::Null)?;
         stream.close(gio::Cancellable::NONE)?;
@@ -310,7 +310,7 @@ impl Default for AudioRecorder {
     }
 }
 
-fn gst_element_factory_make(factory_name: &str) -> anyhow::Result<gst::Element> {
+fn gst_element_factory_make(factory_name: &str) -> Result<gst::Element> {
     gst::ElementFactory::make(factory_name, None)
         .with_context(|| format!("Failed to make `{}`", factory_name))
 }
@@ -318,7 +318,7 @@ fn gst_element_factory_make(factory_name: &str) -> anyhow::Result<gst::Element> 
 async fn create_pipeline(
     stream: &gio::MemoryOutputStream,
     preferred_device_class: AudioDeviceClass,
-) -> anyhow::Result<gst::Pipeline> {
+) -> Result<gst::Pipeline> {
     let pipeline = gst::Pipeline::new(None);
 
     let pulsesrc = gst_element_factory_make("pulsesrc")?;

@@ -1,3 +1,4 @@
+use anyhow::Result;
 use gtk::{
     gio,
     glib::{self, closure_local},
@@ -70,7 +71,7 @@ glib::wrapper! {
 
 impl SongList {
     /// Load a [`SongList`] from application settings `history` key
-    pub fn load_from_settings() -> anyhow::Result<Self> {
+    pub fn load_from_settings() -> Result<Self> {
         let songs: Vec<Song> = serde_json::from_str(&Application::default().settings().history())?;
 
         let obj = Self::default();
@@ -80,7 +81,7 @@ impl SongList {
     }
 
     /// Save to application settings `history` key
-    pub fn save_to_settings(&self) -> anyhow::Result<()> {
+    pub fn save_to_settings(&self) -> Result<()> {
         let list = self.imp().list.borrow();
         let songs = list.values().collect::<Vec<_>>();
         Application::default()

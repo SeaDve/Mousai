@@ -6,13 +6,15 @@ mod youtube;
 use gtk::glib::{self, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 
+use std::fmt;
+
 pub use self::{
     apple_music::AppleMusicExternalLink, aud_d::AudDExternalLink, spotify::SpotifyExternalLink,
     youtube::YoutubeExternalLink,
 };
 
 #[typetag::serde]
-pub trait ExternalLink: std::fmt::Debug {
+pub trait ExternalLink: fmt::Debug {
     /// The uri to launch when this is activated
     fn uri(&self) -> String;
 

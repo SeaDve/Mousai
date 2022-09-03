@@ -4,7 +4,10 @@
 
 use gtk::{cairo, glib, graphene, prelude::*, subclass::prelude::*};
 
-use std::{cell::RefCell, collections::VecDeque};
+use std::{
+    cell::{Ref, RefCell, RefMut},
+    collections::VecDeque,
+};
 
 const GUTTER: f64 = 10.0;
 const LINE_WIDTH: f64 = 6.0;
@@ -65,11 +68,11 @@ impl Waveform {
         self.queue_draw();
     }
 
-    fn peaks(&self) -> std::cell::Ref<'_, VecDeque<f64>> {
+    fn peaks(&self) -> Ref<'_, VecDeque<f64>> {
         self.imp().peaks.borrow()
     }
 
-    fn peaks_mut(&self) -> std::cell::RefMut<'_, VecDeque<f64>> {
+    fn peaks_mut(&self) -> RefMut<'_, VecDeque<f64>> {
         self.imp().peaks.borrow_mut()
     }
 

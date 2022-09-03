@@ -1,4 +1,7 @@
-use std::cell::{Cell, RefCell};
+use std::{
+    cell::{Cell, RefCell},
+    fmt,
+};
 
 #[derive(Debug, Default)]
 pub struct Cancelled(Option<String>);
@@ -9,8 +12,8 @@ impl Cancelled {
     }
 }
 
-impl std::fmt::Display for Cancelled {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl fmt::Display for Cancelled {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if let Some(ref message) = self.0 {
             f.write_str(message)
         } else {
@@ -30,8 +33,8 @@ pub struct Cancellable {
     is_cancelled: Cell<bool>,
 }
 
-impl std::fmt::Debug for Cancellable {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl fmt::Debug for Cancellable {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("Cancellable")
             .field("is_cancelled", &self.is_cancelled())
             .finish()

@@ -1,7 +1,7 @@
 use futures_channel::oneshot;
 use gtk::glib;
 
-use std::{cell::Cell, rc::Rc, time::Duration};
+use std::{cell::Cell, future::Future, rc::Rc, time::Duration};
 
 use crate::core::{Cancellable, Cancelled};
 
@@ -16,7 +16,7 @@ macro_rules! send {
 }
 
 /// Spawns a future in the default [`glib::MainContext`]
-pub fn spawn<F: std::future::Future<Output = ()> + 'static>(fut: F) {
+pub fn spawn<F: Future<Output = ()> + 'static>(fut: F) {
     let ctx = glib::MainContext::default();
     ctx.spawn_local(fut);
 }

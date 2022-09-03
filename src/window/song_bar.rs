@@ -1,3 +1,4 @@
+use anyhow::Result;
 use gtk::{
     glib::{self, clone, closure_local},
     prelude::*,
@@ -173,7 +174,7 @@ impl SongBar {
         )
     }
 
-    pub fn set_song(&self, song: Option<Song>) -> anyhow::Result<()> {
+    pub fn set_song(&self, song: Option<Song>) -> Result<()> {
         if song == self.song() {
             return Ok(());
         }

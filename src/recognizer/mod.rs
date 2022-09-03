@@ -1,5 +1,6 @@
 mod provider;
 
+use anyhow::Result;
 use gst::prelude::*;
 use gtk::glib::{self, clone, closure_local, subclass::prelude::*};
 
@@ -135,7 +136,7 @@ impl Recognizer {
         &self.imp().audio_recorder
     }
 
-    pub async fn toggle_recognize(&self) -> anyhow::Result<()> {
+    pub async fn toggle_recognize(&self) -> Result<()> {
         let imp = self.imp();
 
         match self.state() {
@@ -161,7 +162,7 @@ impl Recognizer {
         Ok(())
     }
 
-    async fn recognize(&self, cancellable: &Cancellable) -> anyhow::Result<()> {
+    async fn recognize(&self, cancellable: &Cancellable) -> Result<()> {
         struct Guard {
             instance: Recognizer,
         }

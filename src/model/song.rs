@@ -1,3 +1,4 @@
+use anyhow::{anyhow, Result};
 use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
@@ -264,10 +265,10 @@ impl Song {
         self.notify("is-newly-recognized");
     }
 
-    pub fn album_art(&self) -> anyhow::Result<Rc<AlbumArt>> {
+    pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
         let album_art_link = self
             .album_art_link()
-            .ok_or_else(|| anyhow::anyhow!("Song doesn't have an album art link"))?;
+            .ok_or_else(|| anyhow!("Song doesn't have an album art link"))?;
 
         Application::default()
             .album_art_store()?

@@ -1,3 +1,4 @@
+use anyhow::{anyhow, Result};
 use gst_player::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
@@ -176,7 +177,7 @@ impl Player {
         self.connect_notify_local(Some("song"), move |obj, _| f(obj))
     }
 
-    pub fn set_song(&self, song: Option<Song>) -> anyhow::Result<()> {
+    pub fn set_song(&self, song: Option<Song>) -> Result<()> {
         if song == self.song() {
             return Ok(());
         }
@@ -189,7 +190,7 @@ impl Player {
 
         if let Some(ref song) = song {
             let playback_link = song.playback_link().ok_or_else(|| {
-                anyhow::anyhow!("Trying to set a song to audio player without playback link")
+                anyhow!("Trying to set a song to audio player without playback link")
             })?;
             imp.gst_player.set_uri(Some(&playback_link));
             tracing::debug!(uri = playback_link, "Uri changed");
@@ -275,7 +276,7 @@ impl Player {
         self.imp().gst_player.pause();
     }
 
-    pub fn stop(&self) -> anyhow::Result<()> {
+    pub fn stop(&self) -> Result<()> {
         self.set_song(None)
     }
 

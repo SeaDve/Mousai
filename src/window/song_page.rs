@@ -1,3 +1,4 @@
+use anyhow::Result;
 use gettextrs::gettext;
 use gtk::{
     gdk,
@@ -318,7 +319,7 @@ impl SongPage {
             .and_then(|(player, _)| player.upgrade())
     }
 
-    fn toggle_playback(&self) -> anyhow::Result<()> {
+    fn toggle_playback(&self) -> Result<()> {
         if let Some(ref player) = self.player() {
             if let Some(song) = self.song() {
                 if player.state() == PlayerState::Playing && player.is_active_song(&song) {

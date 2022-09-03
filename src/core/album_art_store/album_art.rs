@@ -1,10 +1,11 @@
+use anyhow::Result;
 use futures_channel::oneshot::{self, Receiver};
 use futures_util::future::{FutureExt, Shared};
 use gtk::{gdk, gio, glib, prelude::*};
 use once_cell::unsync::OnceCell;
 use soup::prelude::*;
 
-use std::{cell::RefCell, path::Path};
+use std::{cell::RefCell, fmt, path::Path};
 
 pub struct AlbumArt {
     session: soup::Session,
@@ -14,8 +15,8 @@ pub struct AlbumArt {
     loading: RefCell<Option<Shared<Receiver<()>>>>,
 }
 
-impl std::fmt::Debug for AlbumArt {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl fmt::Debug for AlbumArt {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let receiver_strong_count = self
             .loading
             .borrow()
@@ -56,7 +57,7 @@ impl AlbumArt {
         self.download_url.as_str().into()
     }
 
-    pub async fn texture(&self) -> anyhow::Result<&gdk::Texture> {
+    pub async fn texture(&self) -> Result<&gdk::Texture> {
         let receiver = self.loading.borrow().clone();
         if let Some(receiver) = receiver {
             // If there are currently loading AlbumArt, wait

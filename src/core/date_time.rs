@@ -2,6 +2,8 @@ use gettextrs::gettext;
 use gtk::glib;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
+use std::fmt;
+
 /// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, glib::Boxed, PartialEq, Eq, PartialOrd, Ord)]
 #[boxed_type(name = "MsaiDateTime")]
@@ -59,7 +61,7 @@ struct DateTimeVisitor;
 impl<'de> de::Visitor<'de> for DateTimeVisitor {
     type Value = DateTime;
 
-    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
         formatter.write_str("an iso8601 formatted date and time string")
     }
 

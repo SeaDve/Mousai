@@ -1,6 +1,6 @@
 mod album_art;
 
-use anyhow::Context;
+use anyhow::{ensure, Context, Result};
 use gtk::glib;
 
 use std::{cell::RefCell, collections::HashMap, fs, path::PathBuf, rc::Rc};
@@ -16,7 +16,7 @@ pub struct AlbumArtStore {
 
 impl AlbumArtStore {
     /// Initializes the cache dir.
-    pub fn new(session: &soup::Session) -> anyhow::Result<Self> {
+    pub fn new(session: &soup::Session) -> Result<Self> {
         let cache_dir = {
             let mut path = glib::user_cache_dir();
             path.push("mousai/album_art_cache");
@@ -39,7 +39,7 @@ impl AlbumArtStore {
         })
     }
 
-    pub fn get_or_init(&self, download_url: &str) -> anyhow::Result<Rc<AlbumArt>> {
+    pub fn get_or_init(&self, download_url: &str) -> Result<Rc<AlbumArt>> {
         use std::collections::hash_map::Entry;
 
         match self.inner.borrow_mut().entry(download_url.to_string()) {
@@ -50,7 +50,7 @@ impl AlbumArtStore {
                 // gio::File::for_path() would crash with it.
                 let file_name = download_url.replace('/', "-").replace('\0', "");
 
-                anyhow::ensure!(
+                ensure!(
                     file_name != "." && file_name != "..",
                     "Download url cannot be `.` or `..`"
                 );
@@ -58,7 +58,7 @@ impl AlbumArtStore {
                 let cache_path = self.cache_dir.join(file_name);
 
                 // Should be practically impossible, but to detect it just incase
-                anyhow::ensure!(
+                ensure!(
                     cache_path.file_name().is_some(),
                     "Found no file name for created cache path"
                 );

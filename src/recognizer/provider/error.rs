@@ -1,5 +1,7 @@
 use gettextrs::gettext;
 
+use std::fmt;
+
 #[derive(Debug, PartialEq, Eq)]
 pub enum ProviderError {
     NoMatches,
@@ -9,8 +11,8 @@ pub enum ProviderError {
     Other(String),
 }
 
-impl std::fmt::Display for ProviderError {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl fmt::Display for ProviderError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             ProviderError::Connection(string) => {
                 f.write_str(&gettext!("{} Check your internet connection.", string))

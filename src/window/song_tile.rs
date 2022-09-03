@@ -1,3 +1,4 @@
+use anyhow::Result;
 use gtk::{
     gdk,
     glib::{self, clone, closure_local, WeakRef},
@@ -340,7 +341,7 @@ impl SongTile {
         self.update_playback_ui(player);
     }
 
-    fn toggle_playback(&self) -> anyhow::Result<()> {
+    fn toggle_playback(&self) -> Result<()> {
         if let Some(ref player) = self.imp().player.get().and_then(|player| player.upgrade()) {
             if let Some(song) = self.song() {
                 if player.state() == PlayerState::Playing && player.is_active_song(&song) {

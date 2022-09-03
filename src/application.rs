@@ -1,4 +1,5 @@
 use adw::subclass::prelude::*;
+use anyhow::Result;
 use gtk::{
     gio,
     glib::{self, clone},
@@ -85,7 +86,7 @@ impl Application {
         self.imp().session.get_or_init(soup::Session::new)
     }
 
-    pub fn album_art_store(&self) -> anyhow::Result<&AlbumArtStore> {
+    pub fn album_art_store(&self) -> Result<&AlbumArtStore> {
         self.imp()
             .album_art_store
             .get_or_try_init(|| AlbumArtStore::new(self.session()))

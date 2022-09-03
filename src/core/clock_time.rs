@@ -45,8 +45,8 @@ impl From<ClockTime> for gst::ClockTime {
     fn from(value: ClockTime) -> Self {
         let nanos = value.0.as_nanos();
 
-        // Note: `std::u64::MAX` is `ClockTime::None`.
-        if nanos >= std::u64::MAX as u128 {
+        // Note: `u64::MAX` is `ClockTime::None`.
+        if nanos >= u64::MAX as u128 {
             return gst::ClockTime::MAX;
         }
 
@@ -81,12 +81,12 @@ mod test {
 
     #[test]
     fn gst_conversion_max_handling() {
-        let this_max = ClockTime(Duration::from_nanos(std::u64::MAX));
+        let this_max = ClockTime(Duration::from_nanos(u64::MAX));
         let gst_from_this_max = gst::ClockTime::from(this_max);
 
         assert_eq!(gst::ClockTime::MAX, gst_from_this_max);
         assert_eq_gst!(
-            ClockTime(Duration::from_nanos(std::u64::MAX - 1)),
+            ClockTime(Duration::from_nanos(u64::MAX - 1)),
             gst_from_this_max
         );
     }

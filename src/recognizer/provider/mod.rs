@@ -4,14 +4,14 @@ mod settings;
 
 use async_trait::async_trait;
 
-use std::time::Duration;
+use std::{fmt, time::Duration};
 
 use self::error::ProviderError;
 pub use self::settings::{ProviderSettings, ProviderType, TestProviderMode};
 use crate::{core::AudioRecording, model::Song};
 
 #[async_trait(?Send)]
-pub trait Provider: std::fmt::Debug {
+pub trait Provider: fmt::Debug {
     /// Recognize a song from a recording
     async fn recognize(&self, recording: &AudioRecording) -> Result<Song, ProviderError>;
 
