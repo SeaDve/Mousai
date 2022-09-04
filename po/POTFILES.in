@@ -8,6 +8,7 @@ data/resources/ui/song-bar.ui
 data/resources/ui/song-page.ui
 data/resources/ui/song-tile.ui
 src/about_window.rs
+src/application.rs
 src/core/date_time.rs
 src/main.rs
 src/model/external_link/apple_music.rs
@@ -18,7 +19,6 @@ src/recognizer/provider/aud_d/mod.rs
 src/recognizer/provider/aud_d/response.rs
 src/recognizer/provider/error.rs
 src/window/history_view.rs
-src/window/mod.rs
 src/window/playback_button.rs
 src/window/recognizer_view.rs
 src/window/song_page.rs
