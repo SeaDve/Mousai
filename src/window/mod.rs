@@ -11,7 +11,7 @@ mod time_label;
 mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};
-use anyhow::Result;
+use anyhow::{Error, Result};
 use gtk::{
     gdk, gio,
     glib::{self, clone},
@@ -328,8 +328,10 @@ impl Window {
                 obj.update_song_bar_revealer();
             }));
 
-        imp.player
-            .connect_error(|_, err| Application::default().present_error(&err.clone().into()));
+        imp.player.connect_error(|_, err| {
+            let err = Error::from(err.clone()).context("Player error");
+            Application::default().add_toast_error(&err);
+        });
 
         imp.recognizer
             .connect_state_notify(clone!(@weak self as obj => move |_| {
