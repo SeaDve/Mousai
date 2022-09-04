@@ -94,16 +94,13 @@ mod imp {
             });
 
             klass.install_action("win.stop-playback", None, |obj, _, _| {
-                if let Err(err) = obj.imp().player.stop() {
-                    tracing::warn!("Failed to stop player: {:?}", err);
-                }
+                obj.imp().player.clear_song();
             });
 
             klass.install_action("win.toggle-listen", None, |obj, _, _| {
                 utils::spawn(clone!(@weak obj => async move {
-                    if let Err(err) = obj.imp().player.stop() {
-                        tracing::warn!("Failed to stop player before toggling listen: {:?}", err);
-                    }
+                    obj.imp().player.clear_song();
+
                     if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
                         tracing::error!("{:?}", err);
                         Application::default().present_error(&err);
@@ -380,9 +377,7 @@ impl Window {
             .connect_removed(clone!(@weak self as obj => move |_, song| {
                 let player = obj.player();
                 if player.is_active_song(song) {
-                    if let Err(err) = player.stop() {
-                        tracing::warn!("Failed to stop player while deleting the active song: {:?}", err);
-                    }
+                    player.clear_song();
                 }
             }));
     }

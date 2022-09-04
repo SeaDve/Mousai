@@ -1,4 +1,3 @@
-use anyhow::Result;
 use gtk::{
     glib::{self, clone, closure_local},
     prelude::*,
@@ -57,9 +56,7 @@ mod imp {
             klass.set_accessible_role(gtk::AccessibleRole::Group);
 
             klass.install_action("song-bar.clear", None, |obj, _, _| {
-                if let Err(err) = obj.set_song(None) {
-                    tracing::warn!("Failed to clear SongBar song: {:?}", err);
-                }
+                obj.set_song(None);
             });
 
             klass.install_action("song-bar.activate-song", None, |obj, _, _| {
@@ -111,9 +108,7 @@ mod imp {
             match pspec.name() {
                 "song" => {
                     let song = value.get().unwrap();
-                    if let Err(err) = obj.set_song(song) {
-                        tracing::warn!("Failed to set song to SongBar: {:?}", err);
-                    }
+                    obj.set_song(song);
                 }
                 _ => unimplemented!(),
             }
@@ -174,22 +169,20 @@ impl SongBar {
         )
     }
 
-    pub fn set_song(&self, song: Option<Song>) -> Result<()> {
+    pub fn set_song(&self, song: Option<Song>) {
         if song == self.song() {
-            return Ok(());
+            return;
         }
 
         let imp = self.imp();
 
-        self.player().set_song(song.clone())?;
+        self.player().set_song(song.clone());
         imp.song.replace(song);
 
         self.update_album_cover();
         self.update_actions_sensitivity();
 
         self.notify("song");
-
-        Ok(())
     }
 
     pub fn song(&self) -> Option<Song> {

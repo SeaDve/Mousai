@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Result};
+use anyhow::Error;
 use gettextrs::gettext;
 use gtk::{
     gdk,
@@ -68,10 +68,7 @@ mod imp {
             klass.bind_template();
 
             klass.install_action("song-page.toggle-playback", None, |obj, _, _| {
-                if let Err(err) = obj.toggle_playback() {
-                    tracing::warn!("Failed to toggle playback: {:?}", err);
-                    Application::default().add_toast_error(&err);
-                }
+                obj.toggle_playback();
             });
 
             klass.install_action("song-page.remove-song", None, |obj, _, _| {
@@ -192,7 +189,7 @@ mod imp {
                     .await
                     {
                         tracing::warn!("Failed to launch default for uri `{uri}`: {:?}", err);
-                        Application::default().add_toast_error(&anyhow!(gettext!(
+                        Application::default().add_toast_error(&Error::msg(gettext!(
                             "Failed to launch {}",
                             external_link.name()
                         )));
@@ -321,19 +318,17 @@ impl SongPage {
             .and_then(|(player, _)| player.upgrade())
     }
 
-    fn toggle_playback(&self) -> Result<()> {
+    fn toggle_playback(&self) {
         if let Some(ref player) = self.player() {
             if let Some(song) = self.song() {
                 if player.state() == PlayerState::Playing && player.is_active_song(&song) {
                     player.pause();
                 } else {
-                    player.set_song(Some(song))?;
+                    player.set_song(Some(song));
                     player.play();
                 }
             }
         }
-
-        Ok(())
     }
 
     fn update_playback_ui(&self) {

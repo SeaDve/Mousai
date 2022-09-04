@@ -1,4 +1,3 @@
-use anyhow::{anyhow, Result};
 use gst_player::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
@@ -122,9 +121,7 @@ mod imp {
             match pspec.name() {
                 "song" => {
                     let song = value.get().unwrap();
-                    if let Err(err) = obj.set_song(song) {
-                        tracing::warn!("Failed to set song to Player: {:?}", err);
-                    }
+                    obj.set_song(song);
                 }
                 _ => unimplemented!(),
             }
@@ -177,9 +174,9 @@ impl Player {
         self.connect_notify_local(Some("song"), move |obj, _| f(obj))
     }
 
-    pub fn set_song(&self, song: Option<Song>) -> Result<()> {
+    pub fn set_song(&self, song: Option<Song>) {
         if song == self.song() {
-            return Ok(());
+            return;
         }
 
         let imp = self.imp();
@@ -189,9 +186,13 @@ impl Player {
         self.set_duration(None);
 
         if let Some(ref song) = song {
-            let playback_link = song.playback_link().ok_or_else(|| {
-                anyhow!("Trying to set a song to audio player without playback link")
-            })?;
+            let playback_link = if let Some(playback_link) = song.playback_link() {
+                playback_link
+            } else {
+                tracing::warn!("Trying to put a song without playback link on the Player");
+                return;
+            };
+
             imp.gst_player.set_uri(Some(&playback_link));
             tracing::debug!(uri = playback_link, "Uri changed");
 
@@ -223,8 +224,6 @@ impl Player {
         imp.song.replace(song);
 
         self.notify("song");
-
-        Ok(())
     }
 
     pub fn song(&self) -> Option<Song> {
@@ -276,8 +275,8 @@ impl Player {
         self.imp().gst_player.pause();
     }
 
-    pub fn stop(&self) -> Result<()> {
-        self.set_song(None)
+    pub fn clear_song(&self) {
+        self.set_song(None);
     }
 
     pub fn seek(&self, position: ClockTime) {
@@ -331,7 +330,7 @@ impl Player {
             }));
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
-                obj.stop().unwrap_or_else(|err| tracing::warn!("Failed to stop player: {:?}", err));
+                obj.clear_song();
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
