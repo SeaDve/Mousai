@@ -4,7 +4,7 @@ mod response;
 use anyhow::{Context, Error, Result};
 use async_trait::async_trait;
 use gettextrs::gettext;
-use gtk::{gio, glib};
+use gtk::glib;
 use serde_json::json;
 use soup::prelude::*;
 
@@ -15,6 +15,7 @@ use self::response::{Data, Response};
 use super::Provider;
 use crate::{
     audio_recording::AudioRecording,
+    core::ResultExt,
     model::external_link::{
         AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
     },
@@ -128,15 +129,11 @@ impl Provider for AudD {
             .session()
             .send_and_read_future(&message, glib::PRIORITY_HIGH)
             .await
-            .map_err(|err| {
-                if err.matches(gio::ResolverError::TemporaryFailure) {
-                    Error::from(err).context(gettext(
-                        "Failed to connect to the server due to a temporary failure",
-                    ))
-                } else {
-                    err.into()
-                }
-            })?;
+            .map_err(Error::from)
+            .with_help(
+                || gettext("Check your internet connection"),
+                || gettext("Failed to connect to AudD"),
+            )?;
 
         match std::str::from_utf8(&bytes) {
             Ok(string) => tracing::debug!(server_response = ?string),

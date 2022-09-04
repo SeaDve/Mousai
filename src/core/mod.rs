@@ -3,6 +3,7 @@ mod cancellable;
 mod cancelled;
 mod clock_time;
 mod date_time;
+mod help;
 
 pub use self::{
     album_art_store::{AlbumArt, AlbumArtStore},
@@ -10,4 +11,5 @@ pub use self::{
     cancelled::Cancelled,
     clock_time::ClockTime,
     date_time::DateTime,
+    help::{ErrorExt, Help, ResultExt},
 };

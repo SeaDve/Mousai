@@ -123,7 +123,7 @@ mod imp {
                 "song" => {
                     let song = value.get().unwrap();
                     if let Err(err) = obj.set_song(song) {
-                        tracing::warn!("Failed to set song to Player: {err:?}");
+                        tracing::warn!("Failed to set song to Player: {:?}", err);
                     }
                 }
                 _ => unimplemented!(),
@@ -331,7 +331,7 @@ impl Player {
             }));
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
-                obj.stop().unwrap_or_else(|err| tracing::warn!("Failed to stop player: {err:?}"));
+                obj.stop().unwrap_or_else(|err| tracing::warn!("Failed to stop player: {:?}", err));
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
@@ -386,7 +386,6 @@ impl Player {
             }
             Message::Warning(ref warning) => {
                 tracing::warn!("Received warning message: {:?}", warning);
-                self.emit_by_name::<()>("error", &[warning]);
             }
             Message::Eos => {
                 tracing::debug!("Received end of stream message");

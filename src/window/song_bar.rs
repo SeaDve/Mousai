@@ -58,7 +58,7 @@ mod imp {
 
             klass.install_action("song-bar.clear", None, |obj, _, _| {
                 if let Err(err) = obj.set_song(None) {
-                    tracing::warn!("Failed to clear SongBar song: {err:?}");
+                    tracing::warn!("Failed to clear SongBar song: {:?}", err);
                 }
             });
 
@@ -112,7 +112,7 @@ mod imp {
                 "song" => {
                     let song = value.get().unwrap();
                     if let Err(err) = obj.set_song(song) {
-                        tracing::warn!("Failed to set song to SongBar: {err:?}");
+                        tracing::warn!("Failed to set song to SongBar: {:?}", err);
                     }
                 }
                 _ => unimplemented!(),

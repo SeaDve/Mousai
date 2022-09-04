@@ -12,7 +12,6 @@ mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};
 use anyhow::Result;
-use gettextrs::gettext;
 use gtk::{
     gdk, gio,
     glib::{self, clone},
@@ -96,18 +95,18 @@ mod imp {
 
             klass.install_action("win.stop-playback", None, |obj, _, _| {
                 if let Err(err) = obj.imp().player.stop() {
-                    tracing::warn!("Failed to stop player: {err:?}");
+                    tracing::warn!("Failed to stop player: {:?}", err);
                 }
             });
 
             klass.install_action("win.toggle-listen", None, |obj, _, _| {
                 utils::spawn(clone!(@weak obj => async move {
                     if let Err(err) = obj.imp().player.stop() {
-                        tracing::warn!("Failed to stop player before toggling listen: {err:?}");
+                        tracing::warn!("Failed to stop player before toggling listen: {:?}", err);
                     }
                     if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
-                        tracing::error!("Failed to toggle recognize: {:?}", err);
-                        obj.show_error(&err.to_string());
+                        tracing::error!("{:?}", err);
+                        Application::default().present_error(&err);
                     }
                 }));
             });
@@ -234,14 +233,6 @@ impl Window {
         self.imp().toast_overlay.add_toast(toast);
     }
 
-    pub fn show_error(&self, message: &str) {
-        let toast = adw::Toast::builder()
-            .title(&glib::markup_escape_text(message))
-            .priority(adw::ToastPriority::High)
-            .build();
-        self.add_toast(&toast);
-    }
-
     pub fn connect_adaptive_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
@@ -256,8 +247,12 @@ impl Window {
     fn history(&self) -> &SongList {
         self.imp().history.get_or_init(|| {
             SongList::load_from_settings().unwrap_or_else(|err| {
-                tracing::error!("Failed to load SongList from settings: {err:?}");
-                self.show_error(&gettext("Failed to load history"));
+                let err = err.context("Failed to load SongList from settings");
+
+                tracing::error!("{:?}", err);
+                tracing::debug!("Using empty SongList instead");
+                Application::default().present_error(&err);
+
                 SongList::default()
             })
         })
@@ -337,9 +332,7 @@ impl Window {
             }));
 
         imp.player
-            .connect_error(clone!(@weak self as obj => move |_, error| {
-                obj.show_error(&error.to_string());
-            }));
+            .connect_error(|_, err| Application::default().present_error(&err.clone().into()));
 
         imp.recognizer
             .connect_state_notify(clone!(@weak self as obj => move |_| {
@@ -388,7 +381,7 @@ impl Window {
                 let player = obj.player();
                 if player.is_active_song(song) {
                     if let Err(err) = player.stop() {
-                        tracing::warn!("Failed to stop player while deleting the active song: {err:?}");
+                        tracing::warn!("Failed to stop player while deleting the active song: {:?}", err);
                     }
                 }
             }));

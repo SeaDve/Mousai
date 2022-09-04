@@ -108,12 +108,14 @@ impl Response {
                 .ok_or_else(|| anyhow!("Got `error` status but no error"))?;
 
             // Based on https://docs.audd.io/#common-errors
-            return match error.code {
-                901 => Err(TokenError::LimitReached).context(error.message),
-                900 => Err(TokenError::Invalid).context(error.message),
-                300 => Err(FingerprintError).context(error.message),
-                _ => Err(anyhow!("#{}: {}", error.code, error.message)),
-            };
+
+            let err = anyhow!("#{}: {}", error.code, error.message);
+            return Err(match error.code {
+                901 => err.context(TokenError::LimitReached),
+                900 => err.context(TokenError::Invalid),
+                300 => err.context(FingerprintError),
+                _ => err,
+            });
         }
 
         Err(anyhow!(gettext!(

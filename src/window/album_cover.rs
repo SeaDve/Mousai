@@ -146,14 +146,14 @@ impl AlbumCover {
                                 obj.set_paintable(texture);
                             }
                             Err(err) => {
-                                tracing::warn!("Failed to load texture: {err:?}");
+                                tracing::warn!("Failed to load texture: {:?}", err);
                                 obj.clear();
                             }
                         }
                     }));
                 }
                 Err(err) => {
-                    tracing::warn!("Failed to get song album art: {err:?}");
+                    tracing::warn!("Failed to get song album art: {:?}", err);
                     self.clear();
                 }
             }

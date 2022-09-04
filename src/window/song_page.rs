@@ -1,4 +1,4 @@
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use gettextrs::gettext;
 use gtk::{
     gdk,
@@ -69,8 +69,8 @@ mod imp {
 
             klass.install_action("song-page.toggle-playback", None, |obj, _, _| {
                 if let Err(err) = obj.toggle_playback() {
-                    tracing::warn!("Failed to toggle playback: {err:?}");
-                    Application::default().show_error(&err.to_string());
+                    tracing::warn!("Failed to toggle playback: {:?}", err);
+                    Application::default().add_toast_error(&err);
                 }
             });
 
@@ -178,7 +178,7 @@ mod imp {
                     let uri = external_link.uri();
 
                     if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
-                        tracing::warn!("Trying to launch an invalid Uri: {err:?}");
+                        tracing::warn!("Trying to launch an invalid Uri: {:?}", err);
                     }
 
                     if let Err(err) = gtk::show_uri_full_future(
@@ -191,9 +191,11 @@ mod imp {
                     )
                     .await
                     {
-                        tracing::warn!("Failed to launch default for uri `{uri}`: {err:?}");
-                        Application::default()
-                            .show_error(&gettext!("Failed to launch {}", external_link.name()));
+                        tracing::warn!("Failed to launch default for uri `{uri}`: {:?}", err);
+                        Application::default().add_toast_error(&anyhow!(gettext!(
+                            "Failed to launch {}",
+                            external_link.name()
+                        )));
                     }
                 });
             });
