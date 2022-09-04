@@ -6,11 +6,17 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
+use std::cell::RefCell;
+
 use super::waveform::Waveform;
-use crate::recognizer::{Recognizer, RecognizerState};
+use crate::{
+    audio_recording::AudioRecording,
+    recognizer::{Recognizer, RecognizerState},
+};
 
 mod imp {
     use super::*;
+    use glib::WeakRef;
     use gtk::CompositeTemplate;
 
     #[derive(Debug, Default, CompositeTemplate)]
@@ -21,6 +27,8 @@ mod imp {
         #[template_child]
         pub(super) waveform: TemplateChild<Waveform>,
 
+        pub(super) recording_signal_handler:
+            RefCell<Option<(WeakRef<AudioRecording>, glib::SignalHandlerId)>>,
         pub(super) recognizing_animation: OnceCell<adw::TimedAnimation>,
         pub(super) recognizer: OnceCell<Recognizer>,
     }
@@ -67,17 +75,34 @@ impl RecognizerView {
             obj.update_ui();
         }));
 
-        let audio_recorder = recognizer.audio_recorder();
-        audio_recorder.connect_peak(clone!(@weak self as obj => move |_, peak| {
-            obj.imp().waveform.push_peak(peak);
-        }));
-        audio_recorder.connect_stopped(clone!(@weak self as obj => move |_| {
-            obj.imp().waveform.clear_peaks();
+        recognizer.connect_recording_notify(clone!(@weak self as obj => move |_| {
+            obj.on_recognizer_recording_notify();
         }));
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 
         self.update_ui();
+    }
+
+    fn on_recognizer_recording_notify(&self) {
+        let imp = self.imp();
+        let handlers = imp.recording_signal_handler.take();
+
+        imp.waveform.clear_peaks();
+
+        if let Some((recording, handler_id)) = handlers {
+            if let Some(recording) = recording.upgrade() {
+                recording.disconnect(handler_id);
+            }
+        }
+
+        if let Some(recording) = self.recognizer().recording() {
+            let handler_id = recording.connect_peak(clone!(@weak self as obj => move |_, peak| {
+                obj.imp().waveform.push_peak(peak);
+            }));
+            imp.recording_signal_handler
+                .replace(Some((recording.downgrade(), handler_id)));
+        }
     }
 
     fn recognizer(&self) -> &Recognizer {

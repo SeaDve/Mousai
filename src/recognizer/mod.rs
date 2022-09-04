@@ -1,6 +1,6 @@
 mod provider;
 
-use anyhow::Result;
+use anyhow::{Context, Result};
 use gst::prelude::*;
 use gtk::glib::{self, clone, closure_local, subclass::prelude::*};
 
@@ -11,8 +11,9 @@ use std::{
 
 pub use self::provider::{ProviderSettings, ProviderType, TestProviderMode};
 use crate::{
-    audio_device::AudioDeviceClass,
-    core::{AudioRecorder, Cancellable, Cancelled},
+    audio_device::{self, AudioDeviceClass},
+    audio_recording::AudioRecording,
+    core::{Cancellable, Cancelled},
     model::Song,
     settings::PreferredAudioSource,
     utils, Application,
@@ -35,8 +36,8 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct Recognizer {
         pub(super) state: Cell<RecognizerState>,
+        pub(super) recording: RefCell<Option<AudioRecording>>,
 
-        pub(super) audio_recorder: AudioRecorder,
         pub(super) cancellable: RefCell<Option<Rc<Cancellable>>>,
     }
 
@@ -47,6 +48,32 @@ mod imp {
     }
 
     impl ObjectImpl for Recognizer {
+        fn properties() -> &'static [glib::ParamSpec] {
+            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
+                vec![
+                    // Current state of Self
+                    glib::ParamSpecEnum::builder("state", RecognizerState::static_type())
+                        .default_value(RecognizerState::default() as i32)
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                    // Active recording
+                    glib::ParamSpecObject::builder("recording", AudioRecording::static_type())
+                        .flags(glib::ParamFlags::READABLE)
+                        .build(),
+                ]
+            });
+
+            PROPERTIES.as_ref()
+        }
+
+        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            match pspec.name() {
+                "state" => obj.state().to_value(),
+                "recording" => obj.recording().to_value(),
+                _ => unimplemented!(),
+            }
+        }
+
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder(
@@ -58,43 +85,6 @@ mod imp {
             });
 
             SIGNALS.as_ref()
-        }
-
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Current state of Self
-                    glib::ParamSpecEnum::builder("state", RecognizerState::static_type())
-                        .default_value(RecognizerState::default() as i32)
-                        .flags(glib::ParamFlags::READABLE)
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
-            match pspec.name() {
-                "state" => {
-                    let state = value.get().unwrap();
-                    obj.set_state(state);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            match pspec.name() {
-                "state" => obj.state().to_value(),
-                _ => unimplemented!(),
-            }
         }
     }
 }
@@ -108,19 +98,6 @@ impl Recognizer {
         glib::Object::new(&[]).expect("Failed to create Recognizer.")
     }
 
-    pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self, &Song) + 'static,
-    {
-        self.connect_closure(
-            "song-recognized",
-            true,
-            closure_local!(|obj: &Self, song: &Song| {
-                f(obj, song);
-            }),
-        )
-    }
-
     pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
@@ -132,8 +109,28 @@ impl Recognizer {
         self.imp().state.get()
     }
 
-    pub fn audio_recorder(&self) -> &AudioRecorder {
-        &self.imp().audio_recorder
+    pub fn connect_recording_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("recording"), move |obj, _| f(obj))
+    }
+
+    pub fn recording(&self) -> Option<AudioRecording> {
+        self.imp().recording.borrow().clone()
+    }
+
+    pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, &Song) + 'static,
+    {
+        self.connect_closure(
+            "song-recognized",
+            true,
+            closure_local!(|obj: &Self, song: &Song| {
+                f(obj, song);
+            }),
+        )
     }
 
     pub async fn toggle_recognize(&self) -> Result<()> {
@@ -162,6 +159,15 @@ impl Recognizer {
         Ok(())
     }
 
+    fn set_recording(&self, recording: Option<AudioRecording>) {
+        if recording == self.recording() {
+            return;
+        }
+
+        self.imp().recording.replace(recording);
+        self.notify("recording");
+    }
+
     async fn recognize(&self, cancellable: &Cancellable) -> Result<()> {
         struct Guard {
             instance: Recognizer,
@@ -177,8 +183,8 @@ impl Recognizer {
 
         impl Drop for Guard {
             fn drop(&mut self) {
-                self.instance.imp().audio_recorder.cancel();
                 self.instance.set_state(RecognizerState::Null);
+                self.instance.set_recording(None);
             }
         }
 
@@ -186,19 +192,24 @@ impl Recognizer {
             return Err(Cancelled::new("Recognizer is not on null state").into());
         }
 
-        let imp = self.imp();
-
-        imp.audio_recorder.set_device_class(
-            match Application::default().settings().preferred_audio_source() {
-                PreferredAudioSource::Microphone => AudioDeviceClass::Source,
-                PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
-            },
-        );
+        let recording = AudioRecording::new();
+        self.set_recording(Some(recording.clone()));
 
         let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
 
         self.set_state(RecognizerState::Listening);
-        imp.audio_recorder.start().await?;
+
+        let device_name = audio_device::find_default_name(
+            match Application::default().settings().preferred_audio_source() {
+                PreferredAudioSource::Microphone => AudioDeviceClass::Source,
+                PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
+            },
+        )
+        .await
+        .context("Failed to find default device name")?;
+        recording
+            .start(Some(&device_name))
+            .context("Failed to start recording")?;
 
         if cancellable.is_cancelled() {
             return Err(Cancelled::new("Stopped while starting to record").into());
@@ -219,7 +230,7 @@ impl Recognizer {
             return Err(Cancelled::new("Stopped while recording").into());
         }
 
-        let recording = imp.audio_recorder.stop().await?;
+        recording.stop().context("Failed to stop recording")?;
 
         if cancellable.is_cancelled() {
             return Err(Cancelled::new("Stopped while flushing the recording").into());

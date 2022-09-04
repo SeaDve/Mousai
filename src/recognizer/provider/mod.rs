@@ -8,7 +8,7 @@ use std::{fmt, time::Duration};
 
 use self::error::ProviderError;
 pub use self::settings::{ProviderSettings, ProviderType, TestProviderMode};
-use crate::{core::AudioRecording, model::Song};
+use crate::{audio_recording::AudioRecording, model::Song};
 
 #[async_trait(?Send)]
 pub trait Provider: fmt::Debug {

@@ -5,7 +5,7 @@ use std::time::Duration;
 
 use super::{AudD, Data, Provider, ProviderError, Response};
 use crate::{
-    core::AudioRecording,
+    audio_recording::AudioRecording,
     model::Song,
     recognizer::provider::{ProviderSettings, TestProviderMode},
 };

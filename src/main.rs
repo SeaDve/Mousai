@@ -23,6 +23,7 @@
 mod about_window;
 mod application;
 mod audio_device;
+mod audio_recording;
 mod config;
 mod core;
 mod inspector_page;
