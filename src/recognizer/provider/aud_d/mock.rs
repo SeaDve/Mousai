@@ -1,9 +1,10 @@
+use anyhow::Result;
 use async_trait::async_trait;
 use gtk::glib;
 
 use std::time::Duration;
 
-use super::{AudD, Data, Provider, ProviderError, Response};
+use super::{AudD, Data, Provider, Response};
 use crate::{
     audio_recording::AudioRecording,
     model::Song,
@@ -15,7 +16,7 @@ pub struct AudDMock;
 
 #[async_trait(?Send)]
 impl Provider for AudDMock {
-    async fn recognize(&self, _: &AudioRecording) -> Result<Song, ProviderError> {
+    async fn recognize(&self, _: &AudioRecording) -> Result<Song> {
         let test_duration = ProviderSettings::lock().test_recognize_duration;
         glib::timeout_future(test_duration).await;
         Ok(AudD::build_song_from_data(random_data()?))
@@ -30,7 +31,7 @@ impl Provider for AudDMock {
     }
 }
 
-fn random_data() -> Result<Data, ProviderError> {
+fn random_data() -> Result<Data> {
     let test_mode = ProviderSettings::lock().test_mode;
 
     let mut raw_responses = Vec::new();

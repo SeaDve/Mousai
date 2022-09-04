@@ -1,3 +1,4 @@
+use anyhow::{Context, Result};
 use gettextrs::gettext;
 use gtk::glib;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
@@ -20,8 +21,10 @@ impl DateTime {
         Self(glib::DateTime::now_local().expect("You are somehow on year 9999"))
     }
 
-    pub fn parse_from_iso8601(text: &str) -> Result<Self, glib::BoolError> {
-        glib::DateTime::from_iso8601(text, Some(&glib::TimeZone::local())).map(Self)
+    pub fn parse_from_iso8601(string: &str) -> Result<Self> {
+        glib::DateTime::from_iso8601(string, Some(&glib::TimeZone::local()))
+            .map(Self)
+            .with_context(|| format!("Failed to parse `{}`", string))
     }
 
     pub fn fuzzy_display(&self) -> glib::GString {
@@ -45,8 +48,10 @@ impl DateTime {
             .expect("Failed to format date to iso6801")
     }
 
-    pub fn format(&self, format: &str) -> Result<glib::GString, glib::BoolError> {
-        self.0.format(format)
+    pub fn format(&self, format: &str) -> Result<glib::GString> {
+        self.0
+            .format(format)
+            .with_context(|| format!("Failed to format to `{}`", format))
     }
 }
 

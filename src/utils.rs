@@ -44,5 +44,5 @@ pub async fn timeout_future(
         }
     });
 
-    receiver.await.map_err(|_| Cancelled::default())
+    receiver.await.map_err(|_| Cancelled::new("timeout"))
 }

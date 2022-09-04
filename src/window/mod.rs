@@ -11,6 +11,7 @@ mod time_label;
 mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};
+use anyhow::Result;
 use gettextrs::gettext;
 use gtk::{
     gdk, gio,
@@ -272,7 +273,7 @@ impl Window {
         }
     }
 
-    fn save_window_size(&self) -> Result<(), glib::BoolError> {
+    fn save_window_size(&self) -> Result<()> {
         let settings = Application::default().settings();
 
         let (width, height) = self.default_size();

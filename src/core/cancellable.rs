@@ -3,27 +3,6 @@ use std::{
     fmt,
 };
 
-#[derive(Debug, Default)]
-pub struct Cancelled(Option<String>);
-
-impl Cancelled {
-    pub fn new(message: &str) -> Self {
-        Self(Some(message.to_string()))
-    }
-}
-
-impl fmt::Display for Cancelled {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if let Some(ref message) = self.0 {
-            f.write_str(message)
-        } else {
-            f.write_str("Operation was cancelled")
-        }
-    }
-}
-
-impl std::error::Error for Cancelled {}
-
 type CancelledCallback = Box<dyn FnOnce(&Cancellable) + 'static>;
 
 /// Single-threaded cancellable.

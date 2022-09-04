@@ -1,7 +1,8 @@
+use anyhow::{anyhow, Context, Result};
 use gettextrs::gettext;
 use serde::Deserialize;
 
-use super::ProviderError;
+use crate::recognizer::provider::error::{FingerprintError, NoMatchesError, TokenError};
 
 #[derive(Debug, Deserialize)]
 pub struct LyricsData {
@@ -92,39 +93,32 @@ pub struct Response {
 }
 
 impl Response {
-    pub fn parse(slice: &[u8]) -> Result<Self, ProviderError> {
-        serde_json::from_slice(slice).map_err(|err| {
-            tracing::error!("Failed to parse response: {:?}", err);
-
-            ProviderError::Other(gettext(
-                "Failed to parse response. Please report this to Mousai's bug tracker",
-            ))
-        })
+    pub fn parse(slice: &[u8]) -> Result<Self> {
+        serde_json::from_slice(slice).context("Failed to parse AudD response")
     }
 
-    pub fn data(self) -> Result<Data, ProviderError> {
-        match self.status.as_str() {
-            "success" => self.data.map_or_else(|| Err(ProviderError::NoMatches), Ok),
-            "error" => Err(self.error.map_or_else(
-                || ProviderError::Other("Got `error` status, but no error".into()),
-                |error| {
-                    // Based on https://docs.audd.io/#common-errors
-                    match error.code {
-                        901 => ProviderError::NoToken(gettext("Daily limit has been reached.")),
-                        900 => ProviderError::InvalidToken,
-                        300 => ProviderError::Other(gettext(
-                            "Failed to fingerprint audio. There may be no sound heard.",
-                        )),
-                        other_code => {
-                            ProviderError::Other(format!("{} ({})", error.message, other_code))
-                        }
-                    }
-                },
-            )),
-            other => Err(ProviderError::Other(gettext!(
-                "Got invalid status response of {}",
-                other
-            ))),
+    pub fn data(self) -> Result<Data> {
+        if self.status == "success" {
+            return self.data.ok_or_else(|| NoMatchesError.into());
         }
+
+        if self.status == "error" {
+            let error = self
+                .error
+                .ok_or_else(|| anyhow!("Got `error` status but no error"))?;
+
+            // Based on https://docs.audd.io/#common-errors
+            return match error.code {
+                901 => Err(TokenError::LimitReached).context(error.message),
+                900 => Err(TokenError::Invalid).context(error.message),
+                300 => Err(FingerprintError).context(error.message),
+                _ => Err(anyhow!("#{}: {}", error.code, error.message)),
+            };
+        }
+
+        Err(anyhow!(gettext!(
+            "Got invalid status response of {}",
+            self.status
+        )))
     }
 }
