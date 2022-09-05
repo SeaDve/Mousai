@@ -46,27 +46,17 @@
                     <property name="valign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="title_label">
                         <property name="justify">left</property>
                         <property name="xalign">0</property>
                         <property name="ellipsize">end</property>
-                        <binding name="label">
-                          <lookup name="title">
-                            <lookup name="song">MsaiSongBar</lookup>
-                          </lookup>
-                        </binding>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="artist_label">
                         <property name="justify">left</property>
                         <property name="xalign">0</property>
                         <property name="ellipsize">end</property>
-                        <binding name="label">
-                          <lookup name="artist">
-                            <lookup name="song">MsaiSongBar</lookup>
-                          </lookup>
-                        </binding>
                         <style>
                           <class name="caption"/>
                           <class name="dim-label"/>

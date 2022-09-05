@@ -30,6 +30,10 @@ mod imp {
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
+        pub(super) title_label: TemplateChild<gtk::Label>,
+        #[template_child]
+        pub(super) artist_label: TemplateChild<gtk::Label>,
+        #[template_child]
         pub(super) playback_button: TemplateChild<PlaybackButton>,
         #[template_child]
         pub(super) playback_position_scale: TemplateChild<gtk::Scale>,
@@ -38,7 +42,6 @@ mod imp {
         #[template_child]
         pub(super) duration_label: TemplateChild<TimeLabel>,
 
-        pub(super) song: RefCell<Option<Song>>,
         pub(super) scale_handler_id: OnceCell<glib::SignalHandlerId>,
         pub(super) seek_timeout_id: RefCell<Option<glib::SourceId>>,
         pub(super) player: OnceCell<Player>,
@@ -56,11 +59,11 @@ mod imp {
             klass.set_accessible_role(gtk::AccessibleRole::Group);
 
             klass.install_action("song-bar.clear", None, |obj, _, _| {
-                obj.set_song(None);
+                obj.player().clear_song();
             });
 
             klass.install_action("song-bar.activate-song", None, |obj, _, _| {
-                if let Some(ref song) = obj.song() {
+                if let Some(ref song) = obj.player().song() {
                     obj.emit_by_name::<()>("song-activated", &[song]);
                 }
             });
@@ -85,42 +88,6 @@ mod imp {
             SIGNALS.as_ref()
         }
 
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Song represented by Self
-                    glib::ParamSpecObject::builder("song", Song::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
-            match pspec.name() {
-                "song" => {
-                    let song = value.get().unwrap();
-                    obj.set_song(song);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            match pspec.name() {
-                "song" => obj.song().to_value(),
-                _ => unimplemented!(),
-            }
-        }
-
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
@@ -131,9 +98,6 @@ mod imp {
                     }),
                 ))
                 .unwrap();
-
-            obj.update_album_cover();
-            obj.update_actions_sensitivity();
         }
 
         fn dispose(&self, obj: &Self::Type) {
@@ -169,36 +133,15 @@ impl SongBar {
         )
     }
 
-    pub fn set_song(&self, song: Option<Song>) {
-        if song == self.song() {
-            return;
-        }
-
-        let imp = self.imp();
-
-        self.player().set_song(song.clone());
-        imp.song.replace(song);
-
-        self.update_album_cover();
-        self.update_actions_sensitivity();
-
-        self.notify("song");
-    }
-
-    pub fn song(&self) -> Option<Song> {
-        self.imp().song.borrow().clone()
-    }
-
     /// Must only be called once.
     pub fn bind_player(&self, player: &Player) {
         let imp = self.imp();
 
         imp.player.set(player.clone()).unwrap();
 
-        player
-            .bind_property("song", self, "song")
-            .flags(glib::BindingFlags::SYNC_CREATE)
-            .build();
+        player.connect_song_notify(clone!(@weak self as obj => move |_| {
+            obj.update_song_ui();
+        }));
 
         player.connect_state_notify(clone!(@weak self as obj => move |_| {
             obj.update_playback_button();
@@ -212,16 +155,17 @@ impl SongBar {
             obj.update_duration_ui();
         }));
 
+        self.update_song_ui();
         self.update_playback_button();
         self.update_position_ui();
         self.update_duration_ui();
     }
 
     fn player(&self) -> &Player {
-        self.imp().player.get_or_init(|| {
-            tracing::error!("Player was not bound in SongBar. Creating a default one.");
-            Player::default()
-        })
+        self.imp()
+            .player
+            .get()
+            .expect("Player was not bound in SongBar")
     }
 
     fn set_playback_position_scale_value_blocking(&self, value: f64) {
@@ -253,18 +197,20 @@ impl SongBar {
             )));
     }
 
-    fn update_position_ui(&self) {
-        let position = self.player().position().unwrap_or_default();
-        self.set_playback_position_scale_value_blocking(position.as_secs_f64());
-        self.imp().playback_position_label.set_time(position);
-    }
-
-    fn update_duration_ui(&self) {
+    fn update_song_ui(&self) {
         let imp = self.imp();
-        let duration = self.player().duration().unwrap_or_default();
-        imp.playback_position_scale
-            .set_range(0.0, duration.as_secs_f64());
-        imp.duration_label.set_time(duration);
+        let song = self.player().song();
+
+        imp.title_label
+            .set_label(&song.as_ref().map(|s| s.title()).unwrap_or_default());
+        imp.artist_label
+            .set_label(&song.as_ref().map(|s| s.artist()).unwrap_or_default());
+
+        let has_song = song.is_some();
+        self.imp().playback_position_scale.set_sensitive(has_song);
+        self.action_set_enabled("song-bar.clear", has_song);
+
+        imp.album_cover.set_song(song);
     }
 
     fn update_playback_button(&self) {
@@ -283,14 +229,18 @@ impl SongBar {
         }
     }
 
-    fn update_album_cover(&self) {
-        self.imp().album_cover.set_song(self.song());
+    fn update_position_ui(&self) {
+        let position = self.player().position().unwrap_or_default();
+        self.set_playback_position_scale_value_blocking(position.as_secs_f64());
+        self.imp().playback_position_label.set_time(position);
     }
 
-    fn update_actions_sensitivity(&self) {
-        let has_song = self.song().is_some();
-        self.imp().playback_position_scale.set_sensitive(has_song);
-        self.action_set_enabled("song-bar.clear", has_song);
+    fn update_duration_ui(&self) {
+        let imp = self.imp();
+        let duration = self.player().duration().unwrap_or_default();
+        imp.playback_position_scale
+            .set_range(0.0, duration.as_secs_f64());
+        imp.duration_label.set_time(duration);
     }
 }
 
