@@ -32,7 +32,7 @@
           <object class="GtkButton">
             <property name="margin-end">6</property>
             <property name="tooltip-text" translatable="yes">Show Song Information</property>
-            <property name="action-name">song-bar.activate-song</property>
+            <property name="action-name">song-bar.activate</property>
             <property name="child">
               <object class="GtkBox">
                 <property name="spacing">12</property>

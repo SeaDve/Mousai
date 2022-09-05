@@ -361,7 +361,7 @@ impl Window {
             }));
 
         imp.song_bar
-            .connect_song_activated(clone!(@weak self as obj => move |_, song| {
+            .connect_activated(clone!(@weak self as obj => move |_, song| {
                 obj.imp().main_view.push_song_page(song);
             }));
 

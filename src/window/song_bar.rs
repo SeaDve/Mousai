@@ -62,9 +62,9 @@ mod imp {
                 obj.player().clear_song();
             });
 
-            klass.install_action("song-bar.activate-song", None, |obj, _, _| {
+            klass.install_action("song-bar.activate", None, |obj, _, _| {
                 if let Some(ref song) = obj.player().song() {
-                    obj.emit_by_name::<()>("song-activated", &[song]);
+                    obj.emit_by_name::<()>("activated", &[song]);
                 }
             });
         }
@@ -78,7 +78,7 @@ mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder(
-                    "song-activated",
+                    "activated",
                     &[Song::static_type().into()],
                     <()>::static_type().into(),
                 )
@@ -120,12 +120,12 @@ impl SongBar {
         glib::Object::new(&[]).expect("Failed to create SongBar")
     }
 
-    pub fn connect_song_activated<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_activated<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self, &Song) + 'static,
     {
         self.connect_closure(
-            "song-activated",
+            "activated",
             true,
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
