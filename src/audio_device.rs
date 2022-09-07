@@ -1,8 +1,9 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, Context, Error, Result};
+use gettextrs::gettext;
 use gst::prelude::*;
 use gtk::glib;
 
-use crate::THREAD_POOL;
+use crate::{core::ResultExt, THREAD_POOL};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiAudioDeviceClass")]
@@ -50,7 +51,10 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     let device_monitor = gst::DeviceMonitor::new();
     device_monitor.add_filter(Some(class.as_str()), None);
 
-    device_monitor.start()?;
+    device_monitor.start().map_err(Error::from).with_help(
+        || gettext("Make sure that you have PulseAudio installed in your system."),
+        || gettext("Failed to start device monitor"),
+    )?;
     let devices = device_monitor.devices();
     device_monitor.stop();
 
@@ -127,12 +131,13 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
 }
 
 mod pa {
-    use anyhow::{bail, Context as ErrContext, Result};
+    use anyhow::{bail, Context as ErrContext, Error, Result};
     use futures_channel::{mpsc, oneshot};
     use futures_util::{
         future::{self, Either},
         StreamExt,
     };
+    use gettextrs::gettext;
     use gtk::glib;
     use pulse::{
         context::{Context as ContextInner, FlagSet, State},
@@ -142,7 +147,7 @@ mod pa {
     use std::{fmt, time::Duration};
 
     use super::AudioDeviceClass;
-    use crate::config::APP_ID;
+    use crate::{config::APP_ID, core::ResultExt};
 
     const DEFAULT_TIMEOUT: Duration = Duration::from_secs(2);
 
@@ -177,7 +182,13 @@ mod pa {
             let mut inner = ContextInner::new_with_proplist(&main_loop, APP_ID, &proplist)
                 .context("Failed to create pulse Context")?;
 
-            inner.connect(None, FlagSet::NOFLAGS, None)?;
+            inner
+                .connect(None, FlagSet::NOFLAGS, None)
+                .map_err(Error::from)
+                .with_help(
+                    || gettext("Make sure that you have PulseAudio installed in your system."),
+                    || gettext("Failed to connect to PulseAudio daemon"),
+                )?;
 
             let (mut tx, mut rx) = mpsc::channel(1);
 
