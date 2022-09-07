@@ -132,7 +132,7 @@ impl AudioRecording {
         Ok(glib::base64_encode(&bytes))
     }
 
-    pub fn pipeline(&self) -> Option<&gst::Pipeline> {
+    fn pipeline(&self) -> Option<&gst::Pipeline> {
         self.imp().data.get().map(|(pipeline, _)| pipeline)
     }
 
