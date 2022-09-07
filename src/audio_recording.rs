@@ -139,8 +139,6 @@ impl AudioRecording {
     fn handle_bus_message(&self, message: &gst::Message) -> Continue {
         use gst::MessageView;
 
-        let imp = self.imp();
-
         match message.view() {
             MessageView::Element(element) => {
                 if let Some(structure) = element.structure() {
@@ -178,10 +176,9 @@ impl AudioRecording {
             }
             MessageView::StateChanged(sc) => {
                 if message.src().as_ref()
-                    != imp
-                        .data
-                        .get()
-                        .map(|(pipeline, _)| pipeline.upcast_ref::<gst::Object>())
+                    != self
+                        .pipeline()
+                        .map(|pipeline| pipeline.upcast_ref::<gst::Object>())
                 {
                     tracing::trace!(
                         "`{}` changed state from `{:?}` -> `{:?}`",
