@@ -30,7 +30,7 @@ impl AlbumArtStore {
             )
         })?;
 
-        // TODO Remove from store on low memory
+        // TODO Remove from store on low memory (Use LRU Cache)
 
         Ok(Self {
             cache_dir,
