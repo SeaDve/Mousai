@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-08-27 12:20+0000\n"
+"PO-Revision-Date: 2022-09-08 18:22+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/>"
 "\n"
@@ -305,7 +305,7 @@ msgstr "Quentin PAGÈS"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
-msgstr "Copyright 2022 Dave Patrick"
+msgstr "Dreches d’autor 2022 Dave Patrick"
 
 #: src/application.rs:144
 msgid "GitHub"
@@ -356,6 +356,8 @@ msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Fracàs de la conversion de l’enregistrament en base64. Mercés d’o senhalar "
+"sul traçador d’avarias de Mousai."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
@@ -364,6 +366,8 @@ msgstr "Fracàs de la connexion al servidor."
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
+"Fracàs de l’interpretacion de la responsas Volgatz senhalar aquò al traçador "
+"d’avarias de Mousai"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -385,7 +389,7 @@ msgstr "{} Verificatz vòstra connexion a l'Internet."
 
 #: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
-msgstr "Cap de correspondéncia pas trobada per aquesta cançon"
+msgstr "Cap de correspondéncia pas trobada per aquesta cançon."
 
 #: src/recognizer/provider/mod.rs:154
 msgid "{} Input an API token in the preferences."
@@ -393,7 +397,7 @@ msgstr "{} Apondre un geton API dins las preferéncias."
 
 #: src/recognizer/provider/mod.rs:157
 msgid "Please input a valid API token."
-msgstr "Mercés de fornir un geton d’API valid"
+msgstr "Mercés de fornir un geton d’API valid."
 
 #: src/window/history_view.rs:113 src/window/song_page.rs:89
 msgid "Copied song to clipboard"
