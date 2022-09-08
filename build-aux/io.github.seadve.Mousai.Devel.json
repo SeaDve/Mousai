@@ -42,7 +42,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
-                    "tag": "1.2.alpha"
+                    "tag": "1.2.rc"
                 }
             ]
         },
