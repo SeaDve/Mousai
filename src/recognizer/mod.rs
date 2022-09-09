@@ -1,6 +1,6 @@
 mod provider;
 
-use anyhow::{Context, Result};
+use anyhow::{ensure, Context, Result};
 use futures_util::future::{AbortHandle, Abortable};
 use gst::prelude::*;
 use gtk::glib::{self, clone, closure_local, subclass::prelude::*};
@@ -149,7 +149,7 @@ impl Recognizer {
 
                 if let Err(err) = self.recognize(&cancellable).await {
                     if let Some(cancelled) = err.downcast_ref::<Cancelled>() {
-                        tracing::debug!("Cancelled recognizing: {}", cancelled);
+                        tracing::debug!("{}", cancelled);
                     } else {
                         return Err(err);
                     }
@@ -189,9 +189,10 @@ impl Recognizer {
             }
         }
 
-        if self.state() != RecognizerState::Null {
-            return Err(Cancelled::new("Recognizer is not on null state").into());
-        }
+        ensure!(
+            self.state() == RecognizerState::Null,
+            "Recognizer is not in Null state."
+        );
 
         let recording = AudioRecording::new();
         self.set_recording(Some(recording.clone()));
@@ -213,7 +214,7 @@ impl Recognizer {
             .context("Failed to start recording")?;
 
         if cancellable.is_cancelled() {
-            return Err(Cancelled::new("Stopped while starting to record").into());
+            return Err(Cancelled::new("recognizing while starting to record").into());
         }
 
         let (recording_timer_handle, recording_timer_abort_reg) = AbortHandle::new_pair();
@@ -233,20 +234,20 @@ impl Recognizer {
         .await
         .is_err()
         {
-            return Err(Cancelled::new("Stopped while listening").into());
+            return Err(Cancelled::new("recognizing while listening").into());
         }
 
         recording.stop().context("Failed to stop recording")?;
 
         if cancellable.is_cancelled() {
-            return Err(Cancelled::new("Stopped while flushing the recording").into());
+            return Err(Cancelled::new("recognizing while flushing the recording").into());
         }
 
         self.set_state(RecognizerState::Recognizing);
         let song = provider.recognize(&recording).await;
 
         if cancellable.is_cancelled() {
-            return Err(Cancelled::new("Stopped while recognizing").into());
+            return Err(Cancelled::new("recognizing while calling provider").into());
         }
 
         self.emit_by_name::<()>("song-recognized", &[&song?]);
