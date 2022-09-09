@@ -1,6 +1,7 @@
 mod provider;
 
 use anyhow::{Context, Result};
+use futures_util::future::{AbortHandle, Abortable};
 use gst::prelude::*;
 use gtk::glib::{self, clone, closure_local, subclass::prelude::*};
 
@@ -16,7 +17,7 @@ use crate::{
     core::{Cancellable, Cancelled},
     model::Song,
     settings::PreferredAudioSource,
-    utils, Application,
+    Application,
 };
 
 #[derive(Debug, Default, Clone, Copy, glib::Enum, PartialEq, Eq)]
@@ -215,19 +216,24 @@ impl Recognizer {
             return Err(Cancelled::new("Stopped while starting to record").into());
         }
 
+        let (recording_timer_handle, recording_timer_abort_reg) = AbortHandle::new_pair();
+
         cancellable.connect_cancelled(clone!(@weak self as obj, @weak _guard => move |_| {
+            recording_timer_handle.abort();
             let _ = _guard.take();
         }));
 
         let provider = ProviderSettings::lock().active.to_provider();
         tracing::debug!(?provider);
 
-        if cancellable.is_cancelled()
-            || utils::timeout_future(provider.listen_duration(), cancellable)
-                .await
-                .is_err()
+        if Abortable::new(
+            glib::timeout_future(provider.listen_duration()),
+            recording_timer_abort_reg,
+        )
+        .await
+        .is_err()
         {
-            return Err(Cancelled::new("Stopped while recording").into());
+            return Err(Cancelled::new("Stopped while listening").into());
         }
 
         recording.stop().context("Failed to stop recording")?;
