@@ -12,7 +12,7 @@ use std::{
     sync::Arc,
 };
 
-use crate::{config::APP_ID, core::ClockTime, model::Song, send, Application};
+use crate::{config::APP_ID, core::ClockTime, model::Song, Application};
 
 #[derive(Debug)]
 enum Message {
@@ -400,17 +400,17 @@ impl Player {
 
         imp.gst_player
             .connect_position_updated(clone!(@strong sender => move |_, position| {
-                send!(sender, Message::PositionUpdated(position.map(|position| position.into())));
+                let _ = sender.send(Message::PositionUpdated(position.map(|position| position.into())));
             }));
 
         imp.gst_player
             .connect_duration_changed(clone!(@strong sender => move |_, duration| {
-                send!(sender, Message::DurationChanged(duration.map(|duration| duration.into())));
+                let _ = sender.send(Message::DurationChanged(duration.map(|duration| duration.into())));
             }));
 
         imp.gst_player
             .connect_state_changed(clone!(@strong sender => move |_, state| {
-                send!(sender, Message::StateChanged(match state {
+                let _ = sender.send(Message::StateChanged(match state {
                     gst_player::PlayerState::Stopped => PlayerState::Stopped,
                     gst_player::PlayerState::Buffering => PlayerState::Buffering,
                     gst_player::PlayerState::Paused => PlayerState::Paused,
@@ -424,12 +424,12 @@ impl Player {
 
         imp.gst_player
             .connect_error(clone!(@strong sender => move |_, error| {
-                send!(sender, Message::Error(error.clone()));
+                let _ = sender.send(Message::Error(error.clone()));
             }));
 
         imp.gst_player
             .connect_warning(clone!(@strong sender => move |_, error| {
-                send!(sender, Message::Warning(error.clone()));
+                let _ = sender.send(Message::Warning(error.clone()));
             }));
 
         imp.gst_player
@@ -439,7 +439,7 @@ impl Player {
 
         imp.gst_player
             .connect_end_of_stream(clone!(@strong sender => move |_| {
-                send!(sender, Message::Eos);
+                let _ = sender.send(Message::Eos);
             }));
 
         receiver.attach(
