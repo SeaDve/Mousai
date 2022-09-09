@@ -234,7 +234,7 @@ impl Recognizer {
         .await
         .is_err()
         {
-            return Err(Cancelled::new("recognizing while listening").into());
+            return Err(Cancelled::new("recognizing while recording").into());
         }
 
         recording.stop().context("Failed to stop recording")?;
