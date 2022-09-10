@@ -17,7 +17,7 @@ use crate::{
     core::{Cancellable, Cancelled},
     model::Song,
     settings::PreferredAudioSource,
-    Application,
+    utils,
 };
 
 #[derive(Debug, Default, Clone, Copy, glib::Enum, PartialEq, Eq)]
@@ -202,7 +202,7 @@ impl Recognizer {
         self.set_state(RecognizerState::Listening);
 
         let device_name = audio_device::find_default_name(
-            match Application::default().settings().preferred_audio_source() {
+            match utils::app_instance().settings().preferred_audio_source() {
                 PreferredAudioSource::Microphone => AudioDeviceClass::Source,
                 PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
             },

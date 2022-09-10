@@ -103,7 +103,7 @@ mod imp {
 
                     if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
                         tracing::error!("{:?}", err);
-                        Application::default().present_error(&err);
+                        utils::app_instance().present_error(&err);
                     }
                 }));
             });
@@ -148,7 +148,7 @@ mod imp {
         fn constructed(&self, obj: &Self::Type) {
             self.parent_constructed(obj);
 
-            let preferred_audio_source_action = Application::default()
+            let preferred_audio_source_action = utils::app_instance()
                 .settings()
                 .create_preferred_audio_source_action();
             obj.add_action(&preferred_audio_source_action);
@@ -248,7 +248,7 @@ impl Window {
 
                 tracing::error!("{:?}", err);
                 tracing::debug!("Using empty SongList instead");
-                Application::default().present_error(&err);
+                utils::app_instance().present_error(&err);
 
                 SongList::default()
             })
@@ -256,7 +256,7 @@ impl Window {
     }
 
     fn load_window_size(&self) {
-        let settings = Application::default().settings();
+        let settings = utils::app_instance().settings();
 
         self.set_default_size(settings.window_width(), settings.window_height());
 
@@ -266,7 +266,7 @@ impl Window {
     }
 
     fn save_window_size(&self) -> Result<()> {
-        let settings = Application::default().settings();
+        let settings = utils::app_instance().settings();
 
         let (width, height) = self.default_size();
 
@@ -330,7 +330,7 @@ impl Window {
 
         imp.player.connect_error(|_, err| {
             let err = Error::from(err.clone()).context("Player error");
-            Application::default().add_toast_error(&err);
+            utils::app_instance().add_toast_error(&err);
         });
 
         imp.recognizer

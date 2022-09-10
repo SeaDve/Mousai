@@ -9,9 +9,8 @@ use indexmap::IndexMap;
 
 use std::cell::RefCell;
 
-use crate::Application;
-
 use super::{Song, SongId};
+use crate::utils;
 
 mod imp {
     use super::*;
@@ -72,7 +71,7 @@ glib::wrapper! {
 impl SongList {
     /// Load a [`SongList`] from application settings `history` key
     pub fn load_from_settings() -> Result<Self> {
-        let songs: Vec<Song> = serde_json::from_str(&Application::default().settings().history())?;
+        let songs: Vec<Song> = serde_json::from_str(&utils::app_instance().settings().history())?;
 
         let obj = Self::default();
         obj.append_many(songs);
@@ -84,7 +83,7 @@ impl SongList {
     pub fn save_to_settings(&self) -> Result<()> {
         let list = self.imp().list.borrow();
         let songs = list.values().collect::<Vec<_>>();
-        Application::default()
+        utils::app_instance()
             .settings()
             .try_set_history(&serde_json::to_string(&songs)?)?;
         Ok(())

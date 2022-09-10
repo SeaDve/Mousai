@@ -11,7 +11,7 @@ use std::{
 use super::{external_link::ExternalLink, ExternalLinkList, SongId};
 use crate::{
     core::{AlbumArt, DateTime},
-    Application,
+    utils,
 };
 
 mod imp {
@@ -270,7 +270,7 @@ impl Song {
             .album_art_link()
             .ok_or_else(|| anyhow!("Song doesn't have an album art link"))?;
 
-        Application::default()
+        utils::app_instance()
             .album_art_store()?
             .get_or_init(&album_art_link)
     }

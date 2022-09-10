@@ -19,7 +19,7 @@ use super::{
 use crate::{
     model::{ExternalLinkWrapper, Song},
     player::{Player, PlayerState},
-    utils, Application,
+    utils,
 };
 
 const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;
@@ -87,7 +87,7 @@ mod imp {
                         ));
 
                         let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
-                        Application::default().add_toast(&toast);
+                        utils::app_instance().add_toast(&toast);
                     }
                 } else {
                     tracing::error!("Failed to copy song: There is no active song in SongPage");
@@ -189,7 +189,7 @@ mod imp {
                     .await
                     {
                         tracing::warn!("Failed to launch default for uri `{uri}`: {:?}", err);
-                        Application::default().add_toast_error(&Error::msg(gettext!(
+                        utils::app_instance().add_toast_error(&Error::msg(gettext!(
                             "Failed to launch {}",
                             external_link.name()
                         )));

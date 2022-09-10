@@ -12,7 +12,7 @@ use std::{
     sync::Arc,
 };
 
-use crate::{config::APP_ID, core::ClockTime, model::Song, Application};
+use crate::{config::APP_ID, core::ClockTime, model::Song, utils};
 
 #[derive(Debug)]
 enum Message {
@@ -314,7 +314,7 @@ impl Player {
             mpris_player.set_can_go_next(false);
 
             mpris_player.connect_raise(|| {
-                Application::default().activate();
+                utils::app_instance().activate();
             });
 
             mpris_player.connect_play_pause(clone!(@weak self as obj => move || {

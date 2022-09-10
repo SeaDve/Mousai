@@ -20,7 +20,7 @@ use crate::{
         AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
     },
     model::{Song, SongId},
-    Application,
+    utils,
 };
 
 #[derive(Debug)]
@@ -125,7 +125,7 @@ impl Provider for AudD {
         message.set_request_body_from_bytes(None, Some(&glib::Bytes::from_owned(data.to_string())));
         message.set_priority(soup::MessagePriority::High);
 
-        let bytes = Application::default()
+        let bytes = utils::app_instance()
             .session()
             .send_and_read_future(&message, glib::PRIORITY_HIGH)
             .await

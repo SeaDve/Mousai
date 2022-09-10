@@ -14,7 +14,7 @@ use crate::{
     config::APP_ID,
     model::{FuzzyFilter, FuzzySorter, Song, SongList},
     player::Player,
-    Application,
+    utils,
 };
 
 mod imp {
@@ -117,7 +117,7 @@ mod imp {
                         ));
 
                         let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
-                        Application::default().add_toast(&toast);
+                        utils::app_instance().add_toast(&toast);
                     }
                 } else {
                     tracing::error!("Failed to copy song: There is no selected song");
@@ -541,7 +541,7 @@ impl HistoryView {
                 imp.undo_remove_toast.take();
             }));
 
-            Application::default().add_toast(&toast);
+            utils::app_instance().add_toast(&toast);
 
             imp.undo_remove_toast.replace(Some(toast));
         }
