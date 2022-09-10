@@ -20,7 +20,7 @@
 )]
 #![allow(clippy::format_push_string)] // TODO remove once gettext-rs fixes macro issues
 
-mod about_window;
+mod about;
 mod application;
 mod audio_device;
 mod audio_recording;

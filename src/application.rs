@@ -7,7 +7,7 @@ use gtk::{
 };
 
 use crate::{
-    about_window,
+    about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::{AlbumArtStore, Help},
     inspector_page::InspectorPage,
@@ -146,7 +146,7 @@ impl Application {
 
         let action_about = gio::SimpleAction::new("about", None);
         action_about.connect_activate(clone!(@weak self as obj => move |_, _| {
-            about_window::present(obj.main_window().as_ref());
+            about::present_window(obj.main_window().as_ref());
         }));
         self.add_action(&action_about);
     }
