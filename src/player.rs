@@ -304,7 +304,7 @@ impl Player {
         self.notify("duration");
     }
 
-    fn mpris_player(&self) -> &Arc<MprisPlayer> {
+    fn mpris_player(&self) -> &MprisPlayer {
         self.imp().mpris_player.get_or_init(|| {
             let mpris_player = MprisPlayer::new(APP_ID.into(), "Mousai".into(), APP_ID.into());
 
