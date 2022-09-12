@@ -205,13 +205,16 @@ impl Recognizer {
         )
         .await
         .context("Failed to find default device name")?;
+
+        if cancellable.is_cancelled() {
+            return Err(
+                Cancelled::new("recognizing while finding default audio device name").into(),
+            );
+        }
+
         recording
             .start(Some(&device_name))
             .context("Failed to start recording")?;
-
-        if cancellable.is_cancelled() {
-            return Err(Cancelled::new("recognizing while starting to record").into());
-        }
 
         let (recording_timer_handle, recording_timer_abort_reg) = AbortHandle::new_pair();
 
@@ -234,10 +237,6 @@ impl Recognizer {
         }
 
         recording.stop().context("Failed to stop recording")?;
-
-        if cancellable.is_cancelled() {
-            return Err(Cancelled::new("recognizing while flushing the recording").into());
-        }
 
         self.set_state(RecognizerState::Recognizing);
         let song = provider.recognize(&recording).await;
