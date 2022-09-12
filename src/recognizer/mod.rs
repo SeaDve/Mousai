@@ -170,19 +170,11 @@ impl Recognizer {
     }
 
     async fn recognize(&self, cancellable: &Cancellable) -> Result<()> {
-        struct Guard {
+        struct Finally {
             instance: Recognizer,
         }
 
-        impl Guard {
-            fn new(recognizer: &Recognizer) -> Guard {
-                Guard {
-                    instance: recognizer.clone(),
-                }
-            }
-        }
-
-        impl Drop for Guard {
+        impl Drop for Finally {
             fn drop(&mut self) {
                 self.instance.set_state(RecognizerState::Null);
                 self.instance.set_recording(None);
@@ -197,7 +189,9 @@ impl Recognizer {
         let recording = AudioRecording::new();
         self.set_recording(Some(recording.clone()));
 
-        let _guard = Rc::new(RefCell::new(Some(Guard::new(self))));
+        let _guard = Rc::new(RefCell::new(Some(Finally {
+            instance: self.clone(),
+        })));
 
         self.set_state(RecognizerState::Listening);
 
