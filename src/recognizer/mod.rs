@@ -191,7 +191,7 @@ impl Recognizer {
         let recording = AudioRecording::new();
         self.set_recording(Some(recording.clone()));
 
-        let _guard = Rc::new(RefCell::new(Some(Finally {
+        let _finally = Rc::new(RefCell::new(Some(Finally {
             weak: self.downgrade(),
         })));
 
@@ -215,9 +215,9 @@ impl Recognizer {
 
         let (recording_timer_handle, recording_timer_abort_reg) = AbortHandle::new_pair();
 
-        cancellable.connect_cancelled(clone!(@weak self as obj, @weak _guard => move |_| {
+        cancellable.connect_cancelled(clone!(@weak self as obj, @weak _finally => move |_| {
             recording_timer_handle.abort();
-            let _ = _guard.take();
+            let _ = _finally.take();
         }));
 
         let provider = ProviderSettings::lock().active.to_provider();
