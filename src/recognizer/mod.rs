@@ -3,7 +3,7 @@ mod provider;
 use anyhow::{ensure, Context, Result};
 use futures_util::future::{AbortHandle, Abortable};
 use gst::prelude::*;
-use gtk::glib::{self, clone, closure_local, subclass::prelude::*};
+use gtk::glib::{self, clone, closure_local, subclass::prelude::*, WeakRef};
 
 use std::{
     cell::{Cell, RefCell},
@@ -171,13 +171,15 @@ impl Recognizer {
 
     async fn recognize(&self, cancellable: &Cancellable) -> Result<()> {
         struct Finally {
-            instance: Recognizer,
+            weak: WeakRef<Recognizer>,
         }
 
         impl Drop for Finally {
             fn drop(&mut self) {
-                self.instance.set_state(RecognizerState::Null);
-                self.instance.set_recording(None);
+                if let Some(instance) = self.weak.upgrade() {
+                    instance.set_state(RecognizerState::Null);
+                    instance.set_recording(None);
+                }
             }
         }
 
@@ -190,7 +192,7 @@ impl Recognizer {
         self.set_recording(Some(recording.clone()));
 
         let _guard = Rc::new(RefCell::new(Some(Finally {
-            instance: self.clone(),
+            weak: self.downgrade(),
         })));
 
         self.set_state(RecognizerState::Listening);
