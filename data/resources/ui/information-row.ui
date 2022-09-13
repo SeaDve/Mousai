@@ -5,7 +5,7 @@
       <object class="GtkBinLayout"/>
     </property>
     <child type="suffix">
-      <object class="GtkLabel" id="data_label">
+      <object class="GtkLabel" id="value_label">
         <property name="xalign">1</property>
         <property name="ellipsize">end</property>
         <style>

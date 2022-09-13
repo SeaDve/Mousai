@@ -12,9 +12,9 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/information-row.ui")]
     pub struct InformationRow {
         #[template_child]
-        pub(super) data_label: TemplateChild<gtk::Label>,
+        pub(super) value_label: TemplateChild<gtk::Label>,
 
-        pub(super) data: RefCell<Option<String>>,
+        pub(super) value: RefCell<Option<String>>,
     }
 
     #[glib::object_subclass]
@@ -38,7 +38,7 @@ mod imp {
                 vec![
                     // The value of the information. If this is None or
                     // empty, self will be hidden.
-                    glib::ParamSpecString::builder("data")
+                    glib::ParamSpecString::builder("value")
                         .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
                         .build(),
                 ]
@@ -55,9 +55,9 @@ mod imp {
             pspec: &glib::ParamSpec,
         ) {
             match pspec.name() {
-                "data" => {
-                    let data = value.get().unwrap();
-                    obj.set_data(data);
+                "value" => {
+                    let value = value.get().unwrap();
+                    obj.set_value(value);
                 }
                 _ => unimplemented!(),
             }
@@ -65,7 +65,7 @@ mod imp {
 
         fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
-                "data" => obj.data().to_value(),
+                "value" => obj.value().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -99,25 +99,27 @@ impl InformationRow {
         glib::Object::new(&[]).expect("Failed to create InformationRow")
     }
 
-    pub fn set_data(&self, data: Option<&str>) {
-        if data == self.data().as_deref() {
+    pub fn set_value(&self, value: Option<&str>) {
+        if value == self.value().as_deref() {
             return;
         }
 
-        self.imp().data.replace(data.map(|data| data.to_string()));
+        self.imp()
+            .value
+            .replace(value.map(|value| value.to_string()));
         self.update_ui();
-        self.notify("data");
+        self.notify("value");
     }
 
-    pub fn data(&self) -> Option<String> {
-        self.imp().data.borrow().clone()
+    pub fn value(&self) -> Option<String> {
+        self.imp().value.borrow().clone()
     }
 
     fn update_ui(&self) {
-        let data = self.data().filter(|data| !data.is_empty());
+        let value = self.value().filter(|value| !value.is_empty());
 
-        self.set_visible(data.is_some());
-        self.imp().data_label.set_text(&data.unwrap_or_default());
+        self.set_visible(value.is_some());
+        self.imp().value_label.set_text(&value.unwrap_or_default());
     }
 }
 

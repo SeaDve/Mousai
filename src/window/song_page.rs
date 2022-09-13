@@ -373,14 +373,14 @@ impl SongPage {
             },
         );
 
-        imp.last_heard_row.set_data(
+        imp.last_heard_row.set_value(
             song.map(|song| song.last_heard().fuzzy_display())
                 .as_deref(),
         );
         imp.album_row
-            .set_data(song.map(|song| song.album()).as_deref());
+            .set_value(song.map(|song| song.album()).as_deref());
         imp.release_date_row
-            .set_data(song.and_then(|song| song.release_date()).as_deref());
+            .set_value(song.and_then(|song| song.release_date()).as_deref());
     }
 
     fn update_album_cover_size(&self) {
