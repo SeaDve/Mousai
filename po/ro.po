@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Daniel <danny3@tutanota.com>, 2022.
+# Vik <k3kelm4vw@mozmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-01-13 04:53+0000\n"
-"Last-Translator: Daniel <danny3@tutanota.com>\n"
+"PO-Revision-Date: 2022-09-30 10:16+0000\n"
+"Last-Translator: Vik <k3kelm4vw@mozmail.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/kooha/mousai/ro/"
 ">\n"
 "Language: ro\n"
@@ -17,11 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
-#, fuzzy
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -141,7 +141,7 @@ msgstr "_Despre Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "Selectează _tot"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
