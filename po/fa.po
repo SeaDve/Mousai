@@ -154,7 +154,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "انتخاب"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
@@ -167,11 +167,11 @@ msgstr ""
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "لغو"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "نام ترانه یا خواننده را وارد کنید"
 
 #: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
@@ -183,11 +183,11 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:155
 msgid "No Results Found"
-msgstr ""
+msgstr "نتیجه ای یافت نشد"
 
 #: data/resources/ui/history-view.ui:156
 msgid "Try a different search."
-msgstr ""
+msgstr "جستجوی مجدد"
 
 #: data/resources/ui/history-view.ui:165
 msgid "Copy Song"
@@ -195,7 +195,7 @@ msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "لغو"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -205,12 +205,12 @@ msgstr "عمومی"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "منوی اصلی"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "جستجو"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
@@ -235,7 +235,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "توقف/پخش"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
@@ -245,11 +245,11 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "بازگشت"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
-msgstr ""
+msgstr "نمایش اطلاعات آهنگ"
 
 #: data/resources/ui/song-bar.ui:102
 msgid "Stop"
@@ -257,39 +257,39 @@ msgstr "توقف"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
-msgstr ""
+msgstr "بازگشت به صفحه اصلی"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
-msgstr ""
+msgstr "خذف از تاریخچه"
 
 #: data/resources/ui/song-page.ui:44
 msgid "Copy"
-msgstr ""
+msgstr "کپی"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Information"
-msgstr ""
+msgstr "اطلاعات"
 
 #: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
-msgstr ""
+msgstr "آخرین بار در"
 
 #: data/resources/ui/song-page.ui:158
 msgid "Album"
-msgstr ""
+msgstr "آلبوم"
 
 #: data/resources/ui/song-page.ui:163
 msgid "Release Date"
-msgstr ""
+msgstr "تاریخ انتشار"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "متن ترانه ها"
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
-msgstr ""
+msgstr "جدید"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
@@ -322,7 +322,7 @@ msgstr ""
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "اسپاتیفای"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
@@ -330,11 +330,11 @@ msgstr ""
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "یوتیوب"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "جستجو در یوتیوب"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
