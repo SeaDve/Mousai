@@ -442,6 +442,9 @@ impl Player {
                 let _ = sender.send(Message::Eos);
             }));
 
+        // FIXME Using a strong self here fixes the following errors:
+        // * instance of invalid non-instantiatable type '(null)'
+        // * g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
         receiver.attach(
             None,
             clone!(@weak self as obj => @default-return Continue(false), move |message| {
