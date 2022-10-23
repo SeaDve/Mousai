@@ -97,15 +97,13 @@ mod imp {
                 obj.imp().player.clear_song();
             });
 
-            klass.install_action("win.toggle-listen", None, |obj, _, _| {
-                utils::spawn(clone!(@weak obj => async move {
-                    obj.imp().player.clear_song();
+            klass.install_action_async("win.toggle-listen", None, |obj, _, _| async move {
+                obj.imp().player.clear_song();
 
-                    if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
-                        tracing::error!("{:?}", err);
-                        utils::app_instance().present_error(&err);
-                    }
-                }));
+                if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
+                    tracing::error!("{:?}", err);
+                    utils::app_instance().present_error(&err);
+                }
             });
 
             klass.install_action("win.toggle-search", None, |obj, _, _| {
