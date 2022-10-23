@@ -717,6 +717,7 @@ mod test {
     #[gtk::test]
     fn push_and_pop_song_page() {
         init_gresources();
+        gst::init().unwrap(); // For Player
 
         let player = Player::new();
         let song_list = SongList::default();
@@ -751,6 +752,7 @@ mod test {
     #[gtk::test]
     fn push_and_pop_song_page_with_duplicate_non_adjacent() {
         init_gresources();
+        gst::init().unwrap(); // For Player
 
         let player = Player::new();
         let song_list = SongList::default();
