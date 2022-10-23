@@ -1,10 +1,7 @@
 use adw::{prelude::*, subclass::prelude::*};
 use anyhow::{Error, Result};
 use gettextrs::gettext;
-use gtk::{
-    gio,
-    glib::{self, clone},
-};
+use gtk::{gio, glib};
 
 use crate::{
     about,
@@ -136,20 +133,21 @@ impl Application {
     }
 
     fn setup_gactions(&self) {
-        let action_quit = gio::SimpleAction::new("quit", None);
-        action_quit.connect_activate(clone!(@weak self as obj => move |_, _| {
-            if let Some(ref main_window) = obj.main_window() {
-                main_window.close();
-            }
-            obj.quit();
-        }));
-        self.add_action(&action_quit);
-
-        let action_about = gio::SimpleAction::new("about", None);
-        action_about.connect_activate(clone!(@weak self as obj => move |_, _| {
-            about::present_window(obj.main_window().as_ref());
-        }));
-        self.add_action(&action_about);
+        let quit_action = gio::ActionEntry::builder("quit")
+            .activate(|obj: &Self, _, _| {
+                if let Some(ref main_window) = obj.main_window() {
+                    main_window.close();
+                }
+                obj.quit();
+            })
+            .build();
+        let about_action = gio::ActionEntry::builder("about")
+            .activate(|obj: &Self, _, _| {
+                about::present_window(obj.main_window().as_ref());
+            })
+            .build();
+        self.add_action_entries([quit_action, about_action])
+            .unwrap();
     }
 
     fn setup_accels(&self) {
