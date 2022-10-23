@@ -133,10 +133,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
 mod pa {
     use anyhow::{bail, Context as ErrContext, Error, Result};
     use futures_channel::{mpsc, oneshot};
-    use futures_util::{
-        future::{self, Either},
-        StreamExt,
-    };
+    use futures_util::StreamExt;
     use gettextrs::gettext;
     use gtk::glib;
     use pulse::{
@@ -246,9 +243,9 @@ mod pa {
                 }
             });
 
-            let name = match future::select(rx, glib::timeout_future(DEFAULT_TIMEOUT)).await {
-                Either::Left((name, _)) => name,
-                Either::Right(_) => {
+            let name = match glib::future_with_timeout(DEFAULT_TIMEOUT, rx).await {
+                Ok(name) => name,
+                Err(_) => {
                     operation.cancel();
                     bail!("get_server_info operation timeout reached");
                 }
