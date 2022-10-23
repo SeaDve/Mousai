@@ -3,7 +3,10 @@ mod provider;
 use anyhow::{ensure, Context, Result};
 use futures_util::future::{AbortHandle, Abortable};
 use gst::prelude::*;
-use gtk::glib::{self, clone, closure_local, subclass::prelude::*, WeakRef};
+use gtk::{
+    gio::{self, prelude::*},
+    glib::{self, clone, closure_local, subclass::prelude::*, WeakRef},
+};
 
 use std::{
     cell::{Cell, RefCell},
@@ -14,7 +17,7 @@ pub use self::provider::{ProviderSettings, ProviderType, TestProviderMode};
 use crate::{
     audio_device::{self, AudioDeviceClass},
     audio_recording::AudioRecording,
-    core::{Cancellable, Cancelled},
+    core::Cancelled,
     model::Song,
     settings::PreferredAudioSource,
     utils,
@@ -39,7 +42,7 @@ mod imp {
         pub(super) state: Cell<RecognizerState>,
         pub(super) recording: RefCell<Option<AudioRecording>>,
 
-        pub(super) cancellable: RefCell<Option<Rc<Cancellable>>>,
+        pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
     }
 
     #[glib::object_subclass]
@@ -142,8 +145,8 @@ impl Recognizer {
                 }
             }
             RecognizerState::Null => {
-                let cancellable = Rc::new(Cancellable::default());
-                imp.cancellable.replace(Some(Rc::clone(&cancellable)));
+                let cancellable = gio::Cancellable::default();
+                imp.cancellable.replace(Some(cancellable.clone()));
 
                 if let Err(err) = self.recognize(&cancellable).await {
                     if let Some(cancelled) = err.downcast_ref::<Cancelled>() {
@@ -167,7 +170,7 @@ impl Recognizer {
         self.notify("recording");
     }
 
-    async fn recognize(&self, cancellable: &Cancellable) -> Result<()> {
+    async fn recognize(&self, cancellable: &gio::Cancellable) -> Result<()> {
         struct Finally {
             weak: WeakRef<Recognizer>,
         }
@@ -216,7 +219,7 @@ impl Recognizer {
 
         let (recording_timer_handle, recording_timer_abort_reg) = AbortHandle::new_pair();
 
-        cancellable.connect_cancelled(clone!(@weak self as obj, @weak _finally => move |_| {
+        cancellable.connect_cancelled_local(clone!(@weak _finally => move |_| {
             recording_timer_handle.abort();
             let _ = _finally.take();
         }));
