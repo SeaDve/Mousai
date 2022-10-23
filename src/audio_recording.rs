@@ -1,4 +1,4 @@
-use anyhow::{anyhow, ensure, Context, Result};
+use anyhow::{anyhow, ensure, Result};
 use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
@@ -28,19 +28,16 @@ mod imp {
     impl ObjectImpl for AudioRecording {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder(
-                    "peak",
-                    &[f64::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![Signal::builder("peak")
+                    .param_types([f64::static_type()])
+                    .build()]
             });
 
             SIGNALS.as_ref()
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            if let Err(err) = obj.stop() {
+        fn dispose(&self) {
+            if let Err(err) = self.instance().stop() {
                 tracing::warn!("Failed to stop recording on dispose: {:?}", err);
             }
 
@@ -55,7 +52,7 @@ glib::wrapper! {
 
 impl AudioRecording {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create AudioRecording.")
+        glib::Object::new(&[])
     }
 
     pub fn start(&self, device_name: Option<&str>) -> Result<()> {
@@ -221,23 +218,25 @@ impl Default for AudioRecording {
     }
 }
 
-fn element_factory_make(factory_name: &str) -> Result<gst::Element> {
-    gst::ElementFactory::make(factory_name, None)
-        .with_context(|| format!("Failed to make `{}`", factory_name))
-}
-
 fn create_pipeline(
     stream: &gio::MemoryOutputStream,
     device_name: Option<&str>,
 ) -> Result<gst::Pipeline> {
     let pipeline = gst::Pipeline::new(None);
 
-    let pulsesrc = element_factory_make("pulsesrc")?;
-    let audioconvert = element_factory_make("audioconvert")?;
-    let level = element_factory_make("level")?;
-    let opusenc = element_factory_make("opusenc")?;
-    let oggmux = element_factory_make("oggmux")?;
-    let giostreamsink = element_factory_make("giostreamsink")?;
+    let pulsesrc = gst::ElementFactory::make("pulsesrc").build()?;
+    let audioconvert = gst::ElementFactory::make("audioconvert").build()?;
+    let level = gst::ElementFactory::make("level")
+        .property("interval", Duration::from_millis(80).as_nanos() as u64)
+        .property("peak-ttl", Duration::from_millis(80).as_nanos() as u64)
+        .build()?;
+    let opusenc = gst::ElementFactory::make("opusenc")
+        .property("bitrate", 16_000)
+        .build()?;
+    let oggmux = gst::ElementFactory::make("oggmux").build()?;
+    let giostreamsink = gst::ElementFactory::make("giostreamsink")
+        .property("stream", stream)
+        .build()?;
 
     if let Some(device_name) = device_name {
         pulsesrc.set_property("device", &device_name);
@@ -245,11 +244,6 @@ fn create_pipeline(
     } else {
         tracing::warn!("Recording without pulsesrc `device` property set");
     }
-
-    level.set_property("interval", Duration::from_millis(80).as_nanos() as u64);
-    level.set_property("peak-ttl", Duration::from_millis(80).as_nanos() as u64);
-    opusenc.set_property("bitrate", 16_000);
-    giostreamsink.set_property("stream", stream);
 
     let elements = [
         &pulsesrc,

@@ -103,12 +103,9 @@ mod imp {
     impl ObjectImpl for SongPage {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder(
-                    "song-removed",
-                    &[Song::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![Signal::builder("song-removed")
+                    .param_types([Song::static_type()])
+                    .build()]
             });
 
             SIGNALS.as_ref()
@@ -118,13 +115,12 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Song represented by Self
-                    glib::ParamSpecObject::builder("song", Song::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecObject::builder::<Song>("song")
+                        .explicit_notify()
                         .build(),
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::static_type())
-                        .default_value(AdaptiveMode::default() as i32)
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -132,13 +128,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => {
                     let song = value.get().unwrap();
@@ -152,7 +144,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
@@ -160,8 +154,10 @@ mod imp {
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             self.external_links_box.connect_child_activated(|_, child| {
                 let external_link_tile = child
@@ -211,8 +207,8 @@ mod imp {
             obj.update_album_cover_size();
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
         }
@@ -228,7 +224,7 @@ glib::wrapper! {
 
 impl SongPage {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongPage")
+        glib::Object::new(&[])
     }
 
     pub fn connect_song_removed<F>(&self, f: F) -> glib::SignalHandlerId

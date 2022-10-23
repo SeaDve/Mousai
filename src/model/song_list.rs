@@ -32,12 +32,9 @@ mod imp {
     impl ObjectImpl for SongList {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder(
-                    "removed",
-                    &[Song::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![Signal::builder("removed")
+                    .param_types([Song::static_type()])
+                    .build()]
             });
 
             SIGNALS.as_ref()
@@ -45,15 +42,15 @@ mod imp {
     }
 
     impl ListModelImpl for SongList {
-        fn item_type(&self, _list_model: &Self::Type) -> glib::Type {
+        fn item_type(&self) -> glib::Type {
             Song::static_type()
         }
 
-        fn n_items(&self, _list_model: &Self::Type) -> u32 {
+        fn n_items(&self) -> u32 {
             self.list.borrow().len() as u32
         }
 
-        fn item(&self, _list_model: &Self::Type, position: u32) -> Option<glib::Object> {
+        fn item(&self, position: u32) -> Option<glib::Object> {
             self.list
                 .borrow()
                 .get_index(position as usize)
@@ -179,7 +176,7 @@ impl SongList {
 
 impl Default for SongList {
     fn default() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongList.")
+        glib::Object::new(&[])
     }
 }
 

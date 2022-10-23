@@ -31,7 +31,7 @@ mod imp {
                 vec![
                     // A search term
                     glib::ParamSpecString::builder("search")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -39,13 +39,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "search" => {
                     let search = value.get().unwrap();
@@ -55,7 +51,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "search" => obj.search().to_value(),
                 _ => unimplemented!(),
@@ -64,7 +62,7 @@ mod imp {
     }
 
     impl FilterImpl for FuzzyFilter {
-        fn strictness(&self, _filter: &Self::Type) -> gtk::FilterMatch {
+        fn strictness(&self) -> gtk::FilterMatch {
             if self.search.borrow().is_empty() {
                 gtk::FilterMatch::All
             } else {
@@ -72,7 +70,7 @@ mod imp {
             }
         }
 
-        fn match_(&self, _filter: &Self::Type, song: &glib::Object) -> bool {
+        fn match_(&self, song: &glib::Object) -> bool {
             let song = song.downcast_ref::<Song>().unwrap();
 
             let search = self.search.borrow();
@@ -96,7 +94,7 @@ glib::wrapper! {
 
 impl FuzzyFilter {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create FuzzyFilter.")
+        glib::Object::new(&[])
     }
 
     pub fn search(&self) -> String {

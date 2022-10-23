@@ -31,8 +31,8 @@ mod imp {
     impl ObjectImpl for Waveform {}
 
     impl WidgetImpl for Waveform {
-        fn snapshot(&self, obj: &Self::Type, snapshot: &gtk::Snapshot) {
-            obj.on_snapshot(snapshot);
+        fn snapshot(&self, snapshot: &gtk::Snapshot) {
+            self.instance().on_snapshot(snapshot);
         }
     }
 }
@@ -44,7 +44,7 @@ glib::wrapper! {
 
 impl Waveform {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create Waveform")
+        glib::Object::new(&[])
     }
 
     pub fn push_peak(&self, peak: f64) {

@@ -53,19 +53,19 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Song represented by Self
-                    glib::ParamSpecObject::builder("song", Song::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecObject::builder::<Song>("song")
+                        .explicit_notify()
                         .build(),
                     // Pixel Size of the inner GtkImage
                     glib::ParamSpecInt::builder("pixel-size")
                         .minimum(-1)
                         .default_value(-1)
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                     // Whether to animate when switching between textures
                     glib::ParamSpecBoolean::builder("enable-crossfade")
                         .default_value(DEFAULT_ENABLE_CROSSFADE)
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -73,13 +73,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => {
                     let song = value.get().unwrap();
@@ -97,7 +93,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "pixel-size" => obj.pixel_size().to_value(),
@@ -106,14 +104,15 @@ mod imp {
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
 
-            obj.set_enable_crossfade(DEFAULT_ENABLE_CROSSFADE);
+            self.instance()
+                .set_enable_crossfade(DEFAULT_ENABLE_CROSSFADE);
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
         }
@@ -129,7 +128,7 @@ glib::wrapper! {
 
 impl AlbumCover {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create AlbumCover")
+        glib::Object::new(&[])
     }
 
     pub fn set_song(&self, song: Option<Song>) {

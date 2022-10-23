@@ -31,7 +31,7 @@ mod imp {
                 vec![
                     // A search term
                     glib::ParamSpecString::builder("search")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -39,13 +39,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "search" => {
                     let search = value.get().unwrap();
@@ -55,7 +51,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "search" => obj.search().to_value(),
                 _ => unimplemented!(),
@@ -64,12 +62,7 @@ mod imp {
     }
 
     impl SorterImpl for FuzzySorter {
-        fn compare(
-            &self,
-            _sorter: &Self::Type,
-            item_1: &glib::Object,
-            item_2: &glib::Object,
-        ) -> gtk::Ordering {
+        fn compare(&self, item_1: &glib::Object, item_2: &glib::Object) -> gtk::Ordering {
             let song_1 = item_1.downcast_ref::<Song>().unwrap();
             let song_2 = item_2.downcast_ref::<Song>().unwrap();
 
@@ -84,7 +77,7 @@ mod imp {
             }
         }
 
-        fn order(&self, _sorter: &Self::Type) -> gtk::SorterOrder {
+        fn order(&self) -> gtk::SorterOrder {
             gtk::SorterOrder::Partial
         }
     }
@@ -98,7 +91,7 @@ glib::wrapper! {
 
 impl FuzzySorter {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create FuzzySorter.")
+        glib::Object::new(&[])
     }
 
     pub fn search(&self) -> String {

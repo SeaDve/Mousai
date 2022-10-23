@@ -76,25 +76,24 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Song represented by Self
-                    glib::ParamSpecObject::builder("song", Song::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecObject::builder::<Song>("song")
+                        .explicit_notify()
                         .build(),
                     // If self should be displayed as selected
                     glib::ParamSpecBoolean::builder("is-selected")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                     // If self is active
                     glib::ParamSpecBoolean::builder("is-active")
-                        .flags(glib::ParamFlags::READABLE)
+                        .read_only()
                         .build(),
                     // Current selection mode
                     glib::ParamSpecBoolean::builder("is-selection-mode")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::static_type())
-                        .default_value(AdaptiveMode::default() as i32)
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -102,13 +101,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => {
                     let song = value.get().unwrap();
@@ -130,7 +125,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "is-selected" => obj.is_selected().to_value(),
@@ -142,18 +139,16 @@ mod imp {
         }
 
         fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![
-                    Signal::builder("request-selection-mode", &[], <()>::static_type().into())
-                        .build(),
-                ]
-            });
+            static SIGNALS: Lazy<Vec<Signal>> =
+                Lazy::new(|| vec![Signal::builder("request-selection-mode").build()]);
 
             SIGNALS.as_ref()
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             let motion_controller = gtk::EventControllerMotion::new();
             motion_controller.connect_enter(clone!(@weak obj => move |_, _, _| {
@@ -208,8 +203,8 @@ mod imp {
             obj.update_album_cover_size();
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
         }
@@ -225,7 +220,7 @@ glib::wrapper! {
 
 impl SongTile {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongTile")
+        glib::Object::new(&[])
     }
 
     pub fn set_song(&self, song: Option<Song>) {

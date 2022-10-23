@@ -21,16 +21,17 @@ mod imp {
     impl ObjectImpl for ExternalLinkList {}
 
     impl ListModelImpl for ExternalLinkList {
-        fn item_type(&self, _this: &Self::Type) -> glib::Type {
+        fn item_type(&self) -> glib::Type {
             ExternalLinkWrapper::static_type()
         }
 
-        fn n_items(&self, _this: &Self::Type) -> u32 {
+        fn n_items(&self) -> u32 {
             self.0.borrow().len() as u32
         }
 
-        fn item(&self, this: &Self::Type, position: u32) -> Option<glib::Object> {
-            this.get(position as usize)
+        fn item(&self, position: u32) -> Option<glib::Object> {
+            self.instance()
+                .get(position as usize)
                 .map(|item| item.upcast::<glib::Object>())
         }
     }
@@ -84,7 +85,7 @@ impl ExternalLinkList {
 
 impl Default for ExternalLinkList {
     fn default() -> Self {
-        glib::Object::new(&[]).expect("Failed to create ExternalLinkList.")
+        glib::Object::new(&[])
     }
 }
 

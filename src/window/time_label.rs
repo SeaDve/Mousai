@@ -40,8 +40,8 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Time shown by Self
-                    glib::ParamSpecBoxed::builder("time", ClockTime::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecBoxed::builder::<ClockTime>("time")
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -49,13 +49,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "time" => {
                     let time = value.get().unwrap();
@@ -65,20 +61,22 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "time" => obj.time().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
 
-            obj.update_label();
+            self.instance().update_label();
         }
 
-        fn dispose(&self, _obj: &Self::Type) {
+        fn dispose(&self) {
             self.label.unparent();
         }
     }
@@ -93,7 +91,7 @@ glib::wrapper! {
 
 impl TimeLabel {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create TimeLabel")
+        glib::Object::new(&[])
     }
 
     pub fn set_time(&self, time: ClockTime) {

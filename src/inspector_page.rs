@@ -56,23 +56,17 @@ mod imp {
                     // Title of this inspector page
                     glib::ParamSpecString::builder("title")
                         .default_value(Some(INSPECTOR_TITLE))
-                        .flags(glib::ParamFlags::READABLE)
+                        .read_only()
                         .build(),
                     // Property needed as a gtk-inspector-page
-                    glib::ParamSpecObject::builder("object", glib::Object::static_type()).build(),
+                    glib::ParamSpecObject::builder::<glib::Object>("object").build(),
                 ]
             });
 
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            _obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
             match pspec.name() {
                 "object" => {
                     let object = value.get().unwrap();
@@ -82,7 +76,7 @@ mod imp {
             }
         }
 
-        fn property(&self, _obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
             match pspec.name() {
                 "title" => INSPECTOR_TITLE.to_value(),
                 "object" => self.object.borrow().to_value(),
@@ -90,8 +84,10 @@ mod imp {
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             obj.setup_provider_row();
             obj.setup_test_provider_row();
@@ -100,8 +96,8 @@ mod imp {
             obj.update_test_rows_sensitivity();
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
 
@@ -119,7 +115,7 @@ glib::wrapper! {
 
 impl InspectorPage {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create InspectorPage")
+        glib::Object::new(&[])
     }
 
     fn update_test_rows_sensitivity(&self) {
@@ -147,12 +143,8 @@ impl InspectorPage {
             .set_selected(ProviderSettings::lock().active as u32);
 
         imp.provider_row
-            .set_expression(Some(&gtk::ClosureExpression::new::<
-                glib::GString,
-                &[gtk::Expression],
-                _,
-            >(
-                &[],
+            .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
+                &[] as &[gtk::Expression],
                 closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
 
@@ -183,12 +175,8 @@ impl InspectorPage {
             .set_selected(ProviderSettings::lock().test_mode as u32);
 
         imp.test_provider_mode_row
-            .set_expression(Some(&gtk::ClosureExpression::new::<
-                glib::GString,
-                &[gtk::Expression],
-                _,
-            >(
-                &[],
+            .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
+                &[] as &[gtk::Expression],
                 closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
 

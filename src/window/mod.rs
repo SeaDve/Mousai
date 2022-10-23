@@ -128,9 +128,8 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::static_type())
-                        .default_value(AdaptiveMode::default() as i32)
-                        .flags(glib::ParamFlags::READABLE)
+                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                        .read_only()
                         .build(),
                 ]
             });
@@ -138,15 +137,19 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unreachable!(),
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             let preferred_audio_source_action = utils::app_instance()
                 .settings()
@@ -181,8 +184,10 @@ mod imp {
     }
 
     impl WidgetImpl for Window {
-        fn realize(&self, obj: &Self::Type) {
-            self.parent_realize(obj);
+        fn realize(&self) {
+            self.parent_realize();
+
+            let obj = self.instance();
 
             obj.surface()
                 .connect_width_notify(clone!(@weak obj => move |_| {
@@ -194,7 +199,9 @@ mod imp {
     }
 
     impl WindowImpl for Window {
-        fn close_request(&self, obj: &Self::Type) -> gtk::Inhibit {
+        fn close_request(&self) -> gtk::Inhibit {
+            let obj = self.instance();
+
             if let Err(err) = obj.save_window_size() {
                 tracing::warn!("Failed to save window state, {:?}", &err);
             }
@@ -203,7 +210,7 @@ mod imp {
                 tracing::error!("Failed to save history: {:?}", err);
             }
 
-            self.parent_close_request(obj)
+            self.parent_close_request()
         }
     }
 
@@ -219,7 +226,7 @@ glib::wrapper! {
 
 impl Window {
     pub fn new(app: &Application) -> Self {
-        glib::Object::new(&[("application", app)]).expect("Failed to create Window")
+        glib::Object::new(&[("application", app)])
     }
 
     pub fn player(&self) -> Player {

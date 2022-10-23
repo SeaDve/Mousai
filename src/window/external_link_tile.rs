@@ -40,25 +40,16 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Link represented by Self
-                    glib::ParamSpecObject::builder(
-                        "external-link",
-                        ExternalLinkWrapper::static_type(),
-                    )
-                    .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
-                    .build(),
+                    glib::ParamSpecObject::builder::<ExternalLinkWrapper>("external-link")
+                        .construct_only()
+                        .build(),
                 ]
             });
 
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            _obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
             match pspec.name() {
                 "external-link" => {
                     let external_link: ExternalLinkWrapper = value.get().unwrap();
@@ -68,15 +59,19 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "external-link" => obj.external_link().to_value(),
                 _ => unimplemented!(),
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             let external_link_wrapper = obj.external_link();
             let external_link = external_link_wrapper.inner();
@@ -100,7 +95,6 @@ glib::wrapper! {
 impl ExternalLinkTile {
     pub fn new(external_link: &ExternalLinkWrapper) -> Self {
         glib::Object::new(&[("external-link", external_link)])
-            .expect("Failed to create ExternalLinkTile")
     }
 
     pub fn external_link(&self) -> ExternalLinkWrapper {

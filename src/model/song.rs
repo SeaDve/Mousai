@@ -49,51 +49,48 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Unique ID
-                    glib::ParamSpecBoxed::builder("id", SongId::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                    glib::ParamSpecBoxed::builder::<SongId>("id")
+                        .construct_only()
                         .build(),
                     // DateTime when last heard
-                    glib::ParamSpecBoxed::builder("last-heard", DateTime::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecBoxed::builder::<DateTime>("last-heard")
+                        .explicit_notify()
                         .build(),
                     // Title of the song
                     glib::ParamSpecString::builder("title")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .construct_only()
                         .build(),
                     // Artist of the song
                     glib::ParamSpecString::builder("artist")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .construct_only()
                         .build(),
                     // Album where the song was from
                     glib::ParamSpecString::builder("album")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .construct_only()
                         .build(),
                     // Arbitrary string for release date
                     glib::ParamSpecString::builder("release-date")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .construct_only()
                         .build(),
                     // Links relevant to the song
-                    glib::ParamSpecObject::builder(
-                        "external-links",
-                        ExternalLinkList::static_type(),
-                    )
-                    .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
-                    .build(),
+                    glib::ParamSpecObject::builder::<ExternalLinkList>("external-links")
+                        .construct_only()
+                        .build(),
                     // Link where the album art can be downloaded
                     glib::ParamSpecString::builder("album-art-link")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .construct_only()
                         .build(),
                     // Link containing an excerpt of the song
                     glib::ParamSpecString::builder("playback-link")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::CONSTRUCT_ONLY)
+                        .construct_only()
                         .build(),
                     // Lyrics of the song
                     glib::ParamSpecString::builder("lyrics")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                     // Whether the song is recently recognized
                     glib::ParamSpecBoolean::builder("is-newly-recognized")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -101,13 +98,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "id" => {
                     let id = value.get().unwrap();
@@ -157,7 +150,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "id" => obj.id().to_value(),
                 "last-heard" => obj.last_heard().to_value(),
@@ -285,7 +280,7 @@ impl Serialize for Song {
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_inner = imp::SongInner::deserialize(deserializer)?;
-        let song: Self = glib::Object::new(&[
+        Ok(glib::Object::new(&[
             ("id", &deserialized_inner.id),
             ("last-heard", &deserialized_inner.last_heard),
             ("title", &deserialized_inner.title),
@@ -296,9 +291,7 @@ impl<'de> Deserialize<'de> for Song {
             ("album-art-link", &deserialized_inner.album_art_link),
             ("playback-link", &deserialized_inner.playback_link),
             ("lyrics", &deserialized_inner.lyrics),
-        ])
-        .expect("Failed to create song.");
-        Ok(song)
+        ]))
     }
 }
 
@@ -359,7 +352,6 @@ impl SongBuilder {
             ExternalLinkList::new(std::mem::take(&mut self.external_links)).to_value(),
         ));
         glib::Object::with_values(Song::static_type(), &self.properties)
-            .expect("Failed to create Song.")
             .downcast()
             .unwrap()
     }

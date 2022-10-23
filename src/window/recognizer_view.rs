@@ -49,8 +49,8 @@ mod imp {
     }
 
     impl ObjectImpl for RecognizerView {
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
         }
@@ -66,7 +66,7 @@ glib::wrapper! {
 
 impl RecognizerView {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create RecognizerView")
+        glib::Object::new(&[])
     }
 
     /// Must be only called once

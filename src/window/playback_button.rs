@@ -55,13 +55,12 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // State or mode of the button
-                    glib::ParamSpecEnum::builder("mode", PlaybackButtonMode::static_type())
-                        .default_value(PlaybackButtonMode::default() as i32)
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecEnum::builder("mode", PlaybackButtonMode::default())
+                        .explicit_notify()
                         .build(),
                     // Name of the action to trigger when clicked
                     glib::ParamSpecString::builder("action-name")
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                        .explicit_notify()
                         .build(),
                 ]
             });
@@ -69,13 +68,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "mode" => {
                     let mode = value.get().unwrap();
@@ -89,7 +84,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "mode" => obj.mode().to_value(),
                 "action-name" => obj.action_name().to_value(),
@@ -97,14 +94,16 @@ mod imp {
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             obj.update_ui();
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
         }
@@ -120,7 +119,7 @@ glib::wrapper! {
 
 impl PlaybackButton {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create PlaybackButton")
+        glib::Object::new(&[])
     }
 
     pub fn set_mode(&self, mode: PlaybackButtonMode) {

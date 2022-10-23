@@ -77,19 +77,18 @@ mod imp {
     impl ObjectImpl for SongBar {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder(
-                    "activated",
-                    &[Song::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![Signal::builder("activated")
+                    .param_types([Song::static_type()])
+                    .build()]
             });
 
             SIGNALS.as_ref()
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             self.scale_handler_id
                 .set(self.playback_position_scale.connect_value_changed(
@@ -100,8 +99,8 @@ mod imp {
                 .unwrap();
         }
 
-        fn dispose(&self, obj: &Self::Type) {
-            while let Some(child) = obj.first_child() {
+        fn dispose(&self) {
+            while let Some(child) = self.instance().first_child() {
                 child.unparent();
             }
         }
@@ -117,7 +116,7 @@ glib::wrapper! {
 
 impl SongBar {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create SongBar")
+        glib::Object::new(&[])
     }
 
     pub fn connect_activated<F>(&self, f: F) -> glib::SignalHandlerId

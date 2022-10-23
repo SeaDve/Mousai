@@ -64,14 +64,12 @@ fn debug_info() -> String {
         adw::minor_version(),
         adw::micro_version()
     );
-    let soup_version = unsafe {
-        format!(
-            "{}.{}.{}",
-            soup::soup_get_major_version(),
-            soup::soup_get_minor_version(),
-            soup::soup_get_micro_version()
-        )
-    };
+    let soup_version = format!(
+        "{}.{}.{}",
+        soup::major_version(),
+        soup::minor_version(),
+        soup::micro_version()
+    );
     let gst_version_string = gst::version_string();
 
     format!(

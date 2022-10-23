@@ -59,7 +59,10 @@ mod imp {
                 position: Cell::default(),
                 duration: Cell::default(),
                 metadata: RefCell::new(MprisMetadata::new()),
-                gst_player: gst_player::Player::new(None, None),
+                gst_player: gst_player::Player::new(
+                    gst_player::PlayerVideoRenderer::NONE,
+                    gst_player::PlayerSignalDispatcher::NONE,
+                ),
                 mpris_player: OnceCell::default(),
             }
         }
@@ -74,12 +77,9 @@ mod imp {
     impl ObjectImpl for Player {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder(
-                    "error",
-                    &[glib::Error::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![Signal::builder("error")
+                    .param_types([glib::Error::static_type()])
+                    .build()]
             });
 
             SIGNALS.as_ref()
@@ -89,21 +89,20 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Song being played by the player
-                    glib::ParamSpecObject::builder("song", Song::static_type())
-                        .flags(glib::ParamFlags::READWRITE | glib::ParamFlags::EXPLICIT_NOTIFY)
+                    glib::ParamSpecObject::builder::<Song>("song")
+                        .explicit_notify()
                         .build(),
                     // Current state of the player
-                    glib::ParamSpecEnum::builder("state", PlayerState::static_type())
-                        .default_value(PlayerState::default() as i32)
-                        .flags(glib::ParamFlags::READABLE)
+                    glib::ParamSpecEnum::builder("state", PlayerState::default())
+                        .read_only()
                         .build(),
                     // Current position of the player
-                    glib::ParamSpecBoxed::builder("position", ClockTime::static_type())
-                        .flags(glib::ParamFlags::READABLE)
+                    glib::ParamSpecBoxed::builder::<ClockTime>("position")
+                        .read_only()
                         .build(),
                     // Duration of the song
-                    glib::ParamSpecBoxed::builder("duration", ClockTime::static_type())
-                        .flags(glib::ParamFlags::READABLE)
+                    glib::ParamSpecBoxed::builder::<ClockTime>("duration")
+                        .read_only()
                         .build(),
                 ]
             });
@@ -111,13 +110,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn set_property(
-            &self,
-            obj: &Self::Type,
-            _id: usize,
-            value: &glib::Value,
-            pspec: &glib::ParamSpec,
-        ) {
+        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => {
                     let song = value.get().unwrap();
@@ -127,7 +122,9 @@ mod imp {
             }
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "state" => obj.state().to_value(),
@@ -137,8 +134,10 @@ mod imp {
             }
         }
 
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.instance();
 
             obj.setup_player_signals();
         }
@@ -151,7 +150,7 @@ glib::wrapper! {
 
 impl Player {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create Player")
+        glib::Object::new(&[])
     }
 
     pub fn connect_error<F>(&self, f: F) -> glib::SignalHandlerId

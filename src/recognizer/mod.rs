@@ -53,13 +53,12 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Current state of Self
-                    glib::ParamSpecEnum::builder("state", RecognizerState::static_type())
-                        .default_value(RecognizerState::default() as i32)
-                        .flags(glib::ParamFlags::READABLE)
+                    glib::ParamSpecEnum::builder("state", RecognizerState::default())
+                        .read_only()
                         .build(),
                     // Active recording
-                    glib::ParamSpecObject::builder("recording", AudioRecording::static_type())
-                        .flags(glib::ParamFlags::READABLE)
+                    glib::ParamSpecObject::builder::<AudioRecording>("recording")
+                        .read_only()
                         .build(),
                 ]
             });
@@ -67,7 +66,9 @@ mod imp {
             PROPERTIES.as_ref()
         }
 
-        fn property(&self, obj: &Self::Type, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            let obj = self.instance();
+
             match pspec.name() {
                 "state" => obj.state().to_value(),
                 "recording" => obj.recording().to_value(),
@@ -77,12 +78,9 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder(
-                    "song-recognized",
-                    &[Song::static_type().into()],
-                    <()>::static_type().into(),
-                )
-                .build()]
+                vec![Signal::builder("song-recognized")
+                    .param_types([Song::static_type()])
+                    .build()]
             });
 
             SIGNALS.as_ref()
@@ -96,7 +94,7 @@ glib::wrapper! {
 
 impl Recognizer {
     pub fn new() -> Self {
-        glib::Object::new(&[]).expect("Failed to create Recognizer.")
+        glib::Object::new(&[])
     }
 
     pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
