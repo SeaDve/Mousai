@@ -1,7 +1,6 @@
 mod provider;
 
 use anyhow::{ensure, Context, Result};
-use futures_util::future::{AbortHandle, Abortable};
 use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
@@ -198,53 +197,43 @@ impl Recognizer {
 
         self.set_state(RecognizerState::Listening);
 
-        let device_name = audio_device::find_default_name(
-            match utils::app_instance().settings().preferred_audio_source() {
-                PreferredAudioSource::Microphone => AudioDeviceClass::Source,
-                PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
-            },
+        let device_name = gio::CancellableFuture::new(
+            audio_device::find_default_name(
+                match utils::app_instance().settings().preferred_audio_source() {
+                    PreferredAudioSource::Microphone => AudioDeviceClass::Source,
+                    PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
+                },
+            ),
+            cancellable.clone(),
         )
         .await
+        .map_err(|_| Cancelled::new("recognizing while finding default audio device name"))?
         .context("Failed to find default device name")?;
-
-        if cancellable.is_cancelled() {
-            return Err(
-                Cancelled::new("recognizing while finding default audio device name").into(),
-            );
-        }
 
         recording
             .start(Some(&device_name))
             .context("Failed to start recording")?;
 
-        let (recording_timer_handle, recording_timer_abort_reg) = AbortHandle::new_pair();
-
         cancellable.connect_cancelled_local(clone!(@weak _finally => move |_| {
-            recording_timer_handle.abort();
             let _ = _finally.take();
         }));
 
         let provider = ProviderSettings::lock().active.to_provider();
         tracing::debug!(?provider);
 
-        if Abortable::new(
+        gio::CancellableFuture::new(
             glib::timeout_future(provider.listen_duration()),
-            recording_timer_abort_reg,
+            cancellable.clone(),
         )
         .await
-        .is_err()
-        {
-            return Err(Cancelled::new("recognizing while recording").into());
-        }
+        .map_err(|_| Cancelled::new("recognizing while recording"))?;
 
         recording.stop().context("Failed to stop recording")?;
 
         self.set_state(RecognizerState::Recognizing);
-        let song = provider.recognize(&recording).await;
-
-        if cancellable.is_cancelled() {
-            return Err(Cancelled::new("recognizing while calling provider").into());
-        }
+        let song = gio::CancellableFuture::new(provider.recognize(&recording), cancellable.clone())
+            .await
+            .map_err(|_| Cancelled::new("recognizing while calling provider"))?;
 
         self.emit_by_name::<()>("song-recognized", &[&song?]);
 
