@@ -37,7 +37,7 @@ mod imp {
         }
 
         fn dispose(&self) {
-            if let Err(err) = self.instance().stop() {
+            if let Err(err) = self.obj().stop() {
                 tracing::warn!("Failed to stop recording on dispose: {:?}", err);
             }
 

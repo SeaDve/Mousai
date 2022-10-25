@@ -99,7 +99,7 @@ mod imp {
         }
 
         fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "id" => {
@@ -151,7 +151,7 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "id" => obj.id().to_value(),

@@ -30,7 +30,7 @@ mod imp {
         }
 
         fn item(&self, position: u32) -> Option<glib::Object> {
-            self.instance()
+            self.obj()
                 .get(position as usize)
                 .map(|item| item.upcast::<glib::Object>())
         }

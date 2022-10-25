@@ -48,7 +48,7 @@ mod imp {
         }
 
         fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "value" => {
@@ -60,7 +60,7 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "value" => obj.value().to_value(),
@@ -71,11 +71,11 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            self.instance().update_ui();
+            self.obj().update_ui();
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.instance().first_child() {
+            while let Some(child) = self.obj().first_child() {
                 child.unparent();
             }
         }

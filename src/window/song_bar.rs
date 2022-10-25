@@ -88,7 +88,7 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             self.scale_handler_id
                 .set(self.playback_position_scale.connect_value_changed(
@@ -100,7 +100,7 @@ mod imp {
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.instance().first_child() {
+            while let Some(child) = self.obj().first_child() {
                 child.unparent();
             }
         }

@@ -74,7 +74,7 @@ mod imp {
         }
 
         fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "song" => {
@@ -94,7 +94,7 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "song" => obj.song().to_value(),
@@ -107,12 +107,11 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            self.instance()
-                .set_enable_crossfade(DEFAULT_ENABLE_CROSSFADE);
+            self.obj().set_enable_crossfade(DEFAULT_ENABLE_CROSSFADE);
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.instance().first_child() {
+            while let Some(child) = self.obj().first_child() {
                 child.unparent();
             }
         }

@@ -60,7 +60,7 @@ checksum = "08f9ee4a4ca9239c9a839453dce04b7ddee2f859ec4cd7acd1f5703b68db549c"
 dependencies = [
  "bitflags",
  "cairo-sys-rs",
- "glib 0.16.1",
+ "glib 0.16.2",
  "libc",
  "once_cell",
  "thiserror",
@@ -218,7 +218,7 @@ dependencies = [
  "bitflags",
  "gdk-pixbuf-sys",
  "gio",
- "glib 0.16.1",
+ "glib 0.16.2",
  "libc",
 ]
 
@@ -246,7 +246,7 @@ dependencies = [
  "gdk-pixbuf",
  "gdk4-sys",
  "gio",
- "glib 0.16.1",
+ "glib 0.16.2",
  "libc",
  "pango",
 ]
@@ -301,9 +301,9 @@ dependencies = [
 
 [[package]]
 name = "gio"
-version = "0.16.0"
+version = "0.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3025f17aab38ebbb40d785806cf36c292c4dd6755b05584fc52d34fb87533263"
+checksum = "33c1debf8d0315d69be0153aa76249db3c858ef69b7778ad3cc669e6d370c485"
 dependencies = [
  "bitflags",
  "futures-channel",
@@ -311,7 +311,7 @@ dependencies = [
  "futures-io",
  "futures-util",
  "gio-sys",
- "glib 0.16.1",
+ "glib 0.16.2",
  "libc",
  "once_cell",
  "pin-project-lite",
@@ -354,9 +354,9 @@ dependencies = [
 
 [[package]]
 name = "glib"
-version = "0.16.1"
+version = "0.16.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "079d580b26ee5eb504942bd4340a1218323a4cf19a31d776d62cd3a2a8416622"
+checksum = "d5abffa711471e015eb93d65d6ea20e7e9f6f7951fc0a1042280439319b2de06"
 dependencies = [
  "bitflags",
  "futures-channel",
@@ -452,7 +452,7 @@ version = "0.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "95a8de4506a64776d90fedf9c28fdca5a7127f8cc9c78976e8184ac6f42685d8"
 dependencies = [
- "glib 0.16.1",
+ "glib 0.16.2",
  "graphene-sys",
  "libc",
 ]
@@ -493,7 +493,7 @@ dependencies = [
  "bitflags",
  "cairo-rs",
  "gdk4",
- "glib 0.16.1",
+ "glib 0.16.2",
  "graphene-rs",
  "gsk4-sys",
  "libc",
@@ -518,16 +518,16 @@ dependencies = [
 
 [[package]]
 name = "gstreamer"
-version = "0.19.0"
+version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d9008739d8847965cb17eb482a939c28ef16aa912ac503d096683180efc596d"
+checksum = "7e428081934c617115320750b7827f8f13131d9c3ae90b647c14a5d6019f47b4"
 dependencies = [
  "bitflags",
  "cfg-if",
  "futures-channel",
  "futures-core",
  "futures-util",
- "glib 0.16.1",
+ "glib 0.16.2",
  "gstreamer-sys",
  "libc",
  "muldiv",
@@ -542,14 +542,14 @@ dependencies = [
 
 [[package]]
 name = "gstreamer-base"
-version = "0.19.0"
+version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "23b122d32437a1528a2a23ad68ae5cf8c83cae5123d634e26f7ccd825717f20c"
+checksum = "326674197c010e91a98d0f55a032abe22b1fd932456dbcdc3415450b4b653817"
 dependencies = [
  "atomic_refcell",
  "bitflags",
  "cfg-if",
- "glib 0.16.1",
+ "glib 0.16.2",
  "gstreamer",
  "gstreamer-base-sys",
  "libc",
@@ -575,7 +575,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "796e053b45803544c37a150ae6cbedc8019bc5f410dff78aa6041e7a1a969f2b"
 dependencies = [
  "bitflags",
- "glib 0.16.1",
+ "glib 0.16.2",
  "gstreamer",
  "gstreamer-player-sys",
  "gstreamer-video",
@@ -618,7 +618,7 @@ dependencies = [
  "bitflags",
  "cfg-if",
  "futures-channel",
- "glib 0.16.1",
+ "glib 0.16.2",
  "gstreamer",
  "gstreamer-base",
  "gstreamer-video-sys",
@@ -653,7 +653,7 @@ dependencies = [
  "gdk-pixbuf",
  "gdk4",
  "gio",
- "glib 0.16.1",
+ "glib 0.16.2",
  "graphene-rs",
  "gsk4",
  "gtk4-macros",
@@ -751,7 +751,7 @@ dependencies = [
  "gdk-pixbuf",
  "gdk4",
  "gio",
- "glib 0.16.1",
+ "glib 0.16.2",
  "gtk4",
  "libadwaita-sys",
  "libc",
@@ -777,9 +777,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.135"
+version = "0.2.136"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68783febc7782c6c5cb401fbda4de5a9898be1762314da0bb2c10ced61f18b0c"
+checksum = "55edcf6c0bb319052dea84732cf99db461780fd5e8d3eb46ab6ff312ab31f197"
 
 [[package]]
 name = "libdbus-sys"
@@ -810,7 +810,7 @@ version = "2.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "df0e7a964c9f7e95d4f073affc19adfda009fa0d55e8831dbb66c78be1d0e6e5"
 dependencies = [
- "glib 0.16.1",
+ "glib 0.16.2",
  "glib-sys 0.16.0",
  "libpulse-binding",
  "libpulse-mainloop-glib-sys",
@@ -896,7 +896,7 @@ dependencies = [
  "futures-util",
  "fuzzy-matcher",
  "gettext-rs",
- "glib 0.16.1",
+ "glib 0.16.2",
  "gsettings-macro",
  "gstreamer",
  "gstreamer-player",
@@ -1040,7 +1040,7 @@ checksum = "7208c60f224cf6e44c551df5ee2ef38f9da0fd29d7c5a0402000b8ab0520e798"
 dependencies = [
  "bitflags",
  "gio",
- "glib 0.16.1",
+ "glib 0.16.2",
  "libc",
  "once_cell",
  "pango-sys",
@@ -1275,7 +1275,7 @@ dependencies = [
  "bitflags",
  "futures-channel",
  "gio",
- "glib 0.16.1",
+ "glib 0.16.2",
  "libc",
  "once_cell",
  "soup3-sys",

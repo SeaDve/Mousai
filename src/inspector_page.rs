@@ -87,7 +87,7 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             obj.setup_provider_row();
             obj.setup_test_provider_row();
@@ -97,7 +97,7 @@ mod imp {
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.instance().first_child() {
+            while let Some(child) = self.obj().first_child() {
                 child.unparent();
             }
 

@@ -32,7 +32,7 @@ mod imp {
 
     impl WidgetImpl for Waveform {
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
-            self.instance().on_snapshot(snapshot);
+            self.obj().on_snapshot(snapshot);
         }
     }
 }

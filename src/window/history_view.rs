@@ -158,7 +158,7 @@ mod imp {
         }
 
         fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "adaptive-mode" => {
@@ -170,7 +170,7 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "is-selection-mode" => obj.is_selection_mode().to_value(),
@@ -182,7 +182,7 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             self.stack
                 .connect_transition_running_notify(clone!(@weak obj => move |stack| {
@@ -205,7 +205,7 @@ mod imp {
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.instance().first_child() {
+            while let Some(child) = self.obj().first_child() {
                 child.unparent();
             }
         }

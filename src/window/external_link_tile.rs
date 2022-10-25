@@ -60,7 +60,7 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "external-link" => obj.external_link().to_value(),
@@ -71,7 +71,7 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             let external_link_wrapper = obj.external_link();
             let external_link = external_link_wrapper.inner();

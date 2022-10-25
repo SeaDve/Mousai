@@ -136,7 +136,7 @@ mod imp {
         }
 
         fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.instance();
+            let obj = self.obj();
 
             match pspec.name() {
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
@@ -147,7 +147,7 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             let preferred_audio_source_action = utils::app_instance()
                 .settings()
@@ -185,7 +185,7 @@ mod imp {
         fn realize(&self) {
             self.parent_realize();
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             obj.surface()
                 .connect_width_notify(clone!(@weak obj => move |_| {
@@ -198,7 +198,7 @@ mod imp {
 
     impl WindowImpl for Window {
         fn close_request(&self) -> gtk::Inhibit {
-            let obj = self.instance();
+            let obj = self.obj();
 
             if let Err(err) = obj.save_window_size() {
                 tracing::warn!("Failed to save window state, {:?}", &err);

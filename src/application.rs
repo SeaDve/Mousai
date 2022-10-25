@@ -38,7 +38,7 @@ mod imp {
         fn activate(&self) {
             self.parent_activate();
 
-            if let Some(window) = self.instance().main_window() {
+            if let Some(window) = self.obj().main_window() {
                 window.present();
             }
         }
@@ -48,7 +48,7 @@ mod imp {
 
             gtk::Window::set_default_icon_name(APP_ID);
 
-            let obj = self.instance();
+            let obj = self.obj();
 
             obj.setup_gactions();
             obj.setup_accels();
