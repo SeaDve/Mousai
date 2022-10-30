@@ -635,6 +635,8 @@ impl HistoryView {
     fn setup_grid(&self) {
         let factory = gtk::SignalListItemFactory::new();
         factory.connect_setup(clone!(@weak self as obj => move |_, list_item| {
+            let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
+
             let song_tile = SongTile::new();
             song_tile.bind_player(&obj.player());
 
