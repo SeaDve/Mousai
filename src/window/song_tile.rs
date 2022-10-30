@@ -220,7 +220,7 @@ glib::wrapper! {
 
 impl SongTile {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn set_song(&self, song: Option<Song>) {

@@ -176,7 +176,7 @@ impl SongList {
 
 impl Default for SongList {
     fn default() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 }
 

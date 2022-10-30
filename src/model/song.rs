@@ -280,18 +280,18 @@ impl Serialize for Song {
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_inner = imp::SongInner::deserialize(deserializer)?;
-        Ok(glib::Object::new(&[
-            ("id", &deserialized_inner.id),
-            ("last-heard", &deserialized_inner.last_heard),
-            ("title", &deserialized_inner.title),
-            ("artist", &deserialized_inner.artist),
-            ("album", &deserialized_inner.album),
-            ("release-date", &deserialized_inner.release_date),
-            ("external-links", &deserialized_inner.external_links),
-            ("album-art-link", &deserialized_inner.album_art_link),
-            ("playback-link", &deserialized_inner.playback_link),
-            ("lyrics", &deserialized_inner.lyrics),
-        ]))
+        Ok(glib::Object::builder()
+            .property("id", &deserialized_inner.id)
+            .property("last-heard", &deserialized_inner.last_heard)
+            .property("title", &deserialized_inner.title)
+            .property("artist", &deserialized_inner.artist)
+            .property("album", &deserialized_inner.album)
+            .property("release-date", &deserialized_inner.release_date)
+            .property("external-links", &deserialized_inner.external_links)
+            .property("album-art-link", &deserialized_inner.album_art_link)
+            .property("playback-link", &deserialized_inner.playback_link)
+            .property("lyrics", &deserialized_inner.lyrics)
+            .build())
     }
 }
 

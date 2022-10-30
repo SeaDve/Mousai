@@ -44,7 +44,7 @@ glib::wrapper! {
 
 impl Waveform {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn push_peak(&self, peak: f64) {

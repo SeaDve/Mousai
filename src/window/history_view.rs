@@ -221,7 +221,7 @@ glib::wrapper! {
 
 impl HistoryView {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn connect_selection_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId

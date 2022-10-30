@@ -150,7 +150,7 @@ glib::wrapper! {
 
 impl Player {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn connect_error<F>(&self, f: F) -> glib::SignalHandlerId

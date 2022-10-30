@@ -66,7 +66,7 @@ glib::wrapper! {
 
 impl RecognizerView {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     /// Must be only called once

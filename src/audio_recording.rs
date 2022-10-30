@@ -52,7 +52,7 @@ glib::wrapper! {
 
 impl AudioRecording {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn start(&self, device_name: Option<&str>) -> Result<()> {

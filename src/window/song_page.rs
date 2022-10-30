@@ -224,7 +224,7 @@ glib::wrapper! {
 
 impl SongPage {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn connect_song_removed<F>(&self, f: F) -> glib::SignalHandlerId

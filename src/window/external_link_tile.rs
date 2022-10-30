@@ -94,7 +94,9 @@ glib::wrapper! {
 
 impl ExternalLinkTile {
     pub fn new(external_link: &ExternalLinkWrapper) -> Self {
-        glib::Object::new(&[("external-link", external_link)])
+        glib::Object::builder()
+            .property("external-link", external_link)
+            .build()
     }
 
     pub fn external_link(&self) -> ExternalLinkWrapper {

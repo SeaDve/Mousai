@@ -53,13 +53,13 @@ glib::wrapper! {
 
 impl ExternalLinkWrapper {
     pub fn new(inner: impl ExternalLink + 'static) -> Self {
-        let obj: Self = glib::Object::new(&[]);
+        let obj: Self = glib::Object::builder().build();
         obj.imp().0.set(Box::new(inner)).unwrap();
         obj
     }
 
     pub fn from_boxed(inner: Box<dyn ExternalLink>) -> Self {
-        let obj: Self = glib::Object::new(&[]);
+        let obj: Self = glib::Object::builder().build();
         obj.imp().0.set(inner).unwrap();
         obj
     }

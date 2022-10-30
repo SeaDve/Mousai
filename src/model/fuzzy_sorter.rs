@@ -91,7 +91,7 @@ glib::wrapper! {
 
 impl FuzzySorter {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn search(&self) -> String {

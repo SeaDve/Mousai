@@ -119,7 +119,7 @@ glib::wrapper! {
 
 impl PlaybackButton {
     pub fn new() -> Self {
-        glib::Object::new(&[])
+        glib::Object::builder().build()
     }
 
     pub fn set_mode(&self, mode: PlaybackButtonMode) {
