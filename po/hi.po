@@ -7,19 +7,20 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-11 23:54+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Hindi <https://hosted.weblate.org/projects/kooha/mousai/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
@@ -104,7 +105,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferred Audio Source"
@@ -161,7 +162,7 @@ msgstr ""
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "रद्द"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
@@ -194,7 +195,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "आम (General)"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -209,12 +210,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "शॉर्टकट दिखाएँ"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "बंद करें"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -247,7 +248,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:102
 msgid "Stop"
-msgstr ""
+msgstr "रोकें"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
@@ -288,7 +289,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
 msgid "translator-credits"
-msgstr ""
+msgstr "Hemish (hemish04082005)"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
@@ -296,7 +297,7 @@ msgstr ""
 
 #: src/application.rs:144
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
