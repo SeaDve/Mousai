@@ -38,7 +38,7 @@ impl ProviderType {
         use super::aud_d::{AudD, AudDMock};
 
         match self {
-            Self::AudD => Box::new(AudD::default()),
+            Self::AudD => Box::<AudD>::default(),
             Self::AudDMock => Box::new(AudDMock),
         }
     }
