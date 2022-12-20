@@ -185,9 +185,7 @@ impl Player {
         self.set_duration(None);
 
         if let Some(ref song) = song {
-            let playback_link = if let Some(playback_link) = song.playback_link() {
-                playback_link
-            } else {
+            let Some(playback_link) = song.playback_link() else {
                 tracing::warn!("Trying to put a song without playback link on the Player");
                 return;
             };

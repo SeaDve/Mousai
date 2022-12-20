@@ -61,31 +61,25 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     tracing::debug!("Finding device name for class `{:?}`", class);
 
     for device in devices {
-        let device_class = match AudioDeviceClass::for_str(&device.device_class()) {
-            Some(device_class) => device_class,
-            None => {
-                tracing::debug!(
-                    "Skipping device `{}` as it has unknown device class `{}`",
-                    device.name(),
-                    device.device_class()
-                );
-                continue;
-            }
+        let Some(device_class) =  AudioDeviceClass::for_str(&device.device_class()) else {
+            tracing::debug!(
+                "Skipping device `{}` as it has unknown device class `{}`",
+                device.name(),
+                device.device_class()
+            );
+            continue;
         };
 
         if device_class != class {
             continue;
         }
 
-        let properties = match device.properties() {
-            Some(properties) => properties,
-            None => {
+        let Some(properties) = device.properties() else {
                 tracing::warn!(
                     "Skipping device `{}` as it has no properties",
                     device.name()
                 );
                 continue;
-            }
         };
 
         let is_default = match properties.get::<bool>("is-default") {
@@ -216,9 +210,7 @@ mod pa {
             let mut tx = Some(tx);
 
             let mut operation = self.inner.introspect().get_server_info(move |server_info| {
-                let tx = if let Some(tx) = tx.take() {
-                    tx
-                } else {
+                let Some(tx) = tx.take() else {
                     tracing::error!("Called get_server_info twice!");
                     return;
                 };
@@ -243,12 +235,9 @@ mod pa {
                 }
             });
 
-            let name = match glib::future_with_timeout(DEFAULT_TIMEOUT, rx).await {
-                Ok(name) => name,
-                Err(_) => {
-                    operation.cancel();
+            let Ok(name) = glib::future_with_timeout(DEFAULT_TIMEOUT, rx).await else {
+                operation.cancel();
                     bail!("get_server_info operation timeout reached");
-                }
             };
 
             name.unwrap().context("Found no default device")
