@@ -168,7 +168,7 @@ mod imp {
                 .set_key_capture_widget(Some(obj.upcast_ref::<gtk::Widget>()));
 
             obj.bind_property("adaptive-mode", &self.main_view.get(), "adaptive-mode")
-                .flags(glib::BindingFlags::SYNC_CREATE)
+                .sync_create()
                 .build();
 
             obj.setup_signals();

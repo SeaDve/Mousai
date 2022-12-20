@@ -284,7 +284,7 @@ impl HistoryView {
             }));
         let adaptive_mode_binding = self
             .bind_property("adaptive-mode", &song_page, "adaptive-mode")
-            .flags(glib::BindingFlags::SYNC_CREATE)
+            .sync_create()
             .build();
 
         imp.stack.add_child(&song_page);
@@ -641,10 +641,10 @@ impl HistoryView {
             song_tile.bind_player(&obj.player());
 
             obj.bind_property("is-selection-mode", &song_tile, "is-selection-mode")
-                .flags(glib::BindingFlags::SYNC_CREATE)
+                .sync_create()
                 .build();
             obj.bind_property("adaptive-mode", &song_tile, "adaptive-mode")
-                .flags(glib::BindingFlags::SYNC_CREATE)
+                .sync_create()
                 .build();
 
             song_tile.connect_active_notify(clone!(@weak obj, @weak list_item => move |tile| {
