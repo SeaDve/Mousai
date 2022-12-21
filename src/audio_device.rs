@@ -75,11 +75,11 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
         }
 
         let Some(properties) = device.properties() else {
-                tracing::warn!(
-                    "Skipping device `{}` as it has no properties",
-                    device.name()
-                );
-                continue;
+            tracing::warn!(
+                "Skipping device `{}` as it has no properties",
+                device.name()
+            );
+            continue;
         };
 
         let is_default = match properties.get::<bool>("is-default") {
@@ -237,7 +237,7 @@ mod pa {
 
             let Ok(name) = glib::future_with_timeout(DEFAULT_TIMEOUT, rx).await else {
                 operation.cancel();
-                    bail!("get_server_info operation timeout reached");
+                bail!("get_server_info operation timeout reached");
             };
 
             name.unwrap().context("Found no default device")
