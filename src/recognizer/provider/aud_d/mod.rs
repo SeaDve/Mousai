@@ -1,7 +1,7 @@
 mod mock;
 mod response;
 
-use anyhow::{Context, Error, Result};
+use anyhow::{Context, Result};
 use async_trait::async_trait;
 use gettextrs::gettext;
 use gtk::glib;
@@ -129,7 +129,6 @@ impl Provider for AudD {
             .session()
             .send_and_read_future(&message, glib::PRIORITY_HIGH)
             .await
-            .map_err(Error::from)
             .with_help(
                 || gettext("Check your internet connection"),
                 || gettext("Failed to connect to AudD"),
