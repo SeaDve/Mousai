@@ -2,19 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Nikos <dizars1776@yahoo.gr>, 2022.
+# Nikolaos Georgiou <dizars1776@yahoo.gr>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-12-22 14:49+0000\n"
+"Last-Translator: Nikolaos Georgiou <dizars1776@yahoo.gr>\n"
+"Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -120,7 +122,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Συντομεύσεις Πληκτρολογίου"
 
 #: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
@@ -161,7 +163,7 @@ msgstr ""
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
@@ -247,7 +249,7 @@ msgstr ""
 
 #: data/resources/ui/song-bar.ui:102
 msgid "Stop"
-msgstr ""
+msgstr "Τέλος"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
@@ -288,7 +290,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
 msgid "translator-credits"
-msgstr ""
+msgstr "συντελεστές-μετάφρασης"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
@@ -296,7 +298,7 @@ msgstr ""
 
 #: src/application.rs:144
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
