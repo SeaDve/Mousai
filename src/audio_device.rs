@@ -86,7 +86,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
             Ok(is_default) => is_default,
             Err(err) => {
                 tracing::warn!(
-                    "Skipping device `{}` as it has no `is-default` property. {:?}",
+                    "Skipping device `{}` as it has no `is-default` property: {:?}",
                     device.name(),
                     err
                 );
