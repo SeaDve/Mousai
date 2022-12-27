@@ -31,6 +31,10 @@ pub enum RecognizerState {
     Recognizing,
 }
 
+#[derive(Debug, Clone, glib::Boxed)]
+#[boxed_type(name = "MsaiBoxedSongVec")]
+struct BoxedSongVec(Vec<Song>);
+
 mod imp {
     use super::*;
     use glib::subclass::Signal;
@@ -40,7 +44,9 @@ mod imp {
     pub struct Recognizer {
         pub(super) state: Cell<RecognizerState>,
         pub(super) recording: RefCell<Option<AudioRecording>>,
+        pub(super) is_offline_mode: Cell<bool>,
 
+        pub(super) saved_recordings: RefCell<Vec<AudioRecording>>,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
     }
 
@@ -62,6 +68,9 @@ mod imp {
                     glib::ParamSpecObject::builder::<AudioRecording>("recording")
                         .read_only()
                         .build(),
+                    glib::ParamSpecBoolean::builder("offline-mode")
+                        .read_only()
+                        .build(),
                 ]
             });
 
@@ -74,18 +83,46 @@ mod imp {
             match pspec.name() {
                 "state" => obj.state().to_value(),
                 "recording" => obj.recording().to_value(),
+                "offline-mode" => obj.is_offline_mode().to_value(),
                 _ => unimplemented!(),
             }
         }
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("song-recognized")
-                    .param_types([Song::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("song-recognized")
+                        .param_types([Song::static_type()])
+                        .build(),
+                    Signal::builder("saved-songs-recognized")
+                        .param_types([BoxedSongVec::static_type()])
+                        .build(),
+                    Signal::builder("recording-saved").build(),
+                ]
             });
 
             SIGNALS.as_ref()
+        }
+
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.obj();
+
+            // TODO Handle outside and improve timings
+            if let Err(err) = obj.load_saved_recordings() {
+                tracing::error!("Failed to load saved recordings: {:?}", err);
+            }
+
+            gio::NetworkMonitor::default().connect_network_available_notify(
+                clone!(@weak obj => move |_| {
+                    obj.update_offline_mode();
+                    obj.try_recognize_saved_recordings();
+                }),
+            );
+
+            obj.update_offline_mode();
+            obj.try_recognize_saved_recordings();
         }
     }
 }
@@ -121,6 +158,13 @@ impl Recognizer {
         self.imp().recording.borrow().clone()
     }
 
+    pub fn connect_offline_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_notify_local(Some("offline-mode"), move |obj, _| f(obj))
+    }
+
     pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self, &Song) + 'static,
@@ -132,6 +176,36 @@ impl Recognizer {
                 f(obj, song);
             }),
         )
+    }
+
+    pub fn connect_saved_songs_recognized<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, &[Song]) + 'static,
+    {
+        self.connect_closure(
+            "saved-songs-recognized",
+            true,
+            closure_local!(|obj: &Self, boxed_song_vec: BoxedSongVec| {
+                f(obj, &boxed_song_vec.0);
+            }),
+        )
+    }
+
+    pub fn connect_recording_saved<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_closure(
+            "recording-saved",
+            true,
+            closure_local!(|obj: &Self| {
+                f(obj);
+            }),
+        )
+    }
+
+    pub fn is_offline_mode(&self) -> bool {
+        self.imp().is_offline_mode.get()
     }
 
     pub async fn toggle_recognize(&self) -> Result<()> {
@@ -230,12 +304,27 @@ impl Recognizer {
 
         recording.stop().context("Failed to stop recording")?;
 
-        self.set_state(RecognizerState::Recognizing);
-        let song = gio::CancellableFuture::new(provider.recognize(&recording), cancellable.clone())
-            .await
-            .map_err(|_| Cancelled::new("recognizing while calling provider"))?;
+        if self.is_offline_mode() {
+            self.imp().saved_recordings.borrow_mut().push(recording);
+            self.emit_by_name::<()>("recording-saved", &[]);
+            tracing::debug!("Offline mode is active; saved recording for later recognition");
+        } else {
+            self.set_state(RecognizerState::Recognizing);
 
-        self.emit_by_name::<()>("song-recognized", &[&song?]);
+            let song =
+                gio::CancellableFuture::new(provider.recognize(&recording), cancellable.clone())
+                    .await
+                    .map_err(|_| Cancelled::new("recognizing while calling provider"))??;
+            song.set_is_newly_recognized(true);
+            song.set_last_heard(
+                recording
+                    .recorded_time()
+                    .expect("Recording must have a time when started")
+                    .clone(),
+            );
+
+            self.emit_by_name::<()>("song-recognized", &[&song]);
+        }
 
         Ok(())
     }
@@ -247,6 +336,97 @@ impl Recognizer {
 
         self.imp().state.set(state);
         self.notify("state");
+    }
+
+    fn load_saved_recordings(&self) -> Result<()> {
+        let recordings: Vec<AudioRecording> =
+            serde_json::from_str(&utils::app_instance().settings().saved_recordings())?;
+
+        tracing::debug!("Loading {} saved recordings", recordings.len());
+
+        self.imp().saved_recordings.replace(recordings);
+
+        Ok(())
+    }
+
+    pub fn save_saved_recordings(&self) -> Result<()> {
+        let saved_recordings = self.imp().saved_recordings.borrow();
+
+        tracing::debug!("Saving {} saved recordings", saved_recordings.len());
+
+        utils::app_instance()
+            .settings()
+            .set_saved_recordings(&serde_json::to_string(saved_recordings.as_slice())?);
+
+        Ok(())
+    }
+
+    fn try_recognize_saved_recordings(&self) {
+        let saved_recordings = self.imp().saved_recordings.borrow();
+
+        if saved_recordings.is_empty() {
+            return;
+        }
+
+        if self.is_offline_mode() {
+            tracing::debug!(
+                "Offline mode is active, skipping recognition of {} saved recordings",
+                saved_recordings.len()
+            );
+            return;
+        }
+
+        let provider = ProviderSettings::lock().active.to_provider();
+        tracing::debug!("Recognizing saved recordings with provider: {:?}", provider);
+
+        // TODO recognize recordings concurrently
+        utils::spawn(clone!(@weak self as obj => async move {
+            let imp = obj.imp();
+
+            let mut recognized = Vec::new();
+            let mut to_return = Vec::new();
+
+            for audio in imp.saved_recordings.take() {
+                match provider.recognize(&audio).await {
+                    Ok(song) => {
+                        song.set_is_newly_recognized(true);
+                        song.set_last_heard(
+                            audio
+                                .recorded_time()
+                                .expect("Recording must have a time when started")
+                                .clone(),
+                        );
+                        recognized.push(song);
+                    }
+                    Err(err) => {
+                        // TODO don't return no match errors
+                        to_return.push(audio);
+                        // TODO propagate error
+                        tracing::error!("Failed to recognize saved recording: {:?}", err);
+                    }
+                }
+            }
+
+            tracing::debug!("Failed to recognize {} saved recordings and was returned", to_return.len());
+            imp.saved_recordings.replace(to_return);
+
+            // TODO Consider showing a notification if some recordings were not recognized
+            if !recognized.is_empty() {
+                tracing::debug!("Successfully recognized {} saved recordings", recognized.len());
+                obj.emit_by_name::<()>("saved-songs-recognized", &[&BoxedSongVec(recognized)]);
+            }
+        }));
+    }
+
+    fn update_offline_mode(&self) {
+        let is_offline_mode = !gio::NetworkMonitor::default().is_network_available();
+
+        if is_offline_mode == self.is_offline_mode() {
+            return;
+        }
+
+        self.imp().is_offline_mode.set(is_offline_mode);
+        self.notify("offline-mode");
     }
 }
 

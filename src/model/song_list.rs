@@ -7,7 +7,7 @@ use gtk::{
 };
 use indexmap::IndexMap;
 
-use std::cell::RefCell;
+use std::{cell::RefCell, collections::HashMap};
 
 use super::{Song, SongId};
 use crate::utils;
@@ -96,45 +96,61 @@ impl SongList {
 
         if last_value.is_some() {
             self.items_changed(position as u32, 1, 1);
-            return false;
+            false
+        } else {
+            self.items_changed(position as u32, 0, 1);
+            true
         }
-
-        self.items_changed(position as u32, 0, 1);
-
-        true
     }
 
     /// Tries to append all [`Song`]s and returns the number of [`Song`]s that were
-    /// successfully appended.
+    /// actually appended.
     ///
     /// If a [`Song`] is unique to the list, it is appended. Otherwise, the existing
     /// value will be updated.
     ///
     /// This is more efficient than [`SongList::append`] since it emits `items-changed`
     /// only once if all appended [`Song`]s are unique.
-    pub fn append_many(&self, songs: Vec<Song>) -> u32 {
-        let mut n_appended = 0;
+    pub fn append_many(&self, raw_songs: Vec<Song>) -> u32 {
+        // remove duplicated songs
+        let songs = {
+            let mut ret = HashMap::new();
+
+            for song in raw_songs.into_iter().rev() {
+                ret.entry(song.id()).or_insert(song);
+            }
+
+            ret
+        };
+
+        let n_songs = songs.len() as u32;
+
+        let mut n_updated = 0;
+        let mut min_position = None::<u32>;
 
         {
             let mut list = self.imp().list.borrow_mut();
 
-            for song in songs {
-                let (position, last_value) = list.insert_full(song.id(), song);
+            for (song_id, song) in songs {
+                let (position, last_value) = list.insert_full(song_id, song);
 
-                if last_value.is_some() {
-                    self.items_changed(position as u32, 1, 1);
-                    continue;
+                if let Some(previous) = min_position {
+                    min_position = Some(previous.min(position as u32));
+                } else {
+                    min_position = Some(position as u32);
                 }
 
-                n_appended += 1;
+                if last_value.is_some() {
+                    n_updated += 1;
+                }
             }
         }
 
-        if n_appended > 0 {
-            self.items_changed(self.n_items() - n_appended, 0, n_appended);
+        if let Some(min_position) = min_position {
+            self.items_changed(min_position, n_updated, n_songs);
         }
 
-        n_appended
+        n_songs - n_updated
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
@@ -184,10 +200,7 @@ impl Default for SongList {
 mod test {
     use super::*;
 
-    use std::{
-        cell::{Cell, RefCell},
-        rc::Rc,
-    };
+    use std::{cell::Cell, rc::Rc};
 
     fn new_test_song(id: &str) -> Song {
         Song::builder(&SongId::from(id), id, id, id).build()
@@ -296,13 +309,10 @@ mod test {
         let song_list = SongList::default();
         song_list.append(new_test_song("0"));
 
-        let calls_output = Rc::new(RefCell::new(Vec::new()));
-
-        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            calls_output_clone
-                .borrow_mut()
-                .push((index, removed, added));
+            assert_eq!(index, 0);
+            assert_eq!(removed, 2);
+            assert_eq!(added, 4);
         });
 
         assert_eq!(
@@ -314,11 +324,29 @@ mod test {
             ]),
             2
         );
+    }
 
-        let calls_output = calls_output.borrow();
-        assert_eq!(calls_output[0], (0, 1, 1)); // Updated SongId(0)
-        assert_eq!(calls_output[1], (2, 1, 1)); // Updated SongId(2)
-        assert_eq!(calls_output[2], (1, 0, 2)); // Collective emission
+    #[test]
+    fn items_changed_append_many_more_removed_than_n_items() {
+        let song_list = SongList::default();
+        song_list.append(new_test_song("0"));
+        song_list.append(new_test_song("1"));
+
+        song_list.connect_items_changed(move |_, index, removed, added| {
+            assert_eq!(index, 0);
+            assert_eq!(removed, 2);
+            assert_eq!(added, 2);
+        });
+
+        assert_eq!(
+            song_list.append_many(vec![
+                new_test_song("0"),
+                new_test_song("0"),
+                new_test_song("0"),
+                new_test_song("1"),
+            ]),
+            2
+        );
     }
 
     #[test]

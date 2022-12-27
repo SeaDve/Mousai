@@ -18,7 +18,12 @@
     </key>
     <key name="history" type="s">
       <default>"[]"</default>
-      <summary>Contains recently recognized songs</summary>
+      <summary>Contains recognized songs</summary>
+      <description></description>
+    </key>
+    <key name="saved-recordings" type="s">
+      <default>"[]"</default>
+      <summary>Contains recordings to be recognized</summary>
       <description></description>
     </key>
     <key name="preferred-audio-source" type="s">

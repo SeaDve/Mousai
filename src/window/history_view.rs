@@ -9,13 +9,22 @@ use once_cell::unsync::OnceCell;
 
 use std::cell::{Cell, RefCell};
 
-use super::{song_page::SongPage, song_tile::SongTile, AdaptiveMode};
+use super::{
+    recognized_page::RecognizedPage, song_page::SongPage, song_tile::SongTile, AdaptiveMode,
+};
 use crate::{
     config::APP_ID,
     model::{FuzzyFilter, FuzzySorter, Song, SongList},
     player::Player,
     utils,
 };
+
+const SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY: &str = "mousai-song-page-song-removed-handler-id";
+const SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str = "mousai-song-page-adapative-mode-binding";
+const RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY: &str =
+    "mousai-recognized-page-song-activated-handler-id";
+const RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str =
+    "mousai-recognized-page-adaptive-mode-binding";
 
 mod imp {
     use super::*;
@@ -68,8 +77,8 @@ mod imp {
         pub(super) removed_purgatory: RefCell<Vec<Song>>,
         pub(super) undo_remove_toast: RefCell<Option<adw::Toast>>,
 
-        pub(super) song_pages: RefCell<Vec<(SongPage, glib::SignalHandlerId, glib::Binding)>>,
-        pub(super) pending_stack_remove_song_page: RefCell<Option<SongPage>>,
+        pub(super) extra_stack_items: RefCell<Vec<gtk::Widget>>,
+        pub(super) pending_stack_remove: RefCell<Option<gtk::Widget>>,
     }
 
     #[glib::object_subclass]
@@ -188,7 +197,7 @@ mod imp {
                 .connect_transition_running_notify(clone!(@weak obj => move |stack| {
                     let imp = obj.imp();
                     if !stack.is_transition_running() {
-                        if let Some(song_page) = imp.pending_stack_remove_song_page.take() {
+                        if let Some(song_page) = imp.pending_stack_remove.take() {
                             stack.remove(&song_page);
                         }
                     }
@@ -200,8 +209,7 @@ mod imp {
             obj.update_selection_actions();
             obj.update_selection_mode_ui();
 
-            obj.update_history_stack();
-            self.stack.set_visible_child(&self.history_child.get());
+            obj.update_history_stack_visible_child();
         }
 
         fn dispose(&self) {
@@ -256,27 +264,81 @@ impl HistoryView {
         self.imp().search_bar.get()
     }
 
-    pub fn is_on_song_page(&self) -> bool {
+    pub fn is_on_main_stack_main_page(&self) -> bool {
         let imp = self.imp();
-        imp.stack
-            .visible_child()
-            .and_then(|child| child.downcast::<SongPage>().ok())
-            .is_some()
+        let no_extra_stack_items = imp.extra_stack_items.borrow().is_empty();
+
+        if no_extra_stack_items {
+            debug_assert!(imp
+                .stack
+                .visible_child()
+                .map_or(false, |child| child.is::<gtk::Box>()));
+        }
+
+        no_extra_stack_items
+    }
+
+    pub fn push_recognized_page(&self, songs: &[Song]) {
+        let imp = self.imp();
+
+        if imp
+            .extra_stack_items
+            .borrow()
+            .iter()
+            .any(|widget| widget.is::<RecognizedPage>())
+        {
+            tracing::warn!("There is already a `RecognizedPage` on the stack");
+            return;
+        }
+
+        let recognized_page = RecognizedPage::new();
+        recognized_page.bind_player(&self.player());
+        recognized_page.bind_songs(songs);
+
+        let song_activated_handler_id =
+            recognized_page.connect_song_activated(clone!(@weak self as obj => move |_, song| {
+                obj.push_song_page(song);
+            }));
+        let adaptive_mode_binding = self
+            .bind_property("adaptive-mode", &recognized_page, "adaptive-mode")
+            .sync_create()
+            .build();
+
+        unsafe {
+            recognized_page.set_data(
+                RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY,
+                song_activated_handler_id,
+            );
+            recognized_page.set_data(
+                RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY,
+                adaptive_mode_binding,
+            );
+        }
+
+        imp.stack.add_child(&recognized_page);
+        imp.stack.set_visible_child(&recognized_page);
+
+        imp.extra_stack_items
+            .borrow_mut()
+            .push(recognized_page.upcast());
     }
 
     pub fn push_song_page(&self, song: &Song) {
         let imp = self.imp();
 
-        // Return if the last `SongPage`s song has the same id as the given song
-        if let Some((song_page, ..)) = imp.song_pages.borrow().last() {
-            if Some(song.id()) == song_page.song().map(|song| song.id()) {
-                return;
+        // Return if the last widget is a `SongPage` and its song is the same as the given song
+        if let Some(widget) = imp.extra_stack_items.borrow().last() {
+            if let Some(song_page) = widget.downcast_ref::<SongPage>() {
+                if Some(song.id()) == song_page.song().map(|song| song.id()) {
+                    return;
+                }
             }
         }
 
         let song_page = SongPage::new();
         song_page.bind_player(&self.player());
         song_page.set_song(Some(song.clone()));
+
         let song_removed_handler_id =
             song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
                 obj.remove_song(song);
@@ -290,31 +352,57 @@ impl HistoryView {
         imp.stack.add_child(&song_page);
         imp.stack.set_visible_child(&song_page);
 
-        imp.song_pages.borrow_mut().push((
-            song_page,
-            song_removed_handler_id,
-            adaptive_mode_binding,
-        ));
+        unsafe {
+            song_page.set_data(
+                SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY,
+                song_removed_handler_id,
+            );
+            song_page.set_data(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY, adaptive_mode_binding);
+        }
+
+        imp.extra_stack_items.borrow_mut().push(song_page.upcast());
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_recognized(false);
     }
 
-    pub fn pop_song_page(&self) {
+    pub fn pop_stack_item(&self) {
         let imp = self.imp();
 
-        let song_page_item = imp.song_pages.borrow_mut().pop();
-        if let Some(item) = song_page_item {
-            self.stack_remove_song_page_item(item);
-        } else {
-            self.update_history_stack();
-
+        let Some(item) = imp.extra_stack_items.borrow_mut().pop() else {
+            self.update_history_stack_visible_child();
             if imp.stack.visible_child().as_ref() != Some(&imp.history_child.get().upcast()) {
                 tracing::error!(
-                    "Popped all song pages, but the history child is still not the visible child"
+                    "Popped all extra stack items, but the history child is still not the visible child"
                 );
             }
+            return;
+        };
+
+        self.update_stack_visible_child();
+
+        if let Some(song_page) = item.downcast_ref::<SongPage>() {
+            unbind_song_page(song_page);
+        } else if let Some(recognized_page) = item.downcast_ref::<RecognizedPage>() {
+            unsafe {
+                let song_activated_handler_id = recognized_page
+                    .steal_data::<glib::SignalHandlerId>(
+                        RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY,
+                    )
+                    .unwrap();
+                recognized_page.disconnect(song_activated_handler_id);
+
+                let adaptive_mode_binding = recognized_page
+                    .steal_data::<glib::Binding>(RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY)
+                    .unwrap();
+                adaptive_mode_binding.unbind();
+            }
+            recognized_page.unbind_player();
+        } else {
+            tracing::error!("Unknown extra stack item type");
         }
+
+        self.replace_pending_stack_remove(item);
     }
 
     /// Must only be called once
@@ -327,7 +415,7 @@ impl HistoryView {
         let imp = self.imp();
 
         song_list.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_history_stack();
+            obj.update_history_stack_visible_child();
         }));
 
         let filter = FuzzyFilter::new();
@@ -335,7 +423,7 @@ impl HistoryView {
 
         let filter_model = gtk::FilterListModel::new(Some(song_list), Some(&filter));
         filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_history_stack();
+            obj.update_history_stack_visible_child();
         }));
 
         imp.search_entry.connect_search_changed(
@@ -343,7 +431,7 @@ impl HistoryView {
                 let text = search_entry.text();
                 filter.set_search(&text);
                 sorter.set_search(&text);
-                obj.update_history_stack();
+                obj.update_history_stack_visible_child();
             }),
         );
 
@@ -387,7 +475,7 @@ impl HistoryView {
             .set(selection_model.downgrade())
             .unwrap();
 
-        self.update_history_stack();
+        self.update_history_stack_visible_child();
     }
 
     pub fn undo_remove(&self) {
@@ -419,25 +507,6 @@ impl HistoryView {
             .expect("Player was dropped")
     }
 
-    fn stack_remove_song_page_item(&self, item: (SongPage, glib::SignalHandlerId, glib::Binding)) {
-        let (song_page, handler_id, binding) = item;
-
-        let imp = self.imp();
-
-        imp.stack
-            .set_visible_child(&imp.song_pages.borrow().last().map_or_else(
-                || imp.history_child.get().upcast::<gtk::Widget>(),
-                |(song_page, ..)| song_page.clone().upcast::<gtk::Widget>(),
-            ));
-
-        song_page.disconnect(handler_id);
-        song_page.unbind_player();
-
-        binding.unbind();
-
-        imp.pending_stack_remove_song_page.replace(Some(song_page));
-    }
-
     /// Adds song to purgatory, and remove any active `SongPage`s that contain it.
     fn remove_song(&self, song: &Song) {
         let imp = self.imp();
@@ -456,18 +525,27 @@ impl HistoryView {
 
         // Since the song is removed from history, the `SongPage`s that
         // contain it is dangling, so remove them.
-        let (drained, song_pages) = imp
-            .song_pages
+        let (to_drain_items, to_retain_items) = imp
+            .extra_stack_items
             .take()
             .into_iter()
             // FIXME use Vec::drain_filter
-            .partition(|(song_page, ..)| {
-                song_page.song().map(|song_page_song| song_page_song.id()) == Some(song.id())
+            .partition(|item| {
+                if let Some(song_page) = item.downcast_ref::<SongPage>() {
+                    // drain if it matches
+                    song_page.song().map(|song_page_song| song_page_song.id()) == Some(song.id())
+                } else {
+                    // retain
+                    false
+                }
             });
-        imp.song_pages.replace(song_pages);
+        imp.extra_stack_items.replace(to_retain_items);
 
-        for item in drained {
-            self.stack_remove_song_page_item(item);
+        self.update_stack_visible_child();
+
+        for item in to_drain_items {
+            unbind_song_page(item.downcast_ref().unwrap());
+            self.replace_pending_stack_remove(item);
         }
     }
 
@@ -557,6 +635,14 @@ impl HistoryView {
         }
     }
 
+    fn replace_pending_stack_remove(&self, widget: gtk::Widget) {
+        let imp = self.imp();
+
+        if let Some(item) = imp.pending_stack_remove.replace(Some(widget)) {
+            imp.stack.remove(&item);
+        }
+    }
+
     fn update_selection_mode_ui(&self) {
         let imp = self.imp();
         let is_selection_mode = self.is_selection_mode();
@@ -575,7 +661,17 @@ impl HistoryView {
         imp.grid.set_single_click_activate(!is_selection_mode);
     }
 
-    fn update_history_stack(&self) {
+    fn update_stack_visible_child(&self) {
+        let imp = self.imp();
+
+        imp.stack
+            .set_visible_child(&imp.extra_stack_items.borrow().last().map_or_else(
+                || imp.history_child.get().upcast::<gtk::Widget>(),
+                |item| item.clone(),
+            ));
+    }
+
+    fn update_history_stack_visible_child(&self) {
         let imp = self.imp();
 
         let search_text = imp.search_entry.text();
@@ -638,6 +734,7 @@ impl HistoryView {
             let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
 
             let song_tile = SongTile::new();
+            song_tile.set_show_select_button_on_hover(true);
             song_tile.bind_player(&obj.player());
 
             obj.bind_property("is-selection-mode", &song_tile, "is-selection-mode")
@@ -677,6 +774,16 @@ impl HistoryView {
             .bind(&song_tile, "is-selected", glib::Object::NONE);
             list_item.set_child(Some(&song_tile));
         }));
+        factory.connect_teardown(|_, list_item| {
+            let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
+
+            if let Some(song_tile) = list_item
+                .child()
+                .and_then(|child| child.downcast::<SongTile>().ok())
+            {
+                song_tile.unbind_player();
+            }
+        });
 
         self.imp().grid.set_factory(Some(&factory));
     }
@@ -686,6 +793,22 @@ impl Default for HistoryView {
     fn default() -> Self {
         Self::new()
     }
+}
+
+fn unbind_song_page(song_page: &SongPage) {
+    unsafe {
+        let handler_id = song_page
+            .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY)
+            .unwrap();
+        song_page.disconnect(handler_id);
+
+        let binding = song_page
+            .steal_data::<glib::Binding>(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY)
+            .unwrap();
+        binding.unbind();
+    };
+
+    song_page.unbind_player();
 }
 
 #[cfg(test)]
@@ -712,12 +835,12 @@ mod test {
         Song::builder(&SongId::from(id), id, id, id).build()
     }
 
-    fn n_song_pages(view: &HistoryView) -> usize {
-        view.imp().song_pages.borrow().len()
+    fn n_extra_stack_items(view: &HistoryView) -> usize {
+        view.imp().extra_stack_items.borrow().len()
     }
 
     #[gtk::test]
-    fn push_and_pop_song_page() {
+    fn push_and_pop_stack_item() {
         init_gresources();
         gst::init().unwrap(); // For Player
 
@@ -730,25 +853,34 @@ mod test {
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
-        assert!(!view.is_on_song_page());
-        assert_eq!(n_song_pages(&view), 0);
+        assert!(view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 0);
 
         view.push_song_page(&song);
-        assert!(view.is_on_song_page());
-        assert_eq!(n_song_pages(&view), 1);
+        assert!(!view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 1);
 
         // Same song, n items should not change
         view.push_song_page(&song);
-        assert_eq!(n_song_pages(&view), 1);
+        assert!(!view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 1);
 
-        view.pop_song_page();
-        assert!(!view.is_on_song_page());
-        assert_eq!(n_song_pages(&view), 0);
+        view.push_recognized_page(&[]);
+        assert!(!view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 2);
+
+        view.pop_stack_item();
+        assert!(!view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 1);
+
+        view.pop_stack_item();
+        assert!(view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 0);
 
         // Popping with empty song pages should not do anything
-        view.pop_song_page();
-        assert!(!view.is_on_song_page());
-        assert_eq!(n_song_pages(&view), 0);
+        view.pop_stack_item();
+        assert!(view.is_on_main_stack_main_page());
+        assert_eq!(n_extra_stack_items(&view), 0);
     }
 
     #[gtk::test]
@@ -769,31 +901,67 @@ mod test {
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
-        assert_eq!(n_song_pages(&view), 0);
+        assert_eq!(n_extra_stack_items(&view), 0);
 
         view.push_song_page(&song_1);
-        assert_eq!(n_song_pages(&view), 1);
+        assert_eq!(n_extra_stack_items(&view), 1);
 
         view.push_song_page(&song_2);
-        assert_eq!(n_song_pages(&view), 2);
+        assert_eq!(n_extra_stack_items(&view), 2);
 
         view.push_song_page(&song_3);
-        assert_eq!(n_song_pages(&view), 3);
+        assert_eq!(n_extra_stack_items(&view), 3);
 
         // Even song_1 was already added, it is still
         // added as it is not adjacent to the other song_1
         view.push_song_page(&song_1);
-        assert_eq!(n_song_pages(&view), 4);
+        assert_eq!(n_extra_stack_items(&view), 4);
 
         // Since song_1 is added twice, it should reduce
         // the number of pages by 2
         view.remove_song(&song_1);
-        assert_eq!(n_song_pages(&view), 2);
+        assert_eq!(n_extra_stack_items(&view), 2);
 
-        view.pop_song_page();
-        assert_eq!(n_song_pages(&view), 1);
+        view.pop_stack_item();
+        assert_eq!(n_extra_stack_items(&view), 1);
 
         view.remove_song(&song_2);
-        assert_eq!(n_song_pages(&view), 0);
+        assert_eq!(n_extra_stack_items(&view), 0);
+    }
+
+    #[gtk::test]
+    fn push_and_pop_song_page_with_recognized_page_in_between() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let song_list = SongList::default();
+
+        let song_1 = new_test_song("1");
+        song_list.append(song_1.clone());
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+        assert_eq!(n_extra_stack_items(&view), 0);
+
+        view.push_song_page(&song_1);
+        assert_eq!(n_extra_stack_items(&view), 1);
+
+        view.push_recognized_page(&[]);
+        assert_eq!(n_extra_stack_items(&view), 2);
+
+        // Even song_1 was already added, it is still
+        // added as there is a RecognizedPage in between
+        view.push_song_page(&song_1);
+        assert_eq!(n_extra_stack_items(&view), 3);
+
+        // Since song_1 is added twice, it should reduce
+        // the number of pages by 2
+        view.remove_song(&song_1);
+        assert_eq!(n_extra_stack_items(&view), 1);
+
+        view.pop_stack_item();
+        assert_eq!(n_extra_stack_items(&view), 0);
     }
 }
