@@ -43,10 +43,11 @@ mod imp {
 
         pub(super) song: RefCell<Option<Song>>,
         pub(super) is_selected: Cell<bool>,
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
         pub(super) is_selection_mode: Cell<bool>,
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+        pub(super) show_select_button_on_hover: Cell<bool>,
 
-        pub(super) player: OnceCell<WeakRef<Player>>,
+        pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
         pub(super) select_button_active_notify_handler: OnceCell<glib::SignalHandlerId>,
         pub(super) song_binding_group: glib::BindingGroup,
         pub(super) contains_pointer: Cell<bool>,
@@ -60,6 +61,8 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+
+            klass.set_css_name("songtile");
 
             klass.install_action("song-tile.toggle-playback", None, |obj, _, _| {
                 obj.toggle_playback();
@@ -91,6 +94,10 @@ mod imp {
                     glib::ParamSpecBoolean::builder("is-selection-mode")
                         .explicit_notify()
                         .build(),
+                    // Whether to show select button on hover
+                    glib::ParamSpecBoolean::builder("show-select-button-on-hover")
+                        .explicit_notify()
+                        .build(),
                     // Current adapative mode
                     glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
                         .explicit_notify()
@@ -117,6 +124,10 @@ mod imp {
                     let is_selection_mode = value.get().unwrap();
                     obj.set_selection_mode(is_selection_mode);
                 }
+                "show-select-button-on-hover" => {
+                    let show_select_button_on_hover = value.get().unwrap();
+                    obj.set_show_select_button_on_hover(show_select_button_on_hover);
+                }
                 "adaptive-mode" => {
                     let adaptive_mode = value.get().unwrap();
                     obj.set_adaptive_mode(adaptive_mode);
@@ -133,6 +144,7 @@ mod imp {
                 "is-selected" => obj.is_selected().to_value(),
                 "is-active" => obj.is_active().to_value(),
                 "is-selection-mode" => obj.is_selection_mode().to_value(),
+                "show-select-button-on-hover" => obj.is_show_select_button_on_hover().to_value(),
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
             }
@@ -293,6 +305,21 @@ impl SongTile {
         self.imp().is_selection_mode.get()
     }
 
+    pub fn set_show_select_button_on_hover(&self, show_select_button_on_hover: bool) {
+        if show_select_button_on_hover == self.is_show_select_button_on_hover() {
+            return;
+        }
+
+        self.imp()
+            .show_select_button_on_hover
+            .set(show_select_button_on_hover);
+        self.notify("show-select-button-on-hover");
+    }
+
+    pub fn is_show_select_button_on_hover(&self) -> bool {
+        self.imp().show_select_button_on_hover.get()
+    }
+
     pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
         if adaptive_mode == self.adaptive_mode() {
             return;
@@ -322,17 +349,33 @@ impl SongTile {
 
     /// Must only be called once.
     pub fn bind_player(&self, player: &Player) {
-        player.connect_state_notify(clone!(@weak self as obj, @weak player => move |_| {
-            obj.update_playback_ui(&player);
+        let handler_id = player.connect_state_notify(clone!(@weak self as obj => move |player| {
+            obj.update_playback_ui(player);
         }));
 
-        self.imp().player.set(player.downgrade()).unwrap();
+        self.imp()
+            .player
+            .replace(Some((player.downgrade(), handler_id)));
 
         self.update_playback_ui(player);
     }
 
+    pub fn unbind_player(&self) {
+        if let Some((player, handler_id)) = self.imp().player.take() {
+            if let Some(player) = player.upgrade() {
+                player.disconnect(handler_id);
+            }
+        }
+    }
+
     fn toggle_playback(&self) {
-        if let Some(ref player) = self.imp().player.get().and_then(|player| player.upgrade()) {
+        if let Some(ref player) = self
+            .imp()
+            .player
+            .borrow()
+            .as_ref()
+            .and_then(|(player, _)| player.upgrade())
+        {
             if let Some(song) = self.song() {
                 if player.state() == PlayerState::Playing && player.is_active_song(&song) {
                     player.pause();
@@ -363,8 +406,10 @@ impl SongTile {
     fn update_select_button_visibility(&self) {
         let imp = self.imp();
 
-        imp.select_button_revealer
-            .set_reveal_child(self.is_selection_mode() || imp.contains_pointer.get());
+        imp.select_button_revealer.set_reveal_child(
+            self.is_selection_mode()
+                || (imp.contains_pointer.get() && self.is_show_select_button_on_hover()),
+        );
     }
 
     fn update_playback_button_visibility(&self) {

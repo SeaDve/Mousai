@@ -247,6 +247,7 @@ impl Song {
         self.imp().inner.borrow().lyrics.clone()
     }
 
+    // TODO Maybe drop this prop?
     pub fn is_newly_recognized(&self) -> bool {
         self.imp().is_newly_recognized.get()
     }

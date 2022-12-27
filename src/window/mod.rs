@@ -3,6 +3,8 @@ mod external_link_tile;
 mod history_view;
 mod information_row;
 mod playback_button;
+mod recognized_page;
+mod recognized_page_tile;
 mod recognizer_view;
 mod song_bar;
 mod song_page;
@@ -12,6 +14,7 @@ mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};
 use anyhow::{Error, Result};
+use gettextrs::gettext;
 use gtk::{
     gdk, gio,
     glib::{self, clone},
@@ -23,14 +26,13 @@ use std::cell::Cell;
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
-    core::DateTime,
     model::SongList,
     player::{Player, PlayerState},
     recognizer::{Recognizer, RecognizerState},
     utils, Application,
 };
 
-// 570 is perfect to prevent three columns history grid view on narrow mode.
+// 570 is just right to prevent three columns history grid view on narrow mode.
 const NARROW_ADAPTIVE_MODE_THRESHOLD: i32 = 570;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
@@ -80,7 +82,7 @@ mod imp {
             klass.bind_template_instance_callbacks();
 
             klass.install_action("win.navigate-back", None, |obj, _, _| {
-                obj.imp().main_view.pop_song_page();
+                obj.imp().main_view.pop_stack_item();
             });
 
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
@@ -206,6 +208,10 @@ mod imp {
 
             if let Err(err) = obj.history().save_to_settings() {
                 tracing::error!("Failed to save history: {:?}", err);
+            }
+
+            if let Err(err) = self.recognizer.save_saved_recordings() {
+                tracing::error!("Failed to save saved recordings: {:?}", err);
             }
 
             self.parent_close_request()
@@ -345,24 +351,34 @@ impl Window {
 
         imp.recognizer
             .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
-                let history = obj.history();
-                let contains_song = history.contains(&song.id());
+                obj.history().append(song.clone());
 
-                if contains_song {
-                    song.set_last_heard(DateTime::now());
-                }
-
-                // We also need to emit items_changed to update sort list model
-                // order, and update to new properties if any.
-                let is_appended = history.append(song.clone());
-
-                if contains_song == is_appended {
-                    tracing::error!("History already contains song, but it was still successfully appended");
-                }
-
-                let main_view = &obj.imp().main_view;
+                let main_view = obj.imp().main_view.get();
                 main_view.push_song_page(song);
                 main_view.scroll_to_top();
+            }));
+
+        imp.recognizer.connect_saved_songs_recognized(
+            clone!(@weak self as obj => move |_, songs| {
+                obj.history().append_many(songs.to_vec());
+
+                let main_view = obj.imp().main_view.get();
+                main_view.push_recognized_page(songs);
+                main_view.scroll_to_top();
+            }),
+        );
+
+        imp.recognizer
+            .connect_recording_saved(clone!(@weak self as obj => move |_| {
+                let dialog = adw::MessageDialog::builder()
+                    .heading(&gettext("Recording saved"))
+                    .body(&gettext("The result will be available when you're back online."))
+                    .default_response("ok")
+                    .transient_for(&obj)
+                    .modal(true)
+                    .build();
+                dialog.add_response("ok", &gettext("Ok, got it"));
+                dialog.present();
             }));
 
         imp.song_bar
@@ -401,12 +417,12 @@ impl Window {
     #[template_callback]
     fn key_pressed(&self, keyval: gdk::Key, _keycode: u32, state: gdk::ModifierType) -> bool {
         let imp = self.imp();
-        let search_bar = imp.main_view.search_bar();
 
         if keyval == gdk::Key::Escape
             && state == gdk::ModifierType::empty()
-            && !imp.main_view.is_on_song_page()
+            && imp.main_view.is_on_main_stack_main_page()
         {
+            let search_bar = imp.main_view.search_bar();
             if search_bar.is_search_mode() {
                 search_bar.set_search_mode(false);
                 return true;

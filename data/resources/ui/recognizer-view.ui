@@ -35,10 +35,24 @@
           </object>
         </child>
         <child>
-          <object class="GtkLabel" id="title">
-            <style>
-              <class name="title-1"/>
-            </style>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkLabel" id="title">
+                <style>
+                  <class name="title-1"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="offline_mode_status">
+                <property name="label" translatable="yes">Offline Mode</property>
+                <style>
+                  <class name="caption"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
       </object>

@@ -88,6 +88,16 @@
                         <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
                       </object>
                     </child>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="tooltip-text" translatable="yes">Pending Songs</property>
+                        <property name="popover">
+                          <object class="GtkLabel">
+                            <property name="label">Hi</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>

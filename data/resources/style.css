@@ -2,6 +2,10 @@ waveform {
   color: @accent_color;
 }
 
+waveform.red {
+  color: @error_color;
+}
+
 playbackbutton > button {
   padding: 5px;
 }
@@ -68,6 +72,22 @@ playbackbutton.circular > button  {
 .history-view > child {
   margin: 9px;
   padding: 0px;
+}
+
+/* RecognizedPageTile */
+/* Note: Must be synced with libadwaita flat button style */
+
+recognizedpagetile songtile {
+  border-radius: 6px;
+  padding: 6px;
+}
+
+recognizedpagetile songtile:hover {
+  background-color: alpha(currentColor, .07);
+}
+
+recognizedpagetile songtile:active {
+  background-color: alpha(currentColor, .16);
 }
 
 /* SongBar */

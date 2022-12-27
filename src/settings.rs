@@ -1,8 +1,9 @@
+use gsettings_macro::gen_settings;
 use gtk::gio;
 
 use crate::config::APP_ID;
 
-#[gsettings_macro::gen_settings(file = "./data/io.github.seadve.Mousai.gschema.xml.in")]
+#[gen_settings(file = "./data/io.github.seadve.Mousai.gschema.xml.in")]
 pub struct Settings;
 
 impl Default for Settings {

@@ -26,6 +26,8 @@ mod imp {
         pub(super) title: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) waveform: TemplateChild<Waveform>,
+        #[template_child]
+        pub(super) offline_mode_status: TemplateChild<gtk::Label>,
 
         pub(super) recording_signal_handler:
             RefCell<Option<(WeakRef<AudioRecording>, glib::SignalHandlerId)>>,
@@ -71,6 +73,10 @@ impl RecognizerView {
 
     /// Must be only called once
     pub fn bind_recognizer(&self, recognizer: &Recognizer) {
+        recognizer.connect_offline_mode_notify(clone!(@weak self as obj => move |_| {
+            obj.update_offline_mode_ui();
+        }));
+
         recognizer.connect_state_notify(clone!(@weak self as obj => move |_| {
             obj.update_ui();
         }));
@@ -81,6 +87,7 @@ impl RecognizerView {
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 
+        self.update_offline_mode_ui();
         self.update_ui();
     }
 
@@ -130,6 +137,19 @@ impl RecognizerView {
                 .alternate(true)
                 .build()
         })
+    }
+
+    fn update_offline_mode_ui(&self) {
+        let imp = self.imp();
+        let is_offline_mode = self.recognizer().is_offline_mode();
+
+        imp.offline_mode_status.set_visible(is_offline_mode);
+
+        if is_offline_mode {
+            imp.waveform.add_css_class("red");
+        } else {
+            imp.waveform.remove_css_class("red");
+        }
     }
 
     fn update_ui(&self) {

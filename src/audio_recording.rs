@@ -5,18 +5,65 @@ use gtk::{
     glib::{self, clone, closure_local, subclass::prelude::*},
 };
 use once_cell::unsync::OnceCell;
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-use std::{cell::Cell, time::Duration};
+use std::time::Duration;
+
+use crate::core::DateTime;
+
+fn serialize_once_cell<S>(cell: &OnceCell<impl Serialize>, serializer: S) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    cell.get().serialize(serializer)
+}
+
+fn deserialize_once_cell<'de, D, T>(deserializer: D) -> Result<OnceCell<T>, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    Ok(OnceCell::with_value(T::deserialize(deserializer)?))
+}
+
+fn serialize_once_cell_gbytes<S>(
+    cell: &OnceCell<glib::Bytes>,
+    serializer: S,
+) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    cell.get().map(|b| b.as_ref()).serialize(serializer)
+}
+
+fn deserialize_once_cell_gbytes<'de, D>(deserializer: D) -> Result<OnceCell<glib::Bytes>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    Ok(OnceCell::with_value(glib::Bytes::from_owned(
+        Vec::<u8>::deserialize(deserializer)?,
+    )))
+}
 
 mod imp {
     use super::*;
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, Serialize, Deserialize)]
     pub struct AudioRecording {
+        #[serde(skip)]
         pub(super) data: OnceCell<(gst::Pipeline, gio::MemoryOutputStream)>,
-        pub(super) is_done: Cell<bool>,
+        #[serde(
+            serialize_with = "serialize_once_cell",
+            deserialize_with = "deserialize_once_cell"
+        )]
+        pub(super) recorded_time: OnceCell<DateTime>,
+        #[serde(
+            serialize_with = "serialize_once_cell_gbytes",
+            deserialize_with = "deserialize_once_cell_gbytes"
+        )]
+        pub(super) bytes: OnceCell<glib::Bytes>,
     }
 
     #[glib::object_subclass]
@@ -55,9 +102,27 @@ impl AudioRecording {
         glib::Object::builder().build()
     }
 
+    pub fn recorded_time(&self) -> Option<&DateTime> {
+        self.imp().recorded_time.get()
+    }
+
+    pub fn connect_peak<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, f64) + 'static,
+    {
+        self.connect_closure(
+            "peak",
+            true,
+            closure_local!(|obj: &Self, peak: f64| {
+                f(obj, peak);
+            }),
+        )
+    }
+
     pub fn start(&self, device_name: Option<&str>) -> Result<()> {
         let imp = self.imp();
 
+        ensure!(imp.bytes.get().is_none(), "Recording already done");
         ensure!(imp.data.get().is_none(), "Already started recording");
 
         let output_stream = gio::MemoryOutputStream::new_resizable();
@@ -74,11 +139,15 @@ impl AudioRecording {
             .unwrap();
         pipeline.set_state(gst::State::Playing)?;
 
+        imp.recorded_time.set(DateTime::now()).unwrap();
+
         imp.data.set((pipeline, output_stream)).unwrap();
         Ok(())
     }
 
     pub fn stop(&self) -> Result<()> {
+        ensure!(self.imp().bytes.get().is_none(), "Recording already done");
+
         let imp = self.imp();
 
         let (pipeline, stream) = imp
@@ -91,42 +160,25 @@ impl AudioRecording {
 
         let _ = pipeline.bus().unwrap().remove_watch();
 
-        imp.is_done.set(true);
-        tracing::debug!("Stopped recording");
+        let bytes = stream.steal_as_bytes();
+        tracing::debug!(
+            "Stopped recording with size {}",
+            glib::format_size(bytes.len() as u64)
+        );
+
+        imp.bytes.set(bytes).unwrap();
 
         Ok(())
     }
 
-    pub fn connect_peak<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self, f64) + 'static,
-    {
-        self.connect_closure(
-            "peak",
-            true,
-            closure_local!(|obj: &Self, peak: f64| {
-                f(obj, peak);
-            }),
-        )
-    }
-
     pub fn to_base_64(&self) -> Result<glib::GString> {
-        let imp = self.imp();
-
-        let (_, stream) = imp
-            .data
+        let bytes = self
+            .imp()
+            .bytes
             .get()
-            .ok_or_else(|| anyhow!("Recording has not been started"))?;
+            .ok_or_else(|| anyhow!("Recording has not been started or finished"))?;
 
-        ensure!(imp.is_done.get(), "Recording is not done");
-
-        let bytes = stream.steal_as_bytes();
-        tracing::debug!(
-            "Recorded audio with size {}",
-            glib::format_size(bytes.len() as u64)
-        );
-
-        Ok(glib::base64_encode(&bytes))
+        Ok(glib::base64_encode(bytes))
     }
 
     fn pipeline(&self) -> Option<&gst::Pipeline> {
@@ -215,6 +267,31 @@ impl AudioRecording {
 impl Default for AudioRecording {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl Serialize for AudioRecording {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        self.imp().serialize(serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for AudioRecording {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let deserialized_inner = imp::AudioRecording::deserialize(deserializer)?;
+
+        let this = Self::new();
+        let inner = this.imp();
+
+        if let Some(bytes) = deserialized_inner.bytes.into_inner() {
+            inner.bytes.set(bytes).unwrap();
+        }
+
+        if let Some(recorded_time) = deserialized_inner.recorded_time.into_inner() {
+            inner.recorded_time.set(recorded_time).unwrap();
+        }
+
+        Ok(this)
     }
 }
 
