@@ -60,7 +60,7 @@ pub struct Data {
     /// In format of ISO-8601 (%Y-%m-%d)
     pub release_date: Option<String>,
     // TODO consider showing this in the ui
-    pub label: String,
+    pub label: Option<String>,
     pub timecode: String,
     #[serde(rename(deserialize = "song_link"))]
     pub info_link: String,
