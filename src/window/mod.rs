@@ -271,7 +271,7 @@ impl Window {
 
         self.set_default_size(settings.window_width(), settings.window_height());
 
-        if settings.is_maximized() {
+        if settings.window_maximized() {
             self.maximize();
         }
     }
@@ -284,7 +284,7 @@ impl Window {
         settings.try_set_window_width(width)?;
         settings.try_set_window_height(height)?;
 
-        settings.try_set_is_maximized(self.is_maximized())?;
+        settings.try_set_window_maximized(self.is_maximized())?;
 
         Ok(())
     }
@@ -387,7 +387,7 @@ impl Window {
             }));
 
         imp.main_view
-            .connect_selection_mode_notify(clone!(@weak self as obj => move |_| {
+            .connect_selection_mode_active_notify(clone!(@weak self as obj => move |_| {
                 obj.update_song_bar_revealer();
             }));
 
@@ -407,8 +407,9 @@ impl Window {
 
     fn update_song_bar_revealer(&self) {
         let imp = self.imp();
-        imp.song_bar_revealer
-            .set_reveal_child(self.player().song().is_some() && !imp.main_view.is_selection_mode());
+        imp.song_bar_revealer.set_reveal_child(
+            self.player().song().is_some() && !imp.main_view.is_selection_mode_active(),
+        );
     }
 }
 
@@ -428,7 +429,7 @@ impl Window {
                 return true;
             }
 
-            if imp.main_view.is_selection_mode() {
+            if imp.main_view.is_selection_mode_active() {
                 imp.main_view.stop_selection_mode();
                 return true;
             }

@@ -43,7 +43,7 @@ mod imp {
 
         pub(super) song: RefCell<Option<Song>>,
         pub(super) is_selected: Cell<bool>,
-        pub(super) is_selection_mode: Cell<bool>,
+        pub(super) is_selection_mode_active: Cell<bool>,
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
         pub(super) show_select_button_on_hover: Cell<bool>,
 
@@ -83,15 +83,15 @@ mod imp {
                         .explicit_notify()
                         .build(),
                     // If self should be displayed as selected
-                    glib::ParamSpecBoolean::builder("is-selected")
+                    glib::ParamSpecBoolean::builder("selected")
                         .explicit_notify()
                         .build(),
                     // If self is active
-                    glib::ParamSpecBoolean::builder("is-active")
+                    glib::ParamSpecBoolean::builder("active")
                         .read_only()
                         .build(),
                     // Current selection mode
-                    glib::ParamSpecBoolean::builder("is-selection-mode")
+                    glib::ParamSpecBoolean::builder("selection-mode-active")
                         .explicit_notify()
                         .build(),
                     // Whether to show select button on hover
@@ -116,13 +116,13 @@ mod imp {
                     let song = value.get().unwrap();
                     obj.set_song(song);
                 }
-                "is-selected" => {
+                "selected" => {
                     let is_selected = value.get().unwrap();
                     obj.set_selected(is_selected);
                 }
-                "is-selection-mode" => {
-                    let is_selection_mode = value.get().unwrap();
-                    obj.set_selection_mode(is_selection_mode);
+                "selection-mode-active" => {
+                    let is_selection_mode_active = value.get().unwrap();
+                    obj.set_selection_mode_active(is_selection_mode_active);
                 }
                 "show-select-button-on-hover" => {
                     let show_select_button_on_hover = value.get().unwrap();
@@ -141,10 +141,10 @@ mod imp {
 
             match pspec.name() {
                 "song" => obj.song().to_value(),
-                "is-selected" => obj.is_selected().to_value(),
-                "is-active" => obj.is_active().to_value(),
-                "is-selection-mode" => obj.is_selection_mode().to_value(),
-                "show-select-button-on-hover" => obj.is_show_select_button_on_hover().to_value(),
+                "selected" => obj.is_selected().to_value(),
+                "active" => obj.is_active().to_value(),
+                "selection-mode-active" => obj.is_selection_mode_active().to_value(),
+                "show-select-button-on-hover" => obj.shows_select_button_on_hover().to_value(),
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
             }
@@ -197,17 +197,17 @@ mod imp {
                 .set(
                     self.select_button
                         .connect_active_notify(clone!(@weak obj => move |button| {
-                            if button.is_active() && !obj.is_selection_mode() {
+                            if button.is_active() && !obj.is_selection_mode_active() {
                                 obj.emit_by_name::<()>("request-selection-mode", &[]);
                             }
 
-                            obj.notify("is-active");
+                            obj.notify("active");
                         })),
                 )
                 .unwrap();
 
             self.song_binding_group
-                .bind("is-newly-recognized", &self.new_label.get(), "visible")
+                .bind("newly-recognized", &self.new_label.get(), "visible")
                 .build();
 
             obj.update_select_button_visibility();
@@ -256,24 +256,24 @@ impl SongTile {
         self.imp().song.borrow().clone()
     }
 
-    pub fn set_selected(&self, selected: bool) {
-        if selected == self.is_selected() {
+    pub fn set_selected(&self, is_selected: bool) {
+        if is_selected == self.is_selected() {
             return;
         }
 
         let imp = self.imp();
 
-        imp.is_selected.set(selected);
+        imp.is_selected.set(is_selected);
 
         let handler_id = imp
             .select_button_active_notify_handler
             .get()
             .expect("Handler id was not set on constructed");
         imp.select_button.block_signal(handler_id);
-        imp.select_button.set_active(selected);
+        imp.select_button.set_active(is_selected);
         imp.select_button.unblock_signal(handler_id);
 
-        self.notify("is-selected");
+        self.notify("selected");
     }
 
     pub fn is_selected(&self) -> bool {
@@ -284,29 +284,31 @@ impl SongTile {
     where
         F: Fn(&Self) + 'static,
     {
-        self.connect_notify_local(Some("is-active"), move |obj, _| f(obj))
+        self.connect_notify_local(Some("active"), move |obj, _| f(obj))
     }
 
     pub fn is_active(&self) -> bool {
         self.imp().select_button.is_active()
     }
 
-    pub fn set_selection_mode(&self, selection_mode: bool) {
-        if selection_mode == self.is_selection_mode() {
+    pub fn set_selection_mode_active(&self, is_selection_mode_active: bool) {
+        if is_selection_mode_active == self.is_selection_mode_active() {
             return;
         }
 
-        self.imp().is_selection_mode.set(selection_mode);
+        self.imp()
+            .is_selection_mode_active
+            .set(is_selection_mode_active);
         self.update_select_button_visibility();
-        self.notify("is-selection-mode");
+        self.notify("selection-mode-active");
     }
 
-    pub fn is_selection_mode(&self) -> bool {
-        self.imp().is_selection_mode.get()
+    pub fn is_selection_mode_active(&self) -> bool {
+        self.imp().is_selection_mode_active.get()
     }
 
     pub fn set_show_select_button_on_hover(&self, show_select_button_on_hover: bool) {
-        if show_select_button_on_hover == self.is_show_select_button_on_hover() {
+        if show_select_button_on_hover == self.shows_select_button_on_hover() {
             return;
         }
 
@@ -316,7 +318,7 @@ impl SongTile {
         self.notify("show-select-button-on-hover");
     }
 
-    pub fn is_show_select_button_on_hover(&self) -> bool {
+    pub fn shows_select_button_on_hover(&self) -> bool {
         self.imp().show_select_button_on_hover.get()
     }
 
@@ -407,8 +409,8 @@ impl SongTile {
         let imp = self.imp();
 
         imp.select_button_revealer.set_reveal_child(
-            self.is_selection_mode()
-                || (imp.contains_pointer.get() && self.is_show_select_button_on_hover()),
+            self.is_selection_mode_active()
+                || (imp.contains_pointer.get() && self.shows_select_button_on_hover()),
         );
     }
 

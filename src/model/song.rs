@@ -89,7 +89,7 @@ mod imp {
                         .explicit_notify()
                         .build(),
                     // Whether the song is recently recognized
-                    glib::ParamSpecBoolean::builder("is-newly-recognized")
+                    glib::ParamSpecBoolean::builder("newly-recognized")
                         .explicit_notify()
                         .build(),
                 ]
@@ -142,9 +142,9 @@ mod imp {
                     let lyrics = value.get().unwrap();
                     obj.set_lyrics(lyrics);
                 }
-                "is-newly-recognized" => {
+                "newly-recognized" => {
                     let is_newly_recognized = value.get().unwrap();
-                    obj.set_is_newly_recognized(is_newly_recognized);
+                    obj.set_newly_recognized(is_newly_recognized);
                 }
                 _ => unimplemented!(),
             }
@@ -164,7 +164,7 @@ mod imp {
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
                 "lyrics" => obj.lyrics().to_value(),
-                "is-newly-recognized" => obj.is_newly_recognized().to_value(),
+                "newly-recognized" => obj.is_newly_recognized().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -252,13 +252,13 @@ impl Song {
         self.imp().is_newly_recognized.get()
     }
 
-    pub fn set_is_newly_recognized(&self, value: bool) {
+    pub fn set_newly_recognized(&self, value: bool) {
         if value == self.is_newly_recognized() {
             return;
         }
 
         self.imp().is_newly_recognized.set(value);
-        self.notify("is-newly-recognized");
+        self.notify("newly-recognized");
     }
 
     pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
@@ -315,8 +315,7 @@ impl SongBuilder {
     }
 
     pub fn newly_recognized(&mut self, value: bool) -> &mut Self {
-        self.properties
-            .push(("is-newly-recognized", value.to_value()));
+        self.properties.push(("newly-recognized", value.to_value()));
         self
     }
 
