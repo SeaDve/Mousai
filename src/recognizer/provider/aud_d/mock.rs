@@ -2,42 +2,26 @@ use anyhow::Result;
 use async_trait::async_trait;
 use gtk::glib;
 
-use std::time::Duration;
-
-use super::{AudD, Data, Provider, Response};
+use super::{AudD, Data, Response};
 use crate::{
     audio_recording::AudioRecording,
     model::Song,
-    recognizer::provider::{ProviderSettings, TestProviderMode},
+    recognizer::provider::{TestProvider, TestProviderMode},
 };
 
 #[derive(Debug)]
 pub struct AudDMock;
 
 #[async_trait(?Send)]
-impl Provider for AudDMock {
-    async fn recognize(&self, _: &AudioRecording) -> Result<Song> {
-        let test_duration = ProviderSettings::lock().test_recognize_duration;
-        glib::timeout_future(test_duration).await;
-        Ok(AudD::build_song_from_data(random_data()?))
-    }
-
-    fn listen_duration(&self) -> Duration {
-        ProviderSettings::lock().test_listen_duration
-    }
-
-    fn is_test(&self) -> bool {
-        true
+impl TestProvider for AudDMock {
+    async fn recognize_impl(&self, _: &AudioRecording, mode: TestProviderMode) -> Result<Song> {
+        Ok(AudD::build_song_from_data(random_data(mode)?))
     }
 }
 
-fn random_data() -> Result<Data> {
-    let test_mode = ProviderSettings::lock().test_mode;
-
+fn random_data(mode: TestProviderMode) -> Result<Data> {
     let mut raw_responses = Vec::new();
-    if matches!(test_mode, TestProviderMode::Both)
-        || matches!(test_mode, TestProviderMode::ErrorOnly)
-    {
+    if matches!(mode, TestProviderMode::Both) || matches!(mode, TestProviderMode::ErrorOnly) {
         raw_responses.extend([
             r#"{"status":"success","result":null}"#,
             r#"{"status":"error","error":{"error_code":901,"error_message":"Recognition failed: authorization failed: no api_token passed and the limit was reached. Get an api_token from dashboard.audd.io."},"request_params":{},"request_api_method":"recognize","request_http_method":"POST","see api documentation":"https://docs.audd.io","contact us":"api@audd.io"}"#,
@@ -45,9 +29,7 @@ fn random_data() -> Result<Data> {
             r#"{"status":"error","error":{"error_code":300,"error_message":"Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and \\u003caudio\\u003e/\\u003cvideo\\u003e tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/"},"request_params":{},"request_api_method":"recognize","request_http_method":"POST","see api documentation":"https://docs.audd.io","contact us":"api@audd.io"}"#,
         ]);
     }
-    if matches!(test_mode, TestProviderMode::Both)
-        || matches!(test_mode, TestProviderMode::ValidOnly)
-    {
+    if matches!(mode, TestProviderMode::Both) || matches!(mode, TestProviderMode::ValidOnly) {
         raw_responses.extend([
             r#"{"status":"success","result":{"artist":"The London Symphony Orchestra","title":"Eine Kleine Nachtmusik","album":"An Hour Of The London Symphony Orchestra","release_date":"2014-04-22","label":"Glory Days Music","timecode":"00:24","song_link":"https://lis.tn/EineKleineNachtmusik"}}"#,
             r#"{"status":"success","result":{"artist":"Public","title":"Make You Mine","album":"Let's Make It","release_date":"2014-10-07","label":"PUBLIC","timecode":"00:43","song_link":"https://lis.tn/FUYgUV"}}"#,

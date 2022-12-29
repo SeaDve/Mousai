@@ -19,5 +19,38 @@ pub trait Provider: fmt::Debug {
     fn listen_duration(&self) -> Duration;
 
     /// Whether this supports `TestProviderMode`
-    fn is_test(&self) -> bool;
+    fn is_test(&self) -> bool {
+        false
+    }
+}
+
+#[async_trait(?Send)]
+pub trait TestProvider {
+    async fn recognize_impl(
+        &self,
+        recording: &AudioRecording,
+        mode: TestProviderMode,
+    ) -> Result<Song>;
+}
+
+#[async_trait(?Send)]
+impl<T> Provider for T
+where
+    T: TestProvider + fmt::Debug,
+{
+    async fn recognize(&self, recording: &AudioRecording) -> Result<Song> {
+        let duration = ProviderSettings::lock().test_recognize_duration;
+        glib::timeout_future(duration).await;
+
+        let mode = ProviderSettings::lock().test_mode;
+        self.recognize_impl(recording, mode).await
+    }
+
+    fn listen_duration(&self) -> Duration {
+        ProviderSettings::lock().test_listen_duration
+    }
+
+    fn is_test(&self) -> bool {
+        true
+    }
 }
