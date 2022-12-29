@@ -3,27 +3,27 @@
   <schema path="/io/github/seadve/Mousai/" id="@app-id@" gettext-domain="@gettext-package@">
     <key name="window-width" type="i">
       <default>600</default>
-      <summary>Default window width</summary>
-      <description>Default window width</description>
+      <summary>Window width</summary>
+      <description></description>
     </key>
     <key name="window-height" type="i">
       <default>400</default>
-      <summary>Default window height</summary>
-      <description>Default window height</description>
+      <summary>Window height</summary>
+      <description></description>
     </key>
-    <key name="is-maximized" type="b">
+    <key name="window-maximized" type="b">
       <default>false</default>
-      <summary>Default window maximized behaviour</summary>
+      <summary>Whether the window is maximized</summary>
       <description></description>
     </key>
     <key name="history" type="s">
       <default>"[]"</default>
-      <summary>Contains recognized songs</summary>
+      <summary>Recognized songs</summary>
       <description></description>
     </key>
     <key name="saved-recordings" type="s">
       <default>"[]"</default>
-      <summary>Contains recordings to be recognized</summary>
+      <summary>Recordings to be recognized</summary>
       <description></description>
     </key>
     <key name="preferred-audio-source" type="s">

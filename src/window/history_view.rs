@@ -66,7 +66,7 @@ mod imp {
         #[template_child]
         pub(super) empty_search_page: TemplateChild<adw::StatusPage>,
 
-        pub(super) is_selection_mode: Cell<bool>,
+        pub(super) is_selection_mode_active: Cell<bool>,
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         pub(super) player: OnceCell<WeakRef<Player>>,
@@ -91,13 +91,13 @@ mod imp {
             klass.bind_template();
 
             klass.install_action("history-view.toggle-selection-mode", None, |obj, _, _| {
-                // I don't know why exactly getting `is_selection_mode` first
+                // I don't know why exactly getting `is_selection_mode_active` first
                 // before unselecting all, but it prevents flickering when cancelling
                 // selection mode; probably, because we also set selection mode
                 // on selection change callback.
-                let is_selection_mode = obj.is_selection_mode();
+                let is_selection_mode_active = obj.is_selection_mode_active();
                 obj.unselect_all();
-                obj.set_selection_mode(!is_selection_mode);
+                obj.set_selection_mode_active(!is_selection_mode_active);
             });
 
             klass.install_action("history-view.select-all", None, |obj, _, _| {
@@ -152,8 +152,8 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    // Whether self is on selection mode
-                    glib::ParamSpecBoolean::builder("is-selection-mode")
+                    // Whether selection mode is active
+                    glib::ParamSpecBoolean::builder("selection-mode-active")
                         .read_only()
                         .build(),
                     // Current adapative mode
@@ -182,7 +182,7 @@ mod imp {
             let obj = self.obj();
 
             match pspec.name() {
-                "is-selection-mode" => obj.is_selection_mode().to_value(),
+                "selection-mode-active" => obj.is_selection_mode_active().to_value(),
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
             }
@@ -232,15 +232,15 @@ impl HistoryView {
         glib::Object::builder().build()
     }
 
-    pub fn connect_selection_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_selection_mode_active_notify<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
     {
-        self.connect_notify_local(Some("is-selection-mode"), move |obj, _| f(obj))
+        self.connect_notify_local(Some("selection-mode-active"), move |obj, _| f(obj))
     }
 
-    pub fn is_selection_mode(&self) -> bool {
-        self.imp().is_selection_mode.get()
+    pub fn is_selection_mode_active(&self) -> bool {
+        self.imp().is_selection_mode_active.get()
     }
 
     pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
@@ -257,7 +257,7 @@ impl HistoryView {
     }
 
     pub fn stop_selection_mode(&self) {
-        self.set_selection_mode(false);
+        self.set_selection_mode_active(false);
     }
 
     pub fn search_bar(&self) -> gtk::SearchBar {
@@ -363,7 +363,7 @@ impl HistoryView {
         imp.extra_stack_items.borrow_mut().push(song_page.upcast());
 
         // User is already aware of the newly recognized song, so unset it.
-        song.set_is_newly_recognized(false);
+        song.set_newly_recognized(false);
     }
 
     pub fn pop_stack_item(&self) {
@@ -440,18 +440,18 @@ impl HistoryView {
         // FIXME save selection even when the song are filtered from FilterListModel
         let selection_model = gtk::MultiSelection::new(Some(&sort_model));
         selection_model.connect_selection_changed(clone!(@weak self as obj => move |model, _, _| {
-            if obj.is_selection_mode() {
+            if obj.is_selection_mode_active() {
                 if model.selection().size() == 0 {
-                    obj.set_selection_mode(false);
+                    obj.set_selection_mode_active(false);
                 }
 
                 obj.update_selection_actions();
             }
         }));
         selection_model.connect_items_changed(clone!(@weak self as obj => move |model, _, _, _| {
-            if obj.is_selection_mode() {
+            if obj.is_selection_mode_active() {
                 if model.selection().size() == 0 {
-                    obj.set_selection_mode(false);
+                    obj.set_selection_mode_active(false);
                 }
 
                 obj.update_selection_actions();
@@ -590,16 +590,18 @@ impl HistoryView {
         }
     }
 
-    fn set_selection_mode(&self, is_selection_mode: bool) {
-        if is_selection_mode == self.is_selection_mode() {
+    fn set_selection_mode_active(&self, is_selection_mode_active: bool) {
+        if is_selection_mode_active == self.is_selection_mode_active() {
             return;
         }
 
-        self.imp().is_selection_mode.set(is_selection_mode);
+        self.imp()
+            .is_selection_mode_active
+            .set(is_selection_mode_active);
         self.update_selection_mode_ui();
         self.update_selection_actions();
 
-        self.notify("is-selection-mode");
+        self.notify("selection-mode-active");
     }
 
     fn show_undo_remove_toast(&self) {
@@ -645,9 +647,9 @@ impl HistoryView {
 
     fn update_selection_mode_ui(&self) {
         let imp = self.imp();
-        let is_selection_mode = self.is_selection_mode();
+        let is_selection_mode_active = self.is_selection_mode_active();
 
-        if is_selection_mode {
+        if is_selection_mode_active {
             imp.header_bar_stack
                 .set_visible_child(&imp.selection_mode_header_bar.get());
             imp.grid.grab_focus();
@@ -656,9 +658,11 @@ impl HistoryView {
                 .set_visible_child(&imp.main_header_bar.get());
         }
 
-        imp.selection_mode_bar.set_revealed(is_selection_mode);
-        imp.grid.set_enable_rubberband(is_selection_mode);
-        imp.grid.set_single_click_activate(!is_selection_mode);
+        imp.selection_mode_bar
+            .set_revealed(is_selection_mode_active);
+        imp.grid.set_enable_rubberband(is_selection_mode_active);
+        imp.grid
+            .set_single_click_activate(!is_selection_mode_active);
     }
 
     fn update_stack_visible_child(&self) {
@@ -737,7 +741,7 @@ impl HistoryView {
             song_tile.set_show_select_button_on_hover(true);
             song_tile.bind_player(&obj.player());
 
-            obj.bind_property("is-selection-mode", &song_tile, "is-selection-mode")
+            obj.bind_property("selection-mode-active", &song_tile, "selection-mode-active")
                 .sync_create()
                 .build();
             obj.bind_property("adaptive-mode", &song_tile, "adaptive-mode")
@@ -754,7 +758,7 @@ impl HistoryView {
                 }
             }));
             song_tile.connect_request_selection_mode(clone!(@weak obj => move |_| {
-                obj.set_selection_mode(true);
+                obj.set_selection_mode_active(true);
             }));
 
             list_item
@@ -763,15 +767,15 @@ impl HistoryView {
             gtk::ClosureExpression::new::<bool>(
                 [
                     list_item.property_expression("selected"),
-                    obj.property_expression("is-selection-mode"),
+                    obj.property_expression("selection-mode-active"),
                 ],
                 closure!(
-                    |_: Option<glib::Object>, selected: bool, is_selection_mode: bool| {
-                        selected && is_selection_mode
+                    |_: Option<glib::Object>, is_selected: bool, is_selection_mode_active: bool| {
+                        is_selected && is_selection_mode_active
                     }
                 ),
             )
-            .bind(&song_tile, "is-selected", glib::Object::NONE);
+            .bind(&song_tile, "selected", glib::Object::NONE);
             list_item.set_child(Some(&song_tile));
         }));
         factory.connect_teardown(|_, list_item| {

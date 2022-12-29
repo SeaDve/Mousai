@@ -315,7 +315,7 @@ impl Recognizer {
                 gio::CancellableFuture::new(provider.recognize(&recording), cancellable.clone())
                     .await
                     .map_err(|_| Cancelled::new("recognizing while calling provider"))??;
-            song.set_is_newly_recognized(true);
+            song.set_newly_recognized(true);
             song.set_last_heard(
                 recording
                     .recorded_time()
@@ -389,7 +389,7 @@ impl Recognizer {
             for audio in imp.saved_recordings.take() {
                 match provider.recognize(&audio).await {
                     Ok(song) => {
-                        song.set_is_newly_recognized(true);
+                        song.set_newly_recognized(true);
                         song.set_last_heard(
                             audio
                                 .recorded_time()

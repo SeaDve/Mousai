@@ -99,7 +99,7 @@ mod imp {
             match pspec.name() {
                 "song" => obj.song().to_value(),
                 "pixel-size" => obj.pixel_size().to_value(),
-                "enable-crossfade" => obj.enable_crossfade().to_value(),
+                "enable-crossfade" => obj.enables_crossfade().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -188,7 +188,7 @@ impl AlbumCover {
         self.notify("enable-crossfade");
     }
 
-    pub fn enable_crossfade(&self) -> bool {
+    pub fn enables_crossfade(&self) -> bool {
         self.imp().stack.transition_type() == gtk::StackTransitionType::Crossfade
     }
 
