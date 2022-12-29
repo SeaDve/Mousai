@@ -7,7 +7,7 @@ use gtk::{
 };
 use indexmap::IndexMap;
 
-use std::{cell::RefCell, collections::HashMap};
+use std::{cell::RefCell, collections::HashSet};
 
 use super::{Song, SongId};
 use crate::utils;
@@ -111,46 +111,41 @@ impl SongList {
     ///
     /// This is more efficient than [`SongList::append`] since it emits `items-changed`
     /// only once if all appended [`Song`]s are unique.
-    pub fn append_many(&self, raw_songs: Vec<Song>) -> u32 {
-        // remove duplicated songs
-        let songs = {
-            let mut ret = HashMap::new();
-
-            for song in raw_songs.into_iter().rev() {
-                ret.entry(song.id()).or_insert(song);
-            }
-
-            ret
-        };
-
-        let n_songs = songs.len() as u32;
-
-        let mut n_updated = 0;
-        let mut min_position = None::<u32>;
+    pub fn append_many(&self, songs: Vec<Song>) -> u32 {
+        let mut updated_indices = HashSet::new();
+        let mut n_appended = 0;
 
         {
             let mut list = self.imp().list.borrow_mut();
 
-            for (song_id, song) in songs {
-                let (position, last_value) = list.insert_full(song_id, song);
-
-                if let Some(previous) = min_position {
-                    min_position = Some(previous.min(position as u32));
-                } else {
-                    min_position = Some(position as u32);
-                }
+            for song in songs {
+                let (index, last_value) = list.insert_full(song.id(), song);
 
                 if last_value.is_some() {
-                    n_updated += 1;
+                    updated_indices.insert(index);
+                } else {
+                    n_appended += 1;
                 }
             }
         }
 
-        if let Some(min_position) = min_position {
-            self.items_changed(min_position, n_updated, n_songs);
+        let index_of_first_append = self.n_items() - n_appended;
+
+        // This is emitted individually because each updated item
+        // may be on different indices
+        for index in updated_indices {
+            // Only emit if the updated item is before the first appended item
+            // as it is already handled by the emission below
+            if (index as u32) < index_of_first_append {
+                self.items_changed(index as u32, 1, 1);
+            }
         }
 
-        n_songs - n_updated
+        if n_appended != 0 {
+            self.items_changed(index_of_first_append, 0, n_appended);
+        }
+
+        n_appended
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
@@ -200,7 +195,10 @@ impl Default for SongList {
 mod test {
     use super::*;
 
-    use std::{cell::Cell, rc::Rc};
+    use std::{
+        cell::{Cell, RefCell},
+        rc::Rc,
+    };
 
     fn new_test_song(id: &str) -> Song {
         Song::builder(&SongId::from(id), id, id, id).build()
@@ -309,10 +307,13 @@ mod test {
         let song_list = SongList::default();
         song_list.append(new_test_song("0"));
 
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+
+        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            assert_eq!(index, 0);
-            assert_eq!(removed, 2);
-            assert_eq!(added, 4);
+            calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
         });
 
         assert_eq!(
@@ -324,6 +325,8 @@ mod test {
             ]),
             2
         );
+
+        assert_eq!(calls_output.borrow().as_slice(), &[(0, 1, 1), (1, 0, 2)]);
     }
 
     #[test]
@@ -332,10 +335,13 @@ mod test {
         song_list.append(new_test_song("0"));
         song_list.append(new_test_song("1"));
 
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+
+        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            assert_eq!(index, 0);
-            assert_eq!(removed, 2);
-            assert_eq!(added, 2);
+            calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
         });
 
         assert_eq!(
@@ -344,8 +350,15 @@ mod test {
                 new_test_song("0"),
                 new_test_song("0"),
                 new_test_song("1"),
+                new_test_song("2"),
             ]),
-            2
+            1
+        );
+
+        calls_output.borrow_mut().sort();
+        assert_eq!(
+            calls_output.borrow().as_slice(),
+            &[(0, 1, 1), (1, 1, 1), (2, 0, 1)]
         );
     }
 
