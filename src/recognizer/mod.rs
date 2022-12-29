@@ -68,6 +68,7 @@ mod imp {
                     glib::ParamSpecObject::builder::<AudioRecording>("recording")
                         .read_only()
                         .build(),
+                    // Whether offline mode is active
                     glib::ParamSpecBoolean::builder("offline-mode")
                         .read_only()
                         .build(),

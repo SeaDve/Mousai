@@ -75,16 +75,6 @@ mod imp {
     }
 
     impl ObjectImpl for Player {
-        fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("error")
-                    .param_types([glib::Error::static_type()])
-                    .build()]
-            });
-
-            SIGNALS.as_ref()
-        }
-
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
@@ -132,6 +122,16 @@ mod imp {
                 "duration" => obj.duration().to_value(),
                 _ => unimplemented!(),
             }
+        }
+
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder("error")
+                    .param_types([glib::Error::static_type()])
+                    .build()]
+            });
+
+            SIGNALS.as_ref()
         }
 
         fn constructed(&self) {

@@ -101,16 +101,6 @@ mod imp {
     }
 
     impl ObjectImpl for SongPage {
-        fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("song-removed")
-                    .param_types([Song::static_type()])
-                    .build()]
-            });
-
-            SIGNALS.as_ref()
-        }
-
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
@@ -152,6 +142,16 @@ mod imp {
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
             }
+        }
+
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
+                vec![Signal::builder("song-removed")
+                    .param_types([Song::static_type()])
+                    .build()]
+            });
+
+            SIGNALS.as_ref()
         }
 
         fn constructed(&self) {
