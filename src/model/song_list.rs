@@ -131,18 +131,21 @@ impl SongList {
 
         let index_of_first_append = self.n_items() - n_appended;
 
+        // Emit about the appended items first, so GTK would know about
+        // the new items and it won't error out because the n_items
+        // does not match what GTK expect
+        if n_appended != 0 {
+            self.items_changed(index_of_first_append, 0, n_appended);
+        }
+
         // This is emitted individually because each updated item
         // may be on different indices
         for index in updated_indices {
             // Only emit if the updated item is before the first appended item
-            // as it is already handled by the emission below
+            // because it is already handled by the emission above
             if (index as u32) < index_of_first_append {
                 self.items_changed(index as u32, 1, 1);
             }
-        }
-
-        if n_appended != 0 {
-            self.items_changed(index_of_first_append, 0, n_appended);
         }
 
         n_appended
@@ -326,7 +329,7 @@ mod test {
             2
         );
 
-        assert_eq!(calls_output.borrow().as_slice(), &[(0, 1, 1), (1, 0, 2)]);
+        assert_eq!(calls_output.borrow().as_slice(), &[(1, 0, 2), (0, 1, 1)]);
     }
 
     #[test]
@@ -355,10 +358,9 @@ mod test {
             1
         );
 
-        calls_output.borrow_mut().sort();
         assert_eq!(
             calls_output.borrow().as_slice(),
-            &[(0, 1, 1), (1, 1, 1), (2, 0, 1)]
+            &[(2, 0, 1), (0, 1, 1), (1, 1, 1)]
         );
     }
 
