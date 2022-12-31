@@ -351,7 +351,13 @@ impl Window {
 
         imp.recognizer
             .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
-                obj.history().append(song.clone());
+                let history = obj.history();
+
+                if !history.contains(&song.id()) {
+                    song.set_newly_recognized(true);
+                }
+
+                history.append(song.clone());
 
                 let main_view = obj.imp().main_view.get();
                 main_view.push_song_page(song);
@@ -360,7 +366,15 @@ impl Window {
 
         imp.recognizer.connect_saved_songs_recognized(
             clone!(@weak self as obj => move |_, songs| {
-                obj.history().append_many(songs.to_vec());
+                let history = obj.history();
+
+                for song in songs {
+                    if !history.contains(&song.id()) {
+                        song.set_newly_recognized(true);
+                    }
+                }
+
+                history.append_many(songs.to_vec());
 
                 let main_view = obj.imp().main_view.get();
                 main_view.push_recognized_page(songs);
