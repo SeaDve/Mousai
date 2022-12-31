@@ -315,6 +315,7 @@ impl SongTile {
         self.imp()
             .show_select_button_on_hover
             .set(show_select_button_on_hover);
+        self.update_select_button_visibility();
         self.notify("show-select-button-on-hover");
     }
 
