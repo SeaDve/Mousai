@@ -1,4 +1,5 @@
-use gtk::glib;
+use anyhow::{anyhow, Error, Result};
+use gtk::glib::{self, translate::TryFromGlib};
 use once_cell::sync::OnceCell;
 
 use std::{
@@ -17,11 +18,11 @@ pub enum TestProviderMode {
     Both,
 }
 
-impl From<i32> for TestProviderMode {
-    fn from(val: i32) -> Self {
-        use glib::translate::TryFromGlib;
-        unsafe { Self::try_from_glib(val) }
-            .unwrap_or_else(|err| panic!("Failed to turn `{val}` into TestProviderMode: {:?}", err))
+impl TryFrom<i32> for TestProviderMode {
+    type Error = Error;
+
+    fn try_from(val: i32) -> Result<Self> {
+        unsafe { Self::try_from_glib(val) }.map_err(|_| anyhow!("Invalid value `{}`", val))
     }
 }
 
@@ -44,11 +45,11 @@ impl ProviderType {
     }
 }
 
-impl From<i32> for ProviderType {
-    fn from(val: i32) -> Self {
-        use glib::translate::TryFromGlib;
-        unsafe { Self::try_from_glib(val) }
-            .unwrap_or_else(|err| panic!("Failed to turn `{val}` into ProviderType: {:?}", err))
+impl TryFrom<i32> for ProviderType {
+    type Error = Error;
+
+    fn try_from(val: i32) -> Result<Self> {
+        unsafe { Self::try_from_glib(val) }.map_err(|_| anyhow!("Invalid value `{}`", val))
     }
 }
 

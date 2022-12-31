@@ -122,7 +122,10 @@ impl InspectorPage {
         let imp = self.imp();
         let is_test = imp.provider_row.selected_item().map_or(false, |obj| {
             let item = obj.downcast_ref::<adw::EnumListItem>().unwrap();
-            ProviderType::from(item.value()).to_provider().is_test()
+            ProviderType::try_from(item.value())
+                .unwrap()
+                .to_provider()
+                .is_test()
         });
 
         imp.test_provider_mode_row.set_sensitive(is_test);
@@ -153,7 +156,8 @@ impl InspectorPage {
                         .downcast_ref::<adw::EnumListItem>()
                         .unwrap()
                         .value()
-                        .into();
+                        .try_into()
+                        .unwrap();
                 } else {
                     tracing::warn!("provider_row doesn't have a valid selected item");
                     ProviderSettings::lock().active = ProviderType::default();
@@ -185,7 +189,8 @@ impl InspectorPage {
                         .downcast_ref::<adw::EnumListItem>()
                         .unwrap()
                         .value()
-                        .into();
+                        .try_into()
+                        .unwrap();
                 } else {
                     tracing::warn!("test_provider_row doesn't have a valid selected item");
                     ProviderSettings::lock().test_mode = TestProviderMode::default();
