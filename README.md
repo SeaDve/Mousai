@@ -50,13 +50,12 @@ the title and artist of that song!
 Note: This uses the API of audd.io, so it is necessary to log in to their site to get more trials.
 
 Why you will love Mousai?
-* 🎵 Identify the title and artist of the song within seconds.
-* 🎙️ Use your microphone or audio from desktop.
-* 🎸 Store the identified song including the album art in history.
-* 🎼 Preview the identified song with the native player.
-* 🌐 Browse and listen the song from different providers.
-* 📱 Easy-to-use user interface.
-* ⌨️ User-friendly keyboard shortcuts.
+* 🎵 Recognize songs within seconds or save for later when offline
+* 🎙️ Use microphone or desktop audio
+* 🎸 Build a repertoire of recognized songs
+* 🎼 Quickly preview the song within the interface
+* 🌐 Browse and listen the song from different providers
+* 📱 Easy-to-use user interface
 
 ## 🌈 AudD
 
