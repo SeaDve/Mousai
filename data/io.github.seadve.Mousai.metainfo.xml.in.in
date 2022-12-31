@@ -41,14 +41,15 @@
         <p>This update contains huge UI updates and fixes:</p>
         <ul>
           <li>New feature-rich UI</li>
-          <li>Added ability to seek on the Player</li>
           <li>Added section to browse song information and checkout providers</li>
-          <li>Added ability to remove individual song from history</li>
+          <li>Added offline mode</li>
           <li>Added fuzzy search on the history</li>
-          <li>Added ability to copy song title - artist from the UI</li>
-          <li>Added way to cancel during recognizing stage</li>
           <li>Added MPRIS support</li>
-          <li>A lot of bug fixes and improved stability</li>
+          <li>Added ability to remove individual song from history</li>
+          <li>The title and artist of the song can now be copied from the UI</li>
+          <li>The player is now seekable</li>
+          <li>The recognizing stage is now cancellable</li>
+          <li>Fixed a lot of bugs and improved stability</li>
           <li>Updated translations</li>
         </ul>
       </description>
