@@ -115,9 +115,9 @@ mod imp {
             klass.install_action("history-view.copy-selected-song", None, |obj, _, _| {
                 let selected_songs = obj.snapshot_selected_songs();
 
-                if selected_songs.len() > 1 {
+                if selected_songs.len() != 1 {
                     tracing::error!(
-                        "Copying should not be allowed when there is more than one selected."
+                        "Copying should only be allowed if there is exactly one selected"
                     );
                 }
 
@@ -132,8 +132,6 @@ mod imp {
                         let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
                         utils::app_instance().add_toast(&toast);
                     }
-                } else {
-                    tracing::error!("Failed to copy song: There is no selected song");
                 }
             });
 
