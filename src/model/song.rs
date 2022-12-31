@@ -35,7 +35,7 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct Song {
         pub(super) inner: RefCell<SongInner>,
-        pub(super) is_newly_recognized: Cell<bool>,
+        pub(super) is_newly_heard: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -88,8 +88,8 @@ mod imp {
                     glib::ParamSpecString::builder("lyrics")
                         .explicit_notify()
                         .build(),
-                    // Whether the song is recently recognized
-                    glib::ParamSpecBoolean::builder("newly-recognized")
+                    // Whether the song was heard for the first time
+                    glib::ParamSpecBoolean::builder("newly-heard")
                         .explicit_notify()
                         .build(),
                 ]
@@ -142,9 +142,9 @@ mod imp {
                     let lyrics = value.get().unwrap();
                     obj.set_lyrics(lyrics);
                 }
-                "newly-recognized" => {
-                    let is_newly_recognized = value.get().unwrap();
-                    obj.set_newly_recognized(is_newly_recognized);
+                "newly-heard" => {
+                    let is_newly_heard = value.get().unwrap();
+                    obj.set_newly_heard(is_newly_heard);
                 }
                 _ => unimplemented!(),
             }
@@ -164,7 +164,7 @@ mod imp {
                 "album-art-link" => obj.album_art_link().to_value(),
                 "playback-link" => obj.playback_link().to_value(),
                 "lyrics" => obj.lyrics().to_value(),
-                "newly-recognized" => obj.is_newly_recognized().to_value(),
+                "newly-heard" => obj.is_newly_heard().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -247,18 +247,17 @@ impl Song {
         self.imp().inner.borrow().lyrics.clone()
     }
 
-    // TODO Maybe drop this prop?
-    pub fn is_newly_recognized(&self) -> bool {
-        self.imp().is_newly_recognized.get()
+    pub fn is_newly_heard(&self) -> bool {
+        self.imp().is_newly_heard.get()
     }
 
-    pub fn set_newly_recognized(&self, value: bool) {
-        if value == self.is_newly_recognized() {
+    pub fn set_newly_heard(&self, value: bool) {
+        if value == self.is_newly_heard() {
             return;
         }
 
-        self.imp().is_newly_recognized.set(value);
-        self.notify("newly-recognized");
+        self.imp().is_newly_heard.set(value);
+        self.notify("newly-heard");
     }
 
     pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
@@ -314,8 +313,8 @@ impl SongBuilder {
         }
     }
 
-    pub fn newly_recognized(&mut self, value: bool) -> &mut Self {
-        self.properties.push(("newly-recognized", value.to_value()));
+    pub fn newly_heard(&mut self, value: bool) -> &mut Self {
+        self.properties.push(("newly-heard", value.to_value()));
         self
     }
 
@@ -373,7 +372,7 @@ mod test {
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")
         .lyrics("Some song lyrics")
-        .newly_recognized(true)
+        .newly_heard(true)
         .build();
 
         assert_eq!(song.title(), "Some song");
@@ -383,7 +382,7 @@ mod test {
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
-        assert!(song.is_newly_recognized());
+        assert!(song.is_newly_heard());
     }
 
     #[test]
@@ -453,6 +452,6 @@ mod test {
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
 
-        assert!(!song.is_newly_recognized());
+        assert!(!song.is_newly_heard());
     }
 }

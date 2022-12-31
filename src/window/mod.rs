@@ -354,7 +354,7 @@ impl Window {
                 let history = obj.history();
 
                 if !history.contains(&song.id()) {
-                    song.set_newly_recognized(true);
+                    song.set_newly_heard(true);
                 }
 
                 history.append(song.clone());
@@ -370,7 +370,7 @@ impl Window {
 
                 for song in songs {
                     if !history.contains(&song.id()) {
-                        song.set_newly_recognized(true);
+                        song.set_newly_heard(true);
                     }
                 }
 
