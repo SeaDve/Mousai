@@ -21,10 +21,14 @@ use crate::{
 
 const SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY: &str = "mousai-song-page-song-removed-handler-id";
 const SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str = "mousai-song-page-adapative-mode-binding";
+
 const RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY: &str =
     "mousai-recognized-page-song-activated-handler-id";
 const RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str =
     "mousai-recognized-page-adaptive-mode-binding";
+
+const GRID_LIST_ITEM_BINDINGS_KEY: &str = "mousai-grid-list-item-bindings";
+const GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY: &str = "mousai-grid-list-item-expression-watches";
 
 mod imp {
     use super::*;
@@ -741,10 +745,12 @@ impl HistoryView {
             song_tile.set_show_select_button_on_hover(true);
             song_tile.bind_player(&obj.player());
 
-            obj.bind_property("selection-mode-active", &song_tile, "selection-mode-active")
+            let selection_mode_active_binding = obj
+                .bind_property("selection-mode-active", &song_tile, "selection-mode-active")
                 .sync_create()
                 .build();
-            obj.bind_property("adaptive-mode", &song_tile, "adaptive-mode")
+            let adaptive_mode_binding = obj
+                .bind_property("adaptive-mode", &song_tile, "adaptive-mode")
                 .sync_create()
                 .build();
 
@@ -761,31 +767,53 @@ impl HistoryView {
                 obj.set_selection_mode_active(true);
             }));
 
-            list_item
-                .property_expression("item")
-                .bind(&song_tile, "song", glib::Object::NONE);
-            gtk::ClosureExpression::new::<bool>(
+            let song_watch =
+                list_item
+                    .property_expression("item")
+                    .bind(&song_tile, "song", glib::Object::NONE);
+            let selected_watch = gtk::ClosureExpression::new::<bool>(
                 [
                     list_item.property_expression("selected"),
                     obj.property_expression("selection-mode-active"),
                 ],
-                closure!(
-                    |_: Option<glib::Object>, is_selected: bool, is_selection_mode_active: bool| {
-                        is_selected && is_selection_mode_active
-                    }
-                ),
+                closure!(|_: Option<glib::Object>,
+                        is_selected: bool,
+                        is_selection_mode_active: bool| {
+                    is_selected && is_selection_mode_active
+                }),
             )
             .bind(&song_tile, "selected", glib::Object::NONE);
+
+            unsafe {
+                list_item.set_data(
+                    GRID_LIST_ITEM_BINDINGS_KEY,
+                    vec![selection_mode_active_binding, adaptive_mode_binding],
+                );
+                list_item.set_data(
+                    GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY,
+                    vec![song_watch, selected_watch],
+                );
+            }
+
             list_item.set_child(Some(&song_tile));
         }));
         factory.connect_teardown(|_, list_item| {
             let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
 
-            if let Some(song_tile) = list_item
-                .child()
-                .and_then(|child| child.downcast::<SongTile>().ok())
-            {
-                song_tile.unbind_player();
+            unsafe {
+                let bindings = list_item
+                    .steal_data::<Vec<glib::Binding>>(GRID_LIST_ITEM_BINDINGS_KEY)
+                    .unwrap();
+                for binding in bindings {
+                    binding.unbind();
+                }
+
+                let watches = list_item
+                    .steal_data::<Vec<gtk::ExpressionWatch>>(GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY)
+                    .unwrap();
+                for watch in watches {
+                    watch.unwatch();
+                }
             }
         });
 

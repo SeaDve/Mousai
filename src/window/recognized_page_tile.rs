@@ -103,11 +103,14 @@ mod imp {
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.obj().first_child() {
+            let obj = self.obj();
+
+            while let Some(child) = obj.first_child() {
                 child.unparent();
             }
 
             self.binding.take().unwrap().unbind();
+            obj.unbind_player();
         }
     }
 
