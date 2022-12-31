@@ -466,7 +466,7 @@ impl HistoryView {
         grid.set_model(Some(&selection_model));
         grid.connect_activate(
             clone!(@weak self as obj, @weak selection_model => move |_, index| {
-                match selection_model.item(index).and_then(|song| song.downcast::<Song>().ok()) {
+                match selection_model.item(index).map(|song| song.downcast::<Song>().unwrap()) {
                     Some(ref song) => obj.push_song_page(song),
                     None => tracing::error!("Activated `{index}`, but found no song.")
                 }
