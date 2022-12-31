@@ -363,7 +363,7 @@ impl HistoryView {
         imp.extra_stack_items.borrow_mut().push(song_page.upcast());
 
         // User is already aware of the newly recognized song, so unset it.
-        song.set_newly_recognized(false);
+        song.set_newly_heard(false);
     }
 
     pub fn pop_stack_item(&self) {

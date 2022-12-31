@@ -207,7 +207,7 @@ mod imp {
                 .unwrap();
 
             self.song_binding_group
-                .bind("newly-recognized", &self.new_label.get(), "visible")
+                .bind("newly-heard", &self.new_label.get(), "visible")
                 .build();
 
             obj.update_select_button_visibility();
