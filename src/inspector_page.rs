@@ -120,13 +120,10 @@ impl InspectorPage {
 
     fn update_test_rows_sensitivity(&self) {
         let imp = self.imp();
-        let is_test = imp
-            .provider_row
-            .selected_item()
-            .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
-            .map_or(false, |item| {
-                ProviderType::from(item.value()).to_provider().is_test()
-            });
+        let is_test = imp.provider_row.selected_item().map_or(false, |obj| {
+            let item = obj.downcast_ref::<adw::EnumListItem>().unwrap();
+            ProviderType::from(item.value()).to_provider().is_test()
+        });
 
         imp.test_provider_mode_row.set_sensitive(is_test);
         imp.test_listen_duration_row.set_sensitive(is_test);
@@ -150,12 +147,13 @@ impl InspectorPage {
 
         imp.provider_row
             .connect_selected_notify(clone!(@weak self as obj => move |provider_row| {
-                if let Some(ref item) = provider_row
-                    .selected_item()
-                    .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
-                {
+                if let Some(ref item) = provider_row.selected_item() {
                     obj.update_test_rows_sensitivity();
-                    ProviderSettings::lock().active = item.value().into();
+                    ProviderSettings::lock().active = item
+                        .downcast_ref::<adw::EnumListItem>()
+                        .unwrap()
+                        .value()
+                        .into();
                 } else {
                     tracing::warn!("provider_row doesn't have a valid selected item");
                     ProviderSettings::lock().active = ProviderType::default();
@@ -182,11 +180,12 @@ impl InspectorPage {
 
         imp.test_provider_mode_row
             .connect_selected_notify(|test_provider_row| {
-                if let Some(ref item) = test_provider_row
-                    .selected_item()
-                    .and_then(|item| item.downcast::<adw::EnumListItem>().ok())
-                {
-                    ProviderSettings::lock().test_mode = item.value().into();
+                if let Some(ref item) = test_provider_row.selected_item() {
+                    ProviderSettings::lock().test_mode = item
+                        .downcast_ref::<adw::EnumListItem>()
+                        .unwrap()
+                        .value()
+                        .into();
                 } else {
                     tracing::warn!("test_provider_row doesn't have a valid selected item");
                     ProviderSettings::lock().test_mode = TestProviderMode::default();

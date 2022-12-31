@@ -177,7 +177,7 @@ mod imp {
                     if let Err(err) = gtk::show_uri_full_future(
                         external_link_tile
                             .root()
-                            .and_then(|root| root.downcast::<gtk::Window>().ok())
+                            .map(|root| root.downcast::<gtk::Window>().unwrap())
                             .as_ref(),
                         &uri,
                         gdk::CURRENT_TIME,
