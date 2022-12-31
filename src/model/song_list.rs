@@ -329,7 +329,10 @@ mod test {
             2
         );
 
-        assert_eq!(calls_output.borrow().as_slice(), &[(1, 0, 2), (0, 1, 1)]);
+        let calls_output = calls_output.borrow();
+        assert_eq!(calls_output.len(), 2);
+        assert_eq!(calls_output[0], (1, 0, 2));
+        assert!(calls_output.contains(&(0, 1, 1)));
     }
 
     #[test]
@@ -358,10 +361,11 @@ mod test {
             1
         );
 
-        assert_eq!(
-            calls_output.borrow().as_slice(),
-            &[(2, 0, 1), (0, 1, 1), (1, 1, 1)]
-        );
+        let calls_output = calls_output.borrow();
+        assert_eq!(calls_output.len(), 3);
+        assert_eq!(calls_output[0], (2, 0, 1));
+        assert!(calls_output.contains(&(0, 1, 1)));
+        assert!(calls_output.contains(&(1, 1, 1)));
     }
 
     #[test]
