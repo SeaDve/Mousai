@@ -79,16 +79,14 @@ mod imp {
 
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 if let Some(song) = obj.song() {
-                    if let Some(display) = gdk::Display::default() {
-                        display.clipboard().set_text(&format!(
-                            "{} - {}",
-                            song.artist(),
-                            song.title()
-                        ));
+                    obj.display().clipboard().set_text(&format!(
+                        "{} - {}",
+                        song.artist(),
+                        song.title()
+                    ));
 
-                        let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
-                        utils::app_instance().add_toast(&toast);
-                    }
+                    let toast = adw::Toast::new(&gettext("Copied to clipboard"));
+                    utils::app_instance().add_toast(&toast);
                 } else {
                     tracing::error!("Failed to copy song: There is no active song in SongPage");
                 }

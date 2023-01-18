@@ -1,7 +1,6 @@
 use adw::prelude::*;
 use gettextrs::{gettext, ngettext};
 use gtk::{
-    gdk,
     glib::{self, clone, closure},
     subclass::prelude::*,
 };
@@ -115,24 +114,21 @@ mod imp {
             klass.install_action("history-view.copy-selected-song", None, |obj, _, _| {
                 let selected_songs = obj.snapshot_selected_songs();
 
-                if selected_songs.len() != 1 {
+                if selected_songs.is_empty() {
                     tracing::error!(
-                        "Copying should only be allowed if there is exactly one selected"
+                        "Copying should only be allowed if there is atleast one selected"
                     );
                 }
 
-                if let Some(song) = selected_songs.first() {
-                    if let Some(display) = gdk::Display::default() {
-                        display.clipboard().set_text(&format!(
-                            "{} - {}",
-                            song.artist(),
-                            song.title()
-                        ));
+                let text = selected_songs
+                    .iter()
+                    .map(|song| format!("{} - {}", song.artist(), song.title()))
+                    .collect::<Vec<_>>()
+                    .join("\n");
+                obj.display().clipboard().set_text(&text);
 
-                        let toast = adw::Toast::new(&gettext("Copied song to clipboard"));
-                        utils::app_instance().add_toast(&toast);
-                    }
-                }
+                let toast = adw::Toast::new(&gettext("Copied to clipboard"));
+                utils::app_instance().add_toast(&toast);
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
@@ -715,7 +711,7 @@ impl HistoryView {
             .and_then(|model| model.upgrade())
             .map_or(0, |model| model.selection().size());
 
-        self.action_set_enabled("history-view.copy-selected-song", selection_size == 1);
+        self.action_set_enabled("history-view.copy-selected-song", selection_size != 0);
         self.action_set_enabled("history-view.remove-selected-songs", selection_size != 0);
 
         imp.selection_mode_menu_button
