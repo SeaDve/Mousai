@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the mousai package.
 # Heimen Stoffels <vistausss@outlook.com>, 2021.
 # Heimen Stoffels <vistausss@fastmail.com>, 2021, 2022.
+# Philip Goto <philip.goto@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-07-03 13:16+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"PO-Revision-Date: 2023-01-20 11:05+0000\n"
+"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.15.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -26,26 +27,28 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
 msgid "Identify songs in seconds"
-msgstr "Identificeer nummers in luttele seconden"
+msgstr "Identificeer nummers binnen enkele seconden"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr "Shazam;Audio;Muziek;Nummer;Identificatie;Hekenning;"
+msgstr ""
+"Shazam;Audio;Music;Song;Identify;Recognition;Geluid;Muziek;Nummer;Identificer"
+"en;Hekenning;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
-msgstr "Standaard vensterbreedte"
+msgstr "Standaardvensterbreedte"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr "Standaard vensterhoogte"
+msgstr "Standaardvensterhoogte"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr "Standaard maximaliseergedrag"
+msgstr "Standaardmaximalisatiegedrag"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
@@ -58,8 +61,8 @@ msgstr "Voorkeursbron voor audio-opname"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
-"Ontdek namen van nummers die je al lang wilde weten middels een eenvoudig te "
-"gebruiken toepassing."
+"Ontdek namen van nummers die u niet kent via een gebruiksvriendelijke "
+"interface."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
@@ -67,9 +70,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai is een eenvoudige toepassing waarmee je nummers kunt herkennen, net "
-"zoals Shazam. Klik op de luisterknop, wacht een paar seconden en het "
-"antwoord staat voor je klaar!"
+"Mousai is een eenvoudige app waar u net als Shazam nummers mee kunt "
+"herkennen. Klik op de luisterknop, wacht een paar seconden, en de titel en "
+"artiest staan magischerwijs voor u klaar!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -81,7 +84,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid "Why you will love Mousai?"
-msgstr "Waarom je Mousai wilt gebruiken?"
+msgstr "Waarom u van Mousai zult houden?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
@@ -146,7 +149,7 @@ msgstr "_Niets selecteren"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
-msgstr "Ga aan de slag"
+msgstr "Begin met muziek identificeren"
 
 #: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -179,7 +182,7 @@ msgstr "Voer de naam in van een nummer of artiest"
 
 #: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
-msgstr "Ga aan de slag!"
+msgstr "Begin met muziek identificeren!"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Click the listen button to start."
@@ -224,7 +227,7 @@ msgstr "Sneltoetsen tonen"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Afsluiten"
+msgstr "Sluiten"
 
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
@@ -298,7 +301,9 @@ msgstr "Nieuw"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
 msgid "translator-credits"
-msgstr "Heimen Stoffels &lt;vistausss@fastmail.com&gt;"
+msgstr ""
+"Heimen Stoffels &lt;vistausss@fastmail.com&gt;\n"
+"Philip Goto &lt;philip.goto@gmail.com&gt;"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
@@ -358,13 +363,12 @@ msgstr ""
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
-msgstr "Er kan geen verbinding worden gemaakt met de server."
+msgstr "Verbinden met de server mislukt."
 
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
-"Het antwoord kan niet worden verwerkt. Meld dit voorval op Mousais "
-"bugtracker."
+"Antwoord verwerken mislukt. Meld dit alstublieft op de bugtracker van Mousai."
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -381,7 +385,7 @@ msgstr "Ongeldig statusantwoord van {}"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
-msgstr "{} Controleer je internetverbinding."
+msgstr "{} Controleer uw internetverbinding."
 
 #: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
@@ -397,7 +401,7 @@ msgstr "Voer een geldige api-sleutel in."
 
 #: src/window/history_view.rs:113 src/window/song_page.rs:89
 msgid "Copied song to clipboard"
-msgstr "Het nummer is gekopieerd naar het klembord"
+msgstr "Nummer gekopieerd naar klembord"
 
 #: src/window/history_view.rs:411
 msgid "_Undo"
@@ -427,7 +431,7 @@ msgstr[1] "Nummers verwijderen uit geschiedenis"
 
 #: src/window/mod.rs:196
 msgid "Failed to load history"
-msgstr "De geschiedenis kan niet worden geladen"
+msgstr "Geschiedenis laden mislukt"
 
 #: src/window/playback_button.rs:155
 msgid "Play"
