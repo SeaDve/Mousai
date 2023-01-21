@@ -1,4 +1,4 @@
-use gst_player::prelude::*;
+use gst_play::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
     prelude::*,
@@ -13,16 +13,6 @@ use std::{
 };
 
 use crate::{config::APP_ID, core::ClockTime, model::Song, utils};
-
-#[derive(Debug)]
-enum Message {
-    PositionUpdated(Option<ClockTime>),
-    DurationChanged(Option<ClockTime>),
-    StateChanged(PlayerState),
-    Error(glib::Error),
-    Warning(glib::Error),
-    Eos,
-}
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiPlayerState")]
@@ -47,7 +37,7 @@ mod imp {
         pub(super) duration: Cell<Option<ClockTime>>,
 
         pub(super) metadata: RefCell<MprisMetadata>,
-        pub(super) gst_player: gst_player::Player,
+        pub(super) gst_play: gst_play::Play,
         pub(super) mpris_player: OnceCell<Arc<MprisPlayer>>,
     }
 
@@ -59,10 +49,7 @@ mod imp {
                 position: Cell::default(),
                 duration: Cell::default(),
                 metadata: RefCell::new(MprisMetadata::new()),
-                gst_player: gst_player::Player::new(
-                    gst_player::PlayerVideoRenderer::NONE,
-                    gst_player::PlayerSignalDispatcher::NONE,
-                ),
+                gst_play: gst_play::Play::new(gst_play::PlayVideoRenderer::NONE),
                 mpris_player: OnceCell::default(),
             }
         }
@@ -139,7 +126,26 @@ mod imp {
 
             let obj = self.obj();
 
-            obj.setup_player_signals();
+            self.gst_play
+                .message_bus()
+                .add_watch_local(
+                    clone!(@weak obj => @default-return Continue(false), move |_, message| {
+                        if gst_play::Play::is_play_message(message) {
+                            let play_message = gst_play::PlayMessage::parse(&message).unwrap();
+                            obj.handle_gst_play_message(play_message);
+                        } else {
+                            tracing::trace!("Received other bus message: {:?}", message.view());
+                        }
+                        Continue(true)
+                    }),
+                )
+                .unwrap();
+        }
+
+        fn dispose(&self) {
+            if let Err(err) = self.gst_play.message_bus().remove_watch() {
+                tracing::warn!("Failed to remove message bus watch: {:?}", err);
+            }
         }
     }
 }
@@ -181,7 +187,7 @@ impl Player {
 
         let imp = self.imp();
 
-        imp.gst_player.stop();
+        imp.gst_play.stop();
         self.set_position(None);
         self.set_duration(None);
 
@@ -191,7 +197,7 @@ impl Player {
                 return;
             };
 
-            imp.gst_player.set_uri(Some(&playback_link));
+            imp.gst_play.set_uri(Some(&playback_link));
             tracing::debug!(uri = playback_link, "Uri changed");
 
             // TODO Fill up nones
@@ -266,11 +272,11 @@ impl Player {
     }
 
     pub fn play(&self) {
-        self.imp().gst_player.play();
+        self.imp().gst_play.play();
     }
 
     pub fn pause(&self) {
-        self.imp().gst_player.pause();
+        self.imp().gst_play.pause();
     }
 
     pub fn seek(&self, position: ClockTime) {
@@ -280,7 +286,7 @@ impl Player {
 
         tracing::debug!(?position, "Seeking");
 
-        self.imp().gst_player.seek(position.into());
+        self.imp().gst_play.seek(position.into());
     }
 
     fn set_position(&self, position: Option<ClockTime>) {
@@ -348,21 +354,34 @@ impl Player {
         self.mpris_player().set_metadata(current_metadata);
     }
 
-    fn handle_player_message(&self, message: &Message) {
+    fn handle_gst_play_message(&self, message: gst_play::PlayMessage) {
+        use gst_play::{PlayMessage, PlayState};
+
         let imp = self.imp();
 
         match message {
-            Message::PositionUpdated(position) => {
-                self.set_position(*position);
+            PlayMessage::PositionUpdated { position } => {
+                self.set_position(position.map(|position| position.into()));
             }
-            Message::DurationChanged(duration) => {
-                self.set_duration(*duration);
+            PlayMessage::DurationChanged { duration } => {
+                self.set_duration(duration.map(|duration| duration.into()));
             }
-            Message::StateChanged(new_state) => {
+            PlayMessage::StateChanged { state } => {
+                let new_state = match state {
+                    PlayState::Stopped => PlayerState::Stopped,
+                    PlayState::Buffering => PlayerState::Buffering,
+                    PlayState::Paused => PlayerState::Paused,
+                    PlayState::Playing => PlayerState::Playing,
+                    _ => {
+                        tracing::warn!("Received unknown PlayState `{}`", state);
+                        return;
+                    }
+                };
+
                 let old_state = imp.state.get();
                 tracing::debug!("State changed from `{:?}` -> `{:?}`", old_state, new_state);
 
-                imp.state.set(*new_state);
+                imp.state.set(new_state);
                 self.mpris_player()
                     .set_can_pause(matches!(new_state, PlayerState::Playing));
                 self.mpris_player().set_playback_status(match self.state() {
@@ -373,79 +392,44 @@ impl Player {
 
                 self.notify("state");
             }
-            Message::Error(ref error) => {
-                tracing::error!(state = ?self.state(), "Received error message: {:?}", error);
-                self.emit_by_name::<()>("error", &[error]);
-            }
-            Message::Warning(ref warning) => {
-                tracing::warn!("Received warning message: {:?}", warning);
-            }
-            Message::Eos => {
+            PlayMessage::EndOfStream => {
                 tracing::debug!("Received end of stream message");
                 self.set_position(None);
             }
-        }
-    }
-
-    fn setup_player_signals(&self) {
-        let imp = self.imp();
-
-        let (sender, receiver) = glib::MainContext::sync_channel(glib::PRIORITY_DEFAULT, 5);
-
-        imp.gst_player
-            .connect_position_updated(clone!(@strong sender => move |_, position| {
-                let _ = sender.send(Message::PositionUpdated(position.map(|position| position.into())));
-            }));
-
-        imp.gst_player
-            .connect_duration_changed(clone!(@strong sender => move |_, duration| {
-                let _ = sender.send(Message::DurationChanged(duration.map(|duration| duration.into())));
-            }));
-
-        imp.gst_player
-            .connect_state_changed(clone!(@strong sender => move |_, state| {
-                let _ = sender.send(Message::StateChanged(match state {
-                    gst_player::PlayerState::Stopped => PlayerState::Stopped,
-                    gst_player::PlayerState::Buffering => PlayerState::Buffering,
-                    gst_player::PlayerState::Paused => PlayerState::Paused,
-                    gst_player::PlayerState::Playing => PlayerState::Playing,
-                    _ => {
-                        tracing::warn!("Received unknown PlayerState `{}`", state);
-                        return;
-                    }
-                }));
-            }));
-
-        imp.gst_player
-            .connect_error(clone!(@strong sender => move |_, error| {
-                let _ = sender.send(Message::Error(error.clone()));
-            }));
-
-        imp.gst_player
-            .connect_warning(clone!(@strong sender => move |_, error| {
-                let _ = sender.send(Message::Warning(error.clone()));
-            }));
-
-        imp.gst_player
-            .connect_buffering(clone!(@strong sender => move |_, percent| {
+            PlayMessage::SeekDone => {
+                tracing::debug!("Received seek done message");
+                self.set_position(imp.gst_play.position().map(|position| position.into()));
+            }
+            PlayMessage::Error { error, details } => {
+                tracing::error!(state = ?self.state(), ?details, "Received error message: {:?}", error);
+                self.emit_by_name::<()>("error", &[&error]);
+            }
+            PlayMessage::Warning { error, details } => {
+                tracing::warn!(?details, "Received warning message: {:?}", error);
+            }
+            PlayMessage::Buffering { percent } => {
                 tracing::trace!("Buffering ({}%)", percent);
-            }));
-
-        imp.gst_player
-            .connect_end_of_stream(clone!(@strong sender => move |_| {
-                let _ = sender.send(Message::Eos);
-            }));
-
-        // FIXME Using a strong self here fixes the following errors:
-        // * instance of invalid non-instantiatable type '(null)'
-        // * g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
-        receiver.attach(
-            None,
-            clone!(@weak self as obj => @default-return Continue(false), move |message| {
-                obj.handle_player_message(&message);
-                Continue(true)
-            }),
-        );
+            }
+            PlayMessage::MediaInfoUpdated { info } => {
+                tracing::trace!(
+                    container_format = ?info.container_format(),
+                    duration = ?info.duration(),
+                    stream_list = ?info
+                        .stream_list()
+                        .iter()
+                        .map(|i| format!("{}: {:?}", i.stream_type(), i.codec()))
+                        .collect::<Vec<_>>(),
+                    tags = ?info.tags(),
+                    title = ?info.title(),
+                    is_live = info.is_live(),
+                    is_seekable = info.is_seekable(),
+                    "Received media info update"
+                );
+            }
+            _ => {
+                tracing::trace!(?message, "Received other PlayMessage");
+            }
+        }
     }
 }
 
