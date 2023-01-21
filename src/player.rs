@@ -314,10 +314,12 @@ impl Player {
             mpris_player.set_can_go_next(false);
 
             mpris_player.connect_raise(|| {
+                tracing::debug!("Raise via MPRIS");
                 utils::app_instance().activate();
             });
 
             mpris_player.connect_play_pause(clone!(@weak self as obj => move || {
+                tracing::debug!("Play/Pause via MPRIS");
                 if obj.state() == PlayerState::Playing {
                     obj.pause();
                 } else {
@@ -326,18 +328,22 @@ impl Player {
             }));
 
             mpris_player.connect_play(clone!(@weak self as obj => move || {
+                tracing::debug!("Play via MPRIS");
                 obj.play();
             }));
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
+                tracing::debug!("Stop via MPRIS");
                 obj.set_song(None);
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
+                tracing::debug!("Pause via MPRIS");
                 obj.pause();
             }));
 
             mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
+                tracing::debug!(?offset_micros, "Seek via MPRIS");
                 let current_micros = obj.position().unwrap_or_default().as_micros() as i64;
                 let new_position = ClockTime::from_micros(current_micros.saturating_add(offset_micros) as u64);
                 obj.seek(new_position);
