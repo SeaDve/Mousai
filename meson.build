@@ -18,7 +18,7 @@ dependency('libadwaita-1', version: '>= 1.0',)
 dependency('gstreamer-1.0', version: '>= 1.18')
 dependency('gstreamer-base-1.0', version: '>= 1.18')
 dependency('gstreamer-plugins-base-1.0', version: '>= 1.18')
-dependency('gstreamer-player-1.0', version: '>= 1.18')
+dependency('gstreamer-play-1.0', version: '>= 1.18')
 dependency('libsoup-3.0', version: '>= 3.0')
 
 glib_compile_resources = find_program('glib-compile-resources', required: true)
