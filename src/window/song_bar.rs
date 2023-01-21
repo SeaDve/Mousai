@@ -59,7 +59,7 @@ mod imp {
             klass.set_accessible_role(gtk::AccessibleRole::Group);
 
             klass.install_action("song-bar.clear", None, |obj, _, _| {
-                obj.player().clear_song();
+                obj.player().set_song(None);
             });
 
             klass.install_action("song-bar.activate", None, |obj, _, _| {

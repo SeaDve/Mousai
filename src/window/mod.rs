@@ -96,11 +96,11 @@ mod imp {
             });
 
             klass.install_action("win.stop-playback", None, |obj, _, _| {
-                obj.imp().player.clear_song();
+                obj.imp().player.set_song(None);
             });
 
             klass.install_action_async("win.toggle-listen", None, |obj, _, _| async move {
-                obj.imp().player.clear_song();
+                obj.imp().player.set_song(None);
 
                 if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
                     tracing::error!("{:?}", err);
@@ -414,7 +414,7 @@ impl Window {
             .connect_removed(clone!(@weak self as obj => move |_, song| {
                 let player = obj.player();
                 if player.is_active_song(song) {
-                    player.clear_song();
+                    player.set_song(None);
                 }
             }));
     }
