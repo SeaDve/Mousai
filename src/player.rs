@@ -173,6 +173,7 @@ impl Player {
         self.connect_notify_local(Some("song"), move |obj, _| f(obj))
     }
 
+    /// Change the currently playing song. If the song is None, the player will stop.
     pub fn set_song(&self, song: Option<Song>) {
         if song == self.song() {
             return;
@@ -272,10 +273,6 @@ impl Player {
         self.imp().gst_player.pause();
     }
 
-    pub fn clear_song(&self) {
-        self.set_song(None);
-    }
-
     pub fn seek(&self, position: ClockTime) {
         if matches!(self.state(), PlayerState::Stopped) {
             self.pause();
@@ -327,7 +324,7 @@ impl Player {
             }));
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
-                obj.clear_song();
+                obj.set_song(None);
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
