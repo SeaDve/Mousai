@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2023-01-24 11:50+0000\n"
+"PO-Revision-Date: 2023-01-25 12:47+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -393,7 +393,7 @@ msgstr "Er zijn geen overeenkomstige nummers gevonden."
 
 #: src/recognizer/provider/mod.rs:154
 msgid "{} Input an API token in the preferences."
-msgstr "{} Voer een api-sleutel in in de voorkeuren."
+msgstr "{} Voer een API-sleutel in onder voorkeuren."
 
 #: src/recognizer/provider/mod.rs:157
 msgid "Please input a valid API token."
