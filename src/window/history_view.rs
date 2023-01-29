@@ -479,18 +479,6 @@ impl HistoryView {
         self.update_history_stack_visible_child();
     }
 
-    pub fn undo_remove(&self) {
-        let imp = self.imp();
-
-        if let Some(song_list) = imp
-            .song_list
-            .get()
-            .and_then(|song_list| song_list.upgrade())
-        {
-            song_list.append_many(imp.removed_purgatory.take());
-        }
-    }
-
     pub fn scroll_to_top(&self) {
         let item_position = 0_u32.to_variant();
         self.imp()
@@ -519,6 +507,8 @@ impl HistoryView {
         {
             if let Some(removed_song) = song_list.remove(&song.id()) {
                 imp.removed_purgatory.borrow_mut().push(removed_song);
+            } else {
+                tracing::warn!("Failed to remove song: Song not found in SongList");
             }
         } else {
             tracing::warn!("Failed to remove song: SongList not found");
@@ -547,6 +537,18 @@ impl HistoryView {
         for item in to_drain_items {
             unbind_song_page(item.downcast_ref().unwrap());
             self.replace_pending_stack_remove(item);
+        }
+    }
+
+    fn undo_remove_song(&self) {
+        let imp = self.imp();
+
+        if let Some(song_list) = imp
+            .song_list
+            .get()
+            .and_then(|song_list| song_list.upgrade())
+        {
+            song_list.append_many(imp.removed_purgatory.take());
         }
     }
 
@@ -612,8 +614,11 @@ impl HistoryView {
             let toast = adw::Toast::builder()
                 .priority(adw::ToastPriority::High)
                 .button_label(&gettext("_Undo"))
-                .action_name("undo-remove-toast.undo")
                 .build();
+
+            toast.connect_button_clicked(clone!(@weak self as obj => move |_| {
+                obj.undo_remove_song();
+            }));
 
             toast.connect_dismissed(clone!(@weak self as obj => move |_| {
                 let imp = obj.imp();
@@ -635,6 +640,9 @@ impl HistoryView {
                 n_removed as u32,
                 n_removed
             ));
+
+            // Reset toast timeout
+            utils::app_instance().add_toast(toast);
         }
     }
 
