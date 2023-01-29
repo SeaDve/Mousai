@@ -112,10 +112,6 @@ mod imp {
                 let search_bar = obj.imp().main_view.search_bar();
                 search_bar.set_search_mode(!search_bar.is_search_mode());
             });
-
-            klass.install_action("undo-remove-toast.undo", None, |obj, _, _| {
-                obj.imp().main_view.undo_remove();
-            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
