@@ -51,7 +51,7 @@ mod imp {
         fn properties() -> &'static [glib::ParamSpec] {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
                         .explicit_notify()
                         .build(),
                 ]

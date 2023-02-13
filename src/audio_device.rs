@@ -36,7 +36,7 @@ pub async fn find_default_name(class: AudioDeviceClass) -> Result<String> {
         .context("Failed to push future to main thread pool")?
         .await
     {
-        Ok(res) => Ok(res),
+        Ok(res) => res,
         Err(err) => {
             tracing::warn!("Failed to find default name using gstreamer: {:?}", err);
             tracing::debug!("Manually using libpulse instead");

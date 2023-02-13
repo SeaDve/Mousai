@@ -86,7 +86,7 @@ mod imp {
                     ));
 
                     let toast = adw::Toast::new(&gettext("Copied to clipboard"));
-                    utils::app_instance().add_toast(&toast);
+                    utils::app_instance().add_toast(toast);
                 } else {
                     tracing::error!("Failed to copy song: There is no active song in SongPage");
                 }
@@ -107,7 +107,7 @@ mod imp {
                         .explicit_notify()
                         .build(),
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
                         .explicit_notify()
                         .build(),
                 ]

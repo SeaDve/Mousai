@@ -128,7 +128,7 @@ mod imp {
                 obj.display().clipboard().set_text(&text);
 
                 let toast = adw::Toast::new(&gettext("Copied to clipboard"));
-                utils::app_instance().add_toast(&toast);
+                utils::app_instance().add_toast(toast);
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
@@ -155,7 +155,7 @@ mod imp {
                         .read_only()
                         .build(),
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
                         .explicit_notify()
                         .build(),
                 ]
@@ -419,7 +419,7 @@ impl HistoryView {
         let filter = FuzzyFilter::new();
         let sorter = FuzzySorter::new();
 
-        let filter_model = gtk::FilterListModel::new(Some(song_list), Some(&filter));
+        let filter_model = gtk::FilterListModel::new(Some(song_list.clone()), Some(filter.clone()));
         filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
             obj.update_history_stack_visible_child();
         }));
@@ -433,10 +433,10 @@ impl HistoryView {
             }),
         );
 
-        let sort_model = gtk::SortListModel::new(Some(&filter_model), Some(&sorter));
+        let sort_model = gtk::SortListModel::new(Some(filter_model.clone()), Some(sorter));
 
         // FIXME save selection even when the song are filtered from FilterListModel
-        let selection_model = gtk::MultiSelection::new(Some(&sort_model));
+        let selection_model = gtk::MultiSelection::new(Some(sort_model));
         selection_model.connect_selection_changed(clone!(@weak self as obj => move |model, _, _| {
             if obj.is_selection_mode_active() {
                 if model.selection().size() == 0 {
@@ -613,7 +613,7 @@ impl HistoryView {
         if imp.undo_remove_toast.borrow().is_none() {
             let toast = adw::Toast::builder()
                 .priority(adw::ToastPriority::High)
-                .button_label(&gettext("_Undo"))
+                .button_label(gettext("_Undo"))
                 .build();
 
             toast.connect_button_clicked(clone!(@weak self as obj => move |_| {
@@ -626,7 +626,7 @@ impl HistoryView {
                 imp.undo_remove_toast.take();
             }));
 
-            utils::app_instance().add_toast(&toast);
+            utils::app_instance().add_toast(toast.clone());
 
             imp.undo_remove_toast.replace(Some(toast));
         }
@@ -642,7 +642,7 @@ impl HistoryView {
             ));
 
             // Reset toast timeout
-            utils::app_instance().add_toast(toast);
+            utils::app_instance().add_toast(toast.clone());
         }
     }
 

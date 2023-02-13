@@ -95,13 +95,13 @@ impl Application {
 
     pub fn add_toast_error(&self, err: &Error) {
         let toast = adw::Toast::builder()
-            .title(&glib::markup_escape_text(&err.to_string()))
+            .title(glib::markup_escape_text(&err.to_string()))
             .priority(adw::ToastPriority::High)
             .build();
-        self.add_toast(&toast);
+        self.add_toast(toast);
     }
 
-    pub fn add_toast(&self, toast: &adw::Toast) {
+    pub fn add_toast(&self, toast: adw::Toast) {
         if let Some(window) = self.main_window() {
             window.add_toast(toast);
         } else {
@@ -145,8 +145,7 @@ impl Application {
                 about::present_window(obj.main_window().as_ref());
             })
             .build();
-        self.add_action_entries([quit_action, about_action])
-            .unwrap();
+        self.add_action_entries([quit_action, about_action]);
     }
 
     fn setup_accels(&self) {
@@ -206,7 +205,7 @@ fn present_error(err: &Error, transient_for: Option<&impl IsA<gtk::Window>>) {
     scrolled_window_row.add_css_class("error-view");
 
     let copy_button = gtk::Button::builder()
-        .tooltip_text(&gettext("Copy to clipboard"))
+        .tooltip_text(gettext("Copy to clipboard"))
         .icon_name("edit-copy-symbolic")
         .valign(gtk::Align::Center)
         .build();
@@ -218,7 +217,7 @@ fn present_error(err: &Error, transient_for: Option<&impl IsA<gtk::Window>>) {
     });
 
     let expander = adw::ExpanderRow::builder()
-        .title(&gettext("Show detailed error"))
+        .title(gettext("Show detailed error"))
         .activatable(false)
         .build();
     expander.add_row(&scrolled_window_row);
@@ -231,7 +230,7 @@ fn present_error(err: &Error, transient_for: Option<&impl IsA<gtk::Window>>) {
     list_box.append(&expander);
 
     let err_dialog = adw::MessageDialog::builder()
-        .heading(&err.to_string())
+        .heading(err.to_string())
         .body_use_markup(true)
         .default_response("ok")
         .modal(true)

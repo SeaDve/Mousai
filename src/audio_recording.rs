@@ -224,7 +224,7 @@ impl AudioRecording {
                 Continue(false)
             }
             MessageView::StateChanged(sc) => {
-                if message.src().as_ref()
+                if message.src()
                     != self
                         .pipeline()
                         .map(|pipeline| pipeline.upcast_ref::<gst::Object>())

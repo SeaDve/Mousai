@@ -49,7 +49,7 @@ mod imp {
                 position: Cell::default(),
                 duration: Cell::default(),
                 metadata: RefCell::new(MprisMetadata::new()),
-                gst_play: gst_play::Play::new(gst_play::PlayVideoRenderer::NONE),
+                gst_play: gst_play::Play::new(None::<gst_play::PlayVideoRenderer>),
                 mpris_player: OnceCell::default(),
             }
         }
@@ -70,7 +70,7 @@ mod imp {
                         .explicit_notify()
                         .build(),
                     // Current state of the player
-                    glib::ParamSpecEnum::builder("state", PlayerState::default())
+                    glib::ParamSpecEnum::builder::<PlayerState>("state")
                         .read_only()
                         .build(),
                     // Current position of the player
@@ -131,7 +131,7 @@ mod imp {
                 .add_watch_local(
                     clone!(@weak obj => @default-return Continue(false), move |_, message| {
                         if gst_play::Play::is_play_message(message) {
-                            let play_message = gst_play::PlayMessage::parse(&message).unwrap();
+                            let play_message = gst_play::PlayMessage::parse(message).unwrap();
                             obj.handle_gst_play_message(play_message);
                         } else {
                             tracing::trace!("Received other bus message: {:?}", message.view());

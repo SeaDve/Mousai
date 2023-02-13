@@ -99,7 +99,7 @@ mod imp {
                     obj.emit_by_name::<()>("activated", &[]);
                 }
             }));
-            self.song_tile.add_controller(&gesture_click);
+            self.song_tile.add_controller(gesture_click);
         }
 
         fn dispose(&self) {
