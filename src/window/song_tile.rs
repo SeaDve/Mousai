@@ -99,7 +99,7 @@ mod imp {
                         .explicit_notify()
                         .build(),
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
                         .explicit_notify()
                         .build(),
                 ]
@@ -171,7 +171,7 @@ mod imp {
                 obj.imp().contains_pointer.set(false);
                 obj.update_select_button_visibility();
             }));
-            obj.add_controller(&motion_controller);
+            obj.add_controller(motion_controller);
 
             let gesture_click = gtk::GestureClick::builder()
                 .button(gdk::BUTTON_SECONDARY)
@@ -182,7 +182,7 @@ mod imp {
                     obj.emit_by_name::<()>("request-selection-mode", &[]);
                 }
             }));
-            obj.add_controller(&gesture_click);
+            obj.add_controller(gesture_click);
 
             let gesture_long_press = gtk::GestureLongPress::builder().build();
             gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
@@ -191,7 +191,7 @@ mod imp {
                     obj.emit_by_name::<()>("request-selection-mode", &[]);
                 }
             }));
-            obj.add_controller(&gesture_long_press);
+            obj.add_controller(gesture_long_press);
 
             self.select_button_active_notify_handler
                 .set(

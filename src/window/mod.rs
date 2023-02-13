@@ -124,7 +124,7 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Current adapative mode
-                    glib::ParamSpecEnum::builder("adaptive-mode", AdaptiveMode::default())
+                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
                         .read_only()
                         .build(),
                 ]
@@ -233,7 +233,7 @@ impl Window {
         self.imp().player.clone()
     }
 
-    pub fn add_toast(&self, toast: &adw::Toast) {
+    pub fn add_toast(&self, toast: adw::Toast) {
         self.imp().toast_overlay.add_toast(toast);
     }
 
@@ -381,8 +381,8 @@ impl Window {
         imp.recognizer
             .connect_recording_saved(clone!(@weak self as obj => move |_| {
                 let dialog = adw::MessageDialog::builder()
-                    .heading(&gettext("Recording saved"))
-                    .body(&gettext("The result will be available when you're back online."))
+                    .heading(gettext("Recording saved"))
+                    .body(gettext("The result will be available when you're back online."))
                     .default_response("ok")
                     .transient_for(&obj)
                     .modal(true)

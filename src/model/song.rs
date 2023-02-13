@@ -350,7 +350,7 @@ impl SongBuilder {
             "external-links",
             ExternalLinkList::new(std::mem::take(&mut self.external_links)).to_value(),
         ));
-        glib::Object::with_values(Song::static_type(), &self.properties)
+        glib::Object::with_mut_values(Song::static_type(), &mut self.properties)
             .downcast()
             .unwrap()
     }

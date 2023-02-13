@@ -61,7 +61,7 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // Current state of Self
-                    glib::ParamSpecEnum::builder("state", RecognizerState::default())
+                    glib::ParamSpecEnum::builder::<RecognizerState>("state")
                         .read_only()
                         .build(),
                     // Active recording

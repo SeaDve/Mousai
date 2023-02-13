@@ -55,7 +55,7 @@ mod imp {
             static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
                 vec![
                     // State or mode of the button
-                    glib::ParamSpecEnum::builder("mode", PlaybackButtonMode::default())
+                    glib::ParamSpecEnum::builder::<PlaybackButtonMode>("mode")
                         .explicit_notify()
                         .build(),
                     // Name of the action to trigger when clicked
