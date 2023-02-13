@@ -91,7 +91,7 @@ glib::wrapper! {
 
 impl TimeLabel {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn set_time(&self, time: ClockTime) {

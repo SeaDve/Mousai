@@ -113,7 +113,7 @@ glib::wrapper! {
 
 impl InspectorPage {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     fn update_test_rows_sensitivity(&self) {

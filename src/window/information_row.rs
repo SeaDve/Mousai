@@ -92,7 +92,7 @@ glib::wrapper! {
 
 impl InformationRow {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn set_value(&self, value: Option<&str>) {
