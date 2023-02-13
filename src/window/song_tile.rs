@@ -216,13 +216,9 @@ mod imp {
         }
 
         fn dispose(&self) {
-            let obj = self.obj();
+            self.dispose_template();
 
-            while let Some(child) = obj.first_child() {
-                child.unparent();
-            }
-
-            obj.unbind_player();
+            self.obj().unbind_player();
         }
     }
 
