@@ -111,9 +111,7 @@ mod imp {
         }
 
         fn dispose(&self) {
-            while let Some(child) = self.obj().first_child() {
-                child.unparent();
-            }
+            self.dispose_template();
         }
     }
 
