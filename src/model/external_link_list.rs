@@ -85,7 +85,7 @@ impl ExternalLinkList {
 
 impl Default for ExternalLinkList {
     fn default() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 }
 

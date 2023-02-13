@@ -190,7 +190,7 @@ impl SongList {
 
 impl Default for SongList {
     fn default() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 }
 

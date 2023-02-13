@@ -125,7 +125,7 @@ glib::wrapper! {
 
 impl AlbumCover {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn set_song(&self, song: Option<Song>) {

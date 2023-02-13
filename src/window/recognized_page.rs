@@ -114,7 +114,7 @@ glib::wrapper! {
 
 impl RecognizedPage {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {

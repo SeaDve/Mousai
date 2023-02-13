@@ -114,7 +114,7 @@ glib::wrapper! {
 
 impl SongBar {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn connect_activated<F>(&self, f: F) -> glib::SignalHandlerId

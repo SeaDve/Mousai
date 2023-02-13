@@ -184,7 +184,7 @@ mod imp {
             }));
             obj.add_controller(gesture_click);
 
-            let gesture_long_press = gtk::GestureLongPress::builder().build();
+            let gesture_long_press = gtk::GestureLongPress::new();
             gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
                 gesture.set_state(gtk::EventSequenceState::Claimed);
                 if obj.contains(x, y) {
@@ -232,7 +232,7 @@ glib::wrapper! {
 
 impl SongTile {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn set_song(&self, song: Option<Song>) {

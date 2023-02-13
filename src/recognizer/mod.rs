@@ -134,7 +134,7 @@ glib::wrapper! {
 
 impl Recognizer {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId

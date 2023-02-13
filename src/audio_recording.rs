@@ -99,7 +99,7 @@ glib::wrapper! {
 
 impl AudioRecording {
     pub fn new() -> Self {
-        glib::Object::builder().build()
+        glib::Object::new()
     }
 
     pub fn recorded_time(&self) -> Option<&DateTime> {
