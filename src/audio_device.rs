@@ -1,9 +1,9 @@
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, Result};
 use gettextrs::gettext;
 use gst::prelude::*;
-use gtk::glib;
+use gtk::{gio, glib};
 
-use crate::{core::ResultExt, THREAD_POOL};
+use crate::core::ResultExt;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiAudioDeviceClass")]
@@ -31,12 +31,11 @@ impl AudioDeviceClass {
 }
 
 pub async fn find_default_name(class: AudioDeviceClass) -> Result<String> {
-    match THREAD_POOL
-        .push_future(move || find_default_name_gst(class))
-        .context("Failed to push future to main thread pool")?
+    match gio::spawn_blocking(move || find_default_name_gst(class))
         .await
+        .map_err(|err| anyhow!("Failed to spawn blocking task: {:?}", err))?
     {
-        Ok(res) => res,
+        Ok(res) => Ok(res),
         Err(err) => {
             tracing::warn!("Failed to find default name using gstreamer: {:?}", err);
             tracing::debug!("Manually using libpulse instead");
