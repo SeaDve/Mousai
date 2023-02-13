@@ -5,13 +5,14 @@
 # Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022.
 # Kaz Sibuya <sibuyakazokuu@gmail.com>, 2021.
 # Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
+# kj7kt <yyhuton@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-07-26 16:20+0000\n"
-"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"PO-Revision-Date: 2023-02-13 15:36+0000\n"
+"Last-Translator: kj7kt <yyhuton@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
 "Language: ja\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -56,7 +57,7 @@ msgstr "最近識別した曲を含みます"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "録音に使用する好みの音源"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -235,7 +236,7 @@ msgstr "コントロール"
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "聞き取りを切り替え"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
@@ -303,7 +304,8 @@ msgstr ""
 "小山田 純,\n"
 "Ryo Nakano,\n"
 "Kaz Sibuya,\n"
-"Kisaragi Hiu"
+"Kisaragi Hiu,\n"
+"kj7kt"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
@@ -374,11 +376,11 @@ msgstr "毎日のリミットに達しました。"
 
 #: src/recognizer/provider/aud_d/response.rs:116
 msgid "Failed to fingerprint audio. There may be no sound heard."
-msgstr ""
+msgstr "音声を追跡できません。音声が聞こえない可能性があります。"
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
-msgstr ""
+msgstr "{}の不正なステータスレスポンスが発生しました"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
