@@ -46,7 +46,7 @@ use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
 static THREAD_POOL: Lazy<glib::ThreadPool> = Lazy::new(|| glib::ThreadPool::shared(None).unwrap());
 
-fn main() {
+fn main() -> glib::ExitCode {
     tracing_subscriber::fmt::init();
 
     gettextrs::setlocale(LocaleCategory::LcAll, "");
@@ -61,5 +61,5 @@ fn main() {
     gio::resources_register(&res);
 
     let app = Application::new();
-    app.run();
+    app.run()
 }
