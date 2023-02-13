@@ -109,12 +109,12 @@ impl Application {
         }
     }
 
-    pub fn run(&self) {
+    pub fn run(&self) -> glib::ExitCode {
         tracing::info!("Mousai ({})", APP_ID);
         tracing::info!("Version: {} ({})", VERSION, PROFILE);
         tracing::info!("Datadir: {}", PKGDATADIR);
 
-        ApplicationExtManual::run(self);
+        ApplicationExtManual::run(self)
     }
 
     fn main_window(&self) -> Option<Window> {
