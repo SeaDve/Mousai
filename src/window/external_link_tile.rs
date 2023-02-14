@@ -5,18 +5,19 @@ use crate::model::ExternalLinkWrapper;
 
 mod imp {
     use super::*;
-    use glib::WeakRef;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::ExternalLinkTile)]
     #[template(resource = "/io/github/seadve/Mousai/ui/external-link-tile.ui")]
     pub struct ExternalLinkTile {
+        /// Link shown by Self
+        #[property(get, set, construct_only)]
+        pub(super) external_link: OnceCell<ExternalLinkWrapper>,
+
         #[template_child]
         pub(super) image: TemplateChild<gtk::Image>,
         #[template_child]
         pub(super) label: TemplateChild<gtk::Label>,
-
-        pub(super) external_link: OnceCell<WeakRef<ExternalLinkWrapper>>,
     }
 
     #[glib::object_subclass]
@@ -35,37 +36,7 @@ mod imp {
     }
 
     impl ObjectImpl for ExternalLinkTile {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Link represented by Self
-                    glib::ParamSpecObject::builder::<ExternalLinkWrapper>("external-link")
-                        .construct_only()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            match pspec.name() {
-                "external-link" => {
-                    let external_link: ExternalLinkWrapper = value.get().unwrap();
-                    self.external_link.set(external_link.downgrade()).unwrap();
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "external-link" => obj.external_link().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
@@ -96,9 +67,5 @@ impl ExternalLinkTile {
         glib::Object::builder()
             .property("external-link", external_link)
             .build()
-    }
-
-    pub fn external_link(&self) -> ExternalLinkWrapper {
-        self.imp().external_link.get().unwrap().upgrade().unwrap()
     }
 }

@@ -614,9 +614,9 @@ dependencies = [
 
 [[package]]
 name = "gstreamer-video"
-version = "0.20.0"
+version = "0.20.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "47b13459c5d8d0a28b7af67faac22d660a36c2f1b1054e51568afb3685d1701c"
+checksum = "5f74a5a277e91afde7f049174e6c84cfe670c7ae424a4a15ab309e60f25336f7"
 dependencies = [
  "bitflags",
  "cfg-if",
@@ -745,9 +745,9 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "libadwaita"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "674cbf1bd796f3d4f0c24466c15d91180e33e497ae2e07eea3f3d545468dc839"
+checksum = "b1c4efd2020a4fcedbad2c4a97de97bf6045e5dc49d61d5a5d0cfd753db60700"
 dependencies = [
  "bitflags",
  "futures-channel",
