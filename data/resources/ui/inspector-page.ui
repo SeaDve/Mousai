@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiInspectorPage" parent="GtkWidget">
+  <template class="MsaiInspectorPage">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>
