@@ -32,11 +32,18 @@ const GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY: &str = "mousai-grid-list-item-expre
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::HistoryView)]
     #[template(resource = "/io/github/seadve/Mousai/ui/history-view.ui")]
     pub struct HistoryView {
+        /// Whether selection mode is active
+        #[property(get)]
+        pub(super) selection_mode_active: Cell<bool>,
+        /// Current adaptive mode
+        #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+
         #[template_child]
         pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -68,9 +75,6 @@ mod imp {
         #[template_child]
         pub(super) empty_search_page: TemplateChild<adw::StatusPage>,
 
-        pub(super) is_selection_mode_active: Cell<bool>,
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
-
         pub(super) player: OnceCell<WeakRef<Player>>,
         pub(super) song_list: OnceCell<WeakRef<SongList>>,
         pub(super) filter_model: OnceCell<WeakRef<gtk::FilterListModel>>,
@@ -97,7 +101,7 @@ mod imp {
                 // before unselecting all, but it prevents flickering when cancelling
                 // selection mode; probably, because we also set selection mode
                 // on selection change callback.
-                let is_selection_mode_active = obj.is_selection_mode_active();
+                let is_selection_mode_active = obj.selection_mode_active();
                 obj.unselect_all();
                 obj.set_selection_mode_active(!is_selection_mode_active);
             });
@@ -146,44 +150,7 @@ mod imp {
     }
 
     impl ObjectImpl for HistoryView {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Whether selection mode is active
-                    glib::ParamSpecBoolean::builder("selection-mode-active")
-                        .read_only()
-                        .build(),
-                    // Current adapative mode
-                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "adaptive-mode" => {
-                    let adaptive_mode = value.get().unwrap();
-                    obj.set_adaptive_mode(adaptive_mode);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "selection-mode-active" => obj.is_selection_mode_active().to_value(),
-                "adaptive-mode" => obj.adaptive_mode().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
@@ -215,6 +182,19 @@ mod imp {
     }
 
     impl WidgetImpl for HistoryView {}
+
+    impl HistoryView {
+        fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+            let obj = self.obj();
+
+            if adaptive_mode == obj.adaptive_mode() {
+                return;
+            }
+
+            self.adaptive_mode.set(adaptive_mode);
+            obj.notify_adaptive_mode();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -225,30 +205,6 @@ glib::wrapper! {
 impl HistoryView {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn connect_selection_mode_active_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("selection-mode-active"), move |obj, _| f(obj))
-    }
-
-    pub fn is_selection_mode_active(&self) -> bool {
-        self.imp().is_selection_mode_active.get()
-    }
-
-    pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
-        if adaptive_mode == self.adaptive_mode() {
-            return;
-        }
-
-        self.imp().adaptive_mode.set(adaptive_mode);
-        self.notify("adaptive-mode");
-    }
-
-    pub fn adaptive_mode(&self) -> AdaptiveMode {
-        self.imp().adaptive_mode.get()
     }
 
     pub fn stop_selection_mode(&self) {
@@ -435,7 +391,7 @@ impl HistoryView {
         // FIXME save selection even when the song are filtered from FilterListModel
         let selection_model = gtk::MultiSelection::new(Some(sort_model));
         selection_model.connect_selection_changed(clone!(@weak self as obj => move |model, _, _| {
-            if obj.is_selection_mode_active() {
+            if obj.selection_mode_active() {
                 if model.selection().size() == 0 {
                     obj.set_selection_mode_active(false);
                 }
@@ -444,7 +400,7 @@ impl HistoryView {
             }
         }));
         selection_model.connect_items_changed(clone!(@weak self as obj => move |model, _, _, _| {
-            if obj.is_selection_mode_active() {
+            if obj.selection_mode_active() {
                 if model.selection().size() == 0 {
                     obj.set_selection_mode_active(false);
                 }
@@ -591,17 +547,17 @@ impl HistoryView {
     }
 
     fn set_selection_mode_active(&self, is_selection_mode_active: bool) {
-        if is_selection_mode_active == self.is_selection_mode_active() {
+        if is_selection_mode_active == self.selection_mode_active() {
             return;
         }
 
         self.imp()
-            .is_selection_mode_active
+            .selection_mode_active
             .set(is_selection_mode_active);
         self.update_selection_mode_ui();
         self.update_selection_actions();
 
-        self.notify("selection-mode-active");
+        self.notify_selection_mode_active();
     }
 
     fn show_undo_remove_toast(&self) {
@@ -653,7 +609,7 @@ impl HistoryView {
 
     fn update_selection_mode_ui(&self) {
         let imp = self.imp();
-        let is_selection_mode_active = self.is_selection_mode_active();
+        let is_selection_mode_active = self.selection_mode_active();
 
         if is_selection_mode_active {
             imp.header_bar_stack

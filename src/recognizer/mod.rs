@@ -40,11 +40,18 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::Recognizer)]
     pub struct Recognizer {
+        /// Current state
+        #[property(get, builder(RecognizerState::default()))]
         pub(super) state: Cell<RecognizerState>,
+        /// Active recording
+        #[property(get)]
         pub(super) recording: RefCell<Option<AudioRecording>>,
-        pub(super) is_offline_mode: Cell<bool>,
+        /// Whether offline mode is active
+        #[property(get)]
+        pub(super) offline_mode: Cell<bool>,
 
         pub(super) saved_recordings: RefCell<Vec<AudioRecording>>,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
@@ -57,37 +64,7 @@ mod imp {
     }
 
     impl ObjectImpl for Recognizer {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Current state of Self
-                    glib::ParamSpecEnum::builder::<RecognizerState>("state")
-                        .read_only()
-                        .build(),
-                    // Active recording
-                    glib::ParamSpecObject::builder::<AudioRecording>("recording")
-                        .read_only()
-                        .build(),
-                    // Whether offline mode is active
-                    glib::ParamSpecBoolean::builder("offline-mode")
-                        .read_only()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "state" => obj.state().to_value(),
-                "recording" => obj.recording().to_value(),
-                "offline-mode" => obj.is_offline_mode().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
@@ -137,35 +114,6 @@ impl Recognizer {
         glib::Object::new()
     }
 
-    pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("state"), move |obj, _| f(obj))
-    }
-
-    pub fn state(&self) -> RecognizerState {
-        self.imp().state.get()
-    }
-
-    pub fn connect_recording_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("recording"), move |obj, _| f(obj))
-    }
-
-    pub fn recording(&self) -> Option<AudioRecording> {
-        self.imp().recording.borrow().clone()
-    }
-
-    pub fn connect_offline_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("offline-mode"), move |obj, _| f(obj))
-    }
-
     pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self, &Song) + 'static,
@@ -205,10 +153,6 @@ impl Recognizer {
         )
     }
 
-    pub fn is_offline_mode(&self) -> bool {
-        self.imp().is_offline_mode.get()
-    }
-
     pub async fn toggle_recognize(&self) -> Result<()> {
         let imp = self.imp();
 
@@ -241,7 +185,7 @@ impl Recognizer {
         }
 
         self.imp().recording.replace(recording);
-        self.notify("recording");
+        self.notify_recording();
     }
 
     async fn recognize(&self, cancellable: &gio::Cancellable) -> Result<()> {
@@ -305,7 +249,7 @@ impl Recognizer {
 
         recording.stop().context("Failed to stop recording")?;
 
-        if self.is_offline_mode() {
+        if self.offline_mode() {
             self.imp().saved_recordings.borrow_mut().push(recording);
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
@@ -335,7 +279,7 @@ impl Recognizer {
         }
 
         self.imp().state.set(state);
-        self.notify("state");
+        self.notify_state();
     }
 
     fn load_saved_recordings(&self) -> Result<()> {
@@ -368,7 +312,7 @@ impl Recognizer {
             return;
         }
 
-        if self.is_offline_mode() {
+        if self.offline_mode() {
             tracing::debug!(
                 "Offline mode is active, skipping recognition of {} saved recordings",
                 saved_recordings.len()
@@ -420,12 +364,12 @@ impl Recognizer {
     fn update_offline_mode(&self) {
         let is_offline_mode = !gio::NetworkMonitor::default().is_network_available();
 
-        if is_offline_mode == self.is_offline_mode() {
+        if is_offline_mode == self.offline_mode() {
             return;
         }
 
-        self.imp().is_offline_mode.set(is_offline_mode);
-        self.notify("offline-mode");
+        self.imp().offline_mode.set(is_offline_mode);
+        self.notify_offline_mode();
     }
 }
 
