@@ -1,6 +1,5 @@
 use anyhow::{anyhow, Result};
 use gtk::{glib, prelude::*, subclass::prelude::*};
-use once_cell::sync::Lazy;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{
@@ -17,25 +16,43 @@ use crate::{
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, Serialize, Deserialize)]
+    #[derive(Debug, Default, glib::Properties, Serialize, Deserialize)]
+    #[properties(wrapper_type = super::Song)]
     #[serde(default)]
-    pub(super) struct SongInner {
-        pub id: SongId,
-        pub last_heard: DateTime,
-        pub title: String,
-        pub artist: String,
-        pub album: String,
-        pub release_date: Option<String>,
-        pub external_links: ExternalLinkList,
-        pub album_art_link: Option<String>,
-        pub playback_link: Option<String>,
-        pub lyrics: Option<String>,
-    }
-
-    #[derive(Debug, Default)]
     pub struct Song {
-        pub(super) inner: RefCell<SongInner>,
-        pub(super) is_newly_heard: Cell<bool>,
+        /// Unique ID
+        #[property(get = Self::id, set, construct_only)]
+        pub(super) id: RefCell<SongId>,
+        /// Date and time when last heard
+        #[property(get, set = Self::set_last_heard, explicit_notify)]
+        pub(super) last_heard: RefCell<DateTime>,
+        /// Title of the song
+        #[property(get, set, construct_only)]
+        pub(super) title: RefCell<String>,
+        /// Artist of the song
+        #[property(get, set, construct_only)]
+        pub(super) artist: RefCell<String>,
+        /// Album where the song was from
+        #[property(get, set, construct_only)]
+        pub(super) album: RefCell<String>,
+        /// Arbitrary string for release date
+        #[property(get, set, construct_only)]
+        pub(super) release_date: RefCell<Option<String>>,
+        /// Links relevant to the song
+        #[property(get, set, construct_only)]
+        pub(super) external_links: RefCell<ExternalLinkList>,
+        /// Link where the album art can be downloaded
+        #[property(get, set, construct_only)]
+        pub(super) album_art_link: RefCell<Option<String>>,
+        /// Link to a sample of the song
+        #[property(get, set, construct_only)]
+        pub(super) playback_link: RefCell<Option<String>>,
+        /// Lyrics of the song
+        #[property(get, set = Self::set_lyrics, explicit_notify)]
+        pub(super) lyrics: RefCell<Option<String>>,
+        /// Whether the song was heard for the first time
+        #[property(get, set = Self::set_newly_heard, explicit_notify)]
+        pub(super) newly_heard: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -45,128 +62,49 @@ mod imp {
     }
 
     impl ObjectImpl for Song {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Unique ID
-                    glib::ParamSpecBoxed::builder::<SongId>("id")
-                        .construct_only()
-                        .build(),
-                    // DateTime when last heard
-                    glib::ParamSpecBoxed::builder::<DateTime>("last-heard")
-                        .explicit_notify()
-                        .build(),
-                    // Title of the song
-                    glib::ParamSpecString::builder("title")
-                        .construct_only()
-                        .build(),
-                    // Artist of the song
-                    glib::ParamSpecString::builder("artist")
-                        .construct_only()
-                        .build(),
-                    // Album where the song was from
-                    glib::ParamSpecString::builder("album")
-                        .construct_only()
-                        .build(),
-                    // Arbitrary string for release date
-                    glib::ParamSpecString::builder("release-date")
-                        .construct_only()
-                        .build(),
-                    // Links relevant to the song
-                    glib::ParamSpecObject::builder::<ExternalLinkList>("external-links")
-                        .construct_only()
-                        .build(),
-                    // Link where the album art can be downloaded
-                    glib::ParamSpecString::builder("album-art-link")
-                        .construct_only()
-                        .build(),
-                    // Link containing an excerpt of the song
-                    glib::ParamSpecString::builder("playback-link")
-                        .construct_only()
-                        .build(),
-                    // Lyrics of the song
-                    glib::ParamSpecString::builder("lyrics")
-                        .explicit_notify()
-                        .build(),
-                    // Whether the song was heard for the first time
-                    glib::ParamSpecBoolean::builder("newly-heard")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
+        crate::derived_properties!();
+    }
 
-            PROPERTIES.as_ref()
+    impl Song {
+        fn id(&self) -> SongId {
+            let id = self.id.borrow().clone();
+
+            if id.is_default() {
+                tracing::warn!(
+                    "SongId was found in default. It should have been set on the construct."
+                );
+            }
+
+            id
         }
 
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+        fn set_last_heard(&self, value: DateTime) {
             let obj = self.obj();
 
-            match pspec.name() {
-                "id" => {
-                    let id = value.get().unwrap();
-                    self.inner.borrow_mut().id = id;
-                }
-                "last-heard" => {
-                    let last_heard = value.get().unwrap();
-                    obj.set_last_heard(last_heard);
-                }
-                "title" => {
-                    let title = value.get().unwrap();
-                    self.inner.borrow_mut().title = title;
-                }
-                "artist" => {
-                    let artist = value.get().unwrap();
-                    self.inner.borrow_mut().artist = artist;
-                }
-                "album" => {
-                    let album = value.get().unwrap();
-                    self.inner.borrow_mut().album = album;
-                }
-                "release-date" => {
-                    let release_date = value.get().unwrap();
-                    self.inner.borrow_mut().release_date = release_date;
-                }
-                "external-links" => {
-                    let external_links = value.get().unwrap();
-                    self.inner.borrow_mut().external_links = external_links;
-                }
-                "album-art-link" => {
-                    let album_art_link = value.get().unwrap();
-                    self.inner.borrow_mut().album_art_link = album_art_link;
-                }
-                "playback-link" => {
-                    let playback_link = value.get().unwrap();
-                    self.inner.borrow_mut().playback_link = playback_link;
-                }
-                "lyrics" => {
-                    let lyrics = value.get().unwrap();
-                    obj.set_lyrics(lyrics);
-                }
-                "newly-heard" => {
-                    let is_newly_heard = value.get().unwrap();
-                    obj.set_newly_heard(is_newly_heard);
-                }
-                _ => unimplemented!(),
-            }
+            self.last_heard.replace(value);
+            obj.notify_last_heard();
         }
 
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+        fn set_lyrics(&self, value: Option<String>) {
             let obj = self.obj();
 
-            match pspec.name() {
-                "id" => obj.id().to_value(),
-                "last-heard" => obj.last_heard().to_value(),
-                "title" => obj.title().to_value(),
-                "artist" => obj.artist().to_value(),
-                "album" => obj.album().to_value(),
-                "release-date" => obj.release_date().to_value(),
-                "external-links" => obj.external_links().to_value(),
-                "album-art-link" => obj.album_art_link().to_value(),
-                "playback-link" => obj.playback_link().to_value(),
-                "lyrics" => obj.lyrics().to_value(),
-                "newly-heard" => obj.is_newly_heard().to_value(),
-                _ => unimplemented!(),
+            if value == obj.lyrics() {
+                return;
             }
+
+            self.lyrics.replace(value);
+            obj.notify_lyrics();
+        }
+
+        fn set_newly_heard(&self, value: bool) {
+            let obj = self.obj();
+
+            if value == obj.newly_heard() {
+                return;
+            }
+
+            self.newly_heard.set(value);
+            obj.notify_newly_heard();
         }
     }
 }
@@ -189,77 +127,6 @@ impl Song {
         format!("{}{}", self.title(), self.artist())
     }
 
-    pub fn id(&self) -> SongId {
-        let id = self.imp().inner.borrow().id.clone();
-
-        if id.is_default() {
-            tracing::warn!(
-                "SongId was found in default. It should have been set on the construct."
-            );
-        }
-
-        id
-    }
-
-    pub fn set_last_heard(&self, value: DateTime) {
-        self.imp().inner.borrow_mut().last_heard = value;
-        self.notify("last-heard");
-    }
-
-    pub fn last_heard(&self) -> DateTime {
-        self.imp().inner.borrow().last_heard.clone()
-    }
-
-    pub fn title(&self) -> String {
-        self.imp().inner.borrow().title.clone()
-    }
-
-    pub fn artist(&self) -> String {
-        self.imp().inner.borrow().artist.clone()
-    }
-
-    pub fn album(&self) -> String {
-        self.imp().inner.borrow().album.clone()
-    }
-
-    pub fn release_date(&self) -> Option<String> {
-        self.imp().inner.borrow().release_date.clone()
-    }
-
-    pub fn external_links(&self) -> ExternalLinkList {
-        self.imp().inner.borrow().external_links.clone()
-    }
-
-    pub fn album_art_link(&self) -> Option<String> {
-        self.imp().inner.borrow().album_art_link.clone()
-    }
-
-    pub fn playback_link(&self) -> Option<String> {
-        self.imp().inner.borrow().playback_link.clone()
-    }
-
-    pub fn set_lyrics(&self, value: Option<&str>) {
-        self.imp().inner.borrow_mut().lyrics = value.map(|lyrics| lyrics.to_string());
-        self.notify("lyrics");
-    }
-
-    pub fn lyrics(&self) -> Option<String> {
-        self.imp().inner.borrow().lyrics.clone()
-    }
-
-    pub fn is_newly_heard(&self) -> bool {
-        self.imp().is_newly_heard.get()
-    }
-
-    pub fn set_newly_heard(&self, value: bool) {
-        if value == self.is_newly_heard() {
-            return;
-        }
-
-        self.imp().is_newly_heard.set(value);
-        self.notify("newly-heard");
-    }
-
     pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
         let album_art_link = self
             .album_art_link()
@@ -273,24 +140,24 @@ impl Song {
 
 impl Serialize for Song {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        self.imp().inner.serialize(serializer)
+        self.imp().serialize(serializer)
     }
 }
 
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let deserialized_inner = imp::SongInner::deserialize(deserializer)?;
+        let deserialized_imp = imp::Song::deserialize(deserializer)?;
         Ok(glib::Object::builder()
-            .property("id", &deserialized_inner.id)
-            .property("last-heard", &deserialized_inner.last_heard)
-            .property("title", &deserialized_inner.title)
-            .property("artist", &deserialized_inner.artist)
-            .property("album", &deserialized_inner.album)
-            .property("release-date", &deserialized_inner.release_date)
-            .property("external-links", &deserialized_inner.external_links)
-            .property("album-art-link", &deserialized_inner.album_art_link)
-            .property("playback-link", &deserialized_inner.playback_link)
-            .property("lyrics", &deserialized_inner.lyrics)
+            .property("id", deserialized_imp.id.take())
+            .property("last-heard", deserialized_imp.last_heard.take())
+            .property("title", deserialized_imp.title.take())
+            .property("artist", deserialized_imp.artist.take())
+            .property("album", deserialized_imp.album.take())
+            .property("release-date", deserialized_imp.release_date.take())
+            .property("external-links", deserialized_imp.external_links.take())
+            .property("album-art-link", deserialized_imp.album_art_link.take())
+            .property("playback-link", deserialized_imp.playback_link.take())
+            .property("lyrics", deserialized_imp.lyrics.take())
             .build())
     }
 }
@@ -382,7 +249,7 @@ mod test {
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
-        assert!(song.is_newly_heard());
+        assert!(song.newly_heard());
     }
 
     #[test]
@@ -452,6 +319,6 @@ mod test {
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
 
-        assert!(!song.is_newly_heard());
+        assert!(!song.newly_heard());
     }
 }
