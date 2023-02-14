@@ -14,11 +14,19 @@ pub enum PlaybackButtonMode {
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
+    use std::marker::PhantomData;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::PlaybackButton)]
     #[template(resource = "/io/github/seadve/Mousai/ui/playback-button.ui")]
     pub struct PlaybackButton {
+        /// State or mode
+        #[property(get, set = Self::set_mode, explicit_notify, builder(PlaybackButtonMode::default()))]
+        pub(super) mode: Cell<PlaybackButtonMode>,
+        /// Name of the action to trigger when clicked
+        #[property(get = Self::action_name, set = Self::set_action_name, explicit_notify)]
+        pub(super) action_name: PhantomData<Option<glib::GString>>,
+
         #[template_child]
         pub(super) button: TemplateChild<gtk::Button>,
         #[template_child]
@@ -27,8 +35,6 @@ mod imp {
         pub(super) image_child: TemplateChild<gtk::Image>,
         #[template_child]
         pub(super) spinner_child: TemplateChild<gtk::Spinner>,
-
-        pub(super) mode: Cell<PlaybackButtonMode>,
     }
 
     #[glib::object_subclass]
@@ -50,48 +56,7 @@ mod imp {
     }
 
     impl ObjectImpl for PlaybackButton {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // State or mode of the button
-                    glib::ParamSpecEnum::builder::<PlaybackButtonMode>("mode")
-                        .explicit_notify()
-                        .build(),
-                    // Name of the action to trigger when clicked
-                    glib::ParamSpecString::builder("action-name")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "mode" => {
-                    let mode = value.get().unwrap();
-                    obj.set_mode(mode);
-                }
-                "action-name" => {
-                    let action_name = value.get().unwrap();
-                    obj.set_action_name(action_name);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "mode" => obj.mode().to_value(),
-                "action-name" => obj.action_name().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
@@ -107,6 +72,29 @@ mod imp {
     }
 
     impl WidgetImpl for PlaybackButton {}
+
+    impl PlaybackButton {
+        fn set_mode(&self, mode: PlaybackButtonMode) {
+            let obj = self.obj();
+
+            if mode == obj.mode() {
+                return;
+            }
+
+            self.mode.set(mode);
+            obj.update_ui();
+            obj.notify_mode();
+        }
+
+        fn action_name(&self) -> Option<glib::GString> {
+            self.button.action_name()
+        }
+
+        fn set_action_name(&self, action_name: Option<&str>) {
+            self.button.set_action_name(action_name);
+            self.obj().notify_action_name();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -117,29 +105,6 @@ glib::wrapper! {
 impl PlaybackButton {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn set_mode(&self, mode: PlaybackButtonMode) {
-        if mode == self.mode() {
-            return;
-        }
-
-        self.imp().mode.set(mode);
-        self.update_ui();
-        self.notify("mode");
-    }
-
-    pub fn mode(&self) -> PlaybackButtonMode {
-        self.imp().mode.get()
-    }
-
-    pub fn set_action_name(&self, action_name: Option<&str>) {
-        self.imp().button.set_action_name(action_name);
-        self.notify("action-name");
-    }
-
-    pub fn action_name(&self) -> Option<glib::GString> {
-        self.imp().button.action_name()
     }
 
     fn update_ui(&self) {

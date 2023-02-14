@@ -12,11 +12,19 @@ const INSPECTOR_TITLE: &str = "Mousai";
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
+    use std::marker::PhantomData;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::InspectorPage)]
     #[template(resource = "/io/github/seadve/Mousai/ui/inspector-page.ui")]
     pub struct InspectorPage {
+        /// Title of this inspector page
+        #[property(get = |_| INSPECTOR_TITLE.to_string())]
+        pub(super) title: PhantomData<String>,
+        /// Required property for gtk-inspector-page
+        #[property(get, set)]
+        pub(super) object: RefCell<Option<glib::Object>>,
+
         #[template_child]
         pub(super) provider_row: TemplateChild<adw::ComboRow>,
         #[template_child]
@@ -29,8 +37,6 @@ mod imp {
         pub(super) test_recognize_duration_row: TemplateChild<adw::ActionRow>,
         #[template_child]
         pub(super) test_recognize_duration_button: TemplateChild<gtk::SpinButton>,
-
-        pub(super) object: RefCell<Option<glib::Object>>,
     }
 
     #[glib::object_subclass]
@@ -49,39 +55,7 @@ mod imp {
     }
 
     impl ObjectImpl for InspectorPage {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Title of this inspector page
-                    glib::ParamSpecString::builder("title")
-                        .default_value(Some(INSPECTOR_TITLE))
-                        .read_only()
-                        .build(),
-                    // Property needed as a gtk-inspector-page
-                    glib::ParamSpecObject::builder::<glib::Object>("object").build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            match pspec.name() {
-                "object" => {
-                    let object = value.get().unwrap();
-                    self.object.replace(object);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            match pspec.name() {
-                "title" => INSPECTOR_TITLE.to_value(),
-                "object" => self.object.borrow().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
