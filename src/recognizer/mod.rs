@@ -330,6 +330,7 @@ impl Recognizer {
             let mut recognized = Vec::new();
             let mut to_return = Vec::new();
 
+            // TODO only take when recognized successfully
             for audio in imp.saved_recordings.take() {
                 match provider.recognize(&audio).await {
                     Ok(song) => {
