@@ -35,11 +35,11 @@ macro_rules! derived_properties {
         }
 
         fn set_property(&self, id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            Self::derived_set_property(self, id, value, pspec);
+            self.derived_set_property(id, value, pspec);
         }
 
         fn property(&self, id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            Self::derived_property(self, id, pspec)
+            self.derived_property(id, pspec)
         }
     };
 }
