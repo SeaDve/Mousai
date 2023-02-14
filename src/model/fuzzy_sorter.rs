@@ -100,7 +100,7 @@ mod tests {
         song
     }
 
-    #[test]
+    #[gtk::test]
     fn compare() {
         let sorter = FuzzySorter::new();
 
