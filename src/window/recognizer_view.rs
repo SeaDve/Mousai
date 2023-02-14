@@ -138,7 +138,7 @@ impl RecognizerView {
 
     fn update_offline_mode_ui(&self) {
         let imp = self.imp();
-        let is_offline_mode = self.recognizer().is_offline_mode();
+        let is_offline_mode = self.recognizer().offline_mode();
 
         imp.offline_mode_status.set_visible(is_offline_mode);
 

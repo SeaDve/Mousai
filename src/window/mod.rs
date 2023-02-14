@@ -387,7 +387,7 @@ impl Window {
     fn update_song_bar_revealer(&self) {
         let imp = self.imp();
         imp.song_bar_revealer.set_reveal_child(
-            self.player().song().is_some() && !imp.main_view.is_selection_mode_active(),
+            self.player().song().is_some() && !imp.main_view.selection_mode_active(),
         );
     }
 }
@@ -408,7 +408,7 @@ impl Window {
                 return true;
             }
 
-            if imp.main_view.is_selection_mode_active() {
+            if imp.main_view.selection_mode_active() {
                 imp.main_view.stop_selection_mode();
                 return true;
             }
