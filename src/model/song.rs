@@ -158,6 +158,7 @@ impl<'de> Deserialize<'de> for Song {
             .property("album-art-link", deserialized_imp.album_art_link.take())
             .property("playback-link", deserialized_imp.playback_link.take())
             .property("lyrics", deserialized_imp.lyrics.take())
+            .property("newly-heard", deserialized_imp.newly_heard.take())
             .build())
     }
 }
