@@ -14,10 +14,15 @@ mod imp {
     use super::*;
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
+    use std::marker::PhantomData;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::RecognizedPageTile)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page-tile.ui")]
     pub struct RecognizedPageTile {
+        #[property(get = Self::song, set = Self::set_song, construct_only)]
+        pub(super) song: PhantomData<Song>,
+
         #[template_child]
         pub(super) last_heard_label: TemplateChild<gtk::Label>,
         #[template_child]
@@ -44,36 +49,7 @@ mod imp {
     }
 
     impl ObjectImpl for RecognizedPageTile {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![glib::ParamSpecObject::builder::<Song>("song")
-                    .construct_only()
-                    .build()]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => {
-                    let song = value.get().unwrap();
-                    obj.set_song(song);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => obj.song().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> =
@@ -110,6 +86,22 @@ mod imp {
     }
 
     impl WidgetImpl for RecognizedPageTile {}
+
+    impl RecognizedPageTile {
+        fn song(&self) -> Song {
+            self.song_tile.song().unwrap()
+        }
+
+        fn set_song(&self, song: &Song) {
+            let binding = song
+                .bind_property("last-heard", &self.last_heard_label.get(), "label")
+                .transform_to(|_, last_heard: DateTime| Some(last_heard.fuzzy_display()))
+                .sync_create()
+                .build();
+            self.binding.replace(Some(binding));
+            self.song_tile.set_song(Some(song.clone()));
+        }
+    }
 }
 
 glib::wrapper! {
@@ -120,10 +112,6 @@ glib::wrapper! {
 impl RecognizedPageTile {
     pub fn new(song: &Song) -> Self {
         glib::Object::builder().property("song", song).build()
-    }
-
-    pub fn song(&self) -> Song {
-        self.imp().song_tile.song().unwrap()
     }
 
     pub fn connect_activated<F>(&self, f: F) -> glib::SignalHandlerId
@@ -146,16 +134,5 @@ impl RecognizedPageTile {
 
     pub fn unbind_player(&self) {
         self.imp().song_tile.unbind_player();
-    }
-
-    fn set_song(&self, song: &Song) {
-        let imp = self.imp();
-        let binding = song
-            .bind_property("last-heard", &imp.last_heard_label.get(), "label")
-            .transform_to(|_, last_heard: DateTime| Some(last_heard.fuzzy_display()))
-            .sync_create()
-            .build();
-        imp.binding.replace(Some(binding));
-        imp.song_tile.set_song(Some(song.clone()));
     }
 }
