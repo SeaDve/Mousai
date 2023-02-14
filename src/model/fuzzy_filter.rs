@@ -108,7 +108,7 @@ mod tests {
 
     use crate::model::SongId;
 
-    #[test]
+    #[gtk::test]
     fn strictness() {
         let filter = FuzzyFilter::new();
         assert_eq!(filter.strictness(), gtk::FilterMatch::All);
@@ -123,7 +123,7 @@ mod tests {
         assert_eq!(filter.strictness(), gtk::FilterMatch::All);
     }
 
-    #[test]
+    #[gtk::test]
     fn match_() {
         let filter = FuzzyFilter::new();
         assert!(filter.match_(&Song::builder(&SongId::from("0"), "foo", "foo", "").build()));
@@ -142,7 +142,7 @@ mod tests {
         assert!(filter.match_(&Song::builder(&SongId::from("7"), "bar", "bar", "").build()));
     }
 
-    #[test]
+    #[gtk::test]
     fn changed() {
         let filter = FuzzyFilter::new();
 
