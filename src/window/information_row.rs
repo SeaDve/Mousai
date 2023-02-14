@@ -5,15 +5,19 @@ use std::cell::RefCell;
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::InformationRow)]
     #[template(resource = "/io/github/seadve/Mousai/ui/information-row.ui")]
     pub struct InformationRow {
+        /// Value of the information
+        ///
+        /// If this is empty, self will be hidden.
+        #[property(get, set = Self::set_value, explicit_notify)]
+        pub(super) value: RefCell<String>,
+
         #[template_child]
         pub(super) value_label: TemplateChild<gtk::Label>,
-
-        pub(super) value: RefCell<Option<String>>,
     }
 
     #[glib::object_subclass]
@@ -32,40 +36,7 @@ mod imp {
     }
 
     impl ObjectImpl for InformationRow {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // The value of the information. If this is None or
-                    // empty, self will be hidden.
-                    glib::ParamSpecString::builder("value")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "value" => {
-                    let value = value.get().unwrap();
-                    obj.set_value(value);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "value" => obj.value().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
@@ -82,6 +53,20 @@ mod imp {
     impl ListBoxRowImpl for InformationRow {}
     impl PreferencesRowImpl for InformationRow {}
     impl ActionRowImpl for InformationRow {}
+
+    impl InformationRow {
+        fn set_value(&self, value: String) {
+            let obj = self.obj();
+
+            if value == obj.value() {
+                return;
+            }
+
+            self.value.replace(value);
+            obj.update_ui();
+            obj.notify_value();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -94,27 +79,10 @@ impl InformationRow {
         glib::Object::new()
     }
 
-    pub fn set_value(&self, value: Option<&str>) {
-        if value == self.value().as_deref() {
-            return;
-        }
-
-        self.imp()
-            .value
-            .replace(value.map(|value| value.to_string()));
-        self.update_ui();
-        self.notify("value");
-    }
-
-    pub fn value(&self) -> Option<String> {
-        self.imp().value.borrow().clone()
-    }
-
     fn update_ui(&self) {
-        let value = self.value().filter(|value| !value.is_empty());
-
-        self.set_visible(value.is_some());
-        self.imp().value_label.set_text(&value.unwrap_or_default());
+        let value = self.value();
+        self.set_visible(!value.trim().is_empty());
+        self.imp().value_label.set_text(&value);
     }
 }
 

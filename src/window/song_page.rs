@@ -368,12 +368,14 @@ impl SongPage {
 
         imp.last_heard_row.set_value(
             song.map(|song| song.last_heard().fuzzy_display())
-                .as_deref(),
+                .unwrap_or_default(),
         );
         imp.album_row
-            .set_value(song.map(|song| song.album()).as_deref());
-        imp.release_date_row
-            .set_value(song.and_then(|song| song.release_date()).as_deref());
+            .set_value(song.map(|song| song.album()).unwrap_or_default());
+        imp.release_date_row.set_value(
+            song.and_then(|song| song.release_date())
+                .unwrap_or_default(),
+        );
     }
 
     fn update_album_cover_size(&self) {
