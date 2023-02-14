@@ -32,10 +32,9 @@ const GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY: &str = "mousai-grid-list-item-expre
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/history-view.ui")]
     pub struct HistoryView {
         #[template_child]
@@ -425,8 +424,8 @@ impl HistoryView {
         imp.search_entry.connect_search_changed(
             clone!(@weak self as obj, @weak filter, @weak sorter => move |search_entry| {
                 let text = search_entry.text();
-                filter.set_search(&text);
-                sorter.set_search(&text);
+                filter.set_search(text.as_str());
+                sorter.set_search(text);
                 obj.update_history_stack_visible_child();
             }),
         );

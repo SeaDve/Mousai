@@ -5,10 +5,9 @@ use std::cell::RefCell;
 
 mod imp {
     use super::*;
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/information-row.ui")]
     pub struct InformationRow {
         #[template_child]

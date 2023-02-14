@@ -6,16 +6,31 @@ use crate::core::ClockTime;
 
 mod imp {
     use super::*;
-    use gtk::CompositeTemplate;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::TimeLabel)]
     #[template(resource = "/io/github/seadve/Mousai/ui/time-label.ui")]
     pub struct TimeLabel {
+        /// Time shown by Self
+        #[property(get, set = Self::set_time, explicit_notify)]
+        pub(super) time: Cell<ClockTime>,
+
         #[template_child]
         pub(super) label: TemplateChild<gtk::Label>,
+    }
 
-        pub(super) time: Cell<ClockTime>,
+    impl TimeLabel {
+        fn set_time(&self, time: ClockTime) {
+            let obj = self.obj();
+
+            if time == obj.time() {
+                return;
+            }
+
+            self.time.set(time);
+            obj.update_label();
+            obj.notify_time();
+        }
     }
 
     #[glib::object_subclass]
@@ -36,39 +51,7 @@ mod imp {
     }
 
     impl ObjectImpl for TimeLabel {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Time shown by Self
-                    glib::ParamSpecBoxed::builder::<ClockTime>("time")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "time" => {
-                    let time = value.get().unwrap();
-                    obj.set_time(time);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "time" => obj.time().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
@@ -92,20 +75,6 @@ glib::wrapper! {
 impl TimeLabel {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn set_time(&self, time: ClockTime) {
-        if time == self.time() {
-            return;
-        }
-
-        self.imp().time.set(time);
-        self.update_label();
-        self.notify("time");
-    }
-
-    pub fn time(&self) -> ClockTime {
-        self.imp().time.get()
     }
 
     pub fn reset(&self) {

@@ -11,10 +11,15 @@ use super::{Song, FUZZY_MATCHER};
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::FuzzySorter)]
     pub struct FuzzySorter {
+        /// Search term
+        ///
+        /// If search is empty, the sorter will sort by last heard.
+        /// Otherwise, it will sort by the fuzzy match score.
+        #[property(get, set = Self::set_search, explicit_notify)]
         pub(super) search: RefCell<String>,
     }
 
@@ -26,39 +31,7 @@ mod imp {
     }
 
     impl ObjectImpl for FuzzySorter {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // A search term
-                    glib::ParamSpecString::builder("search")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "search" => {
-                    let search = value.get().unwrap();
-                    obj.set_search(search);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "search" => obj.search().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
     }
 
     impl SorterImpl for FuzzySorter {
@@ -81,6 +54,20 @@ mod imp {
             gtk::SorterOrder::Partial
         }
     }
+
+    impl FuzzySorter {
+        fn set_search(&self, search: String) {
+            let obj = self.obj();
+
+            if search == obj.search() {
+                return;
+            }
+
+            self.search.replace(search);
+            obj.changed(gtk::SorterChange::Different);
+            obj.notify_search();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -92,22 +79,6 @@ glib::wrapper! {
 impl FuzzySorter {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn search(&self) -> String {
-        self.imp().search.borrow().clone()
-    }
-
-    /// If search is empty, the sorter will sort by last heard.
-    /// Otherwise, it will sort by the fuzzy match score.
-    pub fn set_search(&self, search: &str) {
-        if search == self.search() {
-            return;
-        }
-
-        self.imp().search.replace(search.to_string());
-        self.changed(gtk::SorterChange::Different);
-        self.notify("search");
     }
 }
 

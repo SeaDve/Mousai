@@ -13,10 +13,9 @@ use crate::{core::DateTime, model::Song, player::Player};
 mod imp {
     use super::*;
     use glib::subclass::Signal;
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page-tile.ui")]
     pub struct RecognizedPageTile {
         #[template_child]
