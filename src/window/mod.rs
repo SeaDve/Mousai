@@ -319,7 +319,7 @@ impl Window {
                 let history = obj.history();
 
                 if !history.contains(&song.id()) {
-                    song.set_newly_heard(true);
+                    song.set_is_newly_heard(true);
                 }
 
                 history.append(song.clone());
@@ -335,7 +335,7 @@ impl Window {
 
                 for song in songs {
                     if !history.contains(&song.id()) {
-                        song.set_newly_heard(true);
+                        song.set_is_newly_heard(true);
                     }
                 }
 
@@ -365,10 +365,11 @@ impl Window {
                 obj.imp().main_view.push_song_page(song);
             }));
 
-        imp.main_view
-            .connect_selection_mode_active_notify(clone!(@weak self as obj => move |_| {
+        imp.main_view.connect_is_selection_mode_active_notify(
+            clone!(@weak self as obj => move |_| {
                 obj.update_song_bar_revealer();
-            }));
+            }),
+        );
 
         imp.stack
             .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
@@ -387,7 +388,7 @@ impl Window {
     fn update_song_bar_revealer(&self) {
         let imp = self.imp();
         imp.song_bar_revealer.set_reveal_child(
-            self.player().song().is_some() && !imp.main_view.selection_mode_active(),
+            self.player().song().is_some() && !imp.main_view.is_selection_mode_active(),
         );
     }
 }
@@ -408,7 +409,7 @@ impl Window {
                 return true;
             }
 
-            if imp.main_view.selection_mode_active() {
+            if imp.main_view.is_selection_mode_active() {
                 imp.main_view.stop_selection_mode();
                 return true;
             }

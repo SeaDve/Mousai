@@ -51,7 +51,7 @@ mod imp {
         pub(super) recording: RefCell<Option<AudioRecording>>,
         /// Whether offline mode is active
         #[property(get)]
-        pub(super) offline_mode: Cell<bool>,
+        pub(super) is_offline_mode: Cell<bool>,
 
         pub(super) saved_recordings: RefCell<Vec<AudioRecording>>,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
@@ -249,7 +249,7 @@ impl Recognizer {
 
         recording.stop().context("Failed to stop recording")?;
 
-        if self.offline_mode() {
+        if self.is_offline_mode() {
             self.imp().saved_recordings.borrow_mut().push(recording);
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
@@ -312,7 +312,7 @@ impl Recognizer {
             return;
         }
 
-        if self.offline_mode() {
+        if self.is_offline_mode() {
             tracing::debug!(
                 "Offline mode is active, skipping recognition of {} saved recordings",
                 saved_recordings.len()
@@ -365,12 +365,12 @@ impl Recognizer {
     fn update_offline_mode(&self) {
         let is_offline_mode = !gio::NetworkMonitor::default().is_network_available();
 
-        if is_offline_mode == self.offline_mode() {
+        if is_offline_mode == self.is_offline_mode() {
             return;
         }
 
-        self.imp().offline_mode.set(is_offline_mode);
-        self.notify_offline_mode();
+        self.imp().is_offline_mode.set(is_offline_mode);
+        self.notify_is_offline_mode();
     }
 }
 

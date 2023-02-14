@@ -52,7 +52,7 @@ mod imp {
         pub(super) lyrics: RefCell<Option<String>>,
         /// Whether the song was heard for the first time
         #[property(get, set = Self::set_newly_heard, explicit_notify)]
-        pub(super) newly_heard: Cell<bool>,
+        pub(super) is_newly_heard: Cell<bool>,
     }
 
     #[glib::object_subclass]
@@ -99,12 +99,12 @@ mod imp {
         fn set_newly_heard(&self, value: bool) {
             let obj = self.obj();
 
-            if value == obj.newly_heard() {
+            if value == obj.is_newly_heard() {
                 return;
             }
 
-            self.newly_heard.set(value);
-            obj.notify_newly_heard();
+            self.is_newly_heard.set(value);
+            obj.notify_is_newly_heard();
         }
     }
 }
@@ -158,7 +158,7 @@ impl<'de> Deserialize<'de> for Song {
             .property("album-art-link", deserialized_imp.album_art_link.take())
             .property("playback-link", deserialized_imp.playback_link.take())
             .property("lyrics", deserialized_imp.lyrics.take())
-            .property("newly-heard", deserialized_imp.newly_heard.take())
+            .property("is-newly-heard", deserialized_imp.is_newly_heard.take())
             .build())
     }
 }
@@ -182,7 +182,7 @@ impl SongBuilder {
     }
 
     pub fn newly_heard(&mut self, value: bool) -> &mut Self {
-        self.properties.push(("newly-heard", value.to_value()));
+        self.properties.push(("is-newly-heard", value.to_value()));
         self
     }
 
@@ -250,7 +250,7 @@ mod test {
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
-        assert!(song.newly_heard());
+        assert!(song.is_newly_heard());
     }
 
     #[test]
@@ -320,6 +320,6 @@ mod test {
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
 
-        assert!(!song.newly_heard());
+        assert!(!song.is_newly_heard());
     }
 }
