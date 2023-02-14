@@ -45,11 +45,14 @@ pub enum AdaptiveMode {
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::Window)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
+        #[property(get, builder(AdaptiveMode::default()))]
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+
         #[template_child]
         pub(super) toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
@@ -62,8 +65,6 @@ mod imp {
         pub(super) song_bar_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
         pub(super) song_bar: TemplateChild<SongBar>,
-
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         pub(super) recognizer: Recognizer,
         pub(super) player: Player,
@@ -119,27 +120,7 @@ mod imp {
     }
 
     impl ObjectImpl for Window {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Current adapative mode
-                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
-                        .read_only()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "adaptive-mode" => obj.adaptive_mode().to_value(),
-                _ => unreachable!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
@@ -236,17 +217,6 @@ impl Window {
         self.imp().toast_overlay.add_toast(toast);
     }
 
-    pub fn connect_adaptive_mode_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("adaptive-mode"), move |obj, _| f(obj))
-    }
-
-    pub fn adaptive_mode(&self) -> AdaptiveMode {
-        self.imp().adaptive_mode.get()
-    }
-
     fn history(&self) -> &SongList {
         self.imp().history.get_or_init(|| {
             SongList::load_from_settings().unwrap_or_else(|err| {
@@ -322,7 +292,7 @@ impl Window {
         }
 
         self.imp().adaptive_mode.set(adaptive_mode);
-        self.notify("adaptive-mode");
+        self.notify_adaptive_mode();
     }
 
     fn setup_signals(&self) {

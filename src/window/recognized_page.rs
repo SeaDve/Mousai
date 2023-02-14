@@ -16,9 +16,13 @@ mod imp {
     use glib::{subclass::Signal, WeakRef};
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::RecognizedPage)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page.ui")]
     pub struct RecognizedPage {
+        #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+
         #[template_child]
         pub(super) title: TemplateChild<gtk::Label>,
         #[template_child]
@@ -26,7 +30,6 @@ mod imp {
         #[template_child]
         pub(super) carousel: TemplateChild<adw::Carousel>,
 
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
         pub(super) tiles: RefCell<Vec<RecognizedPageTile>>,
         pub(super) player: OnceCell<WeakRef<Player>>,
     }
@@ -47,38 +50,7 @@ mod imp {
     }
 
     impl ObjectImpl for RecognizedPage {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "adaptive-mode" => {
-                    let adaptive_mode = value.get().unwrap();
-                    obj.set_adaptive_mode(adaptive_mode);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "adaptive-mode" => obj.adaptive_mode().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
@@ -104,6 +76,20 @@ mod imp {
     }
 
     impl WidgetImpl for RecognizedPage {}
+
+    impl RecognizedPage {
+        fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+            let obj = self.obj();
+
+            if obj.adaptive_mode() == adaptive_mode {
+                return;
+            }
+
+            self.adaptive_mode.set(adaptive_mode);
+            obj.update_carousel_spacing();
+            obj.notify_adaptive_mode();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -114,20 +100,6 @@ glib::wrapper! {
 impl RecognizedPage {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
-        if self.adaptive_mode() == adaptive_mode {
-            return;
-        }
-
-        self.imp().adaptive_mode.set(adaptive_mode);
-        self.update_carousel_spacing();
-        self.notify("adaptive-mode");
-    }
-
-    pub fn adaptive_mode(&self) -> AdaptiveMode {
-        self.imp().adaptive_mode.get()
     }
 
     pub fn connect_song_activated<F>(&self, f: F) -> glib::SignalHandlerId
