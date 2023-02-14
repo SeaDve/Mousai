@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiPlaybackButton" parent="GtkWidget">
+  <template class="MsaiPlaybackButton">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>

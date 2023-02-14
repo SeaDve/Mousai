@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiAlbumCover" parent="GtkWidget">
+  <template class="MsaiAlbumCover">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>

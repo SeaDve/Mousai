@@ -39,7 +39,7 @@
       </item>
     </section>
   </menu>
-  <template class="MsaiHistoryView" parent="GtkWidget">
+  <template class="MsaiHistoryView">
     <property name="layout-manager">
       <object class="GtkBoxLayout">
         <property name="orientation">vertical</property>
