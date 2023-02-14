@@ -90,7 +90,7 @@ mod imp {
                         .read_only()
                         .build(),
                     // Current selection mode
-                    glib::ParamSpecBoolean::builder("selection-mode-active")
+                    glib::ParamSpecBoolean::builder("is-selection-mode-active")
                         .explicit_notify()
                         .build(),
                     // Whether to show select button on hover
@@ -119,7 +119,7 @@ mod imp {
                     let is_selected = value.get().unwrap();
                     obj.set_selected(is_selected);
                 }
-                "selection-mode-active" => {
+                "is-selection-mode-active" => {
                     let is_selection_mode_active = value.get().unwrap();
                     obj.set_selection_mode_active(is_selection_mode_active);
                 }
@@ -142,7 +142,7 @@ mod imp {
                 "song" => obj.song().to_value(),
                 "selected" => obj.is_selected().to_value(),
                 "active" => obj.is_active().to_value(),
-                "selection-mode-active" => obj.is_selection_mode_active().to_value(),
+                "is-selection-mode-active" => obj.is_selection_mode_active().to_value(),
                 "show-select-button-on-hover" => obj.shows_select_button_on_hover().to_value(),
                 "adaptive-mode" => obj.adaptive_mode().to_value(),
                 _ => unimplemented!(),
@@ -206,7 +206,7 @@ mod imp {
                 .unwrap();
 
             self.song_binding_group
-                .bind("newly-heard", &self.new_label.get(), "visible")
+                .bind("is-newly-heard", &self.new_label.get(), "visible")
                 .build();
 
             obj.update_select_button_visibility();
@@ -299,7 +299,7 @@ impl SongTile {
             .is_selection_mode_active
             .set(is_selection_mode_active);
         self.update_select_button_visibility();
-        self.notify("selection-mode-active");
+        self.notify("is-selection-mode-active");
     }
 
     pub fn is_selection_mode_active(&self) -> bool {

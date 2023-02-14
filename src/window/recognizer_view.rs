@@ -70,7 +70,7 @@ impl RecognizerView {
 
     /// Must be only called once
     pub fn bind_recognizer(&self, recognizer: &Recognizer) {
-        recognizer.connect_offline_mode_notify(clone!(@weak self as obj => move |_| {
+        recognizer.connect_is_offline_mode_notify(clone!(@weak self as obj => move |_| {
             obj.update_offline_mode_ui();
         }));
 
@@ -138,7 +138,7 @@ impl RecognizerView {
 
     fn update_offline_mode_ui(&self) {
         let imp = self.imp();
-        let is_offline_mode = self.recognizer().offline_mode();
+        let is_offline_mode = self.recognizer().is_offline_mode();
 
         imp.offline_mode_status.set_visible(is_offline_mode);
 

@@ -39,7 +39,7 @@ mod imp {
     pub struct HistoryView {
         /// Whether selection mode is active
         #[property(get)]
-        pub(super) selection_mode_active: Cell<bool>,
+        pub(super) is_selection_mode_active: Cell<bool>,
         /// Current adaptive mode
         #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
@@ -101,7 +101,7 @@ mod imp {
                 // before unselecting all, but it prevents flickering when cancelling
                 // selection mode; probably, because we also set selection mode
                 // on selection change callback.
-                let is_selection_mode_active = obj.selection_mode_active();
+                let is_selection_mode_active = obj.is_selection_mode_active();
                 obj.unselect_all();
                 obj.set_selection_mode_active(!is_selection_mode_active);
             });
@@ -314,7 +314,7 @@ impl HistoryView {
         imp.extra_stack_items.borrow_mut().push(song_page.upcast());
 
         // User is already aware of the newly recognized song, so unset it.
-        song.set_newly_heard(false);
+        song.set_is_newly_heard(false);
     }
 
     pub fn pop_stack_item(&self) {
@@ -391,7 +391,7 @@ impl HistoryView {
         // FIXME save selection even when the song are filtered from FilterListModel
         let selection_model = gtk::MultiSelection::new(Some(sort_model));
         selection_model.connect_selection_changed(clone!(@weak self as obj => move |model, _, _| {
-            if obj.selection_mode_active() {
+            if obj.is_selection_mode_active() {
                 if model.selection().size() == 0 {
                     obj.set_selection_mode_active(false);
                 }
@@ -400,7 +400,7 @@ impl HistoryView {
             }
         }));
         selection_model.connect_items_changed(clone!(@weak self as obj => move |model, _, _, _| {
-            if obj.selection_mode_active() {
+            if obj.is_selection_mode_active() {
                 if model.selection().size() == 0 {
                     obj.set_selection_mode_active(false);
                 }
@@ -547,17 +547,17 @@ impl HistoryView {
     }
 
     fn set_selection_mode_active(&self, is_selection_mode_active: bool) {
-        if is_selection_mode_active == self.selection_mode_active() {
+        if is_selection_mode_active == self.is_selection_mode_active() {
             return;
         }
 
         self.imp()
-            .selection_mode_active
+            .is_selection_mode_active
             .set(is_selection_mode_active);
         self.update_selection_mode_ui();
         self.update_selection_actions();
 
-        self.notify_selection_mode_active();
+        self.notify_is_selection_mode_active();
     }
 
     fn show_undo_remove_toast(&self) {
@@ -609,7 +609,7 @@ impl HistoryView {
 
     fn update_selection_mode_ui(&self) {
         let imp = self.imp();
-        let is_selection_mode_active = self.selection_mode_active();
+        let is_selection_mode_active = self.is_selection_mode_active();
 
         if is_selection_mode_active {
             imp.header_bar_stack
@@ -704,7 +704,7 @@ impl HistoryView {
             song_tile.bind_player(&obj.player());
 
             let selection_mode_active_binding = obj
-                .bind_property("selection-mode-active", &song_tile, "selection-mode-active")
+                .bind_property("is-selection-mode-active", &song_tile, "is-selection-mode-active")
                 .sync_create()
                 .build();
             let adaptive_mode_binding = obj
@@ -732,7 +732,7 @@ impl HistoryView {
             let selected_watch = gtk::ClosureExpression::new::<bool>(
                 [
                     list_item.property_expression("selected"),
-                    obj.property_expression("selection-mode-active"),
+                    obj.property_expression("is-selection-mode-active"),
                 ],
                 closure!(|_: Option<glib::Object>,
                         is_selected: bool,
