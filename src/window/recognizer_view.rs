@@ -17,9 +17,8 @@ use crate::{
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use gtk::CompositeTemplate;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-view.ui")]
     pub struct RecognizerView {
         #[template_child]

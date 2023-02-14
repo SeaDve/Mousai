@@ -28,10 +28,9 @@ const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 mod imp {
     use super::*;
     use glib::{subclass::Signal, WeakRef};
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
         #[template_child]

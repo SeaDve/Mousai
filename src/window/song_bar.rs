@@ -21,10 +21,9 @@ use crate::{
 mod imp {
     use super::*;
     use glib::subclass::Signal;
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
     pub struct SongBar {
         #[template_child]

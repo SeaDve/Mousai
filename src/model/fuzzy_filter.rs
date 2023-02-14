@@ -11,10 +11,12 @@ use super::{Song, FUZZY_MATCHER};
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::FuzzyFilter)]
     pub struct FuzzyFilter {
+        /// Search term
+        #[property(get, set = Self::set_search, explicit_notify)]
         pub(super) search: RefCell<String>,
     }
 
@@ -26,39 +28,7 @@ mod imp {
     }
 
     impl ObjectImpl for FuzzyFilter {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // A search term
-                    glib::ParamSpecString::builder("search")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "search" => {
-                    let search = value.get().unwrap();
-                    obj.set_search(search);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "search" => obj.search().to_value(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
     }
 
     impl FilterImpl for FuzzyFilter {
@@ -84,6 +54,32 @@ mod imp {
             }
         }
     }
+
+    impl FuzzyFilter {
+        fn set_search(&self, search: &str) {
+            let obj = self.obj();
+            let old_search = obj.search();
+            let search = search.to_lowercase();
+
+            if old_search == search {
+                return;
+            }
+
+            let change = if search.is_empty() {
+                gtk::FilterChange::LessStrict
+            } else if search.starts_with(&old_search) {
+                gtk::FilterChange::MoreStrict
+            } else if old_search.starts_with(&search) {
+                gtk::FilterChange::LessStrict
+            } else {
+                gtk::FilterChange::Different
+            };
+
+            self.search.replace(search);
+            obj.changed(change);
+            obj.notify_search();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -95,33 +91,6 @@ glib::wrapper! {
 impl FuzzyFilter {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn search(&self) -> String {
-        self.imp().search.borrow().clone()
-    }
-
-    pub fn set_search(&self, search: &str) {
-        let old_search = self.search();
-        let search = search.to_lowercase();
-
-        if old_search == search {
-            return;
-        }
-
-        let change = if search.is_empty() {
-            gtk::FilterChange::LessStrict
-        } else if search.starts_with(&old_search) {
-            gtk::FilterChange::MoreStrict
-        } else if old_search.starts_with(&search) {
-            gtk::FilterChange::LessStrict
-        } else {
-            gtk::FilterChange::Different
-        };
-
-        self.imp().search.replace(search);
-        self.changed(change);
-        self.notify("search");
     }
 }
 

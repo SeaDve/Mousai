@@ -14,10 +14,9 @@ use crate::{model::Song, player::Player};
 mod imp {
     use super::*;
     use glib::{subclass::Signal, WeakRef};
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page.ui")]
     pub struct RecognizedPage {
         #[template_child]

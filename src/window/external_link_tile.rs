@@ -6,10 +6,9 @@ use crate::model::ExternalLinkWrapper;
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use gtk::CompositeTemplate;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/external-link-tile.ui")]
     pub struct ExternalLinkTile {
         #[template_child]

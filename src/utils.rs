@@ -26,3 +26,20 @@ pub fn app_instance() -> Application {
 
     gio::Application::default().unwrap().downcast().unwrap()
 }
+
+#[macro_export]
+macro_rules! derived_properties {
+    () => {
+        fn properties() -> &'static [glib::ParamSpec] {
+            Self::derived_properties()
+        }
+
+        fn set_property(&self, id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
+            Self::derived_set_property(self, id, value, pspec);
+        }
+
+        fn property(&self, id: usize, pspec: &glib::ParamSpec) -> glib::Value {
+            Self::derived_property(self, id, pspec)
+        }
+    };
+}
