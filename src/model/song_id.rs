@@ -3,8 +3,6 @@ use serde::{Deserialize, Serialize};
 
 use std::fmt;
 
-use crate::core::DateTime;
-
 #[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
 #[boxed_type(name = "MsaiSongId")]
 #[serde(transparent)]
@@ -17,19 +15,18 @@ impl fmt::Display for SongId {
 }
 
 impl Default for SongId {
+    /// This is only used when a song is constructed and will serve as a
+    /// failsafe when a proper ID was not set in the constructor of a `Song`.
+    /// Thus, it must still be unique.
     fn default() -> Self {
-        Self::from(
-            DateTime::now()
-                .format("Default-%Y-%m-%d-%H-%M-%S-%f-Default")
-                .expect("DateTime formatting error"),
-        )
+        Self::from(format!("Default-{}-Default", glib::real_time()))
     }
 }
 
 impl SongId {
     /// This must be unique to every song.
     ///
-    /// Unique str must not start or end with `Default`.
+    /// Note: Unique str must not start and end with `Default`.
     pub fn from(unique_str: impl Into<Box<str>>) -> Self {
         Self(unique_str.into())
     }
