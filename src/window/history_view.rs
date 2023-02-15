@@ -512,7 +512,19 @@ impl HistoryView {
                 imp.leaflet_pages_purgatory.borrow_mut().push(page);
             });
 
-        self.update_leaflet_visible_child();
+        // Ensure that the visible child is not a dangling `SongPage`
+        imp.leaflet.set_visible_child(
+            &imp.leaflet
+                .pages()
+                .iter::<adw::LeafletPage>()
+                .map(|page| page.unwrap())
+                .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
+                .last()
+                .map_or_else(
+                    || imp.history_child.get().upcast::<gtk::Widget>(),
+                    |page| page.child(),
+                ),
+        );
     }
 
     fn undo_remove_song(&self) {
@@ -639,23 +651,6 @@ impl HistoryView {
         imp.grid.set_enable_rubberband(is_selection_mode_active);
         imp.grid
             .set_single_click_activate(!is_selection_mode_active);
-    }
-
-    fn update_leaflet_visible_child(&self) {
-        let imp = self.imp();
-
-        imp.leaflet.set_visible_child(
-            &imp.leaflet
-                .pages()
-                .iter::<adw::LeafletPage>()
-                .map(|page| page.unwrap())
-                .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
-                .last()
-                .map_or_else(
-                    || imp.history_child.get().upcast::<gtk::Widget>(),
-                    |page| page.child(),
-                ),
-        );
     }
 
     fn update_history_stack_visible_child(&self) {
