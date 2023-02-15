@@ -260,7 +260,7 @@ impl HistoryView {
 
         self.leaflet_insert_after_visible_child_or_last(&recognized_page);
         imp.leaflet.set_visible_child(&recognized_page);
-        self.add_forward_pages_to_purgatory();
+        self.add_forward_leaflet_pages_to_purgatory();
     }
 
     /// Inserts a song page for the given song after the current page and
@@ -297,7 +297,7 @@ impl HistoryView {
 
         self.leaflet_insert_after_visible_child_or_last(&song_page);
         imp.leaflet.set_visible_child(&song_page);
-        self.add_forward_pages_to_purgatory();
+        self.add_forward_leaflet_pages_to_purgatory();
 
         unsafe {
             song_page.set_data(
@@ -416,8 +416,19 @@ impl HistoryView {
             .expect("Player was dropped")
     }
 
+    /// Inserts song page after the currently visible child, or at the end if there is no visible child.
+    fn leaflet_insert_after_visible_child_or_last(&self, child: &impl IsA<gtk::Widget>) {
+        let imp = self.imp();
+
+        if let Some(visible_child) = imp.leaflet.visible_child() {
+            imp.leaflet.insert_child_after(child, Some(&visible_child));
+        } else {
+            imp.leaflet.append(child);
+        }
+    }
+
     /// Adds all pages after the visible child to the purgatory
-    fn add_forward_pages_to_purgatory(&self) {
+    fn add_forward_leaflet_pages_to_purgatory(&self) {
         let imp = self.imp();
 
         imp.leaflet
@@ -461,17 +472,6 @@ impl HistoryView {
             }
 
             imp.leaflet.remove(&child);
-        }
-    }
-
-    /// Inserts song page after the currently visible child, or at the end if there is no visible child.
-    fn leaflet_insert_after_visible_child_or_last(&self, child: &impl IsA<gtk::Widget>) {
-        let imp = self.imp();
-
-        if let Some(visible_child) = imp.leaflet.visible_child() {
-            imp.leaflet.insert_child_after(child, Some(&visible_child));
-        } else {
-            imp.leaflet.append(child);
         }
     }
 
