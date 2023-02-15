@@ -152,6 +152,7 @@ impl Application {
         self.set_accels_for_action("app.quit", &["<Control>q"]);
         self.set_accels_for_action("window.close", &["<Control>w"]);
         self.set_accels_for_action("win.navigate-back", &["<Alt>Left", "Escape"]);
+        self.set_accels_for_action("win.navigate-forward", &["<Alt>Right"]);
         self.set_accels_for_action("win.toggle-playback", &["<Control>space"]);
         self.set_accels_for_action("win.toggle-listen", &["<Control>r"]);
         self.set_accels_for_action("win.toggle-search", &["<Control>f"]);

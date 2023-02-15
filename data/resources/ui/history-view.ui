@@ -46,8 +46,10 @@
       </object>
     </property>
     <child>
-      <object class="GtkStack" id="stack">
-        <property name="transition-type">over-left-right</property>
+      <object class="AdwLeaflet" id="leaflet">
+        <property name="can-unfold">False</property>
+        <property name="can-navigate-back">True</property>
+        <property name="can-navigate-forward">True</property>
         <child>
           <object class="GtkBox" id="history_child">
             <property name="orientation">vertical</property>
