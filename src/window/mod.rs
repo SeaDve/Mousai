@@ -82,7 +82,11 @@ mod imp {
             klass.bind_template_instance_callbacks();
 
             klass.install_action("win.navigate-back", None, |obj, _, _| {
-                obj.imp().main_view.pop_stack_item();
+                obj.imp().main_view.navigate_back();
+            });
+
+            klass.install_action("win.navigate-forward", None, |obj, _, _| {
+                obj.imp().main_view.navigate_forward();
             });
 
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
@@ -325,7 +329,7 @@ impl Window {
                 history.append(song.clone());
 
                 let main_view = obj.imp().main_view.get();
-                main_view.push_song_page(song);
+                main_view.insert_song_page(song);
                 main_view.scroll_to_top();
             }));
 
@@ -342,7 +346,7 @@ impl Window {
                 history.append_many(songs.to_vec());
 
                 let main_view = obj.imp().main_view.get();
-                main_view.push_recognized_page(songs);
+                main_view.insert_recognized_page(songs);
                 main_view.scroll_to_top();
             }),
         );
@@ -362,7 +366,7 @@ impl Window {
 
         imp.song_bar
             .connect_activated(clone!(@weak self as obj => move |_, song| {
-                obj.imp().main_view.push_song_page(song);
+                obj.imp().main_view.insert_song_page(song);
             }));
 
         imp.main_view.connect_is_selection_mode_active_notify(
@@ -401,7 +405,7 @@ impl Window {
 
         if keyval == gdk::Key::Escape
             && state == gdk::ModifierType::empty()
-            && imp.main_view.is_on_main_stack_main_page()
+            && imp.main_view.is_on_leaflet_main_page()
         {
             let search_bar = imp.main_view.search_bar();
             if search_bar.is_search_mode() {

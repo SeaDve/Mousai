@@ -61,6 +61,12 @@
                 <property name="action-name">win.navigate-back</property>
               </object>
             </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Go Forward</property>
+                <property name="action-name">win.navigate-forward</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>
