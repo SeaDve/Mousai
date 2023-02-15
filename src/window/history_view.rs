@@ -213,10 +213,8 @@ impl HistoryView {
     }
 
     pub fn is_on_leaflet_main_page(&self) -> bool {
-        self.imp()
-            .leaflet
-            .visible_child()
-            .map_or(false, |child| child.is::<gtk::Box>())
+        let imp = self.imp();
+        imp.leaflet.visible_child() == Some(imp.history_child.get().upcast())
     }
 
     /// Inserts a recognized page for the given songs after the current page and
