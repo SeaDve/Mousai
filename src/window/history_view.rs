@@ -493,10 +493,11 @@ impl HistoryView {
             tracing::warn!("Failed to remove song: SongList not found");
         }
 
+        let leaflet_pages = imp.leaflet.pages();
+
         // Since the song is removed from history, the `SongPage`s that
         // contain it is dangling, so remove them.
-        imp.leaflet
-            .pages()
+        leaflet_pages
             .iter::<adw::LeafletPage>()
             .map(|page| page.unwrap())
             .filter(|page| {
@@ -512,14 +513,25 @@ impl HistoryView {
                 imp.leaflet_pages_purgatory.borrow_mut().push(page);
             });
 
+        let prev_visible_child_index = imp.leaflet.visible_child().and_then(|child| {
+            leaflet_pages
+                .iter::<adw::LeafletPage>()
+                .position(|page| page.unwrap().child() == child)
+        });
+
         // Ensure that the visible child is not a dangling `SongPage`
+        // by making the previous non-dangling page the visible child.
         imp.leaflet.set_visible_child(
-            &imp.leaflet
-                .pages()
+            &leaflet_pages
                 .iter::<adw::LeafletPage>()
                 .map(|page| page.unwrap())
-                .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
-                .last()
+                .rev()
+                .skip(
+                    // reverse the index
+                    prev_visible_child_index
+                        .map_or(0, |i| leaflet_pages.n_items() as usize - 1 - i),
+                )
+                .find(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
                 .map_or_else(
                     || imp.history_child.get().upcast::<gtk::Widget>(),
                     |page| page.child(),
@@ -1058,5 +1070,79 @@ mod test {
         view.remove_song(&song_3);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_items(&view, 1);
+    }
+
+    #[gtk::test]
+    fn remove_song_middle_visible_child() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let song_list = SongList::default();
+
+        let song_1 = new_test_song("1");
+        song_list.append(song_1.clone());
+        let song_2 = new_test_song("2");
+        song_list.append(song_2.clone());
+        let song_3 = new_test_song("3");
+        song_list.append(song_3.clone());
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+
+        view.insert_song_page(&song_1);
+        view.insert_song_page(&song_2);
+        view.insert_song_page(&song_3);
+        assert_leaflet_n_items(&view, 4);
+
+        assert_leaflet_visible_child_song_id(&view, "3");
+
+        view.navigate_back();
+        assert_leaflet_visible_child_song_id(&view, "2");
+
+        view.remove_song(&song_2);
+        trigger_purge_purgatory_leaflet_pages(&view);
+        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_visible_child_song_id(&view, "1");
+
+        view.navigate_forward();
+        assert_leaflet_visible_child_song_id(&view, "3");
+    }
+
+    #[gtk::test]
+    fn remove_song_middle_visible_child_with_recognized_page() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let song_list = SongList::default();
+
+        let song_1 = new_test_song("1");
+        song_list.append(song_1.clone());
+        let song_2 = new_test_song("2");
+        song_list.append(song_2.clone());
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+
+        view.insert_recognized_page(&[]);
+        view.insert_song_page(&song_1);
+        view.insert_song_page(&song_2);
+        assert_leaflet_n_items(&view, 4);
+
+        assert_leaflet_visible_child_song_id(&view, "2");
+
+        view.navigate_back();
+        assert_leaflet_visible_child_song_id(&view, "1");
+
+        view.remove_song(&song_1);
+        trigger_purge_purgatory_leaflet_pages(&view);
+        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_visible_child_type::<RecognizedPage>(&view);
+
+        view.navigate_forward();
+        assert_leaflet_visible_child_song_id(&view, "2");
     }
 }
