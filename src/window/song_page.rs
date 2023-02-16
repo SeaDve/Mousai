@@ -78,11 +78,7 @@ mod imp {
 
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 if let Some(song) = obj.song() {
-                    obj.display().clipboard().set_text(&format!(
-                        "{} - {}",
-                        song.artist(),
-                        song.title()
-                    ));
+                    obj.display().clipboard().set_text(&song.copy_term());
 
                     let toast = adw::Toast::new(&gettext("Copied to clipboard"));
                     utils::app_instance().add_toast(toast);

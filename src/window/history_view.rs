@@ -124,7 +124,7 @@ mod imp {
 
                 let text = selected_songs
                     .iter()
-                    .map(|song| format!("{} - {}", song.artist(), song.title()))
+                    .map(|song| song.copy_term())
                     .collect::<Vec<_>>()
                     .join("\n");
                 obj.display().clipboard().set_text(&text);

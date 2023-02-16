@@ -127,6 +127,11 @@ impl Song {
         format!("{}{}", self.title(), self.artist())
     }
 
+    /// String copied to clipboard when copying self.
+    pub fn copy_term(&self) -> String {
+        format!("{} - {}", self.artist(), self.title())
+    }
+
     pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
         let album_art_link = self
             .album_art_link()
