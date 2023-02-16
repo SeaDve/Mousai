@@ -278,7 +278,7 @@ impl HistoryView {
         self.add_forward_leaflet_pages_to_purgatory();
     }
 
-    /// Inserts a song page for the given song after the current page and
+    /// Inserts a song page for the given song after the current visible child and
     /// set it as the visible child.
     pub fn insert_song_page(&self, song: &Song) {
         let imp = self.imp();
@@ -993,7 +993,7 @@ mod test {
     }
 
     #[gtk::test]
-    fn page_navigate_then_insert() {
+    fn page_navigate_back_then_insert() {
         init_gresources();
         gst::init().unwrap(); // For Player
 
@@ -1027,6 +1027,10 @@ mod test {
         view.insert_song_page(&song_3);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
+
+        // Navigating back should not do anything since the mentioned tail
+        // pages are already removed
+        assert!(!view.navigate_forward());
     }
 
     #[gtk::test]
