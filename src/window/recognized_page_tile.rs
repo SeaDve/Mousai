@@ -78,10 +78,10 @@ mod imp {
         }
 
         fn dispose(&self) {
-            self.dispose_template();
-
             self.binding.take().unwrap().unbind();
             self.obj().unbind_player();
+
+            self.dispose_template();
         }
     }
 
