@@ -273,9 +273,7 @@ impl HistoryView {
             );
         }
 
-        self.leaflet_insert_after_visible_child_or_last(&recognized_page);
-        imp.leaflet.set_visible_child(&recognized_page);
-        self.add_forward_leaflet_pages_to_purgatory();
+        self.leaflet_set_as_tail_and_navigate_to(&recognized_page);
     }
 
     /// Inserts a song page for the given song after the current visible child and
@@ -310,10 +308,6 @@ impl HistoryView {
             .sync_create()
             .build();
 
-        self.leaflet_insert_after_visible_child_or_last(&song_page);
-        imp.leaflet.set_visible_child(&song_page);
-        self.add_forward_leaflet_pages_to_purgatory();
-
         unsafe {
             song_page.set_data(
                 SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY,
@@ -321,6 +315,8 @@ impl HistoryView {
             );
             song_page.set_data(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY, adaptive_mode_binding);
         }
+
+        self.leaflet_set_as_tail_and_navigate_to(&song_page);
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_heard(false);
@@ -431,31 +427,31 @@ impl HistoryView {
             .expect("Player was dropped")
     }
 
-    /// Inserts song page after the currently visible child, or at the end if there is no visible child.
-    fn leaflet_insert_after_visible_child_or_last(&self, child: &impl IsA<gtk::Widget>) {
+    /// This does the following things:
+    /// 1. Inserts child after the current visible child, or at the end if there is none.
+    /// 2. Add all pages after it to the purgatory.
+    /// 3. Set it as the visible child.
+    fn leaflet_set_as_tail_and_navigate_to(&self, child: &impl IsA<gtk::Widget>) {
         let imp = self.imp();
 
-        if let Some(visible_child) = imp.leaflet.visible_child() {
-            imp.leaflet.insert_child_after(child, Some(&visible_child));
+        let created_page = if let Some(visible_child) = imp.leaflet.visible_child() {
+            imp.leaflet.insert_child_after(child, Some(&visible_child))
         } else {
-            imp.leaflet.append(child);
-        }
-    }
-
-    /// Adds all pages after the visible child to the purgatory
-    fn add_forward_leaflet_pages_to_purgatory(&self) {
-        let imp = self.imp();
+            imp.leaflet.append(child)
+        };
 
         imp.leaflet
             .pages()
             .iter::<adw::LeafletPage>()
             .map(|page| page.unwrap())
             .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
-            .skip_while(|page| Some(&page.child()) != imp.leaflet.visible_child().as_ref())
+            .skip_while(|page| page != &created_page)
             .skip(1)
             .for_each(|page| {
                 imp.leaflet_pages_purgatory.borrow_mut().push(page);
             });
+
+        imp.leaflet.set_visible_child(child);
     }
 
     /// Removes all pages on the purgatory from the leaflet
