@@ -204,7 +204,7 @@ mod test {
     };
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::from(id), id, id, id).build()
+        Song::builder(&SongId::new(id), id, id, id).build()
     }
 
     #[test]
@@ -385,8 +385,8 @@ mod test {
 
         assert_eq!(n_called.get(), 0);
         assert_eq!(
-            song_list.remove(&SongId::from("0")).unwrap().id(),
-            SongId::from("0")
+            song_list.remove(&SongId::new("0")).unwrap().id(),
+            SongId::new("0")
         );
         assert_eq!(n_called.get(), 1);
     }
@@ -406,7 +406,7 @@ mod test {
         });
 
         assert_eq!(n_called.get(), 0);
-        assert!(song_list.remove(&SongId::from("0")).is_none());
+        assert!(song_list.remove(&SongId::new("0")).is_none());
         assert_eq!(n_called.get(), 0);
     }
 
@@ -419,14 +419,14 @@ mod test {
 
         let n_called_clone = Rc::clone(&n_called);
         song_list.connect_removed(move |_, song| {
-            assert_eq!(song.id(), SongId::from("0"));
+            assert_eq!(song.id(), SongId::new("0"));
             n_called_clone.set(n_called_clone.get() + 1);
         });
 
         assert_eq!(n_called.get(), 0);
         assert_eq!(
-            song_list.remove(&SongId::from("0")).unwrap().id(),
-            SongId::from("0")
+            song_list.remove(&SongId::new("0")).unwrap().id(),
+            SongId::new("0")
         );
         assert_eq!(n_called.get(), 1);
     }
@@ -443,7 +443,7 @@ mod test {
         });
 
         assert_eq!(n_called.get(), 0);
-        assert!(song_list.remove(&SongId::from("0")).is_none());
+        assert!(song_list.remove(&SongId::new("0")).is_none());
         assert_eq!(n_called.get(), 0);
     }
 }

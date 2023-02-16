@@ -32,6 +32,7 @@ mod inspector_page;
 mod model;
 mod player;
 mod recognizer;
+mod serde;
 mod settings;
 mod utils;
 mod window;

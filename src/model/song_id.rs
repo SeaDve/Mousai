@@ -16,29 +16,25 @@ impl fmt::Display for SongId {
     }
 }
 
-impl Default for SongId {
-    /// This is only used when a song is constructed and will serve as a
-    /// failsafe when a proper ID was not set in the constructor of a `Song`.
-    /// Thus, it must still be unique.
-    fn default() -> Self {
-        Self::from(
-            DateTime::now()
-                .format("Default-%Y-%m-%d-%H-%M-%S-%f-Default")
-                .expect("DateTime formatting error"),
-        )
+impl SongId {
+    /// This must be unique to every song.
+    pub fn new(unique_str: impl Into<Box<str>>) -> Self {
+        Self(unique_str.into())
     }
 }
 
-impl SongId {
-    /// This must be unique to every song.
+impl Default for SongId {
+    /// Generate a new song id with time stamp based on the current time.
     ///
-    /// Note: Unique str must not start and end with `Default`.
-    pub fn from(unique_str: impl Into<Box<str>>) -> Self {
-        Self(unique_str.into())
-    }
+    /// Note: This is only typically when song id cannot be retrieved.
+    fn default() -> Self {
+        tracing::warn!("Using default song id");
 
-    pub fn is_default(&self) -> bool {
-        self.0.starts_with("Default") && self.0.ends_with("Default")
+        Self::new(
+            DateTime::now()
+                .format("MsaiSongId-%Y-%m-%d-%H-%M-%S-%f")
+                .unwrap(),
+        )
     }
 }
 
@@ -48,65 +44,55 @@ mod test {
     use std::collections::HashMap;
 
     #[test]
-    fn default() {
-        assert!(SongId::default().is_default());
-        assert!(!SongId::from("A").is_default());
-    }
-
-    #[test]
     fn unique_default() {
+        assert_ne!(SongId::default(), SongId::default());
         assert_ne!(SongId::default(), SongId::default());
         assert_ne!(SongId::default(), SongId::default());
     }
 
     #[test]
     fn equality() {
-        assert_eq!(SongId::from("A"), SongId::from("A"));
-        assert_eq!(SongId::from("B"), SongId::from("B"));
+        assert_eq!(SongId::new("A"), SongId::new("A"));
+        assert_eq!(SongId::new("B"), SongId::new("B"));
 
-        assert_ne!(SongId::from("A"), SongId::from("B"));
-        assert_ne!(SongId::from("A"), SongId::from("B"));
+        assert_ne!(SongId::new("A"), SongId::new("B"));
+        assert_ne!(SongId::new("A"), SongId::new("B"));
     }
 
     #[test]
     fn serialize() {
         assert_eq!(
-            serde_json::to_string(&SongId::from("A")).unwrap().as_str(),
+            serde_json::to_string(&SongId::new("A")).unwrap().as_str(),
             "\"A\"",
         );
 
         assert_eq!(
-            serde_json::to_string(&SongId::from("BB8"))
-                .unwrap()
-                .as_str(),
+            serde_json::to_string(&SongId::new("BB8")).unwrap().as_str(),
             "\"BB8\""
         );
     }
 
     #[test]
     fn deserialize() {
-        assert_eq!(SongId::from("A"), serde_json::from_str("\"A\"").unwrap());
-        assert_eq!(
-            SongId::from("BB8"),
-            serde_json::from_str("\"BB8\"").unwrap()
-        );
+        assert_eq!(SongId::new("A"), serde_json::from_str("\"A\"").unwrap());
+        assert_eq!(SongId::new("BB8"), serde_json::from_str("\"BB8\"").unwrap());
     }
 
     #[test]
     fn hash_map() {
         let mut hash_map = HashMap::new();
 
-        let id_0 = SongId::from("Id0");
+        let id_0 = SongId::new("Id0");
         hash_map.insert(&id_0, 0);
 
-        let id_1 = SongId::from("Id1");
+        let id_1 = SongId::new("Id1");
         hash_map.insert(&id_1, 1);
 
-        let id_2 = SongId::from("Id2");
+        let id_2 = SongId::new("Id2");
         hash_map.insert(&id_2, 2);
 
         assert_eq!(hash_map.get(&id_0), Some(&0));
         assert_eq!(hash_map.get(&id_1), Some(&1));
-        assert_eq!(hash_map.get(&SongId::from("Id2")), Some(&2));
+        assert_eq!(hash_map.get(&SongId::new("Id2")), Some(&2));
     }
 }
