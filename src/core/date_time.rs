@@ -7,7 +7,7 @@ use std::fmt;
 
 /// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, glib::Boxed, PartialEq, Eq, PartialOrd, Ord)]
-#[boxed_type(name = "MsaiDateTime", nullable)]
+#[boxed_type(name = "MsaiDateTime")]
 pub struct DateTime(glib::DateTime);
 
 impl Default for DateTime {
