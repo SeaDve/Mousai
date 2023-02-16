@@ -21,7 +21,6 @@
     clippy::todo,
     clippy::print_stdout
 )]
-#![allow(clippy::format_push_string)] // TODO remove once gettext-rs fixes macro issues
 
 mod about;
 mod application;
