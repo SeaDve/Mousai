@@ -285,6 +285,7 @@ impl Window {
     fn update_adaptive_mode(&self) {
         let width = self.surface().width();
 
+        // FIXME make less hacky
         let adaptive_mode = if width < NARROW_ADAPTIVE_MODE_THRESHOLD {
             AdaptiveMode::Narrow
         } else {
