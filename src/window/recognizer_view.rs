@@ -11,6 +11,7 @@ use std::cell::RefCell;
 use super::waveform::Waveform;
 use crate::{
     audio_recording::AudioRecording,
+    debug_unreachable_or_log,
     recognizer::{Recognizer, RecognizerState},
 };
 
@@ -111,7 +112,9 @@ impl RecognizerView {
 
     fn recognizer(&self) -> &Recognizer {
         self.imp().recognizer.get_or_init(|| {
-            tracing::error!("Recognizer was not bound in RecognizerView. Creating a default one.");
+            debug_unreachable_or_log!(
+                "recognizer was not bound in RecognizerView. Creating a default one."
+            );
             Recognizer::default()
         })
     }

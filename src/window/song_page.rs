@@ -17,6 +17,7 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
+    debug_unreachable_or_log,
     model::{ExternalLinkWrapper, Song},
     player::{Player, PlayerState},
     utils,
@@ -83,7 +84,9 @@ mod imp {
                     let toast = adw::Toast::new(&gettext("Copied to clipboard"));
                     utils::app_instance().add_toast(toast);
                 } else {
-                    tracing::error!("Failed to copy song: There is no active song in SongPage");
+                    debug_unreachable_or_log!(
+                        "failed to copy song: There is no active song in SongPage"
+                    );
                 }
             });
         }
@@ -343,7 +346,7 @@ impl SongPage {
                     imp.playback_button.set_mode(PlaybackButtonMode::Play);
                 }
             } else {
-                tracing::error!("Either the player was dropped or not bound in SongPage");
+                debug_unreachable_or_log!("either the player was dropped or not bound in SongPage");
             }
         }
     }

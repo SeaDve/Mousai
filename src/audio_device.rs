@@ -137,7 +137,7 @@ mod pa {
     use std::{fmt, time::Duration};
 
     use super::AudioDeviceClass;
-    use crate::{config::APP_ID, core::ResultExt};
+    use crate::{config::APP_ID, core::ResultExt, debug_unreachable_or_log};
 
     const DEFAULT_TIMEOUT: Duration = Duration::from_secs(2);
 
@@ -207,7 +207,7 @@ mod pa {
 
             let mut operation = self.inner.introspect().get_server_info(move |server_info| {
                 let Some(tx) = tx.take() else {
-                    tracing::error!("Called get_server_info twice!");
+                    debug_unreachable_or_log!("called get_server_info twice!");
                     return;
                 };
 
