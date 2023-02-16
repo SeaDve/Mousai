@@ -164,6 +164,22 @@ mod imp {
                 }),
             );
 
+            if tracing::enabled!(tracing::Level::ERROR) {
+                self.leaflet
+                    .connect_visible_child_notify(clone!(@weak obj => move |leaflet| {
+                        let Some(child) = leaflet.visible_child() else {
+                            tracing::error!("Leaflet has no visible child");
+                            return;
+                        };
+
+                        let imp = obj.imp();
+
+                        if imp.leaflet_pages_purgatory.borrow().contains(&imp.leaflet.page(&child)) {
+                            tracing::error!("Leaflet's visible child is in purgatory");
+                        }
+                    }));
+            }
+
             self.empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
 
