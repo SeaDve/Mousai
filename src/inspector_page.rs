@@ -130,7 +130,7 @@ impl InspectorPage {
                         .try_into()
                         .unwrap();
                 } else {
-                    tracing::warn!("provider_row doesn't have a valid selected item");
+                    tracing::warn!("provider_row doesn't have a selected item");
                     ProviderSettings::lock().active = ProviderType::default();
                 }
             }));
@@ -163,7 +163,7 @@ impl InspectorPage {
                         .try_into()
                         .unwrap();
                 } else {
-                    tracing::warn!("test_provider_row doesn't have a valid selected item");
+                    tracing::warn!("test_provider_row doesn't have a selected item");
                     ProviderSettings::lock().test_mode = TestProviderMode::default();
                 }
             });

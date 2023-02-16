@@ -7,6 +7,7 @@ use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::{AlbumArtStore, Help},
+    debug_assert_or_log, debug_unreachable_or_log,
     inspector_page::InspectorPage,
     settings::Settings,
     window::Window,
@@ -105,7 +106,7 @@ impl Application {
         if let Some(window) = self.main_window() {
             window.add_toast(toast);
         } else {
-            tracing::warn!("Failed to add toast: MainWindow doesn't exist");
+            debug_unreachable_or_log!("failed to add toast: MainWindow doesn't exist");
         }
     }
 
@@ -124,9 +125,7 @@ impl Application {
             .get_or_init(|| Window::new(self).downgrade())
             .upgrade();
 
-        if main_window.is_none() {
-            tracing::warn!("Failed to upgrade WeakRef<Window>");
-        }
+        debug_assert_or_log!(main_window.is_some(), "failed to upgrade WeakRef<Window>");
 
         main_window
     }

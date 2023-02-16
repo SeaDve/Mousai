@@ -29,6 +29,7 @@ mod audio_recording;
 mod config;
 mod core;
 mod inspector_page;
+mod macros;
 mod model;
 mod player;
 mod recognizer;

@@ -5,7 +5,7 @@ use gtk::{
 
 use std::future::Future;
 
-use crate::Application;
+use crate::{debug_assert_or_log, Application};
 
 /// Spawns a future in the default [`glib::MainContext`]
 pub fn spawn<F: Future<Output = ()> + 'static>(fut: F) {
@@ -19,27 +19,10 @@ pub fn spawn<F: Future<Output = ()> + 'static>(fut: F) {
 /// Panics if the application is not running or if this is
 /// called on a non-main thread.
 pub fn app_instance() -> Application {
-    debug_assert!(
+    debug_assert_or_log!(
         gtk::is_initialized_main_thread(),
-        "Application can only be accessed in the main thread"
+        "application can only be accessed in the main thread"
     );
 
     gio::Application::default().unwrap().downcast().unwrap()
-}
-
-#[macro_export]
-macro_rules! derived_properties {
-    () => {
-        fn properties() -> &'static [glib::ParamSpec] {
-            Self::derived_properties()
-        }
-
-        fn set_property(&self, id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            self.derived_set_property(id, value, pspec);
-        }
-
-        fn property(&self, id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            self.derived_property(id, pspec)
-        }
-    };
 }

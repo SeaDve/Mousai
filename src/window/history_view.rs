@@ -13,6 +13,7 @@ use super::{
 };
 use crate::{
     config::APP_ID,
+    debug_assert_or_log, debug_unreachable_or_log,
     model::{FuzzyFilter, FuzzySorter, Song, SongList},
     player::Player,
     utils,
@@ -116,11 +117,10 @@ mod imp {
             klass.install_action("history-view.copy-selected-song", None, |obj, _, _| {
                 let selected_songs = obj.snapshot_selected_songs();
 
-                if selected_songs.is_empty() {
-                    tracing::error!(
-                        "Copying should only be allowed if there is atleast one selected"
-                    );
-                }
+                debug_assert_or_log!(
+                    !selected_songs.is_empty(),
+                    "copying should only be allowed if there is atleast one selected"
+                );
 
                 let text = selected_songs
                     .iter()
@@ -168,15 +168,16 @@ mod imp {
                 self.leaflet
                     .connect_visible_child_notify(clone!(@weak obj => move |leaflet| {
                         let Some(child) = leaflet.visible_child() else {
-                            tracing::error!("Leaflet has no visible child");
+                            debug_unreachable_or_log!("leaflet has no visible child");
                             return;
                         };
 
                         let imp = obj.imp();
 
-                        if imp.leaflet_pages_purgatory.borrow().contains(&imp.leaflet.page(&child)) {
-                            tracing::error!("Leaflet's visible child is in purgatory");
-                        }
+                        debug_assert_or_log!(
+                            !imp.leaflet_pages_purgatory.borrow().contains(&imp.leaflet.page(&child)),
+                            "leaflet's visible child is in purgatory"
+                        );
                     }));
             }
 
@@ -238,17 +239,15 @@ impl HistoryView {
     pub fn insert_recognized_page(&self, songs: &[Song]) {
         let imp = self.imp();
 
-        if imp
-            .leaflet
-            .pages()
-            .iter::<adw::LeafletPage>()
-            .map(|page| page.unwrap())
-            .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
-            .any(|page| page.is::<RecognizedPage>())
-        {
-            tracing::warn!("There is already a `RecognizedPage` on the leaflet");
-            return;
-        }
+        debug_assert_or_log!(
+            !imp.leaflet
+                .pages()
+                .iter::<adw::LeafletPage>()
+                .map(|page| page.unwrap())
+                .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
+                .any(|page| page.is::<RecognizedPage>()),
+            "there is already a `RecognizedPage` on the leaflet"
+        );
 
         let recognized_page = RecognizedPage::new();
         recognized_page.bind_player(&self.player());
@@ -401,7 +400,7 @@ impl HistoryView {
                         let song = item.downcast_ref::<Song>().unwrap();
                         obj.insert_song_page(song);
                     }
-                    None => tracing::error!("Activated `{index}`, but found no song.")
+                    None => debug_unreachable_or_log!("activated `{}`, but found no song.", index)
                 }
             }),
         );
@@ -495,7 +494,10 @@ impl HistoryView {
                 }
                 recognized_page.unbind_player();
             } else {
-                tracing::error!("Tried to purge other leaflet page type `{}`", child.type_());
+                debug_unreachable_or_log!(
+                    "tried to purge other leaflet page type `{}`",
+                    child.type_()
+                );
             }
 
             imp.leaflet.remove(&child);
@@ -514,10 +516,10 @@ impl HistoryView {
             if let Some(removed_song) = song_list.remove(&song.id()) {
                 imp.songs_purgatory.borrow_mut().push(removed_song);
             } else {
-                tracing::warn!("Failed to remove song: Song not found in SongList");
+                debug_unreachable_or_log!("failed to remove song: Song not found in SongList");
             }
         } else {
-            tracing::warn!("Failed to remove song: SongList not found");
+            debug_unreachable_or_log!("failed to remove song: SongList not found");
         }
 
         let leaflet_pages = imp.leaflet.pages();

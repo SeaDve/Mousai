@@ -7,6 +7,8 @@ use soup::prelude::*;
 
 use std::{cell::RefCell, fmt, path::Path};
 
+use crate::{debug_assert_or_log, debug_unreachable_or_log};
+
 pub struct AlbumArt {
     session: soup::Session,
     download_url: String,
@@ -69,7 +71,7 @@ impl AlbumArt {
 
         // Nothing should get passed this point while the
         // AlbumArt is already loading because of the guard above.
-        debug_assert!(self.loading.borrow().is_none());
+        debug_assert_or_log!(self.loading.borrow().is_none());
 
         if let Some(texture) = self.cache.get() {
             return Ok(texture);
@@ -116,9 +118,9 @@ impl AlbumArt {
         let ret = match self.cache.try_insert(texture) {
             Ok(final_value) => final_value,
             Err((final_value, texture)) => {
-                tracing::error!(
-                    "Cache was already set; is_same_instance = {}",
-                    final_value == &texture
+                debug_unreachable_or_log!(
+                    "cache was already set; is_same_instance = {}",
+                    final_value == &texture,
                 );
                 final_value
             }
