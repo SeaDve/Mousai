@@ -126,20 +126,20 @@ mod tests {
     #[gtk::test]
     fn match_() {
         let filter = FuzzyFilter::new();
-        assert!(filter.match_(&Song::builder(&SongId::from("0"), "foo", "foo", "").build()));
-        assert!(filter.match_(&Song::builder(&SongId::from("1"), "bar", "bar", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new("0"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new("1"), "bar", "bar", "").build()));
 
         filter.set_search("foo");
-        assert!(filter.match_(&Song::builder(&SongId::from("2"), "foo", "foo", "").build()));
-        assert!(!filter.match_(&Song::builder(&SongId::from("3"), "bar", "bar", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new("2"), "foo", "foo", "").build()));
+        assert!(!filter.match_(&Song::builder(&SongId::new("3"), "bar", "bar", "").build()));
 
         filter.set_search("bar");
-        assert!(!filter.match_(&Song::builder(&SongId::from("4"), "foo", "foo", "").build()));
-        assert!(filter.match_(&Song::builder(&SongId::from("5"), "bar", "bar", "").build()));
+        assert!(!filter.match_(&Song::builder(&SongId::new("4"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new("5"), "bar", "bar", "").build()));
 
         filter.set_search("");
-        assert!(filter.match_(&Song::builder(&SongId::from("6"), "foo", "foo", "").build()));
-        assert!(filter.match_(&Song::builder(&SongId::from("7"), "bar", "bar", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new("6"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new("7"), "bar", "bar", "").build()));
     }
 
     #[gtk::test]

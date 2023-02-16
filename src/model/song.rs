@@ -1,5 +1,6 @@
 use anyhow::{anyhow, Result};
 use gtk::{glib, prelude::*, subclass::prelude::*};
+use once_cell::unsync::OnceCell;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{
@@ -10,6 +11,7 @@ use std::{
 use super::{external_link::ExternalLink, ExternalLinkList, SongId};
 use crate::{
     core::{AlbumArt, DateTime},
+    serde::{deserialize_once_cell, serialize_once_cell},
     utils,
 };
 
@@ -21,8 +23,12 @@ mod imp {
     #[serde(default)]
     pub struct Song {
         /// Unique ID
-        #[property(get = Self::id, set, construct_only)]
-        pub(super) id: RefCell<SongId>,
+        #[property(get, set, construct_only)]
+        #[serde(
+            serialize_with = "serialize_once_cell",
+            deserialize_with = "deserialize_once_cell"
+        )]
+        pub(super) id: OnceCell<SongId>,
         /// Date and time when last heard
         #[property(get, set = Self::set_last_heard, explicit_notify)]
         pub(super) last_heard: RefCell<DateTime>,
@@ -66,18 +72,6 @@ mod imp {
     }
 
     impl Song {
-        fn id(&self) -> SongId {
-            let id = self.id.borrow().clone();
-
-            if id.is_default() {
-                tracing::warn!(
-                    "SongId was found in default. It should have been set on the construct."
-                );
-            }
-
-            id
-        }
-
         fn set_last_heard(&self, value: DateTime) {
             let obj = self.obj();
 
@@ -153,7 +147,7 @@ impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_imp = imp::Song::deserialize(deserializer)?;
         Ok(glib::Object::builder()
-            .property("id", deserialized_imp.id.take())
+            .property("id", deserialized_imp.id.into_inner().unwrap_or_default())
             .property("last-heard", deserialized_imp.last_heard.take())
             .property("title", deserialized_imp.title.take())
             .property("artist", deserialized_imp.artist.take())
@@ -236,7 +230,7 @@ mod test {
     #[test]
     fn properties() {
         let song = Song::builder(
-            &SongId::from("UniqueSongId"),
+            &SongId::new("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
@@ -295,9 +289,9 @@ mod test {
                 "lyrics": "Some song lyrics"
             }"#,
         )
-        .expect("Failed to deserialize song.");
+        .unwrap();
 
-        assert_eq!(song.id(), SongId::from("UniqueSongId"));
+        assert_eq!(song.id(), SongId::new("UniqueSongId"));
         assert_eq!(
             song.last_heard().to_iso8601(),
             "2022-05-14T10:15:37.798479+08"
@@ -326,5 +320,17 @@ mod test {
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
 
         assert!(!song.is_newly_heard());
+    }
+
+    #[test]
+    fn deserialize_without_song_id() {
+        let song_1: Song = serde_json::from_str("{}").unwrap();
+        let song_2: Song = serde_json::from_str("{}").unwrap();
+        let song_3: Song = serde_json::from_str("{}").unwrap();
+
+        // Make sure that the song id is unique
+        // even it is not defined
+        assert_ne!(song_1.id(), song_2.id());
+        assert_ne!(song_2.id(), song_3.id());
     }
 }

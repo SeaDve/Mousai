@@ -9,41 +9,13 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::time::Duration;
 
-use crate::core::DateTime;
-
-fn serialize_once_cell<S>(cell: &OnceCell<impl Serialize>, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    cell.get().serialize(serializer)
-}
-
-fn deserialize_once_cell<'de, D, T>(deserializer: D) -> Result<OnceCell<T>, D::Error>
-where
-    D: Deserializer<'de>,
-    T: Deserialize<'de>,
-{
-    Ok(OnceCell::with_value(T::deserialize(deserializer)?))
-}
-
-fn serialize_once_cell_gbytes<S>(
-    cell: &OnceCell<glib::Bytes>,
-    serializer: S,
-) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    cell.get().map(|b| b.as_ref()).serialize(serializer)
-}
-
-fn deserialize_once_cell_gbytes<'de, D>(deserializer: D) -> Result<OnceCell<glib::Bytes>, D::Error>
-where
-    D: Deserializer<'de>,
-{
-    Ok(OnceCell::with_value(glib::Bytes::from_owned(
-        Vec::<u8>::deserialize(deserializer)?,
-    )))
-}
+use crate::{
+    core::DateTime,
+    serde::{
+        deserialize_once_cell, deserialize_once_cell_gbytes, serialize_once_cell,
+        serialize_once_cell_gbytes,
+    },
+};
 
 mod imp {
     use super::*;
