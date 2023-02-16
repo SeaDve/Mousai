@@ -60,7 +60,7 @@ mod imp {
         }
 
         fn dispose(&self) {
-            self.label.unparent();
+            self.dispose_template();
         }
     }
 
