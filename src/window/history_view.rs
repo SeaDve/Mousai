@@ -451,7 +451,18 @@ impl HistoryView {
             let child = page.child();
 
             if let Some(song_page) = child.downcast_ref::<SongPage>() {
-                unbind_song_page(song_page);
+                unsafe {
+                    let handler_id = song_page
+                        .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY)
+                        .unwrap();
+                    song_page.disconnect(handler_id);
+
+                    let binding = song_page
+                        .steal_data::<glib::Binding>(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY)
+                        .unwrap();
+                    binding.unbind();
+                }
+                song_page.unbind_player();
             } else if let Some(recognized_page) = child.downcast_ref::<RecognizedPage>() {
                 unsafe {
                     let song_activated_handler_id = recognized_page
@@ -468,7 +479,7 @@ impl HistoryView {
                 }
                 recognized_page.unbind_player();
             } else {
-                tracing::error!("Unknown extra leaflet item type");
+                tracing::error!("Tried to purge other leaflet page type `{}`", child.type_());
             }
 
             imp.leaflet.remove(&child);
@@ -813,22 +824,6 @@ impl Default for HistoryView {
     }
 }
 
-fn unbind_song_page(song_page: &SongPage) {
-    unsafe {
-        let handler_id = song_page
-            .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY)
-            .unwrap();
-        song_page.disconnect(handler_id);
-
-        let binding = song_page
-            .steal_data::<glib::Binding>(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY)
-            .unwrap();
-        binding.unbind();
-    };
-
-    song_page.unbind_player();
-}
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -858,12 +853,12 @@ mod test {
     }
 
     #[track_caller]
-    fn assert_leaflet_n_items(view: &HistoryView, n_items: u32) {
-        assert_eq!(view.imp().leaflet.pages().n_items(), n_items);
+    fn assert_leaflet_n_pages(view: &HistoryView, expected_n_pages: u32) {
+        assert_eq!(view.imp().leaflet.pages().n_items(), expected_n_pages);
     }
 
     #[track_caller]
-    fn assert_leaflet_visible_child_song_id(view: &HistoryView, id: &str) {
+    fn assert_leaflet_visible_child_song_id(view: &HistoryView, expected_id: &str) {
         assert_eq!(
             view.imp()
                 .leaflet
@@ -874,7 +869,7 @@ mod test {
                 .song()
                 .unwrap()
                 .id(),
-            SongId::from(id)
+            SongId::from(expected_id)
         );
     }
 
@@ -898,39 +893,39 @@ mod test {
         view.bind_player(&player);
         view.bind_song_list(&song_list);
 
-        assert_leaflet_n_items(&view, 1);
+        assert_leaflet_n_pages(&view, 1);
         assert_leaflet_visible_child_type::<gtk::Box>(&view);
         assert!(view.is_on_leaflet_main_page());
 
         view.insert_song_page(&song);
-        assert_leaflet_n_items(&view, 2);
+        assert_leaflet_n_pages(&view, 2);
         assert_leaflet_visible_child_type::<SongPage>(&view);
         assert!(!view.is_on_leaflet_main_page());
 
         view.insert_recognized_page(&[]);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<RecognizedPage>(&view);
         assert!(!view.is_on_leaflet_main_page());
 
         // Already on last page, navigating forward should not do anything
         assert!(!view.navigate_forward());
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<RecognizedPage>(&view);
         assert!(!view.is_on_leaflet_main_page());
 
         assert!(view.navigate_back());
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<SongPage>(&view);
         assert!(!view.is_on_leaflet_main_page());
 
         assert!(view.navigate_back());
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<gtk::Box>(&view);
         assert!(view.is_on_leaflet_main_page());
 
         // Already on first page, navigating backward should not do anything
         assert!(!view.navigate_back());
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<gtk::Box>(&view);
         assert!(view.is_on_leaflet_main_page());
     }
@@ -951,32 +946,32 @@ mod test {
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
-        assert_leaflet_n_items(&view, 1);
+        assert_leaflet_n_pages(&view, 1);
 
-        // Added unique song, n items should increase by 1
+        // Added unique song, n pages should increase by 1
         view.insert_song_page(&song_1);
-        assert_leaflet_n_items(&view, 2);
+        assert_leaflet_n_pages(&view, 2);
 
-        // Added unique song, n items should increase by 1
+        // Added unique song, n pages should increase by 1
         view.insert_song_page(&song_2);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
 
-        // Added same song as last, n items should not change
+        // Added same song as last, n pages should not change
         view.insert_song_page(&song_2);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
 
-        // Added recognized page, n items should increase by 1
+        // Added recognized page, n pages should increase by 1
         view.insert_recognized_page(&[]);
-        assert_leaflet_n_items(&view, 4);
+        assert_leaflet_n_pages(&view, 4);
 
         // Added same song as last, but there is a recognized page in between so
-        // n items should increase by 1
+        // n pages should increase by 1
         view.insert_song_page(&song_1);
-        assert_leaflet_n_items(&view, 5);
+        assert_leaflet_n_pages(&view, 5);
 
-        // Added an already added song, but non adjacent, n items should increase by 1
+        // Added an already added song, but non adjacent, n pages should increase by 1
         view.insert_song_page(&song_2);
-        assert_leaflet_n_items(&view, 6);
+        assert_leaflet_n_pages(&view, 6);
     }
 
     #[gtk::test]
@@ -997,23 +992,23 @@ mod test {
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
-        assert_leaflet_n_items(&view, 1);
+        assert_leaflet_n_pages(&view, 1);
 
         view.insert_song_page(&song_1);
         view.insert_song_page(&song_2);
         view.insert_recognized_page(&[]);
-        assert_leaflet_n_items(&view, 4);
+        assert_leaflet_n_pages(&view, 4);
 
         view.navigate_back();
         view.navigate_back();
-        assert_leaflet_n_items(&view, 4);
+        assert_leaflet_n_pages(&view, 4);
 
         // Added song after navigating back to second page with 2 tail page,
-        // 2 tail pages should be removed and n items should decrease to 3
+        // 2 tail pages should be removed and n pages should decrease to 3
         // (main page + second song page + added song page)
         view.insert_song_page(&song_3);
         trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
     }
 
     #[gtk::test]
@@ -1034,42 +1029,42 @@ mod test {
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
-        assert_leaflet_n_items(&view, 1);
+        assert_leaflet_n_pages(&view, 1);
 
         view.insert_song_page(&song_1);
-        assert_leaflet_n_items(&view, 2);
+        assert_leaflet_n_pages(&view, 2);
         assert_leaflet_visible_child_song_id(&view, "1");
 
         view.insert_song_page(&song_2);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_song_id(&view, "2");
 
         view.insert_song_page(&song_3);
-        assert_leaflet_n_items(&view, 4);
+        assert_leaflet_n_pages(&view, 4);
         assert_leaflet_visible_child_song_id(&view, "3");
 
         view.insert_song_page(&song_1);
-        assert_leaflet_n_items(&view, 5);
+        assert_leaflet_n_pages(&view, 5);
         assert_leaflet_visible_child_song_id(&view, "1");
 
         // Since song_1 is added twice non-adjacently, it should reduce
         // the number of pages by 2
         view.remove_song(&song_1);
         trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
         // Since song_2 is added once, it should reduce the number of pages by 1
         view.remove_song(&song_2);
         trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_items(&view, 2);
+        assert_leaflet_n_pages(&view, 2);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
         view.remove_song(&song_3);
         trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_items(&view, 1);
+        assert_leaflet_n_pages(&view, 1);
     }
 
     #[gtk::test]
@@ -1094,7 +1089,7 @@ mod test {
         view.insert_song_page(&song_1);
         view.insert_song_page(&song_2);
         view.insert_song_page(&song_3);
-        assert_leaflet_n_items(&view, 4);
+        assert_leaflet_n_pages(&view, 4);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
@@ -1103,7 +1098,7 @@ mod test {
 
         view.remove_song(&song_2);
         trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_song_id(&view, "1");
 
         view.navigate_forward();
@@ -1130,7 +1125,7 @@ mod test {
         view.insert_recognized_page(&[]);
         view.insert_song_page(&song_1);
         view.insert_song_page(&song_2);
-        assert_leaflet_n_items(&view, 4);
+        assert_leaflet_n_pages(&view, 4);
 
         assert_leaflet_visible_child_song_id(&view, "2");
 
@@ -1139,7 +1134,7 @@ mod test {
 
         view.remove_song(&song_1);
         trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_items(&view, 3);
+        assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<RecognizedPage>(&view);
 
         view.navigate_forward();
