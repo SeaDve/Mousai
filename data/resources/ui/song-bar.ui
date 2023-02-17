@@ -106,25 +106,10 @@
             <property name="margin-end">6</property>
             <property name="spacing">3</property>
             <child>
-              <object class="MsaiTimeLabel" id="playback_position_label">
+              <object class="GtkLabel" id="playback_position_duration_label">
                 <style>
                   <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <!-- Translators: This is the separator in a playback status (e.g., 0:34 / 0:59) -->
-                <property name="label" translatable="yes">/</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="MsaiTimeLabel" id="duration_label">
-                <style>
-                  <class name="dim-label"/>
+                  <class name="numeric"/>
                 </style>
               </object>
             </child>

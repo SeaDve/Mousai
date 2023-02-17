@@ -9,7 +9,6 @@ mod recognizer_view;
 mod song_bar;
 mod song_page;
 mod song_tile;
-mod time_label;
 mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};

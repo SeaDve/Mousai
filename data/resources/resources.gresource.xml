@@ -17,7 +17,6 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/song-bar.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song-tile.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">ui/time-label.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/window.ui</file>
   </gresource>
 </gresources>
