@@ -12,7 +12,7 @@ use std::{
     sync::Arc,
 };
 
-use crate::{config::APP_ID, core::ClockTime, model::Song, utils};
+use crate::{config::APP_ID, model::Song, utils};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiPlayerState")]
@@ -33,8 +33,8 @@ mod imp {
     pub struct Player {
         pub(super) song: RefCell<Option<Song>>,
         pub(super) state: Cell<PlayerState>,
-        pub(super) position: Cell<Option<ClockTime>>,
-        pub(super) duration: Cell<Option<ClockTime>>,
+        pub(super) position: Cell<gst::ClockTime>,
+        pub(super) duration: Cell<gst::ClockTime>,
 
         pub(super) metadata: RefCell<MprisMetadata>,
         pub(super) gst_play: gst_play::Play,
@@ -74,11 +74,11 @@ mod imp {
                         .read_only()
                         .build(),
                     // Current position of the player
-                    glib::ParamSpecBoxed::builder::<ClockTime>("position")
+                    glib::ParamSpecUInt64::builder("position")
                         .read_only()
                         .build(),
                     // Duration of the song
-                    glib::ParamSpecBoxed::builder::<ClockTime>("duration")
+                    glib::ParamSpecUInt64::builder("duration")
                         .read_only()
                         .build(),
                 ]
@@ -188,8 +188,8 @@ impl Player {
         let imp = self.imp();
 
         imp.gst_play.stop();
-        self.set_position(None);
-        self.set_duration(None);
+        self.set_position(gst::ClockTime::ZERO);
+        self.set_duration(gst::ClockTime::ZERO);
 
         if let Some(ref song) = song {
             let Some(playback_link) = song.playback_link() else {
@@ -252,7 +252,7 @@ impl Player {
         self.connect_notify_local(Some("position"), move |obj, _| f(obj))
     }
 
-    pub fn position(&self) -> Option<ClockTime> {
+    pub fn position(&self) -> gst::ClockTime {
         self.imp().position.get()
     }
 
@@ -263,7 +263,7 @@ impl Player {
         self.connect_notify_local(Some("duration"), move |obj, _| f(obj))
     }
 
-    pub fn duration(&self) -> Option<ClockTime> {
+    pub fn duration(&self) -> gst::ClockTime {
         self.imp().duration.get()
     }
 
@@ -279,27 +279,26 @@ impl Player {
         self.imp().gst_play.pause();
     }
 
-    pub fn seek(&self, position: ClockTime) {
+    pub fn seek(&self, position: gst::ClockTime) {
         if matches!(self.state(), PlayerState::Stopped) {
             self.pause();
         }
 
         tracing::debug!(?position, "Seeking");
 
-        self.imp().gst_play.seek(position.into());
+        self.imp().gst_play.seek(position);
     }
 
-    fn set_position(&self, position: Option<ClockTime>) {
+    fn set_position(&self, position: gst::ClockTime) {
         self.imp().position.set(position);
-        self.mpris_player()
-            .set_position(position.unwrap_or_default().as_micros() as i64);
+        self.mpris_player().set_position(position.mseconds() as i64);
         self.notify("position");
     }
 
-    fn set_duration(&self, duration: Option<ClockTime>) {
+    fn set_duration(&self, duration: gst::ClockTime) {
         let imp = self.imp();
         imp.duration.set(duration);
-        imp.metadata.borrow_mut().length = duration.map(|duration| duration.as_micros() as i64);
+        imp.metadata.borrow_mut().length = Some(duration.mseconds() as i64);
         self.push_mpris_metadata();
         self.notify("duration");
     }
@@ -344,8 +343,8 @@ impl Player {
 
             mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
                 tracing::debug!(?offset_micros, "Seek via MPRIS");
-                let current_micros = obj.position().unwrap_or_default().as_micros() as i64;
-                let new_position = ClockTime::from_micros(current_micros.saturating_add(offset_micros) as u64);
+                let current_micros = obj.position().mseconds() as i64;
+                let new_position = gst::ClockTime::from_mseconds(current_micros.saturating_add(offset_micros) as u64);
                 obj.seek(new_position);
             }));
 
@@ -367,10 +366,10 @@ impl Player {
 
         match message {
             PlayMessage::PositionUpdated { position } => {
-                self.set_position(position.map(|position| position.into()));
+                self.set_position(position.unwrap_or_default());
             }
             PlayMessage::DurationChanged { duration } => {
-                self.set_duration(duration.map(|duration| duration.into()));
+                self.set_duration(duration.unwrap_or_default());
             }
             PlayMessage::StateChanged { state } => {
                 let new_state = match state {
@@ -400,11 +399,11 @@ impl Player {
             }
             PlayMessage::EndOfStream => {
                 tracing::debug!("Received end of stream message");
-                self.set_position(None);
+                self.set_position(gst::ClockTime::ZERO);
             }
             PlayMessage::SeekDone => {
                 tracing::debug!("Received seek done message");
-                self.set_position(imp.gst_play.position().map(|position| position.into()));
+                self.set_position(imp.gst_play.position().unwrap_or_default());
             }
             PlayMessage::Error { error, details } => {
                 tracing::error!(state = ?self.state(), ?details, "Received error message: {:?}", error);

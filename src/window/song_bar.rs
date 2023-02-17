@@ -10,10 +10,9 @@ use std::{cell::RefCell, time::Duration};
 use super::{
     album_cover::AlbumCover,
     playback_button::{PlaybackButton, PlaybackButtonMode},
-    time_label::TimeLabel,
 };
 use crate::{
-    core::ClockTime,
+    clock_time::ClockTimeExt,
     model::Song,
     player::{Player, PlayerState},
 };
@@ -37,9 +36,7 @@ mod imp {
         #[template_child]
         pub(super) playback_position_scale: TemplateChild<gtk::Scale>,
         #[template_child]
-        pub(super) playback_position_label: TemplateChild<TimeLabel>,
-        #[template_child]
-        pub(super) duration_label: TemplateChild<TimeLabel>,
+        pub(super) playback_position_duration_label: TemplateChild<gtk::Label>,
 
         pub(super) scale_handler_id: OnceCell<glib::SignalHandlerId>,
         pub(super) seek_timeout_id: RefCell<Option<glib::SourceId>>,
@@ -144,17 +141,20 @@ impl SongBar {
         }));
 
         player.connect_position_notify(clone!(@weak self as obj => move |_| {
-            obj.update_position_ui();
+            obj.update_playback_position();
+            obj.update_playback_position_duration_label();
         }));
 
         player.connect_duration_notify(clone!(@weak self as obj => move |_| {
-            obj.update_duration_ui();
+            obj.update_playback_position_scale_range();
+            obj.update_playback_position_duration_label();
         }));
 
         self.update_song_ui();
         self.update_playback_button();
-        self.update_position_ui();
-        self.update_duration_ui();
+        self.update_playback_position();
+        self.update_playback_position_scale_range();
+        self.update_playback_position_duration_label();
     }
 
     fn player(&self) -> &Player {
@@ -188,7 +188,7 @@ impl SongBar {
                 Duration::from_millis(20),
                 clone!(@weak self as obj => move || {
                     obj.imp().seek_timeout_id.replace(None);
-                    obj.player().seek(ClockTime::from_secs_f64(value));
+                    obj.player().seek(gst::ClockTime::from_seconds_f64(value));
                 }),
             )));
     }
@@ -225,18 +225,27 @@ impl SongBar {
         }
     }
 
-    fn update_position_ui(&self) {
-        let position = self.player().position().unwrap_or_default();
-        self.set_playback_position_scale_value_blocking(position.as_secs_f64());
-        self.imp().playback_position_label.set_time(position);
+    fn update_playback_position(&self) {
+        let position = self.player().position();
+        self.set_playback_position_scale_value_blocking(position.seconds_f64());
     }
 
-    fn update_duration_ui(&self) {
+    fn update_playback_position_scale_range(&self) {
         let imp = self.imp();
-        let duration = self.player().duration().unwrap_or_default();
+        let duration = self.player().duration();
         imp.playback_position_scale
-            .set_range(0.0, duration.as_secs_f64());
-        imp.duration_label.set_time(duration);
+            .set_range(0.0, duration.seconds_f64());
+    }
+
+    fn update_playback_position_duration_label(&self) {
+        let player = self.player();
+        self.imp()
+            .playback_position_duration_label
+            .set_label(&format!(
+                "{} / {}",
+                player.position().to_minute_sec_str(),
+                player.duration().to_minute_sec_str()
+            ));
     }
 }
 
