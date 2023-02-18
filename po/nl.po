@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2023-01-25 12:47+0000\n"
+"PO-Revision-Date: 2023-02-18 09:03+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -79,7 +79,7 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Let op: Mousai gebruikt de api van auddi.io. Log in op hun website om meer "
+"Let op: Mousai gebruikt de API van auddi.io. Log in op hun website om meer "
 "proeftijd te krijgen."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
@@ -121,7 +121,7 @@ msgstr "Dave Patrick"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferred Audio Source"
-msgstr "Voorkeursaudio_bron"
+msgstr "_Voorkeursaudiobron"
 
 #: data/resources/ui/history-view.ui:8
 msgid "Microphone"
@@ -137,7 +137,7 @@ msgstr "Snel_toetsen"
 
 #: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
-msgstr "Over Mous_ai"
+msgstr "_Over Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
@@ -169,7 +169,7 @@ msgstr "Zoeken naar nummers"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr "Niets selecteren"
+msgstr "Selectie annuleren"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
