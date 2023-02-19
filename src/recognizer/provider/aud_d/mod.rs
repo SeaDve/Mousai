@@ -127,7 +127,7 @@ impl Provider for AudD {
                 || gettext("Failed to connect to AudD"),
             )?;
 
-        tracing::debug!(server_response = ?std::str::from_utf8(&bytes));
+        tracing::trace!(server_response = ?std::str::from_utf8(&bytes));
 
         Ok(Self::build_song_from_data(Response::parse(&bytes)?.data()?))
     }
