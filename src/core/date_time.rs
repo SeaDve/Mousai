@@ -12,12 +12,12 @@ pub struct DateTime(glib::DateTime);
 
 impl Default for DateTime {
     fn default() -> Self {
-        Self::now()
+        Self::now_local()
     }
 }
 
 impl DateTime {
-    pub fn now() -> Self {
+    pub fn now_local() -> Self {
         Self(glib::DateTime::now_local().expect("You are somehow on year 9999"))
     }
 
@@ -28,7 +28,7 @@ impl DateTime {
     }
 
     pub fn fuzzy_display(&self) -> glib::GString {
-        let now = Self::now();
+        let now = Self::now_local();
 
         if self.0.ymd() == now.0.ymd() {
             // Translators: `%R` will be replaced with 24-hour formatted date time (e.g., `13:21`)
