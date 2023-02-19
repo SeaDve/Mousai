@@ -137,16 +137,25 @@ impl<'de> Deserialize<'de> for Song {
         let deserialized_imp = imp::Song::deserialize(deserializer)?;
         Ok(glib::Object::builder()
             .property("id", deserialized_imp.id.into_inner().unwrap_or_default())
-            .property("title", deserialized_imp.title.take())
-            .property("artist", deserialized_imp.artist.take())
-            .property("album", deserialized_imp.album.take())
-            .property("release-date", deserialized_imp.release_date.take())
-            .property("external-links", deserialized_imp.external_links.take())
-            .property("album-art-link", deserialized_imp.album_art_link.take())
-            .property("playback-link", deserialized_imp.playback_link.take())
-            .property("lyrics", deserialized_imp.lyrics.take())
-            .property("last-heard", deserialized_imp.last_heard.take())
-            .property("is-newly-heard", deserialized_imp.is_newly_heard.take())
+            .property("title", deserialized_imp.title.into_inner())
+            .property("artist", deserialized_imp.artist.into_inner())
+            .property("album", deserialized_imp.album.into_inner())
+            .property("release-date", deserialized_imp.release_date.into_inner())
+            .property(
+                "external-links",
+                deserialized_imp.external_links.into_inner(),
+            )
+            .property(
+                "album-art-link",
+                deserialized_imp.album_art_link.into_inner(),
+            )
+            .property("playback-link", deserialized_imp.playback_link.into_inner())
+            .property("lyrics", deserialized_imp.lyrics.into_inner())
+            .property("last-heard", deserialized_imp.last_heard.into_inner())
+            .property(
+                "is-newly-heard",
+                deserialized_imp.is_newly_heard.into_inner(),
+            )
             .build())
     }
 }
