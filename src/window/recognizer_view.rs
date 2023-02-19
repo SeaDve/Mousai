@@ -6,18 +6,14 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use std::cell::RefCell;
-
 use super::waveform::Waveform;
 use crate::{
-    audio_recording::AudioRecording,
     debug_unreachable_or_log,
     recognizer::{Recognizer, RecognizerState},
 };
 
 mod imp {
     use super::*;
-    use glib::WeakRef;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-view.ui")]
@@ -29,8 +25,6 @@ mod imp {
         #[template_child]
         pub(super) offline_mode_status: TemplateChild<gtk::Label>,
 
-        pub(super) recording_signal_handler:
-            RefCell<Option<(WeakRef<AudioRecording>, glib::SignalHandlerId)>>,
         pub(super) recognizing_animation: OnceCell<adw::TimedAnimation>,
         pub(super) recognizer: OnceCell<Recognizer>,
     }
@@ -79,35 +73,14 @@ impl RecognizerView {
             obj.update_ui();
         }));
 
-        recognizer.connect_recording_notify(clone!(@weak self as obj => move |_| {
-            obj.on_recognizer_recording_notify();
+        recognizer.connect_recording_peak_changed(clone!(@weak self as obj => move |_, peak| {
+            obj.imp().waveform.push_peak(peak);
         }));
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 
         self.update_offline_mode_ui();
         self.update_ui();
-    }
-
-    fn on_recognizer_recording_notify(&self) {
-        let imp = self.imp();
-        let handlers = imp.recording_signal_handler.take();
-
-        imp.waveform.clear_peaks();
-
-        if let Some((recording, handler_id)) = handlers {
-            if let Some(recording) = recording.upgrade() {
-                recording.disconnect(handler_id);
-            }
-        }
-
-        if let Some(recording) = self.recognizer().recording() {
-            let handler_id = recording.connect_peak(clone!(@weak self as obj => move |_, peak| {
-                obj.imp().waveform.push_peak(peak);
-            }));
-            imp.recording_signal_handler
-                .replace(Some((recording.downgrade(), handler_id)));
-        }
     }
 
     fn recognizer(&self) -> &Recognizer {

@@ -4,7 +4,6 @@ use gtk::glib;
 
 use super::{AudD, Data, Response};
 use crate::{
-    audio_recording::AudioRecording,
     model::Song,
     recognizer::provider::{TestProvider, TestProviderMode},
 };
@@ -14,7 +13,7 @@ pub struct AudDMock;
 
 #[async_trait(?Send)]
 impl TestProvider for AudDMock {
-    async fn recognize_impl(&self, _: &AudioRecording, mode: TestProviderMode) -> Result<Song> {
+    async fn recognize_impl(&self, _: &[u8], mode: TestProviderMode) -> Result<Song> {
         Ok(AudD::build_song_from_data(random_data(mode)?))
     }
 }

@@ -14,7 +14,6 @@ pub use self::mock::AudDMock;
 use self::response::{Data, Response};
 use super::Provider;
 use crate::{
-    audio_recording::AudioRecording,
     core::ResultExt,
     model::external_link::{
         AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
@@ -107,15 +106,11 @@ impl AudD {
 
 #[async_trait(?Send)]
 impl Provider for AudD {
-    async fn recognize(&self, recording: &AudioRecording) -> Result<Song> {
-        let recording_base_64 = recording
-            .to_base_64()
-            .context("Failed to convert recording to base 64")?;
-
+    async fn recognize(&self, bytes: &[u8]) -> Result<Song> {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz,lyrics",
-            "audio": recording_base_64.as_str(),
+            "audio": glib::base64_encode(bytes).as_str(),
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/")
