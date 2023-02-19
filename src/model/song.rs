@@ -54,7 +54,7 @@ mod imp {
         #[property(get, set, construct_only)]
         pub(super) playback_link: RefCell<Option<String>>,
         /// Lyrics of the song
-        #[property(get, set = Self::set_lyrics, explicit_notify)]
+        #[property(get, set, construct_only)]
         pub(super) lyrics: RefCell<Option<String>>,
         /// Whether the song was heard for the first time
         #[property(get, set = Self::set_is_newly_heard, explicit_notify)]
@@ -77,17 +77,6 @@ mod imp {
 
             self.last_heard.replace(value);
             obj.notify_last_heard();
-        }
-
-        fn set_lyrics(&self, value: Option<String>) {
-            let obj = self.obj();
-
-            if value == obj.lyrics() {
-                return;
-            }
-
-            self.lyrics.replace(value);
-            obj.notify_lyrics();
         }
 
         fn set_is_newly_heard(&self, value: bool) {
