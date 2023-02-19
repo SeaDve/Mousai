@@ -139,12 +139,12 @@ mod imp {
             let obj = self.obj();
 
             match pspec.name() {
-                "song" => obj.song().to_value(),
-                "selected" => obj.is_selected().to_value(),
-                "active" => obj.is_active().to_value(),
-                "is-selection-mode-active" => obj.is_selection_mode_active().to_value(),
-                "show-select-button-on-hover" => obj.shows_select_button_on_hover().to_value(),
-                "adaptive-mode" => obj.adaptive_mode().to_value(),
+                "song" => obj.song().into(),
+                "selected" => obj.is_selected().into(),
+                "active" => obj.is_active().into(),
+                "is-selection-mode-active" => obj.is_selection_mode_active().into(),
+                "show-select-button-on-hover" => obj.shows_select_button_on_hover().into(),
+                "adaptive-mode" => obj.adaptive_mode().into(),
                 _ => unimplemented!(),
             }
         }

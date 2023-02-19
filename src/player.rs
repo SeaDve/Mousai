@@ -103,10 +103,10 @@ mod imp {
             let obj = self.obj();
 
             match pspec.name() {
-                "song" => obj.song().to_value(),
-                "state" => obj.state().to_value(),
-                "position" => obj.position().to_value(),
-                "duration" => obj.duration().to_value(),
+                "song" => obj.song().into(),
+                "state" => obj.state().into(),
+                "position" => obj.position().into(),
+                "duration" => obj.duration().into(),
                 _ => unimplemented!(),
             }
         }

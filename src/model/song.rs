@@ -160,37 +160,37 @@ impl SongBuilder {
     pub fn new(id: &SongId, title: &str, artist: &str, album: &str) -> Self {
         Self {
             properties: vec![
-                ("id", id.to_value()),
-                ("title", title.to_value()),
-                ("artist", artist.to_value()),
-                ("album", album.to_value()),
+                ("id", id.into()),
+                ("title", title.into()),
+                ("artist", artist.into()),
+                ("album", album.into()),
             ],
             external_links: Vec::new(),
         }
     }
 
     pub fn newly_heard(&mut self, value: bool) -> &mut Self {
-        self.properties.push(("is-newly-heard", value.to_value()));
+        self.properties.push(("is-newly-heard", value.into()));
         self
     }
 
     pub fn release_date(&mut self, value: &str) -> &mut Self {
-        self.properties.push(("release-date", value.to_value()));
+        self.properties.push(("release-date", value.into()));
         self
     }
 
     pub fn album_art_link(&mut self, value: &str) -> &mut Self {
-        self.properties.push(("album-art-link", value.to_value()));
+        self.properties.push(("album-art-link", value.into()));
         self
     }
 
     pub fn playback_link(&mut self, value: &str) -> &mut Self {
-        self.properties.push(("playback-link", value.to_value()));
+        self.properties.push(("playback-link", value.into()));
         self
     }
 
     pub fn lyrics(&mut self, value: &str) -> &mut Self {
-        self.properties.push(("lyrics", value.to_value()));
+        self.properties.push(("lyrics", value.into()));
         self
     }
 
@@ -204,7 +204,7 @@ impl SongBuilder {
     pub fn build(&mut self) -> Song {
         self.properties.push((
             "external-links",
-            ExternalLinkList::new(std::mem::take(&mut self.external_links)).to_value(),
+            ExternalLinkList::new(std::mem::take(&mut self.external_links)).into(),
         ));
         glib::Object::with_mut_values(Song::static_type(), &mut self.properties)
             .downcast()
