@@ -96,9 +96,9 @@ mod imp {
             let obj = self.obj();
 
             match pspec.name() {
-                "song" => obj.song().to_value(),
-                "pixel-size" => obj.pixel_size().to_value(),
-                "enable-crossfade" => obj.enables_crossfade().to_value(),
+                "song" => obj.song().into(),
+                "pixel-size" => obj.pixel_size().into(),
+                "enable-crossfade" => obj.enables_crossfade().into(),
                 _ => unimplemented!(),
             }
         }

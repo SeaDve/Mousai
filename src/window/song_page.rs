@@ -134,8 +134,8 @@ mod imp {
             let obj = self.obj();
 
             match pspec.name() {
-                "song" => obj.song().to_value(),
-                "adaptive-mode" => obj.adaptive_mode().to_value(),
+                "song" => obj.song().into(),
+                "adaptive-mode" => obj.adaptive_mode().into(),
                 _ => unimplemented!(),
             }
         }
@@ -196,7 +196,7 @@ mod imp {
                 .bind("lyrics", &self.lyrics_group.get(), "visible")
                 .transform_to(|_, value| {
                     let lyrics = value.get::<Option<String>>().unwrap();
-                    Some(lyrics.is_some().to_value())
+                    Some(lyrics.is_some().into())
                 })
                 .build();
 
