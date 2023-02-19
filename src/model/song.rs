@@ -151,9 +151,10 @@ impl<'de> Deserialize<'de> for Song {
     }
 }
 
+#[must_use = "builder doesn't do anything unless built"]
 pub struct SongBuilder {
     properties: Vec<(&'static str, glib::Value)>,
-    external_links: Vec<Box<dyn ExternalLink>>,
+    external_links: ExternalLinkList,
 }
 
 impl SongBuilder {
@@ -165,7 +166,7 @@ impl SongBuilder {
                 ("artist", artist.into()),
                 ("album", album.into()),
             ],
-            external_links: Vec::new(),
+            external_links: ExternalLinkList::default(),
         }
     }
 
@@ -194,18 +195,15 @@ impl SongBuilder {
         self
     }
 
-    /// Pushes an external link. Multiple calls to this won't overwrite
-    /// previews data.
+    /// Pushes an external link. This is not idempotent.
     pub fn external_link(&mut self, value: impl ExternalLink + 'static) -> &mut Self {
-        self.external_links.push(Box::new(value));
+        self.external_links.push(value);
         self
     }
 
     pub fn build(&mut self) -> Song {
-        self.properties.push((
-            "external-links",
-            ExternalLinkList::new(std::mem::take(&mut self.external_links)).into(),
-        ));
+        self.properties
+            .push(("external-links", self.external_links.to_value()));
         glib::Object::with_mut_values(Song::static_type(), &mut self.properties)
             .downcast()
             .unwrap()
