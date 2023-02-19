@@ -29,9 +29,6 @@ mod imp {
             deserialize_with = "deserialize_once_cell"
         )]
         pub(super) id: OnceCell<SongId>,
-        /// Date and time when last heard
-        #[property(get, set = Self::set_last_heard, explicit_notify)]
-        pub(super) last_heard: RefCell<DateTime>,
         /// Title of the song
         #[property(get, set, construct_only)]
         pub(super) title: RefCell<String>,
@@ -56,6 +53,9 @@ mod imp {
         /// Lyrics of the song
         #[property(get, set, construct_only)]
         pub(super) lyrics: RefCell<Option<String>>,
+        /// Date and time when last heard
+        #[property(get, set = Self::set_last_heard, explicit_notify)]
+        pub(super) last_heard: RefCell<DateTime>,
         /// Whether the song was heard for the first time
         #[property(get, set = Self::set_is_newly_heard, explicit_notify)]
         pub(super) is_newly_heard: Cell<bool>,
@@ -137,7 +137,6 @@ impl<'de> Deserialize<'de> for Song {
         let deserialized_imp = imp::Song::deserialize(deserializer)?;
         Ok(glib::Object::builder()
             .property("id", deserialized_imp.id.into_inner().unwrap_or_default())
-            .property("last-heard", deserialized_imp.last_heard.take())
             .property("title", deserialized_imp.title.take())
             .property("artist", deserialized_imp.artist.take())
             .property("album", deserialized_imp.album.take())
@@ -146,6 +145,7 @@ impl<'de> Deserialize<'de> for Song {
             .property("album-art-link", deserialized_imp.album_art_link.take())
             .property("playback-link", deserialized_imp.playback_link.take())
             .property("lyrics", deserialized_imp.lyrics.take())
+            .property("last-heard", deserialized_imp.last_heard.take())
             .property("is-newly-heard", deserialized_imp.is_newly_heard.take())
             .build())
     }
