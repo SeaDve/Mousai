@@ -1,4 +1,6 @@
 mod provider;
+mod recorder;
+mod recording;
 
 use anyhow::{ensure, Context, Result};
 use gst::prelude::*;
@@ -13,10 +15,10 @@ use std::{
 };
 
 pub use self::provider::{ProviderSettings, ProviderType, TestProviderMode};
+use self::{recorder::Recorder, recording::Recording};
 use crate::{
     audio_device::{self, AudioDeviceClass},
-    audio_recording::AudioRecording,
-    core::Cancelled,
+    core::{Cancelled, DateTime},
     model::Song,
     settings::PreferredAudioSource,
     utils,
@@ -46,15 +48,13 @@ mod imp {
         /// Current state
         #[property(get, builder(RecognizerState::default()))]
         pub(super) state: Cell<RecognizerState>,
-        /// Active recording
-        #[property(get)]
-        pub(super) recording: RefCell<Option<AudioRecording>>,
         /// Whether offline mode is active
         #[property(get)]
         pub(super) is_offline_mode: Cell<bool>,
 
-        pub(super) saved_recordings: RefCell<Vec<AudioRecording>>,
+        pub(super) recorder: Recorder,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
+        pub(super) saved_recordings: RefCell<Vec<Recording>>,
     }
 
     #[glib::object_subclass]
@@ -69,6 +69,9 @@ mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![
+                    Signal::builder("recording-peak-changed")
+                        .param_types([f64::static_type()])
+                        .build(),
                     Signal::builder("song-recognized")
                         .param_types([Song::static_type()])
                         .build(),
@@ -112,6 +115,19 @@ glib::wrapper! {
 impl Recognizer {
     pub fn new() -> Self {
         glib::Object::new()
+    }
+
+    pub fn connect_recording_peak_changed<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self, f64) + 'static,
+    {
+        self.connect_closure(
+            "recording-peak-changed",
+            true,
+            closure_local!(|obj: &Self, peak: f64| {
+                f(obj, peak);
+            }),
+        )
     }
 
     pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
@@ -179,15 +195,6 @@ impl Recognizer {
         Ok(())
     }
 
-    fn set_recording(&self, recording: Option<AudioRecording>) {
-        if recording == self.recording() {
-            return;
-        }
-
-        self.imp().recording.replace(recording);
-        self.notify_recording();
-    }
-
     async fn recognize(&self, cancellable: &gio::Cancellable) -> Result<()> {
         struct Finally {
             weak: WeakRef<Recognizer>,
@@ -197,7 +204,7 @@ impl Recognizer {
             fn drop(&mut self) {
                 if let Some(instance) = self.weak.upgrade() {
                     instance.set_state(RecognizerState::Null);
-                    instance.set_recording(None);
+                    let _ = instance.imp().recorder.stop();
                 }
             }
         }
@@ -206,9 +213,6 @@ impl Recognizer {
             self.state() == RecognizerState::Null,
             "Recognizer is not in Null state."
         );
-
-        let recording = AudioRecording::new();
-        self.set_recording(Some(recording.clone()));
 
         let _finally = Rc::new(RefCell::new(Some(Finally {
             weak: self.downgrade(),
@@ -229,9 +233,17 @@ impl Recognizer {
         .map_err(|_| Cancelled::new("recognizing while finding default audio device name"))?
         .context("Failed to find default device name")?;
 
-        recording
-            .start(Some(&device_name))
+        let imp = self.imp();
+
+        imp.recorder
+            .start(
+                Some(&device_name),
+                clone!(@weak self as obj => move |peak| {
+                    obj.emit_by_name::<()>("recording-peak-changed", &[&peak]);
+                }),
+            )
             .context("Failed to start recording")?;
+        let recorded_time = DateTime::now_local();
 
         cancellable.connect_cancelled_local(clone!(@weak _finally => move |_| {
             let _ = _finally.take();
@@ -247,25 +259,25 @@ impl Recognizer {
         .await
         .map_err(|_| Cancelled::new("recognizing while recording"))?;
 
-        recording.stop().context("Failed to stop recording")?;
+        let recording_bytes = imp.recorder.stop().context("Failed to stop recording")?;
 
         if self.is_offline_mode() {
-            self.imp().saved_recordings.borrow_mut().push(recording);
+            self.imp()
+                .saved_recordings
+                .borrow_mut()
+                .push(Recording::new(recording_bytes, recorded_time));
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
         } else {
             self.set_state(RecognizerState::Recognizing);
 
-            let song =
-                gio::CancellableFuture::new(provider.recognize(&recording), cancellable.clone())
-                    .await
-                    .map_err(|_| Cancelled::new("recognizing while calling provider"))??;
-            song.set_last_heard(
-                recording
-                    .recorded_time()
-                    .expect("Recording must have a time when started")
-                    .clone(),
-            );
+            let song = gio::CancellableFuture::new(
+                provider.recognize(&recording_bytes),
+                cancellable.clone(),
+            )
+            .await
+            .map_err(|_| Cancelled::new("recognizing while calling provider"))??;
+            song.set_last_heard(recorded_time);
 
             self.emit_by_name::<()>("song-recognized", &[&song]);
         }
@@ -283,7 +295,7 @@ impl Recognizer {
     }
 
     fn load_saved_recordings(&self) -> Result<()> {
-        let recordings: Vec<AudioRecording> =
+        let recordings: Vec<Recording> =
             serde_json::from_str(&utils::app_instance().settings().saved_recordings())?;
 
         tracing::debug!("Loading {} saved recordings", recordings.len());
@@ -331,20 +343,18 @@ impl Recognizer {
             let mut to_return = Vec::new();
 
             // TODO only take when recognized successfully
-            for audio in imp.saved_recordings.take() {
-                match provider.recognize(&audio).await {
+            for recording in imp.saved_recordings.take() {
+                match provider.recognize(recording.bytes()).await {
                     Ok(song) => {
                         song.set_last_heard(
-                            audio
-                                .recorded_time()
-                                .expect("Recording must have a time when started")
-                                .clone(),
+                            recording
+                                .recorded_time(),
                         );
                         recognized.push(song);
                     }
                     Err(err) => {
                         // TODO don't return no match errors
-                        to_return.push(audio);
+                        to_return.push(recording);
                         // TODO propagate error
                         tracing::error!("Failed to recognize saved recording: {:?}", err);
                     }
