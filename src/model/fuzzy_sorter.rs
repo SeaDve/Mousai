@@ -104,8 +104,8 @@ mod tests {
     fn compare() {
         let sorter = FuzzySorter::new();
 
-        let old = new_test_song(DateTime::now(), "old");
-        let new = new_test_song(DateTime::now(), "new");
+        let old = new_test_song(DateTime::now_local(), "old");
+        let new = new_test_song(DateTime::now_local(), "new");
 
         // Match search term, closer (old) song is sorted first (smaller)
         sorter.set_search("old");

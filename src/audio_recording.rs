@@ -111,7 +111,7 @@ impl AudioRecording {
             .unwrap();
         pipeline.set_state(gst::State::Playing)?;
 
-        imp.recorded_time.set(DateTime::now()).unwrap();
+        imp.recorded_time.set(DateTime::now_local()).unwrap();
 
         imp.data.set((pipeline, output_stream)).unwrap();
         Ok(())

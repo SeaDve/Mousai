@@ -31,7 +31,7 @@ impl Default for SongId {
         tracing::warn!("Using default song id");
 
         Self::new(
-            DateTime::now()
+            DateTime::now_local()
                 .format("MsaiSongId-%Y-%m-%d-%H-%M-%S-%f")
                 .unwrap(),
         )
