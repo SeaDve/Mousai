@@ -10,6 +10,7 @@ use std::fmt;
 #[boxed_type(name = "MsaiDateTime")] // TODO drop Boxed derive and replace with ValueDelegate
 pub struct DateTime(glib::DateTime);
 
+// FIXME consider dropping this
 impl Default for DateTime {
     fn default() -> Self {
         Self::now_local()
