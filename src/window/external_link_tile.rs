@@ -1,7 +1,13 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use anyhow::Error;
+use gettextrs::gettext;
+use gtk::{gdk, glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 
-use crate::model::ExternalLinkWrapper;
+use crate::{
+    debug_unreachable_or_log,
+    model::{ExternalLink, ExternalLinkKey},
+    utils,
+};
 
 mod imp {
     use super::*;
@@ -12,7 +18,7 @@ mod imp {
     pub struct ExternalLinkTile {
         /// Link shown by Self
         #[property(get, set, construct_only)]
-        pub(super) external_link: OnceCell<ExternalLinkWrapper>,
+        pub(super) external_link: OnceCell<ExternalLink>,
 
         #[template_child]
         pub(super) image: TemplateChild<gtk::Image>,
@@ -43,13 +49,41 @@ mod imp {
 
             let obj = self.obj();
 
-            let external_link_wrapper = obj.external_link();
-            let external_link = external_link_wrapper.inner();
+            let link = obj.external_link();
 
-            obj.add_css_class(external_link.css_class());
-            obj.set_tooltip_text(Some(&external_link.tooltip_text()));
-            self.image.set_icon_name(Some(external_link.icon_name()));
-            self.label.set_label(&external_link.name());
+            match ExternalLinkKey::from_str(link.key()) {
+                Some(key) => match key {
+                    ExternalLinkKey::AppleMusicUrl => {
+                        self.label.set_label(&gettext("Apple Music"));
+                        obj.set_tooltip_text(Some(&gettext("Browse on Apple Music")));
+                        self.image.set_icon_name(Some("music-note-symbolic"));
+                        obj.add_css_class("applemusic");
+                    }
+                    ExternalLinkKey::AudDUrl => {
+                        self.label.set_label(&gettext("AudD"));
+                        obj.set_tooltip_text(Some(&gettext("Browse on AudD")));
+                        self.image.set_icon_name(Some("microphone-symbolic"));
+                        obj.add_css_class("audd");
+                    }
+                    ExternalLinkKey::SpotifyUrl => {
+                        self.label.set_label(&gettext("Spotify"));
+                        obj.set_tooltip_text(Some(&gettext("Listen on Spotify")));
+                        self.image.set_icon_name(Some("network-wireless-symbolic"));
+                        obj.add_css_class("spotify");
+                    }
+                    ExternalLinkKey::YoutubeSearchTerm => {
+                        self.label.set_label(&gettext("YouTube"));
+                        obj.set_tooltip_text(Some(&gettext("Search on YouTube")));
+                        self.image
+                            .set_icon_name(Some("media-playback-start-symbolic"));
+                        obj.add_css_class("youtube");
+                    }
+                },
+                None => {
+                    tracing::warn!("Unhandled external link key `{}`", link.key());
+                    obj.set_visible(false);
+                }
+            }
         }
     }
 
@@ -63,9 +97,51 @@ glib::wrapper! {
 }
 
 impl ExternalLinkTile {
-    pub fn new(external_link: &ExternalLinkWrapper) -> Self {
+    pub fn new(external_link: &ExternalLink) -> Self {
         glib::Object::builder()
             .property("external-link", external_link)
             .build()
+    }
+
+    pub async fn handle_activation(&self) {
+        let link = self.external_link();
+        let raw_key = link.key();
+        let raw_value = link.value();
+
+        let Some(key) = ExternalLinkKey::from_str(raw_key) else {
+                debug_unreachable_or_log!("activated a supposed non-visible external link tile with key `{}`", raw_key);
+                return;
+            };
+
+        let uri = match key {
+            ExternalLinkKey::AppleMusicUrl
+            | ExternalLinkKey::AudDUrl
+            | ExternalLinkKey::SpotifyUrl => raw_value.to_string(),
+            ExternalLinkKey::YoutubeSearchTerm => {
+                let escaped_search_term = glib::Uri::escape_string(raw_value, None, true);
+                format!(
+                    "https://www.youtube.com/results?search_query={}",
+                    escaped_search_term
+                )
+            }
+        };
+
+        if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
+            tracing::warn!("Trying to launch an invalid Uri: {:?}", err);
+        }
+
+        if let Err(err) = gtk::show_uri_full_future(
+            self.root()
+                .map(|root| root.downcast::<gtk::Window>().unwrap())
+                .as_ref(),
+            &uri,
+            gdk::CURRENT_TIME,
+        )
+        .await
+        {
+            tracing::warn!("Failed to launch default for uri `{uri}`: {:?}", err);
+            utils::app_instance()
+                .add_toast_error(&Error::msg(gettext!("Failed to launch {}", raw_key)));
+        }
     }
 }

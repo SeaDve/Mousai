@@ -15,10 +15,7 @@ use self::response::{Data, Response};
 use super::Provider;
 use crate::{
     core::ResultExt,
-    model::external_link::{
-        AppleMusicExternalLink, AudDExternalLink, SpotifyExternalLink, YoutubeExternalLink,
-    },
-    model::{Song, SongId},
+    model::{ExternalLinkKey, Song, SongId},
     utils,
 };
 
@@ -49,12 +46,12 @@ impl AudD {
         let mut playback_links = Vec::new();
         let mut album_images = Vec::new();
 
-        song_builder.external_link(AudDExternalLink::new(&data.info_link));
+        song_builder.external_link(ExternalLinkKey::AudDUrl, data.info_link);
 
-        song_builder.external_link(YoutubeExternalLink::new(&format!(
-            "{} - {}",
-            data.artist, data.title,
-        )));
+        song_builder.external_link(
+            ExternalLinkKey::YoutubeSearchTerm,
+            format!("{} - {}", data.artist, data.title,),
+        );
 
         if let Some(spotify_data) = data.spotify_data {
             if let Some(image) = spotify_data.album.images.first() {
@@ -65,13 +62,14 @@ impl AudD {
                 playback_links.push(spotify_data.preview_url);
             }
 
-            song_builder.external_link(SpotifyExternalLink::new(
-                &spotify_data.external_urls.spotify,
-            ));
+            song_builder.external_link(
+                ExternalLinkKey::SpotifyUrl,
+                spotify_data.external_urls.spotify,
+            );
         }
 
         if let Some(mut apple_music_data) = data.apple_music_data {
-            song_builder.external_link(AppleMusicExternalLink::new(&apple_music_data.url));
+            song_builder.external_link(ExternalLinkKey::AppleMusicUrl, &apple_music_data.url);
 
             if let Some(playback_preview) = apple_music_data.previews.pop() {
                 playback_links.push(playback_preview.url);
