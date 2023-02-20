@@ -1,104 +1,59 @@
-use gtk::{glib, prelude::*, subclass::prelude::*};
-use once_cell::unsync::OnceCell;
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use serde::{Deserialize, Serialize};
 
-use std::cell::Cell;
+use std::cell::{Cell, Ref, RefCell};
 
-use crate::{
-    core::DateTime,
-    serde::{
-        deserialize_once_cell, deserialize_once_cell_gbytes, serialize_once_cell,
-        serialize_once_cell_gbytes,
+use crate::{core::DateTime, model::Song};
+
+#[derive(Debug, Serialize, Deserialize)]
+pub enum RecognizeResult {
+    Ok(Song),
+    Err {
+        /// Whether the failure is permanent (i.e. "no matches found for
+        /// this recording", in contrast to "internet connection error" or
+        /// "expired token error")
+        is_permanent: bool,
     },
-};
-
-#[derive(Debug, Default, Clone, Copy, glib::Enum, Serialize, Deserialize)]
-#[enum_type(name = "MsaiAudioRecordingRecognizeState")]
-pub enum RecognizeState {
-    #[default]
-    Idle,
-    Recognizing,
-    Done,
 }
 
-mod imp {
-    use super::*;
-
-    #[derive(Debug, Default, glib::Properties, Serialize, Deserialize)]
-    #[properties(wrapper_type = super::Recording)]
-    #[serde(default)]
-    pub struct Recording {
-        #[property(get, set, builder(RecognizeState::default()))]
-        pub(super) recognize_state: Cell<RecognizeState>,
-
-        #[serde(
-            serialize_with = "serialize_once_cell_gbytes",
-            deserialize_with = "deserialize_once_cell_gbytes"
-        )]
-        pub(super) bytes: OnceCell<glib::Bytes>,
-        #[serde(
-            serialize_with = "serialize_once_cell",
-            deserialize_with = "deserialize_once_cell"
-        )]
-        pub(super) recorded_time: OnceCell<DateTime>,
-    }
-
-    #[glib::object_subclass]
-    impl ObjectSubclass for Recording {
-        const NAME: &'static str = "MsaiRecording";
-        type Type = super::Recording;
-    }
-
-    impl ObjectImpl for Recording {
-        crate::derived_properties!();
-    }
-}
-
-glib::wrapper! {
-     pub struct Recording(ObjectSubclass<imp::Recording>);
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Recording {
+    bytes: Vec<u8>,
+    recorded_time: DateTime,
+    recognize_retries: Cell<u8>,
+    recognize_result: RefCell<Option<RecognizeResult>>,
 }
 
 impl Recording {
-    pub fn new(bytes: glib::Bytes, recorded_time: DateTime) -> Self {
-        let this: Self = glib::Object::new();
-        this.imp().bytes.set(bytes).unwrap();
-        this.imp().recorded_time.set(recorded_time).unwrap();
-        this
+    pub fn new(bytes: Vec<u8>, recorded_time: DateTime) -> Self {
+        Self {
+            bytes,
+            recorded_time,
+            recognize_retries: Cell::default(),
+            recognize_result: RefCell::default(),
+        }
     }
 
-    pub fn bytes(&self) -> &glib::Bytes {
-        self.imp().bytes.get().unwrap()
+    pub fn bytes(&self) -> &[u8] {
+        &self.bytes
     }
 
     pub fn recorded_time(&self) -> &DateTime {
-        self.imp().recorded_time.get().unwrap()
+        &self.recorded_time
     }
-}
 
-impl Serialize for Recording {
-    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        self.imp().serialize(serializer)
+    pub fn recognize_retries(&self) -> u8 {
+        self.recognize_retries.get()
     }
-}
 
-impl<'de> Deserialize<'de> for Recording {
-    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let deserialized_imp = imp::Recording::deserialize(deserializer)?;
+    pub fn increment_recognize_retries(&self) {
+        self.recognize_retries.set(self.recognize_retries.get() + 1);
+    }
 
-        let this: Self = glib::Object::new();
-        let imp = this.imp();
+    pub fn recognize_result(&self) -> Ref<'_, Option<RecognizeResult>> {
+        self.recognize_result.borrow()
+    }
 
-        imp.recognize_state
-            .set(deserialized_imp.recognize_state.into_inner());
-
-        if let Some(bytes) = deserialized_imp.bytes.into_inner() {
-            imp.bytes.set(bytes).unwrap();
-        }
-
-        if let Some(recorded_time) = deserialized_imp.recorded_time.into_inner() {
-            imp.recorded_time.set(recorded_time).unwrap();
-        }
-
-        Ok(this)
+    pub fn set_recognize_result(&self, result: RecognizeResult) {
+        self.recognize_result.replace(Some(result));
     }
 }

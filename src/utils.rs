@@ -8,9 +8,13 @@ use std::future::Future;
 use crate::{debug_assert_or_log, Application};
 
 /// Spawns a future in the default [`glib::MainContext`]
-pub fn spawn<F: Future<Output = ()> + 'static>(fut: F) {
+pub fn spawn<R, F>(fut: F) -> glib::JoinHandle<R>
+where
+    R: 'static,
+    F: Future<Output = R> + 'static,
+{
     let ctx = glib::MainContext::default();
-    ctx.spawn_local(fut);
+    ctx.spawn_local(fut)
 }
 
 /// Get the global instance of `Application`.

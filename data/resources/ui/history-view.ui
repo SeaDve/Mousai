@@ -68,6 +68,9 @@
                         </style>
                       </object>
                     </child>
+                    <child>
+                      <object class="MsaiRecognizerStatusButton" id="recognizer_status_button"/>
+                    </child>
                     <child type="end">
                       <object class="GtkMenuButton">
                         <property name="tooltip-text" translatable="yes">Open Main Menu</property>
@@ -88,16 +91,6 @@
                         <property name="tooltip-text" translatable="yes">Search for Songs</property>
                         <property name="icon-name">system-search-symbolic</property>
                         <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkMenuButton">
-                        <property name="tooltip-text" translatable="yes">Pending Songs</property>
-                        <property name="popover">
-                          <object class="GtkLabel">
-                            <property name="label">Hi</property>
-                          </object>
-                        </property>
                       </object>
                     </child>
                   </object>

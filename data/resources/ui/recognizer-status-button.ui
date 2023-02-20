@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiRecognizerStatusButton">
+    <property name="layout-manager">
+      <object class="GtkBinLayout"/>
+    </property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="transition-type">crossfade</property>
+        <child>
+          <object class="AdwBin" id="recognizing_page">
+            <property name="child">
+              <!-- TODO: show progress -->
+              <object class="GtkSpinner">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="width-request">12</property>
+                <property name="height-request">12</property>
+                <property name="spinning">True</property>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwBin" id="n_successful_recognition_page">
+            <property name="child">
+              <object class="GtkButton">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="action-name">recognizer-status-button.request-show-saved-recordings</property>
+                <property name="child">
+                  <object class="GtkLabel" id="n_successful_recognition_label">
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="numeric"/>
+                      <class name="n-successful-recognition"/>
+                    </style>
+                  </object>
+                </property>
+                <style>
+                  <class name="flat"/>
+                  <class name="n-successful-recognition"/>
+                </style>
+              </object>
+            </property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwBin" id="no_network_page">
+            <property name="child">
+              <object class="GtkImage">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="icon-name">network-offline-symbolic</property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

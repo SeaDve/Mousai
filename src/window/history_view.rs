@@ -9,13 +9,15 @@ use once_cell::unsync::OnceCell;
 use std::cell::{Cell, RefCell};
 
 use super::{
-    recognized_page::RecognizedPage, song_page::SongPage, song_tile::SongTile, AdaptiveMode,
+    recognized_page::RecognizedPage, recognizer_status_button::RecognizerStatusButton,
+    song_page::SongPage, song_tile::SongTile, AdaptiveMode,
 };
 use crate::{
     config::APP_ID,
     debug_assert_or_log, debug_unreachable_or_log,
     model::{FuzzyFilter, FuzzySorter, Song, SongList},
     player::Player,
+    recognizer::{RecognizeResult, Recognizer},
     utils,
 };
 
@@ -53,6 +55,8 @@ mod imp {
         pub(super) header_bar_stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub(super) main_header_bar: TemplateChild<gtk::HeaderBar>,
+        #[template_child]
+        pub(super) recognizer_status_button: TemplateChild<RecognizerStatusButton>,
         #[template_child]
         pub(super) selection_mode_header_bar: TemplateChild<gtk::HeaderBar>,
         #[template_child]
@@ -410,6 +414,62 @@ impl HistoryView {
         self.update_history_stack_visible_child();
     }
 
+    /// Must only be called once
+    pub fn bind_recognizer(&self, recognizer: &Recognizer) {
+        let imp = self.imp();
+
+        imp.recognizer_status_button.bind_recognizer(recognizer);
+
+        imp.recognizer_status_button
+            .connect_show_saved_recordings_requested(
+                clone!(@weak self as obj, @weak recognizer =>move |_| {
+                    let Some(history) = obj.imp()
+                        .song_list
+                        .get()
+                        .and_then(|song_list| song_list.upgrade())
+                    else {
+                        debug_unreachable_or_log!("history not found");
+                        return;
+                    };
+
+                    let songs =
+                        recognizer
+                            .take_recognized_saved_recordings()
+                            .iter()
+                            .filter_map(|recording| match *recording.recognize_result() {
+                                Some(RecognizeResult::Ok(ref song)) => Some(song.clone()),
+                                Some(RecognizeResult::Err {
+                                    is_permanent: true
+                                }) => {
+                                    // TODO handle errors
+                                    None
+                                },
+                                ref res => {
+                                    debug_unreachable_or_log!("invalid result: {:?}", res);
+                                    None
+                                }
+                            })
+                            .collect::<Vec<_>>();
+
+                    if songs.is_empty() {
+                        tracing::debug!("No saved recordings taken when requested");
+                        return;
+                    }
+
+                    for song in &songs {
+                        if !history.contains(&song.id()) {
+                            song.set_is_newly_heard(true);
+                        }
+                    }
+
+                    history.append_many(songs.clone());
+
+                    obj.insert_recognized_page(&songs);
+                    obj.scroll_to_top();
+                }),
+            );
+    }
+
     pub fn scroll_to_top(&self) {
         let item_position = 0_u32.to_variant();
         self.imp()
@@ -573,6 +633,8 @@ impl HistoryView {
             .and_then(|song_list| song_list.upgrade())
         {
             song_list.append_many(imp.songs_purgatory.take());
+        } else {
+            debug_unreachable_or_log!("song list not found");
         }
     }
 
@@ -603,6 +665,8 @@ impl HistoryView {
             .and_then(|model| model.upgrade())
         {
             selection_model.select_all();
+        } else {
+            debug_unreachable_or_log!("selection model not found");
         }
     }
 
@@ -614,6 +678,8 @@ impl HistoryView {
             .and_then(|model| model.upgrade())
         {
             selection_model.unselect_all();
+        } else {
+            debug_unreachable_or_log!("selection model not found");
         }
     }
 
