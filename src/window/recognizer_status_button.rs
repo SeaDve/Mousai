@@ -6,7 +6,11 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use crate::recognizer::{RecognizeResult, Recognizer};
+use super::progress_icon::ProgressIcon;
+use crate::{
+    debug_assert_or_log,
+    recognizer::{RecognizeResult, Recognizer},
+};
 
 mod imp {
     use super::*;
@@ -20,6 +24,8 @@ mod imp {
         pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub(super) recognizing_page: TemplateChild<adw::Bin>,
+        #[template_child]
+        pub(super) recognizing_progress_icon: TemplateChild<ProgressIcon>,
         #[template_child]
         pub(super) n_successful_recognition_page: TemplateChild<adw::Bin>,
         #[template_child]
@@ -127,6 +133,7 @@ impl RecognizerStatusButton {
         if !is_offline_mode && saved_recordings.len() != recognized_saved_recordings.len() {
             self.set_visible(true);
 
+            debug_assert_or_log!(saved_recordings.len() > recognized_saved_recordings.len());
             let n_recognizing = saved_recordings.len() - recognized_saved_recordings.len();
             self.set_tooltip_text(Some(&ngettext!(
                 "Recognizing {} Song",
@@ -134,6 +141,10 @@ impl RecognizerStatusButton {
                 n_recognizing as u32,
                 n_recognizing,
             )));
+
+            imp.recognizing_progress_icon.set_progress(
+                recognized_saved_recordings.len() as f32 / saved_recordings.len() as f32,
+            );
 
             imp.stack.set_visible_child(&imp.recognizing_page.get());
         } else if n_successful_recognition != 0 {

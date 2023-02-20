@@ -10,13 +10,9 @@
         <child>
           <object class="AdwBin" id="recognizing_page">
             <property name="child">
-              <!-- TODO: show progress -->
-              <object class="GtkSpinner">
+              <object class="MsaiProgressIcon" id="recognizing_progress_icon">
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="width-request">12</property>
-                <property name="height-request">12</property>
-                <property name="spinning">True</property>
               </object>
             </property>
           </object>

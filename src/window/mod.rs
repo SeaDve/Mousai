@@ -3,6 +3,7 @@ mod external_link_tile;
 mod history_view;
 mod information_row;
 mod playback_button;
+mod progress_icon;
 mod recognized_page;
 mod recognized_page_tile;
 mod recognizer_status_button;
