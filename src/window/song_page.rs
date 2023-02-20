@@ -1,7 +1,5 @@
-use anyhow::Error;
 use gettextrs::gettext;
 use gtk::{
-    gdk,
     glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
@@ -18,7 +16,7 @@ use super::{
 };
 use crate::{
     debug_unreachable_or_log,
-    model::{ExternalLinkWrapper, Song},
+    model::{ExternalLink, Song},
     player::{Player, PlayerState},
     utils,
 };
@@ -162,30 +160,7 @@ mod imp {
                     .expect("Expected `ExternalLinkTile` as child");
 
                 utils::spawn(async move {
-                    let external_link_wrapper = external_link_tile.external_link();
-                    let external_link = external_link_wrapper.inner();
-                    let uri = external_link.uri();
-
-                    if let Err(err) = glib::Uri::is_valid(&uri, glib::UriFlags::ENCODED) {
-                        tracing::warn!("Trying to launch an invalid Uri: {:?}", err);
-                    }
-
-                    if let Err(err) = gtk::show_uri_full_future(
-                        external_link_tile
-                            .root()
-                            .map(|root| root.downcast::<gtk::Window>().unwrap())
-                            .as_ref(),
-                        &uri,
-                        gdk::CURRENT_TIME,
-                    )
-                    .await
-                    {
-                        tracing::warn!("Failed to launch default for uri `{uri}`: {:?}", err);
-                        utils::app_instance().add_toast_error(&Error::msg(gettext!(
-                            "Failed to launch {}",
-                            external_link.name()
-                        )));
-                    }
+                    external_link_tile.handle_activation().await;
                 });
             });
 
@@ -360,8 +335,8 @@ impl SongPage {
         imp.external_links_box.bind_model(
             song.map(|song| song.external_links()).as_ref(),
             |item| {
-                let wrapper: &ExternalLinkWrapper = item.downcast_ref().unwrap();
-                ExternalLinkTile::new(wrapper).upcast()
+                let link: &ExternalLink = item.downcast_ref().unwrap();
+                ExternalLinkTile::new(link).upcast()
             },
         );
 

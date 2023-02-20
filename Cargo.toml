@@ -19,7 +19,7 @@ gst_play = { package = "gstreamer-play", version = "0.20.0" }
 adw = { package = "libadwaita", version = "0.3.0", features = ["v1_2"] }
 glib = "0.17.0"
 gtk = { version = "0.6.0", package = "gtk4", features = ["gnome_43"] }
-indexmap = "1.9.1"
+indexmap = { version = "1.9.1", features = ["serde"] }
 serde = { version = "1.0.147", features = ["derive", "rc"] }
 serde_json = "1.0.87"
 anyhow = "1.0.66"
@@ -27,7 +27,6 @@ futures-channel = "0.3.25"
 futures-util = { version = "0.3.25", default-features = false }
 async-trait = "0.1.58"
 mpris-player = "0.6.2"
-typetag = "0.2.3"
 gsettings-macro = "0.1.15"
 fuzzy-matcher = "0.3.7"
 pulse = { package = "libpulse-binding", version = "2.26.0" }

@@ -8,9 +8,9 @@ use std::{
     rc::Rc,
 };
 
-use super::{external_link::ExternalLink, ExternalLinkList, SongId};
 use crate::{
     core::{AlbumArt, DateTime},
+    model::{ExternalLinkKey, ExternalLinks, SongId},
     utils,
 };
 
@@ -60,7 +60,7 @@ mod imp {
         pub(super) release_date: RefCell<Option<String>>,
         /// Links relevant to the song
         #[property(get, set, construct_only)]
-        pub(super) external_links: RefCell<ExternalLinkList>,
+        pub(super) external_links: RefCell<ExternalLinks>,
         /// Link where the album art can be downloaded
         #[property(get, set, construct_only)]
         pub(super) album_art_link: RefCell<Option<String>>,
@@ -180,7 +180,7 @@ impl<'de> Deserialize<'de> for Song {
 #[must_use = "builder doesn't do anything unless built"]
 pub struct SongBuilder {
     properties: Vec<(&'static str, glib::Value)>,
-    external_links: ExternalLinkList,
+    external_links: ExternalLinks,
 }
 
 impl SongBuilder {
@@ -192,7 +192,7 @@ impl SongBuilder {
                 ("artist", artist.into()),
                 ("album", album.into()),
             ],
-            external_links: ExternalLinkList::default(),
+            external_links: ExternalLinks::default(),
         }
     }
 
@@ -222,8 +222,8 @@ impl SongBuilder {
     }
 
     /// Pushes an external link. This is not idempotent.
-    pub fn external_link(&mut self, value: impl ExternalLink + 'static) -> &mut Self {
-        self.external_links.push(value);
+    pub fn external_link(&mut self, key: ExternalLinkKey, value: impl Into<String>) -> &mut Self {
+        self.external_links.insert(key, value.into());
         self
     }
 
@@ -275,28 +275,7 @@ mod test {
                 "artist": "Someone",
                 "album": "SomeAlbum",
                 "release_date": "00-00-0000",
-                "external_links": [
-                    {
-                        "AudDExternalLink": {
-                            "uri": "https://aud_d.link"
-                        }
-                    },
-                    {
-                        "YoutubeExternalLink": {
-                            "search_term": "Someone - Some song"
-                        }
-                    },
-                    {
-                        "SpotifyExternalLink": {
-                            "uri": "https://spotify.link"
-                        }
-                    },
-                    {
-                        "AppleMusicExternalLink": {
-                            "uri": "https://apple_music.link"
-                        }
-                    }
-                ],
+                "external_links": {},
                 "album_art_link": "https://album.png",
                 "playback_link": "https://test.mp3",
                 "lyrics": "Some song lyrics"
@@ -314,19 +293,7 @@ mod test {
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
 
-        assert_eq!(song.external_links().n_items(), 4);
-        assert_eq!(
-            song.external_links().get(0).unwrap().inner().uri(),
-            "https://aud_d.link"
-        );
-        assert_eq!(
-            song.external_links().get(2).unwrap().inner().uri(),
-            "https://spotify.link"
-        );
-        assert_eq!(
-            song.external_links().get(3).unwrap().inner().uri(),
-            "https://apple_music.link"
-        );
+        assert_eq!(song.external_links().len(), 0);
 
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
