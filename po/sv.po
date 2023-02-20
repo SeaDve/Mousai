@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Luna Jernberg <droidbittin@gmail.com>, 2021, 2022.
+# Luna Jernberg <droidbittin@gmail.com>, 2021, 2022, 2023.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
 # Kristoffer Grundström <swedishsailfishosuser@tutanota.com>, 2021, 2022.
 msgid ""
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2022-08-08 14:20+0000\n"
+"PO-Revision-Date: 2023-02-20 11:37+0000\n"
 "Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
@@ -33,7 +33,7 @@ msgstr "Identifiera låtar på sekunder"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Ljud;Musik;Sång;Identifiera;Igenkänning;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
@@ -51,7 +51,7 @@ msgstr "Standardfönstermaximerat beteende"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Innehåller nyligen upptäckta låtar"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
@@ -357,6 +357,8 @@ msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Det gick inte att konvertera inspelningen till base64. Vänligen rapportera "
+"detta till Mousais buggtracker."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
@@ -365,6 +367,8 @@ msgstr "Misslyckades att ansluta till servern."
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
+"Misslyckades att analysera svaret. Vänligen rapportera detta till Mousais "
+"buggtracker"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
@@ -373,6 +377,7 @@ msgstr "Daglig gräns har nåtts."
 #: src/recognizer/provider/aud_d/response.rs:116
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Misslyckades att ta fingeravtryck av ljud. Det kanske inte hörs något ljud."
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
