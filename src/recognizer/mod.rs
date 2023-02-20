@@ -374,18 +374,20 @@ impl Recognizer {
             return;
         }
 
-        for recording in saved_recordings.iter() {
-            if is_recording_ready_to_take(recording) {
-                tracing::debug!(
-                    "Skipping recognition of saved recording: it is already ready to be taken with result: {:?}",
-                    recording.recognize_result()
-                );
-                continue;
-            }
+        let provider = ProviderSettings::lock().active.to_provider();
+        tracing::debug!("Recognizing saved recording with provider: {:?}", provider);
 
-            utils::spawn(clone!(@weak self as obj, @weak recording => async move {
-                let provider = ProviderSettings::lock().active.to_provider();
-                tracing::debug!("Recognizing saved recording with provider: {:?}", provider);
+        // TODO recognize recordings concurrently, but not too many at once (at most 3?)
+        let saved_recordings_snapshot = saved_recordings.clone();
+        utils::spawn(clone!(@weak self as obj => async move {
+            for recording in saved_recordings_snapshot {
+                if is_recording_ready_to_take(&recording) {
+                    tracing::debug!(
+                        "Skipping recognition of saved recording: it is already ready to be taken with result: {:?}",
+                        recording.recognize_result()
+                    );
+                    continue;
+                }
 
                 match provider.recognize(recording.bytes()).await {
                     Ok(song) => {
@@ -410,11 +412,10 @@ impl Recognizer {
                         });
 
                         obj.emit_by_name::<()>("saved-recordings-changed", &[]);
-
                     }
                 }
-            }));
-        }
+            }
+        }));
     }
 
     fn update_offline_mode(&self) {
