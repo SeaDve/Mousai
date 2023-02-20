@@ -176,7 +176,7 @@ mod tests {
     #[test]
     fn items_changed_insert_eq_key() {
         let links = ExternalLinks::default();
-        links.insert(ExternalLinkKey::YoutubeSearchTerm, "A".to_string());
+        assert!(links.insert(ExternalLinkKey::YoutubeSearchTerm, "A".to_string()));
 
         let n_called = Rc::new(Cell::new(0));
 
@@ -189,7 +189,7 @@ mod tests {
         });
 
         assert_eq!(n_called.get(), 0);
-        links.insert(ExternalLinkKey::YoutubeSearchTerm, "B".to_string());
+        assert!(!links.insert(ExternalLinkKey::YoutubeSearchTerm, "B".to_string()));
         assert_eq!(n_called.get(), 1);
     }
 
@@ -200,12 +200,13 @@ mod tests {
             "apple-music-url": "https://apple_music.link",
             "aud-d-url": "https://aud_d.link",
             "spotify-url": "https://spotify.link",
-            "youtube-search-term": "Someone - Some song"
+            "youtube-search-term": "Someone - Some song",
+            "extra": "extra"
             }"#,
         )
         .unwrap();
 
-        assert_eq!(links.len(), 4);
+        assert_eq!(links.len(), 5);
         assert_eq!(
             links.get(ExternalLinkKey::AppleMusicUrl).as_deref(),
             Some("https://apple_music.link")
