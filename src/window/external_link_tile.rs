@@ -52,38 +52,38 @@ mod imp {
             let obj = self.obj();
 
             let link = obj.external_link();
+            let raw_key = link.key();
 
-            match ExternalLinkKey::from_str(link.key()) {
-                Ok(key) => match key {
-                    ExternalLinkKey::AppleMusicUrl => {
-                        self.label.set_label(&gettext("Apple Music"));
-                        obj.set_tooltip_text(Some(&gettext("Browse on Apple Music")));
-                        self.image.set_icon_name(Some("music-note-symbolic"));
-                        obj.add_css_class("applemusic");
-                    }
-                    ExternalLinkKey::AudDUrl => {
-                        self.label.set_label(&gettext("AudD"));
-                        obj.set_tooltip_text(Some(&gettext("Browse on AudD")));
-                        self.image.set_icon_name(Some("microphone-symbolic"));
-                        obj.add_css_class("audd");
-                    }
-                    ExternalLinkKey::SpotifyUrl => {
-                        self.label.set_label(&gettext("Spotify"));
-                        obj.set_tooltip_text(Some(&gettext("Listen on Spotify")));
-                        self.image.set_icon_name(Some("network-wireless-symbolic"));
-                        obj.add_css_class("spotify");
-                    }
-                    ExternalLinkKey::YoutubeSearchTerm => {
-                        self.label.set_label(&gettext("YouTube"));
-                        obj.set_tooltip_text(Some(&gettext("Search on YouTube")));
-                        self.image
-                            .set_icon_name(Some("media-playback-start-symbolic"));
-                        obj.add_css_class("youtube");
-                    }
-                },
-                Err(err) => {
-                    tracing::warn!("Unhandled external link key `{}`: {:?}", link.key(), err);
-                    obj.set_visible(false);
+            let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
+                debug_unreachable_or_log!("constructed with unknown key `{}`", raw_key);
+                return;
+            };
+
+            match key {
+                ExternalLinkKey::AppleMusicUrl => {
+                    self.label.set_label(&gettext("Apple Music"));
+                    obj.set_tooltip_text(Some(&gettext("Browse on Apple Music")));
+                    self.image.set_icon_name(Some("music-note-symbolic"));
+                    obj.add_css_class("applemusic");
+                }
+                ExternalLinkKey::AudDUrl => {
+                    self.label.set_label(&gettext("AudD"));
+                    obj.set_tooltip_text(Some(&gettext("Browse on AudD")));
+                    self.image.set_icon_name(Some("microphone-symbolic"));
+                    obj.add_css_class("audd");
+                }
+                ExternalLinkKey::SpotifyUrl => {
+                    self.label.set_label(&gettext("Spotify"));
+                    obj.set_tooltip_text(Some(&gettext("Listen on Spotify")));
+                    self.image.set_icon_name(Some("network-wireless-symbolic"));
+                    obj.add_css_class("spotify");
+                }
+                ExternalLinkKey::YoutubeSearchTerm => {
+                    self.label.set_label(&gettext("YouTube"));
+                    obj.set_tooltip_text(Some(&gettext("Search on YouTube")));
+                    self.image
+                        .set_icon_name(Some("media-playback-start-symbolic"));
+                    obj.add_css_class("youtube");
                 }
             }
         }
@@ -111,9 +111,9 @@ impl ExternalLinkTile {
         let raw_value = link.value();
 
         let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
-                debug_unreachable_or_log!("activated a supposed non-visible external link tile with key `{}`", raw_key);
-                return;
-            };
+            debug_unreachable_or_log!("activated a supposed non-visible external link tile with key `{}`", raw_key);
+            return;
+        };
 
         let uri = match key {
             ExternalLinkKey::AppleMusicUrl

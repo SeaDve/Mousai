@@ -5,7 +5,10 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use std::cell::{Cell, RefCell};
+use std::{
+    cell::{Cell, RefCell},
+    str::FromStr,
+};
 
 use super::{
     album_cover::AlbumCover,
@@ -16,7 +19,7 @@ use super::{
 };
 use crate::{
     debug_unreachable_or_log,
-    model::{ExternalLink, Song},
+    model::{ExternalLink, ExternalLinkKey, Song},
     player::{Player, PlayerState},
     utils,
 };
@@ -333,7 +336,24 @@ impl SongPage {
         let song = song.as_ref();
 
         imp.external_links_box.bind_model(
-            song.map(|song| song.external_links()).as_ref(),
+            song.map(|song| {
+                let filter = gtk::CustomFilter::new(|item| {
+                    let link: &ExternalLink = item.downcast_ref().unwrap();
+                    // TODO use `inspect` once it's stable
+                    match ExternalLinkKey::from_str(link.key()) {
+                        Ok(_) => true,
+                        Err(_) => {
+                            tracing::warn!(
+                                "filtered out an unknown external link key: {}",
+                                link.key()
+                            );
+                            false
+                        }
+                    }
+                });
+                gtk::FilterListModel::new(Some(song.external_links()), Some(filter))
+            })
+            .as_ref(),
             |item| {
                 let link: &ExternalLink = item.downcast_ref().unwrap();
                 ExternalLinkTile::new(link).upcast()
