@@ -375,7 +375,7 @@ impl Recognizer {
         }
 
         let provider = ProviderSettings::lock().active.to_provider();
-        tracing::debug!("Recognizing saved recording with provider: {:?}", provider);
+        tracing::debug!("Recognizing saved recordings with provider: {:?}", provider);
 
         // TODO recognize recordings concurrently, but not too many at once (at most 3?)
         let saved_recordings_snapshot = saved_recordings.clone();
