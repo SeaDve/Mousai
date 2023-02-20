@@ -49,7 +49,7 @@ fn random_data(mode: TestProviderMode) -> Result<Data> {
         .get(glib::random_int_range(0, raw_responses.len() as i32) as usize)
         .expect("Out of bound index from the raw responses");
 
-    tracing::debug!(random_response);
+    tracing::trace!(random_response);
 
     Response::parse(random_response.as_bytes())?.data()
 }
