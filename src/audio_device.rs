@@ -3,31 +3,20 @@ use gettextrs::gettext;
 use gst::prelude::*;
 use gtk::{gio, glib};
 
+use std::str::FromStr;
+
 use crate::core::ResultExt;
 
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
+#[derive(
+    Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum, strum::EnumString, strum::AsRefStr,
+)]
 #[enum_type(name = "MsaiAudioDeviceClass")]
 pub enum AudioDeviceClass {
     #[default]
+    #[strum(serialize = "Audio/Source")]
     Source,
+    #[strum(serialize = "Audio/Sink")]
     Sink,
-}
-
-impl AudioDeviceClass {
-    fn for_str(string: &str) -> Option<Self> {
-        match string {
-            "Audio/Source" => Some(Self::Source),
-            "Audio/Sink" => Some(Self::Sink),
-            _ => None,
-        }
-    }
-
-    fn as_str(self) -> &'static str {
-        match self {
-            Self::Source => "Audio/Source",
-            Self::Sink => "Audio/Sink",
-        }
-    }
 }
 
 pub async fn find_default_name(class: AudioDeviceClass) -> Result<String> {
@@ -48,7 +37,7 @@ pub async fn find_default_name(class: AudioDeviceClass) -> Result<String> {
 
 fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     let device_monitor = gst::DeviceMonitor::new();
-    device_monitor.add_filter(Some(class.as_str()), None);
+    device_monitor.add_filter(Some(class.as_ref()), None);
 
     device_monitor.start().with_help(
         || gettext("Make sure that you have PulseAudio installed in your system."),
@@ -60,7 +49,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     tracing::debug!("Finding device name for class `{:?}`", class);
 
     for device in devices {
-        let Some(device_class) =  AudioDeviceClass::for_str(&device.device_class()) else {
+        let Ok(device_class) =  AudioDeviceClass::from_str(&device.device_class()) else {
             tracing::debug!(
                 "Skipping device `{}` as it has unknown device class `{}`",
                 device.name(),

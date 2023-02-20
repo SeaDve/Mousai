@@ -7,33 +7,13 @@ use std::{cell::RefCell, collections::HashMap};
 use super::external_link::ExternalLink;
 
 /// Known keys for external links.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, strum::EnumString, strum::AsRefStr)]
+#[strum(serialize_all = "kebab-case")]
 pub enum ExternalLinkKey {
     AppleMusicUrl,
     AudDUrl,
     SpotifyUrl,
     YoutubeSearchTerm,
-}
-
-impl ExternalLinkKey {
-    pub fn from_str(s: &str) -> Option<Self> {
-        match s {
-            "apple-music-url" => Some(Self::AppleMusicUrl),
-            "aud-d-url" => Some(Self::AudDUrl),
-            "spotify-url" => Some(Self::SpotifyUrl),
-            "youtube-search-term" => Some(Self::YoutubeSearchTerm),
-            _ => None,
-        }
-    }
-
-    pub fn as_str(self) -> &'static str {
-        match self {
-            Self::AppleMusicUrl => "apple-music-url",
-            Self::AudDUrl => "aud-d-url",
-            Self::SpotifyUrl => "spotify-url",
-            Self::YoutubeSearchTerm => "youtube-search-term",
-        }
-    }
 }
 
 mod imp {
@@ -94,7 +74,7 @@ impl ExternalLinks {
             .imp()
             .map
             .borrow_mut()
-            .insert_full(key.as_str().to_string(), value);
+            .insert_full(key.as_ref().to_string(), value);
 
         if last_value.is_some() {
             self.items_changed(position as u32, 1, 1);
@@ -106,7 +86,7 @@ impl ExternalLinks {
     }
 
     pub fn get(&self, key: ExternalLinkKey) -> Option<String> {
-        self.imp().map.borrow().get(key.as_str()).cloned()
+        self.imp().map.borrow().get(key.as_ref()).cloned()
     }
 
     pub fn len(&self) -> usize {
@@ -155,11 +135,11 @@ mod tests {
         links.insert(ExternalLinkKey::SpotifyUrl, "B".to_string());
 
         let a = links.item(0).unwrap().downcast::<ExternalLink>().unwrap();
-        assert_eq!(a.key(), ExternalLinkKey::YoutubeSearchTerm.as_str());
+        assert_eq!(a.key(), ExternalLinkKey::YoutubeSearchTerm.as_ref());
         assert_eq!(a.value(), "A");
 
         let b = links.item(1).unwrap().downcast::<ExternalLink>().unwrap();
-        assert_eq!(b.key(), ExternalLinkKey::SpotifyUrl.as_str());
+        assert_eq!(b.key(), ExternalLinkKey::SpotifyUrl.as_ref());
         assert_eq!(b.value(), "B");
     }
 

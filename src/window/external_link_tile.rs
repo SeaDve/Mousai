@@ -3,6 +3,8 @@ use gettextrs::gettext;
 use gtk::{gdk, glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 
+use std::str::FromStr;
+
 use crate::{
     debug_unreachable_or_log,
     model::{ExternalLink, ExternalLinkKey},
@@ -52,7 +54,7 @@ mod imp {
             let link = obj.external_link();
 
             match ExternalLinkKey::from_str(link.key()) {
-                Some(key) => match key {
+                Ok(key) => match key {
                     ExternalLinkKey::AppleMusicUrl => {
                         self.label.set_label(&gettext("Apple Music"));
                         obj.set_tooltip_text(Some(&gettext("Browse on Apple Music")));
@@ -79,8 +81,8 @@ mod imp {
                         obj.add_css_class("youtube");
                     }
                 },
-                None => {
-                    tracing::warn!("Unhandled external link key `{}`", link.key());
+                Err(err) => {
+                    tracing::warn!("Unhandled external link key `{}`: {:?}", link.key(), err);
                     obj.set_visible(false);
                 }
             }
@@ -108,7 +110,7 @@ impl ExternalLinkTile {
         let raw_key = link.key();
         let raw_value = link.value();
 
-        let Some(key) = ExternalLinkKey::from_str(raw_key) else {
+        let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
                 debug_unreachable_or_log!("activated a supposed non-visible external link tile with key `{}`", raw_key);
                 return;
             };
