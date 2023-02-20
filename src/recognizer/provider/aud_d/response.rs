@@ -2,7 +2,9 @@ use anyhow::{anyhow, Context, Result};
 use gettextrs::gettext;
 use serde::Deserialize;
 
-use crate::recognizer::provider::error::{FingerprintError, NoMatchesError, TokenError};
+use crate::recognizer::provider::error::{
+    FingerprintError, NoMatchesError, ResponseParseError, TokenError,
+};
 
 #[derive(Debug, Deserialize)]
 pub struct LyricsData {
@@ -94,7 +96,7 @@ pub struct Response {
 
 impl Response {
     pub fn parse(slice: &[u8]) -> Result<Self> {
-        serde_json::from_slice(slice).context("Failed to parse AudD response")
+        serde_json::from_slice(slice).context(ResponseParseError)
     }
 
     pub fn data(self) -> Result<Data> {

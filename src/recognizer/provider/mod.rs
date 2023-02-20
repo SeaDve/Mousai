@@ -1,5 +1,5 @@
 mod aud_d;
-mod error;
+pub mod error;
 mod settings;
 
 use anyhow::Result;

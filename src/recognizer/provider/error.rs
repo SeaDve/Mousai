@@ -25,6 +25,18 @@ impl fmt::Display for FingerprintError {
 impl error::Error for FingerprintError {}
 
 #[derive(Debug)]
+
+pub struct ResponseParseError;
+
+impl fmt::Display for ResponseParseError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str(&gettext("Failed to parse response from provider"))
+    }
+}
+
+impl error::Error for ResponseParseError {}
+
+#[derive(Debug)]
 pub enum TokenError {
     Invalid,
     LimitReached,

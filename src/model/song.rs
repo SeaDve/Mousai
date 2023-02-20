@@ -11,9 +11,26 @@ use std::{
 use super::{external_link::ExternalLink, ExternalLinkList, SongId};
 use crate::{
     core::{AlbumArt, DateTime},
-    serde::{deserialize_once_cell, serialize_once_cell},
     utils,
 };
+
+pub fn serialize_once_cell<S>(
+    cell: &OnceCell<impl Serialize>,
+    serializer: S,
+) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    cell.get().serialize(serializer)
+}
+
+pub fn deserialize_once_cell<'de, D, T>(deserializer: D) -> Result<OnceCell<T>, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    Ok(OnceCell::with_value(T::deserialize(deserializer)?))
+}
 
 mod imp {
     use super::*;

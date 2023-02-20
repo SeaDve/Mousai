@@ -90,6 +90,20 @@ recognizedpagetile songtile:active {
   background-color: alpha(currentColor, .16);
 }
 
+/* RecognizerStatusButton  */
+
+label.n-successful-recognition {
+  padding: 4px 8px;
+  color: @accent_fg_color;
+  background-color: @accent_bg_color;
+  border-radius: 99999px;
+  font-size: 0.8em;
+}
+
+button.n-successful-recognition {
+  padding: 5px;
+}
+
 /* SongBar */
 
 .activate-song-button {

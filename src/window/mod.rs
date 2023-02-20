@@ -5,6 +5,7 @@ mod information_row;
 mod playback_button;
 mod recognized_page;
 mod recognized_page_tile;
+mod recognizer_status_button;
 mod recognizer_view;
 mod song_bar;
 mod song_page;
@@ -142,6 +143,7 @@ mod imp {
             self.song_bar.bind_player(&self.player);
             self.main_view.bind_player(&self.player);
             self.main_view.bind_song_list(obj.history());
+            self.main_view.bind_recognizer(&self.recognizer);
             self.recognizer_view.bind_recognizer(&self.recognizer);
 
             self.main_view
@@ -332,24 +334,6 @@ impl Window {
                 main_view.insert_song_page(song);
                 main_view.scroll_to_top();
             }));
-
-        imp.recognizer.connect_saved_songs_recognized(
-            clone!(@weak self as obj => move |_, songs| {
-                let history = obj.history();
-
-                for song in songs {
-                    if !history.contains(&song.id()) {
-                        song.set_is_newly_heard(true);
-                    }
-                }
-
-                history.append_many(songs.to_vec());
-
-                let main_view = obj.imp().main_view.get();
-                main_view.insert_recognized_page(songs);
-                main_view.scroll_to_top();
-            }),
-        );
 
         imp.recognizer
             .connect_recording_saved(clone!(@weak self as obj => move |_| {

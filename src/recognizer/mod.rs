@@ -10,11 +10,14 @@ use gtk::{
 };
 
 use std::{
-    cell::{Cell, RefCell},
+    cell::{Cell, Ref, RefCell},
     rc::Rc,
 };
 
-pub use self::provider::{ProviderSettings, ProviderType, TestProviderMode};
+pub use self::{
+    provider::{ProviderSettings, ProviderType, TestProviderMode},
+    recording::RecognizeResult,
+};
 use self::{recorder::Recorder, recording::Recording};
 use crate::{
     audio_device::{self, AudioDeviceClass},
@@ -24,6 +27,8 @@ use crate::{
     utils,
 };
 
+const MAX_SAVED_RECORDING_RECOGNIZE_RETRIES: u8 = 3;
+
 #[derive(Debug, Default, Clone, Copy, glib::Enum, PartialEq, Eq)]
 #[enum_type(name = "MsaiRecognizerState")]
 pub enum RecognizerState {
@@ -32,10 +37,6 @@ pub enum RecognizerState {
     Listening,
     Recognizing,
 }
-
-#[derive(Debug, Clone, glib::Boxed)]
-#[boxed_type(name = "MsaiBoxedSongVec")]
-struct BoxedSongVec(Vec<Song>);
 
 mod imp {
     use super::*;
@@ -54,7 +55,8 @@ mod imp {
 
         pub(super) recorder: Recorder,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
-        pub(super) saved_recordings: RefCell<Vec<Recording>>,
+
+        pub(super) saved_recordings: RefCell<Vec<Rc<Recording>>>,
     }
 
     #[glib::object_subclass]
@@ -75,10 +77,8 @@ mod imp {
                     Signal::builder("song-recognized")
                         .param_types([Song::static_type()])
                         .build(),
-                    Signal::builder("saved-songs-recognized")
-                        .param_types([BoxedSongVec::static_type()])
-                        .build(),
                     Signal::builder("recording-saved").build(),
+                    Signal::builder("saved-recordings-changed").build(),
                 ]
             });
 
@@ -143,19 +143,6 @@ impl Recognizer {
         )
     }
 
-    pub fn connect_saved_songs_recognized<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self, &[Song]) + 'static,
-    {
-        self.connect_closure(
-            "saved-songs-recognized",
-            true,
-            closure_local!(|obj: &Self, boxed_song_vec: BoxedSongVec| {
-                f(obj, &boxed_song_vec.0);
-            }),
-        )
-    }
-
     pub fn connect_recording_saved<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
@@ -167,6 +154,23 @@ impl Recognizer {
                 f(obj);
             }),
         )
+    }
+
+    pub fn connect_saved_recordings_changed<F>(&self, f: F) -> glib::SignalHandlerId
+    where
+        F: Fn(&Self) + 'static,
+    {
+        self.connect_closure(
+            "saved-recordings-changed",
+            true,
+            closure_local!(|obj: &Self| {
+                f(obj);
+            }),
+        )
+    }
+
+    pub fn saved_recordings(&self) -> Ref<'_, Vec<Rc<Recording>>> {
+        self.imp().saved_recordings.borrow()
     }
 
     pub async fn toggle_recognize(&self) -> Result<()> {
@@ -265,7 +269,11 @@ impl Recognizer {
             self.imp()
                 .saved_recordings
                 .borrow_mut()
-                .push(Recording::new(recording_bytes, recorded_time));
+                .push(Rc::new(Recording::new(
+                    recording_bytes.to_vec(),
+                    recorded_time,
+                )));
+            self.emit_by_name::<()>("saved-recordings-changed", &[]);
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
         } else {
@@ -295,12 +303,13 @@ impl Recognizer {
     }
 
     fn load_saved_recordings(&self) -> Result<()> {
-        let recordings: Vec<Recording> =
+        let recordings: Vec<Rc<Recording>> =
             serde_json::from_str(&utils::app_instance().settings().saved_recordings())?;
 
         tracing::debug!("Loading {} saved recordings", recordings.len());
 
         self.imp().saved_recordings.replace(recordings);
+        self.emit_by_name::<()>("saved-recordings-changed", &[]);
 
         Ok(())
     }
@@ -315,6 +324,34 @@ impl Recognizer {
             .set_saved_recordings(&serde_json::to_string(saved_recordings.as_slice())?);
 
         Ok(())
+    }
+
+    /// Note: Recognition may or may not be successful
+    pub fn take_recognized_saved_recordings(&self) -> Vec<Rc<Recording>> {
+        let imp = self.imp();
+
+        let (recognized, to_retain) = imp
+            .saved_recordings
+            .take()
+            .into_iter()
+            // FIXME use Vec::drain_filter
+            .partition(|recording| is_recording_ready_to_take(recording));
+        imp.saved_recordings.replace(to_retain);
+        self.emit_by_name::<()>("saved-recordings-changed", &[]);
+
+        recognized
+    }
+
+    /// Note: Recognition may or may not be successful
+    pub fn peek_recognized_saved_recordings(&self) -> Vec<Rc<Recording>> {
+        let imp = self.imp();
+
+        imp.saved_recordings
+            .borrow()
+            .iter()
+            .filter(|recording| is_recording_ready_to_take(recording))
+            .cloned()
+            .collect()
     }
 
     fn try_recognize_saved_recordings(&self) {
@@ -332,44 +369,47 @@ impl Recognizer {
             return;
         }
 
-        let provider = ProviderSettings::lock().active.to_provider();
-        tracing::debug!("Recognizing saved recordings with provider: {:?}", provider);
+        for recording in saved_recordings.iter() {
+            if is_recording_ready_to_take(recording) {
+                tracing::debug!(
+                    "Skipping recognition of saved recording: it is already ready to be taken with result: {:?}",
+                    recording.recognize_result()
+                );
+                continue;
+            }
 
-        // TODO recognize recordings concurrently
-        utils::spawn(clone!(@weak self as obj => async move {
-            let imp = obj.imp();
+            utils::spawn(clone!(@weak self as obj, @weak recording => async move {
+                let provider = ProviderSettings::lock().active.to_provider();
+                tracing::debug!("Recognizing saved recording with provider: {:?}", provider);
 
-            let mut recognized = Vec::new();
-            let mut to_return = Vec::new();
-
-            // TODO only take when recognized successfully
-            for recording in imp.saved_recordings.take() {
                 match provider.recognize(recording.bytes()).await {
                     Ok(song) => {
-                        song.set_last_heard(
-                            recording
-                                .recorded_time(),
-                        );
-                        recognized.push(song);
+                        song.set_last_heard(recording.recorded_time());
+                        recording.set_recognize_result(RecognizeResult::Ok(song));
+
+                        obj.emit_by_name::<()>("saved-recordings-changed", &[]);
                     }
                     Err(err) => {
-                        // TODO don't return no match errors
-                        to_return.push(recording);
-                        // TODO propagate error
+                        use provider::error::{
+                            FingerprintError, NoMatchesError, ResponseParseError,
+                        };
+
                         tracing::error!("Failed to recognize saved recording: {:?}", err);
+
+                        recording.increment_recognize_retries();
+
+                        recording.set_recognize_result(RecognizeResult::Err {
+                            is_permanent: err.is::<NoMatchesError>()
+                                || err.is::<FingerprintError>()
+                                || err.is::<ResponseParseError>(),
+                        });
+
+                        obj.emit_by_name::<()>("saved-recordings-changed", &[]);
+
                     }
                 }
-            }
-
-            tracing::debug!("Failed to recognize {} saved recordings and was returned", to_return.len());
-            imp.saved_recordings.replace(to_return);
-
-            // TODO Consider showing a notification if some recordings were not recognized
-            if !recognized.is_empty() {
-                tracing::debug!("Successfully recognized {} saved recordings", recognized.len());
-                obj.emit_by_name::<()>("saved-songs-recognized", &[&BoxedSongVec(recognized)]);
-            }
-        }));
+            }));
+        }
     }
 
     fn update_offline_mode(&self) {
@@ -387,5 +427,16 @@ impl Recognizer {
 impl Default for Recognizer {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+/// Whether the recording is ready to be taken and its result is set
+fn is_recording_ready_to_take(recording: &Recording) -> bool {
+    match *recording.recognize_result() {
+        None => false,
+        Some(RecognizeResult::Ok(_)) => true,
+        Some(RecognizeResult::Err { is_permanent }) => {
+            is_permanent || recording.recognize_retries() > MAX_SAVED_RECORDING_RECOGNIZE_RETRIES
+        }
     }
 }
