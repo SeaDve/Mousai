@@ -98,6 +98,9 @@ mod imp {
             gio::NetworkMonitor::default().connect_network_available_notify(
                 clone!(@weak obj => move |_| {
                     obj.update_offline_mode();
+
+                    // TODO don't just call when network is available, but also for every
+                    // interval if there is network and there are still saved recordings
                     obj.try_recognize_saved_recordings();
                 }),
             );
