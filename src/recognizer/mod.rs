@@ -326,7 +326,8 @@ impl Recognizer {
         Ok(())
     }
 
-    /// Note: Recognition may or may not be successful
+    /// Returned recordings are guaranteed to have a recognizing result.
+    /// However, the results may not be successful.
     pub fn take_recognized_saved_recordings(&self) -> Vec<Rc<Recording>> {
         let imp = self.imp();
 
@@ -342,7 +343,8 @@ impl Recognizer {
         recognized
     }
 
-    /// Note: Recognition may or may not be successful
+    /// Returned recordings are guaranteed to have a recognizing result.
+    /// However, the results may not be successful.
     pub fn peek_recognized_saved_recordings(&self) -> Vec<Rc<Recording>> {
         let imp = self.imp();
 
