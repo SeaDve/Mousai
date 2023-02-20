@@ -229,6 +229,12 @@ impl Window {
 
                 tracing::error!("{:?}", err);
                 tracing::debug!("Using empty SongList instead");
+
+                // FIXME this causes weird behavior since the first call
+                // to history() is in constructed() where the window is not
+                // yet fully initialized. Thus, when present error, which needed
+                // the window, is called, it causes a weirdness. A fix is to defer
+                // loading the history.
                 utils::app_instance().present_error(&err);
 
                 SongList::default()
