@@ -151,7 +151,7 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> =
-                Lazy::new(|| vec![Signal::builder("request-selection-mode").build()]);
+                Lazy::new(|| vec![Signal::builder("selection-mode-requested").build()]);
 
             SIGNALS.as_ref()
         }
@@ -178,7 +178,7 @@ mod imp {
             gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
                 gesture.set_state(gtk::EventSequenceState::Claimed);
                 if obj.contains(x, y) {
-                    obj.emit_by_name::<()>("request-selection-mode", &[]);
+                    obj.emit_by_name::<()>("selection-mode-requested", &[]);
                 }
             }));
             obj.add_controller(gesture_click);
@@ -187,7 +187,7 @@ mod imp {
             gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
                 gesture.set_state(gtk::EventSequenceState::Claimed);
                 if obj.contains(x, y) {
-                    obj.emit_by_name::<()>("request-selection-mode", &[]);
+                    obj.emit_by_name::<()>("selection-mode-requested", &[]);
                 }
             }));
             obj.add_controller(gesture_long_press);
@@ -197,7 +197,7 @@ mod imp {
                     self.select_button
                         .connect_active_notify(clone!(@weak obj => move |button| {
                             if button.is_active() && !obj.is_selection_mode_active() {
-                                obj.emit_by_name::<()>("request-selection-mode", &[]);
+                                obj.emit_by_name::<()>("selection-mode-requested", &[]);
                             }
 
                             obj.notify("active");
@@ -336,12 +336,12 @@ impl SongTile {
         self.imp().adaptive_mode.get()
     }
 
-    pub fn connect_request_selection_mode<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_selection_mode_requested<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self) + 'static,
     {
         self.connect_closure(
-            "request-selection-mode",
+            "selection-mode-requested",
             true,
             closure_local!(|obj: &Self| {
                 f(obj);

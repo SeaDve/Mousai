@@ -840,7 +840,7 @@ impl HistoryView {
                     }
                 }
             }));
-            song_tile.connect_request_selection_mode(clone!(@weak obj => move |_| {
+            song_tile.connect_selection_mode_requested(clone!(@weak obj => move |_| {
                 obj.set_selection_mode_active(true);
             }));
 
