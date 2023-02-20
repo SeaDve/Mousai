@@ -15,7 +15,7 @@ use super::{
 use crate::{
     config::APP_ID,
     debug_assert_or_log, debug_unreachable_or_log,
-    model::{FuzzyFilter, FuzzySorter, Song, SongList},
+    model::{Song, SongFilter, SongList, SongSorter},
     player::Player,
     recognizer::{RecognizeResult, Recognizer},
     utils,
@@ -351,8 +351,8 @@ impl HistoryView {
             obj.update_history_stack_visible_child();
         }));
 
-        let filter = FuzzyFilter::new();
-        let sorter = FuzzySorter::new();
+        let filter = SongFilter::new();
+        let sorter = SongSorter::new();
 
         let filter_model = gtk::FilterListModel::new(Some(song_list.clone()), Some(filter.clone()));
         filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {

@@ -13,28 +13,29 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, glib::Properties)]
-    #[properties(wrapper_type = super::FuzzySorter)]
-    pub struct FuzzySorter {
+    #[properties(wrapper_type = super::SongSorter)]
+    pub struct SongSorter {
         /// Search term
         ///
         /// If search is empty, the sorter will sort by last heard.
-        /// Otherwise, it will sort by the fuzzy match score.
+        /// Otherwise, it will sort by the fuzzy match score based
+        /// on Song's search term
         #[property(get, set = Self::set_search, explicit_notify)]
         pub(super) search: RefCell<String>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for FuzzySorter {
-        const NAME: &'static str = "MsaiFuzzySorter";
-        type Type = super::FuzzySorter;
+    impl ObjectSubclass for SongSorter {
+        const NAME: &'static str = "MsaiSongSorter";
+        type Type = super::SongSorter;
         type ParentType = gtk::Sorter;
     }
 
-    impl ObjectImpl for FuzzySorter {
+    impl ObjectImpl for SongSorter {
         crate::derived_properties!();
     }
 
-    impl SorterImpl for FuzzySorter {
+    impl SorterImpl for SongSorter {
         fn compare(&self, item_1: &glib::Object, item_2: &glib::Object) -> gtk::Ordering {
             let song_1 = item_1.downcast_ref::<Song>().unwrap();
             let song_2 = item_2.downcast_ref::<Song>().unwrap();
@@ -55,7 +56,7 @@ mod imp {
         }
     }
 
-    impl FuzzySorter {
+    impl SongSorter {
         fn set_search(&self, search: String) {
             let obj = self.obj();
 
@@ -71,18 +72,18 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct FuzzySorter(ObjectSubclass<imp::FuzzySorter>)
+    pub struct SongSorter(ObjectSubclass<imp::SongSorter>)
         @extends gtk::Sorter;
 
 }
 
-impl FuzzySorter {
+impl SongSorter {
     pub fn new() -> Self {
         glib::Object::new()
     }
 }
 
-impl Default for FuzzySorter {
+impl Default for SongSorter {
     fn default() -> Self {
         Self::new()
     }
@@ -102,7 +103,7 @@ mod tests {
 
     #[gtk::test]
     fn compare() {
-        let sorter = FuzzySorter::new();
+        let sorter = SongSorter::new();
 
         let old = new_test_song(DateTime::now_local(), "old");
         let new = new_test_song(DateTime::now_local(), "new");

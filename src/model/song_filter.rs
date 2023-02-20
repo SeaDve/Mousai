@@ -13,25 +13,27 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, glib::Properties)]
-    #[properties(wrapper_type = super::FuzzyFilter)]
-    pub struct FuzzyFilter {
+    #[properties(wrapper_type = super::SongFilter)]
+    pub struct SongFilter {
         /// Search term
+        ///
+        /// If search is empty, the filter will match all songs.
         #[property(get, set = Self::set_search, explicit_notify)]
         pub(super) search: RefCell<String>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for FuzzyFilter {
-        const NAME: &'static str = "MsaiFuzzyFilter";
-        type Type = super::FuzzyFilter;
+    impl ObjectSubclass for SongFilter {
+        const NAME: &'static str = "MsaiSongFilter";
+        type Type = super::SongFilter;
         type ParentType = gtk::Filter;
     }
 
-    impl ObjectImpl for FuzzyFilter {
+    impl ObjectImpl for SongFilter {
         crate::derived_properties!();
     }
 
-    impl FilterImpl for FuzzyFilter {
+    impl FilterImpl for SongFilter {
         fn strictness(&self) -> gtk::FilterMatch {
             if self.search.borrow().is_empty() {
                 gtk::FilterMatch::All
@@ -55,7 +57,7 @@ mod imp {
         }
     }
 
-    impl FuzzyFilter {
+    impl SongFilter {
         fn set_search(&self, search: &str) {
             let obj = self.obj();
             let old_search = obj.search();
@@ -83,18 +85,18 @@ mod imp {
 }
 
 glib::wrapper! {
-    pub struct FuzzyFilter(ObjectSubclass<imp::FuzzyFilter>)
+    pub struct SongFilter(ObjectSubclass<imp::SongFilter>)
         @extends gtk::Filter;
 
 }
 
-impl FuzzyFilter {
+impl SongFilter {
     pub fn new() -> Self {
         glib::Object::new()
     }
 }
 
-impl Default for FuzzyFilter {
+impl Default for SongFilter {
     fn default() -> Self {
         Self::new()
     }
@@ -110,7 +112,7 @@ mod tests {
 
     #[gtk::test]
     fn strictness() {
-        let filter = FuzzyFilter::new();
+        let filter = SongFilter::new();
         assert_eq!(filter.strictness(), gtk::FilterMatch::All);
 
         filter.set_search("foo");
@@ -125,7 +127,7 @@ mod tests {
 
     #[gtk::test]
     fn match_() {
-        let filter = FuzzyFilter::new();
+        let filter = SongFilter::new();
         assert!(filter.match_(&Song::builder(&SongId::new("0"), "foo", "foo", "").build()));
         assert!(filter.match_(&Song::builder(&SongId::new("1"), "bar", "bar", "").build()));
 
@@ -144,7 +146,7 @@ mod tests {
 
     #[gtk::test]
     fn changed() {
-        let filter = FuzzyFilter::new();
+        let filter = SongFilter::new();
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
 
