@@ -389,6 +389,11 @@ impl Recognizer {
                     continue;
                 }
 
+                if obj.is_offline_mode() {
+                    tracing::debug!("Offline mode is active, cancelled subsequent recognitions");
+                    break;
+                }
+
                 match provider.recognize(recording.bytes()).await {
                     Ok(song) => {
                         song.set_last_heard(recording.recorded_time());
