@@ -5,19 +5,24 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use std::cell::RefCell;
+use std::{cell::RefCell, marker::PhantomData};
 
-use crate::{model::Song, utils};
+use crate::{debug_assert_or_log, model::Song, utils};
 
 const DEFAULT_ENABLE_CROSSFADE: bool = true;
 
 mod imp {
     use super::*;
-    use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::AlbumCover)]
     #[template(resource = "/io/github/seadve/Mousai/ui/album-cover.ui")]
     pub struct AlbumCover {
+        #[property(get = Self::pixel_size, set = Self::set_pixel_size, minimum = -1, default = -1, explicit_notify)]
+        pub(super) pixel_size: PhantomData<i32>,
+        #[property(get = Self::enables_crossfade, set = Self::set_enables_crossfade, default = DEFAULT_ENABLE_CROSSFADE, explicit_notify)]
+        pub(super) enables_crossfade: PhantomData<bool>,
+
         #[template_child]
         pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -48,65 +53,12 @@ mod imp {
     }
 
     impl ObjectImpl for AlbumCover {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Song represented by Self
-                    glib::ParamSpecObject::builder::<Song>("song")
-                        .explicit_notify()
-                        .build(),
-                    // Pixel Size of the inner GtkImage
-                    glib::ParamSpecInt::builder("pixel-size")
-                        .minimum(-1)
-                        .default_value(-1)
-                        .explicit_notify()
-                        .build(),
-                    // Whether to animate when switching between textures
-                    glib::ParamSpecBoolean::builder("enable-crossfade")
-                        .default_value(DEFAULT_ENABLE_CROSSFADE)
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => {
-                    let song = value.get().unwrap();
-                    obj.set_song(song);
-                }
-                "pixel-size" => {
-                    let pixel_size = value.get().unwrap();
-                    obj.set_pixel_size(pixel_size);
-                }
-                "enable-crossfade" => {
-                    let enable_crossfade = value.get().unwrap();
-                    obj.set_enable_crossfade(enable_crossfade);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => obj.song().into(),
-                "pixel-size" => obj.pixel_size().into(),
-                "enable-crossfade" => obj.enables_crossfade().into(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn constructed(&self) {
             self.parent_constructed();
 
-            self.obj().set_enable_crossfade(DEFAULT_ENABLE_CROSSFADE);
+            self.obj().set_enables_crossfade(DEFAULT_ENABLE_CROSSFADE);
         }
 
         fn dispose(&self) {
@@ -115,6 +67,36 @@ mod imp {
     }
 
     impl WidgetImpl for AlbumCover {}
+
+    impl AlbumCover {
+        fn pixel_size(&self) -> i32 {
+            let image_a_pixel_size = self.image_a.pixel_size();
+            let image_b_pixel_size = self.image_b.pixel_size();
+            debug_assert_or_log!(image_a_pixel_size == image_b_pixel_size);
+
+            self.image_a.pixel_size()
+        }
+
+        fn set_pixel_size(&self, pixel_size: i32) {
+            self.image_a.set_pixel_size(pixel_size);
+            self.image_b.set_pixel_size(pixel_size);
+            self.placeholder.set_pixel_size(pixel_size / 3);
+            self.obj().notify_pixel_size();
+        }
+
+        fn enables_crossfade(&self) -> bool {
+            self.stack.transition_type() == gtk::StackTransitionType::Crossfade
+        }
+
+        fn set_enables_crossfade(&self, enable_crossfade: bool) {
+            self.stack.set_transition_type(if enable_crossfade {
+                gtk::StackTransitionType::Crossfade
+            } else {
+                gtk::StackTransitionType::None
+            });
+            self.obj().notify_enables_crossfade();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -157,36 +139,10 @@ impl AlbumCover {
         }
 
         self.imp().song.replace(song);
-        self.notify("song");
     }
 
     pub fn song(&self) -> Option<Song> {
         self.imp().song.borrow().clone()
-    }
-
-    pub fn set_pixel_size(&self, pixel_size: i32) {
-        let imp = self.imp();
-        imp.image_a.set_pixel_size(pixel_size);
-        imp.image_b.set_pixel_size(pixel_size);
-        imp.placeholder.set_pixel_size(pixel_size / 3);
-        self.notify("pixel-size");
-    }
-
-    pub fn pixel_size(&self) -> i32 {
-        self.imp().image_a.pixel_size()
-    }
-
-    pub fn set_enable_crossfade(&self, enable_crossfade: bool) {
-        self.imp().stack.set_transition_type(if enable_crossfade {
-            gtk::StackTransitionType::Crossfade
-        } else {
-            gtk::StackTransitionType::None
-        });
-        self.notify("enable-crossfade");
-    }
-
-    pub fn enables_crossfade(&self) -> bool {
-        self.imp().stack.transition_type() == gtk::StackTransitionType::Crossfade
     }
 
     fn clear(&self) {

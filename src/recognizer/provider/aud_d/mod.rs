@@ -50,7 +50,7 @@ impl AudD {
 
         song_builder.external_link(
             ExternalLinkKey::YoutubeSearchTerm,
-            format!("{} - {}", data.artist, data.title,),
+            format!("{} - {}", data.artist, data.title),
         );
 
         if let Some(spotify_data) = data.spotify_data {
