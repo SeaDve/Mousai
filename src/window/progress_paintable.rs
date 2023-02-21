@@ -5,7 +5,6 @@ use gtk::{
     graphene,
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
 
 use std::{
     cell::Cell,
@@ -16,12 +15,13 @@ const SIZE: i32 = 16;
 
 mod imp {
     use super::*;
+    use glib::WeakRef;
 
     #[derive(Debug, Default, glib::Properties)]
     #[properties(wrapper_type = super::ProgressPaintable)]
     pub struct ProgressPaintable {
         #[property(get, set, construct_only)]
-        pub(super) widget: OnceCell<gtk::Widget>,
+        pub(super) widget: WeakRef<gtk::Widget>,
         #[property(get, set = Self::set_progress, minimum = 0.0, maximum = 1.0, explicit_notify)]
         pub(super) progress: Cell<f64>,
     }
@@ -39,12 +39,11 @@ mod imp {
         fn constructed(&self) {
             let obj = self.obj();
 
-            self.widget
-                .get()
-                .unwrap()
-                .connect_scale_factor_notify(clone!(@weak obj => move |_| {
+            self.widget.upgrade().unwrap().connect_scale_factor_notify(
+                clone!(@weak obj => move |_| {
                     obj.invalidate_size();
-                }));
+                }),
+            );
 
             self.parent_constructed();
         }
@@ -52,11 +51,11 @@ mod imp {
 
     impl PaintableImpl for ProgressPaintable {
         fn intrinsic_width(&self) -> i32 {
-            SIZE * self.widget.get().unwrap().scale_factor()
+            SIZE * self.widget.upgrade().unwrap().scale_factor()
         }
 
         fn intrinsic_height(&self) -> i32 {
-            SIZE * self.widget.get().unwrap().scale_factor()
+            SIZE * self.widget.upgrade().unwrap().scale_factor()
         }
 
         fn snapshot(&self, _snapshot: &gdk::Snapshot, _width: f64, _height: f64) {}
