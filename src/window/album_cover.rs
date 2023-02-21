@@ -33,6 +33,7 @@ mod imp {
         pub(super) placeholder: TemplateChild<gtk::Image>,
 
         pub(super) song: RefCell<Option<Song>>,
+        pub(super) join_handle: RefCell<Option<glib::JoinHandle<()>>>,
     }
 
     #[glib::object_subclass]
@@ -114,20 +115,28 @@ impl AlbumCover {
             return;
         }
 
+        let imp = self.imp();
+
+        if let Some(join_handle) = imp.join_handle.take() {
+            join_handle.abort();
+        }
+
         if let Some(ref song) = song {
             match song.album_art() {
                 Ok(album_art) => {
-                    utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
-                        match album_art.texture().await {
-                            Ok(texture) => {
-                                obj.set_paintable(Some(texture));
+                    let join_handle =
+                        utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
+                            match album_art.texture().await {
+                                Ok(texture) => {
+                                    obj.set_paintable(Some(texture));
+                                }
+                                Err(err) => {
+                                    tracing::warn!("Failed to load texture: {:?}", err);
+                                    obj.set_paintable(gdk::Paintable::NONE);
+                                }
                             }
-                            Err(err) => {
-                                tracing::warn!("Failed to load texture: {:?}", err);
-                                obj.set_paintable(gdk::Paintable::NONE);
-                            }
-                        }
-                    }));
+                        }));
+                    imp.join_handle.replace(Some(join_handle));
                 }
                 Err(err) => {
                     tracing::warn!("Failed to get song album art: {:?}", err);
@@ -138,7 +147,7 @@ impl AlbumCover {
             self.set_paintable(gdk::Paintable::NONE);
         }
 
-        self.imp().song.replace(song);
+        imp.song.replace(song);
     }
 
     pub fn song(&self) -> Option<Song> {
