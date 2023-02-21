@@ -12,6 +12,10 @@ use crate::{
     recognizer::{RecognizeResult, Recognizer},
 };
 
+// TODO
+// - Improve UI. Maybe drop separate button to show result?
+// - Show error messages in the UI
+
 mod imp {
     use super::*;
     use glib::subclass::Signal;
