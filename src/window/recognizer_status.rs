@@ -69,8 +69,8 @@ mod imp {
 
             let obj = self.obj();
 
-            self.progress_icon
-                .set_paintable(Some(&ProgressPaintable::new(&self.progress_icon.get())));
+            let progress_paintable = ProgressPaintable::new(&self.progress_icon.get());
+            self.progress_icon.set_paintable(Some(&progress_paintable));
 
             self.show_results_button
                 .connect_clicked(clone!(@weak obj => move |_| {
