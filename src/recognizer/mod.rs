@@ -425,6 +425,7 @@ impl Recognizer {
                         is_permanent: err.is::<NoMatchesError>()
                             || err.is::<FingerprintError>()
                             || err.is::<ResponseParseError>(),
+                        message: err.to_string(),
                     });
                     self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
@@ -455,6 +456,6 @@ fn is_recording_ready_to_take(recording: &Recording) -> bool {
     match *recording.recognize_result() {
         None => false,
         Some(RecognizeResult::Ok(_)) => true,
-        Some(RecognizeResult::Err { is_permanent }) => is_permanent,
+        Some(RecognizeResult::Err { is_permanent, .. }) => is_permanent,
     }
 }

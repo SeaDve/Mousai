@@ -12,6 +12,7 @@ pub enum RecognizeResult {
         /// this recording", in contrast to "internet connection error" or
         /// "expired token error")
         is_permanent: bool,
+        message: String,
     },
 }
 

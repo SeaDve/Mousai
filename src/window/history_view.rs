@@ -438,7 +438,7 @@ impl HistoryView {
                         .filter_map(|recording| match *recording.recognize_result() {
                             Some(RecognizeResult::Ok(ref song)) => Some(song.clone()),
                             Some(RecognizeResult::Err {
-                                is_permanent: true
+                                is_permanent: true, ..
                             }) => {
                                 // TODO handle errors
                                 None
