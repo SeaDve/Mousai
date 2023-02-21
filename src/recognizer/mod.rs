@@ -387,7 +387,7 @@ impl Recognizer {
         let saved_recordings_snapshot = self.imp().saved_recordings.borrow().clone();
         for recording in saved_recordings_snapshot {
             if self.is_offline_mode() {
-                tracing::debug!("Offline mode is active, cancelled subsequent recognitions");
+                tracing::debug!("Offline mode is active, cancelled succeeding recognitions");
                 break;
             }
 
