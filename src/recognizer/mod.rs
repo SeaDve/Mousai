@@ -100,7 +100,10 @@ mod imp {
                     obj.update_offline_mode();
 
                     // TODO don't just call when network is available, but also for every
-                    // interval if there is network and there are still saved recordings
+                    // interval if there is network, there are still saved recordings, and
+                    // there is currently no recognition in progress.
+                    //
+                    // This should also be triggered when token is updated.
                     obj.try_recognize_saved_recordings();
                 }),
             );
