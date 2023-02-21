@@ -30,9 +30,6 @@
             <property name="margin-top">10</property>
             <property name="margin-bottom">10</property>
             <property name="valign">center</property>
-            <style>
-              <class name="accent"/>
-            </style>
           </object>
         </property>
       </object>
