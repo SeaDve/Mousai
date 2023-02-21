@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiRecognizerStatus">
+    <property name="layout-manager">
+      <object class="GtkBoxLayout"/>
+    </property>
+    <child>
+      <object class="GtkRevealer" id="offline_mode_icon_revealer">
+        <property name="transition-type">slide-right</property>
+        <property name="child">
+          <object class="GtkImage">
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <property name="valign">center</property>
+            <property name="tooltip-text" translatable="yes">Offline Mode Enabled</property>
+            <property name="icon-name">network-offline-symbolic</property>
+          </object>
+        </property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkRevealer" id="progress_icon_revealer">
+        <property name="transition-type">slide-right</property>
+        <property name="child">
+          <object class="GtkImage" id="progress_icon">
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="accent"/>
+            </style>
+          </object>
+        </property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkRevealer" id="show_results_button_revealer">
+        <property name="transition-type">slide-right</property>
+        <property name="child">
+          <object class="GtkButton" id="show_results_button">
+            <property name="tooltip-text">Show Offline Mode Recognition Results</property>
+          </object>
+        </property>
+      </object>
+    </child>
+  </template>
+</interface>

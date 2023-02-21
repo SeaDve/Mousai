@@ -21,6 +21,6 @@ src/window/history_view.rs
 src/window/mod.rs
 src/window/playback_button.rs
 src/window/recognized_page.rs
-src/window/recognizer_status_button.rs
+src/window/recognizer_status.rs
 src/window/recognizer_view.rs
 src/window/song_page.rs

@@ -69,7 +69,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="MsaiRecognizerStatusButton" id="recognizer_status_button"/>
+                      <object class="MsaiRecognizerStatus" id="recognizer_status"/>
                     </child>
                     <child type="end">
                       <object class="GtkMenuButton">
