@@ -88,7 +88,6 @@ mod imp {
             );
             cr.move_to(cx, cy);
             cr.arc(cx, cy, radius, -FRAC_PI_2, arc_end);
-            cr.close_path();
             cr.fill().unwrap();
 
             cr.set_source_rgba(
@@ -99,7 +98,6 @@ mod imp {
             );
             cr.move_to(cx, cy);
             cr.arc(cx, cy, radius, arc_end, 3.0 * FRAC_PI_2);
-            cr.close_path();
             cr.fill().unwrap();
         }
     }
