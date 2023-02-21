@@ -90,6 +90,23 @@ recognizedpagetile songtile:active {
   background-color: alpha(currentColor, .16);
 }
 
+/* RecognizerStatus */
+
+.show-results-button {
+  padding: 5px 8px;
+}
+
+.show-results-button > label {
+  padding: 2px 6px;
+
+  color: @accent_fg_color;
+  background-color: @accent_bg_color;
+  border-radius: 99999px;
+
+  font-feature-settings: "tnum";
+  font-size: 0.8em;
+}
+
 /* SongBar */
 
 .activate-song-button {

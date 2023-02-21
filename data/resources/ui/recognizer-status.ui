@@ -9,10 +9,10 @@
         <property name="transition-type">slide-right</property>
         <property name="child">
           <object class="GtkImage">
-            <property name="margin-start">6</property>
-            <property name="margin-end">6</property>
-            <property name="margin-top">6</property>
-            <property name="margin-bottom">6</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">16</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
             <property name="valign">center</property>
             <property name="tooltip-text" translatable="yes">Offline Mode Enabled</property>
             <property name="icon-name">network-offline-symbolic</property>
@@ -25,10 +25,10 @@
         <property name="transition-type">slide-right</property>
         <property name="child">
           <object class="GtkImage" id="progress_icon">
-            <property name="margin-start">6</property>
-            <property name="margin-end">6</property>
-            <property name="margin-top">6</property>
-            <property name="margin-bottom">6</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">16</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
             <property name="valign">center</property>
             <style>
               <class name="accent"/>
@@ -43,6 +43,16 @@
         <property name="child">
           <object class="GtkButton" id="show_results_button">
             <property name="tooltip-text">Show Offline Mode Recognition Results</property>
+            <property name="child">
+              <object class="GtkLabel" id="show_results_button_label">
+                <property name="valign">center</property>
+                <property name="justify">center</property>
+              </object>
+            </property>
+            <style>
+              <class name="show-results-button"/>
+              <class name="flat"/>
+            </style>
           </object>
         </property>
       </object>

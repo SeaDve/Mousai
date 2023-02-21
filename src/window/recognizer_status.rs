@@ -30,6 +30,8 @@ mod imp {
         pub(super) show_results_button_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
         pub(super) show_results_button: TemplateChild<gtk::Button>,
+        #[template_child]
+        pub(super) show_results_button_label: TemplateChild<gtk::Label>,
 
         pub(super) recognizer: OnceCell<Recognizer>,
     }
@@ -176,7 +178,8 @@ impl RecognizerStatus {
         imp.show_results_button_revealer
             .set_reveal_child(n_successful != 0);
 
-        imp.show_results_button.set_label(&n_successful.to_string());
+        imp.show_results_button_label
+            .set_label(&n_successful.to_string());
     }
 }
 
