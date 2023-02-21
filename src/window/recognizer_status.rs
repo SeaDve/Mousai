@@ -13,8 +13,9 @@ use crate::{
 };
 
 // TODO
-// - Improve UI. Maybe drop separate button to show result?
-// - Show error messages in the UI
+// - Maybe drop the separate button to show result?
+// - Show "n queued recordings will be recognized once back online" in the progress icon when offline
+// - Show more detailed progress with error messages
 
 mod imp {
     use super::*;
