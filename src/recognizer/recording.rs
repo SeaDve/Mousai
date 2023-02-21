@@ -19,8 +19,10 @@ pub enum RecognizeResult {
 pub struct Recording {
     bytes: Vec<u8>,
     recorded_time: DateTime,
-    recognize_retries: Cell<u8>,
     recognize_result: RefCell<Option<RecognizeResult>>,
+
+    #[serde(skip)] // So we can retry next session
+    recognize_retries: Cell<u8>,
 }
 
 impl Recording {
@@ -41,19 +43,19 @@ impl Recording {
         &self.recorded_time
     }
 
-    pub fn recognize_retries(&self) -> u8 {
-        self.recognize_retries.get()
-    }
-
-    pub fn increment_recognize_retries(&self) {
-        self.recognize_retries.set(self.recognize_retries.get() + 1);
-    }
-
     pub fn recognize_result(&self) -> Ref<'_, Option<RecognizeResult>> {
         self.recognize_result.borrow()
     }
 
     pub fn set_recognize_result(&self, result: RecognizeResult) {
         self.recognize_result.replace(Some(result));
+    }
+
+    pub fn recognize_retries(&self) -> u8 {
+        self.recognize_retries.get()
+    }
+
+    pub fn increment_recognize_retries(&self) {
+        self.recognize_retries.set(self.recognize_retries.get() + 1);
     }
 }

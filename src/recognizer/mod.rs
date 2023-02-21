@@ -374,53 +374,62 @@ impl Recognizer {
             return;
         }
 
+        // TODO recognize recordings concurrently, but not too many at once (at most 3?)
+        utils::spawn(clone!(@weak self as obj => async move {
+            obj.try_recognize_saved_recordings_inner().await;
+        }));
+    }
+
+    async fn try_recognize_saved_recordings_inner(&self) {
         let provider = ProviderSettings::lock().active.to_provider();
         tracing::debug!("Recognizing saved recordings with provider: {:?}", provider);
 
-        // TODO recognize recordings concurrently, but not too many at once (at most 3?)
-        let saved_recordings_snapshot = saved_recordings.clone();
-        utils::spawn(clone!(@weak self as obj => async move {
-            for recording in saved_recordings_snapshot {
-                if is_recording_ready_to_take(&recording) {
-                    tracing::debug!(
-                        "Skipping recognition of saved recording: it is already ready to be taken with result: {:?}",
-                        recording.recognize_result()
-                    );
-                    continue;
+        let saved_recordings_snapshot = self.imp().saved_recordings.borrow().clone();
+        for recording in saved_recordings_snapshot {
+            if self.is_offline_mode() {
+                tracing::debug!("Offline mode is active, cancelled subsequent recognitions");
+                break;
+            }
+
+            if is_recording_ready_to_take(&recording) {
+                tracing::debug!(
+                    "Skipping recognition of saved recording: it is already ready to be taken with result: {:?}",
+                    recording.recognize_result()
+                );
+                continue;
+            }
+
+            if recording.recognize_retries() > MAX_SAVED_RECORDING_RECOGNIZE_RETRIES {
+                tracing::debug!(
+                    "Skipping recognition of saved recording: it has already been retried {} times",
+                    MAX_SAVED_RECORDING_RECOGNIZE_RETRIES
+                );
+                continue;
+            }
+
+            match provider.recognize(recording.bytes()).await {
+                Ok(song) => {
+                    song.set_last_heard(recording.recorded_time());
+
+                    recording.set_recognize_result(RecognizeResult::Ok(song));
+                    self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
+                Err(err) => {
+                    use provider::error::{FingerprintError, NoMatchesError, ResponseParseError};
 
-                if obj.is_offline_mode() {
-                    tracing::debug!("Offline mode is active, cancelled subsequent recognitions");
-                    break;
-                }
+                    tracing::error!("Failed to recognize saved recording: {:?}", err);
 
-                match provider.recognize(recording.bytes()).await {
-                    Ok(song) => {
-                        song.set_last_heard(recording.recorded_time());
-                        recording.set_recognize_result(RecognizeResult::Ok(song));
+                    recording.increment_recognize_retries();
 
-                        obj.emit_by_name::<()>("saved-recordings-changed", &[]);
-                    }
-                    Err(err) => {
-                        use provider::error::{
-                            FingerprintError, NoMatchesError, ResponseParseError,
-                        };
-
-                        tracing::error!("Failed to recognize saved recording: {:?}", err);
-
-                        recording.increment_recognize_retries();
-
-                        recording.set_recognize_result(RecognizeResult::Err {
-                            is_permanent: err.is::<NoMatchesError>()
-                                || err.is::<FingerprintError>()
-                                || err.is::<ResponseParseError>(),
-                        });
-
-                        obj.emit_by_name::<()>("saved-recordings-changed", &[]);
-                    }
+                    recording.set_recognize_result(RecognizeResult::Err {
+                        is_permanent: err.is::<NoMatchesError>()
+                            || err.is::<FingerprintError>()
+                            || err.is::<ResponseParseError>(),
+                    });
+                    self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
             }
-        }));
+        }
     }
 
     fn update_offline_mode(&self) {
@@ -441,13 +450,11 @@ impl Default for Recognizer {
     }
 }
 
-/// Whether the recording is ready to be taken and its result is set
+/// Whether the recording is ready to be taken and its result is set and permanent
 fn is_recording_ready_to_take(recording: &Recording) -> bool {
     match *recording.recognize_result() {
         None => false,
         Some(RecognizeResult::Ok(_)) => true,
-        Some(RecognizeResult::Err { is_permanent }) => {
-            is_permanent || recording.recognize_retries() > MAX_SAVED_RECORDING_RECOGNIZE_RETRIES
-        }
+        Some(RecognizeResult::Err { is_permanent }) => is_permanent,
     }
 }
