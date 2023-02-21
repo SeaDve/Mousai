@@ -6,7 +6,7 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use super::progress_paintable::ProgressPaintable;
+use super::progress_icon::ProgressIcon;
 use crate::{
     debug_assert_or_log,
     recognizer::{RecognizeResult, Recognizer},
@@ -28,7 +28,7 @@ mod imp {
         #[template_child]
         pub(super) progress_icon_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
-        pub(super) progress_icon: TemplateChild<gtk::Image>,
+        pub(super) progress_icon: TemplateChild<ProgressIcon>,
         #[template_child]
         pub(super) offline_mode_icon_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
@@ -68,9 +68,6 @@ mod imp {
             self.parent_constructed();
 
             let obj = self.obj();
-
-            let progress_paintable = ProgressPaintable::new(&self.progress_icon.get());
-            self.progress_icon.set_paintable(Some(&progress_paintable));
 
             self.show_results_button
                 .connect_clicked(clone!(@weak obj => move |_| {
@@ -163,19 +160,12 @@ impl RecognizerStatus {
             total - n_failed,
         )));
 
-        let progress_paintable = self
-            .imp()
-            .progress_icon
-            .paintable()
-            .unwrap()
-            .downcast::<ProgressPaintable>()
-            .unwrap();
         let progress = if total - n_failed == 0 {
             1.0
         } else {
             n_successful as f64 / (total - n_failed) as f64
         };
-        progress_paintable.set_progress(progress);
+        imp.progress_icon.set_progress(progress);
 
         let has_unfinished = total != n_recognized;
         imp.progress_icon_revealer.set_reveal_child(has_unfinished);
