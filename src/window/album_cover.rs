@@ -120,22 +120,22 @@ impl AlbumCover {
                     utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
                         match album_art.texture().await {
                             Ok(texture) => {
-                                obj.set_paintable(texture);
+                                obj.set_paintable(Some(texture));
                             }
                             Err(err) => {
                                 tracing::warn!("Failed to load texture: {:?}", err);
-                                obj.clear();
+                                obj.set_paintable(gdk::Paintable::NONE);
                             }
                         }
                     }));
                 }
                 Err(err) => {
                     tracing::warn!("Failed to get song album art: {:?}", err);
-                    self.clear();
+                    self.set_paintable(gdk::Paintable::NONE);
                 }
             }
         } else {
-            self.clear();
+            self.set_paintable(gdk::Paintable::NONE);
         }
 
         self.imp().song.replace(song);
@@ -145,22 +145,19 @@ impl AlbumCover {
         self.imp().song.borrow().clone()
     }
 
-    fn clear(&self) {
-        let imp = self.imp();
-        imp.image_a.set_paintable(gdk::Paintable::NONE);
-        imp.image_b.set_paintable(gdk::Paintable::NONE);
-        imp.stack.set_visible_child(&imp.placeholder.get());
-    }
-
-    fn set_paintable(&self, paintable: &impl IsA<gdk::Paintable>) {
+    fn set_paintable(&self, paintable: Option<&impl IsA<gdk::Paintable>>) {
         let imp = self.imp();
 
-        if imp.stack.visible_child().as_ref() == Some(imp.image_a.upcast_ref()) {
-            imp.image_b.set_paintable(Some(paintable));
-            imp.stack.set_visible_child(&imp.image_b.get());
+        if let Some(paintable) = paintable {
+            if imp.stack.visible_child().as_ref() == Some(imp.image_a.upcast_ref()) {
+                imp.image_b.set_paintable(Some(paintable));
+                imp.stack.set_visible_child(&imp.image_b.get());
+            } else {
+                imp.image_a.set_paintable(Some(paintable));
+                imp.stack.set_visible_child(&imp.image_a.get());
+            }
         } else {
-            imp.image_a.set_paintable(Some(paintable));
-            imp.stack.set_visible_child(&imp.image_a.get());
+            imp.stack.set_visible_child(&imp.placeholder.get());
         }
     }
 }
