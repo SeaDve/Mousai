@@ -155,7 +155,7 @@ impl RecognizerStatus {
         let n_failed = n_recognized - n_successful;
 
         imp.progress_icon.set_tooltip_text(Some(&ngettext!(
-            "Recognized {} Out Of {} ",
+            "Recognized {} Out Of {}",
             "Recognized {} Out Of {} Songs",
             (total - n_failed) as u32,
             n_successful,
