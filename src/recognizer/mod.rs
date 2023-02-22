@@ -310,12 +310,14 @@ impl Recognizer {
     }
 
     fn load_saved_recordings(&self) -> Result<()> {
-        let recordings: Vec<Rc<Recording>> =
+        let recordings: Vec<Recording> =
             serde_json::from_str(&utils::app_instance().settings().saved_recordings())?;
 
         tracing::debug!("Loading {} saved recordings", recordings.len());
 
-        self.imp().saved_recordings.replace(recordings);
+        self.imp()
+            .saved_recordings
+            .replace(recordings.into_iter().map(Rc::new).collect());
         self.emit_by_name::<()>("saved-recordings-changed", &[]);
 
         Ok(())
@@ -328,7 +330,12 @@ impl Recognizer {
 
         utils::app_instance()
             .settings()
-            .set_saved_recordings(&serde_json::to_string(saved_recordings.as_slice())?);
+            .set_saved_recordings(&serde_json::to_string(
+                &saved_recordings
+                    .iter()
+                    .map(|r| r.as_ref())
+                    .collect::<Vec<_>>(),
+            )?);
 
         Ok(())
     }
