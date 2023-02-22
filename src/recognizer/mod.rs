@@ -78,6 +78,7 @@ mod imp {
                         .param_types([Song::static_type()])
                         .build(),
                     Signal::builder("recording-saved").build(),
+                    // FIXME use a proper list model
                     Signal::builder("saved-recordings-changed").build(),
                 ]
             });
