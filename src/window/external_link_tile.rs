@@ -55,7 +55,7 @@ mod imp {
             let raw_key = link.key();
 
             let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
-                debug_unreachable_or_log!("constructed with unknown key `{}`", raw_key);
+                debug_unreachable_or_log!("constructed with an unhandleable key `{}`", raw_key);
                 return;
             };
 
@@ -105,13 +105,24 @@ impl ExternalLinkTile {
             .build()
     }
 
+    pub fn can_handle(link: &ExternalLink) -> bool {
+        // FIXME use `inspect` once it's stable
+        match ExternalLinkKey::from_str(link.key()) {
+            Ok(_) => true,
+            Err(_) => {
+                tracing::warn!("can't handle external link key `{}`", link.key());
+                false
+            }
+        }
+    }
+
     pub async fn handle_activation(&self) {
         let link = self.external_link();
         let raw_key = link.key();
         let raw_value = link.value();
 
         let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
-            debug_unreachable_or_log!("activated a supposed non-visible external link tile with key `{}`", raw_key);
+            debug_unreachable_or_log!("activated with an unhandleable key `{}`", raw_key);
             return;
         };
 
