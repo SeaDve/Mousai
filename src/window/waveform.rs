@@ -70,13 +70,12 @@ impl Waveform {
         let height = self.height();
         let color = self.style_context().color();
 
-        let bounds = graphene::Rect::new(0.0, 0.0, width as f32, height as f32);
-        let ctx = snapshot.append_cairo(&bounds);
+        let ctx =
+            snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
         ctx.set_line_cap(cairo::LineCap::Round);
         ctx.set_line_width(LINE_WIDTH);
 
-        let max_height = height as f64;
-        let v_center = max_height / 2.0;
+        let v_center = height as f64 / 2.0;
         let h_center = width as f64 / 2.0;
 
         let peaks = self.imp().peaks.borrow();
