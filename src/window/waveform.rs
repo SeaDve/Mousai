@@ -32,7 +32,50 @@ mod imp {
 
     impl WidgetImpl for Waveform {
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
-            self.obj().on_snapshot(snapshot);
+            let obj = self.obj();
+            let width = obj.width();
+            let height = obj.height();
+            let color = obj.style_context().color();
+
+            let ctx =
+                snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
+            ctx.set_line_cap(cairo::LineCap::Round);
+            ctx.set_line_width(LINE_WIDTH);
+
+            let v_center = height as f64 / 2.0;
+            let h_center = width as f64 / 2.0;
+
+            let peaks = self.peaks.borrow();
+            let peaks_len = peaks.len();
+
+            // Start drawing from the center and work towards the sides.
+            let mut pointer = h_center;
+
+            // More recent peaks are at the end of the list, but they are supposed
+            // to be drawn first at the center. Thus, we iterate in reverse.
+            //
+            // The index is still preserved so that the alpha value and height
+            // is lower for the first/older peaks.
+            for (index, peak) in peaks.iter().enumerate().rev() {
+                ctx.set_source_rgba(
+                    color.red() as f64,
+                    color.green() as f64,
+                    color.blue() as f64,
+                    index as f64 / peaks_len as f64, // Add feathering
+                );
+
+                let peak_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
+
+                ctx.move_to(pointer, v_center + peak_height);
+                ctx.line_to(pointer, v_center - peak_height);
+                ctx.stroke().unwrap();
+
+                ctx.move_to(width as f64 - pointer, v_center + peak_height);
+                ctx.line_to(width as f64 - pointer, v_center - peak_height);
+                ctx.stroke().unwrap();
+
+                pointer += GUTTER;
+            }
         }
     }
 }
@@ -63,52 +106,6 @@ impl Waveform {
         self.imp().peaks.borrow_mut().clear();
 
         self.queue_draw();
-    }
-
-    fn on_snapshot(&self, snapshot: &gtk::Snapshot) {
-        let width = self.width();
-        let height = self.height();
-        let color = self.style_context().color();
-
-        let ctx =
-            snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
-        ctx.set_line_cap(cairo::LineCap::Round);
-        ctx.set_line_width(LINE_WIDTH);
-
-        let v_center = height as f64 / 2.0;
-        let h_center = width as f64 / 2.0;
-
-        let peaks = self.imp().peaks.borrow();
-        let peaks_len = peaks.len();
-
-        // Start drawing from the center and work towards the sides.
-        let mut pointer = h_center;
-
-        // More recent peaks are at the end of the list, but they are supposed
-        // to be drawn first at the center. Thus, we iterate in reverse.
-        //
-        // The index is still preserved so that the alpha value and height
-        // is lower for the first/older peaks.
-        for (index, peak) in peaks.iter().enumerate().rev() {
-            ctx.set_source_rgba(
-                color.red() as f64,
-                color.green() as f64,
-                color.blue() as f64,
-                index as f64 / peaks_len as f64, // Add feathering
-            );
-
-            let peak_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
-
-            ctx.move_to(pointer, v_center + peak_height);
-            ctx.line_to(pointer, v_center - peak_height);
-            ctx.stroke().unwrap();
-
-            ctx.move_to(width as f64 - pointer, v_center + peak_height);
-            ctx.line_to(width as f64 - pointer, v_center - peak_height);
-            ctx.stroke().unwrap();
-
-            pointer += GUTTER;
-        }
     }
 }
 
