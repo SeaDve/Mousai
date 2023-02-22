@@ -13,6 +13,7 @@ use crate::{debug_assert_or_log, debug_unreachable_or_log};
 // - Don't load AlbumArt if network is metered
 // - Retry downloading once network is back
 // - Integrate more with AlbumCover widget
+// - Load only at most n AlbumArt at a time
 
 pub struct AlbumArt {
     session: soup::Session,
