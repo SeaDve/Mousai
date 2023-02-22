@@ -431,24 +431,23 @@ impl HistoryView {
                     return;
                 };
 
-                let songs =
-                    recognizer
-                        .take_recognized_saved_recordings()
-                        .iter()
-                        .filter_map(|recording| match *recording.recognize_result() {
-                            Some(RecognizeResult::Ok(ref song)) => Some(song.clone()),
-                            Some(RecognizeResult::Err {
-                                is_permanent: true, ..
-                            }) => {
-                                // TODO handle errors
-                                None
-                            },
-                            ref res => {
-                                debug_unreachable_or_log!("invalid result: {:?}", res);
-                                None
-                            }
-                        })
-                        .collect::<Vec<_>>();
+                let songs = recognizer
+                    .take_recognized_saved_recordings()
+                    .iter()
+                    .filter_map(|recording| match *recording.recognize_result() {
+                        Some(RecognizeResult::Ok(ref song)) => Some(song.clone()),
+                        Some(RecognizeResult::Err {
+                            is_permanent: true, ..
+                        }) => {
+                            // TODO handle errors
+                            None
+                        }
+                        ref res => {
+                            debug_unreachable_or_log!("invalid result: {:?}", res);
+                            None
+                        }
+                    })
+                    .collect::<Vec<_>>();
 
                 if songs.is_empty() {
                     tracing::debug!("No saved recordings taken when requested");
