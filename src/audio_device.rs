@@ -1,16 +1,13 @@
 use anyhow::{anyhow, Result};
 use gettextrs::gettext;
 use gst::prelude::*;
-use gtk::{gio, glib};
+use gtk::gio;
 
 use std::str::FromStr;
 
 use crate::core::ResultExt;
 
-#[derive(
-    Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum, strum::EnumString, strum::AsRefStr,
-)]
-#[enum_type(name = "MsaiAudioDeviceClass")]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, strum::EnumString, strum::AsRefStr)]
 pub enum AudioDeviceClass {
     #[default]
     #[strum(serialize = "Audio/Source")]
