@@ -120,10 +120,9 @@ impl ExternalLinkTile {
             | ExternalLinkKey::AudDUrl
             | ExternalLinkKey::SpotifyUrl => raw_value.to_string(),
             ExternalLinkKey::YoutubeSearchTerm => {
-                let escaped_search_term = glib::Uri::escape_string(raw_value, None, true);
                 format!(
                     "https://www.youtube.com/results?search_query={}",
-                    escaped_search_term
+                    glib::Uri::escape_string(raw_value, None, true)
                 )
             }
         };
