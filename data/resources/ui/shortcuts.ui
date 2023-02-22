@@ -41,7 +41,7 @@
             <child>
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Toggle Listen</property>
-                <property name="action-name">win.toggle-listen</property>
+                <property name="action-name">win.toggle-recognize</property>
               </object>
             </child>
             <child>

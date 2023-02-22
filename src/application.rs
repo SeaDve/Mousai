@@ -153,7 +153,7 @@ impl Application {
         self.set_accels_for_action("win.navigate-back", &["<Alt>Left", "Escape"]);
         self.set_accels_for_action("win.navigate-forward", &["<Alt>Right"]);
         self.set_accels_for_action("win.toggle-playback", &["<Control>space"]);
-        self.set_accels_for_action("win.toggle-listen", &["<Control>r"]);
+        self.set_accels_for_action("win.toggle-recognize", &["<Control>r"]);
         self.set_accels_for_action("win.toggle-search", &["<Control>f"]);
     }
 }

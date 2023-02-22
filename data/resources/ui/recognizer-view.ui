@@ -12,7 +12,7 @@
           <object class="GtkButton">
             <property name="tooltip-text" translatable="yes">Cancel Listening</property>
             <property name="label" translatable="yes">Cancel</property>
-            <property name="action-name">win.toggle-listen</property>
+            <property name="action-name">win.toggle-recognize</property>
             <style>
               <class name="destructive-action"/>
             </style>

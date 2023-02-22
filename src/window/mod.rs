@@ -104,7 +104,7 @@ mod imp {
                 obj.imp().player.set_song(None);
             });
 
-            klass.install_action_async("win.toggle-listen", None, |obj, _, _| async move {
+            klass.install_action_async("win.toggle-recognize", None, |obj, _, _| async move {
                 obj.imp().player.set_song(None);
 
                 if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
