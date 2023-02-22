@@ -29,7 +29,7 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug)]
+    #[derive(Debug, Default)]
     pub struct Player {
         pub(super) song: RefCell<Option<Song>>,
         pub(super) state: Cell<PlayerState>,
@@ -39,20 +39,6 @@ mod imp {
         pub(super) metadata: RefCell<MprisMetadata>,
         pub(super) gst_play: gst_play::Play,
         pub(super) mpris_player: OnceCell<Arc<MprisPlayer>>,
-    }
-
-    impl Default for Player {
-        fn default() -> Self {
-            Self {
-                song: RefCell::default(),
-                state: Cell::default(),
-                position: Cell::default(),
-                duration: Cell::default(),
-                metadata: RefCell::new(MprisMetadata::new()),
-                gst_play: gst_play::Play::new(None::<gst_play::PlayVideoRenderer>),
-                mpris_player: OnceCell::default(),
-            }
-        }
     }
 
     #[glib::object_subclass]
