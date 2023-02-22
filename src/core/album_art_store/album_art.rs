@@ -1,5 +1,5 @@
 use anyhow::Result;
-use futures_channel::oneshot::{self, Receiver};
+use futures_channel::oneshot::{self, Receiver, Sender};
 use futures_util::future::{FutureExt, Shared};
 use gtk::{gdk, gio, glib, prelude::*};
 use once_cell::unsync::OnceCell;
@@ -14,23 +14,24 @@ pub struct AlbumArt {
     download_url: String,
     cache_file: gio::File,
     cache: OnceCell<gdk::Texture>,
-    loading: RefCell<Option<Shared<Receiver<()>>>>,
+    #[allow(clippy::type_complexity)]
+    guard: RefCell<Option<(Sender<()>, Shared<Receiver<()>>)>>,
 }
 
 impl fmt::Debug for AlbumArt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let receiver_strong_count = self
-            .loading
+        let guard_strong_count = self
+            .guard
             .borrow()
             .as_ref()
-            .and_then(|r| r.strong_count())
+            .and_then(|(_, rx)| rx.strong_count())
             .unwrap_or(0);
 
         f.debug_struct("AlbumArt")
             .field("download_url", &self.download_url)
             .field("cache_uri", &self.cache_file.uri())
             .field("loaded", &self.is_loaded())
-            .field("receiver_strong_count", &receiver_strong_count)
+            .field("guard_strong_count", &guard_strong_count)
             .finish()
     }
 }
@@ -42,7 +43,7 @@ impl AlbumArt {
             download_url: download_url.to_string(),
             cache_file: gio::File::for_path(cache_path),
             cache: OnceCell::new(),
-            loading: RefCell::default(),
+            guard: RefCell::default(),
         }
     }
 
@@ -60,25 +61,25 @@ impl AlbumArt {
     }
 
     pub async fn texture(&self) -> Result<&gdk::Texture> {
-        let receiver = self.loading.borrow().clone();
-        if let Some(receiver) = receiver {
+        let rx = self.guard.borrow().as_ref().map(|(_, rx)| rx.clone());
+        if let Some(rx) = rx {
             // If there are currently loading AlbumArt, wait
             // for it to finish and be stored before checking if
             // it exist. This is to prevent loading the same
             // album art twice on subsequent call on this function.
-            let _ = receiver.await;
+            let _ = rx.await;
         }
 
         // Nothing should get passed this point while the
         // AlbumArt is already loading because of the guard above.
-        debug_assert_or_log!(self.loading.borrow().is_none());
+        debug_assert_or_log!(self.guard.borrow().is_none());
 
         if let Some(texture) = self.cache.get() {
             return Ok(texture);
         }
 
-        let (sender, receiver) = oneshot::channel();
-        self.loading.replace(Some(receiver.shared()));
+        let (tx, rx) = oneshot::channel();
+        self.guard.replace(Some((tx, rx.shared())));
 
         match self.cache_file.load_bytes_future().await {
             Ok((ref bytes, _)) => {
@@ -103,8 +104,6 @@ impl AlbumArt {
 
         let texture = self.set_and_get_cache(gdk::Texture::from_bytes(&bytes)?);
 
-        let _ = sender.send(());
-
         let texture_bytes = texture.save_to_png_bytes();
         self.cache_file
             .replace_contents_future(texture_bytes, None, false, gio::FileCreateFlags::NONE)
@@ -126,10 +125,10 @@ impl AlbumArt {
             }
         };
 
-        // Since the cache is already loaded, the receiver to
+        // Since the cache is already loaded, the rx to
         // delay consecutive calls to Self::texture is not
         // needed anymore.
-        self.loading.replace(None);
+        self.guard.replace(None);
 
         ret
     }
@@ -146,13 +145,16 @@ mod test {
 
     use futures_util::future;
     use gtk::glib;
+    use std::fs;
 
     #[gtk::test]
     async fn download() {
         let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+
         let cache_path = glib::tmp_dir().join("image-download.png");
+        let _ = fs::remove_file(&cache_path);
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
         assert!(!album_art.is_loaded());
@@ -174,7 +176,9 @@ mod test {
         let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+
         let cache_path = glib::tmp_dir().join("image-concurrent_downloads.png");
+        let _ = fs::remove_file(&cache_path);
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
 
@@ -188,6 +192,8 @@ mod test {
         ])
         .await;
 
-        assert!(results.iter().all(|r| r.is_ok()));
+        assert!(results
+            .iter()
+            .all(|r| r.as_ref().unwrap() == results[0].as_ref().unwrap()));
     }
 }
