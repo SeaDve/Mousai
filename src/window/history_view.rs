@@ -421,7 +421,7 @@ impl HistoryView {
         imp.recognizer_status.bind_recognizer(recognizer);
 
         imp.recognizer_status.connect_show_results_requested(
-            clone!(@weak self as obj, @weak recognizer =>move |_| {
+            clone!(@weak self as obj, @weak recognizer => move |_| {
                 let Some(history) = obj.imp()
                     .song_list
                     .get()
