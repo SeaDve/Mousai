@@ -41,7 +41,7 @@ mod imp {
             let width = obj.width();
             let height = obj.height();
 
-            let cr =
+            let ctx =
                 snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
 
             let progress = self.progress.get();
@@ -52,25 +52,25 @@ mod imp {
             let cy = height as f64 / 2.0;
             let radius = width as f64 / 2.0;
 
-            cr.set_source_rgba(
+            ctx.set_source_rgba(
                 color.red() as f64,
                 color.green() as f64,
                 color.blue() as f64,
                 color.alpha() as f64,
             );
-            cr.move_to(cx, cy);
-            cr.arc(cx, cy, radius, -FRAC_PI_2, arc_end);
-            cr.fill().unwrap();
+            ctx.move_to(cx, cy);
+            ctx.arc(cx, cy, radius, -FRAC_PI_2, arc_end);
+            ctx.fill().unwrap();
 
-            cr.set_source_rgba(
+            ctx.set_source_rgba(
                 color.red() as f64,
                 color.green() as f64,
                 color.blue() as f64,
                 color.alpha() as f64 * 0.15,
             );
-            cr.move_to(cx, cy);
-            cr.arc(cx, cy, radius, arc_end, 3.0 * FRAC_PI_2);
-            cr.fill().unwrap();
+            ctx.move_to(cx, cy);
+            ctx.arc(cx, cy, radius, arc_end, 3.0 * FRAC_PI_2);
+            ctx.fill().unwrap();
         }
     }
 
