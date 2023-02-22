@@ -40,13 +40,13 @@ mod imp {
             let obj = self.obj();
             let width = obj.width();
             let height = obj.height();
+            let color = obj.style_context().color();
 
             let ctx =
                 snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
 
             let progress = self.progress.get();
             let arc_end = progress * TAU - FRAC_PI_2;
-            let color = obj.style_context().color();
 
             let cx = width as f64 / 2.0;
             let cy = height as f64 / 2.0;
