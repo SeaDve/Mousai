@@ -1,5 +1,6 @@
 waveform {
   color: @accent_color;
+  transition: 200ms linear color;
 }
 
 waveform.red {

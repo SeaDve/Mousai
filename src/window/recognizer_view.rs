@@ -23,7 +23,7 @@ mod imp {
         #[template_child]
         pub(super) waveform: TemplateChild<Waveform>,
         #[template_child]
-        pub(super) offline_mode_status: TemplateChild<gtk::Label>,
+        pub(super) offline_mode_status_revealer: TemplateChild<gtk::Revealer>,
 
         pub(super) recognizing_animation: OnceCell<adw::TimedAnimation>,
         pub(super) recognizer: OnceCell<Recognizer>,
@@ -116,7 +116,8 @@ impl RecognizerView {
         let imp = self.imp();
         let is_offline_mode = self.recognizer().is_offline_mode();
 
-        imp.offline_mode_status.set_visible(is_offline_mode);
+        imp.offline_mode_status_revealer
+            .set_reveal_child(is_offline_mode);
 
         if is_offline_mode {
             imp.waveform.add_css_class("red");

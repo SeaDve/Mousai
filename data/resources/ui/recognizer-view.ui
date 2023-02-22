@@ -46,11 +46,16 @@
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="offline_mode_status">
-                <property name="label" translatable="yes">Offline Mode</property>
-                <style>
-                  <class name="caption"/>
-                </style>
+              <object class="GtkRevealer" id="offline_mode_status_revealer">
+                <property name="transition-type">crossfade</property>
+                <property name="child">
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Offline Mode</property>
+                    <style>
+                      <class name="caption"/>
+                    </style>
+                  </object>
+                </property>
               </object>
             </child>
           </object>
