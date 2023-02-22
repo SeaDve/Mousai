@@ -25,7 +25,7 @@ pub struct AlbumArt {
 
 impl fmt::Debug for AlbumArt {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let guard_strong_count = self
+        let rx_strong_count = self
             .guard
             .borrow()
             .as_ref()
@@ -36,7 +36,7 @@ impl fmt::Debug for AlbumArt {
             .field("download_url", &self.download_url)
             .field("cache_uri", &self.cache_file.uri())
             .field("loaded", &self.is_loaded())
-            .field("guard_strong_count", &guard_strong_count)
+            .field("rx_strong_count", &rx_strong_count)
             .finish()
     }
 }
@@ -130,7 +130,7 @@ impl AlbumArt {
             }
         };
 
-        // Since the cache is already loaded, the rx to
+        // Since the cache is already loaded, the guard to
         // delay consecutive calls to Self::texture is not
         // needed anymore.
         self.guard.replace(None);
