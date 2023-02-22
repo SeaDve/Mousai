@@ -48,14 +48,15 @@ mod imp {
             let peaks = self.peaks.borrow();
             let peaks_len = peaks.len();
 
-            // Start drawing from the center and work towards the sides.
+            // Start drawing lines from the center and work towards the sides.
             let mut pointer = h_center;
 
-            // More recent peaks are at the end of the list, but they are supposed
-            // to be drawn first at the center. Thus, we iterate in reverse.
+            // More recent peaks are at the end of the list, but their lines are supposed
+            // to be drawn first at the most center part. Thus, we iterate in reverse to
+            // fix that.
             //
-            // The index is still preserved so that the alpha value and height
-            // is lower for the first/older peaks.
+            // The index is still preserved so that the alpha value and height of the lines
+            // of the first/older peaks are lower and shorter respectively.
             for (index, peak) in peaks.iter().enumerate().rev() {
                 ctx.set_source_rgba(
                     color.red() as f64,
@@ -64,14 +65,14 @@ mod imp {
                     color.alpha() as f64 * (index as f64 / peaks_len as f64), // Add feathering
                 );
 
-                let peak_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
+                let line_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
 
-                ctx.move_to(pointer, v_center + peak_height);
-                ctx.line_to(pointer, v_center - peak_height);
+                ctx.move_to(pointer, v_center + line_height);
+                ctx.line_to(pointer, v_center - line_height);
                 ctx.stroke().unwrap();
 
-                ctx.move_to(width as f64 - pointer, v_center + peak_height);
-                ctx.line_to(width as f64 - pointer, v_center - peak_height);
+                ctx.move_to(width as f64 - pointer, v_center + line_height);
+                ctx.line_to(width as f64 - pointer, v_center - line_height);
                 ctx.stroke().unwrap();
 
                 pointer += GUTTER;
