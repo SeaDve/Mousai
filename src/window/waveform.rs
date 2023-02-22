@@ -61,7 +61,7 @@ mod imp {
                     color.red() as f64,
                     color.green() as f64,
                     color.blue() as f64,
-                    index as f64 / peaks_len as f64, // Add feathering
+                    color.alpha() as f64 * (index as f64 / peaks_len as f64), // Add feathering
                 );
 
                 let peak_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
