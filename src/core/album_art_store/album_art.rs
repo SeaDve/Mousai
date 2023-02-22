@@ -9,6 +9,11 @@ use std::{cell::RefCell, fmt, path::Path};
 
 use crate::{debug_assert_or_log, debug_unreachable_or_log};
 
+// TODO
+// - Don't load AlbumArt if network is metered
+// - Retry downloading once network is back
+// - Integrate more with AlbumCover widget
+
 pub struct AlbumArt {
     session: soup::Session,
     download_url: String,
