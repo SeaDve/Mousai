@@ -16,7 +16,7 @@ use super::{
 };
 use crate::{
     debug_unreachable_or_log,
-    model::{ExternalLink, Song},
+    model::Song,
     player::{Player, PlayerState},
     utils,
 };
@@ -342,7 +342,7 @@ impl SongPage {
             })
             .as_ref(),
             |item| {
-                let link: &ExternalLink = item.downcast_ref().unwrap();
+                let link = item.downcast_ref().unwrap();
                 ExternalLinkTile::new(link).upcast()
             },
         );
