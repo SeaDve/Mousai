@@ -273,7 +273,10 @@ impl Recognizer {
         let recording_bytes = imp.recorder.stop().context("Failed to stop recording")?;
         tracing::debug!(
             "Stopped recording with size {}",
-            glib::format_size(recording_bytes.len() as u64)
+            glib::format_size_full(
+                recording_bytes.len() as u64,
+                glib::FormatSizeFlags::LONG_FORMAT
+            )
         );
 
         if self.is_offline_mode() {
