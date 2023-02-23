@@ -27,6 +27,8 @@ use std::cell::Cell;
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
+    core::Help,
+    error_dialog::ErrorDialog,
     model::SongList,
     player::{Player, PlayerState},
     recognizer::{Recognizer, RecognizerState},
@@ -109,7 +111,7 @@ mod imp {
 
                 if let Err(err) = obj.imp().recognizer.toggle_recognize().await {
                     tracing::error!("{:?}", err);
-                    utils::app_instance().present_error(&err);
+                    obj.present_error(&err);
                 }
             });
 
@@ -223,6 +225,17 @@ impl Window {
         self.imp().toast_overlay.add_toast(toast);
     }
 
+    pub fn present_error(&self, err: &Error) {
+        let err_dialog = ErrorDialog::new(
+            err.to_string(),
+            err.downcast_ref::<Help>()
+                .map(|help| format!("<b>{}</b>: {}", gettext("Help"), help)),
+            format!("{:?}", err),
+        );
+        err_dialog.set_transient_for(Some(self));
+        err_dialog.present();
+    }
+
     fn history(&self) -> &SongList {
         self.imp().history.get_or_init(|| {
             SongList::load_from_settings().unwrap_or_else(|err| {
@@ -236,7 +249,7 @@ impl Window {
                 // yet fully initialized. Thus, when present error, which needed
                 // the window, is called, it causes a weirdness. A fix is to defer
                 // loading the history.
-                utils::app_instance().present_error(&err);
+                self.present_error(&err);
 
                 SongList::default()
             })

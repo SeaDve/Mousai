@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiErrorDialog" parent="AdwMessageDialog">
+    <property name="body-use-markup">True</property>
+    <property name="modal">True</property>
+    <property name="extra-child">
+      <object class="GtkListBox">
+        <property name="selection-mode">none</property>
+        <style>
+          <class name="boxed-list"/>
+        </style>
+        <child>
+          <object class="AdwExpanderRow">
+            <property name="activatable">False</property>
+            <property name="title" translatable="yes">Show Detailed Error</property>
+            <child type="action">
+              <object class="GtkButton" id="copy_button">
+                <property name="valign">center</property>
+                <property name="tooltip-text" translatable="yes">Copy to Clipboard</property>
+                <property name="icon-name">edit-copy-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkListBoxRow">
+                <property name="overflow">hidden</property>
+                <property name="activatable">False</property>
+                <property name="selectable">False</property>
+                <property name="child">
+                  <object class="GtkScrolledWindow">
+                    <property name="min-content-width">360</property>
+                    <property name="min-content-height">120</property>
+                    <property name="child">
+                      <object class="GtkTextView">
+                        <property name="top-margin">6</property>
+                        <property name="bottom-margin">6</property>
+                        <property name="left-margin">6</property>
+                        <property name="right-margin">6</property>
+                        <property name="editable">False</property>
+                        <property name="monospace">True</property>
+                        <property name="buffer">
+                          <object class="GtkTextBuffer" id="full_error_buffer"/>
+                        </property>
+                      </object>
+                    </property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

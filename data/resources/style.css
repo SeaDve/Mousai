@@ -75,6 +75,12 @@ playbackbutton.circular > button  {
   padding: 0px;
 }
 
+/* ErrorDialog */
+
+button.copy-done {
+  color: @accent_color;
+}
+
 /* RecognizedPageTile */
 /* Note: Must be synced with libadwaita flat button style */
 

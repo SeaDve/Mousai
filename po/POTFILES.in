@@ -10,7 +10,6 @@ data/resources/ui/song-bar.ui
 data/resources/ui/song-page.ui
 data/resources/ui/song-tile.ui
 src/about.rs
-src/application.rs
 src/audio_device.rs
 src/core/date_time.rs
 src/main.rs
