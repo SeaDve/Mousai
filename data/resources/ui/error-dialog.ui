@@ -19,6 +19,7 @@
             <child>
               <object class="GtkListBoxRow">
                 <property name="activatable">False</property>
+                <property name="overflow">hidden</property>
                 <style>
                   <class name="no-padding"/>
                 </style>
