@@ -128,7 +128,6 @@ impl InspectorPage {
         imp.provider_row
             .connect_selected_notify(clone!(@weak self as obj => move |provider_row| {
                 if let Some(ref item) = provider_row.selected_item() {
-                    obj.update_test_rows_sensitivity();
                     ProviderSettings::lock().active = item
                         .downcast_ref::<adw::EnumListItem>()
                         .unwrap()
@@ -139,6 +138,7 @@ impl InspectorPage {
                     tracing::warn!("provider_row doesn't have a selected item");
                     ProviderSettings::lock().active = ProviderType::default();
                 }
+                obj.update_test_rows_sensitivity();
             }));
     }
 
