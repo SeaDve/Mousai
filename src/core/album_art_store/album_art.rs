@@ -92,11 +92,16 @@ impl AlbumArt {
                 let texture = gdk::Texture::from_bytes(bytes)?;
                 return Ok(self.set_and_get_cache(texture));
             }
-            Err(err) => tracing::warn!(
-                "Failed to load file from `{}`: {:?}",
-                self.cache_file.uri(),
-                err
-            ),
+            Err(err) => {
+                if err.matches(gio::IOErrorEnum::NotFound) {
+                    tracing::debug!(
+                        uri = ?self.cache_file.uri(),
+                        "Cache file not found; downloading album art",
+                    );
+                } else {
+                    return Err(err.into());
+                }
+            }
         }
 
         let bytes = self
