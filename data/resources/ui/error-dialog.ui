@@ -34,8 +34,9 @@
                             <property name="bottom-margin">12</property>
                             <property name="left-margin">12</property>
                             <property name="right-margin">12</property>
-                            <property name="editable">False</property>
                             <property name="monospace">True</property>
+                            <property name="editable">False</property>
+                            <property name="cursor-visible">False</property>
                             <property name="buffer">
                               <object class="GtkTextBuffer" id="full_error_buffer"/>
                             </property>
