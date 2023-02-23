@@ -1,6 +1,6 @@
 use adw::prelude::*;
 use gtk::{
-    glib::{self, clone, closure},
+    glib::{self, clone, closure, gformat},
     subclass::prelude::*,
 };
 
@@ -119,7 +119,17 @@ impl InspectorPage {
         imp.provider_row
             .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
                 &[] as &[gtk::Expression],
-                closure!(|list_item: adw::EnumListItem| list_item.name()),
+                closure!(|list_item: adw::EnumListItem| {
+                    if ProviderType::try_from(list_item.value())
+                        .unwrap()
+                        .to_provider()
+                        .is_test()
+                    {
+                        gformat!("{} (Test)", list_item.name())
+                    } else {
+                        list_item.name()
+                    }
+                }),
             )));
         imp.provider_row
             .connect_selected_notify(clone!(@weak self as obj => move |provider_row| {
