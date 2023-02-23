@@ -108,7 +108,7 @@ impl AlbumArt {
             .session
             .send_and_read_future(
                 &soup::Message::new("GET", &self.download_url)?,
-                glib::PRIORITY_DEFAULT,
+                glib::PRIORITY_LOW,
             )
             .await?;
         tracing::debug!(download_url = ?self.download_url, "Downloaded album art");
