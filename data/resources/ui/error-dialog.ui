@@ -6,6 +6,10 @@
     <property name="extra-child">
       <object class="GtkListBox">
         <property name="selection-mode">none</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">12</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
         <style>
           <class name="boxed-list"/>
         </style>
@@ -27,7 +31,7 @@
                 <property name="selectable">False</property>
                 <property name="child">
                   <object class="GtkScrolledWindow">
-                    <property name="min-content-width">360</property>
+                    <property name="min-content-width">330</property>
                     <property name="min-content-height">120</property>
                     <property name="child">
                       <object class="GtkTextView">
