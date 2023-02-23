@@ -1,3 +1,7 @@
+row.no-padding {
+  padding: 0;
+}
+
 waveform {
   color: @accent_color;
   transition: 200ms linear color;
@@ -73,12 +77,6 @@ playbackbutton.circular > button  {
 .history-view > child {
   margin: 9px;
   padding: 0px;
-}
-
-/* ErrorDialog */
-
-button.copy-done {
-  color: @accent_color;
 }
 
 /* RecognizedPageTile */

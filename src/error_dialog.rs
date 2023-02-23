@@ -52,7 +52,6 @@ mod imp {
                 button.display().clipboard().set_text(&full_error);
                 button.set_tooltip_text(Some(&gettext("Copied to Clipboard")));
                 button.set_icon_name("checkmark-symbolic");
-                button.add_css_class("copy-done");
             });
 
             obj.add_response(OK_RESPONSE_ID, &gettext("Ok"));
