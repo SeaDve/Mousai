@@ -118,7 +118,7 @@ impl Provider for AudD {
 
         let bytes = utils::app_instance()
             .session()
-            .send_and_read_future(&message, glib::PRIORITY_HIGH)
+            .send_and_read_future(&message, glib::PRIORITY_DEFAULT)
             .await
             .with_help(
                 || gettext("Check your internet connection"),
