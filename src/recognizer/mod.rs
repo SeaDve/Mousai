@@ -271,6 +271,10 @@ impl Recognizer {
         .map_err(|_| Cancelled::new("recognizing while recording"))?;
 
         let recording_bytes = imp.recorder.stop().context("Failed to stop recording")?;
+        tracing::debug!(
+            "Stopped recording with size {}",
+            glib::format_size(recording_bytes.len() as u64)
+        );
 
         if self.is_offline_mode() {
             self.imp()

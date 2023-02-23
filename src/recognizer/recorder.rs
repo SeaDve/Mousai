@@ -61,13 +61,7 @@ impl Recorder {
 
         let _ = pipeline.bus().unwrap().remove_watch();
 
-        let bytes = stream.steal_as_bytes();
-        tracing::debug!(
-            "Stopped recording with size {}",
-            glib::format_size(bytes.len() as u64)
-        );
-
-        Ok(bytes)
+        Ok(stream.steal_as_bytes())
     }
 }
 
