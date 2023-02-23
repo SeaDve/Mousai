@@ -13,11 +13,21 @@
             <child>
               <object class="AdwComboRow" id="provider_row">
                 <property name="title">Provider</property>
+                <property name="model">
+                  <object class="AdwEnumListModel" id="provider_model">
+                    <property name="enum-type">MsaiProviderType</property>
+                  </object>
+                </property>
               </object>
             </child>
             <child>
               <object class="AdwComboRow" id="test_provider_mode_row">
                 <property name="title">Test Provider Mode</property>
+                <property name="model">
+                  <object class="AdwEnumListModel" id="test_provider_mode_model">
+                    <property name="enum-type">MsaiTestProviderMode</property>
+                  </object>
+                </property>
               </object>
             </child>
             <child>

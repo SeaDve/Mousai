@@ -28,7 +28,11 @@ mod imp {
         #[template_child]
         pub(super) provider_row: TemplateChild<adw::ComboRow>,
         #[template_child]
+        pub(super) provider_model: TemplateChild<adw::EnumListModel>,
+        #[template_child]
         pub(super) test_provider_mode_row: TemplateChild<adw::ComboRow>,
+        #[template_child]
+        pub(super) test_provider_mode_model: TemplateChild<adw::EnumListModel>,
         #[template_child]
         pub(super) test_listen_duration_row: TemplateChild<adw::ActionRow>,
         #[template_child]
@@ -46,6 +50,9 @@ mod imp {
         type ParentType = gtk::Widget;
 
         fn class_init(klass: &mut Self::Class) {
+            ProviderType::static_type();
+            TestProviderMode::static_type();
+
             klass.bind_template();
         }
 
@@ -107,11 +114,10 @@ impl InspectorPage {
     fn setup_provider_row(&self) {
         let imp = self.imp();
 
-        imp.provider_row
-            .set_model(Some(&adw::EnumListModel::new(ProviderType::static_type())));
-
-        imp.provider_row
-            .set_selected(ProviderSettings::lock().active as u32);
+        imp.provider_row.set_selected(
+            imp.provider_model
+                .find_position(ProviderSettings::lock().active as i32),
+        );
 
         imp.provider_row
             .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
@@ -139,13 +145,10 @@ impl InspectorPage {
     fn setup_test_provider_row(&self) {
         let imp = self.imp();
 
-        imp.test_provider_mode_row
-            .set_model(Some(&adw::EnumListModel::new(
-                TestProviderMode::static_type(),
-            )));
-
-        imp.test_provider_mode_row
-            .set_selected(ProviderSettings::lock().test_mode as u32);
+        imp.test_provider_mode_row.set_selected(
+            imp.test_provider_mode_model
+                .find_position(ProviderSettings::lock().test_mode as i32),
+        );
 
         imp.test_provider_mode_row
             .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
