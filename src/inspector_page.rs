@@ -69,9 +69,7 @@ mod imp {
 
             let obj = self.obj();
 
-            obj.setup_provider_row();
-            obj.setup_test_provider_row();
-            obj.setup_duration_ui();
+            obj.setup_rows();
 
             obj.update_test_rows_sensitivity();
         }
@@ -111,20 +109,18 @@ impl InspectorPage {
         imp.test_recognize_duration_row.set_sensitive(is_test);
     }
 
-    fn setup_provider_row(&self) {
+    fn setup_rows(&self) {
         let imp = self.imp();
 
         imp.provider_row.set_selected(
             imp.provider_model
                 .find_position(ProviderSettings::lock().active as i32),
         );
-
         imp.provider_row
             .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
                 &[] as &[gtk::Expression],
                 closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
-
         imp.provider_row
             .connect_selected_notify(clone!(@weak self as obj => move |provider_row| {
                 if let Some(ref item) = provider_row.selected_item() {
@@ -140,22 +136,16 @@ impl InspectorPage {
                 }
                 obj.update_test_rows_sensitivity();
             }));
-    }
-
-    fn setup_test_provider_row(&self) {
-        let imp = self.imp();
 
         imp.test_provider_mode_row.set_selected(
             imp.test_provider_mode_model
                 .find_position(ProviderSettings::lock().test_mode as i32),
         );
-
         imp.test_provider_mode_row
             .set_expression(Some(&gtk::ClosureExpression::new::<glib::GString>(
                 &[] as &[gtk::Expression],
                 closure!(|list_item: adw::EnumListItem| list_item.name()),
             )));
-
         imp.test_provider_mode_row
             .connect_selected_notify(|test_provider_row| {
                 if let Some(ref item) = test_provider_row.selected_item() {
@@ -170,14 +160,9 @@ impl InspectorPage {
                     ProviderSettings::lock().test_mode = TestProviderMode::default();
                 }
             });
-    }
-
-    fn setup_duration_ui(&self) {
-        let imp = self.imp();
 
         imp.test_listen_duration_button
             .set_value(ProviderSettings::lock().test_listen_duration.as_secs() as f64);
-
         imp.test_listen_duration_button
             .connect_value_changed(|spin_button| {
                 ProviderSettings::lock().test_listen_duration =
@@ -186,7 +171,6 @@ impl InspectorPage {
 
         imp.test_recognize_duration_button
             .set_value(ProviderSettings::lock().test_recognize_duration.as_secs() as f64);
-
         imp.test_recognize_duration_button
             .connect_value_changed(|spin_button| {
                 ProviderSettings::lock().test_recognize_duration =
