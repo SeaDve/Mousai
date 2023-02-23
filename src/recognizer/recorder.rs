@@ -5,7 +5,7 @@ use gtk::{
     glib::{self, clone},
 };
 
-use std::{cell::RefCell, time::Duration};
+use std::cell::RefCell;
 
 #[derive(Debug, Default)]
 
@@ -148,8 +148,8 @@ fn create_pipeline(
     let pulsesrc = gst::ElementFactory::make("pulsesrc").build()?;
     let audioconvert = gst::ElementFactory::make("audioconvert").build()?;
     let level = gst::ElementFactory::make("level")
-        .property("interval", Duration::from_millis(80).as_nanos() as u64)
-        .property("peak-ttl", Duration::from_millis(80).as_nanos() as u64)
+        .property("interval", gst::ClockTime::from_mseconds(80))
+        .property("peak-ttl", gst::ClockTime::from_mseconds(80))
         .build()?;
     let opusenc = gst::ElementFactory::make("opusenc")
         .property("bitrate", 16_000)
