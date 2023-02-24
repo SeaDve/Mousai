@@ -81,7 +81,7 @@ mod imp {
             }
 
             let obj = self.obj();
-            self.progress.replace(progress);
+            self.progress.set(progress);
             obj.queue_draw();
             obj.notify_progress();
         }
