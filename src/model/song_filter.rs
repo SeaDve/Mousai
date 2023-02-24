@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2022 John Toohey <john_t@mailo.com>
-// SPDX-FileCopyrightText: 2022 Dave Patrick Caberto
+// SPDX-FileCopyrightText: 2023 Dave Patrick Caberto
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 use fuzzy_matcher::FuzzyMatcher;
