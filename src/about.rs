@@ -1,5 +1,8 @@
 use gettextrs::gettext;
-use gtk::{glib::IsA, prelude::*};
+use gtk::{
+    glib::{self, IsA},
+    prelude::*,
+};
 
 use std::{env, path::Path};
 

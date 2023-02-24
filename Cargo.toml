@@ -16,7 +16,6 @@ futures-channel = "0.3.25"
 futures-util = { version = "0.3.25", default-features = false }
 fuzzy-matcher = "0.3.7"
 gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
-glib = "0.17.0"
 gsettings-macro = "0.1.15"
 gst = { package = "gstreamer", version = "0.20.0" }
 gst_play = { package = "gstreamer-play", version = "0.20.0" }

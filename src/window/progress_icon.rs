@@ -1,5 +1,5 @@
 use adw::prelude::*;
-use gtk::{graphene, subclass::prelude::*};
+use gtk::{glib, graphene, subclass::prelude::*};
 
 use std::{
     cell::Cell,

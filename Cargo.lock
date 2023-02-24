@@ -914,7 +914,6 @@ dependencies = [
  "futures-util",
  "fuzzy-matcher",
  "gettext-rs",
- "glib 0.17.2",
  "gsettings-macro",
  "gstreamer",
  "gstreamer-play",

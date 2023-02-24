@@ -1,6 +1,6 @@
 use gtk::{
     gdk,
-    glib::{clone, closure_local},
+    glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
