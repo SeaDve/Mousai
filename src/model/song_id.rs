@@ -20,7 +20,8 @@ impl SongId {
 }
 
 impl Default for SongId {
-    /// Generate a new song id with time stamp based on the current time.
+    /// Generate a new song id with "Mousai" as the namespace, plus a
+    /// unique str made up of the real time and a random u32 in hex.
     ///
     /// Note: This should only be used when an id cannot be properly retrieved.
     fn default() -> Self {
@@ -40,8 +41,13 @@ mod test {
 
     #[test]
     fn unique_default() {
-        for _ in 0..1000 {
-            assert_ne!(SongId::default(), SongId::default());
+        for i in 0..1000 {
+            assert_ne!(
+                SongId::default(),
+                SongId::default(),
+                "defaults are equal after {} iterations",
+                i
+            );
         }
     }
 
