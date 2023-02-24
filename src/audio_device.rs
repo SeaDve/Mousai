@@ -152,7 +152,7 @@ mod pa {
                 .set_str(properties::APPLICATION_ID, APP_ID)
                 .unwrap();
             proplist
-                .set_str(properties::APPLICATION_NAME, "Kooha")
+                .set_str(properties::APPLICATION_NAME, "Mousai")
                 .unwrap();
 
             let mut inner = ContextInner::new_with_proplist(&main_loop, APP_ID, &proplist)
@@ -193,7 +193,7 @@ mod pa {
 
             let mut operation = self.inner.introspect().get_server_info(move |server_info| {
                 let Some(tx) = tx.take() else {
-                    debug_unreachable_or_log!("called get_server_info twice!");
+                    debug_unreachable_or_log!("called get_server_info callback twice!");
                     return;
                 };
 
