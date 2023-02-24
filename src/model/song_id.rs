@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 pub struct SongId(Box<str>);
 
 impl SongId {
-    /// This must be unique to every song.
+    /// Note: `unique_str` must be unique to each song.
     pub fn new(namespace: &str, unique_str: &str) -> Self {
         Self(format!("{}-{}", namespace, unique_str).into())
     }
