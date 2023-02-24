@@ -26,7 +26,7 @@ impl SongId {
 impl Default for SongId {
     /// Generate a new song id with time stamp based on the current time.
     ///
-    /// Note: This is only typically when song id cannot be retrieved.
+    /// Note: This should only be used when an id cannot be properly retrieved.
     fn default() -> Self {
         tracing::warn!("Using default song id");
 
