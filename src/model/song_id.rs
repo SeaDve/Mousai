@@ -40,9 +40,9 @@ mod test {
 
     #[test]
     fn unique_default() {
-        assert_ne!(SongId::default(), SongId::default());
-        assert_ne!(SongId::default(), SongId::default());
-        assert_ne!(SongId::default(), SongId::default());
+        for _ in 0..1000 {
+            assert_ne!(SongId::default(), SongId::default());
+        }
     }
 
     #[test]
