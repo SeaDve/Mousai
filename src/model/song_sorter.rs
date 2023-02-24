@@ -107,6 +107,7 @@ mod tests {
 
         let old = new_test_song(DateTime::now_local(), "old");
         let new = new_test_song(DateTime::now_local(), "new");
+        assert!(old.last_heard() < new.last_heard());
 
         // Match search term, closer (old) song is sorted first (smaller)
         sorter.set_search("old");
