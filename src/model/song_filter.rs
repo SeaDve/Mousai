@@ -128,20 +128,24 @@ mod tests {
     #[gtk::test]
     fn match_() {
         let filter = SongFilter::new();
-        assert!(filter.match_(&Song::builder(&SongId::new("0"), "foo", "foo", "").build()));
-        assert!(filter.match_(&Song::builder(&SongId::new("1"), "bar", "bar", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new_for_test("0"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new_for_test("1"), "bar", "bar", "").build()));
 
         filter.set_search("foo");
-        assert!(filter.match_(&Song::builder(&SongId::new("2"), "foo", "foo", "").build()));
-        assert!(!filter.match_(&Song::builder(&SongId::new("3"), "bar", "bar", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new_for_test("2"), "foo", "foo", "").build()));
+        assert!(
+            !filter.match_(&Song::builder(&SongId::new_for_test("3"), "bar", "bar", "").build())
+        );
 
         filter.set_search("bar");
-        assert!(!filter.match_(&Song::builder(&SongId::new("4"), "foo", "foo", "").build()));
-        assert!(filter.match_(&Song::builder(&SongId::new("5"), "bar", "bar", "").build()));
+        assert!(
+            !filter.match_(&Song::builder(&SongId::new_for_test("4"), "foo", "foo", "").build())
+        );
+        assert!(filter.match_(&Song::builder(&SongId::new_for_test("5"), "bar", "bar", "").build()));
 
         filter.set_search("");
-        assert!(filter.match_(&Song::builder(&SongId::new("6"), "foo", "foo", "").build()));
-        assert!(filter.match_(&Song::builder(&SongId::new("7"), "bar", "bar", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new_for_test("6"), "foo", "foo", "").build()));
+        assert!(filter.match_(&Song::builder(&SongId::new_for_test("7"), "bar", "bar", "").build()));
     }
 
     #[gtk::test]

@@ -243,7 +243,7 @@ mod test {
     #[test]
     fn properties() {
         let song = Song::builder(
-            &SongId::new("UniqueSongId"),
+            &SongId::new_for_test("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
@@ -269,7 +269,7 @@ mod test {
     fn deserialize() {
         let song: Song = serde_json::from_str(
             r#"{
-                "id": "UniqueSongId",
+                "id": "Test-UniqueSongId",
                 "last_heard": "2022-05-14T10:15:37.798479+08",
                 "title": "Some song",
                 "artist": "Someone",
@@ -283,7 +283,7 @@ mod test {
         )
         .unwrap();
 
-        assert_eq!(song.id(), SongId::new("UniqueSongId"));
+        assert_eq!(song.id(), SongId::new_for_test("UniqueSongId"));
         assert_eq!(
             song.last_heard().to_iso8601(),
             "2022-05-14T10:15:37.798479+08"

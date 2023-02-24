@@ -10,8 +10,14 @@ pub struct SongId(Box<str>);
 
 impl SongId {
     /// This must be unique to every song.
-    pub fn new(unique_str: impl Into<Box<str>>) -> Self {
-        Self(unique_str.into())
+    pub fn new(namespace: &str, unique_str: &str) -> Self {
+        Self(format!("{}-{}", namespace, unique_str).into())
+    }
+
+    /// Create a new song id with a namespace of "Test".
+    #[cfg(test)]
+    pub fn new_for_test(unique_str: &str) -> Self {
+        Self::new("Test", unique_str)
     }
 }
 
@@ -23,8 +29,9 @@ impl Default for SongId {
         tracing::warn!("Using default song id");
 
         Self::new(
-            DateTime::now_local()
-                .format("MsaiSongId-%Y-%m-%d-%H-%M-%S-%f")
+            "Mousai",
+            &DateTime::now_local()
+                .format("%Y-%m-%d-%H-%M-%S-%f")
                 .unwrap(),
         )
     }
@@ -44,47 +51,56 @@ mod test {
 
     #[test]
     fn equality() {
-        assert_eq!(SongId::new("A"), SongId::new("A"));
-        assert_eq!(SongId::new("B"), SongId::new("B"));
+        assert_eq!(SongId::new_for_test("A"), SongId::new_for_test("A"));
+        assert_eq!(SongId::new_for_test("B"), SongId::new_for_test("B"));
 
-        assert_ne!(SongId::new("A"), SongId::new("B"));
-        assert_ne!(SongId::new("A"), SongId::new("B"));
+        assert_ne!(SongId::new_for_test("A"), SongId::new_for_test("B"));
+        assert_ne!(SongId::new_for_test("A"), SongId::new_for_test("B"));
     }
 
     #[test]
     fn serialize() {
         assert_eq!(
-            serde_json::to_string(&SongId::new("A")).unwrap().as_str(),
-            "\"A\"",
+            serde_json::to_string(&SongId::new_for_test("A"))
+                .unwrap()
+                .as_str(),
+            "\"Test-A\"",
         );
-
         assert_eq!(
-            serde_json::to_string(&SongId::new("BB8")).unwrap().as_str(),
-            "\"BB8\""
+            serde_json::to_string(&SongId::new("Namespace", "BB8"))
+                .unwrap()
+                .as_str(),
+            "\"Namespace-BB8\""
         );
     }
 
     #[test]
     fn deserialize() {
-        assert_eq!(SongId::new("A"), serde_json::from_str("\"A\"").unwrap());
-        assert_eq!(SongId::new("BB8"), serde_json::from_str("\"BB8\"").unwrap());
+        assert_eq!(
+            SongId::new_for_test("A"),
+            serde_json::from_str("\"Test-A\"").unwrap()
+        );
+        assert_eq!(
+            SongId::new("Namespace", "BB8"),
+            serde_json::from_str("\"Namespace-BB8\"").unwrap()
+        );
     }
 
     #[test]
     fn hash_map() {
         let mut hash_map = HashMap::new();
 
-        let id_0 = SongId::new("Id0");
+        let id_0 = SongId::new_for_test("Id0");
         hash_map.insert(&id_0, 0);
 
-        let id_1 = SongId::new("Id1");
+        let id_1 = SongId::new_for_test("Id1");
         hash_map.insert(&id_1, 1);
 
-        let id_2 = SongId::new("Id2");
+        let id_2 = SongId::new_for_test("Id2");
         hash_map.insert(&id_2, 2);
 
         assert_eq!(hash_map.get(&id_0), Some(&0));
         assert_eq!(hash_map.get(&id_1), Some(&1));
-        assert_eq!(hash_map.get(&SongId::new("Id2")), Some(&2));
+        assert_eq!(hash_map.get(&SongId::new_for_test("Id2")), Some(&2));
     }
 }
