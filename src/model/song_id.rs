@@ -1,8 +1,6 @@
 use gtk::glib;
 use serde::{Deserialize, Serialize};
 
-use crate::core::DateTime;
-
 #[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
 #[boxed_type(name = "MsaiSongId")] // TODO drop Boxed derive and replace with ValueDelegate
 #[serde(transparent)]
@@ -30,9 +28,7 @@ impl Default for SongId {
 
         Self::new(
             "Mousai",
-            &DateTime::now_local()
-                .format("%Y-%m-%d-%H-%M-%S-%f")
-                .unwrap(),
+            &format!("{}-{:x}", glib::real_time(), glib::random_int()),
         )
     }
 }
