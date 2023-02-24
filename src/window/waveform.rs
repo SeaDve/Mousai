@@ -1,6 +1,6 @@
 // Based on code from GNOME Sound Recorder GPLv3
 // Modified to be bidirectional
-// See https://gitlab.gnome.org/GNOME/gnome-sound-recorder/-/blob/master/src/waveform.js
+// See https://gitlab.gnome.org/GNOME/gnome-sound-recorder/-/blob/5ffc0fc935b402483b82c42f7baec015af21cdd6/src/waveform.ts
 
 use gtk::{cairo, glib, graphene, prelude::*, subclass::prelude::*};
 
