@@ -1,20 +1,12 @@
 use gtk::glib;
 use serde::{Deserialize, Serialize};
 
-use std::fmt;
-
 use crate::core::DateTime;
 
 #[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
 #[boxed_type(name = "MsaiSongId")] // TODO drop Boxed derive and replace with ValueDelegate
 #[serde(transparent)]
 pub struct SongId(Box<str>);
-
-impl fmt::Display for SongId {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        fmt::Display::fmt(&self.0, f)
-    }
-}
 
 impl SongId {
     /// This must be unique to every song.
