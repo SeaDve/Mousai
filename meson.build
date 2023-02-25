@@ -20,6 +20,8 @@ dependency('gstreamer-base-1.0', version: '>= 1.18')
 dependency('gstreamer-plugins-base-1.0', version: '>= 1.18')
 dependency('gstreamer-play-1.0', version: '>= 1.18')
 dependency('libsoup-3.0', version: '>= 3.0')
+dependency('libpulse-mainloop-glib', version: '>= 16.0')
+dependency('libpulse', version: '>= 16.0')
 
 glib_compile_resources = find_program('glib-compile-resources', required: true)
 glib_compile_schemas = find_program('glib-compile-schemas', required: true)
