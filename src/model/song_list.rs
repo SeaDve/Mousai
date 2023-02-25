@@ -9,7 +9,7 @@ use indexmap::IndexMap;
 
 use std::{cell::RefCell, collections::HashSet};
 
-use super::{Song, SongId};
+use super::{db, Song, SongId};
 use crate::utils;
 
 mod imp {
@@ -66,6 +66,17 @@ glib::wrapper! {
 }
 
 impl SongList {
+    pub fn load_from_db() -> Result<Self> {
+        let this = Self::default();
+        this.imp().list.replace(
+            db::song::read_all()?
+                .into_iter()
+                .map(|song| (song.id(), song))
+                .collect(),
+        );
+        Ok(this)
+    }
+
     /// Load a [`SongList`] from application settings `history` key
     pub fn load_from_settings() -> Result<Self> {
         let songs: Vec<Song> = serde_json::from_str(&utils::app_instance().settings().history())?;
@@ -92,6 +103,7 @@ impl SongList {
     ///
     /// The equivalence of the [`Song`] depends on its [`SongId`]
     pub fn append(&self, song: Song) -> bool {
+        db::song::insert_or_update(&song).unwrap();
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
         if last_value.is_some() {
@@ -119,6 +131,7 @@ impl SongList {
             let mut list = self.imp().list.borrow_mut();
 
             for song in songs {
+                db::song::insert_or_update(&song).unwrap(); // FIXME use batch insert
                 let (index, last_value) = list.insert_full(song.id(), song);
 
                 if last_value.is_some() {
@@ -155,6 +168,7 @@ impl SongList {
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
         if let Some((position, _, ref song)) = removed {
+            db::song::delete(&song.id()).unwrap();
             self.emit_by_name::<()>("removed", &[song]);
             self.items_changed(position as u32, 1, 0);
         }

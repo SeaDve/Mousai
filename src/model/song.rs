@@ -10,7 +10,7 @@ use std::{
 
 use crate::{
     core::{AlbumArt, DateTime},
-    model::{ExternalLinkKey, ExternalLinks, SongId},
+    model::{db, ExternalLinkKey, ExternalLinks, SongId},
     utils,
 };
 
@@ -89,21 +89,27 @@ mod imp {
     }
 
     impl Song {
-        fn set_last_heard(&self, value: DateTime) {
+        fn set_last_heard(&self, last_heard: DateTime) {
             let obj = self.obj();
 
-            self.last_heard.replace(value);
-            obj.notify_last_heard();
-        }
-
-        fn set_is_newly_heard(&self, value: bool) {
-            let obj = self.obj();
-
-            if value == obj.is_newly_heard() {
+            if last_heard == obj.last_heard() {
                 return;
             }
 
-            self.is_newly_heard.set(value);
+            db::song::update_last_heard(&obj.id(), last_heard.clone()).unwrap();
+            self.last_heard.replace(last_heard);
+            obj.notify_last_heard();
+        }
+
+        fn set_is_newly_heard(&self, is_newly_heard: bool) {
+            let obj = self.obj();
+
+            if is_newly_heard == obj.is_newly_heard() {
+                return;
+            }
+
+            db::song::update_is_newly_heard(&obj.id(), is_newly_heard).unwrap();
+            self.is_newly_heard.set(is_newly_heard);
             obj.notify_is_newly_heard();
         }
     }
@@ -140,6 +146,26 @@ impl Song {
         utils::app_instance()
             .album_art_store()?
             .get_or_init(&album_art_link)
+    }
+}
+
+impl TryFrom<&rusqlite::Row<'_>> for Song {
+    type Error = rusqlite::Error;
+
+    fn try_from(row: &rusqlite::Row<'_>) -> Result<Self, rusqlite::Error> {
+        Ok(glib::Object::builder()
+            .property("id", row.get::<_, SongId>(0)?)
+            .property("title", row.get::<_, String>(1)?)
+            .property("artist", row.get::<_, String>(2)?)
+            .property("album", row.get::<_, String>(3)?)
+            .property("release-date", row.get::<_, Option<String>>(4)?)
+            .property("external-links", row.get::<_, ExternalLinks>(5)?)
+            .property("album-art-link", row.get::<_, Option<String>>(6)?)
+            .property("playback-link", row.get::<_, Option<String>>(7)?)
+            .property("lyrics", row.get::<_, Option<String>>(8)?)
+            .property("last-heard", row.get::<_, DateTime>(9)?)
+            .property("is-newly-heard", row.get::<_, bool>(10)?)
+            .build())
     }
 }
 

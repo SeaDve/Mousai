@@ -1,4 +1,5 @@
 use gtk::glib;
+use rusqlite::types::{FromSql, FromSqlResult, ToSql, ToSqlOutput, ValueRef};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
@@ -31,6 +32,18 @@ impl Default for SongId {
             "Mousai",
             &format!("{}-{:x}", glib::real_time(), glib::random_int()),
         )
+    }
+}
+
+impl FromSql for SongId {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        Ok(Self(value.as_str()?.into()))
+    }
+}
+
+impl ToSql for SongId {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        self.0.to_sql()
     }
 }
 

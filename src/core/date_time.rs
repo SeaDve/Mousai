@@ -1,6 +1,7 @@
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Context, Result};
 use gettextrs::gettext;
 use gtk::glib;
+use rusqlite::types::{FromSql, FromSqlError, FromSqlResult, ToSql, ToSqlOutput, ValueRef};
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use std::fmt;
@@ -53,6 +54,28 @@ impl DateTime {
         self.0
             .format(format)
             .with_context(|| format!("Failed to format to `{}`", format))
+    }
+}
+
+impl FromSql for DateTime {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        let string = value.as_str()?;
+
+        match glib::DateTime::from_iso8601(string, Some(&glib::TimeZone::local())) {
+            Ok(date_time) => Ok(Self(date_time)),
+            Err(_) => Err(FromSqlError::Other(
+                anyhow!("Failed to parse `{}`", string).into(),
+            )),
+        }
+    }
+}
+
+impl ToSql for DateTime {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        match self.0.format_iso8601() {
+            Ok(string) => Ok(ToSqlOutput::from(String::from(string))),
+            Err(err) => Err(rusqlite::Error::ToSqlConversionFailure(err.into())),
+        }
     }
 }
 

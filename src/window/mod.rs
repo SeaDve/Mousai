@@ -238,7 +238,7 @@ impl Window {
 
     fn history(&self) -> &SongList {
         self.imp().history.get_or_init(|| {
-            SongList::load_from_settings().unwrap_or_else(|err| {
+            SongList::load_from_db().unwrap_or_else(|err| {
                 let err = err.context("Failed to load SongList from settings");
 
                 tracing::error!("{:?}", err);

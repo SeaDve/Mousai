@@ -1,5 +1,6 @@
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 use indexmap::IndexMap;
+use rusqlite::types::{FromSql, FromSqlError, FromSqlResult, ToSql, ToSqlOutput, ValueRef};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{cell::RefCell, collections::HashMap};
@@ -76,6 +77,8 @@ impl ExternalLinks {
             .borrow_mut()
             .insert_full(key.as_ref().to_string(), value);
 
+        // FIXME handle in db
+
         if last_value.is_some() {
             self.items_changed(position as u32, 1, 1);
             false
@@ -101,6 +104,28 @@ impl ExternalLinks {
 impl Default for ExternalLinks {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl FromSql for ExternalLinks {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        match serde_json::from_slice::<IndexMap<String, String>>(value.as_bytes()?) {
+            Ok(map) => {
+                let this = Self::new();
+                this.imp().map.replace(map);
+                Ok(this)
+            }
+            Err(err) => Err(FromSqlError::Other(err.into())),
+        }
+    }
+}
+
+impl ToSql for ExternalLinks {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        match serde_json::to_vec(&self.imp().map) {
+            Ok(bytes) => Ok(ToSqlOutput::from(bytes)),
+            Err(err) => Err(rusqlite::Error::ToSqlConversionFailure(err.into())),
+        }
     }
 }
 
