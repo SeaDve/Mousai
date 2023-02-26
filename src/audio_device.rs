@@ -130,8 +130,8 @@ mod pa {
     pub struct Context {
         inner: ContextInner,
 
-        // `ContextInner` does not hold a reference causing it
-        // to be freed and cause error after `Context::connect`.
+        // `ContextInner` does not seem to hold a reference to this causing
+        // this to be freed and cause error after `Context::connect`.
         #[allow(dead_code)]
         main_loop: pulse_glib::Mainloop,
     }
