@@ -153,7 +153,7 @@ impl TryFrom<&rusqlite::Row<'_>> for Song {
     type Error = rusqlite::Error;
 
     fn try_from(row: &rusqlite::Row<'_>) -> Result<Self, rusqlite::Error> {
-        Ok(glib::Object::builder()
+        let this = glib::Object::builder::<Self>()
             .property("id", row.get::<_, SongId>(0)?)
             .property("title", row.get::<_, String>(1)?)
             .property("artist", row.get::<_, String>(2)?)
@@ -163,9 +163,14 @@ impl TryFrom<&rusqlite::Row<'_>> for Song {
             .property("album-art-link", row.get::<_, Option<String>>(6)?)
             .property("playback-link", row.get::<_, Option<String>>(7)?)
             .property("lyrics", row.get::<_, Option<String>>(8)?)
-            .property("last-heard", row.get::<_, DateTime>(9)?)
-            .property("is-newly-heard", row.get::<_, bool>(10)?)
-            .build())
+            .build();
+
+        // Avoid calling the setters which will unnecessarily update the database
+        let imp = this.imp();
+        imp.last_heard.replace(row.get::<_, DateTime>(9)?);
+        imp.is_newly_heard.replace(row.get::<_, bool>(10)?);
+
+        Ok(this)
     }
 }
 

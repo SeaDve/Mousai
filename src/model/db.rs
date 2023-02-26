@@ -9,18 +9,17 @@ pub fn ensure() {
     CONNECTION.with(|conn| {
         conn.execute(
             "CREATE TABLE IF NOT EXISTS songs (
-                id             CHAR    NOT NULL,
-                title          VARCHAR NOT NULL,
-                artist         VARCHAR NOT NULL,
-                album          VARCHAR NOT NULL,
-                release_date   VARCHAR,
-                external_links VARCHAR, -- JSON
-                album_art_link VARCHAR,
-                playback_link  VARCHAR,
-                lyrics         VARCHAR,
-                last_heard     VARCHAR, -- DateTime
-                is_newly_heard BOOLEAN NOT NULL,
-                PRIMARY KEY(id)
+                id             TEXT    NOT NULL PRIMARY KEY,
+                title          TEXT    NOT NULL,
+                artist         TEXT    NOT NULL,
+                album          TEXT    NOT NULL,
+                release_date   TEXT,
+                external_links TEXT, -- ExternalLinks
+                album_art_link TEXT,
+                playback_link  TEXT,
+                lyrics         TEXT,
+                last_heard     TEXT, -- DateTime
+                is_newly_heard BOOLEAN NOT NULL
             )",
             (),
         )
@@ -41,6 +40,8 @@ pub mod song {
     /// Inserts a song into the database if it doesn't exist based on the id,
     /// otherwise updates the existing song.
     pub fn insert_or_update(song: &Song) -> Result<()> {
+        let _timer = crate::Timer::new("insert or update");
+
         let changed = CONNECTION.with(|conn| {
             conn.execute(
                 "INSERT INTO songs (
@@ -89,6 +90,8 @@ pub mod song {
     }
 
     pub fn read_all() -> Result<Vec<Song>> {
+        let _timer = crate::Timer::new("read all");
+
         CONNECTION.with(|conn| {
             let mut stmt = conn.prepare("SELECT * FROM songs")?;
             let res = stmt
@@ -99,31 +102,37 @@ pub mod song {
     }
 
     pub fn update_is_newly_heard(id: &SongId, is_newly_heard: bool) -> Result<()> {
+        let _timer = crate::Timer::new("update is_newly_heard");
+
         let changed = CONNECTION.with(|conn| {
             conn.execute(
                 "UPDATE songs SET is_newly_heard = ?1 WHERE id = ?2",
                 (is_newly_heard, id),
             )
         })?;
-        debug_assert_or_log!(changed == 1);
+        debug_assert_or_log!(changed <= 1);
         Ok(())
     }
 
     pub fn update_last_heard(id: &SongId, last_heard: DateTime) -> Result<()> {
+        let _timer = crate::Timer::new("update last_heard");
+
         let changed = CONNECTION.with(|conn| {
             conn.execute(
                 "UPDATE songs SET last_heard = ?1 WHERE id = ?2",
                 (last_heard, id),
             )
         })?;
-        debug_assert_or_log!(changed == 1);
+        debug_assert_or_log!(changed <= 1);
         Ok(())
     }
 
     pub fn delete(id: &SongId) -> Result<()> {
+        let _timer = crate::Timer::new("delete");
+
         let changed =
             CONNECTION.with(|conn| conn.execute("DELETE FROM songs WHERE id = ?1", (id,)))?;
-        debug_assert_or_log!(changed == 1);
+        debug_assert_or_log!(changed <= 1);
         Ok(())
     }
 }

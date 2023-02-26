@@ -46,6 +46,26 @@ use self::{
     config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE},
 };
 
+pub struct Timer {
+    start: std::time::Instant,
+    name: String,
+}
+
+impl Timer {
+    pub fn new(name: impl Into<String>) -> Self {
+        Self {
+            start: std::time::Instant::now(),
+            name: name.into(),
+        }
+    }
+}
+
+impl Drop for Timer {
+    fn drop(&mut self) {
+        tracing::debug!("{} took {:?}", self.name, self.start.elapsed());
+    }
+}
+
 fn main() -> glib::ExitCode {
     tracing_subscriber::fmt::init();
 
