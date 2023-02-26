@@ -89,21 +89,25 @@ mod imp {
     }
 
     impl Song {
-        fn set_last_heard(&self, value: DateTime) {
+        fn set_last_heard(&self, last_heard: DateTime) {
             let obj = self.obj();
 
-            self.last_heard.replace(value);
-            obj.notify_last_heard();
-        }
-
-        fn set_is_newly_heard(&self, value: bool) {
-            let obj = self.obj();
-
-            if value == obj.is_newly_heard() {
+            if last_heard == obj.last_heard() {
                 return;
             }
 
-            self.is_newly_heard.set(value);
+            self.last_heard.replace(last_heard);
+            obj.notify_last_heard();
+        }
+
+        fn set_is_newly_heard(&self, is_newly_heard: bool) {
+            let obj = self.obj();
+
+            if is_newly_heard == obj.is_newly_heard() {
+                return;
+            }
+
+            self.is_newly_heard.set(is_newly_heard);
             obj.notify_is_newly_heard();
         }
     }
