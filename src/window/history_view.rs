@@ -909,7 +909,7 @@ mod test {
 
     use std::sync::Once;
 
-    use crate::{model::SongId, RESOURCES_FILE};
+    use crate::{core::Database, model::SongId, RESOURCES_FILE};
 
     static GRESOURCES_INIT: Once = Once::new();
 
@@ -927,6 +927,10 @@ mod test {
 
     fn trigger_purge_purgatory_leaflet_pages(view: &HistoryView) {
         view.imp().leaflet.notify("child-transition-running");
+    }
+
+    fn new_test_song_list() -> SongList {
+        SongList::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
     }
 
     #[track_caller]
@@ -961,7 +965,7 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let song = new_test_song("1");
         song_list.append(song.clone());
@@ -1013,7 +1017,7 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
         song_list.append(song_1.clone());
@@ -1057,7 +1061,7 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
         song_list.append(song_1.clone());
@@ -1098,7 +1102,7 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
         song_list.append(song_1.clone());
@@ -1154,7 +1158,7 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
         song_list.append(song_1.clone());
@@ -1192,7 +1196,7 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
         song_list.append(song_1.clone());

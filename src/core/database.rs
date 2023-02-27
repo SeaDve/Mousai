@@ -66,13 +66,14 @@ impl From<serde_json::Error> for DatabaseError {
     }
 }
 
-pub struct Table<T> {
+#[derive(Debug)]
+pub struct DatabaseTable<T> {
     pool: Pool<SqliteConnectionManager>,
     name: String,
     data_type: PhantomData<T>,
 }
 
-impl<T> Table<T>
+impl<T> DatabaseTable<T>
 where
     for<'de> T: Serialize + Deserialize<'de> + 'static,
 {
@@ -194,6 +195,8 @@ where
         Ok(())
     }
 
+    /// Update the data if the id exists in the Database, or insert
+    /// both the id and the data if not.
     pub fn upsert_one(&self, id: &str, data: &T) -> Result<()> {
         let _timer = Timer::new("Table::upsert_one");
 
@@ -215,6 +218,8 @@ where
         }
     }
 
+    /// Update the data if the id exists in the Database, or insert
+    /// both the id and the data if not.
     pub fn upsert_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
         let _timer = Timer::new("Table::upsert_many");
 
@@ -381,7 +386,7 @@ where
     }
 }
 
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub struct Database {
     pool: Pool<SqliteConnectionManager>,
 }
@@ -424,11 +429,11 @@ impl Database {
         Ok(Self { pool })
     }
 
-    pub fn table<T>(&self, name: &str) -> Result<Table<T>>
+    pub fn table<T>(&self, name: &str) -> Result<DatabaseTable<T>>
     where
         for<'de> T: Serialize + Deserialize<'de> + 'static,
     {
-        Table::create_if_not_exists(self.pool.clone(), name)
+        DatabaseTable::create_if_not_exists(self.pool.clone(), name)
     }
 }
 
