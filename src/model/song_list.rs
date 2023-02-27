@@ -11,7 +11,7 @@ use once_cell::unsync::OnceCell;
 use std::{cell::RefCell, collections::HashSet};
 
 use super::{Song, SongId};
-use crate::core::{Database, DatabaseTable};
+use crate::core::{Database, DatabaseError, DatabaseTable};
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
@@ -176,7 +176,11 @@ impl SongList {
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
-        self.db_table().delete_one(song_id.as_str()).unwrap();
+        match self.db_table().delete_one(song_id.as_str()) {
+            Ok(_) => {}
+            Err(err) if matches!(err, DatabaseError::NotFound) => {}
+            Err(err) => panic!("Failed to remove song from database: {:?}", err),
+        }
 
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
