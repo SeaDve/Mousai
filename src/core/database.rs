@@ -4,9 +4,30 @@ use serde::{Deserialize, Serialize};
 
 use std::{
     error::Error as StdError, fmt, marker::PhantomData, path::Path, result::Result as StdResult,
+    time::Instant,
 };
 
 type Result<T> = StdResult<T, DatabaseError>;
+
+pub struct Timer {
+    task_name: String,
+    start_time: Instant,
+}
+
+impl Timer {
+    pub fn new(task_name: &str) -> Self {
+        Self {
+            task_name: task_name.to_string(),
+            start_time: Instant::now(),
+        }
+    }
+}
+
+impl Drop for Timer {
+    fn drop(&mut self) {
+        tracing::debug!("{} took {:?}", self.task_name, self.start_time.elapsed());
+    }
+}
 
 #[derive(Debug)]
 pub enum DatabaseError {
@@ -55,7 +76,9 @@ impl<T> Table<T>
 where
     for<'de> T: Serialize + Deserialize<'de> + 'static,
 {
-    fn new(pool: Pool<SqliteConnectionManager>, name: &str) -> Result<Self> {
+    fn create_if_not_exists(pool: Pool<SqliteConnectionManager>, name: &str) -> Result<Self> {
+        let _timer = Timer::new("Table::create_if_not_exists");
+
         let conn = pool.get()?;
 
         conn.execute(
@@ -74,6 +97,8 @@ where
     }
 
     pub fn count(&self) -> Result<usize> {
+        let _timer = Timer::new("Table::count");
+
         let conn = self.pool.get()?;
 
         let mut statement = conn.prepare_cached(&format!("SELECT COUNT(id) FROM {}", self.name))?;
@@ -83,6 +108,8 @@ where
     }
 
     pub fn insert_one(&self, id: &str, data: &T) -> Result<()> {
+        let _timer = Timer::new("Table::insery_one");
+
         let conn = self.pool.get()?;
 
         let mut statement = conn.prepare_cached(&format!(
@@ -121,6 +148,8 @@ where
     /// Note: This errors out if any of the items already exist or there
     /// are duplicates in the given items.
     pub fn insert_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
+        let _timer = Timer::new("Table::insery_many");
+
         let mut conn = self.pool.get()?;
 
         let transaction = conn.transaction()?;
@@ -166,6 +195,8 @@ where
     }
 
     pub fn upsert_one(&self, id: &str, data: &T) -> Result<()> {
+        let _timer = Timer::new("Table::upsert_one");
+
         let conn = self.pool.get()?;
 
         let mut statement = conn.prepare_cached(&format!(
@@ -185,6 +216,8 @@ where
     }
 
     pub fn upsert_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
+        let _timer = Timer::new("Table::upsert_many");
+
         let mut conn = self.pool.get()?;
 
         let transaction = conn.transaction()?;
@@ -215,6 +248,8 @@ where
     }
 
     pub fn select_one(&self, id: &str) -> Result<T> {
+        let _timer = Timer::new("Table::select_one");
+
         let conn = self.pool.get()?;
 
         let mut statement =
@@ -234,6 +269,8 @@ where
     }
 
     pub fn select_all(&self) -> Result<Vec<T>> {
+        let _timer = Timer::new("Table::select_all");
+
         let conn = self.pool.get()?;
 
         let mut statement = conn.prepare_cached(&format!("SELECT data FROM {}", self.name))?;
@@ -256,6 +293,8 @@ where
     }
 
     pub fn update_one(&self, id: &str, data: &T) -> Result<()> {
+        let _timer = Timer::new("Table::update_one");
+
         let mut conn = self.pool.get()?;
 
         let transaction = conn.transaction()?;
@@ -279,6 +318,8 @@ where
 
     /// Note: This does not error out if there are duplicates in the given items.
     pub fn update_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
+        let _timer = Timer::new("Table::update_many");
+
         let mut conn = self.pool.get()?;
 
         let transaction = conn.transaction()?;
@@ -307,6 +348,8 @@ where
     }
 
     pub fn delete_one(&self, id: &str) -> Result<()> {
+        let _timer = Timer::new("Table::delete_one");
+
         let mut conn = self.pool.get()?;
 
         let transaction = conn.transaction()?;
@@ -327,6 +370,8 @@ where
     }
 
     pub fn delete_all(&self) -> Result<()> {
+        let _timer = Timer::new("Table::delete_all");
+
         let conn = self.pool.get()?;
 
         let mut statement = conn.prepare_cached(&format!("DELETE FROM {}", self.name))?;
@@ -356,23 +401,23 @@ impl Drop for Database {
 
 impl Database {
     pub fn open(path: impl AsRef<Path>) -> Result<Self> {
+        let _timer = Timer::new("Database::open");
+
         let manager = SqliteConnectionManager::file(path);
         let pool = Pool::new(manager)?;
 
-        let mut conn = pool.get()?;
+        let conn = pool.get()?;
         conn.pragma_update(None, "journal_mode", "WAL")?;
         conn.pragma_update(None, "synchronous", "normal")?;
         conn.pragma_update(None, "temp_store", "memory")?;
         conn.pragma_update(None, "mmap_size", "30000000000")?;
 
-        conn.profile(Some(|sql, dur| {
-            tracing::debug!("{} took {:?}", sql, dur);
-        }));
-
         Ok(Self { pool })
     }
 
     pub fn open_in_memory() -> Result<Self> {
+        let _timer = Timer::new("Database::open_in_memory");
+
         let manager = SqliteConnectionManager::memory();
         let pool = Pool::new(manager)?;
 
@@ -383,7 +428,7 @@ impl Database {
     where
         for<'de> T: Serialize + Deserialize<'de> + 'static,
     {
-        Table::new(self.pool.clone(), name)
+        Table::create_if_not_exists(self.pool.clone(), name)
     }
 }
 
