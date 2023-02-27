@@ -424,7 +424,7 @@ where
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug)]
 pub struct Database {
     pool: Pool<SqliteConnectionManager>,
 }
