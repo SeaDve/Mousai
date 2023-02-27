@@ -77,7 +77,7 @@ impl Recordings {
         let this = glib::Object::new::<Self>();
 
         for (recording_id, recording) in recordings.iter() {
-            this.bind_recording_to_db(recording_id, recording);
+            this.bind_recording_to_items_changed_and_db(recording_id, recording);
         }
 
         this.imp().list.replace(recordings);
@@ -93,7 +93,7 @@ impl Recordings {
             .insert_one(&recording_id, &recording)
             .unwrap();
 
-        self.bind_recording_to_db(&recording_id, &recording);
+        self.bind_recording_to_items_changed_and_db(&recording_id, &recording);
         let (position, last_value) = self
             .imp()
             .list
@@ -123,7 +123,7 @@ impl Recordings {
 
         for (index, (id, recording)) in imp.list.take().into_iter().enumerate() {
             if filter_func(&recording) {
-                unbind_recording_to_db(&recording);
+                unbind_recording_to_items_changed_and_db(&recording);
                 to_take.push((index, id, recording));
             } else {
                 debug_assert!(to_retain.insert(id, recording).is_none());
@@ -153,7 +153,7 @@ impl Recordings {
         self.imp().db_table.get().unwrap()
     }
 
-    fn bind_recording_to_db(&self, recording_id: &str, recording: &Recording) {
+    fn bind_recording_to_items_changed_and_db(&self, recording_id: &str, recording: &Recording) {
         unsafe {
             let recording_id = recording_id.to_string();
             let handler_id = recording.connect_notify_local(
@@ -162,6 +162,13 @@ impl Recordings {
                     obj.db_table()
                         .update_one(&recording_id, recording)
                         .unwrap();
+                    let index = obj
+                        .imp()
+                        .list
+                        .borrow()
+                        .get_index_of(&recording_id)
+                        .unwrap();
+                    obj.items_changed(index as u32, 1, 1);
                 }),
             );
             recording.set_data(RECORDING_NOTIFY_HANDLER_ID_KEY, handler_id);
@@ -169,7 +176,7 @@ impl Recordings {
     }
 }
 
-fn unbind_recording_to_db(recording: &Recording) {
+fn unbind_recording_to_items_changed_and_db(recording: &Recording) {
     unsafe {
         let handler_id = recording
             .steal_data::<glib::SignalHandlerId>(RECORDING_NOTIFY_HANDLER_ID_KEY)
