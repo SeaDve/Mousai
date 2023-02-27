@@ -16,7 +16,6 @@ use crate::core::{Database, DatabaseTable};
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
 pub fn generate_unique_id() -> String {
-    // FIXME compare with uuid_from_string
     format!("{}-{:x}", glib::real_time(), glib::random_int())
 }
 
@@ -278,6 +277,18 @@ mod tests {
 
         for (_, recording) in recordings.db_table().select_all().unwrap() {
             assert!(recording.recognize_result().is_none());
+        }
+    }
+
+    #[test]
+    fn unique_generated_id() {
+        for i in 0..1000 {
+            assert_ne!(
+                generate_unique_id(),
+                generate_unique_id(),
+                "generated ids are equal after {} iterations",
+                i
+            );
         }
     }
 
