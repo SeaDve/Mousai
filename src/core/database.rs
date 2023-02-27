@@ -97,6 +97,7 @@ where
         })
     }
 
+    /// Counts the total number of items in the table.
     pub fn count(&self) -> Result<usize> {
         let _timer = Timer::new("Table::count");
 
@@ -108,6 +109,8 @@ where
         Ok(count)
     }
 
+    /// Inserts the item into the table. If the item already exists, it
+    /// will return an `AlreadyExist` error.
     pub fn insert_one(&self, id: &str, data: &T) -> Result<()> {
         let _timer = Timer::new("Table::insery_one");
 
@@ -140,14 +143,16 @@ where
                     );
                     Err(DatabaseError::AlreadyExist)
                 } else {
-                    Err(DatabaseError::Internal(err.into()))
+                    Err(err.into())
                 }
             }
         }
     }
 
-    /// Note: This errors out if any of the items already exist or there
-    /// are duplicates in the given items.
+    /// Inserts multiple items into the table. If the item already exists, it
+    /// will return an `AlreadyExist` error.
+    ///
+    /// Note: This also errors when there are duplicates in the given items.
     pub fn insert_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
         let _timer = Timer::new("Table::insery_many");
 
@@ -184,7 +189,7 @@ where
                             );
                             return Err(DatabaseError::AlreadyExist);
                         } else {
-                            return Err(DatabaseError::Internal(err.into()));
+                            return Err(err.into());
                         }
                     }
                 }
@@ -209,13 +214,10 @@ where
 
         let raw_data = serde_json::to_string(data)?;
 
-        match statement.execute((id, raw_data)) {
-            Ok(changed) => {
-                debug_assert_eq!(changed, 1);
-                Ok(())
-            }
-            Err(err) => Err(DatabaseError::Internal(err.into())),
-        }
+        let changed = statement.execute((id, raw_data))?;
+        debug_assert_eq!(changed, 1);
+
+        Ok(())
     }
 
     /// Update the data if the id exists in the Database, or insert
@@ -236,15 +238,8 @@ where
             for item in items.into_iter() {
                 let raw_data = serde_json::to_string(&item.1)?;
 
-                match statement.execute((item.0, raw_data)) {
-                    Ok(changed) => {
-                        debug_assert_eq!(changed, 1);
-                        continue;
-                    }
-                    Err(err) => {
-                        return Err(DatabaseError::Internal(err.into()));
-                    }
-                }
+                let changed = statement.execute((item.0, raw_data))?;
+                debug_assert_eq!(changed, 1);
             }
         }
         transaction.commit()?;
@@ -252,6 +247,8 @@ where
         Ok(())
     }
 
+    /// Get the data associated with the given id, or return a `NotFound` error
+    /// if the id does not exist in the Database.
     pub fn select_one(&self, id: &str) -> Result<T> {
         let _timer = Timer::new("Table::select_one");
 
@@ -265,7 +262,7 @@ where
                 if err == rusqlite::Error::QueryReturnedNoRows {
                     DatabaseError::NotFound
                 } else {
-                    DatabaseError::Internal(err.into())
+                    err.into()
                 }
             })?;
         let data = serde_json::from_str(&raw_data)?;
@@ -273,6 +270,7 @@ where
         Ok(data)
     }
 
+    /// Get all the data in the Database.
     pub fn select_all(&self) -> Result<Vec<T>> {
         let _timer = Timer::new("Table::select_all");
 
@@ -297,6 +295,8 @@ where
         Ok(vec)
     }
 
+    /// Update the data if the id exists in the Database, or return
+    /// a `NotFound` error if not.
     pub fn update_one(&self, id: &str, data: &T) -> Result<()> {
         let _timer = Timer::new("Table::update_one");
 
@@ -321,6 +321,9 @@ where
         }
     }
 
+    /// Update the data if the id exists in the Database, or return
+    /// a `NotFound` error if not.
+    ///
     /// Note: This does not error out if there are duplicates in the given items.
     pub fn update_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
         let _timer = Timer::new("Table::update_many");
@@ -352,6 +355,7 @@ where
         }
     }
 
+    /// Delete the data if the id exists in the Database, or return a `NotFound` error if not.
     pub fn delete_one(&self, id: &str) -> Result<()> {
         let _timer = Timer::new("Table::delete_one");
 
@@ -374,6 +378,7 @@ where
         }
     }
 
+    /// Delete all data in the table.
     pub fn delete_all(&self) -> Result<()> {
         let _timer = Timer::new("Table::delete_all");
 
