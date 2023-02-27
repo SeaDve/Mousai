@@ -1,54 +1,67 @@
 use gettextrs::gettext;
+use serde::{Deserialize, Serialize};
 
 use std::{error, fmt};
 
-#[derive(Debug)]
-pub struct NoMatchesError;
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum RecognizeErrorKind {
+    NoMatches,
+    Fingerprint,
+    InvalidToken,
+    TokenLimitReached,
+    Connection,
+    OtherPermanent,
+}
 
-impl fmt::Display for NoMatchesError {
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RecognizeError {
+    kind: RecognizeErrorKind,
+    message: Option<String>,
+}
+
+impl error::Error for RecognizeError {}
+
+impl fmt::Display for RecognizeError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(&gettext("No matches found for this song"))
+        f.write_str(&match self.kind() {
+            RecognizeErrorKind::NoMatches => gettext("No matches found for this song"),
+            RecognizeErrorKind::Fingerprint => gettext("Failed to create fingerprint from audio"),
+            RecognizeErrorKind::InvalidToken => gettext("Invalid token given"),
+            RecognizeErrorKind::TokenLimitReached => gettext("Token limit reached"),
+            RecognizeErrorKind::Connection => gettext("Failed to connect to the server"),
+            RecognizeErrorKind::OtherPermanent => gettext("Permanent error received"),
+        })
     }
 }
 
-impl error::Error for NoMatchesError {}
-
-#[derive(Debug)]
-pub struct FingerprintError;
-
-impl fmt::Display for FingerprintError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(&gettext("Failed to create fingerprint from audio"))
+impl RecognizeError {
+    pub fn new(kind: RecognizeErrorKind, message: impl Into<Option<String>>) -> Self {
+        Self {
+            kind,
+            message: message.into(),
+        }
     }
-}
 
-impl error::Error for FingerprintError {}
-
-#[derive(Debug)]
-
-pub struct ResponseParseError;
-
-impl fmt::Display for ResponseParseError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(&gettext("Failed to parse response from provider"))
+    pub fn kind(&self) -> RecognizeErrorKind {
+        self.kind
     }
-}
 
-impl error::Error for ResponseParseError {}
+    pub fn message(&self) -> Option<&str> {
+        self.message.as_deref()
+    }
 
-#[derive(Debug)]
-pub enum TokenError {
-    Invalid,
-    LimitReached,
-}
+    /// Whether the failure is permanent (i.e. "no matches found for
+    /// this recording", in contrast to "internet connection error" or
+    /// "expired token error")
+    ///
+    /// Permanent failures are not retried because they are unlikely to
+    /// be resolved by retrying.
+    pub fn is_permanent(&self) -> bool {
+        use RecognizeErrorKind::*;
 
-impl fmt::Display for TokenError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            TokenError::Invalid => f.write_str(&gettext("Invalid token")),
-            TokenError::LimitReached => f.write_str(&gettext("Token limit reached")),
+        match self.kind() {
+            NoMatches | Fingerprint | OtherPermanent => true,
+            Connection | TokenLimitReached | InvalidToken => false,
         }
     }
 }
-
-impl error::Error for TokenError {}

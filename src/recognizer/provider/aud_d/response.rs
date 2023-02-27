@@ -1,10 +1,6 @@
-use anyhow::{anyhow, Context, Result};
-use gettextrs::gettext;
 use serde::Deserialize;
 
-use crate::recognizer::provider::error::{
-    FingerprintError, NoMatchesError, ResponseParseError, TokenError,
-};
+use crate::recognizer::provider::error::{RecognizeError, RecognizeErrorKind};
 
 #[derive(Debug, Deserialize)]
 pub struct LyricsData {
@@ -95,34 +91,42 @@ pub struct Response {
 }
 
 impl Response {
-    pub fn parse(slice: &[u8]) -> Result<Self> {
-        serde_json::from_slice(slice).context(ResponseParseError)
+    pub fn parse(slice: &[u8]) -> Result<Self, RecognizeError> {
+        serde_json::from_slice(slice)
+            .map_err(|err| RecognizeError::new(RecognizeErrorKind::OtherPermanent, err.to_string()))
     }
 
-    pub fn data(self) -> Result<Data> {
+    pub fn data(self) -> Result<Data, RecognizeError> {
         if self.status == "success" {
-            return self.data.ok_or_else(|| NoMatchesError.into());
+            return self
+                .data
+                .ok_or_else(|| RecognizeError::new(RecognizeErrorKind::NoMatches, None));
         }
 
         if self.status == "error" {
-            let error = self
-                .error
-                .ok_or_else(|| anyhow!("Got `error` status but no error"))?;
+            let error = self.error.ok_or_else(|| {
+                RecognizeError::new(
+                    RecognizeErrorKind::OtherPermanent,
+                    "Got `error` status but no error".to_string(),
+                )
+            })?;
 
             // Based on https://docs.audd.io/#common-errors
-
-            let err = anyhow!("#{}: {}", error.code, error.message);
-            return Err(match error.code {
-                901 => err.context(TokenError::LimitReached),
-                900 => err.context(TokenError::Invalid),
-                300 => err.context(FingerprintError),
-                _ => err,
-            });
+            let kind = match error.code {
+                901 => RecognizeErrorKind::TokenLimitReached,
+                900 => RecognizeErrorKind::InvalidToken,
+                300 => RecognizeErrorKind::Fingerprint,
+                _ => RecognizeErrorKind::OtherPermanent,
+            };
+            return Err(RecognizeError::new(
+                kind,
+                format!("#{}: {}", error.code, error.message),
+            ));
         }
 
-        Err(anyhow!(gettext!(
-            "Got invalid status response of {}",
-            self.status
-        )))
+        Err(RecognizeError::new(
+            RecognizeErrorKind::OtherPermanent,
+            format!("Got invalid status response of {}", self.status),
+        ))
     }
 }

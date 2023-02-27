@@ -1,24 +1,24 @@
-use anyhow::Result;
 use async_trait::async_trait;
 use gtk::glib;
 
-use super::{AudD, Data, Response};
-use crate::{
-    model::Song,
-    recognizer::provider::{TestProvider, TestProviderMode},
-};
+use super::{AudD, Data, Response, Song};
+use crate::recognizer::provider::{RecognizeError, TestProvider, TestProviderMode};
 
 #[derive(Debug)]
 pub struct AudDMock;
 
 #[async_trait(?Send)]
 impl TestProvider for AudDMock {
-    async fn recognize_impl(&self, _: &[u8], mode: TestProviderMode) -> Result<Song> {
+    async fn recognize_impl(
+        &self,
+        _: &[u8],
+        mode: TestProviderMode,
+    ) -> Result<Song, RecognizeError> {
         Ok(AudD::build_song_from_data(random_data(mode)?))
     }
 }
 
-fn random_data(mode: TestProviderMode) -> Result<Data> {
+fn random_data(mode: TestProviderMode) -> Result<Data, RecognizeError> {
     let mut raw_responses = Vec::new();
     if matches!(mode, TestProviderMode::Both) || matches!(mode, TestProviderMode::ErrorOnly) {
         raw_responses.extend([

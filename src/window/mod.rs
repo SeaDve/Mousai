@@ -31,7 +31,7 @@ use crate::{
     error_dialog::ErrorDialog,
     model::SongList,
     player::{Player, PlayerState},
-    recognizer::{Recognizer, RecognizerState},
+    recognizer::{RecognizeError, Recognizer, RecognizerState},
     utils, Application,
 };
 
@@ -226,11 +226,26 @@ impl Window {
     }
 
     pub fn present_error(&self, err: &Error) {
+        // TODO specialize error
+        // - Show token preferences dialog on token errors
+        // - Add help on connection error etc.
+
+        let mut detailed_error = Vec::new();
+
+        if let Some(recognize_error) = err.downcast_ref::<RecognizeError>() {
+            if let Some(message) = recognize_error.message() {
+                detailed_error.push(message.to_string());
+            }
+        }
+
+        detailed_error.push(format!("{:?}", err));
+        detailed_error.push(format!("{:#?}", err));
+
         let err_dialog = ErrorDialog::new(
             err.to_string(),
             err.downcast_ref::<Help>()
                 .map(|help| format!("<b>{}</b>: {}", gettext("Help"), help)),
-            format!("{:?}", err),
+            detailed_error.join("\n\n"),
         );
         err_dialog.set_transient_for(Some(self));
         err_dialog.present();

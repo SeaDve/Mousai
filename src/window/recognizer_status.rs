@@ -7,10 +7,7 @@ use gtk::{
 use once_cell::unsync::OnceCell;
 
 use super::progress_icon::ProgressIcon;
-use crate::{
-    debug_assert_or_log,
-    recognizer::{RecognizeResult, Recognizer},
-};
+use crate::{debug_assert_or_log, recognizer::Recognizer};
 
 // TODO
 // - Maybe drop the separate button to show result?
@@ -146,9 +143,7 @@ impl RecognizerStatus {
             .unwrap()
             .peek_recognized_saved_recordings()
             .iter()
-            .filter(|recording| {
-                matches!(*recording.recognize_result(), Some(RecognizeResult::Ok(_)))
-            })
+            .filter(|recording| matches!(*recording.recognize_result(), Some(Ok(_))))
             .count();
         let n_failed = n_recognized - n_successful;
 

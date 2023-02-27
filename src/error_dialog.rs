@@ -13,12 +13,14 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/error-dialog.ui")]
     pub struct ErrorDialog {
         #[property(get, set, construct_only)]
-        pub(super) full_error: OnceCell<String>,
+        pub(super) detailed_error: OnceCell<String>,
 
         #[template_child]
-        pub(super) copy_button: TemplateChild<gtk::Button>,
+        pub(super) copy_detailed_error_button: TemplateChild<gtk::Button>,
         #[template_child]
-        pub(super) full_error_buffer: TemplateChild<gtk::TextBuffer>,
+        pub(super) detailed_error_box: TemplateChild<gtk::ListBox>,
+        #[template_child]
+        pub(super) detailed_error_buffer: TemplateChild<gtk::TextBuffer>,
     }
 
     #[glib::object_subclass]
@@ -43,19 +45,23 @@ mod imp {
             self.parent_constructed();
 
             let obj = self.obj();
-
-            let full_error = obj.full_error();
-
-            self.full_error_buffer.set_text(&full_error);
-
-            self.copy_button.connect_clicked(move |button| {
-                button.display().clipboard().set_text(&full_error);
-                button.set_tooltip_text(Some(&gettext("Copied to Clipboard")));
-                button.set_icon_name("checkmark-symbolic");
-            });
-
             obj.add_response(OK_RESPONSE_ID, &gettext("Ok"));
             obj.set_default_response(Some(OK_RESPONSE_ID));
+
+            let detailed_error = obj.detailed_error();
+
+            let has_detailed_error = !detailed_error.is_empty();
+            self.detailed_error_box.set_visible(has_detailed_error);
+
+            if has_detailed_error {
+                self.detailed_error_buffer.set_text(&detailed_error);
+                self.copy_detailed_error_button
+                    .connect_clicked(move |button| {
+                        button.display().clipboard().set_text(&detailed_error);
+                        button.set_tooltip_text(Some(&gettext("Copied to Clipboard")));
+                        button.set_icon_name("checkmark-symbolic");
+                    });
+            }
         }
 
         fn dispose(&self) {
@@ -77,12 +83,12 @@ impl ErrorDialog {
     pub fn new(
         title: impl Into<glib::GString>,
         body: Option<impl Into<glib::GString>>,
-        full_error: impl Into<glib::GString>,
+        detailed_error: impl Into<glib::GString>,
     ) -> Self {
         glib::Object::builder()
             .property("heading", title.into())
             .property("body", body.map(|h| h.into()).unwrap_or_default())
-            .property("full-error", full_error.into())
+            .property("detailed-error", detailed_error.into())
             .build()
     }
 }

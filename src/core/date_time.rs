@@ -10,7 +10,7 @@ use std::fmt;
 #[boxed_type(name = "MsaiDateTime")] // TODO drop Boxed derive and replace with ValueDelegate
 pub struct DateTime(glib::DateTime);
 
-// FIXME consider dropping this
+// FIXME consider dropping this and make song `last_heard` prop optional
 impl Default for DateTime {
     fn default() -> Self {
         Self::now_local()

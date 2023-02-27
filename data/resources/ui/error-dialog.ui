@@ -4,7 +4,7 @@
     <property name="body-use-markup">True</property>
     <property name="modal">True</property>
     <property name="extra-child">
-      <object class="GtkListBox">
+      <object class="GtkListBox" id="detailed_error_box">
         <property name="selection-mode">none</property>
         <property name="margin-top">24</property>
         <property name="margin-bottom">12</property>
@@ -38,15 +38,16 @@
                             <property name="monospace">True</property>
                             <property name="editable">False</property>
                             <property name="cursor-visible">False</property>
+                            <property name="wrap-mode">word</property>
                             <property name="buffer">
-                              <object class="GtkTextBuffer" id="full_error_buffer"/>
+                              <object class="GtkTextBuffer" id="detailed_error_buffer"/>
                             </property>
                           </object>
                         </property>
                       </object>
                     </property>
                     <child type="overlay">
-                      <object class="GtkButton" id="copy_button">
+                      <object class="GtkButton" id="copy_detailed_error_button">
                         <property name="halign">end</property>
                         <property name="valign">start</property>
                         <property name="margin-end">12</property>

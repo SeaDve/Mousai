@@ -2,25 +2,14 @@ use serde::{Deserialize, Serialize};
 
 use std::cell::{Cell, Ref, RefCell};
 
+use super::RecognizeError;
 use crate::{core::DateTime, model::Song};
-
-#[derive(Debug, Serialize, Deserialize)]
-pub enum RecognizeResult {
-    Ok(Song),
-    Err {
-        /// Whether the failure is permanent (i.e. "no matches found for
-        /// this recording", in contrast to "internet connection error" or
-        /// "expired token error")
-        is_permanent: bool,
-        message: String,
-    },
-}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Recording {
     bytes: Vec<u8>,
     recorded_time: DateTime,
-    recognize_result: RefCell<Option<RecognizeResult>>,
+    recognize_result: RefCell<Option<Result<Song, RecognizeError>>>,
 
     #[serde(skip)] // So we can retry next session
     recognize_retries: Cell<u8>,
@@ -44,11 +33,11 @@ impl Recording {
         &self.recorded_time
     }
 
-    pub fn recognize_result(&self) -> Ref<'_, Option<RecognizeResult>> {
+    pub fn recognize_result(&self) -> Ref<'_, Option<Result<Song, RecognizeError>>> {
         self.recognize_result.borrow()
     }
 
-    pub fn set_recognize_result(&self, result: RecognizeResult) {
+    pub fn set_recognize_result(&self, result: Result<Song, RecognizeError>) {
         self.recognize_result.replace(Some(result));
     }
 

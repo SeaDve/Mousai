@@ -17,7 +17,7 @@ use crate::{
     debug_assert_or_log, debug_unreachable_or_log,
     model::{Song, SongFilter, SongList, SongSorter},
     player::Player,
-    recognizer::{RecognizeResult, Recognizer},
+    recognizer::Recognizer,
     utils,
 };
 
@@ -435,15 +435,14 @@ impl HistoryView {
                     .take_recognized_saved_recordings()
                     .iter()
                     .filter_map(|recording| match *recording.recognize_result() {
-                        Some(RecognizeResult::Ok(ref song)) => Some(song.clone()),
-                        Some(RecognizeResult::Err {
-                            is_permanent: true, ..
-                        }) => {
+                        Some(Ok(ref song)) => Some(song.clone()),
+                        Some(Err(ref err)) => {
                             // TODO handle errors
+                            debug_assert_or_log!(err.is_permanent());
                             None
                         }
-                        ref res => {
-                            debug_unreachable_or_log!("invalid result: {:?}", res);
+                        None => {
+                            debug_unreachable_or_log!("received none recognize result");
                             None
                         }
                     })

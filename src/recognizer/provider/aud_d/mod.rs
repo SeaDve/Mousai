@@ -1,10 +1,8 @@
 mod mock;
 mod response;
 
-use anyhow::{Context, Result};
 use async_trait::async_trait;
-use gettextrs::gettext;
-use gtk::glib;
+use gtk::{gio, glib};
 use serde_json::json;
 use soup::prelude::*;
 
@@ -12,9 +10,8 @@ use std::time::Duration;
 
 pub use self::mock::AudDMock;
 use self::response::{Data, Response};
-use super::Provider;
+use super::{Provider, RecognizeError, RecognizeErrorKind};
 use crate::{
-    core::ResultExt,
     model::{ExternalLinkKey, Song, SongId},
     utils,
 };
@@ -104,15 +101,19 @@ impl AudD {
 
 #[async_trait(?Send)]
 impl Provider for AudD {
-    async fn recognize(&self, bytes: &[u8]) -> Result<Song> {
+    async fn recognize(&self, bytes: &[u8]) -> Result<Song, RecognizeError> {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz,lyrics",
             "audio": glib::base64_encode(bytes).as_str(),
         });
 
-        let message = soup::Message::new("POST", "https://api.audd.io/")
-            .context("Failed to create POST message")?;
+        let message = soup::Message::new("POST", "https://api.audd.io/").map_err(|err| {
+            RecognizeError::new(
+                RecognizeErrorKind::OtherPermanent,
+                format!("Failed to create POST message: {}", err),
+            )
+        })?;
         message.set_request_body_from_bytes(None, Some(&glib::Bytes::from_owned(data.to_string())));
         message.set_priority(soup::MessagePriority::High);
 
@@ -120,10 +121,15 @@ impl Provider for AudD {
             .session()
             .send_and_read_future(&message, glib::PRIORITY_DEFAULT)
             .await
-            .with_help(
-                || gettext("Check your internet connection"),
-                || gettext("Failed to connect to AudD"),
-            )?;
+            .map_err(|err| {
+                if err.matches(gio::ResolverError::NotFound)
+                    || err.matches(gio::ResolverError::TemporaryFailure)
+                {
+                    RecognizeError::new(RecognizeErrorKind::Connection, err.to_string())
+                } else {
+                    RecognizeError::new(RecognizeErrorKind::OtherPermanent, err.to_string())
+                }
+            })?;
 
         tracing::trace!(server_response = ?std::str::from_utf8(&bytes));
 
@@ -144,24 +150,26 @@ impl Default for AudD {
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::recognizer::provider::error::{FingerprintError, NoMatchesError, TokenError};
 
-    fn parse_response(response: &'static str) -> Result<Data> {
+    fn parse_response(response: &'static str) -> Result<Data, RecognizeError> {
         Response::parse(response.as_bytes())?.data()
     }
 
     #[test]
     fn no_matches() {
         let res = parse_response("{\"status\":\"success\",\"result\":null}");
-        assert!(res.unwrap_err().is::<NoMatchesError>());
+        assert!(matches!(
+            res.unwrap_err().kind(),
+            RecognizeErrorKind::NoMatches
+        ));
     }
 
     #[test]
     fn daily_limit_reached() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":901,\"error_message\":\"Recognition failed: authorization failed: no api_token passed and the limit was reached. Get an api_token from dashboard.audd.io.\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
         assert!(matches!(
-            res.unwrap_err().downcast_ref::<TokenError>(),
-            Some(TokenError::LimitReached)
+            res.unwrap_err().kind(),
+            RecognizeErrorKind::TokenLimitReached
         ));
     }
 
@@ -169,15 +177,18 @@ mod test {
     fn wrong_api_token() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":900,\"error_message\":\"Recognition failed: authorization failed: wrong api_token. Please check if your account is activated on dashboard.audd.io and has either a trial or an active subscription.\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
         assert!(matches!(
-            res.unwrap_err().downcast_ref::<TokenError>(),
-            Some(TokenError::Invalid)
+            res.unwrap_err().kind(),
+            RecognizeErrorKind::InvalidToken
         ));
     }
 
     #[test]
     fn wrong_file_sent_or_audio_without_streams() {
         let res = parse_response("{\"status\":\"error\",\"error\":{\"error_code\":300,\"error_message\":\"Recognition failed: a problem with fingerprints creating. Keep in mind that you should send only audio files or links to audio files. We support some of the Instagram, Twitter, TikTok and Facebook videos, and also parse html for OpenGraph and JSON-LD media and \\u003caudio\\u003e/\\u003cvideo\\u003e tags, but it's always better to send a 10-20 seconds-long audio file. For audio streams, see https://docs.audd.io/streams/\"},\"request_params\":{},\"request_api_method\":\"recognize\",\"request_http_method\":\"POST\",\"see api documentation\":\"https://docs.audd.io\",\"contact us\":\"api@audd.io\"}");
-        assert!(res.unwrap_err().is::<FingerprintError>());
+        assert!(matches!(
+            res.unwrap_err().kind(),
+            RecognizeErrorKind::Fingerprint
+        ));
     }
 
     #[test]

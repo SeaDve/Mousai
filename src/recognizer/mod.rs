@@ -14,10 +14,7 @@ use std::{
     rc::Rc,
 };
 
-pub use self::{
-    provider::{ProviderSettings, ProviderType, TestProviderMode},
-    recording::RecognizeResult,
-};
+pub use self::provider::{ProviderSettings, ProviderType, RecognizeError, TestProviderMode};
 use self::{recorder::Recorder, recording::Recording};
 use crate::{
     audio_device::{self, AudioDeviceClass},
@@ -431,22 +428,15 @@ impl Recognizer {
                 Ok(song) => {
                     song.set_last_heard(recording.recorded_time());
 
-                    recording.set_recognize_result(RecognizeResult::Ok(song));
+                    recording.set_recognize_result(Ok(song));
                     self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
                 Err(err) => {
-                    use provider::error::{FingerprintError, NoMatchesError, ResponseParseError};
-
                     tracing::error!("Failed to recognize saved recording: {:?}", err);
 
                     recording.increment_recognize_retries();
 
-                    recording.set_recognize_result(RecognizeResult::Err {
-                        is_permanent: err.is::<NoMatchesError>()
-                            || err.is::<FingerprintError>()
-                            || err.is::<ResponseParseError>(),
-                        message: err.to_string(),
-                    });
+                    recording.set_recognize_result(Err(err));
                     self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
             }
@@ -475,7 +465,7 @@ impl Default for Recognizer {
 fn is_recording_ready_to_take(recording: &Recording) -> bool {
     match *recording.recognize_result() {
         None => false,
-        Some(RecognizeResult::Ok(_)) => true,
-        Some(RecognizeResult::Err { is_permanent, .. }) => is_permanent,
+        Some(Ok(_)) => true,
+        Some(Err(ref err)) => err.is_permanent(),
     }
 }

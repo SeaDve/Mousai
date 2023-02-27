@@ -1,20 +1,22 @@
 mod aud_d;
-pub mod error;
+mod error;
 mod settings;
 
-use anyhow::Result;
 use async_trait::async_trait;
 use gtk::glib;
 
 use std::{fmt, time::Duration};
 
-pub use self::settings::{ProviderSettings, ProviderType, TestProviderMode};
+pub use self::{
+    error::{RecognizeError, RecognizeErrorKind},
+    settings::{ProviderSettings, ProviderType, TestProviderMode},
+};
 use crate::model::Song;
 
 #[async_trait(?Send)]
 pub trait Provider: fmt::Debug {
     /// Recognize a song from bytes
-    async fn recognize(&self, bytes: &[u8]) -> Result<Song>;
+    async fn recognize(&self, bytes: &[u8]) -> Result<Song, RecognizeError>;
 
     /// How long to record the audio
     fn listen_duration(&self) -> Duration;
@@ -27,7 +29,11 @@ pub trait Provider: fmt::Debug {
 
 #[async_trait(?Send)]
 pub trait TestProvider {
-    async fn recognize_impl(&self, bytes: &[u8], mode: TestProviderMode) -> Result<Song>;
+    async fn recognize_impl(
+        &self,
+        bytes: &[u8],
+        mode: TestProviderMode,
+    ) -> Result<Song, RecognizeError>;
 }
 
 #[async_trait(?Send)]
@@ -35,7 +41,7 @@ impl<T> Provider for T
 where
     T: TestProvider + fmt::Debug,
 {
-    async fn recognize(&self, bytes: &[u8]) -> Result<Song> {
+    async fn recognize(&self, bytes: &[u8]) -> Result<Song, RecognizeError> {
         let duration = ProviderSettings::lock().test_recognize_duration;
         glib::timeout_future(duration).await;
 
