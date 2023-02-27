@@ -293,6 +293,8 @@ impl Recognizer {
         } else {
             self.set_state(RecognizerState::Recognizing);
 
+            // TODO Also save the recording here when the error is non-permanent
+            // such as internet or token errors.
             let song = gio::CancellableFuture::new(
                 provider.recognize(&recording_bytes),
                 cancellable.clone(),

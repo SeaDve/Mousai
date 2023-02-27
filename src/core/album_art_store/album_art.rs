@@ -14,6 +14,7 @@ use crate::{debug_assert_or_log, debug_unreachable_or_log};
 // - Retry downloading once network is back
 // - Integrate more with AlbumCover widget
 // - Load only at most n AlbumArt at a time
+// - Sanitize the arbitraty data downloaded before converting it to texture
 
 pub struct AlbumArt {
     session: soup::Session,

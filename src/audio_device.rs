@@ -131,7 +131,8 @@ mod pa {
         inner: ContextInner,
 
         // `ContextInner` does not seem to hold a reference to this causing
-        // this to be freed and cause error after `Context::connect`.
+        // this to be freed and cause error after `Context::connect`. Thus,
+        // we need to hold a reference to it.
         #[allow(dead_code)]
         main_loop: pulse_glib::Mainloop,
     }
