@@ -9,8 +9,11 @@ use indexmap::IndexMap;
 
 use std::{cell::RefCell, collections::HashSet};
 
-use super::{Song, SongId};
-use crate::utils;
+use super::{db, Song, SongId};
+
+const TABLE_NAME: &str = "songs";
+
+const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
 mod imp {
     use super::*;
@@ -66,24 +69,22 @@ glib::wrapper! {
 }
 
 impl SongList {
-    /// Load a [`SongList`] from application settings `history` key
-    pub fn load_from_settings() -> Result<Self> {
-        let songs: Vec<Song> = serde_json::from_str(&utils::app_instance().settings().history())?;
+    /// Load from database at default path
+    pub fn load_from_db() -> Result<Self> {
+        let songs = db::connection()
+            .table::<Song>(TABLE_NAME)?
+            .select_all()?
+            .into_iter()
+            .map(|song| {
+                bind_song(&song);
+                (song.id(), song)
+            })
+            .collect();
 
-        let obj = Self::default();
-        obj.append_many(songs);
+        let this = Self::default();
+        this.imp().list.replace(songs);
 
-        Ok(obj)
-    }
-
-    /// Save to application settings `history` key
-    pub fn save_to_settings(&self) -> Result<()> {
-        let list = self.imp().list.borrow();
-        let songs = list.values().collect::<Vec<_>>();
-        utils::app_instance()
-            .settings()
-            .try_set_history(&serde_json::to_string(&songs)?)?;
-        Ok(())
+        Ok(this)
     }
 
     /// If an equivalent [`Song`] already exists in the list, it returns false and updates
@@ -92,9 +93,17 @@ impl SongList {
     ///
     /// The equivalence of the [`Song`] depends on its [`SongId`]
     pub fn append(&self, song: Song) -> bool {
+        db::connection()
+            .table::<Song>(TABLE_NAME)
+            .unwrap()
+            .upsert_one(song.id_ref().as_str(), &song)
+            .unwrap();
+
+        bind_song(&song);
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
-        if last_value.is_some() {
+        if let Some(last_value) = last_value {
+            unbind_song(&last_value);
             self.items_changed(position as u32, 1, 1);
             false
         } else {
@@ -112,6 +121,17 @@ impl SongList {
     /// This is more efficient than [`SongList::append`] since it emits `items-changed`
     /// only once if all appended [`Song`]s are unique.
     pub fn append_many(&self, songs: Vec<Song>) -> u32 {
+        db::connection()
+            .table::<Song>(TABLE_NAME)
+            .unwrap()
+            .upsert_many(
+                songs
+                    .iter()
+                    .map(|song| (song.id_ref().as_str(), song))
+                    .collect::<Vec<_>>(),
+            )
+            .unwrap();
+
         let mut updated_indices = HashSet::new();
         let mut n_appended = 0;
 
@@ -119,9 +139,11 @@ impl SongList {
             let mut list = self.imp().list.borrow_mut();
 
             for song in songs {
+                bind_song(&song);
                 let (index, last_value) = list.insert_full(song.id(), song);
 
-                if last_value.is_some() {
+                if let Some(last_value) = last_value {
+                    unbind_song(&last_value);
                     updated_indices.insert(index);
                 } else {
                     n_appended += 1;
@@ -152,9 +174,16 @@ impl SongList {
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
+        db::connection()
+            .table::<Song>(TABLE_NAME)
+            .unwrap()
+            .delete_one(song_id.as_str())
+            .unwrap();
+
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
         if let Some((position, _, ref song)) = removed {
+            unbind_song(song);
             self.emit_by_name::<()>("removed", &[song]);
             self.items_changed(position as u32, 1, 0);
         }
@@ -186,6 +215,28 @@ impl SongList {
             }),
         )
     }
+}
+
+fn bind_song(song: &Song) {
+    unsafe {
+        let handler_id = song.connect_notify(None, |song, _| {
+            db::connection()
+                .table::<Song>(TABLE_NAME)
+                .unwrap()
+                .update_one(song.id_ref().as_str(), song)
+                .unwrap();
+        });
+        song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
+    }
+}
+
+fn unbind_song(song: &Song) {
+    unsafe {
+        let handler_id = song
+            .steal_data::<glib::SignalHandlerId>(SONG_NOTIFY_HANDLER_ID_KEY)
+            .unwrap();
+        song.disconnect(handler_id);
+    };
 }
 
 impl Default for SongList {

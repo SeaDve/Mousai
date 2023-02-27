@@ -190,10 +190,6 @@ mod imp {
                 tracing::warn!("Failed to save window state, {:?}", &err);
             }
 
-            if let Err(err) = obj.history().save_to_settings() {
-                tracing::error!("Failed to save history: {:?}", err);
-            }
-
             if let Err(err) = self.recognizer.save_saved_recordings() {
                 tracing::error!("Failed to save saved recordings: {:?}", err);
             }
@@ -253,7 +249,7 @@ impl Window {
 
     fn history(&self) -> &SongList {
         self.imp().history.get_or_init(|| {
-            SongList::load_from_settings().unwrap_or_else(|err| {
+            SongList::load_from_db().unwrap_or_else(|err| {
                 let err = err.context("Failed to load SongList from settings");
 
                 tracing::error!("{:?}", err);
@@ -359,7 +355,7 @@ impl Window {
             .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
                 let history = obj.history();
 
-                if !history.contains(&song.id()) {
+                if !history.contains(song.id_ref()) {
                     song.set_is_newly_heard(true);
                 }
 

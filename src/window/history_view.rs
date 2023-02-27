@@ -454,7 +454,7 @@ impl HistoryView {
                 }
 
                 for song in &songs {
-                    if !history.contains(&song.id()) {
+                    if !history.contains(song.id_ref()) {
                         song.set_is_newly_heard(true);
                     }
                 }
@@ -566,7 +566,7 @@ impl HistoryView {
             .get()
             .and_then(|song_list| song_list.upgrade())
         {
-            if let Some(removed_song) = song_list.remove(&song.id()) {
+            if let Some(removed_song) = song_list.remove(song.id_ref()) {
                 imp.songs_purgatory.borrow_mut().push(removed_song);
             } else {
                 debug_unreachable_or_log!("failed to remove song: Song not found in SongList");
