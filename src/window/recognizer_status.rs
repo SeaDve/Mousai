@@ -109,9 +109,11 @@ impl RecognizerStatus {
             obj.update_offline_mode_ui();
         }));
 
-        recognizer.connect_saved_recordings_changed(clone!(@weak self as obj => move |_| {
-            obj.update_progress_and_show_results_ui();
-        }));
+        recognizer.saved_recordings().connect_items_changed(
+            clone!(@weak self as obj => move |_, _, _, _| {
+                obj.update_progress_and_show_results_ui();
+            }),
+        );
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 
@@ -132,7 +134,7 @@ impl RecognizerStatus {
 
         let recognizer = self.imp().recognizer.get().unwrap();
 
-        let total = recognizer.saved_recordings().len();
+        let total = recognizer.saved_recordings().n_items() as usize;
         let n_recognized = recognizer.peek_recognized_saved_recordings().len();
         debug_assert_or_log!(n_recognized <= total);
 
@@ -143,7 +145,11 @@ impl RecognizerStatus {
             .unwrap()
             .peek_recognized_saved_recordings()
             .iter()
-            .filter(|recording| matches!(*recording.recognize_result(), Some(Ok(_))))
+            .filter(|recording| {
+                recording
+                    .recognize_result()
+                    .map_or(false, |res| res.0.is_ok())
+            })
             .count();
         let n_failed = n_recognized - n_successful;
 

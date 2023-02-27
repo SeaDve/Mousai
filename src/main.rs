@@ -34,6 +34,7 @@ mod macros;
 mod model;
 mod player;
 mod recognizer;
+mod serde_helpers;
 mod settings;
 mod utils;
 mod window;

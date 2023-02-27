@@ -434,7 +434,7 @@ impl HistoryView {
                 let songs = recognizer
                     .take_recognized_saved_recordings()
                     .iter()
-                    .filter_map(|recording| match *recording.recognize_result() {
+                    .filter_map(|recording| match recording.recognize_result().map(|r| r.0) {
                         Some(Ok(ref song)) => Some(song.clone()),
                         Some(Err(ref err)) => {
                             // TODO handle errors

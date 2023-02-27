@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use std::{error, fmt};
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum RecognizeErrorKind {
     NoMatches,
     Fingerprint,
@@ -13,7 +13,7 @@ pub enum RecognizeErrorKind {
     OtherPermanent,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct RecognizeError {
     kind: RecognizeErrorKind,
     message: Option<String>,
