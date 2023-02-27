@@ -190,10 +190,6 @@ mod imp {
                 tracing::warn!("Failed to save window state, {:?}", &err);
             }
 
-            if let Err(err) = self.recognizer.save_saved_recordings() {
-                tracing::error!("Failed to save saved recordings: {:?}", err);
-            }
-
             self.parent_close_request()
         }
     }
@@ -262,7 +258,7 @@ impl Window {
                 // loading the history.
                 self.present_error(&err);
 
-                // FIXME handle this
+                // FIXME properly handle this and other unwraps
                 panic!();
             })
         })

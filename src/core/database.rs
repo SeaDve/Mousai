@@ -3,9 +3,13 @@ use r2d2_sqlite::SqliteConnectionManager;
 use serde::{Deserialize, Serialize};
 
 use std::{
-    error::Error as StdError, fmt, marker::PhantomData, path::Path, result::Result as StdResult,
-    time::Instant,
+    collections::HashMap, error::Error as StdError, fmt, marker::PhantomData, path::Path,
+    result::Result as StdResult, time::Instant,
 };
+
+// TODO
+// * make key generic so we dont as_str on SongId
+// * don't use dot operator on tuples
 
 type Result<T> = StdResult<T, DatabaseError>;
 
@@ -270,17 +274,18 @@ where
         Ok(data)
     }
 
-    /// Get all the data in the Database.
-    pub fn select_all(&self) -> Result<Vec<T>> {
+    /// Get all the data in the Database together with their ids.
+    pub fn select_all(&self) -> Result<HashMap<String, T>> {
         let _timer = Timer::new("Table::select_all");
 
         let conn = self.pool.get()?;
 
-        let mut statement = conn.prepare_cached(&format!("SELECT data FROM {}", self.name))?;
+        let mut statement = conn.prepare_cached(&format!("SELECT id, data FROM {}", self.name))?;
 
         let vec = statement
             .query_map([], |row| {
-                let raw_data = row.get::<_, String>(0)?;
+                let id = row.get::<_, String>(0)?;
+                let raw_data = row.get::<_, String>(1)?;
                 let data = serde_json::from_str::<T>(&raw_data).map_err(|err| {
                     rusqlite::Error::FromSqlConversionFailure(
                         1,
@@ -288,9 +293,9 @@ where
                         err.into(),
                     )
                 })?;
-                Ok(data)
+                Ok((id, data))
             })?
-            .collect::<rusqlite::Result<Vec<_>>>()?;
+            .collect::<rusqlite::Result<HashMap<_, _>>>()?;
 
         Ok(vec)
     }
@@ -378,6 +383,38 @@ where
         }
     }
 
+    /// Delete all data with ids in the table.
+    ///
+    /// Note: This does not do anything if there are duplicates in the given ids.
+    pub fn delete_many<'a>(&self, ids: impl IntoIterator<Item = &'a str>) -> Result<()> {
+        let _timer = Timer::new("Table::delete_many");
+
+        let mut conn = self.pool.get()?;
+
+        let transaction = conn.transaction()?;
+
+        let mut items_len = 0;
+        let mut changed = 0;
+
+        {
+            let mut statement =
+                transaction.prepare_cached(&format!("DELETE FROM {} WHERE id = ?", self.name))?;
+
+            for id in ids.into_iter() {
+                changed += statement.execute((id,))?;
+                items_len += 1;
+            }
+        }
+
+        if changed == items_len {
+            transaction.commit()?;
+            Ok(())
+        } else {
+            transaction.rollback()?;
+            Err(DatabaseError::NotFound)
+        }
+    }
+
     /// Delete all data in the table.
     pub fn delete_all(&self) -> Result<()> {
         let _timer = Timer::new("Table::delete_all");
@@ -449,7 +486,7 @@ mod tests {
     use gtk::gio::{self, prelude::*};
     use serde::{Deserialize, Serialize};
 
-    #[derive(Debug, Serialize, Deserialize)]
+    #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
     pub struct Song {
         title: String,
     }
@@ -588,11 +625,11 @@ mod tests {
             assert_eq!(songs.select_one("2").unwrap().title, "2");
             assert_eq!(songs.select_one("3").unwrap().title, "3");
 
-            let mut iter = songs.select_all().unwrap().into_iter();
-            assert_eq!(iter.next().unwrap().title, "1");
-            assert_eq!(iter.next().unwrap().title, "2");
-            assert_eq!(iter.next().unwrap().title, "3");
-            assert!(iter.next().is_none());
+            let map = songs.select_all().unwrap();
+            assert_eq!(map.len(), 3);
+            assert_eq!(map.get("1").unwrap().title, "1");
+            assert_eq!(map.get("2").unwrap().title, "2");
+            assert_eq!(map.get("3").unwrap().title, "3");
         });
     }
 
@@ -732,6 +769,50 @@ mod tests {
                 DatabaseError::NotFound
             ));
             assert_eq!(songs.count().unwrap(), 2);
+        });
+    }
+
+    #[test]
+    fn delete_many() {
+        run_test(|db| {
+            let songs = db.table::<Song>("songs").unwrap();
+            songs
+                .insert_many(vec![
+                    ("1", &Song::new("1")),
+                    ("2", &Song::new("2")),
+                    ("3", &Song::new("3")),
+                ])
+                .unwrap();
+
+            songs.delete_many(vec!["1", "2"]).unwrap();
+            assert_eq!(songs.count().unwrap(), 1);
+            assert!(matches!(
+                songs.select_one("1").unwrap_err(),
+                DatabaseError::NotFound
+            ));
+            assert!(matches!(
+                songs.select_one("2").unwrap_err(),
+                DatabaseError::NotFound
+            ));
+            assert_eq!(&songs.select_one("3").unwrap().title, "3");
+        });
+    }
+
+    #[test]
+    fn delete_many_missing() {
+        run_test(|db| {
+            let songs = db.table::<Song>("songs").unwrap();
+            songs
+                .insert_many(vec![("1", &Song::new("1")), ("2", &Song::new("2"))])
+                .unwrap();
+
+            assert!(matches!(
+                songs.delete_many(vec!["1", "4"]).unwrap_err(),
+                DatabaseError::NotFound
+            ));
+            assert_eq!(songs.count().unwrap(), 2);
+            assert_eq!(songs.select_one("1").unwrap().title, "1");
+            assert_eq!(songs.select_one("2").unwrap().title, "2");
         });
     }
 

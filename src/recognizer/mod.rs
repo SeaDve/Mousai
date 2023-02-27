@@ -8,9 +8,11 @@ use gtk::{
     gio::{self, prelude::*},
     glib::{self, clone, closure_local, subclass::prelude::*, WeakRef},
 };
+use once_cell::unsync::OnceCell;
 
 use std::{
     cell::{Cell, Ref, RefCell},
+    collections::HashMap,
     rc::Rc,
 };
 
@@ -18,7 +20,7 @@ pub use self::provider::{ProviderSettings, ProviderType, RecognizeError, TestPro
 use self::{recorder::Recorder, recording::Recording};
 use crate::{
     audio_device::{self, AudioDeviceClass},
-    core::{Cancelled, DateTime},
+    core::{Cancelled, DatabaseTable, DateTime},
     model::Song,
     settings::PreferredAudioSource,
     utils,
@@ -53,7 +55,8 @@ mod imp {
         pub(super) recorder: Recorder,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
 
-        pub(super) saved_recordings: RefCell<Vec<Rc<Recording>>>,
+        pub(super) saved_recordings: RefCell<HashMap<String, Rc<Recording>>>,
+        pub(super) saved_recordings_db_table: OnceCell<DatabaseTable<Recording>>,
     }
 
     #[glib::object_subclass]
@@ -173,7 +176,7 @@ impl Recognizer {
         )
     }
 
-    pub fn saved_recordings(&self) -> Ref<'_, Vec<Rc<Recording>>> {
+    pub fn saved_recordings(&self) -> Ref<'_, HashMap<String, Rc<Recording>>> {
         self.imp().saved_recordings.borrow()
     }
 
@@ -277,13 +280,17 @@ impl Recognizer {
         );
 
         if self.is_offline_mode() {
-            self.imp()
-                .saved_recordings
+            let recording = Recording::new(recording_bytes.to_vec(), recorded_time);
+            let recording_id = glib::uuid_string_random();
+            imp.saved_recordings_db_table
+                .get()
+                .unwrap()
+                .insert_one(recording_id.as_str(), &recording)
+                .unwrap();
+            imp.saved_recordings
                 .borrow_mut()
-                .push(Rc::new(Recording::new(
-                    recording_bytes.to_vec(),
-                    recorded_time,
-                )));
+                .insert(recording_id.to_string(), Rc::new(recording));
+
             self.emit_by_name::<()>("saved-recordings-changed", &[]);
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
@@ -316,32 +323,22 @@ impl Recognizer {
     }
 
     fn load_saved_recordings(&self) -> Result<()> {
-        let recordings: Vec<Recording> =
-            serde_json::from_str(&utils::app_instance().settings().saved_recordings())?;
+        let table = utils::app_instance()
+            .db()
+            .table::<Recording>("saved_recordings")?;
 
+        let recordings = table.select_all()?;
         tracing::debug!("Loading {} saved recordings", recordings.len());
 
-        self.imp()
-            .saved_recordings
-            .replace(recordings.into_iter().map(Rc::new).collect());
+        let imp = self.imp();
+        imp.saved_recordings.replace(
+            recordings
+                .into_iter()
+                .map(|(k, v)| (k, Rc::new(v)))
+                .collect(),
+        );
+        imp.saved_recordings_db_table.set(table).unwrap();
         self.emit_by_name::<()>("saved-recordings-changed", &[]);
-
-        Ok(())
-    }
-
-    pub fn save_saved_recordings(&self) -> Result<()> {
-        let saved_recordings = self.imp().saved_recordings.borrow();
-
-        tracing::debug!("Saving {} saved recordings", saved_recordings.len());
-
-        utils::app_instance()
-            .settings()
-            .set_saved_recordings(&serde_json::to_string(
-                &saved_recordings
-                    .iter()
-                    .map(|r| r.as_ref())
-                    .collect::<Vec<_>>(),
-            )?);
 
         Ok(())
     }
@@ -356,11 +353,17 @@ impl Recognizer {
             .take()
             .into_iter()
             // FIXME use Vec::drain_filter
-            .partition(|recording| is_recording_ready_to_take(recording));
+            .partition(|(_, recording)| is_recording_ready_to_take(recording));
         imp.saved_recordings.replace(to_retain);
         self.emit_by_name::<()>("saved-recordings-changed", &[]);
 
-        recognized
+        imp.saved_recordings_db_table
+            .get()
+            .unwrap()
+            .delete_many(recognized.keys().map(|key| key.as_str()))
+            .unwrap();
+
+        recognized.into_values().collect()
     }
 
     /// Returned recordings are guaranteed to have a recognizing result.
@@ -371,8 +374,8 @@ impl Recognizer {
         imp.saved_recordings
             .borrow()
             .iter()
-            .filter(|recording| is_recording_ready_to_take(recording))
-            .cloned()
+            .filter(|(_, recording)| is_recording_ready_to_take(recording))
+            .map(|(_, recording)| Rc::clone(recording))
             .collect()
     }
 
@@ -398,11 +401,13 @@ impl Recognizer {
     }
 
     async fn try_recognize_saved_recordings_inner(&self) {
+        let imp = self.imp();
+
         let provider = ProviderSettings::lock().active.to_provider();
         tracing::debug!("Recognizing saved recordings with provider: {:?}", provider);
 
-        let saved_recordings_snapshot = self.imp().saved_recordings.borrow().clone();
-        for recording in saved_recordings_snapshot {
+        let saved_recordings_snapshot = imp.saved_recordings.borrow().clone();
+        for (recording_id, recording) in saved_recordings_snapshot {
             if self.is_offline_mode() {
                 tracing::debug!("Offline mode is active, cancelled succeeding recognitions");
                 break;
@@ -427,19 +432,21 @@ impl Recognizer {
             match provider.recognize(recording.bytes()).await {
                 Ok(song) => {
                     song.set_last_heard(recording.recorded_time());
-
                     recording.set_recognize_result(Ok(song));
-                    self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
                 Err(err) => {
                     tracing::error!("Failed to recognize saved recording: {:?}", err);
-
                     recording.increment_recognize_retries();
-
                     recording.set_recognize_result(Err(err));
-                    self.emit_by_name::<()>("saved-recordings-changed", &[]);
                 }
             }
+
+            imp.saved_recordings_db_table
+                .get()
+                .unwrap()
+                .update_one(&recording_id, &recording)
+                .unwrap();
+            self.emit_by_name::<()>("saved-recordings-changed", &[]);
         }
     }
 

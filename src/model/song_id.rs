@@ -12,14 +12,14 @@ impl SongId {
         Self(format!("{}-{}", namespace, unique_str).into())
     }
 
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
+
     /// Create a new song id with a namespace of "Test".
     #[cfg(test)]
     pub fn new_for_test(unique_str: &str) -> Self {
         Self::new("Test", unique_str)
-    }
-
-    pub fn as_str(&self) -> &str {
-        &self.0
     }
 }
 
