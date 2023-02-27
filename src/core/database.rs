@@ -8,8 +8,7 @@ use std::{
 };
 
 // TODO
-// * make key generic so we dont as_str on SongId
-// * don't use dot operator on tuples
+// * make id generic so we dont as_str on SongId
 
 type Result<T> = StdResult<T, DatabaseError>;
 
@@ -170,10 +169,10 @@ where
                 self.name
             ))?;
 
-            for item in items.into_iter() {
-                let raw_data = serde_json::to_string(&item.1)?;
+            for (id, data) in items.into_iter() {
+                let raw_data = serde_json::to_string(&data)?;
 
-                match statement.execute((item.0, raw_data)) {
+                match statement.execute((id, raw_data)) {
                     Ok(changed) => {
                         debug_assert_eq!(changed, 1);
                         continue;
@@ -239,10 +238,10 @@ where
                 self.name
             ))?;
 
-            for item in items.into_iter() {
-                let raw_data = serde_json::to_string(&item.1)?;
+            for (id, data) in items.into_iter() {
+                let raw_data = serde_json::to_string(&data)?;
 
-                let changed = statement.execute((item.0, raw_data))?;
+                let changed = statement.execute((id, raw_data))?;
                 debug_assert_eq!(changed, 1);
             }
         }
@@ -344,9 +343,9 @@ where
             let mut statement = transaction
                 .prepare_cached(&format!("UPDATE {} SET data = ? WHERE id = ?", self.name))?;
 
-            for item in items.into_iter() {
-                let raw_data = serde_json::to_string(&item.1)?;
-                changed += statement.execute((raw_data, item.0))?;
+            for (id, data) in items.into_iter() {
+                let raw_data = serde_json::to_string(&data)?;
+                changed += statement.execute((raw_data, id))?;
                 items_len += 1;
             }
         }
@@ -531,7 +530,7 @@ mod tests {
     }
 
     #[test]
-    fn insert_dup_key() {
+    fn insert_dup_id() {
         run_test(|db| {
             let songs = db.table::<Song>("songs").unwrap();
             songs.insert_one("1", &Song::new("1")).unwrap();
@@ -556,11 +555,11 @@ mod tests {
     }
 
     #[test]
-    fn insert_many_dup_key_param() {
+    fn insert_many_dup_id_param() {
         run_test(|db| {
             let songs = db.table::<Song>("songs").unwrap();
 
-            // FIXME Add DuplicateKeyParam error
+            // FIXME Add DuplicateIdParam error
             assert!(matches!(
                 songs
                     .insert_many(vec![("1", &Song::new("2")), ("1", &Song::new("2"))])
@@ -596,11 +595,11 @@ mod tests {
     }
 
     #[test]
-    fn upsert_many_dup_key_param() {
+    fn upsert_many_dup_id_param() {
         run_test(|db| {
             let songs = db.table::<Song>("songs").unwrap();
 
-            // FIXME Make as DuplicateKeyParam error
+            // FIXME Make as DuplicateIdParam error
             songs
                 .upsert_many(vec![("1", &Song::new("1")), ("1", &Song::new("updated"))])
                 .unwrap();
@@ -713,14 +712,14 @@ mod tests {
     }
 
     #[test]
-    fn update_many_dup_key_param() {
+    fn update_many_dup_id_param() {
         run_test(|db| {
             let songs = db.table::<Song>("songs").unwrap();
             songs
                 .insert_many(vec![("1", &Song::new("1")), ("2", &Song::new("2"))])
                 .unwrap();
 
-            // FIXME Make this as error DuplicateKeyParam
+            // FIXME Make this as error DuplicateIdParam
             songs
                 .update_many(vec![
                     ("1", &Song::new("updated")),
