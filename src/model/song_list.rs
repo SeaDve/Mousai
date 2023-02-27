@@ -77,7 +77,7 @@ impl SongList {
 
         let songs = db_table
             .select_all()?
-            .into_iter()
+            .into_values()
             .map(|song| (song.id(), song))
             .collect::<IndexMap<_, _>>();
 
