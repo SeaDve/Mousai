@@ -7,9 +7,6 @@ use std::{
     result::Result as StdResult, time::Instant,
 };
 
-// TODO
-// * make id generic so we dont as_str on SongId
-
 type Result<T> = StdResult<T, DatabaseError>;
 
 pub struct Timer {
