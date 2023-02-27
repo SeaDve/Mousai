@@ -467,6 +467,7 @@ impl Database {
         Ok(Self { pool })
     }
 
+    /// Returns a table with the given name or creates it if it doesn't exist.
     pub fn table<T>(&self, name: &str) -> Result<DatabaseTable<T>>
     where
         for<'de> T: Serialize + Deserialize<'de> + 'static,
