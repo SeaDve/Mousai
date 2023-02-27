@@ -71,7 +71,7 @@ glib::wrapper! {
 }
 
 impl SongList {
-    /// Load from database at default path
+    /// Load from the `songs` table in the database
     pub fn load_from_db(db: &Database) -> Result<Self> {
         let db_table = db.table::<Song>("songs")?;
 
@@ -84,7 +84,7 @@ impl SongList {
         let this = glib::Object::new::<Self>();
 
         for (_, song) in songs.iter() {
-            this.bind_song(song);
+            this.bind_song_to_db(song);
         }
 
         this.imp().list.replace(songs);
@@ -103,11 +103,11 @@ impl SongList {
             .upsert_one(song.id_ref().as_str(), &song)
             .unwrap();
 
-        self.bind_song(&song);
+        self.bind_song_to_db(&song);
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
         if let Some(last_value) = last_value {
-            unbind_song(&last_value);
+            unbind_song_to_db(&last_value);
             self.items_changed(position as u32, 1, 1);
             false
         } else {
@@ -141,11 +141,11 @@ impl SongList {
             let mut list = self.imp().list.borrow_mut();
 
             for song in songs {
-                self.bind_song(&song);
+                self.bind_song_to_db(&song);
                 let (index, last_value) = list.insert_full(song.id(), song);
 
                 if let Some(last_value) = last_value {
-                    unbind_song(&last_value);
+                    unbind_song_to_db(&last_value);
                     updated_indices.insert(index);
                 } else {
                     n_appended += 1;
@@ -185,7 +185,7 @@ impl SongList {
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
         if let Some((position, _, ref song)) = removed {
-            unbind_song(song);
+            unbind_song_to_db(song);
             self.emit_by_name::<()>("removed", &[song]);
             self.items_changed(position as u32, 1, 0);
         }
@@ -222,7 +222,7 @@ impl SongList {
         self.imp().db_table.get().unwrap()
     }
 
-    fn bind_song(&self, song: &Song) {
+    fn bind_song_to_db(&self, song: &Song) {
         unsafe {
             let handler_id = song.connect_notify_local(
                 None,
@@ -237,7 +237,7 @@ impl SongList {
     }
 }
 
-fn unbind_song(song: &Song) {
+fn unbind_song_to_db(song: &Song) {
     unsafe {
         let handler_id = song
             .steal_data::<glib::SignalHandlerId>(SONG_NOTIFY_HANDLER_ID_KEY)
@@ -261,6 +261,27 @@ mod test {
 
     fn new_test_song_list() -> SongList {
         SongList::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
+    }
+
+    #[test]
+    fn load_from_db() {
+        let db = Database::open_in_memory().unwrap();
+        db.table::<Song>("songs")
+            .unwrap()
+            .insert_many(vec![("a", &new_test_song("a")), ("b", &new_test_song("b"))])
+            .unwrap();
+
+        let song_list = SongList::load_from_db(&db).unwrap();
+        assert_eq!(song_list.n_items(), 2);
+
+        assert_eq!(
+            song_list.get(&SongId::new_for_test("a")).unwrap().id(),
+            SongId::new_for_test("a")
+        );
+        assert_eq!(
+            song_list.get(&SongId::new_for_test("b")).unwrap().id(),
+            SongId::new_for_test("b")
+        );
     }
 
     #[test]

@@ -11,26 +11,8 @@ use std::{
 use crate::{
     core::{AlbumArt, DateTime},
     model::{ExternalLinkKey, ExternalLinks, SongId},
-    utils,
+    serde_helpers, utils,
 };
-
-pub fn serialize_once_cell<S>(
-    cell: &OnceCell<impl Serialize>,
-    serializer: S,
-) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    cell.get().serialize(serializer)
-}
-
-pub fn deserialize_once_cell<'de, D, T>(deserializer: D) -> Result<OnceCell<T>, D::Error>
-where
-    D: Deserializer<'de>,
-    T: Deserialize<'de>,
-{
-    Ok(OnceCell::with_value(T::deserialize(deserializer)?))
-}
 
 mod imp {
     use super::*;
@@ -41,10 +23,7 @@ mod imp {
     pub struct Song {
         /// Unique ID
         #[property(get, set, construct_only)]
-        #[serde(
-            serialize_with = "serialize_once_cell",
-            deserialize_with = "deserialize_once_cell"
-        )]
+        #[serde(with = "serde_helpers::once_cell")]
         pub(super) id: OnceCell<SongId>,
         /// Title of the song
         #[property(get, set, construct_only)]

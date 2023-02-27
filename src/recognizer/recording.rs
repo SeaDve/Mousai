@@ -1,51 +1,102 @@
-use serde::{Deserialize, Serialize};
+use gtk::{glib, prelude::*, subclass::prelude::*};
+use once_cell::unsync::OnceCell;
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
-use std::cell::{Cell, Ref, RefCell};
+use std::cell::{Cell, RefCell};
 
 use super::RecognizeError;
-use crate::{core::DateTime, model::Song};
+use crate::{core::DateTime, model::Song, serde_helpers};
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Recording {
-    bytes: Vec<u8>,
-    recorded_time: DateTime,
-    recognize_result: RefCell<Option<Result<Song, RecognizeError>>>,
+#[derive(Debug, Clone, PartialEq, Eq, glib::Boxed, Serialize, Deserialize)]
+#[boxed_type(name = "MsaiBoxedRecognizeResult", nullable)]
+pub struct BoxedRecognizeResult(pub Result<Song, RecognizeError>);
 
-    #[serde(skip)] // So we can retry next session
-    recognize_retries: Cell<u8>,
+mod imp {
+    use super::*;
+
+    #[derive(Debug, Default, glib::Properties, Serialize, Deserialize)]
+    #[properties(wrapper_type = super::Recording)]
+    pub struct Recording {
+        #[property(get, set, construct_only)]
+        #[serde(with = "serde_helpers::once_cell_gbytes")]
+        pub(super) bytes: OnceCell<glib::Bytes>,
+        #[property(get, set, construct_only)]
+        #[serde(with = "serde_helpers::once_cell")]
+        pub(super) recorded_time: OnceCell<DateTime>,
+        #[property(get, set = Self::set_recognize_result, explicit_notify)]
+        pub(super) recognize_result: RefCell<Option<BoxedRecognizeResult>>,
+
+        #[serde(skip)] // So we can retry next session
+        pub(super) recognize_retries: Cell<u8>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for Recording {
+        const NAME: &'static str = "MsaiRecording";
+        type Type = super::Recording;
+    }
+
+    impl ObjectImpl for Recording {
+        crate::derived_properties!();
+    }
+
+    impl Recording {
+        fn set_recognize_result(&self, result: Option<BoxedRecognizeResult>) {
+            if result.as_ref() == self.recognize_result.borrow().as_ref() {
+                return;
+            }
+
+            let obj = self.obj();
+            self.recognize_result.replace(result);
+            obj.notify_recognize_result();
+        }
+    }
+}
+
+glib::wrapper! {
+     pub struct Recording(ObjectSubclass<imp::Recording>);
 }
 
 impl Recording {
-    pub fn new(bytes: Vec<u8>, recorded_time: DateTime) -> Self {
-        Self {
-            bytes,
-            recorded_time,
-            recognize_retries: Cell::default(),
-            recognize_result: RefCell::default(),
-        }
-    }
-
-    pub fn bytes(&self) -> &[u8] {
-        &self.bytes
-    }
-
-    pub fn recorded_time(&self) -> &DateTime {
-        &self.recorded_time
-    }
-
-    pub fn recognize_result(&self) -> Ref<'_, Option<Result<Song, RecognizeError>>> {
-        self.recognize_result.borrow()
-    }
-
-    pub fn set_recognize_result(&self, result: Result<Song, RecognizeError>) {
-        self.recognize_result.replace(Some(result));
+    pub fn new(bytes: &glib::Bytes, recorded_time: &DateTime) -> Self {
+        glib::Object::builder()
+            .property("bytes", bytes)
+            .property("recorded-time", recorded_time)
+            .build()
     }
 
     pub fn recognize_retries(&self) -> u8 {
-        self.recognize_retries.get()
+        self.imp().recognize_retries.get()
     }
 
     pub fn increment_recognize_retries(&self) {
-        self.recognize_retries.set(self.recognize_retries.get() + 1);
+        let imp = self.imp();
+        imp.recognize_retries.set(imp.recognize_retries.get() + 1);
+    }
+}
+
+impl Serialize for Recording {
+    fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        self.imp().serialize(serializer)
+    }
+}
+
+impl<'de> Deserialize<'de> for Recording {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let deserialized_imp = imp::Recording::deserialize(deserializer)?;
+        Ok(glib::Object::builder()
+            .property("bytes", deserialized_imp.bytes.into_inner())
+            .property(
+                "recorded-time",
+                deserialized_imp
+                    .recorded_time
+                    .into_inner()
+                    .ok_or_else(|| serde::de::Error::missing_field("recorded_time"))?,
+            )
+            .property(
+                "recognize-result",
+                deserialized_imp.recognize_result.into_inner(),
+            )
+            .build())
     }
 }
