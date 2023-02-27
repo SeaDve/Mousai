@@ -60,7 +60,7 @@ Why you will love Mousai?
 ## 🌈 AudD
 
 AudD is a music recognition API that makes Mousai possible. For more information,
-you can check their [Privacy Policy](https://audd.io/privacy/) and [Terms of Services](https://audd.io/terms/).
+you can check their [Privacy Policy](https://audd.io/privacy/) and [Terms of Service](https://audd.io/terms/).
 
 
 ## 🏗️ Building from source
@@ -82,6 +82,7 @@ ninja -C _build install
 
 
 ## 🙌 Help translate Mousai
+
 You can help Mousai translate into your native language. If you found any typos
 or think you can improve a translation, you can use the [Weblate](https://hosted.weblate.org/engage/kooha/) platform.
 
@@ -94,5 +95,8 @@ would like to support and fund it, you may donate through [Liberapay](https://li
 
 ## 💝 Acknowledgment
 
-Special thanks to [AudD's API](https://audd.io/) and [contributors](https://github.com/SeaDve/Mousai/graphs/contributors)
-for making Mousai possible. Also, a warm thanks to the project's [translators](https://hosted.weblate.org/engage/kooha/).
+I would like to express my gratitude to the [contributors](https://github.com/SeaDve/Mousai/graphs/contributors)
+and [translators](https://hosted.weblate.org/engage/kooha/) of the project.
+
+I would also like to thank the open-source software projects, libraries, and APIs that were
+used in developing this app, such as GStreamer, GTK, libadwaita, [AudD](https://audd.io/), etc., for making Mousai possible.
