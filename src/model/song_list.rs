@@ -1,17 +1,17 @@
 use anyhow::Result;
 use gtk::{
     gio,
-    glib::{self, closure_local},
+    glib::{self, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
 use indexmap::IndexMap;
+use once_cell::unsync::OnceCell;
 
 use std::{cell::RefCell, collections::HashSet};
 
-use super::{db, Song, SongId};
-
-const TABLE_NAME: &str = "songs";
+use super::{Song, SongId};
+use crate::core::{Database, DatabaseTable};
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
@@ -23,6 +23,8 @@ mod imp {
     #[derive(Debug, Default)]
     pub struct SongList {
         pub(super) list: RefCell<IndexMap<SongId, Song>>,
+
+        pub(super) db_table: OnceCell<DatabaseTable<Song>>,
     }
 
     #[glib::object_subclass]
@@ -70,19 +72,23 @@ glib::wrapper! {
 
 impl SongList {
     /// Load from database at default path
-    pub fn load_from_db() -> Result<Self> {
-        let songs = db::connection()
-            .table::<Song>(TABLE_NAME)?
+    pub fn load_from_db(db: &Database) -> Result<Self> {
+        let db_table = db.table::<Song>("songs")?;
+
+        let songs = db_table
             .select_all()?
             .into_iter()
-            .map(|song| {
-                bind_song(&song);
-                (song.id(), song)
-            })
-            .collect();
+            .map(|song| (song.id(), song))
+            .collect::<IndexMap<_, _>>();
 
-        let this = Self::default();
+        let this = glib::Object::new::<Self>();
+
+        for (_, song) in songs.iter() {
+            this.bind_song(song);
+        }
+
         this.imp().list.replace(songs);
+        this.imp().db_table.set(db_table).unwrap();
 
         Ok(this)
     }
@@ -93,13 +99,11 @@ impl SongList {
     ///
     /// The equivalence of the [`Song`] depends on its [`SongId`]
     pub fn append(&self, song: Song) -> bool {
-        db::connection()
-            .table::<Song>(TABLE_NAME)
-            .unwrap()
+        self.db_table()
             .upsert_one(song.id_ref().as_str(), &song)
             .unwrap();
 
-        bind_song(&song);
+        self.bind_song(&song);
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
         if let Some(last_value) = last_value {
@@ -121,9 +125,7 @@ impl SongList {
     /// This is more efficient than [`SongList::append`] since it emits `items-changed`
     /// only once if all appended [`Song`]s are unique.
     pub fn append_many(&self, songs: Vec<Song>) -> u32 {
-        db::connection()
-            .table::<Song>(TABLE_NAME)
-            .unwrap()
+        self.db_table()
             .upsert_many(
                 songs
                     .iter()
@@ -139,7 +141,7 @@ impl SongList {
             let mut list = self.imp().list.borrow_mut();
 
             for song in songs {
-                bind_song(&song);
+                self.bind_song(&song);
                 let (index, last_value) = list.insert_full(song.id(), song);
 
                 if let Some(last_value) = last_value {
@@ -174,11 +176,7 @@ impl SongList {
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
-        db::connection()
-            .table::<Song>(TABLE_NAME)
-            .unwrap()
-            .delete_one(song_id.as_str())
-            .unwrap();
+        self.db_table().delete_one(song_id.as_str()).unwrap();
 
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
@@ -215,18 +213,23 @@ impl SongList {
             }),
         )
     }
-}
 
-fn bind_song(song: &Song) {
-    unsafe {
-        let handler_id = song.connect_notify(None, |song, _| {
-            db::connection()
-                .table::<Song>(TABLE_NAME)
-                .unwrap()
-                .update_one(song.id_ref().as_str(), song)
-                .unwrap();
-        });
-        song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
+    fn db_table(&self) -> &DatabaseTable<Song> {
+        self.imp().db_table.get().unwrap()
+    }
+
+    fn bind_song(&self, song: &Song) {
+        unsafe {
+            let handler_id = song.connect_notify_local(
+                None,
+                clone!(@weak self as obj => move |song, _| {
+                    obj.db_table()
+                        .update_one(song.id_ref().as_str(), song)
+                        .unwrap();
+                }),
+            );
+            song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
+        }
     }
 }
 
@@ -237,12 +240,6 @@ fn unbind_song(song: &Song) {
             .unwrap();
         song.disconnect(handler_id);
     };
-}
-
-impl Default for SongList {
-    fn default() -> Self {
-        glib::Object::new()
-    }
 }
 
 #[cfg(test)]
@@ -258,9 +255,13 @@ mod test {
         Song::builder(&SongId::new_for_test(id), id, id, id).build()
     }
 
+    fn new_test_song_list() -> SongList {
+        SongList::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
+    }
+
     #[test]
     fn append_and_remove() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         assert!(song_list.is_empty());
 
         let song_1 = new_test_song("1");
@@ -283,7 +284,7 @@ mod test {
 
     #[test]
     fn append_many() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         assert!(song_list.is_empty());
 
         let songs = vec![new_test_song("1"), new_test_song("2")];
@@ -297,7 +298,7 @@ mod test {
 
     #[test]
     fn items_changed_append() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         song_list.connect_items_changed(|_, index, removed, added| {
             assert_eq!(index, 0);
@@ -310,7 +311,7 @@ mod test {
 
     #[test]
     fn items_changed_append_index_1() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
         song_list.connect_items_changed(|_, index, removed, added| {
@@ -324,7 +325,7 @@ mod test {
 
     #[test]
     fn items_changed_append_equal() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
         let n_called = Rc::new(Cell::new(0));
@@ -344,7 +345,7 @@ mod test {
 
     #[test]
     fn items_changed_append_many() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
         song_list.connect_items_changed(|_, index, removed, added| {
@@ -358,7 +359,7 @@ mod test {
 
     #[test]
     fn items_changed_append_many_with_duplicates() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
@@ -388,7 +389,7 @@ mod test {
 
     #[test]
     fn items_changed_append_many_more_removed_than_n_items() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
         song_list.append(new_test_song("1"));
 
@@ -421,7 +422,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_some() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
         let n_called = Rc::new(Cell::new(0));
@@ -444,7 +445,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_none() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let n_called = Rc::new(Cell::new(0));
 
@@ -463,7 +464,7 @@ mod test {
 
     #[test]
     fn connect_removed_some() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
         let n_called = Rc::new(Cell::new(0));
@@ -484,7 +485,7 @@ mod test {
 
     #[test]
     fn connect_removed_none() {
-        let song_list = SongList::default();
+        let song_list = new_test_song_list();
 
         let n_called = Rc::new(Cell::new(0));
 

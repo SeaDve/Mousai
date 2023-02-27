@@ -1,11 +1,12 @@
 use adw::{prelude::*, subclass::prelude::*};
 use anyhow::{Error, Result};
 use gtk::{gio, glib};
+use once_cell::unsync::OnceCell;
 
 use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
-    core::AlbumArtStore,
+    core::{AlbumArtStore, Database},
     debug_assert_or_log, debug_unreachable_or_log,
     inspector_page::InspectorPage,
     settings::Settings,
@@ -15,12 +16,12 @@ use crate::{
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use once_cell::unsync::OnceCell;
 
     #[derive(Debug, Default)]
     pub struct Application {
         pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<soup::Session>,
+        pub(super) db: OnceCell<Database>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
         pub(super) settings: Settings,
     }
@@ -81,6 +82,13 @@ impl Application {
 
     pub fn session(&self) -> &soup::Session {
         self.imp().session.get_or_init(soup::Session::new)
+    }
+
+    pub fn db(&self) -> &Database {
+        self.imp().db.get_or_init(|| {
+            let path = glib::home_dir().join("mousai.db");
+            Database::open(path).unwrap()
+        })
     }
 
     pub fn album_art_store(&self) -> Result<&AlbumArtStore> {
