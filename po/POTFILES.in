@@ -15,8 +15,6 @@ src/audio_device.rs
 src/core/date_time.rs
 src/error_dialog.rs
 src/main.rs
-src/recognizer/provider/aud_d/mod.rs
-src/recognizer/provider/aud_d/response.rs
 src/recognizer/provider/error.rs
 src/window/external_link_tile.rs
 src/window/history_view.rs
