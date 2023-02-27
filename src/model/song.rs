@@ -136,6 +136,10 @@ impl Song {
         format!("{} - {}", self.artist(), self.title())
     }
 
+    pub fn id_ref(&self) -> &SongId {
+        self.imp().id.get().unwrap()
+    }
+
     pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
         let album_art_link = self
             .album_art_link()

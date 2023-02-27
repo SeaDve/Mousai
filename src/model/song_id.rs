@@ -17,6 +17,10 @@ impl SongId {
     pub fn new_for_test(unique_str: &str) -> Self {
         Self::new("Test", unique_str)
     }
+
+    pub fn as_str(&self) -> &str {
+        &self.0
+    }
 }
 
 impl Default for SongId {

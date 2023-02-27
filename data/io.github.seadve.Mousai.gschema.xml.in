@@ -16,11 +16,6 @@
       <summary>Whether the window is maximized</summary>
       <description></description>
     </key>
-    <key name="history" type="s">
-      <default>"[]"</default>
-      <summary>Recognized songs</summary>
-      <description></description>
-    </key>
     <key name="saved-recordings" type="s">
       <default>"[]"</default>
       <summary>Recordings to be recognized</summary>
