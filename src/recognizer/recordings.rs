@@ -126,7 +126,8 @@ impl Recordings {
                 unbind_recording_to_items_changed_and_db(&recording);
                 to_take.push((index, id, recording));
             } else {
-                debug_assert!(to_retain.insert(id, recording).is_none());
+                let last_value = to_retain.insert(id, recording);
+                debug_assert!(last_value.is_none());
             }
         }
         imp.list.replace(to_retain);
