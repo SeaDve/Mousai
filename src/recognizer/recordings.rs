@@ -495,6 +495,30 @@ mod tests {
     }
 
     #[test]
+    fn recording_notify_items_changed() {
+        let recordings = new_test_recordings();
+        let recording_a = new_test_recording(b"a");
+        recordings.insert(recording_a.clone());
+        let recording_b = new_test_recording(b"b");
+        recordings.insert(recording_b.clone());
+
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+
+        let calls_output_clone = Rc::clone(&calls_output);
+        recordings.connect_items_changed(move |_, index, removed, added| {
+            calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
+        });
+
+        recording_a.set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+        assert_eq!(calls_output.take(), vec![(0, 1, 1)]);
+
+        recording_b.set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+        assert_eq!(calls_output.take(), vec![(1, 1, 1)]);
+    }
+
+    #[test]
     fn is_empty() {
         let recordings = new_test_recordings();
         assert!(recordings.is_empty());
