@@ -118,32 +118,27 @@ impl Recordings {
     pub fn take_filtered(&self, filter_func: impl Fn(&Recording) -> bool) -> Vec<Recording> {
         let imp = self.imp();
 
-        let mut to_take = Vec::new();
-        let mut to_retain = IndexMap::new();
-
-        for (index, (id, recording)) in imp.list.take().into_iter().enumerate() {
-            if filter_func(&recording) {
-                unbind_recording_to_items_changed_and_db(&recording);
-                to_take.push((index, id, recording));
-            } else {
-                let last_value = to_retain.insert(id, recording);
-                debug_assert!(last_value.is_none());
+        let mut to_take_ids = Vec::new();
+        for (id, recording) in imp.list.borrow().iter() {
+            if filter_func(recording) {
+                to_take_ids.push(id.to_string());
             }
-        }
-        imp.list.replace(to_retain);
-
-        for (index, _, _) in &to_take {
-            self.items_changed(*index as u32, 1, 0);
         }
 
         self.db_table()
-            .delete_many(to_take.iter().map(|(_, id, _)| id.as_str()))
+            .delete_many(to_take_ids.iter().map(|id| id.as_str()))
             .unwrap();
 
-        to_take
-            .into_iter()
-            .map(|(_, _, recording)| recording)
-            .collect()
+        let mut list = imp.list.borrow_mut();
+        let mut taken = Vec::new();
+        for id in &to_take_ids {
+            let (index, _, recording) = list.shift_remove_full(id.as_str()).expect("id exists");
+            unbind_recording_to_items_changed_and_db(&recording);
+            self.items_changed(index as u32, 1, 0);
+            taken.push(recording);
+        }
+
+        taken
     }
 
     pub fn is_empty(&self) -> bool {
@@ -353,7 +348,7 @@ mod tests {
         assert_synced_to_db(&recordings);
     }
 
-    #[gtk::test]
+    #[test]
     fn insert_items_changed() {
         let recordings = new_test_recordings();
 
@@ -399,7 +394,7 @@ mod tests {
         assert_n_items_and_db_count_eq(&recordings, 2);
     }
 
-    #[gtk::test]
+    #[test]
     fn peek_filtered_items_changed() {
         let recordings = new_test_recordings();
 
@@ -484,7 +479,7 @@ mod tests {
         assert!(calls_output.take().is_empty());
 
         recordings.take_filtered(|_| true);
-        assert_eq!(calls_output.take(), vec![(0, 1, 0), (1, 1, 0)]);
+        assert_eq!(calls_output.take(), vec![(0, 1, 0), (0, 1, 0)]);
 
         recordings.block_signal(&handler_id);
         recordings.insert(new_test_recording(b"a"));
