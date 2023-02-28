@@ -112,7 +112,7 @@ where
     /// Inserts the item into the table. If the item already exists, it
     /// will return an `AlreadyExist` error.
     pub fn insert_one(&self, id: &str, data: &T) -> Result<()> {
-        let _timer = Timer::new("Table::insery_one");
+        let _timer = Timer::new("Table::insert_one");
 
         let conn = self.pool.get()?;
 
@@ -154,7 +154,7 @@ where
     ///
     /// Note: This also errors when there are duplicates in the given items.
     pub fn insert_many<'a>(&self, items: impl IntoIterator<Item = (&'a str, &'a T)>) -> Result<()> {
-        let _timer = Timer::new("Table::insery_many");
+        let _timer = Timer::new("Table::insert_many");
 
         let mut conn = self.pool.get()?;
 
@@ -431,6 +431,8 @@ pub struct Database {
 
 impl Drop for Database {
     fn drop(&mut self) {
+        let _timer = Timer::new("Database::drop");
+
         match self.pool.get() {
             Ok(conn) => {
                 if let Err(err) = conn.execute("PRAGMA optimize", ()) {
