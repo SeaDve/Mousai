@@ -223,7 +223,6 @@ mod tests {
     }
 
     /// Must have exactly 2 recordings
-    #[track_caller]
     fn assert_synced_to_db(recordings: &Recordings) {
         let table_items = recordings.db_table().select_all().unwrap();
         assert_eq!(table_items.len(), 2);

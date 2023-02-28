@@ -269,12 +269,83 @@ mod test {
         assert_eq!(song_list.db_table().count().unwrap(), n);
     }
 
+    /// Must have exactly 2 songs
+    fn assert_synced_to_db(song_list: &SongList) {
+        let table_items = song_list.db_table().select_all().unwrap();
+        assert_eq!(table_items.len(), 2);
+
+        // Test if the items are synced to the database
+        for (id, song) in song_list.imp().list.borrow().iter() {
+            assert_eq!(
+                table_items.get(id.as_str()).unwrap().is_newly_heard(),
+                song.is_newly_heard()
+            );
+        }
+
+        for (_, song) in song_list.db_table().select_all().unwrap() {
+            assert!(!song.is_newly_heard());
+        }
+
+        {
+            song_list
+                .item(0)
+                .and_downcast::<Song>()
+                .unwrap()
+                .set_is_newly_heard(true);
+
+            let table_items = song_list.db_table().select_all().unwrap();
+            assert_eq!(table_items.len(), 2);
+
+            // Test if the items are synced to the database even
+            // after the song is modified
+            for (id, song) in song_list.imp().list.borrow().iter() {
+                assert_eq!(
+                    table_items.get(id.as_str()).unwrap().is_newly_heard(),
+                    song.is_newly_heard()
+                );
+            }
+        }
+
+        {
+            song_list
+                .item(1)
+                .and_downcast::<Song>()
+                .unwrap()
+                .set_is_newly_heard(true);
+
+            let table_items = song_list.db_table().select_all().unwrap();
+            assert_eq!(table_items.len(), 2);
+
+            for (id, song) in song_list.imp().list.borrow().iter() {
+                assert_eq!(
+                    table_items.get(id.as_str()).unwrap().is_newly_heard(),
+                    song.is_newly_heard()
+                );
+            }
+        }
+
+        for (_, song) in song_list.db_table().select_all().unwrap() {
+            assert!(song.is_newly_heard());
+        }
+
+        for (_, song) in song_list.imp().list.borrow().iter() {
+            song.set_is_newly_heard(false);
+        }
+
+        for (_, song) in song_list.db_table().select_all().unwrap() {
+            assert!(!song.is_newly_heard());
+        }
+    }
+
     #[test]
     fn load_from_db() {
         let db = Database::open_in_memory().unwrap();
         db.table::<Song>("songs")
             .unwrap()
-            .insert_many(vec![("a", &new_test_song("a")), ("b", &new_test_song("b"))])
+            .insert_many(vec![
+                ("Test-a", &new_test_song("a")),
+                ("Test-b", &new_test_song("b")),
+            ])
             .unwrap();
 
         let song_list = SongList::load_from_db(&db).unwrap();
@@ -288,6 +359,9 @@ mod test {
             song_list.get(&SongId::new_for_test("b")).unwrap().id(),
             SongId::new_for_test("b")
         );
+
+        assert_n_items_and_db_count_eq(&song_list, 2);
+        assert_synced_to_db(&song_list);
     }
 
     #[test]
@@ -302,6 +376,7 @@ mod test {
         assert!(song_list.append(song_2.clone()));
 
         assert_n_items_and_db_count_eq(&song_list, 2);
+        assert_synced_to_db(&song_list);
 
         assert_eq!(song_list.get(&song_1.id()), Some(song_1.clone()));
         assert_eq!(song_list.get(&song_2.id()), Some(song_2.clone()));
