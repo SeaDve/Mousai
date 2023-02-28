@@ -436,7 +436,16 @@ mod tests {
         assert_n_items_and_db_count_eq(&recordings, 2);
         assert!(recordings.take_filtered(|_| false).is_empty());
         assert_n_items_and_db_count_eq(&recordings, 2);
-        assert_eq!(recordings.take_filtered(|_| true).len(), 2);
+
+        let taken = recordings.take_filtered(|_| true);
+        assert_eq!(taken.len(), 2);
+        assert_n_items_and_db_count_eq(&recordings, 0);
+
+        // Ensure that the removed recordings is not added back to the database
+        for recording in taken {
+            assert!(recording.recognize_result().is_none());
+            recording.set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+        }
         assert_n_items_and_db_count_eq(&recordings, 0);
 
         recordings.insert(new_test_recording(b"a"));
