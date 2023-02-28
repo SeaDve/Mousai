@@ -263,6 +263,12 @@ mod test {
         SongList::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
     }
 
+    #[track_caller]
+    fn assert_n_items_and_db_count_eq(song_list: &SongList, n: usize) {
+        assert_eq!(song_list.n_items(), n as u32);
+        assert_eq!(song_list.db_table().count().unwrap(), n);
+    }
+
     #[test]
     fn load_from_db() {
         let db = Database::open_in_memory().unwrap();
@@ -287,7 +293,7 @@ mod test {
     #[test]
     fn append_and_remove() {
         let song_list = new_test_song_list();
-        assert!(song_list.is_empty());
+        assert_n_items_and_db_count_eq(&song_list, 0);
 
         let song_1 = new_test_song("1");
         assert!(song_list.append(song_1.clone()));
@@ -295,8 +301,7 @@ mod test {
         let song_2 = new_test_song("2");
         assert!(song_list.append(song_2.clone()));
 
-        assert!(!song_list.is_empty());
-        assert_eq!(song_list.n_items(), 2);
+        assert_n_items_and_db_count_eq(&song_list, 2);
 
         assert_eq!(song_list.get(&song_1.id()), Some(song_1.clone()));
         assert_eq!(song_list.get(&song_2.id()), Some(song_2.clone()));
@@ -304,21 +309,21 @@ mod test {
         assert_eq!(song_list.remove(&song_1.id()), Some(song_1));
         assert_eq!(song_list.remove(&song_2.id()), Some(song_2));
 
-        assert!(song_list.is_empty());
+        assert_n_items_and_db_count_eq(&song_list, 0);
     }
 
     #[test]
     fn append_many() {
         let song_list = new_test_song_list();
-        assert!(song_list.is_empty());
+        assert_n_items_and_db_count_eq(&song_list, 0);
 
         let songs = vec![new_test_song("1"), new_test_song("2")];
         assert_eq!(song_list.append_many(songs), 2);
-        assert_eq!(song_list.n_items(), 2);
+        assert_n_items_and_db_count_eq(&song_list, 2);
 
         let more_songs = vec![new_test_song("SameId"), new_test_song("SameId")];
         assert_eq!(song_list.append_many(more_songs), 1);
-        assert_eq!(song_list.n_items(), 3);
+        assert_n_items_and_db_count_eq(&song_list, 3);
     }
 
     #[test]
