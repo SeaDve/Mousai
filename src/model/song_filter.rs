@@ -161,39 +161,21 @@ mod tests {
         assert!(filter.search().is_empty());
 
         filter.set_search("foo");
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::MoreStrict
-        );
+        assert_eq!(calls_output.take(), &[gtk::FilterChange::MoreStrict]);
 
         filter.set_search("f");
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::LessStrict
-        );
+        assert_eq!(calls_output.take(), &[gtk::FilterChange::LessStrict]);
 
         filter.set_search("bar");
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::Different
-        );
+        assert_eq!(calls_output.take(), &[gtk::FilterChange::Different]);
 
         filter.set_search("b");
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::LessStrict
-        );
+        assert_eq!(calls_output.take(), &[gtk::FilterChange::LessStrict]);
 
         filter.set_search("bars");
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::MoreStrict
-        );
+        assert_eq!(calls_output.take(), &[gtk::FilterChange::MoreStrict]);
 
         filter.set_search("");
-        assert_eq!(
-            calls_output.borrow_mut().pop().unwrap(),
-            gtk::FilterChange::LessStrict
-        );
+        assert_eq!(calls_output.take(), &[gtk::FilterChange::LessStrict]);
     }
 }
