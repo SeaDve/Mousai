@@ -130,10 +130,13 @@ impl Recordings {
             .delete_many(to_take_ids.iter().map(|id| id.as_str()))
             .unwrap();
 
-        let mut list = imp.list.borrow_mut();
         let mut taken = Vec::new();
         for id in &to_take_ids {
-            let (index, _, recording) = list.shift_remove_full(id.as_str()).expect("id exists");
+            let (index, _, recording) = imp
+                .list
+                .borrow_mut()
+                .shift_remove_full(id.as_str())
+                .expect("id exists");
             unbind_recording_to_items_changed_and_db(&recording);
             self.items_changed(index as u32, 1, 0);
             taken.push(recording);
