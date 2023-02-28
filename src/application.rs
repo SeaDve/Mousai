@@ -86,6 +86,7 @@ impl Application {
 
     pub fn db(&self) -> &Database {
         self.imp().db.get_or_init(|| {
+            // FIXME use a proper path
             let path = glib::home_dir().join("mousai.db");
             Database::open(path).unwrap()
         })
