@@ -381,9 +381,18 @@ mod test {
         assert_eq!(song_list.get(&song_1.id()), Some(song_1.clone()));
         assert_eq!(song_list.get(&song_2.id()), Some(song_2.clone()));
 
-        assert_eq!(song_list.remove(&song_1.id()), Some(song_1));
-        assert_eq!(song_list.remove(&song_2.id()), Some(song_2));
+        let song_1_removed = song_list.remove(&song_1.id()).unwrap();
+        assert_eq!(song_1, song_1_removed);
+        assert_eq!(song_list.get(&song_1.id()), None);
+        let song_2_removed = song_list.remove(&song_2.id()).unwrap();
+        assert_eq!(song_2, song_2_removed);
+        assert_eq!(song_list.get(&song_2.id()), None);
 
+        assert_n_items_and_db_count_eq(&song_list, 0);
+
+        // Ensure that the removed songs is not added back to the database
+        song_1_removed.set_is_newly_heard(true);
+        song_2_removed.set_is_newly_heard(true);
         assert_n_items_and_db_count_eq(&song_list, 0);
     }
 
@@ -395,6 +404,8 @@ mod test {
         let songs = vec![new_test_song("1"), new_test_song("2")];
         assert_eq!(song_list.append_many(songs), 2);
         assert_n_items_and_db_count_eq(&song_list, 2);
+
+        assert_synced_to_db(&song_list);
 
         let more_songs = vec![new_test_song("SameId"), new_test_song("SameId")];
         assert_eq!(song_list.append_many(more_songs), 1);
