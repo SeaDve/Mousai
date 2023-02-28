@@ -94,13 +94,14 @@ impl Recordings {
             .unwrap();
 
         self.bind_recording_to_items_changed_and_db(&recording_id, &recording);
+
         let (position, last_value) = self
             .imp()
             .list
             .borrow_mut()
             .insert_full(recording_id, recording);
-
         debug_assert!(last_value.is_none());
+
         self.items_changed(position as u32, 0, 1);
     }
 
