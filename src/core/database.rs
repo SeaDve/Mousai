@@ -285,7 +285,7 @@ where
                 let data = serde_json::from_str::<T>(&raw_data).map_err(|err| {
                     rusqlite::Error::FromSqlConversionFailure(
                         1,
-                        rusqlite::types::Type::Blob,
+                        rusqlite::types::Type::Text,
                         err.into(),
                     )
                 })?;
