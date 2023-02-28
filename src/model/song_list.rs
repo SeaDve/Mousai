@@ -12,8 +12,7 @@ use once_cell::unsync::OnceCell;
 use std::{cell::RefCell, collections::HashSet};
 
 use super::{Song, SongId};
-
-const DB_NAME: &str = "songs";
+use crate::db::SONG_LIST_DB_NAME;
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
@@ -78,8 +77,10 @@ impl SongList {
     /// Load from the `songs` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
         let mut wtxn = env.write_txn()?;
-        let db =
-            env.create_database::<SerdeJson<SongId>, SerdeJson<Song>>(&mut wtxn, Some(DB_NAME))?;
+        let db = env.create_database::<SerdeJson<SongId>, SerdeJson<Song>>(
+            &mut wtxn,
+            Some(SONG_LIST_DB_NAME),
+        )?;
         let songs = db.iter(&wtxn)?.collect::<Result<IndexMap<_, _>, _>>()?;
         wtxn.commit()?;
 
@@ -355,7 +356,7 @@ mod test {
             .unwrap();
         let mut wtxn = env.write_txn().unwrap();
         let db = env
-            .create_database::<SerdeJson<SongId>, SerdeJson<Song>>(&mut wtxn, Some(DB_NAME))
+            .create_database::<SerdeJson<SongId>, SerdeJson<Song>>(&mut wtxn, Some(SONG_LIST_DB_NAME))
             .unwrap();
         db.put(&mut wtxn, &SongId::new_for_test("a"), &new_test_song("a"))
             .unwrap();

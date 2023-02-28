@@ -3,13 +3,11 @@ use anyhow::{Error, Result};
 use gtk::{gio, glib};
 use once_cell::unsync::OnceCell;
 
-use std::fs;
-
 use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::AlbumArtStore,
-    debug_assert_or_log, debug_unreachable_or_log,
+    db, debug_assert_or_log, debug_unreachable_or_log,
     inspector_page::InspectorPage,
     settings::Settings,
     window::Window,
@@ -51,8 +49,9 @@ mod imp {
 
             gtk::Window::set_default_icon_name(APP_ID);
 
-            let obj = self.obj();
+            self.env.set(db::init_env().unwrap()).unwrap();
 
+            let obj = self.obj();
             obj.setup_gactions();
             obj.setup_accels();
 
@@ -87,12 +86,7 @@ impl Application {
     }
 
     pub fn env(&self) -> &heed::Env {
-        self.imp().env.get_or_init(|| {
-            // FIXME use a proper path
-            let path = glib::user_data_dir().join("mousai/db");
-            fs::create_dir_all(&path).unwrap();
-            heed::EnvOpenOptions::new().max_dbs(2).open(path).unwrap()
-        })
+        self.imp().env.get().unwrap()
     }
 
     pub fn album_art_store(&self) -> Result<&AlbumArtStore> {

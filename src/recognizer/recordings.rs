@@ -12,8 +12,7 @@ use once_cell::unsync::OnceCell;
 use std::cell::RefCell;
 
 use super::Recording;
-
-const DB_NAME: &str = "saved_recordings";
+use crate::db::RECORDINGS_DB_NAME;
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
@@ -70,7 +69,8 @@ impl Recordings {
     /// Load from the `saved_recordings` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
         let mut wtxn = env.write_txn()?;
-        let db = env.create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(DB_NAME))?;
+        let db =
+            env.create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(RECORDINGS_DB_NAME))?;
         let recordings = db
             .iter(&wtxn)?
             .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
@@ -327,7 +327,7 @@ mod tests {
             .unwrap();
         let mut wtxn = env.write_txn().unwrap();
         let db = env
-            .create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(DB_NAME))
+            .create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(RECORDINGS_DB_NAME))
             .unwrap();
         db.put(&mut wtxn, "a", &new_test_recording(b"A")).unwrap();
         db.put(&mut wtxn, "b", &new_test_recording(b"B")).unwrap();

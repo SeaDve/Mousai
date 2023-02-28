@@ -28,6 +28,7 @@ mod audio_device;
 mod clock_time;
 mod config;
 mod core;
+mod db;
 mod error_dialog;
 mod inspector_page;
 mod macros;
