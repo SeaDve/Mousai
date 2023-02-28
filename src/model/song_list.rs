@@ -5,15 +5,19 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use heed::types::SerdeJson;
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
 use std::{cell::RefCell, collections::HashSet};
 
 use super::{Song, SongId};
-use crate::core::{Database, DatabaseError, DatabaseTable};
+
+const DB_NAME: &str = "songs";
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
+
+type SongDatabase = heed::Database<SerdeJson<SongId>, SerdeJson<Song>>;
 
 mod imp {
     use super::*;
@@ -24,7 +28,7 @@ mod imp {
     pub struct SongList {
         pub(super) list: RefCell<IndexMap<SongId, Song>>,
 
-        pub(super) db_table: OnceCell<DatabaseTable<Song>>,
+        pub(super) db: OnceCell<(heed::Env, SongDatabase)>,
     }
 
     #[glib::object_subclass]
@@ -72,14 +76,12 @@ glib::wrapper! {
 
 impl SongList {
     /// Load from the `songs` table in the database
-    pub fn load_from_db(db: &Database) -> Result<Self> {
-        let db_table = db.table::<Song>("songs")?;
-
-        let songs = db_table
-            .select_all()?
-            .into_values()
-            .map(|song| (song.id(), song))
-            .collect::<IndexMap<_, _>>();
+    pub fn load_from_env(env: heed::Env) -> Result<Self> {
+        let mut wtxn = env.write_txn()?;
+        let db =
+            env.create_database::<SerdeJson<SongId>, SerdeJson<Song>>(&mut wtxn, Some(DB_NAME))?;
+        let songs = db.iter(&wtxn)?.collect::<Result<IndexMap<_, _>, _>>()?;
+        wtxn.commit()?;
 
         let this = glib::Object::new::<Self>();
 
@@ -87,8 +89,9 @@ impl SongList {
             this.bind_song_to_db(song);
         }
 
-        this.imp().list.replace(songs);
-        this.imp().db_table.set(db_table).unwrap();
+        let imp = this.imp();
+        imp.list.replace(songs);
+        imp.db.set((env, db)).unwrap();
 
         Ok(this)
     }
@@ -99,9 +102,10 @@ impl SongList {
     ///
     /// The equivalence of the [`Song`] depends on its [`SongId`]
     pub fn append(&self, song: Song) -> bool {
-        self.db_table()
-            .upsert_one(song.id_ref().as_str(), &song)
-            .unwrap();
+        let (env, db) = self.db();
+        let mut wtxn = env.write_txn().unwrap();
+        db.put(&mut wtxn, song.id_ref(), &song).unwrap();
+        wtxn.commit().unwrap();
 
         self.bind_song_to_db(&song);
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
@@ -125,14 +129,12 @@ impl SongList {
     /// This is more efficient than [`SongList::append`] since it emits `items-changed`
     /// only once if all appended [`Song`]s are unique.
     pub fn append_many(&self, songs: Vec<Song>) -> u32 {
-        self.db_table()
-            .upsert_many(
-                songs
-                    .iter()
-                    .map(|song| (song.id_ref().as_str(), song))
-                    .collect::<Vec<_>>(),
-            )
-            .unwrap();
+        let (env, db) = self.db();
+        let mut wtxn = env.write_txn().unwrap();
+        for song in &songs {
+            db.put(&mut wtxn, song.id_ref(), song).unwrap();
+        }
+        wtxn.commit().unwrap();
 
         let mut updated_indices = HashSet::new();
         let mut n_appended = 0;
@@ -176,11 +178,10 @@ impl SongList {
     }
 
     pub fn remove(&self, song_id: &SongId) -> Option<Song> {
-        match self.db_table().delete_one(song_id.as_str()) {
-            Ok(_) => {}
-            Err(err) if matches!(err, DatabaseError::NotFound) => {}
-            Err(err) => panic!("Failed to remove song from database: {:?}", err),
-        }
+        let (env, db) = self.db();
+        let mut wtxn = env.write_txn().unwrap();
+        db.delete(&mut wtxn, song_id).unwrap();
+        wtxn.commit().unwrap();
 
         let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
 
@@ -218,8 +219,8 @@ impl SongList {
         )
     }
 
-    fn db_table(&self) -> &DatabaseTable<Song> {
-        self.imp().db_table.get().unwrap()
+    fn db(&self) -> &(heed::Env, SongDatabase) {
+        self.imp().db.get().unwrap()
     }
 
     fn bind_song_to_db(&self, song: &Song) {
@@ -227,9 +228,10 @@ impl SongList {
             let handler_id = song.connect_notify_local(
                 None,
                 clone!(@weak self as obj => move |song, _| {
-                    obj.db_table()
-                        .update_one(song.id_ref().as_str(), song)
-                        .unwrap();
+                    let (env, db) = obj.db();
+                    let mut wtxn = env.write_txn().unwrap();
+                    db.put(&mut wtxn, song.id_ref(), song).unwrap();
+                    wtxn.commit().unwrap();
                 }),
             );
             song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
@@ -260,96 +262,108 @@ mod test {
     }
 
     fn new_test_song_list() -> SongList {
-        SongList::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
+        let env = heed::EnvOpenOptions::new()
+            .max_dbs(1)
+            .open(tempfile::tempdir().unwrap())
+            .unwrap();
+        SongList::load_from_env(env).unwrap()
     }
 
     #[track_caller]
     fn assert_n_items_and_db_count_eq(song_list: &SongList, n: usize) {
         assert_eq!(song_list.n_items(), n as u32);
-        assert_eq!(song_list.db_table().count().unwrap(), n);
+
+        let (env, db) = song_list.db();
+        let rtxn = env.read_txn().unwrap();
+        assert_eq!(db.len(&rtxn).unwrap(), n as u64);
     }
 
     /// Must have exactly 2 songs
     fn assert_synced_to_db(song_list: &SongList) {
-        let table_items = song_list.db_table().select_all().unwrap();
-        assert_eq!(table_items.len(), 2);
+        assert_n_items_and_db_count_eq(song_list, 2);
+
+        let (env, db) = song_list.db();
 
         // Test if the items are synced to the database
+        let rtxn = env.read_txn().unwrap();
+        for item in db.iter(&rtxn).unwrap() {
+            let (_, song) = item.unwrap();
+            assert!(!song.is_newly_heard());
+        }
         for (id, song) in song_list.imp().list.borrow().iter() {
             assert_eq!(
-                table_items.get(id.as_str()).unwrap().is_newly_heard(),
+                db.get(&rtxn, id).unwrap().unwrap().is_newly_heard(),
                 song.is_newly_heard()
             );
         }
+        drop(rtxn);
 
-        for (_, song) in song_list.db_table().select_all().unwrap() {
-            assert!(!song.is_newly_heard());
+        song_list
+            .item(0)
+            .and_downcast::<Song>()
+            .unwrap()
+            .set_is_newly_heard(true);
+        assert_n_items_and_db_count_eq(song_list, 2);
+
+        // Test if the items are synced to the database even
+        // after the song is modified\
+        let rtxn = env.read_txn().unwrap();
+        for (id, song) in song_list.imp().list.borrow().iter() {
+            assert_eq!(
+                db.get(&rtxn, id).unwrap().unwrap().is_newly_heard(),
+                song.is_newly_heard()
+            );
         }
+        drop(rtxn);
 
-        {
-            song_list
-                .item(0)
-                .and_downcast::<Song>()
-                .unwrap()
-                .set_is_newly_heard(true);
+        song_list
+            .item(1)
+            .and_downcast::<Song>()
+            .unwrap()
+            .set_is_newly_heard(true);
+        assert_n_items_and_db_count_eq(song_list, 2);
 
-            let table_items = song_list.db_table().select_all().unwrap();
-            assert_eq!(table_items.len(), 2);
-
-            // Test if the items are synced to the database even
-            // after the song is modified
-            for (id, song) in song_list.imp().list.borrow().iter() {
-                assert_eq!(
-                    table_items.get(id.as_str()).unwrap().is_newly_heard(),
-                    song.is_newly_heard()
-                );
-            }
-        }
-
-        {
-            song_list
-                .item(1)
-                .and_downcast::<Song>()
-                .unwrap()
-                .set_is_newly_heard(true);
-
-            let table_items = song_list.db_table().select_all().unwrap();
-            assert_eq!(table_items.len(), 2);
-
-            for (id, song) in song_list.imp().list.borrow().iter() {
-                assert_eq!(
-                    table_items.get(id.as_str()).unwrap().is_newly_heard(),
-                    song.is_newly_heard()
-                );
-            }
-        }
-
-        for (_, song) in song_list.db_table().select_all().unwrap() {
+        let rtxn = env.read_txn().unwrap();
+        for item in db.iter(&rtxn).unwrap() {
+            let (_, song) = item.unwrap();
             assert!(song.is_newly_heard());
         }
+        for (id, song) in song_list.imp().list.borrow().iter() {
+            assert_eq!(
+                db.get(&rtxn, id).unwrap().unwrap().is_newly_heard(),
+                song.is_newly_heard()
+            );
+        }
+        drop(rtxn);
 
         for (_, song) in song_list.imp().list.borrow().iter() {
             song.set_is_newly_heard(false);
         }
 
-        for (_, song) in song_list.db_table().select_all().unwrap() {
+        let rtxn = env.read_txn().unwrap();
+        for item in db.iter(&rtxn).unwrap() {
+            let (_, song) = item.unwrap();
             assert!(!song.is_newly_heard());
         }
     }
 
     #[test]
     fn load_from_db() {
-        let db = Database::open_in_memory().unwrap();
-        db.table::<Song>("songs")
-            .unwrap()
-            .insert_many(vec![
-                ("Test-a", &new_test_song("a")),
-                ("Test-b", &new_test_song("b")),
-            ])
+        let env = heed::EnvOpenOptions::new()
+            .max_dbs(1)
+            .open(tempfile::tempdir().unwrap())
             .unwrap();
+        let mut wtxn = env.write_txn().unwrap();
+        let db = env
+            .create_database::<SerdeJson<SongId>, SerdeJson<Song>>(&mut wtxn, Some(DB_NAME))
+            .unwrap();
+        db.put(&mut wtxn, &SongId::new_for_test("a"), &new_test_song("a"))
+            .unwrap();
+        db.put(&mut wtxn, &SongId::new_for_test("b"), &new_test_song("b"))
+            .unwrap();
+        wtxn.commit().unwrap();
 
-        let song_list = SongList::load_from_db(&db).unwrap();
-        assert_eq!(song_list.n_items(), 2);
+        let song_list = SongList::load_from_env(env).unwrap();
 
         assert_eq!(
             song_list.get(&SongId::new_for_test("a")).unwrap().id(),

@@ -909,7 +909,7 @@ mod test {
 
     use std::sync::Once;
 
-    use crate::{core::Database, model::SongId, RESOURCES_FILE};
+    use crate::{model::SongId, RESOURCES_FILE};
 
     static GRESOURCES_INIT: Once = Once::new();
 
@@ -930,7 +930,11 @@ mod test {
     }
 
     fn new_test_song_list() -> SongList {
-        SongList::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
+        let env = heed::EnvOpenOptions::new()
+            .max_dbs(1)
+            .open(tempfile::tempdir().unwrap())
+            .unwrap();
+        SongList::load_from_env(env).unwrap()
     }
 
     #[track_caller]
