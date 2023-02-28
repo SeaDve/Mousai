@@ -5,15 +5,19 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use heed::types::{SerdeJson, Str};
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
 use std::cell::RefCell;
 
 use super::Recording;
-use crate::core::{Database, DatabaseTable};
+
+const DB_NAME: &str = "saved_recordings";
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
+
+type RecordingDatabase = heed::Database<Str, SerdeJson<Recording>>;
 
 pub fn generate_unique_id() -> String {
     format!("{}-{:x}", glib::real_time(), glib::random_int())
@@ -26,7 +30,7 @@ mod imp {
     pub struct Recordings {
         pub(super) list: RefCell<IndexMap<String, Recording>>,
 
-        pub(super) db_table: OnceCell<DatabaseTable<Recording>>,
+        pub(super) db: OnceCell<(heed::Env, RecordingDatabase)>,
     }
 
     #[glib::object_subclass]
@@ -64,13 +68,14 @@ glib::wrapper! {
 
 impl Recordings {
     /// Load from the `saved_recordings` table in the database
-    pub fn load_from_db(db: &Database) -> Result<Self> {
-        let db_table = db.table::<Recording>("saved_recordings")?;
-
-        let recordings = db_table
-            .select_all()?
-            .into_iter()
-            .collect::<IndexMap<_, _>>();
+    pub fn load_from_env(env: heed::Env) -> Result<Self> {
+        let mut wtxn = env.write_txn()?;
+        let db = env.create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(DB_NAME))?;
+        let recordings = db
+            .iter(&wtxn)?
+            .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
+            .collect::<Result<IndexMap<_, _>, _>>()?;
+        wtxn.commit()?;
 
         tracing::debug!("Loaded {} saved recordings", recordings.len());
 
@@ -80,8 +85,9 @@ impl Recordings {
             this.bind_recording_to_items_changed_and_db(recording_id, recording);
         }
 
-        this.imp().list.replace(recordings);
-        this.imp().db_table.set(db_table).unwrap();
+        let imp = this.imp();
+        imp.list.replace(recordings);
+        imp.db.set((env, db)).unwrap();
 
         Ok(this)
     }
@@ -89,9 +95,10 @@ impl Recordings {
     pub fn insert(&self, recording: Recording) {
         let recording_id = generate_unique_id();
 
-        self.db_table()
-            .insert_one(&recording_id, &recording)
-            .unwrap();
+        let (env, db) = self.db();
+        let mut wtxn = env.write_txn().unwrap();
+        db.put(&mut wtxn, &recording_id, &recording).unwrap();
+        wtxn.commit().unwrap();
 
         self.bind_recording_to_items_changed_and_db(&recording_id, &recording);
 
@@ -126,9 +133,13 @@ impl Recordings {
             }
         }
 
-        self.db_table()
-            .delete_many(to_take_ids.iter().map(|id| id.as_str()))
-            .unwrap();
+        let (env, db) = self.db();
+        let mut wtxn = env.write_txn().unwrap();
+        for key in &to_take_ids {
+            let existed = db.delete(&mut wtxn, key).unwrap();
+            debug_assert!(existed);
+        }
+        wtxn.commit().unwrap();
 
         let mut taken = Vec::new();
         for id in &to_take_ids {
@@ -149,8 +160,8 @@ impl Recordings {
         self.n_items() == 0
     }
 
-    fn db_table(&self) -> &DatabaseTable<Recording> {
-        self.imp().db_table.get().unwrap()
+    fn db(&self) -> &(heed::Env, RecordingDatabase) {
+        self.imp().db.get().unwrap()
     }
 
     fn bind_recording_to_items_changed_and_db(&self, recording_id: &str, recording: &Recording) {
@@ -159,9 +170,11 @@ impl Recordings {
             let handler_id = recording.connect_notify_local(
                 None,
                 clone!(@weak self as obj => move |recording, _| {
-                    obj.db_table()
-                        .update_one(&recording_id, recording)
-                        .unwrap();
+                    let (env, db) = obj.db();
+                    let mut wtxn = env.write_txn().unwrap();
+                    db.put(&mut wtxn, &recording_id, recording).unwrap();
+                    wtxn.commit().unwrap();
+
                     let index = obj
                         .imp()
                         .list
@@ -198,7 +211,11 @@ mod tests {
     };
 
     fn new_test_recordings() -> Recordings {
-        Recordings::load_from_db(&Database::open_in_memory().unwrap()).unwrap()
+        let env = heed::EnvOpenOptions::new()
+            .max_dbs(1)
+            .open(tempfile::tempdir().unwrap())
+            .unwrap();
+        Recordings::load_from_env(env).unwrap()
     }
 
     fn new_test_recording(bytes: &'static [u8]) -> Recording {
@@ -212,7 +229,10 @@ mod tests {
     #[track_caller]
     fn assert_n_items_and_db_count_eq(recordings: &Recordings, n: usize) {
         assert_eq!(recordings.n_items(), n as u32);
-        assert_eq!(recordings.db_table().count().unwrap(), n);
+
+        let (env, db) = recordings.db();
+        let rtxn = env.read_txn().unwrap();
+        assert_eq!(db.len(&rtxn).unwrap(), n as u64);
     }
 
     #[track_caller]
@@ -228,60 +248,61 @@ mod tests {
 
     /// Must have exactly 2 recordings
     fn assert_synced_to_db(recordings: &Recordings) {
-        let table_items = recordings.db_table().select_all().unwrap();
-        assert_eq!(table_items.len(), 2);
+        assert_n_items_and_db_count_eq(recordings, 2);
+
+        let (env, db) = recordings.db();
 
         // Test if the items are synced to the database
-        for (key, recording) in recordings.imp().list.borrow().iter() {
-            assert_equal_recognize_result_song_id(table_items.get(key).unwrap(), recording);
-        }
-
-        for (_, recording) in recordings.db_table().select_all().unwrap() {
+        let rtxn = env.read_txn().unwrap();
+        for item in db.iter(&rtxn).unwrap() {
+            let (_, recording) = item.unwrap();
             assert!(recording.recognize_result().is_none());
         }
-
-        {
-            recordings
-                .item(0)
-                .and_downcast::<Recording>()
-                .unwrap()
-                .set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
-
-            let table_items = recordings.db_table().select_all().unwrap();
-            assert_eq!(table_items.len(), 2);
-
-            // Test if the items are synced to the database even
-            // after the recording is modified
-            for (key, recording) in recordings.imp().list.borrow().iter() {
-                assert_equal_recognize_result_song_id(table_items.get(key).unwrap(), recording);
-            }
+        for (id, recording) in recordings.imp().list.borrow().iter() {
+            assert_equal_recognize_result_song_id(&db.get(&rtxn, id).unwrap().unwrap(), recording);
         }
+        drop(rtxn);
 
-        {
-            recordings
-                .item(1)
-                .and_downcast::<Recording>()
-                .unwrap()
-                .set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("b"))));
+        recordings
+            .item(0)
+            .and_downcast::<Recording>()
+            .unwrap()
+            .set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+        assert_n_items_and_db_count_eq(recordings, 2);
 
-            let table_items = recordings.db_table().select_all().unwrap();
-            assert_eq!(table_items.len(), 2);
-
-            for (key, recording) in recordings.imp().list.borrow().iter() {
-                assert_equal_recognize_result_song_id(table_items.get(key).unwrap(), recording);
-            }
+        // Test if the items are synced to the database even
+        // after the recording is modified
+        let rtxn = env.read_txn().unwrap();
+        for (id, recording) in recordings.imp().list.borrow().iter() {
+            assert_equal_recognize_result_song_id(&db.get(&rtxn, id).unwrap().unwrap(), recording);
         }
+        drop(rtxn);
 
-        for (_, recording) in recordings.db_table().select_all().unwrap() {
+        recordings
+            .item(1)
+            .and_downcast::<Recording>()
+            .unwrap()
+            .set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("b"))));
+        assert_n_items_and_db_count_eq(recordings, 2);
+
+        let rtxn = env.read_txn().unwrap();
+        for item in db.iter(&rtxn).unwrap() {
+            let (_, recording) = item.unwrap();
             assert!(recording.recognize_result().is_some());
         }
+        for (id, recording) in recordings.imp().list.borrow().iter() {
+            assert_equal_recognize_result_song_id(&db.get(&rtxn, id).unwrap().unwrap(), recording);
+        }
+        drop(rtxn);
 
         for (_, recording) in recordings.imp().list.borrow().iter() {
             // FIXME use the generated glib::Properties setter
             recording.set_property("recognize-result", None::<BoxedRecognizeResult>);
         }
 
-        for (_, recording) in recordings.db_table().select_all().unwrap() {
+        let rtxn = env.read_txn().unwrap();
+        for item in db.iter(&rtxn).unwrap() {
+            let (_, recording) = item.unwrap();
             assert!(recording.recognize_result().is_none());
         }
     }
@@ -300,22 +321,25 @@ mod tests {
 
     #[test]
     fn load_from_db() {
-        let db = Database::open_in_memory().unwrap();
-        db.table::<Recording>("saved_recordings")
-            .unwrap()
-            .insert_many(vec![
-                ("a", &new_test_recording(b"A")),
-                ("b", &new_test_recording(b"B")),
-            ])
+        let env = heed::EnvOpenOptions::new()
+            .max_dbs(1)
+            .open(tempfile::tempdir().unwrap())
             .unwrap();
+        let mut wtxn = env.write_txn().unwrap();
+        let db = env
+            .create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(DB_NAME))
+            .unwrap();
+        db.put(&mut wtxn, "a", &new_test_recording(b"A")).unwrap();
+        db.put(&mut wtxn, "b", &new_test_recording(b"B")).unwrap();
+        wtxn.commit().unwrap();
 
-        let recordings = Recordings::load_from_db(&db).unwrap();
-        assert_n_items_and_db_count_eq(&recordings, 2);
+        let recordings = Recordings::load_from_env(env).unwrap();
 
         let items = recordings.peek_filtered(|_| true);
         assert!(items.iter().any(|i| i.bytes().as_ref() == b"A"));
         assert!(items.iter().any(|i| i.bytes().as_ref() == b"A"));
 
+        assert_n_items_and_db_count_eq(&recordings, 2);
         assert_synced_to_db(&recordings);
     }
 

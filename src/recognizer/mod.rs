@@ -93,7 +93,7 @@ mod imp {
             let obj = self.obj();
 
             // TODO Handle outside and improve timings
-            match Recordings::load_from_db(utils::app_instance().db()) {
+            match Recordings::load_from_env(utils::app_instance().env().clone()) {
                 Ok(recordings) => self.saved_recordings.set(recordings).unwrap(),
                 Err(err) => tracing::error!("Failed to load saved recordings: {:?}", err),
             }

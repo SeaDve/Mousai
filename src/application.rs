@@ -3,10 +3,12 @@ use anyhow::{Error, Result};
 use gtk::{gio, glib};
 use once_cell::unsync::OnceCell;
 
+use std::fs;
+
 use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
-    core::{AlbumArtStore, Database},
+    core::AlbumArtStore,
     debug_assert_or_log, debug_unreachable_or_log,
     inspector_page::InspectorPage,
     settings::Settings,
@@ -21,7 +23,7 @@ mod imp {
     pub struct Application {
         pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<soup::Session>,
-        pub(super) db: OnceCell<Database>,
+        pub(super) env: OnceCell<heed::Env>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
         pub(super) settings: Settings,
     }
@@ -84,11 +86,12 @@ impl Application {
         self.imp().session.get_or_init(soup::Session::new)
     }
 
-    pub fn db(&self) -> &Database {
-        self.imp().db.get_or_init(|| {
+    pub fn env(&self) -> &heed::Env {
+        self.imp().env.get_or_init(|| {
             // FIXME use a proper path
-            let path = glib::home_dir().join("mousai.db");
-            Database::open(path).unwrap()
+            let path = glib::user_data_dir().join("mousai/db");
+            fs::create_dir_all(&path).unwrap();
+            heed::EnvOpenOptions::new().max_dbs(2).open(path).unwrap()
         })
     }
 
