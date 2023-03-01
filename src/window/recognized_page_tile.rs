@@ -95,7 +95,13 @@ mod imp {
         fn set_song(&self, song: &Song) {
             let binding = song
                 .bind_property("last-heard", &self.last_heard_label.get(), "label")
-                .transform_to(|_, last_heard: DateTime| Some(last_heard.fuzzy_display()))
+                .transform_to(|_, last_heard: Option<DateTime>| {
+                    Some(
+                        last_heard.map_or_else(glib::GString::default, |last_heard| {
+                            last_heard.fuzzy_display()
+                        }),
+                    )
+                })
                 .sync_create()
                 .build();
             self.binding.replace(Some(binding));
