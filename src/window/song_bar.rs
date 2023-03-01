@@ -12,7 +12,7 @@ use super::{
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
 use crate::{
-    clock_time::ClockTimeExt,
+    core::ClockTimeExt,
     model::Song,
     player::{Player, PlayerState},
 };

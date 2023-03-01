@@ -27,7 +27,6 @@
 mod about;
 mod application;
 mod audio_device;
-mod clock_time;
 mod config;
 mod core;
 mod db;
