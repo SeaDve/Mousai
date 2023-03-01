@@ -65,8 +65,7 @@ impl Recordings {
     /// Load from the `saved_recordings` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
         let mut wtxn = env.write_txn()?;
-        let db =
-            env.create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(RECORDINGS_DB_NAME))?;
+        let db: RecordingDatabase = env.create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))?;
         let recordings = db
             .iter(&wtxn)?
             .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
@@ -326,8 +325,8 @@ mod tests {
             .open(tempfile::tempdir().unwrap())
             .unwrap();
         let mut wtxn = env.write_txn().unwrap();
-        let db = env
-            .create_database::<Str, SerdeJson<Recording>>(&mut wtxn, Some(RECORDINGS_DB_NAME))
+        let db: RecordingDatabase = env
+            .create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))
             .unwrap();
         db.put(&mut wtxn, "a", &new_test_recording(b"A")).unwrap();
         db.put(&mut wtxn, "b", &new_test_recording(b"B")).unwrap();

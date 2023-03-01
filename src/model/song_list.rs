@@ -77,10 +77,7 @@ impl SongList {
     /// Load from the `songs` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
         let mut wtxn = env.write_txn()?;
-        let db = env.create_database::<SerdeJson<SongId>, SerdeJson<Song>>(
-            &mut wtxn,
-            Some(SONG_LIST_DB_NAME),
-        )?;
+        let db = env.create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))?;
         let songs = db.iter(&wtxn)?.collect::<Result<IndexMap<_, _>, _>>()?;
         wtxn.commit()?;
 
@@ -425,11 +422,8 @@ mod test {
             .open(tempfile::tempdir().unwrap())
             .unwrap();
         let mut wtxn = env.write_txn().unwrap();
-        let db = env
-            .create_database::<SerdeJson<SongId>, SerdeJson<Song>>(
-                &mut wtxn,
-                Some(SONG_LIST_DB_NAME),
-            )
+        let db: SongDatabase = env
+            .create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))
             .unwrap();
         db.put(&mut wtxn, &SongId::new_for_test("a"), &new_test_song("a"))
             .unwrap();
