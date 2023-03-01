@@ -466,15 +466,15 @@ mod test {
         assert_n_items_and_db_count_eq(&song_list, 2);
         assert_synced_to_db(&song_list);
 
-        assert_eq!(song_list.get(&song_1.id()), Some(song_1.clone()));
-        assert_eq!(song_list.get(&song_2.id()), Some(song_2.clone()));
+        assert_eq!(song_list.get(song_1.id_ref()), Some(song_1.clone()));
+        assert_eq!(song_list.get(song_2.id_ref()), Some(song_2.clone()));
 
-        let song_1_removed = song_list.remove(&song_1.id()).unwrap();
+        let song_1_removed = song_list.remove(song_1.id_ref()).unwrap();
         assert_eq!(song_1, song_1_removed);
-        assert_eq!(song_list.get(&song_1.id()), None);
-        let song_2_removed = song_list.remove(&song_2.id()).unwrap();
+        assert_eq!(song_list.get(song_1.id_ref()), None);
+        let song_2_removed = song_list.remove(song_2.id_ref()).unwrap();
         assert_eq!(song_2, song_2_removed);
-        assert_eq!(song_list.get(&song_2.id()), None);
+        assert_eq!(song_list.get(song_2.id_ref()), None);
 
         assert_n_items_and_db_count_eq(&song_list, 0);
 

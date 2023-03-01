@@ -292,7 +292,7 @@ impl HistoryView {
                 .contains(&imp.leaflet.page(child))
         }) {
             if let Some(song_page) = page.downcast_ref::<SongPage>() {
-                if Some(song.id()) == song_page.song().map(|song| song.id()) {
+                if Some(song.id_ref()) == song_page.song().map(|song| song.id()).as_ref() {
                     return;
                 }
             }
@@ -586,8 +586,11 @@ impl HistoryView {
                 page.child()
                     .downcast_ref::<SongPage>()
                     .map_or(false, |song_page| {
-                        song_page.song().map(|song_page_song| song_page_song.id())
-                            == Some(song.id())
+                        song_page
+                            .song()
+                            .map(|song_page_song| song_page_song.id())
+                            .as_ref()
+                            == Some(song.id_ref())
                     })
                     && !imp.leaflet_pages_purgatory.borrow().contains(page)
             })
