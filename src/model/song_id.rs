@@ -1,6 +1,8 @@
 use gtk::glib;
 use serde::{Deserialize, Serialize};
 
+use crate::utils;
+
 #[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
 #[boxed_type(name = "MsaiSongId")] // TODO drop Boxed derive and replace with ValueDelegate
 #[serde(transparent)]
@@ -20,17 +22,13 @@ impl SongId {
 }
 
 impl Default for SongId {
-    /// Generate a new song id with "Mousai" as the namespace, plus a
-    /// unique str made up of the real time and a random u32 in hex.
+    /// Generate a new song id with "Mousai" as the namespace, plus a random "unique" str
     ///
     /// Note: This should only be used when an id cannot be properly retrieved.
     fn default() -> Self {
         tracing::warn!("Using default song id");
 
-        Self::new(
-            "Mousai",
-            &format!("{}-{:x}", glib::real_time(), glib::random_int()),
-        )
+        Self::new("Mousai", &utils::generate_unique_id())
     }
 }
 

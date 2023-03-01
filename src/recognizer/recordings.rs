@@ -12,7 +12,7 @@ use once_cell::unsync::OnceCell;
 use std::cell::RefCell;
 
 use super::Recording;
-use crate::db::RECORDINGS_DB_NAME;
+use crate::{db::RECORDINGS_DB_NAME, utils};
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
@@ -88,7 +88,7 @@ impl Recordings {
     }
 
     pub fn insert(&self, recording: Recording) {
-        let recording_id = generate_unique_id();
+        let recording_id = utils::generate_unique_id();
 
         let (env, db) = self.db();
         let mut wtxn = env.write_txn().unwrap();
@@ -191,10 +191,6 @@ fn unbind_recording_to_items_changed_and_db(recording: &Recording) {
             .unwrap();
         recording.disconnect(handler_id);
     };
-}
-
-fn generate_unique_id() -> String {
-    format!("{}-{:x}", glib::real_time(), glib::random_int())
 }
 
 #[cfg(test)]
@@ -302,18 +298,6 @@ mod tests {
         for item in db.iter(&rtxn).unwrap() {
             let (_, recording) = item.unwrap();
             assert!(recording.recognize_result().is_none());
-        }
-    }
-
-    #[test]
-    fn unique_generated_id() {
-        for i in 0..1000 {
-            assert_ne!(
-                generate_unique_id(),
-                generate_unique_id(),
-                "generated ids are equal after {} iterations",
-                i
-            );
         }
     }
 
