@@ -85,6 +85,8 @@ impl SongList {
             tracing::warn!("Failed to migrate from memory list: {}", err);
         }
 
+        tracing::debug!("Loaded {} songs", songs.len());
+
         let this = glib::Object::new::<Self>();
 
         for (_, song) in songs.iter() {
