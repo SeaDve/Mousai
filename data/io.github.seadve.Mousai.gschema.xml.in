@@ -25,5 +25,10 @@
       <summary>Preferred audio source to use in recording audio</summary>
       <description></description>
     </key>
+
+    <key type="aa{ss}" name="memory-list">
+      <default>[]</default>
+      <summary>Legacy (Kept for migration)</summary>
+    </key>
   </schema>
 </schemalist>

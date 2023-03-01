@@ -18,10 +18,6 @@ const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-i
 
 type RecordingDatabase = heed::Database<Str, SerdeJson<Recording>>;
 
-pub fn generate_unique_id() -> String {
-    format!("{}-{:x}", glib::real_time(), glib::random_int())
-}
-
 mod imp {
     use super::*;
 
@@ -196,6 +192,10 @@ fn unbind_recording_to_items_changed_and_db(recording: &Recording) {
             .unwrap();
         recording.disconnect(handler_id);
     };
+}
+
+fn generate_unique_id() -> String {
+    format!("{}-{:x}", glib::real_time(), glib::random_int())
 }
 
 #[cfg(test)]

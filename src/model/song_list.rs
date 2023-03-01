@@ -84,6 +84,10 @@ impl SongList {
         let songs = db.iter(&wtxn)?.collect::<Result<IndexMap<_, _>, _>>()?;
         wtxn.commit()?;
 
+        if let Err(err) = migrate_from_memory_list(&env, &db) {
+            tracing::warn!("Failed to migrate from memory list: {}", err);
+        }
+
         let this = glib::Object::new::<Self>();
 
         for (_, song) in songs.iter() {
@@ -249,6 +253,72 @@ fn unbind_song_to_db(song: &Song) {
     };
 }
 
+/// Migrate from the old memory list of Mousai v0.6.6 and earlier.
+///
+/// To be removed in future releases.
+fn migrate_from_memory_list(env: &heed::Env, db: &SongDatabase) -> Result<()> {
+    use crate::{model::ExternalLinkKey, settings::Settings};
+
+    let settings = Settings::default();
+    let memory_list = settings.memory_list();
+
+    if memory_list.is_empty() {
+        return Ok(());
+    }
+
+    tracing::debug!("Migrating {} songs from memory list", memory_list.len());
+
+    let mut wtxn = env.write_txn()?;
+
+    for mut item in memory_list {
+        let title = item.remove("title");
+        let artist = item.remove("artist");
+        let song_link = item.remove("song_link");
+        let song_src = item.remove("song_src");
+
+        let id = song_link
+            .as_ref()
+            .map_or_else(SongId::default, |song_link| {
+                SongId::new("AudD", song_link.trim_start_matches("https://lis.tn/"))
+            });
+
+        let mut song_builder = Song::builder(
+            &id,
+            title.as_deref().unwrap_or_default(),
+            artist.as_deref().unwrap_or_default(),
+            "",
+        );
+
+        if let Some(song_link) = song_link {
+            song_builder.external_link(ExternalLinkKey::AudDUrl, song_link);
+        }
+
+        if let (Some(ref title), Some(ref artist)) = (title, artist) {
+            song_builder.external_link(
+                ExternalLinkKey::YoutubeSearchTerm,
+                format!("{} - {}", artist, title),
+            );
+        }
+
+        if let Some(ref song_src) = song_src {
+            song_builder.playback_link(song_src);
+        }
+
+        let song = song_builder.build();
+
+        if let Err(err) = db.put(&mut wtxn, &id, &song) {
+            tracing::warn!("Failed to migrate song `{:?}`: {:?}", song, err);
+        }
+    }
+
+    wtxn.commit()?;
+
+    settings.set_memory_list(Vec::new());
+    tracing::debug!("Successfully migrated songs from memory list");
+
+    Ok(())
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -356,7 +426,10 @@ mod test {
             .unwrap();
         let mut wtxn = env.write_txn().unwrap();
         let db = env
-            .create_database::<SerdeJson<SongId>, SerdeJson<Song>>(&mut wtxn, Some(SONG_LIST_DB_NAME))
+            .create_database::<SerdeJson<SongId>, SerdeJson<Song>>(
+                &mut wtxn,
+                Some(SONG_LIST_DB_NAME),
+            )
             .unwrap();
         db.put(&mut wtxn, &SongId::new_for_test("a"), &new_test_song("a"))
             .unwrap();
