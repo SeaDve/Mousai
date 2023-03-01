@@ -30,3 +30,25 @@ pub fn app_instance() -> Application {
 
     gio::Application::default().unwrap().downcast().unwrap()
 }
+
+/// Generate a random "unique" String made up of real time and a random u32 in hex.
+pub fn generate_unique_id() -> String {
+    format!("{}-{:x}", glib::real_time(), glib::random_int())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn unique_generated_id() {
+        for i in 0..1000 {
+            assert_ne!(
+                generate_unique_id(),
+                generate_unique_id(),
+                "generated ids are equal after {} iterations",
+                i
+            );
+        }
+    }
+}
