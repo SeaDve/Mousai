@@ -115,6 +115,7 @@ impl Song {
         format!("{} - {}", self.artist(), self.title())
     }
 
+    /// Get a reference to the unique ID instead of cloning it like in `Self::id()`
     pub fn id_ref(&self) -> &SongId {
         self.imp().id.get().unwrap()
     }
@@ -226,6 +227,18 @@ impl SongBuilder {
 #[cfg(test)]
 mod test {
     use super::*;
+
+    #[test]
+    fn id_ref() {
+        let song = Song::builder(
+            &SongId::new_for_test("UniqueSongId"),
+            "Some song",
+            "Someone",
+            "SomeAlbum",
+        )
+        .build();
+        assert_eq!(&song.id(), song.id_ref());
+    }
 
     #[test]
     fn properties() {
