@@ -225,7 +225,6 @@ mod tests {
         Song::builder(&SongId::new_for_test(id), id, id, id).build()
     }
 
-    #[track_caller]
     fn assert_n_items_and_db_count_eq(recordings: &Recordings, n: usize) {
         assert_eq!(recordings.n_items(), n as u32);
 
