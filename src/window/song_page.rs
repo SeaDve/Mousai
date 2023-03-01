@@ -157,7 +157,6 @@ mod imp {
                 return;
             }
 
-            self.song.replace(song.clone());
             self.song_binding_group.set_source(song.as_ref());
 
             // Only crossfade when album art is not loaded to avoid
@@ -168,8 +167,9 @@ mod imp {
                     .and_then(|song| song.album_art().ok())
                     .map_or(true, |album_art| !album_art.is_loaded()),
             );
-            self.album_cover.set_song(song);
+            self.album_cover.set_song(song.clone());
 
+            self.song.replace(song);
             obj.update_playback_ui();
             obj.update_information();
 

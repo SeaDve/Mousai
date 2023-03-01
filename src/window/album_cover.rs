@@ -5,7 +5,7 @@ use gtk::{
     subclass::prelude::*,
 };
 
-use std::{cell::RefCell, marker::PhantomData};
+use std::cell::RefCell;
 
 use crate::{debug_assert_or_log, model::Song, utils};
 
@@ -13,6 +13,7 @@ const DEFAULT_ENABLE_CROSSFADE: bool = true;
 
 mod imp {
     use super::*;
+    use std::marker::PhantomData;
 
     #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::AlbumCover)]

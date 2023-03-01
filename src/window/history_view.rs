@@ -819,7 +819,7 @@ impl HistoryView {
             let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
 
             let song_tile = SongTile::new();
-            song_tile.set_show_select_button_on_hover(true);
+            song_tile.set_shows_select_button_on_hover(true);
             song_tile.bind_player(&obj.player());
 
             let selection_mode_active_binding = obj
@@ -831,7 +831,7 @@ impl HistoryView {
                 .sync_create()
                 .build();
 
-            song_tile.connect_active_notify(clone!(@weak obj, @weak list_item => move |tile| {
+            song_tile.connect_is_active_notify(clone!(@weak obj, @weak list_item => move |tile| {
                 if let Some(selection_model) = obj.imp().selection_model.get().and_then(|model| model.upgrade()) {
                     if tile.is_active() {
                         selection_model.select_item(list_item.position(), false);
@@ -859,7 +859,7 @@ impl HistoryView {
                     is_selected && is_selection_mode_active
                 }),
             )
-            .bind(&song_tile, "selected", glib::Object::NONE);
+            .bind(&song_tile, "is-selected", glib::Object::NONE);
 
             unsafe {
                 list_item.set_data(

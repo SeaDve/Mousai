@@ -16,7 +16,7 @@
     </child>
     <child>
       <object class="MsaiSongTile" id="song_tile">
-        <property name="show-select-button-on-hover">False</property>
+        <property name="shows-select-button-on-hover">False</property>
       </object>
     </child>
   </template>
