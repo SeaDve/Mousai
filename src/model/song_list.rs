@@ -337,7 +337,6 @@ mod test {
         SongList::load_from_env(env).unwrap()
     }
 
-    #[track_caller]
     fn assert_n_items_and_db_count_eq(song_list: &SongList, n: usize) {
         assert_eq!(song_list.n_items(), n as u32);
 
