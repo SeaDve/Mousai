@@ -838,6 +838,8 @@ impl HistoryView {
                     } else {
                         selection_model.unselect_item(list_item.position());
                     }
+                } else {
+                    debug_unreachable_or_log!("selection model not found");
                 }
             }));
             song_tile.connect_selection_mode_requested(clone!(@weak obj => move |_| {
