@@ -81,10 +81,6 @@ impl SongList {
         let songs = db.iter(&wtxn)?.collect::<Result<IndexMap<_, _>, _>>()?;
         wtxn.commit()?;
 
-        if let Err(err) = migrate_from_memory_list(&env, &db) {
-            tracing::warn!("Failed to migrate from memory list: {}", err);
-        }
-
         tracing::debug!("Loaded {} songs", songs.len());
 
         let this = glib::Object::new::<Self>();
@@ -96,6 +92,9 @@ impl SongList {
         let imp = this.imp();
         imp.list.replace(songs);
         imp.db.set((env, db)).unwrap();
+
+        // TODO Remove in future releases
+        migrate_from_memory_list(&this);
 
         Ok(this)
     }
@@ -253,69 +252,61 @@ fn unbind_song_to_db(song: &Song) {
 }
 
 /// Migrate from the old memory list of Mousai v0.6.6 and earlier.
-///
-/// To be removed in future releases.
-fn migrate_from_memory_list(env: &heed::Env, db: &SongDatabase) -> Result<()> {
+fn migrate_from_memory_list(song_list: &SongList) {
     use crate::{model::ExternalLinkKey, settings::Settings};
 
     let settings = Settings::default();
     let memory_list = settings.memory_list();
 
     if memory_list.is_empty() {
-        return Ok(());
+        return;
     }
 
     tracing::debug!("Migrating {} songs from memory list", memory_list.len());
 
-    let mut wtxn = env.write_txn()?;
+    let songs = memory_list
+        .into_iter()
+        .map(|mut item| {
+            let title = item.remove("title");
+            let artist = item.remove("artist");
+            let song_link = item.remove("song_link");
+            let song_src = item.remove("song_src");
 
-    for mut item in memory_list {
-        let title = item.remove("title");
-        let artist = item.remove("artist");
-        let song_link = item.remove("song_link");
-        let song_src = item.remove("song_src");
+            let id = song_link
+                .as_ref()
+                .map_or_else(SongId::generate_unique, |song_link| {
+                    SongId::from("AudD", song_link.trim_start_matches("https://lis.tn/"))
+                });
 
-        let id = song_link
-            .as_ref()
-            .map_or_else(SongId::generate_unique, |song_link| {
-                SongId::from("AudD", song_link.trim_start_matches("https://lis.tn/"))
-            });
-
-        let mut song_builder = Song::builder(
-            &id,
-            title.as_deref().unwrap_or_default(),
-            artist.as_deref().unwrap_or_default(),
-            "",
-        );
-
-        if let Some(song_link) = song_link {
-            song_builder.external_link(ExternalLinkKey::AudDUrl, song_link);
-        }
-
-        if let (Some(ref title), Some(ref artist)) = (title, artist) {
-            song_builder.external_link(
-                ExternalLinkKey::YoutubeSearchTerm,
-                format!("{} - {}", artist, title),
+            let mut song_builder = Song::builder(
+                &id,
+                title.as_deref().unwrap_or_default(),
+                artist.as_deref().unwrap_or_default(),
+                "",
             );
-        }
 
-        if let Some(ref song_src) = song_src {
-            song_builder.playback_link(song_src);
-        }
+            if let Some(song_link) = song_link {
+                song_builder.external_link(ExternalLinkKey::AudDUrl, song_link);
+            }
 
-        let song = song_builder.build();
+            if let (Some(ref title), Some(ref artist)) = (title, artist) {
+                song_builder.external_link(
+                    ExternalLinkKey::YoutubeSearchTerm,
+                    format!("{} - {}", artist, title),
+                );
+            }
 
-        if let Err(err) = db.put(&mut wtxn, &id, &song) {
-            tracing::warn!("Failed to migrate song `{:?}`: {:?}", song, err);
-        }
-    }
+            if let Some(ref song_src) = song_src {
+                song_builder.playback_link(song_src);
+            }
 
-    wtxn.commit()?;
+            song_builder.build()
+        })
+        .collect::<Vec<_>>();
+    song_list.append_many(songs);
 
     settings.set_memory_list(Vec::new());
     tracing::debug!("Successfully migrated songs from memory list");
-
-    Ok(())
 }
 
 #[cfg(test)]
