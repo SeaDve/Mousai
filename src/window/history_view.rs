@@ -454,7 +454,10 @@ impl HistoryView {
                 }
 
                 for song in &songs {
-                    if !history.contains(song.id_ref()) {
+                    // If the song is not found in the history, set it as newly heard
+                    // (That's why an always true value is used after `or`). If it is in the
+                    // history and it was newly heard, pass that state to the new value.
+                    if history.get(song.id_ref()).map_or(true, |prev| prev.is_newly_heard()) {
                         song.set_is_newly_heard(true);
                     }
                 }
