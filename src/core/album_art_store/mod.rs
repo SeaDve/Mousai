@@ -92,7 +92,7 @@ mod test {
     }
 
     #[test]
-    fn null_bytes() {
+    fn no_null_bytes() {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session).unwrap();
 
@@ -110,7 +110,7 @@ mod test {
     }
 
     #[test]
-    fn forward_slash() {
+    fn no_forward_slashes() {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session).unwrap();
 

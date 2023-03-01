@@ -156,8 +156,6 @@ mod test {
     use super::*;
 
     use futures_util::future;
-    use gtk::glib;
-    use std::fs;
 
     #[gtk::test]
     async fn download() {
@@ -165,8 +163,8 @@ mod test {
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
 
-        let cache_path = glib::tmp_dir().join("image-download.png");
-        let _ = fs::remove_file(&cache_path);
+        let tempdir = tempfile::tempdir().unwrap();
+        let cache_path = tempdir.path().join("image-download.png");
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
         assert!(!album_art.is_loaded());
@@ -174,7 +172,10 @@ mod test {
 
         assert!(album_art.texture().await.is_ok());
         assert!(album_art.is_loaded());
-        assert_eq!(album_art.uri(), gio::File::for_path(cache_path).uri());
+        assert_eq!(
+            album_art.uri(),
+            glib::filename_to_uri(&cache_path, None).unwrap()
+        );
 
         // Multiple texture call yields the same instance of texture.
         assert_eq!(
@@ -189,8 +190,8 @@ mod test {
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
 
-        let cache_path = glib::tmp_dir().join("image-concurrent_downloads.png");
-        let _ = fs::remove_file(&cache_path);
+        let tempdir = tempfile::tempdir().unwrap();
+        let cache_path = tempdir.path().join("image-concurrent_downloads.png");
 
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
 
