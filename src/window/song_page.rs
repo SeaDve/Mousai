@@ -29,9 +29,15 @@ mod imp {
     use glib::{subclass::Signal, WeakRef};
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type  = super::SongPage)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
+        #[property(get, set = Self::set_song, explicit_notify)]
+        pub(super) song: RefCell<Option<Song>>,
+        #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
@@ -48,9 +54,6 @@ mod imp {
         pub(super) lyrics_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
         pub(super) lyrics_label: TemplateChild<gtk::Label>,
-
-        pub(super) song: RefCell<Option<Song>>,
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
         pub(super) song_binding_group: glib::BindingGroup,
@@ -95,48 +98,7 @@ mod imp {
     }
 
     impl ObjectImpl for SongPage {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Song represented by Self
-                    glib::ParamSpecObject::builder::<Song>("song")
-                        .explicit_notify()
-                        .build(),
-                    // Current adapative mode
-                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => {
-                    let song = value.get().unwrap();
-                    obj.set_song(song);
-                }
-                "adaptive-mode" => {
-                    let adaptive_mode = value.get().unwrap();
-                    obj.set_adaptive_mode(adaptive_mode);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => obj.song().into(),
-                "adaptive-mode" => obj.adaptive_mode().into(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
@@ -186,6 +148,46 @@ mod imp {
     }
 
     impl WidgetImpl for SongPage {}
+
+    impl SongPage {
+        fn set_song(&self, song: Option<Song>) {
+            let obj = self.obj();
+
+            if song == obj.song() {
+                return;
+            }
+
+            self.song.replace(song.clone());
+            self.song_binding_group.set_source(song.as_ref());
+
+            // Only crossfade when album art is not loaded to avoid
+            // unnecessary crossfading when the album art can be
+            // loaded immediately.
+            self.album_cover.set_enables_crossfade(
+                song.as_ref()
+                    .and_then(|song| song.album_art().ok())
+                    .map_or(true, |album_art| !album_art.is_loaded()),
+            );
+            self.album_cover.set_song(song);
+
+            obj.update_playback_ui();
+            obj.update_information();
+
+            obj.notify_song();
+        }
+
+        fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+            let obj = self.obj();
+
+            if adaptive_mode == obj.adaptive_mode() {
+                return;
+            }
+
+            self.adaptive_mode.set(adaptive_mode);
+            obj.update_album_cover_size();
+            obj.notify_adaptive_mode();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -209,50 +211,6 @@ impl SongPage {
                 f(obj, song);
             }),
         )
-    }
-
-    pub fn set_song(&self, song: Option<Song>) {
-        if song == self.song() {
-            return;
-        }
-
-        let imp = self.imp();
-        imp.song.replace(song.clone());
-
-        imp.song_binding_group.set_source(song.as_ref());
-
-        // Only crossfade when album art is not loaded to avoid
-        // unnecessary crossfading when the album art can be
-        // loaded immediately.
-        imp.album_cover.set_enables_crossfade(
-            song.as_ref()
-                .and_then(|song| song.album_art().ok())
-                .map_or(true, |album_art| !album_art.is_loaded()),
-        );
-        imp.album_cover.set_song(song);
-
-        self.update_playback_ui();
-        self.update_information();
-
-        self.notify("song");
-    }
-
-    pub fn song(&self) -> Option<Song> {
-        self.imp().song.borrow().clone()
-    }
-
-    pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
-        if adaptive_mode == self.adaptive_mode() {
-            return;
-        }
-
-        self.imp().adaptive_mode.set(adaptive_mode);
-        self.update_album_cover_size();
-        self.notify("adaptive-mode");
-    }
-
-    pub fn adaptive_mode(&self) -> AdaptiveMode {
-        self.imp().adaptive_mode.get()
     }
 
     /// Must only be called when no player is bound.

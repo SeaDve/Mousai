@@ -300,7 +300,7 @@ impl HistoryView {
 
         let song_page = SongPage::new();
         song_page.bind_player(&self.player());
-        song_page.set_song(Some(song.clone()));
+        song_page.set_song(song);
 
         let song_removed_handler_id =
             song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
