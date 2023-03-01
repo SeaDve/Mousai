@@ -291,7 +291,7 @@ mod test {
 
         assert_eq!(song.id(), SongId::for_test("UniqueSongId"));
         assert_eq!(
-            song.last_heard().unwrap().to_iso8601(),
+            song.last_heard().unwrap().format_iso8601(),
             "2022-05-14T10:15:37.798479+08"
         );
         assert_eq!(song.title(), "Some song");
