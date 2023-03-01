@@ -99,7 +99,7 @@ mod imp {
                 .sync_create()
                 .build();
             self.binding.replace(Some(binding));
-            self.song_tile.set_song(Some(song.clone()));
+            self.song_tile.set_song(song);
         }
     }
 }

@@ -25,10 +25,31 @@ mod imp {
     use super::*;
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
+    use std::marker::PhantomData;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::SongTile)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-tile.ui")]
     pub struct SongTile {
+        /// Song represented by Self
+        #[property(get, set = Self::set_song, explicit_notify)]
+        pub(super) song: RefCell<Option<Song>>,
+        /// Whether self should be displayed as selected
+        #[property(get, set = Self::set_is_selected, explicit_notify)]
+        pub(super) is_selected: Cell<bool>,
+        /// Whether self is active
+        #[property(get = Self::is_active)]
+        pub(super) is_active: PhantomData<bool>,
+        /// Whether selection mode is active
+        #[property(get, set = Self::set_is_selection_mode_active, explicit_notify)]
+        pub(super) is_selection_mode_active: Cell<bool>,
+        /// Current adaptive mode
+        #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+        /// Whether to show select button on hover
+        #[property(get, set = Self::set_shows_select_button_on_hover, explicit_notify)]
+        pub(super) shows_select_button_on_hover: Cell<bool>,
+
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
@@ -39,12 +60,6 @@ mod imp {
         pub(super) select_button_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
         pub(super) select_button: TemplateChild<gtk::CheckButton>,
-
-        pub(super) song: RefCell<Option<Song>>,
-        pub(super) is_selected: Cell<bool>,
-        pub(super) is_selection_mode_active: Cell<bool>,
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
-        pub(super) show_select_button_on_hover: Cell<bool>,
 
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
         pub(super) select_button_active_notify_handler: OnceCell<glib::SignalHandlerId>,
@@ -74,80 +89,7 @@ mod imp {
     }
 
     impl ObjectImpl for SongTile {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Song represented by Self
-                    glib::ParamSpecObject::builder::<Song>("song")
-                        .explicit_notify()
-                        .build(),
-                    // If self should be displayed as selected
-                    glib::ParamSpecBoolean::builder("selected")
-                        .explicit_notify()
-                        .build(),
-                    // If self is active
-                    glib::ParamSpecBoolean::builder("active")
-                        .read_only()
-                        .build(),
-                    // Current selection mode
-                    glib::ParamSpecBoolean::builder("is-selection-mode-active")
-                        .explicit_notify()
-                        .build(),
-                    // Whether to show select button on hover
-                    glib::ParamSpecBoolean::builder("show-select-button-on-hover")
-                        .explicit_notify()
-                        .build(),
-                    // Current adapative mode
-                    glib::ParamSpecEnum::builder::<AdaptiveMode>("adaptive-mode")
-                        .explicit_notify()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => {
-                    let song = value.get().unwrap();
-                    obj.set_song(song);
-                }
-                "selected" => {
-                    let is_selected = value.get().unwrap();
-                    obj.set_selected(is_selected);
-                }
-                "is-selection-mode-active" => {
-                    let is_selection_mode_active = value.get().unwrap();
-                    obj.set_selection_mode_active(is_selection_mode_active);
-                }
-                "show-select-button-on-hover" => {
-                    let show_select_button_on_hover = value.get().unwrap();
-                    obj.set_show_select_button_on_hover(show_select_button_on_hover);
-                }
-                "adaptive-mode" => {
-                    let adaptive_mode = value.get().unwrap();
-                    obj.set_adaptive_mode(adaptive_mode);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => obj.song().into(),
-                "selected" => obj.is_selected().into(),
-                "active" => obj.is_active().into(),
-                "is-selection-mode-active" => obj.is_selection_mode_active().into(),
-                "show-select-button-on-hover" => obj.shows_select_button_on_hover().into(),
-                "adaptive-mode" => obj.adaptive_mode().into(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> =
@@ -200,7 +142,7 @@ mod imp {
                                 obj.emit_by_name::<()>("selection-mode-requested", &[]);
                             }
 
-                            obj.notify("active");
+                            obj.notify_is_active();
                         })),
                 )
                 .unwrap();
@@ -222,6 +164,86 @@ mod imp {
     }
 
     impl WidgetImpl for SongTile {}
+
+    impl SongTile {
+        fn set_song(&self, song: Option<Song>) {
+            let obj = self.obj();
+
+            if song == obj.song() {
+                return;
+            }
+
+            self.song_binding_group.set_source(song.as_ref());
+
+            self.album_cover.set_song(song.clone());
+
+            self.song.replace(song);
+            obj.update_playback_button_visibility();
+
+            obj.notify_song();
+        }
+
+        fn set_is_selected(&self, is_selected: bool) {
+            let obj = self.obj();
+
+            if is_selected == obj.is_selected() {
+                return;
+            }
+
+            self.is_selected.set(is_selected);
+
+            let handler_id = self
+                .select_button_active_notify_handler
+                .get()
+                .expect("Handler id was not set on constructed");
+            self.select_button.block_signal(handler_id);
+            self.select_button.set_active(is_selected);
+            self.select_button.unblock_signal(handler_id);
+
+            obj.notify_is_selected();
+        }
+
+        fn is_active(&self) -> bool {
+            self.select_button.is_active()
+        }
+
+        fn set_is_selection_mode_active(&self, is_selection_mode_active: bool) {
+            let obj = self.obj();
+
+            if is_selection_mode_active == obj.is_selection_mode_active() {
+                return;
+            }
+
+            self.is_selection_mode_active.set(is_selection_mode_active);
+            obj.update_select_button_visibility();
+            obj.notify_is_selection_mode_active();
+        }
+
+        fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+            let obj = self.obj();
+
+            if adaptive_mode == obj.adaptive_mode() {
+                return;
+            }
+
+            self.adaptive_mode.set(adaptive_mode);
+            obj.update_album_cover_size();
+            obj.notify_adaptive_mode();
+        }
+
+        fn set_shows_select_button_on_hover(&self, show_select_button_on_hover: bool) {
+            let obj = self.obj();
+
+            if show_select_button_on_hover == obj.shows_select_button_on_hover() {
+                return;
+            }
+
+            self.shows_select_button_on_hover
+                .set(show_select_button_on_hover);
+            obj.update_select_button_visibility();
+            obj.notify_shows_select_button_on_hover();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -232,108 +254,6 @@ glib::wrapper! {
 impl SongTile {
     pub fn new() -> Self {
         glib::Object::new()
-    }
-
-    pub fn set_song(&self, song: Option<Song>) {
-        if song == self.song() {
-            return;
-        }
-
-        let imp = self.imp();
-
-        imp.song_binding_group.set_source(song.as_ref());
-
-        imp.album_cover.set_song(song.clone());
-
-        imp.song.replace(song);
-        self.update_playback_button_visibility();
-
-        self.notify("song");
-    }
-
-    pub fn song(&self) -> Option<Song> {
-        self.imp().song.borrow().clone()
-    }
-
-    pub fn set_selected(&self, is_selected: bool) {
-        if is_selected == self.is_selected() {
-            return;
-        }
-
-        let imp = self.imp();
-
-        imp.is_selected.set(is_selected);
-
-        let handler_id = imp
-            .select_button_active_notify_handler
-            .get()
-            .expect("Handler id was not set on constructed");
-        imp.select_button.block_signal(handler_id);
-        imp.select_button.set_active(is_selected);
-        imp.select_button.unblock_signal(handler_id);
-
-        self.notify("selected");
-    }
-
-    pub fn is_selected(&self) -> bool {
-        self.imp().is_selected.get()
-    }
-
-    pub fn connect_active_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("active"), move |obj, _| f(obj))
-    }
-
-    pub fn is_active(&self) -> bool {
-        self.imp().select_button.is_active()
-    }
-
-    pub fn set_selection_mode_active(&self, is_selection_mode_active: bool) {
-        if is_selection_mode_active == self.is_selection_mode_active() {
-            return;
-        }
-
-        self.imp()
-            .is_selection_mode_active
-            .set(is_selection_mode_active);
-        self.update_select_button_visibility();
-        self.notify("is-selection-mode-active");
-    }
-
-    pub fn is_selection_mode_active(&self) -> bool {
-        self.imp().is_selection_mode_active.get()
-    }
-
-    pub fn set_show_select_button_on_hover(&self, show_select_button_on_hover: bool) {
-        if show_select_button_on_hover == self.shows_select_button_on_hover() {
-            return;
-        }
-
-        self.imp()
-            .show_select_button_on_hover
-            .set(show_select_button_on_hover);
-        self.update_select_button_visibility();
-        self.notify("show-select-button-on-hover");
-    }
-
-    pub fn shows_select_button_on_hover(&self) -> bool {
-        self.imp().show_select_button_on_hover.get()
-    }
-
-    pub fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
-        if adaptive_mode == self.adaptive_mode() {
-            return;
-        }
-
-        self.imp().adaptive_mode.set(adaptive_mode);
-        self.update_album_cover_size();
-        self.notify("adaptive-mode");
-    }
-
-    pub fn adaptive_mode(&self) -> AdaptiveMode {
-        self.imp().adaptive_mode.get()
     }
 
     pub fn connect_selection_mode_requested<F>(&self, f: F) -> glib::SignalHandlerId
