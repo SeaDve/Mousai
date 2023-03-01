@@ -31,9 +31,10 @@ pub fn app_instance() -> Application {
     gio::Application::default().unwrap().downcast().unwrap()
 }
 
-/// Generate a random "unique" String made up of real time and a random u32 in hex.
+/// Generate a random "unique" String made up of real time and a random u32
+/// both encoded in hex.
 pub fn generate_unique_id() -> String {
-    format!("{}-{:x}", glib::real_time(), glib::random_int())
+    format!("{:x}-{:x}", glib::real_time(), glib::random_int())
 }
 
 #[cfg(test)]
