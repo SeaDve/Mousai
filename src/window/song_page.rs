@@ -348,8 +348,13 @@ impl SongPage {
         );
 
         imp.last_heard_row.set_value(
-            song.map(|song| song.last_heard().fuzzy_display())
-                .unwrap_or_default(),
+            song.map(|song| {
+                song.last_heard().map_or_else(
+                    || gettext("Unknown").into(),
+                    |last_heard| last_heard.fuzzy_display(),
+                )
+            })
+            .unwrap_or_default(),
         );
         imp.album_row
             .set_value(song.map(|song| song.album()).unwrap_or_default());
