@@ -7,15 +7,8 @@ use std::fmt;
 
 /// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, glib::Boxed, PartialEq, Eq, PartialOrd, Ord)]
-#[boxed_type(name = "MsaiDateTime")] // TODO drop Boxed derive and replace with ValueDelegate
+#[boxed_type(name = "MsaiDateTime", nullable)] // TODO drop Boxed derive and replace with ValueDelegate
 pub struct DateTime(glib::DateTime);
-
-// FIXME consider dropping this and make song `last_heard` prop optional
-impl Default for DateTime {
-    fn default() -> Self {
-        Self::now_local()
-    }
-}
 
 impl DateTime {
     pub fn now_local() -> Self {

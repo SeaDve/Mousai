@@ -51,7 +51,7 @@ mod imp {
         pub(super) lyrics: RefCell<Option<String>>,
         /// Date and time when last heard
         #[property(get, set = Self::set_last_heard, explicit_notify)]
-        pub(super) last_heard: RefCell<DateTime>,
+        pub(super) last_heard: RefCell<Option<DateTime>>,
         /// Whether the song was heard for the first time
         #[property(get, set = Self::set_is_newly_heard, explicit_notify)]
         pub(super) is_newly_heard: Cell<bool>,
@@ -68,7 +68,7 @@ mod imp {
     }
 
     impl Song {
-        fn set_last_heard(&self, last_heard: DateTime) {
+        fn set_last_heard(&self, last_heard: Option<DateTime>) {
             let obj = self.obj();
 
             if last_heard == obj.last_heard() {
@@ -291,7 +291,7 @@ mod test {
 
         assert_eq!(song.id(), SongId::for_test("UniqueSongId"));
         assert_eq!(
-            song.last_heard().to_iso8601(),
+            song.last_heard().unwrap().to_iso8601(),
             "2022-05-14T10:15:37.798479+08"
         );
         assert_eq!(song.title(), "Some song");
