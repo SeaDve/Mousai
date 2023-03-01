@@ -277,8 +277,8 @@ fn migrate_from_memory_list(env: &heed::Env, db: &SongDatabase) -> Result<()> {
 
         let id = song_link
             .as_ref()
-            .map_or_else(SongId::default, |song_link| {
-                SongId::new("AudD", song_link.trim_start_matches("https://lis.tn/"))
+            .map_or_else(SongId::generate_unique, |song_link| {
+                SongId::from("AudD", song_link.trim_start_matches("https://lis.tn/"))
             });
 
         let mut song_builder = Song::builder(
@@ -328,7 +328,7 @@ mod test {
     };
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::new_for_test(id), id, id, id).build()
+        Song::builder(&SongId::for_test(id), id, id, id).build()
     }
 
     fn new_test_song_list() -> SongList {
@@ -426,21 +426,21 @@ mod test {
         let db: SongDatabase = env
             .create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))
             .unwrap();
-        db.put(&mut wtxn, &SongId::new_for_test("a"), &new_test_song("a"))
+        db.put(&mut wtxn, &SongId::for_test("a"), &new_test_song("a"))
             .unwrap();
-        db.put(&mut wtxn, &SongId::new_for_test("b"), &new_test_song("b"))
+        db.put(&mut wtxn, &SongId::for_test("b"), &new_test_song("b"))
             .unwrap();
         wtxn.commit().unwrap();
 
         let song_list = SongList::load_from_env(env).unwrap();
 
         assert_eq!(
-            song_list.get(&SongId::new_for_test("a")).unwrap().id(),
-            SongId::new_for_test("a")
+            song_list.get(&SongId::for_test("a")).unwrap().id(),
+            SongId::for_test("a")
         );
         assert_eq!(
-            song_list.get(&SongId::new_for_test("b")).unwrap().id(),
-            SongId::new_for_test("b")
+            song_list.get(&SongId::for_test("b")).unwrap().id(),
+            SongId::for_test("b")
         );
 
         assert_n_items_and_db_count_eq(&song_list, 2);
@@ -636,8 +636,8 @@ mod test {
 
         assert_eq!(n_called.get(), 0);
         assert_eq!(
-            song_list.remove(&SongId::new_for_test("0")).unwrap().id(),
-            SongId::new_for_test("0")
+            song_list.remove(&SongId::for_test("0")).unwrap().id(),
+            SongId::for_test("0")
         );
         assert_eq!(n_called.get(), 1);
     }
@@ -657,7 +657,7 @@ mod test {
         });
 
         assert_eq!(n_called.get(), 0);
-        assert!(song_list.remove(&SongId::new_for_test("0")).is_none());
+        assert!(song_list.remove(&SongId::for_test("0")).is_none());
         assert_eq!(n_called.get(), 0);
     }
 
@@ -670,14 +670,14 @@ mod test {
 
         let n_called_clone = Rc::clone(&n_called);
         song_list.connect_removed(move |_, song| {
-            assert_eq!(song.id(), SongId::new_for_test("0"));
+            assert_eq!(song.id(), SongId::for_test("0"));
             n_called_clone.set(n_called_clone.get() + 1);
         });
 
         assert_eq!(n_called.get(), 0);
         assert_eq!(
-            song_list.remove(&SongId::new_for_test("0")).unwrap().id(),
-            SongId::new_for_test("0")
+            song_list.remove(&SongId::for_test("0")).unwrap().id(),
+            SongId::for_test("0")
         );
         assert_eq!(n_called.get(), 1);
     }
@@ -694,7 +694,7 @@ mod test {
         });
 
         assert_eq!(n_called.get(), 0);
-        assert!(song_list.remove(&SongId::new_for_test("0")).is_none());
+        assert!(song_list.remove(&SongId::for_test("0")).is_none());
         assert_eq!(n_called.get(), 0);
     }
 }

@@ -30,7 +30,7 @@ impl AudD {
 
     fn build_song_from_data(data: Data) -> Song {
         let mut song_builder = Song::builder(
-            &SongId::new("AudD", data.info_link.trim_start_matches("https://lis.tn/")), // Info link is unique to every song
+            &SongId::from("AudD", data.info_link.trim_start_matches("https://lis.tn/")), // Info link is unique to every song
             &data.title,
             &data.artist,
             &data.album,

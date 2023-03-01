@@ -218,7 +218,7 @@ mod tests {
     }
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::new_for_test(id), id, id, id).build()
+        Song::builder(&SongId::for_test(id), id, id, id).build()
     }
 
     fn assert_n_items_and_db_count_eq(recordings: &Recordings, n: usize) {

@@ -925,7 +925,7 @@ mod test {
     }
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::new_for_test(id), id, id, id).build()
+        Song::builder(&SongId::for_test(id), id, id, id).build()
     }
 
     fn trigger_purge_purgatory_leaflet_pages(view: &HistoryView) {
@@ -957,7 +957,7 @@ mod test {
                 .song()
                 .unwrap()
                 .id(),
-            SongId::new_for_test(expected_id)
+            SongId::for_test(expected_id)
         );
     }
 

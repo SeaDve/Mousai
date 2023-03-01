@@ -141,7 +141,13 @@ impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_imp = imp::Song::deserialize(deserializer)?;
         Ok(glib::Object::builder()
-            .property("id", deserialized_imp.id.into_inner().unwrap_or_default())
+            .property(
+                "id",
+                deserialized_imp
+                    .id
+                    .into_inner()
+                    .unwrap_or_else(SongId::generate_unique),
+            )
             .property("title", deserialized_imp.title.into_inner())
             .property("artist", deserialized_imp.artist.into_inner())
             .property("album", deserialized_imp.album.into_inner())
@@ -231,7 +237,7 @@ mod test {
     #[test]
     fn id_ref() {
         let song = Song::builder(
-            &SongId::new_for_test("UniqueSongId"),
+            &SongId::for_test("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
@@ -243,7 +249,7 @@ mod test {
     #[test]
     fn properties() {
         let song = Song::builder(
-            &SongId::new_for_test("UniqueSongId"),
+            &SongId::for_test("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
@@ -283,7 +289,7 @@ mod test {
         )
         .unwrap();
 
-        assert_eq!(song.id(), SongId::new_for_test("UniqueSongId"));
+        assert_eq!(song.id(), SongId::for_test("UniqueSongId"));
         assert_eq!(
             song.last_heard().to_iso8601(),
             "2022-05-14T10:15:37.798479+08"
