@@ -19,6 +19,10 @@ const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 // FIXME use more efficient encoding than json
 type SongDatabase = heed::Database<SerdeJson<SongId>, SerdeJson<Song>>;
 
+#[derive(Clone, glib::Boxed)]
+#[boxed_type(name = "MsaiBoxedSongVec")]
+struct BoxedSongVec(Vec<Song>);
+
 mod imp {
     use super::*;
     use glib::subclass::Signal;
@@ -42,7 +46,7 @@ mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder("removed")
-                    .param_types([Song::static_type()])
+                    .param_types([BoxedSongVec::static_type()])
                     .build()]
             });
 
@@ -196,10 +200,13 @@ impl SongList {
             let removed = { imp.list.borrow_mut().shift_remove_full(*song_id) };
             if let Some((index, _, song)) = removed {
                 unbind_song_to_db(&song);
-                self.emit_by_name::<()>("removed", &[&song]);
                 self.items_changed(index as u32, 1, 0); // TODO Optimize this
                 taken.push(song);
             }
+        }
+
+        if !taken.is_empty() {
+            self.emit_by_name::<()>("removed", &[&BoxedSongVec(taken.clone())]);
         }
 
         taken
@@ -219,13 +226,13 @@ impl SongList {
 
     pub fn connect_removed<F>(&self, f: F) -> glib::SignalHandlerId
     where
-        F: Fn(&Self, &Song) + 'static,
+        F: Fn(&Self, &[Song]) + 'static,
     {
         self.connect_closure(
             "removed",
             true,
-            closure_local!(|obj: &Self, song: &Song| {
-                f(obj, song);
+            closure_local!(|obj: &Self, boxed: BoxedSongVec| {
+                f(obj, &boxed.0);
             }),
         )
     }
@@ -683,8 +690,9 @@ mod test {
 
         let r_n_called = Rc::new(Cell::new(0));
         let r_n_called_clone = Rc::clone(&r_n_called);
-        song_list.connect_removed(move |_, song| {
-            assert_eq!(song.id(), SongId::for_test("0"));
+        song_list.connect_removed(move |_, songs| {
+            assert_eq!(songs.len(), 1);
+            assert_eq!(songs[0].id(), SongId::for_test("0"));
             r_n_called_clone.set(r_n_called_clone.get() + 1);
         });
 
@@ -719,7 +727,7 @@ mod test {
 
         let r_n_called = Rc::new(Cell::new(0));
         let r_n_called_clone = Rc::clone(&r_n_called);
-        song_list.connect_removed(move |_, _song| {
+        song_list.connect_removed(move |_, _songs| {
             r_n_called_clone.set(r_n_called_clone.get() + 1);
         });
 
@@ -734,8 +742,10 @@ mod test {
     fn items_changed_removed_many() {
         let (env, _tempdir) = db::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0"));
-        song_list.append(new_test_song("1"));
+
+        let song_0 = new_test_song("0");
+        let song_1 = new_test_song("1");
+        song_list.append_many(vec![song_0.clone(), song_1.clone()]);
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
         let ic_calls_output_clone = Rc::clone(&ic_calls_output);
@@ -747,8 +757,8 @@ mod test {
 
         let r_calls_output = Rc::new(RefCell::new(Vec::new()));
         let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, song| {
-            r_calls_output_clone.borrow_mut().push(song.id());
+        song_list.connect_removed(move |_, songs| {
+            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -758,23 +768,20 @@ mod test {
             2
         );
         assert_eq!(ic_calls_output.take(), &[(0, 1, 0), (0, 1, 0)]);
-        assert_eq!(
-            r_calls_output.take(),
-            &[SongId::for_test("0"), SongId::for_test("1")]
-        );
+        assert_eq!(r_calls_output.take(), vec![vec![song_0, song_1]]);
     }
 
     #[test]
     fn items_changed_removed_many_in_between() {
         let (env, _tempdir) = db::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append_many(vec![
-            new_test_song("0"),
-            new_test_song("1"),
-            new_test_song("2"),
-            new_test_song("3"),
-            new_test_song("4"),
-        ]);
+
+        let song_0 = new_test_song("0");
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        let song_3 = new_test_song("3");
+        let song_4 = new_test_song("4");
+        song_list.append_many(vec![song_0, song_1.clone(), song_2, song_3.clone(), song_4]);
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
         let ic_calls_output_clone = Rc::clone(&ic_calls_output);
@@ -786,8 +793,8 @@ mod test {
 
         let r_calls_output = Rc::new(RefCell::new(Vec::new()));
         let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, song| {
-            r_calls_output_clone.borrow_mut().push(song.id());
+        song_list.connect_removed(move |_, songs| {
+            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -797,18 +804,17 @@ mod test {
             2
         );
         assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (2, 1, 0)]);
-        assert_eq!(
-            r_calls_output.take(),
-            &[SongId::for_test("1"), SongId::for_test("3")]
-        );
+        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_3]]);
     }
 
     #[test]
     fn items_changed_removed_many_with_duplicates() {
         let (env, _tempdir) = db::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0"));
-        song_list.append(new_test_song("1"));
+
+        let song_0 = new_test_song("0");
+        let song_1 = new_test_song("1");
+        song_list.append_many(vec![song_0.clone(), song_1.clone()]);
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
         let ic_calls_output_clone = Rc::clone(&ic_calls_output);
@@ -820,8 +826,8 @@ mod test {
 
         let r_calls_output = Rc::new(RefCell::new(Vec::new()));
         let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, song| {
-            r_calls_output_clone.borrow_mut().push(song.id());
+        song_list.connect_removed(move |_, songs| {
+            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -835,18 +841,17 @@ mod test {
             2
         );
         assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (0, 1, 0)]);
-        assert_eq!(
-            r_calls_output.take(),
-            &[SongId::for_test("1"), SongId::for_test("0")]
-        );
+        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
     }
 
     #[test]
     fn items_changed_removed_many_reversed_order() {
         let (env, _tempdir) = db::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0"));
-        song_list.append(new_test_song("1"));
+
+        let song_0 = new_test_song("0");
+        let song_1 = new_test_song("1");
+        song_list.append_many(vec![song_0.clone(), song_1.clone()]);
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
         let ic_calls_output_clone = Rc::clone(&ic_calls_output);
@@ -858,8 +863,8 @@ mod test {
 
         let r_calls_output = Rc::new(RefCell::new(Vec::new()));
         let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, song| {
-            r_calls_output_clone.borrow_mut().push(song.id());
+        song_list.connect_removed(move |_, songs| {
+            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -869,18 +874,14 @@ mod test {
             2
         );
         assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (0, 1, 0)]);
-        assert_eq!(
-            r_calls_output.take(),
-            &[SongId::for_test("1"), SongId::for_test("0")]
-        );
+        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
     }
 
     #[test]
     fn items_changed_removed_many_none() {
         let (env, _tempdir) = db::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("1"));
-        song_list.append(new_test_song("2"));
+        song_list.append_many(vec![new_test_song("1"), new_test_song("2")]);
 
         let ic_n_called = Rc::new(Cell::new(0));
         let ic_n_called_clone = Rc::clone(&ic_n_called);
@@ -890,7 +891,7 @@ mod test {
 
         let r_n_called = Rc::new(Cell::new(0));
         let r_n_called_clone = Rc::clone(&r_n_called);
-        song_list.connect_removed(move |_, _song| {
+        song_list.connect_removed(move |_, _songs| {
             r_n_called_clone.set(r_n_called_clone.get() + 1);
         });
 
