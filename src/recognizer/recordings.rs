@@ -144,7 +144,7 @@ impl Recordings {
                 .shift_remove_full(id.as_str())
                 .expect("id exists");
             unbind_recording_to_items_changed_and_db(&recording);
-            self.items_changed(index as u32, 1, 0);
+            self.items_changed(index as u32, 1, 0); // TODO Optimize this
             taken.push(recording);
         }
 

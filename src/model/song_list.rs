@@ -197,7 +197,7 @@ impl SongList {
             if let Some((index, _, song)) = removed {
                 unbind_song_to_db(&song);
                 self.emit_by_name::<()>("removed", &[&song]);
-                self.items_changed(index as u32, 1, 0);
+                self.items_changed(index as u32, 1, 0); // TODO Optimize this
                 taken.push(song);
             }
         }
