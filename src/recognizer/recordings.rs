@@ -201,17 +201,10 @@ mod tests {
 
     use crate::{
         core::DateTime,
+        db,
         model::{Song, SongId},
         recognizer::recording::BoxedRecognizeResult,
     };
-
-    fn new_test_recordings() -> Recordings {
-        let env = heed::EnvOpenOptions::new()
-            .max_dbs(1)
-            .open(tempfile::tempdir().unwrap())
-            .unwrap();
-        Recordings::load_from_env(env).unwrap()
-    }
 
     fn new_test_recording(bytes: &'static [u8]) -> Recording {
         Recording::new(&glib::Bytes::from_static(bytes), &DateTime::now_local())
@@ -303,10 +296,7 @@ mod tests {
 
     #[test]
     fn load_from_db() {
-        let env = heed::EnvOpenOptions::new()
-            .max_dbs(1)
-            .open(tempfile::tempdir().unwrap())
-            .unwrap();
+        let (env, _tempdir) = db::new_test_env();
         let mut wtxn = env.write_txn().unwrap();
         let db: RecordingDatabase = env
             .create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))
@@ -327,7 +317,8 @@ mod tests {
 
     #[test]
     fn insert() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 0);
 
         recordings.insert(new_test_recording(b"a"));
@@ -359,7 +350,8 @@ mod tests {
 
     #[test]
     fn insert_items_changed() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
 
         recordings.connect_items_changed(|_, index, removed, added| {
             assert_eq!(index, 0);
@@ -372,8 +364,10 @@ mod tests {
 
     #[test]
     fn peek_filtered() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 0);
+
         assert!(recordings.peek_filtered(|_| false).is_empty());
         assert!(recordings.peek_filtered(|_| true).is_empty());
         assert!(recordings
@@ -405,7 +399,8 @@ mod tests {
 
     #[test]
     fn peek_filtered_items_changed() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
 
         let a_handler_id = recordings.connect_items_changed(|_, _, _, _| {
             panic!("Recordings::items_changed should not be emitted when peek_filtered is called");
@@ -425,7 +420,8 @@ mod tests {
 
     #[test]
     fn take_filtered() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
 
         assert_n_items_and_db_count_eq(&recordings, 0);
         assert!(recordings.take_filtered(|_| false).is_empty());
@@ -480,7 +476,8 @@ mod tests {
 
     #[test]
     fn take_filtered_items_changed() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
         recordings.insert(new_test_recording(b"a"));
         recordings.insert(new_test_recording(b"b"));
 
@@ -510,7 +507,9 @@ mod tests {
 
     #[test]
     fn recording_notify_items_changed() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
+
         let recording_a = new_test_recording(b"a");
         recordings.insert(recording_a.clone());
         let recording_b = new_test_recording(b"b");
@@ -534,7 +533,9 @@ mod tests {
 
     #[test]
     fn is_empty() {
-        let recordings = new_test_recordings();
+        let (env, _tempdir) = db::new_test_env();
+        let recordings = Recordings::load_from_env(env).unwrap();
+
         assert!(recordings.is_empty());
         assert_n_items_and_db_count_eq(&recordings, 0);
 

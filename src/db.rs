@@ -19,3 +19,19 @@ pub fn init_env() -> Result<heed::Env> {
     };
     Ok(env)
 }
+
+/// Create a new env for tests with 1 max named db and a
+/// path to a temporary directory.
+#[cfg(test)]
+pub fn new_test_env() -> (heed::Env, tempfile::TempDir) {
+    let tempdir = tempfile::tempdir().unwrap();
+    let env = unsafe {
+        heed::EnvOpenOptions::new()
+            .max_dbs(1)
+            .flag(heed::Flags::MdbWriteMap)
+            .flag(heed::Flags::MdbMapAsync)
+            .open(&tempdir)
+            .unwrap()
+    };
+    (env, tempdir)
+}
