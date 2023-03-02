@@ -121,6 +121,7 @@ impl Song {
     }
 
     pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
+        // FIXME: Don't return an err if the song doesn't have an album art link (Maybe just handle this outside of `Song`)
         let album_art_link = self
             .album_art_link()
             .ok_or_else(|| anyhow!("Song doesn't have an album art link"))?;
