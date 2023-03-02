@@ -598,6 +598,9 @@ impl HistoryView {
                 imp.leaflet_pages_purgatory.borrow_mut().push(page);
             });
 
+        // TODO Delete the songs from active RecognizedPage too. If every song
+        // in a RecognizedPage is removed, the RecognizedPage should be removed from the leaflet too.
+
         let prev_visible_child_index = imp.leaflet.visible_child().and_then(|child| {
             leaflet_pages
                 .iter::<adw::LeafletPage>()
