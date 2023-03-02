@@ -12,7 +12,7 @@ use once_cell::unsync::OnceCell;
 use std::{cell::RefCell, collections::HashSet};
 
 use super::{Song, SongId};
-use crate::db::SONG_LIST_DB_NAME;
+use crate::{db::SONG_LIST_DB_NAME, debug_assert_or_log};
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
@@ -83,10 +83,13 @@ impl SongList {
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
         let mut wtxn = env.write_txn()?;
         let db = env.create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))?;
-        let songs = db.iter(&wtxn)?.collect::<Result<IndexMap<_, _>, _>>()?;
+        let songs = db
+            .iter(&wtxn)?
+            .collect::<Result<IndexMap<SongId, Song>, _>>()?;
         wtxn.commit()?;
 
         tracing::debug!("Loaded {} songs", songs.len());
+        debug_assert_or_log!(songs.iter().all(|(id, song)| id == song.id_ref()));
 
         let this = glib::Object::new::<Self>();
 
