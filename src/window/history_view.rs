@@ -1029,9 +1029,8 @@ mod test {
         let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
-        song_list.append(song_1.clone());
         let song_2 = new_test_song("2");
-        song_list.append(song_2.clone());
+        song_list.append_many(vec![song_1.clone(), song_2.clone()]);
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1073,11 +1072,9 @@ mod test {
         let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
-        song_list.append(song_1.clone());
         let song_2 = new_test_song("2");
-        song_list.append(song_2.clone());
         let song_3 = new_test_song("3");
-        song_list.append(song_3.clone());
+        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1114,11 +1111,9 @@ mod test {
         let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
-        song_list.append(song_1.clone());
         let song_2 = new_test_song("2");
-        song_list.append(song_2.clone());
         let song_3 = new_test_song("3");
-        song_list.append(song_3.clone());
+        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1201,11 +1196,9 @@ mod test {
         let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
-        song_list.append(song_1.clone());
         let song_2 = new_test_song("2");
-        song_list.append(song_2.clone());
         let song_3 = new_test_song("3");
-        song_list.append(song_3.clone());
+        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1283,9 +1276,8 @@ mod test {
         let song_list = new_test_song_list();
 
         let song_1 = new_test_song("1");
-        song_list.append(song_1.clone());
         let song_2 = new_test_song("2");
-        song_list.append(song_2.clone());
+        song_list.append_many(vec![song_1.clone(), song_2.clone()]);
 
         let view = HistoryView::new();
         view.bind_player(&player);
