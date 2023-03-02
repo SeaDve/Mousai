@@ -138,6 +138,7 @@ mod imp {
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
+                // FIXME do batch remove
                 obj.snapshot_selected_songs()
                     .iter()
                     .for_each(|selected_song| {

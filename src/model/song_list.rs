@@ -16,6 +16,7 @@ use crate::db::SONG_LIST_DB_NAME;
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
+// FIXME use more efficient encoding than json
 type SongDatabase = heed::Database<SerdeJson<SongId>, SerdeJson<Song>>;
 
 mod imp {
