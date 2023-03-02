@@ -49,7 +49,7 @@ mod imp {
 
             gtk::Window::set_default_icon_name(APP_ID);
 
-            self.env.set(db::init_env().unwrap()).unwrap();
+            self.env.set(db::new_env().unwrap()).unwrap();
 
             let obj = self.obj();
             obj.setup_gactions();
