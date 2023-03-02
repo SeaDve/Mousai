@@ -14,7 +14,7 @@ use super::{
 };
 use crate::{
     config::APP_ID,
-    debug_assert_or_log, debug_unreachable_or_log,
+    debug_assert_eq_or_log, debug_assert_or_log, debug_unreachable_or_log,
     model::{Song, SongFilter, SongId, SongList, SongSorter},
     player::Player,
     recognizer::Recognizer,
@@ -571,7 +571,7 @@ impl HistoryView {
             .and_then(|song_list| song_list.upgrade())
         {
             let mut removed_songs = song_list.remove_many(song_ids);
-            debug_assert_or_log!(removed_songs.len() == song_ids.len());
+            debug_assert_eq_or_log!(removed_songs.len(), song_ids.len());
             imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
         } else {
             debug_unreachable_or_log!("failed to remove song: SongList not found");

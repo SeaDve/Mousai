@@ -15,7 +15,7 @@ macro_rules! derived_properties {
     };
 }
 
-/// Like unreachable but logs as error instead of panicking on release builds.
+/// Like `unreachable` but logs as error instead of panicking on release builds.
 ///
 /// This should only be used on programmer errors.
 #[macro_export]
@@ -29,7 +29,7 @@ macro_rules! debug_unreachable_or_log {
     };
 }
 
-/// Like assert but logs as error instead of panicking on release builds.
+/// Like `assert` but logs as error instead of panicking on release builds.
 ///
 /// This should only be used on programmer errors.
 #[macro_export]
@@ -49,6 +49,32 @@ macro_rules! debug_assert_or_log {
         } else {
             if !$cond {
                 tracing::error!($($arg)*);
+            }
+        }
+    };
+}
+
+/// Like `assert_eq` but logs as error instead of panicking on release builds.
+///
+/// This should only be used on programmer errors.
+#[macro_export]
+macro_rules! debug_assert_eq_or_log {
+    ($left:expr, $right:expr) => {
+        if cfg!(debug_assertions) {
+            assert_eq!($left, $right);
+        } else {
+            match (&$left, &$right) {
+                (left_val, right_val) => {
+                    if !(*left_val == *right_val) {
+                        tracing::error!(
+                            r#"assertion failed: `(left == right)`
+  left: `{:?}`,
+ right: `{:?}`"#,
+                            left_val,
+                            right_val,
+                        );
+                    }
+                }
             }
         }
     };
