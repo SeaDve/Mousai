@@ -181,21 +181,28 @@ impl SongList {
         n_appended
     }
 
-    pub fn remove(&self, song_id: &SongId) -> Option<Song> {
+    pub fn remove_many(&self, song_ids: &[&SongId]) -> Vec<Song> {
+        let imp = self.imp();
+
         let (env, db) = self.db();
         let mut wtxn = env.write_txn().unwrap();
-        db.delete(&mut wtxn, song_id).unwrap();
+        for song_id in song_ids {
+            db.delete(&mut wtxn, song_id).unwrap();
+        }
         wtxn.commit().unwrap();
 
-        let removed = self.imp().list.borrow_mut().shift_remove_full(song_id);
-
-        if let Some((position, _, ref song)) = removed {
-            unbind_song_to_db(song);
-            self.emit_by_name::<()>("removed", &[song]);
-            self.items_changed(position as u32, 1, 0);
+        let mut taken = Vec::new();
+        for song_id in song_ids {
+            let removed = { imp.list.borrow_mut().shift_remove_full(*song_id) };
+            if let Some((index, _, song)) = removed {
+                unbind_song_to_db(&song);
+                self.emit_by_name::<()>("removed", &[&song]);
+                self.items_changed(index as u32, 1, 0);
+                taken.push(song);
+            }
         }
 
-        removed.map(|r| r.2)
+        taken
     }
 
     pub fn get(&self, song_id: &SongId) -> Option<Song> {
@@ -456,18 +463,68 @@ mod test {
         assert_eq!(song_list.get(song_1.id_ref()), Some(song_1.clone()));
         assert_eq!(song_list.get(song_2.id_ref()), Some(song_2.clone()));
 
-        let song_1_removed = song_list.remove(song_1.id_ref()).unwrap();
+        let song_1_removed = song_list.remove_many(&[song_1.id_ref()]).pop().unwrap();
         assert_eq!(song_1, song_1_removed);
         assert_eq!(song_list.get(song_1.id_ref()), None);
-        let song_2_removed = song_list.remove(song_2.id_ref()).unwrap();
+        let song_2_removed = song_list.remove_many(&[song_2.id_ref()]).pop().unwrap();
         assert_eq!(song_2, song_2_removed);
         assert_eq!(song_list.get(song_2.id_ref()), None);
 
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         // Ensure that the removed songs is not added back to the database
-        song_1_removed.set_is_newly_heard(true);
-        song_2_removed.set_is_newly_heard(true);
+        song_1.set_is_newly_heard(true);
+        song_2.set_is_newly_heard(true);
+        assert_n_items_and_db_count_eq(&song_list, 0);
+    }
+
+    #[test]
+    fn remove_many() {
+        let song_list = new_test_song_list();
+        assert_n_items_and_db_count_eq(&song_list, 0);
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+
+        song_list.append_many(vec![song_1.clone(), song_2.clone()]);
+        assert_eq!(song_list.get(song_1.id_ref()), Some(song_1.clone()));
+        assert_eq!(song_list.get(song_2.id_ref()), Some(song_2.clone()));
+        assert_n_items_and_db_count_eq(&song_list, 2);
+
+        let removed = song_list.remove_many(&[song_1.id_ref(), song_2.id_ref()]);
+        assert_eq!(removed, vec![song_1.clone(), song_2.clone()]);
+        assert_eq!(song_list.get(song_1.id_ref()), None);
+        assert_eq!(song_list.get(song_2.id_ref()), None);
+        assert_n_items_and_db_count_eq(&song_list, 0);
+
+        // Ensure that the removed songs is not added back to the database
+        song_1.set_is_newly_heard(true);
+        song_2.set_is_newly_heard(true);
+        assert_n_items_and_db_count_eq(&song_list, 0);
+    }
+
+    #[test]
+    fn remove_many_reversed() {
+        let song_list = new_test_song_list();
+        assert_n_items_and_db_count_eq(&song_list, 0);
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+
+        song_list.append_many(vec![song_1.clone(), song_2.clone()]);
+        assert_eq!(song_list.get(song_1.id_ref()), Some(song_1.clone()));
+        assert_eq!(song_list.get(song_2.id_ref()), Some(song_2.clone()));
+        assert_n_items_and_db_count_eq(&song_list, 2);
+
+        let removed = song_list.remove_many(&[song_2.id_ref(), song_1.id_ref()]);
+        assert_eq!(removed, vec![song_2.clone(), song_1.clone()]);
+        assert_eq!(song_list.get(song_1.id_ref()), None);
+        assert_eq!(song_list.get(song_2.id_ref()), None);
+        assert_n_items_and_db_count_eq(&song_list, 0);
+
+        // Ensure that the removed songs is not added back to the database
+        song_1.set_is_newly_heard(true);
+        song_2.set_is_newly_heard(true);
         assert_n_items_and_db_count_eq(&song_list, 0);
     }
 
@@ -520,7 +577,6 @@ mod test {
         song_list.append(new_test_song("0"));
 
         let n_called = Rc::new(Cell::new(0));
-
         let n_called_clone = Rc::clone(&n_called);
         song_list.connect_items_changed(move |_, index, removed, added| {
             assert_eq!(index, 0);
@@ -554,7 +610,6 @@ mod test {
         song_list.append(new_test_song("0"));
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
-
         let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
             calls_output_clone
@@ -585,7 +640,6 @@ mod test {
         song_list.append(new_test_song("1"));
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
-
         let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
             calls_output_clone
@@ -616,77 +670,226 @@ mod test {
         let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
 
-        let n_called = Rc::new(Cell::new(0));
-
-        let n_called_clone = Rc::clone(&n_called);
+        let ic_n_called = Rc::new(Cell::new(0));
+        let ic_n_called_clone = Rc::clone(&ic_n_called);
         song_list.connect_items_changed(move |_, index, removed, added| {
             assert_eq!(index, 0);
             assert_eq!(removed, 1);
             assert_eq!(added, 0);
-            n_called_clone.set(n_called_clone.get() + 1);
+            ic_n_called_clone.set(ic_n_called_clone.get() + 1);
         });
 
-        assert_eq!(n_called.get(), 0);
+        let r_n_called = Rc::new(Cell::new(0));
+        let r_n_called_clone = Rc::clone(&r_n_called);
+        song_list.connect_removed(move |_, song| {
+            assert_eq!(song.id(), SongId::for_test("0"));
+            r_n_called_clone.set(r_n_called_clone.get() + 1);
+        });
+
+        assert_eq!(ic_n_called.get(), 0);
+        assert_eq!(r_n_called.get(), 0);
         assert_eq!(
-            song_list.remove(&SongId::for_test("0")).unwrap().id(),
+            song_list
+                .remove_many(&[&SongId::for_test("0")])
+                .pop()
+                .unwrap()
+                .id(),
             SongId::for_test("0")
         );
-        assert_eq!(n_called.get(), 1);
+        assert_eq!(ic_n_called.get(), 1);
+        assert_eq!(r_n_called.get(), 1);
     }
 
     #[test]
     fn items_changed_removed_none() {
         let song_list = new_test_song_list();
+        song_list.append(new_test_song("1"));
 
-        let n_called = Rc::new(Cell::new(0));
-
-        let n_called_clone = Rc::clone(&n_called);
+        let ic_n_called = Rc::new(Cell::new(0));
+        let ic_n_called_clone = Rc::clone(&ic_n_called);
         song_list.connect_items_changed(move |_, index, removed, added| {
             assert_eq!(index, 0);
             assert_eq!(removed, 0);
             assert_eq!(added, 0);
-            n_called_clone.set(n_called_clone.get() + 1);
+            ic_n_called_clone.set(ic_n_called_clone.get() + 1);
         });
 
-        assert_eq!(n_called.get(), 0);
-        assert!(song_list.remove(&SongId::for_test("0")).is_none());
-        assert_eq!(n_called.get(), 0);
+        let r_n_called = Rc::new(Cell::new(0));
+        let r_n_called_clone = Rc::clone(&r_n_called);
+        song_list.connect_removed(move |_, _song| {
+            r_n_called_clone.set(r_n_called_clone.get() + 1);
+        });
+
+        assert_eq!(ic_n_called.get(), 0);
+        assert_eq!(r_n_called.get(), 0);
+        assert!(song_list.remove_many(&[&SongId::for_test("0")]).is_empty());
+        assert_eq!(ic_n_called.get(), 0);
+        assert_eq!(r_n_called.get(), 0);
     }
 
     #[test]
-    fn connect_removed_some() {
+    fn items_changed_removed_many() {
         let song_list = new_test_song_list();
         song_list.append(new_test_song("0"));
+        song_list.append(new_test_song("1"));
 
-        let n_called = Rc::new(Cell::new(0));
-
-        let n_called_clone = Rc::clone(&n_called);
-        song_list.connect_removed(move |_, song| {
-            assert_eq!(song.id(), SongId::for_test("0"));
-            n_called_clone.set(n_called_clone.get() + 1);
+        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        song_list.connect_items_changed(move |_, index, removed, added| {
+            ic_calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
         });
 
-        assert_eq!(n_called.get(), 0);
+        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let r_calls_output_clone = Rc::clone(&r_calls_output);
+        song_list.connect_removed(move |_, song| {
+            r_calls_output_clone.borrow_mut().push(song.id());
+        });
+
         assert_eq!(
-            song_list.remove(&SongId::for_test("0")).unwrap().id(),
-            SongId::for_test("0")
+            song_list
+                .remove_many(&[&SongId::for_test("0"), &SongId::for_test("1")])
+                .len(),
+            2
         );
-        assert_eq!(n_called.get(), 1);
+        assert_eq!(ic_calls_output.take(), &[(0, 1, 0), (0, 1, 0)]);
+        assert_eq!(
+            r_calls_output.take(),
+            &[SongId::for_test("0"), SongId::for_test("1")]
+        );
     }
 
     #[test]
-    fn connect_removed_none() {
+    fn items_changed_removed_many_in_between() {
         let song_list = new_test_song_list();
+        song_list.append_many(vec![
+            new_test_song("0"),
+            new_test_song("1"),
+            new_test_song("2"),
+            new_test_song("3"),
+            new_test_song("4"),
+        ]);
 
-        let n_called = Rc::new(Cell::new(0));
-
-        let n_called_clone = Rc::clone(&n_called);
-        song_list.connect_removed(move |_, _| {
-            n_called_clone.set(n_called_clone.get() + 1);
+        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        song_list.connect_items_changed(move |_, index, removed, added| {
+            ic_calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
         });
 
-        assert_eq!(n_called.get(), 0);
-        assert!(song_list.remove(&SongId::for_test("0")).is_none());
-        assert_eq!(n_called.get(), 0);
+        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let r_calls_output_clone = Rc::clone(&r_calls_output);
+        song_list.connect_removed(move |_, song| {
+            r_calls_output_clone.borrow_mut().push(song.id());
+        });
+
+        assert_eq!(
+            song_list
+                .remove_many(&[&SongId::for_test("1"), &SongId::for_test("3")])
+                .len(),
+            2
+        );
+        assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (2, 1, 0)]);
+        assert_eq!(
+            r_calls_output.take(),
+            &[SongId::for_test("1"), SongId::for_test("3")]
+        );
+    }
+
+    #[test]
+    fn items_changed_removed_many_with_duplicates() {
+        let song_list = new_test_song_list();
+        song_list.append(new_test_song("0"));
+        song_list.append(new_test_song("1"));
+
+        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        song_list.connect_items_changed(move |_, index, removed, added| {
+            ic_calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
+        });
+
+        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let r_calls_output_clone = Rc::clone(&r_calls_output);
+        song_list.connect_removed(move |_, song| {
+            r_calls_output_clone.borrow_mut().push(song.id());
+        });
+
+        assert_eq!(
+            song_list
+                .remove_many(&[
+                    &SongId::for_test("1"),
+                    &SongId::for_test("0"),
+                    &SongId::for_test("1"),
+                ])
+                .len(),
+            2
+        );
+        assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (0, 1, 0)]);
+        assert_eq!(
+            r_calls_output.take(),
+            &[SongId::for_test("1"), SongId::for_test("0")]
+        );
+    }
+
+    #[test]
+    fn items_changed_removed_many_reversed_order() {
+        let song_list = new_test_song_list();
+        song_list.append(new_test_song("0"));
+        song_list.append(new_test_song("1"));
+
+        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        song_list.connect_items_changed(move |_, index, removed, added| {
+            ic_calls_output_clone
+                .borrow_mut()
+                .push((index, removed, added));
+        });
+
+        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
+        let r_calls_output_clone = Rc::clone(&r_calls_output);
+        song_list.connect_removed(move |_, song| {
+            r_calls_output_clone.borrow_mut().push(song.id());
+        });
+
+        assert_eq!(
+            song_list
+                .remove_many(&[&SongId::for_test("1"), &SongId::for_test("0")])
+                .len(),
+            2
+        );
+        assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (0, 1, 0)]);
+        assert_eq!(
+            r_calls_output.take(),
+            &[SongId::for_test("1"), SongId::for_test("0")]
+        );
+    }
+
+    #[test]
+    fn items_changed_removed_many_none() {
+        let song_list = new_test_song_list();
+        song_list.append(new_test_song("1"));
+        song_list.append(new_test_song("2"));
+
+        let ic_n_called = Rc::new(Cell::new(0));
+        let ic_n_called_clone = Rc::clone(&ic_n_called);
+        song_list.connect_items_changed(move |_, _index, _removed, _added| {
+            ic_n_called_clone.set(ic_n_called_clone.get() + 1);
+        });
+
+        let r_n_called = Rc::new(Cell::new(0));
+        let r_n_called_clone = Rc::clone(&r_n_called);
+        song_list.connect_removed(move |_, _song| {
+            r_n_called_clone.set(r_n_called_clone.get() + 1);
+        });
+
+        assert!(song_list
+            .remove_many(&[&SongId::for_test("0"), &SongId::for_test("3")])
+            .is_empty(),);
+        assert_eq!(ic_n_called.get(), 0);
+        assert_eq!(r_n_called.get(), 0);
     }
 }
