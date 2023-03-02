@@ -13,6 +13,7 @@ pub fn new_env() -> Result<heed::Env> {
     fs::create_dir_all(&path)?;
     let env = unsafe {
         heed::EnvOpenOptions::new()
+            .map_size(10 * 1024 * 1024) // 10 MiB
             .max_dbs(N_NAMED_DB)
             .flag(heed::Flags::MdbWriteMap)
             .flag(heed::Flags::MdbMapAsync)
@@ -28,6 +29,7 @@ pub fn new_test_env() -> (heed::Env, tempfile::TempDir) {
     let tempdir = tempfile::tempdir().unwrap();
     let env = unsafe {
         heed::EnvOpenOptions::new()
+            .map_size(10 * 1024 * 1024) // 10 MiB
             .max_dbs(1)
             .flag(heed::Flags::MdbWriteMap)
             .flag(heed::Flags::MdbMapAsync)
