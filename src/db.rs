@@ -17,8 +17,16 @@ pub fn new_env() -> Result<heed::Env> {
             .max_dbs(N_NAMED_DB)
             .flag(heed::Flags::MdbWriteMap)
             .flag(heed::Flags::MdbMapAsync)
-            .open(path)?
+            .open(&path)?
     };
+
+    tracing::debug!(
+        ?path,
+        info = ?env.info(),
+        real_disk_size = ?env.real_disk_size(),
+        "Opened db env"
+    );
+
     Ok(env)
 }
 
