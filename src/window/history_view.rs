@@ -914,7 +914,7 @@ mod test {
 
     use std::sync::Once;
 
-    use crate::{model::SongId, RESOURCES_FILE};
+    use crate::{db, RESOURCES_FILE};
 
     static GRESOURCES_INIT: Once = Once::new();
 
@@ -932,14 +932,6 @@ mod test {
 
     fn trigger_purge_purgatory_leaflet_pages(view: &HistoryView) {
         view.imp().leaflet.notify("child-transition-running");
-    }
-
-    fn new_test_song_list() -> SongList {
-        let env = heed::EnvOpenOptions::new()
-            .max_dbs(1)
-            .open(tempfile::tempdir().unwrap())
-            .unwrap();
-        SongList::load_from_env(env).unwrap()
     }
 
     #[track_caller]
@@ -974,7 +966,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song = new_test_song("1");
         song_list.append(song.clone());
@@ -1026,7 +1019,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1069,7 +1063,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1108,7 +1103,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1162,7 +1158,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1193,7 +1190,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1229,7 +1227,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1273,7 +1272,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1308,7 +1308,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let song_list = new_test_song_list();
+        let (env, _tempdir) = db::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
