@@ -15,7 +15,7 @@ use super::{
 use crate::{
     config::APP_ID,
     debug_assert_or_log, debug_unreachable_or_log,
-    model::{Song, SongFilter, SongList, SongSorter},
+    model::{Song, SongFilter, SongId, SongList, SongSorter},
     player::Player,
     recognizer::Recognizer,
     utils,
@@ -138,12 +138,12 @@ mod imp {
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
-                // FIXME do batch remove
-                obj.snapshot_selected_songs()
+                let selected_songs = obj.snapshot_selected_songs();
+                let song_ids = selected_songs
                     .iter()
-                    .for_each(|selected_song| {
-                        obj.remove_song(selected_song);
-                    });
+                    .map(|song| song.id_ref())
+                    .collect::<Vec<_>>();
+                obj.remove_songs(&song_ids);
                 obj.show_undo_remove_song_toast();
             });
         }
@@ -305,7 +305,7 @@ impl HistoryView {
 
         let song_removed_handler_id =
             song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
-                obj.remove_song(song);
+                obj.remove_songs(&[song.id_ref()]);
                 obj.show_undo_remove_song_toast();
             }));
         let adaptive_mode_binding = self
@@ -561,8 +561,8 @@ impl HistoryView {
         }
     }
 
-    /// Adds song to purgatory, and add `SongPage`s that contain it to the purgatory.
-    fn remove_song(&self, song: &Song) {
+    /// Adds songs with ids given to purgatory, and add `SongPage`s that contain them to the purgatory.
+    fn remove_songs(&self, song_ids: &[&SongId]) {
         let imp = self.imp();
 
         if let Some(song_list) = imp
@@ -570,11 +570,9 @@ impl HistoryView {
             .get()
             .and_then(|song_list| song_list.upgrade())
         {
-            if let Some(removed_song) = song_list.remove(song.id_ref()) {
-                imp.songs_purgatory.borrow_mut().push(removed_song);
-            } else {
-                debug_unreachable_or_log!("failed to remove song: Song not found in SongList");
-            }
+            let mut removed_songs = song_list.remove_many(song_ids);
+            debug_assert_or_log!(removed_songs.len() == song_ids.len());
+            imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
         } else {
             debug_unreachable_or_log!("failed to remove song: SongList not found");
         }
@@ -590,11 +588,9 @@ impl HistoryView {
                 page.child()
                     .downcast_ref::<SongPage>()
                     .map_or(false, |song_page| {
-                        song_page
-                            .song()
-                            .map(|song_page_song| song_page_song.id())
-                            .as_ref()
-                            == Some(song.id_ref())
+                        song_page.song().map_or(false, |song_page_song| {
+                            song_ids.contains(&song_page_song.id_ref())
+                        })
                     })
                     && !imp.leaflet_pages_purgatory.borrow().contains(page)
             })
@@ -1147,22 +1143,53 @@ mod test {
 
         // Since song_1 is added twice non-adjacently, it should reduce
         // the number of pages by 2
-        view.remove_song(&song_1);
+        view.remove_songs(&[song_1.id_ref()]);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
         // Since song_2 is added once, it should reduce the number of pages by 1
-        view.remove_song(&song_2);
+        view.remove_songs(&[song_2.id_ref()]);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 2);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
-        view.remove_song(&song_3);
+        view.remove_songs(&[song_3.id_ref()]);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 1);
+    }
+
+    #[gtk::test]
+    fn remove_song_many() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let song_list = new_test_song_list();
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        let song_3 = new_test_song("3");
+        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+        assert_leaflet_n_pages(&view, 1);
+
+        view.insert_song_page(&song_1);
+        view.insert_song_page(&song_2);
+        view.insert_song_page(&song_3);
+        view.insert_song_page(&song_1);
+        view.insert_song_page(&song_2);
+        assert_leaflet_n_pages(&view, 6);
+
+        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()]);
+        trigger_purge_purgatory_leaflet_pages(&view);
+        assert_leaflet_visible_child_song_id(&view, "1");
+        assert_leaflet_n_pages(&view, 3);
     }
 
     #[gtk::test]
@@ -1194,13 +1221,57 @@ mod test {
         view.navigate_back();
         assert_leaflet_visible_child_song_id(&view, "2");
 
-        view.remove_song(&song_2);
+        view.remove_songs(&[song_2.id_ref()]);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_song_id(&view, "1");
 
         view.navigate_forward();
         assert_leaflet_visible_child_song_id(&view, "3");
+    }
+
+    #[gtk::test]
+    fn remove_song_many_middle_visible_child() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let song_list = new_test_song_list();
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        let song_3 = new_test_song("3");
+        let song_4 = new_test_song("4");
+        song_list.append_many(vec![
+            song_1.clone(),
+            song_2.clone(),
+            song_3.clone(),
+            song_4.clone(),
+        ]);
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+
+        view.insert_song_page(&song_1);
+        view.insert_song_page(&song_2);
+        view.insert_song_page(&song_3);
+        view.insert_song_page(&song_4);
+        assert_leaflet_n_pages(&view, 5);
+
+        assert_leaflet_visible_child_song_id(&view, "4");
+
+        view.navigate_back();
+        view.navigate_back();
+        assert_leaflet_visible_child_song_id(&view, "2");
+
+        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()]);
+        trigger_purge_purgatory_leaflet_pages(&view);
+        assert_leaflet_n_pages(&view, 3);
+        assert_leaflet_visible_child_song_id(&view, "1");
+
+        view.navigate_forward();
+        assert_leaflet_visible_child_song_id(&view, "4");
     }
 
     #[gtk::test]
@@ -1230,12 +1301,49 @@ mod test {
         view.navigate_back();
         assert_leaflet_visible_child_song_id(&view, "1");
 
-        view.remove_song(&song_1);
+        view.remove_songs(&[song_1.id_ref()]);
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<RecognizedPage>(&view);
 
         view.navigate_forward();
         assert_leaflet_visible_child_song_id(&view, "2");
+    }
+
+    #[gtk::test]
+    fn remove_song_many_middle_visible_child_with_recognized_page() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let song_list = new_test_song_list();
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        let song_3 = new_test_song("3");
+        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+
+        view.insert_song_page(&song_1);
+        view.insert_recognized_page(&[]);
+        view.insert_song_page(&song_2);
+        view.insert_song_page(&song_3);
+        assert_leaflet_n_pages(&view, 5);
+
+        assert_leaflet_visible_child_song_id(&view, "3");
+
+        view.navigate_back();
+        assert_leaflet_visible_child_song_id(&view, "2");
+
+        view.remove_songs(&[song_1.id_ref(), song_2.id_ref()]);
+        trigger_purge_purgatory_leaflet_pages(&view);
+        assert_leaflet_n_pages(&view, 3);
+        assert_leaflet_visible_child_type::<RecognizedPage>(&view);
+
+        view.navigate_forward();
+        assert_leaflet_visible_child_song_id(&view, "3");
     }
 }
