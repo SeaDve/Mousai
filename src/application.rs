@@ -57,6 +57,16 @@ mod imp {
 
             setup_inspector_page();
         }
+
+        fn shutdown(&self) {
+            if let Err(err) = self.obj().env().force_sync() {
+                tracing::error!("Failed to sync db env on shutdown: {:?}", err);
+            }
+
+            tracing::info!("Shutting down");
+
+            self.parent_shutdown();
+        }
     }
 
     impl GtkApplicationImpl for Application {}
