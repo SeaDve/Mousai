@@ -396,9 +396,9 @@ impl Window {
             }));
 
         self.history()
-            .connect_removed(clone!(@weak self as obj => move |_, song| {
+            .connect_removed(clone!(@weak self as obj => move |_, songs| {
                 let player = obj.player();
-                if player.is_active_song(song) {
+                if songs.iter().any(|song| player.is_active_song(song)) {
                     player.set_song(None);
                 }
             }));
