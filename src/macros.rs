@@ -15,6 +15,8 @@ macro_rules! derived_properties {
     };
 }
 
+// FIXME these macros may compute expensive expressions on release builds
+
 /// Like `unreachable` but logs as error instead of panicking on release builds.
 ///
 /// This should only be used on programmer errors.
