@@ -12,7 +12,7 @@ use once_cell::unsync::OnceCell;
 use std::cell::RefCell;
 
 use super::Recording;
-use crate::{db::RECORDINGS_DB_NAME, utils};
+use crate::{db::RECORDINGS_DB_NAME, debug_assert_or_log, utils};
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
@@ -102,7 +102,7 @@ impl Recordings {
             .list
             .borrow_mut()
             .insert_full(recording_id, recording);
-        debug_assert!(last_value.is_none());
+        debug_assert_or_log!(last_value.is_none());
 
         self.items_changed(position as u32, 0, 1);
     }
@@ -132,7 +132,7 @@ impl Recordings {
         let mut wtxn = env.write_txn().unwrap();
         for key in &to_take_ids {
             let existed = db.delete(&mut wtxn, key).unwrap();
-            debug_assert!(existed);
+            debug_assert_or_log!(existed);
         }
         wtxn.commit().unwrap();
 
