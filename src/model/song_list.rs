@@ -5,7 +5,7 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use heed::types::SerdeJson;
+use heed::types::SerdeBincode;
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
@@ -17,7 +17,7 @@ use crate::{db::SONG_LIST_DB_NAME, debug_assert_or_log};
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
 // FIXME use more efficient encoding than json
-type SongDatabase = heed::Database<SerdeJson<SongId>, SerdeJson<Song>>;
+type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
 
 #[derive(Clone, glib::Boxed)]
 #[boxed_type(name = "MsaiBoxedSongVec")]

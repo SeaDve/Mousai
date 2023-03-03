@@ -5,7 +5,7 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use heed::types::{SerdeJson, Str};
+use heed::types::{SerdeBincode, Str};
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
@@ -16,7 +16,7 @@ use crate::{db::RECORDINGS_DB_NAME, debug_assert_or_log, utils};
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
-type RecordingDatabase = heed::Database<Str, SerdeJson<Recording>>;
+type RecordingDatabase = heed::Database<Str, SerdeBincode<Recording>>;
 
 mod imp {
     use super::*;

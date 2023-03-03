@@ -17,7 +17,8 @@ pub mod once_cell {
         D: Deserializer<'de>,
         T: Deserialize<'de>,
     {
-        Ok(OnceCell::with_value(T::deserialize(deserializer)?))
+        let val = Option::<T>::deserialize(deserializer)?;
+        Ok(val.map_or_else(OnceCell::new, OnceCell::with_value))
     }
 }
 
@@ -35,8 +36,9 @@ pub mod once_cell_gbytes {
     where
         D: Deserializer<'de>,
     {
-        Ok(OnceCell::with_value(glib::Bytes::from_owned(
-            Vec::<u8>::deserialize(deserializer)?,
-        )))
+        let val = Option::<Vec<u8>>::deserialize(deserializer)?;
+        Ok(val.map_or_else(OnceCell::new, |val| {
+            OnceCell::with_value(glib::Bytes::from_owned(val))
+        }))
     }
 }
