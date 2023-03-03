@@ -57,6 +57,24 @@ mod test {
     }
 
     #[test]
+    fn serde_bincode() {
+        let val = SongId::from("Namespace", "some unique str");
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+
+        let val = SongId::generate_unique();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+
+        let val = SongId::for_test("b");
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+    }
+
+    #[test]
     fn serialize() {
         assert_eq!(
             serde_json::to_string(&SongId::for_test("A"))

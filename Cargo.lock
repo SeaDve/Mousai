@@ -1084,6 +1084,7 @@ version = "0.7.0"
 dependencies = [
  "anyhow",
  "async-trait",
+ "bincode",
  "futures-channel",
  "futures-util",
  "fuzzy-matcher",

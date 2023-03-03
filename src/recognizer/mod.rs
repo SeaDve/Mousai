@@ -16,7 +16,9 @@ use std::{
     rc::Rc,
 };
 
-pub use self::provider::{ProviderSettings, ProviderType, RecognizeError, TestProviderMode};
+pub use self::provider::{
+    ProviderSettings, ProviderType, RecognizeError, RecognizeErrorKind, TestProviderMode,
+};
 use self::{
     recorder::Recorder,
     recording::{BoxedRecognizeResult, Recording},

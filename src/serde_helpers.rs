@@ -42,3 +42,35 @@ pub mod once_cell_gbytes {
         }))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
+    struct Test {
+        #[serde(with = "once_cell")]
+        once_cell: OnceCell<i32>,
+        #[serde(with = "once_cell_gbytes")]
+        once_cell_gbytes: OnceCell<glib::Bytes>,
+    }
+
+    #[test]
+    fn serde_bincode() {
+        let val = Test {
+            once_cell: OnceCell::new(),
+            once_cell_gbytes: OnceCell::new(),
+        };
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<Test>(&bytes).unwrap();
+        assert_eq!(val, de_val);
+
+        let val = Test {
+            once_cell: OnceCell::with_value(100),
+            once_cell_gbytes: OnceCell::with_value(glib::Bytes::from_owned(vec![0])),
+        };
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<Test>(&bytes).unwrap();
+        assert_eq!(val, de_val);
+    }
+}

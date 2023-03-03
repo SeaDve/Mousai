@@ -194,6 +194,21 @@ mod tests {
     }
 
     #[test]
+    fn serde_bincode() {
+        let val = ExternalLinks::new();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<ExternalLinks>(&bytes).unwrap();
+        assert_eq!(val.imp().map, de_val.imp().map);
+
+        let val = ExternalLinks::new();
+        val.insert(ExternalLinkKey::AppleMusicUrl, "some value".to_string());
+        val.insert(ExternalLinkKey::AudDUrl, "some value".to_string());
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<ExternalLinks>(&bytes).unwrap();
+        assert_eq!(val.imp().map, de_val.imp().map);
+    }
+
+    #[test]
     fn deserialize() {
         let links: ExternalLinks = serde_json::from_str(
             r#"{
