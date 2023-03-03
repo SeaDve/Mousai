@@ -65,3 +65,24 @@ impl RecognizeError {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn serde_bincode() {
+        let val = RecognizeError::new(RecognizeErrorKind::Connection, None);
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+
+        let val = RecognizeError::new(
+            RecognizeErrorKind::Connection,
+            "Some error message".to_string(),
+        );
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+    }
+}

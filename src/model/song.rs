@@ -235,6 +235,8 @@ impl SongBuilder {
 mod test {
     use super::*;
 
+    use crate::model::ExternalLink;
+
     #[test]
     fn id_ref() {
         let song = Song::builder(
@@ -270,6 +272,65 @@ mod test {
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
         assert!(song.is_newly_heard());
+    }
+
+    fn assert_song_eq(v1: &Song, v2: &Song) {
+        assert_eq!(v1.id_ref(), v2.id_ref());
+        assert_eq!(v1.title(), v2.title());
+        assert_eq!(v1.artist(), v2.artist());
+        assert_eq!(v1.album(), v2.album());
+        assert_eq!(v1.release_date(), v2.release_date());
+
+        assert_eq!(v1.external_links().len(), v2.external_links().len());
+        for (v1_item, v2_item) in v1
+            .external_links()
+            .iter::<ExternalLink>()
+            .zip(v2.external_links().iter::<ExternalLink>())
+        {
+            let v1_item = v1_item.unwrap();
+            let v2_item = v2_item.unwrap();
+            assert_eq!(v1_item.key(), v2_item.key());
+            assert_eq!(v1_item.value(), v2_item.value());
+        }
+
+        assert_eq!(v1.album_art_link(), v2.album_art_link());
+        assert_eq!(v1.playback_link(), v2.playback_link());
+        assert_eq!(v1.lyrics(), v2.lyrics());
+        assert_eq!(v1.last_heard(), v2.last_heard());
+        assert_eq!(v1.is_newly_heard(), v2.is_newly_heard());
+    }
+
+    #[test]
+    fn serde_bincode() {
+        let val =
+            SongBuilder::new(&SongId::for_test("a"), "A Title", "A Artist", "A Album").build();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
+        assert_song_eq(&val, &de_val);
+
+        let val = SongBuilder::new(&SongId::for_test("b"), "B Title", "B Artist", "B Album")
+            .newly_heard(true)
+            .build();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
+        assert_song_eq(&val, &de_val);
+
+        let val = SongBuilder::new(&SongId::for_test("c"), "C Title", "C Artist", "C Album")
+            .release_date("some value")
+            .album_art_link("some value")
+            .playback_link("some value")
+            .lyrics("some value")
+            .build();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
+        assert_song_eq(&val, &de_val);
+
+        let val =
+            SongBuilder::new(&SongId::for_test("d"), "D Title", "D Artist", "D Album").build();
+        val.set_last_heard(DateTime::now_local());
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
+        assert_song_eq(&val, &de_val);
     }
 
     #[test]

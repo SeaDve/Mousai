@@ -65,6 +65,19 @@ mod tests {
     use super::*;
 
     #[test]
+    fn serde_bincode() {
+        let val = DateTime::from_iso8601("2022-07-28T08:23:28.623259+08").unwrap();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+
+        let val = DateTime::now_local();
+        let bytes = bincode::serialize(&val).unwrap();
+        let de_val = bincode::deserialize(&bytes).unwrap();
+        assert_eq!(val, de_val);
+    }
+
+    #[test]
     fn serialize() {
         let dt = DateTime::from_iso8601("2022-07-28T08:23:28.623259+08").unwrap();
         assert_eq!(
