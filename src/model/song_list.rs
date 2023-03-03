@@ -16,7 +16,7 @@ use crate::{db::SONG_LIST_DB_NAME, debug_assert_or_log};
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
-// FIXME use more efficient encoding than json
+// FIXME Remove indirection of encoding SongId through SerdeBincode and use heed types directly
 type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
 
 #[derive(Clone, glib::Boxed)]
