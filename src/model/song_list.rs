@@ -81,6 +81,8 @@ glib::wrapper! {
 impl SongList {
     /// Load from the `songs` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
+        let now = std::time::Instant::now();
+
         let mut wtxn = env.write_txn()?;
         let db = env.create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))?;
         let songs = db
@@ -88,7 +90,7 @@ impl SongList {
             .collect::<Result<IndexMap<SongId, Song>, _>>()?;
         wtxn.commit()?;
 
-        tracing::debug!("Loaded {} songs", songs.len());
+        tracing::debug!("Loaded {} songs in {:?}", songs.len(), now.elapsed());
         debug_assert_or_log!(songs.iter().all(|(id, song)| id == song.id_ref()));
 
         let this = glib::Object::new::<Self>();

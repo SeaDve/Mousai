@@ -64,6 +64,8 @@ glib::wrapper! {
 impl Recordings {
     /// Load from the `saved_recordings` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
+        let now = std::time::Instant::now();
+
         let mut wtxn = env.write_txn()?;
         let db: RecordingDatabase = env.create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))?;
         let recordings = db
@@ -72,7 +74,11 @@ impl Recordings {
             .collect::<Result<IndexMap<_, _>, _>>()?;
         wtxn.commit()?;
 
-        tracing::debug!("Loaded {} saved recordings", recordings.len());
+        tracing::debug!(
+            "Loaded {} saved recordings in {:?}",
+            recordings.len(),
+            now.elapsed()
+        );
 
         let this = glib::Object::new::<Self>();
 
