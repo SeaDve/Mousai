@@ -80,15 +80,11 @@ glib::wrapper! {
 }
 
 impl ErrorDialog {
-    pub fn new(
-        title: impl Into<glib::GString>,
-        body: Option<impl Into<glib::GString>>,
-        detailed_error: impl Into<glib::GString>,
-    ) -> Self {
+    pub fn new(title: &str, body: Option<&str>, detailed_error: &str) -> Self {
         glib::Object::builder()
-            .property("heading", title.into())
-            .property("body", body.map(|h| h.into()).unwrap_or_default())
-            .property("detailed-error", detailed_error.into())
+            .property("heading", title)
+            .property("body", body)
+            .property("detailed-error", detailed_error)
             .build()
     }
 }

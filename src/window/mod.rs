@@ -234,10 +234,11 @@ impl Window {
         detailed_error.push(format!("{:#?}", err));
 
         let err_dialog = ErrorDialog::new(
-            err.to_string(),
+            &err.to_string(),
             err.downcast_ref::<Help>()
-                .map(|help| format!("<b>{}</b>: {}", gettext("Help"), help)),
-            detailed_error.join("\n\n"),
+                .map(|help| format!("<b>{}</b>: {}", gettext("Help"), help))
+                .as_deref(),
+            &detailed_error.join("\n\n"),
         );
         err_dialog.set_transient_for(Some(self));
         err_dialog.present();
