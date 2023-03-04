@@ -235,9 +235,9 @@ impl Window {
 
         let err_dialog = ErrorDialog::new(
             &err.to_string(),
-            err.downcast_ref::<Help>()
+            &err.downcast_ref::<Help>()
                 .map(|help| format!("<b>{}</b>: {}", gettext("Help"), help))
-                .as_deref(),
+                .unwrap_or_default(),
             &detailed_error.join("\n\n"),
         );
         err_dialog.set_transient_for(Some(self));
