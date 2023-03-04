@@ -80,7 +80,7 @@ glib::wrapper! {
 }
 
 impl ErrorDialog {
-    pub fn new(title: &str, body: Option<&str>, detailed_error: &str) -> Self {
+    pub fn new(title: &str, body: &str, detailed_error: &str) -> Self {
         glib::Object::builder()
             .property("heading", title)
             .property("body", body)
