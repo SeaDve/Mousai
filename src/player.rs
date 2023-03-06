@@ -29,11 +29,20 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::Player)]
     pub struct Player {
+        /// Song being played. If the song is None, the player will stop.
+        #[property(get, set = Self::set_song, explicit_notify, nullable)]
         pub(super) song: RefCell<Option<Song>>,
+        /// Current state of the player
+        #[property(get, builder(PlayerState::default()))]
         pub(super) state: Cell<PlayerState>,
+        /// Current position of the player
+        #[property(get)]
         pub(super) position: Cell<gst::ClockTime>,
+        /// Duration of the active song
+        #[property(get)]
         pub(super) duration: Cell<gst::ClockTime>,
 
         pub(super) metadata: RefCell<MprisMetadata>,
@@ -48,54 +57,7 @@ mod imp {
     }
 
     impl ObjectImpl for Player {
-        fn properties() -> &'static [glib::ParamSpec] {
-            static PROPERTIES: Lazy<Vec<glib::ParamSpec>> = Lazy::new(|| {
-                vec![
-                    // Song being played by the player
-                    glib::ParamSpecObject::builder::<Song>("song")
-                        .explicit_notify()
-                        .build(),
-                    // Current state of the player
-                    glib::ParamSpecEnum::builder::<PlayerState>("state")
-                        .read_only()
-                        .build(),
-                    // Current position of the player
-                    glib::ParamSpecUInt64::builder("position")
-                        .read_only()
-                        .build(),
-                    // Duration of the song
-                    glib::ParamSpecUInt64::builder("duration")
-                        .read_only()
-                        .build(),
-                ]
-            });
-
-            PROPERTIES.as_ref()
-        }
-
-        fn set_property(&self, _id: usize, value: &glib::Value, pspec: &glib::ParamSpec) {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => {
-                    let song = value.get().unwrap();
-                    obj.set_song(song);
-                }
-                _ => unimplemented!(),
-            }
-        }
-
-        fn property(&self, _id: usize, pspec: &glib::ParamSpec) -> glib::Value {
-            let obj = self.obj();
-
-            match pspec.name() {
-                "song" => obj.song().into(),
-                "state" => obj.state().into(),
-                "position" => obj.position().into(),
-                "duration" => obj.duration().into(),
-                _ => unimplemented!(),
-            }
-        }
+        crate::derived_properties!();
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
@@ -134,6 +96,58 @@ mod imp {
             }
         }
     }
+
+    impl Player {
+        fn set_song(&self, song: Option<Song>) {
+            let obj = self.obj();
+
+            if song == obj.song() {
+                return;
+            }
+
+            self.gst_play.stop();
+            obj.set_position(gst::ClockTime::ZERO);
+            obj.set_duration(gst::ClockTime::ZERO);
+
+            if let Some(ref song) = song {
+                let Some(playback_link) = song.playback_link() else {
+                    tracing::warn!("Trying to put a song without playback link on the Player");
+                    return;
+                };
+
+                self.gst_play.set_uri(Some(&playback_link));
+                tracing::debug!(uri = playback_link, "Uri changed");
+
+                // TODO Fill up nones
+                self.metadata.replace(MprisMetadata {
+                    length: None,
+                    art_url: song
+                        .album_art()
+                        .ok()
+                        .map(|album_art| album_art.uri().into()),
+                    album: Some(song.album()),
+                    album_artist: None,
+                    artist: Some(vec![song.artist()]),
+                    composer: None,
+                    disc_number: None,
+                    genre: None,
+                    title: Some(song.title()),
+                    track_number: None,
+                    url: None,
+                });
+            } else {
+                self.metadata.replace(MprisMetadata::new());
+            }
+            obj.push_mpris_metadata();
+            let mpris_player = obj.mpris_player();
+            mpris_player.set_can_play(song.as_ref().is_some());
+            mpris_player.set_can_seek(song.as_ref().is_some());
+
+            self.song.replace(song);
+
+            obj.notify_song();
+        }
+    }
 }
 
 glib::wrapper! {
@@ -156,101 +170,6 @@ impl Player {
                 f(obj, error);
             }),
         )
-    }
-
-    pub fn connect_song_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("song"), move |obj, _| f(obj))
-    }
-
-    /// Change the currently playing song. If the song is None, the player will stop.
-    pub fn set_song(&self, song: Option<Song>) {
-        if song == self.song() {
-            return;
-        }
-
-        let imp = self.imp();
-
-        imp.gst_play.stop();
-        self.set_position(gst::ClockTime::ZERO);
-        self.set_duration(gst::ClockTime::ZERO);
-
-        if let Some(ref song) = song {
-            let Some(playback_link) = song.playback_link() else {
-                tracing::warn!("Trying to put a song without playback link on the Player");
-                return;
-            };
-
-            imp.gst_play.set_uri(Some(&playback_link));
-            tracing::debug!(uri = playback_link, "Uri changed");
-
-            // TODO Fill up nones
-            imp.metadata.replace(MprisMetadata {
-                length: None,
-                art_url: song
-                    .album_art()
-                    .ok()
-                    .map(|album_art| album_art.uri().into()),
-                album: Some(song.album()),
-                album_artist: None,
-                artist: Some(vec![song.artist()]),
-                composer: None,
-                disc_number: None,
-                genre: None,
-                title: Some(song.title()),
-                track_number: None,
-                url: None,
-            });
-        } else {
-            imp.metadata.replace(MprisMetadata::new());
-        }
-        self.push_mpris_metadata();
-        let mpris_player = self.mpris_player();
-        mpris_player.set_can_play(song.as_ref().is_some());
-        mpris_player.set_can_seek(song.as_ref().is_some());
-
-        imp.song.replace(song);
-
-        self.notify("song");
-    }
-
-    pub fn song(&self) -> Option<Song> {
-        self.imp().song.borrow().clone()
-    }
-
-    pub fn connect_state_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("state"), move |obj, _| f(obj))
-    }
-
-    pub fn state(&self) -> PlayerState {
-        self.imp().state.get()
-    }
-
-    pub fn connect_position_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("position"), move |obj, _| f(obj))
-    }
-
-    pub fn position(&self) -> gst::ClockTime {
-        self.imp().position.get()
-    }
-
-    pub fn connect_duration_notify<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self) + 'static,
-    {
-        self.connect_notify_local(Some("duration"), move |obj, _| f(obj))
-    }
-
-    pub fn duration(&self) -> gst::ClockTime {
-        self.imp().duration.get()
     }
 
     pub fn is_active_song(&self, song: &Song) -> bool {
@@ -278,7 +197,7 @@ impl Player {
     fn set_position(&self, position: gst::ClockTime) {
         self.imp().position.set(position);
         self.mpris_player().set_position(position.mseconds() as i64);
-        self.notify("position");
+        self.notify_position();
     }
 
     fn set_duration(&self, duration: gst::ClockTime) {
@@ -286,7 +205,7 @@ impl Player {
         imp.duration.set(duration);
         imp.metadata.borrow_mut().length = Some(duration.mseconds() as i64);
         self.push_mpris_metadata();
-        self.notify("duration");
+        self.notify_duration();
     }
 
     fn mpris_player(&self) -> &MprisPlayer {
@@ -319,7 +238,7 @@ impl Player {
 
             mpris_player.connect_stop(clone!(@weak self as obj => move || {
                 tracing::debug!("Stop via MPRIS");
-                obj.set_song(None);
+                obj.set_song(Song::NONE);
             }));
 
             mpris_player.connect_pause(clone!(@weak self as obj => move || {
@@ -381,7 +300,7 @@ impl Player {
                     PlayerState::Paused => MprisPlaybackStatus::Paused,
                 });
 
-                self.notify("state");
+                self.notify_state();
             }
             PlayMessage::EndOfStream => {
                 tracing::debug!("Received end of stream message");
