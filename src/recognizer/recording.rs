@@ -23,7 +23,7 @@ mod imp {
         #[property(get, set, construct_only)]
         #[serde(with = "serde_helpers::once_cell")]
         pub(super) recorded_time: OnceCell<DateTime>,
-        #[property(get, set = Self::set_recognize_result, explicit_notify)]
+        #[property(get, set = Self::set_recognize_result, explicit_notify, nullable)]
         pub(super) recognize_result: RefCell<Option<BoxedRecognizeResult>>,
 
         #[serde(skip)] // So we can retry next session
@@ -146,10 +146,10 @@ mod tests {
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
         let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_local());
-        val.set_recognize_result(BoxedRecognizeResult(Err(RecognizeError::new(
+        val.set_recognize_result(Some(BoxedRecognizeResult(Err(RecognizeError::new(
             RecognizeErrorKind::Connection,
             "Some message".to_string(),
-        ))));
+        )))));
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);
