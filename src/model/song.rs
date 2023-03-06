@@ -97,6 +97,8 @@ glib::wrapper! {
 }
 
 impl Song {
+    pub const NONE: Option<&'static Self> = None;
+
     /// The parameter `SongID` must be unique to each [`Song`] so that [`crate::model::SongList`] will
     /// treat them different.
     ///
