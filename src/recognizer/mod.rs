@@ -368,12 +368,12 @@ impl Recognizer {
             match provider.recognize(recording.bytes().as_ref()).await {
                 Ok(song) => {
                     song.set_last_heard(recording.recorded_time());
-                    recording.set_recognize_result(BoxedRecognizeResult(Ok(song)));
+                    recording.set_recognize_result(Some(BoxedRecognizeResult(Ok(song))));
                 }
                 Err(err) => {
                     tracing::error!("Failed to recognize saved recording: {:?}", err);
                     recording.increment_recognize_retries();
-                    recording.set_recognize_result(BoxedRecognizeResult(Err(err)));
+                    recording.set_recognize_result(Some(BoxedRecognizeResult(Err(err))));
                 }
             }
         }

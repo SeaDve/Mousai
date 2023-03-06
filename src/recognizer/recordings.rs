@@ -260,7 +260,7 @@ mod tests {
             .item(0)
             .and_downcast::<Recording>()
             .unwrap()
-            .set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+            .set_recognize_result(Some(BoxedRecognizeResult(Ok(new_test_song("a")))));
         assert_n_items_and_db_count_eq(recordings, 2);
 
         // Test if the items are synced to the database even
@@ -275,7 +275,7 @@ mod tests {
             .item(1)
             .and_downcast::<Recording>()
             .unwrap()
-            .set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("b"))));
+            .set_recognize_result(Some(BoxedRecognizeResult(Ok(new_test_song("b")))));
         assert_n_items_and_db_count_eq(recordings, 2);
 
         let rtxn = env.read_txn().unwrap();
@@ -289,8 +289,7 @@ mod tests {
         drop(rtxn);
 
         for (_, recording) in recordings.imp().list.borrow().iter() {
-            // FIXME use the generated glib::Properties setter
-            recording.set_property("recognize-result", None::<BoxedRecognizeResult>);
+            recording.set_recognize_result(None::<BoxedRecognizeResult>);
         }
 
         let rtxn = env.read_txn().unwrap();
@@ -456,7 +455,7 @@ mod tests {
         // Ensure that the removed recordings is not added back to the database
         for recording in taken {
             assert!(recording.recognize_result().is_none());
-            recording.set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+            recording.set_recognize_result(Some(BoxedRecognizeResult(Ok(new_test_song("a")))));
         }
         assert_n_items_and_db_count_eq(&recordings, 0);
 
@@ -530,10 +529,10 @@ mod tests {
                 .push((index, removed, added));
         });
 
-        recording_a.set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+        recording_a.set_recognize_result(Some(BoxedRecognizeResult(Ok(new_test_song("a")))));
         assert_eq!(calls_output.take(), vec![(0, 1, 1)]);
 
-        recording_b.set_recognize_result(BoxedRecognizeResult(Ok(new_test_song("a"))));
+        recording_b.set_recognize_result(Some(BoxedRecognizeResult(Ok(new_test_song("a")))));
         assert_eq!(calls_output.take(), vec![(1, 1, 1)]);
     }
 
