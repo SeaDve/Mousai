@@ -152,6 +152,9 @@
                     <property name="vexpand">True</property>
                     <property name="title" translatable="yes">Start Identifying Music!</property>
                     <property name="description" translatable="yes">Click the listen button to start.</property>
+                    <style>
+                      <class name="icon-dropshadow"/>
+                    </style>
                   </object>
                 </child>
                 <child>
