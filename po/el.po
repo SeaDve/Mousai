@@ -3,61 +3,63 @@
 # This file is distributed under the same license as the mousai package.
 # Nikos <dizars1776@yahoo.gr>, 2022.
 # Nikolaos Georgiou <dizars1776@yahoo.gr>, 2022.
+# greek anon <rnation@bbq59.xyz>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-01 13:36+0800\n"
-"PO-Revision-Date: 2023-01-08 00:51+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-03-11 09:37+0000\n"
+"Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Εντόπισε τραγούδια σε δευτερόλεπτα"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Ήχος;Μουσική;Τραγούδι;Εντοπισμός;Αναγνώριση;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 #: data/io.github.seadve.Mousai.gschema.xml.in:7
 msgid "Default window width"
-msgstr ""
+msgstr "Προεπιλεγμένο πλάτος παραθύρου"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 #: data/io.github.seadve.Mousai.gschema.xml.in:12
 msgid "Default window height"
-msgstr ""
+msgstr "Προεπιλεγμένο ύψος παραθύρου"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Default window maximized behaviour"
-msgstr ""
+msgstr "Προεπιλεγμένη μέγιστη συμπεριφορά παραθύρου"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:21
 msgid "Contains recently recognized songs"
-msgstr ""
+msgstr "Περιέχει πρόσφάτως αναγνωρισμένα τραγούδια"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:30
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Προτεινόμενη πηγή ήχου προς χρήση για την καταγραφή ήχου"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"Ανακαλύψτε τραγούδια που πονάτε να αναγνωρίζετε με μια εύχρηστη διεπαφή."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
@@ -65,60 +67,73 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Το Mousai είναι μια απλή εφαρμογή που μπορεί να αναγνωρίσει ένα τραγούδι "
+"παρόμοιο με το Shazam. Απλώς κάντε κλικ στο κουμπί ακρόαση και, στη "
+"συνέχεια, περιμένετε μερικά δευτερόλεπτα. Θα επιστρέψει μαγικά τον τίτλο και "
+"τον καλλιτέχνη αυτού του τραγουδιού!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"Σημείωση: Αυτό χρησιμοποιεί το API του aud.io, επομένως είναι απαραίτητο να "
+"συνδεθείτε στον ιστότοπό τους για να λάβετε περισσότερες δοκιμές."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "Γιατί θα αγαπήσετε το Mousai;"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify the title and artist of the song within seconds."
 msgstr ""
+"🎵 Προσδιορίστε τον τίτλο και τον καλλιτέχνη του τραγουδιού μέσα σε λίγα "
+"δευτερόλεπτα."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use your microphone or audio from desktop."
 msgstr ""
+"🎙️ ️ ️ Χρησιμοποιήστε το μικρόφωνο ή τον ήχο σας από την επιφάνεια εργασίας."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Store the identified song including the album art in history."
 msgstr ""
+"🎸 Αποθηκεύστε το αναγνωρισμένο τραγούδι, συμπεριλαμβανομένου του εξώφυλλου "
+"του άλμπουμ στην ιστορία."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Preview the identified song with the native player."
 msgstr ""
+"🎼 Προεπισκόπηση του αναγνωρισμένου τραγουδιού με το δικό σας πρόγραμμα "
+"αναπαραγωγής μουσικής."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers."
-msgstr ""
+msgstr "🌐 Περιηγηθείτε και ακούστε το τραγούδι από διαφορετικούς παρόχους."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface."
-msgstr ""
+msgstr "📱 Εύκολη στη χρήση διεπαφή χρήστη."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr ""
+msgstr "⌨️ Φιλικές προς το χρήστη συντομεύσεις πληκτρολογίου."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
 msgid "Dave Patrick"
-msgstr ""
+msgstr "Dave Patrick"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferred Audio Source"
-msgstr ""
+msgstr "_Προτιμώμενη πηγή ήχου"
 
 #: data/resources/ui/history-view.ui:8
 msgid "Microphone"
-msgstr ""
+msgstr "Μικρόφωνο"
 
 #: data/resources/ui/history-view.ui:13
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Ήχος επιφάνειας εργασίας"
 
 #: data/resources/ui/history-view.ui:21
 msgid "_Keyboard Shortcuts"
@@ -126,39 +141,39 @@ msgstr "_Συντομεύσεις Πληκτρολογίου"
 
 #: data/resources/ui/history-view.ui:25
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Σχετικά με το Mousai"
 
 #: data/resources/ui/history-view.ui:33
 msgid "Select _All"
-msgstr ""
+msgstr "Επιλογή_Όλων"
 
 #: data/resources/ui/history-view.ui:37
 msgid "Select _None"
-msgstr ""
+msgstr "Επιλογή_Κανενός"
 
 #: data/resources/ui/history-view.ui:61
 msgid "Start Identifying Music"
-msgstr ""
+msgstr "Ξεκινήστε να αναγνωρίζετε μουσική"
 
 #: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
 msgid "Listen"
-msgstr ""
+msgstr "Ακούστε"
 
 #: data/resources/ui/history-view.ui:71
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Άνοιγμα κυρίως Menu"
 
 #: data/resources/ui/history-view.ui:79
 msgid "Select"
-msgstr ""
+msgstr "Επιλέξτε"
 
 #: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
 msgid "Search for Songs"
-msgstr ""
+msgstr "Αναζήτηση για Τραγούδια"
 
 #: data/resources/ui/history-view.ui:102
 msgid "Cancel Select"
-msgstr ""
+msgstr "Ακύρωση Επιλογής"
 
 #: data/resources/ui/history-view.ui:103
 #: data/resources/ui/recognizer-view.ui:14
@@ -167,31 +182,31 @@ msgstr "Ακύρωση"
 
 #: data/resources/ui/history-view.ui:123
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Εισαγωγή ονόματος τραγουδιού ή καλλιτέχνη"
 
 #: data/resources/ui/history-view.ui:147
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Ξεκινήστε να αναγνωρίζετε μουσική!"
 
 #: data/resources/ui/history-view.ui:148
 msgid "Click the listen button to start."
-msgstr ""
+msgstr "Κάντε κλικ στο κουμπί ακρόασης για να ξεκινήσετε."
 
 #: data/resources/ui/history-view.ui:155
 msgid "No Results Found"
-msgstr ""
+msgstr "Δεν βρέθηκαν αποτελέσματα"
 
 #: data/resources/ui/history-view.ui:156
 msgid "Try a different search."
-msgstr ""
+msgstr "Δοκιμάστε μια διαφορετική αναζήτηση."
 
 #: data/resources/ui/history-view.ui:165
 msgid "Copy Song"
-msgstr ""
+msgstr "Αντιγραφή τραγουδιού"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Ακύρωση ακρόασης"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -201,12 +216,12 @@ msgstr "Γενικά"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Ανοίξτε το Κεντρικό Μενού"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
@@ -221,31 +236,31 @@ msgstr "Έξοδος"
 #: data/resources/ui/shortcuts.ui:40
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Έλεγχοι"
 
 #: data/resources/ui/shortcuts.ui:43
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Εναλλαγή λειτουργίας ακρόασης"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Εναλλαγή λειτουργίας αναπαραγωγής"
 
 #: data/resources/ui/shortcuts.ui:57
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Πλοήγηση"
 
 #: data/resources/ui/shortcuts.ui:60
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Πηγαίνετε πίσω"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
-msgstr ""
+msgstr "Εμφάνιση πληροφοριών τραγουδιού"
 
 #: data/resources/ui/song-bar.ui:102
 msgid "Stop"
@@ -253,39 +268,39 @@ msgstr "Τέλος"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Return to Main Page"
-msgstr ""
+msgstr "Επιστροφή στην Κεντρική Σελίδα"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
-msgstr ""
+msgstr "Κατάργηση από το ιστορικό"
 
 #: data/resources/ui/song-page.ui:44
 msgid "Copy"
-msgstr ""
+msgstr "Αντιγραφή"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Information"
-msgstr ""
+msgstr "Πληροφορίες"
 
 #: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
-msgstr ""
+msgstr "Τελευταία ακρόαση"
 
 #: data/resources/ui/song-page.ui:158
 msgid "Album"
-msgstr ""
+msgstr "Άλμπουμ"
 
 #: data/resources/ui/song-page.ui:163
 msgid "Release Date"
-msgstr ""
+msgstr "Ημερομηνία κυκλοφορίας"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "Στίχοι"
 
 #: data/resources/ui/song-tile.ui:25
 msgid "New"
-msgstr ""
+msgstr "Νέο"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/application.rs:140
@@ -294,7 +309,7 @@ msgstr "συντελεστές-μετάφρασης"
 
 #: src/application.rs:141
 msgid "Copyright 2022 Dave Patrick"
-msgstr ""
+msgstr "Πνευματικά δικαιώματα 2022 Dave Patrick"
 
 #: src/application.rs:144
 msgid "GitHub"
@@ -302,136 +317,141 @@ msgstr "GitHub"
 
 #: src/model/external_link/apple_music.rs:26
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/model/external_link/apple_music.rs:30
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Περιήγηση στο Apple Music"
 
 #: src/model/external_link/aud_d.rs:26
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: src/model/external_link/aud_d.rs:30
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Περιήγηση στο AudD"
 
 #: src/model/external_link/spotify.rs:26
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/model/external_link/spotify.rs:30
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Ακούστε στο Spotify"
 
 #: src/model/external_link/youtube.rs:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/model/external_link/youtube.rs:32
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Αναζήτηση στο YouTube"
 
 #: src/recognizer/mod.rs:193
 msgid "Cancelled recording"
-msgstr ""
+msgstr "Ακυρωμένη εγγραφή"
 
 #: src/recognizer/mod.rs:207
 msgid "Cancelled recognizing"
-msgstr ""
+msgstr "Ακυρώθηκε η αναγνώριση"
 
 #: src/recognizer/provider/aud_d/mod.rs:112
 msgid ""
 "Failed to convert the recording to base64. Please report this to Mousai's "
 "bug tracker."
 msgstr ""
+"Αποτυχία μετατροπής της εγγραφής σε base64. Παρακαλούμε να το αναφέρετε στον "
+"ανιχνευτή σφαλμάτων του Mousai."
 
 #: src/recognizer/provider/aud_d/mod.rs:136
 msgid "Failed to connect to the server."
-msgstr ""
+msgstr "Αποτυχία σύνδεσης με το διακομιστή."
 
 #: src/recognizer/provider/aud_d/response.rs:100
 msgid "Failed to parse response. Please report this to Mousai's bug tracker"
 msgstr ""
+"Αποτυχία ανάλυσης απόκρισης. Παρακαλούμε αναφέρετέ το στον ανιχνευτή "
+"σφαλμάτων του Mousai"
 
 #: src/recognizer/provider/aud_d/response.rs:113
 msgid "Daily limit has been reached."
-msgstr ""
+msgstr "Το ημερήσιο όριο έχει συμπληρωθεί."
 
 #: src/recognizer/provider/aud_d/response.rs:116
 msgid "Failed to fingerprint audio. There may be no sound heard."
 msgstr ""
+"Αποτυχία λήψης δακτυλικών αποτυπωμάτων ήχου. Μπορεί να μην ακούγεται ήχος."
 
 #: src/recognizer/provider/aud_d/response.rs:125
 msgid "Got invalid status response of {}"
-msgstr ""
+msgstr "Έλαβε μη έγκυρη απάντηση κατάστασης {}"
 
 #: src/recognizer/provider/mod.rs:150
 msgid "{} Check your internet connection."
-msgstr ""
+msgstr "{} Ελέγξτε τη σύνδεσή σας στο διαδίκτυο."
 
 #: src/recognizer/provider/mod.rs:152
 msgid "No matches found for this song."
-msgstr ""
+msgstr "Δεν βρέθηκαν αντιστοιχίες για αυτό το τραγούδι."
 
 #: src/recognizer/provider/mod.rs:154
 msgid "{} Input an API token in the preferences."
-msgstr ""
+msgstr "{} Εισαγάγετε ένα διακριτικό API στις προτιμήσεις."
 
 #: src/recognizer/provider/mod.rs:157
 msgid "Please input a valid API token."
-msgstr ""
+msgstr "Εισαγάγετε ένα έγκυρο API token."
 
 #: src/window/history_view.rs:113 src/window/song_page.rs:89
 msgid "Copied song to clipboard"
-msgstr ""
+msgstr "Αντιγράφηκε το τραγούδι στο πρόχειρο"
 
 #: src/window/history_view.rs:411
 msgid "_Undo"
-msgstr ""
+msgstr "_Αναίρεση"
 
 #: src/window/history_view.rs:430
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Καταργήθηκε {} τραγούδι"
+msgstr[1] "Καταργήθηκαν {} τραγούδια"
 
 #: src/window/history_view.rs:495
 msgid "Click on items to select them"
-msgstr ""
+msgstr "Κάντε κλικ στα στοιχεία για να τα επιλέξετε"
 
 #: src/window/history_view.rs:497
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Επιλεγμένο {} τραγούδι"
+msgstr[1] "Επιλεγμένα {} τραγούδια"
 
 #: src/window/history_view.rs:506
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αφαιρέστε το τραγούδι από το ιστορίκο"
+msgstr[1] "Αφαιρέστε τα τραγούδια από το ιστορίκο"
 
 #: src/window/mod.rs:196
 msgid "Failed to load history"
-msgstr ""
+msgstr "Η φόρτωση του ιστορικού απέτυχε"
 
 #: src/window/playback_button.rs:155
 msgid "Play"
-msgstr ""
+msgstr "Αναπαραγωγή"
 
 #: src/window/playback_button.rs:162
 msgid "Pause"
-msgstr ""
+msgstr "Παύση"
 
 #: src/window/recognizer_view.rs:117
 msgid "Listening…"
-msgstr ""
+msgstr "Ακρόαση…"
 
 #: src/window/recognizer_view.rs:122
 msgid "Recognizing…"
-msgstr ""
+msgstr "Αναγνώριση…"
 
 #: src/window/song_page.rs:177
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Απέτυχε να ξεκινήσει {}"
