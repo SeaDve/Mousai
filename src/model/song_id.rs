@@ -3,10 +3,16 @@ use serde::{Deserialize, Serialize};
 
 use crate::utils;
 
-#[derive(Debug, Clone, Hash, PartialEq, Eq, glib::Boxed, Deserialize, Serialize)]
-#[boxed_type(name = "MsaiSongId")] // TODO drop Boxed derive and replace with ValueDelegate
+#[derive(Debug, Clone, Hash, PartialEq, Eq, glib::ValueDelegate, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct SongId(Box<str>);
+
+// TODO Remove this once upstreamed
+impl From<SongId> for glib::Value {
+    fn from(value: SongId) -> Self {
+        glib::Value::from(value.0)
+    }
+}
 
 impl SongId {
     /// Note: `unique_str` must be unique to each song.

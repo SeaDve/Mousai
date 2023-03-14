@@ -4,9 +4,16 @@ use gtk::glib;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 /// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
-#[derive(Debug, Clone, glib::Boxed, PartialEq, Eq, PartialOrd, Ord)]
-#[boxed_type(name = "MsaiDateTime", nullable)] // TODO drop Boxed derive and replace with ValueDelegate
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, glib::ValueDelegate)]
+#[value_delegate(nullable)]
 pub struct DateTime(glib::DateTime);
+
+// TODO Remove this once upstreamed
+impl From<DateTime> for glib::Value {
+    fn from(value: DateTime) -> Self {
+        glib::Value::from(value.0)
+    }
+}
 
 impl DateTime {
     pub fn now_local() -> Self {
