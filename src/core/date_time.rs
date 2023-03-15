@@ -62,8 +62,8 @@ impl Serialize for DateTime {
 
 impl<'de> Deserialize<'de> for DateTime {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let string = String::deserialize(deserializer)?;
-        DateTime::from_iso8601(&string).map_err(de::Error::custom)
+        let string = <&str>::deserialize(deserializer)?;
+        DateTime::from_iso8601(string).map_err(de::Error::custom)
     }
 }
 
