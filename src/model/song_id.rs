@@ -7,13 +7,6 @@ use crate::utils;
 #[serde(transparent)]
 pub struct SongId(Box<str>);
 
-// TODO Remove this once upstreamed
-impl From<SongId> for glib::Value {
-    fn from(value: SongId) -> Self {
-        glib::Value::from(value.0)
-    }
-}
-
 impl SongId {
     /// Note: `unique_str` must be unique to each song.
     pub fn from(namespace: &str, unique_str: &str) -> Self {
