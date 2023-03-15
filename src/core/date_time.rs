@@ -8,13 +8,6 @@ use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 #[value_delegate(nullable)]
 pub struct DateTime(glib::DateTime);
 
-// TODO Remove this once upstreamed
-impl From<DateTime> for glib::Value {
-    fn from(value: DateTime) -> Self {
-        glib::Value::from(value.0)
-    }
-}
-
 impl DateTime {
     pub fn now_local() -> Self {
         Self(glib::DateTime::now_local().expect("You are somehow on year 9999"))
