@@ -65,7 +65,8 @@ mod imp {
                     color.alpha() as f64 * (index as f64 / peaks_len as f64), // Add feathering
                 );
 
-                let line_height = ease_in_quad(index as f64 / peaks_len as f64) * peak * v_center;
+                let line_height =
+                    adw::Easing::EaseInQuad.ease(index as f64 / peaks_len as f64) * peak * v_center;
 
                 ctx.move_to(pointer, v_center + line_height);
                 ctx.line_to(pointer, v_center - line_height);
@@ -108,10 +109,6 @@ impl Waveform {
 
         self.queue_draw();
     }
-}
-
-fn ease_in_quad(x: f64) -> f64 {
-    x * x
 }
 
 impl Default for Waveform {
