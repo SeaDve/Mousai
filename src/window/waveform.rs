@@ -35,7 +35,7 @@ mod imp {
             let obj = self.obj();
             let width = obj.width();
             let height = obj.height();
-            let color = obj.style_context().color();
+            let color = obj.color();
 
             let ctx =
                 snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
