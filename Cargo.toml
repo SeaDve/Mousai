@@ -19,7 +19,7 @@ gettext-rs = { version = "0.7.0", features = ["gettext-system"] }
 gsettings-macro = "0.1.15"
 gst = { package = "gstreamer", version = "0.20.0" }
 gst_play = { package = "gstreamer-play", version = "0.20.0" }
-gtk = { version = "0.6.0", package = "gtk4", features = ["gnome_43"] }
+gtk = { version = "0.6.0", package = "gtk4", features = ["gnome_44"] }
 heed = "0.20.0-alpha.0"
 indexmap = { version = "1.9.1", features = ["serde"] }
 mpris-player = "0.6.2"
