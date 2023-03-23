@@ -1,6 +1,6 @@
 use anyhow::Error;
 use gettextrs::gettext;
-use gtk::{gdk, glib, prelude::*, subclass::prelude::*};
+use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 
 use std::str::FromStr;
@@ -116,12 +116,12 @@ impl ExternalLinkTile {
         }
     }
 
-    pub async fn handle_activation(&self) {
+    pub fn handle_activation(&self) {
         let link = self.external_link();
-        let raw_key = link.key();
+        let raw_key = link.key().to_string();
         let raw_value = link.value();
 
-        let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
+        let Ok(key) = ExternalLinkKey::from_str(&raw_key) else {
             debug_unreachable_or_log!("activated with an unhandleable key `{}`", raw_key);
             return;
         };
@@ -142,18 +142,18 @@ impl ExternalLinkTile {
             tracing::warn!("Trying to launch an invalid Uri: {:?}", err);
         }
 
-        if let Err(err) = gtk::show_uri_full_future(
+        gtk::UriLauncher::new(&uri).launch(
             self.root()
                 .map(|root| root.downcast::<gtk::Window>().unwrap())
                 .as_ref(),
-            &uri,
-            gdk::CURRENT_TIME,
-        )
-        .await
-        {
-            tracing::warn!("Failed to launch default for uri `{uri}`: {:?}", err);
-            utils::app_instance()
-                .add_toast_error(&Error::msg(gettext!("Failed to launch {}", raw_key)));
-        }
+            gio::Cancellable::NONE,
+            move |res| {
+                if let Err(err) = res {
+                    tracing::warn!("Failed to launch default for uri `{}`: {:?}", uri, err);
+                    utils::app_instance()
+                        .add_toast_error(&Error::msg(gettext!("Failed to launch {}", raw_key)));
+                }
+            },
+        );
     }
 }

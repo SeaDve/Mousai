@@ -120,10 +120,7 @@ mod imp {
                     .clone()
                     .downcast::<ExternalLinkTile>()
                     .expect("Expected `ExternalLinkTile` as child");
-
-                utils::spawn(async move {
-                    external_link_tile.handle_activation().await;
-                });
+                external_link_tile.handle_activation();
             });
 
             self.song_binding_group
