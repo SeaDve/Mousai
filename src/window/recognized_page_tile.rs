@@ -78,7 +78,10 @@ mod imp {
         }
 
         fn dispose(&self) {
-            self.binding.take().unwrap().unbind();
+            if let Some(binding) = self.binding.take() {
+                binding.unbind();
+            }
+
             self.obj().unbind_player();
 
             self.dispose_template();
@@ -93,6 +96,10 @@ mod imp {
         }
 
         fn set_song(&self, song: &Song) {
+            if let Some(binding) = self.binding.take() {
+                binding.unbind();
+            }
+
             let binding = song
                 .bind_property("last-heard", &self.last_heard_label.get(), "label")
                 .transform_to(|_, last_heard: Option<DateTime>| {
@@ -105,6 +112,7 @@ mod imp {
                 .sync_create()
                 .build();
             self.binding.replace(Some(binding));
+
             self.song_tile.set_song(song);
         }
     }
