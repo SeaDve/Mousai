@@ -1,4 +1,3 @@
-use anyhow::Error;
 use gettextrs::gettext;
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
@@ -151,7 +150,8 @@ impl ExternalLinkTile {
                 if let Err(err) = res {
                     tracing::warn!("Failed to launch default for uri `{}`: {:?}", uri, err);
                     utils::app_instance()
-                        .add_toast_error(&Error::msg(gettext!("Failed to launch {}", raw_key)));
+                        .window()
+                        .add_message_toast(&gettext!("Failed to launch {}", raw_key));
                 }
             },
         );

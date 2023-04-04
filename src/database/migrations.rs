@@ -31,6 +31,7 @@ impl Migrations {
     pub fn run(&self, env: &heed::Env, wtxn: &mut heed::RwTxn<'_>) -> Result<()> {
         let now = Instant::now();
 
+        // FIXME this should be open instead of create I guess
         let db = env.create_poly_database(wtxn, None)?;
         let current_version = db.get::<Str, U64<LE>>(wtxn, USER_VERSION_KEY)?.unwrap_or(0);
 
@@ -81,8 +82,6 @@ mod tests {
 
     #[test]
     fn migration() {
-        tracing_subscriber::fmt::init();
-
         let (env, _tempdir) = database::new_test_env();
         let mut wtxn = env.write_txn().unwrap();
 

@@ -7,10 +7,7 @@ use gtk::{
 use once_cell::unsync::OnceCell;
 
 use super::waveform::Waveform;
-use crate::{
-    debug_unreachable_or_log,
-    recognizer::{Recognizer, RecognizerState},
-};
+use crate::recognizer::{Recognizer, RecognizerState};
 
 mod imp {
     use super::*;
@@ -84,12 +81,10 @@ impl RecognizerView {
     }
 
     fn recognizer(&self) -> &Recognizer {
-        self.imp().recognizer.get_or_init(|| {
-            debug_unreachable_or_log!(
-                "recognizer was not bound in RecognizerView. Creating a default one."
-            );
-            Recognizer::default()
-        })
+        self.imp()
+            .recognizer
+            .get()
+            .expect("Recognizer was not bound")
     }
 
     fn recognizing_animation(&self) -> &adw::TimedAnimation {

@@ -1,6 +1,7 @@
 data/io.github.seadve.Mousai.desktop.in.in
 data/io.github.seadve.Mousai.gschema.xml.in
 data/io.github.seadve.Mousai.metainfo.xml.in.in
+data/resources/ui/database-error-window.ui
 data/resources/ui/error-dialog.ui
 data/resources/ui/history-view.ui
 data/resources/ui/recognized-page.ui

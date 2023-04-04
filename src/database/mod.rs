@@ -3,7 +3,7 @@ mod migrations;
 use anyhow::{Context, Result};
 use gtk::glib;
 
-use std::fs;
+use std::{fs, time::Instant};
 
 pub use self::migrations::Migrations;
 
@@ -52,4 +52,23 @@ pub fn new_test_env() -> (heed::Env, tempfile::TempDir) {
             .unwrap()
     };
     (env, tempdir)
+}
+
+pub trait EnvExt {
+    /// Run a func with a write txn and commit it.
+    fn with_write_txn<T>(&self, func: impl FnOnce(&mut heed::RwTxn<'_>) -> Result<T>) -> Result<T>;
+}
+
+impl EnvExt for heed::Env {
+    fn with_write_txn<T>(&self, func: impl FnOnce(&mut heed::RwTxn<'_>) -> Result<T>) -> Result<T> {
+        let now = Instant::now();
+
+        let mut wtxn = self.write_txn().context("Failed to create write txn")?;
+        let ret = func(&mut wtxn)?;
+        wtxn.commit().context("Failed to commit write txn")?;
+
+        tracing::debug!("Database write transaction took {:?}", now.elapsed());
+
+        Ok(ret)
+    }
 }

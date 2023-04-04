@@ -353,7 +353,7 @@ mod test {
         )
         .unwrap();
 
-        assert_eq!(song.id(), SongId::for_test("UniqueSongId"));
+        assert_eq!(song.id_ref(), &SongId::for_test("UniqueSongId"));
         assert_eq!(
             song.last_heard().unwrap().format_iso8601(),
             "2022-05-14T10:15:37.798479+08"
@@ -380,7 +380,7 @@ mod test {
 
         // Make sure that the song id is unique
         // even it is not defined
-        assert_ne!(song_1.id(), song_2.id());
-        assert_ne!(song_2.id(), song_3.id());
+        assert_ne!(song_1.id_ref(), song_2.id_ref());
+        assert_ne!(song_2.id_ref(), song_3.id_ref());
     }
 }

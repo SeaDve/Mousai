@@ -1,4 +1,5 @@
 use adw::prelude::*;
+use anyhow::{bail, Context, Result};
 use gettextrs::{gettext, ngettext};
 use gtk::{
     glib::{self, clone, closure},
@@ -133,8 +134,9 @@ mod imp {
                     .join("\n");
                 obj.display().clipboard().set_text(&text);
 
-                let toast = adw::Toast::new(&gettext("Copied to clipboard"));
-                utils::app_instance().add_toast(toast);
+                utils::app_instance()
+                    .window()
+                    .add_message_toast(&gettext("Copied to clipboard"));
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
@@ -143,7 +145,15 @@ mod imp {
                     .iter()
                     .map(|song| song.id_ref())
                     .collect::<Vec<_>>();
-                obj.remove_songs(&song_ids);
+
+                if let Err(err) = obj.remove_songs(&song_ids) {
+                    tracing::error!("Failed to remove songs: {}", err);
+                    utils::app_instance()
+                        .window()
+                        .add_message_toast(&gettext("Failed to remove selected songs"));
+                    return;
+                }
+
                 obj.show_undo_remove_song_toast();
             });
         }
@@ -305,7 +315,14 @@ impl HistoryView {
 
         let song_removed_handler_id =
             song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
-                obj.remove_songs(&[song.id_ref()]);
+                if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
+                    tracing::error!("Failed to remove song: {}", err);
+                    utils::app_instance()
+                        .window()
+                        .add_message_toast(&gettext("Failed to remove song"));
+                    return;
+                }
+
                 obj.show_undo_remove_song_toast();
             }));
         let adaptive_mode_binding = self
@@ -423,50 +440,12 @@ impl HistoryView {
 
         imp.recognizer_status.connect_show_results_requested(
             clone!(@weak self as obj, @weak recognizer => move |_| {
-                let Some(history) = obj.imp()
-                    .song_list
-                    .get()
-                    .and_then(|song_list| song_list.upgrade())
-                else {
-                    debug_unreachable_or_log!("history not found");
-                    return;
-                };
-
-                let songs = recognizer
-                    .take_recognized_saved_recordings()
-                    .iter()
-                    .filter_map(|recording| match recording.recognize_result().map(|r| r.0) {
-                        Some(Ok(ref song)) => Some(song.clone()),
-                        Some(Err(ref err)) => {
-                            // TODO handle errors
-                            debug_assert_or_log!(err.is_permanent());
-                            None
-                        }
-                        None => {
-                            debug_unreachable_or_log!("received none recognize result");
-                            None
-                        }
-                    })
-                    .collect::<Vec<_>>();
-
-                if songs.is_empty() {
-                    tracing::debug!("No saved recordings taken when requested");
-                    return;
+                if let Err(err) = obj.show_recognizer_results(&recognizer) {
+                    tracing::error!("Failed to show recognizer results: {}", err);
+                    utils::app_instance()
+                        .window()
+                        .add_message_toast(&gettext("Failed to show recognizer results"));
                 }
-
-                for song in &songs {
-                    // If the song is not found in the history, set it as newly heard
-                    // (That's why an always true value is used after `or`). If it is in the
-                    // history and it was newly heard, pass that state to the new value.
-                    if history.get(song.id_ref()).map_or(true, |prev| prev.is_newly_heard()) {
-                        song.set_is_newly_heard(true);
-                    }
-                }
-
-                history.append_many(songs.clone());
-
-                obj.insert_recognized_page(&songs);
-                obj.scroll_to_top();
             }),
         );
     }
@@ -562,7 +541,7 @@ impl HistoryView {
     }
 
     /// Adds songs with ids given to purgatory, and add `SongPage`s that contain them to the purgatory.
-    fn remove_songs(&self, song_ids: &[&SongId]) {
+    fn remove_songs(&self, song_ids: &[&SongId]) -> Result<()> {
         let imp = self.imp();
 
         if let Some(song_list) = imp
@@ -570,7 +549,9 @@ impl HistoryView {
             .get()
             .and_then(|song_list| song_list.upgrade())
         {
-            let mut removed_songs = song_list.remove_many(song_ids);
+            let mut removed_songs = song_list
+                .remove_many(song_ids)
+                .context("Failed to remove songs from history")?;
             debug_assert_eq_or_log!(removed_songs.len(), song_ids.len());
             imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
         } else {
@@ -625,9 +606,11 @@ impl HistoryView {
                     |page| page.child(),
                 ),
         );
+
+        Ok(())
     }
 
-    fn undo_remove_song(&self) {
+    fn undo_remove_song(&self) -> Result<()> {
         let imp = self.imp();
 
         if let Some(song_list) = imp
@@ -635,10 +618,14 @@ impl HistoryView {
             .get()
             .and_then(|song_list| song_list.upgrade())
         {
-            song_list.append_many(imp.songs_purgatory.take());
+            song_list
+                .append_many(imp.songs_purgatory.take())
+                .context("Failed to restore removed songs")?;
         } else {
             debug_unreachable_or_log!("song list not found");
         }
+
+        Ok(())
     }
 
     fn snapshot_selected_songs(&self) -> Vec<Song> {
@@ -710,7 +697,12 @@ impl HistoryView {
                 .build();
 
             toast.connect_button_clicked(clone!(@weak self as obj => move |_| {
-                obj.undo_remove_song();
+                if let Err(err) = obj.undo_remove_song() {
+                    tracing::error!("Failed to undo remove song: {}", err);
+                    utils::app_instance()
+                        .window()
+                        .add_message_toast(&gettext("Failed to undo"));
+                }
             }));
 
             toast.connect_dismissed(clone!(@weak self as obj => move |_| {
@@ -719,7 +711,7 @@ impl HistoryView {
                 imp.undo_remove_song_toast.take();
             }));
 
-            utils::app_instance().add_toast(toast.clone());
+            utils::app_instance().window().add_toast(toast.clone());
 
             imp.undo_remove_song_toast.replace(Some(toast));
         }
@@ -735,8 +727,65 @@ impl HistoryView {
             ));
 
             // Reset toast timeout
-            utils::app_instance().add_toast(toast.clone());
+            utils::app_instance().window().add_toast(toast.clone());
         }
+    }
+
+    fn show_recognizer_results(&self, recognizer: &Recognizer) -> Result<()> {
+        let Some(history) = self.imp()
+            .song_list
+            .get()
+            .and_then(|song_list| song_list.upgrade())
+        else {
+            debug_unreachable_or_log!("history not found");
+            bail!("History not found");
+        };
+
+        let songs = recognizer
+            .take_recognized_saved_recordings()
+            .context("Failed to take recognized saved recordings")?
+            .iter()
+            .filter_map(
+                |recording| match recording.recognize_result().map(|r| r.0) {
+                    Some(Ok(ref song)) => Some(song.clone()),
+                    Some(Err(ref err)) => {
+                        // TODO handle errors
+                        debug_assert_or_log!(err.is_permanent());
+                        None
+                    }
+                    None => {
+                        debug_unreachable_or_log!("received none recognize result");
+                        None
+                    }
+                },
+            )
+            .collect::<Vec<_>>();
+
+        if songs.is_empty() {
+            tracing::debug!("No saved recordings taken when requested");
+            return Ok(());
+        }
+
+        for song in &songs {
+            // If the song is not found in the history, set it as newly heard
+            // (That's why an always true value is used after `or`). If it is in the
+            // history and it was newly heard, pass that state to the new value.
+            if history
+                .get(song.id_ref())
+                .map_or(true, |prev| prev.is_newly_heard())
+            {
+                song.set_is_newly_heard(true);
+            }
+        }
+
+        history
+            .append_many(songs.clone())
+            .context("Failed to append songs to history")?;
+
+        self.insert_recognized_page(&songs);
+        self.scroll_to_top();
+
+        Ok(())
     }
 
     fn update_selection_mode_ui(&self) {
@@ -953,8 +1002,8 @@ mod test {
                 .unwrap()
                 .song()
                 .unwrap()
-                .id(),
-            SongId::for_test(expected_id)
+                .id_ref(),
+            &SongId::for_test(expected_id)
         );
     }
 
@@ -973,7 +1022,7 @@ mod test {
         let song_list = SongList::load_from_env(env).unwrap();
 
         let song = new_test_song("1");
-        song_list.append(song.clone());
+        song_list.append(song.clone()).unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1027,7 +1076,9 @@ mod test {
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
-        song_list.append_many(vec![song_1.clone(), song_2.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1072,7 +1123,9 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
-        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1112,7 +1165,9 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
-        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1137,20 +1192,20 @@ mod test {
 
         // Since song_1 is added twice non-adjacently, it should reduce
         // the number of pages by 2
-        view.remove_songs(&[song_1.id_ref()]);
+        view.remove_songs(&[song_1.id_ref()]).unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
         // Since song_2 is added once, it should reduce the number of pages by 1
-        view.remove_songs(&[song_2.id_ref()]);
+        view.remove_songs(&[song_2.id_ref()]).unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 2);
 
         assert_leaflet_visible_child_song_id(&view, "3");
 
-        view.remove_songs(&[song_3.id_ref()]);
+        view.remove_songs(&[song_3.id_ref()]).unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 1);
     }
@@ -1167,7 +1222,9 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
-        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1181,7 +1238,8 @@ mod test {
         view.insert_song_page(&song_2);
         assert_leaflet_n_pages(&view, 6);
 
-        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()]);
+        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()])
+            .unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_visible_child_song_id(&view, "1");
         assert_leaflet_n_pages(&view, 3);
@@ -1199,7 +1257,9 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
-        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1215,7 +1275,7 @@ mod test {
         view.navigate_back();
         assert_leaflet_visible_child_song_id(&view, "2");
 
-        view.remove_songs(&[song_2.id_ref()]);
+        view.remove_songs(&[song_2.id_ref()]).unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_song_id(&view, "1");
@@ -1237,12 +1297,14 @@ mod test {
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
         let song_4 = new_test_song("4");
-        song_list.append_many(vec![
-            song_1.clone(),
-            song_2.clone(),
-            song_3.clone(),
-            song_4.clone(),
-        ]);
+        song_list
+            .append_many(vec![
+                song_1.clone(),
+                song_2.clone(),
+                song_3.clone(),
+                song_4.clone(),
+            ])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1260,7 +1322,8 @@ mod test {
         view.navigate_back();
         assert_leaflet_visible_child_song_id(&view, "2");
 
-        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()]);
+        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()])
+            .unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_song_id(&view, "1");
@@ -1280,7 +1343,9 @@ mod test {
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
-        song_list.append_many(vec![song_1.clone(), song_2.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1296,7 +1361,7 @@ mod test {
         view.navigate_back();
         assert_leaflet_visible_child_song_id(&view, "1");
 
-        view.remove_songs(&[song_1.id_ref()]);
+        view.remove_songs(&[song_1.id_ref()]).unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<RecognizedPage>(&view);
@@ -1317,7 +1382,9 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
-        song_list.append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()]);
+        song_list
+            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1334,7 +1401,8 @@ mod test {
         view.navigate_back();
         assert_leaflet_visible_child_song_id(&view, "2");
 
-        view.remove_songs(&[song_1.id_ref(), song_2.id_ref()]);
+        view.remove_songs(&[song_1.id_ref(), song_2.id_ref()])
+            .unwrap();
         trigger_purge_purgatory_leaflet_pages(&view);
         assert_leaflet_n_pages(&view, 3);
         assert_leaflet_visible_child_type::<RecognizedPage>(&view);

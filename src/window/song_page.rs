@@ -81,9 +81,9 @@ mod imp {
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 if let Some(song) = obj.song() {
                     obj.display().clipboard().set_text(&song.copy_term());
-
-                    let toast = adw::Toast::new(&gettext("Copied to clipboard"));
-                    utils::app_instance().add_toast(toast);
+                    utils::app_instance()
+                        .window()
+                        .add_message_toast(&gettext("Copied to clipboard"));
                 } else {
                     debug_unreachable_or_log!(
                         "failed to copy song: There is no active song in SongPage"
