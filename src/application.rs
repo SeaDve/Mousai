@@ -3,11 +3,13 @@ use anyhow::{Error, Result};
 use gtk::{gio, glib};
 use once_cell::unsync::OnceCell;
 
+use std::rc::Rc;
+
 use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::AlbumArtStore,
-    db, debug_assert_or_log, debug_unreachable_or_log,
+    database, debug_assert_or_log, debug_unreachable_or_log,
     inspector_page::InspectorPage,
     settings::Settings,
     window::Window,
@@ -21,7 +23,7 @@ mod imp {
     pub struct Application {
         pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<soup::Session>,
-        pub(super) env: OnceCell<heed::Env>,
+        pub(super) db_conn: OnceCell<Rc<rusqlite::Connection>>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
         pub(super) settings: Settings,
     }
@@ -49,7 +51,9 @@ mod imp {
 
             gtk::Window::set_default_icon_name(APP_ID);
 
-            self.env.set(db::new_env().unwrap()).unwrap();
+            self.db_conn
+                .set(Rc::new(database::new_connection()))
+                .unwrap();
 
             let obj = self.obj();
             obj.setup_gactions();
@@ -59,10 +63,6 @@ mod imp {
         }
 
         fn shutdown(&self) {
-            if let Err(err) = self.obj().env().force_sync() {
-                tracing::error!("Failed to sync db env on shutdown: {:?}", err);
-            }
-
             tracing::info!("Shutting down");
 
             self.parent_shutdown();
@@ -95,8 +95,11 @@ impl Application {
         self.imp().session.get_or_init(soup::Session::new)
     }
 
-    pub fn env(&self) -> &heed::Env {
-        self.imp().env.get().unwrap()
+    pub fn db_conn(&self) -> &Rc<rusqlite::Connection> {
+        self.imp()
+            .db_conn
+            .get()
+            .expect("database connection was not initialized")
     }
 
     pub fn album_art_store(&self) -> Result<&AlbumArtStore> {

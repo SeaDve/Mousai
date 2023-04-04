@@ -95,7 +95,7 @@ mod imp {
             let obj = self.obj();
 
             // TODO Handle outside and improve timings
-            match Recordings::load_from_env(utils::app_instance().env().clone()) {
+            match Recordings::load_from_db(utils::app_instance().db_conn().clone()) {
                 Ok(recordings) => self.saved_recordings.set(recordings).unwrap(),
                 Err(err) => tracing::error!("Failed to load saved recordings: {:?}", err),
             }
@@ -285,8 +285,11 @@ impl Recognizer {
         );
 
         if self.is_offline_mode() {
-            self.saved_recordings()
-                .insert(Recording::new(&recording_bytes, &recorded_time));
+            self.saved_recordings().insert(Recording::new(
+                &utils::generate_unique_id(),
+                &recording_bytes,
+                &recorded_time,
+            ));
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
         } else {

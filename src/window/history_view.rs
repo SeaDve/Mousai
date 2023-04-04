@@ -910,14 +910,14 @@ impl Default for HistoryView {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
 
     use gtk::gio;
 
-    use std::sync::Once;
+    use std::{rc::Rc, sync::Once};
 
-    use crate::{db, RESOURCES_FILE};
+    use crate::{database, RESOURCES_FILE};
 
     static GRESOURCES_INIT: Once = Once::new();
 
@@ -969,8 +969,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song = new_test_song("1");
         song_list.append(song.clone());
@@ -1022,8 +1022,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1066,8 +1066,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1106,8 +1106,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1161,8 +1161,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1193,8 +1193,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1230,8 +1230,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1275,8 +1275,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
@@ -1311,8 +1311,8 @@ mod test {
         gst::init().unwrap(); // For Player
 
         let player = Player::new();
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");

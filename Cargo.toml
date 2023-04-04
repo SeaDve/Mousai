@@ -20,7 +20,8 @@ gsettings-macro = "0.1.15"
 gst = { package = "gstreamer", version = "0.20.0" }
 gst_play = { package = "gstreamer-play", version = "0.20.0" }
 gtk = { version = "0.6.0", package = "gtk4", features = ["gnome_44"] }
-heed = "0.20.0-alpha.0"
+rusqlite = { version = "0.29.0" }
+rusqlite_migration = "1.0.2"
 indexmap = { version = "1.9.1", features = ["serde"] }
 mpris-player = "0.6.2"
 once_cell = "1.15.0"

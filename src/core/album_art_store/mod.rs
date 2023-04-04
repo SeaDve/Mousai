@@ -74,7 +74,7 @@ impl AlbumArtStore {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
 
     use gtk::gio::prelude::FileExt;

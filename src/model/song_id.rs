@@ -1,4 +1,8 @@
 use gtk::glib;
+use rusqlite::{
+    types::{FromSql, FromSqlResult, ToSqlOutput, ValueRef},
+    ToSql,
+};
 use serde::{Deserialize, Serialize};
 
 use crate::utils;
@@ -29,8 +33,20 @@ impl SongId {
     }
 }
 
+impl FromSql for SongId {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        Ok(Self(value.as_str()?.into()))
+    }
+}
+
+impl ToSql for SongId {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        self.0.as_ref().to_sql()
+    }
+}
+
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
     use std::collections::HashMap;
 

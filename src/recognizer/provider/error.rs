@@ -1,4 +1,9 @@
 use gettextrs::gettext;
+use rusqlite::{
+    types::{FromSql, FromSqlError, FromSqlResult, ToSqlOutput, ValueRef},
+    Error::ToSqlConversionFailure,
+    ToSql,
+};
 use serde::{Deserialize, Serialize};
 
 use std::{error, fmt};
@@ -62,6 +67,22 @@ impl RecognizeError {
         match self.kind() {
             NoMatches | Fingerprint | OtherPermanent => true,
             Connection | TokenLimitReached | InvalidToken => false,
+        }
+    }
+}
+
+impl FromSql for RecognizeError {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        let string = value.as_str()?;
+        serde_json::from_str::<Self>(string).map_err(|err| FromSqlError::Other(err.into()))
+    }
+}
+
+impl ToSql for RecognizeError {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        match serde_json::to_string(self) {
+            Ok(string) => Ok(ToSqlOutput::from(string)),
+            Err(err) => Err(ToSqlConversionFailure(err.into())),
         }
     }
 }

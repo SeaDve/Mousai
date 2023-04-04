@@ -148,7 +148,7 @@ impl Default for AudD {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
 
     fn parse_response(response: &'static str) -> Result<Data, RecognizeError> {

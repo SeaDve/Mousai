@@ -1,4 +1,5 @@
 mod album_art_store;
+mod bytes;
 mod cancelled;
 mod clock_time;
 mod date_time;
@@ -10,4 +11,5 @@ pub use self::{
     clock_time::ClockTimeExt,
     date_time::DateTime,
     help::{ErrorExt, Help, ResultExt},
+    bytes::Bytes,
 };

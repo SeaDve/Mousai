@@ -1,5 +1,10 @@
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 use indexmap::IndexMap;
+use rusqlite::{
+    types::{FromSql, FromSqlError, FromSqlResult, ToSqlOutput, ValueRef},
+    Error::ToSqlConversionFailure,
+    ToSql,
+};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{cell::RefCell, collections::HashMap};
@@ -118,6 +123,28 @@ impl<'de> Deserialize<'de> for ExternalLinks {
         this.imp().map.replace(external_links);
 
         Ok(this)
+    }
+}
+
+impl FromSql for ExternalLinks {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        let string = value.as_str()?;
+        let map = serde_json::from_str::<IndexMap<String, String>>(string)
+            .map_err(|err| FromSqlError::Other(err.into()))?;
+
+        let this = Self::new();
+        this.imp().map.replace(map);
+
+        Ok(this)
+    }
+}
+
+impl ToSql for ExternalLinks {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        match serde_json::to_string(&self.imp().map) {
+            Ok(string) => Ok(ToSqlOutput::from(string)),
+            Err(err) => Err(ToSqlConversionFailure(err.into())),
+        }
     }
 }
 

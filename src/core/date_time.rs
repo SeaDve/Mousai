@@ -1,6 +1,10 @@
 use anyhow::{Context, Result};
 use gettextrs::gettext;
 use gtk::glib;
+use rusqlite::{
+    types::{FromSql, FromSqlError, FromSqlResult, ToSqlOutput, ValueRef},
+    ToSql,
+};
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 /// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
@@ -57,6 +61,19 @@ impl<'de> Deserialize<'de> for DateTime {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let string = <&str>::deserialize(deserializer)?;
         DateTime::from_iso8601(string).map_err(de::Error::custom)
+    }
+}
+
+impl FromSql for DateTime {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        let string = value.as_str()?;
+        DateTime::from_iso8601(string).map_err(|err| FromSqlError::Other(err.into()))
+    }
+}
+
+impl ToSql for DateTime {
+    fn to_sql(&self) -> rusqlite::Result<ToSqlOutput<'_>> {
+        Ok(ToSqlOutput::from(self.format_iso8601().to_string()))
     }
 }
 

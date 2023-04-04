@@ -7,6 +7,8 @@ use gtk::{
 
 use std::cell::RefCell;
 
+use crate::core::Bytes;
+
 #[derive(Debug, Default)]
 
 pub struct Recorder {
@@ -50,7 +52,7 @@ impl Recorder {
         Ok(())
     }
 
-    pub fn stop(&self) -> Result<glib::Bytes> {
+    pub fn stop(&self) -> Result<Bytes> {
         let (pipeline, stream) = self
             .current_data
             .take()
@@ -61,7 +63,7 @@ impl Recorder {
 
         let _ = pipeline.bus().unwrap().remove_watch();
 
-        Ok(stream.steal_as_bytes())
+        Ok(stream.steal_as_bytes().into())
     }
 }
 

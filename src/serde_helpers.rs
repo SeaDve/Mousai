@@ -1,5 +1,4 @@
 use ::once_cell::unsync::OnceCell;
-use gtk::glib;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 pub mod once_cell {
@@ -22,27 +21,6 @@ pub mod once_cell {
     }
 }
 
-pub mod once_cell_gbytes {
-    use super::*;
-
-    pub fn serialize<S>(cell: &OnceCell<glib::Bytes>, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        cell.get().map(|bytes| bytes.as_ref()).serialize(serializer)
-    }
-
-    pub fn deserialize<'de, D>(deserializer: D) -> Result<OnceCell<glib::Bytes>, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let val = Option::<Vec<u8>>::deserialize(deserializer)?;
-        Ok(val.map_or_else(OnceCell::new, |val| {
-            OnceCell::with_value(glib::Bytes::from_owned(val))
-        }))
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -51,15 +29,12 @@ mod tests {
     struct Test {
         #[serde(with = "once_cell")]
         once_cell: OnceCell<i32>,
-        #[serde(with = "once_cell_gbytes")]
-        once_cell_gbytes: OnceCell<glib::Bytes>,
     }
 
     #[test]
     fn serde_bincode() {
         let val = Test {
             once_cell: OnceCell::new(),
-            once_cell_gbytes: OnceCell::new(),
         };
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Test>(&bytes).unwrap();
@@ -67,7 +42,6 @@ mod tests {
 
         let val = Test {
             once_cell: OnceCell::with_value(100),
-            once_cell_gbytes: OnceCell::with_value(glib::Bytes::from_owned(vec![0])),
         };
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Test>(&bytes).unwrap();

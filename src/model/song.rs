@@ -107,6 +107,35 @@ impl Song {
         SongBuilder::new(id, title, artist, album)
     }
 
+    #[allow(clippy::too_many_arguments)]
+    pub fn from_raw_parts(
+        id: SongId,
+        title: String,
+        artist: String,
+        album: String,
+        release_date: Option<String>,
+        external_links: ExternalLinks,
+        album_art_link: Option<String>,
+        playback_link: Option<String>,
+        lyrics: Option<String>,
+        last_heard: Option<DateTime>,
+        is_newly_heard: bool,
+    ) -> Self {
+        glib::Object::builder()
+            .property("id", id)
+            .property("title", title)
+            .property("artist", artist)
+            .property("album", album)
+            .property("release-date", release_date)
+            .property("external-links", external_links)
+            .property("album-art-link", album_art_link)
+            .property("playback-link", playback_link)
+            .property("lyrics", lyrics)
+            .property("last-heard", last_heard)
+            .property("is-newly-heard", is_newly_heard)
+            .build()
+    }
+
     /// String to match to when searching for self.
     pub fn search_term(&self) -> String {
         format!("{}{}", self.title(), self.artist())
@@ -143,34 +172,22 @@ impl Serialize for Song {
 impl<'de> Deserialize<'de> for Song {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_imp = imp::Song::deserialize(deserializer)?;
-        Ok(glib::Object::builder()
-            .property(
-                "id",
-                deserialized_imp
-                    .id
-                    .into_inner()
-                    .unwrap_or_else(SongId::generate_unique),
-            )
-            .property("title", deserialized_imp.title.into_inner())
-            .property("artist", deserialized_imp.artist.into_inner())
-            .property("album", deserialized_imp.album.into_inner())
-            .property("release-date", deserialized_imp.release_date.into_inner())
-            .property(
-                "external-links",
-                deserialized_imp.external_links.into_inner(),
-            )
-            .property(
-                "album-art-link",
-                deserialized_imp.album_art_link.into_inner(),
-            )
-            .property("playback-link", deserialized_imp.playback_link.into_inner())
-            .property("lyrics", deserialized_imp.lyrics.into_inner())
-            .property("last-heard", deserialized_imp.last_heard.into_inner())
-            .property(
-                "is-newly-heard",
-                deserialized_imp.is_newly_heard.into_inner(),
-            )
-            .build())
+        Ok(Self::from_raw_parts(
+            deserialized_imp
+                .id
+                .into_inner()
+                .unwrap_or_else(SongId::generate_unique),
+            deserialized_imp.title.into_inner(),
+            deserialized_imp.artist.into_inner(),
+            deserialized_imp.album.into_inner(),
+            deserialized_imp.release_date.into_inner(),
+            deserialized_imp.external_links.into_inner(),
+            deserialized_imp.album_art_link.into_inner(),
+            deserialized_imp.playback_link.into_inner(),
+            deserialized_imp.lyrics.into_inner(),
+            deserialized_imp.last_heard.into_inner(),
+            deserialized_imp.is_newly_heard.into_inner(),
+        ))
     }
 }
 
@@ -234,7 +251,7 @@ impl SongBuilder {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
 
     use crate::model::ExternalLink;

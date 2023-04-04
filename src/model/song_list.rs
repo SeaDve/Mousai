@@ -5,19 +5,19 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use heed::types::SerdeBincode;
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, collections::HashSet};
+use std::{cell::RefCell, collections::HashSet, rc::Rc};
 
 use super::{Song, SongId};
-use crate::{db::SONG_LIST_DB_NAME, debug_assert_or_log};
+use crate::{
+    core::DateTime, database::ParamPlaceholders, debug_assert_eq_or_log, model::ExternalLinks,
+};
 
-const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
-
-// FIXME Remove indirection of encoding SongId through SerdeBincode and use heed types directly
-type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
+const SONG_LAST_HEARD_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-last-heard-notify-handler-id";
+const SONG_IS_NEWLY_HEARD_NOTIFY_HANDLER_ID_KEY: &str =
+    "mousai-song-is-newly-heard-notify-handler-id";
 
 #[derive(Clone, glib::Boxed)]
 #[boxed_type(name = "MsaiBoxedSongVec")]
@@ -32,7 +32,7 @@ mod imp {
     pub struct SongList {
         pub(super) list: RefCell<IndexMap<SongId, Song>>,
 
-        pub(super) db: OnceCell<(heed::Env, SongDatabase)>,
+        pub(super) db_conn: OnceCell<Rc<rusqlite::Connection>>,
     }
 
     #[glib::object_subclass]
@@ -79,19 +79,33 @@ glib::wrapper! {
 }
 
 impl SongList {
-    /// Load from the `songs` table in the database
-    pub fn load_from_env(env: heed::Env) -> Result<Self> {
+    /// Load from the `songs` table in the database where `is_in_history` is `TRUE`.
+    pub fn load_from_db(conn: Rc<rusqlite::Connection>) -> Result<Self> {
         let now = std::time::Instant::now();
-
-        let mut wtxn = env.write_txn()?;
-        let db = env.create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))?;
-        let songs = db
-            .iter(&wtxn)?
-            .collect::<Result<IndexMap<SongId, Song>, _>>()?;
-        wtxn.commit()?;
-
+        let songs = {
+            let mut stmt = conn.prepare_cached(
+                "SELECT id, title, artist, album, release_date, external_links, album_art_link, playback_link, lyrics, last_heard, is_newly_heard FROM songs WHERE is_in_history IS TRUE",
+            )?;
+            let res = stmt.query_map([], |row| {
+                let song_id = row.get::<_, SongId>(0)?;
+                let song = Song::from_raw_parts(
+                    song_id.clone(),
+                    row.get::<_, String>(1)?,
+                    row.get::<_, String>(2)?,
+                    row.get::<_, String>(3)?,
+                    row.get::<_, Option<String>>(4)?,
+                    row.get::<_, ExternalLinks>(5)?,
+                    row.get::<_, Option<String>>(6)?,
+                    row.get::<_, Option<String>>(7)?,
+                    row.get::<_, Option<String>>(8)?,
+                    row.get::<_, Option<DateTime>>(9)?,
+                    row.get::<_, bool>(10)?,
+                );
+                Ok((song_id, song))
+            })?;
+            res.collect::<rusqlite::Result<IndexMap<_, _>>>()?
+        };
         tracing::debug!("Loaded {} songs in {:?}", songs.len(), now.elapsed());
-        debug_assert_or_log!(songs.iter().all(|(id, song)| id == song.id_ref()));
 
         let this = glib::Object::new::<Self>();
 
@@ -101,7 +115,7 @@ impl SongList {
 
         let imp = this.imp();
         imp.list.replace(songs);
-        imp.db.set((env, db)).unwrap();
+        imp.db_conn.set(conn).unwrap();
 
         // TODO Remove in future releases
         migrate_from_memory_list(&this);
@@ -115,10 +129,28 @@ impl SongList {
     ///
     /// The equivalence of the [`Song`] depends on its [`SongId`]
     pub fn append(&self, song: Song) -> bool {
-        let (env, db) = self.db();
-        let mut wtxn = env.write_txn().unwrap();
-        db.put(&mut wtxn, song.id_ref(), &song).unwrap();
-        wtxn.commit().unwrap();
+        let conn = self.db_conn();
+        let mut stmt = conn
+            .prepare_cached(&format!(
+                "INSERT OR REPLACE INTO songs (id, title, artist, album, release_date, external_links, album_art_link, playback_link, lyrics, last_heard, is_newly_heard, is_in_history) VALUES ({})",
+                ParamPlaceholders::new(12)
+            ))
+            .unwrap();
+        stmt.execute((
+            song.id_ref(),
+            song.title(),
+            song.artist(),
+            song.album(),
+            song.release_date(),
+            song.external_links(),
+            song.album_art_link(),
+            song.playback_link(),
+            song.lyrics(),
+            song.last_heard(),
+            song.is_newly_heard(),
+            true,
+        ))
+        .unwrap();
 
         self.bind_song_to_db(&song);
         let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
@@ -142,12 +174,34 @@ impl SongList {
     /// This is more efficient than [`SongList::append`] since it emits `items-changed`
     /// only once if all appended [`Song`]s are unique.
     pub fn append_many(&self, songs: Vec<Song>) -> u32 {
-        let (env, db) = self.db();
-        let mut wtxn = env.write_txn().unwrap();
-        for song in &songs {
-            db.put(&mut wtxn, song.id_ref(), song).unwrap();
+        let conn = self.db_conn();
+        let txn = conn.unchecked_transaction().unwrap();
+        {
+            let mut stmt = txn
+                .prepare_cached(&format!(
+                    "INSERT OR REPLACE INTO songs (id, title, artist, album, release_date, external_links, album_art_link, playback_link, lyrics, last_heard, is_newly_heard, is_in_history) VALUES ({})",
+                    ParamPlaceholders::new(12)
+                ))
+                .unwrap();
+            for song in &songs {
+                stmt.execute((
+                    song.id_ref(),
+                    song.title(),
+                    song.artist(),
+                    song.album(),
+                    song.release_date(),
+                    song.external_links(),
+                    song.album_art_link(),
+                    song.playback_link(),
+                    song.lyrics(),
+                    song.last_heard(),
+                    song.is_newly_heard(),
+                    true,
+                ))
+                .unwrap();
+            }
         }
-        wtxn.commit().unwrap();
+        txn.commit().unwrap();
 
         let mut updated_indices = HashSet::new();
         let mut n_appended = 0;
@@ -193,12 +247,17 @@ impl SongList {
     pub fn remove_many(&self, song_ids: &[&SongId]) -> Vec<Song> {
         let imp = self.imp();
 
-        let (env, db) = self.db();
-        let mut wtxn = env.write_txn().unwrap();
-        for song_id in song_ids {
-            db.delete(&mut wtxn, song_id).unwrap();
+        let conn = self.db_conn();
+        let txn = conn.unchecked_transaction().unwrap();
+        {
+            let mut stmt = txn
+                .prepare_cached("DELETE FROM songs WHERE id = ? AND is_in_history = TRUE")
+                .unwrap();
+            for id in song_ids {
+                stmt.execute((id,)).unwrap();
+            }
         }
-        wtxn.commit().unwrap();
+        txn.commit().unwrap();
 
         let mut taken = Vec::new();
         for song_id in song_ids {
@@ -242,22 +301,40 @@ impl SongList {
         )
     }
 
-    fn db(&self) -> &(heed::Env, SongDatabase) {
-        self.imp().db.get().unwrap()
+    fn db_conn(&self) -> &rusqlite::Connection {
+        self.imp().db_conn.get().unwrap()
     }
 
     fn bind_song_to_db(&self, song: &Song) {
         unsafe {
-            let handler_id = song.connect_notify_local(
-                None,
-                clone!(@weak self as obj => move |song, _| {
-                    let (env, db) = obj.db();
-                    let mut wtxn = env.write_txn().unwrap();
-                    db.put(&mut wtxn, song.id_ref(), song).unwrap();
-                    wtxn.commit().unwrap();
-                }),
+            let last_heard_handler_id =
+                song.connect_last_heard_notify(clone!(@weak self as obj => move |song| {
+                    let conn = obj.db_conn();
+                    let mut stmt = conn
+                        .prepare_cached(
+                            "UPDATE songs SET last_heard = ? WHERE id = ?",
+                        )
+                        .unwrap();
+                    let n_changed = stmt.execute((song.last_heard(), song.id_ref())).unwrap();
+                    debug_assert_eq_or_log!(n_changed, 1);
+                }));
+            song.set_data(SONG_LAST_HEARD_NOTIFY_HANDLER_ID_KEY, last_heard_handler_id);
+
+            let is_newly_heard_handler_id =
+                song.connect_is_newly_heard_notify(clone!(@weak self as obj => move |song| {
+                    let conn = obj.db_conn();
+                    let mut stmt = conn
+                        .prepare_cached(
+                            "UPDATE songs SET is_newly_heard = ? WHERE id = ?",
+                        )
+                        .unwrap();
+                    let n_changed = stmt.execute((song.is_newly_heard(), song.id_ref())).unwrap();
+                    debug_assert_eq_or_log!(n_changed, 1);
+                }));
+            song.set_data(
+                SONG_IS_NEWLY_HEARD_NOTIFY_HANDLER_ID_KEY,
+                is_newly_heard_handler_id,
             );
-            song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
         }
     }
 }
@@ -265,7 +342,12 @@ impl SongList {
 fn unbind_song_to_db(song: &Song) {
     unsafe {
         let handler_id = song
-            .steal_data::<glib::SignalHandlerId>(SONG_NOTIFY_HANDLER_ID_KEY)
+            .steal_data::<glib::SignalHandlerId>(SONG_LAST_HEARD_NOTIFY_HANDLER_ID_KEY)
+            .unwrap();
+        song.disconnect(handler_id);
+
+        let handler_id = song
+            .steal_data::<glib::SignalHandlerId>(SONG_IS_NEWLY_HEARD_NOTIFY_HANDLER_ID_KEY)
             .unwrap();
         song.disconnect(handler_id);
     };
@@ -330,7 +412,7 @@ fn migrate_from_memory_list(song_list: &SongList) {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
 
     use std::{
@@ -338,7 +420,7 @@ mod test {
         rc::Rc,
     };
 
-    use crate::db;
+    use crate::database;
 
     fn new_test_song(id: &str) -> Song {
         Song::builder(&SongId::for_test(id), id, id, id).build()
@@ -347,30 +429,42 @@ mod test {
     fn assert_n_items_and_db_count_eq(song_list: &SongList, n: usize) {
         assert_eq!(song_list.n_items(), n as u32);
 
-        let (env, db) = song_list.db();
-        let rtxn = env.read_txn().unwrap();
-        assert_eq!(db.len(&rtxn).unwrap(), n as u64);
+        let conn = song_list.db_conn();
+        let count = conn
+            .query_row("SELECT COUNT(id) FROM songs", (), |row| {
+                row.get::<_, u64>(0)
+            })
+            .unwrap();
+        assert_eq!(count, n as u64);
     }
 
     /// Must have exactly 2 songs
     fn assert_synced_to_db(song_list: &SongList) {
         assert_n_items_and_db_count_eq(song_list, 2);
 
-        let (env, db) = song_list.db();
+        let conn = song_list.db_conn();
+        let mut all_is_newly_heard_stmt = conn
+            .prepare_cached("SELECT is_newly_heard FROM songs")
+            .unwrap();
+        let mut get_is_newly_heard_stmt = conn
+            .prepare_cached("SELECT is_newly_heard FROM songs WHERE id = ?")
+            .unwrap();
 
         // Test if the items are synced to the database
-        let rtxn = env.read_txn().unwrap();
-        for item in db.iter(&rtxn).unwrap() {
-            let (_, song) = item.unwrap();
-            assert!(!song.is_newly_heard());
+        for is_newly_heard in all_is_newly_heard_stmt
+            .query_map((), |row| row.get::<_, bool>(0))
+            .unwrap()
+        {
+            assert!(!is_newly_heard.unwrap());
         }
         for (id, song) in song_list.imp().list.borrow().iter() {
             assert_eq!(
-                db.get(&rtxn, id).unwrap().unwrap().is_newly_heard(),
+                get_is_newly_heard_stmt
+                    .query_row((id,), |row| row.get::<_, bool>(0))
+                    .unwrap(),
                 song.is_newly_heard()
             );
         }
-        drop(rtxn);
 
         song_list
             .item(0)
@@ -381,14 +475,14 @@ mod test {
 
         // Test if the items are synced to the database even
         // after the song is modified\
-        let rtxn = env.read_txn().unwrap();
         for (id, song) in song_list.imp().list.borrow().iter() {
             assert_eq!(
-                db.get(&rtxn, id).unwrap().unwrap().is_newly_heard(),
+                get_is_newly_heard_stmt
+                    .query_row((id,), |row| row.get::<_, bool>(0))
+                    .unwrap(),
                 song.is_newly_heard()
             );
         }
-        drop(rtxn);
 
         song_list
             .item(1)
@@ -397,44 +491,85 @@ mod test {
             .set_is_newly_heard(true);
         assert_n_items_and_db_count_eq(song_list, 2);
 
-        let rtxn = env.read_txn().unwrap();
-        for item in db.iter(&rtxn).unwrap() {
-            let (_, song) = item.unwrap();
-            assert!(song.is_newly_heard());
+        for is_newly_heard in all_is_newly_heard_stmt
+            .query_map((), |row| row.get::<_, bool>(0))
+            .unwrap()
+        {
+            assert!(is_newly_heard.unwrap());
         }
         for (id, song) in song_list.imp().list.borrow().iter() {
             assert_eq!(
-                db.get(&rtxn, id).unwrap().unwrap().is_newly_heard(),
+                get_is_newly_heard_stmt
+                    .query_row((id,), |row| row.get::<_, bool>(0))
+                    .unwrap(),
                 song.is_newly_heard()
             );
         }
-        drop(rtxn);
 
         for (_, song) in song_list.imp().list.borrow().iter() {
             song.set_is_newly_heard(false);
         }
 
-        let rtxn = env.read_txn().unwrap();
-        for item in db.iter(&rtxn).unwrap() {
-            let (_, song) = item.unwrap();
-            assert!(!song.is_newly_heard());
+        for is_newly_heard in all_is_newly_heard_stmt
+            .query_map((), |row| row.get::<_, bool>(0))
+            .unwrap()
+        {
+            assert!(!is_newly_heard.unwrap());
         }
     }
 
     #[test]
     fn load_from_db() {
-        let (env, _tempdir) = db::new_test_env();
-        let mut wtxn = env.write_txn().unwrap();
-        let db: SongDatabase = env
-            .create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))
-            .unwrap();
-        db.put(&mut wtxn, &SongId::for_test("a"), &new_test_song("a"))
-            .unwrap();
-        db.put(&mut wtxn, &SongId::for_test("b"), &new_test_song("b"))
-            .unwrap();
-        wtxn.commit().unwrap();
-
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        {
+            let mut insert_stmt = conn
+                .prepare_cached(&format!(
+                    "INSERT OR REPLACE INTO songs (id, title, artist, album, release_date, external_links, album_art_link, playback_link, lyrics, last_heard, is_newly_heard, is_in_history) VALUES ({})",
+                    ParamPlaceholders::new(12),
+                ))
+                .unwrap();
+            let song_a = new_test_song("a");
+            assert_eq!(
+                insert_stmt
+                    .execute((
+                        song_a.id_ref(),
+                        song_a.title(),
+                        song_a.artist(),
+                        song_a.album(),
+                        song_a.release_date(),
+                        song_a.external_links(),
+                        song_a.album_art_link(),
+                        song_a.playback_link(),
+                        song_a.lyrics(),
+                        song_a.last_heard(),
+                        song_a.is_newly_heard(),
+                        true,
+                    ))
+                    .unwrap(),
+                1
+            );
+            let song_b = new_test_song("b");
+            assert_eq!(
+                insert_stmt
+                    .execute((
+                        song_b.id_ref(),
+                        song_b.title(),
+                        song_b.artist(),
+                        song_b.album(),
+                        song_b.release_date(),
+                        song_b.external_links(),
+                        song_b.album_art_link(),
+                        song_b.playback_link(),
+                        song_b.lyrics(),
+                        song_b.last_heard(),
+                        song_b.is_newly_heard(),
+                        true,
+                    ))
+                    .unwrap(),
+                1
+            );
+        }
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         assert_eq!(
             song_list.get(&SongId::for_test("a")).unwrap().id(),
@@ -451,8 +586,8 @@ mod test {
 
     #[test]
     fn append_and_remove() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         let song_1 = new_test_song("1");
@@ -484,8 +619,8 @@ mod test {
 
     #[test]
     fn remove_many() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         let song_1 = new_test_song("1");
@@ -510,8 +645,8 @@ mod test {
 
     #[test]
     fn remove_many_reversed() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         let song_1 = new_test_song("1");
@@ -536,8 +671,8 @@ mod test {
 
     #[test]
     fn append_many() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         let songs = vec![new_test_song("1"), new_test_song("2")];
@@ -553,8 +688,8 @@ mod test {
 
     #[test]
     fn items_changed_append() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         song_list.connect_items_changed(|_, index, removed, added| {
             assert_eq!(index, 0);
@@ -567,8 +702,8 @@ mod test {
 
     #[test]
     fn items_changed_append_index_1() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("0"));
 
         song_list.connect_items_changed(|_, index, removed, added| {
@@ -582,8 +717,8 @@ mod test {
 
     #[test]
     fn items_changed_append_equal() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("0"));
 
         let n_called = Rc::new(Cell::new(0));
@@ -602,8 +737,8 @@ mod test {
 
     #[test]
     fn items_changed_append_many() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("0"));
 
         song_list.connect_items_changed(|_, index, removed, added| {
@@ -617,8 +752,8 @@ mod test {
 
     #[test]
     fn items_changed_append_many_with_duplicates() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("0"));
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
@@ -647,8 +782,8 @@ mod test {
 
     #[test]
     fn items_changed_append_many_more_removed_than_n_items() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("0"));
         song_list.append(new_test_song("1"));
 
@@ -680,8 +815,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_some() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("0"));
 
         let ic_n_called = Rc::new(Cell::new(0));
@@ -717,8 +852,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_none() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append(new_test_song("1"));
 
         let ic_n_called = Rc::new(Cell::new(0));
@@ -745,8 +880,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_many() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
@@ -778,8 +913,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_in_between() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
@@ -814,8 +949,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_with_duplicates() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
@@ -851,8 +986,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_reversed_order() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
@@ -884,8 +1019,8 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_none() {
-        let (env, _tempdir) = db::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
+        let conn = database::new_test_connection();
+        let song_list = SongList::load_from_db(Rc::new(conn)).unwrap();
         song_list.append_many(vec![new_test_song("1"), new_test_song("2")]);
 
         let ic_n_called = Rc::new(Cell::new(0));

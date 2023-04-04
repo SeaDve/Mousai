@@ -152,7 +152,7 @@ impl AlbumArt {
 }
 
 #[cfg(test)]
-mod test {
+mod tests {
     use super::*;
 
     use futures_util::future;
