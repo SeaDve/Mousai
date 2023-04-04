@@ -1,11 +1,17 @@
-use anyhow::Result;
+mod migrations;
+
+use anyhow::{Context, Result};
 use gtk::glib;
 
 use std::fs;
 
-const N_NAMED_DB: u32 = 2;
+pub use self::migrations::Migrations;
+
+const N_NAMED_DBS: u32 = 2;
+
 pub const SONG_LIST_DB_NAME: &str = "song_list";
 pub const RECORDINGS_DB_NAME: &str = "saved_recordings";
+pub const USER_VERSION_KEY: &str = "user_version";
 
 /// Note: This must be only called once.
 pub fn new_env() -> Result<heed::Env> {
@@ -14,10 +20,11 @@ pub fn new_env() -> Result<heed::Env> {
     let env = unsafe {
         heed::EnvOpenOptions::new()
             .map_size(100 * 1024 * 1024) // 100 MiB
-            .max_dbs(N_NAMED_DB)
+            .max_dbs(N_NAMED_DBS)
             .flag(heed::Flags::MdbWriteMap)
             .flag(heed::Flags::MdbMapAsync)
-            .open(&path)?
+            .open(&path)
+            .with_context(|| format!("Failed to open heed env at {}", path.display()))?
     };
 
     tracing::debug!(

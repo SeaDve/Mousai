@@ -9,10 +9,10 @@ use heed::types::SerdeBincode;
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, collections::HashSet};
+use std::{cell::RefCell, collections::HashSet, time::Instant};
 
 use super::{Song, SongId};
-use crate::{db::SONG_LIST_DB_NAME, debug_assert_or_log};
+use crate::{database::SONG_LIST_DB_NAME, debug_assert_or_log};
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
@@ -81,7 +81,7 @@ glib::wrapper! {
 impl SongList {
     /// Load from the `songs` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
-        let now = std::time::Instant::now();
+        let now = Instant::now();
 
         let mut wtxn = env.write_txn()?;
         let db = env.create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))?;
@@ -338,7 +338,7 @@ mod test {
         rc::Rc,
     };
 
-    use crate::db;
+    use crate::database;
 
     fn new_test_song(id: &str) -> Song {
         Song::builder(&SongId::for_test(id), id, id, id).build()
@@ -423,7 +423,7 @@ mod test {
 
     #[test]
     fn load_from_db() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let mut wtxn = env.write_txn().unwrap();
         let db: SongDatabase = env
             .create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))
@@ -451,7 +451,7 @@ mod test {
 
     #[test]
     fn append_and_remove() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
@@ -484,7 +484,7 @@ mod test {
 
     #[test]
     fn remove_many() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
@@ -510,7 +510,7 @@ mod test {
 
     #[test]
     fn remove_many_reversed() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
@@ -536,7 +536,7 @@ mod test {
 
     #[test]
     fn append_many() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
@@ -553,7 +553,7 @@ mod test {
 
     #[test]
     fn items_changed_append() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
         song_list.connect_items_changed(|_, index, removed, added| {
@@ -567,7 +567,7 @@ mod test {
 
     #[test]
     fn items_changed_append_index_1() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("0"));
 
@@ -582,7 +582,7 @@ mod test {
 
     #[test]
     fn items_changed_append_equal() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("0"));
 
@@ -602,7 +602,7 @@ mod test {
 
     #[test]
     fn items_changed_append_many() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("0"));
 
@@ -617,7 +617,7 @@ mod test {
 
     #[test]
     fn items_changed_append_many_with_duplicates() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("0"));
 
@@ -647,7 +647,7 @@ mod test {
 
     #[test]
     fn items_changed_append_many_more_removed_than_n_items() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("0"));
         song_list.append(new_test_song("1"));
@@ -680,7 +680,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_some() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("0"));
 
@@ -717,7 +717,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_none() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append(new_test_song("1"));
 
@@ -745,7 +745,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_many() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
         let song_0 = new_test_song("0");
@@ -778,7 +778,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_in_between() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
         let song_0 = new_test_song("0");
@@ -814,7 +814,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_with_duplicates() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
         let song_0 = new_test_song("0");
@@ -851,7 +851,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_reversed_order() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
         let song_0 = new_test_song("0");
@@ -884,7 +884,7 @@ mod test {
 
     #[test]
     fn items_changed_removed_many_none() {
-        let (env, _tempdir) = db::new_test_env();
+        let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.append_many(vec![new_test_song("1"), new_test_song("2")]);
 
