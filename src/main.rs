@@ -29,7 +29,7 @@ mod application;
 mod audio_device;
 mod config;
 mod core;
-mod db;
+mod database;
 mod error_dialog;
 mod inspector_page;
 mod macros;

@@ -7,7 +7,8 @@ use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::AlbumArtStore,
-    db, debug_assert_or_log, debug_unreachable_or_log,
+    database::{self, Migrations},
+    debug_assert_or_log, debug_unreachable_or_log,
     inspector_page::InspectorPage,
     settings::Settings,
     window::Window,
@@ -49,9 +50,8 @@ mod imp {
 
             gtk::Window::set_default_icon_name(APP_ID);
 
-            self.env.set(db::new_env().unwrap()).unwrap();
-
             let obj = self.obj();
+            obj.setup_env().unwrap();
             obj.setup_gactions();
             obj.setup_accels();
 
@@ -139,6 +139,30 @@ impl Application {
         debug_assert_or_log!(main_window.is_some(), "failed to upgrade WeakRef<Window>");
 
         main_window
+    }
+
+    fn setup_env(&self) -> Result<()> {
+        {
+            let env = database::new_env()?;
+
+            let mut wtxn = env.write_txn()?;
+
+            let migrations = Migrations::new();
+            migrations.run(&env, &mut wtxn)?;
+
+            wtxn.commit()?;
+
+            // We might open a db in migrations and open the same db with different
+            // types later on, which is not allowed when done within the same env.
+            // To workaround this, we close the env and open a new one.
+            env.prepare_for_closing().wait();
+        }
+
+        let imp = self.imp();
+        let env = database::new_env()?;
+        imp.env.set(env).unwrap();
+
+        Ok(())
     }
 
     fn setup_gactions(&self) {
