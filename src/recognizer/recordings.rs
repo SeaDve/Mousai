@@ -1,4 +1,4 @@
-use anyhow::Result;
+use anyhow::{Context, Result};
 use gtk::{
     gio,
     glib::{self, clone},
@@ -12,7 +12,10 @@ use once_cell::unsync::OnceCell;
 use std::{cell::RefCell, time::Instant};
 
 use super::Recording;
-use crate::{database::RECORDINGS_DB_NAME, debug_assert_or_log, utils};
+use crate::{
+    database::{EnvExt, RECORDINGS_DB_NAME},
+    debug_assert_or_log, utils,
+};
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
@@ -66,13 +69,18 @@ impl Recordings {
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
         let now = Instant::now();
 
-        let mut wtxn = env.write_txn()?;
-        let db: RecordingDatabase = env.create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))?;
-        let recordings = db
-            .iter(&wtxn)?
-            .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
-            .collect::<Result<IndexMap<_, _>, _>>()?;
-        wtxn.commit()?;
+        let (db, recordings) = env.with_write_txn(|wtxn| {
+            let db: RecordingDatabase = env
+                .create_database(wtxn, Some(RECORDINGS_DB_NAME))
+                .context("Failed to create db")?;
+            let recordings = db
+                .iter(wtxn)
+                .context("Failed to iterate db")?
+                .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
+                .collect::<Result<IndexMap<_, _>, _>>()
+                .context("Failed to collect recordings from db")?;
+            Ok((db, recordings))
+        })?;
 
         tracing::debug!(
             "Loaded {} saved recordings in {:?}",
@@ -93,13 +101,15 @@ impl Recordings {
         Ok(this)
     }
 
-    pub fn insert(&self, recording: Recording) {
+    pub fn insert(&self, recording: Recording) -> Result<()> {
         let recording_id = utils::generate_unique_id();
 
         let (env, db) = self.db();
-        let mut wtxn = env.write_txn().unwrap();
-        db.put(&mut wtxn, &recording_id, &recording).unwrap();
-        wtxn.commit().unwrap();
+        env.with_write_txn(|wtxn| {
+            db.put(wtxn, &recording_id, &recording)
+                .context("Failed to put to db")?;
+            Ok(())
+        })?;
 
         self.bind_recording_to_items_changed_and_db(&recording_id, &recording);
 
@@ -111,6 +121,7 @@ impl Recordings {
         debug_assert_or_log!(last_value.is_none());
 
         self.items_changed(position as u32, 0, 1);
+        Ok(())
     }
 
     pub fn peek_filtered(&self, filter_func: impl Fn(&Recording) -> bool) -> Vec<Recording> {
@@ -124,7 +135,10 @@ impl Recordings {
             .collect()
     }
 
-    pub fn take_filtered(&self, filter_func: impl Fn(&Recording) -> bool) -> Vec<Recording> {
+    pub fn take_filtered(
+        &self,
+        filter_func: impl Fn(&Recording) -> bool,
+    ) -> Result<Vec<Recording>> {
         let imp = self.imp();
 
         let mut to_take_ids = Vec::new();
@@ -135,12 +149,13 @@ impl Recordings {
         }
 
         let (env, db) = self.db();
-        let mut wtxn = env.write_txn().unwrap();
-        for key in &to_take_ids {
-            let existed = db.delete(&mut wtxn, key).unwrap();
-            debug_assert_or_log!(existed);
-        }
-        wtxn.commit().unwrap();
+        env.with_write_txn(|wtxn| {
+            for key in &to_take_ids {
+                let existed = db.delete(wtxn, key).context("Failed to delete from db")?;
+                debug_assert_or_log!(existed);
+            }
+            Ok(())
+        })?;
 
         let mut taken = Vec::new();
         for id in &to_take_ids {
@@ -154,7 +169,7 @@ impl Recordings {
             taken.push(recording);
         }
 
-        taken
+        Ok(taken)
     }
 
     pub fn is_empty(&self) -> bool {
@@ -172,16 +187,14 @@ impl Recordings {
                 None,
                 clone!(@weak self as obj => move |recording, _| {
                     let (env, db) = obj.db();
-                    let mut wtxn = env.write_txn().unwrap();
-                    db.put(&mut wtxn, &recording_id, recording).unwrap();
-                    wtxn.commit().unwrap();
+                    if let Err(err) = env.with_write_txn(|wtxn| {
+                        db.put(wtxn, &recording_id, recording).context("Failed to put to db")?;
+                        Ok(())
+                    }) {
+                        tracing::error!("Failed to update recording in database: {:?}", err);
+                    }
 
-                    let index = obj
-                        .imp()
-                        .list
-                        .borrow()
-                        .get_index_of(&recording_id)
-                        .unwrap();
+                    let index = obj.imp().list.borrow().get_index_of(&recording_id).unwrap();
                     obj.items_changed(index as u32, 1, 1);
                 }),
             );
@@ -232,8 +245,8 @@ mod tests {
     fn assert_equal_recognize_result_song_id(a: &Recording, b: &Recording) {
         match (a.recognize_result(), b.recognize_result()) {
             (Some(result_a), Some(result_b)) => assert_eq!(
-                result_a.0.as_ref().unwrap().id(),
-                result_b.0.as_ref().unwrap().id()
+                result_a.0.as_ref().unwrap().id_ref(),
+                result_b.0.as_ref().unwrap().id_ref()
             ),
             (a, b) => assert_eq!(a, b),
         }
@@ -326,7 +339,7 @@ mod tests {
         let recordings = Recordings::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 0);
 
-        recordings.insert(new_test_recording(b"a"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 1);
         assert_eq!(
             recordings
@@ -338,7 +351,7 @@ mod tests {
             b"a"
         );
 
-        recordings.insert(new_test_recording(b"b"));
+        recordings.insert(new_test_recording(b"b")).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 2);
         assert_eq!(
             recordings
@@ -364,7 +377,7 @@ mod tests {
             assert_eq!(added, 1);
         });
 
-        recordings.insert(new_test_recording(b"a"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
     }
 
     #[test]
@@ -379,7 +392,7 @@ mod tests {
             .peek_filtered(|r| r.bytes().as_ref() == b"a")
             .is_empty());
 
-        recordings.insert(new_test_recording(b"a"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
         assert!(recordings.peek_filtered(|_| false).is_empty());
         assert_eq!(recordings.peek_filtered(|_| true).len(), 1);
         assert_eq!(
@@ -390,7 +403,7 @@ mod tests {
         );
         assert_n_items_and_db_count_eq(&recordings, 1);
 
-        recordings.insert(new_test_recording(b"b"));
+        recordings.insert(new_test_recording(b"b")).unwrap();
         assert!(recordings.peek_filtered(|_| false).is_empty());
         assert_eq!(recordings.peek_filtered(|_| true).len(), 2);
         assert_eq!(
@@ -414,7 +427,7 @@ mod tests {
         recordings.peek_filtered(|_| false);
 
         recordings.disconnect(a_handler_id);
-        recordings.insert(new_test_recording(b"a"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
 
         recordings.connect_items_changed(|_, _, _, _| {
             panic!("Recordings::items_changed should not be emitted when peek_filtered is called");
@@ -429,26 +442,27 @@ mod tests {
         let recordings = Recordings::load_from_env(env).unwrap();
 
         assert_n_items_and_db_count_eq(&recordings, 0);
-        assert!(recordings.take_filtered(|_| false).is_empty());
-        assert!(recordings.take_filtered(|_| true).is_empty());
+        assert!(recordings.take_filtered(|_| false).unwrap().is_empty());
+        assert!(recordings.take_filtered(|_| true).unwrap().is_empty());
         assert!(recordings
             .take_filtered(|r| r.bytes().as_ref() == b"a")
+            .unwrap()
             .is_empty());
 
-        recordings.insert(new_test_recording(b"a"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 1);
-        assert!(recordings.take_filtered(|_| false).is_empty());
+        assert!(recordings.take_filtered(|_| false).unwrap().is_empty());
         assert_n_items_and_db_count_eq(&recordings, 1);
-        assert_eq!(recordings.take_filtered(|_| true).len(), 1);
+        assert_eq!(recordings.take_filtered(|_| true).unwrap().len(), 1);
         assert_n_items_and_db_count_eq(&recordings, 0);
 
-        recordings.insert(new_test_recording(b"a"));
-        recordings.insert(new_test_recording(b"b"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
+        recordings.insert(new_test_recording(b"b")).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 2);
-        assert!(recordings.take_filtered(|_| false).is_empty());
+        assert!(recordings.take_filtered(|_| false).unwrap().is_empty());
         assert_n_items_and_db_count_eq(&recordings, 2);
 
-        let taken = recordings.take_filtered(|_| true);
+        let taken = recordings.take_filtered(|_| true).unwrap();
         assert_eq!(taken.len(), 2);
         assert_n_items_and_db_count_eq(&recordings, 0);
 
@@ -459,11 +473,12 @@ mod tests {
         }
         assert_n_items_and_db_count_eq(&recordings, 0);
 
-        recordings.insert(new_test_recording(b"a"));
-        recordings.insert(new_test_recording(b"b"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
+        recordings.insert(new_test_recording(b"b")).unwrap();
         assert_eq!(
             recordings
                 .take_filtered(|r| r.bytes().as_ref() == b"a")
+                .unwrap()
                 .len(),
             1,
         );
@@ -483,8 +498,8 @@ mod tests {
     fn take_filtered_items_changed() {
         let (env, _tempdir) = database::new_test_env();
         let recordings = Recordings::load_from_env(env).unwrap();
-        recordings.insert(new_test_recording(b"a"));
-        recordings.insert(new_test_recording(b"b"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
+        recordings.insert(new_test_recording(b"b")).unwrap();
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
 
@@ -495,18 +510,20 @@ mod tests {
                 .push((index, removed, added));
         });
 
-        recordings.take_filtered(|_| false);
+        recordings.take_filtered(|_| false).unwrap();
         assert!(calls_output.take().is_empty());
 
-        recordings.take_filtered(|_| true);
+        recordings.take_filtered(|_| true).unwrap();
         assert_eq!(calls_output.take(), vec![(0, 1, 0), (0, 1, 0)]);
 
         recordings.block_signal(&handler_id);
-        recordings.insert(new_test_recording(b"a"));
-        recordings.insert(new_test_recording(b"b"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
+        recordings.insert(new_test_recording(b"b")).unwrap();
         recordings.unblock_signal(&handler_id);
 
-        recordings.take_filtered(|r| r.bytes().as_ref() == b"a");
+        recordings
+            .take_filtered(|r| r.bytes().as_ref() == b"a")
+            .unwrap();
         assert_eq!(calls_output.take(), vec![(0, 1, 0)]);
     }
 
@@ -516,9 +533,9 @@ mod tests {
         let recordings = Recordings::load_from_env(env).unwrap();
 
         let recording_a = new_test_recording(b"a");
-        recordings.insert(recording_a.clone());
+        recordings.insert(recording_a.clone()).unwrap();
         let recording_b = new_test_recording(b"b");
-        recordings.insert(recording_b.clone());
+        recordings.insert(recording_b.clone()).unwrap();
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
 
@@ -544,7 +561,7 @@ mod tests {
         assert!(recordings.is_empty());
         assert_n_items_and_db_count_eq(&recordings, 0);
 
-        recordings.insert(new_test_recording(b"a"));
+        recordings.insert(new_test_recording(b"a")).unwrap();
         assert!(!recordings.is_empty());
         assert_n_items_and_db_count_eq(&recordings, 1);
     }

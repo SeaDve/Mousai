@@ -16,13 +16,15 @@ use std::{
     rc::Rc,
 };
 
-pub use self::provider::{
-    ProviderSettings, ProviderType, RecognizeError, RecognizeErrorKind, TestProviderMode,
+pub use self::{
+    provider::{
+        ProviderSettings, ProviderType, RecognizeError, RecognizeErrorKind, TestProviderMode,
+    },
+    recordings::Recordings,
 };
 use self::{
     recorder::Recorder,
     recording::{BoxedRecognizeResult, Recording},
-    recordings::Recordings,
 };
 use crate::{
     audio_device::{self, AudioDeviceClass},
@@ -51,6 +53,9 @@ mod imp {
     #[derive(Debug, Default, glib::Properties)]
     #[properties(wrapper_type = super::Recognizer)]
     pub struct Recognizer {
+        /// Saved recordings
+        #[property(get, set, construct_only)]
+        pub(super) saved_recordings: OnceCell<Recordings>,
         /// Current state
         #[property(get, builder(RecognizerState::default()))]
         pub(super) state: Cell<RecognizerState>,
@@ -60,8 +65,6 @@ mod imp {
 
         pub(super) recorder: Recorder,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
-
-        pub(super) saved_recordings: OnceCell<Recordings>,
     }
 
     #[glib::object_subclass]
@@ -94,12 +97,6 @@ mod imp {
 
             let obj = self.obj();
 
-            // TODO Handle outside and improve timings
-            match Recordings::load_from_env(utils::app_instance().env().clone()) {
-                Ok(recordings) => self.saved_recordings.set(recordings).unwrap(),
-                Err(err) => tracing::error!("Failed to load saved recordings: {:?}", err),
-            }
-
             gio::NetworkMonitor::default().connect_network_available_notify(
                 clone!(@weak obj => move |_| {
                     obj.update_offline_mode();
@@ -124,8 +121,10 @@ glib::wrapper! {
 }
 
 impl Recognizer {
-    pub fn new() -> Self {
-        glib::Object::new()
+    pub fn new(saved_recordings: &Recordings) -> Self {
+        glib::Object::builder()
+            .property("saved-recordings", saved_recordings)
+            .build()
     }
 
     pub fn connect_recording_peak_changed<F>(&self, f: F) -> glib::SignalHandlerId
@@ -167,13 +166,9 @@ impl Recognizer {
         )
     }
 
-    pub fn saved_recordings(&self) -> &Recordings {
-        self.imp().saved_recordings.get().unwrap()
-    }
-
     /// Returned recordings are guaranteed to have a recognizing result.
     /// However, the results may not be successful.
-    pub fn take_recognized_saved_recordings(&self) -> Vec<Recording> {
+    pub fn take_recognized_saved_recordings(&self) -> Result<Vec<Recording>> {
         self.saved_recordings()
             .take_filtered(is_recording_ready_to_take)
     }
@@ -286,7 +281,8 @@ impl Recognizer {
 
         if self.is_offline_mode() {
             self.saved_recordings()
-                .insert(Recording::new(&recording_bytes, &recorded_time));
+                .insert(Recording::new(&recording_bytes, &recorded_time))
+                .context("Failed to insert recording")?;
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
         } else {
@@ -388,12 +384,6 @@ impl Recognizer {
 
         self.imp().is_offline_mode.set(is_offline_mode);
         self.notify_is_offline_mode();
-    }
-}
-
-impl Default for Recognizer {
-    fn default() -> Self {
-        Self::new()
     }
 }
 

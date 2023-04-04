@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiDatabaseErrorWindow" parent="AdwApplicationWindow">
+    <property name="default-width">800</property>
+    <property name="default-height">600</property>
+    <property name="content">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkHeaderBar">
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage">
+            <property name="vexpand">True</property>
+            <property name="icon-name">face-sad-symbolic</property>
+            <property name="title" translatable="yes">Critical Database Error</property>
+            <property name="description" translatable="yes">This is likely caused by a tampered or corrupted database. You can try clearing application data. However, this is not recommended and will delete all your songs and saved recordings.&#xA;&#xA;To report this issue, please launch Mousai in the terminal to include the logs and submit the bug report to the &lt;a href="https://github.com/SeaDve/Mousai/issues/"&gt;issue page&lt;/a&gt;.</property>
+            <property name="child">
+              <object class="GtkButton">
+                <property name="halign">center</property>
+                <property name="action-name">app.quit</property>
+                <property name="label">Quit</property>
+                <style>
+                  <class name="pill"/>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

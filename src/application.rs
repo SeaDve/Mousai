@@ -1,5 +1,5 @@
 use adw::{prelude::*, subclass::prelude::*};
-use anyhow::{Error, Result};
+use anyhow::{Context, Result};
 use gtk::{gio, glib};
 use once_cell::unsync::OnceCell;
 
@@ -7,9 +7,11 @@ use crate::{
     about,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     core::AlbumArtStore,
-    database::{self, Migrations},
-    debug_assert_or_log, debug_unreachable_or_log,
+    database::{self, EnvExt, Migrations},
+    database_error_window::DatabaseErrorWindow,
     inspector_page::InspectorPage,
+    model::SongList,
+    recognizer::{Recognizer, Recordings},
     settings::Settings,
     window::Window,
 };
@@ -22,9 +24,12 @@ mod imp {
     pub struct Application {
         pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<soup::Session>,
-        pub(super) env: OnceCell<heed::Env>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
         pub(super) settings: Settings,
+
+        pub(super) env: OnceCell<heed::Env>,
+        pub(super) song_history: OnceCell<SongList>,
+        pub(super) saved_recordings: OnceCell<Recordings>,
     }
 
     #[glib::object_subclass]
@@ -40,8 +45,15 @@ mod imp {
         fn activate(&self) {
             self.parent_activate();
 
-            if let Some(window) = self.obj().main_window() {
-                window.present();
+            if self.env.get().is_some()
+                && self.song_history.get().is_some()
+                && self.saved_recordings.get().is_some()
+            {
+                self.obj().window().present();
+            } else {
+                // TODO don't spawn a new window if one is already open
+                // or find a better solution in handling these errors
+                DatabaseErrorWindow::new(&self.obj()).present();
             }
         }
 
@@ -51,16 +63,21 @@ mod imp {
             gtk::Window::set_default_icon_name(APP_ID);
 
             let obj = self.obj();
-            obj.setup_env().unwrap();
             obj.setup_gactions();
             obj.setup_accels();
 
             setup_inspector_page();
+
+            if let Err(err) = obj.setup_env() {
+                tracing::error!("Failed to setup db env: {:?}", err);
+            }
         }
 
         fn shutdown(&self) {
-            if let Err(err) = self.obj().env().force_sync() {
-                tracing::error!("Failed to sync db env on shutdown: {:?}", err);
+            if let Some(env) = self.env.get() {
+                if let Err(err) = env.force_sync() {
+                    tracing::error!("Failed to sync db env on shutdown: {:?}", err);
+                }
             }
 
             tracing::info!("Shutting down");
@@ -87,16 +104,19 @@ impl Application {
             .build()
     }
 
-    pub fn settings(&self) -> Settings {
-        self.imp().settings.clone()
+    pub fn window(&self) -> Window {
+        self.imp()
+            .window
+            .get_or_init(|| {
+                let recognizer = Recognizer::new(self.saved_recordings());
+                Window::new(self, self.song_history(), &recognizer).downgrade()
+            })
+            .upgrade()
+            .unwrap()
     }
 
     pub fn session(&self) -> &soup::Session {
         self.imp().session.get_or_init(soup::Session::new)
-    }
-
-    pub fn env(&self) -> &heed::Env {
-        self.imp().env.get().unwrap()
     }
 
     pub fn album_art_store(&self) -> Result<&AlbumArtStore> {
@@ -105,20 +125,8 @@ impl Application {
             .get_or_try_init(|| AlbumArtStore::new(self.session()))
     }
 
-    pub fn add_toast_error(&self, err: &Error) {
-        let toast = adw::Toast::builder()
-            .title(glib::markup_escape_text(&err.to_string()))
-            .priority(adw::ToastPriority::High)
-            .build();
-        self.add_toast(toast);
-    }
-
-    pub fn add_toast(&self, toast: adw::Toast) {
-        if let Some(window) = self.main_window() {
-            window.add_toast(toast);
-        } else {
-            debug_unreachable_or_log!("failed to add toast: MainWindow doesn't exist");
-        }
+    pub fn settings(&self) -> Settings {
+        self.imp().settings.clone()
     }
 
     pub fn run(&self) -> glib::ExitCode {
@@ -129,28 +137,30 @@ impl Application {
         ApplicationExtManual::run(self)
     }
 
-    fn main_window(&self) -> Option<Window> {
-        let main_window = self
-            .imp()
-            .window
-            .get_or_init(|| Window::new(self).downgrade())
-            .upgrade();
+    fn song_history(&self) -> &SongList {
+        self.imp()
+            .song_history
+            .get()
+            .expect("Song history not initialized")
+    }
 
-        debug_assert_or_log!(main_window.is_some(), "failed to upgrade WeakRef<Window>");
-
-        main_window
+    fn saved_recordings(&self) -> &Recordings {
+        self.imp()
+            .saved_recordings
+            .get()
+            .expect("Saved recordings not initialized")
     }
 
     fn setup_env(&self) -> Result<()> {
         {
             let env = database::new_env()?;
 
-            let mut wtxn = env.write_txn()?;
-
-            let migrations = Migrations::new();
-            migrations.run(&env, &mut wtxn)?;
-
-            wtxn.commit()?;
+            env.with_write_txn(|wtxn| {
+                let migrations = Migrations::new();
+                migrations
+                    .run(&env, wtxn)
+                    .context("Failed to run migrations")
+            })?;
 
             // We might open a db in migrations and open the same db with different
             // types later on, which is not allowed when done within the same env.
@@ -160,7 +170,14 @@ impl Application {
 
         let imp = self.imp();
         let env = database::new_env()?;
-        imp.env.set(env).unwrap();
+        imp.env.set(env.clone()).unwrap();
+
+        let song_history =
+            SongList::load_from_env(env.clone()).context("Failed to load song history")?;
+        self.imp().song_history.set(song_history).unwrap();
+
+        let recordings = Recordings::load_from_env(env)?;
+        self.imp().saved_recordings.set(recordings).unwrap();
 
         Ok(())
     }
@@ -168,15 +185,15 @@ impl Application {
     fn setup_gactions(&self) {
         let quit_action = gio::ActionEntry::builder("quit")
             .activate(|obj: &Self, _, _| {
-                if let Some(ref main_window) = obj.main_window() {
-                    main_window.close();
+                if let Some(window) = obj.imp().window.get().and_then(|window| window.upgrade()) {
+                    window.close();
                 }
                 obj.quit();
             })
             .build();
         let about_action = gio::ActionEntry::builder("about")
             .activate(|obj: &Self, _, _| {
-                about::present_window(obj.main_window().as_ref());
+                about::present_window(Some(&obj.window()));
             })
             .build();
         self.add_action_entries([quit_action, about_action]);
