@@ -1,6 +1,6 @@
 use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use std::cell::{Cell, RefCell};
 
@@ -85,13 +85,19 @@ impl<'de> Deserialize<'de> for Recording {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let deserialized_imp = imp::Recording::deserialize(deserializer)?;
         Ok(glib::Object::builder()
-            .property("bytes", deserialized_imp.bytes.into_inner())
+            .property(
+                "bytes",
+                deserialized_imp
+                    .bytes
+                    .into_inner()
+                    .ok_or_else(|| de::Error::missing_field("bytes"))?,
+            )
             .property(
                 "recorded-time",
                 deserialized_imp
                     .recorded_time
                     .into_inner()
-                    .ok_or_else(|| serde::de::Error::missing_field("recorded_time"))?,
+                    .ok_or_else(|| de::Error::missing_field("recorded_time"))?,
             )
             .property(
                 "recognize-result",
