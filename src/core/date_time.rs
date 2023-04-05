@@ -10,7 +10,7 @@ pub struct DateTime(glib::DateTime);
 
 impl DateTime {
     pub fn now_local() -> Self {
-        Self(glib::DateTime::now_local().expect("You are somehow on year 9999"))
+        Self(glib::DateTime::now_local().unwrap())
     }
 
     pub fn from_iso8601(string: &str) -> Result<Self> {
@@ -31,13 +31,11 @@ impl DateTime {
         } else {
             self.0.format("%F") // ISO 8601 (e.g., `2001-07-08`)
         }
-        .expect("DateTime formatting error")
+        .expect("format must be correct")
     }
 
     pub fn format_iso8601(&self) -> glib::GString {
-        self.0
-            .format_iso8601()
-            .expect("Failed to format datetime to iso6801")
+        self.0.format_iso8601().unwrap()
     }
 
     pub fn format(&self, format: &str) -> Result<glib::GString> {

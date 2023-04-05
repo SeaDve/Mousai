@@ -150,9 +150,9 @@ impl RecognizedPage {
             .imp()
             .player
             .get()
-            .expect("Player was not bound")
+            .expect("player must be bound")
             .upgrade()
-            .expect("Player was dropped");
+            .expect("player must not be dropped");
 
         for song in songs {
             let tile = RecognizedPageTile::new(song);

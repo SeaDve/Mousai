@@ -62,7 +62,7 @@ mod imp {
         pub(super) select_button: TemplateChild<gtk::CheckButton>,
 
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
-        pub(super) select_button_active_notify_handler: OnceCell<glib::SignalHandlerId>,
+        pub(super) select_button_active_notify_handler_id: OnceCell<glib::SignalHandlerId>,
         pub(super) song_binding_group: glib::BindingGroup,
         pub(super) contains_pointer: Cell<bool>,
     }
@@ -134,7 +134,7 @@ mod imp {
             }));
             obj.add_controller(gesture_long_press);
 
-            self.select_button_active_notify_handler
+            self.select_button_active_notify_handler_id
                 .set(
                     self.select_button
                         .connect_active_notify(clone!(@weak obj => move |button| {
@@ -193,9 +193,9 @@ mod imp {
             self.is_selected.set(is_selected);
 
             let handler_id = self
-                .select_button_active_notify_handler
+                .select_button_active_notify_handler_id
                 .get()
-                .expect("Handler id was not set on constructed");
+                .expect("handler id should be set on constructed");
             self.select_button.block_signal(handler_id);
             self.select_button.set_active(is_selected);
             self.select_button.unblock_signal(handler_id);

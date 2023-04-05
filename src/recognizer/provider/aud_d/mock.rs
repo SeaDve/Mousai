@@ -47,7 +47,7 @@ fn random_data(mode: TestProviderMode) -> Result<Data, RecognizeError> {
 
     let random_response = raw_responses
         .get(glib::random_int_range(0, raw_responses.len() as i32) as usize)
-        .expect("Out of bound index from the raw responses");
+        .expect("index must be in range");
 
     tracing::trace!(random_response);
 

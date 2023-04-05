@@ -168,7 +168,8 @@ impl Recordings {
                 .iter()
                 .rev()
                 .map(|&index| {
-                    let (_, recording) = list.shift_remove_index(index).expect("id exists");
+                    let (_, recording) =
+                        list.shift_remove_index(index).expect("index must be valid");
                     recording
                 })
                 .collect::<Vec<_>>()

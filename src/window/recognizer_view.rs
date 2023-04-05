@@ -84,7 +84,7 @@ impl RecognizerView {
         self.imp()
             .recognizer
             .get()
-            .expect("Recognizer was not bound")
+            .expect("recognizer must be bound")
     }
 
     fn recognizing_animation(&self) -> &adw::TimedAnimation {

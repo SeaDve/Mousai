@@ -110,10 +110,7 @@ mod imp {
             let obj = self.obj();
 
             self.external_links_box.connect_child_activated(|_, child| {
-                let external_link_tile = child
-                    .clone()
-                    .downcast::<ExternalLinkTile>()
-                    .expect("Expected `ExternalLinkTile` as child");
+                let external_link_tile = child.clone().downcast::<ExternalLinkTile>().unwrap();
                 external_link_tile.handle_activation();
             });
 

@@ -141,14 +141,14 @@ impl Application {
         self.imp()
             .song_history
             .get()
-            .expect("Song history not initialized")
+            .expect("song history should be initialized on env setup")
     }
 
     fn saved_recordings(&self) -> &Recordings {
         self.imp()
             .saved_recordings
             .get()
-            .expect("Saved recordings not initialized")
+            .expect("saved recordings should be initialized on env setup")
     }
 
     fn setup_env(&self) -> Result<()> {

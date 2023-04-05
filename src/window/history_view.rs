@@ -459,9 +459,9 @@ impl HistoryView {
         self.imp()
             .player
             .get()
-            .expect("Player was not bound on HistoryView")
+            .expect("player must be bound")
             .upgrade()
-            .expect("Player was dropped")
+            .expect("player must not be dropped")
     }
 
     /// This does the following things:
@@ -951,8 +951,7 @@ mod test {
 
     fn init_gresources() {
         GRESOURCES_INIT.call_once(|| {
-            let res =
-                gio::Resource::load(RESOURCES_FILE).expect("Tests could not load gresource file");
+            let res = gio::Resource::load(RESOURCES_FILE).unwrap();
             gio::resources_register(&res);
         });
     }

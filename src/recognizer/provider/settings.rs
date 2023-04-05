@@ -69,7 +69,7 @@ impl ProviderSettings {
         INSTANCE
             .get_or_init(|| Mutex::new(ProviderSettings::default()))
             .lock()
-            .expect("Failed to lock the global ProviderSettings mutex")
+            .unwrap()
     }
 
     /// Reset all fields to their defaults

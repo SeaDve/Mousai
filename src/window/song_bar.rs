@@ -158,10 +158,7 @@ impl SongBar {
     }
 
     fn player(&self) -> &Player {
-        self.imp()
-            .player
-            .get()
-            .expect("Player was not bound in SongBar")
+        self.imp().player.get().expect("player must be bound")
     }
 
     fn set_playback_position_scale_value_blocking(&self, value: f64) {

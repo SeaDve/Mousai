@@ -232,7 +232,7 @@ impl SongList {
                 .iter()
                 .rev()
                 .map(|&index| {
-                    let (_, song) = list.shift_remove_index(index).expect("index is valid");
+                    let (_, song) = list.shift_remove_index(index).expect("index must be valid");
                     song
                 })
                 .collect::<Vec<_>>()
