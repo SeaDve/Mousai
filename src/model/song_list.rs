@@ -9,12 +9,16 @@ use heed::types::SerdeBincode;
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, collections::HashSet, time::Instant};
+use std::{
+    cell::RefCell,
+    collections::{BTreeSet, HashSet},
+    time::Instant,
+};
 
 use super::{Song, SongId};
 use crate::{
     database::{EnvExt, SONG_LIST_DB_NAME},
-    debug_assert_or_log,
+    debug_assert_or_log, utils,
 };
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
@@ -214,14 +218,25 @@ impl SongList {
             Ok(())
         })?;
 
+        let mut to_remove_indices = BTreeSet::new();
+        for song_id in song_ids {
+            if let Some(index) = imp.list.borrow().get_index_of(*song_id) {
+                to_remove_indices.insert(index);
+            }
+        }
+
         let mut taken = Vec::new();
         for song_id in song_ids {
-            let removed = { imp.list.borrow_mut().shift_remove_full(*song_id) };
-            if let Some((index, _, song)) = removed {
+            let removed = { imp.list.borrow_mut().shift_remove(*song_id) };
+            if let Some(song) = removed {
                 unbind_song_to_db(&song);
-                self.items_changed(index as u32, 1, 0); // TODO Optimize this
                 taken.push(song);
             }
+        }
+
+        // Reverse the iterations so we don't shift the indices
+        for &(first, count) in utils::consecutive_groups(&to_remove_indices).iter().rev() {
+            self.items_changed(first as u32, count as u32, 0);
         }
 
         if !taken.is_empty() {
@@ -822,7 +837,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(0, 1, 0), (0, 1, 0)]);
+        assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
         assert_eq!(r_calls_output.take(), vec![vec![song_0, song_1]]);
     }
 
@@ -861,7 +876,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (2, 1, 0)]);
+        assert_eq!(ic_calls_output.take(), &[(3, 1, 0), (1, 1, 0)]);
         assert_eq!(r_calls_output.take(), vec![vec![song_1, song_3]]);
     }
 
@@ -901,7 +916,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (0, 1, 0)]);
+        assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
         assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
     }
 
@@ -937,7 +952,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(1, 1, 0), (0, 1, 0)]);
+        assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
         assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
     }
 

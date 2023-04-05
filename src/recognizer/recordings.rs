@@ -9,7 +9,7 @@ use heed::types::{SerdeBincode, Str};
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, time::Instant};
+use std::{cell::RefCell, collections::BTreeSet, time::Instant};
 
 use super::Recording;
 use crate::{
@@ -142,9 +142,12 @@ impl Recordings {
         let imp = self.imp();
 
         let mut to_take_ids = Vec::new();
-        for (id, recording) in imp.list.borrow().iter() {
+        let mut to_take_indices = BTreeSet::new();
+        for (index, (id, recording)) in imp.list.borrow().iter().enumerate() {
             if filter_func(recording) {
                 to_take_ids.push(id.to_string());
+                to_take_indices.insert(index);
+                debug_assert_eq!(index, imp.list.borrow().get_index_of(id).unwrap());
             }
         }
 
@@ -161,14 +164,18 @@ impl Recordings {
 
         let mut taken = Vec::new();
         for id in &to_take_ids {
-            let (index, _, recording) = imp
+            let recording = imp
                 .list
                 .borrow_mut()
-                .shift_remove_full(id.as_str())
+                .shift_remove(id.as_str())
                 .expect("id exists");
             unbind_recording_to_items_changed_and_db(&recording);
-            self.items_changed(index as u32, 1, 0); // TODO Optimize this
             taken.push(recording);
+        }
+
+        // Reverse the iterations so we don't shift the indices
+        for &(first, count) in utils::consecutive_groups(&to_take_indices).iter().rev() {
+            self.items_changed(first as u32, count as u32, 0);
         }
 
         Ok(taken)
@@ -516,7 +523,7 @@ mod tests {
         assert!(calls_output.take().is_empty());
 
         recordings.take_filtered(|_| true).unwrap();
-        assert_eq!(calls_output.take(), vec![(0, 1, 0), (0, 1, 0)]);
+        assert_eq!(calls_output.take(), vec![(0, 2, 0)]);
 
         recordings.block_signal(&handler_id);
         recordings.insert(new_test_recording(b"a")).unwrap();
