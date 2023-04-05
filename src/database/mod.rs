@@ -67,7 +67,7 @@ impl EnvExt for heed::Env {
         let ret = func(&mut wtxn)?;
         wtxn.commit().context("Failed to commit write txn")?;
 
-        tracing::debug!("Database write transaction took {:?}", now.elapsed());
+        tracing::trace!("Database write transaction took {:?}", now.elapsed());
 
         Ok(ret)
     }

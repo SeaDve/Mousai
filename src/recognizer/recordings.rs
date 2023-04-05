@@ -72,10 +72,10 @@ impl Recordings {
         let (db, recordings) = env.with_write_txn(|wtxn| {
             let db: RecordingDatabase = env
                 .create_database(wtxn, Some(RECORDINGS_DB_NAME))
-                .context("Failed to create db")?;
+                .context("Failed to create recordings db")?;
             let recordings = db
                 .iter(wtxn)
-                .context("Failed to iterate db")?
+                .context("Failed to iter recordings from db")?
                 .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
                 .collect::<Result<IndexMap<_, _>, _>>()
                 .context("Failed to collect recordings from db")?;
@@ -107,7 +107,7 @@ impl Recordings {
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
             db.put(wtxn, &recording_id, &recording)
-                .context("Failed to put to db")?;
+                .context("Failed to put recording to db")?;
             Ok(())
         })?;
 
@@ -151,7 +151,9 @@ impl Recordings {
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
             for key in &to_take_ids {
-                let existed = db.delete(wtxn, key).context("Failed to delete from db")?;
+                let existed = db
+                    .delete(wtxn, key)
+                    .context("Failed to delete recording from db")?;
                 debug_assert_or_log!(existed);
             }
             Ok(())
@@ -188,7 +190,7 @@ impl Recordings {
                 clone!(@weak self as obj => move |recording, _| {
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
-                        db.put(wtxn, &recording_id, recording).context("Failed to put to db")?;
+                        db.put(wtxn, &recording_id, recording).context("Failed to put recording to db")?;
                         Ok(())
                     }) {
                         tracing::error!("Failed to update recording in database: {:?}", err);
