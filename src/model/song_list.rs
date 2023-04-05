@@ -226,9 +226,9 @@ impl SongList {
         }
 
         let mut taken = Vec::new();
-        for song_id in song_ids {
-            let removed = { imp.list.borrow_mut().shift_remove(*song_id) };
-            if let Some(song) = removed {
+        for &index in to_remove_indices.iter().rev() {
+            let removed = { imp.list.borrow_mut().shift_remove_index(index) };
+            if let Some((_, song)) = removed {
                 unbind_song_to_db(&song);
                 taken.push(song);
             }
@@ -545,7 +545,7 @@ mod test {
         let removed = song_list
             .remove_many(&[song_1.id_ref(), song_2.id_ref()])
             .unwrap();
-        assert_eq!(removed, vec![song_1.clone(), song_2.clone()]);
+        assert_eq!(removed, vec![song_2.clone(), song_1.clone()]);
         assert_eq!(song_list.get(song_1.id_ref()), None);
         assert_eq!(song_list.get(song_2.id_ref()), None);
         assert_n_items_and_db_count_eq(&song_list, 0);
@@ -838,7 +838,7 @@ mod test {
             2
         );
         assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
-        assert_eq!(r_calls_output.take(), vec![vec![song_0, song_1]]);
+        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
     }
 
     #[test]
@@ -877,7 +877,7 @@ mod test {
             2
         );
         assert_eq!(ic_calls_output.take(), &[(3, 1, 0), (1, 1, 0)]);
-        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_3]]);
+        assert_eq!(r_calls_output.take(), vec![vec![song_3, song_1]]);
     }
 
     #[test]
