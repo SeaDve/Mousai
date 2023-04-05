@@ -89,10 +89,10 @@ impl SongList {
         let (db, songs) = env.with_write_txn(|wtxn| {
             let db = env
                 .create_database(wtxn, Some(SONG_LIST_DB_NAME))
-                .context("Failed to create db")?;
+                .context("Failed to create songs db")?;
             let songs = db
                 .iter(wtxn)
-                .context("Failed to iterate db")?
+                .context("Failed to iter songs from db")?
                 .collect::<Result<IndexMap<SongId, Song>, _>>()
                 .context("Failed to collect songs from db")?;
             Ok((db, songs))
@@ -126,7 +126,7 @@ impl SongList {
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
             db.put(wtxn, song.id_ref(), &song)
-                .context("Failed to put to db")?;
+                .context("Failed to put song to db")?;
             Ok(())
         })?;
 
@@ -156,7 +156,7 @@ impl SongList {
         env.with_write_txn(|wtxn| {
             for song in &songs {
                 db.put(wtxn, song.id_ref(), song)
-                    .context("Failed to put to db")?;
+                    .context("Failed to put song to db")?;
             }
             Ok(())
         })?;
@@ -209,7 +209,7 @@ impl SongList {
         env.with_write_txn(|wtxn| {
             for song_id in song_ids {
                 db.delete(wtxn, song_id)
-                    .context("Failed to delete from db")?;
+                    .context("Failed to delete song from db")?;
             }
             Ok(())
         })?;
@@ -267,7 +267,7 @@ impl SongList {
                 clone!(@weak self as obj => move |song, _| {
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
-                        db.put(wtxn, song.id_ref(), song).context("Failed to put to db")?;
+                        db.put(wtxn, song.id_ref(), song).context("Failed to put song to db")?;
                         Ok(())
                     }) {
                         tracing::error!("Failed to update song in database: {:?}", err);
@@ -342,7 +342,7 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
         .collect::<Vec<_>>();
     song_list
         .append_many(songs)
-        .context("Failed to append songs")?;
+        .context("Failed to append songs to song history")?;
 
     settings.set_memory_list(Vec::new());
     tracing::debug!("Successfully migrated songs from memory list");
