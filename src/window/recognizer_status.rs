@@ -7,7 +7,7 @@ use gtk::{
 use once_cell::unsync::OnceCell;
 
 use super::progress_icon::ProgressIcon;
-use crate::{debug_assert_or_log, recognizer::Recognizer};
+use crate::recognizer::Recognizer;
 
 // TODO
 // - Maybe drop the separate button to show result?
@@ -136,7 +136,10 @@ impl RecognizerStatus {
 
         let total = recognizer.saved_recordings().n_items() as usize;
         let n_recognized = recognizer.peek_recognized_saved_recordings().len();
-        debug_assert_or_log!(n_recognized <= total);
+        debug_assert!(
+            n_recognized <= total,
+            "total must always be greater or equal than n_recognized"
+        );
 
         let n_successful = self
             .imp()

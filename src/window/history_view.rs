@@ -15,7 +15,7 @@ use super::{
 };
 use crate::{
     config::APP_ID,
-    debug_assert_eq_or_log, debug_assert_or_log,
+    debug_assert_eq_or_log,
     model::{Song, SongFilter, SongId, SongList, SongSorter},
     player::Player,
     recognizer::Recognizer,
@@ -122,9 +122,9 @@ mod imp {
             klass.install_action("history-view.copy-selected-song", None, |obj, _, _| {
                 let selected_songs = obj.snapshot_selected_songs();
 
-                debug_assert_or_log!(
+                debug_assert!(
                     !selected_songs.is_empty(),
-                    "copying should only be allowed if there is atleast one selected"
+                    "copying must only be allowed if there is atleast one selected"
                 );
 
                 let text = selected_songs
@@ -186,9 +186,9 @@ mod imp {
 
                         let imp = obj.imp();
 
-                        debug_assert_or_log!(
+                        debug_assert!(
                             !imp.leaflet_pages_purgatory.borrow().contains(&imp.leaflet.page(&child)),
-                            "leaflet's visible child is in purgatory"
+                            "leaflet's visible child must not be in the purgatory"
                         );
                     }));
             }
@@ -251,14 +251,14 @@ impl HistoryView {
     pub fn insert_recognized_page(&self, songs: &[Song]) {
         let imp = self.imp();
 
-        debug_assert_or_log!(
+        debug_assert!(
             !imp.leaflet
                 .pages()
                 .iter::<adw::LeafletPage>()
                 .map(|page| page.unwrap())
                 .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
                 .any(|page| page.is::<RecognizedPage>()),
-            "there is already a `RecognizedPage` on the leaflet"
+            "there must not be already a `RecognizedPage` on the leaflet"
         );
 
         let recognized_page = RecognizedPage::new();
@@ -730,7 +730,10 @@ impl HistoryView {
                     Some(Ok(ref song)) => Some(song.clone()),
                     Some(Err(ref err)) => {
                         // TODO handle errors
-                        debug_assert_or_log!(err.is_permanent());
+                        debug_assert!(
+                            err.is_permanent(),
+                            "only results with permanent errors must be taken"
+                        );
                         None
                     }
                     None => unreachable!("recognized saved recordings should have some result"),

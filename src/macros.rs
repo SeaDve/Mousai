@@ -17,31 +17,6 @@ macro_rules! derived_properties {
 
 // FIXME these macros may compute expensive expressions on release builds
 
-/// Like `assert` but logs as error instead of panicking on release builds.
-///
-/// This should only be used on programmer errors.
-#[macro_export]
-macro_rules! debug_assert_or_log {
-    ($cond:expr) => {
-        if cfg!(debug_assertions) {
-            assert!($cond);
-        } else {
-            if !$cond {
-                tracing::error!("assertion failed: {}", stringify!($cond));
-            }
-        }
-    };
-    ($cond:expr, $($arg:tt)*) => {
-        if cfg!(debug_assertions) {
-            assert!($cond, $($arg)*);
-        } else {
-            if !$cond {
-                tracing::error!($($arg)*);
-            }
-        }
-    };
-}
-
 /// Like `assert_eq` but logs as error instead of panicking on release builds.
 ///
 /// This should only be used on programmer errors.

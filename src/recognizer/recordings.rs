@@ -14,7 +14,7 @@ use std::{cell::RefCell, collections::BTreeSet, time::Instant};
 use super::Recording;
 use crate::{
     database::{EnvExt, RECORDINGS_DB_NAME},
-    debug_assert_or_log, utils,
+    utils,
 };
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
@@ -118,7 +118,7 @@ impl Recordings {
             .list
             .borrow_mut()
             .insert_full(recording_id, recording);
-        debug_assert_or_log!(last_value.is_none());
+        debug_assert!(last_value.is_none(), "recording must not exist already");
 
         self.items_changed(position as u32, 0, 1);
         Ok(())
@@ -157,7 +157,7 @@ impl Recordings {
                 let existed = db
                     .delete(wtxn, key)
                     .context("Failed to delete recording from db")?;
-                debug_assert_or_log!(existed);
+                debug_assert!(existed, "recording must exist in the db");
             }
             Ok(())
         })?;
@@ -203,9 +203,13 @@ impl Recordings {
                 clone!(@weak self as obj => move |recording, _| {
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
-                        debug_assert!(db.get(wtxn, &recording_id).unwrap().is_some());
+                        debug_assert!(
+                            db.get(wtxn, &recording_id).unwrap().is_some(),
+                            "recording must exist in the db"
+                        );
 
-                        db.put(wtxn, &recording_id, recording).context("Failed to put recording to db")?;
+                        db.put(wtxn, &recording_id, recording)
+                            .context("Failed to put recording to db")?;
 
                         Ok(())
                     }) {

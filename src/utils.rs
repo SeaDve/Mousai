@@ -5,7 +5,7 @@ use gtk::{
 
 use std::{collections::BTreeSet, future::Future};
 
-use crate::{debug_assert_or_log, Application};
+use crate::Application;
 
 /// Spawns a future in the default [`glib::MainContext`]
 pub fn spawn<R, F>(fut: F) -> glib::JoinHandle<R>
@@ -23,9 +23,9 @@ where
 /// Panics if the application is not running or if this is
 /// called on a non-main thread.
 pub fn app_instance() -> Application {
-    debug_assert_or_log!(
+    debug_assert!(
         gtk::is_initialized_main_thread(),
-        "application can only be accessed in the main thread"
+        "application must only be accessed in the main thread"
     );
 
     gio::Application::default().unwrap().downcast().unwrap()

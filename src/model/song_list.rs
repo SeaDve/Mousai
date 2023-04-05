@@ -18,7 +18,7 @@ use std::{
 use super::{Song, SongId};
 use crate::{
     database::{EnvExt, SONG_LIST_DB_NAME},
-    debug_assert_or_log, utils,
+    utils,
 };
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
@@ -103,7 +103,10 @@ impl SongList {
         })?;
 
         tracing::debug!("Loaded {} songs in {:?}", songs.len(), now.elapsed());
-        debug_assert_or_log!(songs.iter().all(|(id, song)| id == song.id_ref()));
+        debug_assert!(
+            songs.iter().all(|(id, song)| id == song.id_ref()),
+            "all ids must be equal"
+        );
 
         let this = glib::Object::new::<Self>();
 
@@ -290,9 +293,13 @@ impl SongList {
                 clone!(@weak self as obj => move |song, _| {
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
-                        debug_assert!(db.get(wtxn, song.id_ref()).unwrap().is_some());
+                        debug_assert!(
+                            db.get(wtxn, song.id_ref()).unwrap().is_some(),
+                            "song must exist in the db"
+                        );
 
-                        db.put(wtxn, song.id_ref(), song).context("Failed to put song to db")?;
+                        db.put(wtxn, song.id_ref(), song)
+                            .context("Failed to put song to db")?;
 
                         Ok(())
                     }) {

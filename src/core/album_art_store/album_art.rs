@@ -7,8 +7,6 @@ use soup::prelude::*;
 
 use std::{cell::RefCell, fmt, path::Path};
 
-use crate::debug_assert_or_log;
-
 // TODO
 // - Don't load AlbumArt if network is metered
 // - Retry downloading once network is back
@@ -77,9 +75,10 @@ impl AlbumArt {
             let _ = rx.await;
         }
 
-        // Nothing should get passed this point while the
-        // AlbumArt is already loading because of the guard above.
-        debug_assert_or_log!(self.guard.borrow().is_none());
+        debug_assert!(
+            self.guard.borrow().is_none(),
+            "guard must be dropped before checking cache"
+        );
 
         if let Some(texture) = self.cache.get() {
             return Ok(texture);
@@ -196,7 +195,7 @@ mod test {
         let album_art = AlbumArt::new(&session, download_url, &cache_path);
 
         // Should not panic on the following line in `AlbumArt::texture`.
-        // debug_assert!(self.loading.borrow().is_none());
+        // debug_assert!(self.guard.borrow().is_none());
         let results = future::join_all(vec![
             album_art.texture(),
             album_art.texture(),
