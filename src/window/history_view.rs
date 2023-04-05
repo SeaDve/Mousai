@@ -1,5 +1,5 @@
 use adw::prelude::*;
-use anyhow::{bail, Context, Result};
+use anyhow::{Context, Result};
 use gettextrs::{gettext, ngettext};
 use gtk::{
     glib::{self, clone, closure},
@@ -15,7 +15,7 @@ use super::{
 };
 use crate::{
     config::APP_ID,
-    debug_assert_eq_or_log, debug_assert_or_log, debug_unreachable_or_log,
+    debug_assert_eq_or_log, debug_assert_or_log,
     model::{Song, SongFilter, SongId, SongList, SongSorter},
     player::Player,
     recognizer::Recognizer,
@@ -182,10 +182,7 @@ mod imp {
             if tracing::enabled!(tracing::Level::ERROR) {
                 self.leaflet
                     .connect_visible_child_notify(clone!(@weak obj => move |leaflet| {
-                        let Some(child) = leaflet.visible_child() else {
-                            debug_unreachable_or_log!("leaflet has no visible child");
-                            return;
-                        };
+                        let child = leaflet.visible_child().expect("leaflet should always have a visible child");
 
                         let imp = obj.imp();
 
@@ -418,7 +415,7 @@ impl HistoryView {
                         let song = item.downcast_ref::<Song>().unwrap();
                         obj.insert_song_page(song);
                     }
-                    None => debug_unreachable_or_log!("activated `{}`, but found no song.", index)
+                    None => unreachable!("selection model must have item at index `{}`", index)
                 }
             }),
         );
@@ -530,10 +527,7 @@ impl HistoryView {
                 }
                 recognized_page.unbind_player();
             } else {
-                debug_unreachable_or_log!(
-                    "tried to purge other leaflet page type `{}`",
-                    child.type_()
-                );
+                unreachable!("tried to purge other leaflet page type `{}`", child.type_());
             }
 
             imp.leaflet.remove(&child);
@@ -544,19 +538,16 @@ impl HistoryView {
     fn remove_songs(&self, song_ids: &[&SongId]) -> Result<()> {
         let imp = self.imp();
 
-        if let Some(song_list) = imp
+        let song_list = imp
             .song_list
             .get()
             .and_then(|song_list| song_list.upgrade())
-        {
-            let mut removed_songs = song_list
-                .remove_many(song_ids)
-                .context("Failed to remove songs from history")?;
-            debug_assert_eq_or_log!(removed_songs.len(), song_ids.len());
-            imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
-        } else {
-            debug_unreachable_or_log!("failed to remove song: SongList not found");
-        }
+            .expect("song list should be bound");
+        let mut removed_songs = song_list
+            .remove_many(song_ids)
+            .context("Failed to remove songs from history")?;
+        debug_assert_eq_or_log!(removed_songs.len(), song_ids.len());
+        imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
 
         let leaflet_pages = imp.leaflet.pages();
 
@@ -613,17 +604,14 @@ impl HistoryView {
     fn undo_remove_song(&self) -> Result<()> {
         let imp = self.imp();
 
-        if let Some(song_list) = imp
+        let song_list = imp
             .song_list
             .get()
             .and_then(|song_list| song_list.upgrade())
-        {
-            song_list
-                .append_many(imp.songs_purgatory.take())
-                .context("Failed to restore removed songs")?;
-        } else {
-            debug_unreachable_or_log!("song list not found");
-        }
+            .expect("song list should be bound");
+        song_list
+            .append_many(imp.songs_purgatory.take())
+            .context("Failed to restore removed songs")?;
 
         Ok(())
     }
@@ -648,29 +636,23 @@ impl HistoryView {
     }
 
     fn select_all(&self) {
-        if let Some(selection_model) = self
+        let selection_model = self
             .imp()
             .selection_model
             .get()
             .and_then(|model| model.upgrade())
-        {
-            selection_model.select_all();
-        } else {
-            debug_unreachable_or_log!("selection model not found");
-        }
+            .expect("selection model should exist");
+        selection_model.select_all();
     }
 
     fn unselect_all(&self) {
-        if let Some(selection_model) = self
+        let selection_model = self
             .imp()
             .selection_model
             .get()
             .and_then(|model| model.upgrade())
-        {
-            selection_model.unselect_all();
-        } else {
-            debug_unreachable_or_log!("selection model not found");
-        }
+            .expect("selection model should exist");
+        selection_model.unselect_all();
     }
 
     fn set_selection_mode_active(&self, is_selection_mode_active: bool) {
@@ -732,14 +714,12 @@ impl HistoryView {
     }
 
     fn show_recognizer_results(&self, recognizer: &Recognizer) -> Result<()> {
-        let Some(history) = self.imp()
+        let song_list = self
+            .imp()
             .song_list
             .get()
             .and_then(|song_list| song_list.upgrade())
-        else {
-            debug_unreachable_or_log!("history not found");
-            bail!("History not found");
-        };
+            .expect("song list should be bound");
 
         let songs = recognizer
             .take_recognized_saved_recordings()
@@ -753,10 +733,7 @@ impl HistoryView {
                         debug_assert_or_log!(err.is_permanent());
                         None
                     }
-                    None => {
-                        debug_unreachable_or_log!("received none recognize result");
-                        None
-                    }
+                    None => unreachable!("recognized saved recordings should have some result"),
                 },
             )
             .collect::<Vec<_>>();
@@ -770,7 +747,7 @@ impl HistoryView {
             // If the song is not found in the history, set it as newly heard
             // (That's why an always true value is used after `or`). If it is in the
             // history and it was newly heard, pass that state to the new value.
-            if history
+            if song_list
                 .get(song.id_ref())
                 .map_or(true, |prev| prev.is_newly_heard())
             {
@@ -778,7 +755,7 @@ impl HistoryView {
             }
         }
 
-        history
+        song_list
             .append_many(songs.clone())
             .context("Failed to append songs to history")?;
 
@@ -884,14 +861,16 @@ impl HistoryView {
                 .build();
 
             song_tile.connect_is_active_notify(clone!(@weak obj, @weak list_item => move |tile| {
-                if let Some(selection_model) = obj.imp().selection_model.get().and_then(|model| model.upgrade()) {
-                    if tile.is_active() {
-                        selection_model.select_item(list_item.position(), false);
-                    } else {
-                        selection_model.unselect_item(list_item.position());
-                    }
+                let selection_model = obj
+                    .imp()
+                    .selection_model
+                    .get()
+                    .and_then(|model| model.upgrade())
+                    .expect("selection model should exist");
+                if tile.is_active() {
+                    selection_model.select_item(list_item.position(), false);
                 } else {
-                    debug_unreachable_or_log!("selection model not found");
+                    selection_model.unselect_item(list_item.position());
                 }
             }));
             song_tile.connect_selection_mode_requested(clone!(@weak obj => move |_| {

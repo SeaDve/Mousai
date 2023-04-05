@@ -123,7 +123,7 @@ mod pa {
     use std::{fmt, time::Duration};
 
     use super::AudioDeviceClass;
-    use crate::{config::APP_ID, core::ResultExt, debug_unreachable_or_log};
+    use crate::{config::APP_ID, core::ResultExt};
 
     const DEFAULT_TIMEOUT: Duration = Duration::from_secs(2);
 
@@ -193,10 +193,9 @@ mod pa {
             let mut tx = Some(tx);
 
             let mut operation = self.inner.introspect().get_server_info(move |server_info| {
-                let Some(tx) = tx.take() else {
-                    debug_unreachable_or_log!("called get_server_info callback twice!");
-                    return;
-                };
+                let tx = tx
+                    .take()
+                    .expect("get_server_info callback must not be called twice");
 
                 match class {
                     AudioDeviceClass::Source => {

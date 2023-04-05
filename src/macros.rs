@@ -17,20 +17,6 @@ macro_rules! derived_properties {
 
 // FIXME these macros may compute expensive expressions on release builds
 
-/// Like `unreachable` but logs as error instead of panicking on release builds.
-///
-/// This should only be used on programmer errors.
-#[macro_export]
-macro_rules! debug_unreachable_or_log {
-    ($($arg:tt)*) => {
-        if cfg!(debug_assertions) {
-            unreachable!($($arg)*);
-        } else {
-            tracing::error!($($arg)*);
-        }
-    };
-}
-
 /// Like `assert` but logs as error instead of panicking on release builds.
 ///
 /// This should only be used on programmer errors.

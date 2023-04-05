@@ -5,7 +5,6 @@ use once_cell::unsync::OnceCell;
 use std::str::FromStr;
 
 use crate::{
-    debug_unreachable_or_log,
     model::{ExternalLink, ExternalLinkKey},
     utils,
 };
@@ -54,8 +53,7 @@ mod imp {
             let raw_key = link.key();
 
             let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
-                debug_unreachable_or_log!("constructed with an unhandleable key `{}`", raw_key);
-                return;
+                unreachable!("external link tile should not be constructed with an unhandleable key `{}`", raw_key);
             };
 
             match key {
@@ -121,8 +119,7 @@ impl ExternalLinkTile {
         let raw_value = link.value();
 
         let Ok(key) = ExternalLinkKey::from_str(&raw_key) else {
-            debug_unreachable_or_log!("activated with an unhandleable key `{}`", raw_key);
-            return;
+            unreachable!("external link tile with an unhandleable key `{}` should not have been constructed and thus activated", raw_key);
         };
 
         let uri = match key {

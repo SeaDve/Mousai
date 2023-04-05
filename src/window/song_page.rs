@@ -15,7 +15,6 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
-    debug_unreachable_or_log,
     model::Song,
     player::{Player, PlayerState},
     utils,
@@ -79,16 +78,11 @@ mod imp {
             });
 
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
-                if let Some(song) = obj.song() {
-                    obj.display().clipboard().set_text(&song.copy_term());
-                    utils::app_instance()
-                        .window()
-                        .add_message_toast(&gettext("Copied to clipboard"));
-                } else {
-                    debug_unreachable_or_log!(
-                        "failed to copy song: There is no active song in SongPage"
-                    );
-                }
+                let song = obj.song().expect("song should be set");
+                obj.display().clipboard().set_text(&song.copy_term());
+                utils::app_instance()
+                    .window()
+                    .add_message_toast(&gettext("Copied to clipboard"));
             });
         }
 
@@ -264,19 +258,16 @@ impl SongPage {
         );
 
         if let Some(ref song) = song {
-            if let Some(player) = self.player() {
-                let is_active_song = player.is_active_song(song);
-                let player_state = player.state();
+            let player = self.player().expect("player should be bound");
+            let is_active_song = player.is_active_song(song);
+            let player_state = player.state();
 
-                if is_active_song && player_state == PlayerState::Buffering {
-                    imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
-                } else if is_active_song && player_state == PlayerState::Playing {
-                    imp.playback_button.set_mode(PlaybackButtonMode::Pause);
-                } else {
-                    imp.playback_button.set_mode(PlaybackButtonMode::Play);
-                }
+            if is_active_song && player_state == PlayerState::Buffering {
+                imp.playback_button.set_mode(PlaybackButtonMode::Buffering);
+            } else if is_active_song && player_state == PlayerState::Playing {
+                imp.playback_button.set_mode(PlaybackButtonMode::Pause);
             } else {
-                debug_unreachable_or_log!("either the player was dropped or not bound in SongPage");
+                imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
         }
     }

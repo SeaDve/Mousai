@@ -7,7 +7,7 @@ use soup::prelude::*;
 
 use std::{cell::RefCell, fmt, path::Path};
 
-use crate::{debug_assert_or_log, debug_unreachable_or_log};
+use crate::debug_assert_or_log;
 
 // TODO
 // - Don't load AlbumArt if network is metered
@@ -129,7 +129,7 @@ impl AlbumArt {
         let ret = match self.cache.try_insert(texture) {
             Ok(final_value) => final_value,
             Err((final_value, texture)) => {
-                debug_unreachable_or_log!(
+                tracing::error!(
                     "cache was already set; is_same_instance = {}",
                     final_value == &texture,
                 );
