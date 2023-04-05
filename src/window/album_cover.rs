@@ -7,7 +7,7 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use crate::{debug_assert_eq_or_log, model::Song, utils};
+use crate::{model::Song, utils};
 
 const DEFAULT_ENABLE_CROSSFADE: bool = true;
 
@@ -74,7 +74,10 @@ mod imp {
         fn pixel_size(&self) -> i32 {
             let image_a_pixel_size = self.image_a.pixel_size();
             let image_b_pixel_size = self.image_b.pixel_size();
-            debug_assert_eq_or_log!(image_a_pixel_size, image_b_pixel_size);
+            debug_assert_eq!(
+                image_a_pixel_size, image_b_pixel_size,
+                "pixel sizes must be synced"
+            );
 
             self.image_a.pixel_size()
         }

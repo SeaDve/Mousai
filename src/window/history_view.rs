@@ -15,7 +15,6 @@ use super::{
 };
 use crate::{
     config::APP_ID,
-    debug_assert_eq_or_log,
     model::{Song, SongFilter, SongId, SongList, SongSorter},
     player::Player,
     recognizer::Recognizer,
@@ -546,7 +545,11 @@ impl HistoryView {
         let mut removed_songs = song_list
             .remove_many(song_ids)
             .context("Failed to remove songs from history")?;
-        debug_assert_eq_or_log!(removed_songs.len(), song_ids.len());
+        debug_assert_eq!(
+            removed_songs.len(),
+            song_ids.len(),
+            "all corresponding songs of the ids must be removed"
+        );
         imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
 
         let leaflet_pages = imp.leaflet.pages();

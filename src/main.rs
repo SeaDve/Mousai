@@ -33,7 +33,6 @@ mod database;
 mod database_error_window;
 mod error_dialog;
 mod inspector_page;
-mod macros;
 mod model;
 mod player;
 mod recognizer;
