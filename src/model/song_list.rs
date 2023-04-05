@@ -218,20 +218,28 @@ impl SongList {
             Ok(())
         })?;
 
-        let mut to_remove_indices = BTreeSet::new();
-        for song_id in song_ids {
-            if let Some(index) = imp.list.borrow().get_index_of(*song_id) {
-                to_remove_indices.insert(index);
-            }
-        }
+        let to_remove_indices = {
+            let list = imp.list.borrow();
+            song_ids
+                .iter()
+                .filter_map(|&song_id| list.get_index_of(song_id))
+                .collect::<BTreeSet<_>>()
+        };
 
-        let mut taken = Vec::new();
-        for &index in to_remove_indices.iter().rev() {
-            let removed = { imp.list.borrow_mut().shift_remove_index(index) };
-            if let Some((_, song)) = removed {
-                unbind_song_to_db(&song);
-                taken.push(song);
-            }
+        let removed = {
+            let mut list = imp.list.borrow_mut();
+            to_remove_indices
+                .iter()
+                .rev()
+                .map(|&index| {
+                    let (_, song) = list.shift_remove_index(index).expect("index is valid");
+                    song
+                })
+                .collect::<Vec<_>>()
+        };
+
+        for song in &removed {
+            unbind_song_to_db(song);
         }
 
         // Reverse the iterations so we don't shift the indices
@@ -239,11 +247,11 @@ impl SongList {
             self.items_changed(first as u32, count as u32, 0);
         }
 
-        if !taken.is_empty() {
-            self.emit_by_name::<()>("removed", &[&BoxedSongVec(taken.clone())]);
+        if !removed.is_empty() {
+            self.emit_by_name::<()>("removed", &[&BoxedSongVec(removed.clone())]);
         }
 
-        Ok(taken)
+        Ok(removed)
     }
 
     pub fn get(&self, song_id: &SongId) -> Option<Song> {
@@ -282,7 +290,10 @@ impl SongList {
                 clone!(@weak self as obj => move |song, _| {
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
+                        debug_assert!(db.get(wtxn, song.id_ref()).unwrap().is_some());
+
                         db.put(wtxn, song.id_ref(), song).context("Failed to put song to db")?;
+
                         Ok(())
                     }) {
                         tracing::error!("Failed to update song in database: {:?}", err);

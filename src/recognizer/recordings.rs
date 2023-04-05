@@ -162,15 +162,20 @@ impl Recordings {
             Ok(())
         })?;
 
-        let mut taken = Vec::new();
-        for id in &to_take_ids {
-            let recording = imp
-                .list
-                .borrow_mut()
-                .shift_remove(id.as_str())
-                .expect("id exists");
-            unbind_recording_to_items_changed_and_db(&recording);
-            taken.push(recording);
+        let taken = {
+            let mut list = imp.list.borrow_mut();
+            to_take_indices
+                .iter()
+                .rev()
+                .map(|&index| {
+                    let (_, recording) = list.shift_remove_index(index).expect("id exists");
+                    recording
+                })
+                .collect::<Vec<_>>()
+        };
+
+        for recording in &taken {
+            unbind_recording_to_items_changed_and_db(recording);
         }
 
         // Reverse the iterations so we don't shift the indices
@@ -197,7 +202,10 @@ impl Recordings {
                 clone!(@weak self as obj => move |recording, _| {
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
+                        debug_assert!(db.get(wtxn, &recording_id).unwrap().is_some());
+
                         db.put(wtxn, &recording_id, recording).context("Failed to put recording to db")?;
+
                         Ok(())
                     }) {
                         tracing::error!("Failed to update recording in database: {:?}", err);
