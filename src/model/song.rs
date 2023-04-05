@@ -1,7 +1,7 @@
 use anyhow::{anyhow, Result};
 use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{
     cell::{Cell, RefCell},
@@ -19,7 +19,6 @@ mod imp {
 
     #[derive(Debug, Default, glib::Properties, Serialize, Deserialize)]
     #[properties(wrapper_type = super::Song)]
-    #[serde(default)]
     pub struct Song {
         /// Unique ID
         #[property(get, set, construct_only)]
@@ -149,7 +148,7 @@ impl<'de> Deserialize<'de> for Song {
                 deserialized_imp
                     .id
                     .into_inner()
-                    .unwrap_or_else(SongId::generate_unique),
+                    .ok_or_else(|| de::Error::missing_field("id"))?,
             )
             .property("title", deserialized_imp.title.into_inner())
             .property("artist", deserialized_imp.artist.into_inner())
@@ -340,7 +339,6 @@ mod test {
         let song: Song = serde_json::from_str(
             r#"{
                 "id": "Test-UniqueSongId",
-                "last_heard": "2022-05-14T10:15:37.798479+08",
                 "title": "Some song",
                 "artist": "Someone",
                 "album": "SomeAlbum",
@@ -348,39 +346,26 @@ mod test {
                 "external_links": {},
                 "album_art_link": "https://album.png",
                 "playback_link": "https://test.mp3",
-                "lyrics": "Some song lyrics"
+                "lyrics": "Some song lyrics",
+                "last_heard": "2022-05-14T10:15:37.798479+08",
+                "is_newly_heard": true
             }"#,
         )
         .unwrap();
 
         assert_eq!(song.id_ref(), &SongId::for_test("UniqueSongId"));
-        assert_eq!(
-            song.last_heard().unwrap().format_iso8601(),
-            "2022-05-14T10:15:37.798479+08"
-        );
         assert_eq!(song.title(), "Some song");
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
-
         assert_eq!(song.external_links().len(), 0);
-
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
-
-        assert!(!song.is_newly_heard());
-    }
-
-    #[test]
-    fn deserialize_without_song_id() {
-        let song_1: Song = serde_json::from_str("{}").unwrap();
-        let song_2: Song = serde_json::from_str("{}").unwrap();
-        let song_3: Song = serde_json::from_str("{}").unwrap();
-
-        // Make sure that the song id is unique
-        // even it is not defined
-        assert_ne!(song_1.id_ref(), song_2.id_ref());
-        assert_ne!(song_2.id_ref(), song_3.id_ref());
+        assert_eq!(
+            song.last_heard().unwrap().format_iso8601(),
+            "2022-05-14T10:15:37.798479+08"
+        );
+        assert!(song.is_newly_heard());
     }
 }
