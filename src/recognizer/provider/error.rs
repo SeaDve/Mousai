@@ -23,14 +23,11 @@ impl error::Error for RecognizeError {}
 
 impl fmt::Display for RecognizeError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str(&match self.kind() {
-            RecognizeErrorKind::NoMatches => gettext("No matches found for this song"),
-            RecognizeErrorKind::Fingerprint => gettext("Failed to create fingerprint from audio"),
-            RecognizeErrorKind::InvalidToken => gettext("Invalid token given"),
-            RecognizeErrorKind::TokenLimitReached => gettext("Token limit reached"),
-            RecognizeErrorKind::Connection => gettext("Failed to connect to the server"),
-            RecognizeErrorKind::OtherPermanent => gettext("Permanent error received"),
-        })
+        if let Some(message) = self.message() {
+            write!(f, "{}: {}", self.title(), message)
+        } else {
+            write!(f, "{}", self.title())
+        }
     }
 }
 
@@ -44,6 +41,17 @@ impl RecognizeError {
 
     pub fn kind(&self) -> RecognizeErrorKind {
         self.kind
+    }
+
+    pub fn title(&self) -> String {
+        match self.kind() {
+            RecognizeErrorKind::NoMatches => gettext("No Matches Found"),
+            RecognizeErrorKind::Fingerprint => gettext("Cannot Create Fingerprint From Audio"),
+            RecognizeErrorKind::InvalidToken => gettext("Invalid Token Given"),
+            RecognizeErrorKind::TokenLimitReached => gettext("Token Limit Reached"),
+            RecognizeErrorKind::Connection => gettext("Cannot Connect to the Server"),
+            RecognizeErrorKind::OtherPermanent => gettext("Received Other Permanent Error"),
+        }
     }
 
     pub fn message(&self) -> Option<&str> {

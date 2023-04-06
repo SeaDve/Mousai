@@ -31,7 +31,6 @@ mod config;
 mod core;
 mod database;
 mod database_error_window;
-mod error_dialog;
 mod inspector_page;
 mod model;
 mod player;

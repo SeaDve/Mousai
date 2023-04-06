@@ -2,7 +2,6 @@ data/io.github.seadve.Mousai.desktop.in.in
 data/io.github.seadve.Mousai.gschema.xml.in
 data/io.github.seadve.Mousai.metainfo.xml.in.in
 data/resources/ui/database-error-window.ui
-data/resources/ui/error-dialog.ui
 data/resources/ui/history-view.ui
 data/resources/ui/preferences-window.ui
 data/resources/ui/recognized-page.ui
@@ -13,9 +12,7 @@ data/resources/ui/song-bar.ui
 data/resources/ui/song-page.ui
 data/resources/ui/song-tile.ui
 src/about.rs
-src/audio_device.rs
 src/core/date_time.rs
-src/error_dialog.rs
 src/main.rs
 src/preferences_window.rs
 src/recognizer/provider/error.rs

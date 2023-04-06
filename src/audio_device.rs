@@ -1,11 +1,8 @@
-use anyhow::{anyhow, Result};
-use gettextrs::gettext;
+use anyhow::{anyhow, Context, Result};
 use gst::prelude::*;
 use gtk::gio;
 
 use std::str::FromStr;
-
-use crate::core::ResultExt;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, strum::EnumString, strum::AsRefStr)]
 pub enum AudioDeviceClass {
@@ -36,10 +33,9 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     let device_monitor = gst::DeviceMonitor::new();
     device_monitor.add_filter(Some(class.as_ref()), None);
 
-    device_monitor.start().with_help(
-        || gettext("Make sure that you have PulseAudio installed in your system."),
-        || gettext("Failed to start device monitor"),
-    )?;
+    device_monitor
+        .start()
+        .context("Failed to start device monitor")?;
     let devices = device_monitor.devices();
     device_monitor.stop();
 
@@ -113,7 +109,6 @@ mod pa {
     use anyhow::{bail, Context as ErrContext, Result};
     use futures_channel::{mpsc, oneshot};
     use futures_util::StreamExt;
-    use gettextrs::gettext;
     use gtk::glib;
     use pulse::{
         context::{Context as ContextInner, FlagSet, State},
@@ -123,7 +118,7 @@ mod pa {
     use std::{fmt, time::Duration};
 
     use super::AudioDeviceClass;
-    use crate::{config::APP_ID, core::ResultExt};
+    use crate::config::APP_ID;
 
     const DEFAULT_TIMEOUT: Duration = Duration::from_secs(2);
 
@@ -159,10 +154,9 @@ mod pa {
             let mut inner = ContextInner::new_with_proplist(&main_loop, APP_ID, &proplist)
                 .context("Failed to create pulse Context")?;
 
-            inner.connect(None, FlagSet::NOFLAGS, None).with_help(
-                || gettext("Make sure that you have PulseAudio installed in your system."),
-                || gettext("Failed to connect to PulseAudio daemon"),
-            )?;
+            inner
+                .connect(None, FlagSet::NOFLAGS, None)
+                .context("Failed to connect to PulseAudio daemon")?;
 
             let (mut tx, mut rx) = mpsc::channel(1);
 

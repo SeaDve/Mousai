@@ -14,7 +14,7 @@ mod song_tile;
 mod waveform;
 
 use adw::{prelude::*, subclass::prelude::*};
-use anyhow::{Error, Result};
+use anyhow::Result;
 use gettextrs::gettext;
 use gtk::{
     gdk, gio,
@@ -27,11 +27,10 @@ use std::cell::Cell;
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
-    core::Help,
-    error_dialog::ErrorDialog,
     model::{Song, SongList},
     player::{Player, PlayerState},
-    recognizer::{RecognizeError, Recognizer, RecognizerState, Recordings},
+    preferences_window::PreferencesWindow,
+    recognizer::{RecognizeError, RecognizeErrorKind, Recognizer, RecognizerState, Recordings},
     utils, Application,
 };
 
@@ -112,8 +111,13 @@ mod imp {
                 imp.player.set_song(Song::NONE);
 
                 if let Err(err) = imp.recognizer.toggle_recognize().await {
-                    tracing::error!("{:?}", err);
-                    obj.present_recognize_error(&err);
+                    tracing::error!("{:?} (dbg: {:#?})", err, err);
+
+                    if let Some(recognize_error) = err.downcast_ref::<RecognizeError>() {
+                        obj.present_recognize_error(recognize_error);
+                    } else {
+                        obj.add_message_toast(&err.to_string());
+                    }
                 }
             });
 
@@ -284,31 +288,104 @@ impl Window {
             .expect("song history must be bound")
     }
 
-    fn present_recognize_error(&self, err: &Error) {
-        // TODO specialize error
-        // - Show token preferences dialog on token errors
-        // - Add help on connection error etc.
+    fn present_recognize_error(&self, err: &RecognizeError) {
+        let dialog = adw::MessageDialog::builder()
+            .transient_for(self)
+            .modal(true)
+            .heading(err.title())
+            .build();
 
-        let mut detailed_error = Vec::new();
+        match err.kind() {
+            RecognizeErrorKind::InvalidToken | RecognizeErrorKind::TokenLimitReached => {
+                const OPEN_RESPONSE_ID: &str = "open";
+                const LATER_RESPONSE_ID: &str = "later";
 
-        if let Some(recognize_error) = err.downcast_ref::<RecognizeError>() {
-            if let Some(message) = recognize_error.message() {
-                detailed_error.push(message.to_string());
+                match err.kind() {
+                    RecognizeErrorKind::InvalidToken => {
+                        dialog.set_body(&gettext(
+                            "Open preferences and try setting a different token.",
+                        ));
+                    }
+                    RecognizeErrorKind::TokenLimitReached => {
+                        dialog.set_body(&gettext(
+                            "Wait until the limit is reset or open preferences and try setting a different token.",
+                        ));
+                    }
+                    _ => unreachable!(),
+                }
+
+                dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open Preferences"));
+                dialog
+                    .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
+
+                dialog.add_response(LATER_RESPONSE_ID, &gettext("Later"));
+
+                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
+
+                dialog.connect_response(
+                    Some(OPEN_RESPONSE_ID),
+                    clone!(@weak self as obj => move |_, id| {
+                        debug_assert_eq!(id, OPEN_RESPONSE_ID);
+
+                        let window = PreferencesWindow::new(utils::app_instance().settings());
+                        window.set_transient_for(Some(&obj));
+                        window.present();
+                        window.focus_aud_d_api_token_row();
+                    }),
+                );
+            }
+            RecognizeErrorKind::OtherPermanent | RecognizeErrorKind::Fingerprint => {
+                const OPEN_RESPONSE_ID: &str = "open";
+                const NO_RESPONSE_ID: &str = "no";
+
+                dialog.set_body(&gettext(
+                    "Please open an issue on GitHub and provide the necessary information.",
+                ));
+
+                dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open an Issue"));
+                dialog
+                    .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
+
+                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
+
+                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
+
+                dialog.connect_response(
+                    Some(OPEN_RESPONSE_ID),
+                    clone!(@weak self as obj => move |_, id| {
+                        debug_assert_eq!(id, OPEN_RESPONSE_ID);
+
+                        let uri = "https://github.com/SeaDve/Mousai/issues/new?assignees=&labels=&template=bug_report.md";
+                        gtk::UriLauncher::new(uri).launch(
+                            Some(&obj),
+                            gio::Cancellable::NONE,
+                            |res| {
+                                if let Err(err ) = res {
+                                    tracing::error!("Failed to open bug report URI: {}", err);
+                                }
+                            },
+                        );
+                    }),
+                );
+            }
+            RecognizeErrorKind::NoMatches | RecognizeErrorKind::Connection => {
+                const OK_RESPONSE_ID: &str = "ok";
+
+                match err.kind() {
+                    RecognizeErrorKind::NoMatches => {}
+                    RecognizeErrorKind::Connection => {
+                        dialog.set_body(&gettext("Please check your internet connection."));
+                    }
+                    _ => unreachable!(),
+                }
+
+                dialog.add_response(OK_RESPONSE_ID, &gettext("Ok"));
+
+                dialog.set_default_response(Some(OK_RESPONSE_ID));
             }
         }
 
-        detailed_error.push(format!("{:?}", err));
-        detailed_error.push(format!("{:#?}", err));
-
-        let err_dialog = ErrorDialog::new(
-            &err.to_string(),
-            &err.downcast_ref::<Help>()
-                .map(|help| format!("<b>{}</b>: {}", gettext("Help"), help))
-                .unwrap_or_default(),
-            &detailed_error.join("\n\n"),
-        );
-        err_dialog.set_transient_for(Some(self));
-        err_dialog.present();
+        dialog.present();
     }
 
     fn load_window_size(&self) {

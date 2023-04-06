@@ -8,7 +8,6 @@
     <file compressed="true">style.css</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/album-cover.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/database-error-window.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">ui/error-dialog.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/external-link-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/history-view.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/information-row.ui</file>
