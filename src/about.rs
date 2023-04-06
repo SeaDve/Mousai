@@ -23,6 +23,8 @@ pub fn present_window(transient_for: Option<&impl IsA<gtk::Window>>) {
         .support_url("https://github.com/SeaDve/Mousai/discussions")
         .debug_info(debug_info())
         .debug_info_filename("mousai-debug-info")
+        .release_notes_version("0.7.0")
+        .release_notes(release_notes())
         .build();
 
     win.add_link(
@@ -83,4 +85,21 @@ fn debug_info() -> String {
 - Libsoup {soup_version}
 - {gst_version_string}"#
     )
+}
+
+fn release_notes() -> &'static str {
+    r#"<p>This update contains huge UI updates and fixes:</p>
+    <ul>
+      <li>New feature-rich UI</li>
+      <li>Added section to browse song information and checkout providers</li>
+      <li>Added offline mode</li>
+      <li>Added fuzzy search on the history</li>
+      <li>Added MPRIS support</li>
+      <li>Added ability to remove individual song from history</li>
+      <li>The title and artist of the song can now be copied from the UI</li>
+      <li>The player is now seekable</li>
+      <li>The recognizing stage is now cancellable</li>
+      <li>Fixed a lot of bugs and improved stability</li>
+      <li>Updated translations</li>
+    </ul>"#
 }
