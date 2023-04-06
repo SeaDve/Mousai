@@ -3,7 +3,10 @@ mod migrations;
 use anyhow::{Context, Result};
 use gtk::glib;
 
-use std::{fs, time::Instant};
+use std::{
+    fs,
+    time::{Duration, Instant},
+};
 
 pub use self::migrations::Migrations;
 
@@ -67,7 +70,13 @@ impl EnvExt for heed::Env {
         let ret = func(&mut wtxn)?;
         wtxn.commit().context("Failed to commit write txn")?;
 
-        tracing::trace!("Database write transaction took {:?}", now.elapsed());
+        // There are 16.67 ms in a 60 Hz frame, so warn if the write txn
+        // takes longer than that.
+        if now.elapsed() > Duration::from_millis(15) {
+            tracing::warn!("Database write txn took {:?}", now.elapsed());
+        } else {
+            tracing::trace!("Database write txn took {:?}", now.elapsed());
+        }
 
         Ok(ret)
     }
