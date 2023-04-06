@@ -58,6 +58,12 @@ impl<'de> Deserialize<'de> for DateTime {
     }
 }
 
+impl From<glib::DateTime> for DateTime {
+    fn from(dt: glib::DateTime) -> Self {
+        Self(dt)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

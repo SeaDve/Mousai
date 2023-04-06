@@ -11,7 +11,7 @@ use once_cell::unsync::OnceCell;
 
 use std::{
     cell::RefCell,
-    collections::{BTreeSet, HashSet},
+    collections::{BTreeSet, HashMap, HashSet},
     time::Instant,
 };
 
@@ -322,7 +322,7 @@ fn unbind_song_from_db(song: &Song) {
 
 /// Migrate from the old memory list of Mousai v0.6.6 and earlier.
 fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
-    use crate::{model::ExternalLinkKey, settings::Settings};
+    use crate::{core::DateTime, model::ExternalLinkKey, settings::Settings};
 
     let settings = Settings::default();
     let memory_list = settings.memory_list();
@@ -332,6 +332,57 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
     }
 
     tracing::debug!("Migrating {} songs from memory list", memory_list.len());
+
+    let now = Instant::now();
+
+    // We don't store last heards before, but we can get it from the creation date
+    // of the songs' album art files
+    let last_heards = {
+        let mut ret = HashMap::new();
+
+        let path = glib::user_cache_dir().join("tmp");
+
+        match gio::File::for_path(&path).enumerate_children(
+            gio::FILE_ATTRIBUTE_TIME_CREATED,
+            gio::FileQueryInfoFlags::NOFOLLOW_SYMLINKS,
+            gio::Cancellable::NONE,
+        ) {
+            Ok(enumerator) => {
+                for res in enumerator {
+                    let file_info = match res {
+                        Ok(info) => info,
+                        Err(err) => {
+                            tracing::warn!("Failed to get album art file info: {:?}", err);
+                            continue;
+                        }
+                    };
+
+                    if file_info.file_type() != gio::FileType::Regular {
+                        tracing::debug!("Skipping non-regular file: {:?}", file_info);
+                        continue;
+                    }
+
+                    let Some(creation_date_time) = file_info.creation_date_time() else {
+                        tracing::debug!("Skipping file without creation date: {:?}", file_info);
+                        continue;
+                    };
+
+                    let file_name = file_info.name();
+                    let Some(file_stem) = file_name.file_stem() else {
+                        tracing::debug!("Skipping file without file stem: {:?}", file_info);
+                        continue;
+                    };
+
+                    ret.insert(file_stem.to_string_lossy().to_string(), creation_date_time);
+                }
+            }
+            Err(err) => {
+                tracing::warn!("Failed to enumerate on `{}`: {:?}", path.display(), err);
+            }
+        }
+
+        ret
+    };
 
     let songs = memory_list
         .into_iter()
@@ -358,7 +409,7 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
                 song_builder.external_link(ExternalLinkKey::AudDUrl, song_link);
             }
 
-            if let (Some(ref title), Some(ref artist)) = (title, artist) {
+            if let (Some(title), Some(artist)) = (&title, &artist) {
                 song_builder.external_link(
                     ExternalLinkKey::YoutubeSearchTerm,
                     format!("{} - {}", artist, title),
@@ -369,7 +420,16 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
                 song_builder.playback_link(song_src);
             }
 
-            song_builder.build()
+            let song = song_builder.build();
+
+            if let (Some(ref title), Some(ref artist)) = (title, artist) {
+                // Some weird legacy stuff
+                if let Some(creation_date_time) = last_heards.get(&format!("{}{}", title, artist)) {
+                    song.set_last_heard(DateTime::from(creation_date_time.clone()));
+                }
+            }
+
+            song
         })
         .collect::<Vec<_>>();
     song_list
@@ -377,7 +437,10 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
         .context("Failed to insert songs to song history")?;
 
     settings.set_memory_list(Vec::new());
-    tracing::debug!("Successfully migrated songs from memory list");
+    tracing::debug!(
+        "Successfully migrated songs from memory list in {:?}",
+        now.elapsed()
+    );
 
     Ok(())
 }
