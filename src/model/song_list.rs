@@ -124,12 +124,12 @@ impl SongList {
         Ok(this)
     }
 
-    /// If an equivalent [`Song`] already exists in the list, it returns false and updates
-    /// the original value in the list. Otherwise, it inserts the new [`Song`] at the end and
-    /// returns true.
+    /// If an equivalent song already exists in the list, it returns false and updates
+    /// the corresponding value with `song`. Otherwise, it appends `song` at the
+    /// end and returns true.
     ///
-    /// The equivalence of the [`Song`] depends on its [`SongId`]
-    pub fn append(&self, song: Song) -> Result<bool> {
+    /// The equivalence of the song depends on its [`SongId`].
+    pub fn insert(&self, song: Song) -> Result<bool> {
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
             db.put(wtxn, song.id_ref(), &song)
@@ -150,15 +150,14 @@ impl SongList {
         }
     }
 
-    /// Tries to append all [`Song`]s and returns the number of [`Song`]s that were
-    /// actually appended.
+    /// If an equivalent song already exists in the list, it updates the corresponding value
+    /// with the given song. Otherwise, it appends the given song at the end.
     ///
-    /// If a [`Song`] is unique to the list, it is appended. Otherwise, the existing
-    /// value will be updated.
+    /// This returns the number of songs that were appended at the end, i.e., not updated.
     ///
-    /// This is more efficient than [`SongList::append`] since it emits `items-changed`
-    /// only once if all appended [`Song`]s are unique.
-    pub fn append_many(&self, songs: Vec<Song>) -> Result<u32> {
+    /// This is more efficient than [`SongList::insert`] since it emits `items-changed`
+    /// only once for all appended songs.
+    pub fn insert_many(&self, songs: Vec<Song>) -> Result<u32> {
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
             for song in &songs {
@@ -374,8 +373,8 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
         })
         .collect::<Vec<_>>();
     song_list
-        .append_many(songs)
-        .context("Failed to append songs to song history")?;
+        .insert_many(songs)
+        .context("Failed to insert songs to song history")?;
 
     settings.set_memory_list(Vec::new());
     tracing::debug!("Successfully migrated songs from memory list");
@@ -504,16 +503,16 @@ mod test {
     }
 
     #[test]
-    fn append_and_remove() {
+    fn insert_and_remove() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         let song_1 = new_test_song("1");
-        assert!(song_list.append(song_1.clone()).unwrap());
+        assert!(song_list.insert(song_1.clone()).unwrap());
 
         let song_2 = new_test_song("2");
-        assert!(song_list.append(song_2.clone()).unwrap());
+        assert!(song_list.insert(song_2.clone()).unwrap());
 
         assert_n_items_and_db_count_eq(&song_list, 2);
         assert_synced_to_db(&song_list);
@@ -554,7 +553,7 @@ mod test {
         let song_2 = new_test_song("2");
 
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone()])
             .unwrap();
         assert_eq!(song_list.get(song_1.id_ref()), Some(song_1.clone()));
         assert_eq!(song_list.get(song_2.id_ref()), Some(song_2.clone()));
@@ -584,7 +583,7 @@ mod test {
         let song_2 = new_test_song("2");
 
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone()])
             .unwrap();
         assert_eq!(song_list.get(song_1.id_ref()), Some(song_1.clone()));
         assert_eq!(song_list.get(song_2.id_ref()), Some(song_2.clone()));
@@ -605,24 +604,24 @@ mod test {
     }
 
     #[test]
-    fn append_many() {
+    fn insert_many() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         assert_n_items_and_db_count_eq(&song_list, 0);
 
         let songs = vec![new_test_song("1"), new_test_song("2")];
-        assert_eq!(song_list.append_many(songs).unwrap(), 2);
+        assert_eq!(song_list.insert_many(songs).unwrap(), 2);
         assert_n_items_and_db_count_eq(&song_list, 2);
 
         assert_synced_to_db(&song_list);
 
         let more_songs = vec![new_test_song("SameId"), new_test_song("SameId")];
-        assert_eq!(song_list.append_many(more_songs).unwrap(), 1);
+        assert_eq!(song_list.insert_many(more_songs).unwrap(), 1);
         assert_n_items_and_db_count_eq(&song_list, 3);
     }
 
     #[test]
-    fn items_changed_append() {
+    fn items_changed_insert() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
@@ -632,14 +631,14 @@ mod test {
             assert_eq!(added, 1);
         });
 
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
     }
 
     #[test]
-    fn items_changed_append_index_1() {
+    fn items_changed_insert_index_1() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
 
         song_list.connect_items_changed(|_, index, removed, added| {
             assert_eq!(index, 1);
@@ -647,14 +646,14 @@ mod test {
             assert_eq!(added, 1);
         });
 
-        song_list.append(new_test_song("1")).unwrap();
+        song_list.insert(new_test_song("1")).unwrap();
     }
 
     #[test]
-    fn items_changed_append_equal() {
+    fn items_changed_insert_equal() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
 
         let n_called = Rc::new(Cell::new(0));
         let n_called_clone = Rc::clone(&n_called);
@@ -666,15 +665,15 @@ mod test {
         });
 
         assert_eq!(n_called.get(), 0);
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
         assert_eq!(n_called.get(), 1);
     }
 
     #[test]
-    fn items_changed_append_many() {
+    fn items_changed_insert_many() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
 
         song_list.connect_items_changed(|_, index, removed, added| {
             assert_eq!(index, 1);
@@ -683,15 +682,15 @@ mod test {
         });
 
         song_list
-            .append_many(vec![new_test_song("1"), new_test_song("2")])
+            .insert_many(vec![new_test_song("1"), new_test_song("2")])
             .unwrap();
     }
 
     #[test]
-    fn items_changed_append_many_with_duplicates() {
+    fn items_changed_insert_many_with_duplicates() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
         let calls_output_clone = Rc::clone(&calls_output);
@@ -703,7 +702,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .append_many(vec![
+                .insert_many(vec![
                     new_test_song("0"),
                     new_test_song("1"),
                     new_test_song("2"),
@@ -720,11 +719,11 @@ mod test {
     }
 
     #[test]
-    fn items_changed_append_many_more_removed_than_n_items() {
+    fn items_changed_insert_many_more_removed_than_n_items() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0")).unwrap();
-        song_list.append(new_test_song("1")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("1")).unwrap();
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
         let calls_output_clone = Rc::clone(&calls_output);
@@ -736,7 +735,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .append_many(vec![
+                .insert_many(vec![
                     new_test_song("0"),
                     new_test_song("0"),
                     new_test_song("0"),
@@ -758,7 +757,7 @@ mod test {
     fn items_changed_removed_some() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("0")).unwrap();
+        song_list.insert(new_test_song("0")).unwrap();
 
         let ic_n_called = Rc::new(Cell::new(0));
         let ic_n_called_clone = Rc::clone(&ic_n_called);
@@ -796,7 +795,7 @@ mod test {
     fn items_changed_removed_none() {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
-        song_list.append(new_test_song("1")).unwrap();
+        song_list.insert(new_test_song("1")).unwrap();
 
         let ic_n_called = Rc::new(Cell::new(0));
         let ic_n_called_clone = Rc::clone(&ic_n_called);
@@ -831,7 +830,7 @@ mod test {
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
         song_list
-            .append_many(vec![song_0.clone(), song_1.clone()])
+            .insert_many(vec![song_0.clone(), song_1.clone()])
             .unwrap();
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
@@ -870,7 +869,7 @@ mod test {
         let song_3 = new_test_song("3");
         let song_4 = new_test_song("4");
         song_list
-            .append_many(vec![song_0, song_1.clone(), song_2, song_3.clone(), song_4])
+            .insert_many(vec![song_0, song_1.clone(), song_2, song_3.clone(), song_4])
             .unwrap();
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
@@ -906,7 +905,7 @@ mod test {
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
         song_list
-            .append_many(vec![song_0.clone(), song_1.clone()])
+            .insert_many(vec![song_0.clone(), song_1.clone()])
             .unwrap();
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
@@ -946,7 +945,7 @@ mod test {
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
         song_list
-            .append_many(vec![song_0.clone(), song_1.clone()])
+            .insert_many(vec![song_0.clone(), song_1.clone()])
             .unwrap();
 
         let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
@@ -979,7 +978,7 @@ mod test {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
         song_list
-            .append_many(vec![new_test_song("1"), new_test_song("2")])
+            .insert_many(vec![new_test_song("1"), new_test_song("2")])
             .unwrap();
 
         let ic_n_called = Rc::new(Cell::new(0));

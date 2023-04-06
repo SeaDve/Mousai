@@ -364,9 +364,9 @@ impl Window {
                 song.set_is_newly_heard(true);
             }
 
-            if let Err(err) = history.append(song.clone()) {
-                tracing::error!("Failed to append song to history: {:?}", err);
-                obj.add_message_toast(&gettext("Failed to append song to history"));
+            if let Err(err) = history.insert(song.clone()) {
+                tracing::error!("Failed to insert song to history: {:?}", err);
+                obj.add_message_toast(&gettext("Failed to insert song to history"));
                 return;
             }
 

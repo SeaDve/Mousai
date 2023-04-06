@@ -613,7 +613,7 @@ impl HistoryView {
             .and_then(|song_list| song_list.upgrade())
             .expect("song list should be bound");
         song_list
-            .append_many(imp.songs_purgatory.take())
+            .insert_many(imp.songs_purgatory.take())
             .context("Failed to restore removed songs")?;
 
         Ok(())
@@ -762,8 +762,8 @@ impl HistoryView {
         }
 
         song_list
-            .append_many(songs.clone())
-            .context("Failed to append songs to history")?;
+            .insert_many(songs.clone())
+            .context("Failed to insert songs to history")?;
 
         self.insert_recognized_page(&songs);
         self.scroll_to_top();
@@ -1006,7 +1006,7 @@ mod test {
         let song_list = SongList::load_from_env(env).unwrap();
 
         let song = new_test_song("1");
-        song_list.append(song.clone()).unwrap();
+        song_list.insert(song.clone()).unwrap();
 
         let view = HistoryView::new();
         view.bind_player(&player);
@@ -1061,7 +1061,7 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone()])
             .unwrap();
 
         let view = HistoryView::new();
@@ -1108,7 +1108,7 @@ mod test {
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
             .unwrap();
 
         let view = HistoryView::new();
@@ -1150,7 +1150,7 @@ mod test {
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
             .unwrap();
 
         let view = HistoryView::new();
@@ -1207,7 +1207,7 @@ mod test {
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
             .unwrap();
 
         let view = HistoryView::new();
@@ -1242,7 +1242,7 @@ mod test {
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
             .unwrap();
 
         let view = HistoryView::new();
@@ -1282,7 +1282,7 @@ mod test {
         let song_3 = new_test_song("3");
         let song_4 = new_test_song("4");
         song_list
-            .append_many(vec![
+            .insert_many(vec![
                 song_1.clone(),
                 song_2.clone(),
                 song_3.clone(),
@@ -1328,7 +1328,7 @@ mod test {
         let song_1 = new_test_song("1");
         let song_2 = new_test_song("2");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone()])
             .unwrap();
 
         let view = HistoryView::new();
@@ -1367,7 +1367,7 @@ mod test {
         let song_2 = new_test_song("2");
         let song_3 = new_test_song("3");
         song_list
-            .append_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
             .unwrap();
 
         let view = HistoryView::new();
