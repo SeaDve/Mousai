@@ -57,12 +57,12 @@ impl AlbumArt {
         self.cache.get().is_some()
     }
 
-    pub fn uri(&self) -> glib::GString {
+    pub fn uri(&self) -> String {
         if self.cache_file.query_exists(gio::Cancellable::NONE) {
-            return self.cache_file.uri();
+            return self.cache_file.uri().into();
         }
 
-        self.download_url.as_str().into()
+        self.download_url.clone()
     }
 
     pub async fn texture(&self) -> Result<&gdk::Texture> {

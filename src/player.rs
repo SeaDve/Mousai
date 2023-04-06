@@ -121,10 +121,7 @@ mod imp {
                 // TODO Fill up nones
                 self.metadata.replace(MprisMetadata {
                     length: None,
-                    art_url: song
-                        .album_art()
-                        .ok()
-                        .map(|album_art| album_art.uri().into()),
+                    art_url: song.album_art().ok().map(|album_art| album_art.uri()),
                     album: Some(song.album()),
                     album_artist: None,
                     artist: Some(vec![song.artist()]),
