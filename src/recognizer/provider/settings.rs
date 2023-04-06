@@ -8,6 +8,7 @@ use std::{
 };
 
 use super::Provider;
+use crate::utils;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiTestProviderMode")]
@@ -39,7 +40,11 @@ impl ProviderType {
         use super::aud_d::{AudD, AudDMock};
 
         match self {
-            Self::AudD => Box::<AudD>::default(),
+            Self::AudD => {
+                // FIXME handle this outside
+                let api_token = utils::app_instance().settings().aud_d_api_token();
+                Box::new(AudD::new(Some(&api_token)))
+            }
             Self::AudDMock => Box::new(AudDMock),
         }
     }

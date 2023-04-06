@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MsaiPreferencesWindow" parent="AdwPreferencesWindow">
+    <child>
+      <object class="AdwPreferencesPage">
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">General</property>
+            <child>
+              <object class="AdwComboRow" id="preferred_audio_source_row">
+                <property name="title" translatable="yes">Preferred Audio Source</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">AudD Provider</property>
+            <child>
+              <object class="AdwEntryRow" id="aud_d_api_token_row">
+                <property name="title" translatable="yes">API Token</property>
+                <property name="max-width-chars">32</property>
+                <property name="input-hints">no-spellcheck | no-emoji | private</property>
+                <property name="show-apply-button">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

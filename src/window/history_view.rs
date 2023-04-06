@@ -178,19 +178,21 @@ mod imp {
                 }),
             );
 
-            if tracing::enabled!(tracing::Level::ERROR) {
-                self.leaflet
-                    .connect_visible_child_notify(clone!(@weak obj => move |leaflet| {
-                        let child = leaflet.visible_child().expect("leaflet should always have a visible child");
+            self.leaflet
+                .connect_visible_child_notify(clone!(@weak obj => move |leaflet| {
+                    let imp = obj.imp();
 
-                        let imp = obj.imp();
-
-                        debug_assert!(
-                            !imp.leaflet_pages_purgatory.borrow().contains(&imp.leaflet.page(&child)),
-                            "leaflet's visible child must not be in the purgatory"
-                        );
-                    }));
-            }
+                    debug_assert!(
+                        !imp.leaflet_pages_purgatory.borrow().contains(
+                            &imp.leaflet.page(
+                                &leaflet
+                                    .visible_child()
+                                    .expect("leaflet should always have a visible child")
+                            )
+                        ),
+                        "leaflet's visible child must not be in the purgatory"
+                    );
+                }));
 
             self.empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();

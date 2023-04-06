@@ -11,6 +11,7 @@ use crate::{
     database_error_window::DatabaseErrorWindow,
     inspector_page::InspectorPage,
     model::SongList,
+    preferences_window::PreferencesWindow,
     recognizer::Recordings,
     settings::Settings,
     window::Window,
@@ -192,16 +193,24 @@ impl Application {
                 obj.quit();
             })
             .build();
-        let about_action = gio::ActionEntry::builder("about")
+        let show_preferences_action = gio::ActionEntry::builder("show-preferences")
+            .activate(|obj: &Self, _, _| {
+                let window = PreferencesWindow::new(obj.settings());
+                window.set_transient_for(Some(&obj.window()));
+                window.present();
+            })
+            .build();
+        let show_about_action = gio::ActionEntry::builder("show-about")
             .activate(|obj: &Self, _, _| {
                 about::present_window(Some(&obj.window()));
             })
             .build();
-        self.add_action_entries([quit_action, about_action]);
+        self.add_action_entries([quit_action, show_preferences_action, show_about_action]);
     }
 
     fn setup_accels(&self) {
         self.set_accels_for_action("app.quit", &["<Control>q"]);
+        self.set_accels_for_action("app.show-preferences", &["<Control>comma"]);
         self.set_accels_for_action("window.close", &["<Control>w"]);
         self.set_accels_for_action("win.navigate-back", &["<Alt>Left", "Escape"]);
         self.set_accels_for_action("win.navigate-forward", &["<Alt>Right"]);

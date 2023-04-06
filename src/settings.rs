@@ -1,5 +1,5 @@
 use gsettings_macro::gen_settings;
-use gtk::gio;
+use gtk::{gio, glib};
 
 use std::collections::HashMap;
 

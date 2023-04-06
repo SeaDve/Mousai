@@ -4,6 +4,7 @@ data/io.github.seadve.Mousai.metainfo.xml.in.in
 data/resources/ui/database-error-window.ui
 data/resources/ui/error-dialog.ui
 data/resources/ui/history-view.ui
+data/resources/ui/preferences-window.ui
 data/resources/ui/recognized-page.ui
 data/resources/ui/recognizer-status.ui
 data/resources/ui/recognizer-view.ui
@@ -16,6 +17,7 @@ src/audio_device.rs
 src/core/date_time.rs
 src/error_dialog.rs
 src/main.rs
+src/preferences_window.rs
 src/recognizer/provider/error.rs
 src/window/external_link_tile.rs
 src/window/history_view.rs

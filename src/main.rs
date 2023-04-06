@@ -35,6 +35,7 @@ mod error_dialog;
 mod inspector_page;
 mod model;
 mod player;
+mod preferences_window;
 mod recognizer;
 mod serde_helpers;
 mod settings;

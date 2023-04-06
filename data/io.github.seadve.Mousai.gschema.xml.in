@@ -16,6 +16,7 @@
       <summary>Whether the window is maximized</summary>
       <description></description>
     </key>
+
     <key name="preferred-audio-source" type="s">
       <choices>
         <choice value="microphone"/>
@@ -24,6 +25,11 @@
       <default>"microphone"</default>
       <summary>Preferred audio source to use in recording audio</summary>
       <description></description>
+    </key>
+
+    <key type="s" name="aud-d-api-token">
+      <default>""</default>
+      <summary>API token used by AudD recognition</summary>
     </key>
 
     <key type="aa{ss}" name="memory-list">

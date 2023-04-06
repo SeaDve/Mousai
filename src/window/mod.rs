@@ -136,11 +136,6 @@ mod imp {
 
             let obj = self.obj();
 
-            let preferred_audio_source_action = utils::app_instance()
-                .settings()
-                .create_preferred_audio_source_action();
-            obj.add_action(&preferred_audio_source_action);
-
             if PROFILE == "Devel" {
                 obj.add_css_class("devel");
             }
