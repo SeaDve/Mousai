@@ -298,7 +298,7 @@ impl Window {
         match err.kind() {
             RecognizeErrorKind::InvalidToken | RecognizeErrorKind::TokenLimitReached => {
                 const OPEN_RESPONSE_ID: &str = "open";
-                const LATER_RESPONSE_ID: &str = "later";
+                const NO_RESPONSE_ID: &str = "no";
 
                 match err.kind() {
                     RecognizeErrorKind::InvalidToken => {
@@ -319,7 +319,7 @@ impl Window {
                     .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
                 dialog.set_default_response(Some(OPEN_RESPONSE_ID));
 
-                dialog.add_response(LATER_RESPONSE_ID, &gettext("Later"));
+                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
 
                 dialog.connect_response(
                     Some(OPEN_RESPONSE_ID),
@@ -353,8 +353,7 @@ impl Window {
                     clone!(@weak self as obj => move |_, id| {
                         debug_assert_eq!(id, OPEN_RESPONSE_ID);
 
-                        let uri = "https://github.com/SeaDve/Mousai/issues/new?assignees=&labels=&template=bug_report.md";
-                        gtk::UriLauncher::new(uri).launch(
+                        gtk::UriLauncher::new("https://github.com/SeaDve/Mousai/issues/new?assignees=&labels=&template=bug_report.md").launch(
                             Some(&obj),
                             gio::Cancellable::NONE,
                             |res| {
