@@ -138,10 +138,10 @@ impl SongList {
         })?;
 
         self.bind_song_to_db(&song);
-        let (position, last_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
+        let (position, prev_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
-        if let Some(last_value) = last_value {
-            unbind_song_to_db(&last_value);
+        if let Some(prev_value) = prev_value {
+            unbind_song_to_db(&prev_value);
             self.items_changed(position as u32, 1, 1);
             Ok(false)
         } else {
@@ -176,10 +176,10 @@ impl SongList {
 
             for song in songs {
                 self.bind_song_to_db(&song);
-                let (index, last_value) = list.insert_full(song.id(), song);
+                let (index, prev_value) = list.insert_full(song.id(), song);
 
-                if let Some(last_value) = last_value {
-                    unbind_song_to_db(&last_value);
+                if let Some(prev_value) = prev_value {
+                    unbind_song_to_db(&prev_value);
                     updated_indices.insert(index);
                 } else {
                     n_appended += 1;

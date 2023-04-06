@@ -70,13 +70,13 @@ impl ExternalLinks {
     }
 
     pub fn insert(&self, key: ExternalLinkKey, value: String) -> bool {
-        let (position, last_value) = self
+        let (position, prev_value) = self
             .imp()
             .map
             .borrow_mut()
             .insert_full(key.as_ref().to_string(), value);
 
-        if last_value.is_some() {
+        if prev_value.is_some() {
             self.items_changed(position as u32, 1, 1);
             false
         } else {

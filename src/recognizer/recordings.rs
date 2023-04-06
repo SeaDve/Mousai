@@ -113,12 +113,12 @@ impl Recordings {
 
         self.bind_recording_to_items_changed_and_db(&recording_id, &recording);
 
-        let (position, last_value) = self
+        let (position, prev_value) = self
             .imp()
             .list
             .borrow_mut()
             .insert_full(recording_id, recording);
-        debug_assert!(last_value.is_none(), "recording must not exist already");
+        debug_assert!(prev_value.is_none(), "recording must not exist already");
 
         self.items_changed(position as u32, 0, 1);
         Ok(())
