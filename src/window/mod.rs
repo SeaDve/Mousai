@@ -317,10 +317,9 @@ impl Window {
                 dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open Preferences"));
                 dialog
                     .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
+                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
 
                 dialog.add_response(LATER_RESPONSE_ID, &gettext("Later"));
-
-                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
 
                 dialog.connect_response(
                     Some(OPEN_RESPONSE_ID),
@@ -345,10 +344,9 @@ impl Window {
                 dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open an Issue"));
                 dialog
                     .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
+                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
 
                 dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
-
-                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
 
                 dialog.connect_response(
                     Some(OPEN_RESPONSE_ID),
@@ -380,7 +378,6 @@ impl Window {
                 }
 
                 dialog.add_response(OK_RESPONSE_ID, &gettext("Ok"));
-
                 dialog.set_default_response(Some(OK_RESPONSE_ID));
             }
         }
