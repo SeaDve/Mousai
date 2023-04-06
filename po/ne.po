@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-06 17:26+0800\n"
-"PO-Revision-Date: 2022-05-31 05:18+0000\n"
+"PO-Revision-Date: 2023-04-06 10:27+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Nepali <https://hosted.weblate.org/projects/kooha/mousai/ne/"
-">\n"
+"Language-Team: Nepali <https://hosted.weblate.org/projects/kooha/mousai/ne/>"
+"\n"
 "Language: ne\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -218,8 +218,9 @@ msgid "Copy Song"
 msgstr "गीत प्रतिलिपि गर्नुहोस्"
 
 #: data/resources/ui/preferences-window.ui:8
+#, fuzzy
 msgid "General"
-msgstr ""
+msgstr "सामान्य"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"

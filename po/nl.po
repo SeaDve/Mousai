@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-06 17:26+0800\n"
-"PO-Revision-Date: 2023-04-05 19:48+0000\n"
-"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
+"PO-Revision-Date: 2023-04-06 10:27+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -39,15 +39,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Vensterbreedte"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Vensterhoogte"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Of het venster is gemaximaliseerd"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -55,11 +55,11 @@ msgstr "Voorkeursbron voor audio-opname"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API-token gebruikt door AudD-herkenning"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Verouderd (behouden voor migratie)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -114,8 +114,9 @@ msgid "📱 Easy-to-use user interface"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#, fuzzy
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
@@ -133,8 +134,9 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
+#, fuzzy
 msgid "_Preferences"
-msgstr ""
+msgstr "_Voorkeuren"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -252,9 +254,10 @@ msgid "Search"
 msgstr "Zoeken"
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Voorkeuren openen"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -348,20 +351,23 @@ msgstr ""
 "Philip Goto https://flipflop97.github.io/"
 
 #: src/about.rs:29
+#, fuzzy
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "Doneren (Liberapay)"
 
 #: src/about.rs:33
+#, fuzzy
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "Doneren (PayPal)"
 
 #: src/about.rs:37
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:39
+#, fuzzy
 msgid "Translate"
-msgstr ""
+msgstr "Vertalen"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
@@ -438,8 +444,9 @@ msgid "Search on YouTube"
 msgstr "Zoeken op YouTube"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:85
+#, fuzzy
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "De tekst is gekopieerd naar het klembord"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
@@ -518,8 +525,9 @@ msgid "Please check your internet connection."
 msgstr ""
 
 #: src/window/mod.rs:379
+#, fuzzy
 msgid "Ok"
-msgstr ""
+msgstr "Oké"
 
 #: src/window/mod.rs:464
 msgid "An error occurred in the player"

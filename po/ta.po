@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-06 17:26+0800\n"
-"PO-Revision-Date: 2023-02-13 15:36+0000\n"
-"Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
+"PO-Revision-Date: 2023-04-06 10:27+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -109,8 +109,9 @@ msgid "📱 Easy-to-use user interface"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#, fuzzy
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "டேவ் பேட்ரிக் கேபர்டோ"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
@@ -128,8 +129,9 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
+#, fuzzy
 msgid "_Preferences"
-msgstr ""
+msgstr "_விருப்பங்கள்"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -200,8 +202,9 @@ msgid "Copy Song"
 msgstr "நகல் பாடல்"
 
 #: data/resources/ui/preferences-window.ui:8
+#, fuzzy
 msgid "General"
-msgstr ""
+msgstr "பொது"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
@@ -247,9 +250,10 @@ msgid "Search"
 msgstr "தேடு"
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "விருப்பங்களைக் காட்டு"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -341,20 +345,23 @@ msgid "translator-credits"
 msgstr "தருண் கிருஷ்ணா.க.பா"
 
 #: src/about.rs:29
+#, fuzzy
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "நன்கொடை (லிபரபே)"
 
 #: src/about.rs:33
+#, fuzzy
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "நன்கொடை (பேபால்)"
 
 #: src/about.rs:37
 msgid "GitHub"
 msgstr "கிட்ஹப்"
 
 #: src/about.rs:39
+#, fuzzy
 msgid "Translate"
-msgstr ""
+msgstr "மொழிபெயர்"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
@@ -431,8 +438,9 @@ msgid "Search on YouTube"
 msgstr "யூடியூப்பில் தேடுங்கள்"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:85
+#, fuzzy
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
@@ -511,8 +519,9 @@ msgid "Please check your internet connection."
 msgstr ""
 
 #: src/window/mod.rs:379
+#, fuzzy
 msgid "Ok"
-msgstr ""
+msgstr "சரி"
 
 #: src/window/mod.rs:464
 msgid "An error occurred in the player"

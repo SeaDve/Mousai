@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-06 17:26+0800\n"
-"PO-Revision-Date: 2023-02-20 11:37+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
-">\n"
+"PO-Revision-Date: 2023-04-06 10:26+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -114,8 +114,9 @@ msgid "📱 Easy-to-use user interface"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#, fuzzy
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
@@ -133,8 +134,9 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
+#, fuzzy
 msgid "_Preferences"
-msgstr ""
+msgstr "_Inställningar"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -252,9 +254,10 @@ msgid "Search"
 msgstr "Sök"
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Visa inställningar"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -348,20 +351,23 @@ msgstr ""
 "Luna Jernberg"
 
 #: src/about.rs:29
+#, fuzzy
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "Donera (Liberapay)"
 
 #: src/about.rs:33
+#, fuzzy
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "Donera (Paypal)"
 
 #: src/about.rs:37
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:39
+#, fuzzy
 msgid "Translate"
-msgstr ""
+msgstr "Översätt"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
@@ -438,8 +444,9 @@ msgid "Search on YouTube"
 msgstr "Sök på YouTube"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:85
+#, fuzzy
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Kopierades till urklipp"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
@@ -518,8 +525,9 @@ msgid "Please check your internet connection."
 msgstr ""
 
 #: src/window/mod.rs:379
+#, fuzzy
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/window/mod.rs:464
 msgid "An error occurred in the player"
