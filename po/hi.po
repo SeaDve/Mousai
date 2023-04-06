@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 17:26+0800\n"
+"POT-Creation-Date: 2023-04-06 20:39+0800\n"
 "PO-Revision-Date: 2023-04-06 10:27+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/kooha/mousai/hi/>\n"
@@ -338,21 +338,21 @@ msgstr ""
 msgid "translator-credits"
 msgstr "Hemish <hemish04082005@gmail.com>"
 
-#: src/about.rs:29
+#: src/about.rs:31
 #, fuzzy
 msgid "Donate (Liberapay)"
 msgstr "दान करें (लिबरेपे के द्वारा)"
 
-#: src/about.rs:33
+#: src/about.rs:35
 #, fuzzy
 msgid "Donate (PayPal)"
 msgstr "दान करें (पेपाल के द्वारा)"
 
-#: src/about.rs:37
+#: src/about.rs:39
 msgid "GitHub"
 msgstr "गिटहब"
 
-#: src/about.rs:39
+#: src/about.rs:41
 #, fuzzy
 msgid "Translate"
 msgstr "अनुवादन"

@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 17:26+0800\n"
+"POT-Creation-Date: 2023-04-06 20:39+0800\n"
 "PO-Revision-Date: 2023-04-06 10:26+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
-"\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
+">\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -342,21 +342,21 @@ msgstr ""
 msgid "translator-credits"
 msgstr "محمدصالح کامیاب"
 
-#: src/about.rs:29
+#: src/about.rs:31
 #, fuzzy
 msgid "Donate (Liberapay)"
 msgstr "اعانه (لیبراپی)"
 
-#: src/about.rs:33
+#: src/about.rs:35
 #, fuzzy
 msgid "Donate (PayPal)"
 msgstr "اعانه (پی‌پال)"
 
-#: src/about.rs:37
+#: src/about.rs:39
 msgid "GitHub"
 msgstr "گیت‌هاب"
 
-#: src/about.rs:39
+#: src/about.rs:41
 #, fuzzy
 msgid "Translate"
 msgstr "ترجمه"

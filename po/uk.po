@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Ihor Hordiichuk <igor_ck@outlook.com>, 2021, 2022.
+# Ihor Hordiichuk <igor_ck@outlook.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 17:26+0800\n"
-"PO-Revision-Date: 2023-04-06 10:27+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2023-04-06 20:39+0800\n"
+"PO-Revision-Date: 2023-04-06 12:40+0000\n"
+"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
@@ -39,15 +39,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Ширина вікна"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Висота вікна"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Чи розгорнуто вікно"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -55,11 +55,11 @@ msgstr "Бажане джерело звуку для запису звуку"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "Токен API, що використовується для розпізнавання AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Застаріле (лишається для міграції)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -91,35 +91,36 @@ msgstr "Чому ви вподобаєте Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Розпізнавайте пісні за лічені секунди або збережіть на потім, якщо ви "
+"офлайн"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Використовуйте мікрофон або звук з комп'ютера"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Створіть репертуар із впізнаваних пісень"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Швидкий попередній перегляд пісні через інтерфейс"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Перегляд і прослуховування пісень від різних постачальників"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Простий користувацький інтерфейс"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Критична помилка бази даних"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -131,9 +132,15 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"Ймовірно, це спричинено втручанням у базу даних або її пошкодженням. Ви "
+"можете спробувати очистити дані застосунку. Однак це не рекомендується, "
+"оскільки це призведе до видалення всіх ваших пісень і збережених записів.\n"
+"\n"
+"Щоб повідомити про цю проблему, запустіть Mousai у терміналі, щоб включити "
+"журнали, і надішліть повідомлення про помилку на <a href=\"https://github."
+"com/SeaDve/Mousai/issues/\">сторінку проблеми</a>."
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_Налаштування"
 
@@ -211,23 +218,23 @@ msgstr "Загальні"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Бажане джерело звуку"
 
 #: data/resources/ui/preferences-window.ui:18
 msgid "AudD Provider"
-msgstr ""
+msgstr "Постачальник AudD"
 
 #: data/resources/ui/preferences-window.ui:21
 msgid "API Token"
-msgstr ""
+msgstr "Токен API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Повернутись"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Увімкнено офлайн-режим"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -235,7 +242,7 @@ msgstr "Скасувати прослуховування"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Офлайн-режим"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -253,7 +260,6 @@ msgid "Search"
 msgstr "Шукати"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Показати налаштування"
@@ -291,12 +297,12 @@ msgstr "Навігація"
 #: data/resources/ui/shortcuts.ui:66
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr "Повернутися"
+msgstr "Повернутись"
 
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Уперед"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -340,41 +346,38 @@ msgstr "Нове"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
 msgstr "Ihor Hordiichuk &lt;igor_ck@outlook.com&gt;"
 
-#: src/about.rs:29
-#, fuzzy
+#: src/about.rs:31
 msgid "Donate (Liberapay)"
 msgstr "Підтримати (Liberapay)"
 
-#: src/about.rs:33
-#, fuzzy
+#: src/about.rs:35
 msgid "Donate (PayPal)"
 msgstr "Підтримати (PayPal)"
 
-#: src/about.rs:37
+#: src/about.rs:39
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:39
-#, fuzzy
+#: src/about.rs:41
 msgid "Translate"
 msgstr "Перекласти"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "сьогодні о %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "учора о %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -386,27 +389,27 @@ msgstr "Звук зі стільниці"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Збігів не знайдено"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Не вдалося створити цифровий відбиток аудіо"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Надано недійсний токен"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Досягнуто ліміту токенів"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Не вдалося з'єднатись із сервером"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Отримано іншу постійну помилку"
 
 #: src/window/external_link_tile.rs:61
 msgid "Apple Music"
@@ -441,21 +444,20 @@ msgid "Search on YouTube"
 msgstr "Пошук на YouTube"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:85
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "Скопійовано до буфера обміну"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Не вдалося вилучити вибрані пісні"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Не вдалося вилучити пісню"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Не вдалося показати результати розпізнавання"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
@@ -463,11 +465,11 @@ msgstr "_Скасувати"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "Не вдалося скасувати"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "Вибрати елементи"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -478,58 +480,60 @@ msgstr[2] "Вилучити пісні з історії"
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Не вдалося вставити пісню до історії"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Запис збережено"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Результат буде доступний, коли ви будете онлайн."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "Гаразд, зрозуміло"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "Відкрийте налаштування і спробуйте налаштувати інший токен."
 
 #: src/window/mod.rs:311
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
+"Зачекайте, поки ліміт буде скинуто, або відкрийте налаштування і спробуйте "
+"встановити інший токен."
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "Відкрити налаштування"
 
 #: src/window/mod.rs:322 src/window/mod.rs:349
 msgid "No, Thanks"
-msgstr ""
+msgstr "Ні, дякую"
 
 #: src/window/mod.rs:341
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr ""
+"Будь ласка, створіть звернення на GitHub та надайте необхідну інформацію."
 
 #: src/window/mod.rs:344
 msgid "Open an Issue"
-msgstr ""
+msgstr "Написати звернення"
 
 #: src/window/mod.rs:374
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Перевірте своє інтернет-з'єднання."
 
 #: src/window/mod.rs:379
-#, fuzzy
 msgid "Ok"
 msgstr "Гаразд"
 
 #: src/window/mod.rs:464
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Сталася помилка у програвачі"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -542,9 +546,9 @@ msgstr "Призупинити"
 #: src/window/recognized_page.rs:144
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Ця пісня була почута, коли ви були офлайн"
+msgstr[1] "Ці пісні були почуті, коли ви були офлайн"
+msgstr[2] "Ці пісні були почуті, коли ви були офлайн"
 
 #: src/window/recognizer_view.rs:131
 msgid "Listening…"
@@ -556,7 +560,7 @@ msgstr "Розпізнавання…"
 
 #: src/window/song_page.rs:296
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 #~ msgid "Default window width"
 #~ msgstr "Типова ширина вікна"

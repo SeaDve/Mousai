@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 17:26+0800\n"
+"POT-Creation-Date: 2023-04-06 20:39+0800\n"
 "PO-Revision-Date: 2023-04-06 10:27+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
@@ -350,21 +350,21 @@ msgstr ""
 "Heimen Stoffels &lt;vistausss@fastmail.com&gt;\n"
 "Philip Goto https://flipflop97.github.io/"
 
-#: src/about.rs:29
+#: src/about.rs:31
 #, fuzzy
 msgid "Donate (Liberapay)"
 msgstr "Doneren (Liberapay)"
 
-#: src/about.rs:33
+#: src/about.rs:35
 #, fuzzy
 msgid "Donate (PayPal)"
 msgstr "Doneren (PayPal)"
 
-#: src/about.rs:37
+#: src/about.rs:39
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:39
+#: src/about.rs:41
 #, fuzzy
 msgid "Translate"
 msgstr "Vertalen"

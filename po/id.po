@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 17:26+0800\n"
+"POT-Creation-Date: 2023-04-06 20:39+0800\n"
 "PO-Revision-Date: 2022-07-11 08:15+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -348,19 +348,19 @@ msgstr ""
 "Hervy Qurrotul Ainur Rozi\n"
 "Reza Almanda"
 
-#: src/about.rs:29
+#: src/about.rs:31
 msgid "Donate (Liberapay)"
 msgstr ""
 
-#: src/about.rs:33
+#: src/about.rs:35
 msgid "Donate (PayPal)"
 msgstr ""
 
-#: src/about.rs:37
+#: src/about.rs:39
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:39
+#: src/about.rs:41
 msgid "Translate"
 msgstr ""
 
