@@ -53,9 +53,6 @@ mod imp {
     #[derive(Debug, Default, glib::Properties)]
     #[properties(wrapper_type = super::Recognizer)]
     pub struct Recognizer {
-        /// Saved recordings
-        #[property(get, set, construct_only)]
-        pub(super) saved_recordings: OnceCell<Recordings>,
         /// Current state
         #[property(get, builder(RecognizerState::default()))]
         pub(super) state: Cell<RecognizerState>,
@@ -65,6 +62,8 @@ mod imp {
 
         pub(super) recorder: Recorder,
         pub(super) cancellable: RefCell<Option<gio::Cancellable>>,
+
+        pub(super) saved_recordings: OnceCell<Recordings>,
     }
 
     #[glib::object_subclass]
@@ -91,28 +90,6 @@ mod imp {
 
             SIGNALS.as_ref()
         }
-
-        fn constructed(&self) {
-            self.parent_constructed();
-
-            let obj = self.obj();
-
-            gio::NetworkMonitor::default().connect_network_available_notify(
-                clone!(@weak obj => move |_| {
-                    obj.update_offline_mode();
-
-                    // TODO don't just call when network is available, but also for every
-                    // interval if there is network, there are still saved recordings, and
-                    // there is currently no recognition in progress.
-                    //
-                    // This should also be triggered when token is updated.
-                    obj.try_recognize_saved_recordings();
-                }),
-            );
-
-            obj.update_offline_mode();
-            obj.try_recognize_saved_recordings();
-        }
     }
 }
 
@@ -121,10 +98,8 @@ glib::wrapper! {
 }
 
 impl Recognizer {
-    pub fn new(saved_recordings: &Recordings) -> Self {
-        glib::Object::builder()
-            .property("saved-recordings", saved_recordings)
-            .build()
+    pub fn new() -> Self {
+        glib::Object::new()
     }
 
     pub fn connect_recording_peak_changed<F>(&self, f: F) -> glib::SignalHandlerId
@@ -164,6 +139,37 @@ impl Recognizer {
                 f(obj);
             }),
         )
+    }
+
+    pub fn bind_saved_recordings(&self, recordings: &Recordings) {
+        self.imp()
+            .saved_recordings
+            .set(recordings.clone())
+            .expect("saved recordings must be bound only once");
+
+        gio::NetworkMonitor::default().connect_network_available_notify(
+            clone!(@weak self as obj => move |_| {
+                obj.update_offline_mode();
+
+                // TODO don't just call when network is available, but also for every
+                // interval if there is network, there are still saved recordings, and
+                // there is currently no recognition in progress.
+                //
+                // This should also be triggered when token is updated.
+                obj.try_recognize_saved_recordings();
+            }),
+        );
+
+        self.update_offline_mode();
+
+        self.try_recognize_saved_recordings();
+    }
+
+    pub fn saved_recordings(&self) -> &Recordings {
+        self.imp()
+            .saved_recordings
+            .get()
+            .expect("saved recordings must be bound")
     }
 
     /// Returned recordings are guaranteed to have a recognizing result.
@@ -384,6 +390,12 @@ impl Recognizer {
 
         self.imp().is_offline_mode.set(is_offline_mode);
         self.notify_is_offline_mode();
+    }
+}
+
+impl Default for Recognizer {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

@@ -31,7 +31,7 @@ use crate::{
     error_dialog::ErrorDialog,
     model::{Song, SongList},
     player::{Player, PlayerState},
-    recognizer::{RecognizeError, Recognizer, RecognizerState},
+    recognizer::{RecognizeError, Recognizer, RecognizerState, Recordings},
     utils, Application,
 };
 
@@ -53,10 +53,6 @@ mod imp {
     #[properties(wrapper_type = super::Window)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
-        #[property(get, set, construct_only)]
-        pub(super) song_history: OnceCell<SongList>,
-        #[property(get, set, construct_only)]
-        pub(super) recognizer: OnceCell<Recognizer>,
         #[property(get, builder(AdaptiveMode::default()))]
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
@@ -74,6 +70,8 @@ mod imp {
         pub(super) song_bar: TemplateChild<SongBar>,
 
         pub(super) player: Player,
+        pub(super) recognizer: Recognizer,
+        pub(super) song_history: OnceCell<SongList>,
     }
 
     #[glib::object_subclass]
@@ -95,12 +93,12 @@ mod imp {
             });
 
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
-                let player = obj.player();
+                let imp = obj.imp();
 
-                if player.state() == PlayerState::Playing {
-                    player.pause();
+                if imp.player.state() == PlayerState::Playing {
+                    imp.player.pause();
                 } else {
-                    player.play();
+                    imp.player.play();
                 };
             });
 
@@ -109,9 +107,11 @@ mod imp {
             });
 
             klass.install_action_async("win.toggle-recognize", None, |obj, _, _| async move {
-                obj.imp().player.set_song(Song::NONE);
+                let imp = obj.imp();
 
-                if let Err(err) = obj.recognizer().toggle_recognize().await {
+                imp.player.set_song(Song::NONE);
+
+                if let Err(err) = imp.recognizer.toggle_recognize().await {
                     tracing::error!("{:?}", err);
                     obj.present_recognize_error(&err);
                 }
@@ -147,11 +147,6 @@ mod imp {
 
             self.song_bar.bind_player(&self.player);
             self.main_view.bind_player(&self.player);
-            self.main_view.bind_song_list(&obj.song_history());
-
-            let recognizer = obj.recognizer();
-            self.main_view.bind_recognizer(&recognizer);
-            self.recognizer_view.bind_recognizer(&recognizer);
 
             self.main_view
                 .search_bar()
@@ -209,16 +204,73 @@ glib::wrapper! {
 }
 
 impl Window {
-    pub fn new(
-        application: &Application,
-        song_history: &SongList,
-        recognizer: &Recognizer,
-    ) -> Self {
+    pub fn new(application: &Application) -> Self {
         glib::Object::builder()
             .property("application", application)
-            .property("song-history", song_history)
-            .property("recognizer", recognizer)
             .build()
+    }
+
+    pub fn bind_models(&self, song_history: &SongList, recordings: &Recordings) {
+        let imp = self.imp();
+
+        imp.song_history
+            .set(song_history.clone())
+            .expect("song history must be bound only once");
+
+        song_history.connect_removed(clone!(@weak self as obj => move |_, songs| {
+            let imp = obj.imp();
+            if songs.iter().any(|song| imp.player.is_active_song(song)) {
+                imp.player.set_song(Song::NONE);
+            }
+        }));
+
+        imp.main_view.bind_song_list(song_history);
+        imp.recognizer.bind_saved_recordings(recordings);
+
+        // Recognizer must have saved recordings first
+        imp.main_view.bind_recognizer(&imp.recognizer);
+        imp.recognizer_view.bind_recognizer(&imp.recognizer);
+
+        imp.recognizer
+            .connect_state_notify(clone!(@weak self as obj => move |_| {
+                obj.update_stack();
+            }));
+        imp.recognizer
+            .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
+                let history = obj.song_history();
+
+                // If the song is not found in the history, set it as newly heard
+                // (That's why an always true value is used after `or`). If it is in the
+                // history and it was newly heard, pass that state to the new value.
+                if history
+                    .get(song.id_ref())
+                    .map_or(true, |prev| prev.is_newly_heard())
+                {
+                    song.set_is_newly_heard(true);
+                }
+
+                if let Err(err) = history.insert(song.clone()) {
+                    tracing::error!("Failed to insert song to history: {:?}", err);
+                    obj.add_message_toast(&gettext("Failed to insert song to history"));
+                    return;
+                }
+
+                let main_view = obj.imp().main_view.get();
+                main_view.insert_song_page(song);
+                main_view.scroll_to_top();
+            }));
+        imp.recognizer
+            .connect_recording_saved(clone!(@weak self as obj => move |_| {
+                let dialog = adw::MessageDialog::builder()
+                    .heading(gettext("Recording saved"))
+                    .body(gettext("The result will be available when you're back online."))
+                    .default_response("ok")
+                    .transient_for(&obj)
+                    .modal(true)
+                    .build();
+                dialog.add_response("ok", &gettext("Ok, got it"));
+                dialog.present();
+            }));
     }
 
     pub fn add_toast(&self, toast: adw::Toast) {
@@ -228,6 +280,13 @@ impl Window {
     pub fn add_message_toast(&self, message: &str) {
         let toast = adw::Toast::new(message);
         self.add_toast(toast);
+    }
+
+    fn song_history(&self) -> &SongList {
+        self.imp()
+            .song_history
+            .get()
+            .expect("song history must be bound")
     }
 
     fn present_recognize_error(&self, err: &Error) {
@@ -257,12 +316,9 @@ impl Window {
         err_dialog.present();
     }
 
-    fn player(&self) -> &Player {
-        &self.imp().player
-    }
-
     fn load_window_size(&self) {
-        let settings = utils::app_instance().settings();
+        let app = utils::app_instance();
+        let settings = app.settings();
 
         self.set_default_size(settings.window_width(), settings.window_height());
 
@@ -272,7 +328,8 @@ impl Window {
     }
 
     fn save_window_size(&self) -> Result<()> {
-        let settings = utils::app_instance().settings();
+        let app = utils::app_instance();
+        let settings = app.settings();
 
         let (width, height) = self.default_size();
 
@@ -285,7 +342,7 @@ impl Window {
     }
 
     fn update_toggle_playback_action(&self) {
-        self.action_set_enabled("win.toggle-playback", self.player().song().is_some());
+        self.action_set_enabled("win.toggle-playback", self.imp().player.song().is_some());
     }
 
     fn update_toggle_search_action(&self) {
@@ -298,7 +355,7 @@ impl Window {
     fn update_stack(&self) {
         let imp = self.imp();
 
-        match self.recognizer().state() {
+        match imp.recognizer.state() {
             RecognizerState::Listening | RecognizerState::Recognizing => {
                 imp.stack.set_visible_child(&imp.recognizer_view.get());
             }
@@ -339,53 +396,6 @@ impl Window {
                 obj.add_message_toast(&gettext("An error occurred in the player"));
             }));
 
-        self.song_history()
-            .connect_removed(clone!(@weak self as obj => move |_, songs| {
-                let player = obj.player();
-                if songs.iter().any(|song| player.is_active_song(song)) {
-                    player.set_song(Song::NONE);
-                }
-            }));
-
-        let recognizer = self.recognizer();
-        recognizer.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_stack();
-        }));
-        recognizer.connect_song_recognized(clone!(@weak self as obj => move |_, song| {
-            let history = obj.song_history();
-
-            // If the song is not found in the history, set it as newly heard
-            // (That's why an always true value is used after `or`). If it is in the
-            // history and it was newly heard, pass that state to the new value.
-            if history
-                .get(song.id_ref())
-                .map_or(true, |prev| prev.is_newly_heard())
-            {
-                song.set_is_newly_heard(true);
-            }
-
-            if let Err(err) = history.insert(song.clone()) {
-                tracing::error!("Failed to insert song to history: {:?}", err);
-                obj.add_message_toast(&gettext("Failed to insert song to history"));
-                return;
-            }
-
-            let main_view = obj.imp().main_view.get();
-            main_view.insert_song_page(song);
-            main_view.scroll_to_top();
-        }));
-        recognizer.connect_recording_saved(clone!(@weak self as obj => move |_| {
-            let dialog = adw::MessageDialog::builder()
-                .heading(gettext("Recording saved"))
-                .body(gettext("The result will be available when you're back online."))
-                .default_response("ok")
-                .transient_for(&obj)
-                .modal(true)
-                .build();
-            dialog.add_response("ok", &gettext("Ok, got it"));
-            dialog.present();
-        }));
-
         imp.song_bar
             .connect_activated(clone!(@weak self as obj => move |_, song| {
                 obj.imp().main_view.insert_song_page(song);
@@ -406,7 +416,7 @@ impl Window {
     fn update_song_bar_revealer(&self) {
         let imp = self.imp();
         imp.song_bar_revealer.set_reveal_child(
-            self.player().song().is_some() && !imp.main_view.is_selection_mode_active(),
+            imp.player.song().is_some() && !imp.main_view.is_selection_mode_active(),
         );
     }
 }

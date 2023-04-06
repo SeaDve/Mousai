@@ -11,7 +11,7 @@ use crate::{
     database_error_window::DatabaseErrorWindow,
     inspector_page::InspectorPage,
     model::SongList,
-    recognizer::{Recognizer, Recordings},
+    recognizer::Recordings,
     settings::Settings,
     window::Window,
 };
@@ -108,8 +108,9 @@ impl Application {
         self.imp()
             .window
             .get_or_init(|| {
-                let recognizer = Recognizer::new(self.saved_recordings());
-                Window::new(self, self.song_history(), &recognizer).downgrade()
+                let window = Window::new(self);
+                window.bind_models(self.song_history(), self.saved_recordings());
+                window.downgrade()
             })
             .upgrade()
             .unwrap()
@@ -125,8 +126,8 @@ impl Application {
             .get_or_try_init(|| AlbumArtStore::new(self.session()))
     }
 
-    pub fn settings(&self) -> Settings {
-        self.imp().settings.clone()
+    pub fn settings(&self) -> &Settings {
+        &self.imp().settings
     }
 
     pub fn run(&self) -> glib::ExitCode {
@@ -174,10 +175,10 @@ impl Application {
 
         let song_history =
             SongList::load_from_env(env.clone()).context("Failed to load song history")?;
-        self.imp().song_history.set(song_history).unwrap();
+        imp.song_history.set(song_history).unwrap();
 
         let recordings = Recordings::load_from_env(env)?;
-        self.imp().saved_recordings.set(recordings).unwrap();
+        imp.saved_recordings.set(recordings).unwrap();
 
         Ok(())
     }
