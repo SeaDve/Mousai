@@ -149,10 +149,12 @@ recognizedpagetile songtile:active {
 /* SongTile */
 
 label.new {
-  background-color: @accent_bg_color;
+  padding: 3px 8px;
+
   color: @accent_fg_color;
-  padding: 3px 6px;
-  border-radius: 6px;
+  background-color: @accent_bg_color;
+  border-radius: 99999px;
+
   font-weight: bold;
 }
 
