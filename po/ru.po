@@ -12,26 +12,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-01 13:36+0800\n"
+"POT-Creation-Date: 2023-04-06 17:26+0800\n"
 "PO-Revision-Date: 2023-01-20 11:05+0000\n"
 "Last-Translator: Vin <k3kelm4vw@mozmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.15.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
+#: src/main.rs:57
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
 msgid "Identify songs in seconds"
 msgstr "Распознавайте песни за секунды"
 
@@ -41,26 +42,28 @@ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
 msgstr "Шазам;Аудио;Музыка;Песня;Распознать;Распознавание;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
-#: data/io.github.seadve.Mousai.gschema.xml.in:7
-msgid "Default window width"
-msgstr "Ширина окна по умолчанию"
+msgid "Window width"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
-#: data/io.github.seadve.Mousai.gschema.xml.in:12
-msgid "Default window height"
-msgstr "Высота окна по умолчанию"
+msgid "Window height"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
-msgid "Default window maximized behaviour"
-msgstr "Максимальное поведение окна по умолчанию"
+msgid "Whether the window is maximized"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:21
-msgid "Contains recently recognized songs"
-msgstr "Содержит недавно распознанные песни"
-
-#: data/io.github.seadve.Mousai.gschema.xml.in:30
+#: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
 msgstr "Предпочтительный источник звука для записи звука"
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:32
+msgid "API token used by AudD recognition"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:37
+msgid "Legacy (Kept for migration)"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -91,124 +94,152 @@ msgid "Why you will love Mousai?"
 msgstr "За что вы полюбите Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
-msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr "🎵 Определите название и исполнителя песни в течение нескольких секунд."
+msgid "🎵 Recognize songs within seconds or save for later when offline"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
-msgid "🎙️ Use your microphone or audio from desktop."
-msgstr "🎙️ Используйте свой микрофон или звук с компьютера."
+msgid "🎙️ Use microphone or desktop audio"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
-msgid "🎸 Store the identified song including the album art in history."
+msgid "🎸 Build a repertoire of recognized songs"
 msgstr ""
-"🎸 Храните идентифицированную песню, включая обложку альбома, в истории."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
-msgid "🎼 Preview the identified song with the native player."
+msgid "🎼 Quickly preview the song within the interface"
 msgstr ""
-"🎼 Предварительный просмотр идентифицированной песни с помощью нативного "
-"проигрывателя."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
-msgid "🌐 Browse and listen the song from different providers."
-msgstr "🌐 Ищите и слушайте песни от разных провайдеров."
+msgid "🌐 Browse and listen the song from different providers"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
-msgid "📱 Easy-to-use user interface."
-msgstr "📱 Лёгкий в использовании интерфейс."
+msgid "📱 Easy-to-use user interface"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
-msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr "⌨️ Удобные сочетания клавиш."
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+msgid "Dave Patrick Caberto"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
-msgid "Dave Patrick"
-msgstr "Дэйв Патрик"
+#: data/resources/ui/database-error-window.ui:20
+msgid "Critical Database Error"
+msgstr ""
+
+#: data/resources/ui/database-error-window.ui:21
+msgid ""
+"This is likely caused by a tampered or corrupted database. You can try "
+"clearing application data. However, this is not recommended and will delete "
+"all your songs and saved recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>."
+msgstr ""
 
 #: data/resources/ui/history-view.ui:6
-msgid "_Preferred Audio Source"
-msgstr "_Предпочтительный источник звука"
+msgid "_Preferences"
+msgstr ""
 
-#: data/resources/ui/history-view.ui:8
-msgid "Microphone"
-msgstr "Микрофон"
-
-#: data/resources/ui/history-view.ui:13
-msgid "Desktop Audio"
-msgstr "Звук с компьютера"
-
-#: data/resources/ui/history-view.ui:21
+#: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
 msgstr "_Комбинации клавиш"
 
-#: data/resources/ui/history-view.ui:25
+#: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
 msgstr "_О Mousai"
 
-#: data/resources/ui/history-view.ui:33
+#: data/resources/ui/history-view.ui:22
 msgid "Select _All"
 msgstr "Выбрать _Все"
 
-#: data/resources/ui/history-view.ui:37
+#: data/resources/ui/history-view.ui:26
 msgid "Select _None"
 msgstr "Выбрать _Ничего"
 
-#: data/resources/ui/history-view.ui:61
+#: data/resources/ui/history-view.ui:52
 msgid "Start Identifying Music"
 msgstr "Начать распознавание музыки"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
+#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "Слушать"
 
-#: data/resources/ui/history-view.ui:71
+#: data/resources/ui/history-view.ui:65
 msgid "Open Main Menu"
 msgstr "Открыть главное меню"
 
-#: data/resources/ui/history-view.ui:79
+#: data/resources/ui/history-view.ui:73
 msgid "Select"
 msgstr "Выбрать"
 
-#: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
+#: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search for Songs"
 msgstr "Ищите песни"
 
-#: data/resources/ui/history-view.ui:102
+#: data/resources/ui/history-view.ui:96
 msgid "Cancel Select"
 msgstr "Отменить выбор"
 
-#: data/resources/ui/history-view.ui:103
-#: data/resources/ui/recognizer-view.ui:14
+#: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
 msgstr "Отменить"
 
-#: data/resources/ui/history-view.ui:123
+#: data/resources/ui/history-view.ui:117
 msgid "Enter song or artist name"
 msgstr "Введите имя песни или исполнителя"
 
-#: data/resources/ui/history-view.ui:147
+#: data/resources/ui/history-view.ui:142
 msgid "Start Identifying Music!"
 msgstr "Начните распознавать музыку!"
 
-#: data/resources/ui/history-view.ui:148
+#: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start."
 msgstr "Нажмите кнопку \"Слушать\", чтобы начать."
 
-#: data/resources/ui/history-view.ui:155
+#: data/resources/ui/history-view.ui:153
 msgid "No Results Found"
 msgstr "Результатов не найдено"
 
-#: data/resources/ui/history-view.ui:156
+#: data/resources/ui/history-view.ui:154
 msgid "Try a different search."
 msgstr "Попробывать другой поиск."
 
-#: data/resources/ui/history-view.ui:165
+#: data/resources/ui/history-view.ui:163
 msgid "Copy Song"
 msgstr "Скопировать песню"
+
+#: data/resources/ui/preferences-window.ui:8
+#, fuzzy
+msgid "General"
+msgstr "Основное"
+
+#: data/resources/ui/preferences-window.ui:11
+msgid "Preferred Audio Source"
+msgstr ""
+
+#: data/resources/ui/preferences-window.ui:18
+msgid "AudD Provider"
+msgstr ""
+
+#: data/resources/ui/preferences-window.ui:21
+msgid "API Token"
+msgstr ""
+
+#: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
+msgid "Go Back"
+msgstr ""
+
+#: data/resources/ui/recognizer-status.ui:17
+msgid "Offline Mode Enabled"
+msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
 msgstr "Отменить прослушивание"
+
+#: data/resources/ui/recognizer-view.ui:53
+msgid "Offline Mode"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -227,50 +258,56 @@ msgstr "Поиск"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Показать комбинации клавиш"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выход"
 
-#: data/resources/ui/shortcuts.ui:40
+#: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Управление"
 
-#: data/resources/ui/shortcuts.ui:43
+#: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Переключить прослушивание"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Переключить проигрывание"
 
-#: data/resources/ui/shortcuts.ui:57
+#: data/resources/ui/shortcuts.ui:63
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "Навигация"
 
-#: data/resources/ui/shortcuts.ui:60
+#: data/resources/ui/shortcuts.ui:66
 msgctxt "shortcut window"
 msgid "Go Back"
 msgstr "Назад"
+
+#: data/resources/ui/shortcuts.ui:72
+msgctxt "shortcut window"
+msgid "Go Forward"
+msgstr ""
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
 msgstr "Показать информацию о песне"
 
-#: data/resources/ui/song-bar.ui:102
+#: data/resources/ui/song-bar.ui:92
 msgid "Stop"
 msgstr "Остановить"
-
-#: data/resources/ui/song-page.ui:30
-msgid "Return to Main Page"
-msgstr "Вернуться на главную страницу"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
@@ -300,166 +337,340 @@ msgstr "Дата выпуска"
 msgid "Lyrics"
 msgstr "Лирика"
 
-#: data/resources/ui/song-tile.ui:25
+#: data/resources/ui/song-tile.ui:30
 msgid "New"
 msgstr "Новое"
 
+#: src/about.rs:18
+msgid "© 2023 Dave Patrick Caberto"
+msgstr ""
+
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:140
+#: src/about.rs:21
 msgid "translator-credits"
 msgstr ""
 "Ковалев Артем, Давид Лапшин, ViktorOn &lt;https://github.com/viktoron&gt;"
 
-#: src/application.rs:141
-msgid "Copyright 2022 Dave Patrick"
-msgstr "Авторское право 2022 Дейв Патрик"
+#: src/about.rs:29
+msgid "Donate (Liberapay)"
+msgstr ""
 
-#: src/application.rs:144
+#: src/about.rs:33
+msgid "Donate (PayPal)"
+msgstr ""
+
+#: src/about.rs:37
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/model/external_link/apple_music.rs:26
+#: src/about.rs:39
+msgid "Translate"
+msgstr ""
+
+#. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
+#: src/core/date_time.rs:27
+msgid "today at %R"
+msgstr ""
+
+#. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
+#: src/core/date_time.rs:30
+msgid "yesterday at %R"
+msgstr ""
+
+#: src/preferences_window.rs:107
+msgid "Microphone"
+msgstr "Микрофон"
+
+#: src/preferences_window.rs:108
+msgid "Desktop Audio"
+msgstr "Звук с компьютера"
+
+#: src/recognizer/provider/error.rs:48
+msgid "No Matches Found"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:49
+msgid "Cannot Create Fingerprint From Audio"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:50
+msgid "Invalid Token Given"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:51
+msgid "Token Limit Reached"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:52
+msgid "Cannot Connect to the Server"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:53
+msgid "Received Other Permanent Error"
+msgstr ""
+
+#: src/window/external_link_tile.rs:61
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/model/external_link/apple_music.rs:30
+#: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
 msgstr "Поиск в Apple Music"
 
-#: src/model/external_link/aud_d.rs:26
+#: src/window/external_link_tile.rs:67
 msgid "AudD"
 msgstr "AudD"
 
-#: src/model/external_link/aud_d.rs:30
+#: src/window/external_link_tile.rs:68
 msgid "Browse on AudD"
 msgstr "Поиск в AudD"
 
-#: src/model/external_link/spotify.rs:26
+#: src/window/external_link_tile.rs:73
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/model/external_link/spotify.rs:30
+#: src/window/external_link_tile.rs:74
 msgid "Listen on Spotify"
 msgstr "Слушать в Spotify"
 
-#: src/model/external_link/youtube.rs:28
+#: src/window/external_link_tile.rs:79
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/model/external_link/youtube.rs:32
+#: src/window/external_link_tile.rs:80
 msgid "Search on YouTube"
 msgstr "Поиск в YouTube"
 
-#: src/recognizer/mod.rs:193
-msgid "Cancelled recording"
-msgstr "Отменить запись"
-
-#: src/recognizer/mod.rs:207
-msgid "Cancelled recognizing"
-msgstr "Отменить распознование"
-
-#: src/recognizer/provider/aud_d/mod.rs:112
-msgid ""
-"Failed to convert the recording to base64. Please report this to Mousai's "
-"bug tracker."
+#: src/window/history_view.rs:138 src/window/song_page.rs:85
+msgid "Copied to clipboard"
 msgstr ""
-"Не удалось преобразовать запись в base64. Пожалуйста, сообщите об этом в "
-"систему отслеживания ошибок Mousai."
 
-#: src/recognizer/provider/aud_d/mod.rs:136
-msgid "Failed to connect to the server."
-msgstr "Не удалось подключиться к серверу."
-
-#: src/recognizer/provider/aud_d/response.rs:100
-msgid "Failed to parse response. Please report this to Mousai's bug tracker"
+#: src/window/history_view.rs:152
+msgid "Failed to remove selected songs"
 msgstr ""
-"Не удалось обработать ответ. Пожалуйста, сообщите об этом в систему "
-"отслеживания ошибок Mousai"
 
-#: src/recognizer/provider/aud_d/response.rs:113
-msgid "Daily limit has been reached."
-msgstr "Достигнут дневной лимит."
+#: src/window/history_view.rs:320
+msgid "Failed to remove song"
+msgstr ""
 
-#: src/recognizer/provider/aud_d/response.rs:116
-msgid "Failed to fingerprint audio. There may be no sound heard."
-msgstr "Не удалось записать отпечаток звука. Звук может быть не слышен."
+#: src/window/history_view.rs:445
+msgid "Failed to show recognizer results"
+msgstr ""
 
-#: src/recognizer/provider/aud_d/response.rs:125
-msgid "Got invalid status response of {}"
-msgstr "Получен недействительный ответ о статусе {}"
-
-#: src/recognizer/provider/mod.rs:150
-msgid "{} Check your internet connection."
-msgstr "{} Проверьте подключение к Интернету."
-
-#: src/recognizer/provider/mod.rs:152
-msgid "No matches found for this song."
-msgstr "Для этой песни совпадений не найдено."
-
-#: src/recognizer/provider/mod.rs:154
-msgid "{} Input an API token in the preferences."
-msgstr "{} Введите токен API в параметрах."
-
-#: src/recognizer/provider/mod.rs:157
-msgid "Please input a valid API token."
-msgstr "Пожалуйста, введите действительный токен API."
-
-#: src/window/history_view.rs:113 src/window/song_page.rs:89
-msgid "Copied song to clipboard"
-msgstr "Песня скопирована в буфер обмена"
-
-#: src/window/history_view.rs:411
+#: src/window/history_view.rs:683
 msgid "_Undo"
 msgstr "_Отменить"
 
-#: src/window/history_view.rs:430
-msgid "Removed {} song"
-msgid_plural "Removed {} songs"
-msgstr[0] "Удалена {} песня"
-msgstr[1] "Удалено {} песен"
-msgstr[2] "Удалено {} песен"
+#: src/window/history_view.rs:691
+msgid "Failed to undo"
+msgstr ""
 
-#: src/window/history_view.rs:495
-msgid "Click on items to select them"
-msgstr "Нажмите на элементы, чтобы выбрать их"
+#: src/window/history_view.rs:836
+msgid "Select items"
+msgstr ""
 
-#: src/window/history_view.rs:497
-msgid "Selected {} song"
-msgid_plural "Selected {} songs"
-msgstr[0] "Выбрана {} песня"
-msgstr[1] "Выбрано {} песен"
-msgstr[2] "Выбрано {} песен"
-
-#: src/window/history_view.rs:506
+#: src/window/history_view.rs:847
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Удалить песню из истории"
 msgstr[1] "Удалить песни из истории"
 msgstr[2] "Удалить песни из истории"
 
-#: src/window/mod.rs:196
-msgid "Failed to load history"
-msgstr "Не удалось загрузить историю"
+#: src/window/mod.rs:253
+msgid "Failed to insert song to history"
+msgstr ""
 
-#: src/window/playback_button.rs:155
+#: src/window/mod.rs:264
+msgid "Recording saved"
+msgstr ""
+
+#: src/window/mod.rs:265
+msgid "The result will be available when you're back online."
+msgstr ""
+
+#: src/window/mod.rs:270
+msgid "Ok, got it"
+msgstr ""
+
+#: src/window/mod.rs:306
+msgid "Open preferences and try setting a different token."
+msgstr ""
+
+#: src/window/mod.rs:311
+msgid ""
+"Wait until the limit is reset or open preferences and try setting a "
+"different token."
+msgstr ""
+
+#: src/window/mod.rs:317
+msgid "Open Preferences"
+msgstr ""
+
+#: src/window/mod.rs:322 src/window/mod.rs:349
+msgid "No, Thanks"
+msgstr ""
+
+#: src/window/mod.rs:341
+msgid "Please open an issue on GitHub and provide the necessary information."
+msgstr ""
+
+#: src/window/mod.rs:344
+msgid "Open an Issue"
+msgstr ""
+
+#: src/window/mod.rs:374
+msgid "Please check your internet connection."
+msgstr ""
+
+#: src/window/mod.rs:379
+msgid "Ok"
+msgstr ""
+
+#: src/window/mod.rs:464
+msgid "An error occurred in the player"
+msgstr ""
+
+#: src/window/playback_button.rs:117
 msgid "Play"
 msgstr "Воспроизвести"
 
-#: src/window/playback_button.rs:162
+#: src/window/playback_button.rs:124
 msgid "Pause"
 msgstr "Пауза"
 
-#: src/window/recognizer_view.rs:117
+#: src/window/recognized_page.rs:144
+msgid "This song was heard while you're offline"
+msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/window/recognizer_view.rs:131
 msgid "Listening…"
 msgstr "Прослушивание…"
 
-#: src/window/recognizer_view.rs:122
+#: src/window/recognizer_view.rs:136
 msgid "Recognizing…"
 msgstr "Распознавание…"
 
-#: src/window/song_page.rs:177
-msgid "Failed to launch {}"
-msgstr "Не удалось запустить {}"
+#: src/window/song_page.rs:296
+msgid "Unknown"
+msgstr ""
+
+#~ msgid "Default window width"
+#~ msgstr "Ширина окна по умолчанию"
+
+#~ msgid "Default window height"
+#~ msgstr "Высота окна по умолчанию"
+
+#~ msgid "Default window maximized behaviour"
+#~ msgstr "Максимальное поведение окна по умолчанию"
+
+#~ msgid "Contains recently recognized songs"
+#~ msgstr "Содержит недавно распознанные песни"
+
+#~ msgid "🎵 Identify the title and artist of the song within seconds."
+#~ msgstr ""
+#~ "🎵 Определите название и исполнителя песни в течение нескольких секунд."
+
+#~ msgid "🎙️ Use your microphone or audio from desktop."
+#~ msgstr "🎙️ Используйте свой микрофон или звук с компьютера."
+
+#~ msgid "🎸 Store the identified song including the album art in history."
+#~ msgstr ""
+#~ "🎸 Храните идентифицированную песню, включая обложку альбома, в истории."
+
+#~ msgid "🎼 Preview the identified song with the native player."
+#~ msgstr ""
+#~ "🎼 Предварительный просмотр идентифицированной песни с помощью нативного "
+#~ "проигрывателя."
+
+#~ msgid "🌐 Browse and listen the song from different providers."
+#~ msgstr "🌐 Ищите и слушайте песни от разных провайдеров."
+
+#~ msgid "📱 Easy-to-use user interface."
+#~ msgstr "📱 Лёгкий в использовании интерфейс."
+
+#~ msgid "⌨️ User-friendly keyboard shortcuts."
+#~ msgstr "⌨️ Удобные сочетания клавиш."
+
+#~ msgid "Dave Patrick"
+#~ msgstr "Дэйв Патрик"
+
+#~ msgid "_Preferred Audio Source"
+#~ msgstr "_Предпочтительный источник звука"
+
+#~ msgid "Return to Main Page"
+#~ msgstr "Вернуться на главную страницу"
+
+#~ msgid "Copyright 2022 Dave Patrick"
+#~ msgstr "Авторское право 2022 Дейв Патрик"
+
+#~ msgid "Cancelled recording"
+#~ msgstr "Отменить запись"
+
+#~ msgid "Cancelled recognizing"
+#~ msgstr "Отменить распознование"
+
+#~ msgid ""
+#~ "Failed to convert the recording to base64. Please report this to Mousai's "
+#~ "bug tracker."
+#~ msgstr ""
+#~ "Не удалось преобразовать запись в base64. Пожалуйста, сообщите об этом в "
+#~ "систему отслеживания ошибок Mousai."
+
+#~ msgid "Failed to connect to the server."
+#~ msgstr "Не удалось подключиться к серверу."
+
+#~ msgid "Failed to parse response. Please report this to Mousai's bug tracker"
+#~ msgstr ""
+#~ "Не удалось обработать ответ. Пожалуйста, сообщите об этом в систему "
+#~ "отслеживания ошибок Mousai"
+
+#~ msgid "Daily limit has been reached."
+#~ msgstr "Достигнут дневной лимит."
+
+#~ msgid "Failed to fingerprint audio. There may be no sound heard."
+#~ msgstr "Не удалось записать отпечаток звука. Звук может быть не слышен."
+
+#~ msgid "Got invalid status response of {}"
+#~ msgstr "Получен недействительный ответ о статусе {}"
+
+#~ msgid "{} Check your internet connection."
+#~ msgstr "{} Проверьте подключение к Интернету."
+
+#~ msgid "No matches found for this song."
+#~ msgstr "Для этой песни совпадений не найдено."
+
+#~ msgid "{} Input an API token in the preferences."
+#~ msgstr "{} Введите токен API в параметрах."
+
+#~ msgid "Please input a valid API token."
+#~ msgstr "Пожалуйста, введите действительный токен API."
+
+#~ msgid "Copied song to clipboard"
+#~ msgstr "Песня скопирована в буфер обмена"
+
+#~ msgid "Removed {} song"
+#~ msgid_plural "Removed {} songs"
+#~ msgstr[0] "Удалена {} песня"
+#~ msgstr[1] "Удалено {} песен"
+#~ msgstr[2] "Удалено {} песен"
+
+#~ msgid "Click on items to select them"
+#~ msgstr "Нажмите на элементы, чтобы выбрать их"
+
+#~ msgid "Selected {} song"
+#~ msgid_plural "Selected {} songs"
+#~ msgstr[0] "Выбрана {} песня"
+#~ msgstr[1] "Выбрано {} песен"
+#~ msgstr[2] "Выбрано {} песен"
+
+#~ msgid "Failed to load history"
+#~ msgstr "Не удалось загрузить историю"
+
+#~ msgid "Failed to launch {}"
+#~ msgstr "Не удалось запустить {}"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Шазам;Музыка;Песни;Распознавание;"
@@ -480,10 +691,6 @@ msgstr "Не удалось запустить {}"
 
 #~ msgid "🌐 Browse the song in the web with the link."
 #~ msgstr "🌐 Просмотрите песню в Интернете с помощью ссылки."
-
-#, fuzzy
-#~ msgid "General"
-#~ msgstr "Основное"
 
 #~ msgid "Open Menu"
 #~ msgstr "Открыть меню"

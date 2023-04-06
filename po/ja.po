@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-01 13:36+0800\n"
+"POT-Creation-Date: 2023-04-06 17:26+0800\n"
 "PO-Revision-Date: 2023-02-13 15:36+0000\n"
 "Last-Translator: kj7kt <yyhuton@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
@@ -23,12 +23,13 @@ msgstr ""
 "X-Generator: Weblate 4.16-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/main.rs:41
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
+#: src/main.rs:57
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/application.rs:135
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
 msgid "Identify songs in seconds"
 msgstr "数秒間で曲を特定します"
 
@@ -38,26 +39,28 @@ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
 msgstr "Shazam;Audio;Music;Song;Identify;Recognition;音声;認識;曲名;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
-#: data/io.github.seadve.Mousai.gschema.xml.in:7
-msgid "Default window width"
-msgstr "標準のウインドウの幅"
+msgid "Window width"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
-#: data/io.github.seadve.Mousai.gschema.xml.in:12
-msgid "Default window height"
-msgstr "標準のウインドウの高さ"
+msgid "Window height"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
-msgid "Default window maximized behaviour"
-msgstr "ウィンドウが最大化したときの標準の挙動"
+msgid "Whether the window is maximized"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.gschema.xml.in:21
-msgid "Contains recently recognized songs"
-msgstr "最近識別した曲を含みます"
-
-#: data/io.github.seadve.Mousai.gschema.xml.in:30
+#: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
 msgstr "録音に使用する好みの音源"
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:32
+msgid "API token used by AudD recognition"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:37
+msgid "Legacy (Kept for migration)"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -79,7 +82,8 @@ msgstr ""
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr "注：Mousaiはaudd.ioのAPIを使用しているため、継続して利用するには、AudDのサイ"
+msgstr ""
+"注：Mousaiはaudd.ioのAPIを使用しているため、継続して利用するには、AudDのサイ"
 "トにログインする必要があります。"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
@@ -87,121 +91,151 @@ msgid "Why you will love Mousai?"
 msgstr "Mousaiを使う理由"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
-msgid "🎵 Identify the title and artist of the song within seconds."
-msgstr "🎵 曲のタイトルやアーティストを数秒で特定できます。"
+msgid "🎵 Recognize songs within seconds or save for later when offline"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
-msgid "🎙️ Use your microphone or audio from desktop."
-msgstr "🎙️ マイクおよびPC内部からの音を使って認識できます。"
+msgid "🎙️ Use microphone or desktop audio"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
-msgid "🎸 Store the identified song including the album art in history."
-msgstr "🎸 認識した曲は、ジャケットを含め履歴に保存されます。"
+msgid "🎸 Build a repertoire of recognized songs"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
-msgid "🎼 Preview the identified song with the native player."
-msgstr "🎼 認識した曲をネイティブプレーヤーで試聴できます。"
+msgid "🎼 Quickly preview the song within the interface"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
-msgid "🌐 Browse and listen the song from different providers."
-msgstr "🌐 様々のプロバイダーで曲をブラウスし聞くことができます。"
+msgid "🌐 Browse and listen the song from different providers"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
-msgid "📱 Easy-to-use user interface."
-msgstr "📱 使いやすいインターフェース。"
+msgid "📱 Easy-to-use user interface"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
-msgid "⌨️ User-friendly keyboard shortcuts."
-msgstr "⌨️ ユーザーフレンドリーなキーボードショートカット。"
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+msgid "Dave Patrick Caberto"
+msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:297
-msgid "Dave Patrick"
-msgstr "Dave Patrick"
+#: data/resources/ui/database-error-window.ui:20
+msgid "Critical Database Error"
+msgstr ""
+
+#: data/resources/ui/database-error-window.ui:21
+msgid ""
+"This is likely caused by a tampered or corrupted database. You can try "
+"clearing application data. However, this is not recommended and will delete "
+"all your songs and saved recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>."
+msgstr ""
 
 #: data/resources/ui/history-view.ui:6
-msgid "_Preferred Audio Source"
-msgstr "オーディオソースを選択(_P)"
+msgid "_Preferences"
+msgstr ""
 
-#: data/resources/ui/history-view.ui:8
-msgid "Microphone"
-msgstr "マイク"
-
-#: data/resources/ui/history-view.ui:13
-msgid "Desktop Audio"
-msgstr "PC内部の音"
-
-#: data/resources/ui/history-view.ui:21
+#: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
 msgstr "キーボードショートカット(_K)"
 
-#: data/resources/ui/history-view.ui:25
+#: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
 msgstr "Mousaiについて(_A)"
 
-#: data/resources/ui/history-view.ui:33
+#: data/resources/ui/history-view.ui:22
 msgid "Select _All"
 msgstr "すべて選択(_A)"
 
-#: data/resources/ui/history-view.ui:37
+#: data/resources/ui/history-view.ui:26
 msgid "Select _None"
 msgstr "すべて選択解除(_N)"
 
-#: data/resources/ui/history-view.ui:61
+#: data/resources/ui/history-view.ui:52
 msgid "Start Identifying Music"
 msgstr "曲の認識を始める"
 
-#: data/resources/ui/history-view.ui:62 data/resources/ui/song-page.ui:137
+#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "認識"
 
-#: data/resources/ui/history-view.ui:71
+#: data/resources/ui/history-view.ui:65
 msgid "Open Main Menu"
 msgstr "メインメニューを開く"
 
-#: data/resources/ui/history-view.ui:79
+#: data/resources/ui/history-view.ui:73
 msgid "Select"
 msgstr "選択"
 
-#: data/resources/ui/history-view.ui:86 data/resources/ui/history-view.ui:109
+#: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search for Songs"
 msgstr "曲を検索"
 
-#: data/resources/ui/history-view.ui:102
+#: data/resources/ui/history-view.ui:96
 msgid "Cancel Select"
 msgstr "選択解除"
 
-#: data/resources/ui/history-view.ui:103
-#: data/resources/ui/recognizer-view.ui:14
+#: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: data/resources/ui/history-view.ui:123
+#: data/resources/ui/history-view.ui:117
 msgid "Enter song or artist name"
 msgstr "曲やアーティストの名前を入力"
 
-#: data/resources/ui/history-view.ui:147
+#: data/resources/ui/history-view.ui:142
 msgid "Start Identifying Music!"
 msgstr "曲の認識を始める！"
 
-#: data/resources/ui/history-view.ui:148
+#: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start."
 msgstr "“認識”ボタンをクリックして開始します。"
 
-#: data/resources/ui/history-view.ui:155
+#: data/resources/ui/history-view.ui:153
 msgid "No Results Found"
 msgstr "結果はありません"
 
-#: data/resources/ui/history-view.ui:156
+#: data/resources/ui/history-view.ui:154
 msgid "Try a different search."
 msgstr "検索を変えてみましょう。"
 
-#: data/resources/ui/history-view.ui:165
+#: data/resources/ui/history-view.ui:163
 msgid "Copy Song"
 msgstr "曲をコピー"
+
+#: data/resources/ui/preferences-window.ui:8
+msgid "General"
+msgstr "一般"
+
+#: data/resources/ui/preferences-window.ui:11
+msgid "Preferred Audio Source"
+msgstr ""
+
+#: data/resources/ui/preferences-window.ui:18
+msgid "AudD Provider"
+msgstr ""
+
+#: data/resources/ui/preferences-window.ui:21
+msgid "API Token"
+msgstr ""
+
+#: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
+msgid "Go Back"
+msgstr ""
+
+#: data/resources/ui/recognizer-status.ui:17
+msgid "Offline Mode Enabled"
+msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
 msgstr "認識をキャンセル"
+
+#: data/resources/ui/recognizer-view.ui:53
+msgid "Offline Mode"
+msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -220,50 +254,56 @@ msgstr "検索"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "ショートカット一覧を表示"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "終了"
 
-#: data/resources/ui/shortcuts.ui:40
+#: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "コントロール"
 
-#: data/resources/ui/shortcuts.ui:43
+#: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "聞き取りを切り替え"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "再生を切り替え"
 
-#: data/resources/ui/shortcuts.ui:57
+#: data/resources/ui/shortcuts.ui:63
 msgctxt "shortcut window"
 msgid "Navigation"
 msgstr "ナビゲーション"
 
-#: data/resources/ui/shortcuts.ui:60
+#: data/resources/ui/shortcuts.ui:66
 msgctxt "shortcut window"
 msgid "Go Back"
 msgstr "戻る"
+
+#: data/resources/ui/shortcuts.ui:72
+msgctxt "shortcut window"
+msgid "Go Forward"
+msgstr ""
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
 msgstr "曲の情報を表示"
 
-#: data/resources/ui/song-bar.ui:102
+#: data/resources/ui/song-bar.ui:92
 msgid "Stop"
 msgstr "停止"
-
-#: data/resources/ui/song-page.ui:30
-msgid "Return to Main Page"
-msgstr "ホームへ戻る"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
@@ -293,12 +333,16 @@ msgstr "リリース日"
 msgid "Lyrics"
 msgstr "歌詞"
 
-#: data/resources/ui/song-tile.ui:25
+#: data/resources/ui/song-tile.ui:30
 msgid "New"
 msgstr "新規"
 
+#: src/about.rs:18
+msgid "© 2023 Dave Patrick Caberto"
+msgstr ""
+
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/application.rs:140
+#: src/about.rs:21
 msgid "translator-credits"
 msgstr ""
 "小山田 純,\n"
@@ -307,147 +351,313 @@ msgstr ""
 "Kisaragi Hiu,\n"
 "kj7kt"
 
-#: src/application.rs:141
-msgid "Copyright 2022 Dave Patrick"
-msgstr "Copyright 2022 Dave Patrick"
+#: src/about.rs:29
+msgid "Donate (Liberapay)"
+msgstr ""
 
-#: src/application.rs:144
+#: src/about.rs:33
+msgid "Donate (PayPal)"
+msgstr ""
+
+#: src/about.rs:37
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/model/external_link/apple_music.rs:26
+#: src/about.rs:39
+msgid "Translate"
+msgstr ""
+
+#. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
+#: src/core/date_time.rs:27
+msgid "today at %R"
+msgstr ""
+
+#. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
+#: src/core/date_time.rs:30
+msgid "yesterday at %R"
+msgstr ""
+
+#: src/preferences_window.rs:107
+msgid "Microphone"
+msgstr "マイク"
+
+#: src/preferences_window.rs:108
+msgid "Desktop Audio"
+msgstr "PC内部の音"
+
+#: src/recognizer/provider/error.rs:48
+msgid "No Matches Found"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:49
+msgid "Cannot Create Fingerprint From Audio"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:50
+msgid "Invalid Token Given"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:51
+msgid "Token Limit Reached"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:52
+msgid "Cannot Connect to the Server"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:53
+msgid "Received Other Permanent Error"
+msgstr ""
+
+#: src/window/external_link_tile.rs:61
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/model/external_link/apple_music.rs:30
+#: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
 msgstr "Apple Musicでブラウス"
 
-#: src/model/external_link/aud_d.rs:26
+#: src/window/external_link_tile.rs:67
 msgid "AudD"
 msgstr "AudD"
 
-#: src/model/external_link/aud_d.rs:30
+#: src/window/external_link_tile.rs:68
 msgid "Browse on AudD"
 msgstr "AudDでブラウス"
 
-#: src/model/external_link/spotify.rs:26
+#: src/window/external_link_tile.rs:73
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/model/external_link/spotify.rs:30
+#: src/window/external_link_tile.rs:74
 msgid "Listen on Spotify"
 msgstr "Spotifyで聞く"
 
-#: src/model/external_link/youtube.rs:28
+#: src/window/external_link_tile.rs:79
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/model/external_link/youtube.rs:32
+#: src/window/external_link_tile.rs:80
 msgid "Search on YouTube"
 msgstr "YouTubeで検索"
 
-#: src/recognizer/mod.rs:193
-msgid "Cancelled recording"
-msgstr "レコーディングをキャンセルしました"
+#: src/window/history_view.rs:138 src/window/song_page.rs:85
+msgid "Copied to clipboard"
+msgstr ""
 
-#: src/recognizer/mod.rs:207
-msgid "Cancelled recognizing"
-msgstr "識別をキャンセルしました"
+#: src/window/history_view.rs:152
+msgid "Failed to remove selected songs"
+msgstr ""
 
-#: src/recognizer/provider/aud_d/mod.rs:112
-msgid ""
-"Failed to convert the recording to base64. Please report this to Mousai's "
-"bug tracker."
-msgstr "レコーディングをbase64に変換できませんでした。Mousaiのバクトラッカーに "
-"報告してください。"
+#: src/window/history_view.rs:320
+msgid "Failed to remove song"
+msgstr ""
 
-#: src/recognizer/provider/aud_d/mod.rs:136
-msgid "Failed to connect to the server."
-msgstr "サーバに接続できませんでした。"
+#: src/window/history_view.rs:445
+msgid "Failed to show recognizer results"
+msgstr ""
 
-#: src/recognizer/provider/aud_d/response.rs:100
-msgid "Failed to parse response. Please report this to Mousai's bug tracker"
-msgstr "応答を解析できませんでした。Mousaiのバクトラッカーに報告してください"
-
-#: src/recognizer/provider/aud_d/response.rs:113
-msgid "Daily limit has been reached."
-msgstr "毎日のリミットに達しました。"
-
-#: src/recognizer/provider/aud_d/response.rs:116
-msgid "Failed to fingerprint audio. There may be no sound heard."
-msgstr "音声を追跡できません。音声が聞こえない可能性があります。"
-
-#: src/recognizer/provider/aud_d/response.rs:125
-msgid "Got invalid status response of {}"
-msgstr "{}の不正なステータスレスポンスが発生しました"
-
-#: src/recognizer/provider/mod.rs:150
-msgid "{} Check your internet connection."
-msgstr "{}インターネット接続を確認してください。"
-
-#: src/recognizer/provider/mod.rs:152
-msgid "No matches found for this song."
-msgstr "この曲にマッチするものは見つかりませんでした。"
-
-#: src/recognizer/provider/mod.rs:154
-msgid "{} Input an API token in the preferences."
-msgstr "{}設定でAPIトークンを入力してください。"
-
-#: src/recognizer/provider/mod.rs:157
-msgid "Please input a valid API token."
-msgstr "有効なAPIトークンを入力してください。"
-
-#: src/window/history_view.rs:113 src/window/song_page.rs:89
-msgid "Copied song to clipboard"
-msgstr "曲をクリップボードにコピーしました"
-
-#: src/window/history_view.rs:411
+#: src/window/history_view.rs:683
 msgid "_Undo"
 msgstr "元に戻す(_U)"
 
-#: src/window/history_view.rs:430
-msgid "Removed {} song"
-msgid_plural "Removed {} songs"
-msgstr[0] "{}曲を削除しました"
+#: src/window/history_view.rs:691
+msgid "Failed to undo"
+msgstr ""
 
-#: src/window/history_view.rs:495
-msgid "Click on items to select them"
-msgstr "アイテムをクリックすると選択します"
+#: src/window/history_view.rs:836
+msgid "Select items"
+msgstr ""
 
-#: src/window/history_view.rs:497
-msgid "Selected {} song"
-msgid_plural "Selected {} songs"
-msgstr[0] "%1曲を選択しました"
-
-#: src/window/history_view.rs:506
+#: src/window/history_view.rs:847
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "曲を履歴から削除"
 
-#: src/window/mod.rs:196
-msgid "Failed to load history"
-msgstr "履歴の読み込みに失敗しました"
+#: src/window/mod.rs:253
+msgid "Failed to insert song to history"
+msgstr ""
 
-#: src/window/playback_button.rs:155
+#: src/window/mod.rs:264
+msgid "Recording saved"
+msgstr ""
+
+#: src/window/mod.rs:265
+msgid "The result will be available when you're back online."
+msgstr ""
+
+#: src/window/mod.rs:270
+msgid "Ok, got it"
+msgstr ""
+
+#: src/window/mod.rs:306
+msgid "Open preferences and try setting a different token."
+msgstr ""
+
+#: src/window/mod.rs:311
+msgid ""
+"Wait until the limit is reset or open preferences and try setting a "
+"different token."
+msgstr ""
+
+#: src/window/mod.rs:317
+msgid "Open Preferences"
+msgstr ""
+
+#: src/window/mod.rs:322 src/window/mod.rs:349
+msgid "No, Thanks"
+msgstr ""
+
+#: src/window/mod.rs:341
+msgid "Please open an issue on GitHub and provide the necessary information."
+msgstr ""
+
+#: src/window/mod.rs:344
+msgid "Open an Issue"
+msgstr ""
+
+#: src/window/mod.rs:374
+msgid "Please check your internet connection."
+msgstr ""
+
+#: src/window/mod.rs:379
+msgid "Ok"
+msgstr ""
+
+#: src/window/mod.rs:464
+msgid "An error occurred in the player"
+msgstr ""
+
+#: src/window/playback_button.rs:117
 msgid "Play"
 msgstr "再生"
 
-#: src/window/playback_button.rs:162
+#: src/window/playback_button.rs:124
 msgid "Pause"
 msgstr "一時停止"
 
-#: src/window/recognizer_view.rs:117
+#: src/window/recognized_page.rs:144
+msgid "This song was heard while you're offline"
+msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+
+#: src/window/recognizer_view.rs:131
 msgid "Listening…"
 msgstr "認識しています…"
 
-#: src/window/recognizer_view.rs:122
+#: src/window/recognizer_view.rs:136
 msgid "Recognizing…"
 msgstr "識別しています…"
 
-#: src/window/song_page.rs:177
-msgid "Failed to launch {}"
-msgstr "{}の起動に失敗しました"
+#: src/window/song_page.rs:296
+msgid "Unknown"
+msgstr ""
+
+#~ msgid "Default window width"
+#~ msgstr "標準のウインドウの幅"
+
+#~ msgid "Default window height"
+#~ msgstr "標準のウインドウの高さ"
+
+#~ msgid "Default window maximized behaviour"
+#~ msgstr "ウィンドウが最大化したときの標準の挙動"
+
+#~ msgid "Contains recently recognized songs"
+#~ msgstr "最近識別した曲を含みます"
+
+#~ msgid "🎵 Identify the title and artist of the song within seconds."
+#~ msgstr "🎵 曲のタイトルやアーティストを数秒で特定できます。"
+
+#~ msgid "🎙️ Use your microphone or audio from desktop."
+#~ msgstr "🎙️ マイクおよびPC内部からの音を使って認識できます。"
+
+#~ msgid "🎸 Store the identified song including the album art in history."
+#~ msgstr "🎸 認識した曲は、ジャケットを含め履歴に保存されます。"
+
+#~ msgid "🎼 Preview the identified song with the native player."
+#~ msgstr "🎼 認識した曲をネイティブプレーヤーで試聴できます。"
+
+#~ msgid "🌐 Browse and listen the song from different providers."
+#~ msgstr "🌐 様々のプロバイダーで曲をブラウスし聞くことができます。"
+
+#~ msgid "📱 Easy-to-use user interface."
+#~ msgstr "📱 使いやすいインターフェース。"
+
+#~ msgid "⌨️ User-friendly keyboard shortcuts."
+#~ msgstr "⌨️ ユーザーフレンドリーなキーボードショートカット。"
+
+#~ msgid "Dave Patrick"
+#~ msgstr "Dave Patrick"
+
+#~ msgid "_Preferred Audio Source"
+#~ msgstr "オーディオソースを選択(_P)"
+
+#~ msgid "Return to Main Page"
+#~ msgstr "ホームへ戻る"
+
+#~ msgid "Copyright 2022 Dave Patrick"
+#~ msgstr "Copyright 2022 Dave Patrick"
+
+#~ msgid "Cancelled recording"
+#~ msgstr "レコーディングをキャンセルしました"
+
+#~ msgid "Cancelled recognizing"
+#~ msgstr "識別をキャンセルしました"
+
+#~ msgid ""
+#~ "Failed to convert the recording to base64. Please report this to Mousai's "
+#~ "bug tracker."
+#~ msgstr ""
+#~ "レコーディングをbase64に変換できませんでした。Mousaiのバクトラッカーに 報"
+#~ "告してください。"
+
+#~ msgid "Failed to connect to the server."
+#~ msgstr "サーバに接続できませんでした。"
+
+#~ msgid "Failed to parse response. Please report this to Mousai's bug tracker"
+#~ msgstr ""
+#~ "応答を解析できませんでした。Mousaiのバクトラッカーに報告してください"
+
+#~ msgid "Daily limit has been reached."
+#~ msgstr "毎日のリミットに達しました。"
+
+#~ msgid "Failed to fingerprint audio. There may be no sound heard."
+#~ msgstr "音声を追跡できません。音声が聞こえない可能性があります。"
+
+#~ msgid "Got invalid status response of {}"
+#~ msgstr "{}の不正なステータスレスポンスが発生しました"
+
+#~ msgid "{} Check your internet connection."
+#~ msgstr "{}インターネット接続を確認してください。"
+
+#~ msgid "No matches found for this song."
+#~ msgstr "この曲にマッチするものは見つかりませんでした。"
+
+#~ msgid "{} Input an API token in the preferences."
+#~ msgstr "{}設定でAPIトークンを入力してください。"
+
+#~ msgid "Please input a valid API token."
+#~ msgstr "有効なAPIトークンを入力してください。"
+
+#~ msgid "Copied song to clipboard"
+#~ msgstr "曲をクリップボードにコピーしました"
+
+#~ msgid "Removed {} song"
+#~ msgid_plural "Removed {} songs"
+#~ msgstr[0] "{}曲を削除しました"
+
+#~ msgid "Click on items to select them"
+#~ msgstr "アイテムをクリックすると選択します"
+
+#~ msgid "Selected {} song"
+#~ msgid_plural "Selected {} songs"
+#~ msgstr[0] "%1曲を選択しました"
+
+#~ msgid "Failed to load history"
+#~ msgstr "履歴の読み込みに失敗しました"
+
+#~ msgid "Failed to launch {}"
+#~ msgstr "{}の起動に失敗しました"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "音楽;ミュージック;曲;認識;識別;Shazam;Music;Song;Identify;"
@@ -457,9 +667,6 @@ msgstr "{}の起動に失敗しました"
 
 #~ msgid "🌐 Browse the song in the web with the link."
 #~ msgstr "🌐 リンクをクリックすると、様々なサービスでその曲を聴けます。"
-
-#~ msgid "General"
-#~ msgstr "一般"
 
 #~ msgid "Open Menu"
 #~ msgstr "メニューを開く"
