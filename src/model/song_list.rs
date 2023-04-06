@@ -425,7 +425,11 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
             if let (Some(ref title), Some(ref artist)) = (title, artist) {
                 // Some weird legacy stuff
                 if let Some(creation_date_time) = last_heards.get(&format!("{}{}", title, artist)) {
-                    song.set_last_heard(DateTime::from(creation_date_time.clone()));
+                    song.set_last_heard(DateTime::from(
+                        creation_date_time
+                            .to_local()
+                            .expect("date time must not go out of bounds"),
+                    ));
                 }
             }
 
