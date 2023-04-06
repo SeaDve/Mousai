@@ -141,7 +141,7 @@ impl SongList {
         let (position, prev_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
         if let Some(prev_value) = prev_value {
-            unbind_song_to_db(&prev_value);
+            unbind_song_from_db(&prev_value);
             self.items_changed(position as u32, 1, 1);
             Ok(false)
         } else {
@@ -179,7 +179,7 @@ impl SongList {
                 let (index, prev_value) = list.insert_full(song.id(), song);
 
                 if let Some(prev_value) = prev_value {
-                    unbind_song_to_db(&prev_value);
+                    unbind_song_from_db(&prev_value);
                     updated_indices.insert(index);
                 } else {
                     n_appended += 1;
@@ -242,7 +242,7 @@ impl SongList {
         };
 
         for song in &removed {
-            unbind_song_to_db(song);
+            unbind_song_from_db(song);
         }
 
         // Reverse the iterations so we don't shift the indices
@@ -312,7 +312,7 @@ impl SongList {
     }
 }
 
-fn unbind_song_to_db(song: &Song) {
+fn unbind_song_from_db(song: &Song) {
     unsafe {
         let handler_id = song
             .steal_data::<glib::SignalHandlerId>(SONG_NOTIFY_HANDLER_ID_KEY)

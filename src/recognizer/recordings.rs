@@ -176,7 +176,7 @@ impl Recordings {
         };
 
         for recording in &taken {
-            unbind_recording_to_items_changed_and_db(recording);
+            unbind_recording_from_items_changed_and_db(recording);
         }
 
         // Reverse the iterations so we don't shift the indices
@@ -225,7 +225,7 @@ impl Recordings {
     }
 }
 
-fn unbind_recording_to_items_changed_and_db(recording: &Recording) {
+fn unbind_recording_from_items_changed_and_db(recording: &Recording) {
     unsafe {
         let handler_id = recording
             .steal_data::<glib::SignalHandlerId>(RECORDING_NOTIFY_HANDLER_ID_KEY)
