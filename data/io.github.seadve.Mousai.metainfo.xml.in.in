@@ -29,6 +29,9 @@
     <screenshot>
       <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot3.png</image>
     </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot4.png</image>
+    </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/SeaDve/Mousai</url>
   <url type="bugtracker">https://github.com/SeaDve/Mousai/issues</url>
