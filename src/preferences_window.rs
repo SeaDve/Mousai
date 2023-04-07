@@ -93,8 +93,8 @@ impl PreferencesWindow {
             .build()
     }
 
-    pub fn focus_aud_d_api_token_row(&self) {
-        self.imp().aud_d_api_token_row.grab_focus();
+    pub fn focus_aud_d_api_token_row(&self) -> bool {
+        self.imp().aud_d_api_token_row.grab_focus()
     }
 
     fn setup_rows(&self) {

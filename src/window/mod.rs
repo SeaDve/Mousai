@@ -329,7 +329,9 @@ impl Window {
                         let window = PreferencesWindow::new(utils::app_instance().settings());
                         window.set_transient_for(Some(&obj));
                         window.present();
-                        window.focus_aud_d_api_token_row();
+
+                        let is_focused = window.focus_aud_d_api_token_row();
+                        debug_assert!(is_focused);
                     }),
                 );
             }
