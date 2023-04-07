@@ -16,7 +16,7 @@ pub struct Recorder {
 impl Drop for Recorder {
     fn drop(&mut self) {
         if let Err(err) = self.stop() {
-            tracing::warn!("Failed to stop recording on dispose: {:?}", err);
+            tracing::debug!("Failed to stop on dispose: {:?}", err);
         }
     }
 }
@@ -161,7 +161,7 @@ fn create_pipeline(
 
     if let Some(device_name) = device_name {
         pulsesrc.set_property("device", &device_name);
-        tracing::debug!("Using device `{device_name}` for recording");
+        tracing::debug!("Using device `{}` for recording", device_name);
     } else {
         tracing::warn!("Recording without pulsesrc `device` property set");
     }
