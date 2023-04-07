@@ -365,16 +365,33 @@ impl Window {
                     }),
                 );
             }
-            RecognizeErrorKind::NoMatches | RecognizeErrorKind::Connection => {
+            RecognizeErrorKind::NoMatches => {
+                const TRY_AGAIN_RESPONSE_ID: &str = "try-again";
+                const NO_RESPONSE_ID: &str = "no";
+
+                dialog.add_response(TRY_AGAIN_RESPONSE_ID, &gettext("Try Again"));
+                dialog.set_response_appearance(
+                    TRY_AGAIN_RESPONSE_ID,
+                    adw::ResponseAppearance::Suggested,
+                );
+                dialog.set_default_response(Some(TRY_AGAIN_RESPONSE_ID));
+
+                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
+
+                dialog.connect_response(
+                    Some(TRY_AGAIN_RESPONSE_ID),
+                    clone!(@weak self as obj => move |_, id| {
+                        debug_assert_eq!(id, TRY_AGAIN_RESPONSE_ID);
+
+                        debug_assert_eq!(obj.imp().recognizer.state(), RecognizerState::Null);
+                        WidgetExt::activate_action(&obj, "win.toggle-recognize", None).unwrap();
+                    }),
+                );
+            }
+            RecognizeErrorKind::Connection => {
                 const OK_RESPONSE_ID: &str = "ok";
 
-                match err.kind() {
-                    RecognizeErrorKind::NoMatches => {}
-                    RecognizeErrorKind::Connection => {
-                        dialog.set_body(&gettext("Please check your internet connection."));
-                    }
-                    _ => unreachable!(),
-                }
+                dialog.set_body(&gettext("Please check your internet connection."));
 
                 dialog.add_response(OK_RESPONSE_ID, &gettext("Ok"));
                 dialog.set_default_response(Some(OK_RESPONSE_ID));
