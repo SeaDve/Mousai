@@ -125,8 +125,8 @@ impl AlbumCover {
             join_handle.abort();
         }
 
-        if let Some(ref song) = song {
-            match song.album_art() {
+        if let Some(album_art) = song.as_ref().and_then(|song| song.album_art()) {
+            match album_art {
                 Ok(album_art) => {
                     let join_handle =
                         utils::spawn(clone!(@weak self as obj, @weak album_art => async move {

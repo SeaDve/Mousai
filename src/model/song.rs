@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Result};
+use anyhow::Result;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
@@ -121,15 +121,15 @@ impl Song {
         self.imp().id.get().unwrap()
     }
 
-    pub fn album_art(&self) -> Result<Rc<AlbumArt>> {
-        // FIXME: Don't return an err if the song doesn't have an album art link (Maybe just handle this outside of `Song`)
-        let album_art_link = self
-            .album_art_link()
-            .ok_or_else(|| anyhow!("Song doesn't have an album art link"))?;
+    /// Returns a result of album art for the corresponding album art link if it exists
+    pub fn album_art(&self) -> Option<Result<Rc<AlbumArt>>> {
+        let album_art_link = self.album_art_link()?;
 
-        utils::app_instance()
-            .album_art_store()?
-            .get_or_init(&album_art_link)
+        Some(
+            utils::app_instance()
+                .album_art_store()
+                .and_then(|store| store.get_or_init(&album_art_link)),
+        )
     }
 }
 
