@@ -26,6 +26,8 @@ mod imp {
         pub(super) object: RefCell<Option<glib::Object>>,
 
         #[template_child]
+        pub(super) page: TemplateChild<adw::PreferencesPage>, // Unused
+        #[template_child]
         pub(super) provider_row: TemplateChild<adw::ComboRow>,
         #[template_child]
         pub(super) provider_model: TemplateChild<adw::EnumListModel>,

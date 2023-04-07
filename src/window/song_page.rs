@@ -38,6 +38,10 @@ mod imp {
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         #[template_child]
+        pub(super) header_bar: TemplateChild<gtk::HeaderBar>, // Unused
+        #[template_child]
+        pub(super) scrolled_window: TemplateChild<gtk::ScrolledWindow>, // Unused
+        #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
         pub(super) playback_button: TemplateChild<PlaybackButton>,

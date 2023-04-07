@@ -51,6 +51,8 @@ mod imp {
         pub(super) shows_select_button_on_hover: Cell<bool>,
 
         #[template_child]
+        pub(super) overlay: TemplateChild<gtk::Overlay>, // Unused
+        #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
         pub(super) new_label: TemplateChild<gtk::Label>,

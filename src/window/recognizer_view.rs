@@ -16,6 +16,10 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-view.ui")]
     pub struct RecognizerView {
         #[template_child]
+        pub(super) header_bar: TemplateChild<gtk::HeaderBar>, // Unused
+        #[template_child]
+        pub(super) vbox: TemplateChild<gtk::Box>, // Unused
+        #[template_child]
         pub(super) title: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) waveform: TemplateChild<Waveform>,

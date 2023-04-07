@@ -10,7 +10,7 @@
       <class name="background"/>
     </style>
     <child>
-      <object class="GtkHeaderBar">
+      <object class="GtkHeaderBar" id="header_bar">
         <property name="title-widget">
           <object class="AdwBin"/>
         </property>
@@ -27,7 +27,7 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="vbox">
         <property name="margin-top">24</property>
         <property name="margin-bottom">24</property>
         <property name="orientation">vertical</property>

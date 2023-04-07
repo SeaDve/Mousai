@@ -5,7 +5,7 @@
       <object class="GtkBinLayout"/>
     </property>
     <child>
-      <object class="GtkOverlay">
+      <object class="GtkOverlay" id="overlay">
         <property name="margin-start">6</property>
         <property name="margin-end">6</property>
         <property name="margin-top">6</property>

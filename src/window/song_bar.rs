@@ -26,6 +26,8 @@ mod imp {
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
     pub struct SongBar {
         #[template_child]
+        pub(super) center_box: TemplateChild<gtk::CenterBox>, // Unused
+        #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
         pub(super) title_label: TemplateChild<gtk::Label>,

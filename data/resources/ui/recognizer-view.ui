@@ -7,7 +7,7 @@
       </object>
     </property>
     <child>
-      <object class="GtkHeaderBar">
+      <object class="GtkHeaderBar" id="header_bar">
         <child>
           <object class="GtkButton">
             <property name="tooltip-text" translatable="yes">Cancel Listening</property>
@@ -21,7 +21,7 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkBox" id="vbox">
         <property name="margin-top">24</property>
         <property name="margin-bottom">24</property>
         <property name="vexpand">True</property>
