@@ -39,6 +39,17 @@
   <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.7.1" date="2023-04-06">
+      <description>
+        <p>This release contains new features and fixes:</p>
+        <ul>
+          <li>Added button to try again on no matches</li>
+          <li>Added missing descriptions on the preferences</li>
+          <li>Fixed warnings when a song has no album art link</li>
+          <li>Fixed warnings when a widget child was left on finalize</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.0" date="2023-04-06">
       <description>
         <p>This update contains huge UI updates and fixes:</p>
