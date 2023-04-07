@@ -10,11 +10,6 @@
         <property name="margin-bottom">18</property>
         <property name="halign">center</property>
         <child>
-          <object class="GtkImage" id="image">
-            <property name="valign">center</property>
-          </object>
-        </child>
-        <child>
           <object class="GtkLabel" id="label">
             <property name="valign">center</property>
             <style>
