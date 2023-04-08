@@ -108,7 +108,7 @@ impl Song {
 
     /// String to match to when searching for self.
     pub fn search_term(&self) -> String {
-        format!("{}{}", self.title(), self.artist())
+        format!("{} {}", self.artist(), self.title())
     }
 
     /// String copied to clipboard when copying self.
