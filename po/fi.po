@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022.
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022, 2023.
 # Jiri Nakola <github@nakola.fi>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 20:39+0800\n"
-"PO-Revision-Date: 2023-04-06 10:27+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2023-04-07 09:50+0800\n"
+"PO-Revision-Date: 2023-04-07 01:52+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
 ">\n"
 "Language: fi\n"
@@ -38,15 +38,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Ikkunan leveys"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Ikkunan korkeus"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Onko ikkuna suurennettu"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -94,7 +94,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Käytä mikrofonia tai työpöydän äänilähdettä"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -110,16 +110,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Helppokäyttöinen käyttöliittymä"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Kriittinen tietokantavirhe"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -133,7 +132,6 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_Asetukset"
 
@@ -211,23 +209,34 @@ msgstr "Yleiset"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
+msgstr "Ensisijainen äänilähde"
+
+#: data/resources/ui/preferences-window.ui:12
+msgid "Determines the audio source to select when available."
 msgstr ""
 
-#: data/resources/ui/preferences-window.ui:18
-msgid "AudD Provider"
+#: data/resources/ui/preferences-window.ui:19
+#: src/window/external_link_tile.rs:67
+msgid "AudD"
+msgstr "AudD"
+
+#: data/resources/ui/preferences-window.ui:20
+msgid ""
+"You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
 
-#: data/resources/ui/preferences-window.ui:21
+#: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API-poletti"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Takaisin"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Yhteydetön tila käytössä"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -235,7 +244,7 @@ msgstr "Peru kuuntelu"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Yhteydetön tila"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -253,7 +262,6 @@ msgid "Search"
 msgstr "Etsi"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Näytä asetukset"
@@ -296,7 +304,7 @@ msgstr "Siirry takaisin"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Eteenpäin"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -340,7 +348,7 @@ msgstr "Uusi"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -348,12 +356,10 @@ msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Liberapay)"
 msgstr "Lahjoita (Liberapay)"
 
 #: src/about.rs:35
-#, fuzzy
 msgid "Donate (PayPal)"
 msgstr "Lahjoita (PayPal)"
 
@@ -362,19 +368,18 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:41
-#, fuzzy
 msgid "Translate"
 msgstr "Käännä"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "tänään %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "eilen %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -386,23 +391,23 @@ msgstr "Tietokoneen ääni"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Ei tuloksia"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Äänestä ei voi luoda sormenjälkeä"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Virheellinen poletti"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Polettiraja tuli vastaan"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Palvelimeen ei voi yhdistää"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
@@ -415,10 +420,6 @@ msgstr "Apple Music"
 #: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
 msgstr "Selaa Apple Musicissa"
-
-#: src/window/external_link_tile.rs:67
-msgid "AudD"
-msgstr "AudD"
 
 #: src/window/external_link_tile.rs:68
 msgid "Browse on AudD"
@@ -440,18 +441,17 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Etsi YouTubesta"
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:85
-#, fuzzy
+#: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Kopioitu leikepöydälle"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Valittujen kappaleiden poistaminen epäonnistui"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Kappaleen poistaminen epäonnistui"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
@@ -463,11 +463,11 @@ msgstr "_Kumoa"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "Kumoaminen epäonnistui"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "Valitse kohteet"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -477,23 +477,23 @@ msgstr[1] "Poista kappaleet historiasta"
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Kappaleen asettaminen historiaan epäonnistui"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Nauhoite tallennettu"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Tulos on saatavilla, kun olet taas yhteydessä verkkoon."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "Selvä"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "Avaa asetukset ja aseta eri poletti."
 
 #: src/window/mod.rs:311
 msgid ""
@@ -503,32 +503,35 @@ msgstr ""
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "Avaa asetukset"
 
-#: src/window/mod.rs:322 src/window/mod.rs:349
+#: src/window/mod.rs:322 src/window/mod.rs:349 src/window/mod.rs:379
 msgid "No, Thanks"
-msgstr ""
+msgstr "Ei"
 
 #: src/window/mod.rs:341
 msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr ""
+msgstr "Avaa issue GitHubiin ja toimita tarvittavat tiedot."
 
 #: src/window/mod.rs:344
 msgid "Open an Issue"
+msgstr "Avaa issue"
+
+#: src/window/mod.rs:372
+msgid "Try Again"
 msgstr ""
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:394
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Tarkista internetyhteytesi."
 
-#: src/window/mod.rs:379
-#, fuzzy
+#: src/window/mod.rs:396
 msgid "Ok"
 msgstr "OK"
 
-#: src/window/mod.rs:464
+#: src/window/mod.rs:481
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Soittimessa tapahtui virhe"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -538,23 +541,26 @@ msgstr "Toista"
 msgid "Pause"
 msgstr "Keskeytä"
 
-#: src/window/recognized_page.rs:144
+#: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tämä kappale kuultiin, kun olit yhteydettömässä tilassa"
+msgstr[1] "Nämä kappaleet kuultiin, kun olit yhteydettömässä tilassa"
 
-#: src/window/recognizer_view.rs:131
+#: src/window/recognizer_view.rs:135
 msgid "Listening…"
 msgstr "Kuunnellaan…"
 
-#: src/window/recognizer_view.rs:136
+#: src/window/recognizer_view.rs:140
 msgid "Recognizing…"
 msgstr "Tunnistetaan…"
 
-#: src/window/song_page.rs:296
+#: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
+
+#~ msgid "AudD Provider"
+#~ msgstr "AudD-palveluntarjoaja"
 
 #~ msgid "Default window width"
 #~ msgstr "Ikkunan oletusleveys"

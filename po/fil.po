@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Dave Patrick <davecruz48@gmail.com>, 2021, 2022.
+# Dave Patrick <davecruz48@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 20:39+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2023-04-07 09:50+0800\n"
+"PO-Revision-Date: 2023-04-07 03:47+0000\n"
+"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1 && n != 2 && n != 3 && (n % 10 == 4 "
 "|| n % 10 == 6 || n % 10 == 9);\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -33,31 +33,31 @@ msgstr "Mag-identify ng kanta"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Music;Song;Identify;Recognition;Kanta;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Haba ng window"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Taas ng window"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Kung naka-maximize ang window"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "Mas gustong panggagalingan ng audio para sa pag-record"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API token na gagamitin ng recognition ng AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Legado (Itinira para sa migrasyon)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -88,34 +88,36 @@ msgstr "Bakit magugustuhan mo ang Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Mag-recognize ng kanta sa loob ng ilang segundo o i-save para mamaya kung "
+"offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Gumamit ng mikropono o audio ng desktop"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Magipon ng mga na-recognize na mga kanta"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 I-preview ang kanta sa interface"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 I-browse o makinig sa mga kanta gamit ang iba't ibang providers"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Madaling gamitin na interface"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Kritikal na Error sa Database"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -127,10 +129,17 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"Malamang ay idinulot ito ng na-corrupt o na-tampered na database. Maaari "
+"mong i-clear ang data ng aplikasyon. Subalit, hindi ito recommended at i-"
+"dedelete nito ang lahat ng iyong kanta at naka-save na recordings.\n"
+"\n"
+"Para mai-report ang issue na ito, i-launch ang Mousai sa terminal para isama "
+"ang mga logs at isumite ang report ng bug sa <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">issue page</a>."
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "Mga _Preference"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -142,11 +151,11 @@ msgstr "_Tungkol sa Mousai"
 
 #: data/resources/ui/history-view.ui:22
 msgid "Select _All"
-msgstr ""
+msgstr "Piliin _Lahat"
 
 #: data/resources/ui/history-view.ui:26
 msgid "Select _None"
-msgstr ""
+msgstr "Piliin ang _Wala"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Start Identifying Music"
@@ -158,19 +167,19 @@ msgstr "Makinig"
 
 #: data/resources/ui/history-view.ui:65
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Buksan ang Pangunahing Menu"
 
 #: data/resources/ui/history-view.ui:73
 msgid "Select"
-msgstr ""
+msgstr "I-select"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search for Songs"
-msgstr ""
+msgstr "Maghanap ng Kanta"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Select"
-msgstr ""
+msgstr "I-kansela ang Pagselekta"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -178,11 +187,11 @@ msgstr "Ikansela"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Enter song or artist name"
-msgstr ""
+msgstr "Itala ang kanta o pangalan ng may-akda"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Identifying Music!"
-msgstr ""
+msgstr "Magsimula Mag-identify ng Kanta!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start."
@@ -190,15 +199,15 @@ msgstr "Pindutin ang listen button upang magsimula."
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results Found"
-msgstr ""
+msgstr "Walang Nahanap na Resulta"
 
 #: data/resources/ui/history-view.ui:154
 msgid "Try a different search."
-msgstr ""
+msgstr "Subukang gumamit ng ibang termino."
 
 #: data/resources/ui/history-view.ui:163
 msgid "Copy Song"
-msgstr ""
+msgstr "I-copy ang Kanta"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -206,31 +215,45 @@ msgstr "Pangkalahatan"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Preferred na Audio Source"
 
-#: data/resources/ui/preferences-window.ui:18
-msgid "AudD Provider"
-msgstr ""
+#: data/resources/ui/preferences-window.ui:12
+msgid "Determines the audio source to select when available."
+msgstr "Dine-determine kung anong audio source ang gagamitin kung available."
 
-#: data/resources/ui/preferences-window.ui:21
+#: data/resources/ui/preferences-window.ui:19
+#: src/window/external_link_tile.rs:67
+msgid "AudD"
+msgstr "AudD"
+
+#: data/resources/ui/preferences-window.ui:20
+msgid ""
+"You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Leaving this blank will give you a few trials per day."
+msgstr ""
+"Maaari kang kumuha ng API token sa <a href=\"https://dashboard.audd.io/\""
+">audd.io</a>. Makapagbibigay lamang ng unting trials kung iiwanan itong "
+"blanko."
+
+#: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "Token ng API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Bumalik"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Naka-enable ang Offline Mode"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "I-kansela ang Pakikinig"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Offline Mode"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -240,17 +263,17 @@ msgstr "Pangkalahatan"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "I-open ang Pangunahing Menu"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Mag-search"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "I-pakita ang Preferences"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -265,36 +288,36 @@ msgstr "Isara"
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Mga Kontrol"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "I-toggle ang Pakikinig"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "I-toggle ang Pag-playback"
 
 #: data/resources/ui/shortcuts.ui:63
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "Nabigasyon"
 
 #: data/resources/ui/shortcuts.ui:66
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "Bumalik"
 
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Sumulong"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
-msgstr ""
+msgstr "Ipakita ang Impormasyon ng Kanta"
 
 #: data/resources/ui/song-bar.ui:92
 msgid "Stop"
@@ -302,52 +325,52 @@ msgstr "Huminto"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
-msgstr ""
+msgstr "Tanggalin Mula sa History"
 
 #: data/resources/ui/song-page.ui:44
 msgid "Copy"
-msgstr ""
+msgstr "I-copy"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Information"
-msgstr ""
+msgstr "Impormasyon"
 
 #: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
-msgstr ""
+msgstr "Huling Pinakinggan"
 
 #: data/resources/ui/song-page.ui:158
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song-page.ui:163
 msgid "Release Date"
-msgstr ""
+msgstr "Petsa ng Pag-release"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "Mga Liriko"
 
 #: data/resources/ui/song-tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "Bago"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr "Dave Patrick"
+msgstr "Dave Patrick Caberto"
 
 #: src/about.rs:31
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "Mag-donate (Liberapay)"
 
 #: src/about.rs:35
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "Mag-donate (PayPal)"
 
 #: src/about.rs:39
 msgid "GitHub"
@@ -355,17 +378,17 @@ msgstr "GitHub"
 
 #: src/about.rs:41
 msgid "Translate"
-msgstr ""
+msgstr "I-translate"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "ngayon nang %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "kahapon nang %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -377,173 +400,177 @@ msgstr "Tunog ng Desktop"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Walang Nahanap na Nag-match"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Hindi Makagawa ng Fingerprint Mula sa Audio"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Hindi Wasto ang Ibinigay na Token"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Nakamit ang Limitasyon ng Token"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Hindi Maka-konek sa Server"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Naka-tanggap ng Ibang Permanenteng Error"
 
 #: src/window/external_link_tile.rs:61
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
-msgstr ""
-
-#: src/window/external_link_tile.rs:67
-msgid "AudD"
-msgstr ""
+msgstr "I-browse sa Apple Music"
 
 #: src/window/external_link_tile.rs:68
 msgid "Browse on AudD"
-msgstr ""
+msgstr "I-browse sa AudD"
 
 #: src/window/external_link_tile.rs:73
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:74
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Pakinggan sa Spotify"
 
 #: src/window/external_link_tile.rs:79
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:80
 msgid "Search on YouTube"
-msgstr ""
+msgstr "I-search sa YouTube"
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:85
+#: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Na-copy na sa clipboard"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Hindi matanggal ang mga naka-selektang kanta"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Hindi matanggal ang kanta"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Hindi maipakita ang resulta ng recognizer"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
-msgstr ""
+msgstr "I_undo"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "Hindi mai-undo"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "I-select ang mga items"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tanggalin ang Kanta sa History"
+msgstr[1] "Tanggalin ang mga Kanta sa History"
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Hindi mailagay ang kanta sa history"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Nai-save na ang recording"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Ang resulta ay magiging available kapag online ka na."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "Ok, nakuha ko"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "I-open ang preferences at i-try palitan ng ibang token."
 
 #: src/window/mod.rs:311
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
+"Hintayin na mai-reset ang limit o i-open ang preferences at i-try palitan ng "
+"ibang token."
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "I-open ang Preferences"
 
-#: src/window/mod.rs:322 src/window/mod.rs:349
+#: src/window/mod.rs:322 src/window/mod.rs:349 src/window/mod.rs:379
 msgid "No, Thanks"
-msgstr ""
+msgstr "Salamat Nalang"
 
 #: src/window/mod.rs:341
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr ""
+"Pakiusap na magopen ng issue sa GitHub at i-provide ang mga hinihinging "
+"impormasyon."
 
 #: src/window/mod.rs:344
 msgid "Open an Issue"
-msgstr ""
+msgstr "Mag-open ng Issue"
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:372
+msgid "Try Again"
+msgstr "Subukang Muli"
+
+#: src/window/mod.rs:394
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Paki-check ang iyong internet connection."
 
-#: src/window/mod.rs:379
+#: src/window/mod.rs:396
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
-#: src/window/mod.rs:464
+#: src/window/mod.rs:481
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Nagkaroon ng error sa player"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
-msgstr ""
+msgstr "I-play"
 
 #: src/window/playback_button.rs:124
 msgid "Pause"
-msgstr ""
+msgstr "I-pause"
 
-#: src/window/recognized_page.rs:144
+#: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Napakinggan ang kantang ito noong ikaw ay offline"
+msgstr[1] "Napakinggan ang mga kantang ito noong ikaw ay offline"
 
-#: src/window/recognizer_view.rs:131
+#: src/window/recognizer_view.rs:135
 msgid "Listening…"
-msgstr ""
+msgstr "Nakikinig…"
 
-#: src/window/recognizer_view.rs:136
+#: src/window/recognizer_view.rs:140
 msgid "Recognizing…"
-msgstr ""
+msgstr "Rine-recognize…"
 
-#: src/window/song_page.rs:296
+#: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "Hindi Alam"
 
 #~ msgid "🎵 Identify the title and artist of the song within seconds."
 #~ msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."

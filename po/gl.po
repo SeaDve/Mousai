@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-06 20:39+0800\n"
+"POT-Creation-Date: 2023-04-07 09:50+0800\n"
 "PO-Revision-Date: 2022-04-18 11:07+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/kooha/mousai/gl/"
@@ -209,11 +209,22 @@ msgstr "Xeral"
 msgid "Preferred Audio Source"
 msgstr ""
 
-#: data/resources/ui/preferences-window.ui:18
-msgid "AudD Provider"
+#: data/resources/ui/preferences-window.ui:12
+msgid "Determines the audio source to select when available."
 msgstr ""
 
-#: data/resources/ui/preferences-window.ui:21
+#: data/resources/ui/preferences-window.ui:19
+#: src/window/external_link_tile.rs:67
+msgid "AudD"
+msgstr ""
+
+#: data/resources/ui/preferences-window.ui:20
+msgid ""
+"You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Leaving this blank will give you a few trials per day."
+msgstr ""
+
+#: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
 msgstr ""
 
@@ -408,10 +419,6 @@ msgstr ""
 msgid "Browse on Apple Music"
 msgstr ""
 
-#: src/window/external_link_tile.rs:67
-msgid "AudD"
-msgstr ""
-
 #: src/window/external_link_tile.rs:68
 msgid "Browse on AudD"
 msgstr ""
@@ -432,7 +439,7 @@ msgstr ""
 msgid "Search on YouTube"
 msgstr ""
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:85
+#: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr ""
 
@@ -496,7 +503,7 @@ msgstr ""
 msgid "Open Preferences"
 msgstr ""
 
-#: src/window/mod.rs:322 src/window/mod.rs:349
+#: src/window/mod.rs:322 src/window/mod.rs:349 src/window/mod.rs:379
 msgid "No, Thanks"
 msgstr ""
 
@@ -508,15 +515,19 @@ msgstr ""
 msgid "Open an Issue"
 msgstr ""
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:372
+msgid "Try Again"
+msgstr ""
+
+#: src/window/mod.rs:394
 msgid "Please check your internet connection."
 msgstr ""
 
-#: src/window/mod.rs:379
+#: src/window/mod.rs:396
 msgid "Ok"
 msgstr ""
 
-#: src/window/mod.rs:464
+#: src/window/mod.rs:481
 msgid "An error occurred in the player"
 msgstr ""
 
@@ -528,21 +539,21 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
-#: src/window/recognized_page.rs:144
+#: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/window/recognizer_view.rs:131
+#: src/window/recognizer_view.rs:135
 msgid "Listening…"
 msgstr ""
 
-#: src/window/recognizer_view.rs:136
+#: src/window/recognizer_view.rs:140
 msgid "Recognizing…"
 msgstr ""
 
-#: src/window/song_page.rs:296
+#: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr ""
 
