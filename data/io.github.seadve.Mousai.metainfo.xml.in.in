@@ -45,6 +45,7 @@
         <ul>
           <li>Added button to try again on no matches</li>
           <li>Added missing descriptions on the preferences</li>
+          <li>Search now ignores leading and trailing whitespaces</li>
           <li>Fixed missing selection mode icon</li>
           <li>Fixed warnings when a song has no album art link</li>
           <li>Fixed warnings when a widget child was left on finalize</li>
