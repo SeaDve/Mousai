@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-07 09:50+0800\n"
-"PO-Revision-Date: 2023-04-07 01:52+0000\n"
+"POT-Creation-Date: 2023-04-09 07:18+0800\n"
+"PO-Revision-Date: 2023-04-08 23:19+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
 ">\n"
@@ -91,6 +91,7 @@ msgstr "Miksi tulet pitämään Mousaista?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Tunnista kappaleet hetkessä tai tallenna myöhemmäksi, jos ei verkkoyhteyttä"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
@@ -98,15 +99,15 @@ msgstr "🎙️ Käytä mikrofonia tai työpöydän äänilähdettä"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Rakenna luettelo tunnistetuista kappaleista"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Tutustu pikaisesti kappaleeseen käyttöliittymässä"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Selaa ja kuuntele kappaleita useilta eri palveluntarjoajilta"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
@@ -213,10 +214,10 @@ msgstr "Ensisijainen äänilähde"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "Määrittää valittavan äänilähteen."
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
@@ -225,6 +226,9 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"Saat API-poletin osoitteesta <a href=\"https://dashboard.audd.io/\">audd.io</"
+"a>. Jos jätät tämän tyhjäksi, sinun on mahdollista tunnistaa kappale "
+"muutaman kerran päivässä."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -413,31 +417,31 @@ msgstr "Palvelimeen ei voi yhdistää"
 msgid "Received Other Permanent Error"
 msgstr ""
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "Selaa Apple Musicissa"
 
-#: src/window/external_link_tile.rs:68
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "Selaa AudD:ssä"
 
-#: src/window/external_link_tile.rs:73
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "Kuuntele Spotifyssa"
 
-#: src/window/external_link_tile.rs:79
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:80
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "Etsi YouTubesta"
 
@@ -505,31 +509,31 @@ msgstr ""
 msgid "Open Preferences"
 msgstr "Avaa asetukset"
 
-#: src/window/mod.rs:322 src/window/mod.rs:349 src/window/mod.rs:379
+#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
 msgstr "Ei"
 
-#: src/window/mod.rs:341
+#: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr "Avaa issue GitHubiin ja toimita tarvittavat tiedot."
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:346
 msgid "Open an Issue"
 msgstr "Avaa issue"
 
-#: src/window/mod.rs:372
+#: src/window/mod.rs:374
 msgid "Try Again"
-msgstr ""
+msgstr "Yritä uudelleen"
 
-#: src/window/mod.rs:394
+#: src/window/mod.rs:396
 msgid "Please check your internet connection."
 msgstr "Tarkista internetyhteytesi."
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:398
 msgid "Ok"
 msgstr "OK"
 
-#: src/window/mod.rs:481
+#: src/window/mod.rs:483
 msgid "An error occurred in the player"
 msgstr "Soittimessa tapahtui virhe"
 

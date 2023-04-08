@@ -11,12 +11,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-07 09:50+0800\n"
+"POT-Creation-Date: 2023-04-09 07:18+0800\n"
 "PO-Revision-Date: 2023-04-08 01:03+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
-".org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
-"\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
+"weblate.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -230,7 +230,7 @@ msgid "Determines the audio source to select when available."
 msgstr "Determina la fuente de audio a seleccionar cuando esté disponible."
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
@@ -239,8 +239,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
-"Puede conseguir un testigo de API en <a href=\"https://dashboard.audd.io/\""
-">audd.io</a>. Si lo deja en blanco, obtendrá unas cuantas pruebas al día."
+"Puede conseguir un testigo de API en <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Si lo deja en blanco, obtendrá unas cuantas pruebas al día."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -429,31 +429,31 @@ msgstr "No se puede conectar al servidor"
 msgid "Received Other Permanent Error"
 msgstr "Recibido otro error permanente"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "Explorar en Apple Music"
 
-#: src/window/external_link_tile.rs:68
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "Explorar en AudD"
 
-#: src/window/external_link_tile.rs:73
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "Escuchar en Spotify"
 
-#: src/window/external_link_tile.rs:79
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:80
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "Buscar en YouTube"
 
@@ -523,32 +523,32 @@ msgstr ""
 msgid "Open Preferences"
 msgstr "Abrir preferencias"
 
-#: src/window/mod.rs:322 src/window/mod.rs:349 src/window/mod.rs:379
+#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
 msgstr "No, gracias"
 
-#: src/window/mod.rs:341
+#: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr ""
 "Por favor, abra una incidencia en GitHub y facilite la información necesaria."
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:346
 msgid "Open an Issue"
 msgstr "Abrir una incidencia"
 
-#: src/window/mod.rs:372
+#: src/window/mod.rs:374
 msgid "Try Again"
 msgstr "Inténtelo de nuevo"
 
-#: src/window/mod.rs:394
+#: src/window/mod.rs:396
 msgid "Please check your internet connection."
 msgstr "Compruebe su conexión a Internet."
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:398
 msgid "Ok"
 msgstr "Vale"
 
-#: src/window/mod.rs:481
+#: src/window/mod.rs:483
 msgid "An error occurred in the player"
 msgstr "Se ha producido un error en el reproductor"
 

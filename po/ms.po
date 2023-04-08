@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-07 09:50+0800\n"
+"POT-Creation-Date: 2023-04-09 07:18+0800\n"
 "PO-Revision-Date: 2022-01-14 08:55+0000\n"
 "Last-Translator: drwshh <dxrwish0201@outlook.com>\n"
 "Language-Team: Malay <https://hosted.weblate.org/projects/kooha/mousai/ms/>\n"
@@ -212,7 +212,7 @@ msgid "Determines the audio source to select when available."
 msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr ""
 
@@ -409,31 +409,31 @@ msgstr ""
 msgid "Received Other Permanent Error"
 msgstr ""
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr ""
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr ""
 
-#: src/window/external_link_tile.rs:68
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr ""
 
-#: src/window/external_link_tile.rs:73
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr ""
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr ""
 
-#: src/window/external_link_tile.rs:79
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr ""
 
-#: src/window/external_link_tile.rs:80
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr ""
 
@@ -500,31 +500,31 @@ msgstr ""
 msgid "Open Preferences"
 msgstr ""
 
-#: src/window/mod.rs:322 src/window/mod.rs:349 src/window/mod.rs:379
+#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
 msgstr ""
 
-#: src/window/mod.rs:341
+#: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr ""
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:346
 msgid "Open an Issue"
 msgstr ""
 
-#: src/window/mod.rs:372
+#: src/window/mod.rs:374
 msgid "Try Again"
 msgstr ""
 
-#: src/window/mod.rs:394
+#: src/window/mod.rs:396
 msgid "Please check your internet connection."
 msgstr ""
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:398
 msgid "Ok"
 msgstr ""
 
-#: src/window/mod.rs:481
+#: src/window/mod.rs:483
 msgid "An error occurred in the player"
 msgstr ""
 
