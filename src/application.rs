@@ -46,15 +46,26 @@ mod imp {
         fn activate(&self) {
             self.parent_activate();
 
-            if self.env.get().is_some()
-                && self.song_history.get().is_some()
-                && self.saved_recordings.get().is_some()
+            if let Some(window) = self.window.get() {
+                let window = window.upgrade().unwrap();
+                window.present();
+                return;
+            }
+
+            let obj = self.obj();
+
+            if let (Some(song_history), Some(recordings)) =
+                (self.song_history.get(), self.saved_recordings.get())
             {
-                self.obj().window().present();
+                let window = Window::new(&obj);
+                window.bind_models(song_history, recordings);
+                self.window.set(window.downgrade()).unwrap();
+                window.present();
             } else {
                 // TODO don't spawn a new window if one is already open
                 // or find a better solution in handling these errors
-                DatabaseErrorWindow::new(&self.obj()).present();
+                let err_window = DatabaseErrorWindow::new(&obj);
+                err_window.present();
             }
         }
 
@@ -108,11 +119,8 @@ impl Application {
     pub fn window(&self) -> Window {
         self.imp()
             .window
-            .get_or_init(|| {
-                let window = Window::new(self);
-                window.bind_models(self.song_history(), self.saved_recordings());
-                window.downgrade()
-            })
+            .get()
+            .expect("window must be initialized on activate")
             .upgrade()
             .unwrap()
     }
@@ -137,20 +145,6 @@ impl Application {
         tracing::info!("Datadir: {}", PKGDATADIR);
 
         ApplicationExtManual::run(self)
-    }
-
-    fn song_history(&self) -> &SongList {
-        self.imp()
-            .song_history
-            .get()
-            .expect("song history should be initialized on env setup")
-    }
-
-    fn saved_recordings(&self) -> &Recordings {
-        self.imp()
-            .saved_recordings
-            .get()
-            .expect("saved recordings should be initialized on env setup")
     }
 
     fn setup_env(&self) -> Result<()> {
