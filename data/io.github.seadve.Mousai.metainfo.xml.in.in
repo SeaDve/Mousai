@@ -45,8 +45,10 @@
         <ul>
           <li>Added button to try again on no matches</li>
           <li>Added missing descriptions on the preferences</li>
+          <li>Fixed missing selection mode icon</li>
           <li>Fixed warnings when a song has no album art link</li>
           <li>Fixed warnings when a widget child was left on finalize</li>
+          <li>Updated Ukrainian, Dutch, Spanish, Filipino, Finnish, and French translations</li>
         </ul>
       </description>
     </release>
