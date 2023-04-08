@@ -1,6 +1,6 @@
 [package]
 name = "mousai"
-version = "0.7.0"
+version = "0.7.1"
 authors = ["Dave Patrick Caberto <davecruz48@gmail.com>"]
 license = "GPL-3.0-or-later"
 edition = "2021"

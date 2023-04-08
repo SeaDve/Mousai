@@ -39,7 +39,7 @@
   <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
-    <release version="0.7.1" date="2023-04-06">
+    <release version="0.7.1" date="2023-04-09">
       <description>
         <p>This release contains new features and fixes:</p>
         <ul>
