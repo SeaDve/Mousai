@@ -233,14 +233,15 @@ impl SongList {
 
             // Reverse the iterations so we don't shift the indices
             for &(first, count) in utils::consecutive_groups(&to_remove_indices).iter().rev() {
-                for index in (first..first + count).rev() {
-                    let (_, song) = imp
-                        .list
-                        .borrow_mut()
-                        .shift_remove_index(index)
-                        .expect("index must be valid");
-                    unbind_song_from_db(&song);
-                    ret.push(song);
+                {
+                    let mut list = imp.list.borrow_mut();
+
+                    for index in (first..first + count).rev() {
+                        let (_, song) =
+                            list.shift_remove_index(index).expect("index must be valid");
+                        unbind_song_from_db(&song);
+                        ret.push(song);
+                    }
                 }
 
                 self.items_changed(first as u32, count as u32, 0);

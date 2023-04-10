@@ -169,14 +169,15 @@ impl Recordings {
 
             // Reverse the iterations so we don't shift the indices
             for &(first, count) in utils::consecutive_groups(&to_take_indices).iter().rev() {
-                for index in (first..first + count).rev() {
-                    let (_, recording) = imp
-                        .list
-                        .borrow_mut()
-                        .shift_remove_index(index)
-                        .expect("index must be valid");
-                    unbind_recording_from_items_changed_and_db(&recording);
-                    ret.push(recording);
+                {
+                    let mut list = imp.list.borrow_mut();
+
+                    for index in (first..first + count).rev() {
+                        let (_, recording) =
+                            list.shift_remove_index(index).expect("index must be valid");
+                        unbind_recording_from_items_changed_and_db(&recording);
+                        ret.push(recording);
+                    }
                 }
 
                 self.items_changed(first as u32, count as u32, 0);
