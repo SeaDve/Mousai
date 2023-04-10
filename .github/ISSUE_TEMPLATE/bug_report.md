@@ -9,8 +9,8 @@ assignees: ''
 **Affected version**
 
 <!--
-Click on Mousai's Main Menu then go to Troubleshooting > Debugging
-Information, copy the text, and paste it here.
+Open Mousai's Main Menu, click on About Mousai, go to
+Troubleshooting > Debugging Information, copy the text, and paste it here.
 
 If there are other relevant version information, please include them here.
 -->
@@ -35,11 +35,11 @@ Provide a short summary of the bug you encountered.
 What did you expect Mousai should do?
 -->
 
-**Relevant logs, screenshots, screencasts etc.**
+**Relevant logs, screenshots, screencasts, etc.**
 
 <!--
 If you have further information, such as technical documentation, logs,
-screenshots or screncasts related, please provide them here.
+screenshots or screencasts related, please provide them here.
 
 If applicable, please attach the logs from running Mousai in the
 terminal with the following environment variables: `RUST_BACKTRACE=1 RUST_LOG=mousai=debug`

@@ -20,10 +20,10 @@ If you can think of a way Mousai might be able to do this, let us know
 here.
 -->
 
-**Relevant links, screenshots, screencasts etc.**
+**Relevant links, screenshots, screencasts, etc.**
 
 <!--
 If you have further information, such as technical documentation,
-code, mockups or a similar feature in other applications, please
+code, mockups, or a similar feature in other applications, please
 provide them here.
 -->
