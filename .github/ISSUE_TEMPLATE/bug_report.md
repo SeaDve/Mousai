@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a bug report to help Mousai improve
+about: Create a bug report to help Mousai improve.
 title: ''
 labels: ''
 assignees: ''

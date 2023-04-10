@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a feature to help Mousai improve
+about: Suggest a feature to help Mousai improve.
 title: ''
 labels: ''
 assignees: ''
