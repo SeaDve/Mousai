@@ -1,33 +1,47 @@
 ---
 name: Bug report
-about: Create a report to help Mousai improve
+about: Create a bug report to help Mousai improve
 title: ''
 labels: ''
 assignees: ''
 ---
 
-**System Info**
+**Affected version**
+
 <!--
 Click on Mousai's Main Menu then go to Troubleshooting > Debugging
 Information, copy the text, and paste it here.
+
+If there are other relevant version information, please include them here.
 -->
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Bug summary**
 
-**To Reproduce**
-Steps to reproduce the behavior:
+<!--
+Provide a short summary of the bug you encountered.
+-->
+
+**Steps to reproduce**
+
+<!--
 1. Go to '...'
 2. Click on '....'
 3. See error
+-->
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+<!--
+What did you expect Mousai should do?
+-->
 
-**Additional context**
+**Relevant logs, screenshots, screencasts etc.**
+
+<!--
+If you have further information, such as technical documentation, logs,
+screenshots or screncasts related, please provide them here.
+
 If applicable, please attach the logs from running Mousai in the
 terminal with the following environment variables: `RUST_BACKTRACE=1 RUST_LOG=mousai=debug`
 (e.g., `RUST_BACKTRACE=1 RUST_LOG=mousai=debug flatpak run io.github.seadve.Mousai`).
+-->

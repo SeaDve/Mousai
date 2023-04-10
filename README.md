@@ -100,3 +100,7 @@ and [translators](https://hosted.weblate.org/engage/kooha/) of the project.
 
 I would also like to thank the open-source software projects, libraries, and APIs that were
 used in developing this app, such as GStreamer, GTK, libadwaita, [AudD](https://audd.io/), etc., for making Mousai possible.
+
+I would also like to acknowledge GNOME Shell whose
+[issue templates](https://gitlab.gnome.org/GNOME/gnome-shell/-/tree/main/.gitlab/issue_templates)
+served as the basis of Mousai's issue templates.
