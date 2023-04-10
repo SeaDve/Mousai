@@ -59,9 +59,7 @@ pub fn generate_unique_id() -> String {
     format!("{:x}-{:x}", glib::real_time(), glib::random_int())
 }
 
-/// Sorts and removes duplicates from the input, then finds consecutive groups of numbers.
-///
-/// Returns a vector of tuples where the first element of each tuple is the first number of a consecutive group,
+/// Returns a vector of tuples where the first element of each tuple is the first number in a consecutive group,
 /// and the second element is the count of numbers in that group.
 pub fn consecutive_groups(set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
     let first = match set.first() {
@@ -74,25 +72,27 @@ pub fn consecutive_groups(set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
         return vec![(first, set.len())];
     }
 
-    let mut res: Vec<(usize, usize)> = Vec::new();
+    let mut ret: Vec<(usize, usize)> = Vec::new();
+
     let mut current_group_start = first;
     let mut current_group_count = 1;
+
     for &num in set.iter().skip(1) {
         if num == current_group_start + current_group_count {
             // Consecutive number, increment count
             current_group_count += 1;
         } else {
             // Non-consecutive number, store group in result and start new group
-            res.push((current_group_start, current_group_count));
+            ret.push((current_group_start, current_group_count));
             current_group_start = num;
             current_group_count = 1;
         }
     }
 
     // Store the last group
-    res.push((current_group_start, current_group_count));
+    ret.push((current_group_start, current_group_count));
 
-    res
+    ret
 }
 
 #[cfg(test)]
