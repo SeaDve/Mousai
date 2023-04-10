@@ -357,19 +357,20 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
                         }
                     };
 
+                    let file_name = file_info.name();
+
                     if file_info.file_type() != gio::FileType::Regular {
-                        tracing::debug!("Skipping non-regular file: {:?}", file_info);
+                        tracing::debug!("Skipping non-regular file `{}`", file_name.display());
                         continue;
                     }
 
                     let Some(creation_date_time) = file_info.creation_date_time() else {
-                        tracing::debug!("Skipping file without creation date: {:?}", file_info);
+                        tracing::debug!("Skipping file `{}` without creation date", file_name.display());
                         continue;
                     };
 
-                    let file_name = file_info.name();
                     let Some(file_stem) = file_name.file_stem() else {
-                        tracing::debug!("Skipping file without file stem: {:?}", file_info);
+                        tracing::debug!("Skipping file `{}` without file stem", file_name.display());
                         continue;
                     };
 
@@ -377,7 +378,11 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
                 }
             }
             Err(err) => {
-                tracing::warn!("Failed to enumerate on `{}`: {:?}", path.display(), err);
+                tracing::warn!(
+                    "Failed to enumerate on path `{}`: {:?}",
+                    path.display(),
+                    err
+                );
             }
         }
 
