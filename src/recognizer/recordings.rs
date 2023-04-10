@@ -151,6 +151,8 @@ impl Recordings {
             }
         }
 
+        debug_assert_eq!(to_take_ids.len(), to_take_indices.len());
+
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
             for key in &to_take_ids {
@@ -163,26 +165,27 @@ impl Recordings {
         })?;
 
         let taken = {
-            let mut list = imp.list.borrow_mut();
-            to_take_indices
-                .iter()
-                .rev()
-                .map(|&index| {
-                    let (_, recording) =
-                        list.shift_remove_index(index).expect("index must be valid");
-                    recording
-                })
-                .collect::<Vec<_>>()
+            let mut ret = Vec::with_capacity(to_take_indices.len());
+
+            // Reverse the iterations so we don't shift the indices
+            for &(first, count) in utils::consecutive_groups(&to_take_indices).iter().rev() {
+                for index in (first..first + count).rev() {
+                    let (_, recording) = imp
+                        .list
+                        .borrow_mut()
+                        .shift_remove_index(index)
+                        .expect("index must be valid");
+                    unbind_recording_from_items_changed_and_db(&recording);
+                    ret.push(recording);
+                }
+
+                self.items_changed(first as u32, count as u32, 0);
+            }
+
+            debug_assert_eq!(ret.len(), to_take_indices.len());
+
+            ret
         };
-
-        for recording in &taken {
-            unbind_recording_from_items_changed_and_db(recording);
-        }
-
-        // Reverse the iterations so we don't shift the indices
-        for &(first, count) in utils::consecutive_groups(&to_take_indices).iter().rev() {
-            self.items_changed(first as u32, count as u32, 0);
-        }
 
         Ok(taken)
     }

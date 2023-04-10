@@ -229,25 +229,27 @@ impl SongList {
         };
 
         let removed = {
-            let mut list = imp.list.borrow_mut();
-            to_remove_indices
-                .iter()
-                .rev()
-                .map(|&index| {
-                    let (_, song) = list.shift_remove_index(index).expect("index must be valid");
-                    song
-                })
-                .collect::<Vec<_>>()
+            let mut ret = Vec::with_capacity(to_remove_indices.len());
+
+            // Reverse the iterations so we don't shift the indices
+            for &(first, count) in utils::consecutive_groups(&to_remove_indices).iter().rev() {
+                for index in (first..first + count).rev() {
+                    let (_, song) = imp
+                        .list
+                        .borrow_mut()
+                        .shift_remove_index(index)
+                        .expect("index must be valid");
+                    unbind_song_from_db(&song);
+                    ret.push(song);
+                }
+
+                self.items_changed(first as u32, count as u32, 0);
+            }
+
+            debug_assert_eq!(ret.len(), to_remove_indices.len());
+
+            ret
         };
-
-        for song in &removed {
-            unbind_song_from_db(song);
-        }
-
-        // Reverse the iterations so we don't shift the indices
-        for &(first, count) in utils::consecutive_groups(&to_remove_indices).iter().rev() {
-            self.items_changed(first as u32, count as u32, 0);
-        }
 
         if !removed.is_empty() {
             self.emit_by_name::<()>("removed", &[&BoxedSongVec(removed.clone())]);
