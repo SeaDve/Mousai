@@ -10,11 +10,11 @@ use std::{
 
 pub use self::migrations::Migrations;
 
-const N_NAMED_DBS: u32 = 2;
+pub const USER_VERSION_KEY: &str = "user_version";
 
+const N_NAMED_DBS: u32 = 2;
 pub const SONG_LIST_DB_NAME: &str = "song_list";
 pub const RECORDINGS_DB_NAME: &str = "saved_recordings";
-pub const USER_VERSION_KEY: &str = "user_version";
 
 /// Note: This must be only called once.
 pub fn new_env() -> Result<heed::Env> {
