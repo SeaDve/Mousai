@@ -1,3 +1,4 @@
+use gettextrs::gettext;
 use gtk::{
     gdk,
     glib::{self, clone, closure_local, WeakRef},
@@ -153,6 +154,7 @@ mod imp {
                 .bind("is-newly-heard", &self.new_label.get(), "visible")
                 .build();
 
+            obj.update_select_button_tooltip_text();
             obj.update_select_button_visibility();
             obj.update_playback_button_visibility();
             obj.update_album_cover_size();
@@ -201,6 +203,8 @@ mod imp {
             self.select_button.block_signal(handler_id);
             self.select_button.set_active(is_selected);
             self.select_button.unblock_signal(handler_id);
+
+            obj.update_select_button_tooltip_text();
 
             obj.notify_is_selected();
         }
@@ -325,6 +329,18 @@ impl SongTile {
                 imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
         }
+    }
+
+    fn update_select_button_tooltip_text(&self) {
+        let tooltip_text = if self.is_selected() {
+            gettext("Unselect")
+        } else {
+            gettext("Select")
+        };
+
+        self.imp()
+            .select_button
+            .set_tooltip_text(Some(&tooltip_text));
     }
 
     fn update_select_button_visibility(&self) {
