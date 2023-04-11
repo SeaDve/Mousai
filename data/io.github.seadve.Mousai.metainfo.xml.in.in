@@ -39,6 +39,16 @@
   <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.7.2" date="2023-04-09">
+      <description>
+        <p>This release contains fixes:</p>
+        <ul>
+          <li>Added tooltip text on select tile button</li>
+          <li>Improved items changed implementation</li>
+          <li>Updated Arabic, and Finnish translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.1" date="2023-04-09">
       <description>
         <p>This release contains new features and fixes:</p>
