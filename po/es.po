@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-12 00:57+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
@@ -457,6 +457,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Buscar en YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "Fallo al lanzar {}"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Copiado al portapapeles"
@@ -481,9 +485,21 @@ msgstr "_Revertir"
 msgid "Failed to undo"
 msgstr "Error al deshacer"
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "{} canción eliminada"
+msgstr[1] "{} canciones eliminadas"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr "Seleccionar elementos"
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "{} canción seleccionada"
+msgstr[1] "{} canciones seleccionadas"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -560,11 +576,23 @@ msgstr "Reproducir"
 msgid "Pause"
 msgstr "Pausar"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
 msgstr[0] "Esta canción se escuchó mientras estaba desconectado"
 msgstr[1] "Estas canciones se escucharon mientras estaba desconectado"
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -678,24 +706,11 @@ msgstr "Deseleccionar"
 #~ msgid "Copied song to clipboard"
 #~ msgstr "Copiar la canción en el portapapeles"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "{} canción eliminada"
-#~ msgstr[1] "{} canciones eliminadas"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Haga clic en los elementos para seleccionarlos"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "{} canción seleccionada"
-#~ msgstr[1] "{} canciones seleccionadas"
-
 #~ msgid "Failed to load history"
 #~ msgstr "Fallo al cargar el historial"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "Fallo al lanzar {}"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Shazam;Música;Canción;Identificar;"

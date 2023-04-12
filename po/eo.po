@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2022-04-18 11:07+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -433,6 +433,10 @@ msgstr ""
 msgid "Search on YouTube"
 msgstr ""
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr ""
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr ""
@@ -457,9 +461,21 @@ msgstr ""
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -533,9 +549,21 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 msgstr[1] ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
@@ -444,6 +444,10 @@ msgstr "யூடியூப்"
 msgid "Search on YouTube"
 msgstr "யூடியூப்பில் தேடுங்கள்"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "தொடங்க முடியவில்லை {}"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
@@ -469,9 +473,21 @@ msgstr "_செயல்தவிர்"
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "{} பாடல் அகற்றப்பட்டது"
+msgstr[1] "{} பாடல்கள் அகற்றப்பட்டன"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "தேர்ந்தெடுக்கப்பட்ட {} பாடல்"
+msgstr[1] "தேர்ந்தெடுக்கப்பட்ட {} பாடல்கள்"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -546,9 +562,21 @@ msgstr "விளையாடு"
 msgid "Pause"
 msgstr "இடைநிறுத்து"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -657,21 +685,8 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "பாடல் கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "{} பாடல் அகற்றப்பட்டது"
-#~ msgstr[1] "{} பாடல்கள் அகற்றப்பட்டன"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "உருப்படிகளைத் தேர்ந்தெடுக்க அவற்றைக் கிளிக் செய்யவும்"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "தேர்ந்தெடுக்கப்பட்ட {} பாடல்"
-#~ msgstr[1] "தேர்ந்தெடுக்கப்பட்ட {} பாடல்கள்"
-
 #~ msgid "Failed to load history"
 #~ msgstr "வரலாற்றை ஏற்ற முடியவில்லை"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "தொடங்க முடியவில்லை {}"

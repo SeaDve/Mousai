@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-06 10:26+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
@@ -451,6 +451,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Suche auf YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "Starten von {} fehlgeschlagen"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
@@ -476,9 +480,21 @@ msgstr "_Rückgängig"
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "{} Lied entfernt"
+msgstr[1] "{} Lieder entfernt"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "{} Lied ausgewählt"
+msgstr[1] "{} Lieder ausgewählt"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -553,9 +569,21 @@ msgstr "Abspielen"
 msgid "Pause"
 msgstr "Pausieren"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -670,24 +698,11 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "Lied in die Zwischenablage kopiert"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "{} Lied entfernt"
-#~ msgstr[1] "{} Lieder entfernt"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Auf Einträge klicken um sie auszuwählen"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "{} Lied ausgewählt"
-#~ msgstr[1] "{} Lieder ausgewählt"
-
 #~ msgid "Failed to load history"
 #~ msgstr "Konnte Verlauf nicht laden"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "Starten von {} fehlgeschlagen"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Shazam;Musik;Lied;Identifizieren;"

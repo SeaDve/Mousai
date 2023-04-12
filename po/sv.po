@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-06 10:26+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
@@ -450,6 +450,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Sök på YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "Misslyckades att starta {}"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
@@ -475,9 +479,21 @@ msgstr "_Ångra"
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "Tog bort {} låt"
+msgstr[1] "Tog bort {} låtar"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "Vald {} låt"
+msgstr[1] "Valda {} låtar"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -552,9 +568,21 @@ msgstr "Spela"
 msgid "Pause"
 msgstr "Paus"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -667,24 +695,11 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "Kopierade låt till urklipp"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "Tog bort {} låt"
-#~ msgstr[1] "Tog bort {} låtar"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Klicka på objekt för att välja dem"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "Vald {} låt"
-#~ msgstr[1] "Valda {} låtar"
-
 #~ msgid "Failed to load history"
 #~ msgstr "Misslyckades att läsa in historia"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "Misslyckades att starta {}"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Shazam;Musik;Låt;Identifiera;"

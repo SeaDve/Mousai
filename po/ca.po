@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-12 00:57+0000\n"
 "Last-Translator: Joan Aymà <joanayma@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/"
@@ -443,6 +443,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Cerca al YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "No s’ha pogut iniciar {}"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Copiat al portaretalls"
@@ -467,9 +471,21 @@ msgstr "_Desfés"
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "S’ha eliminat {} cançó"
+msgstr[1] "S’han eliminat {} cançons"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "S’ha seleccionat {} cançó"
+msgstr[1] "S’han seleccionat {} cançons"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -543,9 +559,21 @@ msgstr "Reprodueix"
 msgid "Pause"
 msgstr "Posa en pausa"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -640,24 +668,11 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "S’ha copiat la cançó al porta-retalls"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "S’ha eliminat {} cançó"
-#~ msgstr[1] "S’han eliminat {} cançons"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Feu clic als elements per a seleccionar-los"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "S’ha seleccionat {} cançó"
-#~ msgstr[1] "S’han seleccionat {} cançons"
-
 #~ msgid "Failed to load history"
 #~ msgstr "No s’ha pogut carregar l’historial"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "No s’ha pogut iniciar {}"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Shazam;Música;Cançó;Identificació;"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-06 10:26+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -451,6 +451,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "搜索 YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "启动 {} 失败"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
@@ -476,9 +480,19 @@ msgstr "撤销(_U)"
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "移除了 {} 首歌曲"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "已选择 {} 首歌曲"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -552,9 +566,19 @@ msgstr "播放"
 msgid "Pause"
 msgstr "暂停"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 
 #: src/window/recognizer_view.rs:135
@@ -659,22 +683,11 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "复制歌曲到剪贴板"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "移除了 {} 首歌曲"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "在项目上点击来选择它们"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "已选择 {} 首歌曲"
-
 #~ msgid "Failed to load history"
 #~ msgstr "加载历史记录失败"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "启动 {} 失败"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Shazam;Music;Song;Identify;听歌识曲;识别;音乐;歌曲;"

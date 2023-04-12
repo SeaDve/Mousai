@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
@@ -449,6 +449,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Αναζήτηση στο YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "Απέτυχε να ξεκινήσει {}"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
@@ -474,9 +478,21 @@ msgstr "_Αναίρεση"
 msgid "Failed to undo"
 msgstr ""
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "Καταργήθηκε {} τραγούδι"
+msgstr[1] "Καταργήθηκαν {} τραγούδια"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr ""
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "Επιλεγμένο {} τραγούδι"
+msgstr[1] "Επιλεγμένα {} τραγούδια"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -551,9 +567,21 @@ msgstr "Αναπαραγωγή"
 msgid "Pause"
 msgstr "Παύση"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -671,21 +699,8 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "Αντιγράφηκε το τραγούδι στο πρόχειρο"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "Καταργήθηκε {} τραγούδι"
-#~ msgstr[1] "Καταργήθηκαν {} τραγούδια"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Κάντε κλικ στα στοιχεία για να τα επιλέξετε"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "Επιλεγμένο {} τραγούδι"
-#~ msgstr[1] "Επιλεγμένα {} τραγούδια"
-
 #~ msgid "Failed to load history"
 #~ msgstr "Η φόρτωση του ιστορικού απέτυχε"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "Απέτυχε να ξεκινήσει {}"

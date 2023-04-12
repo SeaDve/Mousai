@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-12 00:57+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -452,6 +452,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Пошук на YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "Не вдалося запустити {}"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Скопійовано до буфера обміну"
@@ -476,9 +480,23 @@ msgstr "_Скасувати"
 msgid "Failed to undo"
 msgstr "Не вдалося скасувати"
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "Вилучено {} пісню"
+msgstr[1] "Вилучено {} пісні"
+msgstr[2] "Вилучено {} пісень"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr "Вибрати елементи"
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "Вибрана {} пісня"
+msgstr[1] "Вибрано {} пісні"
+msgstr[2] "Вибрано {} пісень"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -556,12 +574,26 @@ msgstr "Відтворити"
 msgid "Pause"
 msgstr "Призупинити"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
 msgstr[0] "Ця пісня була почута, коли ви були офлайн"
 msgstr[1] "Ці пісні були почуті, коли ви були офлайн"
 msgstr[2] "Ці пісні були почуті, коли ви були офлайн"
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -674,26 +706,11 @@ msgstr "Скасувати вибір"
 #~ msgid "Copied song to clipboard"
 #~ msgstr "Пісню скопійовано до буфера обміну"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "Вилучено {} пісню"
-#~ msgstr[1] "Вилучено {} пісні"
-#~ msgstr[2] "Вилучено {} пісень"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Натисніть на елементи, щоб вибрати їх"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "Вибрана {} пісня"
-#~ msgstr[1] "Вибрано {} пісні"
-#~ msgstr[2] "Вибрано {} пісень"
-
 #~ msgid "Failed to load history"
 #~ msgstr "Не вдалося завантажити історію"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "Не вдалося запустити {}"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Шазам;Музика;Пісня;Визначити;Shazam;Music;Song;Identify;"

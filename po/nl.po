@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 08:59+0800\n"
+"POT-Creation-Date: 2023-04-12 09:29+0800\n"
 "PO-Revision-Date: 2023-04-08 01:03+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
@@ -455,6 +455,10 @@ msgstr "YouTube"
 msgid "Search on YouTube"
 msgstr "Zoeken op YouTube"
 
+#: src/window/external_link_tile.rs:144
+msgid "Failed to launch {}"
+msgstr "{} kan niet worden gestart"
+
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Gekopieerd naar klembord"
@@ -479,9 +483,21 @@ msgstr "_Ongedaan maken"
 msgid "Failed to undo"
 msgstr "Ongedaan maken mislukt"
 
+#: src/window/history_view.rs:710
+msgid "Removed {} song"
+msgid_plural "Removed {} songs"
+msgstr[0] "Er is {} nummer verwijderd"
+msgstr[1] "Er zijn {} nummers verwijderd"
+
 #: src/window/history_view.rs:836
 msgid "Select items"
 msgstr "Items selecteren"
+
+#: src/window/history_view.rs:838
+msgid "Selected {} song"
+msgid_plural "Selected {} songs"
+msgstr[0] "{} nummer geselecteerd"
+msgstr[1] "{} nummers geselecteerd"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -557,11 +573,23 @@ msgstr "Afspelen"
 msgid "Pause"
 msgstr "Pauzeren"
 
+#: src/window/recognized_page.rs:142
+msgid "Recognized {} new song"
+msgid_plural "Recognized {} new songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
 msgstr[0] "Dit nummer werd gehoord terwijl u offline was"
 msgstr[1] "Deze nummers zijn gehoord terwijl u offline was"
+
+#: src/window/recognizer_status.rs:160
+msgid "Recognized {} Out Of {}"
+msgid_plural "Recognized {} Out Of {} Songs"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -672,24 +700,11 @@ msgstr ""
 #~ msgid "Copied song to clipboard"
 #~ msgstr "Nummer gekopieerd naar klembord"
 
-#~ msgid "Removed {} song"
-#~ msgid_plural "Removed {} songs"
-#~ msgstr[0] "Er is {} nummer verwijderd"
-#~ msgstr[1] "Er zijn {} nummers verwijderd"
-
 #~ msgid "Click on items to select them"
 #~ msgstr "Klik op items om ze te selecteren"
 
-#~ msgid "Selected {} song"
-#~ msgid_plural "Selected {} songs"
-#~ msgstr[0] "{} nummer geselecteerd"
-#~ msgstr[1] "{} nummers geselecteerd"
-
 #~ msgid "Failed to load history"
 #~ msgstr "Geschiedenis laden mislukt"
-
-#~ msgid "Failed to launch {}"
-#~ msgstr "{} kan niet worden gestart"
 
 #~ msgid "Shazam;Music;Song;Identify;"
 #~ msgstr "Shazam;Muziek;Song;Nummer;Identificeren;Herkennen;"
