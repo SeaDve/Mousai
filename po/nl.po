@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
 "PO-Revision-Date: 2023-04-08 01:03+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
@@ -115,7 +115,7 @@ msgstr "🌐 Blader en luister naar het nummer van verschillende aanbieders"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Gebruiksvriendelijke vormgeving"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -173,7 +173,7 @@ msgstr "Luisteren"
 msgid "Open Main Menu"
 msgstr "Hoofdmenu openen"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Selecteren"
 
@@ -574,6 +574,10 @@ msgstr "Bezig met herkennen…"
 #: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr "Onbekend"
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
+msgstr ""
 
 #~ msgid "Default window width"
 #~ msgstr "Standaardvensterbreedte"

@@ -5,18 +5,18 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # albanobattistella <albano_battistella@hotmail.com>, 2021, 2022.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
-# Michael Moroni <michaelmoroni@disroot.org>, 2021.
+# Michael Moroni <michaelmoroni@disroot.org>, 2021, 2023.
 # Andrea Brandi <git@andreabrandi.com>, 2022.
 # musiclover382 <mattiagiovanni.borda@icloud.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-06 10:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-12 00:57+0000\n"
+"Last-Translator: Michael Moroni <michaelmoroni@disroot.org>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,11 +42,11 @@ msgstr "Shazam;Audio;Musica;Canzone;Identifica;Riconoscimento;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Larghezza finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Altezza finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
@@ -116,7 +116,7 @@ msgstr ""
 msgid "📱 Easy-to-use user interface"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 #, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
@@ -169,7 +169,7 @@ msgstr "Ascolta"
 msgid "Open Main Menu"
 msgstr "Apri menu principale"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Seleziona"
 
@@ -573,6 +573,10 @@ msgstr "Riconoscimento…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
+msgstr ""
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
 msgstr ""
 
 #~ msgid "Default window width"

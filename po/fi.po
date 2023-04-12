@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-08 23:19+0000\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
 ">\n"
@@ -113,7 +113,7 @@ msgstr "🌐 Selaa ja kuuntele kappaleita useilta eri palveluntarjoajilta"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Helppokäyttöinen käyttöliittymä"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -164,7 +164,7 @@ msgstr "Kuuntele"
 msgid "Open Main Menu"
 msgstr "Avaa päävalikko"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Valitse"
 
@@ -227,8 +227,8 @@ msgid ""
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
 "Saat API-poletin osoitteesta <a href=\"https://dashboard.audd.io/\">audd.io</"
-"a>. Jos jätät tämän tyhjäksi, sinun on mahdollista tunnistaa kappale "
-"muutaman kerran päivässä."
+"a>. Jos jätät tämän tyhjäksi, sinun on mahdollista tunnistaa muutama kappale "
+"päivässä."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -562,6 +562,10 @@ msgstr "Tunnistetaan…"
 #: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr "Tuntematon"
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
+msgstr ""
 
 #~ msgid "AudD Provider"
 #~ msgstr "AudD-palveluntarjoaja"

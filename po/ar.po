@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-08 23:19+0000\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-12 00:57+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/"
-">\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,7 +110,7 @@ msgstr "🌐 تصفَّح واستمع الأغاني من مصادر مختلف
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 واجهة سهلة الاستخدام"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "ديف باترك كابرتو"
 
@@ -141,7 +141,7 @@ msgstr "ال_تفضيلات"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "إ_ختصارات لوحة المفاتيح"
+msgstr "ا_ختصارات لوحة المفاتيح"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
@@ -167,7 +167,7 @@ msgstr "استمع"
 msgid "Open Main Menu"
 msgstr "افتح القائمة الرئيسة"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "حدِّد"
 
@@ -185,11 +185,11 @@ msgstr "ألغِ"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Enter song or artist name"
-msgstr "أكتب اسم أغنية أو فنَّان"
+msgstr "اكتب اسم أغنية أو فنَّان"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Identifying Music!"
-msgstr "ابدأ تبيُّن الأغاني!"
+msgstr "تبيَّن الأغاني!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start."
@@ -362,7 +362,7 @@ msgid "translator-credits"
 msgstr ""
 "Mehdi Essalehi\n"
 "Muhammad Yasser\n"
-"علي الجشي &lt;ahj696@hotmail.com&gt;"
+"علي الجشي https://github.com/Ali-x98"
 
 #: src/about.rs:31
 msgid "Donate (Liberapay)"
@@ -374,7 +374,7 @@ msgstr "تبرَّع (بي‌بال)"
 
 #: src/about.rs:39
 msgid "GitHub"
-msgstr "جب‌هب"
+msgstr "جت‌هب"
 
 #: src/about.rs:41
 msgid "Translate"
@@ -575,6 +575,10 @@ msgstr "يتبيَّن…"
 #: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr "مجهول"
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
+msgstr "ألغِ التحديد"
 
 #~ msgid "🎵 Identify the title and artist of the song within seconds."
 #~ msgstr "🎵 عرف عنوان وفنان الأغنية في ثوانٍ."

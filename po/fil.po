@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
 "PO-Revision-Date: 2023-04-07 03:47+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -111,7 +111,7 @@ msgstr "🌐 I-browse o makinig sa mga kanta gamit ang iba't ibang providers"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Madaling gamitin na interface"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -169,7 +169,7 @@ msgstr "Makinig"
 msgid "Open Main Menu"
 msgstr "Buksan ang Pangunahing Menu"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "I-select"
 
@@ -571,6 +571,10 @@ msgstr "Rine-recognize…"
 #: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr "Hindi Alam"
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
+msgstr ""
 
 #~ msgid "🎵 Identify the title and artist of the song within seconds."
 #~ msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."

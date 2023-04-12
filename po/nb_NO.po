@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
 "PO-Revision-Date: 2023-04-06 10:26+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -111,7 +111,7 @@ msgstr ""
 msgid "📱 Easy-to-use user interface"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 #, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
@@ -164,7 +164,7 @@ msgstr "Lytt"
 msgid "Open Main Menu"
 msgstr "Åpne hovedmenyen"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Velg"
 
@@ -566,6 +566,10 @@ msgstr "Gjenkjenner …"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
+msgstr ""
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
 msgstr ""
 
 #~ msgid "Default window width"

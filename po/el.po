@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-06 10:27+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-11 12:51+0000\n"
+"Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -37,15 +37,15 @@ msgstr "Shazam;Ήχος;Μουσική;Τραγούδι;Εντοπισμός;Α�
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Πλάτος παραθύρου"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Ύψος παραθύρου"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Εάν το παράθυρο μεγιστοποιείται"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -53,11 +53,11 @@ msgstr "Προτεινόμενη πηγή ήχου προς χρήση για τ
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API token που χρησιμοποιείται από την αναγνώριση AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Παλαιού τύπου (Διατηρείται για μετεγκατάσταση)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -90,14 +90,16 @@ msgstr "Γιατί θα αγαπήσετε το Mousai;"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Αναγνώριση τραγουδιών μέσα σε δευτερόλεπτα ή αποθήκευση για αργότερα όταν "
+"είστε εκτός σύνδεσης"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Χρήση μικροφώνου ή ήχου γραφείου εργασίας"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Δημιουργήστε ένα ρεπερτόριο αναγνωρισμένων τραγουδιών"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
@@ -111,7 +113,7 @@ msgstr ""
 msgid "📱 Easy-to-use user interface"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 #, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
@@ -164,7 +166,7 @@ msgstr "Ακούστε"
 msgid "Open Main Menu"
 msgstr "Άνοιγμα κυρίως Menu"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Επιλέξτε"
 
@@ -565,6 +567,10 @@ msgstr "Αναγνώριση…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
+msgstr ""
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
 msgstr ""
 
 #~ msgid "Default window width"

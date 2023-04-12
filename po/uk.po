@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-08 01:03+0000\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-12 00:57+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
@@ -114,7 +114,7 @@ msgstr "🌐 Перегляд і прослуховування пісень в�
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Простий користувацький інтерфейс"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -172,7 +172,7 @@ msgstr "Слухати"
 msgid "Open Main Menu"
 msgstr "Відкрити головне меню"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Вибрати"
 
@@ -574,6 +574,10 @@ msgstr "Розпізнавання…"
 #: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr "Невідомо"
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
+msgstr "Скасувати вибір"
 
 #~ msgid "AudD Provider"
 #~ msgstr "Постачальник AudD"

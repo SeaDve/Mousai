@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-07 01:52+0000\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
 ">\n"
@@ -121,7 +121,7 @@ msgstr "🌐 Parcourez et écoutez le titre avec différentes sources"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱Interface utilisateur intuitive"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -180,7 +180,7 @@ msgstr "Écouter"
 msgid "Open Main Menu"
 msgstr "Ouvrir le menu principal"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -230,7 +230,7 @@ msgstr "Source audio favorite"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "Détermine la source audio à sélectionner si disponible."
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -242,6 +242,9 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"Vous pouvez obtenir par vous-même un jeton API depuis <a href=\"https://"
+"dashboard.audd.io/\">audd.io</a>. Laisser ce champ vide vous donnera droit à "
+"quelques essais par jour."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -540,7 +543,7 @@ msgstr "Ouvrir un signalement"
 
 #: src/window/mod.rs:374
 msgid "Try Again"
-msgstr ""
+msgstr "Réessayer"
 
 #: src/window/mod.rs:396
 msgid "Please check your internet connection."
@@ -579,6 +582,10 @@ msgstr "En cours d'identification…"
 #: src/window/song_page.rs:301
 msgid "Unknown"
 msgstr "Inconnu"
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
+msgstr ""
 
 #~ msgid "AudD Provider"
 #~ msgstr "Fournisseur AudD"

@@ -2,15 +2,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022.
+# Joan Aymà <joanayma@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-09 07:18+0800\n"
-"PO-Revision-Date: 2023-04-06 10:27+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/"
-">\n"
+"POT-Creation-Date: 2023-04-11 20:50+0800\n"
+"PO-Revision-Date: 2023-04-12 00:57+0000\n"
+"Last-Translator: Joan Aymà <joanayma@gmail.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,9 +111,9 @@ msgstr ""
 msgid "📱 Easy-to-use user interface"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:300 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
@@ -131,7 +132,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferències"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -161,7 +162,7 @@ msgstr "Escolta"
 msgid "Open Main Menu"
 msgstr "Obre el menú principal"
 
-#: data/resources/ui/history-view.ui:73
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Selecciona"
 
@@ -261,9 +262,10 @@ msgid "Search"
 msgstr "Cerca"
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Mostrar Preferències"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -356,11 +358,11 @@ msgstr "Adolfo Jayme Barrientos &lt;fitojb@ubuntu.com&gt;, 2022"
 
 #: src/about.rs:31
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "Donació (Liberapay)"
 
 #: src/about.rs:35
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "Donació (PayPal)"
 
 #: src/about.rs:39
 msgid "GitHub"
@@ -443,7 +445,7 @@ msgstr "Cerca al YouTube"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Copiat al portaretalls"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
@@ -527,7 +529,7 @@ msgstr ""
 
 #: src/window/mod.rs:398
 msgid "Ok"
-msgstr ""
+msgstr "D'acord"
 
 #: src/window/mod.rs:483
 msgid "An error occurred in the player"
@@ -557,6 +559,10 @@ msgstr "S’està reconeixent…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
+msgstr ""
+
+#: src/window/song_tile.rs:336
+msgid "Unselect"
 msgstr ""
 
 #~ msgid "Default window width"
