@@ -180,7 +180,7 @@ pub struct SongBuilder {
 }
 
 impl SongBuilder {
-    pub fn new(id: &SongId, title: &str, artist: &str, album: &str) -> Self {
+    fn new(id: &SongId, title: &str, artist: &str, album: &str) -> Self {
         Self {
             properties: vec![
                 ("id", id.into()),
