@@ -27,7 +27,7 @@
         </property>
         <child>
           <object class="GtkButton">
-            <property name="tooltip-text" translatable="yes">Go Back</property>
+            <property name="tooltip-text" translatable="yes">Back</property>
             <property name="icon-name">go-previous-symbolic</property>
             <property name="action-name">win.navigate-back</property>
           </object>
