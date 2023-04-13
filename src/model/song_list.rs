@@ -292,7 +292,9 @@ impl SongList {
         unsafe {
             let handler_id = song.connect_notify_local(
                 None,
-                clone!(@weak self as obj => move |song, _| {
+                clone!(@weak self as obj => move |song, pspec| {
+                    tracing::debug!("Song property `{}` notified", pspec.name());
+
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
                         debug_assert!(

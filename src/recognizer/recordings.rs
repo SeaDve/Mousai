@@ -204,7 +204,9 @@ impl Recordings {
             let recording_id = recording_id.to_string();
             let handler_id = recording.connect_notify_local(
                 None,
-                clone!(@weak self as obj => move |recording, _| {
+                clone!(@weak self as obj => move |recording, pspec| {
+                    tracing::debug!("Recording property `{}` notified", pspec.name());
+
                     let (env, db) = obj.db();
                     if let Err(err) = env.with_write_txn(|wtxn| {
                         debug_assert!(
