@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Allan Nordhøy <epost@anotheragency.no>, 2021, 2022.
+# Allan Nordhøy <epost@anotheragency.no>, 2021, 2022, 2023.
 # Syver Stensholt <sssandum@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2023-04-06 10:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-04-14 19:50+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
 "mousai/nb_NO/>\n"
 "Language: nb_NO\n"
@@ -37,15 +37,15 @@ msgstr "Shazam;Lyd;Musikk;Sang;Identifisering;Gjenkjenning"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Vindusbredde"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Vindushøyde"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Hvorvidt vinduet maksimeres"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 #, fuzzy
@@ -53,12 +53,14 @@ msgid "Preferred audio source to use in recording audio"
 msgstr "Foretrukket lydkilde å bruke for lydopptak"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
+#, fuzzy
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API-symbol brukt av AudD-gjenkjennelse"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
+#, fuzzy
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Gammeldags (beholdt for overgang)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -88,28 +90,31 @@ msgid "Why you will love Mousai?"
 msgstr "Hvorfor du vil elske Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#, fuzzy
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Gjenkjenn sanger i løpet av sekunder, eller lagre dem for frakoblet bruk"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#, fuzzy
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Bruk mikrofon eller skrivebordslyd"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Bygg et repertoar av gjenkjente sanger"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Forhåndsvis sangen i grensesnittet"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Utforsk og lytt til sanger fra forskjellige tilbydere"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Lettfattelig brukergrensesnitt"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 #, fuzzy
@@ -118,7 +123,7 @@ msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Database over kritiske feil"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -130,6 +135,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"Dette forårsakes sannsynlig av en endret eller skadet database. Du kan prøve "
+"å tømme programdata. Dog er dette ikke anbefalt, og det sletter alle dine "
+"spor og lagrede opptak.\n"
+"\n"
+"For å rapportere dette problemet kan du starte Mousai i terminalen for å "
+"inkludere loggfilene og sende inn en feilrapport til <a href=\"https://github"
+".com/SeaDve/Mousai/issues/\">feilsporeren</a>."
 
 #: data/resources/ui/history-view.ui:6
 #, fuzzy
@@ -212,11 +224,12 @@ msgstr "Generelt"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Foretrukket lydkilde"
 
 #: data/resources/ui/preferences-window.ui:12
+#, fuzzy
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "Avgjør valgt lydkilde når tilgjengelig."
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -228,18 +241,20 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"Du kan hente deg et API-symbol fra <a href=\"https://dashboard.audd.io/\""
+">audd.io</a>. Å la dette stå tomt gir deg et par forsøk per dag."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API-symbol"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Tilbake"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Frakoblet modus påslått"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -247,7 +262,7 @@ msgstr "Avbryt lytting"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Frakoblet modus"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -309,7 +324,7 @@ msgstr "Tilbake"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Forover"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -353,7 +368,7 @@ msgstr "Ny"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -382,12 +397,12 @@ msgstr "Oversett"
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "i dag %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "i går %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -399,27 +414,29 @@ msgstr "Skrivebordslyd"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Ingen treff"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Kan ikke gjenkjenne fingeravtrykk fra lyd"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Ugyldig symbol angitt"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Symbolgrense nådd"
 
 #: src/recognizer/provider/error.rs:52
+#, fuzzy
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Kan ikke koble til tjeneren"
 
 #: src/recognizer/provider/error.rs:53
+#, fuzzy
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Mottok annen vedvarende feil"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -459,24 +476,28 @@ msgid "Copied to clipboard"
 msgstr "Kopiert til utklippstavlen"
 
 #: src/window/history_view.rs:152
+#, fuzzy
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Klarte ikke å fjerne valgte sanger"
 
 #: src/window/history_view.rs:320
+#, fuzzy
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Klarte ikke å fjerne sang"
 
 #: src/window/history_view.rs:445
+#, fuzzy
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Kunne ikke vise resultater fra gjenkjenneren"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
 msgstr "_Angre"
 
 #: src/window/history_view.rs:691
+#, fuzzy
 msgid "Failed to undo"
-msgstr ""
+msgstr "Klarte ikke å angre"
 
 #: src/window/history_view.rs:710
 msgid "Removed {} song"
@@ -486,7 +507,7 @@ msgstr[1] "Fjernet {} sanger"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "Velg elementer"
 
 #: src/window/history_view.rs:838
 msgid "Selected {} song"
@@ -501,62 +522,68 @@ msgstr[0] "Fjern sang fra historikk"
 msgstr[1] "Fjern sanger fra historikk"
 
 #: src/window/mod.rs:253
+#, fuzzy
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Klarte ikke å legge sang i historikk"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Opptak lagret"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Resultatet vil være tilgjengelig når du er på nett igjen."
 
 #: src/window/mod.rs:270
+#, fuzzy
 msgid "Ok, got it"
-msgstr ""
+msgstr "OK, skjønner."
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "Åpne innstillingene og prøv å sette et annet symbol."
 
 #: src/window/mod.rs:311
+#, fuzzy
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
+"Vent til grensen er tilbakestilt eller åpne innstillingene og prøv å sette "
+"et annet symbol."
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "Åpne innstillinger"
 
 #: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
-msgstr ""
+msgstr "Nei takk"
 
 #: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr ""
+msgstr "Åpne feilrapport på GitHub og legg til nødvendig info."
 
 #: src/window/mod.rs:346
 msgid "Open an Issue"
-msgstr ""
+msgstr "Åpne feilrapport"
 
 #: src/window/mod.rs:374
 msgid "Try Again"
-msgstr ""
+msgstr "Prøv igjen"
 
 #: src/window/mod.rs:396
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Sjekk at du er tilkoblet Internett."
 
 #: src/window/mod.rs:398
+#, fuzzy
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: src/window/mod.rs:483
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "En feil oppstod i avspilleren"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -569,20 +596,21 @@ msgstr "Pause"
 #: src/window/recognized_page.rs:142
 msgid "Recognized {} new song"
 msgid_plural "Recognized {} new songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gjenkjente {} ny sang"
+msgstr[1] "Gjenkjente {} nye sanger"
 
 #: src/window/recognized_page.rs:148
+#, fuzzy
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Denne sangen ble hørt mens du var frakoblet"
+msgstr[1] "Disse sangene ble hørt mens du var frakoblet"
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
 msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Gjenkjente {} av {}"
+msgstr[1] "Gjenkjente {} av {} sanger"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -594,11 +622,11 @@ msgstr "Gjenkjenner …"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "Ukjent"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "Fravelg"
 
 #~ msgid "Default window width"
 #~ msgstr "Forvalgt vindusbredde"

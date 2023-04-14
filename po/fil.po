@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2023-04-07 03:47+0000\n"
+"PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
 "fil/>\n"
@@ -452,7 +452,7 @@ msgstr "I-search sa YouTube"
 
 #: src/window/external_link_tile.rs:144
 msgid "Failed to launch {}"
-msgstr ""
+msgstr "Hindi mai-launch ang {}"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
@@ -481,8 +481,8 @@ msgstr "Hindi mai-undo"
 #: src/window/history_view.rs:710
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nagtanggal ng {} na kanta"
+msgstr[1] "Nagtanggal ng {} na mga kanta"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
@@ -491,8 +491,8 @@ msgstr "I-select ang mga items"
 #: src/window/history_view.rs:838
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Pumili ng {} na kanta"
+msgstr[1] "Pumili ng {} na mga kanta"
 
 #: src/window/history_view.rs:847
 msgid "Remove Song From History"
@@ -573,8 +573,8 @@ msgstr "I-pause"
 #: src/window/recognized_page.rs:142
 msgid "Recognized {} new song"
 msgid_plural "Recognized {} new songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Naka-recognize ng {} na bagong kanta"
+msgstr[1] "Naka-recognize ng {} na mga bagong kanta"
 
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
@@ -585,8 +585,8 @@ msgstr[1] "Napakinggan ang mga kantang ito noong ikaw ay offline"
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
 msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Naka-recognize ng {} Mula sa {} na Kanta"
+msgstr[1] "Naka-recognize ng {} Mula sa {} na Kanta"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -602,7 +602,7 @@ msgstr "Hindi Alam"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "I-unselect"
 
 #~ msgid "🎵 Identify the title and artist of the song within seconds."
 #~ msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."

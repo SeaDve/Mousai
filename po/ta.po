@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2023-04-11 12:51+0000\n"
+"PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
 "Language: ta\n"
@@ -40,11 +40,11 @@ msgstr "சாளரத்தின் அகலம்"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "சாளரத்தின் உயரம்"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "சாளரம் பெரிதாக்கப்பட்டுள்ளதா"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -52,11 +52,11 @@ msgstr "ஆடியோ ரெக்கார்டிங்கில் பய�
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "AudD அங்கீகாரத்தால் பயன்படுத்தப்படும் API டோக்கன்"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "மரபு (இடம்பெயர்வுக்காக வைக்கப்பட்டுள்ளது)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -87,35 +87,36 @@ msgstr "நீங்கள் ஏன் மௌசையை நேசிப்ப
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 சில நொடிகளில் பாடல்களை அடையாளம் காணலாம் அல்லது ஆஃப்லைனில் இருக்கும் போது "
+"சேமிக்கலாம்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ ஒலிவாங்கி அல்லது டெஸ்க்டாப் ஒலியைப் பயன்படுத்தவும்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 அங்கீகரிக்கப்பட்ட பாடல்களின் தொகுப்பை உருவாக்குங்கள்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 இடைமுகத்திற்குள் பாடலை விரைவாக முன்னோட்டமிடுங்கள்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 வெவ்வேறு வழங்குநர்களிடமிருந்து பாடலை உலாவிக் கேட்கலாம்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 பயன்படுத்த எளிதான பயனர் இடைமுகம்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "டேவ் பேட்ரிக் கேபர்டோ"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "முக்கியமான தரவுத்தளப் பிழை"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -127,9 +128,15 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"இது சிதைந்த அல்லது சிதைந்த தரவுத்தளத்தால் ஏற்பட்டிருக்கலாம். பயன்பாட்டுத் "
+"தரவை அழிக்க முயற்சி செய்யலாம். இருப்பினும், இது பரிந்துரைக்கப்படவில்லை, "
+"மேலும் உங்கள் எல்லா பாடல்களையும் சேமித்த பதிவுகளையும் நீக்கிவிடும்.\n"
+"\n"
+"இந்தச் சிக்கலைப் புகாரளிக்க, பதிவுகளைச் சேர்க்க முனையத்தில் மௌசாயைத் "
+"தொடங்கவும் மற்றும் பிழை அறிக்கையை <a href=\"https://github.com/SeaDve/Mousai/"
+"issues/\">பிரச்சினைப் பக்கத்தில்</a> சமர்ப்பிக்கவும்."
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_விருப்பங்கள்"
 
@@ -202,17 +209,16 @@ msgid "Copy Song"
 msgstr "நகல் பாடல்"
 
 #: data/resources/ui/preferences-window.ui:8
-#, fuzzy
 msgid "General"
 msgstr "பொது"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "விருப்பமான ஒலி மூலம்"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "கிடைக்கும்போது தேர்ந்தெடுக்க ஒலி மூலத்தைத் தீர்மானிக்கிறது."
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -224,18 +230,21 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"நீங்கள் <a href=\"https://dashboard.audd.io/\">audd.io</a> இலிருந்து API "
+"டோக்கனைப் பெறலாம். இதை காலியாக விடுவது ஒரு நாளைக்கு சில சோதனைகளை உங்களுக்கு "
+"வழங்கும்."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API டோக்கன்"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "திரும்பி செல்"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "ஆஃப்லைன் பயன்முறை இயக்கப்பட்டது"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -243,7 +252,7 @@ msgstr "கேட்பதை ரத்துசெய்"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "ஆஃப்லைன் பயன்முறை"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -261,7 +270,6 @@ msgid "Search"
 msgstr "தேடு"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "விருப்பங்களைக் காட்டு"
@@ -304,7 +312,7 @@ msgstr "திரும்பிச் செல்லுங்கள்"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "முன்னோக்கிச் செல்"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -348,7 +356,7 @@ msgstr "புதிய"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 டேவ் பேட்ரிக் கேபர்டோ"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -356,12 +364,10 @@ msgid "translator-credits"
 msgstr "தருண் கிருஷ்ணா.க.பா"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Liberapay)"
-msgstr "நன்கொடை (லிபரபே)"
+msgstr "நன்கொடை (லிபராபே)"
 
 #: src/about.rs:35
-#, fuzzy
 msgid "Donate (PayPal)"
 msgstr "நன்கொடை (பேபால்)"
 
@@ -370,19 +376,18 @@ msgid "GitHub"
 msgstr "கிட்ஹப்"
 
 #: src/about.rs:41
-#, fuzzy
 msgid "Translate"
 msgstr "மொழிபெயர்"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "இன்று %R இல்"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "நேற்று %R இல்"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -394,27 +399,27 @@ msgstr "டெஸ்க்டாப் ஆடியோ"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "பொருத்தங்கள் எதுவும் இல்லை"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "ஒலியில் இருந்து கைரேகையை உருவாக்க முடியவில்லை"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "தவறான டோக்கன் கொடுக்கப்பட்டது"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "டோக்கன் வரம்பை அடைந்தது"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "சேவையகத்துடன் இணைக்க முடியவில்லை"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "மற்ற நிரந்தரப் பிழையைப் பெற்றது"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -449,21 +454,20 @@ msgid "Failed to launch {}"
 msgstr "தொடங்க முடியவில்லை {}"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "தேர்ந்தெடுக்கப்பட்ட பாடல்களை அகற்ற முடியவில்லை"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "பாடலை அகற்ற முடியவில்லை"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "அங்கீகார முடிவுகளைக் காட்ட முடியவில்லை"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
@@ -471,7 +475,7 @@ msgstr "_செயல்தவிர்"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "செயல்தவிர்க்க முடியவில்லை"
 
 #: src/window/history_view.rs:710
 msgid "Removed {} song"
@@ -481,7 +485,7 @@ msgstr[1] "{} பாடல்கள் அகற்றப்பட்டன"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "பொருட்களைத் தேர்ந்தெடுக்கவும்"
 
 #: src/window/history_view.rs:838
 msgid "Selected {} song"
@@ -497,62 +501,63 @@ msgstr[1] "வரலாற்றிலிருந்து பாடல்க�
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "வரலாற்றில் பாடலைச் செருகுவதில் தோல்வி"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "பதிவு சேமிக்கப்பட்டது"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "நீங்கள் ஆன்லைனில் திரும்பியவுடன் முடிவு கிடைக்கும்."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "சரி, புரிந்தது"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "விருப்பத்தேர்வுகளைத் திறந்து வேறு டோக்கனை அமைக்க முயற்சிக்கவும்."
 
 #: src/window/mod.rs:311
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
+"வரம்பு மீட்டமைக்கப்படும் வரை காத்திருக்கவும் அல்லது விருப்பத்தேர்வுகளைத் "
+"திறந்து வேறு டோக்கனை அமைக்க முயற்சிக்கவும்."
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "விருப்பங்களைத் திறக்கவும்"
 
 #: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
-msgstr ""
+msgstr "இல்லை, நன்றி"
 
 #: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr ""
+msgstr "GitHub இல் சிக்கலைத் திறந்து தேவையான தகவலை வழங்கவும்."
 
 #: src/window/mod.rs:346
 msgid "Open an Issue"
-msgstr ""
+msgstr "ஒரு சிக்கலைத் திறக்கவும்"
 
 #: src/window/mod.rs:374
 msgid "Try Again"
-msgstr ""
+msgstr "மீண்டும் முயற்சிக்கவும்"
 
 #: src/window/mod.rs:396
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "உங்கள் இணைய இணைப்பைச் சரிபார்க்கவும்."
 
 #: src/window/mod.rs:398
-#, fuzzy
 msgid "Ok"
 msgstr "சரி"
 
 #: src/window/mod.rs:483
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "பிளேயரில் பிழை ஏற்பட்டது"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -565,20 +570,20 @@ msgstr "இடைநிறுத்து"
 #: src/window/recognized_page.rs:142
 msgid "Recognized {} new song"
 msgid_plural "Recognized {} new songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} புதிய பாடல் கண்டறியப்பட்டது"
+msgstr[1] "{} புதிய பாடல்கள் கண்டறியப்பட்டன"
 
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "நீங்கள் ஆஃப்லைனில் இருக்கும்போது இந்தப் பாடல் கேட்டது"
+msgstr[1] "நீங்கள் ஆஃப்லைனில் இருக்கும்போது இந்தப் பாடல்கள் கேட்கப்பட்டன"
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
 msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} இல் {} கண்டறியப்பட்டது"
+msgstr[1] "{} இல் {} பாடல்கள் கண்டறியப்பட்டன"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -590,11 +595,11 @@ msgstr "அங்கீகரிக்கிறது…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "தெரியாதது"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "தேர்வுநீக்கு"
 
 #~ msgid "Default window width"
 #~ msgstr "இயல்புநிலை சாளர அகலம்"

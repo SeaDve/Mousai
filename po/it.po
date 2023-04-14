@@ -13,10 +13,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2023-04-12 00:57+0000\n"
+"PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Michael Moroni <michaelmoroni@disroot.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
-">\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,15 +42,15 @@ msgstr "Shazam;Audio;Musica;Canzone;Identifica;Riconoscimento;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr "Larghezza finestra"
+msgstr "Larghezza della finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr "Altezza finestra"
+msgstr "Altezza della finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Controlla se la finestra è massimizzata"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -58,11 +58,11 @@ msgstr "Sorgente audio preferita da utilizzare durante la registrazione"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "Token per le API usato dal sistema di riconoscimento di AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Passato (mantenuto per la migrazione)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -76,8 +76,8 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai è una applicazione semplice che può identificare la canzone simile a "
-"Shazam. Basta fare clic sul pulsante di ascolto, e poi aspettare qualche "
+"Mousai è una applicazione semplice simile a Shazam che può identificare le "
+"canzoni. Basta fare clic sul pulsante di ascolto e poi aspettare qualche "
 "secondo. Restituirà magicamente il titolo e l'artista della canzone!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
@@ -85,7 +85,7 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Nota: Questo programma utilizza le API di audd.io, quindi è necessario "
+"Nota: Questo programma utilizza le API di audd.io quindi è necessario "
 "accedere al loro sito per ottenere ulteriori prove."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
@@ -95,35 +95,38 @@ msgstr "Perché Mousai ti piacerà?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Riconosce le canzoni in pochi secondi oppure le salva per dopo quando sei "
+"offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Usa il microfono o l'audio del desktop"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Crea un repertorio di brani riconosciuti"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
 msgstr ""
+"🎼 Offre un'anteprima del brano direttamente dall'interfaccia in maniera "
+"rapida"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Cerca e ascolta brani da diversi fornitori"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Interfaccia utente facile da usare"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Errore del database critico"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -135,11 +138,18 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"Questo errore potrebbe essere stato causato da un database manomesso o "
+"corrotto. Puoi provare a eliminare i dati dell'applicazione. Comunque, "
+"questo non è raccomandato ed eliminerà tutti brani e le registrazioni "
+"salvate.\n"
+"\n"
+"Per segnalare questo errore, per favore avvia Mousai dal terminale così da "
+"includere i registri e segnalare il bug nella <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">pagina dei problemi</a>."
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
-msgstr "_Preferenze"
+msgstr "Im_postazioni"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -215,11 +225,11 @@ msgstr "Generale"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Fonte audio preferita"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "Determina la fonte audio da utilizzare quando disponibile."
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -231,18 +241,21 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"Puoi ottenere un token per le API su <a href=\"https://dashboard.audd.io/\""
+">audd.io</a>. Lasciando questo spazio vuoto avrai la possibilità di "
+"usufruire del servizio di prova giornaliero."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "Token per le API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Torna indietro"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Modalità offline attivata"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -250,7 +263,7 @@ msgstr "Interrompi ascolto"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Modalità offline"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -268,10 +281,9 @@ msgid "Search"
 msgstr "Ricerca"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Mostra preferenze"
+msgstr "Mostra impostazioni"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -311,7 +323,7 @@ msgstr "Torna indietro"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Vai avanti"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -355,45 +367,38 @@ msgstr "Nuovo"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr ""
-"Nicolas Mariniello\n"
-"Albano Battistella\n"
-"Michael Moroni\n"
-"Andrea Brandi"
+msgstr "Albano Battistella, Andrea Brandi, Michael Moroni, Nicolas Mariniello"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Liberapay)"
-msgstr "Donazione (Liberapay)"
+msgstr "Dona (Liberapay)"
 
 #: src/about.rs:35
-#, fuzzy
 msgid "Donate (PayPal)"
-msgstr "Donazione (PayPal)"
+msgstr "Dona (PayPal)"
 
 #: src/about.rs:39
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:41
-#, fuzzy
 msgid "Translate"
 msgstr "Traduci"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "oggi alle %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "ieri alle %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -405,27 +410,27 @@ msgstr "Audio Desktop"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Nessun riscontro trovato"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Impossibile creare l'impronta digitale del brano"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Token inserito non valido"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Limite del token raggiunto"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Impossibile connettersi al server"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Ricevuti altri errori permanenti"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -460,21 +465,20 @@ msgid "Failed to launch {}"
 msgstr "Impossibile avviare {}"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "Copiato negli appunti"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Impossibile rimuovere i brani selezionati"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Impossibile rimuovere il brano"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Impossibile mostrare i risultati di riconoscimento"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
@@ -482,7 +486,7 @@ msgstr "_Annulla"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "Impossibile annullare"
 
 #: src/window/history_view.rs:710
 msgid "Removed {} song"
@@ -492,7 +496,7 @@ msgstr[1] "{} brani rimossi"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "Seleziona elementi"
 
 #: src/window/history_view.rs:838
 msgid "Selected {} song"
@@ -508,62 +512,65 @@ msgstr[1] "Rimuovi brani dalla cronologia"
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Impossibile inserire il brano nella cronologia"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Registrazione salvata"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Il risultato sarà disponibile una volta tornati online."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "Ok, capito"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "Apri le impostazioni e prova a impostare un differente token."
 
 #: src/window/mod.rs:311
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
+"Attendi fino a quando il limite viene azzerato o apri le impostazioni e "
+"prova a impostare un differente token."
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "Apri le impostazioni"
 
 #: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
-msgstr ""
+msgstr "No, grazie"
 
 #: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr ""
+"Per favore apri una segnalazione su GitHub e fornisci le informazioni "
+"necessarie."
 
 #: src/window/mod.rs:346
 msgid "Open an Issue"
-msgstr ""
+msgstr "Apri una segnalazione"
 
 #: src/window/mod.rs:374
 msgid "Try Again"
-msgstr ""
+msgstr "Riprova"
 
 #: src/window/mod.rs:396
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Per favore controlla la tua connessione a internet."
 
 #: src/window/mod.rs:398
-#, fuzzy
 msgid "Ok"
 msgstr "Ok"
 
 #: src/window/mod.rs:483
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "C'è stato un errore nel lettore"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -576,20 +583,20 @@ msgstr "Pausa"
 #: src/window/recognized_page.rs:142
 msgid "Recognized {} new song"
 msgid_plural "Recognized {} new songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Riconosciuto {} nuovo brano"
+msgstr[1] "Riconosciuti {} nuovi brani"
 
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Questo brano è stato ascoltato mentre eri offline"
+msgstr[1] "Questi brani sono stati ascoltati mentre eri offline"
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
 msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Riconosciuto {} brano su {}"
+msgstr[1] "Riconosciuti {} brani su {}"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -601,11 +608,11 @@ msgstr "Riconoscimento…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "Sconosciuto"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "Deseleziona"
 
 #~ msgid "Default window width"
 #~ msgstr "Larghezza predefinita della finestra"

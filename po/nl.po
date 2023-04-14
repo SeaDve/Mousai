@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2023-04-08 01:03+0000\n"
+"PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -576,8 +576,8 @@ msgstr "Pauzeren"
 #: src/window/recognized_page.rs:142
 msgid "Recognized {} new song"
 msgid_plural "Recognized {} new songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} nieuw nummer herkend"
+msgstr[1] "{} nieuwe nummers herkend"
 
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
@@ -588,8 +588,8 @@ msgstr[1] "Deze nummers zijn gehoord terwijl u offline was"
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
 msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{} van {} nummer herkend"
+msgstr[1] "{} van {} nummers herkend"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -605,7 +605,7 @@ msgstr "Onbekend"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "Deselecteren"
 
 #~ msgid "Default window width"
 #~ msgstr "Standaardvensterbreedte"
