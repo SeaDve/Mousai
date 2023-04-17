@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2023-04-11 12:51+0000\n"
+"PO-Revision-Date: 2023-04-17 07:51+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
 "Language: el\n"
@@ -103,24 +103,23 @@ msgstr "🎸 Δημιουργήστε ένα ρεπερτόριο αναγνωρ
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Γρήγορη προεπισκόπηση του τραγουδιού μέσα στη διεπαφή"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Περιηγηθείτε και ακούστε το τραγούδι από διαφορετικούς παρόχους"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Εύκολο στη χρήση διεπαφή χρήστη"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Κρίσιμο σφάλμα βάσης δεδομένων"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -132,9 +131,16 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"Αυτό πιθανότατα προκαλείται από μια παραποιημένη ή κατεστραμμένη βάση "
+"δεδομένων. Μπορείτε να δοκιμάσετε να διαγράψετε τα δεδομένα της εφαρμογής. "
+"Ωστόσο, αυτό δε συνιστάται και θα διαγράψει όλα τα τραγούδια και τις "
+"αποθηκευμένες ηχογραφήσεις σας.\n"
+"\n"
+"Για να αναφέρετε αυτό το ζήτημα, εκκινήστε το Mousai στο τερματικό για να "
+"συμπεριλάβετε τα αρχεία καταγραφής και υποβάλετε την αναφορά σφαλμάτων στη "
+"<a href=\"https://github.com/SeaDve/Mousai/issues/\">σελίδα προβλήματος</a>."
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_Προτιμήσεις"
 
@@ -207,17 +213,16 @@ msgid "Copy Song"
 msgstr "Αντιγραφή τραγουδιού"
 
 #: data/resources/ui/preferences-window.ui:8
-#, fuzzy
 msgid "General"
 msgstr "Γενικά"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Προτιμώμενη πηγή ήχου"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "Καθορίζει την πηγή ήχου που θα επιλέξετε όταν είναι διαθέσιμη."
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -229,18 +234,21 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"Μπορείτε να αποκτήσετε ένα διακριτικό API από το <a href=\"https://dashboard."
+"audd.io/\">audd.io</a>. Αν αφήσετε αυτό το κενό, θα έχετε μερικές δοκιμές "
+"την ημέρα."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API Token"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Πήγαινε πίσω"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Ενεργοποιήθηκε η λειτουργία εκτός σύνδεσης"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -248,7 +256,7 @@ msgstr "Ακύρωση ακρόασης"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Λειτουργία εκτός σύνδεσης"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -266,7 +274,6 @@ msgid "Search"
 msgstr "Αναζήτηση"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Εμφάνιση Προτιμήσεων"
@@ -309,7 +316,7 @@ msgstr "Πηγαίνετε πίσω"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Πάμε μπροστά"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -353,7 +360,7 @@ msgstr "Νέο"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -361,12 +368,10 @@ msgid "translator-credits"
 msgstr "συντελεστές-μετάφρασης"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Liberapay)"
 msgstr "Δωρεά (Liberapay)"
 
 #: src/about.rs:35
-#, fuzzy
 msgid "Donate (PayPal)"
 msgstr "Δωρεά (PayPal)"
 
@@ -375,19 +380,18 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:41
-#, fuzzy
 msgid "Translate"
 msgstr "Μετάφραση"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "σήμερα στις %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "χθές στις %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -399,27 +403,27 @@ msgstr "Ήχος επιφάνειας εργασίας"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Δεν βρέθηκαν αντιστοιχίες"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Δεν είναι δυνατή η δημιουργία δακτυλικού αποτυπώματος από ήχο"
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Δόθηκε μη έγκυρο διακριτικό"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Συμπληρώθηκε το όριο διακριτικών"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Δεν είναι δυνατή η σύνδεση στον διακομιστή"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Λήφθηκε άλλο μόνιμο σφάλμα"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -454,21 +458,20 @@ msgid "Failed to launch {}"
 msgstr "Απέτυχε να ξεκινήσει {}"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "Αντιγράφηκε στο πρόχειρο"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Αποτυχία κατάργησης επιλεγμένων τραγουδιών"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Η κατάργηση του τραγουδιού απέτυχε"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Αποτυχία εμφάνισης αποτελεσμάτων αναγνώρισης"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
@@ -476,7 +479,7 @@ msgstr "_Αναίρεση"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "Αποτυχία αναίρεσης"
 
 #: src/window/history_view.rs:710
 msgid "Removed {} song"
@@ -486,7 +489,7 @@ msgstr[1] "Καταργήθηκαν {} τραγούδια"
 
 #: src/window/history_view.rs:836
 msgid "Select items"
-msgstr ""
+msgstr "Επιλέξτε στοιχεία"
 
 #: src/window/history_view.rs:838
 msgid "Selected {} song"
@@ -502,62 +505,64 @@ msgstr[1] "Αφαιρέστε τα τραγούδια από το ιστορίκ
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Αποτυχία εισαγωγής τραγουδιού στο ιστορικό"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Η εγγραφή αποθηκεύτηκε"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Το αποτέλεσμα θα είναι διαθέσιμο όταν συνδεθείτε ξανά."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "Εντάξει το κατάλαβα"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
 msgstr ""
+"Ανοίξτε τις προτιμήσεις και δοκιμάστε να ορίσετε ένα διαφορετικό διακριτικό."
 
 #: src/window/mod.rs:311
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
+"Περιμένετε έως ότου γίνει επαναφορά του ορίου ή ανοίξτε τις προτιμήσεις και "
+"δοκιμάστε να ορίσετε ένα διαφορετικό διακριτικό."
 
 #: src/window/mod.rs:317
 msgid "Open Preferences"
-msgstr ""
+msgstr "Ανοίξτε τις Προτιμήσεις"
 
 #: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
 msgid "No, Thanks"
-msgstr ""
+msgstr "Οχι ευχαριστώ"
 
 #: src/window/mod.rs:343
 msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr ""
+msgstr "Ανοίξτε ένα θέμα στο GitHub και δώστε τις απαραίτητες πληροφορίες."
 
 #: src/window/mod.rs:346
 msgid "Open an Issue"
-msgstr ""
+msgstr "Ανοίξτε ένα Issue στο GitHub"
 
 #: src/window/mod.rs:374
 msgid "Try Again"
-msgstr ""
+msgstr "Προσπάθησε ξανά"
 
 #: src/window/mod.rs:396
 msgid "Please check your internet connection."
-msgstr ""
+msgstr "Ελέγξτε τη σύνδεσή σας στο Διαδίκτυο."
 
 #: src/window/mod.rs:398
-#, fuzzy
 msgid "Ok"
 msgstr "Εντάξει"
 
 #: src/window/mod.rs:483
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Παρουσιάστηκε σφάλμα στη συσκευή αναπαραγωγής"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -570,20 +575,20 @@ msgstr "Παύση"
 #: src/window/recognized_page.rs:142
 msgid "Recognized {} new song"
 msgid_plural "Recognized {} new songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αναγνωρίστηκε {} νέο τραγούδι"
+msgstr[1] "Αναγνωρίστηκαν {} νέα τραγούδια"
 
 #: src/window/recognized_page.rs:148
 msgid "This song was heard while you're offline"
 msgid_plural "These songs were heard while you're offline"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αυτό το τραγούδι ακούστηκε ενώ είστε εκτός σύνδεσης"
+msgstr[1] "Αυτά τα τραγούδια ακούστηκαν ενώ είστε εκτός σύνδεσης"
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
 msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αναγνωρίστηκε {} από {}"
+msgstr[1] "Αναγνωρίστηκαν {} από {} τραγούδια"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -595,11 +600,11 @@ msgstr "Αναγνώριση…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "Άγνωστο"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "Αποεπιλογή"
 
 #~ msgid "Default window width"
 #~ msgstr "Προεπιλεγμένο πλάτος παραθύρου"

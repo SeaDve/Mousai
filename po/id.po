@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021, 2022.
-# liimee <alt3753.7@gmail.com>, 2021, 2022.
+# liimee <alt3753.7@gmail.com>, 2021, 2022, 2023.
 # Sucipto <show.cheap@gmail.com>, 2021.
 # Hervy Qurrotul Ainur Rozi <hervyqa@proton.me>, 2022.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-12 09:29+0800\n"
-"PO-Revision-Date: 2022-07-11 08:15+0000\n"
+"PO-Revision-Date: 2023-04-17 07:51+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
 "id/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -39,11 +39,11 @@ msgstr "Shazam;Audio;Musik;Lagu;Kenali;Pengenalan;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Lebar jendela"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Tinggi jendela"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
@@ -51,11 +51,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr "Sumber audio pilihan untuk digunakan dalam merekam audio"
+msgstr "Sumber audio utama yang digunakan dalam merekam audio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "Token API yang digunakan oleh pengenalan AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
@@ -91,35 +91,35 @@ msgstr "Mengapa Anda akan mencintai Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
-msgstr ""
+msgstr "🎵 Kenali lagu dalam hitungan detik atau simpan untuk nanti saat luring"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Gunakan mikrofon atau audio desktop"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Buat daftar lagu yang telah dikenali"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Pratinjau lagu dengan cepat pada antarmuka"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Telusuri dan dengarkan lagu dari berbagai penyedia"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Antarmuka yang mudah digunakan"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Kesalahan Database Fatal"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -131,10 +131,17 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>."
 msgstr ""
+"Ini kemungkinan terjadi karena database yang rusak. Anda dapat mencoba "
+"menghapus data aplikasi. Namun, hal ini tidak disarankan dan akan menghapus "
+"seluruh lagu dan rekaman yang telah disimpan.\n"
+"\n"
+"Untuk melaporkan masalah ini, harap luncurkan Mousai dari terminal untuk "
+"memperoleh log serta kirim laporan bug ke <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">halaman issue</a> Mousai."
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "Pre_ferensi"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -150,7 +157,7 @@ msgstr "Pilih _Semua"
 
 #: data/resources/ui/history-view.ui:26
 msgid "Select _None"
-msgstr "Pilih _Tidak Ada"
+msgstr "Pilih Ti_dak Ada"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Start Identifying Music"
@@ -210,11 +217,11 @@ msgstr "Umum"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Sumber Audio Utama"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to select when available."
-msgstr ""
+msgstr "Menentukan sumber audio yang dipilih apabila tersedia."
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -226,18 +233,21 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
+"Anda dapat memperoleh token API sendiri dari <a href=\"https://dashboard.audd"
+".io/\">audd.io</a>. Mengosongkan ini akan memberi Anda beberapa kali "
+"percobaan per hari."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "Token API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Go Back"
-msgstr ""
+msgstr "Kembali"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Mode Luring Aktif"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -245,7 +255,7 @@ msgstr "Batal Mendengarkan"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Mode Luring"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -265,7 +275,7 @@ msgstr "Cari"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Menampilkan Preferensi"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -349,7 +359,7 @@ msgstr ""
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -361,11 +371,11 @@ msgstr ""
 
 #: src/about.rs:31
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "Berdonasi (Liberapay)"
 
 #: src/about.rs:35
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "Berdonasi (PayPal)"
 
 #: src/about.rs:39
 msgid "GitHub"
@@ -373,17 +383,17 @@ msgstr "GitHub"
 
 #: src/about.rs:41
 msgid "Translate"
-msgstr ""
+msgstr "Terjemahkan"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "hari ini pukul %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "kemarin pukul %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -395,7 +405,7 @@ msgstr "Audio Desktop"
 
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
-msgstr ""
+msgstr "Tak Ditemukan Hasil"
 
 #: src/recognizer/provider/error.rs:49
 msgid "Cannot Create Fingerprint From Audio"
@@ -403,19 +413,19 @@ msgstr ""
 
 #: src/recognizer/provider/error.rs:50
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Token yang Tidak Sah Diberikan"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Batas Token Tercapai"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Tidak Dapat Terhubung ke Server"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Menerima Kesalahan Permanen Lain"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -451,19 +461,19 @@ msgstr "Gagal meluncurkan {}"
 
 #: src/window/history_view.rs:138 src/window/song_page.rs:89
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Disalin ke papan klip"
 
 #: src/window/history_view.rs:152
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Gagal menghapus lagu yang dipilih"
 
 #: src/window/history_view.rs:320
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Gagal menghapus lagu"
 
 #: src/window/history_view.rs:445
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Gagal menampilkan hasil pengenalan"
 
 #: src/window/history_view.rs:683
 msgid "_Undo"
@@ -471,7 +481,7 @@ msgstr "_Batal"
 
 #: src/window/history_view.rs:691
 msgid "Failed to undo"
-msgstr ""
+msgstr "Gagal membatalkan"
 
 #: src/window/history_view.rs:710
 msgid "Removed {} song"
@@ -494,23 +504,23 @@ msgstr[0] "Hapus Lagu Dari Riwayat"
 
 #: src/window/mod.rs:253
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Gagal menambahkan lagu ke riwayat"
 
 #: src/window/mod.rs:264
 msgid "Recording saved"
-msgstr ""
+msgstr "Rekaman disimpan"
 
 #: src/window/mod.rs:265
 msgid "The result will be available when you're back online."
-msgstr ""
+msgstr "Hasil akan tersedia saat Anda kembali daring."
 
 #: src/window/mod.rs:270
 msgid "Ok, got it"
-msgstr ""
+msgstr "Baik, mengerti"
 
 #: src/window/mod.rs:306
 msgid "Open preferences and try setting a different token."
-msgstr ""
+msgstr "Buka preferensi dan coba mengatur dengan token yang berbeda."
 
 #: src/window/mod.rs:311
 msgid ""
