@@ -291,20 +291,33 @@ impl Recognizer {
                 .context("Failed to insert recording")?;
             self.emit_by_name::<()>("recording-saved", &[]);
             tracing::debug!("Offline mode is active; saved recording for later recognition");
-        } else {
-            self.set_state(RecognizerState::Recognizing);
+            return Ok(());
+        }
 
-            // TODO Also save the recording here when the error is non-permanent
-            // such as internet or token errors.
-            let song = gio::CancellableFuture::new(
-                provider.recognize(&recording_bytes),
-                cancellable.clone(),
-            )
-            .await
-            .map_err(|_| Cancelled::new("recognizing while calling provider"))??;
-            song.set_last_heard(recorded_time);
+        self.set_state(RecognizerState::Recognizing);
 
-            self.emit_by_name::<()>("song-recognized", &[&song]);
+        let res =
+            gio::CancellableFuture::new(provider.recognize(&recording_bytes), cancellable.clone())
+                .await
+                .map_err(|_| Cancelled::new("recognizing while calling provider"))?;
+
+        match res {
+            Ok(song) => {
+                song.set_last_heard(recorded_time);
+
+                self.emit_by_name::<()>("song-recognized", &[&song]);
+            }
+            Err(err) => {
+                if err.is_permanent() {
+                    return Err(err.into());
+                }
+
+                self.saved_recordings()
+                    .insert(Recording::new(&recording_bytes, &recorded_time))
+                    .context("Failed to insert recording")?;
+                self.emit_by_name::<()>("recording-saved", &[]);
+                tracing::debug!("Recognition failed with non-permanent error `{:?}`; saved recording for later recognition", err);
+            }
         }
 
         Ok(())
