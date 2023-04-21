@@ -160,7 +160,7 @@ fn create_pipeline(
         .build()?;
 
     if let Some(device_name) = device_name {
-        pulsesrc.set_property("device", &device_name);
+        pulsesrc.set_property("device", device_name);
         tracing::debug!("Using device `{}` for recording", device_name);
     } else {
         tracing::warn!("Recording without pulsesrc `device` property set");
