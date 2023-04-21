@@ -244,7 +244,7 @@ impl HistoryView {
 
     pub fn is_on_leaflet_main_page(&self) -> bool {
         let imp = self.imp();
-        imp.leaflet.visible_child() == Some(imp.history_child.get().upcast())
+        imp.leaflet.visible_child().as_ref() == Some(imp.history_child.upcast_ref())
     }
 
     /// Inserts a recognized page for the given songs after the current page and

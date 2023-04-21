@@ -149,7 +149,7 @@ mod imp {
 
             self.main_view
                 .search_bar()
-                .set_key_capture_widget(Some(obj.upcast_ref::<gtk::Widget>()));
+                .set_key_capture_widget(Some(obj.as_ref()));
 
             obj.bind_property("adaptive-mode", &self.main_view.get(), "adaptive-mode")
                 .sync_create()
@@ -435,7 +435,7 @@ impl Window {
     fn update_toggle_search_action(&self) {
         let imp = self.imp();
         let is_main_page_visible =
-            imp.stack.visible_child().as_ref() == Some(imp.main_view.get().upcast_ref());
+            imp.stack.visible_child().as_ref() == Some(imp.main_view.upcast_ref());
         self.action_set_enabled("win.toggle-search", is_main_page_visible);
     }
 
