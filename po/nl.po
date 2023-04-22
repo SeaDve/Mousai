@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
@@ -115,7 +115,7 @@ msgstr "🌐 Blader en luister naar het nummer van verschillende aanbieders"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Gebruiksvriendelijke vormgeving"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 

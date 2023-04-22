@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
-"\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/"
+">\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,7 +110,7 @@ msgstr "🌐 تصفَّح واستمع الأغاني من مصادر مختلف
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 واجهة سهلة الاستخدام"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "ديف باترك كابرتو"
 

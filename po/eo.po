@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2022-04-18 11:07+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -104,7 +104,7 @@ msgstr ""
 msgid "📱 Easy-to-use user interface"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr ""
 

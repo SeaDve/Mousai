@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2023-04-18 22:48+0000\n"
 "Last-Translator: liimee <alt3753.7@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -113,7 +113,7 @@ msgstr "🌐 Telusuri dan dengarkan lagu dari berbagai penyedia"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Antarmuka yang mudah digunakan"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -233,8 +233,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
-"Anda dapat memperoleh token API sendiri dari <a href=\"https://dashboard.audd"
-".io/\">audd.io</a>. Mengosongkan ini akan memberi Anda beberapa kali "
+"Anda dapat memperoleh token API sendiri dari <a href=\"https://dashboard."
+"audd.io/\">audd.io</a>. Mengosongkan ini akan memberi Anda beberapa kali "
 "percobaan per hari."
 
 #: data/resources/ui/preferences-window.ui:23

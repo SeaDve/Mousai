@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -116,7 +116,7 @@ msgstr "🌐 Utforsk og lytt til sanger fra forskjellige tilbydere"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Lettfattelig brukergrensesnitt"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 #, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
@@ -140,8 +140,8 @@ msgstr ""
 "spor og lagrede opptak.\n"
 "\n"
 "For å rapportere dette problemet kan du starte Mousai i terminalen for å "
-"inkludere loggfilene og sende inn en feilrapport til <a href=\"https://github"
-".com/SeaDve/Mousai/issues/\">feilsporeren</a>."
+"inkludere loggfilene og sende inn en feilrapport til <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">feilsporeren</a>."
 
 #: data/resources/ui/history-view.ui:6
 #, fuzzy
@@ -241,8 +241,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day."
 msgstr ""
-"Du kan hente deg et API-symbol fra <a href=\"https://dashboard.audd.io/\""
-">audd.io</a>. Å la dette stå tomt gir deg et par forsøk per dag."
+"Du kan hente deg et API-symbol fra <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Å la dette stå tomt gir deg et par forsøk per dag."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"

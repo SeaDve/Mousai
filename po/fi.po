@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
@@ -113,7 +113,7 @@ msgstr "🌐 Selaa ja kuuntele kappaleita useilta eri palveluntarjoajilta"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Helppokäyttöinen käyttöliittymä"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 

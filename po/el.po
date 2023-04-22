@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:29+0800\n"
+"POT-Creation-Date: 2023-04-22 11:01+0800\n"
 "PO-Revision-Date: 2023-04-17 07:51+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
@@ -113,7 +113,7 @@ msgstr "🌐 Περιηγηθείτε και ακούστε το τραγούδ�
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Εύκολο στη χρήση διεπαφή χρήστη"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:327 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
