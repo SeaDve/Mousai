@@ -39,6 +39,16 @@
   <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.7.3" date="2023-04-22">
+      <description>
+        <p>This release contains a new feature and translation updates:</p>
+        <ul>
+          <li>Save the recording when the error is non-permanent even in non-offline mode</li>
+          <li>Fixed some untranslatable strings</li>
+          <li>Updated Ukrainian, Tamil, Arabic, Dutch, Norwegian Bokmål, Spanish, Italian, Filipino, Greek, Indonesian, and Croatian translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.2" date="2023-04-12">
       <description>
         <p>This release contains fixes:</p>
