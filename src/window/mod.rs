@@ -259,10 +259,10 @@ impl Window {
                 main_view.scroll_to_top();
             }));
         imp.recognizer
-            .connect_recording_saved(clone!(@weak self as obj => move |_| {
+            .connect_recording_saved(clone!(@weak self as obj => move |_, message| {
                 let dialog = adw::MessageDialog::builder()
                     .heading(gettext("Recording saved"))
-                    .body(gettext("The result will be available when you're back online."))
+                    .body(message)
                     .default_response("ok")
                     .transient_for(&obj)
                     .modal(true)

@@ -4,6 +4,7 @@ mod recording;
 mod recordings;
 
 use anyhow::{ensure, Context, Result};
+use gettextrs::gettext;
 use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
@@ -84,7 +85,9 @@ mod imp {
                     Signal::builder("song-recognized")
                         .param_types([Song::static_type()])
                         .build(),
-                    Signal::builder("recording-saved").build(),
+                    Signal::builder("recording-saved")
+                        .param_types([String::static_type()])
+                        .build(),
                 ]
             });
 
@@ -115,6 +118,10 @@ impl Recognizer {
         )
     }
 
+    fn emit_recording_peak_changed(&self, peak: f64) {
+        self.emit_by_name::<()>("recording-peak-changed", &[&peak]);
+    }
+
     pub fn connect_song_recognized<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self, &Song) + 'static,
@@ -128,17 +135,25 @@ impl Recognizer {
         )
     }
 
+    fn emit_song_recognized(&self, song: &Song) {
+        self.emit_by_name::<()>("song-recognized", &[song]);
+    }
+
     pub fn connect_recording_saved<F>(&self, f: F) -> glib::SignalHandlerId
     where
-        F: Fn(&Self) + 'static,
+        F: Fn(&Self, &str) + 'static,
     {
         self.connect_closure(
             "recording-saved",
             true,
-            closure_local!(|obj: &Self| {
-                f(obj);
+            closure_local!(|obj: &Self, message: &str| {
+                f(obj, message);
             }),
         )
+    }
+
+    fn emit_recording_saved(&self, message: &str) {
+        self.emit_by_name::<()>("recording-saved", &[&message]);
     }
 
     pub fn bind_saved_recordings(&self, recordings: &Recordings) {
@@ -256,7 +271,7 @@ impl Recognizer {
             .start(
                 Some(&device_name),
                 clone!(@weak self as obj => move |peak| {
-                    obj.emit_by_name::<()>("recording-peak-changed", &[&peak]);
+                    obj.emit_recording_peak_changed(peak);
                 }),
             )
             .context("Failed to start recording")?;
@@ -289,7 +304,9 @@ impl Recognizer {
             self.saved_recordings()
                 .insert(Recording::new(&recording_bytes, &recorded_time))
                 .context("Failed to insert recording")?;
-            self.emit_by_name::<()>("recording-saved", &[]);
+            self.emit_recording_saved(&gettext(
+                "The result will be available when you're back online.",
+            ));
             tracing::debug!("Offline mode is active; saved recording for later recognition");
             return Ok(());
         }
@@ -305,7 +322,7 @@ impl Recognizer {
             Ok(song) => {
                 song.set_last_heard(recorded_time);
 
-                self.emit_by_name::<()>("song-recognized", &[&song]);
+                self.emit_song_recognized(&song);
             }
             Err(err) => {
                 if err.is_permanent() {
@@ -315,7 +332,23 @@ impl Recognizer {
                 self.saved_recordings()
                     .insert(Recording::new(&recording_bytes, &recorded_time))
                     .context("Failed to insert recording")?;
-                self.emit_by_name::<()>("recording-saved", &[]);
+                let message = match err.kind() {
+                    RecognizeErrorKind::Connection => {
+                        gettext("The result will be available when your connection is restored.")
+                    }
+                    RecognizeErrorKind::TokenLimitReached => {
+                        gettext("The result will be available when your token limit is reset.")
+                    }
+                    RecognizeErrorKind::InvalidToken => {
+                        gettext("The result will be available when your token is replaced.")
+                    }
+                    RecognizeErrorKind::NoMatches
+                    | RecognizeErrorKind::Fingerprint
+                    | RecognizeErrorKind::OtherPermanent => {
+                        unreachable!("permanent errors should have been returned")
+                    }
+                };
+                self.emit_recording_saved(&message);
                 tracing::debug!("Recognition failed with non-permanent error `{:?}`; saved recording for later recognition", err);
             }
         }
