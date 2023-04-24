@@ -339,9 +339,9 @@ impl Recognizer {
                     RecognizeErrorKind::TokenLimitReached => {
                         gettext("The result will be available when your token limit is reset.")
                     }
-                    RecognizeErrorKind::InvalidToken => {
-                        gettext("The result will be available when your token is replaced.")
-                    }
+                    RecognizeErrorKind::InvalidToken => gettext(
+                        "The result will be available when your token is replaced with a valid one.",
+                    ),
                     RecognizeErrorKind::NoMatches
                     | RecognizeErrorKind::Fingerprint
                     | RecognizeErrorKind::OtherPermanent => {
