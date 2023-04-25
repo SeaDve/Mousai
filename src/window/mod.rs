@@ -216,12 +216,20 @@ impl Window {
             .set(song_history.clone())
             .expect("song history must be bound only once");
 
-        song_history.connect_removed(clone!(@weak self as obj => move |_, songs| {
-            let imp = obj.imp();
-            if songs.iter().any(|song| imp.player.is_active_song(song)) {
-                imp.player.set_song(Song::NONE);
-            }
-        }));
+        song_history.connect_items_changed(
+            clone!(@weak self as obj => move |history, _index, removed, _added| {
+                if removed == 0 {
+                    return;
+                }
+
+                let imp = obj.imp();
+                if let Some(active_song) = imp.player.song() {
+                    if !history.contains(active_song.id_ref()) {
+                        imp.player.set_song(Song::NONE);
+                    }
+                }
+            }),
+        );
 
         imp.main_view.bind_song_list(song_history);
         imp.recognizer.bind_saved_recordings(recordings);

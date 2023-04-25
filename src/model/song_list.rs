@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use gtk::{
     gio,
-    glib::{self, clone, closure_local},
+    glib::{self, clone},
     prelude::*,
     subclass::prelude::*,
 };
@@ -26,14 +26,8 @@ const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 // FIXME Remove indirection of encoding SongId through SerdeBincode and use heed types directly
 type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
 
-#[derive(Clone, glib::Boxed)]
-#[boxed_type(name = "MsaiBoxedSongVec")]
-struct BoxedSongVec(Vec<Song>);
-
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
 
     #[derive(Debug, Default)]
     pub struct SongList {
@@ -49,17 +43,7 @@ mod imp {
         type Interfaces = (gio::ListModel,);
     }
 
-    impl ObjectImpl for SongList {
-        fn signals() -> &'static [Signal] {
-            static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("removed")
-                    .param_types([BoxedSongVec::static_type()])
-                    .build()]
-            });
-
-            SIGNALS.as_ref()
-        }
-    }
+    impl ObjectImpl for SongList {}
 
     impl ListModelImpl for SongList {
         fn item_type(&self) -> glib::Type {
@@ -252,10 +236,6 @@ impl SongList {
             ret
         };
 
-        if !removed.is_empty() {
-            self.emit_by_name::<()>("removed", &[&BoxedSongVec(removed.clone())]);
-        }
-
         Ok(removed)
     }
 
@@ -269,19 +249,6 @@ impl SongList {
 
     pub fn is_empty(&self) -> bool {
         self.n_items() == 0
-    }
-
-    pub fn connect_removed<F>(&self, f: F) -> glib::SignalHandlerId
-    where
-        F: Fn(&Self, &[Song]) + 'static,
-    {
-        self.connect_closure(
-            "removed",
-            true,
-            closure_local!(|obj: &Self, boxed: BoxedSongVec| {
-                f(obj, &boxed.0);
-            }),
-        )
     }
 
     fn db(&self) -> &(heed::Env, SongDatabase) {
@@ -836,25 +803,16 @@ mod test {
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.insert(new_test_song("0")).unwrap();
 
-        let ic_n_called = Rc::new(Cell::new(0));
-        let ic_n_called_clone = Rc::clone(&ic_n_called);
+        let n_called = Rc::new(Cell::new(0));
+        let n_called_clone = Rc::clone(&n_called);
         song_list.connect_items_changed(move |_, index, removed, added| {
             assert_eq!(index, 0);
             assert_eq!(removed, 1);
             assert_eq!(added, 0);
-            ic_n_called_clone.set(ic_n_called_clone.get() + 1);
+            n_called_clone.set(n_called_clone.get() + 1);
         });
 
-        let r_n_called = Rc::new(Cell::new(0));
-        let r_n_called_clone = Rc::clone(&r_n_called);
-        song_list.connect_removed(move |_, songs| {
-            assert_eq!(songs.len(), 1);
-            assert_eq!(songs[0].id_ref(), &SongId::for_test("0"));
-            r_n_called_clone.set(r_n_called_clone.get() + 1);
-        });
-
-        assert_eq!(ic_n_called.get(), 0);
-        assert_eq!(r_n_called.get(), 0);
+        assert_eq!(n_called.get(), 0);
         assert_eq!(
             song_list
                 .remove_many(&[&SongId::for_test("0")])
@@ -864,8 +822,7 @@ mod test {
                 .id_ref(),
             &SongId::for_test("0")
         );
-        assert_eq!(ic_n_called.get(), 1);
-        assert_eq!(r_n_called.get(), 1);
+        assert_eq!(n_called.get(), 1);
     }
 
     #[test]
@@ -874,29 +831,21 @@ mod test {
         let song_list = SongList::load_from_env(env).unwrap();
         song_list.insert(new_test_song("1")).unwrap();
 
-        let ic_n_called = Rc::new(Cell::new(0));
-        let ic_n_called_clone = Rc::clone(&ic_n_called);
+        let n_called = Rc::new(Cell::new(0));
+        let n_called_clone = Rc::clone(&n_called);
         song_list.connect_items_changed(move |_, index, removed, added| {
             assert_eq!(index, 0);
             assert_eq!(removed, 0);
             assert_eq!(added, 0);
-            ic_n_called_clone.set(ic_n_called_clone.get() + 1);
+            n_called_clone.set(n_called_clone.get() + 1);
         });
 
-        let r_n_called = Rc::new(Cell::new(0));
-        let r_n_called_clone = Rc::clone(&r_n_called);
-        song_list.connect_removed(move |_, _songs| {
-            r_n_called_clone.set(r_n_called_clone.get() + 1);
-        });
-
-        assert_eq!(ic_n_called.get(), 0);
-        assert_eq!(r_n_called.get(), 0);
+        assert_eq!(n_called.get(), 0);
         assert!(song_list
             .remove_many(&[&SongId::for_test("0")])
             .unwrap()
             .is_empty());
-        assert_eq!(ic_n_called.get(), 0);
-        assert_eq!(r_n_called.get(), 0);
+        assert_eq!(n_called.get(), 0);
     }
 
     #[test]
@@ -906,22 +855,14 @@ mod test {
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
-        song_list
-            .insert_many(vec![song_0.clone(), song_1.clone()])
-            .unwrap();
+        song_list.insert_many(vec![song_0, song_1]).unwrap();
 
-        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            ic_calls_output_clone
+            calls_output_clone
                 .borrow_mut()
                 .push((index, removed, added));
-        });
-
-        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, songs| {
-            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -931,8 +872,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
-        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
+        assert_eq!(calls_output.take(), &[(0, 2, 0)]);
     }
 
     #[test]
@@ -946,21 +886,15 @@ mod test {
         let song_3 = new_test_song("3");
         let song_4 = new_test_song("4");
         song_list
-            .insert_many(vec![song_0, song_1.clone(), song_2, song_3.clone(), song_4])
+            .insert_many(vec![song_0, song_1, song_2, song_3, song_4])
             .unwrap();
 
-        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            ic_calls_output_clone
+            calls_output_clone
                 .borrow_mut()
                 .push((index, removed, added));
-        });
-
-        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, songs| {
-            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -970,8 +904,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(3, 1, 0), (1, 1, 0)]);
-        assert_eq!(r_calls_output.take(), vec![vec![song_3, song_1]]);
+        assert_eq!(calls_output.take(), &[(3, 1, 0), (1, 1, 0)]);
     }
 
     #[test]
@@ -981,22 +914,14 @@ mod test {
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
-        song_list
-            .insert_many(vec![song_0.clone(), song_1.clone()])
-            .unwrap();
+        song_list.insert_many(vec![song_0, song_1]).unwrap();
 
-        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            ic_calls_output_clone
+            calls_output_clone
                 .borrow_mut()
                 .push((index, removed, added));
-        });
-
-        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, songs| {
-            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -1010,8 +935,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
-        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
+        assert_eq!(calls_output.take(), &[(0, 2, 0)]);
     }
 
     #[test]
@@ -1021,22 +945,14 @@ mod test {
 
         let song_0 = new_test_song("0");
         let song_1 = new_test_song("1");
-        song_list
-            .insert_many(vec![song_0.clone(), song_1.clone()])
-            .unwrap();
+        song_list.insert_many(vec![song_0, song_1]).unwrap();
 
-        let ic_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let ic_calls_output_clone = Rc::clone(&ic_calls_output);
+        let calls_output = Rc::new(RefCell::new(Vec::new()));
+        let calls_output_clone = Rc::clone(&calls_output);
         song_list.connect_items_changed(move |_, index, removed, added| {
-            ic_calls_output_clone
+            calls_output_clone
                 .borrow_mut()
                 .push((index, removed, added));
-        });
-
-        let r_calls_output = Rc::new(RefCell::new(Vec::new()));
-        let r_calls_output_clone = Rc::clone(&r_calls_output);
-        song_list.connect_removed(move |_, songs| {
-            r_calls_output_clone.borrow_mut().push(songs.to_vec());
         });
 
         assert_eq!(
@@ -1046,8 +962,7 @@ mod test {
                 .len(),
             2
         );
-        assert_eq!(ic_calls_output.take(), &[(0, 2, 0)]);
-        assert_eq!(r_calls_output.take(), vec![vec![song_1, song_0]]);
+        assert_eq!(calls_output.take(), &[(0, 2, 0)]);
     }
 
     #[test]
@@ -1058,23 +973,16 @@ mod test {
             .insert_many(vec![new_test_song("1"), new_test_song("2")])
             .unwrap();
 
-        let ic_n_called = Rc::new(Cell::new(0));
-        let ic_n_called_clone = Rc::clone(&ic_n_called);
+        let n_called = Rc::new(Cell::new(0));
+        let n_called_clone = Rc::clone(&n_called);
         song_list.connect_items_changed(move |_, _index, _removed, _added| {
-            ic_n_called_clone.set(ic_n_called_clone.get() + 1);
-        });
-
-        let r_n_called = Rc::new(Cell::new(0));
-        let r_n_called_clone = Rc::clone(&r_n_called);
-        song_list.connect_removed(move |_, _songs| {
-            r_n_called_clone.set(r_n_called_clone.get() + 1);
+            n_called_clone.set(n_called_clone.get() + 1);
         });
 
         assert!(song_list
             .remove_many(&[&SongId::for_test("0"), &SongId::for_test("3")])
             .unwrap()
             .is_empty(),);
-        assert_eq!(ic_n_called.get(), 0);
-        assert_eq!(r_n_called.get(), 0);
+        assert_eq!(n_called.get(), 0);
     }
 }
