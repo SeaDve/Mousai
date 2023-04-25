@@ -12,7 +12,11 @@ use std::{
     sync::Arc,
 };
 
-use crate::{config::APP_ID, model::Song, utils};
+use crate::{
+    config::APP_ID,
+    model::{Song, SongId},
+    utils,
+};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiPlayerState")]
@@ -172,8 +176,8 @@ impl Player {
         )
     }
 
-    pub fn is_active_song(&self, song: &Song) -> bool {
-        self.song().as_ref() == Some(song)
+    pub fn is_active_song(&self, song_id: &SongId) -> bool {
+        self.song().map_or(false, |song| song.id_ref() == song_id)
     }
 
     pub fn play(&self) {

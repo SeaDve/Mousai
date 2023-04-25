@@ -239,7 +239,7 @@ impl SongPage {
     fn toggle_playback(&self) {
         if let Some(ref player) = self.player() {
             if let Some(song) = self.song() {
-                if player.state() == PlayerState::Playing && player.is_active_song(&song) {
+                if player.state() == PlayerState::Playing && player.is_active_song(song.id_ref()) {
                     player.pause();
                 } else {
                     player.set_song(Some(song));
@@ -261,7 +261,7 @@ impl SongPage {
 
         if let Some(ref song) = song {
             let player = self.player().expect("player should be bound");
-            let is_active_song = player.is_active_song(song);
+            let is_active_song = player.is_active_song(song.id_ref());
             let player_state = player.state();
 
             if is_active_song && player_state == PlayerState::Buffering {
