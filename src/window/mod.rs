@@ -1,4 +1,5 @@
 mod album_cover;
+mod crossfade_paintable;
 mod external_link_tile;
 mod history_view;
 mod information_row;
@@ -7,7 +8,6 @@ mod progress_icon;
 mod recognized_page;
 mod recognized_page_tile;
 mod recognizer_status;
-mod crossfade_paintable;
 mod recognizer_view;
 mod song_bar;
 mod song_page;
