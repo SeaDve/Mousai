@@ -1,5 +1,6 @@
 use gtk::{
     glib::{self, clone, closure_local},
+    graphene,
     prelude::*,
     subclass::prelude::*,
 };
@@ -9,6 +10,7 @@ use std::{cell::RefCell, time::Duration};
 
 use super::{
     album_cover::AlbumCover,
+    crossfade_paintable::CrossfadePaintable,
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
 use crate::{
@@ -16,6 +18,10 @@ use crate::{
     model::Song,
     player::{Player, PlayerState},
 };
+
+const BACKGROUND_BLUR_RADIUS: f64 = 80.0;
+const BACKGROUND_SCALE_FACTOR: f32 = 2.0;
+const BACKGROUND_OPACITY: f64 = 0.25;
 
 mod imp {
     use super::*;
@@ -43,6 +49,7 @@ mod imp {
         pub(super) scale_handler_id: OnceCell<glib::SignalHandlerId>,
         pub(super) seek_timeout_id: RefCell<Option<glib::SourceId>>,
         pub(super) player: OnceCell<Player>,
+        pub(super) background_paintable: OnceCell<CrossfadePaintable>,
     }
 
     #[glib::object_subclass]
@@ -102,7 +109,26 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for SongBar {}
+    impl WidgetImpl for SongBar {
+        fn snapshot(&self, snapshot: &gtk::Snapshot) {
+            let obj = self.obj();
+            let width = obj.width();
+            let height = obj.height();
+            let background_scale_factor = BACKGROUND_SCALE_FACTOR * obj.scale_factor() as f32;
+
+            snapshot.push_clip(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
+            snapshot.push_blur(BACKGROUND_BLUR_RADIUS);
+            snapshot.push_opacity(BACKGROUND_OPACITY);
+            snapshot.scale(background_scale_factor, background_scale_factor);
+            obj.background_paintable()
+                .snapshot(snapshot, width as f64, height as f64);
+            snapshot.pop();
+            snapshot.pop();
+            snapshot.pop();
+
+            self.parent_snapshot(snapshot);
+        }
+    }
 }
 
 glib::wrapper! {
@@ -163,6 +189,16 @@ impl SongBar {
         self.imp().player.get().expect("player must be bound")
     }
 
+    fn background_paintable(&self) -> &CrossfadePaintable {
+        self.imp().background_paintable.get_or_init(|| {
+            let paintable = CrossfadePaintable::new(self);
+            paintable.connect_invalidate_contents(clone!(@weak self as obj => move |_| {
+                obj.queue_draw();
+            }));
+            paintable
+        })
+    }
+
     fn set_playback_position_scale_value_blocking(&self, value: f64) {
         let imp = self.imp();
         let scale_handler_id = imp.scale_handler_id.get().unwrap();
@@ -205,7 +241,9 @@ impl SongBar {
         self.imp().playback_position_scale.set_sensitive(has_song);
         self.action_set_enabled("song-bar.clear", has_song);
 
-        imp.album_cover.set_song(song);
+        imp.album_cover.set_song(song.as_ref());
+
+        self.background_paintable().set_song(song.as_ref());
     }
 
     fn update_playback_button(&self) {

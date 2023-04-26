@@ -7,6 +7,7 @@ mod progress_icon;
 mod recognized_page;
 mod recognized_page_tile;
 mod recognizer_status;
+mod crossfade_paintable;
 mod recognizer_view;
 mod song_bar;
 mod song_page;

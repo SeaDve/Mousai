@@ -179,7 +179,7 @@ mod imp {
 
             self.song_binding_group.set_source(song.as_ref());
 
-            self.album_cover.set_song(song.clone());
+            self.album_cover.set_song(song.as_ref());
 
             self.song.replace(song);
             obj.update_playback_button_visibility();

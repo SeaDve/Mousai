@@ -33,7 +33,6 @@ mod imp {
         #[template_child]
         pub(super) placeholder: TemplateChild<gtk::Image>,
 
-        pub(super) song: RefCell<Option<Song>>,
         pub(super) join_handle: RefCell<Option<glib::JoinHandle<()>>>,
     }
 
@@ -114,11 +113,7 @@ impl AlbumCover {
         glib::Object::new()
     }
 
-    pub fn set_song(&self, song: Option<Song>) {
-        if song == self.song() {
-            return;
-        }
-
+    pub fn set_song(&self, song: Option<&Song>) {
         let imp = self.imp();
 
         if let Some(join_handle) = imp.join_handle.take() {
@@ -150,12 +145,6 @@ impl AlbumCover {
         } else {
             self.set_paintable(gdk::Paintable::NONE);
         }
-
-        imp.song.replace(song);
-    }
-
-    pub fn song(&self) -> Option<Song> {
-        self.imp().song.borrow().clone()
     }
 
     fn set_paintable(&self, paintable: Option<&impl IsA<gdk::Paintable>>) {
