@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 11:01+0800\n"
+"POT-Creation-Date: 2023-04-26 17:08+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
@@ -109,7 +109,7 @@ msgstr "🌐 வெவ்வேறு வழங்குநர்களிடம
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 பயன்படுத்த எளிதான பயனர் இடைமுகம்"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "டேவ் பேட்ரிக் கேபர்டோ"
 
@@ -395,6 +395,23 @@ msgstr "ஒலிவாங்கி"
 msgid "Desktop Audio"
 msgstr "டெஸ்க்டாப் ஆடியோ"
 
+#: src/recognizer/mod.rs:308
+msgid "The result will be available when you're back online."
+msgstr "நீங்கள் ஆன்லைனில் திரும்பியவுடன் முடிவு கிடைக்கும்."
+
+#: src/recognizer/mod.rs:337
+msgid "The result will be available when your connection is restored."
+msgstr ""
+
+#: src/recognizer/mod.rs:340
+msgid "The result will be available when your token limit is reset."
+msgstr ""
+
+#: src/recognizer/mod.rs:343
+msgid ""
+"The result will be available when your token is replaced with a valid one."
+msgstr ""
+
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
 msgstr "பொருத்தங்கள் எதுவும் இல்லை"
@@ -497,27 +514,23 @@ msgid_plural "Remove Songs From History"
 msgstr[0] "வரலாற்றிலிருந்து பாடலை அகற்று"
 msgstr[1] "வரலாற்றிலிருந்து பாடல்களை அகற்று"
 
-#: src/window/mod.rs:253
+#: src/window/mod.rs:262
 msgid "Failed to insert song to history"
 msgstr "வரலாற்றில் பாடலைச் செருகுவதில் தோல்வி"
 
-#: src/window/mod.rs:264
+#: src/window/mod.rs:273
 msgid "Recording saved"
 msgstr "பதிவு சேமிக்கப்பட்டது"
 
-#: src/window/mod.rs:265
-msgid "The result will be available when you're back online."
-msgstr "நீங்கள் ஆன்லைனில் திரும்பியவுடன் முடிவு கிடைக்கும்."
-
-#: src/window/mod.rs:270
+#: src/window/mod.rs:279
 msgid "Ok, got it"
 msgstr "சரி, புரிந்தது"
 
-#: src/window/mod.rs:306
+#: src/window/mod.rs:315
 msgid "Open preferences and try setting a different token."
 msgstr "விருப்பத்தேர்வுகளைத் திறந்து வேறு டோக்கனை அமைக்க முயற்சிக்கவும்."
 
-#: src/window/mod.rs:311
+#: src/window/mod.rs:320
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
@@ -525,35 +538,35 @@ msgstr ""
 "வரம்பு மீட்டமைக்கப்படும் வரை காத்திருக்கவும் அல்லது விருப்பத்தேர்வுகளைத் திறந்து வேறு "
 "டோக்கனை அமைக்க முயற்சிக்கவும்."
 
-#: src/window/mod.rs:317
+#: src/window/mod.rs:326
 msgid "Open Preferences"
 msgstr "விருப்பங்களைத் திறக்கவும்"
 
-#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
+#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
 msgid "No, Thanks"
 msgstr "இல்லை, நன்றி"
 
-#: src/window/mod.rs:343
+#: src/window/mod.rs:352
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr "GitHub இல் சிக்கலைத் திறந்து தேவையான தகவலை வழங்கவும்."
 
-#: src/window/mod.rs:346
+#: src/window/mod.rs:355
 msgid "Open an Issue"
 msgstr "ஒரு சிக்கலைத் திறக்கவும்"
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:383
 msgid "Try Again"
 msgstr "மீண்டும் முயற்சிக்கவும்"
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:405
 msgid "Please check your internet connection."
 msgstr "உங்கள் இணைய இணைப்பைச் சரிபார்க்கவும்."
 
-#: src/window/mod.rs:398
+#: src/window/mod.rs:407
 msgid "Ok"
 msgstr "சரி"
 
-#: src/window/mod.rs:483
+#: src/window/mod.rs:492
 msgid "An error occurred in the player"
 msgstr "பிளேயரில் பிழை ஏற்பட்டது"
 

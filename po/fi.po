@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 11:01+0800\n"
+"POT-Creation-Date: 2023-04-26 17:08+0800\n"
 "PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
@@ -113,7 +113,7 @@ msgstr "🌐 Selaa ja kuuntele kappaleita useilta eri palveluntarjoajilta"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Helppokäyttöinen käyttöliittymä"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -393,6 +393,23 @@ msgstr "Mikrofoni"
 msgid "Desktop Audio"
 msgstr "Tietokoneen ääni"
 
+#: src/recognizer/mod.rs:308
+msgid "The result will be available when you're back online."
+msgstr "Tulos on saatavilla, kun olet taas yhteydessä verkkoon."
+
+#: src/recognizer/mod.rs:337
+msgid "The result will be available when your connection is restored."
+msgstr ""
+
+#: src/recognizer/mod.rs:340
+msgid "The result will be available when your token limit is reset."
+msgstr ""
+
+#: src/recognizer/mod.rs:343
+msgid ""
+"The result will be available when your token is replaced with a valid one."
+msgstr ""
+
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
 msgstr "Ei tuloksia"
@@ -495,61 +512,57 @@ msgid_plural "Remove Songs From History"
 msgstr[0] "Poista kappale historiasta"
 msgstr[1] "Poista kappaleet historiasta"
 
-#: src/window/mod.rs:253
+#: src/window/mod.rs:262
 msgid "Failed to insert song to history"
 msgstr "Kappaleen asettaminen historiaan epäonnistui"
 
-#: src/window/mod.rs:264
+#: src/window/mod.rs:273
 msgid "Recording saved"
 msgstr "Nauhoite tallennettu"
 
-#: src/window/mod.rs:265
-msgid "The result will be available when you're back online."
-msgstr "Tulos on saatavilla, kun olet taas yhteydessä verkkoon."
-
-#: src/window/mod.rs:270
+#: src/window/mod.rs:279
 msgid "Ok, got it"
 msgstr "Selvä"
 
-#: src/window/mod.rs:306
+#: src/window/mod.rs:315
 msgid "Open preferences and try setting a different token."
 msgstr "Avaa asetukset ja aseta eri poletti."
 
-#: src/window/mod.rs:311
+#: src/window/mod.rs:320
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
 msgstr ""
 
-#: src/window/mod.rs:317
+#: src/window/mod.rs:326
 msgid "Open Preferences"
 msgstr "Avaa asetukset"
 
-#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
+#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
 msgid "No, Thanks"
 msgstr "Ei"
 
-#: src/window/mod.rs:343
+#: src/window/mod.rs:352
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr "Avaa issue GitHubiin ja toimita tarvittavat tiedot."
 
-#: src/window/mod.rs:346
+#: src/window/mod.rs:355
 msgid "Open an Issue"
 msgstr "Avaa issue"
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:383
 msgid "Try Again"
 msgstr "Yritä uudelleen"
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:405
 msgid "Please check your internet connection."
 msgstr "Tarkista internetyhteytesi."
 
-#: src/window/mod.rs:398
+#: src/window/mod.rs:407
 msgid "Ok"
 msgstr "OK"
 
-#: src/window/mod.rs:483
+#: src/window/mod.rs:492
 msgid "An error occurred in the player"
 msgstr "Soittimessa tapahtui virhe"
 

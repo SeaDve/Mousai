@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 11:01+0800\n"
+"POT-Creation-Date: 2023-04-26 17:08+0800\n"
 "PO-Revision-Date: 2023-04-17 07:51+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
@@ -113,7 +113,7 @@ msgstr "🌐 Περιηγηθείτε και ακούστε το τραγούδ�
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Εύκολο στη χρήση διεπαφή χρήστη"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -401,6 +401,23 @@ msgstr "Μικρόφωνο"
 msgid "Desktop Audio"
 msgstr "Ήχος επιφάνειας εργασίας"
 
+#: src/recognizer/mod.rs:308
+msgid "The result will be available when you're back online."
+msgstr "Το αποτέλεσμα θα είναι διαθέσιμο όταν συνδεθείτε ξανά."
+
+#: src/recognizer/mod.rs:337
+msgid "The result will be available when your connection is restored."
+msgstr ""
+
+#: src/recognizer/mod.rs:340
+msgid "The result will be available when your token limit is reset."
+msgstr ""
+
+#: src/recognizer/mod.rs:343
+msgid ""
+"The result will be available when your token is replaced with a valid one."
+msgstr ""
+
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
 msgstr "Δεν βρέθηκαν αντιστοιχίες"
@@ -503,28 +520,24 @@ msgid_plural "Remove Songs From History"
 msgstr[0] "Αφαιρέστε το τραγούδι από το ιστορίκο"
 msgstr[1] "Αφαιρέστε τα τραγούδια από το ιστορίκο"
 
-#: src/window/mod.rs:253
+#: src/window/mod.rs:262
 msgid "Failed to insert song to history"
 msgstr "Αποτυχία εισαγωγής τραγουδιού στο ιστορικό"
 
-#: src/window/mod.rs:264
+#: src/window/mod.rs:273
 msgid "Recording saved"
 msgstr "Η εγγραφή αποθηκεύτηκε"
 
-#: src/window/mod.rs:265
-msgid "The result will be available when you're back online."
-msgstr "Το αποτέλεσμα θα είναι διαθέσιμο όταν συνδεθείτε ξανά."
-
-#: src/window/mod.rs:270
+#: src/window/mod.rs:279
 msgid "Ok, got it"
 msgstr "Εντάξει το κατάλαβα"
 
-#: src/window/mod.rs:306
+#: src/window/mod.rs:315
 msgid "Open preferences and try setting a different token."
 msgstr ""
 "Ανοίξτε τις προτιμήσεις και δοκιμάστε να ορίσετε ένα διαφορετικό διακριτικό."
 
-#: src/window/mod.rs:311
+#: src/window/mod.rs:320
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
 "different token."
@@ -532,35 +545,35 @@ msgstr ""
 "Περιμένετε έως ότου γίνει επαναφορά του ορίου ή ανοίξτε τις προτιμήσεις και "
 "δοκιμάστε να ορίσετε ένα διαφορετικό διακριτικό."
 
-#: src/window/mod.rs:317
+#: src/window/mod.rs:326
 msgid "Open Preferences"
 msgstr "Ανοίξτε τις Προτιμήσεις"
 
-#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
+#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
 msgid "No, Thanks"
 msgstr "Οχι ευχαριστώ"
 
-#: src/window/mod.rs:343
+#: src/window/mod.rs:352
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr "Ανοίξτε ένα θέμα στο GitHub και δώστε τις απαραίτητες πληροφορίες."
 
-#: src/window/mod.rs:346
+#: src/window/mod.rs:355
 msgid "Open an Issue"
 msgstr "Ανοίξτε ένα Issue στο GitHub"
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:383
 msgid "Try Again"
 msgstr "Προσπάθησε ξανά"
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:405
 msgid "Please check your internet connection."
 msgstr "Ελέγξτε τη σύνδεσή σας στο Διαδίκτυο."
 
-#: src/window/mod.rs:398
+#: src/window/mod.rs:407
 msgid "Ok"
 msgstr "Εντάξει"
 
-#: src/window/mod.rs:483
+#: src/window/mod.rs:492
 msgid "An error occurred in the player"
 msgstr "Παρουσιάστηκε σφάλμα στη συσκευή αναπαραγωγής"
 

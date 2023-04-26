@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-22 11:01+0800\n"
+"POT-Creation-Date: 2023-04-26 17:08+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -116,7 +116,7 @@ msgstr "🌐 Utforsk og lytt til sanger fra forskjellige tilbydere"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Lettfattelig brukergrensesnitt"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:337 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
 #, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
@@ -412,6 +412,23 @@ msgstr "Mikrofon"
 msgid "Desktop Audio"
 msgstr "Skrivebordslyd"
 
+#: src/recognizer/mod.rs:308
+msgid "The result will be available when you're back online."
+msgstr "Resultatet vil være tilgjengelig når du er på nett igjen."
+
+#: src/recognizer/mod.rs:337
+msgid "The result will be available when your connection is restored."
+msgstr ""
+
+#: src/recognizer/mod.rs:340
+msgid "The result will be available when your token limit is reset."
+msgstr ""
+
+#: src/recognizer/mod.rs:343
+msgid ""
+"The result will be available when your token is replaced with a valid one."
+msgstr ""
+
 #: src/recognizer/provider/error.rs:48
 msgid "No Matches Found"
 msgstr "Ingen treff"
@@ -521,29 +538,25 @@ msgid_plural "Remove Songs From History"
 msgstr[0] "Fjern sang fra historikk"
 msgstr[1] "Fjern sanger fra historikk"
 
-#: src/window/mod.rs:253
+#: src/window/mod.rs:262
 #, fuzzy
 msgid "Failed to insert song to history"
 msgstr "Klarte ikke å legge sang i historikk"
 
-#: src/window/mod.rs:264
+#: src/window/mod.rs:273
 msgid "Recording saved"
 msgstr "Opptak lagret"
 
-#: src/window/mod.rs:265
-msgid "The result will be available when you're back online."
-msgstr "Resultatet vil være tilgjengelig når du er på nett igjen."
-
-#: src/window/mod.rs:270
+#: src/window/mod.rs:279
 #, fuzzy
 msgid "Ok, got it"
 msgstr "OK, skjønner."
 
-#: src/window/mod.rs:306
+#: src/window/mod.rs:315
 msgid "Open preferences and try setting a different token."
 msgstr "Åpne innstillingene og prøv å sette et annet symbol."
 
-#: src/window/mod.rs:311
+#: src/window/mod.rs:320
 #, fuzzy
 msgid ""
 "Wait until the limit is reset or open preferences and try setting a "
@@ -552,36 +565,36 @@ msgstr ""
 "Vent til grensen er tilbakestilt eller åpne innstillingene og prøv å sette "
 "et annet symbol."
 
-#: src/window/mod.rs:317
+#: src/window/mod.rs:326
 msgid "Open Preferences"
 msgstr "Åpne innstillinger"
 
-#: src/window/mod.rs:322 src/window/mod.rs:351 src/window/mod.rs:381
+#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
 msgid "No, Thanks"
 msgstr "Nei takk"
 
-#: src/window/mod.rs:343
+#: src/window/mod.rs:352
 msgid "Please open an issue on GitHub and provide the necessary information."
 msgstr "Åpne feilrapport på GitHub og legg til nødvendig info."
 
-#: src/window/mod.rs:346
+#: src/window/mod.rs:355
 msgid "Open an Issue"
 msgstr "Åpne feilrapport"
 
-#: src/window/mod.rs:374
+#: src/window/mod.rs:383
 msgid "Try Again"
 msgstr "Prøv igjen"
 
-#: src/window/mod.rs:396
+#: src/window/mod.rs:405
 msgid "Please check your internet connection."
 msgstr "Sjekk at du er tilkoblet Internett."
 
-#: src/window/mod.rs:398
+#: src/window/mod.rs:407
 #, fuzzy
 msgid "Ok"
 msgstr "OK"
 
-#: src/window/mod.rs:483
+#: src/window/mod.rs:492
 msgid "An error occurred in the player"
 msgstr "En feil oppstod i avspilleren"
 
