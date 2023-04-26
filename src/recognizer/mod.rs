@@ -381,9 +381,12 @@ impl Recognizer {
         }
 
         // TODO recognize recordings concurrently, but not too many at once (at most 3?)
-        utils::spawn(clone!(@weak self as obj => async move {
-            obj.try_recognize_saved_recordings_inner().await;
-        }));
+        utils::spawn(
+            glib::PRIORITY_DEFAULT,
+            clone!(@weak self as obj => async move {
+                obj.try_recognize_saved_recordings_inner().await;
+            }),
+        );
     }
 
     async fn try_recognize_saved_recordings_inner(&self) {

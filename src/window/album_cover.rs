@@ -127,8 +127,9 @@ impl AlbumCover {
                         self.set_paintable(gdk::Paintable::NONE);
                     }
 
-                    let join_handle =
-                        utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
+                    let join_handle = utils::spawn(
+                        glib::PRIORITY_LOW,
+                        clone!(@weak self as obj, @weak album_art => async move {
                             match album_art.texture().await {
                                 Ok(texture) => {
                                     obj.set_paintable(Some(texture));
@@ -138,7 +139,8 @@ impl AlbumCover {
                                     obj.set_paintable(gdk::Paintable::NONE);
                                 }
                             }
-                        }));
+                        }),
+                    );
                     imp.join_handle.replace(Some(join_handle));
                 }
                 Err(err) => {
