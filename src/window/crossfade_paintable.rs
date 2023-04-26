@@ -11,6 +11,7 @@ use std::cell::{Cell, RefCell};
 use crate::{model::Song, utils};
 
 const FADE_ANIMATION_DURATION_MS: u32 = 800;
+const INITIAL_FADE_PROGRESS: f64 = 1.0;
 
 mod imp {
     use super::*;
@@ -47,6 +48,8 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
 
+            self.fade_progress.set(INITIAL_FADE_PROGRESS);
+
             let obj = self.obj();
             let widget = self.widget.upgrade().expect("widget must be alive");
 
@@ -56,7 +59,7 @@ mod imp {
             }));
             let fade_animation = adw::TimedAnimation::builder()
                 .widget(&widget)
-                .value_from(0.0)
+                .value_from(INITIAL_FADE_PROGRESS)
                 .value_to(1.0)
                 .duration(FADE_ANIMATION_DURATION_MS)
                 .target(&target)
