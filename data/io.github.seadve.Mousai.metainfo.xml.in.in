@@ -39,6 +39,15 @@
   <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.7.4" date="2023-04-26">
+      <description>
+        <p>This release contains new features and fixes:</p>
+        <ul>
+          <li>Added blur background on song player bar</li>
+          <li>Improved saved recording messages</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.3" date="2023-04-22">
       <description>
         <p>This release contains a new feature and translation updates:</p>
