@@ -1,5 +1,4 @@
 use gtk::{
-    gdk,
     glib::{self, clone},
     prelude::*,
     subclass::prelude::*,
@@ -7,7 +6,7 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use crate::{model::Song, utils};
+use crate::{core::AlbumArt, model::Song};
 
 const DEFAULT_ENABLE_CROSSFADE: bool = true;
 
@@ -33,7 +32,8 @@ mod imp {
         #[template_child]
         pub(super) placeholder: TemplateChild<gtk::Image>,
 
-        pub(super) join_handle: RefCell<Option<glib::JoinHandle<()>>>,
+        pub(super) album_art: RefCell<Option<AlbumArt>>,
+        pub(super) album_art_is_loaded_notify_handler_id: RefCell<Option<glib::SignalHandlerId>>,
     }
 
     #[glib::object_subclass]
@@ -116,45 +116,43 @@ impl AlbumCover {
     pub fn set_song(&self, song: Option<&Song>) {
         let imp = self.imp();
 
-        if let Some(join_handle) = imp.join_handle.take() {
-            join_handle.abort();
-        }
-
         if let Some(album_art) = song.as_ref().and_then(|song| song.album_art()) {
             match album_art {
                 Ok(album_art) => {
-                    if !album_art.is_loaded() {
-                        self.set_paintable(gdk::Paintable::NONE);
+                    if let Some(old_album_art) = self.album_art() {
+                        if let Some(handler_id) = imp.album_art_is_loaded_notify_handler_id.take() {
+                            old_album_art.disconnect(handler_id);
+                        }
                     }
 
-                    let join_handle =
-                        utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
-                            match album_art.texture().await {
-                                Ok(texture) => {
-                                    obj.set_paintable(Some(texture));
-                                }
-                                Err(err) => {
-                                    tracing::warn!("Failed to load texture: {:?}", err);
-                                    obj.set_paintable(gdk::Paintable::NONE);
-                                }
-                            }
-                        }));
-                    imp.join_handle.replace(Some(join_handle));
+                    if album_art.is_loaded() {
+                        self.set_album_art(Some(album_art));
+                    } else {
+                        imp.album_art_is_loaded_notify_handler_id.replace(Some(
+                            album_art.connect_is_loaded_notify(
+                                clone!(@weak self as obj => move |album_art| {
+                                    if album_art.is_loaded() {
+                                        obj.set_album_art(Some(album_art.clone()));
+                                    }
+                                }),
+                            ),
+                        ));
+                    }
                 }
                 Err(err) => {
                     tracing::warn!("Failed to get song album art: {:?}", err);
-                    self.set_paintable(gdk::Paintable::NONE);
+                    self.set_album_art(None);
                 }
             }
         } else {
-            self.set_paintable(gdk::Paintable::NONE);
+            self.set_album_art(None);
         }
     }
 
-    fn set_paintable(&self, paintable: Option<&impl IsA<gdk::Paintable>>) {
+    fn set_album_art(&self, paintable: Option<AlbumArt>) {
         let imp = self.imp();
 
-        if let Some(paintable) = paintable {
+        if let Some(ref paintable) = paintable {
             if imp.stack.visible_child().as_ref() == Some(imp.image_a.upcast_ref()) {
                 imp.image_b.set_paintable(Some(paintable));
                 imp.stack.set_visible_child(&imp.image_b.get());
@@ -165,6 +163,28 @@ impl AlbumCover {
         } else {
             imp.stack.set_visible_child(&imp.placeholder.get());
         }
+
+        imp.album_art.replace(paintable);
+    }
+
+    fn album_art(&self) -> Option<AlbumArt> {
+        let imp = self.imp();
+        let album_art = imp.album_art.borrow().clone();
+
+        debug_assert_eq!(
+            album_art,
+            imp.stack.visible_child().and_then(|visible_child| {
+                if &visible_child == imp.image_a.upcast_ref::<gtk::Widget>() {
+                    imp.image_a.paintable().map(|p| p.downcast().unwrap())
+                } else if &visible_child == imp.image_b.upcast_ref::<gtk::Widget>() {
+                    imp.image_b.paintable().map(|p| p.downcast().unwrap())
+                } else {
+                    None
+                }
+            })
+        );
+
+        album_art
     }
 }
 

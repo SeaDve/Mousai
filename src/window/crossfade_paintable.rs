@@ -8,7 +8,7 @@ use once_cell::unsync::OnceCell;
 
 use std::cell::{Cell, RefCell};
 
-use crate::{model::Song, utils};
+use crate::model::Song;
 
 const FADE_ANIMATION_DURATION_MS: u32 = 800;
 const INITIAL_FADE_PROGRESS: f64 = 1.0;
@@ -33,8 +33,6 @@ mod imp {
 
         pub(super) fade_progress: Cell<f64>,
         pub(super) fade_animation: OnceCell<adw::TimedAnimation>,
-
-        pub(super) join_handle: RefCell<Option<glib::JoinHandle<()>>>,
     }
 
     #[glib::object_subclass]
@@ -201,32 +199,10 @@ impl CrossfadePaintable {
 
     /// Helper to set the album art of the song as the paintable.
     pub fn set_song(&self, song: Option<&Song>) {
-        let imp = self.imp();
-
-        if let Some(join_handle) = imp.join_handle.take() {
-            join_handle.abort();
-        }
-
         if let Some(album_art) = song.and_then(|song| song.album_art()) {
             match album_art {
                 Ok(album_art) => {
-                    if !album_art.is_loaded() {
-                        self.set_paintable(gdk::Paintable::NONE);
-                    }
-
-                    let join_handle =
-                        utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
-                            match album_art.texture().await {
-                                Ok(texture) => {
-                                    obj.set_paintable(Some(texture.upcast_ref::<gdk::Paintable>()));
-                                }
-                                Err(err) => {
-                                    tracing::warn!("Failed to load texture: {:?}", err);
-                                    obj.set_paintable(gdk::Paintable::NONE);
-                                }
-                            }
-                        }));
-                    imp.join_handle.replace(Some(join_handle));
+                    self.set_paintable(Some(album_art));
                 }
                 Err(err) => {
                     tracing::warn!("Failed to get song album art: {:?}", err);

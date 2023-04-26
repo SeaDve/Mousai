@@ -3,10 +3,7 @@ use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::unsync::OnceCell;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
-use std::{
-    cell::{Cell, RefCell},
-    rc::Rc,
-};
+use std::cell::{Cell, RefCell};
 
 use crate::{
     core::{AlbumArt, DateTime},
@@ -122,7 +119,7 @@ impl Song {
     }
 
     /// Returns a result of album art for the corresponding album art link if it exists
-    pub fn album_art(&self) -> Option<Result<Rc<AlbumArt>>> {
+    pub fn album_art(&self) -> Option<Result<AlbumArt>> {
         let album_art_link = self.album_art_link()?;
 
         Some(

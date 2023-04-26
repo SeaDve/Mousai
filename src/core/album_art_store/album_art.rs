@@ -1,11 +1,16 @@
-use anyhow::Result;
-use futures_channel::oneshot::{self, Receiver, Sender};
-use futures_util::future::{FutureExt, Shared};
-use gtk::{gdk, gio, glib, prelude::*};
+use anyhow::{Context, Result};
+use gtk::{
+    gdk, gio,
+    glib::{self, clone},
+    prelude::*,
+    subclass::prelude::*,
+};
 use once_cell::unsync::OnceCell;
 use soup::prelude::*;
 
-use std::{cell::RefCell, fmt, path::Path};
+use std::{cell::RefCell, marker::PhantomData, path::Path};
+
+use crate::utils;
 
 // TODO
 // - Don't load AlbumArt if network is metered
@@ -14,198 +19,192 @@ use std::{cell::RefCell, fmt, path::Path};
 // - Load only at most n AlbumArt at a time
 // - Sanitize the arbitrary data downloaded before converting it to texture
 
-pub struct AlbumArt {
-    session: soup::Session,
-    download_url: String,
-    cache_file: gio::File,
-    cache: OnceCell<gdk::Texture>,
-    #[allow(clippy::type_complexity)]
-    guard: RefCell<Option<(Sender<()>, Shared<Receiver<()>>)>>,
+mod imp {
+    use super::*;
+
+    #[derive(Debug, Default, glib::Properties)]
+    #[properties(wrapper_type = super::AlbumArt)]
+    pub struct AlbumArt {
+        #[property(get, set, construct_only)]
+        pub(super) session: OnceCell<soup::Session>,
+        #[property(get, set, construct_only)]
+        pub(super) download_url: OnceCell<String>,
+        #[property(get, set, construct_only)]
+        pub(super) cache_file: OnceCell<gio::File>,
+        #[property(get = Self::is_loaded)]
+        pub(super) is_loaded: PhantomData<bool>,
+
+        pub(super) texture: RefCell<Option<gdk::Texture>>,
+        pub(super) join_handle: RefCell<Option<glib::JoinHandle<()>>>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for AlbumArt {
+        const NAME: &'static str = "MsaiAlbumArt";
+        type Type = super::AlbumArt;
+        type Interfaces = (gdk::Paintable,);
+    }
+
+    impl ObjectImpl for AlbumArt {
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.obj();
+
+            let join_handle = utils::spawn(
+                glib::PRIORITY_LOW,
+                clone!(@weak obj => async move {
+                    if let Err(err) = obj.load_texture().await {
+                        tracing::warn!("Failed to load album art: {:?}", err);
+                    }
+                }),
+            );
+            self.join_handle.replace(Some(join_handle));
+        }
+
+        fn dispose(&self) {
+            if let Some(join_handle) = self.join_handle.take() {
+                join_handle.abort();
+            }
+        }
+
+        crate::derived_properties!();
+    }
+
+    impl PaintableImpl for AlbumArt {
+        fn snapshot(&self, snapshot: &gdk::Snapshot, width: f64, height: f64) {
+            if let Some(texture) = self.texture.borrow().as_ref() {
+                texture.snapshot(snapshot, width, height);
+            }
+        }
+
+        fn current_image(&self) -> gdk::Paintable {
+            self.texture.borrow().as_ref().map_or_else(
+                || self.parent_current_image(),
+                |texture| texture.current_image(),
+            )
+        }
+
+        fn flags(&self) -> gdk::PaintableFlags {
+            self.texture.borrow().as_ref().map_or_else(
+                || self.parent_flags(),
+                |texture| {
+                    let mut flags = texture.flags();
+                    flags.remove(gdk::PaintableFlags::CONTENTS);
+                    flags
+                },
+            )
+        }
+
+        fn intrinsic_width(&self) -> i32 {
+            self.texture.borrow().as_ref().map_or_else(
+                || self.parent_intrinsic_width(),
+                |texture| texture.intrinsic_width(),
+            )
+        }
+
+        fn intrinsic_height(&self) -> i32 {
+            self.texture.borrow().as_ref().map_or_else(
+                || self.parent_intrinsic_height(),
+                |texture| texture.intrinsic_height(),
+            )
+        }
+
+        fn intrinsic_aspect_ratio(&self) -> f64 {
+            self.texture.borrow().as_ref().map_or_else(
+                || self.parent_intrinsic_aspect_ratio(),
+                |texture| texture.intrinsic_aspect_ratio(),
+            )
+        }
+    }
+
+    impl AlbumArt {
+        fn is_loaded(&self) -> bool {
+            self.texture.borrow().is_some()
+        }
+    }
 }
 
-impl fmt::Debug for AlbumArt {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let rx_strong_count = self
-            .guard
-            .borrow()
-            .as_ref()
-            .and_then(|(_, rx)| rx.strong_count())
-            .unwrap_or(0);
-
-        f.debug_struct("AlbumArt")
-            .field("download_url", &self.download_url)
-            .field("cache_uri", &self.cache_file.uri())
-            .field("loaded", &self.is_loaded())
-            .field("rx_strong_count", &rx_strong_count)
-            .finish()
-    }
+glib::wrapper! {
+    pub struct AlbumArt(ObjectSubclass<imp::AlbumArt>)
+        @implements gdk::Paintable;
 }
 
 impl AlbumArt {
-    pub(super) fn new(session: &soup::Session, download_url: &str, cache_path: &Path) -> Self {
-        Self {
-            session: session.clone(),
-            download_url: download_url.to_string(),
-            cache_file: gio::File::for_path(cache_path),
-            cache: OnceCell::new(),
-            guard: RefCell::default(),
-        }
-    }
-
-    /// Whether the album art is loaded in memory.
-    pub fn is_loaded(&self) -> bool {
-        self.cache.get().is_some()
+    pub fn new(session: &soup::Session, download_url: &str, cache_path: impl AsRef<Path>) -> Self {
+        glib::Object::builder()
+            .property("session", session)
+            .property("download-url", download_url)
+            .property("cache-file", gio::File::for_path(cache_path))
+            .build()
     }
 
     pub fn uri(&self) -> String {
-        if self.cache_file.query_exists(gio::Cancellable::NONE) {
-            return self.cache_file.uri().into();
+        if self.is_loaded() {
+            let cache_file = self.cache_file();
+            debug_assert!(cache_file.query_exists(gio::Cancellable::NONE));
+            return cache_file.uri().into();
         }
 
-        self.download_url.clone()
+        self.download_url()
     }
 
-    pub async fn texture(&self) -> Result<&gdk::Texture> {
-        let rx = self.guard.borrow().as_ref().map(|(_, rx)| rx.clone());
-        if let Some(rx) = rx {
-            // If there are currently loading AlbumArt, wait
-            // for it to finish and be stored before checking if
-            // it exist. This is to prevent loading the same
-            // album art twice on subsequent call on this function.
-            let _ = rx.await;
-        }
+    fn set_texture(&self, texture: gdk::Texture) {
+        let imp = self.imp();
+        imp.texture.replace(Some(texture));
+        self.invalidate_contents();
+        self.notify_is_loaded();
+    }
 
-        debug_assert!(
-            self.guard.borrow().is_none(),
-            "guard must be dropped before checking cache"
-        );
+    async fn load_texture(&self) -> Result<()> {
+        let cache_file = self.cache_file();
 
-        if let Some(texture) = self.cache.get() {
-            return Ok(texture);
-        }
-
-        let (tx, rx) = oneshot::channel();
-        self.guard.replace(Some((tx, rx.shared())));
-
-        match self.cache_file.load_bytes_future().await {
+        match cache_file.load_bytes_future().await {
             Ok((ref bytes, _)) => {
-                let texture = gdk::Texture::from_bytes(bytes)?;
-                return Ok(self.set_and_get_cache(texture));
+                let texture =
+                    gdk::Texture::from_bytes(bytes).context("Failed to load texture from bytes")?;
+                self.set_texture(texture);
+                return Ok(());
             }
             Err(err) => {
-                if err.matches(gio::IOErrorEnum::NotFound) {
-                    tracing::debug!(
-                        uri = ?self.cache_file.uri(),
-                        "Cache file not found; downloading album art",
-                    );
-                } else {
+                if !err.matches(gio::IOErrorEnum::NotFound) {
                     return Err(err.into());
                 }
+
+                tracing::debug!(
+                    uri = ?cache_file.uri(),
+                    "Cache file not found; downloading album art",
+                );
             }
         }
 
+        let download_url = self.download_url();
+
         let bytes = self
-            .session
+            .session()
             .send_and_read_future(
-                &soup::Message::new("GET", &self.download_url)?,
+                &soup::Message::new("GET", &download_url)?,
                 glib::PRIORITY_LOW,
             )
-            .await?;
-        tracing::debug!(download_url = ?self.download_url, "Downloaded album art");
-
-        let texture = self.set_and_get_cache(gdk::Texture::from_bytes(&bytes)?);
-
-        let texture_bytes = texture.save_to_png_bytes();
-        self.cache_file
-            .replace_contents_future(texture_bytes, None, false, gio::FileCreateFlags::NONE)
             .await
-            .map_err(|(_, err)| err)?;
+            .context("Failed to download album art")?;
+        tracing::debug!(download_url, "Downloaded album art");
 
-        Ok(texture)
-    }
+        let texture =
+            gdk::Texture::from_bytes(&bytes).context("Failed to load texture from bytes")?;
+        self.set_texture(texture.clone());
 
-    fn set_and_get_cache(&self, texture: gdk::Texture) -> &gdk::Texture {
-        let ret = match self.cache.try_insert(texture) {
-            Ok(final_value) => final_value,
-            Err((final_value, texture)) => {
-                tracing::error!(
-                    "cache was already set; is_same_instance = {}",
-                    final_value == &texture,
-                );
-                final_value
-            }
-        };
+        cache_file
+            .replace_contents_future(
+                texture.save_to_png_bytes(),
+                None,
+                false,
+                gio::FileCreateFlags::NONE,
+            )
+            .await
+            .map_err(|(_, err)| err)
+            .context("Failed to save texture to file")?;
 
-        // Since the cache is already loaded, the guard to
-        // delay consecutive calls to Self::texture is not
-        // needed anymore.
-        self.guard.replace(None);
-
-        ret
-    }
-
-    #[cfg(test)]
-    pub(super) fn cache_file(&self) -> &gio::File {
-        &self.cache_file
-    }
-}
-
-#[cfg(test)]
-mod test {
-    use super::*;
-
-    use futures_util::future;
-
-    #[gtk::test]
-    async fn download() {
-        let session = soup::Session::new();
-        let download_url =
-            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-
-        let tempdir = tempfile::tempdir().unwrap();
-        let cache_path = tempdir.path().join("image-download.png");
-
-        let album_art = AlbumArt::new(&session, download_url, &cache_path);
-        assert!(!album_art.is_loaded());
-        assert_eq!(album_art.uri(), download_url);
-
-        assert!(album_art.texture().await.is_ok());
-        assert!(album_art.is_loaded());
-        assert_eq!(
-            album_art.uri(),
-            glib::filename_to_uri(&cache_path, None).unwrap()
-        );
-
-        // Multiple texture call yields the same instance of texture.
-        assert_eq!(
-            album_art.texture().await.unwrap(),
-            album_art.texture().await.unwrap()
-        );
-    }
-
-    #[gtk::test]
-    async fn concurrent_downloads() {
-        let session = soup::Session::new();
-        let download_url =
-            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-
-        let tempdir = tempfile::tempdir().unwrap();
-        let cache_path = tempdir.path().join("image-concurrent_downloads.png");
-
-        let album_art = AlbumArt::new(&session, download_url, &cache_path);
-
-        // Should not panic on the following line in `AlbumArt::texture`.
-        // debug_assert!(self.guard.borrow().is_none());
-        let results = future::join_all(vec![
-            album_art.texture(),
-            album_art.texture(),
-            album_art.texture(),
-            album_art.texture(),
-        ])
-        .await;
-
-        assert!(results
-            .iter()
-            .all(|r| r.as_ref().unwrap() == results[0].as_ref().unwrap()));
+        Ok(())
     }
 }
