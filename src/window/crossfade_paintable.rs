@@ -1,7 +1,7 @@
 use adw::prelude::*;
 use gtk::{
     gdk,
-    glib::{self, clone},
+    glib::{self, clone, closure_local},
     subclass::prelude::*,
 };
 use once_cell::unsync::OnceCell;
@@ -24,12 +24,10 @@ mod imp {
         #[property(get, set = Self::set_paintable, explicit_notify, nullable)]
         pub(super) paintable: RefCell<Option<gdk::Paintable>>,
 
-        pub(super) paintable_invalidate_contents_handler_id: RefCell<Option<glib::SignalHandlerId>>,
-        pub(super) paintable_invalidate_size_handler_id: RefCell<Option<glib::SignalHandlerId>>,
+        pub(super) paintable_signal_group: OnceCell<glib::SignalGroup>,
 
         pub(super) prev_paintable: RefCell<Option<gdk::Paintable>>,
-        pub(super) prev_paintable_invalidate_contents_handler_id:
-            RefCell<Option<glib::SignalHandlerId>>,
+        pub(super) prev_paintable_signal_group: OnceCell<glib::SignalGroup>,
 
         pub(super) fade_progress: Cell<f64>,
         pub(super) fade_animation: OnceCell<adw::TimedAnimation>,
@@ -51,8 +49,39 @@ mod imp {
             self.fade_progress.set(INITIAL_FADE_PROGRESS);
 
             let obj = self.obj();
-            let widget = self.widget.upgrade().expect("widget must be alive");
 
+            let paintable_signal_group = glib::SignalGroup::new(gdk::Paintable::static_type());
+            paintable_signal_group.connect_closure(
+                "invalidate-contents",
+                false,
+                closure_local!(@watch obj => move |_: gdk::Paintable| {
+                    obj.invalidate_contents();
+                }),
+            );
+            paintable_signal_group.connect_closure(
+                "invalidate-size",
+                false,
+                closure_local!(@watch obj => move |_: gdk::Paintable| {
+                    obj.invalidate_size();
+                }),
+            );
+            self.paintable_signal_group
+                .set(paintable_signal_group)
+                .unwrap();
+
+            let prev_paintable_signal_group = glib::SignalGroup::new(gdk::Paintable::static_type());
+            prev_paintable_signal_group.connect_closure(
+                "invalidate-contents",
+                false,
+                closure_local!(@watch obj => move |_: gdk::Paintable| {
+                    obj.invalidate_contents();
+                }),
+            );
+            self.prev_paintable_signal_group
+                .set(prev_paintable_signal_group)
+                .unwrap();
+
+            let widget = self.widget.upgrade().expect("widget must be alive");
             let target = adw::CallbackAnimationTarget::new(clone!(@weak obj => move |value| {
                 obj.imp().fade_progress.set(value);
                 obj.invalidate_contents();
@@ -127,56 +156,25 @@ mod imp {
     }
 
     impl CrossfadePaintable {
-        fn set_paintable(&self, paintable: Option<gdk::Paintable>) {
+        fn set_paintable(&self, paintable: Option<&gdk::Paintable>) {
             let obj = self.obj();
 
-            let prev_paintable = self.paintable.replace(paintable.clone());
+            let prev_paintable = self.paintable.replace(paintable.cloned());
 
-            if prev_paintable == paintable {
+            if prev_paintable.as_ref() == paintable {
                 return;
             }
 
-            let prev_prev_paintable = self.prev_paintable.replace(prev_paintable.clone());
+            self.prev_paintable.replace(prev_paintable.clone());
 
-            if let Some(ref prev_paintable) = prev_paintable {
-                if let Some(handler_id) = self.paintable_invalidate_contents_handler_id.take() {
-                    prev_paintable.disconnect(handler_id);
-                }
-
-                if let Some(handler_id) = self.paintable_invalidate_size_handler_id.take() {
-                    prev_paintable.disconnect(handler_id);
-                }
-            }
-
-            if let Some(paintable) = paintable {
-                self.paintable_invalidate_contents_handler_id.replace(Some(
-                    paintable.connect_invalidate_contents(clone!(@weak obj => move |_| {
-                        obj.invalidate_contents();
-                    })),
-                ));
-
-                self.paintable_invalidate_size_handler_id.replace(Some(
-                    paintable.connect_invalidate_size(clone!(@weak obj => move |_| {
-                        obj.invalidate_size();
-                    })),
-                ));
-            }
-
-            if let Some(prev_prev_paintable) = prev_prev_paintable {
-                if let Some(handler_id) = self.prev_paintable_invalidate_contents_handler_id.take()
-                {
-                    prev_prev_paintable.disconnect(handler_id);
-                }
-            }
-
-            if let Some(prev_paintable) = prev_paintable {
-                self.prev_paintable_invalidate_contents_handler_id
-                    .replace(Some(prev_paintable.connect_invalidate_contents(
-                        clone!(@weak obj => move |_| {
-                            obj.invalidate_contents();
-                        }),
-                    )));
-            }
+            self.paintable_signal_group
+                .get()
+                .unwrap()
+                .set_target(paintable);
+            self.prev_paintable_signal_group
+                .get()
+                .unwrap()
+                .set_target(prev_paintable.as_ref());
 
             let fade_animation = self.fade_animation.get().unwrap();
             fade_animation.pause();
