@@ -207,6 +207,10 @@ impl CrossfadePaintable {
         if let Some(album_art) = song.and_then(|song| song.album_art()) {
             match album_art {
                 Ok(album_art) => {
+                    if !album_art.is_loaded() {
+                        self.set_paintable(gdk::Paintable::NONE);
+                    }
+
                     let join_handle =
                         utils::spawn(clone!(@weak self as obj, @weak album_art => async move {
                             match album_art.texture().await {
