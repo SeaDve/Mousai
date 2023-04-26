@@ -332,6 +332,8 @@ impl Recognizer {
                 self.saved_recordings()
                     .insert(Recording::new(&recording_bytes, &recorded_time))
                     .context("Failed to insert recording")?;
+                // FIXME Provide a more helpful error dialog, like in window. Those are great but
+                // they never show up now because this catches the error.
                 let message = match err.kind() {
                     RecognizeErrorKind::Connection => {
                         gettext("The result will be available when your connection is restored.")
