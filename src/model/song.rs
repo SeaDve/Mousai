@@ -17,7 +17,7 @@ use crate::{
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties, Serialize, Deserialize)]
+    #[derive(Default, glib::Properties, Serialize, Deserialize)]
     #[properties(wrapper_type = super::Song)]
     pub struct Song {
         /// Unique ID

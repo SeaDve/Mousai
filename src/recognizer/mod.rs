@@ -37,7 +37,7 @@ use crate::{
 
 const MAX_SAVED_RECORDING_RECOGNIZE_RETRIES: u8 = 3;
 
-#[derive(Debug, Default, Clone, Copy, glib::Enum, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiRecognizerState")]
 pub enum RecognizerState {
     #[default]
@@ -51,7 +51,7 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, glib::Properties)]
+    #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Recognizer)]
     pub struct Recognizer {
         /// Current state

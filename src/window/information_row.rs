@@ -6,7 +6,7 @@ use std::cell::RefCell;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::InformationRow)]
     #[template(resource = "/io/github/seadve/Mousai/ui/information-row.ui")]
     pub struct InformationRow {

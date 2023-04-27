@@ -11,7 +11,7 @@ const SIZE_REQUEST: i32 = 16;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties)]
+    #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::ProgressIcon)]
     pub struct ProgressIcon {
         #[property(get, set = Self::set_progress, minimum = 0.0, maximum = 1.0, explicit_notify)]

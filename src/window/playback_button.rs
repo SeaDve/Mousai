@@ -16,7 +16,7 @@ mod imp {
     use super::*;
     use std::marker::PhantomData;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::PlaybackButton)]
     #[template(resource = "/io/github/seadve/Mousai/ui/playback-button.ui")]
     pub struct PlaybackButton {

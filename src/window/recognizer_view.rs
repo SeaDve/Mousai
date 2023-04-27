@@ -12,7 +12,7 @@ use crate::recognizer::{Recognizer, RecognizerState};
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-view.ui")]
     pub struct RecognizerView {
         #[template_child]

@@ -12,7 +12,7 @@ use super::{Song, FUZZY_MATCHER};
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties)]
+    #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::SongFilter)]
     pub struct SongFilter {
         /// Search term

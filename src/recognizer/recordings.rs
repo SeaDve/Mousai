@@ -26,7 +26,7 @@ type RecordingDatabase = heed::Database<Str, SerdeBincode<Recording>>;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default)]
+    #[derive(Default)]
     pub struct Recordings {
         pub(super) list: RefCell<IndexMap<String, Recording>>,
 

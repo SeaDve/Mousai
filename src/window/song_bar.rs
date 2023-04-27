@@ -28,7 +28,7 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
     pub struct SongBar {
         #[template_child]

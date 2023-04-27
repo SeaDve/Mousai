@@ -115,7 +115,7 @@ mod pa {
         proplist::{properties, Proplist},
     };
 
-    use std::{fmt, time::Duration};
+    use std::time::Duration;
 
     use super::AudioDeviceClass;
     use crate::config::APP_ID;
@@ -130,12 +130,6 @@ mod pa {
         // we need to hold a reference to it.
         #[allow(dead_code)]
         main_loop: pulse_glib::Mainloop,
-    }
-
-    impl fmt::Debug for Context {
-        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-            f.write_str("Context")
-        }
     }
 
     impl Context {

@@ -4,7 +4,7 @@ use once_cell::unsync::OnceCell;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default)]
+    #[derive(Default)]
     pub struct ExternalLink {
         pub(super) key: OnceCell<String>,
         pub(super) value: OnceCell<String>,

@@ -28,7 +28,7 @@ mod imp {
     use glib::{subclass::Signal, WeakRef};
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type  = super::SongPage)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {

@@ -16,7 +16,7 @@ const INITIAL_FADE_PROGRESS: f64 = 1.0;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties)]
+    #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::CrossfadePaintable)]
     pub struct CrossfadePaintable {
         #[property(get, set, construct_only)]

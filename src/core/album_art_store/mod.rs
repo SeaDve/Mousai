@@ -7,7 +7,6 @@ use std::{cell::RefCell, collections::HashMap, fs, path::PathBuf, rc::Rc};
 
 pub use self::album_art::AlbumArt;
 
-#[derive(Debug)]
 pub struct AlbumArtStore {
     session: soup::Session,
     cache_dir: PathBuf,

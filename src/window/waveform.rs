@@ -12,7 +12,7 @@ const LINE_WIDTH: f64 = 6.0;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default)]
+    #[derive(Default)]
     pub struct Waveform {
         pub(super) peaks: RefCell<VecDeque<f64>>,
     }

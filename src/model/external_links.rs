@@ -19,7 +19,7 @@ pub enum ExternalLinkKey {
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default)]
+    #[derive(Default)]
     pub struct ExternalLinks {
         pub(super) map: RefCell<IndexMap<String, String>>,
         pub(super) cache: RefCell<HashMap<String, ExternalLink>>,

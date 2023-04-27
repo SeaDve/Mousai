@@ -33,7 +33,7 @@ mod imp {
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, glib::Properties)]
+    #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Player)]
     pub struct Player {
         /// Song being played. If the song is None, the player will stop.

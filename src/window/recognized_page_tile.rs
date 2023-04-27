@@ -16,7 +16,7 @@ mod imp {
     use once_cell::sync::Lazy;
     use std::marker::PhantomData;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPageTile)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page-tile.ui")]
     pub struct RecognizedPageTile {

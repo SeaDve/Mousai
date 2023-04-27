@@ -36,7 +36,7 @@ mod imp {
     use super::*;
     use glib::WeakRef;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::HistoryView)]
     #[template(resource = "/io/github/seadve/Mousai/ui/history-view.ui")]
     pub struct HistoryView {

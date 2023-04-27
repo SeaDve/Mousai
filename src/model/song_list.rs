@@ -27,7 +27,7 @@ type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default)]
+    #[derive(Default)]
     pub struct SongList {
         pub(super) list: RefCell<IndexMap<SongId, Song>>,
 

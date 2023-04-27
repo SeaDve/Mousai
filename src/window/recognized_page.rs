@@ -16,7 +16,7 @@ mod imp {
     use glib::{subclass::Signal, WeakRef};
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPage)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page.ui")]
     pub struct RecognizedPage {

@@ -21,7 +21,7 @@ mod imp {
     use super::*;
     use glib::WeakRef;
 
-    #[derive(Debug, Default)]
+    #[derive(Default)]
     pub struct Application {
         pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<soup::Session>,

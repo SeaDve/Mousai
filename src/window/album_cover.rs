@@ -15,7 +15,7 @@ mod imp {
     use super::*;
     use std::marker::PhantomData;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::AlbumCover)]
     #[template(resource = "/io/github/seadve/Mousai/ui/album-cover.ui")]
     pub struct AlbumCover {

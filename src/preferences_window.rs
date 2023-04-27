@@ -25,7 +25,7 @@ impl PreferredAudioSource {
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::PreferencesWindow)]
     #[template(resource = "/io/github/seadve/Mousai/ui/preferences-window.ui")]
     pub struct PreferencesWindow {

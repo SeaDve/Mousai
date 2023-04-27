@@ -6,9 +6,9 @@ use crate::application::Application;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
+    #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/database-error-window.ui")]
-    pub struct DatabaseErrorWindow {}
+    pub struct DatabaseErrorWindow;
 
     #[glib::object_subclass]
     impl ObjectSubclass for DatabaseErrorWindow {

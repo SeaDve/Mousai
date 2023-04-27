@@ -14,7 +14,7 @@ pub struct BoxedRecognizeResult(pub Result<Song, RecognizeError>);
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties, Serialize, Deserialize)]
+    #[derive(Default, glib::Properties, Serialize, Deserialize)]
     #[properties(wrapper_type = super::Recording)]
     pub struct Recording {
         #[property(get, set, construct_only)]

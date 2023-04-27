@@ -49,7 +49,7 @@ pub enum AdaptiveMode {
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, glib::Properties, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::Window)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {

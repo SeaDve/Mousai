@@ -7,7 +7,7 @@ use gtk::{
 
 use std::cell::RefCell;
 
-#[derive(Debug, Default)]
+#[derive(Default)]
 
 pub struct Recorder {
     current_data: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
