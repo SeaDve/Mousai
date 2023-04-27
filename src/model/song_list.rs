@@ -21,8 +21,6 @@ use crate::{
     utils,
 };
 
-const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
-
 // FIXME Remove indirection of encoding SongId through SerdeBincode and use heed types directly
 type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
 
@@ -34,6 +32,7 @@ mod imp {
         pub(super) list: RefCell<IndexMap<SongId, Song>>,
 
         pub(super) db: OnceCell<(heed::Env, SongDatabase)>,
+        pub(super) song_notify_handler_ids: RefCell<HashMap<SongId, glib::SignalHandlerId>>,
     }
 
     #[glib::object_subclass]
@@ -125,7 +124,7 @@ impl SongList {
         let (position, prev_value) = self.imp().list.borrow_mut().insert_full(song.id(), song);
 
         if let Some(prev_value) = prev_value {
-            unbind_song_from_db(&prev_value);
+            self.unbind_song_from_db(&prev_value);
             self.items_changed(position as u32, 1, 1);
             Ok(false)
         } else {
@@ -162,7 +161,7 @@ impl SongList {
                 let (index, prev_value) = list.insert_full(song.id(), song);
 
                 if let Some(prev_value) = prev_value {
-                    unbind_song_from_db(&prev_value);
+                    self.unbind_song_from_db(&prev_value);
                     updated_indices.insert(index);
                 } else {
                     n_appended += 1;
@@ -223,7 +222,7 @@ impl SongList {
                     for index in (first..first + count).rev() {
                         let (_, song) =
                             list.shift_remove_index(index).expect("index must be valid");
-                        unbind_song_from_db(&song);
+                        self.unbind_song_from_db(&song);
                         ret.push(song);
                     }
                 }
@@ -256,40 +255,42 @@ impl SongList {
     }
 
     fn bind_song_to_db(&self, song: &Song) {
-        unsafe {
-            let handler_id = song.connect_notify_local(
-                None,
-                clone!(@weak self as obj => move |song, pspec| {
-                    tracing::debug!("Song property `{}` notified", pspec.name());
+        let handler_id = song.connect_notify_local(
+            None,
+            clone!(@weak self as obj => move |song, pspec| {
+                tracing::debug!("Song property `{}` notified", pspec.name());
 
-                    let (env, db) = obj.db();
-                    if let Err(err) = env.with_write_txn(|wtxn| {
-                        debug_assert!(
-                            db.get(wtxn, song.id_ref()).unwrap().is_some(),
-                            "song must exist in the db"
-                        );
+                let (env, db) = obj.db();
+                if let Err(err) = env.with_write_txn(|wtxn| {
+                    debug_assert!(
+                        db.get(wtxn, song.id_ref()).unwrap().is_some(),
+                        "song must exist in the db"
+                    );
 
-                        db.put(wtxn, song.id_ref(), song)
-                            .context("Failed to put song to db")?;
+                    db.put(wtxn, song.id_ref(), song)
+                        .context("Failed to put song to db")?;
 
-                        Ok(())
-                    }) {
-                        tracing::error!("Failed to update song in database: {:?}", err);
-                    };
-                }),
-            );
-            song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
-        }
+                    Ok(())
+                }) {
+                    tracing::error!("Failed to update song in database: {:?}", err);
+                };
+            }),
+        );
+        self.imp()
+            .song_notify_handler_ids
+            .borrow_mut()
+            .insert(song.id(), handler_id);
     }
-}
 
-fn unbind_song_from_db(song: &Song) {
-    unsafe {
-        let handler_id = song
-            .steal_data::<glib::SignalHandlerId>(SONG_NOTIFY_HANDLER_ID_KEY)
+    fn unbind_song_from_db(&self, song: &Song) {
+        let handler_id = self
+            .imp()
+            .song_notify_handler_ids
+            .borrow_mut()
+            .remove(song.id_ref())
             .unwrap();
         song.disconnect(handler_id);
-    };
+    }
 }
 
 /// Migrate from the old memory list of Mousai v0.6.6 and earlier.

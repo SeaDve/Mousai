@@ -9,15 +9,17 @@ use heed::types::{SerdeBincode, Str};
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, collections::BTreeSet, time::Instant};
+use std::{
+    cell::RefCell,
+    collections::{BTreeSet, HashMap},
+    time::Instant,
+};
 
 use super::Recording;
 use crate::{
     database::{EnvExt, RECORDINGS_DB_NAME},
     utils,
 };
-
-const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
 type RecordingDatabase = heed::Database<Str, SerdeBincode<Recording>>;
 
@@ -29,6 +31,7 @@ mod imp {
         pub(super) list: RefCell<IndexMap<String, Recording>>,
 
         pub(super) db: OnceCell<(heed::Env, RecordingDatabase)>,
+        pub(super) recording_notify_handler_ids: RefCell<HashMap<String, glib::SignalHandlerId>>,
     }
 
     #[glib::object_subclass]
@@ -91,7 +94,7 @@ impl Recordings {
         let this = glib::Object::new::<Self>();
 
         for (recording_id, recording) in recordings.iter() {
-            this.bind_recording_to_items_changed_and_db(recording_id, recording);
+            this.bind_recording_to_items_changed_and_db(recording_id.clone(), recording);
         }
 
         let imp = this.imp();
@@ -111,7 +114,7 @@ impl Recordings {
             Ok(())
         })?;
 
-        self.bind_recording_to_items_changed_and_db(&recording_id, &recording);
+        self.bind_recording_to_items_changed_and_db(recording_id.clone(), &recording);
 
         let (position, prev_value) = self
             .imp()
@@ -173,9 +176,9 @@ impl Recordings {
                     let mut list = imp.list.borrow_mut();
 
                     for index in (first..first + count).rev() {
-                        let (_, recording) =
+                        let (recording_id, recording) =
                             list.shift_remove_index(index).expect("index must be valid");
-                        unbind_recording_from_items_changed_and_db(&recording);
+                        self.unbind_recording_from_items_changed_and_db(&recording_id, &recording);
                         ret.push(recording);
                     }
                 }
@@ -199,45 +202,50 @@ impl Recordings {
         self.imp().db.get().unwrap()
     }
 
-    fn bind_recording_to_items_changed_and_db(&self, recording_id: &str, recording: &Recording) {
-        unsafe {
-            let recording_id = recording_id.to_string();
-            let handler_id = recording.connect_notify_local(
-                None,
-                clone!(@weak self as obj => move |recording, pspec| {
-                    tracing::debug!("Recording property `{}` notified", pspec.name());
+    fn bind_recording_to_items_changed_and_db(&self, recording_id: String, recording: &Recording) {
+        let handler_id = recording.connect_notify_local(
+            None,
+            clone!(@strong recording_id, @weak self as obj => move |recording, pspec| {
+                tracing::debug!("Recording property `{}` notified", pspec.name());
 
-                    let (env, db) = obj.db();
-                    if let Err(err) = env.with_write_txn(|wtxn| {
-                        debug_assert!(
-                            db.get(wtxn, &recording_id).unwrap().is_some(),
-                            "recording must exist in the db"
-                        );
+                let (env, db) = obj.db();
+                if let Err(err) = env.with_write_txn(|wtxn| {
+                    debug_assert!(
+                        db.get(wtxn, &recording_id).unwrap().is_some(),
+                        "recording must exist in the db"
+                    );
 
-                        db.put(wtxn, &recording_id, recording)
-                            .context("Failed to put recording to db")?;
+                    db.put(wtxn, &recording_id, recording)
+                        .context("Failed to put recording to db")?;
 
-                        Ok(())
-                    }) {
-                        tracing::error!("Failed to update recording in database: {:?}", err);
-                    }
+                    Ok(())
+                }) {
+                    tracing::error!("Failed to update recording in database: {:?}", err);
+                }
 
-                    let index = obj.imp().list.borrow().get_index_of(&recording_id).unwrap();
-                    obj.items_changed(index as u32, 1, 1);
-                }),
-            );
-            recording.set_data(RECORDING_NOTIFY_HANDLER_ID_KEY, handler_id);
-        }
+                let index = obj.imp().list.borrow().get_index_of(&recording_id).unwrap();
+                obj.items_changed(index as u32, 1, 1);
+            }),
+        );
+        self.imp()
+            .recording_notify_handler_ids
+            .borrow_mut()
+            .insert(recording_id, handler_id);
     }
-}
 
-fn unbind_recording_from_items_changed_and_db(recording: &Recording) {
-    unsafe {
-        let handler_id = recording
-            .steal_data::<glib::SignalHandlerId>(RECORDING_NOTIFY_HANDLER_ID_KEY)
+    fn unbind_recording_from_items_changed_and_db(
+        &self,
+        recording_id: &str,
+        recording: &Recording,
+    ) {
+        let handler_id = self
+            .imp()
+            .recording_notify_handler_ids
+            .borrow_mut()
+            .remove(recording_id)
             .unwrap();
         recording.disconnect(handler_id);
-    };
+    }
 }
 
 #[cfg(test)]
