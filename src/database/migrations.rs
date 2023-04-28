@@ -25,7 +25,6 @@ impl Migrations {
         }
     }
 
-    #[allow(dead_code)]
     pub fn add(
         &mut self,
         name: &'static str,
