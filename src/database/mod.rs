@@ -19,7 +19,8 @@ pub const RECORDINGS_DB_NAME: &str = "saved_recordings";
 /// Note: This must be only called once.
 pub fn new_env() -> Result<heed::Env> {
     let path = glib::user_data_dir().join("mousai/db");
-    fs::create_dir_all(&path)?;
+    fs::create_dir_all(&path)
+        .with_context(|| format!("Failed to create db dir at {}", path.display()))?;
     let env = heed::EnvOpenOptions::new()
         .map_size(100 * 1024 * 1024) // 100 MiB
         .max_dbs(N_NAMED_DBS)
