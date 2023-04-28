@@ -7,21 +7,22 @@
 # Nico <d3sox@protonmail.com>, 2021, 2022.
 # Milo Ivir <mail@milotype.de>, 2021.
 # sal0max <msal.coding@gmail.com>, 2022.
+# Marlon <mawol@protonmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-26 17:08+0800\n"
-"PO-Revision-Date: 2023-04-06 10:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
-">\n"
+"PO-Revision-Date: 2023-04-28 17:51+0000\n"
+"Last-Translator: Marlon <mawol@protonmail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -41,15 +42,15 @@ msgstr "Shazam;Audio;Musik;Song;Identifizieren;Erkennung;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Fensterbreite"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Fensterhöhe"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Ob das Fenster maximiert ist"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -57,7 +58,7 @@ msgstr "Bevorzugte Quelle die für die Audioaufnahme verwendet wird"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API-Token für die AudD-Erkennung"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
@@ -95,14 +96,16 @@ msgstr "Warum du Mousai lieben wirst?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Entdecke Lieder in fünf Sekunden oder speichere sie für später wenn du "
+"offline sein solltest"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Mikrofon oder Desktop-Audio verwenden"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Baue ein Repertoire an bekannten Liedern auf"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
