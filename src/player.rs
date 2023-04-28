@@ -14,7 +14,7 @@ use std::{
 
 use crate::{
     config::APP_ID,
-    model::{Song, SongId},
+    model::{Song, Uid},
     utils,
 };
 
@@ -176,7 +176,7 @@ impl Player {
         )
     }
 
-    pub fn is_active_song(&self, song_id: &SongId) -> bool {
+    pub fn is_active_song(&self, song_id: &Uid) -> bool {
         self.song().map_or(false, |song| song.id_ref() == song_id)
     }
 

@@ -5,7 +5,7 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use heed::types::{SerdeBincode, Str};
+use heed::types::SerdeBincode;
 use indexmap::IndexMap;
 use once_cell::unsync::OnceCell;
 
@@ -14,19 +14,20 @@ use std::{cell::RefCell, collections::BTreeSet, time::Instant};
 use super::Recording;
 use crate::{
     database::{EnvExt, RECORDINGS_DB_NAME},
+    model::{Uid, UidCodec},
     utils,
 };
 
 const RECORDING_NOTIFY_HANDLER_ID_KEY: &str = "mousai-recording-notify-handler-id";
 
-type RecordingDatabase = heed::Database<Str, SerdeBincode<Recording>>;
+type RecordingDatabase = heed::Database<UidCodec, SerdeBincode<Recording>>;
 
 mod imp {
     use super::*;
 
     #[derive(Default)]
     pub struct Recordings {
-        pub(super) list: RefCell<IndexMap<String, Recording>>,
+        pub(super) list: RefCell<IndexMap<Uid, Recording>>,
 
         pub(super) db: OnceCell<(heed::Env, RecordingDatabase)>,
     }
@@ -67,7 +68,7 @@ glib::wrapper! {
 impl Recordings {
     /// Load from the `saved_recordings` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
-        let now = Instant::now();
+        let db_load_start_time = Instant::now();
 
         let (db, recordings) = env.with_write_txn(|wtxn| {
             let db: RecordingDatabase = env
@@ -76,7 +77,7 @@ impl Recordings {
             let recordings = db
                 .iter(wtxn)
                 .context("Failed to iter recordings from db")?
-                .map(|item| item.map(|(id, recording)| (id.to_string(), recording)))
+                .map(|item| item.map(|(id, recording)| (id, recording)))
                 .collect::<Result<IndexMap<_, _>, _>>()
                 .context("Failed to collect recordings from db")?;
             Ok((db, recordings))
@@ -85,7 +86,7 @@ impl Recordings {
         tracing::debug!(
             "Loaded {} saved recordings in {:?}",
             recordings.len(),
-            now.elapsed()
+            db_load_start_time.elapsed()
         );
 
         let this = glib::Object::new::<Self>();
@@ -102,7 +103,7 @@ impl Recordings {
     }
 
     pub fn insert(&self, recording: Recording) -> Result<()> {
-        let recording_id = utils::generate_unique_id();
+        let recording_id = Uid::generate("Recording");
 
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
@@ -145,7 +146,7 @@ impl Recordings {
         let mut to_take_indices = BTreeSet::new();
         for (index, (id, recording)) in imp.list.borrow().iter().enumerate() {
             if filter_func(recording) {
-                to_take_ids.push(id.to_string());
+                to_take_ids.push(id.clone());
                 to_take_indices.insert(index);
                 debug_assert_eq!(index, imp.list.borrow().get_index_of(id).unwrap());
             }
@@ -199,12 +200,11 @@ impl Recordings {
         self.imp().db.get().unwrap()
     }
 
-    fn bind_recording_to_items_changed_and_db(&self, recording_id: &str, recording: &Recording) {
+    fn bind_recording_to_items_changed_and_db(&self, recording_id: &Uid, recording: &Recording) {
         unsafe {
-            let recording_id = recording_id.to_string();
             let handler_id = recording.connect_notify_local(
                 None,
-                clone!(@weak self as obj => move |recording, pspec| {
+                clone!(@weak self as obj, @strong recording_id => move |recording, pspec| {
                     tracing::debug!("Recording property `{}` notified", pspec.name());
 
                     let (env, db) = obj.db();
@@ -249,7 +249,7 @@ mod tests {
     use crate::{
         core::DateTime,
         database,
-        model::{Song, SongId},
+        model::{Song, Uid},
         recognizer::recording::BoxedRecognizeResult,
     };
 
@@ -258,7 +258,7 @@ mod tests {
     }
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::for_test(id), id, id, id).build()
+        Song::builder(&Uid::for_test(id), id, id, id).build()
     }
 
     fn assert_n_items_and_db_count_eq(recordings: &Recordings, n: usize) {
@@ -347,8 +347,10 @@ mod tests {
         let db: RecordingDatabase = env
             .create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))
             .unwrap();
-        db.put(&mut wtxn, "a", &new_test_recording(b"A")).unwrap();
-        db.put(&mut wtxn, "b", &new_test_recording(b"B")).unwrap();
+        db.put(&mut wtxn, &Uid::for_test("a"), &new_test_recording(b"A"))
+            .unwrap();
+        db.put(&mut wtxn, &Uid::for_test("b"), &new_test_recording(b"B"))
+            .unwrap();
         wtxn.commit().unwrap();
 
         let recordings = Recordings::load_from_env(env).unwrap();

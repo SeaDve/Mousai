@@ -15,7 +15,7 @@ use std::{
     time::Instant,
 };
 
-use super::{Song, SongId};
+use super::{Song, Uid, UidCodec};
 use crate::{
     database::{EnvExt, SONG_LIST_DB_NAME},
     utils,
@@ -23,15 +23,14 @@ use crate::{
 
 const SONG_NOTIFY_HANDLER_ID_KEY: &str = "mousai-song-notify-handler-id";
 
-// FIXME Remove indirection of encoding SongId through SerdeBincode and use heed types directly
-type SongDatabase = heed::Database<SerdeBincode<SongId>, SerdeBincode<Song>>;
+type SongDatabase = heed::Database<UidCodec, SerdeBincode<Song>>;
 
 mod imp {
     use super::*;
 
     #[derive(Default)]
     pub struct SongList {
-        pub(super) list: RefCell<IndexMap<SongId, Song>>,
+        pub(super) list: RefCell<IndexMap<Uid, Song>>,
 
         pub(super) db: OnceCell<(heed::Env, SongDatabase)>,
     }
@@ -72,7 +71,7 @@ glib::wrapper! {
 impl SongList {
     /// Load from the `songs` table in the database
     pub fn load_from_env(env: heed::Env) -> Result<Self> {
-        let now = Instant::now();
+        let db_load_start_time = Instant::now();
 
         let (db, songs) = env.with_write_txn(|wtxn| {
             let db = env
@@ -81,16 +80,19 @@ impl SongList {
             let songs = db
                 .iter(wtxn)
                 .context("Failed to iter songs from db")?
-                .collect::<Result<IndexMap<SongId, Song>, _>>()
+                .collect::<Result<IndexMap<Uid, Song>, _>>()
                 .context("Failed to collect songs from db")?;
             Ok((db, songs))
         })?;
 
-        tracing::debug!("Loaded {} songs in {:?}", songs.len(), now.elapsed());
-        debug_assert!(
-            songs.iter().all(|(id, song)| id == song.id_ref()),
-            "all ids must be equal"
+        tracing::debug!(
+            "Loaded {} songs in {:?}",
+            songs.len(),
+            db_load_start_time.elapsed()
         );
+        for (id, song) in &songs {
+            debug_assert_eq!(id, song.id_ref(), "id must be equal to song.id()");
+        }
 
         let this = glib::Object::new::<Self>();
 
@@ -112,7 +114,7 @@ impl SongList {
     /// the corresponding value with `song`. Otherwise, it appends `song` at the
     /// end and returns true.
     ///
-    /// The equivalence of the song depends on its [`SongId`].
+    /// The equivalence of the song depends on its [`Uid`].
     pub fn insert(&self, song: Song) -> Result<bool> {
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
@@ -192,7 +194,7 @@ impl SongList {
         Ok(n_appended)
     }
 
-    pub fn remove_many(&self, song_ids: &[&SongId]) -> Result<Vec<Song>> {
+    pub fn remove_many(&self, song_ids: &[&Uid]) -> Result<Vec<Song>> {
         let imp = self.imp();
 
         let (env, db) = self.db();
@@ -239,11 +241,11 @@ impl SongList {
         Ok(removed)
     }
 
-    pub fn get(&self, song_id: &SongId) -> Option<Song> {
+    pub fn get(&self, song_id: &Uid) -> Option<Song> {
         self.imp().list.borrow().get(song_id).cloned()
     }
 
-    pub fn contains(&self, song_id: &SongId) -> bool {
+    pub fn contains(&self, song_id: &Uid) -> bool {
         self.imp().list.borrow().contains_key(song_id)
     }
 
@@ -305,7 +307,7 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
 
     tracing::debug!("Migrating {} songs from memory list", memory_list.len());
 
-    let now = Instant::now();
+    let start_time = Instant::now();
 
     // We don't store last heards before, but we can get it from the creation date
     // of the songs' album art files
@@ -369,11 +371,10 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
             let song_link = item.remove("song_link");
             let song_src = item.remove("song_src");
 
-            let id = song_link
-                .as_ref()
-                .map_or_else(SongId::generate_unique, |song_link| {
-                    SongId::from("AudD", song_link.trim_start_matches("https://lis.tn/"))
-                });
+            let id = song_link.as_ref().map_or_else(
+                || Uid::generate("AudD"),
+                |song_link| Uid::from("AudD", song_link.trim_start_matches("https://lis.tn/")),
+            );
 
             let mut song_builder = Song::builder(
                 &id,
@@ -420,7 +421,7 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
     settings.set_memory_list(Vec::new());
     tracing::debug!(
         "Successfully migrated songs from memory list in {:?}",
-        now.elapsed()
+        start_time.elapsed()
     );
 
     Ok(())
@@ -438,7 +439,7 @@ mod test {
     use crate::database;
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::for_test(id), id, id, id).build()
+        Song::builder(&Uid::for_test(id), id, id, id).build()
     }
 
     fn assert_n_items_and_db_count_eq(song_list: &SongList, n: usize) {
@@ -525,21 +526,21 @@ mod test {
         let db: SongDatabase = env
             .create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))
             .unwrap();
-        db.put(&mut wtxn, &SongId::for_test("a"), &new_test_song("a"))
+        db.put(&mut wtxn, &Uid::for_test("a"), &new_test_song("a"))
             .unwrap();
-        db.put(&mut wtxn, &SongId::for_test("b"), &new_test_song("b"))
+        db.put(&mut wtxn, &Uid::for_test("b"), &new_test_song("b"))
             .unwrap();
         wtxn.commit().unwrap();
 
         let song_list = SongList::load_from_env(env).unwrap();
 
         assert_eq!(
-            song_list.get(&SongId::for_test("a")).unwrap().id_ref(),
-            &SongId::for_test("a")
+            song_list.get(&Uid::for_test("a")).unwrap().id_ref(),
+            &Uid::for_test("a")
         );
         assert_eq!(
-            song_list.get(&SongId::for_test("b")).unwrap().id_ref(),
-            &SongId::for_test("b")
+            song_list.get(&Uid::for_test("b")).unwrap().id_ref(),
+            &Uid::for_test("b")
         );
 
         assert_n_items_and_db_count_eq(&song_list, 2);
@@ -815,12 +816,12 @@ mod test {
         assert_eq!(n_called.get(), 0);
         assert_eq!(
             song_list
-                .remove_many(&[&SongId::for_test("0")])
+                .remove_many(&[&Uid::for_test("0")])
                 .unwrap()
                 .pop()
                 .unwrap()
                 .id_ref(),
-            &SongId::for_test("0")
+            &Uid::for_test("0")
         );
         assert_eq!(n_called.get(), 1);
     }
@@ -842,7 +843,7 @@ mod test {
 
         assert_eq!(n_called.get(), 0);
         assert!(song_list
-            .remove_many(&[&SongId::for_test("0")])
+            .remove_many(&[&Uid::for_test("0")])
             .unwrap()
             .is_empty());
         assert_eq!(n_called.get(), 0);
@@ -867,7 +868,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[&SongId::for_test("0"), &SongId::for_test("1")])
+                .remove_many(&[&Uid::for_test("0"), &Uid::for_test("1")])
                 .unwrap()
                 .len(),
             2
@@ -899,7 +900,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[&SongId::for_test("1"), &SongId::for_test("3")])
+                .remove_many(&[&Uid::for_test("1"), &Uid::for_test("3")])
                 .unwrap()
                 .len(),
             2
@@ -927,9 +928,9 @@ mod test {
         assert_eq!(
             song_list
                 .remove_many(&[
-                    &SongId::for_test("1"),
-                    &SongId::for_test("0"),
-                    &SongId::for_test("1"),
+                    &Uid::for_test("1"),
+                    &Uid::for_test("0"),
+                    &Uid::for_test("1"),
                 ])
                 .unwrap()
                 .len(),
@@ -957,7 +958,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[&SongId::for_test("1"), &SongId::for_test("0")])
+                .remove_many(&[&Uid::for_test("1"), &Uid::for_test("0")])
                 .unwrap()
                 .len(),
             2
@@ -980,7 +981,7 @@ mod test {
         });
 
         assert!(song_list
-            .remove_many(&[&SongId::for_test("0"), &SongId::for_test("3")])
+            .remove_many(&[&Uid::for_test("0"), &Uid::for_test("3")])
             .unwrap()
             .is_empty(),);
         assert_eq!(n_called.get(), 0);

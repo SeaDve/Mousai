@@ -12,7 +12,7 @@ pub use self::mock::AudDMock;
 use self::response::{Data, Response};
 use super::{Provider, RecognizeError, RecognizeErrorKind};
 use crate::{
-    model::{ExternalLinkKey, Song, SongId},
+    model::{ExternalLinkKey, Song, Uid},
     utils,
 };
 
@@ -30,7 +30,7 @@ impl AudD {
 
     fn build_song_from_data(data: Data) -> Song {
         let mut song_builder = Song::builder(
-            &SongId::from("AudD", data.info_link.trim_start_matches("https://lis.tn/")), // Info link is unique to every song
+            &Uid::from("AudD", data.info_link.trim_start_matches("https://lis.tn/")), // Info link is unique to every song
             &data.title,
             &data.artist,
             &data.album,

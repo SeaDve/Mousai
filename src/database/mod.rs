@@ -64,7 +64,7 @@ pub trait EnvExt {
 
 impl EnvExt for heed::Env {
     fn with_write_txn<T>(&self, func: impl FnOnce(&mut heed::RwTxn<'_>) -> Result<T>) -> Result<T> {
-        let now = Instant::now();
+        let start_time = Instant::now();
 
         let mut wtxn = self.write_txn().context("Failed to create write txn")?;
         let ret = func(&mut wtxn)?;
@@ -72,10 +72,10 @@ impl EnvExt for heed::Env {
 
         // There are 16.67 ms in a 60 Hz frame, so warn if the write txn
         // takes longer than that.
-        if now.elapsed() > Duration::from_millis(15) {
-            tracing::warn!("Database write txn took {:?}", now.elapsed());
+        if start_time.elapsed() > Duration::from_millis(15) {
+            tracing::warn!("Database write txn took {:?}", start_time.elapsed());
         } else {
-            tracing::trace!("Database write txn took {:?}", now.elapsed());
+            tracing::trace!("Database write txn took {:?}", start_time.elapsed());
         }
 
         Ok(ret)

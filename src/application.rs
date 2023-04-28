@@ -152,7 +152,32 @@ impl Application {
             let env = database::new_env()?;
 
             env.with_write_txn(|wtxn| {
-                let migrations = Migrations::new();
+                let mut migrations = Migrations::new();
+                migrations.add("SongList: SerdeBincode<Uid> -> UidCodec", |env, wtxn| {
+                    use heed::types::SerdeBincode;
+
+                    use crate::{
+                        database::SONG_LIST_DB_NAME,
+                        model::{Song, Uid, UidCodec},
+                    };
+
+                    if let Some(db) = env.open_poly_database(wtxn, Some(SONG_LIST_DB_NAME))? {
+                        let new_items = db
+                            .iter::<SerdeBincode<Uid>, SerdeBincode<Song>>(wtxn)
+                            .context("Failed to iter db")?
+                            .collect::<Result<Vec<_>, _>>()
+                            .context("Failed to collect items")?;
+
+                        db.clear(wtxn)?;
+
+                        for (uid, song) in new_items {
+                            db.put::<UidCodec, SerdeBincode<Song>>(wtxn, &uid, &song)
+                                .context("Failed to put item")?;
+                        }
+                    }
+
+                    Ok(())
+                });
                 migrations
                     .run(&env, wtxn)
                     .context("Failed to run migrations")

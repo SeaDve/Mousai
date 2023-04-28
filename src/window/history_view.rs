@@ -15,7 +15,7 @@ use super::{
 };
 use crate::{
     config::APP_ID,
-    model::{Song, SongFilter, SongId, SongList, SongSorter},
+    model::{Song, SongFilter, SongList, SongSorter, Uid},
     player::Player,
     recognizer::Recognizer,
     utils,
@@ -536,7 +536,7 @@ impl HistoryView {
     }
 
     /// Adds songs with ids given to purgatory, and add `SongPage`s that contain them to the purgatory.
-    fn remove_songs(&self, song_ids: &[&SongId]) -> Result<()> {
+    fn remove_songs(&self, song_ids: &[&Uid]) -> Result<()> {
         let imp = self.imp();
 
         let song_list = imp
@@ -965,7 +965,7 @@ mod test {
     }
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&SongId::for_test(id), id, id, id).build()
+        Song::builder(&Uid::for_test(id), id, id, id).build()
     }
 
     fn trigger_purge_purgatory_leaflet_pages(view: &HistoryView) {
@@ -989,7 +989,7 @@ mod test {
                 .song()
                 .unwrap()
                 .id_ref(),
-            &SongId::for_test(expected_id)
+            &Uid::for_test(expected_id)
         );
     }
 

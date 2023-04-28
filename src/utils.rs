@@ -53,12 +53,6 @@ pub fn app_instance() -> Application {
     gio::Application::default().unwrap().downcast().unwrap()
 }
 
-/// Generate a random "unique" String made up of real time and a random u32
-/// both encoded in hex.
-pub fn generate_unique_id() -> String {
-    format!("{:x}-{:x}", glib::real_time(), glib::random_int())
-}
-
 /// Returns a vector of tuples where the first element of each tuple is the first number in a consecutive group,
 /// and the second element is the count of numbers in that group.
 pub fn consecutive_groups(set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
@@ -98,18 +92,6 @@ pub fn consecutive_groups(set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn unique_generated_id() {
-        for i in 0..1000 {
-            assert_ne!(
-                generate_unique_id(),
-                generate_unique_id(),
-                "generated ids are equal after {} iterations",
-                i
-            );
-        }
-    }
 
     #[test]
     fn consecutive_groups_empty() {
