@@ -300,19 +300,19 @@ impl Window {
 
         match err.kind() {
             RecognizeErrorKind::OtherPermanent | RecognizeErrorKind::Fingerprint => {
-                const OPEN_RESPONSE_ID: &str = "open";
                 const NO_RESPONSE_ID: &str = "no";
+                const OPEN_RESPONSE_ID: &str = "open";
 
                 dialog.set_body(&gettext(
                     "Please open an issue on GitHub and provide the necessary information.",
                 ));
 
+                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
+
                 dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open an Issue"));
                 dialog
                     .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
                 dialog.set_default_response(Some(OPEN_RESPONSE_ID));
-
-                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
 
                 dialog.connect_response(
                     Some(OPEN_RESPONSE_ID),
@@ -332,8 +332,10 @@ impl Window {
                 );
             }
             RecognizeErrorKind::NoMatches => {
-                const TRY_AGAIN_RESPONSE_ID: &str = "try-again";
                 const NO_RESPONSE_ID: &str = "no";
+                const TRY_AGAIN_RESPONSE_ID: &str = "try-again";
+
+                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
 
                 dialog.add_response(TRY_AGAIN_RESPONSE_ID, &gettext("Try Again"));
                 dialog.set_response_appearance(
@@ -341,8 +343,6 @@ impl Window {
                     adw::ResponseAppearance::Suggested,
                 );
                 dialog.set_default_response(Some(TRY_AGAIN_RESPONSE_ID));
-
-                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
 
                 dialog.connect_response(
                     Some(TRY_AGAIN_RESPONSE_ID),
@@ -385,8 +385,8 @@ impl Window {
                 dialog.set_default_response(Some(OK_RESPONSE_ID));
             }
             RecognizeErrorKind::TokenLimitReached | RecognizeErrorKind::InvalidToken => {
-                const OPEN_RESPONSE_ID: &str = "open";
                 const NO_RESPONSE_ID: &str = "no";
+                const OPEN_RESPONSE_ID: &str = "open";
 
                 match cause.kind() {
                     RecognizeErrorKind::TokenLimitReached => {
