@@ -335,6 +335,10 @@ impl Window {
                 const NO_RESPONSE_ID: &str = "no";
                 const TRY_AGAIN_RESPONSE_ID: &str = "try-again";
 
+                dialog.set_body(&gettext(
+                    "Try moving closer to the source or using a different excerpt of the song.",
+                ));
+
                 dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
 
                 dialog.add_response(TRY_AGAIN_RESPONSE_ID, &gettext("Try Again"));
