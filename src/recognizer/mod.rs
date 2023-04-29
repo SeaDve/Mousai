@@ -162,18 +162,19 @@ impl Recognizer {
             .set(recordings.clone())
             .expect("saved recordings must be bound only once");
 
-        gio::NetworkMonitor::default().connect_network_available_notify(
-            clone!(@weak self as obj => move |_| {
-                obj.update_offline_mode();
+        let network_monitor = gio::NetworkMonitor::default();
+        network_monitor.connect_connectivity_notify(clone!(@weak self as obj => move |monitor| {
+            tracing::debug!(connectivity = ?monitor.connectivity());
 
-                // TODO don't just call when network is available, but also for every
-                // interval if there is network, there are still saved recordings, and
-                // there is currently no recognition in progress.
-                //
-                // This should also be triggered when token is updated.
-                obj.try_recognize_saved_recordings();
-            }),
-        );
+            obj.update_offline_mode();
+
+            // TODO don't just call when network is available, but also for every
+            // interval if there is network, there are still saved recordings, and
+            // there is currently no recognition in progress.
+            //
+            // This should also be triggered when token is updated.
+            obj.try_recognize_saved_recordings();
+        }));
 
         self.update_offline_mode();
 
@@ -433,7 +434,11 @@ impl Recognizer {
     }
 
     fn update_offline_mode(&self) {
-        let is_offline_mode = !gio::NetworkMonitor::default().is_network_available();
+        let network_monitor = gio::NetworkMonitor::default();
+
+        // We just assume API servers are not reachable in limited or
+        // portal connectivities
+        let is_offline_mode = network_monitor.connectivity() != gio::NetworkConnectivity::Full;
 
         if is_offline_mode == self.is_offline_mode() {
             return;
