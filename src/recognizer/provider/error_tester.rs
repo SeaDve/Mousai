@@ -7,6 +7,7 @@ use crate::recognizer::provider::{
     RecognizeError, RecognizeErrorKind, TestProvider, TestProviderMode,
 };
 
+// FIXME Store this state to the struct
 static CURRENT: AtomicI32 = AtomicI32::new(0);
 
 #[derive(Debug)]
