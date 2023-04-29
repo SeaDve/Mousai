@@ -268,16 +268,8 @@ impl Window {
                 main_view.scroll_to_top();
             }));
         imp.recognizer
-            .connect_recording_saved(clone!(@weak self as obj => move |_, message| {
-                let dialog = adw::MessageDialog::builder()
-                    .heading(gettext("Recording saved"))
-                    .body(message)
-                    .default_response("ok")
-                    .transient_for(&obj)
-                    .modal(true)
-                    .build();
-                dialog.add_response("ok", &gettext("Ok, got it"));
-                dialog.present();
+            .connect_recording_saved(clone!(@weak self as obj => move |_, cause| {
+                obj.present_recording_saved_message(cause);
             }));
     }
 
@@ -298,6 +290,8 @@ impl Window {
     }
 
     fn present_recognize_error(&self, err: &RecognizeError) {
+        debug_assert!(err.is_permanent());
+
         let dialog = adw::MessageDialog::builder()
             .transient_for(self)
             .modal(true)
@@ -305,45 +299,6 @@ impl Window {
             .build();
 
         match err.kind() {
-            RecognizeErrorKind::InvalidToken | RecognizeErrorKind::TokenLimitReached => {
-                const OPEN_RESPONSE_ID: &str = "open";
-                const NO_RESPONSE_ID: &str = "no";
-
-                match err.kind() {
-                    RecognizeErrorKind::InvalidToken => {
-                        dialog.set_body(&gettext(
-                            "Open preferences and try setting a different token.",
-                        ));
-                    }
-                    RecognizeErrorKind::TokenLimitReached => {
-                        dialog.set_body(&gettext(
-                            "Wait until the limit is reset or open preferences and try setting a different token.",
-                        ));
-                    }
-                    _ => unreachable!(),
-                }
-
-                dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open Preferences"));
-                dialog
-                    .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
-                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
-
-                dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
-
-                dialog.connect_response(
-                    Some(OPEN_RESPONSE_ID),
-                    clone!(@weak self as obj => move |_, id| {
-                        debug_assert_eq!(id, OPEN_RESPONSE_ID);
-
-                        let window = PreferencesWindow::new(utils::app_instance().settings());
-                        window.set_transient_for(Some(&obj));
-                        window.present();
-
-                        let is_focused = window.focus_aud_d_api_token_row();
-                        debug_assert!(is_focused);
-                    }),
-                );
-            }
             RecognizeErrorKind::OtherPermanent | RecognizeErrorKind::Fingerprint => {
                 const OPEN_RESPONSE_ID: &str = "open";
                 const NO_RESPONSE_ID: &str = "no";
@@ -399,13 +354,81 @@ impl Window {
                     }),
                 );
             }
+            RecognizeErrorKind::Connection
+            | RecognizeErrorKind::InvalidToken
+            | RecognizeErrorKind::TokenLimitReached => {
+                unreachable!("recording with non permanent errors must be saved instead")
+            }
+        }
+
+        dialog.present();
+    }
+
+    fn present_recording_saved_message(&self, cause: &RecognizeError) {
+        debug_assert!(!cause.is_permanent());
+
+        let dialog = adw::MessageDialog::builder()
+            .transient_for(self)
+            .modal(true)
+            .heading(gettext("Recording saved"))
+            .build();
+
+        match cause.kind() {
             RecognizeErrorKind::Connection => {
                 const OK_RESPONSE_ID: &str = "ok";
 
-                dialog.set_body(&gettext("Please check your internet connection."));
+                dialog.set_body(&gettext(
+                    "The result will be available when you're back online.",
+                ));
 
-                dialog.add_response(OK_RESPONSE_ID, &gettext("Ok"));
+                dialog.add_response(OK_RESPONSE_ID, &gettext("Ok, got it"));
                 dialog.set_default_response(Some(OK_RESPONSE_ID));
+            }
+            RecognizeErrorKind::TokenLimitReached | RecognizeErrorKind::InvalidToken => {
+                const OPEN_RESPONSE_ID: &str = "open";
+                const NO_RESPONSE_ID: &str = "no";
+
+                match cause.kind() {
+                    RecognizeErrorKind::TokenLimitReached => {
+                        dialog.set_body(&gettext(
+                            "The result will be available when your token limit is reset. Wait until the limit is reset or open preferences and try setting a different token.",
+                        ));
+
+                        dialog.add_response(NO_RESPONSE_ID, &gettext("I'll Wait"));
+                    }
+                    RecognizeErrorKind::InvalidToken => {
+                        dialog.set_body(&gettext(
+                            "The result will be available when your token is replaced with a valid one. Open preferences and try setting a different token.",
+                        ));
+
+                        dialog.add_response(NO_RESPONSE_ID, &gettext("Later"));
+                    }
+                    _ => unreachable!(),
+                }
+
+                dialog.add_response(OPEN_RESPONSE_ID, &gettext("Open Preferences"));
+                dialog
+                    .set_response_appearance(OPEN_RESPONSE_ID, adw::ResponseAppearance::Suggested);
+                dialog.set_default_response(Some(OPEN_RESPONSE_ID));
+
+                dialog.connect_response(
+                    Some(OPEN_RESPONSE_ID),
+                    clone!(@weak self as obj => move |_, id| {
+                        debug_assert_eq!(id, OPEN_RESPONSE_ID);
+
+                        let window = PreferencesWindow::new(utils::app_instance().settings());
+                        window.set_transient_for(Some(&obj));
+                        window.present();
+
+                        let is_focused = window.focus_aud_d_api_token_row();
+                        debug_assert!(is_focused);
+                    }),
+                );
+            }
+            RecognizeErrorKind::NoMatches
+            | RecognizeErrorKind::Fingerprint
+            | RecognizeErrorKind::OtherPermanent => {
+                unreachable!("recordings with permanent errors should not be saved")
             }
         }
 

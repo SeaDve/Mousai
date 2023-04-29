@@ -4,7 +4,6 @@ mod recording;
 mod recordings;
 
 use anyhow::{ensure, Context, Result};
-use gettextrs::gettext;
 use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
@@ -86,7 +85,7 @@ mod imp {
                         .param_types([Song::static_type()])
                         .build(),
                     Signal::builder("recording-saved")
-                        .param_types([String::static_type()])
+                        .param_types([RecognizeError::static_type()])
                         .build(),
                 ]
             });
@@ -141,19 +140,19 @@ impl Recognizer {
 
     pub fn connect_recording_saved<F>(&self, f: F) -> glib::SignalHandlerId
     where
-        F: Fn(&Self, &str) + 'static,
+        F: Fn(&Self, &RecognizeError) + 'static,
     {
         self.connect_closure(
             "recording-saved",
             true,
-            closure_local!(|obj: &Self, message: &str| {
-                f(obj, message);
+            closure_local!(|obj: &Self, cause: &RecognizeError| {
+                f(obj, cause);
             }),
         )
     }
 
-    fn emit_recording_saved(&self, message: &str) {
-        self.emit_by_name::<()>("recording-saved", &[&message]);
+    fn emit_recording_saved(&self, cause: &RecognizeError) {
+        self.emit_by_name::<()>("recording-saved", &[&cause]);
     }
 
     pub fn bind_saved_recordings(&self, recordings: &Recordings) {
@@ -305,9 +304,7 @@ impl Recognizer {
             self.saved_recordings()
                 .insert(Recording::new(&recording_bytes, &recorded_time))
                 .context("Failed to insert recording")?;
-            self.emit_recording_saved(&gettext(
-                "The result will be available when you're back online.",
-            ));
+            self.emit_recording_saved(&RecognizeError::new(RecognizeErrorKind::Connection, None));
             tracing::debug!("Offline mode is active; saved recording for later recognition");
             return Ok(());
         }
@@ -333,25 +330,7 @@ impl Recognizer {
                 self.saved_recordings()
                     .insert(Recording::new(&recording_bytes, &recorded_time))
                     .context("Failed to insert recording")?;
-                // FIXME Provide a more helpful error dialog, like in window. Those are great but
-                // they never show up now because this catches the error.
-                let message = match err.kind() {
-                    RecognizeErrorKind::Connection => {
-                        gettext("The result will be available when your connection is restored.")
-                    }
-                    RecognizeErrorKind::TokenLimitReached => {
-                        gettext("The result will be available when your token limit is reset.")
-                    }
-                    RecognizeErrorKind::InvalidToken => gettext(
-                        "The result will be available when your token is replaced with a valid one.",
-                    ),
-                    RecognizeErrorKind::NoMatches
-                    | RecognizeErrorKind::Fingerprint
-                    | RecognizeErrorKind::OtherPermanent => {
-                        unreachable!("permanent errors should have been returned")
-                    }
-                };
-                self.emit_recording_saved(&message);
+                self.emit_recording_saved(&err);
                 tracing::debug!("Recognition failed with non-permanent error `{:?}`; saved recording for later recognition", err);
             }
         }

@@ -1,4 +1,5 @@
 use gettextrs::gettext;
+use gtk::glib;
 use serde::{Deserialize, Serialize};
 
 use std::{error, fmt};
@@ -13,7 +14,8 @@ pub enum RecognizeErrorKind {
     OtherPermanent,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, glib::Boxed)]
+#[boxed_type(name = "MsaiRecognizeError")]
 pub struct RecognizeError {
     kind: RecognizeErrorKind,
     message: Option<String>,

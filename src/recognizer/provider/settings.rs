@@ -33,11 +33,15 @@ pub enum ProviderType {
     #[default]
     AudD,
     AudDMock,
+    ErrorTester,
 }
 
 impl ProviderType {
     pub fn to_provider(self) -> Box<dyn Provider> {
-        use super::aud_d::{AudD, AudDMock};
+        use super::{
+            aud_d::{AudD, AudDMock},
+            error_tester::ErrorTester,
+        };
 
         match self {
             Self::AudD => {
@@ -46,6 +50,7 @@ impl ProviderType {
                 Box::new(AudD::new(Some(&api_token)))
             }
             Self::AudDMock => Box::new(AudDMock),
+            Self::ErrorTester => Box::new(ErrorTester),
         }
     }
 }

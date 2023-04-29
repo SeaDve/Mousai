@@ -1,5 +1,6 @@
 mod aud_d;
 mod error;
+mod error_tester;
 mod settings;
 
 use async_trait::async_trait;

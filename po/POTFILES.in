@@ -15,7 +15,6 @@ src/about.rs
 src/core/date_time.rs
 src/main.rs
 src/preferences_window.rs
-src/recognizer/mod.rs
 src/recognizer/provider/error.rs
 src/window/external_link_tile.rs
 src/window/history_view.rs
