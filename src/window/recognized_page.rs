@@ -145,8 +145,8 @@ impl RecognizedPage {
             songs_len
         ));
         imp.subtitle.set_label(&ngettext(
-            "This song was heard while you're offline",
-            "These songs were heard while you're offline",
+            "This song was recognized from your saved recording.",
+            "These songs were recognized from your saved recordings.",
             songs_len as u32,
         ));
 
