@@ -150,8 +150,7 @@
                   <object class="AdwStatusPage" id="empty_search_page">
                     <property name="vexpand">True</property>
                     <property name="icon-name">system-search-symbolic</property>
-                    <property name="title" translatable="yes">No Results Found</property>
-                    <property name="description" translatable="yes">Try a different search</property>
+                    <property name="title" translatable="yes">No Results</property>
                   </object>
                 </child>
               </object>
