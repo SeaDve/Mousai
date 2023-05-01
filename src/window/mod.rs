@@ -304,7 +304,7 @@ impl Window {
                 const OPEN_RESPONSE_ID: &str = "open";
 
                 dialog.set_body(&gettext(
-                    "Please open an issue on GitHub and provide the necessary information.",
+                    "Please open an issue on GitHub and provide the necessary information",
                 ));
 
                 dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
@@ -336,7 +336,7 @@ impl Window {
                 const TRY_AGAIN_RESPONSE_ID: &str = "try-again";
 
                 dialog.set_body(&gettext(
-                    "Try moving closer to the source or using a different excerpt of the song.",
+                    "Try moving closer to the source or using a different excerpt of the song",
                 ));
 
                 dialog.add_response(NO_RESPONSE_ID, &gettext("No, Thanks"));
@@ -374,7 +374,7 @@ impl Window {
         let dialog = adw::MessageDialog::builder()
             .transient_for(self)
             .modal(true)
-            .heading(gettext("Recording saved"))
+            .heading(gettext("Recording Saved"))
             .build();
 
         match cause.kind() {
@@ -382,10 +382,10 @@ impl Window {
                 const OK_RESPONSE_ID: &str = "ok";
 
                 dialog.set_body(&gettext(
-                    "The result will be available when you're back online.",
+                    "The result will be available when you're back online",
                 ));
 
-                dialog.add_response(OK_RESPONSE_ID, &gettext("Ok, got it"));
+                dialog.add_response(OK_RESPONSE_ID, &gettext("Ok, Got It"));
                 dialog.set_default_response(Some(OK_RESPONSE_ID));
             }
             RecognizeErrorKind::TokenLimitReached | RecognizeErrorKind::InvalidToken => {
@@ -395,14 +395,14 @@ impl Window {
                 match cause.kind() {
                     RecognizeErrorKind::TokenLimitReached => {
                         dialog.set_body(&gettext(
-                            "The result will be available when your token limit is reset. Wait until the limit is reset or open preferences and try setting a different token.",
+                            "The result will be available when your token limit is reset. Wait until the limit is reset or open preferences and try setting a different token",
                         ));
 
                         dialog.add_response(NO_RESPONSE_ID, &gettext("I'll Wait"));
                     }
                     RecognizeErrorKind::InvalidToken => {
                         dialog.set_body(&gettext(
-                            "The result will be available when your token is replaced with a valid one. Open preferences and try setting a different token.",
+                            "The result will be available when your token is replaced with a valid one. Open preferences and try setting a different token",
                         ));
 
                         dialog.add_response(NO_RESPONSE_ID, &gettext("Later"));

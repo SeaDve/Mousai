@@ -9,7 +9,7 @@
             <child>
               <object class="AdwComboRow" id="preferred_audio_source_row">
                 <property name="title" translatable="yes">Preferred Audio Source</property>
-                <property name="subtitle" translatable="yes">Determines the audio source to select when available.</property>
+                <property name="subtitle" translatable="yes">Determines the audio source to use when available</property>
               </object>
             </child>
           </object>
@@ -17,7 +17,7 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">AudD</property>
-            <property name="description" translatable="yes">You can get yourself an API token from &lt;a href="https://dashboard.audd.io/"&gt;audd.io&lt;/a&gt;. Leaving this blank will give you a few trials per day.</property>
+            <property name="description" translatable="yes">You can get yourself an API token from &lt;a href="https://dashboard.audd.io/"&gt;audd.io&lt;/a&gt;. Leaving this blank will give you a few trials per day</property>
             <child>
               <object class="AdwEntryRow" id="aud_d_api_token_row">
                 <property name="title" translatable="yes">API Token</property>

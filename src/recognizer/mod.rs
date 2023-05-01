@@ -243,7 +243,7 @@ impl Recognizer {
 
         ensure!(
             self.state() == RecognizerState::Null,
-            "Recognizer is not in Null state."
+            "Recognizer is not in Null state"
         );
 
         let _finally = Rc::new(RefCell::new(Some(Finally {

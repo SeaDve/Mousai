@@ -114,7 +114,7 @@
               <object class="GtkSearchBar" id="search_bar">
                 <property name="child">
                   <object class="GtkSearchEntry" id="search_entry">
-                    <property name="placeholder-text" translatable="yes">Enter song or artist name</property>
+                    <property name="placeholder-text" translatable="yes">Search songs</property>
                   </object>
                 </property>
               </object>
@@ -139,8 +139,8 @@
                 <child>
                   <object class="AdwStatusPage" id="empty_page">
                     <property name="vexpand">True</property>
-                    <property name="title" translatable="yes">Start Identifying Music!</property>
-                    <property name="description" translatable="yes">Click the listen button to start.</property>
+                    <property name="title" translatable="yes">Start Recognizing Songs!</property>
+                    <property name="description" translatable="yes">Click the listen button to start</property>
                     <style>
                       <class name="icon-dropshadow"/>
                     </style>
@@ -151,7 +151,7 @@
                     <property name="vexpand">True</property>
                     <property name="icon-name">system-search-symbolic</property>
                     <property name="title" translatable="yes">No Results Found</property>
-                    <property name="description" translatable="yes">Try a different search.</property>
+                    <property name="description" translatable="yes">Try a different search</property>
                   </object>
                 </child>
               </object>

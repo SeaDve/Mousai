@@ -9,7 +9,7 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title">Recognizer Developer Settings</property>
-            <property name="description">These will be reset upon closing the inspector.</property>
+            <property name="description">These will be reset upon closing the inspector</property>
             <child>
               <object class="AdwComboRow" id="provider_row">
                 <property name="title">Provider</property>

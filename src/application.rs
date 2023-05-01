@@ -254,6 +254,6 @@ fn setup_inspector_page() {
             10,
         );
     } else {
-        tracing::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found.");
+        tracing::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found");
     }
 }
