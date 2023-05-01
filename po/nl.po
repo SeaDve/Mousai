@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-01 12:30+0800\n"
-"PO-Revision-Date: 2023-04-28 17:51+0000\n"
-"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
+"PO-Revision-Date: 2023-05-01 07:14+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -34,6 +34,8 @@ msgstr "Identificeer nummers binnen enkele seconden"
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
+"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Geluid;Muziek;Herkenne"
+"n;Identificeren;Herkenning;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -71,6 +73,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai is een eenvoudige app die nummers kan herkennen, vergelijkbaar met "
+"Shazam. Druk gewoon op de luisterknop, en wacht dan een paar seconden. Het "
+"zal op magische wijze de titel en artiest van dat nummer teruggeven!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -151,7 +156,7 @@ msgstr "_Niets selecteren"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Nummer herkennen"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -167,11 +172,11 @@ msgstr "Selecteren"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Nummers zoeken"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Selectie annuleren"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -179,11 +184,11 @@ msgstr "Annuleren"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Nummers zoeken"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Begin met nummers herkennen!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
@@ -191,7 +196,7 @@ msgstr "Klik op 'Luisteren' om aan de slag te gaan"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "Geen resultaten"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -203,7 +208,7 @@ msgstr "Audiobron"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "Bepaalt de te gebruiken audiobron indien beschikbaar"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -215,6 +220,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"U kunt een API-token krijgen op <a href=\"https://dashboard.audd.io/\">audd."
+"io</a>. Indien leeggelaten krijgt u een paar pogingen per dag"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -222,7 +229,7 @@ msgstr "API-token"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -478,11 +485,10 @@ msgstr[0] "{} nummer geselecteerd"
 msgstr[1] "{} nummers geselecteerd"
 
 #: src/window/history_view.rs:849
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Nummer kopiëren"
-msgstr[1] "Nummer kopiëren"
+msgstr[1] "Nummers kopiëren"
 
 #: src/window/history_view.rs:856
 msgid "Remove Song From History"
@@ -496,7 +502,7 @@ msgstr "Nummer aan geschiedenis toevoegen mislukt"
 
 #: src/window/mod.rs:307
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "Open een issue op GitHub en geef de benodigde informatie op"
 
 #: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
@@ -510,6 +516,8 @@ msgstr "Issue openen"
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
+"Probeer dichter bij de bron te komen of gebruik een ander fragment van het "
+"nummer"
 
 #: src/window/mod.rs:344
 msgid "Try Again"
@@ -517,15 +525,15 @@ msgstr "Opnieuw proberen"
 
 #: src/window/mod.rs:377
 msgid "Recording Saved"
-msgstr ""
+msgstr "Opname opgeslagen"
 
 #: src/window/mod.rs:385
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Het resultaat zal beschikbaar zijn wanneer u weer online bent"
 
 #: src/window/mod.rs:388
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Oké, begrepen"
 
 #: src/window/mod.rs:398
 msgid ""
@@ -544,8 +552,9 @@ msgid ""
 msgstr ""
 
 #: src/window/mod.rs:408
+#, fuzzy
 msgid "Later"
-msgstr ""
+msgstr "Later"
 
 #: src/window/mod.rs:413
 msgid "Open Preferences"

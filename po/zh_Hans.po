@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-01 12:30+0800\n"
-"PO-Revision-Date: 2023-04-06 10:26+0000\n"
+"PO-Revision-Date: 2023-05-01 07:14+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -549,8 +549,9 @@ msgid ""
 msgstr ""
 
 #: src/window/mod.rs:408
+#, fuzzy
 msgid "Later"
-msgstr ""
+msgstr "稍后"
 
 #: src/window/mod.rs:413
 msgid "Open Preferences"

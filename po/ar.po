@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-01 12:30+0800\n"
-"PO-Revision-Date: 2023-04-28 17:51+0000\n"
-"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/"
-">\n"
+"PO-Revision-Date: 2023-05-01 07:14+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -559,8 +559,9 @@ msgid ""
 msgstr ""
 
 #: src/window/mod.rs:408
+#, fuzzy
 msgid "Later"
-msgstr ""
+msgstr "لاحقًا"
 
 #: src/window/mod.rs:413
 msgid "Open Preferences"
