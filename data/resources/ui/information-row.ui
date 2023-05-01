@@ -5,6 +5,7 @@
       <object class="GtkLabel" id="value_label">
         <property name="xalign">1</property>
         <property name="ellipsize">end</property>
+        <property name="selectable">True</property>
         <style>
           <class name="dim-label"/>
         </style>
