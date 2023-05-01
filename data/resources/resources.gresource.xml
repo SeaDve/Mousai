@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai/">
+    <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/emblem-music-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/face-sad-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/selection-mode-symbolic.svg</file>
     <file compressed="true">style.css</file>
