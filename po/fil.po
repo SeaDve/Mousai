@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 17:08+0800\n"
+"POT-Creation-Date: 2023-05-01 12:30+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -32,8 +32,8 @@ msgstr "Mag-identify ng kanta"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr "Shazam;Audio;Music;Song;Identify;Recognition;Kanta;"
+msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -65,13 +65,10 @@ msgstr "Dumiskubre ng mga kanta gamit ang napakadaling gamiting interface."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
-"Mousai is a simple application that can identify song similar to Shazam. "
+"Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Ang Mousai ay isang simpleng aplikasyon na kayang maka-identify ng kanta "
-"tulad ng Shazam. Pinduting mo lang ang listen button, maghintay sandali. "
-"Ibibigay niya na ang pamagat at kumanta ng kanta!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -127,15 +124,8 @@ msgid ""
 "\n"
 "To report this issue, please launch Mousai in the terminal to include the "
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>."
+"Mousai/issues/\">issue page</a>"
 msgstr ""
-"Malamang ay idinulot ito ng na-corrupt o na-tampered na database. Maaari "
-"mong i-clear ang data ng aplikasyon. Subalit, hindi ito recommended at i-"
-"dedelete nito ang lahat ng iyong kanta at naka-save na recordings.\n"
-"\n"
-"Para mai-report ang issue na ito, i-launch ang Mousai sa terminal para isama "
-"ang mga logs at isumite ang report ng bug sa <a href=\"https://github.com/"
-"SeaDve/Mousai/issues/\">issue page</a>."
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -158,56 +148,48 @@ msgid "Select _None"
 msgstr "Piliin ang _Wala"
 
 #: data/resources/ui/history-view.ui:52
-msgid "Start Identifying Music"
-msgstr "Magsimula"
+msgid "Recognize Song"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "Makinig"
 
 #: data/resources/ui/history-view.ui:65
-msgid "Open Main Menu"
-msgstr "Buksan ang Pangunahing Menu"
+msgid "Main Menu"
+msgstr "Pangunahing Menu"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "I-select"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
-msgid "Search for Songs"
-msgstr "Maghanap ng Kanta"
+msgid "Search Songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:96
-msgid "Cancel Select"
-msgstr "I-kansela ang Pagselekta"
+msgid "Cancel Selection"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
 msgstr "Ikansela"
 
 #: data/resources/ui/history-view.ui:117
-msgid "Enter song or artist name"
-msgstr "Itala ang kanta o pangalan ng may-akda"
+msgid "Search songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:142
-msgid "Start Identifying Music!"
-msgstr "Magsimula Mag-identify ng Kanta!"
+msgid "Start Recognizing Songs!"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:143
-msgid "Click the listen button to start."
-msgstr "Pindutin ang listen button upang magsimula."
+msgid "Click the listen button to start"
+msgstr "Pindutin ang button sa pagkinig upang magsimula"
 
 #: data/resources/ui/history-view.ui:153
-msgid "No Results Found"
-msgstr "Walang Nahanap na Resulta"
-
-#: data/resources/ui/history-view.ui:154
-msgid "Try a different search."
-msgstr "Subukang gumamit ng ibang termino."
-
-#: data/resources/ui/history-view.ui:163
-msgid "Copy Song"
-msgstr "I-copy ang Kanta"
+msgid "No Results"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -218,8 +200,8 @@ msgid "Preferred Audio Source"
 msgstr "Preferred na Audio Source"
 
 #: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to select when available."
-msgstr "Dine-determine kung anong audio source ang gagamitin kung available."
+msgid "Determines the audio source to use when available"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -229,19 +211,16 @@ msgstr "AudD"
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Leaving this blank will give you a few trials per day."
+"\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Maaari kang kumuha ng API token sa <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Makapagbibigay lamang ng unting trials kung iiwanan itong "
-"blanko."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
 msgstr "Token ng API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
-msgid "Go Back"
-msgstr "Bumalik"
+msgid "Back"
+msgstr ""
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -398,44 +377,27 @@ msgstr "Mikropono"
 msgid "Desktop Audio"
 msgstr "Tunog ng Desktop"
 
-#: src/recognizer/mod.rs:308
-msgid "The result will be available when you're back online."
-msgstr "Ang resulta ay magiging available kapag online ka na."
-
-#: src/recognizer/mod.rs:337
-msgid "The result will be available when your connection is restored."
-msgstr ""
-
-#: src/recognizer/mod.rs:340
-msgid "The result will be available when your token limit is reset."
-msgstr ""
-
-#: src/recognizer/mod.rs:343
-msgid ""
-"The result will be available when your token is replaced with a valid one."
-msgstr ""
-
-#: src/recognizer/provider/error.rs:48
+#: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
 msgstr "Walang Nahanap na Nag-match"
 
-#: src/recognizer/provider/error.rs:49
+#: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
 msgstr "Hindi Makagawa ng Fingerprint Mula sa Audio"
 
-#: src/recognizer/provider/error.rs:50
+#: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
 msgstr "Hindi Wasto ang Ibinigay na Token"
 
-#: src/recognizer/provider/error.rs:51
+#: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
 msgstr "Nakamit ang Limitasyon ng Token"
 
-#: src/recognizer/provider/error.rs:52
+#: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
 msgstr "Hindi Maka-konek sa Server"
 
-#: src/recognizer/provider/error.rs:53
+#: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
 msgstr "Naka-tanggap ng Ibang Permanenteng Error"
 
@@ -471,47 +433,54 @@ msgstr "I-search sa YouTube"
 msgid "Failed to launch {}"
 msgstr "Hindi mai-launch ang {}"
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:89
+#: src/window/history_view.rs:140 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Na-copy na sa clipboard"
 
-#: src/window/history_view.rs:152
+#: src/window/history_view.rs:154
 msgid "Failed to remove selected songs"
 msgstr "Hindi matanggal ang mga naka-selektang kanta"
 
-#: src/window/history_view.rs:320
+#: src/window/history_view.rs:322
 msgid "Failed to remove song"
 msgstr "Hindi matanggal ang kanta"
 
-#: src/window/history_view.rs:445
+#: src/window/history_view.rs:447
 msgid "Failed to show recognizer results"
 msgstr "Hindi maipakita ang resulta ng recognizer"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:685
 msgid "_Undo"
 msgstr "I_undo"
 
-#: src/window/history_view.rs:691
+#: src/window/history_view.rs:693
 msgid "Failed to undo"
 msgstr "Hindi mai-undo"
 
-#: src/window/history_view.rs:710
+#: src/window/history_view.rs:712
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
 msgstr[0] "Nagtanggal ng {} na kanta"
 msgstr[1] "Nagtanggal ng {} na mga kanta"
 
-#: src/window/history_view.rs:836
+#: src/window/history_view.rs:838
 msgid "Select items"
 msgstr "I-select ang mga items"
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "Pumili ng {} na kanta"
 msgstr[1] "Pumili ng {} na mga kanta"
 
-#: src/window/history_view.rs:847
+#: src/window/history_view.rs:849
+#, fuzzy
+msgid "Copy Song"
+msgid_plural "Copy Songs"
+msgstr[0] "I-copy ang Kanta"
+msgstr[1] "I-copy ang Kanta"
+
+#: src/window/history_view.rs:856
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Tanggalin ang Kanta sa History"
@@ -521,57 +490,64 @@ msgstr[1] "Tanggalin ang mga Kanta sa History"
 msgid "Failed to insert song to history"
 msgstr "Hindi mailagay ang kanta sa history"
 
-#: src/window/mod.rs:273
-msgid "Recording saved"
-msgstr "Nai-save na ang recording"
-
-#: src/window/mod.rs:279
-msgid "Ok, got it"
-msgstr "Ok, nakuha ko"
-
-#: src/window/mod.rs:315
-msgid "Open preferences and try setting a different token."
-msgstr "I-open ang preferences at i-try palitan ng ibang token."
-
-#: src/window/mod.rs:320
-msgid ""
-"Wait until the limit is reset or open preferences and try setting a "
-"different token."
+#: src/window/mod.rs:307
+msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
-"Hintayin na mai-reset ang limit o i-open ang preferences at i-try palitan ng "
-"ibang token."
 
-#: src/window/mod.rs:326
-msgid "Open Preferences"
-msgstr "I-open ang Preferences"
-
-#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
+#: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
 msgstr "Salamat Nalang"
 
-#: src/window/mod.rs:352
-msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr ""
-"Pakiusap na magopen ng issue sa GitHub at i-provide ang mga hinihinging "
-"impormasyon."
-
-#: src/window/mod.rs:355
+#: src/window/mod.rs:312
 msgid "Open an Issue"
 msgstr "Mag-open ng Issue"
 
-#: src/window/mod.rs:383
+#: src/window/mod.rs:339
+msgid ""
+"Try moving closer to the source or using a different excerpt of the song"
+msgstr ""
+
+#: src/window/mod.rs:344
 msgid "Try Again"
 msgstr "Subukang Muli"
 
+#: src/window/mod.rs:377
+msgid "Recording Saved"
+msgstr ""
+
+#: src/window/mod.rs:385
+msgid "The result will be available when you're back online"
+msgstr ""
+
+#: src/window/mod.rs:388
+msgid "Ok, Got It"
+msgstr ""
+
+#: src/window/mod.rs:398
+msgid ""
+"The result will be available when your token limit is reset. Wait until the "
+"limit is reset or open preferences and try setting a different token"
+msgstr ""
+
+#: src/window/mod.rs:401
+msgid "I'll Wait"
+msgstr ""
+
 #: src/window/mod.rs:405
-msgid "Please check your internet connection."
-msgstr "Paki-check ang iyong internet connection."
+msgid ""
+"The result will be available when your token is replaced with a valid one. "
+"Open preferences and try setting a different token"
+msgstr ""
 
-#: src/window/mod.rs:407
-msgid "Ok"
-msgstr "Ok"
+#: src/window/mod.rs:408
+msgid "Later"
+msgstr ""
 
-#: src/window/mod.rs:492
+#: src/window/mod.rs:413
+msgid "Open Preferences"
+msgstr "I-open ang Preferences"
+
+#: src/window/mod.rs:519
 msgid "An error occurred in the player"
 msgstr "Nagkaroon ng error sa player"
 
@@ -584,16 +560,16 @@ msgid "Pause"
 msgstr "I-pause"
 
 #: src/window/recognized_page.rs:142
-msgid "Recognized {} new song"
-msgid_plural "Recognized {} new songs"
-msgstr[0] "Naka-recognize ng {} na bagong kanta"
-msgstr[1] "Naka-recognize ng {} na mga bagong kanta"
+msgid "Recognized {} New Song"
+msgid_plural "Recognized {} New Songs"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognized_page.rs:148
-msgid "This song was heard while you're offline"
-msgid_plural "These songs were heard while you're offline"
-msgstr[0] "Napakinggan ang kantang ito noong ikaw ay offline"
-msgstr[1] "Napakinggan ang mga kantang ito noong ikaw ay offline"
+msgid "This song was recognized from your saved recording"
+msgid_plural "These songs were recognized from your saved recordings"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
@@ -616,6 +592,118 @@ msgstr "Hindi Alam"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "I-unselect"
+
+#~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+#~ msgstr "Shazam;Audio;Music;Song;Identify;Recognition;Kanta;"
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song similar to Shazam. "
+#~ "Just click the listen button, and then wait a few seconds. It will "
+#~ "magically return the title and artist of that song!"
+#~ msgstr ""
+#~ "Ang Mousai ay isang simpleng aplikasyon na kayang maka-identify ng kanta "
+#~ "tulad ng Shazam. Pinduting mo lang ang listen button, maghintay sandali. "
+#~ "Ibibigay niya na ang pamagat at kumanta ng kanta!"
+
+#~ msgid ""
+#~ "This is likely caused by a tampered or corrupted database. You can try "
+#~ "clearing application data. However, this is not recommended and will "
+#~ "delete all your songs and saved recordings.\n"
+#~ "\n"
+#~ "To report this issue, please launch Mousai in the terminal to include the "
+#~ "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#~ "Mousai/issues/\">issue page</a>."
+#~ msgstr ""
+#~ "Malamang ay idinulot ito ng na-corrupt o na-tampered na database. Maaari "
+#~ "mong i-clear ang data ng aplikasyon. Subalit, hindi ito recommended at i-"
+#~ "dedelete nito ang lahat ng iyong kanta at naka-save na recordings.\n"
+#~ "\n"
+#~ "Para mai-report ang issue na ito, i-launch ang Mousai sa terminal para "
+#~ "isama ang mga logs at isumite ang report ng bug sa <a href=\"https://"
+#~ "github.com/SeaDve/Mousai/issues/\">issue page</a>."
+
+#~ msgid "Start Identifying Music"
+#~ msgstr "Magsimula"
+
+#~ msgid "Open Main Menu"
+#~ msgstr "Buksan ang Pangunahing Menu"
+
+#~ msgid "Search for Songs"
+#~ msgstr "Maghanap ng Kanta"
+
+#~ msgid "Cancel Select"
+#~ msgstr "I-kansela ang Pagselekta"
+
+#~ msgid "Enter song or artist name"
+#~ msgstr "Itala ang kanta o pangalan ng may-akda"
+
+#~ msgid "Start Identifying Music!"
+#~ msgstr "Magsimula Mag-identify ng Kanta!"
+
+#~ msgid "Click the listen button to start."
+#~ msgstr "Pindutin ang listen button upang magsimula."
+
+#~ msgid "No Results Found"
+#~ msgstr "Walang Nahanap na Resulta"
+
+#~ msgid "Try a different search."
+#~ msgstr "Subukang gumamit ng ibang termino."
+
+#~ msgid "Determines the audio source to select when available."
+#~ msgstr ""
+#~ "Dine-determine kung anong audio source ang gagamitin kung available."
+
+#~ msgid ""
+#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
+#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Maaari kang kumuha ng API token sa <a href=\"https://dashboard.audd.io/"
+#~ "\">audd.io</a>. Makapagbibigay lamang ng unting trials kung iiwanan itong "
+#~ "blanko."
+
+#~ msgid "Go Back"
+#~ msgstr "Bumalik"
+
+#~ msgid "The result will be available when you're back online."
+#~ msgstr "Ang resulta ay magiging available kapag online ka na."
+
+#~ msgid "Recording saved"
+#~ msgstr "Nai-save na ang recording"
+
+#~ msgid "Ok, got it"
+#~ msgstr "Ok, nakuha ko"
+
+#~ msgid "Open preferences and try setting a different token."
+#~ msgstr "I-open ang preferences at i-try palitan ng ibang token."
+
+#~ msgid ""
+#~ "Wait until the limit is reset or open preferences and try setting a "
+#~ "different token."
+#~ msgstr ""
+#~ "Hintayin na mai-reset ang limit o i-open ang preferences at i-try palitan "
+#~ "ng ibang token."
+
+#~ msgid ""
+#~ "Please open an issue on GitHub and provide the necessary information."
+#~ msgstr ""
+#~ "Pakiusap na magopen ng issue sa GitHub at i-provide ang mga hinihinging "
+#~ "impormasyon."
+
+#~ msgid "Please check your internet connection."
+#~ msgstr "Paki-check ang iyong internet connection."
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid "Recognized {} new song"
+#~ msgid_plural "Recognized {} new songs"
+#~ msgstr[0] "Naka-recognize ng {} na bagong kanta"
+#~ msgstr[1] "Naka-recognize ng {} na mga bagong kanta"
+
+#~ msgid "This song was heard while you're offline"
+#~ msgid_plural "These songs were heard while you're offline"
+#~ msgstr[0] "Napakinggan ang kantang ito noong ikaw ay offline"
+#~ msgstr[1] "Napakinggan ang mga kantang ito noong ikaw ay offline"
 
 #~ msgid "🎵 Identify the title and artist of the song within seconds."
 #~ msgstr "🎵 Kaya niya i-identify and pamagat at kumanta ng kanta."
@@ -701,9 +789,6 @@ msgstr "I-unselect"
 
 #~ msgid "Cancel the Recording"
 #~ msgstr "I-kansela ang pag-record"
-
-#~ msgid "Main Menu"
-#~ msgstr "Pangunahing Menu"
 
 #~ msgid "Start Mousaing!"
 #~ msgstr "Magsimulang magmousai!"
@@ -798,9 +883,6 @@ msgstr "I-unselect"
 
 #~ msgid "🌐 Play the identified song in your browser."
 #~ msgstr "🌐 I-play ang nadiskubreng kanta sa iyong browser."
-
-#~ msgid "Click the listen button to start"
-#~ msgstr "Pindutin ang button sa pagkinig upang magsimula"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""

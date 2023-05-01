@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 17:08+0800\n"
+"POT-Creation-Date: 2023-05-01 12:30+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -32,8 +32,8 @@ msgstr "Identifiser sanger i løpet av sekunder"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-msgstr "Shazam;Lyd;Musikk;Sang;Identifisering;Gjenkjenning"
+msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -69,13 +69,10 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
-"Mousai is a simple application that can identify song similar to Shazam. "
+"Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai er et enkelt program som kan gjenkjenne sanger, som Shazam. Klikk på "
-"lytteknappen og vent noen sekunder. Det vil magisk vise deg både tittel og "
-"artist for sangen."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -133,15 +130,8 @@ msgid ""
 "\n"
 "To report this issue, please launch Mousai in the terminal to include the "
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>."
+"Mousai/issues/\">issue page</a>"
 msgstr ""
-"Dette forårsakes sannsynlig av en endret eller skadet database. Du kan prøve "
-"å tømme programdata. Dog er dette ikke anbefalt, og det sletter alle dine "
-"spor og lagrede opptak.\n"
-"\n"
-"For å rapportere dette problemet kan du starte Mousai i terminalen for å "
-"inkludere loggfilene og sende inn en feilrapport til <a href=\"https://"
-"github.com/SeaDve/Mousai/issues/\">feilsporeren</a>."
 
 #: data/resources/ui/history-view.ui:6
 #, fuzzy
@@ -165,58 +155,48 @@ msgid "Select _None"
 msgstr "_Fravelg alle"
 
 #: data/resources/ui/history-view.ui:52
-msgid "Start Identifying Music"
-msgstr "Start identifisering av musikk"
+msgid "Recognize Song"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "Lytt"
 
 #: data/resources/ui/history-view.ui:65
-msgid "Open Main Menu"
-msgstr "Åpne hovedmenyen"
+msgid "Main Menu"
+msgstr "Hovedmeny"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Velg"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
-msgid "Search for Songs"
-msgstr "Søk etter sanger"
+msgid "Search Songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:96
-msgid "Cancel Select"
-msgstr "Avbryt utvalg"
+msgid "Cancel Selection"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
 msgstr "Avbryt"
 
 #: data/resources/ui/history-view.ui:117
-msgid "Enter song or artist name"
-msgstr "Skriv inn sang- eller artistnavn"
+msgid "Search songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:142
-#, fuzzy
-msgid "Start Identifying Music!"
-msgstr "Begynn å identifisere musikk."
+msgid "Start Recognizing Songs!"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:143
-msgid "Click the listen button to start."
-msgstr "Klikk på lytteknappen for å starte."
+msgid "Click the listen button to start"
+msgstr "Klikk på lytteknappen for å starte"
 
 #: data/resources/ui/history-view.ui:153
-msgid "No Results Found"
-msgstr "Resultatløst"
-
-#: data/resources/ui/history-view.ui:154
-#, fuzzy
-msgid "Try a different search."
-msgstr "Prøv å søke etter noe annet."
-
-#: data/resources/ui/history-view.ui:163
-msgid "Copy Song"
-msgstr "Kopier sang"
+msgid "No Results"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -227,9 +207,8 @@ msgid "Preferred Audio Source"
 msgstr "Foretrukket lydkilde"
 
 #: data/resources/ui/preferences-window.ui:12
-#, fuzzy
-msgid "Determines the audio source to select when available."
-msgstr "Avgjør valgt lydkilde når tilgjengelig."
+msgid "Determines the audio source to use when available"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -239,18 +218,16 @@ msgstr "AudD"
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Leaving this blank will give you a few trials per day."
+"\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Du kan hente deg et API-symbol fra <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Å la dette stå tomt gir deg et par forsøk per dag."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
 msgstr "API-symbol"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
-msgid "Go Back"
-msgstr "Tilbake"
+msgid "Back"
+msgstr ""
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -412,45 +389,28 @@ msgstr "Mikrofon"
 msgid "Desktop Audio"
 msgstr "Skrivebordslyd"
 
-#: src/recognizer/mod.rs:308
-msgid "The result will be available when you're back online."
-msgstr "Resultatet vil være tilgjengelig når du er på nett igjen."
-
-#: src/recognizer/mod.rs:337
-msgid "The result will be available when your connection is restored."
-msgstr ""
-
-#: src/recognizer/mod.rs:340
-msgid "The result will be available when your token limit is reset."
-msgstr ""
-
-#: src/recognizer/mod.rs:343
-msgid ""
-"The result will be available when your token is replaced with a valid one."
-msgstr ""
-
-#: src/recognizer/provider/error.rs:48
+#: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
 msgstr "Ingen treff"
 
-#: src/recognizer/provider/error.rs:49
+#: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
 msgstr "Kan ikke gjenkjenne fingeravtrykk fra lyd"
 
-#: src/recognizer/provider/error.rs:50
+#: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
 msgstr "Ugyldig symbol angitt"
 
-#: src/recognizer/provider/error.rs:51
+#: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
 msgstr "Symbolgrense nådd"
 
-#: src/recognizer/provider/error.rs:52
+#: src/recognizer/provider/error.rs:54
 #, fuzzy
 msgid "Cannot Connect to the Server"
 msgstr "Kan ikke koble til tjeneren"
 
-#: src/recognizer/provider/error.rs:53
+#: src/recognizer/provider/error.rs:55
 #, fuzzy
 msgid "Received Other Permanent Error"
 msgstr "Mottok annen vedvarende feil"
@@ -487,52 +447,59 @@ msgstr "Søk på YouTube"
 msgid "Failed to launch {}"
 msgstr "Klarte ikke å starte {}"
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:89
+#: src/window/history_view.rs:140 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "Kopiert til utklippstavlen"
 
-#: src/window/history_view.rs:152
+#: src/window/history_view.rs:154
 #, fuzzy
 msgid "Failed to remove selected songs"
 msgstr "Klarte ikke å fjerne valgte sanger"
 
-#: src/window/history_view.rs:320
+#: src/window/history_view.rs:322
 #, fuzzy
 msgid "Failed to remove song"
 msgstr "Klarte ikke å fjerne sang"
 
-#: src/window/history_view.rs:445
+#: src/window/history_view.rs:447
 #, fuzzy
 msgid "Failed to show recognizer results"
 msgstr "Kunne ikke vise resultater fra gjenkjenneren"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:685
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/window/history_view.rs:691
+#: src/window/history_view.rs:693
 #, fuzzy
 msgid "Failed to undo"
 msgstr "Klarte ikke å angre"
 
-#: src/window/history_view.rs:710
+#: src/window/history_view.rs:712
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
 msgstr[0] "Fjernet {} sang"
 msgstr[1] "Fjernet {} sanger"
 
-#: src/window/history_view.rs:836
+#: src/window/history_view.rs:838
 msgid "Select items"
 msgstr "Velg elementer"
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "Valgte {} sang"
 msgstr[1] "Valgte {} sanger"
 
-#: src/window/history_view.rs:847
+#: src/window/history_view.rs:849
+#, fuzzy
+msgid "Copy Song"
+msgid_plural "Copy Songs"
+msgstr[0] "Kopier sang"
+msgstr[1] "Kopier sang"
+
+#: src/window/history_view.rs:856
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Fjern sang fra historikk"
@@ -543,58 +510,64 @@ msgstr[1] "Fjern sanger fra historikk"
 msgid "Failed to insert song to history"
 msgstr "Klarte ikke å legge sang i historikk"
 
-#: src/window/mod.rs:273
-msgid "Recording saved"
-msgstr "Opptak lagret"
-
-#: src/window/mod.rs:279
-#, fuzzy
-msgid "Ok, got it"
-msgstr "OK, skjønner."
-
-#: src/window/mod.rs:315
-msgid "Open preferences and try setting a different token."
-msgstr "Åpne innstillingene og prøv å sette et annet symbol."
-
-#: src/window/mod.rs:320
-#, fuzzy
-msgid ""
-"Wait until the limit is reset or open preferences and try setting a "
-"different token."
+#: src/window/mod.rs:307
+msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
-"Vent til grensen er tilbakestilt eller åpne innstillingene og prøv å sette "
-"et annet symbol."
 
-#: src/window/mod.rs:326
-msgid "Open Preferences"
-msgstr "Åpne innstillinger"
-
-#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
+#: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
 msgstr "Nei takk"
 
-#: src/window/mod.rs:352
-msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr "Åpne feilrapport på GitHub og legg til nødvendig info."
-
-#: src/window/mod.rs:355
+#: src/window/mod.rs:312
 msgid "Open an Issue"
 msgstr "Åpne feilrapport"
 
-#: src/window/mod.rs:383
+#: src/window/mod.rs:339
+msgid ""
+"Try moving closer to the source or using a different excerpt of the song"
+msgstr ""
+
+#: src/window/mod.rs:344
 msgid "Try Again"
 msgstr "Prøv igjen"
 
+#: src/window/mod.rs:377
+msgid "Recording Saved"
+msgstr ""
+
+#: src/window/mod.rs:385
+msgid "The result will be available when you're back online"
+msgstr ""
+
+#: src/window/mod.rs:388
+msgid "Ok, Got It"
+msgstr ""
+
+#: src/window/mod.rs:398
+msgid ""
+"The result will be available when your token limit is reset. Wait until the "
+"limit is reset or open preferences and try setting a different token"
+msgstr ""
+
+#: src/window/mod.rs:401
+msgid "I'll Wait"
+msgstr ""
+
 #: src/window/mod.rs:405
-msgid "Please check your internet connection."
-msgstr "Sjekk at du er tilkoblet Internett."
+msgid ""
+"The result will be available when your token is replaced with a valid one. "
+"Open preferences and try setting a different token"
+msgstr ""
 
-#: src/window/mod.rs:407
-#, fuzzy
-msgid "Ok"
-msgstr "OK"
+#: src/window/mod.rs:408
+msgid "Later"
+msgstr ""
 
-#: src/window/mod.rs:492
+#: src/window/mod.rs:413
+msgid "Open Preferences"
+msgstr "Åpne innstillinger"
+
+#: src/window/mod.rs:519
 msgid "An error occurred in the player"
 msgstr "En feil oppstod i avspilleren"
 
@@ -607,17 +580,16 @@ msgid "Pause"
 msgstr "Pause"
 
 #: src/window/recognized_page.rs:142
-msgid "Recognized {} new song"
-msgid_plural "Recognized {} new songs"
-msgstr[0] "Gjenkjente {} ny sang"
-msgstr[1] "Gjenkjente {} nye sanger"
+msgid "Recognized {} New Song"
+msgid_plural "Recognized {} New Songs"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognized_page.rs:148
-#, fuzzy
-msgid "This song was heard while you're offline"
-msgid_plural "These songs were heard while you're offline"
-msgstr[0] "Denne sangen ble hørt mens du var frakoblet"
-msgstr[1] "Disse sangene ble hørt mens du var frakoblet"
+msgid "This song was recognized from your saved recording"
+msgid_plural "These songs were recognized from your saved recordings"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
@@ -640,6 +612,121 @@ msgstr "Ukjent"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "Fravelg"
+
+#~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+#~ msgstr "Shazam;Lyd;Musikk;Sang;Identifisering;Gjenkjenning"
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song similar to Shazam. "
+#~ "Just click the listen button, and then wait a few seconds. It will "
+#~ "magically return the title and artist of that song!"
+#~ msgstr ""
+#~ "Mousai er et enkelt program som kan gjenkjenne sanger, som Shazam. Klikk "
+#~ "på lytteknappen og vent noen sekunder. Det vil magisk vise deg både "
+#~ "tittel og artist for sangen."
+
+#~ msgid ""
+#~ "This is likely caused by a tampered or corrupted database. You can try "
+#~ "clearing application data. However, this is not recommended and will "
+#~ "delete all your songs and saved recordings.\n"
+#~ "\n"
+#~ "To report this issue, please launch Mousai in the terminal to include the "
+#~ "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#~ "Mousai/issues/\">issue page</a>."
+#~ msgstr ""
+#~ "Dette forårsakes sannsynlig av en endret eller skadet database. Du kan "
+#~ "prøve å tømme programdata. Dog er dette ikke anbefalt, og det sletter "
+#~ "alle dine spor og lagrede opptak.\n"
+#~ "\n"
+#~ "For å rapportere dette problemet kan du starte Mousai i terminalen for å "
+#~ "inkludere loggfilene og sende inn en feilrapport til <a href=\"https://"
+#~ "github.com/SeaDve/Mousai/issues/\">feilsporeren</a>."
+
+#~ msgid "Start Identifying Music"
+#~ msgstr "Start identifisering av musikk"
+
+#~ msgid "Open Main Menu"
+#~ msgstr "Åpne hovedmenyen"
+
+#~ msgid "Search for Songs"
+#~ msgstr "Søk etter sanger"
+
+#~ msgid "Cancel Select"
+#~ msgstr "Avbryt utvalg"
+
+#~ msgid "Enter song or artist name"
+#~ msgstr "Skriv inn sang- eller artistnavn"
+
+#, fuzzy
+#~ msgid "Start Identifying Music!"
+#~ msgstr "Begynn å identifisere musikk."
+
+#~ msgid "Click the listen button to start."
+#~ msgstr "Klikk på lytteknappen for å starte."
+
+#~ msgid "No Results Found"
+#~ msgstr "Resultatløst"
+
+#, fuzzy
+#~ msgid "Try a different search."
+#~ msgstr "Prøv å søke etter noe annet."
+
+#, fuzzy
+#~ msgid "Determines the audio source to select when available."
+#~ msgstr "Avgjør valgt lydkilde når tilgjengelig."
+
+#~ msgid ""
+#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
+#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Du kan hente deg et API-symbol fra <a href=\"https://dashboard.audd.io/"
+#~ "\">audd.io</a>. Å la dette stå tomt gir deg et par forsøk per dag."
+
+#~ msgid "Go Back"
+#~ msgstr "Tilbake"
+
+#~ msgid "The result will be available when you're back online."
+#~ msgstr "Resultatet vil være tilgjengelig når du er på nett igjen."
+
+#~ msgid "Recording saved"
+#~ msgstr "Opptak lagret"
+
+#, fuzzy
+#~ msgid "Ok, got it"
+#~ msgstr "OK, skjønner."
+
+#~ msgid "Open preferences and try setting a different token."
+#~ msgstr "Åpne innstillingene og prøv å sette et annet symbol."
+
+#, fuzzy
+#~ msgid ""
+#~ "Wait until the limit is reset or open preferences and try setting a "
+#~ "different token."
+#~ msgstr ""
+#~ "Vent til grensen er tilbakestilt eller åpne innstillingene og prøv å "
+#~ "sette et annet symbol."
+
+#~ msgid ""
+#~ "Please open an issue on GitHub and provide the necessary information."
+#~ msgstr "Åpne feilrapport på GitHub og legg til nødvendig info."
+
+#~ msgid "Please check your internet connection."
+#~ msgstr "Sjekk at du er tilkoblet Internett."
+
+#, fuzzy
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgid "Recognized {} new song"
+#~ msgid_plural "Recognized {} new songs"
+#~ msgstr[0] "Gjenkjente {} ny sang"
+#~ msgstr[1] "Gjenkjente {} nye sanger"
+
+#, fuzzy
+#~ msgid "This song was heard while you're offline"
+#~ msgid_plural "These songs were heard while you're offline"
+#~ msgstr[0] "Denne sangen ble hørt mens du var frakoblet"
+#~ msgstr[1] "Disse sangene ble hørt mens du var frakoblet"
 
 #~ msgid "Default window width"
 #~ msgstr "Forvalgt vindusbredde"
@@ -812,9 +899,6 @@ msgstr "Fravelg"
 #~ msgid "Cancel the Recording"
 #~ msgstr "Avbryt opptaket"
 
-#~ msgid "Main Menu"
-#~ msgstr "Hovedmeny"
-
 #~ msgid "Start Mousaing!"
 #~ msgstr "Start Mousaing."
 
@@ -895,9 +979,6 @@ msgstr "Fravelg"
 
 #~ msgid "🌐 Play the identified song in your browser."
 #~ msgstr "🌐 Spill identifisert sang i din nettleser."
-
-#~ msgid "Click the listen button to start"
-#~ msgstr "Klikk på lytteknappen for å starte"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""

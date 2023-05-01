@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 17:08+0800\n"
+"POT-Creation-Date: 2023-05-01 12:30+0800\n"
 "PO-Revision-Date: 2023-04-28 17:51+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
-"\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,10 +37,8 @@ msgstr "Identificar canciones en segundos"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
-"Shazam;Audio;Music;Song;Identify;Recognition;Sonido;Música;Canción;"
-"Identificar;Reconocimiento;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -73,13 +71,10 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
-"Mousai is a simple application that can identify song similar to Shazam. "
+"Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai es una sencilla aplicación que puede identificar canciones similar a "
-"Shazam. Sólo tiene que pulsar el botón de escuchar y esperar unos segundos. "
-"¡Mágicamente le devolverá el título y el artista de esa canción!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -135,15 +130,8 @@ msgid ""
 "\n"
 "To report this issue, please launch Mousai in the terminal to include the "
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>."
+"Mousai/issues/\">issue page</a>"
 msgstr ""
-"Es probable que se deba a una base de datos alterada o corrupta. Puede "
-"intentar limpiar los datos de la aplicación. Sin embargo, esto no es "
-"recomendable y eliminará todas sus canciones y grabaciones guardadas.\n"
-"\n"
-"Para informar de este problema, ejecute Mousai en el terminal para incluir "
-"los registros y envíe el informe de error a la <a href=\"https://github.com/"
-"SeaDve/Mousai/issues/\">página de problemas</a>."
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -166,56 +154,48 @@ msgid "Select _None"
 msgstr "No seleccionar _ninguna"
 
 #: data/resources/ui/history-view.ui:52
-msgid "Start Identifying Music"
-msgstr "Empezar a identificar la música"
+msgid "Recognize Song"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "Escuchar"
 
 #: data/resources/ui/history-view.ui:65
-msgid "Open Main Menu"
-msgstr "Abrir menú principal"
+msgid "Main Menu"
+msgstr "Menú principal"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Seleccionar"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
-msgid "Search for Songs"
-msgstr "Buscar canciones"
+msgid "Search Songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:96
-msgid "Cancel Select"
-msgstr "Cancelar selección"
+msgid "Cancel Selection"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: data/resources/ui/history-view.ui:117
-msgid "Enter song or artist name"
-msgstr "Introduzca el nombre de la canción o del artista"
+msgid "Search songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:142
-msgid "Start Identifying Music!"
-msgstr "¡Empiece a identificar música!"
+msgid "Start Recognizing Songs!"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:143
-msgid "Click the listen button to start."
-msgstr "Pulsar el botón de escuchar para empezar."
+msgid "Click the listen button to start"
+msgstr "Pulsar el botón de escuchar para empezar"
 
 #: data/resources/ui/history-view.ui:153
-msgid "No Results Found"
-msgstr "No se han encontrado resultados"
-
-#: data/resources/ui/history-view.ui:154
-msgid "Try a different search."
-msgstr "Intente una búsqueda diferente."
-
-#: data/resources/ui/history-view.ui:163
-msgid "Copy Song"
-msgstr "Copiar canción"
+msgid "No Results"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -226,8 +206,8 @@ msgid "Preferred Audio Source"
 msgstr "Fuente de audio preferida"
 
 #: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to select when available."
-msgstr "Determina la fuente de audio a seleccionar cuando esté disponible."
+msgid "Determines the audio source to use when available"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -237,18 +217,16 @@ msgstr "AudD"
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Leaving this blank will give you a few trials per day."
+"\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Puede conseguir un testigo de API en <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Si lo deja en blanco, obtendrá unas cuantas pruebas al día."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
 msgstr "Testigo API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
-msgid "Go Back"
-msgstr "Atrás"
+msgid "Back"
+msgstr ""
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -405,47 +383,27 @@ msgstr "Micrófono"
 msgid "Desktop Audio"
 msgstr "Escritorio"
 
-#: src/recognizer/mod.rs:308
-msgid "The result will be available when you're back online."
-msgstr "El resultado estará disponible cuando vuelva a conectarse."
-
-#: src/recognizer/mod.rs:337
-msgid "The result will be available when your connection is restored."
-msgstr "El resultado estará disponible cuando se restablezca la conexión."
-
-#: src/recognizer/mod.rs:340
-msgid "The result will be available when your token limit is reset."
-msgstr ""
-"El resultado estará disponible cuando se restablezca su límite de los tokens."
-
-#: src/recognizer/mod.rs:343
-msgid ""
-"The result will be available when your token is replaced with a valid one."
-msgstr ""
-"El resultado estará disponible cuando tu token sea reemplazado por uno "
-"válido."
-
-#: src/recognizer/provider/error.rs:48
+#: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
 msgstr "No se han encontrado coincidencias"
 
-#: src/recognizer/provider/error.rs:49
+#: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
 msgstr "No se puede crear una huella dactilar a partir de audio"
 
-#: src/recognizer/provider/error.rs:50
+#: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
 msgstr "Testigo no válido"
 
-#: src/recognizer/provider/error.rs:51
+#: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
 msgstr "Límite de testigos alcanzado"
 
-#: src/recognizer/provider/error.rs:52
+#: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
 msgstr "No se puede conectar al servidor"
 
-#: src/recognizer/provider/error.rs:53
+#: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
 msgstr "Recibido otro error permanente"
 
@@ -481,47 +439,54 @@ msgstr "Buscar en YouTube"
 msgid "Failed to launch {}"
 msgstr "Fallo al lanzar {}"
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:89
+#: src/window/history_view.rs:140 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Copiado al portapapeles"
 
-#: src/window/history_view.rs:152
+#: src/window/history_view.rs:154
 msgid "Failed to remove selected songs"
 msgstr "Error al eliminar las canciones seleccionadas"
 
-#: src/window/history_view.rs:320
+#: src/window/history_view.rs:322
 msgid "Failed to remove song"
 msgstr "Error al eliminar canción"
 
-#: src/window/history_view.rs:445
+#: src/window/history_view.rs:447
 msgid "Failed to show recognizer results"
 msgstr "Error al mostrar los resultados del reconocedor"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:685
 msgid "_Undo"
 msgstr "_Revertir"
 
-#: src/window/history_view.rs:691
+#: src/window/history_view.rs:693
 msgid "Failed to undo"
 msgstr "Error al deshacer"
 
-#: src/window/history_view.rs:710
+#: src/window/history_view.rs:712
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
 msgstr[0] "{} canción eliminada"
 msgstr[1] "{} canciones eliminadas"
 
-#: src/window/history_view.rs:836
+#: src/window/history_view.rs:838
 msgid "Select items"
 msgstr "Seleccionar elementos"
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "{} canción seleccionada"
 msgstr[1] "{} canciones seleccionadas"
 
-#: src/window/history_view.rs:847
+#: src/window/history_view.rs:849
+#, fuzzy
+msgid "Copy Song"
+msgid_plural "Copy Songs"
+msgstr[0] "Copiar canción"
+msgstr[1] "Copiar canción"
+
+#: src/window/history_view.rs:856
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Eliminar canción del historial"
@@ -531,56 +496,64 @@ msgstr[1] "Eliminar canciones del historial"
 msgid "Failed to insert song to history"
 msgstr "Error al insertar canción en el historial"
 
-#: src/window/mod.rs:273
-msgid "Recording saved"
-msgstr "Grabación guardada"
-
-#: src/window/mod.rs:279
-msgid "Ok, got it"
-msgstr "De acuerdo"
-
-#: src/window/mod.rs:315
-msgid "Open preferences and try setting a different token."
-msgstr "Abre las preferencias e intenta configurar un testigo diferente."
-
-#: src/window/mod.rs:320
-msgid ""
-"Wait until the limit is reset or open preferences and try setting a "
-"different token."
+#: src/window/mod.rs:307
+msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
-"Espere a que se restablezca el límite o abra las preferencias e intente "
-"establecer un testigo diferente."
 
-#: src/window/mod.rs:326
-msgid "Open Preferences"
-msgstr "Abrir preferencias"
-
-#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
+#: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
 msgstr "No, gracias"
 
-#: src/window/mod.rs:352
-msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr ""
-"Por favor, abra una incidencia en GitHub y facilite la información necesaria."
-
-#: src/window/mod.rs:355
+#: src/window/mod.rs:312
 msgid "Open an Issue"
 msgstr "Abrir una incidencia"
 
-#: src/window/mod.rs:383
+#: src/window/mod.rs:339
+msgid ""
+"Try moving closer to the source or using a different excerpt of the song"
+msgstr ""
+
+#: src/window/mod.rs:344
 msgid "Try Again"
 msgstr "Inténtelo de nuevo"
 
+#: src/window/mod.rs:377
+msgid "Recording Saved"
+msgstr ""
+
+#: src/window/mod.rs:385
+msgid "The result will be available when you're back online"
+msgstr ""
+
+#: src/window/mod.rs:388
+msgid "Ok, Got It"
+msgstr ""
+
+#: src/window/mod.rs:398
+msgid ""
+"The result will be available when your token limit is reset. Wait until the "
+"limit is reset or open preferences and try setting a different token"
+msgstr ""
+
+#: src/window/mod.rs:401
+msgid "I'll Wait"
+msgstr ""
+
 #: src/window/mod.rs:405
-msgid "Please check your internet connection."
-msgstr "Compruebe su conexión a Internet."
+msgid ""
+"The result will be available when your token is replaced with a valid one. "
+"Open preferences and try setting a different token"
+msgstr ""
 
-#: src/window/mod.rs:407
-msgid "Ok"
-msgstr "Vale"
+#: src/window/mod.rs:408
+msgid "Later"
+msgstr ""
 
-#: src/window/mod.rs:492
+#: src/window/mod.rs:413
+msgid "Open Preferences"
+msgstr "Abrir preferencias"
+
+#: src/window/mod.rs:519
 msgid "An error occurred in the player"
 msgstr "Se ha producido un error en el reproductor"
 
@@ -593,16 +566,16 @@ msgid "Pause"
 msgstr "Pausar"
 
 #: src/window/recognized_page.rs:142
-msgid "Recognized {} new song"
-msgid_plural "Recognized {} new songs"
-msgstr[0] "Reconocida {} nueva canción"
-msgstr[1] "Reconocidas {} nuevas canciones"
+msgid "Recognized {} New Song"
+msgid_plural "Recognized {} New Songs"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognized_page.rs:148
-msgid "This song was heard while you're offline"
-msgid_plural "These songs were heard while you're offline"
-msgstr[0] "Esta canción se escuchó mientras estaba desconectado"
-msgstr[1] "Estas canciones se escucharon mientras estaba desconectado"
+msgid "This song was recognized from your saved recording"
+msgid_plural "These songs were recognized from your saved recordings"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
@@ -625,6 +598,133 @@ msgstr "Desconocido"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "Deseleccionar"
+
+#~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+#~ msgstr ""
+#~ "Shazam;Audio;Music;Song;Identify;Recognition;Sonido;Música;Canción;"
+#~ "Identificar;Reconocimiento;"
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song similar to Shazam. "
+#~ "Just click the listen button, and then wait a few seconds. It will "
+#~ "magically return the title and artist of that song!"
+#~ msgstr ""
+#~ "Mousai es una sencilla aplicación que puede identificar canciones similar "
+#~ "a Shazam. Sólo tiene que pulsar el botón de escuchar y esperar unos "
+#~ "segundos. ¡Mágicamente le devolverá el título y el artista de esa canción!"
+
+#~ msgid ""
+#~ "This is likely caused by a tampered or corrupted database. You can try "
+#~ "clearing application data. However, this is not recommended and will "
+#~ "delete all your songs and saved recordings.\n"
+#~ "\n"
+#~ "To report this issue, please launch Mousai in the terminal to include the "
+#~ "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#~ "Mousai/issues/\">issue page</a>."
+#~ msgstr ""
+#~ "Es probable que se deba a una base de datos alterada o corrupta. Puede "
+#~ "intentar limpiar los datos de la aplicación. Sin embargo, esto no es "
+#~ "recomendable y eliminará todas sus canciones y grabaciones guardadas.\n"
+#~ "\n"
+#~ "Para informar de este problema, ejecute Mousai en el terminal para "
+#~ "incluir los registros y envíe el informe de error a la <a href=\"https://"
+#~ "github.com/SeaDve/Mousai/issues/\">página de problemas</a>."
+
+#~ msgid "Start Identifying Music"
+#~ msgstr "Empezar a identificar la música"
+
+#~ msgid "Open Main Menu"
+#~ msgstr "Abrir menú principal"
+
+#~ msgid "Search for Songs"
+#~ msgstr "Buscar canciones"
+
+#~ msgid "Cancel Select"
+#~ msgstr "Cancelar selección"
+
+#~ msgid "Enter song or artist name"
+#~ msgstr "Introduzca el nombre de la canción o del artista"
+
+#~ msgid "Start Identifying Music!"
+#~ msgstr "¡Empiece a identificar música!"
+
+#~ msgid "Click the listen button to start."
+#~ msgstr "Pulsar el botón de escuchar para empezar."
+
+#~ msgid "No Results Found"
+#~ msgstr "No se han encontrado resultados"
+
+#~ msgid "Try a different search."
+#~ msgstr "Intente una búsqueda diferente."
+
+#~ msgid "Determines the audio source to select when available."
+#~ msgstr "Determina la fuente de audio a seleccionar cuando esté disponible."
+
+#~ msgid ""
+#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
+#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Puede conseguir un testigo de API en <a href=\"https://dashboard.audd.io/"
+#~ "\">audd.io</a>. Si lo deja en blanco, obtendrá unas cuantas pruebas al "
+#~ "día."
+
+#~ msgid "Go Back"
+#~ msgstr "Atrás"
+
+#~ msgid "The result will be available when you're back online."
+#~ msgstr "El resultado estará disponible cuando vuelva a conectarse."
+
+#~ msgid "The result will be available when your connection is restored."
+#~ msgstr "El resultado estará disponible cuando se restablezca la conexión."
+
+#~ msgid "The result will be available when your token limit is reset."
+#~ msgstr ""
+#~ "El resultado estará disponible cuando se restablezca su límite de los "
+#~ "tokens."
+
+#~ msgid ""
+#~ "The result will be available when your token is replaced with a valid one."
+#~ msgstr ""
+#~ "El resultado estará disponible cuando tu token sea reemplazado por uno "
+#~ "válido."
+
+#~ msgid "Recording saved"
+#~ msgstr "Grabación guardada"
+
+#~ msgid "Ok, got it"
+#~ msgstr "De acuerdo"
+
+#~ msgid "Open preferences and try setting a different token."
+#~ msgstr "Abre las preferencias e intenta configurar un testigo diferente."
+
+#~ msgid ""
+#~ "Wait until the limit is reset or open preferences and try setting a "
+#~ "different token."
+#~ msgstr ""
+#~ "Espere a que se restablezca el límite o abra las preferencias e intente "
+#~ "establecer un testigo diferente."
+
+#~ msgid ""
+#~ "Please open an issue on GitHub and provide the necessary information."
+#~ msgstr ""
+#~ "Por favor, abra una incidencia en GitHub y facilite la información "
+#~ "necesaria."
+
+#~ msgid "Please check your internet connection."
+#~ msgstr "Compruebe su conexión a Internet."
+
+#~ msgid "Ok"
+#~ msgstr "Vale"
+
+#~ msgid "Recognized {} new song"
+#~ msgid_plural "Recognized {} new songs"
+#~ msgstr[0] "Reconocida {} nueva canción"
+#~ msgstr[1] "Reconocidas {} nuevas canciones"
+
+#~ msgid "This song was heard while you're offline"
+#~ msgid_plural "These songs were heard while you're offline"
+#~ msgstr[0] "Esta canción se escuchó mientras estaba desconectado"
+#~ msgstr[1] "Estas canciones se escucharon mientras estaba desconectado"
 
 #~ msgid "Default window width"
 #~ msgstr "Ancho predeterminado de ventana"
@@ -803,9 +903,6 @@ msgstr "Deseleccionar"
 #~ msgid "Cancel the Recording"
 #~ msgstr "Cancelar la grabación"
 
-#~ msgid "Main Menu"
-#~ msgstr "Menú principal"
-
 #~ msgid "Start Mousaing!"
 #~ msgstr "¡Comienza a Mousaiar!"
 
@@ -892,9 +989,6 @@ msgstr "Deseleccionar"
 
 #~ msgid "🌐 Play the identified song in your browser."
 #~ msgstr "🌐 Reproduce la canción identificada en su navegador."
-
-#~ msgid "Click the listen button to start"
-#~ msgstr "Pulsar el botón de escuchar para empezar"
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""

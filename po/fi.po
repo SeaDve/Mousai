@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 17:08+0800\n"
+"POT-Creation-Date: 2023-05-01 12:30+0800\n"
 "PO-Revision-Date: 2023-04-11 12:51+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/"
@@ -32,9 +32,8 @@ msgstr "Tunnista kappaleet sekunneissa"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
-"Shazam;Audio;Music;Song;Identify;Recognition;kappale;musiikki;tunnistus;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -68,13 +67,10 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
-"Mousai is a simple application that can identify song similar to Shazam. "
+"Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai on sovellus, joka tunnistaa kappaleita kuten Shazam. Napsauta "
-"kuuntelupainiketta ja odota muutama sekunti. Saat tietoosi kappaleen nimen "
-"ja esittäjän!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -129,7 +125,7 @@ msgid ""
 "\n"
 "To report this issue, please launch Mousai in the terminal to include the "
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>."
+"Mousai/issues/\">issue page</a>"
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
@@ -153,56 +149,48 @@ msgid "Select _None"
 msgstr "Älä valitse _mitään"
 
 #: data/resources/ui/history-view.ui:52
-msgid "Start Identifying Music"
-msgstr "Aloita musiikin tunnistaminen"
+msgid "Recognize Song"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "Kuuntele"
 
 #: data/resources/ui/history-view.ui:65
-msgid "Open Main Menu"
-msgstr "Avaa päävalikko"
+msgid "Main Menu"
+msgstr "Päävalikko"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
 msgstr "Valitse"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
-msgid "Search for Songs"
-msgstr "Etsi kappaleita"
+msgid "Search Songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:96
-msgid "Cancel Select"
-msgstr "Peru valinta"
+msgid "Cancel Selection"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
 msgstr "Peru"
 
 #: data/resources/ui/history-view.ui:117
-msgid "Enter song or artist name"
-msgstr "Kirjoita kappaleen tai esittäjän nimi"
+msgid "Search songs"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:142
-msgid "Start Identifying Music!"
-msgstr "Aloita musiikin tunnistaminen!"
+msgid "Start Recognizing Songs!"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:143
-msgid "Click the listen button to start."
-msgstr "Napsauta kuuntelupainiketta aloittaaksesi."
+msgid "Click the listen button to start"
+msgstr ""
 
 #: data/resources/ui/history-view.ui:153
-msgid "No Results Found"
-msgstr "Tuloksia ei löytynyt"
-
-#: data/resources/ui/history-view.ui:154
-msgid "Try a different search."
-msgstr "Kokeile eri hakuehtoja."
-
-#: data/resources/ui/history-view.ui:163
-msgid "Copy Song"
-msgstr "Kopioi kappale"
+msgid "No Results"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -213,8 +201,8 @@ msgid "Preferred Audio Source"
 msgstr "Ensisijainen äänilähde"
 
 #: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to select when available."
-msgstr "Määrittää valittavan äänilähteen."
+msgid "Determines the audio source to use when available"
+msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:64
@@ -224,19 +212,16 @@ msgstr "AudD"
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Leaving this blank will give you a few trials per day."
+"\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Saat API-poletin osoitteesta <a href=\"https://dashboard.audd.io/\">audd.io</"
-"a>. Jos jätät tämän tyhjäksi, sinun on mahdollista tunnistaa muutama kappale "
-"päivässä."
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
 msgstr "API-poletti"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
-msgid "Go Back"
-msgstr "Takaisin"
+msgid "Back"
+msgstr ""
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -393,44 +378,27 @@ msgstr "Mikrofoni"
 msgid "Desktop Audio"
 msgstr "Tietokoneen ääni"
 
-#: src/recognizer/mod.rs:308
-msgid "The result will be available when you're back online."
-msgstr "Tulos on saatavilla, kun olet taas yhteydessä verkkoon."
-
-#: src/recognizer/mod.rs:337
-msgid "The result will be available when your connection is restored."
-msgstr ""
-
-#: src/recognizer/mod.rs:340
-msgid "The result will be available when your token limit is reset."
-msgstr ""
-
-#: src/recognizer/mod.rs:343
-msgid ""
-"The result will be available when your token is replaced with a valid one."
-msgstr ""
-
-#: src/recognizer/provider/error.rs:48
+#: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
 msgstr "Ei tuloksia"
 
-#: src/recognizer/provider/error.rs:49
+#: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
 msgstr "Äänestä ei voi luoda sormenjälkeä"
 
-#: src/recognizer/provider/error.rs:50
+#: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
 msgstr "Virheellinen poletti"
 
-#: src/recognizer/provider/error.rs:51
+#: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
 msgstr "Polettiraja tuli vastaan"
 
-#: src/recognizer/provider/error.rs:52
+#: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
 msgstr "Palvelimeen ei voi yhdistää"
 
-#: src/recognizer/provider/error.rs:53
+#: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
 msgstr ""
 
@@ -466,47 +434,54 @@ msgstr "Etsi YouTubesta"
 msgid "Failed to launch {}"
 msgstr "Ei voitu käynnistää {}"
 
-#: src/window/history_view.rs:138 src/window/song_page.rs:89
+#: src/window/history_view.rs:140 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Kopioitu leikepöydälle"
 
-#: src/window/history_view.rs:152
+#: src/window/history_view.rs:154
 msgid "Failed to remove selected songs"
 msgstr "Valittujen kappaleiden poistaminen epäonnistui"
 
-#: src/window/history_view.rs:320
+#: src/window/history_view.rs:322
 msgid "Failed to remove song"
 msgstr "Kappaleen poistaminen epäonnistui"
 
-#: src/window/history_view.rs:445
+#: src/window/history_view.rs:447
 msgid "Failed to show recognizer results"
 msgstr ""
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:685
 msgid "_Undo"
 msgstr "_Kumoa"
 
-#: src/window/history_view.rs:691
+#: src/window/history_view.rs:693
 msgid "Failed to undo"
 msgstr "Kumoaminen epäonnistui"
 
-#: src/window/history_view.rs:710
+#: src/window/history_view.rs:712
 msgid "Removed {} song"
 msgid_plural "Removed {} songs"
 msgstr[0] "Poistettu {} kappale"
 msgstr[1] "Poistettu {} kappaletta"
 
-#: src/window/history_view.rs:836
+#: src/window/history_view.rs:838
 msgid "Select items"
 msgstr "Valitse kohteet"
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Selected {} song"
 msgid_plural "Selected {} songs"
 msgstr[0] "Valittu {} kappale"
 msgstr[1] "Valittu {} kappaletta"
 
-#: src/window/history_view.rs:847
+#: src/window/history_view.rs:849
+#, fuzzy
+msgid "Copy Song"
+msgid_plural "Copy Songs"
+msgstr[0] "Kopioi kappale"
+msgstr[1] "Kopioi kappale"
+
+#: src/window/history_view.rs:856
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Poista kappale historiasta"
@@ -516,53 +491,64 @@ msgstr[1] "Poista kappaleet historiasta"
 msgid "Failed to insert song to history"
 msgstr "Kappaleen asettaminen historiaan epäonnistui"
 
-#: src/window/mod.rs:273
-msgid "Recording saved"
-msgstr "Nauhoite tallennettu"
-
-#: src/window/mod.rs:279
-msgid "Ok, got it"
-msgstr "Selvä"
-
-#: src/window/mod.rs:315
-msgid "Open preferences and try setting a different token."
-msgstr "Avaa asetukset ja aseta eri poletti."
-
-#: src/window/mod.rs:320
-msgid ""
-"Wait until the limit is reset or open preferences and try setting a "
-"different token."
+#: src/window/mod.rs:307
+msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
 
-#: src/window/mod.rs:326
-msgid "Open Preferences"
-msgstr "Avaa asetukset"
-
-#: src/window/mod.rs:331 src/window/mod.rs:360 src/window/mod.rs:390
+#: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
 msgstr "Ei"
 
-#: src/window/mod.rs:352
-msgid "Please open an issue on GitHub and provide the necessary information."
-msgstr "Avaa issue GitHubiin ja toimita tarvittavat tiedot."
-
-#: src/window/mod.rs:355
+#: src/window/mod.rs:312
 msgid "Open an Issue"
 msgstr "Avaa issue"
 
-#: src/window/mod.rs:383
+#: src/window/mod.rs:339
+msgid ""
+"Try moving closer to the source or using a different excerpt of the song"
+msgstr ""
+
+#: src/window/mod.rs:344
 msgid "Try Again"
 msgstr "Yritä uudelleen"
 
+#: src/window/mod.rs:377
+msgid "Recording Saved"
+msgstr ""
+
+#: src/window/mod.rs:385
+msgid "The result will be available when you're back online"
+msgstr ""
+
+#: src/window/mod.rs:388
+msgid "Ok, Got It"
+msgstr ""
+
+#: src/window/mod.rs:398
+msgid ""
+"The result will be available when your token limit is reset. Wait until the "
+"limit is reset or open preferences and try setting a different token"
+msgstr ""
+
+#: src/window/mod.rs:401
+msgid "I'll Wait"
+msgstr ""
+
 #: src/window/mod.rs:405
-msgid "Please check your internet connection."
-msgstr "Tarkista internetyhteytesi."
+msgid ""
+"The result will be available when your token is replaced with a valid one. "
+"Open preferences and try setting a different token"
+msgstr ""
 
-#: src/window/mod.rs:407
-msgid "Ok"
-msgstr "OK"
+#: src/window/mod.rs:408
+msgid "Later"
+msgstr ""
 
-#: src/window/mod.rs:492
+#: src/window/mod.rs:413
+msgid "Open Preferences"
+msgstr "Avaa asetukset"
+
+#: src/window/mod.rs:519
 msgid "An error occurred in the player"
 msgstr "Soittimessa tapahtui virhe"
 
@@ -575,16 +561,16 @@ msgid "Pause"
 msgstr "Keskeytä"
 
 #: src/window/recognized_page.rs:142
-msgid "Recognized {} new song"
-msgid_plural "Recognized {} new songs"
+msgid "Recognized {} New Song"
+msgid_plural "Recognized {} New Songs"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/window/recognized_page.rs:148
-msgid "This song was heard while you're offline"
-msgid_plural "These songs were heard while you're offline"
-msgstr[0] "Tämä kappale kuultiin, kun olit yhteydettömässä tilassa"
-msgstr[1] "Nämä kappaleet kuultiin, kun olit yhteydettömässä tilassa"
+msgid "This song was recognized from your saved recording"
+msgid_plural "These songs were recognized from your saved recordings"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {} Out Of {}"
@@ -607,6 +593,87 @@ msgstr "Tuntematon"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr ""
+
+#~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+#~ msgstr ""
+#~ "Shazam;Audio;Music;Song;Identify;Recognition;kappale;musiikki;tunnistus;"
+
+#~ msgid ""
+#~ "Mousai is a simple application that can identify song similar to Shazam. "
+#~ "Just click the listen button, and then wait a few seconds. It will "
+#~ "magically return the title and artist of that song!"
+#~ msgstr ""
+#~ "Mousai on sovellus, joka tunnistaa kappaleita kuten Shazam. Napsauta "
+#~ "kuuntelupainiketta ja odota muutama sekunti. Saat tietoosi kappaleen "
+#~ "nimen ja esittäjän!"
+
+#~ msgid "Start Identifying Music"
+#~ msgstr "Aloita musiikin tunnistaminen"
+
+#~ msgid "Open Main Menu"
+#~ msgstr "Avaa päävalikko"
+
+#~ msgid "Search for Songs"
+#~ msgstr "Etsi kappaleita"
+
+#~ msgid "Cancel Select"
+#~ msgstr "Peru valinta"
+
+#~ msgid "Enter song or artist name"
+#~ msgstr "Kirjoita kappaleen tai esittäjän nimi"
+
+#~ msgid "Start Identifying Music!"
+#~ msgstr "Aloita musiikin tunnistaminen!"
+
+#~ msgid "Click the listen button to start."
+#~ msgstr "Napsauta kuuntelupainiketta aloittaaksesi."
+
+#~ msgid "No Results Found"
+#~ msgstr "Tuloksia ei löytynyt"
+
+#~ msgid "Try a different search."
+#~ msgstr "Kokeile eri hakuehtoja."
+
+#~ msgid "Determines the audio source to select when available."
+#~ msgstr "Määrittää valittavan äänilähteen."
+
+#~ msgid ""
+#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
+#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ msgstr ""
+#~ "Saat API-poletin osoitteesta <a href=\"https://dashboard.audd.io/\">audd."
+#~ "io</a>. Jos jätät tämän tyhjäksi, sinun on mahdollista tunnistaa muutama "
+#~ "kappale päivässä."
+
+#~ msgid "Go Back"
+#~ msgstr "Takaisin"
+
+#~ msgid "The result will be available when you're back online."
+#~ msgstr "Tulos on saatavilla, kun olet taas yhteydessä verkkoon."
+
+#~ msgid "Recording saved"
+#~ msgstr "Nauhoite tallennettu"
+
+#~ msgid "Ok, got it"
+#~ msgstr "Selvä"
+
+#~ msgid "Open preferences and try setting a different token."
+#~ msgstr "Avaa asetukset ja aseta eri poletti."
+
+#~ msgid ""
+#~ "Please open an issue on GitHub and provide the necessary information."
+#~ msgstr "Avaa issue GitHubiin ja toimita tarvittavat tiedot."
+
+#~ msgid "Please check your internet connection."
+#~ msgstr "Tarkista internetyhteytesi."
+
+#~ msgid "Ok"
+#~ msgstr "OK"
+
+#~ msgid "This song was heard while you're offline"
+#~ msgid_plural "These songs were heard while you're offline"
+#~ msgstr[0] "Tämä kappale kuultiin, kun olit yhteydettömässä tilassa"
+#~ msgstr[1] "Nämä kappaleet kuultiin, kun olit yhteydettömässä tilassa"
 
 #~ msgid "AudD Provider"
 #~ msgstr "AudD-palveluntarjoaja"
@@ -780,9 +847,6 @@ msgstr ""
 
 #~ msgid "Cancel the Recording"
 #~ msgstr "Peru nauhoittaminen"
-
-#~ msgid "Main Menu"
-#~ msgstr "Päävalikko"
 
 #~ msgid "Start Mousaing!"
 #~ msgstr "Aloita Mousaiointi!"
