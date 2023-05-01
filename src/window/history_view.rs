@@ -64,6 +64,8 @@ mod imp {
         #[template_child]
         pub(super) selection_mode_bar: TemplateChild<gtk::ActionBar>,
         #[template_child]
+        pub(super) copy_selected_songs_button: TemplateChild<gtk::Button>,
+        #[template_child]
         pub(super) remove_selected_songs_button: TemplateChild<gtk::Button>,
         #[template_child]
         pub(super) search_bar: TemplateChild<gtk::SearchBar>,
@@ -841,6 +843,13 @@ impl HistoryView {
                     selection_size
                 ),
             });
+
+        imp.copy_selected_songs_button
+            .set_tooltip_text(Some(&ngettext(
+                "Copy Song",
+                "Copy Songs",
+                selection_size as u32,
+            )));
 
         imp.remove_selected_songs_button
             .set_tooltip_text(Some(&ngettext(
