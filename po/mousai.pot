@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 12:17+0800\n"
+"POT-Creation-Date: 2023-05-01 12:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgstr ""
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
-msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
+msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
@@ -64,7 +64,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
-"Mousai is a simple application that can identify song similar to Shazam. "
+"Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""

@@ -43,7 +43,7 @@
 
 Discover songs you are aching to know with an easy-to-use interface.
 
-Mousai is a simple application that can identify songs similar to Shazam. Just
+Mousai is a simple application that can recognize songs similar to Shazam. Just
 click the listen button, and then wait a few seconds. It will magically return
 the title and artist of that song!
 
