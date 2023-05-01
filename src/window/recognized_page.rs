@@ -139,8 +139,8 @@ impl RecognizedPage {
 
         let songs_len = songs.len();
         imp.title.set_label(&ngettext!(
-            "Recognized {} new song",
-            "Recognized {} new songs",
+            "Recognized {} New Song",
+            "Recognized {} New Songs",
             songs_len as u32,
             songs_len
         ));
