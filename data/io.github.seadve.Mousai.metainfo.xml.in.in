@@ -39,6 +39,19 @@
   <url type="donation">https://liberapay.com/SeaDve</url>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.7.5" date="2023-05-02">
+      <description>
+        <p>This release contains the following changes:</p>
+        <ul>
+          <li>Added suggestions and more helpful messages when a recording is saved</li>
+          <li>Make song information row selectable</li>
+          <li>Fixed not using offline mode on limited and local connections</li>
+          <li>Fixed crash on missing format placeholder on certain translations</li>
+          <li>Improved UI texts writing style</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.4" date="2023-04-26">
       <description>
         <p>This release contains new features and fixes:</p>
