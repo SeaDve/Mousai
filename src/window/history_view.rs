@@ -15,6 +15,7 @@ use super::{
 };
 use crate::{
     config::APP_ID,
+    i18n::ngettext_f,
     model::{Song, SongFilter, SongList, SongSorter, Uid},
     player::Player,
     recognizer::Recognizer,
@@ -708,11 +709,12 @@ impl HistoryView {
         // Add this point we should already have a toast setup
         if let Some(ref toast) = *imp.undo_remove_song_toast.borrow() {
             let n_removed = imp.songs_purgatory.borrow().len();
-            toast.set_title(&ngettext!(
-                "Removed {} song",
-                "Removed {} songs",
+            toast.set_title(&ngettext_f(
+                // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+                "Removed {n_removed} song",
+                "Removed {n_removed} songs",
                 n_removed as u32,
-                n_removed
+                &[("n_removed", &n_removed.to_string())],
             ));
 
             // Reset toast timeout
@@ -836,12 +838,15 @@ impl HistoryView {
         imp.selection_mode_menu_button
             .set_label(&match selection_size {
                 0 => gettext("Select items"),
-                1.. => ngettext!(
-                    "Selected {} song",
-                    "Selected {} songs",
-                    selection_size as u32,
-                    selection_size
-                ),
+                1.. => {
+                    ngettext_f(
+                        // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+                        "Selected {selection_size} song",
+                        "Selected {selection_size} songs",
+                        selection_size as u32,
+                        &[("selection_size", &selection_size.to_string())],
+                    )
+                }
             });
 
         imp.copy_selected_songs_button

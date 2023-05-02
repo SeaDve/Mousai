@@ -1,4 +1,3 @@
-use gettextrs::ngettext;
 use gtk::{
     glib::{self, clone, closure_local},
     prelude::*,
@@ -7,7 +6,7 @@ use gtk::{
 use once_cell::unsync::OnceCell;
 
 use super::progress_icon::ProgressIcon;
-use crate::recognizer::Recognizer;
+use crate::{i18n::gettext_f, recognizer::Recognizer};
 
 // TODO
 // - Maybe drop the separate button to show result?
@@ -156,12 +155,13 @@ impl RecognizerStatus {
             .count();
         let n_failed = n_recognized - n_successful;
 
-        imp.progress_icon.set_tooltip_text(Some(&ngettext!(
-            "Recognized {} Out Of {}",
-            "Recognized {} Out Of {} Songs",
-            (total - n_failed) as u32,
-            n_successful,
-            total - n_failed,
+        imp.progress_icon.set_tooltip_text(Some(&gettext_f(
+            // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+            "Recognized {n_successful} Out Of {total_minus_failed}",
+            &[
+                ("n_successful", &n_successful.to_string()),
+                ("total_minus_failed", &(total - n_failed).to_string()),
+            ],
         )));
 
         let progress = if total - n_failed == 0 {

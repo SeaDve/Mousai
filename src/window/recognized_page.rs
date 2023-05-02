@@ -9,7 +9,7 @@ use once_cell::unsync::OnceCell;
 use std::cell::{Cell, RefCell};
 
 use super::{recognized_page_tile::RecognizedPageTile, AdaptiveMode};
-use crate::{model::Song, player::Player};
+use crate::{i18n::ngettext_f, model::Song, player::Player};
 
 mod imp {
     use super::*;
@@ -137,17 +137,18 @@ impl RecognizedPage {
 
         let imp = self.imp();
 
-        let songs_len = songs.len();
-        imp.title.set_label(&ngettext!(
-            "Recognized {} New Song",
-            "Recognized {} New Songs",
-            songs_len as u32,
-            songs_len
+        let n_songs = songs.len();
+        imp.title.set_label(&ngettext_f(
+            // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+            "Recognized {n_songs} New Song",
+            "Recognized {n_songs} New Songs",
+            n_songs as u32,
+            &[("n_songs", &n_songs.to_string())],
         ));
         imp.subtitle.set_label(&ngettext(
             "This song was recognized from your saved recording",
             "These songs were recognized from your saved recordings",
-            songs_len as u32,
+            n_songs as u32,
         ));
 
         let player = self

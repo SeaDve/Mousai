@@ -31,6 +31,7 @@ mod config;
 mod core;
 mod database;
 mod database_error_window;
+mod i18n;
 mod inspector_page;
 mod model;
 mod player;

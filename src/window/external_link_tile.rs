@@ -5,6 +5,7 @@ use once_cell::unsync::OnceCell;
 use std::str::FromStr;
 
 use crate::{
+    i18n::gettext_f,
     model::{ExternalLink, ExternalLinkKey},
     utils,
 };
@@ -139,9 +140,11 @@ impl ExternalLinkTile {
             move |res| {
                 if let Err(err) = res {
                     tracing::warn!("Failed to launch default for uri `{}`: {:?}", uri, err);
-                    utils::app_instance()
-                        .window()
-                        .add_message_toast(&gettext!("Failed to launch {}", raw_key));
+                    utils::app_instance().window().add_message_toast(&gettext_f(
+                        // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+                        "Failed to launch {key}",
+                        &[("key", &raw_key)],
+                    ));
                 }
             },
         );
