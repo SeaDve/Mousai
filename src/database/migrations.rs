@@ -30,6 +30,13 @@ impl Migrations {
         name: &'static str,
         func: impl Fn(&heed::Env, &mut heed::RwTxn<'_>) -> Result<()> + 'static,
     ) {
+        for migration in &self.migrations {
+            debug_assert_ne!(
+                migration.name, name,
+                "there must be no duplicate migration names"
+            );
+        }
+
         self.migrations.push(Migration {
             name,
             func: Box::new(func),
