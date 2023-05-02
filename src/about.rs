@@ -48,6 +48,9 @@ pub fn present_window(transient_for: Option<&impl IsA<gtk::Window>>) {
 
 fn debug_info() -> String {
     let is_flatpak = Path::new("/.flatpak-info").exists();
+
+    let language_names = glib::language_names().join(", ");
+
     let distribution = glib::os_info("PRETTY_NAME").unwrap_or_else(|| "<unknown>".into());
     let desktop_session = env::var("DESKTOP_SESSION").unwrap_or_else(|_| "<unknown>".into());
     let display_server = env::var("XDG_SESSION_TYPE").unwrap_or_else(|_| "<unknown>".into());
@@ -75,6 +78,8 @@ fn debug_info() -> String {
     format!(
         r#"- {APP_ID} {VERSION}
 - Flatpak: {is_flatpak}
+
+- Language: {language_names}
 
 - Distribution: {distribution}
 - Desktop Session: {desktop_session}
