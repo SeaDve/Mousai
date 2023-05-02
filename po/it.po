@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 12:30+0800\n"
+"POT-Creation-Date: 2023-05-02 18:03+0800\n"
 "PO-Revision-Date: 2023-05-01 07:14+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
-"\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/"
+">\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: src/main.rs:58
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -117,7 +117,7 @@ msgstr "🌐 Cerca e ascolta brani da diversi fornitori"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Interfaccia utente facile da usare"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -213,7 +213,7 @@ msgid "Determines the audio source to use when available"
 msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:64
+#: src/window/external_link_tile.rs:65
 msgid "AudD"
 msgstr "AudD"
 
@@ -410,86 +410,89 @@ msgstr "Impossibile connettersi al server"
 msgid "Received Other Permanent Error"
 msgstr "Ricevuti altri errori permanenti"
 
-#: src/window/external_link_tile.rs:59
+#: src/window/external_link_tile.rs:60
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:60
+#: src/window/external_link_tile.rs:61
 msgid "Browse on Apple Music"
 msgstr "Esplora su Apple Music"
 
-#: src/window/external_link_tile.rs:65
+#: src/window/external_link_tile.rs:66
 msgid "Browse on AudD"
 msgstr "Esplora su AudD"
 
-#: src/window/external_link_tile.rs:69
+#: src/window/external_link_tile.rs:70
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:70
+#: src/window/external_link_tile.rs:71
 msgid "Listen on Spotify"
 msgstr "Ascolta su Spotify"
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:75
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:75
+#: src/window/external_link_tile.rs:76
 msgid "Search on YouTube"
 msgstr "Cerca su YouTube"
 
-#: src/window/external_link_tile.rs:144
-msgid "Failed to launch {}"
-msgstr "Impossibile avviare {}"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/external_link_tile.rs:145
+msgid "Failed to launch {key}"
+msgstr ""
 
-#: src/window/history_view.rs:140 src/window/song_page.rs:89
+#: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Copiato negli appunti"
 
-#: src/window/history_view.rs:154
+#: src/window/history_view.rs:155
 msgid "Failed to remove selected songs"
 msgstr "Impossibile rimuovere i brani selezionati"
 
-#: src/window/history_view.rs:322
+#: src/window/history_view.rs:323
 msgid "Failed to remove song"
 msgstr "Impossibile rimuovere il brano"
 
-#: src/window/history_view.rs:447
+#: src/window/history_view.rs:448
 msgid "Failed to show recognizer results"
 msgstr "Impossibile mostrare i risultati di riconoscimento"
 
-#: src/window/history_view.rs:685
+#: src/window/history_view.rs:686
 msgid "_Undo"
 msgstr "_Annulla"
 
-#: src/window/history_view.rs:693
+#: src/window/history_view.rs:694
 msgid "Failed to undo"
 msgstr "Impossibile annullare"
 
-#: src/window/history_view.rs:712
-msgid "Removed {} song"
-msgid_plural "Removed {} songs"
-msgstr[0] "{} brano rimosso"
-msgstr[1] "{} brani rimossi"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:714
+msgid "Removed {n_removed} song"
+msgid_plural "Removed {n_removed} songs"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Select items"
 msgstr "Seleziona elementi"
 
-#: src/window/history_view.rs:840
-msgid "Selected {} song"
-msgid_plural "Selected {} songs"
-msgstr[0] "{} brano selezionato"
-msgstr[1] "{} brani selezionati"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:844
+msgid "Selected {selection_size} song"
+msgid_plural "Selected {selection_size} songs"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/window/history_view.rs:849
+#: src/window/history_view.rs:854
 #, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Copia brano"
 msgstr[1] "Copia brano"
 
-#: src/window/history_view.rs:856
+#: src/window/history_view.rs:861
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Rimuovi brano dalla cronologia"
@@ -569,23 +572,23 @@ msgstr "Riproduci"
 msgid "Pause"
 msgstr "Pausa"
 
-#: src/window/recognized_page.rs:142
-msgid "Recognized {} New Song"
-msgid_plural "Recognized {} New Songs"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/recognized_page.rs:143
+msgid "Recognized {n_songs} New Song"
+msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] ""
 msgstr[1] ""
 
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
-msgid "Recognized {} Out Of {}"
-msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] "Riconosciuto {} brano su {}"
-msgstr[1] "Riconosciuti {} brani su {}"
+msgid "Recognized {n_successful} Out Of {total_minus_failed}"
+msgstr ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -602,6 +605,24 @@ msgstr "Sconosciuto"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "Deseleziona"
+
+#~ msgid "Failed to launch {}"
+#~ msgstr "Impossibile avviare {}"
+
+#~ msgid "Removed {} song"
+#~ msgid_plural "Removed {} songs"
+#~ msgstr[0] "{} brano rimosso"
+#~ msgstr[1] "{} brani rimossi"
+
+#~ msgid "Selected {} song"
+#~ msgid_plural "Selected {} songs"
+#~ msgstr[0] "{} brano selezionato"
+#~ msgstr[1] "{} brani selezionati"
+
+#~ msgid "Recognized {} Out Of {}"
+#~ msgid_plural "Recognized {} Out Of {} Songs"
+#~ msgstr[0] "Riconosciuto {} brano su {}"
+#~ msgstr[1] "Riconosciuti {} brani su {}"
 
 #~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
 #~ msgstr "Shazam;Audio;Musica;Canzone;Identifica;Riconoscimento;"

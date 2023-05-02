@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 12:30+0800\n"
+"POT-Creation-Date: 2023-05-02 18:03+0800\n"
 "PO-Revision-Date: 2023-05-01 07:14+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/kooha/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: src/main.rs:58
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -113,7 +113,7 @@ msgstr "🌐 Utforsk og lytt til sanger fra forskjellige tilbydere"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Lettfattelig brukergrensesnitt"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
 #, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
@@ -211,7 +211,7 @@ msgid "Determines the audio source to use when available"
 msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:64
+#: src/window/external_link_tile.rs:65
 msgid "AudD"
 msgstr "AudD"
 
@@ -415,91 +415,94 @@ msgstr "Kan ikke koble til tjeneren"
 msgid "Received Other Permanent Error"
 msgstr "Mottok annen vedvarende feil"
 
-#: src/window/external_link_tile.rs:59
+#: src/window/external_link_tile.rs:60
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:60
+#: src/window/external_link_tile.rs:61
 msgid "Browse on Apple Music"
 msgstr "Utforsk på Apple Music"
 
-#: src/window/external_link_tile.rs:65
+#: src/window/external_link_tile.rs:66
 msgid "Browse on AudD"
 msgstr "Utforsk på AudD"
 
-#: src/window/external_link_tile.rs:69
+#: src/window/external_link_tile.rs:70
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:70
+#: src/window/external_link_tile.rs:71
 msgid "Listen on Spotify"
 msgstr "Lytt på Spotify"
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:75
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:75
+#: src/window/external_link_tile.rs:76
 msgid "Search on YouTube"
 msgstr "Søk på YouTube"
 
-#: src/window/external_link_tile.rs:144
-msgid "Failed to launch {}"
-msgstr "Klarte ikke å starte {}"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/external_link_tile.rs:145
+msgid "Failed to launch {key}"
+msgstr ""
 
-#: src/window/history_view.rs:140 src/window/song_page.rs:89
+#: src/window/history_view.rs:141 src/window/song_page.rs:89
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "Kopiert til utklippstavlen"
 
-#: src/window/history_view.rs:154
+#: src/window/history_view.rs:155
 #, fuzzy
 msgid "Failed to remove selected songs"
 msgstr "Klarte ikke å fjerne valgte sanger"
 
-#: src/window/history_view.rs:322
+#: src/window/history_view.rs:323
 #, fuzzy
 msgid "Failed to remove song"
 msgstr "Klarte ikke å fjerne sang"
 
-#: src/window/history_view.rs:447
+#: src/window/history_view.rs:448
 #, fuzzy
 msgid "Failed to show recognizer results"
 msgstr "Kunne ikke vise resultater fra gjenkjenneren"
 
-#: src/window/history_view.rs:685
+#: src/window/history_view.rs:686
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/window/history_view.rs:693
+#: src/window/history_view.rs:694
 #, fuzzy
 msgid "Failed to undo"
 msgstr "Klarte ikke å angre"
 
-#: src/window/history_view.rs:712
-msgid "Removed {} song"
-msgid_plural "Removed {} songs"
-msgstr[0] "Fjernet {} sang"
-msgstr[1] "Fjernet {} sanger"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:714
+msgid "Removed {n_removed} song"
+msgid_plural "Removed {n_removed} songs"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Select items"
 msgstr "Velg elementer"
 
-#: src/window/history_view.rs:840
-msgid "Selected {} song"
-msgid_plural "Selected {} songs"
-msgstr[0] "Valgte {} sang"
-msgstr[1] "Valgte {} sanger"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:844
+msgid "Selected {selection_size} song"
+msgid_plural "Selected {selection_size} songs"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/window/history_view.rs:849
+#: src/window/history_view.rs:854
 #, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Kopier sang"
 msgstr[1] "Kopier sang"
 
-#: src/window/history_view.rs:856
+#: src/window/history_view.rs:861
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Fjern sang fra historikk"
@@ -580,23 +583,23 @@ msgstr "Spill"
 msgid "Pause"
 msgstr "Pause"
 
-#: src/window/recognized_page.rs:142
-msgid "Recognized {} New Song"
-msgid_plural "Recognized {} New Songs"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/recognized_page.rs:143
+msgid "Recognized {n_songs} New Song"
+msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] ""
 msgstr[1] ""
 
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
-msgid "Recognized {} Out Of {}"
-msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] "Gjenkjente {} av {}"
-msgstr[1] "Gjenkjente {} av {} sanger"
+msgid "Recognized {n_successful} Out Of {total_minus_failed}"
+msgstr ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -613,6 +616,24 @@ msgstr "Ukjent"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "Fravelg"
+
+#~ msgid "Failed to launch {}"
+#~ msgstr "Klarte ikke å starte {}"
+
+#~ msgid "Removed {} song"
+#~ msgid_plural "Removed {} songs"
+#~ msgstr[0] "Fjernet {} sang"
+#~ msgstr[1] "Fjernet {} sanger"
+
+#~ msgid "Selected {} song"
+#~ msgid_plural "Selected {} songs"
+#~ msgstr[0] "Valgte {} sang"
+#~ msgstr[1] "Valgte {} sanger"
+
+#~ msgid "Recognized {} Out Of {}"
+#~ msgid_plural "Recognized {} Out Of {} Songs"
+#~ msgstr[0] "Gjenkjente {} av {}"
+#~ msgstr[1] "Gjenkjente {} av {} sanger"
 
 #~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
 #~ msgstr "Shazam;Lyd;Musikk;Sang;Identifisering;Gjenkjenning"

@@ -6,22 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 12:30+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2023-05-02 18:03+0800\n"
+"PO-Revision-Date: 2023-05-02 09:51+0000\n"
+"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.18-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: src/main.rs:58
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -34,6 +34,8 @@ msgstr "Визначайте пісні за лічені секунди"
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
+"Shazam;Аудіо;Audio;Music;Музика;Song; Пісня;Recognize;Розпізнати;Identify; "
+"Ідентифікувати;Recognition; Розпізнавання;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -70,6 +72,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai – це простий застосунок, який може розпізнавати пісні, подібно до "
+"Shazam. Просто натисніть кнопку «Слухати» і зачекайте кілька секунд. Він "
+"чарівним чином поверне вам назву та виконавця цієї пісні!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -109,7 +114,7 @@ msgstr "🌐 Перегляд і прослуховування пісень в�
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Простий користувацький інтерфейс"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -127,6 +132,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Це, ймовірно, спричинено втручанням у базу даних або її пошкодженням. Можете "
+"спробувати очистити дані застосунку. Однак це не рекомендується, оскільки це "
+"призведе до видалення всіх ваших пісень і збережених записів.\n"
+"\n"
+"Щоб повідомити про цю проблему, запустіть Mousai у терміналі, щоб включити "
+"журнали, і надішліть звіт про помилку на <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">сторінку обговорення</a>"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -150,7 +162,7 @@ msgstr "Ска_сувати вибір"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Розпізнати пісню"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -166,11 +178,11 @@ msgstr "Вибрати"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Пошук пісень"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Скасувати вибір"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -178,19 +190,19 @@ msgstr "Скасувати"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Пошук пісень"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Почніть розпізнавати пісні!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Натисніть кнопку прослуховування, щоб розпочати"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "Нічого не знайдено"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -202,10 +214,10 @@ msgstr "Бажане джерело звуку"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "Визначає джерело звуку, яке буде використовуватися, якщо воно доступне"
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:64
+#: src/window/external_link_tile.rs:65
 msgid "AudD"
 msgstr "AudD"
 
@@ -214,6 +226,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"Ви можете отримати токен API з <a href=\"https://dashboard.audd.io/\">audd."
+"io</a>. Якщо залишити це поле порожнім, ви отримаєте кілька спроб на день"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -221,7 +235,7 @@ msgstr "Токен API"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -402,89 +416,91 @@ msgstr "Не вдалося з'єднатись із сервером"
 msgid "Received Other Permanent Error"
 msgstr "Отримано іншу постійну помилку"
 
-#: src/window/external_link_tile.rs:59
+#: src/window/external_link_tile.rs:60
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:60
+#: src/window/external_link_tile.rs:61
 msgid "Browse on Apple Music"
 msgstr "Переглянути на Apple Music"
 
-#: src/window/external_link_tile.rs:65
+#: src/window/external_link_tile.rs:66
 msgid "Browse on AudD"
 msgstr "Переглянути на AudD"
 
-#: src/window/external_link_tile.rs:69
+#: src/window/external_link_tile.rs:70
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:70
+#: src/window/external_link_tile.rs:71
 msgid "Listen on Spotify"
 msgstr "Слухати на Spotify"
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:75
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:75
+#: src/window/external_link_tile.rs:76
 msgid "Search on YouTube"
 msgstr "Пошук на YouTube"
 
-#: src/window/external_link_tile.rs:144
-msgid "Failed to launch {}"
-msgstr "Не вдалося запустити {}"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/external_link_tile.rs:145
+msgid "Failed to launch {key}"
+msgstr ""
 
-#: src/window/history_view.rs:140 src/window/song_page.rs:89
+#: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Скопійовано до буфера обміну"
 
-#: src/window/history_view.rs:154
+#: src/window/history_view.rs:155
 msgid "Failed to remove selected songs"
 msgstr "Не вдалося вилучити вибрані пісні"
 
-#: src/window/history_view.rs:322
+#: src/window/history_view.rs:323
 msgid "Failed to remove song"
 msgstr "Не вдалося вилучити пісню"
 
-#: src/window/history_view.rs:447
+#: src/window/history_view.rs:448
 msgid "Failed to show recognizer results"
 msgstr "Не вдалося показати результати розпізнавання"
 
-#: src/window/history_view.rs:685
+#: src/window/history_view.rs:686
 msgid "_Undo"
 msgstr "_Скасувати"
 
-#: src/window/history_view.rs:693
+#: src/window/history_view.rs:694
 msgid "Failed to undo"
 msgstr "Не вдалося скасувати"
 
-#: src/window/history_view.rs:712
-msgid "Removed {} song"
-msgid_plural "Removed {} songs"
-msgstr[0] "Вилучено {} пісню"
-msgstr[1] "Вилучено {} пісні"
-msgstr[2] "Вилучено {} пісень"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:714
+msgid "Removed {n_removed} song"
+msgid_plural "Removed {n_removed} songs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Select items"
 msgstr "Вибрати елементи"
 
-#: src/window/history_view.rs:840
-msgid "Selected {} song"
-msgid_plural "Selected {} songs"
-msgstr[0] "Вибрана {} пісня"
-msgstr[1] "Вибрано {} пісні"
-msgstr[2] "Вибрано {} пісень"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:844
+msgid "Selected {selection_size} song"
+msgid_plural "Selected {selection_size} songs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-#: src/window/history_view.rs:849
-#, fuzzy
+#: src/window/history_view.rs:854
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Копіювати пісню"
-msgstr[1] "Копіювати пісню"
-msgstr[2] "Копіювати пісню"
+msgstr[1] "Копіювати пісні"
+msgstr[2] "Копіювати пісні"
 
-#: src/window/history_view.rs:856
+#: src/window/history_view.rs:861
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Вилучити пісню з історії"
@@ -497,7 +513,7 @@ msgstr "Не вдалося вставити пісню до історії"
 
 #: src/window/mod.rs:307
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "Створіть звернення на GitHub та надайте необхідну інформацію"
 
 #: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
@@ -510,7 +526,7 @@ msgstr "Написати звернення"
 #: src/window/mod.rs:339
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
-msgstr ""
+msgstr "Спробуйте наблизитися до джерела або використати інший уривок пісні"
 
 #: src/window/mod.rs:344
 msgid "Try Again"
@@ -518,34 +534,38 @@ msgstr "Спробувати ще раз"
 
 #: src/window/mod.rs:377
 msgid "Recording Saved"
-msgstr ""
+msgstr "Запис збережено"
 
 #: src/window/mod.rs:385
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Результат буде доступний, коли ви будете онлайн"
 
 #: src/window/mod.rs:388
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Гаразд, зрозуміло"
 
 #: src/window/mod.rs:398
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Результат буде доступний, коли ліміт токенів буде скинуто. Зачекайте, поки "
+"ліміт буде скинуто, або відкрийте налаштування і спробуйте встановити інший "
+"токен"
 
 #: src/window/mod.rs:401
 msgid "I'll Wait"
-msgstr ""
+msgstr "Я зачекаю"
 
 #: src/window/mod.rs:405
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Результат буде доступний, коли ваш токен буде замінено на дійсний. Відкрийте "
+"налаштування та спробуйте встановити інший токен"
 
 #: src/window/mod.rs:408
-#, fuzzy
 msgid "Later"
 msgstr "Пізніше"
 
@@ -565,26 +585,25 @@ msgstr "Відтворити"
 msgid "Pause"
 msgstr "Призупинити"
 
-#: src/window/recognized_page.rs:142
-msgid "Recognized {} New Song"
-msgid_plural "Recognized {} New Songs"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/recognized_page.rs:143
+msgid "Recognized {n_songs} New Song"
+msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Цю пісню розпізнано зі збереженого запису"
+msgstr[1] "Ці пісні розпізнано зі збережених записів"
+msgstr[2] "Ці пісні розпізнано зі збережених записів"
 
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
-msgid "Recognized {} Out Of {}"
-msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] "Розпізнано {} з {}"
-msgstr[1] "Розпізнано {} з {} пісень"
-msgstr[2] "Розпізнано {} з {} пісень"
+msgid "Recognized {n_successful} Out Of {total_minus_failed}"
+msgstr ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -601,6 +620,33 @@ msgstr "Невідомо"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "Скасувати вибір"
+
+#~ msgid "Failed to launch {}"
+#~ msgstr "Не вдалося запустити {}"
+
+#~ msgid "Removed {} song"
+#~ msgid_plural "Removed {} songs"
+#~ msgstr[0] "Вилучено {} пісню"
+#~ msgstr[1] "Вилучено {} пісні"
+#~ msgstr[2] "Вилучено {} пісень"
+
+#~ msgid "Selected {} song"
+#~ msgid_plural "Selected {} songs"
+#~ msgstr[0] "Вибрана {} пісня"
+#~ msgstr[1] "Вибрано {} пісні"
+#~ msgstr[2] "Вибрано {} пісень"
+
+#~ msgid "Recognized {} New Song"
+#~ msgid_plural "Recognized {} New Songs"
+#~ msgstr[0] "Розпізнано {} нову пісню"
+#~ msgstr[1] "Розпізнано {} нові пісні"
+#~ msgstr[2] "Розпізнано {} нових пісень"
+
+#~ msgid "Recognized {} Out Of {}"
+#~ msgid_plural "Recognized {} Out Of {} Songs"
+#~ msgstr[0] "Розпізнано {} з {}"
+#~ msgstr[1] "Розпізнано {} з {} пісень"
+#~ msgstr[2] "Розпізнано {} з {} пісень"
 
 #~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
 #~ msgstr ""

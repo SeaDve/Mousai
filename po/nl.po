@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 12:30+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2023-05-02 18:03+0800\n"
+"PO-Revision-Date: 2023-05-02 09:51+0000\n"
+"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: src/main.rs:58
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -34,8 +34,8 @@ msgstr "Identificeer nummers binnen enkele seconden"
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
-"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Geluid;Muziek;Herkenne"
-"n;Identificeren;Herkenning;"
+"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Geluid;Muziek;"
+"Herkennen;Identificeren;Herkenning;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -115,7 +115,7 @@ msgstr "🌐 Blader en luister naar het nummer van verschillende aanbieders"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Gebruiksvriendelijke vormgeving"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:346 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
@@ -133,6 +133,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Dit wordt waarschijnlijk veroorzaakt door een gemanipuleerde of beschadigde "
+"database. U kunt proberen de app-gegevens te wissen. Dit wordt echter niet "
+"aanbevolen en zal al uw nummers en opgeslagen opnames verwijderen.\n"
+"\n"
+"Om dit probleem te melden, start Mousai in de terminal om het logboek op te "
+"nemen en dien het foutrapport in op de <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue-pagina</a>"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -211,7 +218,7 @@ msgid "Determines the audio source to use when available"
 msgstr "Bepaalt de te gebruiken audiobron indien beschikbaar"
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:64
+#: src/window/external_link_tile.rs:65
 msgid "AudD"
 msgstr "AudD"
 
@@ -412,85 +419,88 @@ msgstr "Kan geen verbinding maken met de server"
 msgid "Received Other Permanent Error"
 msgstr "Andere permanente fout ontvangen"
 
-#: src/window/external_link_tile.rs:59
+#: src/window/external_link_tile.rs:60
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:60
+#: src/window/external_link_tile.rs:61
 msgid "Browse on Apple Music"
 msgstr "Bekijken op Apple Music"
 
-#: src/window/external_link_tile.rs:65
+#: src/window/external_link_tile.rs:66
 msgid "Browse on AudD"
 msgstr "Bekijken op AudD"
 
-#: src/window/external_link_tile.rs:69
+#: src/window/external_link_tile.rs:70
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:70
+#: src/window/external_link_tile.rs:71
 msgid "Listen on Spotify"
 msgstr "Beluisteren op Spotify"
 
-#: src/window/external_link_tile.rs:74
+#: src/window/external_link_tile.rs:75
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:75
+#: src/window/external_link_tile.rs:76
 msgid "Search on YouTube"
 msgstr "Zoeken op YouTube"
 
-#: src/window/external_link_tile.rs:144
-msgid "Failed to launch {}"
-msgstr "{} kan niet worden gestart"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/external_link_tile.rs:145
+msgid "Failed to launch {key}"
+msgstr ""
 
-#: src/window/history_view.rs:140 src/window/song_page.rs:89
+#: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
 msgstr "Gekopieerd naar klembord"
 
-#: src/window/history_view.rs:154
+#: src/window/history_view.rs:155
 msgid "Failed to remove selected songs"
 msgstr "Geselecteerde nummers verwijderen mislukt"
 
-#: src/window/history_view.rs:322
+#: src/window/history_view.rs:323
 msgid "Failed to remove song"
 msgstr "Nummer verwijderen mislukt"
 
-#: src/window/history_view.rs:447
+#: src/window/history_view.rs:448
 msgid "Failed to show recognizer results"
 msgstr "Herkenningsresultaten tonen mislukt"
 
-#: src/window/history_view.rs:685
+#: src/window/history_view.rs:686
 msgid "_Undo"
 msgstr "_Ongedaan maken"
 
-#: src/window/history_view.rs:693
+#: src/window/history_view.rs:694
 msgid "Failed to undo"
 msgstr "Ongedaan maken mislukt"
 
-#: src/window/history_view.rs:712
-msgid "Removed {} song"
-msgid_plural "Removed {} songs"
-msgstr[0] "Er is {} nummer verwijderd"
-msgstr[1] "Er zijn {} nummers verwijderd"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:714
+msgid "Removed {n_removed} song"
+msgid_plural "Removed {n_removed} songs"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/window/history_view.rs:838
+#: src/window/history_view.rs:840
 msgid "Select items"
 msgstr "Items selecteren"
 
-#: src/window/history_view.rs:840
-msgid "Selected {} song"
-msgid_plural "Selected {} songs"
-msgstr[0] "{} nummer geselecteerd"
-msgstr[1] "{} nummers geselecteerd"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:844
+msgid "Selected {selection_size} song"
+msgid_plural "Selected {selection_size} songs"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/window/history_view.rs:849
+#: src/window/history_view.rs:854
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Nummer kopiëren"
 msgstr[1] "Nummers kopiëren"
 
-#: src/window/history_view.rs:856
+#: src/window/history_view.rs:861
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Nummer verwijderen uit geschiedenis"
@@ -540,19 +550,23 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Het resultaat zal beschikbaar zijn wanneer uw tokenlimiet is gereset. Wacht "
+"tot de limiet is gereset of open de voorkeuren en probeer een ander token in "
+"te stellen"
 
 #: src/window/mod.rs:401
 msgid "I'll Wait"
-msgstr ""
+msgstr "Ik zal wachten"
 
 #: src/window/mod.rs:405
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Het resultaat zal beschikbaar zijn wanneer uw token wordt vervangen door een "
+"geldig token. Open voorkeuren en probeer een ander token in te stellen"
 
 #: src/window/mod.rs:408
-#, fuzzy
 msgid "Later"
 msgstr "Later"
 
@@ -572,23 +586,23 @@ msgstr "Afspelen"
 msgid "Pause"
 msgstr "Pauzeren"
 
-#: src/window/recognized_page.rs:142
-msgid "Recognized {} New Song"
-msgid_plural "Recognized {} New Songs"
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/recognized_page.rs:143
+msgid "Recognized {n_songs} New Song"
+msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Dit nummer is herkend van uw opgeslagen opname"
+msgstr[1] "Deze nummers zijn herkend van uw opgeslagen opnames"
 
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
-msgid "Recognized {} Out Of {}"
-msgid_plural "Recognized {} Out Of {} Songs"
-msgstr[0] "{} van {} nummer herkend"
-msgstr[1] "{} van {} nummers herkend"
+msgid "Recognized {n_successful} Out Of {total_minus_failed}"
+msgstr ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -605,6 +619,29 @@ msgstr "Onbekend"
 #: src/window/song_tile.rs:336
 msgid "Unselect"
 msgstr "Deselecteren"
+
+#~ msgid "Failed to launch {}"
+#~ msgstr "{} kan niet worden gestart"
+
+#~ msgid "Removed {} song"
+#~ msgid_plural "Removed {} songs"
+#~ msgstr[0] "Er is {} nummer verwijderd"
+#~ msgstr[1] "Er zijn {} nummers verwijderd"
+
+#~ msgid "Selected {} song"
+#~ msgid_plural "Selected {} songs"
+#~ msgstr[0] "{} nummer geselecteerd"
+#~ msgstr[1] "{} nummers geselecteerd"
+
+#~ msgid "Recognized {} New Song"
+#~ msgid_plural "Recognized {} New Songs"
+#~ msgstr[0] "{} nieuw nummer herkend"
+#~ msgstr[1] "{} nieuwe nummers herkend"
+
+#~ msgid "Recognized {} Out Of {}"
+#~ msgid_plural "Recognized {} Out Of {} Songs"
+#~ msgstr[0] "{} van {} nummer herkend"
+#~ msgstr[1] "{} van {} nummers herkend"
 
 #~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
 #~ msgstr ""
