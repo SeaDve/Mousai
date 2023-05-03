@@ -77,7 +77,6 @@ impl Recordings {
             let recordings = db
                 .iter(wtxn)
                 .context("Failed to iter recordings from db")?
-                .map(|item| item.map(|(id, recording)| (id, recording)))
                 .collect::<Result<IndexMap<_, _>, _>>()
                 .context("Failed to collect recordings from db")?;
             Ok((db, recordings))
