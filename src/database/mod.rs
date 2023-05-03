@@ -31,6 +31,7 @@ pub fn new_env() -> Result<heed::Env> {
         ?path,
         info = ?env.info(),
         real_disk_size = ?env.real_disk_size(),
+        non_free_pages_size = ?env.non_free_pages_size(),
         "Opened db env"
     );
 
