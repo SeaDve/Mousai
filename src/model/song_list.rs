@@ -74,13 +74,13 @@ impl SongList {
         let db_load_start_time = Instant::now();
 
         let (db, songs) = env.with_write_txn(|wtxn| {
-            let db = env
+            let db: SongDatabase = env
                 .create_database(wtxn, Some(SONG_LIST_DB_NAME))
                 .context("Failed to create songs db")?;
             let songs = db
                 .iter(wtxn)
                 .context("Failed to iter songs from db")?
-                .collect::<Result<IndexMap<Uid, Song>, _>>()
+                .collect::<Result<IndexMap<_, _>, _>>()
                 .context("Failed to collect songs from db")?;
             Ok((db, songs))
         })?;
