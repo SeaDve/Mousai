@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-02 09:51+0000\n"
+"PO-Revision-Date: 2023-05-04 10:56+0000\n"
 "Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/"
-">\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -445,7 +445,7 @@ msgstr "ابحث في يوتيوب"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "فشل البدء {key}"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
@@ -475,12 +475,12 @@ msgstr "فشل التراجع"
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لم تُزل أي أغنية"
+msgstr[1] "أُزيلت أغنية"
+msgstr[2] "أُزيلت أغنيتان"
+msgstr[3] "أُزيلت {n_removed} أغانٍ"
+msgstr[4] "أُزيلت {n_removed} أغنيةً"
+msgstr[5] "أُزيلت {n_removed} أغنية"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
@@ -490,12 +490,12 @@ msgstr "حدِّد عناصر"
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لم تُحدَّد أي أغنية"
+msgstr[1] "حُدِّدت أغنية"
+msgstr[2] "حُدِّدت أغنيتان"
+msgstr[3] "حُدِّدت {selection_size} أغانٍ"
+msgstr[4] "حُدِّدت {selection_size} أغنيةً"
+msgstr[5] "حُدِّدت {selection_size} أغنية"
 
 #: src/window/history_view.rs:854
 msgid "Copy Song"
@@ -596,12 +596,12 @@ msgstr "ألبث"
 #: src/window/recognized_page.rs:143
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لم تُتبيَّن أي أغنية"
+msgstr[1] "تُبيِّنت أغنية"
+msgstr[2] "تُبيِّنت أغنيتان"
+msgstr[3] "تُبيِّنت {n_songs} أغانٍ"
+msgstr[4] "تُبيِّنت {n_songs} أغنيةً"
+msgstr[5] "تُبيِّنت {n_songs} أغنية"
 
 #: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
@@ -616,7 +616,7 @@ msgstr[5] "تُبيِّنت هذه الأغاني من تسجيلاتك المح
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "تُبيِّنت {n_successful} من أصل {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-02 09:51+0000\n"
+"PO-Revision-Date: 2023-05-04 10:56+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/kooha/mousai/nl/>\n"
 "Language: nl\n"
@@ -450,7 +450,7 @@ msgstr "Zoeken op YouTube"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "{key} starten mislukt"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
@@ -480,8 +480,8 @@ msgstr "Ongedaan maken mislukt"
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{n_removed} nummer verwijderd"
+msgstr[1] "{n_removed} nummers verwijderd"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
@@ -491,8 +491,8 @@ msgstr "Items selecteren"
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{selection_size} nummer geselecteerd"
+msgstr[1] "{selection_size} nummers geselecteerd"
 
 #: src/window/history_view.rs:854
 msgid "Copy Song"
@@ -590,8 +590,8 @@ msgstr "Pauzeren"
 #: src/window/recognized_page.rs:143
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{n_songs} nieuw nummer herkend"
+msgstr[1] "{n_songs} nieuwe nummers herkend"
 
 #: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
@@ -602,7 +602,7 @@ msgstr[1] "Deze nummers zijn herkend van uw opgeslagen opnames"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "{n_successful} van de {total_minus_failed} herkend"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"

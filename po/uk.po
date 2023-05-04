@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-02 09:51+0000\n"
+"PO-Revision-Date: 2023-05-04 10:56+0000\n"
 "Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.18-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
@@ -447,7 +447,7 @@ msgstr "Пошук на YouTube"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "Не вдалося запустити {key}"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
@@ -477,9 +477,9 @@ msgstr "Не вдалося скасувати"
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Вилучено {n_removed} пісню"
+msgstr[1] "Вилучено {n_removed} пісні"
+msgstr[2] "Вилучено {n_removed} пісень"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
@@ -489,9 +489,9 @@ msgstr "Вибрати елементи"
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Вибрано {selection_size} пісню"
+msgstr[1] "Вибрано {selection_size} пісні"
+msgstr[2] "Вибрано {selection_size} пісень"
 
 #: src/window/history_view.rs:854
 msgid "Copy Song"
@@ -589,9 +589,9 @@ msgstr "Призупинити"
 #: src/window/recognized_page.rs:143
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Розпізнано {n_songs} нову пісню"
+msgstr[1] "Розпізнано {n_songs} нові пісні"
+msgstr[2] "Розпізнано {n_songs} нових пісень"
 
 #: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
@@ -603,7 +603,7 @@ msgstr[2] "Ці пісні розпізнано зі збережених зап
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "Розпізнано {n_successful} з {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-05-04 10:56+0000\n"
+"Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "வினாடிகளில் பாடல்களை அடைய�
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "ஷாஜம்;ஒலி;இசை;பாடல்;அறிக;அடையாளம்;அங்கீகரித்தல்;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -68,6 +68,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"மௌசாய் என்பது ஷாஜம் போன்ற பாடல்களை அடையாளம் காணக்கூடிய ஒரு எளிய பயன்பாடாகும்"
+". கேளுங்கள் பொத்தானைக் கிளிக் செய்து, சில வினாடிகள் காத்திருக்கவும். அது "
+"அந்தப் பாடலின் தலைப்பையும் கலைஞரையும் மாயமாய்த் திருப்பிவிடும்!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -79,7 +82,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid "Why you will love Mousai?"
-msgstr "நீங்கள் ஏன் மௌசையை நேசிப்பீர்கள்?"
+msgstr "நீங்கள் ஏன் மௌசாயை நேசிப்பீர்கள்?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
@@ -124,6 +127,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"இது சிதைந்த அல்லது சிதைந்த தரவுத்தளத்தால் ஏற்பட்டிருக்கலாம். பயன்பாட்டுத் "
+"தரவை அழிக்க முயற்சி செய்யலாம். இருப்பினும், இது பரிந்துரைக்கப்படவில்லை, "
+"மேலும் உங்கள் எல்லா பாடல்களையும் சேமித்த பதிவுகளையும் நீக்கிவிடும். \n"
+" \n"
+"இந்தச் சிக்கலைப் புகாரளிக்க, பதிவுகளைச் சேர்க்க முனையத்தில் மௌசாயைத் "
+"தொடங்கவும் மற்றும் பிழை அறிக்கையை <a href=\"https://github.com/SeaDve/Mousai/"
+"issues/\">பிரச்சினைப் பக்கத்தில்</a> சமர்ப்பிக்கவும்"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -147,16 +157,15 @@ msgstr "எதுவும் இல்லை என்பதைத் தேர
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "பாடலை அங்கீகரிக்கவும்"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
 msgstr "கேளுங்கள்"
 
 #: data/resources/ui/history-view.ui:65
-#, fuzzy
 msgid "Main Menu"
-msgstr "முதன்மை மெனு"
+msgstr "முதன்மை பட்டியல்"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
@@ -164,11 +173,11 @@ msgstr "தேர்ந்தெடு"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "பாடல்களைத் தேடுங்கள்"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "தேர்வை ரத்து செய்"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -176,19 +185,19 @@ msgstr "ரத்துசெய்"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "பாடல்களைத் தேடுங்கள்"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "பாடல்களை அங்கீகரிக்கத் தொடங்குங்கள்!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "தொடங்குவதற்கு கேட்கும் பொத்தானைக் கிளிக் செய்யவும்"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "முடிவுகள் இல்லை"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -200,7 +209,7 @@ msgstr "விருப்பமான ஒலி மூலம்"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "கிடைக்கும்போது பயன்படுத்த வேண்டிய ஆடியோ மூலத்தைத் தீர்மானிக்கிறது"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:65
@@ -212,6 +221,9 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"நீங்கள் <a href=\"https://dashboard.audd.io/\">audd.io</a> இலிருந்து API "
+"டோக்கனைப் பெறலாம். இதை காலியாக விடுவது ஒரு நாளைக்கு சில சோதனைகளை உங்களுக்கு "
+"வழங்கும்"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -219,7 +231,7 @@ msgstr "API டோக்கன்"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Back"
-msgstr ""
+msgstr "திரும்பவும்"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -431,7 +443,7 @@ msgstr "யூடியூப்பில் தேடுங்கள்"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "{key} ஐ துவக்க முடியவில்லை"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
@@ -461,8 +473,8 @@ msgstr "செயல்தவிர்க்க முடியவில்ல�
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{n_removed} பாடல் அகற்றப்பட்டது"
+msgstr[1] "{n_removed} பாடல்கள் அகற்றப்பட்டன"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
@@ -472,15 +484,14 @@ msgstr "பொருட்களைத் தேர்ந்தெடுக்�
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "தேர்ந்தெடுக்கப்பட்ட {selection_size} பாடல்"
+msgstr[1] "தேர்ந்தெடுக்கப்பட்ட {selection_size} பாடல்கள்"
 
 #: src/window/history_view.rs:854
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "நகல் பாடல்"
-msgstr[1] "நகல் பாடல்"
+msgstr[1] "நகல் பாடல்கள்"
 
 #: src/window/history_view.rs:861
 msgid "Remove Song From History"
@@ -494,7 +505,7 @@ msgstr "வரலாற்றில் பாடலைச் செருகு�
 
 #: src/window/mod.rs:307
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "GitHub இல் சிக்கலைத் திறந்து தேவையான தகவலை வழங்கவும்"
 
 #: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
@@ -508,6 +519,7 @@ msgstr "ஒரு சிக்கலைத் திறக்கவும்"
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
+"மூலத்திற்கு அருகில் செல்லவும் அல்லது பாடலின் வேறு பகுதியைப் பயன்படுத்தவும்"
 
 #: src/window/mod.rs:344
 msgid "Try Again"
@@ -515,34 +527,38 @@ msgstr "மீண்டும் முயற்சிக்கவும்"
 
 #: src/window/mod.rs:377
 msgid "Recording Saved"
-msgstr ""
+msgstr "பதிவு சேமிக்கப்பட்டது"
 
 #: src/window/mod.rs:385
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "நீங்கள் ஆன்லைனில் திரும்பியவுடன் முடிவு கிடைக்கும்"
 
 #: src/window/mod.rs:388
 msgid "Ok, Got It"
-msgstr ""
+msgstr "சரி, புரிந்தது"
 
 #: src/window/mod.rs:398
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"உங்கள் டோக்கன் வரம்பை மீட்டமைக்கும்போது முடிவு கிடைக்கும். வரம்பு "
+"மீட்டமைக்கப்படும் வரை அல்லது விருப்பத்தேர்வுகளைத் திறக்கும் வரை காத்திருந்து "
+"வேறு டோக்கனை அமைக்க முயற்சிக்கவும்"
 
 #: src/window/mod.rs:401
 msgid "I'll Wait"
-msgstr ""
+msgstr "நான் காத்திருக்கிறேன்"
 
 #: src/window/mod.rs:405
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"உங்கள் டோக்கனை சரியான டோக்கன் மூலம் மாற்றியமைக்கும் போது முடிவு கிடைக்கும். "
+"விருப்பத்தேர்வுகளைத் திறந்து வேறு டோக்கனை அமைக்க முயற்சிக்கவும்"
 
 #: src/window/mod.rs:408
-#, fuzzy
 msgid "Later"
 msgstr "பின்னர்"
 
@@ -566,19 +582,19 @@ msgstr "இடைநிறுத்து"
 #: src/window/recognized_page.rs:143
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "அங்கீகரிக்கப்பட்ட {n_songs} புதிய பாடல்"
+msgstr[1] "அங்கீகரிக்கப்பட்ட {n_songs} புதிய பாடல்கள்"
 
 #: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "நீங்கள் சேமித்த பதிவிலிருந்து இந்தப் பாடல் அங்கீகரிக்கப்பட்டது"
+msgstr[1] "நீங்கள் சேமித்த பதிவுகளிலிருந்து இந்தப் பாடல்கள் அங்கீகரிக்கப்பட்டுள்ளன"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "{total_minus_failed} இல் {n_successful} அங்கீகரிக்கப்பட்டது"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
