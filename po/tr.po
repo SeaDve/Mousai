@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the mousai package.
 # Oğuz Ersen <oguzersen@protonmail.com>, 2021.
 # Oğuz Ersen <oguz@ersen.moe>, 2022.
+# Sabri Ünal <libreajans@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
-">\n"
+"PO-Revision-Date: 2023-05-14 22:49+0000\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,19 +34,19 @@ msgstr "Şarkıları saniyeler içinde tanıyın"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Ses;Müzik;Şarkı;Türkü;Tanıma;Tanımlama;Tanılama;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Pencere genişliği"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Pencere yüksekliği"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Pencerenin büyütülüp büyütülmediği"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -53,11 +54,11 @@ msgstr "Ses kaydederken kullanılacak tercih edilen ses kaynağı"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "AudD tanıma tarafından kullanılan API jetonu"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Eski (Geçiş için saklanır)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -69,6 +70,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai, Shazam'a benzer şekilde şarkıları tanıyabilen basit bir uygulamadır. "
+"Sadece dinle düğmesine tıklayın ve ardından birkaç saniye bekleyin. Sihirli "
+"bir şekilde o şarkının adını ve sanatçısını getirecektir!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -85,35 +89,36 @@ msgstr "Mousai'yi neden seveceksiniz?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Şarkıları saniyeler içinde tanıyın veya çevrimdışıyken daha sonrası için "
+"kaydedin"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ Mikrofon veya masaüstü sesini kullanın"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Tanınmış şarkılardan oluşan bir repertuar oluşturun"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Arayüzde şarkıyı hızlıca önizleyin"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Farklı sağlayıcılardan şarkıya göz atın ve dinleyin"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Kullanımı kolay kullanıcı arayüzü"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Kritik Veritabanı Hatası"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -125,9 +130,15 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Bunun nedeni büyük olasılıkla değiştirilmiş veya bozulmuş bir veritabanıdır. "
+"Uygulama verilerini temizlemeyi deneyebilirsiniz. Ancak bu önerilmez ve tüm "
+"şarkılarınızı ve kayıtlı kayıtlarınızı siler.\n"
+"\n"
+"Bu sorunu bildirmek için, lütfen günlükleri dahil etmek üzere uçbirimde "
+"Mousai'yi başlatın ve hata raporunu <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">sorun sayfasına</a> gönderin"
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_Tercihler"
 
@@ -149,7 +160,7 @@ msgstr "_Hiçbirini Seçme"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Şarkıyı Tanı"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -165,11 +176,11 @@ msgstr "Seç"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Şarkıları Ara"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Seçimi İptal Et"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -177,11 +188,11 @@ msgstr "İptal"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Şarkıları ara"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Şarkıları Tanımaya Başlayın!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
@@ -189,7 +200,7 @@ msgstr "Başlamak için dinle düğmesine tıklayın"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "Sonuç Yok"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -197,11 +208,11 @@ msgstr "Genel"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Tercih Edilen Ses Kaynağı"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "Mevcut olduğunda kullanılacak ses kaynağını belirler"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:65
@@ -213,18 +224,21 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"<a href=\"https://dashboard.audd.io/\">audd.io</a> adresinden kendinize bir "
+"API jetonu alabilirsiniz. Boş bırakmanız size günde birkaç deneme hakkı "
+"verecektir"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API Jetonu"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Back"
-msgstr ""
+msgstr "Geri"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Çevrimdışı Kip Etkin"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -232,7 +246,7 @@ msgstr "Dinlemeyi İptal Et"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Çevrimdışı Kip"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -250,7 +264,6 @@ msgid "Search"
 msgstr "Ara"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Tercihleri Göster"
@@ -293,7 +306,7 @@ msgstr "Geri Dön"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "İleri Git"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -337,7 +350,7 @@ msgstr "Yeni"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -347,12 +360,10 @@ msgstr ""
 "Oğuz Ersen"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Liberapay)"
 msgstr "Bağış Yap (Liberapay)"
 
 #: src/about.rs:35
-#, fuzzy
 msgid "Donate (PayPal)"
 msgstr "Bağış Yap (PayPal)"
 
@@ -361,19 +372,18 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:41
-#, fuzzy
 msgid "Translate"
 msgstr "Çevir"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "bugün %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "dün %R"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
@@ -385,27 +395,27 @@ msgstr "Masaüstü Sesi"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "Eşleşme Bulunamadı"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Sesten Parmak İzi Oluşturulamıyor"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Geçersiz Jeton Verildi"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Jeton Limitine Ulaşıldı"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Sunucuya Bağlanamıyor"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Diğer Kalıcı Hata Alındı"
 
 #: src/window/external_link_tile.rs:60
 msgid "Apple Music"
@@ -438,24 +448,23 @@ msgstr "YouTube'da Ara"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "{key} başlatılamadı"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "Panoya kopyalandı"
 
 #: src/window/history_view.rs:155
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Seçilen şarkılar kaldırılamadı"
 
 #: src/window/history_view.rs:323
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Şarkı kaldırılamadı"
 
 #: src/window/history_view.rs:448
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Tanıyıcı sonuçları gösterilemedi"
 
 #: src/window/history_view.rs:686
 msgid "_Undo"
@@ -463,32 +472,31 @@ msgstr "_Geri Al"
 
 #: src/window/history_view.rs:694
 msgid "Failed to undo"
-msgstr ""
+msgstr "Geri alınamadı"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{n_removed} şarkı silindi"
+msgstr[1] "{n_removed} şarkı silindi"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
-msgstr ""
+msgstr "Ögeleri seç"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{selection_size} şarkı seçildi"
+msgstr[1] "{selection_size} şarkı seçildi"
 
 #: src/window/history_view.rs:854
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Şarkıyı Kopyala"
-msgstr[1] "Şarkıyı Kopyala"
+msgstr[1] "Şarkıları Kopyala"
 
 #: src/window/history_view.rs:861
 msgid "Remove Song From History"
@@ -498,69 +506,73 @@ msgstr[1] "Şarkıları Geçmişten Kaldır"
 
 #: src/window/mod.rs:262
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Şarkı geçmişe eklenemedi"
 
 #: src/window/mod.rs:307
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "Lütfen GitHub'da sorun bildirin ve gerekli bilgileri sağlayın"
 
 #: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
-msgstr ""
+msgstr "Hayır, Sağ Ol"
 
 #: src/window/mod.rs:312
 msgid "Open an Issue"
-msgstr ""
+msgstr "Bir Sorun Bildir"
 
 #: src/window/mod.rs:339
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
-msgstr ""
+msgstr "Kaynağa yaklaşmayı veya şarkının farklı bir bölümünü kullanmayı deneyin"
 
 #: src/window/mod.rs:344
 msgid "Try Again"
-msgstr ""
+msgstr "Tekrar Dene"
 
 #: src/window/mod.rs:377
 msgid "Recording Saved"
-msgstr ""
+msgstr "Kayıt Kaydedildi"
 
 #: src/window/mod.rs:385
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Sonuç, tekrar çevrimiçi olduğunuzda hazır olacaktır"
 
 #: src/window/mod.rs:388
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Anladım"
 
 #: src/window/mod.rs:398
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Sonuç, jeton limitiniz sıfırlandığında kullanılabilir olacaktır. Limit "
+"sıfırlanana kadar bekleyin veya tercihleri açın ve farklı bir jeton "
+"ayarlamayı deneyin"
 
 #: src/window/mod.rs:401
 msgid "I'll Wait"
-msgstr ""
+msgstr "Bekleyeceğim"
 
 #: src/window/mod.rs:405
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Sonuç, jetonunuz geçerli bir jetonla değiştirildiğinde kullanılabilir "
+"olacaktır. Tercihleri açın ve farklı birjeton ayarlamayı deneyin"
 
 #: src/window/mod.rs:408
-#, fuzzy
 msgid "Later"
 msgstr "Daha sonra"
 
 #: src/window/mod.rs:413
 msgid "Open Preferences"
-msgstr ""
+msgstr "Tercihleri Aç"
 
 #: src/window/mod.rs:519
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Oynatıcıda bir hata oluştu"
 
 #: src/window/playback_button.rs:117
 msgid "Play"
@@ -574,19 +586,19 @@ msgstr "Duraklat"
 #: src/window/recognized_page.rs:143
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{n_songs} Yeni Şarkı Tanındı"
+msgstr[1] "{n_songs} Yeni Şarkı Tanındı"
 
 #: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bu şarkı kayıtlı kayıtlarınızdan tanındı"
+msgstr[1] "Bu şarkılar kayıtlı kayıtlarınızdan tanındı"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "Tanınan: {n_successful}, Başarısız: {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
@@ -598,11 +610,11 @@ msgstr "Tanınıyor…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmiyor"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "Seçimi Kaldır"
 
 #~ msgid "Failed to launch {}"
 #~ msgstr "{} başlatılamadı"
