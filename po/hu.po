@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Balázs Úr <balazs@urbalazs.hu>, 2021.
+# Cimbora <domonkos.sebestyen@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2022-04-18 11:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-05-27 20:50+0000\n"
+"Last-Translator: Cimbora <domonkos.sebestyen@gmail.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/kooha/mousai/"
 "hu/>\n"
 "Language: hu\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -27,36 +28,37 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "Dalok azonosítása másodpercek alatt"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Zene; Dal;Felismerés;Azonosítás;Megismerés;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Ablak szélessége"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Ablak magassága"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Az ablak maximalizálva van-e"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "A hangfelvételhez használni kívánt hangforrás"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "Az AudD felismeréshez használt API token"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
+#, fuzzy
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Hagyaték (migrációhoz megtartva)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -70,6 +72,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"A Mousai egy egyszerű eszköz, ami a Shazamhoz hasonlóan képes felismerni a "
+"dalokat. Csak kattintson a hallgatás gombara, majd várjon egy néhány "
+"másodpercet. Csodálatos módon visszatér a dal címével és szerzőjével!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -86,34 +91,36 @@ msgstr "Miért fogja szeretni a Mousai alkalmazást?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Ismerje fel a dalokat másodperceken belül, vagy mentse el későbbre, ha "
+"offline állapotban van"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ A mikrofon vagy az asztali hangforrás használata"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Felismert dalok repertoárjának felépítése"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 A dal gyors áttekintése a kezelőfelületen"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Böngésszen és hallgassa a különböző szolgáltatók dalát"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Egyszerű felhasználói felület"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Kritikus adatbázishiba"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -125,10 +132,17 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Ezt valószínűleg egy manipulált vagy sérült adatbázis okozza. Megpróbálhatja "
+"az alkalmazás adatainak törlését. Ez azonban nem ajánlott, és törli az "
+"összes dalt és mentett felvételt.\n"
+"\n"
+"A probléma bejelentéséhez indítsa el a Mousai-t a terminálon, hogy a "
+"naplófájlok is bekerüljenek, és küldje el a hibajelentést a <a href=\"https"
+"://github.com/SeaDve/Mousai/issues/\">i issue oldalon. </a>"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Beállítások"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -140,7 +154,7 @@ msgstr "A Mousai _névjegye"
 
 #: data/resources/ui/history-view.ui:22
 msgid "Select _All"
-msgstr ""
+msgstr "Az_összes_kiválasztása"
 
 #: data/resources/ui/history-view.ui:26
 msgid "Select _None"
@@ -148,7 +162,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Dal felismerése"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -160,7 +174,7 @@ msgstr "Főmenü"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
-msgstr ""
+msgstr "Kiválasztás"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
