@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-08 15:48+0000\n"
+"PO-Revision-Date: 2023-05-29 21:51+0000\n"
 "Last-Translator: Jörn Weigend <das.jott@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
 "\n"
@@ -205,7 +205,7 @@ msgstr "Liederkennung starten!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
-msgstr "Klicke auf die Schaltfläche „Anhören“, um zu starten"
+msgstr "Klicke auf die Schaltfläche „Zuhören“, um zu starten"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
