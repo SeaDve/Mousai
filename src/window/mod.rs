@@ -290,7 +290,10 @@ impl Window {
     }
 
     fn present_recognize_error(&self, err: &RecognizeError) {
-        debug_assert!(err.is_permanent());
+        debug_assert!(
+            err.is_permanent(),
+            "non permanent errors must be saved instead"
+        );
 
         let dialog = adw::MessageDialog::builder()
             .transient_for(self)
@@ -369,7 +372,7 @@ impl Window {
     }
 
     fn present_recording_saved_message(&self, cause: &RecognizeError) {
-        debug_assert!(!cause.is_permanent());
+        debug_assert!(!cause.is_permanent(), "permanent errors must not be saved");
 
         let dialog = adw::MessageDialog::builder()
             .transient_for(self)
@@ -425,7 +428,7 @@ impl Window {
                         window.present();
 
                         let is_focused = window.focus_aud_d_api_token_row();
-                        debug_assert!(is_focused);
+                        debug_assert!(is_focused, "token row must be focused");
                     }),
                 );
             }
