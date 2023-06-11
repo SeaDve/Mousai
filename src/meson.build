@@ -60,15 +60,13 @@ test(
   cargo,
   args: [
     'test',
-    '--manifest-path=@0@'.format(manifest_path),
-    '--target-dir=@0@'.format(cargo_target_dir),
+    cargo_options,
     '--',
     '--nocapture',
   ],
   env: [
     'RUST_BACKTRACE=1',
-    'CARGO_HOME=@0@'.format(cargo_home),
-    'PATH=/app/bin:/usr/bin:/usr/lib/sdk/llvm15/bin:/usr/lib/sdk/rust-stable/bin',  # TODO Remove llvm15 once removed in manifest
+    cargo_env
   ],
   timeout: 300, # give cargo more time
 )
@@ -78,12 +76,10 @@ test(
   cargo,
   args: [
     'clippy',
-    '--manifest-path=@0@'.format(manifest_path),
-    '--target-dir=@0@'.format(cargo_target_dir),
+    cargo_options
   ],
   env: [
-    'CARGO_HOME=@0@'.format(cargo_home),
-    'PATH=/app/bin:/usr/bin:/usr/lib/sdk/llvm15/bin:/usr/lib/sdk/rust-stable/bin',  # TODO Remove llvm15 once removed in manifest
+    cargo_env
   ],
   timeout: 300, # give cargo more time
 )
