@@ -23,7 +23,7 @@ use crate::{
 };
 
 const SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY: &str = "mousai-song-page-song-removed-handler-id";
-const SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str = "mousai-song-page-adapative-mode-binding";
+const SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str = "mousai-song-page-adaptive-mode-binding";
 
 const RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY: &str =
     "mousai-recognized-page-song-activated-handler-id";
