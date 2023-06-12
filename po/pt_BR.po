@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>, 2021, 2022.
+# Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>, 2021, 2022, 2023.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Davi Patricio <davipatricio@pm.me>, 2021.
 # inkhorn <inkhorn@hostux.ninja>, 2021.
@@ -11,8 +11,9 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-06-12 11:49+0000\n"
+"Last-Translator: Vitor Sabino Cardoso da SIlva <vitorcsilva180396@gmail.com>"
+"\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -40,11 +41,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Largura da janela"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Altura da janela"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
@@ -96,11 +97,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Construa um repertório de músicas reconhecidas"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Visualize rapidamente a música na interface"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
@@ -131,7 +132,6 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_Preferências"
 
@@ -153,7 +153,7 @@ msgstr "Selecionar_Nenhum"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Reconhecer música"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
@@ -169,11 +169,11 @@ msgstr "Selecionar"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Buscar músicas"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Cancelar seleção"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -185,7 +185,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Comece a reconhecer músicas!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
@@ -193,7 +193,7 @@ msgstr "Clique no botão escutar para iniciar"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "Nenhum resultado"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -228,7 +228,7 @@ msgstr ""
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Modo offline ativado"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -236,7 +236,7 @@ msgstr "Cancelar Escutar"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "Modo offline"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -254,7 +254,6 @@ msgid "Search"
 msgstr "Buscar"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Mostrar preferências"
@@ -297,7 +296,7 @@ msgstr "Voltar"
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "Avançar"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
