@@ -2,6 +2,9 @@ use adw::{prelude::*, subclass::prelude::*};
 use anyhow::{Context, Result};
 use gtk::{gio, glib};
 use once_cell::unsync::OnceCell;
+use soup::prelude::*;
+
+use std::time::Instant;
 
 use crate::{
     about,
@@ -24,7 +27,7 @@ mod imp {
     #[derive(Default)]
     pub struct Application {
         pub(super) window: OnceCell<WeakRef<Window>>,
-        pub(super) session: OnceCell<soup::Session>,
+        pub(super) session: OnceCell<(soup::Session, soup::Cache)>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
         pub(super) settings: Settings,
 
@@ -92,6 +95,13 @@ mod imp {
                 }
             }
 
+            if let Some((_, cache)) = self.session.get() {
+                let now = Instant::now();
+                cache.flush();
+                cache.dump();
+                tracing::debug!("Dumped soup cache in {:?}", now.elapsed());
+            }
+
             tracing::info!("Shutting down");
 
             self.parent_shutdown();
@@ -126,13 +136,34 @@ impl Application {
     }
 
     pub fn session(&self) -> &soup::Session {
-        self.imp().session.get_or_init(soup::Session::new)
+        let (session, _) = self.imp().session.get_or_init(|| {
+            let session = soup::Session::new();
+
+            let cache_dir = {
+                let mut path = glib::user_cache_dir();
+                path.push("mousai/soup_cache");
+                path
+            };
+            let cache = soup::Cache::new(
+                Some(cache_dir.to_str().expect("path must be in utf-8 encoding")),
+                soup::CacheType::Shared,
+            );
+            session.add_feature(&cache);
+
+            let now = Instant::now();
+            cache.load();
+            tracing::debug!("Loaded soup cache in {:?}", now.elapsed());
+
+            (session, cache)
+        });
+
+        session
     }
 
-    pub fn album_art_store(&self) -> Result<&AlbumArtStore> {
+    pub fn album_art_store(&self) -> &AlbumArtStore {
         self.imp()
             .album_art_store
-            .get_or_try_init(|| AlbumArtStore::new(self.session()))
+            .get_or_init(|| AlbumArtStore::new(self.session()))
     }
 
     pub fn settings(&self) -> &Settings {

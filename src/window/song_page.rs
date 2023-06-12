@@ -157,7 +157,6 @@ mod imp {
             self.album_cover.set_enables_crossfade(
                 song.as_ref()
                     .and_then(|song| song.album_art())
-                    .and_then(|album_art| album_art.ok())
                     .map_or(true, |album_art| !album_art.is_loaded()),
             );
             self.album_cover.set_song(song.as_ref());

@@ -127,8 +127,7 @@ mod imp {
                     length: None,
                     art_url: song
                         .album_art()
-                        .and_then(|album_art| album_art.ok())
-                        .map(|album_art| album_art.uri()),
+                        .map(|album_art| album_art.download_url().to_string()),
                     album: Some(song.album()),
                     album_artist: None,
                     artist: Some(vec![song.artist()]),

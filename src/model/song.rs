@@ -122,13 +122,13 @@ impl Song {
     }
 
     /// Returns a result of album art for the corresponding album art link if it exists
-    pub fn album_art(&self) -> Option<Result<Rc<AlbumArt>>> {
+    pub fn album_art(&self) -> Option<Rc<AlbumArt>> {
         let album_art_link = self.album_art_link()?;
 
         Some(
             utils::app_instance()
                 .album_art_store()
-                .and_then(|store| store.get_or_init(&album_art_link)),
+                .get_or_init(&album_art_link),
         )
     }
 }

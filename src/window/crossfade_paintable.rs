@@ -206,33 +206,25 @@ impl CrossfadePaintable {
         }
 
         if let Some(album_art) = song.and_then(|song| song.album_art()) {
-            match album_art {
-                Ok(album_art) => {
-                    if !album_art.is_loaded() {
-                        self.set_paintable(gdk::Paintable::NONE);
-                    }
-
-                    let join_handle = utils::spawn(
-                        glib::PRIORITY_LOW,
-                        clone!(@weak self as obj, @weak album_art => async move {
-                            match album_art.texture().await {
-                                Ok(texture) => {
-                                    obj.set_paintable(Some(texture.upcast_ref::<gdk::Paintable>()));
-                                }
-                                Err(err) => {
-                                    tracing::warn!("Failed to load texture: {:?}", err);
-                                    obj.set_paintable(gdk::Paintable::NONE);
-                                }
-                            }
-                        }),
-                    );
-                    imp.join_handle.replace(Some(join_handle));
-                }
-                Err(err) => {
-                    tracing::warn!("Failed to get song album art: {:?}", err);
-                    self.set_paintable(gdk::Paintable::NONE);
-                }
+            if !album_art.is_loaded() {
+                self.set_paintable(gdk::Paintable::NONE);
             }
+
+            let join_handle = utils::spawn(
+                glib::PRIORITY_LOW,
+                clone!(@weak self as obj, @weak album_art => async move {
+                    match album_art.texture().await {
+                        Ok(texture) => {
+                            obj.set_paintable(Some(texture.upcast_ref::<gdk::Paintable>()));
+                        }
+                        Err(err) => {
+                            tracing::warn!("Failed to load texture: {:?}", err);
+                            obj.set_paintable(gdk::Paintable::NONE);
+                        }
+                    }
+                }),
+            );
+            imp.join_handle.replace(Some(join_handle));
         } else {
             self.set_paintable(gdk::Paintable::NONE);
         }
