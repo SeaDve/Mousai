@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiPlaybackButton">
-    <property name="layout-manager">
-      <object class="GtkBinLayout"/>
-    </property>
-    <child>
-      <object class="GtkButton" id="button">
-        <property name="child">
-          <object class="GtkStack" id="stack">
-            <child>
-              <object class="GtkImage" id="image_child"/>
-            </child>
-            <child>
-              <object class="GtkSpinner" id="spinner_child">
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="width-request">24</property>
-                <property name="height-request">24</property>
-              </object>
-            </child>
+  <template class="MsaiPlaybackButton" parent="GtkButton">
+    <property name="child">
+      <object class="GtkStack" id="stack">
+        <child>
+          <object class="GtkImage" id="image_child"/>
+        </child>
+        <child>
+          <object class="GtkSpinner" id="spinner_child">
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="width-request">24</property>
+            <property name="height-request">24</property>
           </object>
-        </property>
+        </child>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

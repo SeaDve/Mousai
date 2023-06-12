@@ -11,17 +11,6 @@ waveform.red {
   color: @error_color;
 }
 
-playbackbutton > button {
-  padding: 5px;
-}
-playbackbutton.osd > button {
-  background: none;
-}
-playbackbutton.circular,
-playbackbutton.circular > button  {
-  border-radius: 99999px;
-}
-
 /* ExternalLinkTile */
 
 .external-link-tile.applemusic {
