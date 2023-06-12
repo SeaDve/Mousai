@@ -146,7 +146,7 @@ impl Application {
             };
             let cache = soup::Cache::new(
                 Some(cache_dir.to_str().expect("path must be in utf-8 encoding")),
-                soup::CacheType::Shared,
+                soup::CacheType::SingleUser,
             );
             session.add_feature(&cache);
 
