@@ -20,14 +20,12 @@ impl AlbumArtStore {
     }
 
     pub fn get_or_init(&self, download_url: &str) -> Rc<AlbumArt> {
-        use std::collections::hash_map::Entry;
-
-        match self.map.borrow_mut().entry(download_url.to_string()) {
-            Entry::Occupied(entry) => Rc::clone(entry.get()),
-            Entry::Vacant(entry) => {
-                Rc::clone(entry.insert(Rc::new(AlbumArt::new(&self.session, download_url))))
-            }
-        }
+        Rc::clone(
+            self.map
+                .borrow_mut()
+                .entry(download_url.to_string())
+                .or_insert_with(|| Rc::new(AlbumArt::new(&self.session, download_url))),
+        )
     }
 }
 
