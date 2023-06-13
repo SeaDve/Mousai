@@ -33,14 +33,19 @@ impl AlbumArtStore {
 mod test {
     use super::*;
 
-    #[test]
-    fn identity() {
+    #[gtk::test]
+    async fn identity() {
         let session = soup::Session::new();
         let store = AlbumArtStore::new(&session);
 
-        let url = "https://example.com/album.jpg";
-        let access_1 = store.get_or_init(url);
-        let access_2 = store.get_or_init(url);
+        let download_url =
+            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+        let access_1 = store.get_or_init(download_url);
+        let access_2 = store.get_or_init(download_url);
         assert!(Rc::ptr_eq(&access_1, &access_2));
+        assert_eq!(
+            access_1.texture().await.unwrap(),
+            access_2.texture().await.unwrap()
+        );
     }
 }
