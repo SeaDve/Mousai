@@ -43,10 +43,6 @@ mod imp {
 
             self.obj().update_ui();
         }
-
-        fn dispose(&self) {
-            self.dispose_template();
-        }
     }
 
     impl WidgetImpl for InformationRow {}

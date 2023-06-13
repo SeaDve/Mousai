@@ -25,12 +25,7 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for DatabaseErrorWindow {
-        fn dispose(&self) {
-            self.dispose_template();
-        }
-    }
-
+    impl ObjectImpl for DatabaseErrorWindow {}
     impl WidgetImpl for DatabaseErrorWindow {}
     impl WindowImpl for DatabaseErrorWindow {}
     impl ApplicationWindowImpl for DatabaseErrorWindow {}

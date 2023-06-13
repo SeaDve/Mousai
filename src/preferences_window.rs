@@ -68,10 +68,6 @@ mod imp {
             obj.setup_rows();
         }
 
-        fn dispose(&self) {
-            self.dispose_template();
-        }
-
         crate::derived_properties!();
     }
 
