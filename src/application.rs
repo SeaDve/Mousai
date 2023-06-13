@@ -144,15 +144,18 @@ impl Application {
                 path.push("mousai/soup_cache");
                 path
             };
-            let cache = soup::Cache::new(
-                Some(cache_dir.to_str().expect("path must be in utf-8 encoding")),
-                soup::CacheType::SingleUser,
-            );
+            let cache_dir_str = cache_dir.to_str();
+
+            if cache_dir_str.is_none() {
+                tracing::warn!("Failed to convert cache dir to str");
+            }
+
+            let cache = soup::Cache::new(cache_dir_str, soup::CacheType::SingleUser);
             session.add_feature(&cache);
 
             let now = Instant::now();
             cache.load();
-            tracing::debug!("Loaded soup cache in {:?}", now.elapsed());
+            tracing::debug!(path = ?cache.cache_dir(), "Loaded soup cache in {:?}", now.elapsed());
 
             (session, cache)
         });
