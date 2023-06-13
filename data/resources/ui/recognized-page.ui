@@ -2,73 +2,67 @@
 <interface>
   <template class="MsaiRecognizedPage">
     <property name="layout-manager">
-      <object class="GtkBoxLayout">
-        <property name="orientation">vertical</property>
-      </object>
+      <object class="GtkBinLayout"/>
     </property>
-    <style>
-      <class name="background"/>
-    </style>
     <child>
-      <object class="GtkHeaderBar" id="header_bar">
-        <property name="title-widget">
-          <object class="AdwBin"/>
-        </property>
-        <style>
-          <class name="flat"/>
-        </style>
-        <child>
-          <object class="GtkButton">
-            <property name="tooltip-text" translatable="yes">Back</property>
-            <property name="icon-name">go-previous-symbolic</property>
-            <property name="action-name">win.navigate-back</property>
+      <object class="AdwToolbarView" id="toolbar_view">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <property name="show-title">False</property>
+            <child>
+              <object class="GtkButton">
+                <property name="tooltip-text" translatable="yes">Back</property>
+                <property name="icon-name">go-previous-symbolic</property>
+                <property name="action-name">win.navigate-back</property>
+              </object>
+            </child>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="vbox">
-        <property name="margin-top">24</property>
-        <property name="margin-bottom">24</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">48</property>
-        <child>
+        <property name="content">
           <object class="GtkBox">
-            <property name="margin-start">24</property>
-            <property name="margin-end">24</property>
+            <property name="margin-top">24</property>
+            <property name="margin-bottom">24</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">6</property>
+            <property name="spacing">48</property>
             <child>
-              <object class="GtkLabel" id="title">
-                <property name="xalign">0.5</property>
-                <property name="justify">center</property>
-                <property name="wrap">True</property>
-                <style>
-                  <class name="title-1"/>
-                </style>
+              <object class="GtkBox">
+                <property name="margin-start">24</property>
+                <property name="margin-end">24</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkLabel" id="title">
+                    <property name="xalign">0.5</property>
+                    <property name="justify">center</property>
+                    <property name="wrap">True</property>
+                    <style>
+                      <class name="title-1"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="subtitle">
+                    <property name="xalign">0.5</property>
+                    <property name="justify">center</property>
+                    <property name="wrap">True</property>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="subtitle">
-                <property name="xalign">0.5</property>
-                <property name="justify">center</property>
-                <property name="wrap">True</property>
+              <object class="AdwCarousel" id="carousel">
+                <property name="vexpand">True</property>
+                <property name="valign">center</property>
+                <property name="allow-long-swipes">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwCarouselIndicatorDots">
+                <property name="carousel">carousel</property>
               </object>
             </child>
           </object>
-        </child>
-        <child>
-          <object class="AdwCarousel" id="carousel">
-            <property name="vexpand">True</property>
-            <property name="valign">center</property>
-            <property name="allow-long-swipes">True</property>
-          </object>
-        </child>
-        <child>
-          <object class="AdwCarouselIndicatorDots">
-            <property name="carousel">carousel</property>
-          </object>
-        </child>
+        </property>
       </object>
     </child>
   </template>

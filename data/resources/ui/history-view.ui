@@ -30,23 +30,23 @@
   </menu>
   <template class="MsaiHistoryView">
     <property name="layout-manager">
-      <object class="GtkBoxLayout">
-        <property name="orientation">vertical</property>
-      </object>
+      <object class="GtkBinLayout"/>
     </property>
+    <style>
+      <class name="view"/>
+    </style>
     <child>
       <object class="AdwLeaflet" id="leaflet">
         <property name="can-unfold">False</property>
         <property name="can-navigate-back">True</property>
         <property name="can-navigate-forward">True</property>
         <child>
-          <object class="GtkBox" id="history_child">
-            <property name="orientation">vertical</property>
-            <child>
+          <object class="AdwToolbarView" id="history_child">
+            <child type="top">
               <object class="GtkStack" id="header_bar_stack">
                 <property name="transition-type">crossfade</property>
                 <child>
-                  <object class="GtkHeaderBar" id="main_header_bar">
+                  <object class="AdwHeaderBar" id="main_header_bar">
                     <child>
                       <object class="GtkButton">
                         <property name="tooltip-text" translatable="yes">Recognize Song</property>
@@ -85,7 +85,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkHeaderBar" id="selection_mode_header_bar">
+                  <object class="AdwHeaderBar" id="selection_mode_header_bar">
                     <property name="title-widget">
                       <object class="GtkMenuButton" id="selection_mode_menu_button">
                         <property name="menu-model">selection_menu</property>
@@ -109,7 +109,7 @@
                 </child>
               </object>
             </child>
-            <child>
+            <child type="top">
               <!-- TODO Maybe inline this in the headerbar -->
               <object class="GtkSearchBar" id="search_bar">
                 <property name="child">
@@ -119,7 +119,7 @@
                 </property>
               </object>
             </child>
-            <child>
+            <property name="content">
               <object class="GtkStack" id="history_stack">
                 <property name="transition-type">crossfade</property>
                 <child>
@@ -154,8 +154,8 @@
                   </object>
                 </child>
               </object>
-            </child>
-            <child>
+            </property>
+            <child type="bottom">
               <object class="GtkActionBar" id="selection_mode_bar">
                 <child>
                   <object class="GtkButton" id="copy_selected_songs_button">

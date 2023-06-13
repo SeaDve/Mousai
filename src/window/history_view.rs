@@ -51,15 +51,15 @@ mod imp {
         #[template_child]
         pub(super) leaflet: TemplateChild<adw::Leaflet>,
         #[template_child]
-        pub(super) history_child: TemplateChild<gtk::Box>,
+        pub(super) history_child: TemplateChild<adw::ToolbarView>,
         #[template_child]
         pub(super) header_bar_stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub(super) main_header_bar: TemplateChild<gtk::HeaderBar>,
+        pub(super) main_header_bar: TemplateChild<adw::HeaderBar>,
         #[template_child]
         pub(super) recognizer_status: TemplateChild<RecognizerStatus>,
         #[template_child]
-        pub(super) selection_mode_header_bar: TemplateChild<gtk::HeaderBar>,
+        pub(super) selection_mode_header_bar: TemplateChild<adw::HeaderBar>,
         #[template_child]
         pub(super) selection_mode_menu_button: TemplateChild<gtk::MenuButton>,
         #[template_child]

@@ -4,16 +4,11 @@
     <property name="default-width">800</property>
     <property name="default-height">600</property>
     <property name="content">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkHeaderBar">
-            <style>
-              <class name="flat"/>
-            </style>
-          </object>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar"/>
         </child>
-        <child>
+        <property name="content">
           <object class="AdwStatusPage">
             <property name="vexpand">True</property>
             <property name="icon-name">face-sad-symbolic</property>
@@ -31,7 +26,7 @@
               </object>
             </property>
           </object>
-        </child>
+        </property>
       </object>
     </property>
   </template>
