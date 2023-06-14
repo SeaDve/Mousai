@@ -39,7 +39,7 @@ jobs:
     name: Flatpak
     runs-on: ubuntu-22.04
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-44
+      image: bilelmoussaoui/flatpak-github-actions:gnome-nightly
       options: --privileged
     steps:
       - uses: actions/checkout@v3
