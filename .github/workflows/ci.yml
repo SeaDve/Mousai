@@ -19,7 +19,7 @@ jobs:
 
   rustfmt:
     name: Rustfmt
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: Create blank versions of configured file
@@ -29,7 +29,7 @@ jobs:
 
   typos:
     name: Typos
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: Check for typos
@@ -37,7 +37,7 @@ jobs:
 
   flatpak:
     name: Flatpak
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container:
       image: bilelmoussaoui/flatpak-github-actions:gnome-44
       options: --privileged
