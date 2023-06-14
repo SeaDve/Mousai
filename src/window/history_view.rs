@@ -1009,7 +1009,10 @@ mod test {
 
     #[track_caller]
     fn assert_leaflet_visible_child_type<T: glib::StaticType>(view: &HistoryView) {
-        assert!(view.imp().leaflet.visible_child().unwrap().is::<T>());
+        assert_eq!(
+            view.imp().leaflet.visible_child().unwrap().type_(),
+            T::static_type()
+        );
     }
 
     #[gtk::test]
@@ -1029,7 +1032,7 @@ mod test {
         view.bind_song_list(&song_list);
 
         assert_leaflet_n_pages(&view, 1);
-        assert_leaflet_visible_child_type::<gtk::Box>(&view);
+        assert_leaflet_visible_child_type::<adw::ToolbarView>(&view);
         assert!(view.is_on_leaflet_main_page());
 
         view.insert_song_page(&song);
@@ -1055,13 +1058,13 @@ mod test {
 
         assert!(view.navigate_back());
         assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<gtk::Box>(&view);
+        assert_leaflet_visible_child_type::<adw::ToolbarView>(&view);
         assert!(view.is_on_leaflet_main_page());
 
         // Already on first page, navigating backward should not do anything
         assert!(!view.navigate_back());
         assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<gtk::Box>(&view);
+        assert_leaflet_visible_child_type::<adw::ToolbarView>(&view);
         assert!(view.is_on_leaflet_main_page());
     }
 
