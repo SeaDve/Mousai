@@ -31,41 +31,31 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="test_listen_duration_row">
+              <object class="AdwSpinRow" id="test_listen_duration_row">
                 <property name="title">Test Listen Duration (seconds)</property>
-                <child type="suffix">
-                  <object class="GtkSpinButton" id="test_listen_duration_button">
-                    <property name="valign">center</property>
-                    <property name="snap-to-ticks">True</property>
-                    <property name="numeric">True</property>
-                    <property name="adjustment">
-                      <object class="GtkAdjustment">
-                        <property name="upper">999999</property>
-                        <property name="step-increment">1</property>
-                        <property name="page-increment">10</property>
-                      </object>
-                    </property>
+                <property name="snap-to-ticks">True</property>
+                <property name="numeric">True</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="upper">999999</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="test_recognize_duration_row">
+              <object class="AdwSpinRow" id="test_recognize_duration_row">
                 <property name="title">Test Recognize Duration (seconds)</property>
-                <child type="suffix">
-                  <object class="GtkSpinButton" id="test_recognize_duration_button">
-                    <property name="valign">center</property>
-                    <property name="snap-to-ticks">True</property>
-                    <property name="numeric">True</property>
-                    <property name="adjustment">
-                      <object class="GtkAdjustment">
-                        <property name="upper">999999</property>
-                        <property name="step-increment">1</property>
-                        <property name="page-increment">10</property>
-                      </object>
-                    </property>
+                <property name="snap-to-ticks">True</property>
+                <property name="numeric">True</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="upper">999999</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
                   </object>
-                </child>
+                </property>
               </object>
             </child>
           </object>

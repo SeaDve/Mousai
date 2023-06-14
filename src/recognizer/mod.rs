@@ -282,14 +282,12 @@ impl Recognizer {
         }));
 
         let provider = ProviderSettings::lock().active.to_provider();
-        tracing::debug!(?provider);
+        let listen_duration = provider.listen_duration();
+        tracing::debug!(?provider, ?listen_duration);
 
-        gio::CancellableFuture::new(
-            glib::timeout_future(provider.listen_duration()),
-            cancellable.clone(),
-        )
-        .await
-        .map_err(|_| Cancelled::new("recognizing while recording"))?;
+        gio::CancellableFuture::new(glib::timeout_future(listen_duration), cancellable.clone())
+            .await
+            .map_err(|_| Cancelled::new("recognizing while recording"))?;
 
         let recording_bytes = imp.recorder.stop().context("Failed to stop recording")?;
         tracing::debug!(

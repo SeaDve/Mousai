@@ -36,13 +36,9 @@ mod imp {
         #[template_child]
         pub(super) test_provider_mode_model: TemplateChild<adw::EnumListModel>,
         #[template_child]
-        pub(super) test_listen_duration_row: TemplateChild<adw::ActionRow>,
+        pub(super) test_listen_duration_row: TemplateChild<adw::SpinRow>,
         #[template_child]
-        pub(super) test_listen_duration_button: TemplateChild<gtk::SpinButton>,
-        #[template_child]
-        pub(super) test_recognize_duration_row: TemplateChild<adw::ActionRow>,
-        #[template_child]
-        pub(super) test_recognize_duration_button: TemplateChild<gtk::SpinButton>,
+        pub(super) test_recognize_duration_row: TemplateChild<adw::SpinRow>,
     }
 
     #[glib::object_subclass]
@@ -173,20 +169,20 @@ impl InspectorPage {
                 }
             });
 
-        imp.test_listen_duration_button
+        imp.test_listen_duration_row
             .set_value(ProviderSettings::lock().test_listen_duration.as_secs() as f64);
-        imp.test_listen_duration_button
-            .connect_value_changed(|spin_button| {
+        imp.test_listen_duration_row
+            .connect_value_notify(|spin_button| {
                 ProviderSettings::lock().test_listen_duration =
-                    Duration::from_secs(spin_button.value_as_int() as u64);
+                    Duration::from_secs(spin_button.value() as u64);
             });
 
-        imp.test_recognize_duration_button
+        imp.test_recognize_duration_row
             .set_value(ProviderSettings::lock().test_recognize_duration.as_secs() as f64);
-        imp.test_recognize_duration_button
-            .connect_value_changed(|spin_button| {
+        imp.test_recognize_duration_row
+            .connect_value_notify(|spin_button| {
                 ProviderSettings::lock().test_recognize_duration =
-                    Duration::from_secs(spin_button.value_as_int() as u64);
+                    Duration::from_secs(spin_button.value() as u64);
             });
     }
 }
