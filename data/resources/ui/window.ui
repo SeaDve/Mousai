@@ -7,7 +7,6 @@
           <object class="AdwToolbarView" id="toolbar_view">
             <property name="content">
               <object class="GtkStack" id="stack">
-                <property name="vexpand">True</property>
                 <property name="transition-type">crossfade</property>
                 <child>
                   <object class="MsaiHistoryView" id="main_view"/>

@@ -124,7 +124,6 @@
                 <property name="transition-type">crossfade</property>
                 <child>
                   <object class="GtkScrolledWindow" id="main_page">
-                    <property name="vexpand">True</property>
                     <property name="hscrollbar-policy">never</property>
                     <property name="child">
                       <object class="GtkGridView" id="grid">
@@ -138,7 +137,6 @@
                 </child>
                 <child>
                   <object class="AdwStatusPage" id="empty_page">
-                    <property name="vexpand">True</property>
                     <property name="title" translatable="yes">Start Recognizing Songs!</property>
                     <property name="description" translatable="yes">Click the listen button to start</property>
                     <style>
@@ -148,7 +146,6 @@
                 </child>
                 <child>
                   <object class="AdwStatusPage" id="empty_search_page">
-                    <property name="vexpand">True</property>
                     <property name="icon-name">system-search-symbolic</property>
                     <property name="title" translatable="yes">No Results</property>
                   </object>

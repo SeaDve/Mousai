@@ -47,7 +47,6 @@
         </child>
         <property name="content">
           <object class="GtkScrolledWindow">
-            <property name="vexpand">True</property>
             <property name="child">
               <object class="AdwClamp">
                 <property name="maximum-size">800</property>

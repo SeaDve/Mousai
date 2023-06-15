@@ -24,7 +24,6 @@
           <object class="GtkBox">
             <property name="margin-top">24</property>
             <property name="margin-bottom">24</property>
-            <property name="vexpand">True</property>
             <property name="valign">center</property>
             <property name="orientation">vertical</property>
             <property name="spacing">24</property>
