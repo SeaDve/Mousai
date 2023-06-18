@@ -152,10 +152,9 @@ mod tests {
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
         let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_local());
-        val.set_recognize_result(Some(BoxedRecognizeResult(Err(RecognizeError::new(
-            RecognizeErrorKind::Connection,
-            "Some message".to_string(),
-        )))));
+        val.set_recognize_result(Some(BoxedRecognizeResult(Err(
+            RecognizeError::with_message(RecognizeErrorKind::Connection, "Some message"),
+        ))));
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);

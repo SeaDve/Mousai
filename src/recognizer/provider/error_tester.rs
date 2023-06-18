@@ -1,11 +1,9 @@
 use async_trait::async_trait;
+use gtk::glib;
 
 use std::sync::atomic::{AtomicI32, Ordering};
 
-use super::Song;
-use crate::recognizer::provider::{
-    RecognizeError, RecognizeErrorKind, TestProvider, TestProviderMode,
-};
+use super::{RecognizeError, RecognizeErrorKind, Song, TestProvider, TestProviderMode};
 
 // FIXME Store this state to the struct
 static CURRENT: AtomicI32 = AtomicI32::new(0);
@@ -17,7 +15,7 @@ pub struct ErrorTester;
 impl TestProvider for ErrorTester {
     async fn recognize_impl(
         &self,
-        _: &[u8],
+        _: &glib::Bytes,
         mode: TestProviderMode,
     ) -> Result<Song, RecognizeError> {
         if mode != TestProviderMode::ErrorOnly {
@@ -34,29 +32,29 @@ impl TestProvider for ErrorTester {
             })
             .unwrap()
         {
-            0 => RecognizeError::new(
+            0 => RecognizeError::with_message(
                 RecognizeErrorKind::Connection,
-                "connection error message".to_string(),
+                "connection error message",
             ),
-            1 => RecognizeError::new(
+            1 => RecognizeError::with_message(
                 RecognizeErrorKind::TokenLimitReached,
-                "token limit reached error message".to_string(),
+                "token limit reached error message",
             ),
-            2 => RecognizeError::new(
+            2 => RecognizeError::with_message(
                 RecognizeErrorKind::InvalidToken,
-                "invalid token error message".to_string(),
+                "invalid token error message",
             ),
-            3 => RecognizeError::new(
+            3 => RecognizeError::with_message(
                 RecognizeErrorKind::Fingerprint,
-                "fingerprint error message".to_string(),
+                "fingerprint error message",
             ),
-            4 => RecognizeError::new(
+            4 => RecognizeError::with_message(
                 RecognizeErrorKind::NoMatches,
-                "no matches error message".to_string(),
+                "no matches error message",
             ),
-            5 => RecognizeError::new(
+            5 => RecognizeError::with_message(
                 RecognizeErrorKind::OtherPermanent,
-                "other permanent error message".to_string(),
+                "other permanent error message",
             ),
             _ => unreachable!("current must always be less than n variants of RecognizeErrorKind"),
         };

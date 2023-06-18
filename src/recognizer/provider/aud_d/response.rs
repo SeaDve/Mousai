@@ -95,14 +95,14 @@ impl Response {
         if self.status == "success" {
             return self
                 .data
-                .ok_or_else(|| RecognizeError::new(RecognizeErrorKind::NoMatches, None));
+                .ok_or_else(|| RecognizeError::new(RecognizeErrorKind::NoMatches));
         }
 
         if self.status == "error" {
             let error = self.error.ok_or_else(|| {
-                RecognizeError::new(
+                RecognizeError::with_message(
                     RecognizeErrorKind::OtherPermanent,
-                    "Got `error` status but no error".to_string(),
+                    "Got `error` status but no error",
                 )
             })?;
 
@@ -113,13 +113,13 @@ impl Response {
                 300 => RecognizeErrorKind::Fingerprint,
                 _ => RecognizeErrorKind::OtherPermanent,
             };
-            return Err(RecognizeError::new(
+            return Err(RecognizeError::with_message(
                 kind,
                 format!("#{}: {}", error.code, error.message),
             ));
         }
 
-        Err(RecognizeError::new(
+        Err(RecognizeError::with_message(
             RecognizeErrorKind::OtherPermanent,
             format!("Got invalid status response of {}", self.status),
         ))

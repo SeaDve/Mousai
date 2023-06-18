@@ -31,7 +31,7 @@ impl AudD {
     fn build_song_from_response_bytes(response_bytes: &[u8]) -> Result<Song, RecognizeError> {
         let data = serde_json::from_slice::<Response>(response_bytes)
             .map_err(|err| {
-                RecognizeError::new(RecognizeErrorKind::OtherPermanent, err.to_string())
+                RecognizeError::with_message(RecognizeErrorKind::OtherPermanent, err.to_string())
             })?
             .data()?;
 
@@ -107,7 +107,7 @@ impl AudD {
 
 #[async_trait(?Send)]
 impl Provider for AudD {
-    async fn recognize(&self, bytes: &[u8]) -> Result<Song, RecognizeError> {
+    async fn recognize(&self, bytes: &glib::Bytes) -> Result<Song, RecognizeError> {
         let data = json!({
             "api_token": self.api_token,
             "return": "spotify,apple_music,musicbrainz,lyrics",
@@ -115,7 +115,7 @@ impl Provider for AudD {
         });
 
         let message = soup::Message::new("POST", "https://api.audd.io/").map_err(|err| {
-            RecognizeError::new(
+            RecognizeError::with_message(
                 RecognizeErrorKind::OtherPermanent,
                 format!("Failed to create POST message: {}", err),
             )
@@ -131,9 +131,12 @@ impl Provider for AudD {
                 if err.matches(gio::ResolverError::NotFound)
                     || err.matches(gio::ResolverError::TemporaryFailure)
                 {
-                    RecognizeError::new(RecognizeErrorKind::Connection, err.to_string())
+                    RecognizeError::with_message(RecognizeErrorKind::Connection, err.to_string())
                 } else {
-                    RecognizeError::new(RecognizeErrorKind::OtherPermanent, err.to_string())
+                    RecognizeError::with_message(
+                        RecognizeErrorKind::OtherPermanent,
+                        err.to_string(),
+                    )
                 }
             })?;
 

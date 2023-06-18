@@ -302,7 +302,7 @@ impl Recognizer {
             self.saved_recordings()
                 .insert(Recording::new(&recording_bytes, &recorded_time))
                 .context("Failed to insert recording")?;
-            self.emit_recording_saved(&RecognizeError::new(RecognizeErrorKind::Connection, None));
+            self.emit_recording_saved(&RecognizeError::new(RecognizeErrorKind::Connection));
             tracing::debug!("Offline mode is active; saved recording for later recognition");
             return Ok(());
         }
@@ -396,7 +396,7 @@ impl Recognizer {
                 continue;
             }
 
-            match provider.recognize(recording.bytes().as_ref()).await {
+            match provider.recognize(&recording.bytes()).await {
                 Ok(song) => {
                     song.set_last_heard(recording.recorded_time());
                     recording.set_recognize_result(Some(BoxedRecognizeResult(Ok(song))));

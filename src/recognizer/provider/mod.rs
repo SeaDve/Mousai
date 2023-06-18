@@ -2,6 +2,7 @@ mod aud_d;
 mod error;
 mod error_tester;
 mod settings;
+mod shazam;
 
 use async_trait::async_trait;
 use gtk::glib;
@@ -17,7 +18,7 @@ use crate::model::Song;
 #[async_trait(?Send)]
 pub trait Provider: fmt::Debug {
     /// Recognize a song from bytes
-    async fn recognize(&self, bytes: &[u8]) -> Result<Song, RecognizeError>;
+    async fn recognize(&self, bytes: &glib::Bytes) -> Result<Song, RecognizeError>;
 
     /// How long to record the audio
     fn listen_duration(&self) -> Duration;
@@ -32,7 +33,7 @@ pub trait Provider: fmt::Debug {
 pub trait TestProvider {
     async fn recognize_impl(
         &self,
-        bytes: &[u8],
+        bytes: &glib::Bytes,
         mode: TestProviderMode,
     ) -> Result<Song, RecognizeError>;
 }
@@ -42,7 +43,7 @@ impl<T> Provider for T
 where
     T: TestProvider + fmt::Debug,
 {
-    async fn recognize(&self, bytes: &[u8]) -> Result<Song, RecognizeError> {
+    async fn recognize(&self, bytes: &glib::Bytes) -> Result<Song, RecognizeError> {
         let duration = ProviderSettings::lock().test_recognize_duration;
         glib::timeout_future(duration).await;
 

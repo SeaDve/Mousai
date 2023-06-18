@@ -155,9 +155,7 @@ fn create_pipeline(
         .property("interval", gst::ClockTime::from_mseconds(80))
         .property("peak-ttl", gst::ClockTime::from_mseconds(80))
         .build()?;
-    let opusenc = gst::ElementFactory::make("opusenc")
-        .property("bitrate", 16_000)
-        .build()?;
+    let vorbisenc = gst::ElementFactory::make("vorbisenc").build()?;
     let oggmux = gst::ElementFactory::make("oggmux").build()?;
     let giostreamsink = gst::ElementFactory::make("giostreamsink")
         .property("stream", stream)
@@ -174,23 +172,23 @@ fn create_pipeline(
         &pulsesrc,
         &audioconvert,
         &level,
-        &opusenc,
+        &vorbisenc,
         &oggmux,
         &giostreamsink,
     ];
     pipeline.add_many(&elements)?;
 
-    pulsesrc.link_filtered(
-        &audioconvert,
-        &gst::Caps::builder("audio/x-raw")
-            .field("channels", 1)
+    pulsesrc.link(&audioconvert)?;
+    audioconvert.link(&level)?;
+    level.link(&vorbisenc)?;
+    vorbisenc.link_filtered(
+        &oggmux,
+        &gst::Caps::builder("audio/x-vorbis")
             .field("rate", 16_000)
+            .field("channels", 1)
             .build(),
     )?;
-    audioconvert.link(&level)?;
-    level.link(&opusenc)?;
-    opusenc.link_filtered(&oggmux, &gst::Caps::builder("audio/x-opus").build())?;
-    oggmux.link_filtered(&giostreamsink, &gst::Caps::builder("audio/ogg").build())?;
+    oggmux.link(&giostreamsink)?;
 
     for e in elements {
         e.sync_state_with_parent()?;

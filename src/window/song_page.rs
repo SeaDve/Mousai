@@ -114,8 +114,10 @@ mod imp {
                 }));
 
             self.external_links_box.connect_child_activated(|_, child| {
-                let external_link_tile = child.clone().downcast::<ExternalLinkTile>().unwrap();
-                external_link_tile.handle_activation();
+                child
+                    .downcast_ref::<ExternalLinkTile>()
+                    .unwrap()
+                    .handle_activation();
             });
 
             self.song_binding_group

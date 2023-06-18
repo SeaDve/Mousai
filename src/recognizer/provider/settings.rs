@@ -30,10 +30,11 @@ impl TryFrom<i32> for TestProviderMode {
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiProviderType")]
 pub enum ProviderType {
-    #[default]
     AudD,
     AudDMock,
     ErrorTester,
+    #[default]
+    Shazam,
 }
 
 impl ProviderType {
@@ -41,6 +42,7 @@ impl ProviderType {
         use super::{
             aud_d::{AudD, AudDMock},
             error_tester::ErrorTester,
+            shazam::Shazam,
         };
 
         match self {
@@ -51,6 +53,7 @@ impl ProviderType {
             }
             Self::AudDMock => Box::new(AudDMock),
             Self::ErrorTester => Box::new(ErrorTester),
+            Self::Shazam => Box::new(Shazam),
         }
     }
 }

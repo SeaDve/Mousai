@@ -11,7 +11,7 @@ pub struct AudDMock;
 impl TestProvider for AudDMock {
     async fn recognize_impl(
         &self,
-        _: &[u8],
+        _: &glib::Bytes,
         mode: TestProviderMode,
     ) -> Result<Song, RecognizeError> {
         let response_str = random_response_str(mode);

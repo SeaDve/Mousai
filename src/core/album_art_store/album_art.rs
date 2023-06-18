@@ -20,9 +20,9 @@ pub struct AlbumArt {
 }
 
 impl AlbumArt {
-    pub(super) fn new(session: &soup::Session, download_url: &str) -> Self {
+    pub(super) fn new(session: soup::Session, download_url: &str) -> Self {
         Self {
-            session: session.clone(),
+            session,
             download_url: download_url.to_string(),
             cache: OnceCell::new(),
             cache_guard: Mutex::new(()),
@@ -83,11 +83,9 @@ mod test {
 
     #[gtk::test]
     async fn download() {
-        let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-
-        let album_art = AlbumArt::new(&session, download_url);
+        let album_art = AlbumArt::new(soup::Session::new(), download_url);
         assert!(!album_art.is_loaded());
         assert_eq!(album_art.download_url(), download_url);
 
@@ -103,11 +101,9 @@ mod test {
 
     #[gtk::test]
     async fn concurrent_downloads() {
-        let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-
-        let album_art = AlbumArt::new(&session, download_url);
+        let album_art = AlbumArt::new(soup::Session::new(), download_url);
 
         // Should not panic on the following line in `AlbumArt::texture`.
         // debug_assert!(self.guard.borrow().is_none());

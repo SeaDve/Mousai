@@ -10,11 +10,11 @@ pub struct AlbumArtStore {
 }
 
 impl AlbumArtStore {
-    pub fn new(session: &soup::Session) -> Self {
+    pub fn new(session: soup::Session) -> Self {
         // TODO Remove from store on low memory (Use LRU Cache)
 
         Self {
-            session: session.clone(),
+            session,
             map: RefCell::default(),
         }
     }
@@ -24,7 +24,7 @@ impl AlbumArtStore {
             self.map
                 .borrow_mut()
                 .entry(download_url.to_string())
-                .or_insert_with(|| Rc::new(AlbumArt::new(&self.session, download_url))),
+                .or_insert_with(|| Rc::new(AlbumArt::new(self.session.clone(), download_url))),
         )
     }
 }
@@ -35,8 +35,7 @@ mod test {
 
     #[gtk::test]
     async fn identity() {
-        let session = soup::Session::new();
-        let store = AlbumArtStore::new(&session);
+        let store = AlbumArtStore::new(soup::Session::new());
 
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";

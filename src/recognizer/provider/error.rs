@@ -34,10 +34,17 @@ impl fmt::Display for RecognizeError {
 }
 
 impl RecognizeError {
-    pub fn new(kind: RecognizeErrorKind, message: impl Into<Option<String>>) -> Self {
+    pub fn new(kind: RecognizeErrorKind) -> Self {
         Self {
             kind,
-            message: message.into(),
+            message: None,
+        }
+    }
+
+    pub fn with_message(kind: RecognizeErrorKind, message: impl Into<String>) -> Self {
+        Self {
+            kind,
+            message: Some(message.into()),
         }
     }
 
@@ -82,15 +89,13 @@ mod tests {
 
     #[test]
     fn serde_bincode() {
-        let val = RecognizeError::new(RecognizeErrorKind::Connection, None);
+        let val = RecognizeError::new(RecognizeErrorKind::Connection);
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
 
-        let val = RecognizeError::new(
-            RecognizeErrorKind::Connection,
-            "Some error message".to_string(),
-        );
+        let val =
+            RecognizeError::with_message(RecognizeErrorKind::Connection, "Some error message");
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
