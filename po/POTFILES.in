@@ -4,7 +4,6 @@ data/io.github.seadve.Mousai.metainfo.xml.in.in
 data/resources/ui/database-error-window.ui
 data/resources/ui/history-view.ui
 data/resources/ui/preferences-window.ui
-data/resources/ui/recognized-page.ui
 data/resources/ui/recognizer-status.ui
 data/resources/ui/recognizer-view.ui
 data/resources/ui/shortcuts.ui

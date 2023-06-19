@@ -84,14 +84,6 @@ mod imp {
             klass.bind_template();
             klass.bind_template_instance_callbacks();
 
-            klass.install_action("win.navigate-back", None, |obj, _, _| {
-                obj.imp().main_view.navigate_back();
-            });
-
-            klass.install_action("win.navigate-forward", None, |obj, _, _| {
-                obj.imp().main_view.navigate_forward();
-            });
-
             klass.install_action("win.toggle-playback", None, |obj, _, _| {
                 let imp = obj.imp();
 
@@ -213,21 +205,6 @@ impl Window {
             .set(song_history.clone())
             .expect("song history must be bound only once");
 
-        song_history.connect_items_changed(
-            clone!(@weak self as obj => move |history, _index, removed, _added| {
-                if removed == 0 {
-                    return;
-                }
-
-                let imp = obj.imp();
-                if let Some(active_song) = imp.player.song() {
-                    if !history.contains(active_song.id_ref()) {
-                        imp.player.set_song(Song::NONE);
-                    }
-                }
-            }),
-        );
-
         imp.main_view.bind_song_list(song_history);
         imp.recognizer.bind_saved_recordings(recordings);
 
@@ -260,7 +237,7 @@ impl Window {
                 }
 
                 let main_view = obj.imp().main_view.get();
-                main_view.insert_song_page(song);
+                main_view.push_song_page(song);
                 main_view.scroll_to_top();
             }));
         imp.recognizer
@@ -323,7 +300,7 @@ impl Window {
                             gio::Cancellable::NONE,
                             |res| {
                                 if let Err(err ) = res {
-                                    tracing::error!("Failed to open bug report URI: {}", err);
+                                    tracing::error!("Failed to open bug report URI: {:?}", err);
                                 }
                             },
                         );
@@ -520,7 +497,7 @@ impl Window {
 
         imp.song_bar
             .connect_activated(clone!(@weak self as obj => move |_, song| {
-                obj.imp().main_view.insert_song_page(song);
+                obj.imp().main_view.push_song_page(song);
             }));
 
         imp.main_view.connect_is_selection_mode_active_notify(
@@ -551,7 +528,7 @@ impl Window {
 
         if keyval == gdk::Key::Escape
             && state == gdk::ModifierType::empty()
-            && imp.main_view.is_on_leaflet_main_page()
+            && imp.main_view.is_on_main_navigation_page()
         {
             let search_bar = imp.main_view.search_bar();
             if search_bar.is_search_mode() {
