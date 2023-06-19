@@ -102,10 +102,6 @@ mod imp {
                 };
             });
 
-            klass.install_action("win.stop-playback", None, |obj, _, _| {
-                obj.imp().player.set_song(Song::NONE);
-            });
-
             klass.install_action_async("win.toggle-recognize", None, |obj, _, _| async move {
                 let imp = obj.imp();
 
