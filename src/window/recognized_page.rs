@@ -1,9 +1,9 @@
-use gettextrs::ngettext;
-use gtk::{
-    glib::{self, clone, closure_local},
+use adw::{
     prelude::*,
-    subclass::prelude::*,
+    subclass::{navigation_page::NavigationPageImpl, prelude::*},
 };
+use gettextrs::ngettext;
+use gtk::glib::{self, clone, closure_local};
 use once_cell::unsync::OnceCell;
 
 use std::cell::{Cell, RefCell};
@@ -24,11 +24,9 @@ mod imp {
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         #[template_child]
-        pub(super) toolbar_view: TemplateChild<adw::ToolbarView>, // Unused
+        pub(super) heading: TemplateChild<gtk::Label>,
         #[template_child]
-        pub(super) title: TemplateChild<gtk::Label>,
-        #[template_child]
-        pub(super) subtitle: TemplateChild<gtk::Label>,
+        pub(super) body: TemplateChild<gtk::Label>,
         #[template_child]
         pub(super) carousel: TemplateChild<adw::Carousel>,
 
@@ -40,7 +38,7 @@ mod imp {
     impl ObjectSubclass for RecognizedPage {
         const NAME: &'static str = "MsaiRecognizedPage";
         type Type = super::RecognizedPage;
-        type ParentType = gtk::Widget;
+        type ParentType = adw::NavigationPage;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
@@ -72,12 +70,11 @@ mod imp {
 
         fn dispose(&self) {
             self.obj().unbind_player();
-
-            self.dispose_template();
         }
     }
 
     impl WidgetImpl for RecognizedPage {}
+    impl NavigationPageImpl for RecognizedPage {}
 
     impl RecognizedPage {
         fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
@@ -96,7 +93,7 @@ mod imp {
 
 glib::wrapper! {
      pub struct RecognizedPage(ObjectSubclass<imp::RecognizedPage>)
-        @extends gtk::Widget;
+        @extends gtk::Widget, adw::NavigationPage;
 }
 
 impl RecognizedPage {
@@ -136,14 +133,19 @@ impl RecognizedPage {
         let imp = self.imp();
 
         let n_songs = songs.len();
-        imp.title.set_label(&ngettext_f(
+        self.set_title(&ngettext(
+            "Recognized Song",
+            "Recognized Songs",
+            n_songs as u32,
+        ));
+        imp.heading.set_label(&ngettext_f(
             // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
             "Recognized {n_songs} New Song",
             "Recognized {n_songs} New Songs",
             n_songs as u32,
             &[("n_songs", &n_songs.to_string())],
         ));
-        imp.subtitle.set_label(&ngettext(
+        imp.body.set_label(&ngettext(
             "This song was recognized from your saved recording",
             "These songs were recognized from your saved recordings",
             n_songs as u32,
@@ -156,7 +158,6 @@ impl RecognizedPage {
             .expect("player must be bound")
             .upgrade()
             .expect("player must not be dropped");
-
         for song in songs {
             let tile = RecognizedPageTile::new(song);
             tile.bind_player(&player);

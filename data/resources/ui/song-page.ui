@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiSongPage">
-    <property name="layout-manager">
-      <object class="GtkBinLayout"/>
-    </property>
-    <child>
-      <object class="AdwToolbarView" id="toolbar_view">
+  <template class="MsaiSongPage" parent="AdwNavigationPage">
+    <property name="child">
+      <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
             <property name="title-widget">
@@ -22,18 +19,10 @@
                 </binding>
               </object>
             </property>
-            <child>
-              <object class="GtkButton">
-                <property name="tooltip-text" translatable="yes">Back</property>
-                <property name="icon-name">go-previous-symbolic</property>
-                <property name="action-name">win.navigate-back</property>
-              </object>
-            </child>
             <child type="end">
-              <object class="GtkButton">
+              <object class="GtkButton" id="remove_button">
                 <property name="tooltip-text" translatable="yes">Remove From History</property>
                 <property name="icon-name">user-trash-symbolic</property>
-                <property name="action-name">song-page.remove-song</property>
               </object>
             </child>
             <child type="end">
@@ -118,7 +107,6 @@
                                 <property name="halign">start</property>
                                 <property name="width-request">40</property>
                                 <property name="height-request">40</property>
-                                <property name="action-name">song-page.toggle-playback</property>
                                 <style>
                                   <class name="circular"/>
                                 </style>
@@ -182,6 +170,6 @@
           </object>
         </property>
       </object>
-    </child>
+    </property>
   </template>
 </interface>

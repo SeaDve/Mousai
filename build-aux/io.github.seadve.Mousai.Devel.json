@@ -1,7 +1,7 @@
 {
     "id": "io.github.seadve.Mousai.Devel",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "master",
+    "runtime-version": "44",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable",
@@ -29,6 +29,123 @@
         }
     },
     "modules": [
+        {
+            "name": "libadwaita",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dvapi=false",
+                "-Dtests=false",
+                "-Dexamples=false"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
+                    "branch": "main"
+                }
+            ],
+            "modules": [
+                {
+                    "name": "appstream",
+                    "buildsystem": "meson",
+                    "config-opts": [
+                        "-Dstemming=false",
+                        "-Dgir=false",
+                        "-Ddocs=false"
+                    ],
+                    "cleanup": [
+                        "/bin/*",
+                        "/etc/*",
+                        "/share/metainfo"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/ximion/appstream.git",
+                            "tag": "v0.16.2"
+                        }
+                    ],
+                    "modules": [
+                        {
+                            "name": "libyaml",
+                            "sources": [
+                                {
+                                    "type": "git",
+                                    "url": "https://github.com/yaml/libyaml.git",
+                                    "tag": "0.2.5"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "libxmlb",
+                            "buildsystem": "meson",
+                            "config-opts": [
+                                "-Dintrospection=false",
+                                "-Dgtkdoc=false",
+                                "-Dstemmer=false",
+                                "-Dcli=false",
+                                "-Dtests=false"
+                            ],
+                            "sources": [
+                                {
+                                    "type": "git",
+                                    "url": "https://github.com/hughsie/libxmlb.git",
+                                    "tag": "0.3.11"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "libsass",
+                    "buildsystem": "meson",
+                    "cleanup": [
+                        "*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/lazka/libsass.git",
+                            "branch": "meson"
+                        }
+                    ]
+                },
+                {
+                    "name": "sassc",
+                    "buildsystem": "meson",
+                    "cleanup": [
+                        "*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/lazka/sassc.git",
+                            "branch": "meson"
+                        }
+                    ]
+                },
+                {
+                    "name": "gtk",
+                    "buildsystem": "meson",
+                    "config-opts": [
+                        "-Ddemos=false",
+                        "-Dbuild-testsuite=false",
+                        "-Dbuild-examples=false",
+                        "-Dbuild-tests=false"
+                    ],
+                    "cleanup": [
+                        "/bin/*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://gitlab.gnome.org/GNOME/gtk.git",
+                            "tag": "4.11.3"
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "name": "mousai",
             "buildsystem": "meson",

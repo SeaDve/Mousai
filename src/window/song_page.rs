@@ -1,9 +1,9 @@
-use gettextrs::gettext;
-use gtk::{
-    glib::{self, clone, closure_local},
+use adw::{
     prelude::*,
-    subclass::prelude::*,
+    subclass::{navigation_page::NavigationPageImpl, prelude::*},
 };
+use gettextrs::gettext;
+use gtk::glib::{self, clone, closure_local};
 
 use std::cell::{Cell, RefCell};
 
@@ -15,7 +15,7 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
-    model::Song,
+    model::{Song, SongList},
     player::{Player, PlayerState},
     utils,
 };
@@ -29,7 +29,7 @@ mod imp {
     use once_cell::sync::Lazy;
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
-    #[properties(wrapper_type  = super::SongPage)]
+    #[properties(wrapper_type = super::SongPage)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
     pub struct SongPage {
         #[property(get, set = Self::set_song, explicit_notify)]
@@ -38,7 +38,7 @@ mod imp {
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         #[template_child]
-        pub(super) toolbar_view: TemplateChild<adw::ToolbarView>, // Unused
+        pub(super) remove_button: TemplateChild<gtk::Button>,
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
@@ -57,6 +57,7 @@ mod imp {
         pub(super) lyrics_label: TemplateChild<gtk::Label>,
 
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
+        pub(super) song_list: RefCell<Option<(WeakRef<SongList>, glib::SignalHandlerId)>>, // SongList and SongList's items changed handler id
         pub(super) song_binding_group: glib::BindingGroup,
     }
 
@@ -64,20 +65,10 @@ mod imp {
     impl ObjectSubclass for SongPage {
         const NAME: &'static str = "MsaiSongPage";
         type Type = super::SongPage;
-        type ParentType = gtk::Widget;
+        type ParentType = adw::NavigationPage;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
-
-            klass.install_action("song-page.toggle-playback", None, |obj, _, _| {
-                obj.toggle_playback();
-            });
-
-            klass.install_action("song-page.remove-song", None, |obj, _, _| {
-                if let Some(ref song) = obj.song() {
-                    obj.emit_by_name::<()>("song-removed", &[song]);
-                }
-            });
 
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 let song = obj.song().expect("song should be set");
@@ -98,7 +89,7 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("song-removed")
+                vec![Signal::builder("song-remove-request")
                     .param_types([Song::static_type()])
                     .build()]
             });
@@ -110,6 +101,17 @@ mod imp {
             self.parent_constructed();
 
             let obj = self.obj();
+
+            self.remove_button
+                .connect_clicked(clone!(@weak obj => move |_| {
+                    if let Some(ref song) = obj.song() {
+                        obj.emit_by_name::<()>("song-remove-request", &[song]);
+                    }
+                }));
+            self.playback_button
+                .connect_clicked(clone!(@weak obj => move |_| {
+                    obj.toggle_playback();
+                }));
 
             self.external_links_box.connect_child_activated(|_, child| {
                 let external_link_tile = child.clone().downcast::<ExternalLinkTile>().unwrap();
@@ -127,17 +129,21 @@ mod imp {
                 })
                 .build();
 
+            obj.update_information();
+            obj.update_page_title();
             obj.update_album_cover_size();
         }
 
         fn dispose(&self) {
-            self.obj().unbind_player();
+            let obj = self.obj();
 
-            self.dispose_template();
+            obj.unbind_player();
+            obj.unbind_song_list();
         }
     }
 
     impl WidgetImpl for SongPage {}
+    impl NavigationPageImpl for SongPage {}
 
     impl SongPage {
         fn set_song(&self, song: Option<Song>) {
@@ -161,7 +167,9 @@ mod imp {
 
             self.song.replace(song);
             obj.update_playback_ui();
+            obj.update_remove_button_sensitivity();
             obj.update_information();
+            obj.update_page_title();
 
             obj.notify_song();
         }
@@ -182,7 +190,7 @@ mod imp {
 
 glib::wrapper! {
     pub struct SongPage(ObjectSubclass<imp::SongPage>)
-        @extends gtk::Widget;
+        @extends gtk::Widget, adw::NavigationPage;
 }
 
 impl SongPage {
@@ -190,12 +198,12 @@ impl SongPage {
         glib::Object::new()
     }
 
-    pub fn connect_song_removed<F>(&self, f: F) -> glib::SignalHandlerId
+    pub fn connect_song_remove_request<F>(&self, f: F) -> glib::SignalHandlerId
     where
         F: Fn(&Self, &Song) + 'static,
     {
         self.connect_closure(
-            "song-removed",
+            "song-remove-request",
             true,
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
@@ -203,7 +211,7 @@ impl SongPage {
         )
     }
 
-    /// Must only be called when no player is bound.
+    /// Must only be called when no player was already bound.
     pub fn bind_player(&self, player: &Player) {
         let handler_id = player.connect_state_notify(clone!(@weak self as obj => move |_| {
             obj.update_playback_ui();
@@ -224,24 +232,49 @@ impl SongPage {
         }
     }
 
-    /// Returns `None` when player is dropped or not bound.
-    fn player(&self) -> Option<Player> {
+    /// Must only be called when no song list was already bound.
+    pub fn bind_song_list(&self, song_list: &SongList) {
+        let handler_id = song_list.connect_items_changed(
+            clone!(@weak self as obj => move |_, _index, _removed, _added| {
+                obj.update_remove_button_sensitivity();
+            }),
+        );
+
+        self.imp()
+            .song_list
+            .replace(Some((song_list.downgrade(), handler_id)));
+
+        self.update_remove_button_sensitivity();
+    }
+
+    pub fn unbind_song_list(&self) {
+        if let Some((song_list, handler_id)) = self.imp().song_list.take() {
+            if let Some(song_list) = song_list.upgrade() {
+                song_list.disconnect(handler_id);
+            }
+        }
+    }
+
+    fn player(&self) -> Player {
         self.imp()
             .player
             .borrow()
             .as_ref()
-            .and_then(|(player, _)| player.upgrade())
+            .map(|(player, _)| player)
+            .expect("player must be bound")
+            .upgrade()
+            .expect("player must not be dropped")
     }
 
     fn toggle_playback(&self) {
-        if let Some(ref player) = self.player() {
-            if let Some(song) = self.song() {
-                if player.state() == PlayerState::Playing && player.is_active_song(song.id_ref()) {
-                    player.pause();
-                } else {
-                    player.set_song(Some(song));
-                    player.play();
-                }
+        let player = self.player();
+
+        if let Some(song) = self.song() {
+            if player.state() == PlayerState::Playing && player.is_active_song(song.id_ref()) {
+                player.pause();
+            } else {
+                player.set_song(Some(song));
+                player.play();
             }
         }
     }
@@ -257,7 +290,7 @@ impl SongPage {
         );
 
         if let Some(ref song) = song {
-            let player = self.player().expect("player should be bound");
+            let player = self.player();
             let is_active_song = player.is_active_song(song.id_ref());
             let player_state = player.state();
 
@@ -269,6 +302,25 @@ impl SongPage {
                 imp.playback_button.set_mode(PlaybackButtonMode::Play);
             }
         }
+    }
+
+    fn update_remove_button_sensitivity(&self) {
+        let imp = self.imp();
+
+        let song_list = self
+            .imp()
+            .song_list
+            .borrow()
+            .as_ref()
+            .map(|(song_list, _)| song_list)
+            .expect("song list must be bound")
+            .upgrade()
+            .expect("song list must not be dropped");
+
+        imp.remove_button.set_sensitive(
+            self.song()
+                .map_or(false, |song| song_list.contains(song.id_ref())),
+        );
     }
 
     fn update_information(&self) {
@@ -305,6 +357,16 @@ impl SongPage {
             .set_value(song.map(|song| song.album()).unwrap_or_default());
         imp.release_date_row.set_value(
             song.and_then(|song| song.release_date())
+                .unwrap_or_default(),
+        );
+    }
+
+    fn update_page_title(&self) {
+        self.set_title(
+            &self
+                .song()
+                .as_ref()
+                .map(|song| song.title())
                 .unwrap_or_default(),
         );
     }

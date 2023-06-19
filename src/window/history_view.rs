@@ -22,7 +22,12 @@ use crate::{
     utils,
 };
 
-const SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY: &str = "mousai-song-page-song-removed-handler-id";
+// FIXME
+// * Missing global navigation shortcuts
+// * Missing title on main navigation page
+
+const SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY: &str =
+    "mousai-song-page-song-remove-request-handler-id";
 const SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str = "mousai-song-page-adaptive-mode-binding";
 
 const RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY: &str =
@@ -49,9 +54,9 @@ mod imp {
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         #[template_child]
-        pub(super) leaflet: TemplateChild<adw::Leaflet>,
+        pub(super) navigation_view: TemplateChild<adw::NavigationView>,
         #[template_child]
-        pub(super) history_child: TemplateChild<adw::ToolbarView>,
+        pub(super) main_navigation_page: TemplateChild<adw::NavigationPage>,
         #[template_child]
         pub(super) header_bar_stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -91,7 +96,7 @@ mod imp {
         pub(super) songs_purgatory: RefCell<Vec<Song>>,
         pub(super) undo_remove_song_toast: RefCell<Option<adw::Toast>>,
 
-        pub(super) leaflet_pages_purgatory: RefCell<Vec<adw::LeafletPage>>,
+        pub(super) navigation_forward_stack: RefCell<Vec<adw::NavigationPage>>,
     }
 
     #[glib::object_subclass]
@@ -149,7 +154,7 @@ mod imp {
                     .collect::<Vec<_>>();
 
                 if let Err(err) = obj.remove_songs(&song_ids) {
-                    tracing::error!("Failed to remove songs: {}", err);
+                    tracing::error!("Failed to remove songs: {:?}", err);
                     utils::app_instance()
                         .window()
                         .add_message_toast(&gettext("Failed to remove selected songs"));
@@ -173,29 +178,46 @@ mod imp {
 
             let obj = self.obj();
 
-            self.leaflet.connect_child_transition_running_notify(
-                clone!(@weak obj => move |leaflet| {
-                    if !leaflet.is_child_transition_running() {
-                        obj.purge_purgatory_leaflet_pages();
-                    }
-                }),
-            );
-
-            self.leaflet
-                .connect_visible_child_notify(clone!(@weak obj => move |leaflet| {
+            self.navigation_view
+                .connect_pushed(clone!(@weak obj => move |view| {
                     let imp = obj.imp();
 
-                    debug_assert!(
-                        !imp.leaflet_pages_purgatory.borrow().contains(
-                            &imp.leaflet.page(
-                                &leaflet
-                                    .visible_child()
-                                    .expect("leaflet should always have a visible child")
-                            )
-                        ),
-                        "leaflet's visible child must not be in the purgatory"
-                    );
+                    let visible_page = view
+                        .visible_page()
+                        .expect("visible page must exist on pushed");
+                    let forward_page = imp.navigation_forward_stack.borrow().last().cloned();
+
+                    if let Some(forward_page) = forward_page {
+                        if visible_page == forward_page {
+                            // The page is already on the navigation stack, so remove
+                            // it from the forward stack
+                            let removed = imp.navigation_forward_stack.borrow_mut().pop();
+                            debug_assert_eq!(removed.as_ref(), Some(&forward_page));
+                        } else {
+                            for page in imp.navigation_forward_stack.take() {
+                                unbind_page(&page);
+                            }
+                        }
+                    }
                 }));
+            self.navigation_view
+                .connect_popped(clone!(@weak obj => move |_, page| {
+                    obj.imp()
+                        .navigation_forward_stack
+                        .borrow_mut()
+                        .push(page.clone());
+                }));
+            self.navigation_view.connect_get_next_page(
+                clone!(@weak obj => @default-panic, move |_| {
+                    let next_page = obj.imp()
+                        .navigation_forward_stack
+                        .borrow()
+                        .last()
+                        .cloned();
+
+                    next_page
+                }),
+            );
 
             self.empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
@@ -245,65 +267,55 @@ impl HistoryView {
         self.imp().search_bar.get()
     }
 
-    pub fn is_on_leaflet_main_page(&self) -> bool {
+    pub fn is_on_main_navigation_page(&self) -> bool {
         let imp = self.imp();
-        imp.leaflet.visible_child().as_ref() == Some(imp.history_child.upcast_ref())
+        imp.navigation_view.visible_page().as_ref() == Some(imp.main_navigation_page.upcast_ref())
     }
 
-    /// Inserts a recognized page for the given songs after the current page and
-    /// set it as the visible child.
-    pub fn insert_recognized_page(&self, songs: &[Song]) {
+    /// Pushes a `RecognizedPage` for the given songs to the navigation stack.
+    pub fn push_recognized_page(&self, songs: &[Song]) {
         let imp = self.imp();
 
         debug_assert!(
-            !imp.leaflet
-                .pages()
-                .iter::<adw::LeafletPage>()
+            !imp.navigation_view
+                .navigation_stack()
+                .iter::<adw::NavigationPage>()
                 .map(|page| page.unwrap())
-                .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
                 .any(|page| page.is::<RecognizedPage>()),
-            "there must not be already a `RecognizedPage` on the leaflet"
+            "there must not be already a `RecognizedPage` on the navigation stack"
         );
 
         let recognized_page = RecognizedPage::new();
         recognized_page.bind_player(&self.player());
         recognized_page.bind_songs(songs);
 
-        let song_activated_handler_id =
-            recognized_page.connect_song_activated(clone!(@weak self as obj => move |_, song| {
-                obj.insert_song_page(song);
-            }));
-        let adaptive_mode_binding = self
-            .bind_property("adaptive-mode", &recognized_page, "adaptive-mode")
-            .sync_create()
-            .build();
-
         unsafe {
             recognized_page.set_data(
                 RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY,
-                song_activated_handler_id,
+                recognized_page.connect_song_activated(
+                    clone!(@weak self as obj => move |_, song| {
+                        obj.push_song_page(song);
+                    }),
+                ),
             );
             recognized_page.set_data(
                 RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY,
-                adaptive_mode_binding,
+                self.bind_property("adaptive-mode", &recognized_page, "adaptive-mode")
+                    .sync_create()
+                    .build(),
             );
         }
 
-        self.leaflet_set_as_tail_and_navigate_to(&recognized_page);
+        imp.navigation_view.push(&recognized_page);
     }
 
-    /// Inserts a song page for the given song after the current visible child and
-    /// set it as the visible child.
-    pub fn insert_song_page(&self, song: &Song) {
+    /// Pushes a `SongPage` for the given song to the navigation stack.
+    pub fn push_song_page(&self, song: &Song) {
         let imp = self.imp();
 
         // Return if the last widget is a `SongPage` and its song is the same as the given song
-        if let Some(page) = imp.leaflet.visible_child().filter(|child| {
-            !imp.leaflet_pages_purgatory
-                .borrow()
-                .contains(&imp.leaflet.page(child))
-        }) {
-            if let Some(song_page) = page.downcast_ref::<SongPage>() {
+        if let Some(visible_page) = imp.navigation_view.visible_page() {
+            if let Some(song_page) = visible_page.downcast_ref::<SongPage>() {
                 if Some(song.id_ref()) == song_page.song().map(|song| song.id()).as_ref() {
                     return;
                 }
@@ -312,49 +324,41 @@ impl HistoryView {
 
         let song_page = SongPage::new();
         song_page.bind_player(&self.player());
+        song_page.bind_song_list(&self.song_list());
         song_page.set_song(song);
-
-        let song_removed_handler_id =
-            song_page.connect_song_removed(clone!(@weak self as obj => move |_, song| {
-                if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
-                    tracing::error!("Failed to remove song: {}", err);
-                    utils::app_instance()
-                        .window()
-                        .add_message_toast(&gettext("Failed to remove song"));
-                    return;
-                }
-
-                obj.show_undo_remove_song_toast();
-            }));
-        let adaptive_mode_binding = self
-            .bind_property("adaptive-mode", &song_page, "adaptive-mode")
-            .sync_create()
-            .build();
 
         unsafe {
             song_page.set_data(
-                SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY,
-                song_removed_handler_id,
+                SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY,
+                song_page.connect_song_remove_request(clone!(@weak self as obj => move |_, song| {
+                    if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
+                        tracing::error!("Failed to remove song: {:?}", err);
+                        utils::app_instance()
+                            .window()
+                            .add_message_toast(&gettext("Failed to remove song"));
+                        return;
+                    }
+
+                    obj.show_undo_remove_song_toast();
+                })),
             );
-            song_page.set_data(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY, adaptive_mode_binding);
+            song_page.set_data(
+                SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY,
+                self.bind_property("adaptive-mode", &song_page, "adaptive-mode")
+                    .sync_create()
+                    .build(),
+            );
         }
 
-        self.leaflet_set_as_tail_and_navigate_to(&song_page);
+        imp.navigation_view.push(&song_page);
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_heard(false);
     }
 
-    /// Returns true only if the visible child was changed.
-    pub fn navigate_back(&self) -> bool {
-        self.imp().leaflet.navigate(adw::NavigationDirection::Back)
-    }
-
-    /// Returns true only if the visible child was changed.
-    pub fn navigate_forward(&self) -> bool {
-        self.imp()
-            .leaflet
-            .navigate(adw::NavigationDirection::Forward)
+    /// Returns true if a page has been popped
+    pub fn pop_page(&self) -> bool {
+        self.imp().navigation_view.pop()
     }
 
     /// Must only be called once
@@ -417,7 +421,7 @@ impl HistoryView {
                 match selection_model.item(index) {
                     Some(ref item) => {
                         let song = item.downcast_ref::<Song>().unwrap();
-                        obj.insert_song_page(song);
+                        obj.push_song_page(song);
                     }
                     None => unreachable!("selection model must have item at index `{}`", index)
                 }
@@ -442,7 +446,7 @@ impl HistoryView {
         imp.recognizer_status.connect_show_results_requested(
             clone!(@weak self as obj, @weak recognizer => move |_| {
                 if let Err(err) = obj.show_recognizer_results(&recognizer) {
-                    tracing::error!("Failed to show recognizer results: {}", err);
+                    tracing::error!("Failed to show recognizer results: {:?}", err);
                     utils::app_instance()
                         .window()
                         .add_message_toast(&gettext("Failed to show recognizer results"));
@@ -468,86 +472,21 @@ impl HistoryView {
             .expect("player must not be dropped")
     }
 
-    /// This does the following things:
-    /// 1. Inserts child after the current visible child, or at the end if there is none.
-    /// 2. Add all pages after it to the purgatory.
-    /// 3. Set it as the visible child.
-    fn leaflet_set_as_tail_and_navigate_to(&self, child: &impl IsA<gtk::Widget>) {
-        let imp = self.imp();
-
-        let created_page = if let Some(visible_child) = imp.leaflet.visible_child() {
-            imp.leaflet.insert_child_after(child, Some(&visible_child))
-        } else {
-            imp.leaflet.append(child)
-        };
-
-        imp.leaflet
-            .pages()
-            .iter::<adw::LeafletPage>()
-            .map(|page| page.unwrap())
-            .filter(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
-            .skip_while(|page| page != &created_page)
-            .skip(1)
-            .for_each(|page| {
-                imp.leaflet_pages_purgatory.borrow_mut().push(page);
-            });
-
-        imp.leaflet.set_visible_child(child);
-    }
-
-    /// Removes all pages on the purgatory from the leaflet
-    fn purge_purgatory_leaflet_pages(&self) {
-        let imp = self.imp();
-
-        for page in imp.leaflet_pages_purgatory.take() {
-            let child = page.child();
-
-            if let Some(song_page) = child.downcast_ref::<SongPage>() {
-                unsafe {
-                    let handler_id = song_page
-                        .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SONG_REMOVED_HANDLER_ID_KEY)
-                        .unwrap();
-                    song_page.disconnect(handler_id);
-
-                    let binding = song_page
-                        .steal_data::<glib::Binding>(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY)
-                        .unwrap();
-                    binding.unbind();
-                }
-                song_page.unbind_player();
-            } else if let Some(recognized_page) = child.downcast_ref::<RecognizedPage>() {
-                unsafe {
-                    let song_activated_handler_id = recognized_page
-                        .steal_data::<glib::SignalHandlerId>(
-                            RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY,
-                        )
-                        .unwrap();
-                    recognized_page.disconnect(song_activated_handler_id);
-
-                    let adaptive_mode_binding = recognized_page
-                        .steal_data::<glib::Binding>(RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY)
-                        .unwrap();
-                    adaptive_mode_binding.unbind();
-                }
-                recognized_page.unbind_player();
-            } else {
-                unreachable!("tried to purge other leaflet page type `{}`", child.type_());
-            }
-
-            imp.leaflet.remove(&child);
-        }
+    fn song_list(&self) -> SongList {
+        self.imp()
+            .song_list
+            .get()
+            .expect("song list must be bound")
+            .upgrade()
+            .expect("song list must not be dropped")
     }
 
     /// Adds songs with ids given to purgatory, and add `SongPage`s that contain them to the purgatory.
     fn remove_songs(&self, song_ids: &[&Uid]) -> Result<()> {
         let imp = self.imp();
 
-        let song_list = imp
-            .song_list
-            .get()
-            .and_then(|song_list| song_list.upgrade())
-            .expect("song list should be bound");
-        let mut removed_songs = song_list
+        let mut removed_songs = self
+            .song_list()
             .remove_many(song_ids)
             .context("Failed to remove songs from history")?;
         debug_assert_eq!(
@@ -556,70 +495,6 @@ impl HistoryView {
             "all corresponding songs of the ids must be removed"
         );
         imp.songs_purgatory.borrow_mut().append(&mut removed_songs);
-
-        let leaflet_pages = imp.leaflet.pages();
-
-        // Since the song is removed from history, the `SongPage`s that
-        // contain it is dangling, so remove them.
-        leaflet_pages
-            .iter::<adw::LeafletPage>()
-            .map(|page| page.unwrap())
-            .filter(|page| {
-                page.child()
-                    .downcast_ref::<SongPage>()
-                    .map_or(false, |song_page| {
-                        song_page.song().map_or(false, |song_page_song| {
-                            song_ids.contains(&song_page_song.id_ref())
-                        })
-                    })
-                    && !imp.leaflet_pages_purgatory.borrow().contains(page)
-            })
-            .for_each(|page| {
-                imp.leaflet_pages_purgatory.borrow_mut().push(page);
-            });
-
-        // TODO Delete the songs from active RecognizedPage too. If every song
-        // in a RecognizedPage is removed, the RecognizedPage should be removed from the leaflet too.
-
-        let prev_visible_child_index = imp.leaflet.visible_child().and_then(|child| {
-            leaflet_pages
-                .iter::<adw::LeafletPage>()
-                .position(|page| page.unwrap().child() == child)
-        });
-
-        // Ensure that the visible child is not a dangling `SongPage`
-        // by making the previous non-dangling page the visible child.
-        imp.leaflet.set_visible_child(
-            &leaflet_pages
-                .iter::<adw::LeafletPage>()
-                .map(|page| page.unwrap())
-                .rev()
-                .skip(
-                    // reverse the index
-                    prev_visible_child_index
-                        .map_or(0, |i| leaflet_pages.n_items() as usize - 1 - i),
-                )
-                .find(|page| !imp.leaflet_pages_purgatory.borrow().contains(page))
-                .map_or_else(
-                    || imp.history_child.get().upcast::<gtk::Widget>(),
-                    |page| page.child(),
-                ),
-        );
-
-        Ok(())
-    }
-
-    fn undo_remove_song(&self) -> Result<()> {
-        let imp = self.imp();
-
-        let song_list = imp
-            .song_list
-            .get()
-            .and_then(|song_list| song_list.upgrade())
-            .expect("song list should be bound");
-        song_list
-            .insert_many(imp.songs_purgatory.take())
-            .context("Failed to restore removed songs")?;
 
         Ok(())
     }
@@ -687,8 +562,11 @@ impl HistoryView {
                 .build();
 
             toast.connect_button_clicked(clone!(@weak self as obj => move |_| {
-                if let Err(err) = obj.undo_remove_song() {
-                    tracing::error!("Failed to undo remove song: {}", err);
+                if let Err(err) = obj
+                    .song_list()
+                    .insert_many(obj.imp().songs_purgatory.take())
+                {
+                    tracing::error!("Failed to undo remove song: {:?}", err);
                     utils::app_instance()
                         .window()
                         .add_message_toast(&gettext("Failed to undo"));
@@ -723,12 +601,7 @@ impl HistoryView {
     }
 
     fn show_recognizer_results(&self, recognizer: &Recognizer) -> Result<()> {
-        let song_list = self
-            .imp()
-            .song_list
-            .get()
-            .and_then(|song_list| song_list.upgrade())
-            .expect("song list should be bound");
+        let song_list = self.song_list();
 
         let songs = recognizer
             .take_recognized_saved_recordings()
@@ -771,7 +644,7 @@ impl HistoryView {
             .insert_many(songs.clone())
             .context("Failed to insert songs to history")?;
 
-        self.insert_recognized_page(&songs);
+        self.push_recognized_page(&songs);
         self.scroll_to_top();
 
         Ok(())
@@ -953,6 +826,42 @@ impl HistoryView {
     }
 }
 
+fn unbind_page(page: &adw::NavigationPage) {
+    if let Some(song_page) = page.downcast_ref::<SongPage>() {
+        unsafe {
+            let handler_id = song_page
+                .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY)
+                .unwrap();
+            song_page.disconnect(handler_id);
+
+            let binding = song_page
+                .steal_data::<glib::Binding>(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY)
+                .unwrap();
+            binding.unbind();
+        }
+        song_page.unbind_player();
+        song_page.unbind_song_list();
+    } else if let Some(recognized_page) = page.downcast_ref::<RecognizedPage>() {
+        unsafe {
+            let song_activated_handler_id = recognized_page
+                .steal_data::<glib::SignalHandlerId>(RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY)
+                .unwrap();
+            recognized_page.disconnect(song_activated_handler_id);
+
+            let adaptive_mode_binding = recognized_page
+                .steal_data::<glib::Binding>(RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY)
+                .unwrap();
+            adaptive_mode_binding.unbind();
+        }
+        recognized_page.unbind_player();
+    } else {
+        unreachable!(
+            "tried to unbind unknown navigation page type `{}`",
+            page.type_()
+        );
+    }
+}
+
 impl Default for HistoryView {
     fn default() -> Self {
         Self::new()
@@ -982,41 +891,63 @@ mod test {
         Song::builder(&Uid::for_test(id), id, id, id).build()
     }
 
-    fn trigger_purge_purgatory_leaflet_pages(view: &HistoryView) {
-        view.imp().leaflet.notify("child-transition-running");
-    }
-
     #[track_caller]
-    fn assert_leaflet_n_pages(view: &HistoryView, expected_n_pages: u32) {
-        assert_eq!(view.imp().leaflet.pages().n_items(), expected_n_pages);
-    }
-
-    #[track_caller]
-    fn assert_leaflet_visible_child_song_id(view: &HistoryView, expected_id: &str) {
+    fn assert_navigation_stack_n_pages(view: &HistoryView, expected_n_pages: u32) {
         assert_eq!(
-            view.imp()
-                .leaflet
-                .visible_child()
-                .unwrap()
-                .downcast_ref::<SongPage>()
-                .unwrap()
-                .song()
-                .unwrap()
-                .id_ref(),
-            &Uid::for_test(expected_id)
+            view.imp().navigation_view.navigation_stack().n_items(),
+            expected_n_pages
         );
     }
 
     #[track_caller]
-    fn assert_leaflet_visible_child_type<T: glib::StaticType>(view: &HistoryView) {
+    fn assert_forward_navigation_stack_n_pages(view: &HistoryView, expected_n_pages: usize) {
         assert_eq!(
-            view.imp().leaflet.visible_child().unwrap().type_(),
+            view.imp().navigation_forward_stack.borrow().len(),
+            expected_n_pages
+        );
+    }
+
+    #[track_caller]
+    fn assert_navigation_visible_page_type<T: IsA<adw::NavigationPage>>(view: &HistoryView) {
+        assert_eq!(
+            view.imp().navigation_view.visible_page().unwrap().type_(),
             T::static_type()
         );
     }
 
+    #[track_caller]
+    fn assert_navigation_visible_page_is_song_page_with_id(
+        view: &HistoryView,
+        expected_song_page_song_id: &str,
+    ) {
+        assert_eq!(
+            view.imp()
+                .navigation_view
+                .visible_page()
+                .expect("visible page must exist")
+                .downcast_ref::<SongPage>()
+                .expect("visible page must be a `SongPage`")
+                .song()
+                .expect("song page must have a song")
+                .id_ref(),
+            &Uid::for_test(expected_song_page_song_id)
+        );
+    }
+
+    // Returns true if a page has been pushed
+    fn simulate_navigate_forward(view: &HistoryView) -> bool {
+        let last = view.imp().navigation_forward_stack.borrow().last().cloned();
+
+        if let Some(last) = last {
+            view.imp().navigation_view.push(&last);
+            true
+        } else {
+            false
+        }
+    }
+
     #[gtk::test]
-    fn page_navigation() {
+    fn navigation_simple() {
         init_gresources();
         gst::init().unwrap(); // For Player
 
@@ -1031,45 +962,94 @@ mod test {
         view.bind_player(&player);
         view.bind_song_list(&song_list);
 
-        assert_leaflet_n_pages(&view, 1);
-        assert_leaflet_visible_child_type::<adw::ToolbarView>(&view);
-        assert!(view.is_on_leaflet_main_page());
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+        assert!(view.is_on_main_navigation_page());
 
-        view.insert_song_page(&song);
-        assert_leaflet_n_pages(&view, 2);
-        assert_leaflet_visible_child_type::<SongPage>(&view);
-        assert!(!view.is_on_leaflet_main_page());
+        view.push_song_page(&song);
+        assert_navigation_stack_n_pages(&view, 2);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_type::<SongPage>(&view);
+        assert!(!view.is_on_main_navigation_page());
 
-        view.insert_recognized_page(&[]);
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<RecognizedPage>(&view);
-        assert!(!view.is_on_leaflet_main_page());
+        view.push_recognized_page(&[]);
+        assert_navigation_stack_n_pages(&view, 3);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_type::<RecognizedPage>(&view);
+        assert!(!view.is_on_main_navigation_page());
 
         // Already on last page, navigating forward should not do anything
-        assert!(!view.navigate_forward());
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<RecognizedPage>(&view);
-        assert!(!view.is_on_leaflet_main_page());
+        assert!(!simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 3);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_type::<RecognizedPage>(&view);
+        assert!(!view.is_on_main_navigation_page());
 
-        assert!(view.navigate_back());
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<SongPage>(&view);
-        assert!(!view.is_on_leaflet_main_page());
+        assert!(view.pop_page());
+        assert_navigation_stack_n_pages(&view, 2);
+        assert_forward_navigation_stack_n_pages(&view, 1);
+        assert_navigation_visible_page_type::<SongPage>(&view);
+        assert!(!view.is_on_main_navigation_page());
 
-        assert!(view.navigate_back());
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<adw::ToolbarView>(&view);
-        assert!(view.is_on_leaflet_main_page());
+        assert!(view.pop_page());
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 2);
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+        assert!(view.is_on_main_navigation_page());
 
-        // Already on first page, navigating backward should not do anything
-        assert!(!view.navigate_back());
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<adw::ToolbarView>(&view);
-        assert!(view.is_on_leaflet_main_page());
+        // Already on main navigation page, popping page should not do anything
+        assert!(!view.pop_page());
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 2);
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+        assert!(view.is_on_main_navigation_page());
     }
 
     #[gtk::test]
-    fn page_insertion() {
+    fn navigation_pop_and_push() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let (env, _tempdir) = database::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        let song_3 = new_test_song("3");
+        song_list
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+
+        view.push_song_page(&song_1);
+        view.push_song_page(&song_2);
+        view.push_recognized_page(&[]);
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+
+        assert!(view.pop_page());
+        assert!(view.pop_page());
+        assert_navigation_stack_n_pages(&view, 2);
+        assert_forward_navigation_stack_n_pages(&view, 2);
+
+        view.push_song_page(&song_3);
+        assert_navigation_stack_n_pages(&view, 3);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+
+        assert!(!simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 3);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+    }
+
+    #[gtk::test]
+    fn navigation_pop_and_forward() {
         init_gresources();
         gst::init().unwrap(); // For Player
 
@@ -1086,36 +1066,183 @@ mod test {
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
-        assert_leaflet_n_pages(&view, 1);
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+
+        view.push_song_page(&song_1);
+        view.push_recognized_page(&[]);
+        view.push_song_page(&song_2);
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert!(view.pop_page());
+        assert_navigation_stack_n_pages(&view, 3);
+        assert_forward_navigation_stack_n_pages(&view, 1);
+        assert_navigation_visible_page_type::<RecognizedPage>(&view);
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert!(!simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert!(view.pop_page());
+        assert!(view.pop_page());
+        assert!(view.pop_page());
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 3);
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+
+        assert!(!view.pop_page());
+        assert_navigation_stack_n_pages(&view, 1);
+        assert_forward_navigation_stack_n_pages(&view, 3);
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 2);
+        assert_forward_navigation_stack_n_pages(&view, 2);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "1");
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 3);
+        assert_forward_navigation_stack_n_pages(&view, 1);
+        assert_navigation_visible_page_type::<RecognizedPage>(&view);
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert!(!simulate_navigate_forward(&view));
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+    }
+
+    #[gtk::test]
+    fn navigation_complex() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let (env, _tempdir) = database::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        let song_3 = new_test_song("3");
+        song_list
+            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
+            .unwrap();
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+
+        view.push_song_page(&song_1);
+        view.push_recognized_page(&[]);
+        view.push_song_page(&song_2);
+
+        assert!(!simulate_navigate_forward(&view));
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert!(view.pop_page());
+        assert_navigation_visible_page_type::<RecognizedPage>(&view);
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert!(view.pop_page());
+        assert_navigation_visible_page_type::<RecognizedPage>(&view);
+
+        assert!(view.pop_page());
+        assert_navigation_visible_page_is_song_page_with_id(&view, "1");
+
+        view.push_song_page(&song_3);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "3");
+
+        assert!(!simulate_navigate_forward(&view));
+        assert_navigation_visible_page_is_song_page_with_id(&view, "3");
+
+        assert!(view.pop_page());
+        assert_navigation_visible_page_is_song_page_with_id(&view, "1");
+
+        assert!(view.pop_page());
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+
+        assert!(!view.pop_page());
+        assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_visible_page_is_song_page_with_id(&view, "1");
+
+        assert!(simulate_navigate_forward(&view));
+        assert_navigation_visible_page_is_song_page_with_id(&view, "3");
+
+        view.push_song_page(&song_2);
+        assert_navigation_visible_page_is_song_page_with_id(&view, "2");
+
+        assert_navigation_stack_n_pages(&view, 4);
+        assert_forward_navigation_stack_n_pages(&view, 0);
+    }
+
+    #[gtk::test]
+    fn navigation_push_song_page_same_song_id() {
+        init_gresources();
+        gst::init().unwrap(); // For Player
+
+        let player = Player::new();
+        let (env, _tempdir) = database::new_test_env();
+        let song_list = SongList::load_from_env(env).unwrap();
+
+        let song_1 = new_test_song("1");
+        let song_2 = new_test_song("2");
+        song_list
+            .insert_many(vec![song_1.clone(), song_2.clone()])
+            .unwrap();
+
+        let view = HistoryView::new();
+        view.bind_player(&player);
+        view.bind_song_list(&song_list);
+        assert_navigation_stack_n_pages(&view, 1);
 
         // Added unique song, n pages should increase by 1
-        view.insert_song_page(&song_1);
-        assert_leaflet_n_pages(&view, 2);
+        view.push_song_page(&song_1);
+        assert_navigation_stack_n_pages(&view, 2);
 
         // Added unique song, n pages should increase by 1
-        view.insert_song_page(&song_2);
-        assert_leaflet_n_pages(&view, 3);
+        view.push_song_page(&song_2);
+        assert_navigation_stack_n_pages(&view, 3);
 
         // Added same song as last, n pages should not change
-        view.insert_song_page(&song_2);
-        assert_leaflet_n_pages(&view, 3);
+        view.push_song_page(&song_2);
+        assert_navigation_stack_n_pages(&view, 3);
 
         // Added recognized page, n pages should increase by 1
-        view.insert_recognized_page(&[]);
-        assert_leaflet_n_pages(&view, 4);
+        view.push_recognized_page(&[]);
+        assert_navigation_stack_n_pages(&view, 4);
 
         // Added same song as last, but there is a recognized page in between so
         // n pages should increase by 1
-        view.insert_song_page(&song_1);
-        assert_leaflet_n_pages(&view, 5);
+        view.push_song_page(&song_1);
+        assert_navigation_stack_n_pages(&view, 5);
 
         // Added an already added song, but non adjacent, n pages should increase by 1
-        view.insert_song_page(&song_2);
-        assert_leaflet_n_pages(&view, 6);
+        view.push_song_page(&song_2);
+        assert_navigation_stack_n_pages(&view, 6);
     }
 
     #[gtk::test]
-    fn page_navigate_back_then_insert() {
+    #[should_panic(
+        expected = "there must not be already a `RecognizedPage` on the navigation stack"
+    )]
+    fn navigation_push_recognized_page_with_duplicate() {
         init_gresources();
         gst::init().unwrap(); // For Player
 
@@ -1123,294 +1250,11 @@ mod test {
         let (env, _tempdir) = database::new_test_env();
         let song_list = SongList::load_from_env(env).unwrap();
 
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        let song_3 = new_test_song("3");
-        song_list
-            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
-            .unwrap();
-
-        let view = HistoryView::new();
-        view.bind_player(&player);
-        view.bind_song_list(&song_list);
-        assert_leaflet_n_pages(&view, 1);
-
-        view.insert_song_page(&song_1);
-        view.insert_song_page(&song_2);
-        view.insert_recognized_page(&[]);
-        assert_leaflet_n_pages(&view, 4);
-
-        view.navigate_back();
-        view.navigate_back();
-        assert_leaflet_n_pages(&view, 4);
-
-        // Added song after navigating back to second page with 2 tail page,
-        // 2 tail pages should be removed and n pages should decrease to 3
-        // (main page + second song page + added song page)
-        view.insert_song_page(&song_3);
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 3);
-
-        // Navigating back should not do anything since the mentioned tail
-        // pages are already removed
-        assert!(!view.navigate_forward());
-    }
-
-    #[gtk::test]
-    fn remove_song() {
-        init_gresources();
-        gst::init().unwrap(); // For Player
-
-        let player = Player::new();
-        let (env, _tempdir) = database::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
-
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        let song_3 = new_test_song("3");
-        song_list
-            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
-            .unwrap();
-
-        let view = HistoryView::new();
-        view.bind_player(&player);
-        view.bind_song_list(&song_list);
-        assert_leaflet_n_pages(&view, 1);
-
-        view.insert_song_page(&song_1);
-        assert_leaflet_n_pages(&view, 2);
-        assert_leaflet_visible_child_song_id(&view, "1");
-
-        view.insert_song_page(&song_2);
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_song_id(&view, "2");
-
-        view.insert_song_page(&song_3);
-        assert_leaflet_n_pages(&view, 4);
-        assert_leaflet_visible_child_song_id(&view, "3");
-
-        view.insert_song_page(&song_1);
-        assert_leaflet_n_pages(&view, 5);
-        assert_leaflet_visible_child_song_id(&view, "1");
-
-        // Since song_1 is added twice non-adjacently, it should reduce
-        // the number of pages by 2
-        view.remove_songs(&[song_1.id_ref()]).unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 3);
-
-        assert_leaflet_visible_child_song_id(&view, "3");
-
-        // Since song_2 is added once, it should reduce the number of pages by 1
-        view.remove_songs(&[song_2.id_ref()]).unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 2);
-
-        assert_leaflet_visible_child_song_id(&view, "3");
-
-        view.remove_songs(&[song_3.id_ref()]).unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 1);
-    }
-
-    #[gtk::test]
-    fn remove_song_many() {
-        init_gresources();
-        gst::init().unwrap(); // For Player
-
-        let player = Player::new();
-        let (env, _tempdir) = database::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
-
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        let song_3 = new_test_song("3");
-        song_list
-            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
-            .unwrap();
-
-        let view = HistoryView::new();
-        view.bind_player(&player);
-        view.bind_song_list(&song_list);
-        assert_leaflet_n_pages(&view, 1);
-
-        view.insert_song_page(&song_1);
-        view.insert_song_page(&song_2);
-        view.insert_song_page(&song_3);
-        view.insert_song_page(&song_1);
-        view.insert_song_page(&song_2);
-        assert_leaflet_n_pages(&view, 6);
-
-        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()])
-            .unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_visible_child_song_id(&view, "1");
-        assert_leaflet_n_pages(&view, 3);
-    }
-
-    #[gtk::test]
-    fn remove_song_middle_visible_child() {
-        init_gresources();
-        gst::init().unwrap(); // For Player
-
-        let player = Player::new();
-        let (env, _tempdir) = database::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
-
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        let song_3 = new_test_song("3");
-        song_list
-            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
-            .unwrap();
-
         let view = HistoryView::new();
         view.bind_player(&player);
         view.bind_song_list(&song_list);
 
-        view.insert_song_page(&song_1);
-        view.insert_song_page(&song_2);
-        view.insert_song_page(&song_3);
-        assert_leaflet_n_pages(&view, 4);
-
-        assert_leaflet_visible_child_song_id(&view, "3");
-
-        view.navigate_back();
-        assert_leaflet_visible_child_song_id(&view, "2");
-
-        view.remove_songs(&[song_2.id_ref()]).unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_song_id(&view, "1");
-
-        view.navigate_forward();
-        assert_leaflet_visible_child_song_id(&view, "3");
-    }
-
-    #[gtk::test]
-    fn remove_song_many_middle_visible_child() {
-        init_gresources();
-        gst::init().unwrap(); // For Player
-
-        let player = Player::new();
-        let (env, _tempdir) = database::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
-
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        let song_3 = new_test_song("3");
-        let song_4 = new_test_song("4");
-        song_list
-            .insert_many(vec![
-                song_1.clone(),
-                song_2.clone(),
-                song_3.clone(),
-                song_4.clone(),
-            ])
-            .unwrap();
-
-        let view = HistoryView::new();
-        view.bind_player(&player);
-        view.bind_song_list(&song_list);
-
-        view.insert_song_page(&song_1);
-        view.insert_song_page(&song_2);
-        view.insert_song_page(&song_3);
-        view.insert_song_page(&song_4);
-        assert_leaflet_n_pages(&view, 5);
-
-        assert_leaflet_visible_child_song_id(&view, "4");
-
-        view.navigate_back();
-        view.navigate_back();
-        assert_leaflet_visible_child_song_id(&view, "2");
-
-        view.remove_songs(&[song_2.id_ref(), song_3.id_ref()])
-            .unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_song_id(&view, "1");
-
-        view.navigate_forward();
-        assert_leaflet_visible_child_song_id(&view, "4");
-    }
-
-    #[gtk::test]
-    fn remove_song_middle_visible_child_with_recognized_page() {
-        init_gresources();
-        gst::init().unwrap(); // For Player
-
-        let player = Player::new();
-        let (env, _tempdir) = database::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
-
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        song_list
-            .insert_many(vec![song_1.clone(), song_2.clone()])
-            .unwrap();
-
-        let view = HistoryView::new();
-        view.bind_player(&player);
-        view.bind_song_list(&song_list);
-
-        view.insert_recognized_page(&[]);
-        view.insert_song_page(&song_1);
-        view.insert_song_page(&song_2);
-        assert_leaflet_n_pages(&view, 4);
-
-        assert_leaflet_visible_child_song_id(&view, "2");
-
-        view.navigate_back();
-        assert_leaflet_visible_child_song_id(&view, "1");
-
-        view.remove_songs(&[song_1.id_ref()]).unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<RecognizedPage>(&view);
-
-        view.navigate_forward();
-        assert_leaflet_visible_child_song_id(&view, "2");
-    }
-
-    #[gtk::test]
-    fn remove_song_many_middle_visible_child_with_recognized_page() {
-        init_gresources();
-        gst::init().unwrap(); // For Player
-
-        let player = Player::new();
-        let (env, _tempdir) = database::new_test_env();
-        let song_list = SongList::load_from_env(env).unwrap();
-
-        let song_1 = new_test_song("1");
-        let song_2 = new_test_song("2");
-        let song_3 = new_test_song("3");
-        song_list
-            .insert_many(vec![song_1.clone(), song_2.clone(), song_3.clone()])
-            .unwrap();
-
-        let view = HistoryView::new();
-        view.bind_player(&player);
-        view.bind_song_list(&song_list);
-
-        view.insert_song_page(&song_1);
-        view.insert_recognized_page(&[]);
-        view.insert_song_page(&song_2);
-        view.insert_song_page(&song_3);
-        assert_leaflet_n_pages(&view, 5);
-
-        assert_leaflet_visible_child_song_id(&view, "3");
-
-        view.navigate_back();
-        assert_leaflet_visible_child_song_id(&view, "2");
-
-        view.remove_songs(&[song_1.id_ref(), song_2.id_ref()])
-            .unwrap();
-        trigger_purge_purgatory_leaflet_pages(&view);
-        assert_leaflet_n_pages(&view, 3);
-        assert_leaflet_visible_child_type::<RecognizedPage>(&view);
-
-        view.navigate_forward();
-        assert_leaflet_visible_child_song_id(&view, "3");
+        view.push_recognized_page(&[]);
+        view.push_recognized_page(&[]);
     }
 }

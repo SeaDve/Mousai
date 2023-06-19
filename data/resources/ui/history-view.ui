@@ -36,138 +36,139 @@
       <class name="view"/>
     </style>
     <child>
-      <object class="AdwLeaflet" id="leaflet">
-        <property name="can-unfold">False</property>
-        <property name="can-navigate-back">True</property>
-        <property name="can-navigate-forward">True</property>
+      <object class="AdwNavigationView" id="navigation_view">
         <child>
-          <object class="AdwToolbarView" id="history_child">
-            <child type="top">
-              <object class="GtkStack" id="header_bar_stack">
-                <property name="transition-type">crossfade</property>
-                <child>
-                  <object class="AdwHeaderBar" id="main_header_bar">
+          <object class="AdwNavigationPage" id="main_navigation_page">
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="GtkStack" id="header_bar_stack">
+                    <property name="transition-type">crossfade</property>
                     <child>
-                      <object class="GtkButton">
-                        <property name="tooltip-text" translatable="yes">Recognize Song</property>
-                        <property name="label" translatable="yes">Listen</property>
-                        <property name="action-name">win.toggle-recognize</property>
+                      <object class="AdwHeaderBar" id="main_header_bar">
+                        <child>
+                          <object class="GtkButton">
+                            <property name="tooltip-text" translatable="yes">Recognize Song</property>
+                            <property name="label" translatable="yes">Listen</property>
+                            <property name="action-name">win.toggle-recognize</property>
+                            <style>
+                              <class name="suggested-action"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="MsaiRecognizerStatus" id="recognizer_status"/>
+                        </child>
+                        <child type="end">
+                          <object class="GtkMenuButton">
+                            <property name="tooltip-text" translatable="yes">Main Menu</property>
+                            <property name="icon-name">open-menu-symbolic</property>
+                            <property name="menu-model">menu</property>
+                            <property name="primary">True</property>
+                          </object>
+                        </child>
+                        <child type="end">
+                          <object class="GtkButton">
+                            <property name="tooltip-text" translatable="yes">Select</property>
+                            <property name="icon-name">selection-mode-symbolic</property>
+                            <property name="action-name">history-view.toggle-selection-mode</property>
+                          </object>
+                        </child>
+                        <child type="end">
+                          <object class="GtkToggleButton">
+                            <property name="tooltip-text" translatable="yes">Search Songs</property>
+                            <property name="icon-name">system-search-symbolic</property>
+                            <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwHeaderBar" id="selection_mode_header_bar">
+                        <property name="title-widget">
+                          <object class="GtkMenuButton" id="selection_mode_menu_button">
+                            <property name="menu-model">selection_menu</property>
+                          </object>
+                        </property>
+                        <child type="end">
+                          <object class="GtkButton">
+                            <property name="tooltip-text" translatable="yes">Cancel Selection</property>
+                            <property name="label" translatable="yes">Cancel</property>
+                            <property name="action-name">history-view.toggle-selection-mode</property>
+                          </object>
+                        </child>
+                        <child type="end">
+                          <object class="GtkToggleButton">
+                            <property name="tooltip-text" translatable="yes">Search Songs</property>
+                            <property name="icon-name">system-search-symbolic</property>
+                            <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child type="top">
+                  <!-- TODO Maybe inline this in the headerbar -->
+                  <object class="GtkSearchBar" id="search_bar">
+                    <property name="child">
+                      <object class="GtkSearchEntry" id="search_entry">
+                        <property name="placeholder-text" translatable="yes">Search songs</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="GtkStack" id="history_stack">
+                    <property name="transition-type">crossfade</property>
+                    <child>
+                      <object class="GtkScrolledWindow" id="main_page">
+                        <property name="hscrollbar-policy">never</property>
+                        <property name="child">
+                          <object class="GtkGridView" id="grid">
+                            <property name="min-columns">2</property>
+                            <style>
+                              <class name="history-view"/>
+                            </style>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwStatusPage" id="empty_page">
+                        <property name="title" translatable="yes">Start Recognizing Songs!</property>
+                        <property name="description" translatable="yes">Click the listen button to start</property>
                         <style>
-                          <class name="suggested-action"/>
+                          <class name="icon-dropshadow"/>
                         </style>
                       </object>
                     </child>
                     <child>
-                      <object class="MsaiRecognizerStatus" id="recognizer_status"/>
-                    </child>
-                    <child type="end">
-                      <object class="GtkMenuButton">
-                        <property name="tooltip-text" translatable="yes">Main Menu</property>
-                        <property name="icon-name">open-menu-symbolic</property>
-                        <property name="menu-model">menu</property>
-                        <property name="primary">True</property>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkButton">
-                        <property name="tooltip-text" translatable="yes">Select</property>
-                        <property name="icon-name">selection-mode-symbolic</property>
-                        <property name="action-name">history-view.toggle-selection-mode</property>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkToggleButton">
-                        <property name="tooltip-text" translatable="yes">Search Songs</property>
+                      <object class="AdwStatusPage" id="empty_search_page">
                         <property name="icon-name">system-search-symbolic</property>
-                        <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
+                        <property name="title" translatable="yes">No Results</property>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwHeaderBar" id="selection_mode_header_bar">
-                    <property name="title-widget">
-                      <object class="GtkMenuButton" id="selection_mode_menu_button">
-                        <property name="menu-model">selection_menu</property>
-                      </object>
-                    </property>
-                    <child type="end">
-                      <object class="GtkButton">
-                        <property name="tooltip-text" translatable="yes">Cancel Selection</property>
-                        <property name="label" translatable="yes">Cancel</property>
-                        <property name="action-name">history-view.toggle-selection-mode</property>
-                      </object>
-                    </child>
-                    <child type="end">
-                      <object class="GtkToggleButton">
-                        <property name="tooltip-text" translatable="yes">Search Songs</property>
-                        <property name="icon-name">system-search-symbolic</property>
-                        <property name="active" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="sync-create | bidirectional"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="top">
-              <!-- TODO Maybe inline this in the headerbar -->
-              <object class="GtkSearchBar" id="search_bar">
-                <property name="child">
-                  <object class="GtkSearchEntry" id="search_entry">
-                    <property name="placeholder-text" translatable="yes">Search songs</property>
                   </object>
                 </property>
-              </object>
-            </child>
-            <property name="content">
-              <object class="GtkStack" id="history_stack">
-                <property name="transition-type">crossfade</property>
-                <child>
-                  <object class="GtkScrolledWindow" id="main_page">
-                    <property name="hscrollbar-policy">never</property>
-                    <property name="child">
-                      <object class="GtkGridView" id="grid">
-                        <property name="min-columns">2</property>
-                        <style>
-                          <class name="history-view"/>
-                        </style>
+                <child type="bottom">
+                  <object class="GtkActionBar" id="selection_mode_bar">
+                    <child>
+                      <object class="GtkButton" id="copy_selected_songs_button">
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <property name="action-name">history-view.copy-selected-song</property>
                       </object>
-                    </property>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwStatusPage" id="empty_page">
-                    <property name="title" translatable="yes">Start Recognizing Songs!</property>
-                    <property name="description" translatable="yes">Click the listen button to start</property>
-                    <style>
-                      <class name="icon-dropshadow"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwStatusPage" id="empty_search_page">
-                    <property name="icon-name">system-search-symbolic</property>
-                    <property name="title" translatable="yes">No Results</property>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="remove_selected_songs_button">
+                        <property name="icon-name">user-trash-symbolic</property>
+                        <property name="action-name">history-view.remove-selected-songs</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </property>
-            <child type="bottom">
-              <object class="GtkActionBar" id="selection_mode_bar">
-                <child>
-                  <object class="GtkButton" id="copy_selected_songs_button">
-                    <property name="icon-name">edit-copy-symbolic</property>
-                    <property name="action-name">history-view.copy-selected-song</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="remove_selected_songs_button">
-                    <property name="icon-name">user-trash-symbolic</property>
-                    <property name="action-name">history-view.remove-selected-songs</property>
-                  </object>
-                </child>
-              </object>
-            </child>
           </object>
         </child>
       </object>

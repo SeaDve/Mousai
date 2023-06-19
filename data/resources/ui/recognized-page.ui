@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiRecognizedPage">
-    <property name="layout-manager">
-      <object class="GtkBinLayout"/>
-    </property>
-    <child>
-      <object class="AdwToolbarView" id="toolbar_view">
+  <template class="MsaiRecognizedPage" parent="AdwNavigationPage">
+    <property name="child">
+      <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
             <property name="show-title">False</property>
-            <child>
-              <object class="GtkButton">
-                <property name="tooltip-text" translatable="yes">Back</property>
-                <property name="icon-name">go-previous-symbolic</property>
-                <property name="action-name">win.navigate-back</property>
-              </object>
-            </child>
           </object>
         </child>
         <property name="content">
@@ -31,7 +21,7 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
                 <child>
-                  <object class="GtkLabel" id="title">
+                  <object class="GtkLabel" id="heading">
                     <property name="xalign">0.5</property>
                     <property name="justify">center</property>
                     <property name="wrap">True</property>
@@ -41,7 +31,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="subtitle">
+                  <object class="GtkLabel" id="body">
                     <property name="xalign">0.5</property>
                     <property name="justify">center</property>
                     <property name="wrap">True</property>
@@ -64,6 +54,6 @@
           </object>
         </property>
       </object>
-    </child>
+    </property>
   </template>
 </interface>
