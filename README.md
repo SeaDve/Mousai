@@ -24,14 +24,11 @@
   <a href="https://hosted.weblate.org/engage/kooha">
     <img alt="Translation status" src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg"/>
   </a>
-  <a href="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml">
-    <img alt="Build status" src="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml/badge.svg"/>
-  </a>
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
     <img alt="Flathub downloads" src="https://img.shields.io/badge/dynamic/json?color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai"/>
   </a>
-  <a href="https://repology.org/project/mousai/versions">
-    <img alt="Packaging status" src="https://repology.org/badge/tiny-repos/mousai.svg"/>
+  <a href="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml">
+    <img alt="Build status" src="https://github.com/SeaDve/Mousai/actions/workflows/ci.yml/badge.svg"/>
   </a>
 </p>
 
@@ -86,6 +83,10 @@ Unlike Flatpak, take note that these packages are not officially supported by th
 | Distribution |              Package Name               |                   Maintainer                    |
 | :----------: | :-------------------------------------: | :---------------------------------------------: |
 |     Snap     | [`mousai`](https://snapcraft.io/mousai) | [soumyaDghosh](https://github.com/soumyaDghosh) |
+
+### Repology
+
+You can also check out other third-party packages on [Repology](https://repology.org/project/mousai/versions).
 
 ## 🙌 Help translate Mousai
 
