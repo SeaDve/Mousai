@@ -313,11 +313,13 @@ impl HistoryView {
     pub fn push_song_page(&self, song: &Song) {
         let imp = self.imp();
 
-        // Return if the last widget is a `SongPage` and its song is the same as the given song
+        // Return if the last widget is a `SongPage` and its song's id is the same as the given song's id
         if let Some(visible_page) = imp.navigation_view.visible_page() {
             if let Some(song_page) = visible_page.downcast_ref::<SongPage>() {
-                if Some(song.id_ref()) == song_page.song().map(|song| song.id()).as_ref() {
-                    return;
+                if let Some(song_page_song) = song_page.song() {
+                    if song_page_song.id_ref() == song.id_ref() {
+                        return;
+                    }
                 }
             }
         }
