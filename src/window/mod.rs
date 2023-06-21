@@ -528,7 +528,7 @@ impl Window {
 
         if keyval == gdk::Key::Escape
             && state == gdk::ModifierType::empty()
-            && imp.main_view.is_on_main_navigation_page()
+            && imp.main_view.is_on_navigation_main_page()
         {
             let search_bar = imp.main_view.search_bar();
             if search_bar.is_search_mode() {

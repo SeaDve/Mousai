@@ -38,7 +38,7 @@
     <child>
       <object class="AdwNavigationView" id="navigation_view">
         <child>
-          <object class="AdwNavigationPage" id="main_navigation_page">
+          <object class="AdwNavigationPage" id="navigation_main_page">
             <property name="child">
               <object class="AdwToolbarView">
                 <child type="top">
@@ -119,10 +119,10 @@
                   </object>
                 </child>
                 <property name="content">
-                  <object class="GtkStack" id="history_stack">
+                  <object class="GtkStack" id="content_stack">
                     <property name="transition-type">crossfade</property>
                     <child>
-                      <object class="GtkScrolledWindow" id="main_page">
+                      <object class="GtkScrolledWindow" id="content_main_page">
                         <property name="hscrollbar-policy">never</property>
                         <property name="child">
                           <object class="GtkGridView" id="grid">
@@ -135,7 +135,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="AdwStatusPage" id="empty_page">
+                      <object class="AdwStatusPage" id="content_empty_page">
                         <property name="title" translatable="yes">Start Recognizing Songs!</property>
                         <property name="description" translatable="yes">Click the listen button to start</property>
                         <style>
@@ -144,7 +144,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="AdwStatusPage" id="empty_search_page">
+                      <object class="AdwStatusPage" id="content_empty_search_result_page">
                         <property name="icon-name">system-search-symbolic</property>
                         <property name="title" translatable="yes">No Results</property>
                       </object>

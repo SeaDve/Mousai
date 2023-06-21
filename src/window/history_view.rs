@@ -56,7 +56,7 @@ mod imp {
         #[template_child]
         pub(super) navigation_view: TemplateChild<adw::NavigationView>,
         #[template_child]
-        pub(super) main_navigation_page: TemplateChild<adw::NavigationPage>,
+        pub(super) navigation_main_page: TemplateChild<adw::NavigationPage>,
         #[template_child]
         pub(super) header_bar_stack: TemplateChild<gtk::Stack>,
         #[template_child]
@@ -78,15 +78,15 @@ mod imp {
         #[template_child]
         pub(super) search_entry: TemplateChild<gtk::SearchEntry>,
         #[template_child]
-        pub(super) history_stack: TemplateChild<gtk::Stack>,
+        pub(super) content_stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub(super) main_page: TemplateChild<gtk::ScrolledWindow>,
+        pub(super) content_main_page: TemplateChild<gtk::ScrolledWindow>,
         #[template_child]
         pub(super) grid: TemplateChild<gtk::GridView>,
         #[template_child]
-        pub(super) empty_page: TemplateChild<adw::StatusPage>,
+        pub(super) content_empty_page: TemplateChild<adw::StatusPage>,
         #[template_child]
-        pub(super) empty_search_page: TemplateChild<adw::StatusPage>,
+        pub(super) content_empty_search_result_page: TemplateChild<adw::StatusPage>,
 
         pub(super) player: OnceCell<WeakRef<Player>>,
         pub(super) song_list: OnceCell<WeakRef<SongList>>,
@@ -219,13 +219,13 @@ mod imp {
                 }),
             );
 
-            self.empty_page.set_icon_name(Some(APP_ID));
+            self.content_empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
 
             obj.update_selection_actions();
             obj.update_selection_mode_ui();
 
-            obj.update_history_stack_visible_child();
+            obj.update_content_stack_visible_child();
         }
 
         fn dispose(&self) {
@@ -267,9 +267,9 @@ impl HistoryView {
         self.imp().search_bar.get()
     }
 
-    pub fn is_on_main_navigation_page(&self) -> bool {
+    pub fn is_on_navigation_main_page(&self) -> bool {
         let imp = self.imp();
-        imp.navigation_view.visible_page().as_ref() == Some(imp.main_navigation_page.upcast_ref())
+        imp.navigation_view.visible_page().as_ref() == Some(imp.navigation_main_page.upcast_ref())
     }
 
     /// Pushes a `RecognizedPage` for the given songs to the navigation stack.
@@ -371,7 +371,7 @@ impl HistoryView {
         let imp = self.imp();
 
         song_list.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_history_stack_visible_child();
+            obj.update_content_stack_visible_child();
         }));
 
         let filter = SongFilter::new();
@@ -379,7 +379,7 @@ impl HistoryView {
 
         let filter_model = gtk::FilterListModel::new(Some(song_list.clone()), Some(filter.clone()));
         filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_history_stack_visible_child();
+            obj.update_content_stack_visible_child();
         }));
 
         imp.search_entry.connect_search_changed(
@@ -387,7 +387,7 @@ impl HistoryView {
                 let text = search_entry.text();
                 filter.set_search(text.trim());
                 sorter.set_search(text.trim());
-                obj.update_history_stack_visible_child();
+                obj.update_content_stack_visible_child();
             }),
         );
 
@@ -434,7 +434,7 @@ impl HistoryView {
             .set(selection_model.downgrade())
             .unwrap();
 
-        self.update_history_stack_visible_child();
+        self.update_content_stack_visible_child();
     }
 
     /// Must only be called once
@@ -670,7 +670,7 @@ impl HistoryView {
             .set_single_click_activate(!is_selection_mode_active);
     }
 
-    fn update_history_stack_visible_child(&self) {
+    fn update_content_stack_visible_child(&self) {
         let imp = self.imp();
 
         let search_text = imp.search_entry.text();
@@ -682,8 +682,8 @@ impl HistoryView {
             .map_or(true, |filter_model| filter_model.n_items() == 0)
             && !search_text.is_empty()
         {
-            imp.history_stack
-                .set_visible_child(&imp.empty_search_page.get());
+            imp.content_stack
+                .set_visible_child(&imp.content_empty_search_result_page.get());
         } else if imp
             .song_list
             .get()
@@ -691,9 +691,11 @@ impl HistoryView {
             .map_or(true, |song_list| song_list.n_items() == 0)
             && search_text.is_empty()
         {
-            imp.history_stack.set_visible_child(&imp.empty_page.get());
+            imp.content_stack
+                .set_visible_child(&imp.content_empty_page.get());
         } else {
-            imp.history_stack.set_visible_child(&imp.main_page.get());
+            imp.content_stack
+                .set_visible_child(&imp.content_main_page.get());
         }
     }
 
@@ -965,45 +967,45 @@ mod test {
         assert_navigation_stack_n_pages(&view, 1);
         assert_forward_navigation_stack_n_pages(&view, 0);
         assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
-        assert!(view.is_on_main_navigation_page());
+        assert!(view.is_on_navigation_main_page());
 
         view.push_song_page(&song);
         assert_navigation_stack_n_pages(&view, 2);
         assert_forward_navigation_stack_n_pages(&view, 0);
         assert_navigation_visible_page_type::<SongPage>(&view);
-        assert!(!view.is_on_main_navigation_page());
+        assert!(!view.is_on_navigation_main_page());
 
         view.push_recognized_page(&[]);
         assert_navigation_stack_n_pages(&view, 3);
         assert_forward_navigation_stack_n_pages(&view, 0);
         assert_navigation_visible_page_type::<RecognizedPage>(&view);
-        assert!(!view.is_on_main_navigation_page());
+        assert!(!view.is_on_navigation_main_page());
 
         // Already on last page, navigating forward should not do anything
         assert!(!simulate_navigate_forward(&view));
         assert_navigation_stack_n_pages(&view, 3);
         assert_forward_navigation_stack_n_pages(&view, 0);
         assert_navigation_visible_page_type::<RecognizedPage>(&view);
-        assert!(!view.is_on_main_navigation_page());
+        assert!(!view.is_on_navigation_main_page());
 
         assert!(view.pop_page());
         assert_navigation_stack_n_pages(&view, 2);
         assert_forward_navigation_stack_n_pages(&view, 1);
         assert_navigation_visible_page_type::<SongPage>(&view);
-        assert!(!view.is_on_main_navigation_page());
+        assert!(!view.is_on_navigation_main_page());
 
         assert!(view.pop_page());
         assert_navigation_stack_n_pages(&view, 1);
         assert_forward_navigation_stack_n_pages(&view, 2);
         assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
-        assert!(view.is_on_main_navigation_page());
+        assert!(view.is_on_navigation_main_page());
 
         // Already on main navigation page, popping page should not do anything
         assert!(!view.pop_page());
         assert_navigation_stack_n_pages(&view, 1);
         assert_forward_navigation_stack_n_pages(&view, 2);
         assert_navigation_visible_page_type::<adw::NavigationPage>(&view);
-        assert!(view.is_on_main_navigation_page());
+        assert!(view.is_on_navigation_main_page());
     }
 
     #[gtk::test]
