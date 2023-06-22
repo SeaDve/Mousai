@@ -71,11 +71,11 @@ pub struct Data {
 }
 
 #[derive(Debug, Deserialize)]
-pub struct AudDRawError {
+struct AudDRawError {
     #[serde(rename(deserialize = "error_code"))]
-    pub code: u16,
+    code: u16,
     #[serde(rename(deserialize = "error_message"))]
-    pub message: String,
+    message: String,
 }
 
 /// If `status` is `success` `data` is `Some` and `error` is `None`. On the other hand, if status is
