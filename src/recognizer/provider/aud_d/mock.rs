@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 use gtk::glib;
 
-use super::{AudD, Data, Response, Song};
+use super::{AudD, Song};
 use crate::recognizer::provider::{RecognizeError, TestProvider, TestProviderMode};
 
 #[derive(Debug)]
@@ -14,11 +14,14 @@ impl TestProvider for AudDMock {
         _: &[u8],
         mode: TestProviderMode,
     ) -> Result<Song, RecognizeError> {
-        Ok(AudD::build_song_from_data(random_data(mode)?))
+        let response_str = random_response_str(mode);
+        tracing::trace!(response_str);
+
+        AudD::build_song_from_response_bytes(response_str.as_bytes())
     }
 }
 
-fn random_data(mode: TestProviderMode) -> Result<Data, RecognizeError> {
+fn random_response_str(mode: TestProviderMode) -> &'static str {
     let mut raw_responses = Vec::new();
     if matches!(mode, TestProviderMode::Both) || matches!(mode, TestProviderMode::ErrorOnly) {
         raw_responses.extend([
@@ -45,11 +48,7 @@ fn random_data(mode: TestProviderMode) -> Result<Data, RecognizeError> {
         ]);
     }
 
-    let random_response = raw_responses
+    raw_responses
         .get(glib::random_int_range(0, raw_responses.len() as i32) as usize)
-        .expect("index must be in range");
-
-    tracing::trace!(random_response);
-
-    Response::parse(random_response.as_bytes())?.data()
+        .expect("index must be in range")
 }

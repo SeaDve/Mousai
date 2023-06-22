@@ -91,11 +91,6 @@ pub struct Response {
 }
 
 impl Response {
-    pub fn parse(slice: &[u8]) -> Result<Self, RecognizeError> {
-        serde_json::from_slice(slice)
-            .map_err(|err| RecognizeError::new(RecognizeErrorKind::OtherPermanent, err.to_string()))
-    }
-
     pub fn data(self) -> Result<Data, RecognizeError> {
         if self.status == "success" {
             return self
