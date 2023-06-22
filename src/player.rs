@@ -110,6 +110,10 @@ mod imp {
             }
 
             self.gst_play.stop();
+
+            // FIXME This does not actually reset the position, especially when
+            // a song is already playing and we switch to another song that took
+            // some time to load.
             obj.set_position(gst::ClockTime::ZERO);
             obj.set_duration(gst::ClockTime::ZERO);
 
