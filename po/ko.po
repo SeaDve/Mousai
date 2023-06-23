@@ -7,38 +7,42 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-06-23 13:01+0000\n"
+"Last-Translator: 정지우 <jgw1010@ajou.ac.kr>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/kooha/mousai/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
 #: src/main.rs:58
+#, fuzzy
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "몇 초 안에 노래를 식별합니다"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
+#, fuzzy
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "창 너비"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "창 높이"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
@@ -125,8 +129,9 @@ msgid "_Preferences"
 msgstr ""
 
 #: data/resources/ui/history-view.ui:10
+#, fuzzy
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "키보드 바로 가기 키(_K)"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
@@ -149,8 +154,9 @@ msgid "Listen"
 msgstr ""
 
 #: data/resources/ui/history-view.ui:65
+#, fuzzy
 msgid "Main Menu"
-msgstr ""
+msgstr "주 메뉴"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
@@ -185,8 +191,9 @@ msgid "No Results"
 msgstr ""
 
 #: data/resources/ui/preferences-window.ui:8
+#, fuzzy
 msgid "General"
-msgstr ""
+msgstr "일반"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
@@ -228,9 +235,10 @@ msgid "Offline Mode"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
+#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "일반"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -248,14 +256,16 @@ msgid "Show Preferences"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:32
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "바로 가기 키 표시"
 
 #: data/resources/ui/shortcuts.ui:38
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "끝내기"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -292,8 +302,9 @@ msgid "Show Song Information"
 msgstr ""
 
 #: data/resources/ui/song-bar.ui:92
+#, fuzzy
 msgid "Stop"
-msgstr ""
+msgstr "정지"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
@@ -333,8 +344,9 @@ msgstr ""
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
+#, fuzzy
 msgid "translator-credits"
-msgstr ""
+msgstr "조성호 "
 
 #: src/about.rs:31
 msgid "Donate (Liberapay)"
@@ -345,8 +357,9 @@ msgid "Donate (PayPal)"
 msgstr ""
 
 #: src/about.rs:39
+#, fuzzy
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/about.rs:41
 msgid "Translate"
