@@ -9,13 +9,14 @@
 # sal0max <msal.coding@gmail.com>, 2022.
 # Marlon <mawol@protonmail.com>, 2023.
 # Jörn Weigend <das.jott@gmail.com>, 2023.
+# Florian Schaupp <fschaupp@hotmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-29 21:51+0000\n"
-"Last-Translator: Jörn Weigend <das.jott@gmail.com>\n"
+"PO-Revision-Date: 2023-06-24 18:54+0000\n"
+"Last-Translator: Florian Schaupp <fschaupp@hotmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
 "\n"
 "Language: de\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -185,7 +186,7 @@ msgstr "Auswählen"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr "Suche Lieder"
+msgstr "Lieder suchen"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
@@ -197,7 +198,7 @@ msgstr "Abbrechen"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr "Suche Lieder"
+msgstr "Lieder suchen"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
@@ -279,7 +280,7 @@ msgstr "Einstellungen anzeigen"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Tastaturkürzel anzeigen"
+msgstr "Tastenkürzel anzeigen"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
