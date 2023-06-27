@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="MsaiWindow" parent="AdwApplicationWindow">
+    <!-- FIXME Properly support these dimensions -->
+    <property name="width-request">360</property>
+    <property name="height-request">294</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <!-- 450 is just right to prevent three columns history grid view on narrow mode. -->
+        <condition>max-width: 450sp</condition>
+        <setter object="main_view" property="adaptive-mode">narrow</setter>
+      </object>
+    </child>
     <property name="content">
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">

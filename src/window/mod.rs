@@ -23,8 +23,6 @@ use gtk::{
 };
 use once_cell::unsync::OnceCell;
 
-use std::cell::Cell;
-
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
@@ -34,9 +32,6 @@ use crate::{
     recognizer::{RecognizeError, RecognizeErrorKind, Recognizer, RecognizerState, Recordings},
     utils, Application,
 };
-
-// 570 is just right to prevent three columns history grid view on narrow mode.
-const NARROW_ADAPTIVE_MODE_THRESHOLD: i32 = 570;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiAdaptiveMode")]
@@ -49,13 +44,9 @@ pub enum AdaptiveMode {
 mod imp {
     use super::*;
 
-    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
-    #[properties(wrapper_type = super::Window)]
+    #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/window.ui")]
     pub struct Window {
-        #[property(get, builder(AdaptiveMode::default()))]
-        pub(super) adaptive_mode: Cell<AdaptiveMode>,
-
         #[template_child]
         pub(super) toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
@@ -122,8 +113,6 @@ mod imp {
     }
 
     impl ObjectImpl for Window {
-        crate::derived_properties!();
-
         fn constructed(&self) {
             self.parent_constructed();
 
@@ -140,10 +129,6 @@ mod imp {
                 .search_bar()
                 .set_key_capture_widget(Some(obj.as_ref()));
 
-            obj.bind_property("adaptive-mode", &self.main_view.get(), "adaptive-mode")
-                .sync_create()
-                .build();
-
             obj.setup_signals();
 
             obj.load_window_size();
@@ -154,20 +139,7 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for Window {
-        fn realize(&self) {
-            self.parent_realize();
-
-            let obj = self.obj();
-
-            obj.surface()
-                .connect_width_notify(clone!(@weak obj => move |_| {
-                    obj.update_adaptive_mode();
-                }));
-
-            obj.update_adaptive_mode();
-        }
-    }
+    impl WidgetImpl for Window {}
 
     impl WindowImpl for Window {
         fn close_request(&self) -> gtk::Inhibit {
@@ -462,24 +434,6 @@ impl Window {
                 imp.stack.set_visible_child(&imp.main_view.get());
             }
         }
-    }
-
-    fn update_adaptive_mode(&self) {
-        let width = self.surface().width();
-
-        // FIXME make less hacky
-        let adaptive_mode = if width < NARROW_ADAPTIVE_MODE_THRESHOLD {
-            AdaptiveMode::Narrow
-        } else {
-            AdaptiveMode::Normal
-        };
-
-        if adaptive_mode == self.adaptive_mode() {
-            return;
-        }
-
-        self.imp().adaptive_mode.set(adaptive_mode);
-        self.notify_adaptive_mode();
     }
 
     fn setup_signals(&self) {
