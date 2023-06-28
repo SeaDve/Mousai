@@ -29,11 +29,8 @@ mod imp {
         pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<(soup::Session, soup::Cache)>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
+        pub(super) env: OnceCell<(heed::Env, SongList, Recordings)>,
         pub(super) settings: Settings,
-
-        pub(super) env: OnceCell<heed::Env>,
-        pub(super) song_history: OnceCell<SongList>,
-        pub(super) saved_recordings: OnceCell<Recordings>,
     }
 
     #[glib::object_subclass]
@@ -57,18 +54,20 @@ mod imp {
 
             let obj = self.obj();
 
-            if let (Some(song_history), Some(recordings)) =
-                (self.song_history.get(), self.saved_recordings.get())
-            {
-                let window = Window::new(&obj);
-                window.bind_models(song_history, recordings);
-                self.window.set(window.downgrade()).unwrap();
-                window.present();
-            } else {
-                // TODO don't spawn a new window if one is already open
-                // or find a better solution in handling these errors
-                let err_window = DatabaseErrorWindow::new(&obj);
-                err_window.present();
+            match self.env.get_or_try_init(init_env) {
+                Ok((_, song_history, recordings)) => {
+                    let window = Window::new(&obj);
+                    window.bind_models(song_history, recordings);
+                    self.window.set(window.downgrade()).unwrap();
+                    window.present();
+                }
+                Err(err) => {
+                    // TODO don't spawn a new window if one is already open
+                    // or find a better solution in handling these errors
+                    let err_window = DatabaseErrorWindow::new(&obj);
+                    err_window.present();
+                    tracing::error!("Failed to setup db env: {:?}", err);
+                }
             }
         }
 
@@ -82,14 +81,10 @@ mod imp {
             obj.setup_accels();
 
             setup_inspector_page();
-
-            if let Err(err) = obj.setup_env() {
-                tracing::error!("Failed to setup db env: {:?}", err);
-            }
         }
 
         fn shutdown(&self) {
-            if let Some(env) = self.env.get() {
+            if let Some((env, _, _)) = self.env.get() {
                 if let Err(err) = env.force_sync() {
                     tracing::error!("Failed to sync db env on shutdown: {:?}", err);
                 }
@@ -181,62 +176,6 @@ impl Application {
         ApplicationExtManual::run(self)
     }
 
-    fn setup_env(&self) -> Result<()> {
-        {
-            let env = database::new_env()?;
-
-            env.with_write_txn(|wtxn| {
-                let mut migrations = Migrations::new();
-                migrations.add("SongList: SerdeBincode<Uid> -> UidCodec", |env, wtxn| {
-                    use heed::types::SerdeBincode;
-
-                    use crate::{
-                        database::SONG_LIST_DB_NAME,
-                        model::{Song, Uid, UidCodec},
-                    };
-
-                    if let Some(db) = env.open_poly_database(wtxn, Some(SONG_LIST_DB_NAME))? {
-                        let new_items = db
-                            .iter::<SerdeBincode<Uid>, SerdeBincode<Song>>(wtxn)
-                            .context("Failed to iter db")?
-                            .collect::<Result<Vec<_>, _>>()
-                            .context("Failed to collect items")?;
-
-                        db.clear(wtxn)?;
-
-                        for (uid, song) in new_items {
-                            db.put::<UidCodec, SerdeBincode<Song>>(wtxn, &uid, &song)
-                                .context("Failed to put item")?;
-                        }
-                    }
-
-                    Ok(())
-                });
-                migrations
-                    .run(&env, wtxn)
-                    .context("Failed to run migrations")
-            })?;
-
-            // We might open a db in migrations and open the same db with different
-            // types later on, which is not allowed when done within the same env.
-            // To workaround this, we close the env and open a new one.
-            env.prepare_for_closing().wait();
-        }
-
-        let imp = self.imp();
-        let env = database::new_env()?;
-        imp.env.set(env.clone()).unwrap();
-
-        let song_history =
-            SongList::load_from_env(env.clone()).context("Failed to load song history")?;
-        imp.song_history.set(song_history).unwrap();
-
-        let recordings = Recordings::load_from_env(env)?;
-        imp.saved_recordings.set(recordings).unwrap();
-
-        Ok(())
-    }
-
     fn setup_gactions(&self) {
         let quit_action = gio::ActionEntry::builder("quit")
             .activate(|obj: &Self, _, _| {
@@ -288,4 +227,54 @@ fn setup_inspector_page() {
     } else {
         tracing::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found");
     }
+}
+
+fn init_env() -> Result<(heed::Env, SongList, Recordings)> {
+    {
+        let env = database::new_env()?;
+
+        env.with_write_txn(|wtxn| {
+            let mut migrations = Migrations::new();
+            migrations.add("SongList: SerdeBincode<Uid> -> UidCodec", |env, wtxn| {
+                use heed::types::SerdeBincode;
+
+                use crate::{
+                    database::SONG_LIST_DB_NAME,
+                    model::{Song, Uid, UidCodec},
+                };
+
+                if let Some(db) = env.open_poly_database(wtxn, Some(SONG_LIST_DB_NAME))? {
+                    let new_items = db
+                        .iter::<SerdeBincode<Uid>, SerdeBincode<Song>>(wtxn)
+                        .context("Failed to iter db")?
+                        .collect::<Result<Vec<_>, _>>()
+                        .context("Failed to collect items")?;
+
+                    db.clear(wtxn)?;
+
+                    for (uid, song) in new_items {
+                        db.put::<UidCodec, SerdeBincode<Song>>(wtxn, &uid, &song)
+                            .context("Failed to put item")?;
+                    }
+                }
+
+                Ok(())
+            });
+            migrations
+                .run(&env, wtxn)
+                .context("Failed to run migrations")
+        })?;
+
+        // We might open a db in migrations and open the same db with different
+        // types later on, which is not allowed when done within the same env.
+        // To workaround this, we close the env and open a new one.
+        env.prepare_for_closing().wait();
+    }
+
+    let env = database::new_env()?;
+    let song_history =
+        SongList::load_from_env(env.clone()).context("Failed to load song history")?;
+    let recordings = Recordings::load_from_env(env.clone())?;
+
+    Ok((env, song_history, recordings))
 }
