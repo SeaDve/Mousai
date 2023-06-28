@@ -62,11 +62,12 @@ mod imp {
                     window.present();
                 }
                 Err(err) => {
+                    tracing::error!("Failed to setup db env: {:?}", err);
+
                     // TODO don't spawn a new window if one is already open
                     // or find a better solution in handling these errors
                     let err_window = DatabaseErrorWindow::new(&obj);
                     err_window.present();
-                    tracing::error!("Failed to setup db env: {:?}", err);
                 }
             }
         }
