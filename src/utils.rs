@@ -53,17 +53,19 @@ pub fn app_instance() -> Application {
     gio::Application::default().unwrap().downcast().unwrap()
 }
 
-/// Returns a vector of tuples where the first element of each tuple is the first number in a consecutive group,
-/// and the second element is the count of numbers in that group.
-pub fn consecutive_groups(set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
-    let first = match set.first() {
+/// Returns a list of tuples where the first element of a tuple is the first number
+/// in a consecutive group, and the second element is the count of numbers in that group.
+pub fn consecutive_groups(ordered_set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
+    let mut iter = ordered_set.iter();
+
+    let first = match iter.next() {
         Some(first) => *first,
         None => return Vec::new(),
     };
 
     // If all numbers are consecutive, return a single group
-    if set.last().unwrap() - first + 1 == set.len() {
-        return vec![(first, set.len())];
+    if ordered_set.last().unwrap() - first + 1 == ordered_set.len() {
+        return vec![(first, ordered_set.len())];
     }
 
     let mut ret: Vec<(usize, usize)> = Vec::new();
@@ -71,7 +73,7 @@ pub fn consecutive_groups(set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
     let mut current_group_start = first;
     let mut current_group_count = 1;
 
-    for &num in set.iter().skip(1) {
+    for &num in iter {
         if num == current_group_start + current_group_count {
             // Consecutive number, increment count
             current_group_count += 1;
