@@ -40,8 +40,8 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
-                    "branch": "main"
+                    "url": "https://github.com/GNOME/libadwaita.git",
+                    "tag": "1.4.alpha"
                 }
             ],
             "modules": [

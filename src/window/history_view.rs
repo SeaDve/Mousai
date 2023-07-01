@@ -22,9 +22,7 @@ use crate::{
     utils,
 };
 
-// FIXME
-// * Missing global navigation shortcuts
-// * Missing title on main navigation page
+// FIXME Missing global navigation shortcuts
 
 const SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY: &str =
     "mousai-song-page-song-remove-request-handler-id";

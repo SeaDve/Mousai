@@ -39,6 +39,7 @@
       <object class="AdwNavigationView" id="navigation_view">
         <child>
           <object class="AdwNavigationPage" id="navigation_main_page">
+            <property name="title">Home</property>
             <property name="child">
               <object class="AdwToolbarView">
                 <child type="top">
