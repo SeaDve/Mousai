@@ -17,7 +17,7 @@ impl Uid {
         Self(unique_str.into())
     }
 
-    /// Create an id from the given `unique_str` prefixed with `prefix` in
+    /// Create an id from the given `unique_str` prefixed with `prefix` and
     /// joined with a `-`.
     ///
     /// Note: Caller must ensure that `unique_str` is unique in the context of
@@ -84,12 +84,12 @@ mod test {
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
 
-        let val = Uid::generate();
+        let val = Uid::from_prefixed("a", "b");
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
 
-        let val = Uid::from("b");
+        let val = Uid::generate();
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
@@ -102,15 +102,20 @@ mod test {
             "\"A\"",
         );
         assert_eq!(
-            serde_json::to_string(&Uid::from("BB8")).unwrap().as_str(),
-            "\"BB8\""
+            serde_json::to_string(&Uid::from_prefixed("a", "BB8"))
+                .unwrap()
+                .as_str(),
+            "\"a-BB8\""
         );
     }
 
     #[test]
     fn deserialize() {
         assert_eq!(Uid::from("A"), serde_json::from_str("\"A\"").unwrap());
-        assert_eq!(Uid::from("BB8"), serde_json::from_str("\"BB8\"").unwrap());
+        assert_eq!(
+            Uid::from_prefixed("a", "BB8"),
+            serde_json::from_str("\"a-BB8\"").unwrap()
+        );
     }
 
     #[test]
