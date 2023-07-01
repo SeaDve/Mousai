@@ -102,7 +102,7 @@ impl Recordings {
     }
 
     pub fn insert(&self, recording: Recording) -> Result<()> {
-        let recording_id = Uid::generate("Recording");
+        let recording_id = Uid::generate();
 
         let (env, db) = self.db();
         env.with_write_txn(|wtxn| {
@@ -257,7 +257,7 @@ mod tests {
     }
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&Uid::for_test(id), id, id, id).build()
+        Song::builder(&Uid::from(id), id, id, id).build()
     }
 
     fn assert_n_items_and_db_count_eq(recordings: &Recordings, n: usize) {
@@ -346,9 +346,9 @@ mod tests {
         let db: RecordingDatabase = env
             .create_database(&mut wtxn, Some(RECORDINGS_DB_NAME))
             .unwrap();
-        db.put(&mut wtxn, &Uid::for_test("a"), &new_test_recording(b"A"))
+        db.put(&mut wtxn, &Uid::from("a"), &new_test_recording(b"A"))
             .unwrap();
-        db.put(&mut wtxn, &Uid::for_test("b"), &new_test_recording(b"B"))
+        db.put(&mut wtxn, &Uid::from("b"), &new_test_recording(b"B"))
             .unwrap();
         wtxn.commit().unwrap();
 

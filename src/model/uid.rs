@@ -10,24 +10,26 @@ use std::borrow::Cow;
 pub struct Uid(Box<str>);
 
 impl Uid {
-    /// Create an id from the given `unique_str` with the given `namespace`.
+    /// Create an id from the given `unique_str`.
     ///
-    /// Note: Caller must ensure that `unique_str` is unique for the given `namespace`.
-    pub fn from(namespace: &str, unique_str: &str) -> Self {
-        Self(format!("{}-{}", namespace, unique_str).into())
+    /// Note: Caller must ensure that `unique_str` is unique.
+    pub fn from(unique_str: impl Into<Box<str>>) -> Self {
+        Self(unique_str.into())
+    }
+
+    /// Create an id from the given `unique_str` prefixed with `prefix` in
+    /// joined with a `-`.
+    ///
+    /// Note: Caller must ensure that `unique_str` is unique in the context of
+    /// the given `prefix`.
+    pub fn from_prefixed(prefix: &str, unique_str: &str) -> Self {
+        Self::from(format!("{}-{}", prefix, unique_str))
     }
 
     /// Generate a new id with `unique_str` made up of real time and a random u32
     /// both encoded in hex.
-    pub fn generate(namespace: &str) -> Self {
-        let unique_str = format!("{:x}-{:x}", glib::real_time(), glib::random_int());
-        Self::from(namespace, &unique_str)
-    }
-
-    /// Create an id from the given `unique_str` with a namespace of "Test".
-    #[cfg(test)]
-    pub fn for_test(unique_str: &str) -> Self {
-        Self::from("Test", unique_str)
+    pub fn generate() -> Self {
+        Self::from(format!("{:x}-{:x}", glib::real_time(), glib::random_int()))
     }
 }
 
@@ -58,8 +60,8 @@ mod test {
     fn unique_generated() {
         for i in 0..1_000_000 {
             assert_ne!(
-                Uid::generate("Test"),
-                Uid::generate("Test"),
+                Uid::generate(),
+                Uid::generate(),
                 "ids are equal after {} iterations",
                 i
             );
@@ -68,26 +70,26 @@ mod test {
 
     #[test]
     fn equality() {
-        assert_eq!(Uid::for_test("A"), Uid::for_test("A"));
-        assert_eq!(Uid::for_test("B"), Uid::for_test("B"));
+        assert_eq!(Uid::from("A"), Uid::from("A"));
+        assert_eq!(Uid::from("B"), Uid::from("B"));
 
-        assert_ne!(Uid::for_test("A"), Uid::for_test("B"));
-        assert_ne!(Uid::for_test("A"), Uid::for_test("B"));
+        assert_ne!(Uid::from("A"), Uid::from("B"));
+        assert_ne!(Uid::from("A"), Uid::from("B"));
     }
 
     #[test]
     fn serde_bincode() {
-        let val = Uid::from("Namespace", "some unique str");
+        let val = Uid::from("some unique str");
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
 
-        let val = Uid::generate("Test");
+        let val = Uid::generate();
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
 
-        let val = Uid::for_test("b");
+        let val = Uid::from("b");
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
@@ -96,44 +98,36 @@ mod test {
     #[test]
     fn serialize() {
         assert_eq!(
-            serde_json::to_string(&Uid::for_test("A")).unwrap().as_str(),
-            "\"Test-A\"",
+            serde_json::to_string(&Uid::from("A")).unwrap().as_str(),
+            "\"A\"",
         );
         assert_eq!(
-            serde_json::to_string(&Uid::from("Namespace", "BB8"))
-                .unwrap()
-                .as_str(),
-            "\"Namespace-BB8\""
+            serde_json::to_string(&Uid::from("BB8")).unwrap().as_str(),
+            "\"BB8\""
         );
     }
 
     #[test]
     fn deserialize() {
-        assert_eq!(
-            Uid::for_test("A"),
-            serde_json::from_str("\"Test-A\"").unwrap()
-        );
-        assert_eq!(
-            Uid::from("Namespace", "BB8"),
-            serde_json::from_str("\"Namespace-BB8\"").unwrap()
-        );
+        assert_eq!(Uid::from("A"), serde_json::from_str("\"A\"").unwrap());
+        assert_eq!(Uid::from("BB8"), serde_json::from_str("\"BB8\"").unwrap());
     }
 
     #[test]
     fn hash_map() {
         let mut hash_map = HashMap::new();
 
-        let id_0 = Uid::for_test("Id0");
+        let id_0 = Uid::from("Id0");
         hash_map.insert(&id_0, 0);
 
-        let id_1 = Uid::for_test("Id1");
+        let id_1 = Uid::from("Id1");
         hash_map.insert(&id_1, 1);
 
-        let id_2 = Uid::for_test("Id2");
+        let id_2 = Uid::from("Id2");
         hash_map.insert(&id_2, 2);
 
         assert_eq!(hash_map.get(&id_0), Some(&0));
         assert_eq!(hash_map.get(&id_1), Some(&1));
-        assert_eq!(hash_map.get(&Uid::for_test("Id2")), Some(&2));
+        assert_eq!(hash_map.get(&Uid::from("Id2")), Some(&2));
     }
 }

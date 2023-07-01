@@ -96,7 +96,7 @@ mod tests {
     use crate::{core::DateTime, model::Uid};
 
     fn new_test_song(last_heard: DateTime, search_term: &str) -> Song {
-        let song = Song::builder(&Uid::for_test(""), search_term, search_term, "").build();
+        let song = Song::builder(&Uid::from(""), search_term, search_term, "").build();
         song.set_last_heard(last_heard);
         song
     }

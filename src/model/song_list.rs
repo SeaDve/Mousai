@@ -371,10 +371,9 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
             let song_link = item.remove("song_link");
             let song_src = item.remove("song_src");
 
-            let id = song_link.as_ref().map_or_else(
-                || Uid::generate("AudD"),
-                |song_link| Uid::from("AudD", song_link.trim_start_matches("https://lis.tn/")),
-            );
+            let id = song_link.as_ref().map_or_else(Uid::generate, |song_link| {
+                Uid::from_prefixed("AudD", song_link.trim_start_matches("https://lis.tn/"))
+            });
 
             let mut song_builder = Song::builder(
                 &id,
@@ -439,7 +438,7 @@ mod test {
     use crate::database;
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&Uid::for_test(id), id, id, id).build()
+        Song::builder(&Uid::from(id), id, id, id).build()
     }
 
     fn assert_n_items_and_db_count_eq(song_list: &SongList, n: usize) {
@@ -526,21 +525,21 @@ mod test {
         let db: SongDatabase = env
             .create_database(&mut wtxn, Some(SONG_LIST_DB_NAME))
             .unwrap();
-        db.put(&mut wtxn, &Uid::for_test("a"), &new_test_song("a"))
+        db.put(&mut wtxn, &Uid::from("a"), &new_test_song("a"))
             .unwrap();
-        db.put(&mut wtxn, &Uid::for_test("b"), &new_test_song("b"))
+        db.put(&mut wtxn, &Uid::from("b"), &new_test_song("b"))
             .unwrap();
         wtxn.commit().unwrap();
 
         let song_list = SongList::load_from_env(env).unwrap();
 
         assert_eq!(
-            song_list.get(&Uid::for_test("a")).unwrap().id_ref(),
-            &Uid::for_test("a")
+            song_list.get(&Uid::from("a")).unwrap().id_ref(),
+            &Uid::from("a")
         );
         assert_eq!(
-            song_list.get(&Uid::for_test("b")).unwrap().id_ref(),
-            &Uid::for_test("b")
+            song_list.get(&Uid::from("b")).unwrap().id_ref(),
+            &Uid::from("b")
         );
 
         assert_n_items_and_db_count_eq(&song_list, 2);
@@ -816,12 +815,12 @@ mod test {
         assert_eq!(n_called.get(), 0);
         assert_eq!(
             song_list
-                .remove_many(&[&Uid::for_test("0")])
+                .remove_many(&[&Uid::from("0")])
                 .unwrap()
                 .pop()
                 .unwrap()
                 .id_ref(),
-            &Uid::for_test("0")
+            &Uid::from("0")
         );
         assert_eq!(n_called.get(), 1);
     }
@@ -843,7 +842,7 @@ mod test {
 
         assert_eq!(n_called.get(), 0);
         assert!(song_list
-            .remove_many(&[&Uid::for_test("0")])
+            .remove_many(&[&Uid::from("0")])
             .unwrap()
             .is_empty());
         assert_eq!(n_called.get(), 0);
@@ -868,7 +867,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[&Uid::for_test("0"), &Uid::for_test("1")])
+                .remove_many(&[&Uid::from("0"), &Uid::from("1")])
                 .unwrap()
                 .len(),
             2
@@ -900,7 +899,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[&Uid::for_test("1"), &Uid::for_test("3")])
+                .remove_many(&[&Uid::from("1"), &Uid::from("3")])
                 .unwrap()
                 .len(),
             2
@@ -927,11 +926,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[
-                    &Uid::for_test("1"),
-                    &Uid::for_test("0"),
-                    &Uid::for_test("1"),
-                ])
+                .remove_many(&[&Uid::from("1"), &Uid::from("0"), &Uid::from("1"),])
                 .unwrap()
                 .len(),
             2
@@ -958,7 +953,7 @@ mod test {
 
         assert_eq!(
             song_list
-                .remove_many(&[&Uid::for_test("1"), &Uid::for_test("0")])
+                .remove_many(&[&Uid::from("1"), &Uid::from("0")])
                 .unwrap()
                 .len(),
             2
@@ -981,7 +976,7 @@ mod test {
         });
 
         assert!(song_list
-            .remove_many(&[&Uid::for_test("0"), &Uid::for_test("3")])
+            .remove_many(&[&Uid::from("0"), &Uid::from("3")])
             .unwrap()
             .is_empty(),);
         assert_eq!(n_called.get(), 0);

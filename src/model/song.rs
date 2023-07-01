@@ -241,7 +241,7 @@ mod test {
     #[test]
     fn id_ref() {
         let song = Song::builder(
-            &Uid::for_test("UniqueSongId"),
+            &Uid::from("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
@@ -253,7 +253,7 @@ mod test {
     #[test]
     fn properties() {
         let song = Song::builder(
-            &Uid::for_test("UniqueSongId"),
+            &Uid::from("UniqueSongId"),
             "Some song",
             "Someone",
             "SomeAlbum",
@@ -303,19 +303,19 @@ mod test {
 
     #[test]
     fn serde_bincode() {
-        let val = SongBuilder::new(&Uid::for_test("a"), "A Title", "A Artist", "A Album").build();
+        let val = SongBuilder::new(&Uid::from("a"), "A Title", "A Artist", "A Album").build();
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
         assert_song_eq(&val, &de_val);
 
-        let val = SongBuilder::new(&Uid::for_test("b"), "B Title", "B Artist", "B Album")
+        let val = SongBuilder::new(&Uid::from("b"), "B Title", "B Artist", "B Album")
             .newly_heard(true)
             .build();
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
         assert_song_eq(&val, &de_val);
 
-        let val = SongBuilder::new(&Uid::for_test("c"), "C Title", "C Artist", "C Album")
+        let val = SongBuilder::new(&Uid::from("c"), "C Title", "C Artist", "C Album")
             .release_date("some value")
             .album_art_link("some value")
             .playback_link("some value")
@@ -325,7 +325,7 @@ mod test {
         let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
         assert_song_eq(&val, &de_val);
 
-        let val = SongBuilder::new(&Uid::for_test("d"), "D Title", "D Artist", "D Album").build();
+        let val = SongBuilder::new(&Uid::from("d"), "D Title", "D Artist", "D Album").build();
         val.set_last_heard(DateTime::now_local());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
@@ -336,7 +336,7 @@ mod test {
     fn deserialize() {
         let song: Song = serde_json::from_str(
             r#"{
-                "id": "Test-UniqueSongId",
+                "id": "UniqueSongId",
                 "title": "Some song",
                 "artist": "Someone",
                 "album": "SomeAlbum",
@@ -351,7 +351,7 @@ mod test {
         )
         .unwrap();
 
-        assert_eq!(song.id_ref(), &Uid::for_test("UniqueSongId"));
+        assert_eq!(song.id_ref(), &Uid::from("UniqueSongId"));
         assert_eq!(song.title(), "Some song");
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");

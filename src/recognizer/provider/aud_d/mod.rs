@@ -36,7 +36,7 @@ impl AudD {
             .data()?;
 
         let mut song_builder = Song::builder(
-            &Uid::from("AudD", data.info_link.trim_start_matches("https://lis.tn/")), // Info link is unique to every song
+            &Uid::from_prefixed("AudD", data.info_link.trim_start_matches("https://lis.tn/")), // Info link is unique to every song
             &data.title,
             &data.artist,
             &data.album,

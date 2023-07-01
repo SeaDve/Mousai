@@ -892,7 +892,7 @@ mod test {
     }
 
     fn new_test_song(id: &str) -> Song {
-        Song::builder(&Uid::for_test(id), id, id, id).build()
+        Song::builder(&Uid::from(id), id, id, id).build()
     }
 
     #[track_caller]
@@ -934,7 +934,7 @@ mod test {
                 .song()
                 .expect("song page must have a song")
                 .id_ref(),
-            &Uid::for_test(expected_song_page_song_id)
+            &Uid::from(expected_song_page_song_id)
         );
     }
 
