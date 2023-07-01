@@ -47,7 +47,7 @@ impl<'a> heed::BytesDecode<'a> for UidCodec {
     type DItem = Uid;
 
     fn bytes_decode(bytes: &'a [u8]) -> Result<Self::DItem, heed::BoxedError> {
-        Str::bytes_decode(bytes).map(|s| Uid(s.into()))
+        Str::bytes_decode(bytes).map(Uid::from)
     }
 }
 
