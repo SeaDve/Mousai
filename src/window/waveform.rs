@@ -57,27 +57,32 @@ mod imp {
             let h_center = width as f64 / 2.0;
 
             let peaks = self.peaks.borrow();
-            let peaks_len = peaks.len();
 
-            // Start drawing lines from the center and work towards the sides.
+            // Since we pop peaks only when the number of peaks exceeds on push, we need to
+            // also handle the case where the window can be resized. This is done by clamping
+            // here the number of peaks to the maximum number of peaks that can be drawn visibly.
+            let n_peaks_to_draw = peaks.len().clamp(0, obj.max_n_peaks() as usize);
+
+            // Use horizontal center as we start drawing lines from the center and work
+            // towards the sides.
             let mut pointer = h_center;
 
-            // More recent peaks are at the end of the list, but their lines are supposed
-            // to be drawn first at the most center part. Thus, we iterate in reverse to
-            // fix that.
-            //
-            // The index is still preserved so that the alpha value and height of the lines
-            // of the first/older peaks are lower and shorter respectively.
-            for (index, peak) in peaks.iter().enumerate().rev() {
+            for (index, peak) in peaks.iter().take(n_peaks_to_draw).enumerate() {
+                // Index is reversed so that the alpha value and height of the lines of the
+                // first/older peaks are lower and shorter respectively.
+                let rev_index = n_peaks_to_draw - index - 1;
+
                 ctx.set_source_rgba(
                     color.red() as f64,
                     color.green() as f64,
                     color.blue() as f64,
-                    color.alpha() as f64 * (index as f64 / peaks_len as f64), // Add feathering
+                    color.alpha() as f64 * (rev_index as f64 / n_peaks_to_draw as f64), // Add feathering
                 );
 
-                let line_height =
-                    adw::Easing::EaseInQuad.ease(index as f64 / peaks_len as f64) * peak * v_center;
+                let line_height = adw::Easing::EaseInQuad
+                    .ease(rev_index as f64 / n_peaks_to_draw as f64)
+                    * peak
+                    * v_center;
 
                 ctx.move_to(pointer, v_center + line_height);
                 ctx.line_to(pointer, v_center - line_height);
@@ -106,11 +111,11 @@ impl Waveform {
     pub fn push_peak(&self, peak: f64) {
         let mut peaks = self.imp().peaks.borrow_mut();
 
-        if peaks.len() as i32 > self.allocated_width() / (2 * GUTTER as i32) {
-            peaks.pop_front();
+        if peaks.len() > self.max_n_peaks() as usize {
+            peaks.pop_back();
         }
 
-        peaks.push_back(peak);
+        peaks.push_front(peak);
 
         self.queue_draw();
     }
@@ -119,6 +124,11 @@ impl Waveform {
         self.imp().peaks.borrow_mut().clear();
 
         self.queue_draw();
+    }
+
+    /// Returns the maximum number of peaks that can be drawn visibly.
+    fn max_n_peaks(&self) -> u32 {
+        self.width().unsigned_abs() / (2 * GUTTER as u32)
     }
 }
 
