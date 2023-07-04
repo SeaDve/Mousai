@@ -9,6 +9,9 @@ use std::{cell::RefCell, collections::VecDeque};
 const GUTTER: f64 = 10.0;
 const LINE_WIDTH: f64 = 6.0;
 
+const NATURAL_WIDTH: i32 = 300;
+const NATURAL_HEIGHT: i32 = 240;
+
 mod imp {
     use super::*;
 
@@ -31,6 +34,14 @@ mod imp {
     impl ObjectImpl for Waveform {}
 
     impl WidgetImpl for Waveform {
+        fn measure(&self, orientation: gtk::Orientation, _for_size: i32) -> (i32, i32, i32, i32) {
+            match orientation {
+                gtk::Orientation::Horizontal => (-1, NATURAL_WIDTH, -1, -1),
+                gtk::Orientation::Vertical => (-1, NATURAL_HEIGHT, -1, -1),
+                _ => unreachable!(),
+            }
+        }
+
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
             let obj = self.obj();
             let width = obj.width();
