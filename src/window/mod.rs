@@ -50,13 +50,13 @@ mod imp {
         #[template_child]
         pub(super) toast_overlay: TemplateChild<adw::ToastOverlay>,
         #[template_child]
-        pub(super) toolbar_view: TemplateChild<adw::ToolbarView>,
-        #[template_child]
         pub(super) stack: TemplateChild<gtk::Stack>,
         #[template_child]
         pub(super) main_view: TemplateChild<HistoryView>,
         #[template_child]
         pub(super) recognizer_view: TemplateChild<RecognizerView>,
+        #[template_child]
+        pub(super) song_bar_revealer: TemplateChild<gtk::Revealer>,
         #[template_child]
         pub(super) song_bar: TemplateChild<SongBar>,
 
@@ -132,7 +132,7 @@ mod imp {
             obj.setup_signals();
 
             obj.load_window_size();
-            obj.update_song_bar_visibility();
+            obj.update_song_bar_revealer();
             obj.update_stack();
             obj.update_toggle_playback_action();
             obj.update_toggle_search_action();
@@ -442,7 +442,7 @@ impl Window {
         imp.player
             .connect_song_notify(clone!(@weak self as obj => move |_| {
                 obj.update_toggle_playback_action();
-                obj.update_song_bar_visibility();
+                obj.update_song_bar_revealer();
             }));
         imp.player
             .connect_error(clone!(@weak self as obj => move |_, _| {
@@ -456,7 +456,7 @@ impl Window {
 
         imp.main_view.connect_is_selection_mode_active_notify(
             clone!(@weak self as obj => move |_| {
-                obj.update_song_bar_visibility();
+                obj.update_song_bar_revealer();
             }),
         );
 
@@ -466,9 +466,9 @@ impl Window {
             }));
     }
 
-    fn update_song_bar_visibility(&self) {
+    fn update_song_bar_revealer(&self) {
         let imp = self.imp();
-        imp.toolbar_view.set_reveal_bottom_bars(
+        imp.song_bar_revealer.set_reveal_child(
             imp.player.song().is_some() && !imp.main_view.is_selection_mode_active(),
         );
     }
