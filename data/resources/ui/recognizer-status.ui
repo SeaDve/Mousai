@@ -29,6 +29,8 @@
             <property name="margin-end">16</property>
             <property name="margin-top">10</property>
             <property name="margin-bottom">10</property>
+            <property name="width-request">16</property>
+            <property name="height-request">16</property>
             <property name="valign">center</property>
           </object>
         </property>

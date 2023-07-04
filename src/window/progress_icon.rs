@@ -6,8 +6,6 @@ use std::{
     f64::consts::{FRAC_PI_2, TAU},
 };
 
-const SIZE_REQUEST: i32 = 16;
-
 mod imp {
     use super::*;
 
@@ -27,12 +25,6 @@ mod imp {
 
     impl ObjectImpl for ProgressIcon {
         crate::derived_properties!();
-
-        fn constructed(&self) {
-            self.parent_constructed();
-
-            self.obj().set_size_request(SIZE_REQUEST, SIZE_REQUEST);
-        }
     }
 
     impl WidgetImpl for ProgressIcon {
