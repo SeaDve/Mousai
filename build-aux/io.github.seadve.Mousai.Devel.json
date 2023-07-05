@@ -128,7 +128,7 @@
                     "name": "gtk",
                     "buildsystem": "meson",
                     "config-opts": [
-                        "-Ddemos=false",
+                        "-Dbuild-demos=false",
                         "-Dbuild-testsuite=false",
                         "-Dbuild-examples=false",
                         "-Dbuild-tests=false"
@@ -140,7 +140,7 @@
                         {
                             "type": "git",
                             "url": "https://gitlab.gnome.org/GNOME/gtk.git",
-                            "tag": "4.11.3"
+                            "tag": "4.11.4"
                         }
                     ]
                 }
