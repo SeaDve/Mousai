@@ -413,9 +413,10 @@ impl Recognizer {
     fn update_offline_mode(&self) {
         let network_monitor = gio::NetworkMonitor::default();
 
-        // We just assume API servers are not reachable in limited or
-        // portal connectivities
-        let is_offline_mode = network_monitor.connectivity() != gio::NetworkConnectivity::Full;
+        // We catch the case anyway where the server is unreachable but network monitor shows
+        // full connection, so it won't be a problem if we not enable offline mode on limited or
+        // portal connection.
+        let is_offline_mode = network_monitor.connectivity() == gio::NetworkConnectivity::Local;
 
         if is_offline_mode == self.is_offline_mode() {
             return;
