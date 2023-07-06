@@ -10,7 +10,7 @@ use std::cell::RefCell;
 #[derive(Default)]
 
 pub struct Recorder {
-    current_data: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
+    pipeline: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
 }
 
 impl Drop for Recorder {
@@ -28,7 +28,7 @@ impl Recorder {
         peak_callback: impl Fn(f64) + 'static,
     ) -> Result<()> {
         ensure!(
-            self.current_data.borrow().is_none(),
+            self.pipeline.borrow().is_none(),
             "there is already a recording in progress"
         );
 
@@ -44,15 +44,17 @@ impl Recorder {
                 }),
             )
             .unwrap();
+        self.pipeline
+            .replace(Some((pipeline.clone(), output_stream)));
+
         pipeline.set_state(gst::State::Playing)?;
 
-        self.current_data.replace(Some((pipeline, output_stream)));
         Ok(())
     }
 
     pub fn stop(&self) -> Result<glib::Bytes> {
         let (pipeline, stream) = self
-            .current_data
+            .pipeline
             .take()
             .ok_or_else(|| anyhow!("Recording has not been started"))?;
 
@@ -68,23 +70,25 @@ impl Recorder {
 fn handle_bus_message(
     pipeline: &gst::Pipeline,
     message: &gst::Message,
-    handler: &impl Fn(f64),
+    peak_callback: &impl Fn(f64),
 ) -> Continue {
     use gst::MessageView;
 
     match message.view() {
-        MessageView::Element(element) => {
-            if let Some(structure) = element.structure() {
+        MessageView::Element(e) => {
+            tracing::trace!("Received element message on bus: {:?}", e);
+
+            if let Some(structure) = e.structure() {
                 if structure.has_name("level") {
                     let peak = structure
                         .get::<&glib::ValueArray>("peak")
                         .unwrap()
-                        .nth(0)
+                        .first()
                         .unwrap()
                         .get::<f64>()
                         .unwrap();
                     let normalized_peak = 10_f64.powf(peak / 20.0);
-                    handler(normalized_peak);
+                    peak_callback(normalized_peak);
                 }
             }
 
