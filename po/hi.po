@@ -2,64 +2,67 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Hemish <hemish04082005@gmail.com>, 2022.
+# Th3 A6add0n <th3.a6add0n@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-07-12 11:53+0000\n"
+"Last-Translator: Th3 A6add0n <th3.a6add0n@gmail.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/kooha/mousai/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
 #: src/main.rs:58
 msgid "Mousai"
-msgstr "मोसाई"
+msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "सेकंड्स में गाने पहचानें"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "शज़ाम;ऑडियो;संगीत;गाना;रेकॉग्नाएस;पहचाने;रेकॉग्नीशन;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "विंडो की चौड़ाई"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "विंडो की लम्बाई"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "क्या विंडो अधिकतम बड़ा है"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "ऑडियो रिकॉर्डिंग में उपयोग के लिए पसंदीदा ऑडियो स्रोत"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "AudD रेकॉग्नीशन द्वारा इस्तेमाल किया गया API टोकन"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "लेगेसी (माइग्रेशन के लिए )"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
+"उपयोग में आसान इंटरफ़ेस के साथ उन गानों की खोज करें जिन्हें आप जानना चाहते "
+"हैं।"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid ""
@@ -67,49 +70,53 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai एक सरल एप्लिकेशन है जो शज़ाम के समान गानों को पहचान सकता है। बस \"सुनें"
+"\" बटन को दबाएं और फिर कुछ क्षण प्रतीक्षा करें। यह जादुई ढंग से उस गीत का "
+"शीर्षक और कलाकार बता देगा!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
+"नोट: यह audd.io की API का उपयोग करता है, इसलिए अधिक परीक्षण प्राप्त करने के "
+"लिए उनकी साइट पर लॉग इन करना आवश्यक है।"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid "Why you will love Mousai?"
-msgstr ""
+msgstr "आप Mousai को क्यों पसंद करेंगे?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Recognize songs within seconds or save for later when offline"
-msgstr ""
+msgstr "🎵 सेकंड में गाने पहचानें या ऑफ़लाइन होने पर बाद के लिए सहेजें"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Use microphone or desktop audio"
-msgstr ""
+msgstr "🎙️ माइक्रोफ़ोन या डेस्कटॉप ऑडियो का उपयोग करें"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 रेकॉग्नाइस्ड गीतों की एक सूची बनाएं"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 त्वरित रूप से इंटरफ़ेस के भीतर गीत का पूर्वावलोकन करें"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 विभिन्न प्रदाताओं से गीत ब्राउज़ करें और सुनें"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 उपयोग में आसान यूजर इंटरफेस"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
-msgstr ""
+msgstr "गंभीर डेटाबेस त्रुटि"
 
 #: data/resources/ui/database-error-window.ui:21
 msgid ""
@@ -121,52 +128,58 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"यह संभवतः किसी छेड़छाड़ या खराब डेटाबेस के कारण हुआ है। आप एप्लिकेशन डेटा "
+"साफ़ करने का प्रयास कर सकते हैं. हालाँकि, यह अनुशंसित नहीं है और यह करने से "
+"आपके सभी गाने और सहेजी गई रिकॉर्डिंग हट जाएँगी।\n"
+"\n"
+"इस समस्या की रिपोर्ट करने के लिए, कृपया करके Mousai को टर्मिनल से चलाएं लॉग्"
+"स को शामिल करने के लिए और फिर बग की रिपोर्ट <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">issue page </a> पर दर्ज करें।"
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
-msgstr "सेटिंग्स (_P)"
+msgstr "_वरीयता"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "कूंजीपटल शॉर्टकट"
+msgstr "_कीबोर्ड शॉर्टकट्स"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
-msgstr ""
+msgstr "_Mousai के बारे में"
 
 #: data/resources/ui/history-view.ui:22
 msgid "Select _All"
-msgstr ""
+msgstr "सभी_चुनें"
 
 #: data/resources/ui/history-view.ui:26
 msgid "Select _None"
-msgstr ""
+msgstr "कुछ ना_चुनें"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "गीत को पहचानो"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
-msgstr ""
+msgstr "सुनें"
 
 #: data/resources/ui/history-view.ui:65
-#, fuzzy
 msgid "Main Menu"
 msgstr "मुख्य मेन्यू"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
-msgstr ""
+msgstr "चुनें"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "गाना ढूंढें"
 
 #: data/resources/ui/history-view.ui:96
+#, fuzzy
 msgid "Cancel Selection"
-msgstr ""
+msgstr "चयन रद्द करें"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -174,19 +187,19 @@ msgstr "रद्द"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "गानें ढूंढें"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "गानों को पहचानना शुरू करें!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "शुरू करने के लिए \"सुनें\" बटन को दबाएं"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "कोई परिणाम नहीं"
 
 #: data/resources/ui/preferences-window.ui:8
 #, fuzzy
@@ -195,26 +208,28 @@ msgstr "आम (General)"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "पसंदीदा ऑडियो स्रोत"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "उपलब्ध होने पर उपयोग करने के लिए ऑडियो स्रोत निर्धारित करता है"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:65
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"आप अपना API टोकन <a href=\"https://dashboard.audd.io/\">audd.io</a> से ले "
+"सकते हैं. इसको खाली रखने पर आपको हर दिन सिर्फ कुछ ही ट्रायल मिलेंगे"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API टोकन"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Back"
@@ -226,11 +241,11 @@ msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "सुनना रद्द करें"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "ऑफलाइन मोड"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -240,12 +255,12 @@ msgstr "आम (General)"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "मुख्य मेनू खोलें"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "ढूंढें"
 
 #: data/resources/ui/shortcuts.ui:26
 #, fuzzy
@@ -271,17 +286,17 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "\"सुनो\" टॉगल करें"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "प्लेबैक टॉगल करें"
 
 #: data/resources/ui/shortcuts.ui:63
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "नेविगेशन"
 
 #: data/resources/ui/shortcuts.ui:66
 msgctxt "shortcut window"
