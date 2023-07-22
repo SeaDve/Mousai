@@ -40,7 +40,7 @@ mod imp {
         }
 
         fn n_items(&self) -> u32 {
-            self.obj().len() as u32
+            self.map.borrow().len() as u32
         }
 
         fn item(&self, position: u32) -> Option<glib::Object> {
@@ -88,14 +88,6 @@ impl ExternalLinks {
     pub fn get(&self, key: ExternalLinkKey) -> Option<String> {
         self.imp().map.borrow().get(key.as_ref()).cloned()
     }
-
-    pub fn len(&self) -> usize {
-        self.imp().map.borrow().len()
-    }
-
-    pub fn is_empty(&self) -> bool {
-        self.len() == 0
-    }
 }
 
 impl Default for ExternalLinks {
@@ -112,10 +104,10 @@ impl Serialize for ExternalLinks {
 
 impl<'de> Deserialize<'de> for ExternalLinks {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-        let external_links = IndexMap::<String, String>::deserialize(deserializer)?;
+        let map = IndexMap::<String, String>::deserialize(deserializer)?;
 
         let this = Self::new();
-        this.imp().map.replace(external_links);
+        this.imp().map.replace(map);
 
         Ok(this)
     }
@@ -221,7 +213,7 @@ mod tests {
         )
         .unwrap();
 
-        assert_eq!(links.len(), 5);
+        assert_eq!(links.n_items(), 5);
         assert_eq!(
             links.get(ExternalLinkKey::AppleMusicUrl).as_deref(),
             Some("https://apple_music.link")

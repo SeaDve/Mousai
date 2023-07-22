@@ -282,7 +282,7 @@ mod test {
         assert_eq!(v1.album(), v2.album());
         assert_eq!(v1.release_date(), v2.release_date());
 
-        assert_eq!(v1.external_links().len(), v2.external_links().len());
+        assert_eq!(v1.external_links().n_items(), v2.external_links().n_items());
         for (v1_item, v2_item) in v1
             .external_links()
             .iter::<ExternalLink>()
@@ -356,7 +356,7 @@ mod test {
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
-        assert_eq!(song.external_links().len(), 0);
+        assert_eq!(song.external_links().n_items(), 0);
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
