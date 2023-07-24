@@ -72,7 +72,10 @@ test(
   cargo,
   args: [
     'clippy',
-    cargo_options
+    cargo_options,
+    '--',
+    '-D',
+    'warnings'
   ],
   env: [
     cargo_env
