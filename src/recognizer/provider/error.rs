@@ -25,7 +25,7 @@ impl error::Error for RecognizeError {}
 
 impl fmt::Display for RecognizeError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if let Some(message) = self.message() {
+        if let Some(message) = &self.message {
             write!(f, "{}: {}", self.title(), message)
         } else {
             write!(f, "{}", self.title())
@@ -54,10 +54,6 @@ impl RecognizeError {
             RecognizeErrorKind::Connection => gettext("Cannot Connect to the Server"),
             RecognizeErrorKind::OtherPermanent => gettext("Received Other Permanent Error"),
         }
-    }
-
-    pub fn message(&self) -> Option<&str> {
-        self.message.as_deref()
     }
 
     /// Whether the failure is permanent (i.e. "no matches found for
