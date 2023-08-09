@@ -31,9 +31,8 @@ mod imp {
         type ParentType = gtk::Sorter;
     }
 
-    impl ObjectImpl for SongSorter {
-        crate::derived_properties!();
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for SongSorter {}
 
     impl SorterImpl for SongSorter {
         fn compare(&self, item_1: &glib::Object, item_2: &glib::Object) -> gtk::Ordering {

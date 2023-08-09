@@ -7,7 +7,7 @@ mod song_sorter;
 mod uid;
 
 use fuzzy_matcher::skim::SkimMatcherV2;
-use once_cell::sync::Lazy;
+use gtk::glib::once_cell::sync::Lazy;
 
 pub use self::{
     external_link::ExternalLink,

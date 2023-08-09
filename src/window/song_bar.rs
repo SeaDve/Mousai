@@ -4,9 +4,11 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, time::Duration};
+use std::{
+    cell::{OnceCell, RefCell},
+    time::Duration,
+};
 
 use super::{
     album_cover::AlbumCover,
@@ -14,7 +16,6 @@ use super::{
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
 use crate::{
-    core::ClockTimeExt,
     model::Song,
     player::{Player, PlayerState},
 };
@@ -25,8 +26,7 @@ const BACKGROUND_OPACITY: f64 = 0.25;
 
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
@@ -280,8 +280,8 @@ impl SongBar {
             .playback_position_duration_label
             .set_label(&format!(
                 "{} / {}",
-                player.position().to_minute_sec_str(),
-                player.duration().to_minute_sec_str()
+                format_clock_time_minute_sec(player.position()),
+                format_clock_time_minute_sec(player.duration())
             ));
     }
 }
@@ -289,5 +289,36 @@ impl SongBar {
 impl Default for SongBar {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+/// Displays `gst::ClockTime` in a `MM∶SS` format with padding for SS.
+pub fn format_clock_time_minute_sec(clock_time: gst::ClockTime) -> String {
+    let seconds = clock_time.seconds();
+
+    let minutes_display = seconds / 60;
+    let seconds_display = seconds % 60;
+
+    format!("{}∶{:02}", minutes_display, seconds_display)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_format_clock_time_minute_sec() {
+        #[track_caller]
+        fn test(clock_time: gst::ClockTime, string: &str) {
+            assert_eq!(format_clock_time_minute_sec(clock_time), string);
+        }
+
+        test(gst::ClockTime::ZERO, "0∶00");
+        test(gst::ClockTime::from_seconds(31), "0∶31");
+        test(gst::ClockTime::from_seconds(59 * 60 + 59), "59∶59");
+
+        test(gst::ClockTime::from_seconds(60 * 60), "60∶00");
+        test(gst::ClockTime::from_seconds(100 * 60 + 20), "100∶20");
+        test(gst::ClockTime::MAX, "307445734∶33");
     }
 }

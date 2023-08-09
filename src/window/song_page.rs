@@ -25,8 +25,7 @@ const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
     use super::*;
-    use glib::{subclass::Signal, WeakRef};
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal, WeakRef};
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::SongPage)]
@@ -84,9 +83,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for SongPage {
-        crate::derived_properties!();
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder("song-remove-request")

@@ -7,9 +7,12 @@ use gtk::{
 };
 use heed::types::SerdeBincode;
 use indexmap::IndexMap;
-use once_cell::unsync::OnceCell;
 
-use std::{cell::RefCell, collections::BTreeSet, time::Instant};
+use std::{
+    cell::{OnceCell, RefCell},
+    collections::BTreeSet,
+    time::Instant,
+};
 
 use super::Recording;
 use crate::{

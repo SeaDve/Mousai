@@ -5,9 +5,8 @@ use gtk::{
     glib::{self, clone, closure},
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
 
-use std::cell::{Cell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 
 use super::{
     recognized_page::RecognizedPage, recognizer_status::RecognizerStatus, song_page::SongPage,
@@ -168,9 +167,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for HistoryView {
-        crate::derived_properties!();
-
         fn constructed(&self) {
             self.parent_constructed();
 

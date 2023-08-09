@@ -1,10 +1,9 @@
 use adw::{prelude::*, subclass::prelude::*};
 use anyhow::{Context, Result};
 use gtk::{gio, glib};
-use once_cell::unsync::OnceCell;
 use soup::prelude::*;
 
-use std::time::Instant;
+use std::{cell::OnceCell, time::Instant};
 
 use crate::{
     about,
@@ -47,6 +46,8 @@ mod imp {
             self.parent_activate();
 
             if let Some(window) = self.window.get() {
+                debug_assert!(self.env.get().is_some(), "env must be initialized too");
+
                 let window = window.upgrade().unwrap();
                 window.present();
                 return;
@@ -54,11 +55,13 @@ mod imp {
 
             let obj = self.obj();
 
-            match self.env.get_or_try_init(init_env) {
-                Ok((_, song_history, recordings)) => {
+            // TODO use `get_or_try_init` once it's stable
+            match init_env() {
+                Ok((env, song_history, recordings)) => {
                     let window = Window::new(&obj);
-                    window.bind_models(song_history, recordings);
+                    window.bind_models(&song_history, &recordings);
                     self.window.set(window.downgrade()).unwrap();
+                    self.env.set((env, song_history, recordings)).unwrap();
                     window.present();
                 }
                 Err(err) => {

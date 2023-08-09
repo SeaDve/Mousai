@@ -1,3 +1,4 @@
+use gst::bus::BusWatchGuard;
 use gst_play::prelude::*;
 use gtk::{
     glib::{self, clone, closure_local},
@@ -5,10 +6,9 @@ use gtk::{
     subclass::prelude::*,
 };
 use mpris_player::{Metadata as MprisMetadata, MprisPlayer, PlaybackStatus as MprisPlaybackStatus};
-use once_cell::unsync::OnceCell;
 
 use std::{
-    cell::{Cell, RefCell},
+    cell::{Cell, OnceCell, RefCell},
     sync::Arc,
 };
 
@@ -30,8 +30,7 @@ pub enum PlayerState {
 
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Player)]
@@ -49,9 +48,11 @@ mod imp {
         #[property(get)]
         pub(super) duration: Cell<gst::ClockTime>,
 
-        pub(super) metadata: RefCell<MprisMetadata>,
         pub(super) gst_play: gst_play::Play,
+        pub(super) bus_watch_guard: OnceCell<BusWatchGuard>,
+
         pub(super) mpris_player: OnceCell<Arc<MprisPlayer>>,
+        pub(super) metadata: RefCell<MprisMetadata>,
     }
 
     #[glib::object_subclass]
@@ -60,9 +61,8 @@ mod imp {
         type Type = super::Player;
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for Player {
-        crate::derived_properties!();
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder("error")
@@ -78,26 +78,21 @@ mod imp {
 
             let obj = self.obj();
 
-            self.gst_play
+            let bus_watch_guard = self.gst_play
                 .message_bus()
                 .add_watch_local(
-                    clone!(@weak obj => @default-return Continue(false), move |_, message| {
+                    clone!(@weak obj => @default-return glib::ControlFlow::Continue, move |_, message| {
                         if gst_play::Play::is_play_message(message) {
                             let play_message = gst_play::PlayMessage::parse(message).unwrap();
                             obj.handle_gst_play_message(play_message);
                         } else {
                             tracing::trace!("Received other bus message: {:?}", message.view());
                         }
-                        Continue(true)
+                        glib::ControlFlow::Continue
                     }),
                 )
                 .unwrap();
-        }
-
-        fn dispose(&self) {
-            if let Err(err) = self.gst_play.message_bus().remove_watch() {
-                tracing::warn!("Failed to remove message bus watch: {:?}", err);
-            }
+            self.bus_watch_guard.set(bus_watch_guard).unwrap();
         }
     }
 

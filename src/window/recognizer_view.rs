@@ -4,7 +4,8 @@ use gtk::{
     glib::{self, clone},
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
+
+use std::cell::OnceCell;
 
 use super::waveform::Waveform;
 use crate::recognizer::{Recognizer, RecognizerState};

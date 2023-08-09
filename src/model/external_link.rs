@@ -1,5 +1,6 @@
 use gtk::glib::{self, subclass::prelude::*};
-use once_cell::unsync::OnceCell;
+
+use std::cell::OnceCell;
 
 mod imp {
     use super::*;

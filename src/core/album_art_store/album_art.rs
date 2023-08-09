@@ -1,8 +1,9 @@
 use anyhow::{Context, Result};
 use futures_util::lock::Mutex;
 use gtk::{gdk, glib};
-use once_cell::unsync::OnceCell;
 use soup::prelude::*;
+
+use std::cell::OnceCell;
 
 // TODO
 // - Don't load AlbumArt if network is metered
@@ -49,7 +50,7 @@ impl AlbumArt {
             .session
             .send_and_read_future(
                 &soup::Message::new("GET", &self.download_url)?,
-                glib::PRIORITY_LOW,
+                glib::Priority::LOW,
             )
             .await
             .context("Failed to download album art bytes")?;
@@ -57,21 +58,9 @@ impl AlbumArt {
 
         let texture = gdk::Texture::from_bytes(&bytes)
             .context("Failed to load album art texture from bytes")?;
-        let texture = self.set_and_get_cache(texture);
+        self.cache.set(texture).unwrap();
 
-        Ok(texture)
-    }
-
-    fn set_and_get_cache(&self, texture: gdk::Texture) -> &gdk::Texture {
-        match self.cache.try_insert(texture) {
-            Ok(final_value) => final_value,
-            Err((final_value, texture)) => {
-                unreachable!(
-                    "cache must not already be set; is_same_instance = {}",
-                    final_value == &texture,
-                );
-            }
-        }
+        Ok(self.cache.get().unwrap())
     }
 }
 

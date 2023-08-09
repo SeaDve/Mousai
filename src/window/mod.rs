@@ -21,7 +21,8 @@ use gtk::{
     gdk, gio,
     glib::{self, clone},
 };
-use once_cell::unsync::OnceCell;
+
+use std::cell::OnceCell;
 
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
@@ -142,7 +143,7 @@ mod imp {
     impl WidgetImpl for Window {}
 
     impl WindowImpl for Window {
-        fn close_request(&self) -> gtk::Inhibit {
+        fn close_request(&self) -> glib::Propagation {
             let obj = self.obj();
 
             if let Err(err) = obj.save_window_size() {

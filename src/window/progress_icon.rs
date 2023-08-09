@@ -23,9 +23,8 @@ mod imp {
         type ParentType = gtk::Widget;
     }
 
-    impl ObjectImpl for ProgressIcon {
-        crate::derived_properties!();
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for ProgressIcon {}
 
     impl WidgetImpl for ProgressIcon {
         fn snapshot(&self, snapshot: &gtk::Snapshot) {

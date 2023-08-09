@@ -125,7 +125,7 @@ impl Provider for AudD {
 
         let response_bytes = utils::app_instance()
             .session()
-            .send_and_read_future(&message, glib::PRIORITY_DEFAULT)
+            .send_and_read_future(&message, glib::Priority::default())
             .await
             .map_err(|err| {
                 if err.matches(gio::ResolverError::NotFound)

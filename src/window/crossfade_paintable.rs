@@ -4,9 +4,8 @@ use gtk::{
     glib::{self, clone, closure_local},
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
 
-use std::cell::{Cell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 
 use crate::{model::Song, utils};
 
@@ -42,6 +41,7 @@ mod imp {
         type Interfaces = (gdk::Paintable,);
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for CrossfadePaintable {
         fn constructed(&self) {
             self.parent_constructed();
@@ -50,7 +50,7 @@ mod imp {
 
             let obj = self.obj();
 
-            let paintable_signal_group = glib::SignalGroup::new(gdk::Paintable::static_type());
+            let paintable_signal_group = glib::SignalGroup::new::<gdk::Paintable>();
             paintable_signal_group.connect_closure(
                 "invalidate-contents",
                 false,
@@ -69,7 +69,7 @@ mod imp {
                 .set(paintable_signal_group)
                 .unwrap();
 
-            let prev_paintable_signal_group = glib::SignalGroup::new(gdk::Paintable::static_type());
+            let prev_paintable_signal_group = glib::SignalGroup::new::<gdk::Paintable>();
             prev_paintable_signal_group.connect_closure(
                 "invalidate-contents",
                 false,
@@ -95,8 +95,6 @@ mod imp {
                 .build();
             self.fade_animation.set(fade_animation).unwrap();
         }
-
-        crate::derived_properties!();
     }
 
     impl PaintableImpl for CrossfadePaintable {
@@ -211,7 +209,7 @@ impl CrossfadePaintable {
             }
 
             let join_handle = utils::spawn(
-                glib::PRIORITY_LOW,
+                glib::Priority::LOW,
                 clone!(@weak self as obj, @weak album_art => async move {
                     match album_art.texture().await {
                         Ok(texture) => {

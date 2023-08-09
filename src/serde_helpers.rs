@@ -1,6 +1,7 @@
-use ::once_cell::unsync::OnceCell;
 use gtk::glib;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
+use std::cell::OnceCell;
 
 pub mod once_cell {
     use super::*;
@@ -18,7 +19,7 @@ pub mod once_cell {
         T: Deserialize<'de>,
     {
         let val = Option::<T>::deserialize(deserializer)?;
-        Ok(val.map_or_else(OnceCell::new, OnceCell::with_value))
+        Ok(val.map_or_else(OnceCell::new, OnceCell::from))
     }
 }
 
@@ -38,7 +39,7 @@ pub mod once_cell_gbytes {
     {
         let val = Option::<Vec<u8>>::deserialize(deserializer)?;
         Ok(val.map_or_else(OnceCell::new, |val| {
-            OnceCell::with_value(glib::Bytes::from_owned(val))
+            OnceCell::from(glib::Bytes::from_owned(val))
         }))
     }
 }
@@ -66,8 +67,8 @@ mod tests {
         assert_eq!(val, de_val);
 
         let val = Test {
-            once_cell: OnceCell::with_value(100),
-            once_cell_gbytes: OnceCell::with_value(glib::Bytes::from_owned(vec![0])),
+            once_cell: OnceCell::from(100),
+            once_cell_gbytes: OnceCell::from(glib::Bytes::from_owned(vec![0])),
         };
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Test>(&bytes).unwrap();

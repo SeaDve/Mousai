@@ -3,7 +3,8 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
+
+use std::cell::OnceCell;
 
 use super::progress_icon::ProgressIcon;
 use crate::{i18n::gettext_f, recognizer::Recognizer};
@@ -15,8 +16,7 @@ use crate::{i18n::gettext_f, recognizer::Recognizer};
 
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-status.ui")]

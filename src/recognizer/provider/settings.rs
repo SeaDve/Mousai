@@ -1,9 +1,8 @@
 use anyhow::{anyhow, Error, Result};
 use gtk::glib::{self, translate::TryFromGlib};
-use once_cell::sync::OnceCell;
 
 use std::{
-    sync::{Mutex, MutexGuard},
+    sync::{Mutex, MutexGuard, OnceLock},
     time::Duration,
 };
 
@@ -74,7 +73,7 @@ pub struct ProviderSettings {
 impl ProviderSettings {
     /// Acquire lock to the global `ProviderSettings`
     pub fn lock() -> MutexGuard<'static, Self> {
-        static INSTANCE: OnceCell<Mutex<ProviderSettings>> = OnceCell::new();
+        static INSTANCE: OnceLock<Mutex<ProviderSettings>> = OnceLock::new();
 
         INSTANCE
             .get_or_init(|| Mutex::new(ProviderSettings::default()))

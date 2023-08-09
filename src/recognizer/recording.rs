@@ -1,8 +1,7 @@
 use gtk::{glib, prelude::*, subclass::prelude::*};
-use once_cell::unsync::OnceCell;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
-use std::cell::{Cell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 
 use super::RecognizeError;
 use crate::{core::DateTime, model::Song, serde_helpers};
@@ -36,9 +35,8 @@ mod imp {
         type Type = super::Recording;
     }
 
-    impl ObjectImpl for Recording {
-        crate::derived_properties!();
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for Recording {}
 
     impl Recording {
         fn set_recognize_result(&self, result: Option<BoxedRecognizeResult>) {

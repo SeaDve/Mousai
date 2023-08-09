@@ -1,10 +1,9 @@
 use anyhow::Result;
 use gtk::{glib, prelude::*, subclass::prelude::*};
-use once_cell::unsync::OnceCell;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{
-    cell::{Cell, RefCell},
+    cell::{Cell, OnceCell, RefCell},
     rc::Rc,
 };
 
@@ -62,9 +61,8 @@ mod imp {
         type Type = super::Song;
     }
 
-    impl ObjectImpl for Song {
-        crate::derived_properties!();
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for Song {}
 
     impl Song {
         fn set_last_heard(&self, last_heard: Option<DateTime>) {

@@ -53,9 +53,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for AlbumCover {
-        crate::derived_properties!();
-
         fn constructed(&self) {
             self.parent_constructed();
 
@@ -126,7 +125,7 @@ impl AlbumCover {
             }
 
             let join_handle = utils::spawn(
-                glib::PRIORITY_LOW,
+                glib::Priority::LOW,
                 clone!(@weak self as obj, @weak album_art => async move {
                     match album_art.texture().await {
                         Ok(texture) => {

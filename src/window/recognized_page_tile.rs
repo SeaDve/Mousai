@@ -12,8 +12,7 @@ use crate::{core::DateTime, model::Song, player::Player};
 
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
     use std::marker::PhantomData;
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
@@ -48,9 +47,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for RecognizedPageTile {
-        crate::derived_properties!();
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> =
                 Lazy::new(|| vec![Signal::builder("activated").build()]);

@@ -4,17 +4,15 @@ use adw::{
 };
 use gettextrs::ngettext;
 use gtk::glib::{self, clone, closure_local};
-use once_cell::unsync::OnceCell;
 
-use std::cell::{Cell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 
 use super::{recognized_page_tile::RecognizedPageTile, AdaptiveMode};
 use crate::{i18n::ngettext_f, model::Song, player::Player};
 
 mod imp {
     use super::*;
-    use glib::{subclass::Signal, WeakRef};
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal, WeakRef};
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPage)]
@@ -49,9 +47,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for RecognizedPage {
-        crate::derived_properties!();
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![Signal::builder("song-activated")

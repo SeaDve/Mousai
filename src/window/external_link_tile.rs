@@ -1,8 +1,7 @@
 use gettextrs::gettext;
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
-use once_cell::unsync::OnceCell;
 
-use std::str::FromStr;
+use std::{cell::OnceCell, str::FromStr};
 
 use crate::{
     i18n::gettext_f,
@@ -40,9 +39,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for ExternalLinkTile {
-        crate::derived_properties!();
-
         fn constructed(&self) {
             self.parent_constructed();
 

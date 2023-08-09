@@ -1,5 +1,5 @@
 use anyhow::{anyhow, ensure, Result};
-use gst::prelude::*;
+use gst::{bus::BusWatchGuard, prelude::*};
 use gtk::{
     gio::{self, prelude::*},
     glib::{self, clone},
@@ -10,7 +10,7 @@ use std::cell::RefCell;
 #[derive(Default)]
 
 pub struct Recorder {
-    pipeline: RefCell<Option<(gst::Pipeline, gio::MemoryOutputStream)>>,
+    pipeline: RefCell<Option<(gst::Pipeline, BusWatchGuard, gio::MemoryOutputStream)>>,
 }
 
 impl Drop for Recorder {
@@ -35,17 +35,17 @@ impl Recorder {
         let output_stream = gio::MemoryOutputStream::new_resizable();
         let pipeline = create_pipeline(&output_stream, device_name)?;
 
-        pipeline
+        let bus_watch_guard = pipeline
             .bus()
             .unwrap()
             .add_watch_local(
-                clone!(@weak pipeline => @default-return Continue(false), move |_, message| {
+                clone!(@weak pipeline => @default-return glib::ControlFlow::Break, move |_, message| {
                     handle_bus_message(&pipeline, message, &peak_callback)
                 }),
             )
             .unwrap();
         self.pipeline
-            .replace(Some((pipeline.clone(), output_stream)));
+            .replace(Some((pipeline.clone(), bus_watch_guard, output_stream)));
 
         pipeline.set_state(gst::State::Playing)?;
 
@@ -53,15 +53,13 @@ impl Recorder {
     }
 
     pub fn stop(&self) -> Result<glib::Bytes> {
-        let (pipeline, stream) = self
+        let (pipeline, _bus_watch_guard, stream) = self
             .pipeline
             .take()
             .ok_or_else(|| anyhow!("Recording has not been started"))?;
 
         pipeline.set_state(gst::State::Null)?;
         stream.close(gio::Cancellable::NONE)?;
-
-        let _ = pipeline.bus().unwrap().remove_watch();
 
         Ok(stream.steal_as_bytes())
     }
@@ -71,7 +69,7 @@ fn handle_bus_message(
     pipeline: &gst::Pipeline,
     message: &gst::Message,
     peak_callback: &impl Fn(f64),
-) -> Continue {
+) -> glib::ControlFlow {
     use gst::MessageView;
 
     match message.view() {
@@ -92,12 +90,12 @@ fn handle_bus_message(
                 }
             }
 
-            Continue(true)
+            glib::ControlFlow::Continue
         }
         MessageView::Eos(_) => {
             tracing::debug!("Eos signal received from record bus");
 
-            Continue(false)
+            glib::ControlFlow::Break
         }
         MessageView::Error(e) => {
             let current_state = pipeline.state(None);
@@ -105,7 +103,7 @@ fn handle_bus_message(
 
             // TODO handle these errors
 
-            Continue(false)
+            glib::ControlFlow::Break
         }
         MessageView::StateChanged(sc) => {
             if message.src() != Some(pipeline.upcast_ref::<gst::Object>()) {
@@ -117,7 +115,7 @@ fn handle_bus_message(
                     sc.old(),
                     sc.current(),
                 );
-                return Continue(true);
+                return glib::ControlFlow::Continue;
             }
 
             tracing::debug!(
@@ -126,19 +124,19 @@ fn handle_bus_message(
                 sc.current(),
             );
 
-            Continue(true)
+            glib::ControlFlow::Continue
         }
         MessageView::Warning(w) => {
             tracing::warn!("Received warning message on bus: {:?}", w);
-            Continue(true)
+            glib::ControlFlow::Continue
         }
         MessageView::Info(i) => {
             tracing::debug!("Received info message on bus: {:?}", i);
-            Continue(true)
+            glib::ControlFlow::Continue
         }
         other => {
             tracing::trace!("Received other message on bus: {:?}", other);
-            Continue(true)
+            glib::ControlFlow::Continue
         }
     }
 }
@@ -147,7 +145,7 @@ fn create_pipeline(
     stream: &gio::MemoryOutputStream,
     device_name: Option<&str>,
 ) -> Result<gst::Pipeline> {
-    let pipeline = gst::Pipeline::new(None);
+    let pipeline = gst::Pipeline::new();
 
     let pulsesrc = gst::ElementFactory::make("pulsesrc").build()?;
     let audioconvert = gst::ElementFactory::make("audioconvert").build()?;
@@ -178,7 +176,7 @@ fn create_pipeline(
         &oggmux,
         &giostreamsink,
     ];
-    pipeline.add_many(&elements)?;
+    pipeline.add_many(elements)?;
 
     pulsesrc.link_filtered(
         &audioconvert,

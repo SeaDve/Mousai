@@ -59,9 +59,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for InspectorPage {
-        crate::derived_properties!();
-
         fn constructed(&self) {
             self.parent_constructed();
 

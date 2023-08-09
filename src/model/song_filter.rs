@@ -29,9 +29,8 @@ mod imp {
         type ParentType = gtk::Filter;
     }
 
-    impl ObjectImpl for SongFilter {
-        crate::derived_properties!();
-    }
+    #[glib::derived_properties]
+    impl ObjectImpl for SongFilter {}
 
     impl FilterImpl for SongFilter {
         fn strictness(&self) -> gtk::FilterMatch {

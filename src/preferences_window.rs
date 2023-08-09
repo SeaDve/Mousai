@@ -1,7 +1,8 @@
 use adw::{prelude::*, subclass::prelude::*};
 use gettextrs::gettext;
 use gtk::glib::{self, clone};
-use once_cell::unsync::OnceCell;
+
+use std::cell::OnceCell;
 
 use crate::settings::{PreferredAudioSource, Settings};
 
@@ -53,6 +54,7 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for PreferencesWindow {
         fn constructed(&self) {
             self.parent_constructed();
@@ -67,8 +69,6 @@ mod imp {
 
             obj.setup_rows();
         }
-
-        crate::derived_properties!();
     }
 
     impl WidgetImpl for PreferencesWindow {}

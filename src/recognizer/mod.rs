@@ -9,10 +9,9 @@ use gtk::{
     gio::{self, prelude::*},
     glib::{self, clone, closure_local, subclass::prelude::*, WeakRef},
 };
-use once_cell::unsync::OnceCell;
 
 use std::{
-    cell::{Cell, RefCell},
+    cell::{Cell, OnceCell, RefCell},
     rc::Rc,
 };
 
@@ -47,8 +46,7 @@ pub enum RecognizerState {
 
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Recognizer)]
@@ -72,9 +70,8 @@ mod imp {
         type Type = super::Recognizer;
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for Recognizer {
-        crate::derived_properties!();
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![
@@ -362,7 +359,7 @@ impl Recognizer {
 
         // TODO recognize recordings concurrently, but not too many at once (at most 3?)
         utils::spawn(
-            glib::PRIORITY_DEFAULT,
+            glib::Priority::default(),
             clone!(@weak self as obj => async move {
                 obj.try_recognize_saved_recordings_inner().await;
             }),

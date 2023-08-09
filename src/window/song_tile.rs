@@ -5,9 +5,8 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use once_cell::unsync::OnceCell;
 
-use std::cell::{Cell, RefCell};
+use std::cell::{Cell, OnceCell, RefCell};
 
 use super::{
     album_cover::AlbumCover,
@@ -24,8 +23,7 @@ const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
     use super::*;
-    use glib::subclass::Signal;
-    use once_cell::sync::Lazy;
+    use glib::{once_cell::sync::Lazy, subclass::Signal};
     use std::marker::PhantomData;
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
@@ -91,9 +89,8 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for SongTile {
-        crate::derived_properties!();
-
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> =
                 Lazy::new(|| vec![Signal::builder("selection-mode-requested").build()]);

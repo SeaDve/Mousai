@@ -7,10 +7,9 @@ use gtk::{
 };
 use heed::types::SerdeBincode;
 use indexmap::IndexMap;
-use once_cell::unsync::OnceCell;
 
 use std::{
-    cell::RefCell,
+    cell::{OnceCell, RefCell},
     collections::{BTreeSet, HashMap, HashSet},
     time::Instant,
 };
