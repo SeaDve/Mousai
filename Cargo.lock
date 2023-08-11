@@ -593,9 +593,9 @@ dependencies = [
 
 [[package]]
 name = "gsettings-macro"
-version = "0.1.18"
+version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9d9f5e58c3791c184b9ec4170406a4257eb1a51f99d2d7e56dbf1e50fb8dd2f"
+checksum = "583563edb5e9d86f1208e3e1fb8e692f311e2e46732474f60461cbd7a0a027dd"
 dependencies = [
  "deluxe",
  "heck",
@@ -1373,9 +1373,9 @@ dependencies = [
 
 [[package]]
 name = "quick-xml"
-version = "0.28.2"
+version = "0.30.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0ce5e73202a820a31f8a0ee32ada5e21029c81fd9e3ebf668a40832e4219d9d1"
+checksum = "eff6510e86862b57b210fd8cbe8ed3f0d7d600b9c2863cd4549a2e033c66e956"
 dependencies = [
  "memchr",
  "serde",
