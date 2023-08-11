@@ -69,6 +69,7 @@ fn debug_info() -> String {
         soup::micro_version()
     );
     let gst_version_string = gst::version_string();
+    let libpulse_version = pulse::version::get_library_version().to_string_lossy();
 
     format!(
         r#"- {APP_ID} {VERSION}
@@ -83,7 +84,8 @@ fn debug_info() -> String {
 - GTK {gtk_version}
 - Libadwaita {adw_version}
 - Libsoup {soup_version}
-- {gst_version_string}"#
+- {gst_version_string}
+- Libpulse {libpulse_version}"#
     )
 }
 
