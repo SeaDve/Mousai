@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-08-12 14:51+0000\n"
+"PO-Revision-Date: 2023-08-14 17:52+0000\n"
 "Last-Translator: \"HelaBasa Group (හෙළබස සමූහය)\" <weblate-helabasa@yalu.lk>"
 "\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/kooha/mousai/si/>"
@@ -28,32 +28,32 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "මොහොතකින් ගීත හඳුනාගන්න"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;ගීත;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "කවුළුවේ පළල"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "කවුළුවේ උස"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "කවුළුව විහිදුවා තිබේද යන්න"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
-msgstr ""
+msgstr "හඬ පටිගතයට භාවිත කිරීමට කැමති ශ්‍රව්‍ය මූලාශ්‍ර."
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API token used by AudD recognition"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
@@ -102,11 +102,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 සරල පරිශ්‍රීලක අතුරුමුහුණතක්"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "ඩේව් පැට්‍රික් කැබර්ටෝ"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Critical Database Error"
@@ -125,86 +125,84 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr "අභිප්‍රේත"
+msgstr "අභිප්‍රේත (_P)"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "යතුරුපුවරුවේ කෙටිමං"
+msgstr "යතුරුපුවරුවේ කෙටිමං (_K)"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
-msgstr "Mousai ගැන"
+msgstr "Mousai ගැන (_A)"
 
 #: data/resources/ui/history-view.ui:22
 msgid "Select _All"
-msgstr "සියල්ල තෝරන්න"
+msgstr "සියල්ල තෝරන්න (_A)"
 
 #: data/resources/ui/history-view.ui:26
 msgid "Select _None"
-msgstr "කිසිවක් නොතෝරන්න"
+msgstr "කිසිවක් නොතෝරන්න (_N)"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "ගීතය හඳුනාගන්න"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
 msgid "Listen"
-msgstr ""
+msgstr "සවන්දෙන්න"
 
 #: data/resources/ui/history-view.ui:65
 msgid "Main Menu"
-msgstr ""
+msgstr "ප්‍රධාන වට්ටෝරුව"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
 msgid "Select"
-msgstr ""
+msgstr "තෝරන්න"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "ගීත සොයන්න"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "තේරීම ඉවතලන්න"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
-#, fuzzy
 msgid "Cancel"
 msgstr "අවලංගු"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "ගීත සොයන්න"
 
 #: data/resources/ui/history-view.ui:142
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "ගීත හඳුනාගැනීම අරඹන්න!"
 
 #: data/resources/ui/history-view.ui:143
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "ඇරඹීමට සවන්දෙන්න ඔබන්න"
 
 #: data/resources/ui/history-view.ui:153
 msgid "No Results"
-msgstr ""
+msgstr "ප්‍රතිඵල නැත"
 
 #: data/resources/ui/preferences-window.ui:8
-#, fuzzy
 msgid "General"
-msgstr "සාමාන්‍ය"
+msgstr "ප්‍රධාන"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "ප්‍රිය හඬ මූලාශ්‍රය"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "තිබෙන විට භාවිතයට හඬ මූලාශ්‍රය තීරණය කරයි"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:65
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
@@ -214,52 +212,50 @@ msgstr ""
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "යෙ.ක්‍ර.මු. නිමිත්ත"
 
 #: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
 msgid "Back"
-msgstr ""
+msgstr "ආපසු"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "මාර්ගඅපගත ප්‍රකාරය සබලයි"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "සවන්දීම නවතන්න"
 
 #: data/resources/ui/recognizer-view.ui:53
 msgid "Offline Mode"
-msgstr ""
+msgstr "මාර්ගඅපගත ප්‍රකාරය"
 
 #: data/resources/ui/shortcuts.ui:11
-#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
-msgstr "සාමාන්‍ය"
+msgstr "ප්‍රධාන"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "ප්‍රධාන වට්ටෝරුව අරින්න"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "සොයන්න"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "අභිප්‍රේත පෙන්වන්න"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "කෙටිමං පෙන්වන්න"
 
 #: data/resources/ui/shortcuts.ui:38
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "ඉවත් වන්න"
@@ -267,52 +263,52 @@ msgstr "ඉවත් වන්න"
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "පාලන"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "සවන්දීම අරඹන්න"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "පිළිවැයීම අරඹන්න"
 
 #: data/resources/ui/shortcuts.ui:63
 msgctxt "shortcut window"
 msgid "Navigation"
-msgstr ""
+msgstr "යාත්‍රණය"
 
 #: data/resources/ui/shortcuts.ui:66
 msgctxt "shortcut window"
 msgid "Go Back"
-msgstr ""
+msgstr "ආපසු යන්න"
 
 #: data/resources/ui/shortcuts.ui:72
 msgctxt "shortcut window"
 msgid "Go Forward"
-msgstr ""
+msgstr "ඉදිරියට යන්න"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
-msgstr ""
+msgstr "ගීතයේ තොරතුරු පෙන්වන්න"
 
 #: data/resources/ui/song-bar.ui:92
 msgid "Stop"
-msgstr ""
+msgstr "නවතන්න"
 
 #: data/resources/ui/song-page.ui:37
 msgid "Remove From History"
-msgstr ""
+msgstr "ඉතිහාසයෙන් ඉවත් කරන්න"
 
 #: data/resources/ui/song-page.ui:44
 msgid "Copy"
-msgstr ""
+msgstr "පිටපතක්"
 
 #: data/resources/ui/song-page.ui:150
 msgid "Information"
-msgstr ""
+msgstr "තොරතුරු"
 
 #: data/resources/ui/song-page.ui:153
 msgid "Last Heard"
@@ -320,82 +316,82 @@ msgstr ""
 
 #: data/resources/ui/song-page.ui:158
 msgid "Album"
-msgstr ""
+msgstr "එකතුව"
 
 #: data/resources/ui/song-page.ui:163
 msgid "Release Date"
-msgstr ""
+msgstr "නිකුත් කළ දිනය"
 
 #: data/resources/ui/song-page.ui:170
 msgid "Lyrics"
-msgstr ""
+msgstr "පදවැල්"
 
 #: data/resources/ui/song-tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "නව"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 ඩේව් පැට්‍රික් කැබර්ටෝ"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr ""
+msgstr "පරිවර්තනයට ස්තූතිය"
 
 #: src/about.rs:31
 msgid "Donate (Liberapay)"
-msgstr ""
+msgstr "පරිත්‍යාග (ලිබෙරාපේ)"
 
 #: src/about.rs:35
 msgid "Donate (PayPal)"
-msgstr ""
+msgstr "පරිත්‍යාග (පේපෑල්)"
 
 #: src/about.rs:39
 msgid "GitHub"
-msgstr ""
+msgstr "ගිට්හබ්"
 
 #: src/about.rs:41
 msgid "Translate"
-msgstr ""
+msgstr "පරිවර්තනය"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "අද %R ට"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "ඊයේ %R ට"
 
 #: src/preferences_window.rs:107
 msgid "Microphone"
-msgstr ""
+msgstr "ශබ්දවාහිනිය"
 
 #: src/preferences_window.rs:108
 msgid "Desktop Audio"
-msgstr ""
+msgstr "වැඩතලයේ හඬ"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "ගැළපීම් හමු නොවිණි"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "හඬෙන් ඇඟිලි සටහනක් සාදා ගැනීමට නොහැකිය"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "වැරදි නිමිත්තක් දී ඇත"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "නිමිත්තේ සීමාවට ළඟා වී ඇත"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "සේවාදායකයට සබැඳීමට නොහැකිය"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
@@ -403,94 +399,95 @@ msgstr ""
 
 #: src/window/external_link_tile.rs:60
 msgid "Apple Music"
-msgstr ""
+msgstr "ඇපල් මියුසික්"
 
 #: src/window/external_link_tile.rs:61
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "ඇපල් මියුසික් හි පිරික්සන්න"
 
 #: src/window/external_link_tile.rs:66
 msgid "Browse on AudD"
-msgstr ""
+msgstr "AudD හි පිරික්සන්න"
 
 #: src/window/external_link_tile.rs:70
 msgid "Spotify"
-msgstr ""
+msgstr "ස්පොටිෆි"
 
 #: src/window/external_link_tile.rs:71
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "ස්පොටිෆි හි සවන්දෙන්න"
 
 #: src/window/external_link_tile.rs:75
 msgid "YouTube"
-msgstr ""
+msgstr "යූටියුබ්"
 
 #: src/window/external_link_tile.rs:76
 msgid "Search on YouTube"
-msgstr ""
+msgstr "යූටියුබ් හි සොයන්න"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "{key} දියත් කිරීමට අසමත් විය"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "පසුරුපුවරුවට පිටපත් විය"
 
 #: src/window/history_view.rs:155
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "තේරූ ගීත ඉවත් කිරීමට අසමත් විය"
 
 #: src/window/history_view.rs:323
 msgid "Failed to remove song"
-msgstr ""
+msgstr "ගීතය ඉවත් කිරීමට අසමත් විය"
 
 #: src/window/history_view.rs:448
 msgid "Failed to show recognizer results"
 msgstr ""
 
 #: src/window/history_view.rs:686
+#, fuzzy
 msgid "_Undo"
-msgstr ""
+msgstr "පෙරසේ"
 
 #: src/window/history_view.rs:694
 msgid "Failed to undo"
-msgstr ""
+msgstr "ආපසු හැරවීමට අසමත් විය"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ගීත {n_removed} ක් ඉවත් කරන්න"
+msgstr[1] "ගීත {n_removed} ක් ඉවත් කරන්න"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
-msgstr ""
+msgstr "අථක තෝරන්න"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ගීත {selection_size} ක් තෝරා ඇත"
+msgstr[1] "ගීත {selection_size} ක් තෝරා ඇත"
 
 #: src/window/history_view.rs:854
 msgid "Copy Song"
 msgid_plural "Copy Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ගීතයේ පිටපතක්"
+msgstr[1] "ගීතවල පිටපතක්"
 
 #: src/window/history_view.rs:861
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ඉතිහාසයෙන් ගීතය ඉවත් කරන්න"
+msgstr[1] "ඉතිහාසයෙන් ගීත ඉවත් කරන්නන"
 
 #: src/window/mod.rs:262
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "ගීතය ඉතිහාසයට දැමීමට අසමත් විය"
 
 #: src/window/mod.rs:307
 msgid "Please open an issue on GitHub and provide the necessary information"
@@ -498,7 +495,7 @@ msgstr ""
 
 #: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
-msgstr ""
+msgstr "නැහැ, ස්තූතියි"
 
 #: src/window/mod.rs:312
 msgid "Open an Issue"
@@ -511,11 +508,11 @@ msgstr ""
 
 #: src/window/mod.rs:344
 msgid "Try Again"
-msgstr ""
+msgstr "නැවත"
 
 #: src/window/mod.rs:377
 msgid "Recording Saved"
-msgstr ""
+msgstr "පටිගතය සුරැකිණි"
 
 #: src/window/mod.rs:385
 msgid "The result will be available when you're back online"
@@ -523,7 +520,7 @@ msgstr ""
 
 #: src/window/mod.rs:388
 msgid "Ok, Got It"
-msgstr ""
+msgstr "හරි, තේරුණා"
 
 #: src/window/mod.rs:398
 msgid ""
@@ -543,11 +540,11 @@ msgstr ""
 
 #: src/window/mod.rs:408
 msgid "Later"
-msgstr ""
+msgstr "පසුව"
 
 #: src/window/mod.rs:413
 msgid "Open Preferences"
-msgstr ""
+msgstr "අභිප්‍රේත අරින්න"
 
 #: src/window/mod.rs:519
 msgid "An error occurred in the player"
@@ -555,11 +552,11 @@ msgstr ""
 
 #: src/window/playback_button.rs:117
 msgid "Play"
-msgstr ""
+msgstr "වාදනය"
 
 #: src/window/playback_button.rs:124
 msgid "Pause"
-msgstr ""
+msgstr "විරාමයක්"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:143
@@ -581,16 +578,16 @@ msgstr ""
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
-msgstr ""
+msgstr "සවන් දෙමින්…"
 
 #: src/window/recognizer_view.rs:140
 msgid "Recognizing…"
-msgstr ""
+msgstr "හඳුනා ගැනෙමින්…"
 
 #: src/window/song_page.rs:301
 msgid "Unknown"
-msgstr ""
+msgstr "නොදන්නා"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr ""
+msgstr "නොතෝරන්න"
