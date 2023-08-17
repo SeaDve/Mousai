@@ -7,13 +7,14 @@
 # inkhorn <inkhorn@hostux.ninja>, 2021.
 # Felipe Nogueira <contato.fnog@gmail.com>, 2023.
 # Império Linux <kevendoria86@gmail.com>, 2023.
+# Fabio Emilio Costa <fabiocosta0305@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-08-07 03:46+0000\n"
-"Last-Translator: Império Linux <kevendoria86@gmail.com>\n"
+"PO-Revision-Date: 2023-08-17 13:49+0000\n"
+"Last-Translator: Fabio Emilio Costa <fabiocosta0305@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -220,6 +221,7 @@ msgstr "Determina a fonte de áudio a ser usada quando disponível"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:65
+#, fuzzy
 msgid "AudD"
 msgstr "AudD"
 
@@ -431,6 +433,7 @@ msgid "Browse on AudD"
 msgstr "Navegue no AudD"
 
 #: src/window/external_link_tile.rs:70
+#, fuzzy
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -439,6 +442,7 @@ msgid "Listen on Spotify"
 msgstr "Escutar no Spotify"
 
 #: src/window/external_link_tile.rs:75
+#, fuzzy
 msgid "YouTube"
 msgstr "YouTube"
 
