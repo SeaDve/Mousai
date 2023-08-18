@@ -125,7 +125,9 @@ mod imp {
             }));
             obj.add_controller(gesture_click);
 
-            let gesture_long_press = gtk::GestureLongPress::new();
+            let gesture_long_press = gtk::GestureLongPress::builder()
+                .propagation_phase(gtk::PropagationPhase::Capture)
+                .build();
             gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
                 if obj.contains(x, y) {
                     gesture.set_state(gtk::EventSequenceState::Claimed);
