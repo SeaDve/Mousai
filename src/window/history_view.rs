@@ -453,12 +453,10 @@ impl HistoryView {
         );
     }
 
-    pub fn scroll_to_top(&self) {
-        let item_position = 0_u32.to_variant();
+    pub fn scroll_to_top(&self) -> bool {
         self.imp()
-            .grid
-            .activate_action("list.scroll-to-item", Some(&item_position))
-            .unwrap();
+            .content_main_page
+            .emit_scroll_child(gtk::ScrollType::Start, false)
     }
 
     fn player(&self) -> Player {
