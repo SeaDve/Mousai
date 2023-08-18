@@ -118,8 +118,8 @@ mod imp {
                 .button(gdk::BUTTON_SECONDARY)
                 .build();
             gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
-                gesture.set_state(gtk::EventSequenceState::Claimed);
                 if obj.contains(x, y) {
+                    gesture.set_state(gtk::EventSequenceState::Claimed);
                     obj.emit_by_name::<()>("selection-mode-requested", &[]);
                 }
             }));
@@ -127,8 +127,8 @@ mod imp {
 
             let gesture_long_press = gtk::GestureLongPress::new();
             gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
-                gesture.set_state(gtk::EventSequenceState::Claimed);
                 if obj.contains(x, y) {
+                    gesture.set_state(gtk::EventSequenceState::Claimed);
                     obj.emit_by_name::<()>("selection-mode-requested", &[]);
                 }
             }));

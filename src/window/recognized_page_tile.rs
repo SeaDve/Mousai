@@ -62,13 +62,12 @@ mod imp {
             let obj = self.obj();
 
             let gesture_click = gtk::GestureClick::builder()
-                .touch_only(false)
                 .button(gdk::BUTTON_PRIMARY)
                 .propagation_phase(gtk::PropagationPhase::Bubble)
                 .build();
             gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
-                gesture.set_state(gtk::EventSequenceState::Claimed);
                 if gesture.widget().contains(x, y) {
+                    gesture.set_state(gtk::EventSequenceState::Claimed);
                     obj.emit_by_name::<()>("activated", &[]);
                 }
             }));
