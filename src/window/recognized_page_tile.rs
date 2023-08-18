@@ -63,7 +63,6 @@ mod imp {
 
             let gesture_click = gtk::GestureClick::builder()
                 .button(gdk::BUTTON_PRIMARY)
-                .propagation_phase(gtk::PropagationPhase::Bubble)
                 .build();
             gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
                 if gesture.widget().contains(x, y) {
