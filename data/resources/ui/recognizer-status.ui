@@ -41,7 +41,7 @@
         <property name="transition-type">slide-right</property>
         <property name="child">
           <object class="GtkButton" id="show_results_button">
-            <property name="tooltip-text">Show Offline Mode Recognition Results</property>
+            <property name="tooltip-text" translatable="yes">Show Offline Mode Recognition Results</property>
             <property name="child">
               <object class="GtkLabel" id="show_results_button_label">
                 <property name="valign">center</property>
