@@ -17,7 +17,7 @@
               <object class="GtkButton">
                 <property name="halign">center</property>
                 <property name="action-name">app.quit</property>
-                <property name="label">Quit</property>
+                <property name="label" translatable="yes">Quit</property>
                 <style>
                   <class name="pill"/>
                   <class name="suggested-action"/>
