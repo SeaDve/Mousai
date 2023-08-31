@@ -3,7 +3,7 @@ use gtk::{
     glib::{self, prelude::*},
 };
 
-use std::{collections::BTreeSet, future::Future};
+use std::{collections::BTreeSet, future::Future, ops::Range};
 
 use crate::Application;
 
@@ -31,9 +31,8 @@ pub fn app_instance() -> Application {
     gio::Application::default().unwrap().downcast().unwrap()
 }
 
-/// Returns a list of tuples where the first element of a tuple is the first number
-/// in a consecutive group, and the second element is the count of numbers in that group.
-pub fn consecutive_groups(ordered_set: &BTreeSet<usize>) -> Vec<(usize, usize)> {
+/// Returns a sorted list of ranges of consecutive numbers in the given set.
+pub fn consecutive_groups(ordered_set: &BTreeSet<usize>) -> Vec<Range<usize>> {
     let mut iter = ordered_set.iter();
 
     let first = match iter.next() {
@@ -43,28 +42,30 @@ pub fn consecutive_groups(ordered_set: &BTreeSet<usize>) -> Vec<(usize, usize)> 
 
     // If all numbers are consecutive, return a single group
     if ordered_set.last().unwrap() - first + 1 == ordered_set.len() {
-        return vec![(first, ordered_set.len())];
+        return vec![first..first + ordered_set.len()];
     }
 
-    let mut ret: Vec<(usize, usize)> = Vec::new();
+    let mut ret: Vec<Range<usize>> = Vec::new();
 
-    let mut current_group_start = first;
-    let mut current_group_count = 1;
+    let mut current = Range {
+        start: first,
+        end: first + 1,
+    };
 
     for &num in iter {
-        if num == current_group_start + current_group_count {
-            // Consecutive number, increment count
-            current_group_count += 1;
+        if num == current.end {
+            // Consecutive number, increment end
+            current.end += 1;
         } else {
             // Non-consecutive number, store group in result and start new group
-            ret.push((current_group_start, current_group_count));
-            current_group_start = num;
-            current_group_count = 1;
+            ret.push(current.clone());
+            current.start = num;
+            current.end = num + 1;
         }
     }
 
     // Store the last group
-    ret.push((current_group_start, current_group_count));
+    ret.push(current);
 
     ret
 }
@@ -75,53 +76,56 @@ mod tests {
 
     #[test]
     fn consecutive_groups_empty() {
-        assert_eq!(consecutive_groups(&BTreeSet::new()), vec![]);
+        assert_eq!(
+            consecutive_groups(&BTreeSet::new()),
+            Vec::<Range<usize>>::new()
+        );
     }
 
     #[test]
     fn consecutive_groups_single() {
-        assert_eq!(consecutive_groups(&BTreeSet::from([3])), vec![(3, 1)]);
-        assert_eq!(consecutive_groups(&BTreeSet::from([3, 3])), vec![(3, 1)]);
-        assert_eq!(consecutive_groups(&BTreeSet::from([3, 3, 3])), vec![(3, 1)]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([3])), vec![3..4]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([3, 3])), vec![3..4]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([3, 3, 3])), vec![3..4]);
 
-        assert_eq!(consecutive_groups(&BTreeSet::from([0])), vec![(0, 1)]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([0])), vec![0..1]);
     }
 
     #[test]
     fn consecutive_groups_two() {
-        assert_eq!(consecutive_groups(&BTreeSet::from([1, 2])), vec![(1, 2)]);
-        assert_eq!(consecutive_groups(&BTreeSet::from([2, 2, 1])), vec![(1, 2)]);
-        assert_eq!(consecutive_groups(&BTreeSet::from([1, 2, 1])), vec![(1, 2)]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([1, 2])), vec![1..3]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([2, 2, 1])), vec![1..3]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([1, 2, 1])), vec![1..3]);
         assert_eq!(
             consecutive_groups(&BTreeSet::from([2, 1, 2, 1])),
-            vec![(1, 2)]
+            vec![1..3]
         );
 
-        assert_eq!(consecutive_groups(&BTreeSet::from([5, 6])), vec![(5, 2)]);
+        assert_eq!(consecutive_groups(&BTreeSet::from([5, 6])), vec![5..7]);
     }
 
     #[test]
     fn consecutive_groups_many() {
         assert_eq!(
             consecutive_groups(&BTreeSet::from([1, 2, 3, 4, 5])),
-            vec![(1, 5)]
+            vec![1..6]
         );
         assert_eq!(
             consecutive_groups(&BTreeSet::from([5, 4, 3, 2, 1])),
-            vec![(1, 5)]
+            vec![1..6]
         );
         assert_eq!(
             consecutive_groups(&BTreeSet::from([5, 3, 4, 2, 1])),
-            vec![(1, 5)]
+            vec![1..6]
         );
         assert_eq!(
             consecutive_groups(&BTreeSet::from([5, 3, 4, 4, 3, 4, 2, 1])),
-            vec![(1, 5)]
+            vec![1..6]
         );
 
         assert_eq!(
             consecutive_groups(&BTreeSet::from([5, 6, 7, 8, 9])),
-            vec![(5, 5)]
+            vec![5..10]
         );
     }
 
@@ -129,16 +133,16 @@ mod tests {
     fn consecutive_groups_many_non_consecutives() {
         assert_eq!(
             consecutive_groups(&BTreeSet::from([1, 2, 3, 5, 6, 10, 12])),
-            vec![(1, 3), (5, 2), (10, 1), (12, 1)]
+            vec![1..4, 5..7, 10..11, 12..13]
         );
         assert_eq!(
             consecutive_groups(&BTreeSet::from([12, 1, 3, 2, 3, 6, 5, 6, 3, 10, 12, 12])),
-            vec![(1, 3), (5, 2), (10, 1), (12, 1)]
+            vec![1..4, 5..7, 10..11, 12..13]
         );
 
         assert_eq!(
             consecutive_groups(&BTreeSet::from([7, 8, 9, 11, 12, 14, 16])),
-            vec![(7, 3), (11, 2), (14, 1), (16, 1)]
+            vec![7..10, 11..13, 14..15, 16..17]
         );
     }
 
@@ -155,10 +159,10 @@ mod tests {
                 100_000_012
             ])),
             vec![
-                (100_000_001, 3),
-                (100_000_005, 2),
-                (100_000_010, 1),
-                (100_000_012, 1)
+                100_000_001..100_000_004,
+                100_000_005..100_000_007,
+                100_000_010..100_000_011,
+                100_000_012..100_000_013
             ]
         );
         assert_eq!(
@@ -177,10 +181,10 @@ mod tests {
                 100_000_012
             ])),
             vec![
-                (100_000_001, 3),
-                (100_000_005, 2),
-                (100_000_010, 1),
-                (100_000_012, 1)
+                100_000_001..100_000_004,
+                100_000_005..100_000_007,
+                100_000_010..100_000_011,
+                100_000_012..100_000_013
             ]
         );
     }

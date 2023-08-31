@@ -171,11 +171,11 @@ impl Recordings {
             let mut ret = Vec::with_capacity(to_take_indices.len());
 
             // Reverse the iterations so we don't shift the indices
-            for &(first, count) in utils::consecutive_groups(&to_take_indices).iter().rev() {
+            for group in utils::consecutive_groups(&to_take_indices).iter().rev() {
                 {
                     let mut list = imp.list.borrow_mut();
 
-                    for index in (first..first + count).rev() {
+                    for index in group.clone().rev() {
                         let (_, recording) =
                             list.shift_remove_index(index).expect("index must be valid");
                         unbind_recording_from_items_changed_and_db(&recording);
@@ -183,7 +183,7 @@ impl Recordings {
                     }
                 }
 
-                self.items_changed(first as u32, count as u32, 0);
+                self.items_changed(group.start as u32, group.len() as u32, 0);
             }
 
             debug_assert_eq!(ret.len(), to_take_indices.len());
@@ -532,6 +532,7 @@ mod tests {
         let recordings = Recordings::load_from_env(env).unwrap();
         recordings.insert(new_test_recording(b"a")).unwrap();
         recordings.insert(new_test_recording(b"b")).unwrap();
+        recordings.insert(new_test_recording(b"c")).unwrap();
 
         let calls_output = Rc::new(RefCell::new(Vec::new()));
 
@@ -545,12 +546,14 @@ mod tests {
         recordings.take_filtered(|_| false).unwrap();
         assert!(calls_output.take().is_empty());
 
-        recordings.take_filtered(|_| true).unwrap();
-        assert_eq!(calls_output.take(), vec![(0, 2, 0)]);
+        recordings
+            .take_filtered(|r| r.bytes() == b"b".as_ref() || r.bytes() == b"c".as_ref())
+            .unwrap();
+        assert_eq!(calls_output.take(), vec![(1, 2, 0)]);
 
         recordings.block_signal(&handler_id);
-        recordings.insert(new_test_recording(b"a")).unwrap();
         recordings.insert(new_test_recording(b"b")).unwrap();
+        recordings.insert(new_test_recording(b"c")).unwrap();
         recordings.unblock_signal(&handler_id);
 
         recordings

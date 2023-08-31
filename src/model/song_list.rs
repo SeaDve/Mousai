@@ -217,11 +217,11 @@ impl SongList {
             let mut ret = Vec::with_capacity(to_remove_indices.len());
 
             // Reverse the iterations so we don't shift the indices
-            for &(first, count) in utils::consecutive_groups(&to_remove_indices).iter().rev() {
+            for group in utils::consecutive_groups(&to_remove_indices).iter().rev() {
                 {
                     let mut list = imp.list.borrow_mut();
 
-                    for index in (first..first + count).rev() {
+                    for index in group.clone().rev() {
                         let (_, song) =
                             list.shift_remove_index(index).expect("index must be valid");
                         unbind_song_from_db(&song);
@@ -229,7 +229,7 @@ impl SongList {
                     }
                 }
 
-                self.items_changed(first as u32, count as u32, 0);
+                self.items_changed(group.start as u32, group.len() as u32, 0);
             }
 
             debug_assert_eq!(ret.len(), to_remove_indices.len());
