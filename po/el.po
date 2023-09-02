@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-07-24 09:07+0000\n"
+"PO-Revision-Date: 2023-09-02 10:53+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/kooha/mousai/el/>\n"
 "Language: el\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -169,7 +169,6 @@ msgid "Listen"
 msgstr "Ακούστε"
 
 #: data/resources/ui/history-view.ui:65
-#, fuzzy
 msgid "Main Menu"
 msgstr "Κυρίως Μενού"
 
@@ -179,7 +178,7 @@ msgstr "Επιλέξτε"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr "Αναζήτηση τραγουδιών"
+msgstr "Αναζήτηση Τραγουδιών"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
@@ -449,7 +448,7 @@ msgstr "Αναζήτηση στο YouTube"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "Αποτυχία εκκίνησης {key}"
 
 #: src/window/history_view.rs:141 src/window/song_page.rs:89
 msgid "Copied to clipboard"
@@ -479,8 +478,8 @@ msgstr "Αποτυχία αναίρεσης"
 #: src/window/history_view.rs:714
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αφαιρέθηκε {n_removed} τραγούδι"
+msgstr[1] "Αφαιρέθηκε {n_removed} τραγούδια"
 
 #: src/window/history_view.rs:840
 msgid "Select items"
@@ -490,15 +489,14 @@ msgstr "Επιλέξτε στοιχεία"
 #: src/window/history_view.rs:844
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Επιλεγμένο {selection_size} τραγούδι"
+msgstr[1] "Επιλεγμένα {selection_size} τραγούδια"
 
 #: src/window/history_view.rs:854
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Αντιγραφή τραγουδιού"
-msgstr[1] "Αντιγραφή τραγουδιού"
+msgstr[1] "Αντιγραφή τραγουδιών"
 
 #: src/window/history_view.rs:861
 msgid "Remove Song From History"
@@ -512,7 +510,7 @@ msgstr "Αποτυχία εισαγωγής τραγουδιού στο ιστο
 
 #: src/window/mod.rs:307
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "Ανοίξτε ένα issue στο GitHub και δώστε τις απαραίτητες πληροφορίες"
 
 #: src/window/mod.rs:310 src/window/mod.rs:342
 msgid "No, Thanks"
@@ -526,6 +524,8 @@ msgstr "Ανοίξτε ένα Issue στο GitHub"
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
+"Δοκιμάστε να μετακινηθείτε πιο κοντά στην πηγή ή να χρησιμοποιήσετε ένα "
+"διαφορετικό απόσπασμα του τραγουδιού"
 
 #: src/window/mod.rs:344
 msgid "Try Again"
@@ -533,34 +533,39 @@ msgstr "Προσπάθησε ξανά"
 
 #: src/window/mod.rs:377
 msgid "Recording Saved"
-msgstr ""
+msgstr "Η Εγγραφή Αποθηκεύτηκε"
 
 #: src/window/mod.rs:385
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Το αποτέλεσμα θα είναι διαθέσιμο όταν ξανασυνδεθείτε στο Διαδίκτυο"
 
 #: src/window/mod.rs:388
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Εντάξει, Κατάλαβα"
 
 #: src/window/mod.rs:398
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Το αποτέλεσμα θα είναι διαθέσιμο όταν γίνει επαναφορά του ορίου του "
+"διακριτικού σας. Περιμένετε έως ότου γίνει επαναφορά του ορίου ή ανοίξτε τις "
+"προτιμήσεις και δοκιμάστε να ορίσετε ένα διαφορετικό διακριτικό"
 
 #: src/window/mod.rs:401
 msgid "I'll Wait"
-msgstr ""
+msgstr "Θα περιμένω"
 
 #: src/window/mod.rs:405
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Το αποτέλεσμα θα είναι διαθέσιμο όταν το διακριτικό σας αντικατασταθεί με "
+"ένα έγκυρο. Ανοίξτε τις προτιμήσεις και δοκιμάστε να ορίσετε ένα διαφορετικό "
+"διακριτικό"
 
 #: src/window/mod.rs:408
-#, fuzzy
 msgid "Later"
 msgstr "Αργότερα"
 
@@ -584,19 +589,19 @@ msgstr "Παύση"
 #: src/window/recognized_page.rs:143
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αναγνωρισμένο {n_songs} νέο τραγούδι"
+msgstr[1] "Αναγνωρισμένα {n_songs} νέα τραγούδια"
 
 #: src/window/recognized_page.rs:149
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Αυτό το τραγούδι αναγνωρίστηκε από την αποθηκευμένη εγγραφή σας"
+msgstr[1] "Αυτά το τραγούδια αναγνωρίστηκαν από τις αποθηκευμένες εγγραφές σας"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "Αναγνωρισμένα {n_succif} από {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:135
 msgid "Listening…"
