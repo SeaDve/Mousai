@@ -12,6 +12,8 @@ const LINE_WIDTH: f64 = 6.0;
 const NATURAL_WIDTH: i32 = 300;
 const NATURAL_HEIGHT: i32 = 240;
 
+// TODO Port to GskPath
+
 mod imp {
     use super::*;
 
