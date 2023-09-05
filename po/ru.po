@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-09-04 04:53+0000\n"
+"PO-Revision-Date: 2023-09-05 08:54+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
 "\n"
@@ -634,7 +634,7 @@ msgstr "Неизвестно"
 
 #: src/window/song_tile.rs:336
 msgid "Unselect"
-msgstr "Не выбрано"
+msgstr "Отменить выбор"
 
 #~ msgid "Failed to launch {}"
 #~ msgstr "Не удалось запустить {}"
