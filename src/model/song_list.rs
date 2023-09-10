@@ -95,7 +95,7 @@ impl SongList {
 
         let this = glib::Object::new::<Self>();
 
-        for (_, song) in songs.iter() {
+        for (_, song) in &songs {
             this.bind_song_to_db(song);
         }
 
