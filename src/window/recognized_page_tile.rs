@@ -65,8 +65,8 @@ mod imp {
                 .button(gdk::BUTTON_PRIMARY)
                 .build();
             gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
+                gesture.set_state(gtk::EventSequenceState::Claimed);
                 if gesture.widget().contains(x, y) {
-                    gesture.set_state(gtk::EventSequenceState::Claimed);
                     obj.emit_by_name::<()>("activated", &[]);
                 }
             }));
