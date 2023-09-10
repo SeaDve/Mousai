@@ -50,7 +50,10 @@ mod imp {
             let raw_key = link.key();
 
             let Ok(key) = ExternalLinkKey::from_str(raw_key) else {
-                unreachable!("external link tile should not be constructed with an unhandleable key `{}`", raw_key);
+                unreachable!(
+                    "external link tile should not be constructed with an unhandleable key `{}`",
+                    raw_key
+                );
             };
 
             match key {

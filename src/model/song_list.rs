@@ -338,12 +338,18 @@ fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
                     }
 
                     let Some(creation_date_time) = file_info.creation_date_time() else {
-                        tracing::debug!("Skipping file `{}` without creation date", file_name.display());
+                        tracing::debug!(
+                            "Skipping file `{}` without creation date",
+                            file_name.display()
+                        );
                         continue;
                     };
 
                     let Some(file_stem) = file_name.file_stem() else {
-                        tracing::debug!("Skipping file `{}` without file stem", file_name.display());
+                        tracing::debug!(
+                            "Skipping file `{}` without file stem",
+                            file_name.display()
+                        );
                         continue;
                     };
 

@@ -42,7 +42,7 @@ fn find_default_name_gst(class: AudioDeviceClass) -> Result<String> {
     tracing::debug!("Finding device name for class `{:?}`", class);
 
     for device in devices {
-        let Ok(device_class) =  AudioDeviceClass::from_str(&device.device_class()) else {
+        let Ok(device_class) = AudioDeviceClass::from_str(&device.device_class()) else {
             tracing::debug!(
                 "Skipping device `{}` as it has unknown device class `{}`",
                 device.name(),

@@ -51,7 +51,10 @@ impl Migrations {
 
         let start_time = Instant::now();
 
-        let Some(db) = env.open_poly_database(wtxn, None).context("Failed to open unnamed db")? else {
+        let Some(db) = env
+            .open_poly_database(wtxn, None)
+            .context("Failed to open unnamed db")?
+        else {
             tracing::debug!("No unnamed db to run migrations on");
             return Ok(());
         };
