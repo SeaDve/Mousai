@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-04 10:56+0000\n"
+"PO-Revision-Date: 2023-09-14 18:50+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -214,7 +214,7 @@ msgstr "கிடைக்கும்போது பயன்படுத்�
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:65
 msgid "AudD"
-msgstr "ஆஉட்D"
+msgstr "AudD"
 
 #: data/resources/ui/preferences-window.ui:20
 msgid ""
