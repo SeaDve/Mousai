@@ -4,3 +4,4 @@ check-file = false
 
 [default.extend-words]
 ba = "ba"
+seeked = "seeked"
