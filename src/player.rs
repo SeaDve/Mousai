@@ -104,7 +104,9 @@ mod imp {
                     utils::spawn(
                         glib::Priority::default(),
                         clone!(@weak obj => async move {
-                            if let Err(err) = obj.mpris_server().unwrap().init_and_run().await {
+                            if let Err(err) =
+                                obj.imp().mpris_server.get().unwrap().init_and_run().await
+                            {
                                 tracing::error!("Failed to run MPRIS server: {:?}", err);
                             }
                         }),
@@ -224,16 +226,12 @@ impl Player {
         self.notify_duration();
     }
 
-    fn mpris_server(&self) -> Option<&LocalServer<Self>> {
-        self.imp().mpris_server.get()
-    }
-
     fn mpris_properties_changed(&self, property: impl Into<BitFlags<Property>>) {
         let property = property.into();
         utils::spawn(
             glib::Priority::default(),
             clone!(@weak self as obj => async move {
-                if let Some(server) = obj.mpris_server() {
+                if let Some(server) = obj.imp().mpris_server.get() {
                     if let Err(err) = server.properties_changed(property).await {
                         tracing::error!("Failed to emit MPRIS properties changed: {:?}", err);
                     }
@@ -246,7 +244,7 @@ impl Player {
         utils::spawn(
             glib::Priority::default(),
             clone!(@weak self as obj => async move {
-                if let Some(server) = obj.mpris_server() {
+                if let Some(server) = obj.imp().mpris_server.get() {
                     if let Err(err) = server.emit(Signal::Seeked { position }).await {
                         tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
                     }
