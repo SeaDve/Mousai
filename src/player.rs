@@ -5,12 +5,15 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
-use mpris_player::{Metadata as MprisMetadata, MprisPlayer, PlaybackStatus as MprisPlaybackStatus};
-
-use std::{
-    cell::{Cell, OnceCell, RefCell},
-    sync::Arc,
+use mpris_server::{
+    async_trait,
+    enumflags2::BitFlags,
+    zbus::{self, fdo},
+    LocalPlayerInterface, LocalRootInterface, LocalServer, LoopStatus, Metadata, PlaybackRate,
+    PlaybackStatus, Property, Signal, Time, TrackId, Volume,
 };
+
+use std::cell::{Cell, OnceCell, RefCell};
 
 use crate::{
     config::APP_ID,
@@ -51,8 +54,8 @@ mod imp {
         pub(super) gst_play: gst_play::Play,
         pub(super) bus_watch_guard: OnceCell<BusWatchGuard>,
 
-        pub(super) mpris_player: OnceCell<Arc<MprisPlayer>>,
-        pub(super) metadata: RefCell<MprisMetadata>,
+        pub(super) mpris_server: OnceCell<LocalServer<super::Player>>,
+        pub(super) metadata: RefCell<Metadata>,
     }
 
     #[glib::object_subclass]
@@ -93,6 +96,18 @@ mod imp {
                 )
                 .unwrap();
             self.bus_watch_guard.set(bus_watch_guard).unwrap();
+
+            let mpris_server = LocalServer::new(APP_ID, obj.clone()).unwrap();
+            self.mpris_server.set(mpris_server).unwrap();
+
+            utils::spawn(
+                glib::Priority::default(),
+                clone!(@weak obj => async move {
+                    if let Err(err) =  obj.mpris_server().init_and_run().await {
+                        tracing::error!("Failed to run MPRIS server: {:?}", err);
+                    }
+                }),
+            );
         }
     }
 
@@ -122,31 +137,23 @@ mod imp {
                 tracing::debug!(uri = playback_link, "Uri changed");
 
                 // TODO Fill up nones
-                self.metadata.replace(MprisMetadata {
-                    length: None,
-                    art_url: song
-                        .album_art()
-                        .map(|album_art| album_art.download_url().to_string()),
-                    album: Some(song.album()),
-                    album_artist: None,
-                    artist: Some(vec![song.artist()]),
-                    composer: None,
-                    disc_number: None,
-                    genre: None,
-                    title: Some(song.title()),
-                    track_number: None,
-                    url: None,
-                });
+                let mut metadata = Metadata::builder()
+                    .album(song.album())
+                    .title(song.title())
+                    .artist([song.artist()])
+                    .build();
+                if let Some(album_art) = song.album_art() {
+                    metadata.set_art_url(Some(album_art.download_url()));
+                }
+                self.metadata.replace(metadata);
             } else {
-                self.metadata.replace(MprisMetadata::new());
+                self.metadata.replace(Metadata::new());
             }
-            obj.push_mpris_metadata();
-            let mpris_player = obj.mpris_player();
-            mpris_player.set_can_play(song.as_ref().is_some());
-            mpris_player.set_can_seek(song.as_ref().is_some());
 
             self.song.replace(song);
-
+            obj.mpris_properties_changed(
+                Property::Metadata | Property::CanPlay | Property::CanPause | Property::CanSeek,
+            );
             obj.notify_song();
         }
     }
@@ -194,76 +201,54 @@ impl Player {
         tracing::debug!(?position, "Seeking");
 
         self.imp().gst_play.seek(position);
+        self.mpris_seeked(Time::from_micros(position.useconds() as i64));
     }
 
     fn set_position(&self, position: gst::ClockTime) {
         self.imp().position.set(position);
-        self.mpris_player().set_position(position.mseconds() as i64);
         self.notify_position();
     }
 
     fn set_duration(&self, duration: gst::ClockTime) {
         let imp = self.imp();
         imp.duration.set(duration);
-        imp.metadata.borrow_mut().length = Some(duration.mseconds() as i64);
-        self.push_mpris_metadata();
+        imp.metadata
+            .borrow_mut()
+            .set_length(Some(Time::from_micros(duration.useconds() as i64)));
+        self.mpris_properties_changed(Property::Metadata);
         self.notify_duration();
     }
 
-    fn mpris_player(&self) -> &MprisPlayer {
-        self.imp().mpris_player.get_or_init(|| {
-            let mpris_player = MprisPlayer::new(APP_ID.into(), "Mousai".into(), APP_ID.into());
-
-            mpris_player.set_can_raise(true);
-            mpris_player.set_can_set_fullscreen(false);
-            mpris_player.set_can_go_previous(false);
-            mpris_player.set_can_go_next(false);
-
-            mpris_player.connect_raise(|| {
-                tracing::debug!("Raise via MPRIS");
-                utils::app_instance().activate();
-            });
-
-            mpris_player.connect_play_pause(clone!(@weak self as obj => move || {
-                tracing::debug!("Play/Pause via MPRIS");
-                if obj.state() == PlayerState::Playing {
-                    obj.pause();
-                } else {
-                    obj.play();
-                }
-            }));
-
-            mpris_player.connect_play(clone!(@weak self as obj => move || {
-                tracing::debug!("Play via MPRIS");
-                obj.play();
-            }));
-
-            mpris_player.connect_stop(clone!(@weak self as obj => move || {
-                tracing::debug!("Stop via MPRIS");
-                obj.set_song(Song::NONE);
-            }));
-
-            mpris_player.connect_pause(clone!(@weak self as obj => move || {
-                tracing::debug!("Pause via MPRIS");
-                obj.pause();
-            }));
-
-            mpris_player.connect_seek(clone!(@weak self as obj => move |offset_micros| {
-                tracing::debug!(?offset_micros, "Seek via MPRIS");
-                let current_micros = obj.position().mseconds() as i64;
-                let new_position = gst::ClockTime::from_mseconds(current_micros.saturating_add(offset_micros) as u64);
-                obj.seek(new_position);
-            }));
-
-            tracing::debug!("Done setting up MPRIS server");
-
-            mpris_player
-        })
+    fn mpris_server(&self) -> &LocalServer<Self> {
+        self.imp()
+            .mpris_server
+            .get()
+            .expect("mpris server was not set")
     }
 
-    fn push_mpris_metadata(&self) {
-        let current_metadata = self.imp().metadata.borrow().clone();
-        self.mpris_player().set_metadata(current_metadata);
+    fn mpris_properties_changed(&self, property: impl Into<BitFlags<Property>>) {
+        let property = property.into();
+        utils::spawn(
+            glib::Priority::default(),
+            clone!(@weak self as obj => async move {
+                obj.mpris_server()
+                    .properties_changed(property)
+                    .await
+                    .unwrap();
+            }),
+        );
+    }
+
+    fn mpris_seeked(&self, position: Time) {
+        utils::spawn(
+            glib::Priority::default(),
+            clone!(@weak self as obj => async move {
+                obj.mpris_server()
+                    .emit(Signal::Seeked { position })
+                    .await
+                    .unwrap();
+            }),
+        );
     }
 
     fn handle_gst_play_message(&self, message: gst_play::PlayMessage) {
@@ -294,14 +279,8 @@ impl Player {
                 tracing::debug!("State changed from `{:?}` -> `{:?}`", old_state, new_state);
 
                 imp.state.set(new_state);
-                self.mpris_player()
-                    .set_can_pause(matches!(new_state, PlayerState::Playing));
-                self.mpris_player().set_playback_status(match self.state() {
-                    PlayerState::Stopped | PlayerState::Buffering => MprisPlaybackStatus::Stopped,
-                    PlayerState::Playing => MprisPlaybackStatus::Playing,
-                    PlayerState::Paused => MprisPlaybackStatus::Paused,
-                });
 
+                self.mpris_properties_changed(Property::PlaybackStatus);
                 self.notify_state();
             }
             PlayMessage::EndOfStream => {
@@ -348,5 +327,204 @@ impl Player {
 impl Default for Player {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+#[async_trait(?Send)]
+impl LocalRootInterface for Player {
+    async fn raise(&self) -> fdo::Result<()> {
+        utils::app_instance().activate();
+        Ok(())
+    }
+
+    async fn quit(&self) -> fdo::Result<()> {
+        utils::app_instance().quit();
+        Ok(())
+    }
+
+    async fn can_quit(&self) -> fdo::Result<bool> {
+        Ok(true)
+    }
+
+    async fn fullscreen(&self) -> fdo::Result<bool> {
+        Ok(false)
+    }
+
+    async fn set_fullscreen(&self, _fullscreen: bool) -> zbus::Result<()> {
+        Err(zbus::Error::from(fdo::Error::NotSupported(
+            "Fullscreen is not supported".into(),
+        )))
+    }
+
+    async fn can_set_fullscreen(&self) -> fdo::Result<bool> {
+        Ok(false)
+    }
+
+    async fn can_raise(&self) -> fdo::Result<bool> {
+        Ok(true)
+    }
+
+    async fn has_track_list(&self) -> fdo::Result<bool> {
+        Ok(false)
+    }
+
+    async fn identity(&self) -> fdo::Result<String> {
+        Ok("Mousai".to_string())
+    }
+
+    async fn desktop_entry(&self) -> fdo::Result<String> {
+        Ok(APP_ID.into())
+    }
+
+    async fn supported_uri_schemes(&self) -> fdo::Result<Vec<String>> {
+        Ok(vec![])
+    }
+
+    async fn supported_mime_types(&self) -> fdo::Result<Vec<String>> {
+        Ok(vec![])
+    }
+}
+
+#[async_trait(?Send)]
+impl LocalPlayerInterface for Player {
+    async fn next(&self) -> fdo::Result<()> {
+        Err(fdo::Error::NotSupported("Next is not supported".into()))
+    }
+
+    async fn previous(&self) -> fdo::Result<()> {
+        Err(fdo::Error::NotSupported("Previous is not supported".into()))
+    }
+
+    async fn pause(&self) -> fdo::Result<()> {
+        self.pause();
+        Ok(())
+    }
+
+    async fn play_pause(&self) -> fdo::Result<()> {
+        if self.state() == PlayerState::Playing {
+            self.pause();
+        } else {
+            self.play();
+        }
+        Ok(())
+    }
+
+    async fn stop(&self) -> fdo::Result<()> {
+        self.set_song(Song::NONE);
+        Ok(())
+    }
+
+    async fn play(&self) -> fdo::Result<()> {
+        self.play();
+        Ok(())
+    }
+
+    async fn seek(&self, offset: Time) -> fdo::Result<()> {
+        let offset_abs = gst::ClockTime::from_useconds(offset.as_micros().unsigned_abs());
+        let new_position = if offset.is_positive() {
+            self.position().saturating_add(offset_abs)
+        } else {
+            self.position().saturating_sub(offset_abs)
+        };
+        self.seek(new_position);
+        Ok(())
+    }
+
+    async fn set_position(&self, _track_id: TrackId, _position: Time) -> fdo::Result<()> {
+        Err(fdo::Error::NotSupported(
+            "SetPosition is not supported".into(),
+        ))
+    }
+
+    async fn open_uri(&self, _uri: String) -> fdo::Result<()> {
+        Err(fdo::Error::NotSupported("OpenUri is not supported".into()))
+    }
+
+    async fn playback_status(&self) -> fdo::Result<PlaybackStatus> {
+        Ok(match self.state() {
+            PlayerState::Stopped | PlayerState::Buffering => PlaybackStatus::Stopped,
+            PlayerState::Playing => PlaybackStatus::Playing,
+            PlayerState::Paused => PlaybackStatus::Paused,
+        })
+    }
+
+    async fn loop_status(&self) -> fdo::Result<LoopStatus> {
+        Ok(LoopStatus::None)
+    }
+
+    async fn set_loop_status(&self, _loop_status: LoopStatus) -> zbus::Result<()> {
+        Err(zbus::Error::from(fdo::Error::NotSupported(
+            "SetLoopStatus is not supported".into(),
+        )))
+    }
+
+    async fn rate(&self) -> fdo::Result<PlaybackRate> {
+        Ok(1.0)
+    }
+
+    async fn set_rate(&self, _rate: PlaybackRate) -> zbus::Result<()> {
+        Err(zbus::Error::from(fdo::Error::NotSupported(
+            "SetRate is not supported".into(),
+        )))
+    }
+
+    async fn shuffle(&self) -> fdo::Result<bool> {
+        Ok(false)
+    }
+
+    async fn set_shuffle(&self, _shuffle: bool) -> zbus::Result<()> {
+        Err(zbus::Error::from(fdo::Error::NotSupported(
+            "SetShuffle is not supported".into(),
+        )))
+    }
+
+    async fn metadata(&self) -> fdo::Result<Metadata> {
+        Ok(self.imp().metadata.borrow().clone())
+    }
+
+    async fn volume(&self) -> fdo::Result<Volume> {
+        Ok(1.0)
+    }
+
+    async fn set_volume(&self, _volume: Volume) -> zbus::Result<()> {
+        Err(zbus::Error::from(fdo::Error::NotSupported(
+            "SetVolume is not supported".into(),
+        )))
+    }
+
+    async fn position(&self) -> fdo::Result<Time> {
+        Ok(Time::from_micros(self.position().useconds() as i64))
+    }
+
+    async fn minimum_rate(&self) -> fdo::Result<PlaybackRate> {
+        Ok(1.0)
+    }
+
+    async fn maximum_rate(&self) -> fdo::Result<PlaybackRate> {
+        Ok(1.0)
+    }
+
+    async fn can_go_next(&self) -> fdo::Result<bool> {
+        Ok(false)
+    }
+
+    async fn can_go_previous(&self) -> fdo::Result<bool> {
+        Ok(false)
+    }
+
+    async fn can_play(&self) -> fdo::Result<bool> {
+        Ok(self.song().is_some())
+    }
+
+    async fn can_pause(&self) -> fdo::Result<bool> {
+        Ok(self.song().is_some())
+    }
+
+    async fn can_seek(&self) -> fdo::Result<bool> {
+        Ok(self.song().is_some())
+    }
+
+    async fn can_control(&self) -> fdo::Result<bool> {
+        Ok(true)
     }
 }

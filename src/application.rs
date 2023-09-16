@@ -180,12 +180,19 @@ impl Application {
         ApplicationExtManual::run(self)
     }
 
+    pub fn quit(&self) {
+        if let Some(window) = self.imp().window.get() {
+            if let Some(window) = window.upgrade() {
+                window.close();
+            }
+        }
+
+        ApplicationExt::quit(self);
+    }
+
     fn setup_gactions(&self) {
         let quit_action = gio::ActionEntry::builder("quit")
             .activate(|obj: &Self, _, _| {
-                if let Some(window) = obj.imp().window.get().and_then(|window| window.upgrade()) {
-                    window.close();
-                }
                 obj.quit();
             })
             .build();
