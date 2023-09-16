@@ -201,7 +201,6 @@ impl Player {
         tracing::debug!(?position, "Seeking");
 
         self.imp().gst_play.seek(position);
-        self.mpris_seeked(Time::from_micros(position.useconds() as i64));
     }
 
     fn set_position(&self, position: gst::ClockTime) {
@@ -289,7 +288,9 @@ impl Player {
             }
             PlayMessage::SeekDone => {
                 tracing::debug!("Received seek done message");
-                self.set_position(imp.gst_play.position().unwrap_or_default());
+                let position = imp.gst_play.position().unwrap_or_default();
+                self.set_position(position);
+                self.mpris_seeked(Time::from_micros(position.useconds() as i64));
             }
             PlayMessage::Error { error, details } => {
                 tracing::error!(state = ?self.state(), ?details, "Received error message: {:?}", error);
