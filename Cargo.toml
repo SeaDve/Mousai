@@ -24,7 +24,7 @@ heed = { version = "=0.20.0-alpha.1", features = [
     "serde-bincode",
 ] } # TODO Remove `=` once https://github.com/meilisearch/heed/pull/203 is merged
 indexmap = { version = "2.0", features = ["serde"] }
-mpris-server = "0.3.2"
+mpris-server = "0.4.1"
 pulse = { package = "libpulse-binding", version = "2.26.0" }
 pulse_glib = { package = "libpulse-glib-binding", version = "2.25.1" }
 serde = { version = "1.0", features = ["derive"] }

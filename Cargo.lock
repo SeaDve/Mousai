@@ -1343,9 +1343,9 @@ dependencies = [
 
 [[package]]
 name = "mpris-server"
-version = "0.3.2"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2dfbea1ccfb4eca8c200efb3d4259e5302ad41f5f68cc4201148c92498a4b76f"
+checksum = "9e6b1c0502d8fdf778ab8a0872ee7174c39be09e96982e872a08dc8cb15905b2"
 dependencies = [
  "async-lock",
  "async-trait",
