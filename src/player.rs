@@ -99,9 +99,8 @@ mod imp {
 
             match LocalServer::new(APP_ID, obj.clone()) {
                 Ok(server) => {
+                    let task = server.init_and_run();
                     self.mpris_server.set(server).unwrap();
-
-                    let task = self.mpris_server.get().unwrap().init_and_run();
                     utils::spawn(glib::Priority::default(), async move {
                         if let Err(err) = task.await {
                             tracing::error!("Failed to run MPRIS server: {:?}", err);
