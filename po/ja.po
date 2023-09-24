@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # 小山田純 <oyamada.junjun@outlook.jp>, 2021.
-# Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022.
+# Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022, 2023.
 # Kaz Sibuya <sibuyakazokuu@gmail.com>, 2021.
 # Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
 # kj7kt <yyhuton@gmail.com>, 2023.
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 18:03+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-09-24 17:02+0000\n"
+"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
 "Language: ja\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -132,9 +132,8 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
-msgstr "_設定"
+msgstr "設定(_P)"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
