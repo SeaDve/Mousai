@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-02 18:03+0800\n"
+"POT-Creation-Date: 2023-10-01 09:25+0800\n"
 "PO-Revision-Date: 2023-09-24 17:02+0000\n"
 "Last-Translator: Muhammad Akbar Yanuar Mantari <mantarimay@users.noreply."
 "hosted.weblate.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:58
+#: src/main.rs:57
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -89,12 +89,12 @@ msgid "Why you will love Mousai?"
 msgstr "Mengapa Anda akan mencintai Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
-msgid "🎵 Recognize songs within seconds or save for later when offline"
-msgstr "🎵 Kenali lagu dalam hitungan detik atau simpan untuk nanti saat luring"
+msgid "🎵 Identify songs within seconds or save for later when offline"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
-msgid "🎙️ Use microphone or desktop audio"
-msgstr "🎙️ Gunakan mikrofon atau audio desktop"
+msgid "🎙️ Recognize from desktop audio or your microphone"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -116,11 +116,11 @@ msgstr "📱 Antarmuka yang mudah digunakan"
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
-#: data/resources/ui/database-error-window.ui:20
+#: data/resources/ui/database-error-window.ui:14
 msgid "Critical Database Error"
 msgstr "Kesalahan Database Fatal"
 
-#: data/resources/ui/database-error-window.ui:21
+#: data/resources/ui/database-error-window.ui:15
 msgid ""
 "This is likely caused by a tampered or corrupted database. You can try "
 "clearing application data. However, this is not recommended and will delete "
@@ -130,6 +130,10 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+
+#: data/resources/ui/database-error-window.ui:20
+msgid "Quit"
+msgstr "Keluar"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -151,11 +155,15 @@ msgstr "Pilih _Semua"
 msgid "Select _None"
 msgstr "Pilih Ti_dak Ada"
 
+#: data/resources/ui/history-view.ui:42
+msgid "Home"
+msgstr ""
+
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
 msgstr ""
 
-#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
+#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
 msgid "Listen"
 msgstr "Dengarkan"
 
@@ -163,7 +171,7 @@ msgstr "Dengarkan"
 msgid "Main Menu"
 msgstr "Menu Utama"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
 msgid "Select"
 msgstr "Pilih"
 
@@ -183,15 +191,15 @@ msgstr "Batal"
 msgid "Search songs"
 msgstr ""
 
-#: data/resources/ui/history-view.ui:142
+#: data/resources/ui/history-view.ui:140
 msgid "Start Recognizing Songs!"
 msgstr ""
 
-#: data/resources/ui/history-view.ui:143
+#: data/resources/ui/history-view.ui:141
 msgid "Click the listen button to start"
 msgstr "Klik tombol dengar untuk memulai"
 
-#: data/resources/ui/history-view.ui:153
+#: data/resources/ui/history-view.ui:150
 msgid "No Results"
 msgstr ""
 
@@ -208,7 +216,7 @@ msgid "Determines the audio source to use when available"
 msgstr ""
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:65
+#: src/window/external_link_tile.rs:66
 msgid "AudD"
 msgstr "AudD"
 
@@ -222,19 +230,19 @@ msgstr ""
 msgid "API Token"
 msgstr "Token API"
 
-#: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
-msgid "Back"
-msgstr ""
-
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
 msgstr "Mode Luring Aktif"
+
+#: data/resources/ui/recognizer-status.ui:44
+msgid "Show Offline Mode Recognition Results"
+msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
 msgstr "Batal Mendengarkan"
 
-#: data/resources/ui/recognizer-view.ui:53
+#: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
 msgstr "Mode Luring"
 
@@ -283,21 +291,6 @@ msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Toggle Pemutaran"
 
-#: data/resources/ui/shortcuts.ui:63
-msgctxt "shortcut window"
-msgid "Navigation"
-msgstr "Navigasi"
-
-#: data/resources/ui/shortcuts.ui:66
-msgctxt "shortcut window"
-msgid "Go Back"
-msgstr "Kembali"
-
-#: data/resources/ui/shortcuts.ui:72
-msgctxt "shortcut window"
-msgid "Go Forward"
-msgstr ""
-
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
 msgstr "Tampilkan Informasi Lagu"
@@ -306,31 +299,31 @@ msgstr "Tampilkan Informasi Lagu"
 msgid "Stop"
 msgstr "Berhenti"
 
-#: data/resources/ui/song-page.ui:37
+#: data/resources/ui/song-page.ui:24
 msgid "Remove From History"
 msgstr "Hapus Dari Riwayat"
 
-#: data/resources/ui/song-page.ui:44
+#: data/resources/ui/song-page.ui:30
 msgid "Copy"
 msgstr "Salin"
 
-#: data/resources/ui/song-page.ui:150
+#: data/resources/ui/song-page.ui:134
 msgid "Information"
 msgstr "Informasi"
 
-#: data/resources/ui/song-page.ui:153
+#: data/resources/ui/song-page.ui:137
 msgid "Last Heard"
 msgstr "Terakhir Didengar"
 
-#: data/resources/ui/song-page.ui:158
+#: data/resources/ui/song-page.ui:142
 msgid "Album"
 msgstr "Album"
 
-#: data/resources/ui/song-page.ui:163
+#: data/resources/ui/song-page.ui:147
 msgid "Release Date"
 msgstr "Tanggal Rilis"
 
-#: data/resources/ui/song-page.ui:170
+#: data/resources/ui/song-page.ui:154
 msgid "Lyrics"
 msgstr "Lirik"
 
@@ -352,18 +345,14 @@ msgstr ""
 "@mantarimay"
 
 #: src/about.rs:31
-msgid "Donate (Liberapay)"
-msgstr "Berdonasi (Liberapay)"
+msgid "Donate (Buy Me a Coffee)"
+msgstr ""
 
-#: src/about.rs:35
-msgid "Donate (PayPal)"
-msgstr "Berdonasi (PayPal)"
-
-#: src/about.rs:39
+#: src/about.rs:34
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:41
+#: src/about.rs:36
 msgid "Translate"
 msgstr "Terjemahkan"
 
@@ -377,11 +366,11 @@ msgstr "hari ini pukul %R"
 msgid "yesterday at %R"
 msgstr "kemarin pukul %R"
 
-#: src/preferences_window.rs:107
+#: src/preferences_window.rs:103
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: src/preferences_window.rs:108
+#: src/preferences_window.rs:104
 msgid "Desktop Audio"
 msgstr "Audio Desktop"
 
@@ -409,171 +398,176 @@ msgstr "Tidak Dapat Terhubung ke Server"
 msgid "Received Other Permanent Error"
 msgstr "Menerima Kesalahan Permanen Lain"
 
-#: src/window/external_link_tile.rs:60
+#: src/window/external_link_tile.rs:61
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
 msgstr "Jelajahi di Apple Music"
 
-#: src/window/external_link_tile.rs:66
+#: src/window/external_link_tile.rs:67
 msgid "Browse on AudD"
 msgstr "Jelajadi di AudD"
 
-#: src/window/external_link_tile.rs:70
+#: src/window/external_link_tile.rs:71
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:72
 msgid "Listen on Spotify"
 msgstr "Dengarkan di Spotify"
 
-#: src/window/external_link_tile.rs:75
+#: src/window/external_link_tile.rs:76
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:77
 msgid "Search on YouTube"
 msgstr "Cari di YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:145
+#: src/window/external_link_tile.rs:146
 msgid "Failed to launch {key}"
 msgstr ""
 
-#: src/window/history_view.rs:141 src/window/song_page.rs:89
+#: src/window/history_view.rs:143 src/window/song_page.rs:77
 msgid "Copied to clipboard"
 msgstr "Disalin ke papan klip"
 
-#: src/window/history_view.rs:155
+#: src/window/history_view.rs:157
 msgid "Failed to remove selected songs"
 msgstr "Gagal menghapus lagu yang dipilih"
 
-#: src/window/history_view.rs:323
+#: src/window/history_view.rs:336
 msgid "Failed to remove song"
 msgstr "Gagal menghapus lagu"
 
-#: src/window/history_view.rs:448
+#: src/window/history_view.rs:450
 msgid "Failed to show recognizer results"
 msgstr "Gagal menampilkan hasil pengenalan"
 
-#: src/window/history_view.rs:686
+#: src/window/history_view.rs:557
 msgid "_Undo"
 msgstr "_Batal"
 
-#: src/window/history_view.rs:694
+#: src/window/history_view.rs:568
 msgid "Failed to undo"
 msgstr "Gagal membatalkan"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:714
+#: src/window/history_view.rs:588
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] ""
 
-#: src/window/history_view.rs:840
+#: src/window/history_view.rs:711
 msgid "Select items"
 msgstr ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:844
+#: src/window/history_view.rs:715
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] ""
 
-#: src/window/history_view.rs:854
+#: src/window/history_view.rs:725
 #, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Salin Lagu"
 
-#: src/window/history_view.rs:861
+#: src/window/history_view.rs:732
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Hapus Lagu Dari Riwayat"
 
-#: src/window/mod.rs:262
+#: src/window/mod.rs:208
 msgid "Failed to insert song to history"
 msgstr "Gagal menambahkan lagu ke riwayat"
 
-#: src/window/mod.rs:307
+#: src/window/mod.rs:256
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
 
-#: src/window/mod.rs:310 src/window/mod.rs:342
+#: src/window/mod.rs:259 src/window/mod.rs:291
 msgid "No, Thanks"
 msgstr ""
 
-#: src/window/mod.rs:312
+#: src/window/mod.rs:261
 msgid "Open an Issue"
 msgstr ""
 
-#: src/window/mod.rs:339
+#: src/window/mod.rs:288
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:293
 msgid "Try Again"
 msgstr ""
 
-#: src/window/mod.rs:377
+#: src/window/mod.rs:326
 msgid "Recording Saved"
 msgstr ""
 
-#: src/window/mod.rs:385
+#: src/window/mod.rs:334
 msgid "The result will be available when you're back online"
 msgstr ""
 
-#: src/window/mod.rs:388
+#: src/window/mod.rs:337
 msgid "Ok, Got It"
 msgstr ""
 
-#: src/window/mod.rs:398
+#: src/window/mod.rs:347
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
 
-#: src/window/mod.rs:401
+#: src/window/mod.rs:350
 msgid "I'll Wait"
 msgstr ""
 
-#: src/window/mod.rs:405
+#: src/window/mod.rs:354
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
 
-#: src/window/mod.rs:408
+#: src/window/mod.rs:357
 #, fuzzy
 msgid "Later"
 msgstr "Nanti"
 
-#: src/window/mod.rs:413
+#: src/window/mod.rs:362
 msgid "Open Preferences"
 msgstr ""
 
-#: src/window/mod.rs:519
+#: src/window/mod.rs:450
 msgid "An error occurred in the player"
 msgstr ""
 
-#: src/window/playback_button.rs:117
+#: src/window/playback_button.rs:95
 msgid "Play"
 msgstr "Mainkan"
 
-#: src/window/playback_button.rs:124
+#: src/window/playback_button.rs:102
 msgid "Pause"
 msgstr "Berhenti"
 
+#: src/window/recognized_page.rs:134
+msgid "Recognized Song"
+msgid_plural "Recognized Songs"
+msgstr[0] ""
+
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:143
+#: src/window/recognized_page.rs:140
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] ""
 
-#: src/window/recognized_page.rs:149
+#: src/window/recognized_page.rs:146
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] ""
@@ -583,21 +577,42 @@ msgstr[0] ""
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr ""
 
-#: src/window/recognizer_view.rs:135
+#: src/window/recognizer_view.rs:134
 msgid "Listening…"
 msgstr "Mendengarkan…"
 
-#: src/window/recognizer_view.rs:140
+#: src/window/recognizer_view.rs:139
 msgid "Recognizing…"
 msgstr "Mengenali…"
 
-#: src/window/song_page.rs:301
+#: src/window/song_page.rs:348
 msgid "Unknown"
 msgstr ""
 
-#: src/window/song_tile.rs:336
+#: src/window/song_tile.rs:335
 msgid "Unselect"
 msgstr ""
+
+#~ msgid "🎵 Recognize songs within seconds or save for later when offline"
+#~ msgstr ""
+#~ "🎵 Kenali lagu dalam hitungan detik atau simpan untuk nanti saat luring"
+
+#~ msgid "🎙️ Use microphone or desktop audio"
+#~ msgstr "🎙️ Gunakan mikrofon atau audio desktop"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Navigation"
+#~ msgstr "Navigasi"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Go Back"
+#~ msgstr "Kembali"
+
+#~ msgid "Donate (Liberapay)"
+#~ msgstr "Berdonasi (Liberapay)"
+
+#~ msgid "Donate (PayPal)"
+#~ msgstr "Berdonasi (PayPal)"
 
 #~ msgid "Failed to launch {}"
 #~ msgstr "Gagal meluncurkan {}"
@@ -813,9 +828,6 @@ msgstr ""
 #~ msgid "Show Shortcuts"
 #~ msgstr "Tampilkan Pintasan"
 
-#~ msgid "Quit"
-#~ msgstr "Keluar"
-
 #~ msgid "Controls"
 #~ msgstr "Kontrol"
 
@@ -841,9 +853,9 @@ msgstr ""
 #~ msgstr "Kirim"
 
 #~ msgid ""
-#~ "Mousai uses audd.io APIs to work, so it is required to login to <a href="
-#~ "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
-#~ "this blank will give you a few trials per day."
+#~ "Mousai uses audd.io APIs to work, so it is required to login to <a "
+#~ "href=\"https://dashboard.audd.io/\">their website</a> and get a token. "
+#~ "Leaving this blank will give you a few trials per day."
 #~ msgstr ""
 #~ "Mousai menggunakan API audd.io untuk bekerja, jadi anda perlu login ke<a "
 #~ "href=\"https://dashboard.audd.io/\">situs mereka</a>untuk mendapatkan "
@@ -945,9 +957,9 @@ msgstr ""
 
 #~ msgctxt "Do not translate the link, only 'their website'"
 #~ msgid ""
-#~ "Mousai uses audd.io APIs to work, so it is required to login to <a href="
-#~ "\"https://dashboard.audd.io/\">their website</a> and get a token. Leaving "
-#~ "this blank will give you a few trials per day."
+#~ "Mousai uses audd.io APIs to work, so it is required to login to <a "
+#~ "href=\"https://dashboard.audd.io/\">their website</a> and get a token. "
+#~ "Leaving this blank will give you a few trials per day."
 #~ msgstr ""
 #~ "Mousai menggunakan API audd.io untuk bekerja, sehingga Anda perlu masuk "
 #~ "ke <a href=\"https://dashboard.audd.io/\">situs web mereka</a> dan "

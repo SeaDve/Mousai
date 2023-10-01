@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-02 18:03+0800\n"
+"POT-Creation-Date: 2023-10-01 09:25+0800\n"
 "PO-Revision-Date: 2023-06-28 15:52+0000\n"
 "Last-Translator: qqqq1 <qqqq1@hi2.in>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/>"
-"\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/kooha/mousai/fa/"
+">\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:58
+#: src/main.rs:57
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -90,12 +90,12 @@ msgid "Why you will love Mousai?"
 msgstr "چرا شما عاشق Mousai خواهید شد؟"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
-msgid "🎵 Recognize songs within seconds or save for later when offline"
-msgstr "🎵 تشخیص آهنگ‌ها با شنیدن چند ثانیه یا ذخیره برای بعدا (اگه‌آفلاین‌هستی)"
+msgid "🎵 Identify songs within seconds or save for later when offline"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
-msgid "🎙️ Use microphone or desktop audio"
-msgstr "🎙️ استفاده از میکروفن یا صوت‌سیستم"
+msgid "🎙️ Recognize from desktop audio or your microphone"
+msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -117,11 +117,11 @@ msgstr "📱 رابط‌کاربری خیلی ساده"
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
-#: data/resources/ui/database-error-window.ui:20
+#: data/resources/ui/database-error-window.ui:14
 msgid "Critical Database Error"
 msgstr "خطای بحرانی دیتابیس"
 
-#: data/resources/ui/database-error-window.ui:21
+#: data/resources/ui/database-error-window.ui:15
 msgid ""
 "This is likely caused by a tampered or corrupted database. You can try "
 "clearing application data. However, this is not recommended and will delete "
@@ -138,6 +138,10 @@ msgstr ""
 "برای گزارش این مشکل، برنامه Mousai رو ازطریق خط‌فرمان اجرا کنید که حاوی لاگ "
 "خطاها باشد، سپس گزارش را در صفحه <a href=\"https://github.com/SeaDve/Mousai/"
 "issues/\">گزارش‌خطا</a> ارسال کنید"
+
+#: data/resources/ui/database-error-window.ui:20
+msgid "Quit"
+msgstr "ترک"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -159,11 +163,15 @@ msgstr "انتخاب _همه"
 msgid "Select _None"
 msgstr "انتخاب _هیچکدام"
 
+#: data/resources/ui/history-view.ui:42
+msgid "Home"
+msgstr ""
+
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
 msgstr "تشخیص آهنگ"
 
-#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:137
+#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
 msgid "Listen"
 msgstr "شنیدن"
 
@@ -171,7 +179,7 @@ msgstr "شنیدن"
 msgid "Main Menu"
 msgstr "منوی اصلی"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:338
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
 msgid "Select"
 msgstr "انتخاب"
 
@@ -191,15 +199,15 @@ msgstr "لغو"
 msgid "Search songs"
 msgstr "جستجوی آهنگ‌ها"
 
-#: data/resources/ui/history-view.ui:142
+#: data/resources/ui/history-view.ui:140
 msgid "Start Recognizing Songs!"
 msgstr "شروع تشخیص آهنگ!"
 
-#: data/resources/ui/history-view.ui:143
+#: data/resources/ui/history-view.ui:141
 msgid "Click the listen button to start"
 msgstr "برای شروع روی دکمه شنیدن کلیک کنید"
 
-#: data/resources/ui/history-view.ui:153
+#: data/resources/ui/history-view.ui:150
 msgid "No Results"
 msgstr "نتیجه‌ای نداشت"
 
@@ -216,7 +224,7 @@ msgid "Determines the audio source to use when available"
 msgstr "شناسایی منابع صوتی جهت استفاده درصورت امکان"
 
 #: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:65
+#: src/window/external_link_tile.rs:66
 msgid "AudD"
 msgstr "AudD"
 
@@ -232,19 +240,19 @@ msgstr ""
 msgid "API Token"
 msgstr "توکنAPI"
 
-#: data/resources/ui/recognized-page.ui:22 data/resources/ui/song-page.ui:30
-msgid "Back"
-msgstr "بازگشت"
-
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
 msgstr "حالت آفلاین فعال است"
+
+#: data/resources/ui/recognizer-status.ui:44
+msgid "Show Offline Mode Recognition Results"
+msgstr ""
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
 msgstr "لغو شنیدن"
 
-#: data/resources/ui/recognizer-view.ui:53
+#: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
 msgstr "حالت آفلاین"
 
@@ -293,21 +301,6 @@ msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "توقف/پخش"
 
-#: data/resources/ui/shortcuts.ui:63
-msgctxt "shortcut window"
-msgid "Navigation"
-msgstr "پیمایش"
-
-#: data/resources/ui/shortcuts.ui:66
-msgctxt "shortcut window"
-msgid "Go Back"
-msgstr "بازگشت"
-
-#: data/resources/ui/shortcuts.ui:72
-msgctxt "shortcut window"
-msgid "Go Forward"
-msgstr "رفتن به جلو"
-
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
 msgstr "نمایش اطلاعات آهنگ"
@@ -316,31 +309,31 @@ msgstr "نمایش اطلاعات آهنگ"
 msgid "Stop"
 msgstr "توقف"
 
-#: data/resources/ui/song-page.ui:37
+#: data/resources/ui/song-page.ui:24
 msgid "Remove From History"
 msgstr "خذف از تاریخچه"
 
-#: data/resources/ui/song-page.ui:44
+#: data/resources/ui/song-page.ui:30
 msgid "Copy"
 msgstr "کپی"
 
-#: data/resources/ui/song-page.ui:150
+#: data/resources/ui/song-page.ui:134
 msgid "Information"
 msgstr "اطلاعات"
 
-#: data/resources/ui/song-page.ui:153
+#: data/resources/ui/song-page.ui:137
 msgid "Last Heard"
 msgstr "آخرین بار در"
 
-#: data/resources/ui/song-page.ui:158
+#: data/resources/ui/song-page.ui:142
 msgid "Album"
 msgstr "آلبوم"
 
-#: data/resources/ui/song-page.ui:163
+#: data/resources/ui/song-page.ui:147
 msgid "Release Date"
 msgstr "تاریخ انتشار"
 
-#: data/resources/ui/song-page.ui:170
+#: data/resources/ui/song-page.ui:154
 msgid "Lyrics"
 msgstr "متن ترانه ها"
 
@@ -358,18 +351,14 @@ msgid "translator-credits"
 msgstr "محمدصالح کامیاب"
 
 #: src/about.rs:31
-msgid "Donate (Liberapay)"
-msgstr "حمایت (Liberapay)"
+msgid "Donate (Buy Me a Coffee)"
+msgstr ""
 
-#: src/about.rs:35
-msgid "Donate (PayPal)"
-msgstr "حمایت (PayPal)"
-
-#: src/about.rs:39
+#: src/about.rs:34
 msgid "GitHub"
 msgstr "گیت‌هاب"
 
-#: src/about.rs:41
+#: src/about.rs:36
 msgid "Translate"
 msgstr "ترجمه"
 
@@ -383,11 +372,11 @@ msgstr "امروز ساعت %R"
 msgid "yesterday at %R"
 msgstr "دیروز ساعت %R"
 
-#: src/preferences_window.rs:107
+#: src/preferences_window.rs:103
 msgid "Microphone"
 msgstr "میکروفن"
 
-#: src/preferences_window.rs:108
+#: src/preferences_window.rs:104
 msgid "Desktop Audio"
 msgstr "صوت دستگاه"
 
@@ -415,131 +404,131 @@ msgstr "اتصال به سرور امکانپذیر نیست"
 msgid "Received Other Permanent Error"
 msgstr "خطاهای دائمی دیگری دریافت شد"
 
-#: src/window/external_link_tile.rs:60
+#: src/window/external_link_tile.rs:61
 msgid "Apple Music"
 msgstr "اپل موزیک"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
 msgstr "جستجو در اپل‌موزیک"
 
-#: src/window/external_link_tile.rs:66
+#: src/window/external_link_tile.rs:67
 msgid "Browse on AudD"
 msgstr "جستجو در AudD"
 
-#: src/window/external_link_tile.rs:70
+#: src/window/external_link_tile.rs:71
 msgid "Spotify"
 msgstr "اسپاتیفای"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:72
 msgid "Listen on Spotify"
 msgstr "شنیدن در Spotify"
 
-#: src/window/external_link_tile.rs:75
+#: src/window/external_link_tile.rs:76
 msgid "YouTube"
 msgstr "یوتیوب"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:77
 msgid "Search on YouTube"
 msgstr "جستجو در یوتیوب"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:145
+#: src/window/external_link_tile.rs:146
 msgid "Failed to launch {key}"
 msgstr "اجرا ناموفق بود {key}"
 
-#: src/window/history_view.rs:141 src/window/song_page.rs:89
+#: src/window/history_view.rs:143 src/window/song_page.rs:77
 msgid "Copied to clipboard"
 msgstr "در حافظه کپی شد"
 
-#: src/window/history_view.rs:155
+#: src/window/history_view.rs:157
 msgid "Failed to remove selected songs"
 msgstr "حذف آهنگ‌های انتخابی ناموفق بود"
 
-#: src/window/history_view.rs:323
+#: src/window/history_view.rs:336
 msgid "Failed to remove song"
 msgstr "حذف آهنگ‌ها ناموفق بود"
 
-#: src/window/history_view.rs:448
+#: src/window/history_view.rs:450
 msgid "Failed to show recognizer results"
 msgstr "نمایش نتیجه تشخیص ناموفق بود"
 
-#: src/window/history_view.rs:686
+#: src/window/history_view.rs:557
 msgid "_Undo"
 msgstr "_ برگشت‌به‌قبل"
 
-#: src/window/history_view.rs:694
+#: src/window/history_view.rs:568
 msgid "Failed to undo"
 msgstr "برگشت‌به‌قبل ناموفق بود"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:714
+#: src/window/history_view.rs:588
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "تعداد {n_removed} آهنگ حذف شد"
 msgstr[1] "تعداد {n_removed} آهنگ حذف شدند"
 
-#: src/window/history_view.rs:840
+#: src/window/history_view.rs:711
 msgid "Select items"
 msgstr "موارد را انتخاب کنید"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:844
+#: src/window/history_view.rs:715
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "تعداد {selection_size} آهنگ انتخابی"
 msgstr[1] "تعداد {selection_size} آهنگ‌های انتخابی"
 
-#: src/window/history_view.rs:854
+#: src/window/history_view.rs:725
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "کپی‌کردن آهنگ"
 msgstr[1] "کپی‌کردن آهنگ‌ها"
 
-#: src/window/history_view.rs:861
+#: src/window/history_view.rs:732
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "حذف آهنگ از تاریخچه"
 msgstr[1] "حذف آهنگ‌ها از تاریخچه"
 
-#: src/window/mod.rs:262
+#: src/window/mod.rs:208
 msgid "Failed to insert song to history"
 msgstr "قرار دادن آهنگ در تاریخچه ناموفق بود"
 
-#: src/window/mod.rs:307
+#: src/window/mod.rs:256
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr "خواهشمند است در GitHub یک گزارش ثبت کرده و اطلاعات لازم را ارائه دهید"
 
-#: src/window/mod.rs:310 src/window/mod.rs:342
+#: src/window/mod.rs:259 src/window/mod.rs:291
 msgid "No, Thanks"
 msgstr "خیر، متشکرم"
 
-#: src/window/mod.rs:312
+#: src/window/mod.rs:261
 msgid "Open an Issue"
 msgstr "ثبت یک گزارش"
 
-#: src/window/mod.rs:339
+#: src/window/mod.rs:288
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr "به منبع صدا نزدیک‌تر شوید، یا بخش دیگری از آهنگ را ضبط کنید"
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:293
 msgid "Try Again"
 msgstr "تلاش مجدد"
 
-#: src/window/mod.rs:377
+#: src/window/mod.rs:326
 msgid "Recording Saved"
 msgstr "ضبط ذخیره شد"
 
-#: src/window/mod.rs:385
+#: src/window/mod.rs:334
 msgid "The result will be available when you're back online"
 msgstr "نتیجه زمانی دردسترس خواهد بود که آنلاین شوید"
 
-#: src/window/mod.rs:388
+#: src/window/mod.rs:337
 msgid "Ok, Got It"
 msgstr "اوکی، بریم سراغش"
 
-#: src/window/mod.rs:398
+#: src/window/mod.rs:347
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -547,11 +536,11 @@ msgstr ""
 "نتیجه زمانی دردسترس خواهد بود که محدودیت توکن شما ریست شود. منتظر باشید تا "
 "زمان ریست شدن یا در بخش تنظیمات توکن دیگری را قرار دهید"
 
-#: src/window/mod.rs:401
+#: src/window/mod.rs:350
 msgid "I'll Wait"
 msgstr "منتظر خواهم ماند"
 
-#: src/window/mod.rs:405
+#: src/window/mod.rs:354
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -559,34 +548,40 @@ msgstr ""
 "نتیجه زمانی دردسترس خواهد بود که توکن شما جایگزین شود. در بخش تنظیمات توکن "
 "دیگری را قرار دهید"
 
-#: src/window/mod.rs:408
+#: src/window/mod.rs:357
 msgid "Later"
 msgstr "بعدا"
 
-#: src/window/mod.rs:413
+#: src/window/mod.rs:362
 msgid "Open Preferences"
 msgstr "باز کردن تنظیمات"
 
-#: src/window/mod.rs:519
+#: src/window/mod.rs:450
 msgid "An error occurred in the player"
 msgstr "خطایی در پخش‌کننده بروز کرد"
 
-#: src/window/playback_button.rs:117
+#: src/window/playback_button.rs:95
 msgid "Play"
 msgstr "پخش"
 
-#: src/window/playback_button.rs:124
+#: src/window/playback_button.rs:102
 msgid "Pause"
 msgstr "مکث"
 
+#: src/window/recognized_page.rs:134
+msgid "Recognized Song"
+msgid_plural "Recognized Songs"
+msgstr[0] ""
+msgstr[1] ""
+
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:143
+#: src/window/recognized_page.rs:140
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "تشخیص {n_songs} آهنگ جدید"
 msgstr[1] "تشخیص {n_songs} آهنگ‌های جدید"
 
-#: src/window/recognized_page.rs:149
+#: src/window/recognized_page.rs:146
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "این آهنگ از صوت‌های ذخیره شده شما تشخیص داده شد"
@@ -597,21 +592,49 @@ msgstr[1] "این آهنگ‌ها از صوت‌های ذخیره شده تشخ�
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "از {total_minus_failed} فقط {n_successful} تشخیص داده شد"
 
-#: src/window/recognizer_view.rs:135
+#: src/window/recognizer_view.rs:134
 msgid "Listening…"
 msgstr "درحال‌شنیدن…"
 
-#: src/window/recognizer_view.rs:140
+#: src/window/recognizer_view.rs:139
 msgid "Recognizing…"
 msgstr "درحال‌تشخیص…"
 
-#: src/window/song_page.rs:301
+#: src/window/song_page.rs:348
 msgid "Unknown"
 msgstr "ناشناخته"
 
-#: src/window/song_tile.rs:336
+#: src/window/song_tile.rs:335
 msgid "Unselect"
 msgstr "لغو انتخاب"
+
+#~ msgid "🎵 Recognize songs within seconds or save for later when offline"
+#~ msgstr ""
+#~ "🎵 تشخیص آهنگ‌ها با شنیدن چند ثانیه یا ذخیره برای بعدا (اگه‌آفلاین‌هستی)"
+
+#~ msgid "🎙️ Use microphone or desktop audio"
+#~ msgstr "🎙️ استفاده از میکروفن یا صوت‌سیستم"
+
+#~ msgid "Back"
+#~ msgstr "بازگشت"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Navigation"
+#~ msgstr "پیمایش"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Go Back"
+#~ msgstr "بازگشت"
+
+#~ msgctxt "shortcut window"
+#~ msgid "Go Forward"
+#~ msgstr "رفتن به جلو"
+
+#~ msgid "Donate (Liberapay)"
+#~ msgstr "حمایت (Liberapay)"
+
+#~ msgid "Donate (PayPal)"
+#~ msgstr "حمایت (PayPal)"
 
 #~ msgid "Enter song or artist name"
 #~ msgstr "نام ترانه یا خواننده را وارد کنید"
@@ -652,9 +675,6 @@ msgstr "لغو انتخاب"
 
 #~ msgid "Show Shortcuts"
 #~ msgstr "نمایش میان‌برها"
-
-#~ msgid "Quit"
-#~ msgstr "ترک"
 
 #~ msgid "Settings"
 #~ msgstr "تنظیمات"
