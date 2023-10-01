@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-05-04 10:56+0000\n"
-"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
+"PO-Revision-Date: 2023-10-01 09:04+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -350,8 +350,9 @@ msgid "translator-credits"
 msgstr "Ihor Hordiichuk &lt;igor_ck@outlook.com&gt;"
 
 #: src/about.rs:31
+#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Підтримати (Buy Me a Coffee)"
 
 #: src/about.rs:34
 msgid "GitHub"

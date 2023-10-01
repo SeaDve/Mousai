@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-09-24 17:02+0000\n"
-"Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
+"PO-Revision-Date: 2023-10-01 09:04+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/kooha/mousai/ja/"
 ">\n"
 "Language: ja\n"
@@ -347,8 +347,9 @@ msgstr ""
 "kj7kt"
 
 #: src/about.rs:31
+#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "寄付 (Buy Me a Coffee)"
 
 #: src/about.rs:34
 msgid "GitHub"
