@@ -13,7 +13,7 @@
     <img alt="Download on Flathub" src="https://dl.flathub.org/assets/badges/flathub-badge-i-en.svg" width="200"/>
   </a>
   <br>
- <a href="https://www.buymeacoffee.com/seadve">
+  <a href="https://www.buymeacoffee.com/seadve">
     <img alt="Buy Me a Coffee" src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=seadve&button_colour=FFDD00&font_colour=000000&font_family=Inter&outline_colour=000000&coffee_colour=ffffff" width="150"/>
   </a>
 </p>
