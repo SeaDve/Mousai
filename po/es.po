@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-10-04 18:11+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
 "Language: es\n"
@@ -356,9 +356,8 @@ msgid "translator-credits"
 msgstr "Óscar Fernández Díaz <oscfdezdz@tuta.io>"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Donar (Invítame a un café)"
+msgstr "Donar (Cómprame un café)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -581,8 +580,8 @@ msgstr "Pausar"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Canción reconocida"
+msgstr[1] "Canciones reconocidas"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140

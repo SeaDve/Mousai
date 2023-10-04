@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-10-04 18:11+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/kooha/mousai/it/>"
 "\n"
 "Language: it\n"
@@ -97,10 +97,11 @@ msgstr "Perché Mousai ti piacerà?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identifica i brani in pochi secondi o salvali per dopo quando sei offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Riconosci dall'audio del desktop o dal microfono"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -172,7 +173,7 @@ msgstr "_Deseleziona tutto"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -254,7 +255,7 @@ msgstr "Modalità offline attivata"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Mostra i risultati del riconoscimento della modalità offline"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -359,9 +360,8 @@ msgid "translator-credits"
 msgstr "Albano Battistella, Andrea Brandi, Michael Moroni, Nicolas Mariniello"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Donazione (Offrimi un caffè)"
+msgstr "Fai una donazione (offrimi un caffè)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -583,8 +583,8 @@ msgstr "Pausa"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Canzone riconosciuta"
+msgstr[1] "Canzoni riconosciute"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140

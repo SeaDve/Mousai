@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-10-04 18:11+0000\n"
+"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/kooha/mousai/"
 "uk/>\n"
 "Language: uk\n"
@@ -91,10 +91,12 @@ msgstr "Чому ви вподобаєте Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Визначайте пісні за лічені секунди або зберігайте їх на потім, коли ви "
+"офлайн"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Розпізнавання аудіо з комп'ютера або вашого мікрофона"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -164,7 +166,7 @@ msgstr "Ска_сувати вибір"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Домівка"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -245,7 +247,7 @@ msgstr "Увімкнено офлайн-режим"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Показати результати розпізнавання в режимі офлайн"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -350,7 +352,6 @@ msgid "translator-credits"
 msgstr "Ihor Hordiichuk &lt;igor_ck@outlook.com&gt;"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Підтримати (Buy Me a Coffee)"
 
@@ -576,9 +577,9 @@ msgstr "Призупинити"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Розпізнана пісня"
+msgstr[1] "Розпізнані пісні"
+msgstr[2] "Розпізнані пісні"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140
