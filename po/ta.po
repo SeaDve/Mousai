@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-10-08 13:02+0000\n"
+"Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/kooha/mousai/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
@@ -87,10 +87,13 @@ msgstr "நீங்கள் ஏன் மௌசாயை நேசிப்ப
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 சில நொடிகளில் பாடல்களை அடையாளம் காணவும் அல்லது பின்னர் ஆஃப்லைனில் "
+"இருக்கும்போது கேட்பதற்கு சேமிக்கவும்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr ""
+"🎙️ டெஸ்க்டாப் ஒலிப்பதிவு அல்லது உங்கள் ஒலி வாங்கியில் இருந்து கண்டறியவும்"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -135,7 +138,6 @@ msgstr ""
 "பக்கத்தில்</a> சமர்ப்பிக்கவும்"
 
 #: data/resources/ui/database-error-window.ui:20
-#, fuzzy
 msgid "Quit"
 msgstr "வெளியேறு"
 
@@ -161,7 +163,7 @@ msgstr "எதுவும் இல்லை என்பதைத் தேர
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "முகப்பு"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -242,7 +244,7 @@ msgstr "ஆஃப்லைன் பயன்முறை இயக்கப்�
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "ஆஃப்லைன் பயன்முறை அறிதல் முடிவுகளைக் காட்டு"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -348,7 +350,7 @@ msgstr "தருண் கிருஷ்ணா.க.பா"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "நன்கொடை (எனக்கு ஒரு காபி வாங்கிக் கொடு)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -567,8 +569,8 @@ msgstr "இடைநிறுத்து"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "பாடல் கண்டறியப்பட்டது"
+msgstr[1] "பாடல்கள் கண்டறியப்பட்டன"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140

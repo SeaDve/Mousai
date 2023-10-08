@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-04 18:11+0000\n"
+"PO-Revision-Date: 2023-10-08 13:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/kooha/mousai/fi/>"
 "\n"
@@ -385,7 +385,7 @@ msgstr "Tietokoneen ääni"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr "Ei tuloksia"
+msgstr "Tuloksia ei löytynyt"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
