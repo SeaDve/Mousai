@@ -36,6 +36,7 @@
   <url type="homepage">https://github.com/SeaDve/Mousai</url>
   <url type="bugtracker">https://github.com/SeaDve/Mousai/issues</url>
   <url type="translate">https://hosted.weblate.org/projects/kooha/mousai</url>
+  <url type="vcs-browser">https://github.com/SeaDve/Mousai</url>
   <url type="donation">https://www.buymeacoffee.com/seadve</url>
   <content_rating type="oars-1.0"/>
   <releases>
@@ -369,7 +370,6 @@
     <control>touch</control>
   </recommends>
   <custom>
-    <value key="Purism::form_factor">workstation</value>
     <value key="Purism::form_factor">mobile</value>
   </custom>
 </component>
