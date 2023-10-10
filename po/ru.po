@@ -9,13 +9,14 @@
 # Vik <k3kelm4vw@mozmail.com>, 2022.
 # Vin <k3kelm4vw@mozmail.com>, 2023.
 # Сергей <asvmail.as@gmail.com>, 2023.
+# Axus Wizix <axus.wizix@mail.ru>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-04 18:11+0000\n"
-"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
+"PO-Revision-Date: 2023-10-10 00:02+0000\n"
+"Last-Translator: Axus Wizix <axus.wizix@mail.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/kooha/mousai/ru/>"
 "\n"
 "Language: ru\n"
@@ -174,7 +175,7 @@ msgstr "_Ничего не выбирать"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Главная"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -296,7 +297,7 @@ msgstr "Показать комбинации клавиш"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Выход"
+msgstr "Выйти"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -592,9 +593,9 @@ msgstr "Пауза"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Распознанная песня"
+msgstr[1] "Распознанные песни"
+msgstr[2] "Распознанные песни"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140
