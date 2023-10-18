@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022.
 # Joan Aymà <joanayma@gmail.com>, 2023.
+# victor dargallo <victordargallo@disroot.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2023-10-18 04:15+0000\n"
+"Last-Translator: victor dargallo <victordargallo@disroot.org>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/>"
 "\n"
 "Language: ca\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -128,7 +129,6 @@ msgid ""
 msgstr ""
 
 #: data/resources/ui/database-error-window.ui:20
-#, fuzzy
 msgid "Quit"
 msgstr "Surt"
 
@@ -165,7 +165,6 @@ msgid "Listen"
 msgstr "Escolta"
 
 #: data/resources/ui/history-view.ui:65
-#, fuzzy
 msgid "Main Menu"
 msgstr "Menú principal"
 
@@ -202,7 +201,6 @@ msgid "No Results"
 msgstr ""
 
 #: data/resources/ui/preferences-window.ui:8
-#, fuzzy
 msgid "General"
 msgstr "General"
 
@@ -338,18 +336,19 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr "Adolfo Jayme Barrientos &lt;fitojb@ubuntu.com&gt;, 2022"
+msgstr ""
+"Adolfo Jayme Barrientos <fitojb@ubuntu.com>, Víctor Dargallo "
+"<victordargallo@disroot.org>"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Feu una donació (compreu-me un cafè)"
 
 #: src/about.rs:34
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:36
-#, fuzzy
 msgid "Translate"
 msgstr "Tradueix"
 
@@ -430,7 +429,7 @@ msgstr ""
 
 #: src/window/history_view.rs:143 src/window/song_page.rs:77
 msgid "Copied to clipboard"
-msgstr "Copiat al portaretalls"
+msgstr "S'ha copiat al porta-retalls"
 
 #: src/window/history_view.rs:157
 msgid "Failed to remove selected songs"
@@ -537,7 +536,6 @@ msgid ""
 msgstr ""
 
 #: src/window/mod.rs:357
-#, fuzzy
 msgid "Later"
 msgstr "Més endavant"
 
