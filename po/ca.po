@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-18 04:15+0000\n"
+"PO-Revision-Date: 2023-10-25 23:04+0000\n"
 "Last-Translator: victor dargallo <victordargallo@disroot.org>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.1.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -336,9 +336,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr ""
-"Adolfo Jayme Barrientos <fitojb@ubuntu.com>, Víctor Dargallo "
-"<victordargallo@disroot.org>"
+msgstr "Adolfo Jayme Barrientos , Víctor Dargallo "
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
@@ -355,12 +353,12 @@ msgstr "Tradueix"
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "avui a les %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "ahir a les %R"
 
 #: src/preferences_window.rs:103
 msgid "Microphone"
@@ -372,27 +370,27 @@ msgstr "Àudio de l’ordinador"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "No s'han trobat coincidències"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "No s'ha pogut crear una empremta digital a partir d'àudio"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Testimoni no vàlid"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "S'ha assolit el límit de testimonis"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "No s'ha pogut connectar al servidor"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "S'ha rebut un altre error permanent"
 
 #: src/window/external_link_tile.rs:61
 msgid "Apple Music"
@@ -400,11 +398,11 @@ msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
-msgstr "Explora-ho a l’Apple Music"
+msgstr "Exploreu-ho a Apple Music"
 
 #: src/window/external_link_tile.rs:67
 msgid "Browse on AudD"
-msgstr "Explora-ho a l’AudD"
+msgstr "Exploreu-ho a AudD"
 
 #: src/window/external_link_tile.rs:71
 msgid "Spotify"
@@ -412,7 +410,7 @@ msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:72
 msgid "Listen on Spotify"
-msgstr "Escolta-la a l’Spotify"
+msgstr "Escolteu-la a l'Spotify"
 
 #: src/window/external_link_tile.rs:76
 msgid "YouTube"
@@ -425,7 +423,7 @@ msgstr "Cerca al YouTube"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:146
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "No s'ha pogut iniciar {key}"
 
 #: src/window/history_view.rs:143 src/window/song_page.rs:77
 msgid "Copied to clipboard"
@@ -433,7 +431,7 @@ msgstr "S'ha copiat al porta-retalls"
 
 #: src/window/history_view.rs:157
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "No s'han pogut eliminar les cançons seleccionades"
 
 #: src/window/history_view.rs:336
 msgid "Failed to remove song"
