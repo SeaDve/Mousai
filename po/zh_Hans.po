@@ -9,13 +9,14 @@
 # lumingzh <lumingzh@qq.com>, 2022.
 # Eric <alchemillatruth@purelymail.com>, 2022.
 # CrackTC <chenrke369@gmail.com>, 2023.
+# Carter Zhang <mcut17198@autistici.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-05-18 13:48+0000\n"
-"Last-Translator: CrackTC <chenrke369@gmail.com>\n"
+"PO-Revision-Date: 2023-10-30 05:13+0000\n"
+"Last-Translator: Carter Zhang <mcut17198@autistici.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "kooha/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -355,7 +356,7 @@ msgstr ""
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "捐赠（买我一杯咖啡！）"
 
 #: src/about.rs:34
 msgid "GitHub"
