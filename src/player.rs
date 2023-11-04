@@ -97,20 +97,14 @@ mod imp {
                 .unwrap();
             self.bus_watch_guard.set(bus_watch_guard).unwrap();
 
-            match LocalServer::new(APP_ID, obj.clone()) {
-                Ok(server) => {
-                    let task = server.init_and_run();
-                    self.mpris_server.set(server).unwrap();
-                    utils::spawn(glib::Priority::default(), async move {
-                        if let Err(err) = task.await {
-                            tracing::error!("Failed to run MPRIS server: {:?}", err);
-                        }
-                    });
+            let mpris_server = LocalServer::new(APP_ID, obj.clone());
+            let mpris_server_task = mpris_server.init_and_run();
+            self.mpris_server.set(mpris_server).unwrap();
+            utils::spawn(glib::Priority::default(), async move {
+                if let Err(err) = mpris_server_task.await {
+                    tracing::error!("Failed to run MPRIS server: {:?}", err);
                 }
-                Err(err) => {
-                    tracing::error!("Failed to create MPRIS server: {:?}", err);
-                }
-            }
+            });
         }
     }
 
@@ -226,10 +220,9 @@ impl Player {
         utils::spawn(
             glib::Priority::default(),
             clone!(@weak self as obj => async move {
-                if let Some(server) = obj.imp().mpris_server.get() {
-                    if let Err(err) = server.properties_changed(property).await {
-                        tracing::error!("Failed to emit MPRIS properties changed: {:?}", err);
-                    }
+                let server = obj.imp().mpris_server.get().unwrap();
+                if let Err(err) = server.properties_changed(property).await {
+                    tracing::error!("Failed to emit MPRIS properties changed: {:?}", err);
                 }
             }),
         );
@@ -239,10 +232,9 @@ impl Player {
         utils::spawn(
             glib::Priority::default(),
             clone!(@weak self as obj => async move {
-                if let Some(server) = obj.imp().mpris_server.get() {
-                    if let Err(err) = server.emit(Signal::Seeked { position }).await {
-                        tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
-                    }
+                let server = obj.imp().mpris_server.get().unwrap();
+                if let Err(err) = server.emit(Signal::Seeked { position }).await {
+                    tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
                 }
             }),
         );
