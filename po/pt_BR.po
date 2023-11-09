@@ -8,13 +8,14 @@
 # Felipe Nogueira <contato.fnog@gmail.com>, 2023.
 # Império Linux <kevendoria86@gmail.com>, 2023.
 # Fabio Emilio Costa <fabiocosta0305@gmail.com>, 2023.
+# Tiago Lucas Flach <tiagolucas9830@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-08-17 13:49+0000\n"
-"Last-Translator: Fabio Emilio Costa <fabiocosta0305@gmail.com>\n"
+"PO-Revision-Date: 2023-11-09 02:35+0000\n"
+"Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "kooha/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -38,7 +39,7 @@ msgstr "Identifique músicas em segundos"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr "Shazam;Audio;Music;Song;Reconhecer;Identificar;Reconhecimento;"
+msgstr "Shazam;Áudio;Música;Canção;Reconhecer;Identificar;Reconhecimento;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -94,14 +95,16 @@ msgstr "Por que você vai amar o Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identifique músicas em segundos ou salve para mais tarde quando estiver "
+"offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Reconheça pelo áudio do desktop ou pelo microfone"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr "🎸 Construa um repertório de músicas reconhecidas"
+msgstr "🎸 Crie um repertório de músicas reconhecidas"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
@@ -167,7 +170,7 @@ msgstr "Selecionar_Nenhum"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Início"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -227,7 +230,6 @@ msgstr "Determina a fonte de áudio a ser usada quando disponível"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:66
-#, fuzzy
 msgid "AudD"
 msgstr "AudD"
 
@@ -249,11 +251,11 @@ msgstr "Modo offline ativado"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Mostrar resultados de reconhecimento do modo offline"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr "Cancelar Escutar"
+msgstr "Cancelar a audição"
 
 #: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
@@ -355,7 +357,7 @@ msgstr "Vitor Cardoso, Tiago Lucas Flach, inkhorn"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Doe (Me Compre Um Café)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -420,7 +422,6 @@ msgid "Browse on AudD"
 msgstr "Navegue no AudD"
 
 #: src/window/external_link_tile.rs:71
-#, fuzzy
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -429,7 +430,6 @@ msgid "Listen on Spotify"
 msgstr "Escutar no Spotify"
 
 #: src/window/external_link_tile.rs:76
-#, fuzzy
 msgid "YouTube"
 msgstr "YouTube"
 
@@ -577,8 +577,8 @@ msgstr "Pausar"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Música Reconhecida"
+msgstr[1] "Músicas Reconhecidas"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140

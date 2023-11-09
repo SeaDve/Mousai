@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-10-30 05:14+0000\n"
+"PO-Revision-Date: 2023-11-09 02:35+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/kooha/mousai/"
 "be/>\n"
@@ -144,6 +144,7 @@ msgstr ""
 "SeaDve/Mousai/issues/\">старонцы issue</a>"
 
 #: data/resources/ui/database-error-window.ui:20
+#, fuzzy
 msgid "Quit"
 msgstr "Выйсці"
 
@@ -217,7 +218,7 @@ msgstr "Няма вынікаў"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
-msgstr "Агульныя"
+msgstr "Агульнае"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
@@ -353,13 +354,14 @@ msgstr "© 2023 Дэйв Патрык Кабэрта"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr "Yahor Haurylenka"
+msgstr "Yahor Haurylenka <k1llo2810@gmail.com>"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Падтрымаць (Buy Me a Coffee)"
 
 #: src/about.rs:34
+#, fuzzy
 msgid "GitHub"
 msgstr "GitHub"
 
