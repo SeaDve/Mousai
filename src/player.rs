@@ -1,3 +1,5 @@
+use anyhow::Result;
+use async_lock::OnceCell as AsyncOnceCell;
 use gst::bus::BusWatchGuard;
 use gst_play::prelude::*;
 use gtk::{
@@ -7,7 +9,6 @@ use gtk::{
 };
 use mpris_server::{
     async_trait,
-    enumflags2::BitFlags,
     zbus::{self, fdo},
     LocalPlayerInterface, LocalRootInterface, LocalServer, LoopStatus, Metadata, PlaybackRate,
     PlaybackStatus, Property, Signal, Time, TrackId, Volume,
@@ -31,11 +32,21 @@ pub enum PlayerState {
     Playing,
 }
 
+impl PlayerState {
+    fn to_playback_status(self) -> PlaybackStatus {
+        match self {
+            Self::Stopped | Self::Buffering => PlaybackStatus::Stopped,
+            Self::Playing => PlaybackStatus::Playing,
+            Self::Paused => PlaybackStatus::Paused,
+        }
+    }
+}
+
 mod imp {
     use super::*;
     use glib::{once_cell::sync::Lazy, subclass::Signal};
 
-    #[derive(Default, glib::Properties)]
+    #[derive(glib::Properties)]
     #[properties(wrapper_type = super::Player)]
     pub struct Player {
         /// Song being played. If the song is None, the player will stop.
@@ -54,7 +65,7 @@ mod imp {
         pub(super) gst_play: gst_play::Play,
         pub(super) bus_watch_guard: OnceCell<BusWatchGuard>,
 
-        pub(super) mpris_server: OnceCell<LocalServer<super::Player>>,
+        pub(super) mpris_server: AsyncOnceCell<LocalServer<super::Player>>,
         pub(super) metadata: RefCell<Metadata>,
     }
 
@@ -62,6 +73,20 @@ mod imp {
     impl ObjectSubclass for Player {
         const NAME: &'static str = "MsaiPlayer";
         type Type = super::Player;
+
+        fn new() -> Self {
+            Self {
+                song: RefCell::default(),
+                state: Cell::default(),
+                position: Cell::default(),
+                duration: Cell::default(),
+                gst_play: gst_play::Play::default(),
+                bus_watch_guard: OnceCell::default(),
+                // FIXME why does this not have a default impl?
+                mpris_server: AsyncOnceCell::new(),
+                metadata: RefCell::default(),
+            }
+        }
     }
 
     #[glib::derived_properties]
@@ -96,15 +121,6 @@ mod imp {
                 )
                 .unwrap();
             self.bus_watch_guard.set(bus_watch_guard).unwrap();
-
-            let mpris_server = LocalServer::new(APP_ID, obj.clone());
-            let mpris_server_task = mpris_server.init_and_run();
-            self.mpris_server.set(mpris_server).unwrap();
-            utils::spawn(glib::Priority::default(), async move {
-                if let Err(err) = mpris_server_task.await {
-                    tracing::error!("Failed to run MPRIS server: {:?}", err);
-                }
-            });
         }
     }
 
@@ -132,7 +148,9 @@ mod imp {
 
                 self.gst_play.set_uri(Some(&playback_link));
                 tracing::debug!(uri = playback_link, "Uri changed");
+            }
 
+            let metadata = song.as_ref().map_or_else(Metadata::new, |song| {
                 // TODO Fill up nones
                 let mut metadata = Metadata::builder()
                     .album(song.album())
@@ -142,15 +160,19 @@ mod imp {
                 if let Some(album_art) = song.album_art() {
                     metadata.set_art_url(Some(album_art.download_url()));
                 }
-                self.metadata.replace(metadata);
-            } else {
-                self.metadata.replace(Metadata::new());
-            }
+                metadata
+            });
+            self.metadata.replace(metadata.clone());
+
+            let has_song = song.is_some();
 
             self.song.replace(song);
-            obj.mpris_properties_changed(
-                Property::Metadata | Property::CanPlay | Property::CanPause | Property::CanSeek,
-            );
+            obj.mpris_properties_changed([
+                Property::Metadata(metadata),
+                Property::CanPlay(has_song),
+                Property::CanPause(has_song),
+                Property::CanSeek(has_song),
+            ]);
             obj.notify_song();
         }
     }
@@ -211,18 +233,34 @@ impl Player {
         imp.metadata
             .borrow_mut()
             .set_length(Some(Time::from_micros(duration.useconds() as i64)));
-        self.mpris_properties_changed(Property::Metadata);
+        self.mpris_properties_changed([Property::Metadata(imp.metadata.borrow().clone())]);
         self.notify_duration();
     }
 
-    fn mpris_properties_changed(&self, property: impl Into<BitFlags<Property>>) {
-        let property = property.into();
+    async fn mpris_server(&self) -> Result<&LocalServer<Self>> {
+        self.imp()
+            .mpris_server
+            .get_or_try_init(|| async {
+                let server = LocalServer::new(APP_ID, self.clone()).await?;
+                utils::spawn(glib::Priority::default(), server.run());
+                Ok(server)
+            })
+            .await
+    }
+
+    fn mpris_properties_changed(&self, property: impl IntoIterator<Item = Property> + 'static) {
         utils::spawn(
             glib::Priority::default(),
             clone!(@weak self as obj => async move {
-                let server = obj.imp().mpris_server.get().unwrap();
-                if let Err(err) = server.properties_changed(property).await {
-                    tracing::error!("Failed to emit MPRIS properties changed: {:?}", err);
+                match obj.mpris_server().await {
+                    Ok(server) => {
+                        if let Err(err) = server.properties_changed(property).await {
+                            tracing::error!("Failed to emit MPRIS properties changed: {:?}", err);
+                        }
+                    }
+                    Err(err) => {
+                        tracing::error!("Failed to get MPRIS server: {:?}", err);
+                    }
                 }
             }),
         );
@@ -232,9 +270,15 @@ impl Player {
         utils::spawn(
             glib::Priority::default(),
             clone!(@weak self as obj => async move {
-                let server = obj.imp().mpris_server.get().unwrap();
-                if let Err(err) = server.emit(Signal::Seeked { position }).await {
-                    tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
+                match obj.mpris_server().await {
+                    Ok(server) => {
+                        if let Err(err) = server.emit(Signal::Seeked { position }).await {
+                            tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
+                        }
+                    }
+                    Err(err) => {
+                        tracing::error!("Failed to get MPRIS server: {:?}", err);
+                    }
                 }
             }),
         );
@@ -269,7 +313,9 @@ impl Player {
 
                 imp.state.set(new_state);
 
-                self.mpris_properties_changed(Property::PlaybackStatus);
+                self.mpris_properties_changed([Property::PlaybackStatus(
+                    new_state.to_playback_status(),
+                )]);
                 self.notify_state();
             }
             PlayMessage::EndOfStream => {
@@ -432,11 +478,7 @@ impl LocalPlayerInterface for Player {
     }
 
     async fn playback_status(&self) -> fdo::Result<PlaybackStatus> {
-        Ok(match self.state() {
-            PlayerState::Stopped | PlayerState::Buffering => PlaybackStatus::Stopped,
-            PlayerState::Playing => PlaybackStatus::Playing,
-            PlayerState::Paused => PlaybackStatus::Paused,
-        })
+        Ok(self.state().to_playback_status())
     }
 
     async fn loop_status(&self) -> fdo::Result<LoopStatus> {
