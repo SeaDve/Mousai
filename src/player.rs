@@ -122,6 +122,10 @@ mod imp {
                 .unwrap();
             self.bus_watch_guard.set(bus_watch_guard).unwrap();
         }
+
+        fn dispose(&self) {
+            self.gst_play.message_bus().set_flushing(true);
+        }
     }
 
     impl Player {
