@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-01 09:25+0800\n"
-"PO-Revision-Date: 2023-11-09 02:35+0000\n"
+"PO-Revision-Date: 2023-11-17 14:04+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/kooha/mousai/"
 "be/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -144,7 +144,6 @@ msgstr ""
 "SeaDve/Mousai/issues/\">старонцы issue</a>"
 
 #: data/resources/ui/database-error-window.ui:20
-#, fuzzy
 msgid "Quit"
 msgstr "Выйсці"
 
@@ -361,7 +360,6 @@ msgid "Donate (Buy Me a Coffee)"
 msgstr "Падтрымаць (Buy Me a Coffee)"
 
 #: src/about.rs:34
-#, fuzzy
 msgid "GitHub"
 msgstr "GitHub"
 
