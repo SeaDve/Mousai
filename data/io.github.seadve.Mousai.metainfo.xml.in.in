@@ -39,6 +39,21 @@
   <url type="donation">https://www.buymeacoffee.com/seadve</url>
   <content_rating type="oars-1.0"/>
   <releases>
+    <release version="0.7.6" date="2023-11-18">
+      <description translatable="no">
+        <p>This release contains the following changes:</p>
+        <ul>
+          <li>Refreshed UI</li>
+          <li>Fixed offline mode handling</li>
+          <li>Fixed long press gesture on song tile</li>
+          <li>Fixed incorrect MPRIS implementation</li>
+          <li>Improved waveform sizing</li>
+          <li>Improved UI navigation</li>
+          <li>Plugged leaks</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.5" date="2023-05-02">
       <description translatable="no">
         <p>This release contains the following changes:</p>
