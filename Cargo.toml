@@ -11,7 +11,7 @@ lto = true
 [dependencies]
 adw = { package = "libadwaita", version = "0.5", features = ["v1_4"] }
 anyhow = "1.0"
-async-lock = "2.8"
+async-lock = "3.1"
 async-trait = "0.1.58"
 futures-channel = "0.3.25"
 futures-util = "0.3.25"
