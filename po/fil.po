@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-01 09:25+0800\n"
+"POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -106,7 +106,7 @@ msgstr "🌐 I-browse o makinig sa mga kanta gamit ang iba't ibang providers"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Madaling gamitin na interface"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 

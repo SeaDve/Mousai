@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-01 09:25+0800\n"
+"POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-11-17 14:04+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/kooha/mousai/"
@@ -35,8 +35,8 @@ msgstr "Вызначце песні за секунды"
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
-"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;музыка;песня;распазнац"
-"ь;ідэнтыфікаваць;"
+"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;музыка;песня;"
+"распазнаць;ідэнтыфікаваць;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -116,7 +116,7 @@ msgstr "🌐 Праглядайце і слухайце песні ад розн
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Лёгкі ў выкарыстанні інтэрфейс"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Дэйв Патрык Кабэрта (Dave Patrick Caberto)"
 
@@ -237,9 +237,9 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Вы можаце атрымаць сабе токен API на <a href=\"https://dashboard.audd.io/\""
-">audd.io</a>. Калі пакінуць гэтае поле пустым, вы атрымаеце некалькі пробаў "
-"у дзень"
+"Вы можаце атрымаць сабе токен API на <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Калі пакінуць гэтае поле пустым, вы атрымаеце некалькі "
+"пробаў у дзень"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"

@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-01 09:25+0800\n"
+"POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-10-01 09:04+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Sinhala <https://hosted.weblate.org/projects/kooha/mousai/si/>"
-"\n"
+"Language-Team: Sinhala <https://hosted.weblate.org/projects/kooha/mousai/si/"
+">\n"
 "Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,7 +103,7 @@ msgstr ""
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 සරල පරිශ්‍රීලක අතුරුමුහුණතක්"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "ඩේව් පැට්‍රික් කැබර්ටෝ"
 

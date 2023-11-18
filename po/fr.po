@@ -15,11 +15,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-01 09:25+0800\n"
+"POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-10-24 04:14+0000\n"
 "Last-Translator: \"Mathieu B.\" <mathieu.bousquet2@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
-"\n"
+"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
+">\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -123,7 +123,7 @@ msgstr "🌐 Parcourez et écoutez le titre avec différentes sources"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱Interface utilisateur intuitive"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 

@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-01 09:25+0800\n"
+"POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-10-04 18:11+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -112,7 +112,7 @@ msgstr "🌐 Farklı sağlayıcılardan şarkıya göz atın ve dinleyin"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Kullanımı kolay kullanıcı arayüzü"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-01 09:25+0800\n"
+"POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-10-30 05:13+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/kooha/mousai/ro/"
@@ -116,7 +116,7 @@ msgstr "🌐 Navighează si ascultă melodia de la diferiți producători"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱Interfață ușor de folosit"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:359 src/about.rs:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
 msgstr "David Patrick Caberto"
 
@@ -139,8 +139,8 @@ msgstr ""
 "toate înregistrălile salvate\n"
 "\n"
 "Pentru a raporta această problema vă rugăm să porniți aplicatia Mousai în "
-"consola pentru a include logurile și trimite-ți bugul la <a href=\"https"
-"://github.com/SeaDve/Mousai/issues/\">issue page</a>"
+"consola pentru a include logurile și trimite-ți bugul la <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">issue page</a>"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"
