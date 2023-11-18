@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-11-18 04:03+0000\n"
+"PO-Revision-Date: 2023-11-18 17:38+0000\n"
 "Last-Translator: Danilo Alfredo Vieira <danilovieira978@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/kooha/mousai/"
 "pt/>\n"
@@ -34,15 +34,15 @@ msgstr "Identifique músicas em segundos"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr "Shazam;Áudio;Música;Canção;Reconhecer;Identificar;Reconhecimento;"
+msgstr "Shazam; Áudio; Música; Canção; Reconhecer; Identificar; Reconhecimento;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr "Largura da janela"
+msgstr "Largura da Tela"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr "Altura da Janela"
+msgstr "Altura da Tela"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
@@ -114,7 +114,7 @@ msgstr "📱 Interface de usuário fácil de usar"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr "Danilo alfredo vieira"
+msgstr "Danilo Alfredo Vieira"
 
 #: data/resources/ui/database-error-window.ui:14
 msgid "Critical Database Error"
@@ -138,7 +138,7 @@ msgstr ""
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"
-msgstr "Sair"
+msgstr "Desistir"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -150,19 +150,19 @@ msgstr "Atalhos do teclado"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
-msgstr "_Sobre o Mousai"
+msgstr "Sobre o Mousai"
 
 #: data/resources/ui/history-view.ui:22
 msgid "Select _All"
-msgstr "Selecionar_Todos"
+msgstr "Selecionar Todos"
 
 #: data/resources/ui/history-view.ui:26
 msgid "Select _None"
-msgstr "Selecionar_Nenhum"
+msgstr "Selecionar Nenhum"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr "casa"
+msgstr "Inicio"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -230,8 +230,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Você pode obter um token de API em <a href=\"https://dashboard.audd.io/"
-"\">audd.io</a>. Deixar em branco lhe dará algumas tentativas por dia"
+"Você pode obter um token de API em https://dashboard.audd.io/ . Deixar em "
+"branco lhe dará algumas tentativas por dia"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
@@ -247,7 +247,7 @@ msgstr "Mostrar resultados de reconhecimento do modo offline"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr "Cancelar Escutar"
+msgstr "Desistir de Escutar"
 
 #: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
@@ -261,7 +261,7 @@ msgstr "Geral"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr "Abrir menu principal"
+msgstr "Abrir Inicio"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
@@ -281,7 +281,7 @@ msgstr "Mostrar atalhos"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Sair"
+msgstr "Desistir"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -308,7 +308,7 @@ msgstr "Parar"
 
 #: data/resources/ui/song-page.ui:24
 msgid "Remove From History"
-msgstr "Remover do histórico"
+msgstr "Deletar o Histórico"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Copy"
@@ -320,7 +320,7 @@ msgstr "Informação"
 
 #: data/resources/ui/song-page.ui:137
 msgid "Last Heard"
-msgstr "Última vez escutado"
+msgstr "Última vez Escutado"
 
 #: data/resources/ui/song-page.ui:142
 msgid "Album"
@@ -332,7 +332,7 @@ msgstr "Data de Lançamento"
 
 #: data/resources/ui/song-page.ui:154
 msgid "Lyrics"
-msgstr "Letras"
+msgstr "Letra da música"
 
 #: data/resources/ui/song-tile.ui:30
 msgid "New"
@@ -340,12 +340,12 @@ msgstr "Novo"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023  Danilo Alfredo Vieira"
+msgstr "© 2023 Danilo Alfredo Vieira"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr "Danilo Alfredo Vieira"
+msgstr "créditos do Tradutor"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
@@ -403,11 +403,11 @@ msgstr "Recebeu outro erro permanente"
 
 #: src/window/external_link_tile.rs:61
 msgid "Apple Music"
-msgstr "Apple Music"
+msgstr "Apple Musica"
 
 #: src/window/external_link_tile.rs:62
 msgid "Browse on Apple Music"
-msgstr "Navegue no Apple Music"
+msgstr "Navegue no Apple Musica"
 
 #: src/window/external_link_tile.rs:67
 msgid "Browse on AudD"
@@ -415,15 +415,15 @@ msgstr "Navegue no AudD"
 
 #: src/window/external_link_tile.rs:71
 msgid "Spotify"
-msgstr "O Spotify"
+msgstr "Navegue no Spotify"
 
 #: src/window/external_link_tile.rs:72
 msgid "Listen on Spotify"
-msgstr "Escutar no Spotify"
+msgstr "Ouça no Spotify"
 
 #: src/window/external_link_tile.rs:76
 msgid "YouTube"
-msgstr "O YouTube"
+msgstr "Navegue no YouTube"
 
 #: src/window/external_link_tile.rs:77
 msgid "Search on YouTube"
@@ -452,7 +452,7 @@ msgstr "Falha ao mostrar os resultados do reconhecedor"
 
 #: src/window/history_view.rs:557
 msgid "_Undo"
-msgstr "_Desfazer"
+msgstr "Desfazer"
 
 #: src/window/history_view.rs:568
 msgid "Failed to undo"
@@ -596,11 +596,11 @@ msgstr "Reconhecido {n_successful} de {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:134
 msgid "Listening…"
-msgstr "Audição…"
+msgstr "Ouvindo…"
 
 #: src/window/recognizer_view.rs:139
 msgid "Recognizing…"
-msgstr "Reconhecendo…"
+msgstr "Indentificando…"
 
 #: src/window/song_page.rs:348
 msgid "Unknown"

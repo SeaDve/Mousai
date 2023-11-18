@@ -16,16 +16,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-10-24 04:14+0000\n"
-"Last-Translator: \"Mathieu B.\" <mathieu.bousquet2@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2023-11-18 17:38+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/kooha/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -160,7 +160,7 @@ msgstr "_Préférences"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "_Raccourcis Clavier"
+msgstr "_Raccourcis clavier"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
@@ -258,11 +258,11 @@ msgstr "Mode hors-ligne activé"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Afficher les résultats de reconnaissance du mode hors-ligne"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
-msgstr "Annuler l'écoute"
+msgstr "Annuler l’écoute"
 
 #: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
@@ -306,7 +306,7 @@ msgstr "Contrôles"
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr "Activer ou désactiver l'écoute"
+msgstr "Activer ou désactiver l’écoute"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
@@ -323,7 +323,7 @@ msgstr "Arrêter"
 
 #: data/resources/ui/song-page.ui:24
 msgid "Remove From History"
-msgstr "Supprimer de l'historique"
+msgstr "Supprimer de l’historique"
 
 #: data/resources/ui/song-page.ui:30
 msgid "Copy"
@@ -364,7 +364,7 @@ msgstr "J. Lavoie, M. Bousquet, Irénée Thirion"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Faire un don (Buy Me a Coffee)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -538,7 +538,7 @@ msgstr "Enregistrement sauvegardé"
 
 #: src/window/mod.rs:334
 msgid "The result will be available when you're back online"
-msgstr "Le résultat sera disponible lorsque vous serez à nouveau connecté⋅e"
+msgstr "Le résultat sera disponible lorsque vous serez à nouveau connecté"
 
 #: src/window/mod.rs:337
 msgid "Ok, Got It"
@@ -588,8 +588,8 @@ msgstr "Pause"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Titre reconnu"
+msgstr[1] "Titres reconnus"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140

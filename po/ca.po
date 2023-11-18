@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022.
+# Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022, 2023.
 # Joan Aymà <joanayma@gmail.com>, 2023.
 # victor dargallo <victordargallo@disroot.org>, 2023.
 msgid ""
@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-10-30 05:13+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/"
-">\n"
+"PO-Revision-Date: 2023-11-18 17:38+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/kooha/mousai/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.2\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -34,15 +34,15 @@ msgstr "Identifiqueu cançons en qüestió de segons"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Àudio;Música;Cançó;Reconeix;Identifica;Reconeixement;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Amplada de la finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Alçada de la finestra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
@@ -54,11 +54,11 @@ msgstr "Font d’àudio preferida per a enregistrar el so"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "Testimoni de l’API utilitzat per al reconeixement AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Llegat (conservat per a la migració)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -72,6 +72,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"El Mousai és una aplicació senzilla que pot reconéixer cançons, semblant al "
+"Shazam. Només feu clic a Escolta i espereu uns segons. En retornarà, com per "
+"art de màgia, el títol i l’artista."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -154,7 +157,7 @@ msgstr "No seleccionis _res"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Inici"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -174,11 +177,11 @@ msgstr "Selecciona"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Cerca cançons"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Cancel·la la selecció"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -186,7 +189,7 @@ msgstr "Cancel·la"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Cerca cançons"
 
 #: data/resources/ui/history-view.ui:140
 msgid "Start Recognizing Songs!"
@@ -198,7 +201,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Cap resultat"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -340,7 +343,7 @@ msgstr "Adolfo Jayme Barrientos , Víctor Dargallo "
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Feu una donació (compreu-me un cafè)"
+msgstr "Feu una donació (Buy Me a Coffee)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -370,7 +373,7 @@ msgstr "Àudio de l’ordinador"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr "No s'han trobat coincidències"
+msgstr "No s’ha trobat cap coincidència"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
