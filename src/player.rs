@@ -46,7 +46,7 @@ mod imp {
     use super::*;
     use glib::{once_cell::sync::Lazy, subclass::Signal};
 
-    #[derive(glib::Properties)]
+    #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Player)]
     pub struct Player {
         /// Song being played. If the song is None, the player will stop.
@@ -73,20 +73,6 @@ mod imp {
     impl ObjectSubclass for Player {
         const NAME: &'static str = "MsaiPlayer";
         type Type = super::Player;
-
-        fn new() -> Self {
-            Self {
-                song: RefCell::default(),
-                state: Cell::default(),
-                position: Cell::default(),
-                duration: Cell::default(),
-                gst_play: gst_play::Play::default(),
-                bus_watch_guard: OnceCell::default(),
-                // FIXME why does this not have a default impl?
-                mpris_server: AsyncOnceCell::new(),
-                metadata: RefCell::default(),
-            }
-        }
     }
 
     #[glib::derived_properties]
