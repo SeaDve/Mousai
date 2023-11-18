@@ -46,6 +46,10 @@ impl AudD {
             song_builder.release_date(release_date);
         }
 
+        if let Some(ref record_label) = data.label {
+            song_builder.record_label(record_label);
+        }
+
         let mut playback_links = Vec::new();
         let mut album_images = Vec::new();
 

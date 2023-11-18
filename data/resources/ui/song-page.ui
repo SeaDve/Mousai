@@ -147,6 +147,11 @@
                             <property name="title" translatable="yes">Release Date</property>
                           </object>
                         </child>
+                        <child>
+                          <object class="MsaiInformationRow" id="record_label_row">
+                            <property name="title" translatable="yes">Record Label</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>

@@ -277,6 +277,94 @@ fn init_env() -> Result<(heed::Env, SongList, Recordings)> {
 
                 Ok(())
             });
+            migrations.add(
+                "SongList: SerdeBincode<Song> add record_label field",
+                |env, wtxn| {
+                    use heed::types::SerdeBincode;
+                    use serde::{Deserialize, Serialize};
+
+                    use crate::{
+                        core::DateTime,
+                        database::SONG_LIST_DB_NAME,
+                        model::{ExternalLinks, Uid},
+                    };
+
+                    #[derive(Deserialize)]
+                    struct SongLegacy {
+                        id: Uid,
+                        title: String,
+                        artist: String,
+                        album: String,
+                        release_date: Option<String>,
+                        external_links: ExternalLinks,
+                        album_art_link: Option<String>,
+                        playback_link: Option<String>,
+                        lyrics: Option<String>,
+                        last_heard: Option<DateTime>,
+                        is_newly_heard: bool,
+                    }
+
+                    #[derive(Serialize)]
+                    struct SongNew {
+                        id: Uid,
+                        title: String,
+                        artist: String,
+                        album: String,
+                        release_date: Option<String>,
+                        record_label: Option<String>,
+                        external_links: ExternalLinks,
+                        album_art_link: Option<String>,
+                        playback_link: Option<String>,
+                        lyrics: Option<String>,
+                        last_heard: Option<DateTime>,
+                        is_newly_heard: bool,
+                    }
+
+                    impl SongNew {
+                        fn from_legacy(legacy: SongLegacy) -> Self {
+                            Self {
+                                id: legacy.id,
+                                title: legacy.title,
+                                artist: legacy.artist,
+                                album: legacy.album,
+                                release_date: legacy.release_date,
+                                record_label: None,
+                                external_links: legacy.external_links,
+                                album_art_link: legacy.album_art_link,
+                                playback_link: legacy.playback_link,
+                                lyrics: legacy.lyrics,
+                                last_heard: legacy.last_heard,
+                                is_newly_heard: legacy.is_newly_heard,
+                            }
+                        }
+                    }
+
+                    if let Some(db) = env
+                        .open_database::<SerdeBincode<Uid>, SerdeBincode<SongLegacy>>(
+                            wtxn,
+                            Some(SONG_LIST_DB_NAME),
+                        )?
+                    {
+                        let new_items = db
+                            .iter(wtxn)
+                            .context("Failed to iter db")?
+                            .collect::<Result<Vec<_>, _>>()
+                            .context("Failed to collect items")?;
+
+                        db.clear(wtxn)?;
+
+                        let remapped_db = db.remap_data_type::<SerdeBincode<SongNew>>();
+
+                        for (uid, song_legacy) in new_items {
+                            remapped_db
+                                .put(wtxn, &uid, &SongNew::from_legacy(song_legacy))
+                                .context("Failed to put item")?;
+                        }
+                    }
+
+                    Ok(())
+                },
+            );
             migrations
                 .run(&env, wtxn)
                 .context("Failed to run migrations")

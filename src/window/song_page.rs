@@ -49,6 +49,8 @@ mod imp {
         #[template_child]
         pub(super) release_date_row: TemplateChild<InformationRow>,
         #[template_child]
+        pub(super) record_label_row: TemplateChild<InformationRow>,
+        #[template_child]
         pub(super) external_links_box: TemplateChild<gtk::FlowBox>,
         #[template_child]
         pub(super) lyrics_group: TemplateChild<adw::PreferencesGroup>,
@@ -355,6 +357,10 @@ impl SongPage {
             .set_value(song.map(|song| song.album()).unwrap_or_default());
         imp.release_date_row.set_value(
             song.and_then(|song| song.release_date())
+                .unwrap_or_default(),
+        );
+        imp.record_label_row.set_value(
+            song.and_then(|song| song.record_label())
                 .unwrap_or_default(),
         );
     }

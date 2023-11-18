@@ -35,6 +35,9 @@ mod imp {
         /// Arbitrary string for release date
         #[property(get, set, construct_only)]
         pub(super) release_date: RefCell<Option<String>>,
+        /// Record label of the song
+        #[property(get, set, construct_only)]
+        pub(super) record_label: RefCell<Option<String>>,
         /// Links relevant to the song
         #[property(get, set, construct_only)]
         pub(super) external_links: RefCell<ExternalLinks>,
@@ -152,6 +155,7 @@ impl<'de> Deserialize<'de> for Song {
             .property("artist", deserialized_imp.artist.into_inner())
             .property("album", deserialized_imp.album.into_inner())
             .property("release-date", deserialized_imp.release_date.into_inner())
+            .property("record-label", deserialized_imp.record_label.into_inner())
             .property(
                 "external-links",
                 deserialized_imp.external_links.into_inner(),
@@ -197,6 +201,11 @@ impl SongBuilder {
 
     pub fn release_date(&mut self, value: &str) -> &mut Self {
         self.properties.push(("release-date", value.into()));
+        self
+    }
+
+    pub fn record_label(&mut self, value: &str) -> &mut Self {
+        self.properties.push(("record-label", value.into()));
         self
     }
 
@@ -257,6 +266,7 @@ mod test {
             "SomeAlbum",
         )
         .release_date("00-00-0000")
+        .record_label("Some label")
         .album_art_link("https://album.png")
         .playback_link("https://test.mp3")
         .lyrics("Some song lyrics")
@@ -267,6 +277,7 @@ mod test {
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
+        assert_eq!(song.record_label().as_deref(), Some("Some label"));
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
         assert_eq!(song.lyrics().as_deref(), Some("Some song lyrics"));
@@ -279,6 +290,7 @@ mod test {
         assert_eq!(v1.artist(), v2.artist());
         assert_eq!(v1.album(), v2.album());
         assert_eq!(v1.release_date(), v2.release_date());
+        assert_eq!(v1.record_label(), v2.record_label());
 
         assert_eq!(v1.external_links().n_items(), v2.external_links().n_items());
         for (v1_item, v2_item) in v1
@@ -315,6 +327,7 @@ mod test {
 
         let val = SongBuilder::new(&Uid::from("c"), "C Title", "C Artist", "C Album")
             .release_date("some value")
+            .record_label("some value")
             .album_art_link("some value")
             .playback_link("some value")
             .lyrics("some value")
@@ -339,6 +352,7 @@ mod test {
                 "artist": "Someone",
                 "album": "SomeAlbum",
                 "release_date": "00-00-0000",
+                "record_label": "Some label",
                 "external_links": {},
                 "album_art_link": "https://album.png",
                 "playback_link": "https://test.mp3",
@@ -354,6 +368,7 @@ mod test {
         assert_eq!(song.artist(), "Someone");
         assert_eq!(song.album(), "SomeAlbum");
         assert_eq!(song.release_date().as_deref(), Some("00-00-0000"));
+        assert_eq!(song.record_label().as_deref(), Some("Some label"));
         assert_eq!(song.external_links().n_items(), 0);
         assert_eq!(song.album_art_link().as_deref(), Some("https://album.png"));
         assert_eq!(song.playback_link().as_deref(), Some("https://test.mp3"));
