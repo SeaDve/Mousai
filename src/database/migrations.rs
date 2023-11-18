@@ -52,7 +52,7 @@ impl Migrations {
         let start_time = Instant::now();
 
         let Some(db) = env
-            .open_poly_database(wtxn, None)
+            .open_database::<Str, U64<LE>>(wtxn, None)
             .context("Failed to open unnamed db")?
         else {
             tracing::debug!("No unnamed db to run migrations on");
@@ -60,7 +60,7 @@ impl Migrations {
         };
 
         let current_version = db
-            .get::<Str, U64<LE>>(wtxn, USER_VERSION_KEY)
+            .get(wtxn, USER_VERSION_KEY)
             .context("Failed to get user version")?
             .unwrap_or(0);
 
@@ -89,13 +89,13 @@ impl Migrations {
                     migration_start_time.elapsed()
                 );
 
-                db.put::<Str, U64<LE>>(wtxn, USER_VERSION_KEY, &migration_version)
+                db.put(wtxn, USER_VERSION_KEY, &migration_version)
                     .context("Failed to set user version")?;
             }
         }
 
         tracing::debug!(
-            new_version = db.get::<Str, U64<LE>>(wtxn, USER_VERSION_KEY)?,
+            new_version = db.get(wtxn, USER_VERSION_KEY)?,
             "Done running migrations in {:?}",
             start_time.elapsed()
         );
@@ -115,8 +115,8 @@ mod tests {
     use crate::database;
 
     fn current_version(env: &heed::Env, rtxn: &heed::RoTxn<'_>) -> Result<u64> {
-        match env.open_poly_database(rtxn, None)? {
-            Some(db) => Ok(db.get::<Str, U64<LE>>(rtxn, USER_VERSION_KEY)?.unwrap_or(0)),
+        match env.open_database::<Str, U64<LE>>(rtxn, None)? {
+            Some(db) => Ok(db.get(rtxn, USER_VERSION_KEY)?.unwrap_or(0)),
             None => Ok(0),
         }
     }

@@ -220,6 +220,9 @@ name = "bitflags"
 version = "2.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "327762f6e5a765692301e5bb513e0d9fef63be86bbc14528052b1cd3e6f03e07"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "block"
@@ -1068,10 +1071,11 @@ checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
 
 [[package]]
 name = "heed"
-version = "0.20.0-alpha.1"
+version = "0.20.0-alpha.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c39659915053b73d567f5b10191adf259e167b47c4a16440ac83cdfc41837100"
+checksum = "b078be81ae0537aab5d76848adcd7d3d642b73fb5d1e3c5aa830dd2794e9deeb"
 dependencies = [
+ "bitflags 2.4.1",
  "bytemuck",
  "byteorder",
  "heed-traits",
@@ -1087,15 +1091,15 @@ dependencies = [
 
 [[package]]
 name = "heed-traits"
-version = "0.20.0-alpha.4"
+version = "0.20.0-alpha.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "34d4dc5baa42b0365969eb3853bb2cec2e032f3cf71f2a9f2503790fcae17832"
+checksum = "275741312f4f85dfa2601f66664c3513f595ee6c2a634ffea53e07d1af92aad2"
 
 [[package]]
 name = "heed-types"
-version = "0.20.0-alpha.4"
+version = "0.20.0-alpha.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9934170f0675423ffe6f9eb6f47fde4dc4b9334f370e2d8ca817e101e7eeeee"
+checksum = "c7519b49ed0358d5e2d609158b1d9c166a4e666a40d801a539b3d731b543381f"
 dependencies = [
  "bincode",
  "bytemuck",

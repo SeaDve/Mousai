@@ -254,17 +254,23 @@ fn init_env() -> Result<(heed::Env, SongList, Recordings)> {
                     model::{Song, Uid, UidCodec},
                 };
 
-                if let Some(db) = env.open_poly_database(wtxn, Some(SONG_LIST_DB_NAME))? {
+                if let Some(db) = env.open_database::<SerdeBincode<Uid>, SerdeBincode<Song>>(
+                    wtxn,
+                    Some(SONG_LIST_DB_NAME),
+                )? {
                     let new_items = db
-                        .iter::<SerdeBincode<Uid>, SerdeBincode<Song>>(wtxn)
+                        .iter(wtxn)
                         .context("Failed to iter db")?
                         .collect::<Result<Vec<_>, _>>()
                         .context("Failed to collect items")?;
 
                     db.clear(wtxn)?;
 
+                    let remapped_db = db.remap_key_type::<UidCodec>();
+
                     for (uid, song) in new_items {
-                        db.put::<UidCodec, SerdeBincode<Song>>(wtxn, &uid, &song)
+                        remapped_db
+                            .put(wtxn, &uid, &song)
                             .context("Failed to put item")?;
                     }
                 }
