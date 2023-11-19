@@ -10,21 +10,22 @@
 # Marlon <mawol@protonmail.com>, 2023.
 # Jörn Weigend <das.jott@gmail.com>, 2023.
 # Florian Schaupp <fschaupp@hotmail.com>, 2023.
+# Justin Nogossek <justmegaliga10000@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-06-24 18:54+0000\n"
-"Last-Translator: Florian Schaupp <fschaupp@hotmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
-">\n"
+"PO-Revision-Date: 2023-11-19 19:58+0000\n"
+"Last-Translator: Justin Nogossek <justmegaliga10000@gmail.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.2\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -310,7 +311,7 @@ msgstr "Wiedergabe umschalten"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
-msgstr "Zeige Liedinformationen"
+msgstr "Liedinformationen zeigen"
 
 #: data/resources/ui/song-bar.ui:92
 msgid "Stop"
@@ -355,7 +356,7 @@ msgstr "© 2023 Dave Patrick Caberto"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr "Jonathan Haas,Milo Ivir,D3SOX,Maximilian Salomon"
+msgstr "Jonathan Haas, Milo Ivir, D3SOX, Maximilian Salomon"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
@@ -504,9 +505,7 @@ msgstr "Hinzufügen des Liedes zum Verlauf fehlgeschlagen"
 
 #: src/window/mod.rs:256
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
-"Bitte melden Sie den Fehler auf GitHub und liefern Sie alle nötigen "
-"Informationen"
+msgstr "Bitte melde den Fehler auf GitHub und liefer alle nötigen Informationen"
 
 #: src/window/mod.rs:259 src/window/mod.rs:291
 msgid "No, Thanks"
@@ -557,9 +556,8 @@ msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
-"Das Ergebnis ist verfügbar, sobald Ihr Token mit einem gültigen ersetzt "
-"wurde. Öffnen Sie die Einstellungen und versuchen Sie, einen anderen Token "
-"anzugeben"
+"Das Ergebnis ist verfügbar, sobald dein Token mit einem gültigen ersetzt "
+"wurde. Öffne die Einstellungen und versuche, einen anderen Token anzugeben"
 
 #: src/window/mod.rs:357
 msgid "Later"

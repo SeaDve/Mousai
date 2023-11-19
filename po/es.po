@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-11-18 17:38+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"PO-Revision-Date: 2023-11-19 19:58+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
 "Language: es\n"
@@ -136,13 +136,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Es probable que esto se deba a una base de datos alterada o dañada. Puede "
-"intentar borrar los datos de la aplicación. Sin embargo, esto no se "
-"recomienda y eliminará todas sus canciones y grabaciones guardadas.\n"
+"Es probable que se deba a una base de datos alterada o corrupta. Puedes "
+"intentar borrar los datos de la aplicación. Sin embargo, esto no es "
+"recomendable y borrará todas tus canciones y grabaciones guardadas.\n"
 "\n"
-"Para informar de este problema, inicie Mousai en el terminal para incluir "
-"los registros y envíe el informe de defecto a la <a href=\"https://github."
-"com/SeaDve/Mousai/issues/\">página de fallos</a>"
+"Para informar de este problema, ejecute Mousai en el terminal para incluir "
+"los registros y envíe el informe de error a la <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">página de errores</a>"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"
@@ -210,7 +210,7 @@ msgstr "Comience a reconocer canciones"
 
 #: data/resources/ui/history-view.ui:141
 msgid "Click the listen button to start"
-msgstr "Pulse en el botón Escuchar para empezar"
+msgstr "Presione escuchar para comenzar"
 
 #: data/resources/ui/history-view.ui:150
 msgid "No Results"
@@ -328,7 +328,7 @@ msgstr "Información"
 
 #: data/resources/ui/song-page.ui:137
 msgid "Last Heard"
-msgstr "Escucha más reciente"
+msgstr "Último escuchado"
 
 #: data/resources/ui/song-page.ui:142
 msgid "Album"
