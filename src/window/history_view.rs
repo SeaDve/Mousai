@@ -584,7 +584,6 @@ impl HistoryView {
         if let Some(ref toast) = *imp.undo_remove_song_toast.borrow() {
             let n_removed = imp.songs_purgatory.borrow().len();
             toast.set_title(&ngettext_f(
-                // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
                 "Removed {n_removed} song",
                 "Removed {n_removed} songs",
                 n_removed as u32,
@@ -711,7 +710,6 @@ impl HistoryView {
                 0 => gettext("Select items"),
                 1.. => {
                     ngettext_f(
-                        // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
                         "Selected {selection_size} song",
                         "Selected {selection_size} songs",
                         selection_size as u32,
