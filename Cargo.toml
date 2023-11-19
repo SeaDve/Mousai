@@ -23,7 +23,7 @@ gst_play = { package = "gstreamer-play", version = "0.21" }
 gtk = { version = "0.7", package = "gtk4", features = ["gnome_45"] }
 heed = { version = "0.20.0-alpha.6", features = ["serde-bincode"] }
 indexmap = { version = "2.0", features = ["serde"] }
-mpris-server = "0.5.0"
+mpris-server = "0.6.0"
 pulse = { package = "libpulse-binding", version = "2.26.0" }
 pulse_glib = { package = "libpulse-glib-binding", version = "2.25.1" }
 serde = { version = "1.0", features = ["derive"] }
