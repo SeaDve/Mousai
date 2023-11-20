@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-11-19 19:58+0000\n"
+"PO-Revision-Date: 2023-11-20 21:00+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/kooha/mousai/es/>"
 "\n"
@@ -206,7 +206,7 @@ msgstr "Buscar canciones"
 
 #: data/resources/ui/history-view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr "Comience a reconocer canciones"
+msgstr "¡Empiece a reconocer canciones!"
 
 #: data/resources/ui/history-view.ui:141
 msgid "Click the listen button to start"
@@ -504,7 +504,9 @@ msgstr "Error al insertar canción en el historial"
 
 #: src/window/mod.rs:256
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr "Cree un informe en GitHub y proporcione la información requerida"
+msgstr ""
+"Por favor, abra una incidencia en GitHub y proporcione la información "
+"necesaria"
 
 #: src/window/mod.rs:259 src/window/mod.rs:291
 msgid "No, Thanks"
@@ -530,7 +532,7 @@ msgstr "Grabación guardada"
 
 #: src/window/mod.rs:334
 msgid "The result will be available when you're back online"
-msgstr "El resultado estará disponible cuando vuelva a conectarse a Internet"
+msgstr "El resultado está disponible tan pronto como esté conectado"
 
 #: src/window/mod.rs:337
 msgid "Ok, Got It"
@@ -554,8 +556,8 @@ msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
-"El resultado estará disponible cuando reemplace la ficha por una válida. "
-"Abra Preferencias y pruebe a establecer una diferente"
+"El resultado estará disponible cuando su token se cambie por uno válido. "
+"Abra los ajustes e intente agregar otro token"
 
 #: src/window/mod.rs:357
 msgid "Later"

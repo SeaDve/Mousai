@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-11-19 19:58+0000\n"
+"PO-Revision-Date: 2023-11-20 21:00+0000\n"
 "Last-Translator: Justin Nogossek <justmegaliga10000@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
 "\n"
@@ -80,16 +80,16 @@ msgid ""
 "return the title and artist of that song!"
 msgstr ""
 "Mousai ist eine einfache Anwendung, die Lieder erkennen kann - ähnlich wie "
-"Shazam. Klicken Sie einfach auf den Zuhörknopf und warten Sie einige "
-"Sekunden. Auf magische Art und Weise wird Ihnen dann Titel und Interpret des "
-"Liedes angezeigt!"
+"Shazam. Klicke einfach auf den Zuhörknopf und warte einige Sekunden. Auf "
+"magische Art und Weise wird Ihnen dann Titel und Interpret des Liedes "
+"angezeigt!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Hinweis: Mousai benutzt die API von audd.io, daher ist es notwendig dort "
+"Hinweis: Mousai verwendet die API von audd.io, daher ist es notwendig dort "
 "einen Account anzulegen, um mehr kostenlose Versuche zu bekommen."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
@@ -99,10 +99,12 @@ msgstr "Warum du Mousai lieben wirst?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identifiziere Lieder innerhalb von Sekunden oder speichere sie für "
+"später, wenn du offline bist"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Erkennen von Desktop-Audio oder deinem Mikrofon"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
@@ -139,13 +141,13 @@ msgid ""
 "Mousai/issues/\">issue page</a>"
 msgstr ""
 "Dies wurde möglicherweise durch eine manipulierte oder beschädigte Datenbank "
-"verursacht. Sie können versuchen, die Anwendungsdaten zu löschen. Dies ist "
+"verursacht. Du kannst versuchen, die Anwendungsdaten zu löschen. Dies ist "
 "jedoch nicht empfohlen, da alle gespeicherten Lieder und Aufnahmen dabei "
-"löschen werden.\n"
+"löschen werden. \n"
 "\n"
-"Um dieses Problem zu melden, starten Sie Mousai bitte im Terminal und "
-"schicken Sie die Logs gleich mit auf unserer <a href=\"https://github.com/"
-"SeaDve/Mousai/issues/\">Meldeseite</a>"
+"Um dieses Problem zu melden, starte Mousai bitte im Terminal und schicke die "
+"Logs gleich mit auf unserer <a href=\"https://github.com/SeaDve/Mousai/"
+"issues/\">Meldeseite</a>"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"
@@ -173,7 +175,7 @@ msgstr "_Keine auswählen"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Startseite"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -241,7 +243,7 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Einen API Token bekommen Sie von <a href=\"https://dashboard.audd.io/\">audd."
+"Einen API Token bekommst du von <a href=\"https://dashboard.audd.io/\">audd."
 "io</a>. Leerlassen, um einige Versuche täglich zu bekommen"
 
 #: data/resources/ui/preferences-window.ui:23
@@ -254,7 +256,7 @@ msgstr "Offline-Modus aktiviert"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Erkennungsergebnisse des Offlinemodus anzeigen"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -356,11 +358,13 @@ msgstr "© 2023 Dave Patrick Caberto"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr "Jonathan Haas, Milo Ivir, D3SOX, Maximilian Salomon"
+msgstr ""
+"J. Lavoie, Andy Pillip, Heinrich Heinzer, Nico, Milo Ivir, sal0max, Marlon, "
+"Jörn Weigend, Florian Schaupp, Justin Nogossek"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Spenden (Kauf mir einen Kaffee)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -519,8 +523,8 @@ msgstr "Fehlerticket öffnen"
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
-"Versuchen Sie näher an die Quelle zu gehen oder einen anderen Auschnitt im "
-"Lied zu wählen"
+"Versuche näher an die Quelle zu gehen oder einen anderen Auschnitt im Lied "
+"zu wählen"
 
 #: src/window/mod.rs:293
 msgid "Try Again"
@@ -532,7 +536,7 @@ msgstr "Aufnahme gespeichert"
 
 #: src/window/mod.rs:334
 msgid "The result will be available when you're back online"
-msgstr "Das Ergebnis ist verfügbar, wenn Sie wieder Online sind"
+msgstr "Das Ergebnis ist verfügbar, wenn du wieder Online bist"
 
 #: src/window/mod.rs:337
 msgid "Ok, Got It"
@@ -543,13 +547,13 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
-"Das Ergebnis ist verfügbar, wenn Ihr Token-Limit zurückgesetzt wurde. Warten "
-"Sie, bis das Limit zurückgesetzt ist oder öffnen Sie die Einstellungen und "
-"versuchen ein anderen Token einzustellen"
+"Das Ergebnis ist verfügbar, wenn Ihr Token-Limit zurückgesetzt wurde. Warte, "
+"bis das Limit zurückgesetzt ist oder öffne die Einstellungen und versuche "
+"ein anderen Token einzustellen"
 
 #: src/window/mod.rs:350
 msgid "I'll Wait"
-msgstr "Ich warte"
+msgstr "Ich werde warten"
 
 #: src/window/mod.rs:354
 msgid ""
@@ -582,8 +586,8 @@ msgstr "Pausieren"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Erkannter Song"
+msgstr[1] "Erkannte Songs"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140
