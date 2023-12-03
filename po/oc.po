@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Quentin PAGÈS <quentinantonin@free.fr>, 2021, 2022.
+# Quentin PAGÈS <quentinantonin@free.fr>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2022-09-08 18:22+0000\n"
+"PO-Revision-Date: 2023-12-03 16:05+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
-"Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/"
-">\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/kooha/mousai/oc/>"
+"\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -36,15 +36,15 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Largor de la fenèstra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Nautor de la fenèstra"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Indica se la fenèstra es maximizada"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -109,11 +109,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 msgid "Dave Patrick Caberto"
-msgstr ""
+msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:14
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Error critica de basa de donadas"
 
 #: data/resources/ui/database-error-window.ui:15
 msgid ""
@@ -132,7 +132,7 @@ msgstr "Sortir"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferéncias"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -152,11 +152,11 @@ msgstr "Seleccionar pas _res"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Repertòri personal"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Reconeissença de cançon"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
 msgid "Listen"
@@ -172,11 +172,11 @@ msgstr "Seleccionar"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Cercar de cançons"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Anullar la seleccion"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -196,7 +196,7 @@ msgstr ""
 
 #: data/resources/ui/history-view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Cap de resultat"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -223,7 +223,7 @@ msgstr ""
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "Geton d’API"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
@@ -259,7 +259,7 @@ msgstr "Recercar"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Afichar las preferéncias"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -337,7 +337,7 @@ msgstr "Quentin PAGÈS"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Far un don (Buy Me a Coffee)"
 
 #: src/about.rs:34
 msgid "GitHub"
@@ -345,7 +345,7 @@ msgstr "GitHub"
 
 #: src/about.rs:36
 msgid "Translate"
-msgstr ""
+msgstr "Traduire"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
@@ -424,7 +424,7 @@ msgstr ""
 
 #: src/window/history_view.rs:143 src/window/song_page.rs:77
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Copiat al quichapapièrs"
 
 #: src/window/history_view.rs:157
 msgid "Failed to remove selected songs"
@@ -532,7 +532,7 @@ msgstr ""
 
 #: src/window/mod.rs:357
 msgid "Later"
-msgstr ""
+msgstr "Mai tard"
 
 #: src/window/mod.rs:362
 msgid "Open Preferences"
