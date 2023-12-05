@@ -4,21 +4,22 @@
 # Luna Jernberg <droidbittin@gmail.com>, 2021, 2022, 2023.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
 # Kristoffer Grundström <swedishsailfishosuser@tutanota.com>, 2021, 2022.
+# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/"
-">\n"
+"PO-Revision-Date: 2023-12-05 09:05+0000\n"
+"Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/kooha/mousai/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.3-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -34,19 +35,19 @@ msgstr "Identifiera låtar på sekunder"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Ljud;Musik;Sång;Känn igen;Identifiera;Igenkänning;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Fönster bredd"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Fönster höjd"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Huruvida fönstret är maximerat"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -54,11 +55,11 @@ msgstr "Föredragen ljudkälla att använda vid inspelning av ljud"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "API-token som används av AudD-igenkänning"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Äldre (bevaras för migrering)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -72,6 +73,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai är ett enkelt program som kan känna igen låtar som liknar Shazam. "
+"Klicka bara på lyssna-knappen och vänta sedan några sekunder. Det kommer "
+"magiskt att returnera titeln och artisten för den låten!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -88,35 +92,36 @@ msgstr "Varför kommer du att älska Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identifiera låtar inom några sekunder eller spara till senare när du är "
+"offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Känn igen från skrivbordsljud eller din mikrofon"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Bygg en repertoar av upptäckta låtar"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Förhandsgranska snabbt låten i gränssnittet"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Bläddra och lyssna på låten från olika leverantörer"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Lättanvänt användargränssnitt"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-#, fuzzy
 msgid "Dave Patrick Caberto"
 msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:14
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Kritiskt databasfel"
 
 #: data/resources/ui/database-error-window.ui:15
 msgid ""
@@ -128,13 +133,19 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Detta orsakas troligen av en manipulerad eller skadad databas. Du kan "
+"försöka rensa programdata. Detta rekommenderas dock inte och kommer att "
+"radera alla dina låtar och sparade inspelningar.\n"
+"\n"
+"För att rapportera det här problemet, starta Mousai i terminalen för att "
+"inkludera loggarna och skicka felrapporten till <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">problemsidan</a>"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"
 msgstr "Avsluta"
 
 #: data/resources/ui/history-view.ui:6
-#, fuzzy
 msgid "_Preferences"
 msgstr "_Inställningar"
 
@@ -156,11 +167,11 @@ msgstr "Välj _ingen"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Hem"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Känn igen låt"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
 msgid "Listen"
@@ -176,11 +187,11 @@ msgstr "Välj"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Sök efter låtar"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Avbryt val"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -188,11 +199,11 @@ msgstr "Avbryt"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Sök låtar"
 
 #: data/resources/ui/history-view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Börja känna igen låtar!"
 
 #: data/resources/ui/history-view.ui:141
 msgid "Click the listen button to start"
@@ -200,7 +211,7 @@ msgstr "Klicka på lyssna knappen för att starta"
 
 #: data/resources/ui/history-view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Inga resultat"
 
 #: data/resources/ui/preferences-window.ui:8
 msgid "General"
@@ -208,11 +219,11 @@ msgstr "Allmänt"
 
 #: data/resources/ui/preferences-window.ui:11
 msgid "Preferred Audio Source"
-msgstr ""
+msgstr "Föredragen ljudkälla"
 
 #: data/resources/ui/preferences-window.ui:12
 msgid "Determines the audio source to use when available"
-msgstr ""
+msgstr "Bestämmer vilken ljudkälla som ska användas när den är tillgänglig"
 
 #: data/resources/ui/preferences-window.ui:19
 #: src/window/external_link_tile.rs:66
@@ -224,18 +235,20 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"Du kan skaffa dig en API-token från <a href=\"https://dashboard.audd.io/\""
+">audd.io</a>. Om du lämnar detta tomt får du några försök per dag"
 
 #: data/resources/ui/preferences-window.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API Token"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Offlineläge aktiverat"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Visa offlineläge igenkänningsresultat"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -243,7 +256,7 @@ msgstr "Avbryt lyssning"
 
 #: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "Offline läge"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -261,10 +274,9 @@ msgid "Search"
 msgstr "Sök"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Visa inställningar"
+msgstr "Visa Inställningar"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -333,7 +345,7 @@ msgstr "Ny"
 
 #: src/about.rs:18
 msgid "© 2023 Dave Patrick Caberto"
-msgstr ""
+msgstr "© 2023 Dave Patrick Caberto"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
@@ -344,26 +356,25 @@ msgstr ""
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Donera (köp mig en kaffe)"
 
 #: src/about.rs:34
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:36
-#, fuzzy
 msgid "Translate"
 msgstr "Översätt"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:27
 msgid "today at %R"
-msgstr ""
+msgstr "idag på %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/core/date_time.rs:30
 msgid "yesterday at %R"
-msgstr ""
+msgstr "igår på %R"
 
 #: src/preferences_window.rs:103
 msgid "Microphone"
@@ -375,27 +386,27 @@ msgstr "Skrivbordsljud"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "Inga matchningar funna"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Kan inte skapa fingeravtryck från ljud"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Ogiltig token angavs"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Token-gränsen uppnådd"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Kan inte ansluta till server"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Mottaget annat permanent fel"
 
 #: src/window/external_link_tile.rs:61
 msgid "Apple Music"
@@ -428,24 +439,23 @@ msgstr "Sök på YouTube"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:146
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "Misslyckades med att starta {key}"
 
 #: src/window/history_view.rs:143 src/window/song_page.rs:77
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "Kopierades till urklipp"
+msgstr "Kopierad till urklipp"
 
 #: src/window/history_view.rs:157
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Misslyckades med att ta bort valda låtar"
 
 #: src/window/history_view.rs:336
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Misslyckades med att ta bort låt"
 
 #: src/window/history_view.rs:450
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Misslyckades att visa igenkänningsresultat"
 
 #: src/window/history_view.rs:557
 msgid "_Undo"
@@ -453,32 +463,31 @@ msgstr "_Ångra"
 
 #: src/window/history_view.rs:568
 msgid "Failed to undo"
-msgstr ""
+msgstr "Misslyckades att ångra"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:588
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tog bort {n_removed} låt"
+msgstr[1] "Tog bort {n_removed} låtar"
 
 #: src/window/history_view.rs:711
 msgid "Select items"
-msgstr ""
+msgstr "Välj objekt"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:715
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valde {selection_size} låt"
+msgstr[1] "Valde {selection_size} låtar"
 
 #: src/window/history_view.rs:725
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Kopiera låt"
-msgstr[1] "Kopiera låt"
+msgstr[1] "Kopiera låtar"
 
 #: src/window/history_view.rs:732
 msgid "Remove Song From History"
@@ -488,69 +497,75 @@ msgstr[1] "Ta bort låtar från historik"
 
 #: src/window/mod.rs:208
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Misslyckades att infoga låten i historiken"
 
 #: src/window/mod.rs:256
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
+"Vänligen öppna ett problem på GitHub och tillhandahåll den nödvändiga "
+"informationen"
 
 #: src/window/mod.rs:259 src/window/mod.rs:291
 msgid "No, Thanks"
-msgstr ""
+msgstr "Nej, Tack"
 
 #: src/window/mod.rs:261
 msgid "Open an Issue"
-msgstr ""
+msgstr "Öppna ett problem"
 
 #: src/window/mod.rs:288
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
-msgstr ""
+msgstr "Försök att flytta närmare källan eller använd ett annat utdrag av låten"
 
 #: src/window/mod.rs:293
 msgid "Try Again"
-msgstr ""
+msgstr "Försök igen"
 
 #: src/window/mod.rs:326
 msgid "Recording Saved"
-msgstr ""
+msgstr "Inspelning sparad"
 
 #: src/window/mod.rs:334
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Resultatet kommer att vara tillgängligt när du är online igen"
 
 #: src/window/mod.rs:337
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Ok, jag förstår"
 
 #: src/window/mod.rs:347
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Resultatet kommer att vara tillgängligt när din token-gräns återställs. "
+"Vänta tills gränsen har återställts eller öppna inställningar och försök "
+"ställa in en annan token"
 
 #: src/window/mod.rs:350
 msgid "I'll Wait"
-msgstr ""
+msgstr "Jag väntar"
 
 #: src/window/mod.rs:354
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Resultatet blir tillgängligt när din token ersätts med en giltig. Öppna "
+"inställningarna och försök ställa in en annan token"
 
 #: src/window/mod.rs:357
-#, fuzzy
 msgid "Later"
 msgstr "Senare"
 
 #: src/window/mod.rs:362
 msgid "Open Preferences"
-msgstr ""
+msgstr "Öppna Inställningar"
 
 #: src/window/mod.rs:450
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Ett fel uppstod i spelaren"
 
 #: src/window/playback_button.rs:95
 msgid "Play"
@@ -563,26 +578,26 @@ msgstr "Paus"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Igenkänd låt"
+msgstr[1] "Igenkända låtar"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kände igen {n_songs} ny låt"
+msgstr[1] "Kände igen {n_songs} nya låtar"
 
 #: src/window/recognized_page.rs:146
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Den här låten kändes igen från din sparade inspelning"
+msgstr[1] "Det här låtarna kändes igen från dina sparade inspelningar"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:160
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "Igenkänd {n_successful} av {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:134
 msgid "Listening…"
@@ -594,11 +609,11 @@ msgstr "Känner igen…"
 
 #: src/window/song_page.rs:348
 msgid "Unknown"
-msgstr ""
+msgstr "Okänd"
 
 #: src/window/song_tile.rs:335
 msgid "Unselect"
-msgstr ""
+msgstr "Avmarkera"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Navigation"
