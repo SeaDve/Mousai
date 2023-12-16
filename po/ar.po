@@ -4,22 +4,23 @@
 # Mehdi Essalehi <messalehi2001@outlook.com>, 2021.
 # Muhammad Yasser <iamrokt@gmail.com>, 2021.
 # Ali Aljishi <ahj696@hotmail.com>, 2023.
+# Ali-98 <ahj696@hotmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-10-08 13:02+0000\n"
-"Last-Translator: Ali Aljishi <ahj696@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/"
-">\n"
+"PO-Revision-Date: 2023-12-16 14:06+0000\n"
+"Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/kooha/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.3\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -137,7 +138,7 @@ msgstr ""
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"
-msgstr "خروج"
+msgstr "أنهِ"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
