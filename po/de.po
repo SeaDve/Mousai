@@ -18,8 +18,8 @@ msgstr ""
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
 "PO-Revision-Date: 2023-11-20 21:00+0000\n"
 "Last-Translator: Justin Nogossek <justmegaliga10000@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/>"
-"\n"
+"Language-Team: German <https://hosted.weblate.org/projects/kooha/mousai/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -509,7 +509,8 @@ msgstr "Hinzufügen des Liedes zum Verlauf fehlgeschlagen"
 
 #: src/window/mod.rs:256
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr "Bitte melde den Fehler auf GitHub und liefer alle nötigen Informationen"
+msgstr ""
+"Bitte melde den Fehler auf GitHub und liefer alle nötigen Informationen"
 
 #: src/window/mod.rs:259 src/window/mod.rs:291
 msgid "No, Thanks"
