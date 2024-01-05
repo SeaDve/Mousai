@@ -3,22 +3,22 @@
 # This file is distributed under the same license as the mousai package.
 # Oğuz Ersen <oguzersen@protonmail.com>, 2021.
 # Oğuz Ersen <oguz@ersen.moe>, 2022.
-# Sabri Ünal <libreajans@gmail.com>, 2023.
+# Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-10-04 18:11+0000\n"
+"PO-Revision-Date: 2024-01-05 08:06+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/kooha/mousai/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -350,7 +350,8 @@ msgstr "© 2023 Dave Patrick Caberto"
 msgid "translator-credits"
 msgstr ""
 "Ümit Solmaz\n"
-"Oğuz Ersen"
+"Oğuz Ersen\n"
+"Sabri Ünal"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
