@@ -156,7 +156,6 @@ impl RecognizerStatus {
         let n_failed = n_recognized - n_successful;
 
         imp.progress_icon.set_tooltip_text(Some(&gettext_f(
-            // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
             "Recognized {n_successful} Out Of {total_minus_failed}",
             &[
                 ("n_successful", &n_successful.to_string()),

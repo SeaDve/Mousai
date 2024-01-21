@@ -136,7 +136,6 @@ impl RecognizedPage {
             n_songs as u32,
         ));
         imp.heading.set_label(&ngettext_f(
-            // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
             "Recognized {n_songs} New Song",
             "Recognized {n_songs} New Songs",
             n_songs as u32,

@@ -58,22 +58,22 @@ mod imp {
 
             match key {
                 ExternalLinkKey::AppleMusicUrl => {
-                    self.label.set_label(&gettext("Apple Music"));
+                    self.label.set_label("Apple Music");
                     obj.set_tooltip_text(Some(&gettext("Browse on Apple Music")));
                     obj.add_css_class("applemusic");
                 }
                 ExternalLinkKey::AudDUrl => {
-                    self.label.set_label(&gettext("AudD"));
+                    self.label.set_label("AudD");
                     obj.set_tooltip_text(Some(&gettext("Browse on AudD")));
                     obj.add_css_class("audd");
                 }
                 ExternalLinkKey::SpotifyUrl => {
-                    self.label.set_label(&gettext("Spotify"));
+                    self.label.set_label("Spotify");
                     obj.set_tooltip_text(Some(&gettext("Listen on Spotify")));
                     obj.add_css_class("spotify");
                 }
                 ExternalLinkKey::YoutubeSearchTerm => {
-                    self.label.set_label(&gettext("YouTube"));
+                    self.label.set_label("YouTube");
                     obj.set_tooltip_text(Some(&gettext("Search on YouTube")));
                     obj.add_css_class("youtube");
                 }
@@ -142,7 +142,6 @@ impl ExternalLinkTile {
                 if let Err(err) = res {
                     tracing::warn!("Failed to launch default for uri `{}`: {:?}", uri, err);
                     utils::app_instance().window().add_message_toast(&gettext_f(
-                        // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
                         "Failed to launch {key}",
                         &[("key", &raw_key)],
                     ));
