@@ -4,7 +4,7 @@ use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 use std::cell::{Cell, OnceCell, RefCell};
 
 use super::RecognizeError;
-use crate::{date_time::DateTime, model::Song, serde_helpers};
+use crate::{date_time::DateTime, serde_helpers, song::Song};
 
 #[derive(Debug, Clone, PartialEq, Eq, glib::Boxed, Serialize, Deserialize)]
 #[boxed_type(name = "MsaiBoxedRecognizeResult", nullable)]

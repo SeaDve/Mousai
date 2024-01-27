@@ -8,7 +8,7 @@ use gtk::glib::{self, clone, closure_local};
 use std::cell::{Cell, OnceCell, RefCell};
 
 use super::{recognized_page_tile::RecognizedPageTile, AdaptiveMode};
-use crate::{i18n::ngettext_f, model::Song, player::Player};
+use crate::{i18n::ngettext_f, player::Player, song::Song};
 
 mod imp {
     use super::*;

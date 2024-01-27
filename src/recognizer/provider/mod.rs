@@ -12,7 +12,7 @@ pub use self::{
     error::{RecognizeError, RecognizeErrorKind},
     settings::{ProviderSettings, ProviderType, TestProviderMode},
 };
-use crate::model::Song;
+use crate::song::Song;
 
 #[async_trait(?Send)]
 pub trait Provider: fmt::Debug {

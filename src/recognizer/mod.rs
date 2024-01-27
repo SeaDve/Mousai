@@ -29,8 +29,8 @@ use crate::{
     audio_device::{self, AudioDeviceClass},
     cancelled::Cancelled,
     date_time::DateTime,
-    model::Song,
     settings::PreferredAudioSource,
+    song::Song,
     utils,
 };
 

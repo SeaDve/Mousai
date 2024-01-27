@@ -16,11 +16,7 @@ use mpris_server::{
 
 use std::cell::{Cell, OnceCell, RefCell};
 
-use crate::{
-    config::APP_ID,
-    model::{Song, Uid},
-    utils,
-};
+use crate::{config::APP_ID, song::Song, uid::Uid, utils};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiPlayerState")]

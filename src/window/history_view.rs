@@ -13,12 +13,8 @@ use super::{
     song_tile::SongTile, AdaptiveMode,
 };
 use crate::{
-    config::APP_ID,
-    i18n::ngettext_f,
-    model::{Song, SongFilter, SongList, SongSorter, Uid},
-    player::Player,
-    recognizer::Recognizer,
-    utils,
+    config::APP_ID, i18n::ngettext_f, player::Player, recognizer::Recognizer, song::Song,
+    song_filter::SongFilter, song_list::SongList, song_sorter::SongSorter, uid::Uid, utils,
 };
 
 // FIXME Missing global navigation shortcuts

@@ -2,12 +2,11 @@
 // SPDX-FileCopyrightText: 2023 Dave Patrick Caberto
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use fuzzy_matcher::FuzzyMatcher;
-use gtk::{glib, prelude::*, subclass::prelude::*};
-
 use std::cell::RefCell;
 
-use super::{Song, FUZZY_MATCHER};
+use gtk::{glib, prelude::*, subclass::prelude::*};
+
+use crate::song::Song;
 
 mod imp {
     use super::*;
@@ -44,9 +43,9 @@ mod imp {
             if search.is_empty() {
                 song_2.last_heard().cmp(&song_1.last_heard()).into()
             } else {
-                let song_1_score = FUZZY_MATCHER.fuzzy_match(&song_1.search_term(), &search);
-                let song_2_score = FUZZY_MATCHER.fuzzy_match(&song_2.search_term(), &search);
-                song_2_score.cmp(&song_1_score).into()
+                let score_1 = song_1.fuzzy_match(&search);
+                let score_2 = song_2.fuzzy_match(&search);
+                score_2.cmp(&score_1).into()
             }
         }
 
@@ -92,7 +91,7 @@ impl Default for SongSorter {
 mod tests {
     use super::*;
 
-    use crate::{date_time::DateTime, model::Uid};
+    use crate::{date_time::DateTime, uid::Uid};
 
     fn new_test_song(last_heard: DateTime, search_term: &str) -> Song {
         let song = Song::builder(&Uid::from(""), search_term, search_term, "").build();

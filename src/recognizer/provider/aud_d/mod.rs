@@ -1,20 +1,17 @@
 mod mock;
 mod response;
 
+use std::time::Duration;
+
 use async_trait::async_trait;
 use gtk::{gio, glib};
 use serde_json::json;
 use soup::prelude::*;
 
-use std::time::Duration;
-
 pub use self::mock::AudDMock;
 use self::response::Response;
 use super::{Provider, RecognizeError, RecognizeErrorKind};
-use crate::{
-    model::{ExternalLinkKey, Song, Uid},
-    utils,
-};
+use crate::{external_links::ExternalLinkKey, song::Song, uid::Uid, utils};
 
 #[derive(Debug)]
 pub struct AudD {

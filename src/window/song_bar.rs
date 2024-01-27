@@ -16,8 +16,8 @@ use super::{
     playback_button::{PlaybackButton, PlaybackButtonMode},
 };
 use crate::{
-    model::Song,
     player::{Player, PlayerState},
+    song::Song,
 };
 
 const BACKGROUND_BLUR_RADIUS: f64 = 80.0;

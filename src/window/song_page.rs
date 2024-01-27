@@ -15,8 +15,9 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
-    model::{Song, SongList},
     player::{Player, PlayerState},
+    song::Song,
+    song_list::SongList,
     utils,
 };
 

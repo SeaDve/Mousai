@@ -17,7 +17,7 @@ use std::{
 use super::Recording;
 use crate::{
     database::{EnvExt, RECORDINGS_DB_NAME},
-    model::{Uid, UidCodec},
+    uid::{Uid, UidCodec},
     utils,
 };
 
@@ -249,10 +249,7 @@ mod tests {
     use std::rc::Rc;
 
     use crate::{
-        database,
-        date_time::DateTime,
-        model::{Song, Uid},
-        recognizer::recording::BoxedRecognizeResult,
+        database, date_time::DateTime, recognizer::recording::BoxedRecognizeResult, song::Song,
     };
 
     fn new_test_recording(bytes: &'static [u8]) -> Recording {

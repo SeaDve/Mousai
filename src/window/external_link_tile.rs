@@ -3,11 +3,7 @@ use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 
 use std::{cell::OnceCell, str::FromStr};
 
-use crate::{
-    i18n::gettext_f,
-    model::{ExternalLink, ExternalLinkKey},
-    utils,
-};
+use crate::{external_link::ExternalLink, external_links::ExternalLinkKey, i18n::gettext_f, utils};
 
 mod imp {
     use super::*;

@@ -2,12 +2,11 @@
 // SPDX-FileCopyrightText: 2023 Dave Patrick Caberto
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-use fuzzy_matcher::FuzzyMatcher;
-use gtk::{glib, prelude::*, subclass::prelude::*};
-
 use std::cell::RefCell;
 
-use super::{Song, FUZZY_MATCHER};
+use gtk::{glib, prelude::*, subclass::prelude::*};
+
+use crate::song::Song;
 
 mod imp {
     use super::*;
@@ -49,9 +48,7 @@ mod imp {
             if search.is_empty() {
                 true
             } else {
-                FUZZY_MATCHER
-                    .fuzzy_match(&song.search_term(), &search)
-                    .is_some()
+                song.fuzzy_match(&search).is_some()
             }
         }
     }
@@ -107,7 +104,7 @@ mod tests {
 
     use std::{cell::RefCell, rc::Rc};
 
-    use crate::model::Uid;
+    use crate::uid::Uid;
 
     #[gtk::test]
     fn strictness() {

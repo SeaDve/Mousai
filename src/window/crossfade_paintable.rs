@@ -7,7 +7,7 @@ use gtk::{
 
 use std::cell::{Cell, OnceCell, RefCell};
 
-use crate::{model::Song, utils};
+use crate::{song::Song, utils};
 
 const FADE_ANIMATION_DURATION_MS: u32 = 800;
 const INITIAL_FADE_PROGRESS: f64 = 1.0;

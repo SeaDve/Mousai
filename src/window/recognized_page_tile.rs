@@ -8,7 +8,7 @@ use gtk::{
 use std::cell::RefCell;
 
 use super::song_tile::SongTile;
-use crate::{date_time::DateTime, model::Song, player::Player};
+use crate::{date_time::DateTime, player::Player, song::Song};
 
 mod imp {
     use super::*;

@@ -27,10 +27,11 @@ use std::cell::OnceCell;
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
     config::PROFILE,
-    model::{Song, SongList},
     player::{Player, PlayerState},
     preferences_window::PreferencesWindow,
     recognizer::{RecognizeError, RecognizeErrorKind, Recognizer, RecognizerState, Recordings},
+    song::Song,
+    song_list::SongList,
     utils, Application,
 };
 

@@ -14,8 +14,8 @@ use super::{
     AdaptiveMode,
 };
 use crate::{
-    model::Song,
     player::{Player, PlayerState},
+    song::Song,
 };
 
 const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;

@@ -7,7 +7,7 @@ use gtk::{
 
 use std::cell::RefCell;
 
-use crate::{model::Song, utils};
+use crate::{song::Song, utils};
 
 const DEFAULT_ENABLE_CROSSFADE: bool = true;
 

@@ -1,5 +1,10 @@
 use anyhow::Result;
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use fuzzy_matcher::{skim::SkimMatcherV2, FuzzyMatcher};
+use gtk::{
+    glib::{self, once_cell::sync::Lazy},
+    prelude::*,
+    subclass::prelude::*,
+};
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{
@@ -10,8 +15,10 @@ use std::{
 use crate::{
     album_art::AlbumArt,
     date_time::DateTime,
-    model::{ExternalLinkKey, ExternalLinks, Uid},
-    serde_helpers, utils,
+    external_links::{ExternalLinkKey, ExternalLinks},
+    serde_helpers,
+    uid::Uid,
+    utils,
 };
 
 mod imp {
@@ -105,9 +112,12 @@ impl Song {
         SongBuilder::new(id, title, artist, album)
     }
 
-    /// String to match to when searching for self.
-    pub fn search_term(&self) -> String {
-        format!("{} {}", self.artist(), self.title())
+    /// Returns the score of song against the pattern.
+    pub fn fuzzy_match(&self, pattern: &str) -> Option<i64> {
+        static FUZZY_MATCHER: Lazy<SkimMatcherV2> = Lazy::new(SkimMatcherV2::default);
+
+        let choice = format!("{} {}", self.artist(), self.title());
+        FUZZY_MATCHER.fuzzy_match(&choice, pattern)
     }
 
     /// String copied to clipboard when copying self.
@@ -235,7 +245,7 @@ impl SongBuilder {
 mod test {
     use super::*;
 
-    use crate::model::ExternalLink;
+    use crate::external_link::ExternalLink;
 
     #[test]
     fn id_ref() {

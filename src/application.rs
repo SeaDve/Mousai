@@ -12,10 +12,10 @@ use crate::{
     database::{self, EnvExt, Migrations},
     database_error_window::DatabaseErrorWindow,
     inspector_page::InspectorPage,
-    model::SongList,
     preferences_window::PreferencesWindow,
     recognizer::Recordings,
     settings::Settings,
+    song_list::SongList,
     window::Window,
 };
 
@@ -251,7 +251,8 @@ fn init_env() -> Result<(heed::Env, SongList, Recordings)> {
 
                 use crate::{
                     database::SONG_LIST_DB_NAME,
-                    model::{Song, Uid, UidCodec},
+                    song::Song,
+                    uid::{Uid, UidCodec},
                 };
 
                 if let Some(db) = env.open_database::<SerdeBincode<Uid>, SerdeBincode<Song>>(
