@@ -273,7 +273,7 @@ impl Recognizer {
                 }),
             )
             .context("Failed to start recording")?;
-        let recorded_time = DateTime::now_local();
+        let recorded_time = DateTime::now_utc();
 
         cancellable.connect_cancelled_local(clone!(@weak _finally => move |_| {
             let _ = _finally.take();

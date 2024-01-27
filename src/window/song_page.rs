@@ -347,7 +347,7 @@ impl SongPage {
             song.map(|song| {
                 song.last_heard().map_or_else(
                     || gettext("Unknown").into(),
-                    |last_heard| last_heard.fuzzy_display(),
+                    |last_heard| last_heard.to_local().fuzzy_display(),
                 )
             })
             .unwrap_or_default(),

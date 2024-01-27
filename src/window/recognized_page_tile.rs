@@ -101,7 +101,7 @@ mod imp {
                 .transform_to(|_, last_heard: Option<DateTime>| {
                     Some(
                         last_heard.map_or_else(glib::GString::default, |last_heard| {
-                            last_heard.fuzzy_display()
+                            last_heard.to_local().fuzzy_display()
                         }),
                     )
                 })

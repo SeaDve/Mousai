@@ -3,24 +3,28 @@ use gettextrs::gettext;
 use gtk::glib;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
-/// A local [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
+/// A [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, glib::ValueDelegate)]
 #[value_delegate(nullable)]
 pub struct DateTime(glib::DateTime);
 
 impl DateTime {
-    pub fn now_local() -> Self {
-        Self(glib::DateTime::now_local().unwrap())
+    pub fn now_utc() -> Self {
+        Self(glib::DateTime::now_utc().unwrap())
+    }
+
+    pub fn to_local(&self) -> Self {
+        Self(self.0.to_local().unwrap())
     }
 
     pub fn from_iso8601(string: &str) -> Result<Self> {
-        glib::DateTime::from_iso8601(string, Some(&glib::TimeZone::local()))
+        glib::DateTime::from_iso8601(string, None)
             .map(Self)
             .with_context(|| format!("Invalid iso8601 datetime `{}`", string))
     }
 
     pub fn fuzzy_display(&self) -> glib::GString {
-        let now = Self::now_local();
+        let now = Self::now_utc();
 
         if self.0.ymd() == now.0.ymd() {
             // Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
@@ -75,7 +79,7 @@ mod tests {
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);
 
-        let val = DateTime::now_local();
+        let val = DateTime::now_utc();
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize(&bytes).unwrap();
         assert_eq!(val, de_val);

@@ -119,37 +119,37 @@ mod tests {
 
     #[test]
     fn serde_bincode() {
-        let val = Recording::new(&glib::Bytes::from_static(b""), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_static(b""), &DateTime::now_utc());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
-        let val = Recording::new(&glib::Bytes::from_static(b"a"), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_static(b"a"), &DateTime::now_utc());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
-        let val = Recording::new(&glib::Bytes::from_owned(vec![]), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_owned(vec![]), &DateTime::now_utc());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
-        let val = Recording::new(&glib::Bytes::from_owned(vec![1]), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_owned(vec![1]), &DateTime::now_utc());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
-        let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_utc());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();
         assert_recording_eq(&val, &de_val);
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
-        let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_utc());
         val.set_recognize_result(Some(BoxedRecognizeResult(Err(RecognizeError::new(
             RecognizeErrorKind::Connection,
             "Some message".to_string(),
@@ -159,7 +159,7 @@ mod tests {
         assert_recording_eq(&val, &de_val);
         assert_eq!(val.recognize_retries(), de_val.recognize_retries());
 
-        let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_local());
+        let val = Recording::new(&glib::Bytes::from_owned(vec![1, 2]), &DateTime::now_utc());
         val.increment_recognize_retries();
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Recording>(&bytes).unwrap();

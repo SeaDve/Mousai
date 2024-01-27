@@ -335,7 +335,7 @@ mod test {
         assert_song_eq(&val, &de_val);
 
         let val = SongBuilder::new(&Uid::from("d"), "D Title", "D Artist", "D Album").build();
-        val.set_last_heard(DateTime::now_local());
+        val.set_last_heard(DateTime::now_utc());
         let bytes = bincode::serialize(&val).unwrap();
         let de_val = bincode::deserialize::<Song>(&bytes).unwrap();
         assert_song_eq(&val, &de_val);

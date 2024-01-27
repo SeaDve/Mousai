@@ -103,8 +103,8 @@ mod tests {
     fn compare() {
         let sorter = SongSorter::new();
 
-        let old = new_test_song(DateTime::now_local(), "old");
-        let new = new_test_song(DateTime::now_local(), "new");
+        let old = new_test_song(DateTime::now_utc(), "old");
+        let new = new_test_song(DateTime::now_utc(), "new");
         assert!(old.last_heard() < new.last_heard());
 
         // Match search term, closer (old) song is sorted first (smaller)

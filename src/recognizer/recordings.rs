@@ -253,7 +253,7 @@ mod tests {
     };
 
     fn new_test_recording(bytes: &'static [u8]) -> Recording {
-        Recording::new(&glib::Bytes::from_static(bytes), &DateTime::now_local())
+        Recording::new(&glib::Bytes::from_static(bytes), &DateTime::now_utc())
     }
 
     fn new_test_song(id: &str) -> Song {
