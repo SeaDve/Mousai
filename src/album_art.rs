@@ -22,11 +22,11 @@ pub struct AlbumArtStore {
 }
 
 impl AlbumArtStore {
-    pub fn new(session: &soup::Session) -> Self {
+    pub fn new(session: soup::Session) -> Self {
         // TODO Remove from store on low memory (Use LRU Cache)
 
         Self {
-            session: session.clone(),
+            session,
             map: RefCell::default(),
         }
     }
@@ -36,7 +36,7 @@ impl AlbumArtStore {
             self.map
                 .borrow_mut()
                 .entry(download_url.to_string())
-                .or_insert_with(|| Rc::new(AlbumArt::new(&self.session, download_url))),
+                .or_insert_with(|| Rc::new(AlbumArt::new(self.session.clone(), download_url))),
         )
     }
 }
@@ -50,9 +50,9 @@ pub struct AlbumArt {
 }
 
 impl AlbumArt {
-    fn new(session: &soup::Session, download_url: &str) -> Self {
+    fn new(session: soup::Session, download_url: &str) -> Self {
         Self {
-            session: session.clone(),
+            session,
             download_url: download_url.to_string(),
             cache: OnceCell::new(),
             cache_guard: Mutex::new(()),
@@ -101,9 +101,7 @@ mod test {
 
     #[gtk::test]
     async fn identity() {
-        let session = soup::Session::new();
-        let store = AlbumArtStore::new(&session);
-
+        let store = AlbumArtStore::new(soup::Session::new());
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
         let access_1 = store.get_or_init(download_url);
@@ -117,11 +115,9 @@ mod test {
 
     #[gtk::test]
     async fn download() {
-        let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-
-        let album_art = AlbumArt::new(&session, download_url);
+        let album_art = AlbumArt::new(soup::Session::new(), download_url);
         assert!(!album_art.is_loaded());
         assert_eq!(album_art.download_url(), download_url);
 
@@ -137,11 +133,9 @@ mod test {
 
     #[gtk::test]
     async fn concurrent_downloads() {
-        let session = soup::Session::new();
         let download_url =
             "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
-
-        let album_art = AlbumArt::new(&session, download_url);
+        let album_art = AlbumArt::new(soup::Session::new(), download_url);
 
         // Should not panic on the following line in `AlbumArt::texture`.
         // debug_assert!(self.guard.borrow().is_none());

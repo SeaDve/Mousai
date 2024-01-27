@@ -165,7 +165,7 @@ impl Application {
     pub fn album_art_store(&self) -> &AlbumArtStore {
         self.imp()
             .album_art_store
-            .get_or_init(|| AlbumArtStore::new(self.session()))
+            .get_or_init(|| AlbumArtStore::new(self.session().clone()))
     }
 
     pub fn settings(&self) -> &Settings {
