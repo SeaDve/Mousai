@@ -24,12 +24,14 @@
 )]
 
 mod about;
+mod album_art_store;
 mod application;
 mod audio_device;
+mod cancelled;
 mod config;
-mod core;
 mod database;
 mod database_error_window;
+mod date_time;
 mod i18n;
 mod inspector_page;
 mod model;

@@ -249,8 +249,8 @@ mod tests {
     use std::rc::Rc;
 
     use crate::{
-        core::DateTime,
         database,
+        date_time::DateTime,
         model::{Song, Uid},
         recognizer::recording::BoxedRecognizeResult,
     };

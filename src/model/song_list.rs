@@ -295,7 +295,7 @@ fn unbind_song_from_db(song: &Song) {
 
 /// Migrate from the old memory list of Mousai v0.6.6 and earlier.
 fn migrate_from_memory_list(song_list: &SongList) -> Result<()> {
-    use crate::{core::DateTime, model::ExternalLinkKey, settings::Settings};
+    use crate::{date_time::DateTime, model::ExternalLinkKey, settings::Settings};
 
     let settings = Settings::default();
     let memory_list = settings.memory_list();

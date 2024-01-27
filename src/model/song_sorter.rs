@@ -92,7 +92,7 @@ impl Default for SongSorter {
 mod tests {
     use super::*;
 
-    use crate::{core::DateTime, model::Uid};
+    use crate::{date_time::DateTime, model::Uid};
 
     fn new_test_song(last_heard: DateTime, search_term: &str) -> Song {
         let song = Song::builder(&Uid::from(""), search_term, search_term, "").build();
