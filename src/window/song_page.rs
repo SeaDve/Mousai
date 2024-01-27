@@ -112,7 +112,7 @@ mod imp {
                 }));
 
             self.external_links_box.connect_child_activated(|_, child| {
-                let external_link_tile = child.clone().downcast::<ExternalLinkTile>().unwrap();
+                let external_link_tile = child.downcast_ref::<ExternalLinkTile>().unwrap();
                 external_link_tile.handle_activation();
             });
 
