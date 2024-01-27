@@ -7,7 +7,7 @@ use std::{cell::OnceCell, time::Instant};
 
 use crate::{
     about,
-    album_art_store::AlbumArtStore,
+    album_art::AlbumArtStore,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     database::{self, EnvExt, Migrations},
     database_error_window::DatabaseErrorWindow,

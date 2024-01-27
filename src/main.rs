@@ -24,7 +24,7 @@
 )]
 
 mod about;
-mod album_art_store;
+mod album_art;
 mod application;
 mod audio_device;
 mod cancelled;

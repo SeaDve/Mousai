@@ -1,9 +1,13 @@
+use std::{
+    cell::{OnceCell, RefCell},
+    collections::HashMap,
+    rc::Rc,
+};
+
 use anyhow::{Context, Result};
 use futures_util::lock::Mutex;
 use gtk::{gdk, glib};
 use soup::prelude::*;
-
-use std::cell::OnceCell;
 
 // TODO
 // - Don't load AlbumArt if network is metered
@@ -11,6 +15,31 @@ use std::cell::OnceCell;
 // - Integrate more with AlbumCover widget
 // - Load only at most n AlbumArt at a time
 // - Sanitize the arbitrary data downloaded before converting it to texture
+
+pub struct AlbumArtStore {
+    session: soup::Session,
+    map: RefCell<HashMap<String, Rc<AlbumArt>>>,
+}
+
+impl AlbumArtStore {
+    pub fn new(session: &soup::Session) -> Self {
+        // TODO Remove from store on low memory (Use LRU Cache)
+
+        Self {
+            session: session.clone(),
+            map: RefCell::default(),
+        }
+    }
+
+    pub fn get_or_init(&self, download_url: &str) -> Rc<AlbumArt> {
+        Rc::clone(
+            self.map
+                .borrow_mut()
+                .entry(download_url.to_string())
+                .or_insert_with(|| Rc::new(AlbumArt::new(&self.session, download_url))),
+        )
+    }
+}
 
 pub struct AlbumArt {
     session: soup::Session,
@@ -21,7 +50,7 @@ pub struct AlbumArt {
 }
 
 impl AlbumArt {
-    pub(super) fn new(session: &soup::Session, download_url: &str) -> Self {
+    fn new(session: &soup::Session, download_url: &str) -> Self {
         Self {
             session: session.clone(),
             download_url: download_url.to_string(),
@@ -69,6 +98,22 @@ mod test {
     use super::*;
 
     use futures_util::future;
+
+    #[gtk::test]
+    async fn identity() {
+        let session = soup::Session::new();
+        let store = AlbumArtStore::new(&session);
+
+        let download_url =
+            "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+        let access_1 = store.get_or_init(download_url);
+        let access_2 = store.get_or_init(download_url);
+        assert!(Rc::ptr_eq(&access_1, &access_2));
+        assert_eq!(
+            access_1.texture().await.unwrap(),
+            access_2.texture().await.unwrap()
+        );
+    }
 
     #[gtk::test]
     async fn download() {

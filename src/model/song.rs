@@ -8,7 +8,7 @@ use std::{
 };
 
 use crate::{
-    album_art_store::AlbumArt,
+    album_art::AlbumArt,
     date_time::DateTime,
     model::{ExternalLinkKey, ExternalLinks, Uid},
     serde_helpers, utils,
