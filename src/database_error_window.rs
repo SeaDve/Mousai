@@ -1,7 +1,5 @@
-use adw::subclass::prelude::*;
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::glib;
-
-use crate::application::Application;
 
 mod imp {
     use super::*;
@@ -38,7 +36,7 @@ glib::wrapper! {
 }
 
 impl DatabaseErrorWindow {
-    pub fn new(application: &Application) -> Self {
+    pub fn new(application: &impl IsA<gtk::Application>) -> Self {
         glib::Object::builder()
             .property("application", application)
             .build()

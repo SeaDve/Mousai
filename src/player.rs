@@ -16,7 +16,7 @@ use mpris_server::{
 
 use std::cell::{Cell, OnceCell, RefCell};
 
-use crate::{config::APP_ID, song::Song, uid::Uid, utils};
+use crate::{config::APP_ID, song::Song, uid::Uid, utils, Application};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MsaiPlayerState")]
@@ -356,12 +356,12 @@ impl Default for Player {
 #[async_trait(?Send)]
 impl LocalRootInterface for Player {
     async fn raise(&self) -> fdo::Result<()> {
-        utils::app_instance().activate();
+        Application::get().activate();
         Ok(())
     }
 
     async fn quit(&self) -> fdo::Result<()> {
-        utils::app_instance().quit();
+        Application::get().quit();
         Ok(())
     }
 

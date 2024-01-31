@@ -14,7 +14,7 @@ use super::{
 };
 use crate::{
     config::APP_ID, i18n::ngettext_f, player::Player, recognizer::Recognizer, song::Song,
-    song_filter::SongFilter, song_list::SongList, song_sorter::SongSorter, uid::Uid, utils,
+    song_filter::SongFilter, song_list::SongList, song_sorter::SongSorter, uid::Uid, Application,
 };
 
 // FIXME Missing global navigation shortcuts
@@ -134,7 +134,7 @@ mod imp {
                     .join("\n");
                 obj.display().clipboard().set_text(&text);
 
-                utils::app_instance()
+                Application::get()
                     .window()
                     .add_message_toast(&gettext("Copied to clipboard"));
             });
@@ -148,7 +148,7 @@ mod imp {
 
                 if let Err(err) = obj.remove_songs(&song_ids) {
                     tracing::error!("Failed to remove songs: {:?}", err);
-                    utils::app_instance()
+                    Application::get()
                         .window()
                         .add_message_toast(&gettext("Failed to remove selected songs"));
                     return;
@@ -327,7 +327,7 @@ impl HistoryView {
                 song_page.connect_song_remove_request(clone!(@weak self as obj => move |_, song| {
                     if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
                         tracing::error!("Failed to remove song: {:?}", err);
-                        utils::app_instance()
+                        Application::get()
                             .window()
                             .add_message_toast(&gettext("Failed to remove song"));
                         return;
@@ -441,7 +441,7 @@ impl HistoryView {
             clone!(@weak self as obj, @weak recognizer => move |_| {
                 if let Err(err) = obj.show_recognizer_results(&recognizer) {
                     tracing::error!("Failed to show recognizer results: {:?}", err);
-                    utils::app_instance()
+                    Application::get()
                         .window()
                         .add_message_toast(&gettext("Failed to show recognizer results"));
                 }
@@ -559,7 +559,7 @@ impl HistoryView {
                     .insert_many(obj.imp().songs_purgatory.take())
                 {
                     tracing::error!("Failed to undo remove song: {:?}", err);
-                    utils::app_instance()
+                    Application::get()
                         .window()
                         .add_message_toast(&gettext("Failed to undo"));
                 }
@@ -571,7 +571,7 @@ impl HistoryView {
                 imp.undo_remove_song_toast.take();
             }));
 
-            utils::app_instance().window().add_toast(toast.clone());
+            Application::get().window().add_toast(toast.clone());
 
             imp.undo_remove_song_toast.replace(Some(toast));
         }
@@ -588,7 +588,7 @@ impl HistoryView {
             ));
 
             // Reset toast timeout
-            utils::app_instance().window().add_toast(toast.clone());
+            Application::get().window().add_toast(toast.clone());
         }
     }
 

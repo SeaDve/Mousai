@@ -11,7 +11,7 @@ use soup::prelude::*;
 pub use self::mock::AudDMock;
 use self::response::Response;
 use super::{Provider, RecognizeError, RecognizeErrorKind};
-use crate::{external_links::ExternalLinkKey, song::Song, uid::Uid, utils};
+use crate::{external_links::ExternalLinkKey, song::Song, uid::Uid, Application};
 
 #[derive(Debug)]
 pub struct AudD {
@@ -120,7 +120,7 @@ impl Provider for AudD {
         message.set_request_body_from_bytes(None, Some(&glib::Bytes::from_owned(data.to_string())));
         message.set_priority(soup::MessagePriority::High);
 
-        let response_bytes = utils::app_instance()
+        let response_bytes = Application::get()
             .session()
             .send_and_read_future(&message, glib::Priority::default())
             .await

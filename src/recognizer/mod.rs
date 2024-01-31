@@ -31,7 +31,7 @@ use crate::{
     date_time::DateTime,
     settings::PreferredAudioSource,
     song::Song,
-    utils,
+    utils, Application,
 };
 
 const MAX_SAVED_RECORDING_RECOGNIZE_RETRIES: u8 = 3;
@@ -252,7 +252,7 @@ impl Recognizer {
 
         let device_name = gio::CancellableFuture::new(
             audio_device::find_default_name(
-                match utils::app_instance().settings().preferred_audio_source() {
+                match Application::get().settings().preferred_audio_source() {
                     PreferredAudioSource::Microphone => AudioDeviceClass::Source,
                     PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
                 },

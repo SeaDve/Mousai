@@ -18,7 +18,7 @@ use crate::{
     external_links::{ExternalLinkKey, ExternalLinks},
     serde_helpers,
     uid::Uid,
-    utils,
+    Application,
 };
 
 mod imp {
@@ -135,7 +135,7 @@ impl Song {
         let album_art_link = self.album_art_link()?;
 
         Some(
-            utils::app_instance()
+            Application::get()
                 .album_art_store()
                 .get_or_init(&album_art_link),
         )

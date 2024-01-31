@@ -32,7 +32,7 @@ use crate::{
     recognizer::{RecognizeError, RecognizeErrorKind, Recognizer, RecognizerState, Recordings},
     song::Song,
     song_list::SongList,
-    utils, Application,
+    Application,
 };
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
@@ -370,7 +370,7 @@ impl Window {
                     clone!(@weak self as obj => move |_, id| {
                         debug_assert_eq!(id, OPEN_RESPONSE_ID);
 
-                        let window = PreferencesWindow::new(utils::app_instance().settings());
+                        let window = PreferencesWindow::new(Application::get().settings());
                         window.set_transient_for(Some(&obj));
                         window.present();
 
@@ -390,7 +390,7 @@ impl Window {
     }
 
     fn load_window_size(&self) {
-        let app = utils::app_instance();
+        let app = Application::get();
         let settings = app.settings();
 
         self.set_default_size(settings.window_width(), settings.window_height());
@@ -401,7 +401,7 @@ impl Window {
     }
 
     fn save_window_size(&self) -> Result<()> {
-        let app = utils::app_instance();
+        let app = Application::get();
         let settings = app.settings();
 
         let (width, height) = self.default_size();

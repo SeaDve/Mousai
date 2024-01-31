@@ -18,7 +18,7 @@ use crate::{
     player::{Player, PlayerState},
     song::Song,
     song_list::SongList,
-    utils,
+    Application,
 };
 
 const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;
@@ -73,7 +73,7 @@ mod imp {
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 let song = obj.song().expect("song should be set");
                 obj.display().clipboard().set_text(&song.copy_term());
-                utils::app_instance()
+                Application::get()
                     .window()
                     .add_message_toast(&gettext("Copied to clipboard"));
             });

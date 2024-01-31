@@ -3,7 +3,9 @@ use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 
 use std::{cell::OnceCell, str::FromStr};
 
-use crate::{external_link::ExternalLink, external_links::ExternalLinkKey, i18n::gettext_f, utils};
+use crate::{
+    external_link::ExternalLink, external_links::ExternalLinkKey, i18n::gettext_f, Application,
+};
 
 mod imp {
     use super::*;
@@ -137,7 +139,7 @@ impl ExternalLinkTile {
             move |res| {
                 if let Err(err) = res {
                     tracing::warn!("Failed to launch default for uri `{}`: {:?}", uri, err);
-                    utils::app_instance().window().add_message_toast(&gettext_f(
+                    Application::get().window().add_message_toast(&gettext_f(
                         // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
                         "Failed to launch {key}",
                         &[("key", &raw_key)],

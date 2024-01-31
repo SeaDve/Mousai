@@ -69,7 +69,7 @@ mod imp {
 
                     // TODO don't spawn a new window if one is already open
                     // or find a better solution in handling these errors
-                    let err_window = DatabaseErrorWindow::new(&obj);
+                    let err_window = DatabaseErrorWindow::new(&*obj);
                     err_window.present();
                 }
             }
@@ -123,6 +123,20 @@ impl Application {
             .property("application-id", APP_ID)
             .property("resource-base-path", "/io/github/seadve/Mousai/")
             .build()
+    }
+
+    /// Returns the global instance of `Application`.
+    ///
+    /// # Panics
+    ///
+    /// Panics if the app is not running or if this is called on a non-main thread.
+    pub fn get() -> Self {
+        debug_assert!(
+            gtk::is_initialized_main_thread(),
+            "application must only be accessed in the main thread"
+        );
+
+        gio::Application::default().unwrap().downcast().unwrap()
     }
 
     pub fn window(&self) -> Window {
