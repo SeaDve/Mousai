@@ -21,8 +21,8 @@
 <br>
 
 <p align="center">
-  <a href="https://hosted.weblate.org/engage/kooha">
-    <img alt="Translation status" src="https://hosted.weblate.org/widgets/kooha/-/mousai/svg-badge.svg"/>
+  <a href="https://hosted.weblate.org/engage/seadve">
+    <img alt="Translation status" src="https://hosted.weblate.org/widgets/seadve/-/mousai/svg-badge.svg"/>
   </a>
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
     <img alt="Flathub downloads" src="https://img.shields.io/badge/dynamic/json?color=informational&label=downloads&logo=flathub&logoColor=white&query=%24.installs_total&url=https%3A%2F%2Fflathub.org%2Fapi%2Fv2%2Fstats%2Fio.github.seadve.Mousai"/>
@@ -91,7 +91,7 @@ You can also check out other third-party packages on [Repology](https://repology
 ## 🙌 Help translate Mousai
 
 You can help Mousai translate into your native language. If you found any typos
-or think you can improve a translation, you can use the [Weblate](https://hosted.weblate.org/engage/kooha/) platform.
+or think you can improve a translation, you can use the [Weblate](https://hosted.weblate.org/engage/seadve/) platform.
 
 ## ☕ Support me and the project
 
@@ -101,7 +101,7 @@ would like to support it, you may [buy me a coffee](https://www.buymeacoffee.com
 ## 💝 Acknowledgment
 
 I would like to express my gratitude to the [contributors](https://github.com/SeaDve/Mousai/graphs/contributors)
-and [translators](https://hosted.weblate.org/engage/kooha/) of the project.
+and [translators](https://hosted.weblate.org/engage/seadve/) of the project.
 
 I would also like to thank the open-source software projects, libraries, and APIs that were
 used in developing this app, such as GStreamer, GTK, LibAdwaita, [AudD](https://audd.io/), etc., for making Mousai possible.
