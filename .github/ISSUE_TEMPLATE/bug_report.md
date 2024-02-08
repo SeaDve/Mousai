@@ -43,5 +43,14 @@ screenshots or screencasts related, please provide them here.
 
 If applicable, please attach the logs from running Mousai in the
 terminal with the following environment variables: `RUST_BACKTRACE=1 RUST_LOG=mousai=debug`
-(e.g., `RUST_BACKTRACE=1 RUST_LOG=mousai=debug flatpak run io.github.seadve.Mousai`).
+
+If running as a flatpak, please attach logs using this command:
+
+`RUST_BACKTRACE=1 RUST_LOG=mousai=debug flatpak run io.github.seadve.Mousai`
+
+Or if running as a snap, please attach logs using this command:
+
+`RUST_BACKTRACE=1 RUST_LOG=mousai=debug snap run mousai` and also show the output of these commands:
+
+`snap version && snap info mousai && snap connections mousai`
 -->
