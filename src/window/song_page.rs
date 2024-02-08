@@ -75,9 +75,7 @@ mod imp {
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 let song = obj.song().expect("song should be set");
                 obj.display().clipboard().set_text(&song.copy_term());
-                Application::get()
-                    .window()
-                    .add_message_toast(&gettext("Copied to clipboard"));
+                Application::get().add_message_toast(&gettext("Copied to clipboard"));
             });
         }
 

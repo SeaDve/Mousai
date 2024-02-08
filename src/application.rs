@@ -21,11 +21,9 @@ use crate::{
 
 mod imp {
     use super::*;
-    use glib::WeakRef;
 
     #[derive(Default)]
     pub struct Application {
-        pub(super) window: OnceCell<WeakRef<Window>>,
         pub(super) session: OnceCell<(soup::Session, soup::Cache)>,
         pub(super) album_art_store: OnceCell<AlbumArtStore>,
         pub(super) env: OnceCell<(heed::Env, SongList, Recordings)>,
@@ -45,22 +43,19 @@ mod imp {
         fn activate(&self) {
             self.parent_activate();
 
-            if let Some(window) = self.window.get() {
-                debug_assert!(self.env.get().is_some(), "env must be initialized too");
+            let obj = self.obj();
 
-                let window = window.upgrade().unwrap();
+            if let Some(window) = obj.window() {
+                debug_assert!(self.env.get().is_some(), "env must be initialized too");
                 window.present();
                 return;
             }
-
-            let obj = self.obj();
 
             // TODO use `get_or_try_init` once it's stable
             match init_env() {
                 Ok((env, song_history, recordings)) => {
                     let window = Window::new(&obj);
                     window.bind_models(&song_history, &recordings);
-                    self.window.set(window.downgrade()).unwrap();
                     self.env.set((env, song_history, recordings)).unwrap();
                     window.present();
                 }
@@ -139,13 +134,24 @@ impl Application {
         gio::Application::default().unwrap().downcast().unwrap()
     }
 
-    pub fn window(&self) -> Window {
-        self.imp()
-            .window
-            .get()
-            .expect("window must be initialized on activate")
-            .upgrade()
-            .unwrap()
+    pub fn add_message_toast(&self, message: &str) {
+        if let Some(window) = self.window() {
+            window.add_message_toast(message);
+        } else {
+            tracing::warn!("Can't add message toast without an active window");
+        }
+    }
+
+    pub fn add_toast(&self, toast: adw::Toast) {
+        if let Some(window) = self.window() {
+            window.add_toast(toast);
+        } else {
+            tracing::warn!("Can't add toast without an active window");
+        }
+    }
+
+    pub fn window(&self) -> Option<Window> {
+        self.active_window().map(|w| w.downcast().unwrap())
     }
 
     pub fn session(&self) -> &soup::Session {
@@ -195,10 +201,8 @@ impl Application {
     }
 
     pub fn quit(&self) {
-        if let Some(window) = self.imp().window.get() {
-            if let Some(window) = window.upgrade() {
-                window.close();
-            }
+        if let Some(window) = self.window() {
+            window.close();
         }
 
         ApplicationExt::quit(self);
@@ -213,13 +217,17 @@ impl Application {
         let show_preferences_action = gio::ActionEntry::builder("show-preferences")
             .activate(|obj: &Self, _, _| {
                 let window = PreferencesWindow::new(obj.settings());
-                window.set_transient_for(Some(&obj.window()));
+                window.set_transient_for(obj.window().as_ref());
                 window.present();
             })
             .build();
         let show_about_action = gio::ActionEntry::builder("show-about")
             .activate(|obj: &Self, _, _| {
-                about::present_dialog(&obj.window());
+                if let Some(window) = obj.window() {
+                    about::present_dialog(&window);
+                } else {
+                    tracing::warn!("Can't present about dialog without an active window");
+                }
             })
             .build();
         self.add_action_entries([quit_action, show_preferences_action, show_about_action]);

@@ -134,9 +134,7 @@ mod imp {
                     .join("\n");
                 obj.display().clipboard().set_text(&text);
 
-                Application::get()
-                    .window()
-                    .add_message_toast(&gettext("Copied to clipboard"));
+                Application::get().add_message_toast(&gettext("Copied to clipboard"));
             });
 
             klass.install_action("history-view.remove-selected-songs", None, |obj, _, _| {
@@ -149,7 +147,6 @@ mod imp {
                 if let Err(err) = obj.remove_songs(&song_ids) {
                     tracing::error!("Failed to remove songs: {:?}", err);
                     Application::get()
-                        .window()
                         .add_message_toast(&gettext("Failed to remove selected songs"));
                     return;
                 }
@@ -327,9 +324,7 @@ impl HistoryView {
                 song_page.connect_song_remove_request(clone!(@weak self as obj => move |_, song| {
                     if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
                         tracing::error!("Failed to remove song: {:?}", err);
-                        Application::get()
-                            .window()
-                            .add_message_toast(&gettext("Failed to remove song"));
+                        Application::get().add_message_toast(&gettext("Failed to remove song"));
                         return;
                     }
 
@@ -442,7 +437,6 @@ impl HistoryView {
                 if let Err(err) = obj.show_recognizer_results(&recognizer) {
                     tracing::error!("Failed to show recognizer results: {:?}", err);
                     Application::get()
-                        .window()
                         .add_message_toast(&gettext("Failed to show recognizer results"));
                 }
             }),
@@ -559,9 +553,7 @@ impl HistoryView {
                     .insert_many(obj.imp().songs_purgatory.take())
                 {
                     tracing::error!("Failed to undo remove song: {:?}", err);
-                    Application::get()
-                        .window()
-                        .add_message_toast(&gettext("Failed to undo"));
+                    Application::get().add_message_toast(&gettext("Failed to undo"));
                 }
             }));
 
@@ -571,7 +563,7 @@ impl HistoryView {
                 imp.undo_remove_song_toast.take();
             }));
 
-            Application::get().window().add_toast(toast.clone());
+            Application::get().add_toast(toast.clone());
 
             imp.undo_remove_song_toast.replace(Some(toast));
         }
@@ -588,7 +580,7 @@ impl HistoryView {
             ));
 
             // Reset toast timeout
-            Application::get().window().add_toast(toast.clone());
+            Application::get().add_toast(toast.clone());
         }
     }
 

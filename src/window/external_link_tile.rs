@@ -139,7 +139,7 @@ impl ExternalLinkTile {
             move |res| {
                 if let Err(err) = res {
                     tracing::warn!("Failed to launch default for uri `{}`: {:?}", uri, err);
-                    Application::get().window().add_message_toast(&gettext_f(
+                    Application::get().add_message_toast(&gettext_f(
                         // Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
                         "Failed to launch {key}",
                         &[("key", &raw_key)],
