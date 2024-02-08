@@ -151,7 +151,7 @@ impl Application {
     }
 
     pub fn window(&self) -> Option<Window> {
-        self.active_window().map(|w| w.downcast().unwrap())
+        self.active_window().and_downcast()
     }
 
     pub fn session(&self) -> &soup::Session {
