@@ -16,7 +16,8 @@
         "--socket=wayland",
         "--env=RUST_LOG=mousai=debug",
         "--env=G_MESSAGES_DEBUG=none",
-        "--env=RUST_BACKTRACE=1"
+        "--env=RUST_BACKTRACE=1",
+        "--env=RUST_LIB_BACKTRACE=0"
     ],
     "build-options": {
         "append-path": "/usr/lib/sdk/llvm16/bin:/usr/lib/sdk/rust-stable/bin",
