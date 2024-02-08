@@ -48,7 +48,7 @@ If running as a flatpak, please attach logs using this command
 
 `RUST_BACKTRACE=1 RUST_LOG=mousai=debug flatpak run io.github.seadve.Mousai`
 
-If running as a snap, please attach logs using this command
+Or if running as a snap, please attach logs using this command:
 
 `RUST_BACKTRACE=1 RUST_LOG=mousai=debug snap run mousai` and also show the output of these commands
 
