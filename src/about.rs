@@ -1,13 +1,13 @@
 use std::{env, path::Path};
 
+use adw::prelude::*;
 use gettextrs::gettext;
-use gtk::{glib, prelude::*};
+use gtk::glib;
 
 use crate::config::{APP_ID, VERSION};
 
-pub fn present_window(transient_for: Option<&impl IsA<gtk::Window>>) {
-    let win = adw::AboutWindow::builder()
-        .modal(true)
+pub fn present_dialog(transient_for: &impl IsA<gtk::Widget>) {
+    let dialog = adw::AboutDialog::builder()
         .application_icon(APP_ID)
         .application_name(gettext("Mousai"))
         .developer_name(gettext("Dave Patrick Caberto"))
@@ -24,18 +24,17 @@ pub fn present_window(transient_for: Option<&impl IsA<gtk::Window>>) {
         .release_notes(release_notes())
         .build();
 
-    win.add_link(
+    dialog.add_link(
         &gettext("Donate (Buy Me a Coffee)"),
         "https://www.buymeacoffee.com/seadve",
     );
-    win.add_link(&gettext("GitHub"), "https://github.com/SeaDve/Mousai");
-    win.add_link(
+    dialog.add_link(&gettext("GitHub"), "https://github.com/SeaDve/Mousai");
+    dialog.add_link(
         &gettext("Translate"),
         "https://hosted.weblate.org/projects/seadve/mousai",
     );
 
-    win.set_transient_for(transient_for);
-    win.present();
+    dialog.present(transient_for);
 }
 
 fn debug_info() -> String {

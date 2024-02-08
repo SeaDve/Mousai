@@ -219,7 +219,7 @@ impl Application {
             .build();
         let show_about_action = gio::ActionEntry::builder("show-about")
             .activate(|obj: &Self, _, _| {
-                about::present_window(Some(&obj.window()));
+                about::present_dialog(&obj.window());
             })
             .build();
         self.add_action_entries([quit_action, show_preferences_action, show_about_action]);
