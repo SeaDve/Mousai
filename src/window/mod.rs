@@ -241,11 +241,7 @@ impl Window {
             "non permanent errors must be saved instead"
         );
 
-        let dialog = adw::MessageDialog::builder()
-            .transient_for(self)
-            .modal(true)
-            .heading(err.title())
-            .build();
+        let dialog = adw::AlertDialog::builder().heading(err.title()).build();
 
         match err.kind() {
             RecognizeErrorKind::OtherPermanent | RecognizeErrorKind::Fingerprint => {
@@ -314,15 +310,13 @@ impl Window {
             }
         }
 
-        dialog.present();
+        dialog.present(self);
     }
 
     fn present_recording_saved_message(&self, cause: &RecognizeError) {
         debug_assert!(!cause.is_permanent(), "permanent errors must not be saved");
 
-        let dialog = adw::MessageDialog::builder()
-            .transient_for(self)
-            .modal(true)
+        let dialog = adw::AlertDialog::builder()
             .heading(gettext("Recording Saved"))
             .build();
 
@@ -385,7 +379,7 @@ impl Window {
             }
         }
 
-        dialog.present();
+        dialog.present(self);
     }
 
     fn load_window_size(&self) {
