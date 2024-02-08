@@ -37,7 +37,7 @@ mod external_links;
 mod i18n;
 mod inspector_page;
 mod player;
-mod preferences_window;
+mod preferences_dialog;
 mod recognizer;
 mod serde_helpers;
 mod settings;

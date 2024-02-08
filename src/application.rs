@@ -12,7 +12,7 @@ use crate::{
     database::{self, EnvExt, Migrations},
     database_error_window::DatabaseErrorWindow,
     inspector_page::InspectorPage,
-    preferences_window::PreferencesWindow,
+    preferences_dialog::PreferencesDialog,
     recognizer::Recordings,
     settings::Settings,
     song_list::SongList,
@@ -216,9 +216,12 @@ impl Application {
             .build();
         let show_preferences_action = gio::ActionEntry::builder("show-preferences")
             .activate(|obj: &Self, _, _| {
-                let window = PreferencesWindow::new(obj.settings());
-                window.set_transient_for(obj.window().as_ref());
-                window.present();
+                if let Some(window) = obj.window() {
+                    let dialog = PreferencesDialog::new(obj.settings());
+                    dialog.present(&window);
+                } else {
+                    tracing::warn!("Can't present preferences dialog without an active window");
+                }
             })
             .build();
         let show_about_action = gio::ActionEntry::builder("show-about")

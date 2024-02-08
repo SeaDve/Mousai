@@ -27,7 +27,7 @@ use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar:
 use crate::{
     config::PROFILE,
     player::{Player, PlayerState},
-    preferences_window::PreferencesWindow,
+    preferences_dialog::PreferencesDialog,
     recognizer::{RecognizeError, RecognizeErrorKind, Recognizer, RecognizerState, Recordings},
     song::Song,
     song_list::SongList,
@@ -363,11 +363,10 @@ impl Window {
                     clone!(@weak self as obj => move |_, id| {
                         debug_assert_eq!(id, OPEN_RESPONSE_ID);
 
-                        let window = PreferencesWindow::new(Application::get().settings());
-                        window.set_transient_for(Some(&obj));
-                        window.present();
+                        let dialog = PreferencesDialog::new(Application::get().settings());
+                        dialog.present(&obj);
 
-                        let is_focused = window.focus_aud_d_api_token_row();
+                        let is_focused = dialog.focus_aud_d_api_token_row();
                         debug_assert!(is_focused, "token row must be focused");
                     }),
                 );

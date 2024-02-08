@@ -13,7 +13,7 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/information-row.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/inspector-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/playback-button.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">ui/preferences-window.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/preferences-dialog.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognized-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognized-page-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognizer-status.ui</file>
