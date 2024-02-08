@@ -1,5 +1,4 @@
 mod album_cover;
-mod crossfade_paintable;
 mod external_link_tile;
 mod history_view;
 mod information_row;
