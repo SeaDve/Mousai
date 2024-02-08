@@ -11,8 +11,10 @@ use super::{recognized_page_tile::RecognizedPageTile, AdaptiveMode};
 use crate::{i18n::ngettext_f, player::Player, song::Song};
 
 mod imp {
+    use glib::{subclass::Signal, WeakRef};
+    use once_cell::sync::Lazy;
+
     use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal, WeakRef};
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPage)]

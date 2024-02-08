@@ -15,8 +15,10 @@ use crate::{i18n::gettext_f, recognizer::Recognizer};
 // - Show more detailed progress with error messages
 
 mod imp {
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
+
     use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-status.ui")]

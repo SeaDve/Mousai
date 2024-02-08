@@ -11,9 +11,12 @@ use super::song_tile::SongTile;
 use crate::{date_time::DateTime, player::Player, song::Song};
 
 mod imp {
-    use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal};
     use std::marker::PhantomData;
+
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
+
+    use super::*;
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPageTile)]

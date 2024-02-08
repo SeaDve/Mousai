@@ -22,9 +22,12 @@ const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;
 const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
-    use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal};
     use std::marker::PhantomData;
+
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
+
+    use super::*;
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::SongTile)]

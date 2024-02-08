@@ -1,10 +1,7 @@
 use anyhow::Result;
 use fuzzy_matcher::{skim::SkimMatcherV2, FuzzyMatcher};
-use gtk::{
-    glib::{self, once_cell::sync::Lazy},
-    prelude::*,
-    subclass::prelude::*,
-};
+use gtk::{glib, prelude::*, subclass::prelude::*};
+use once_cell::sync::Lazy;
 use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
 
 use std::{

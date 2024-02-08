@@ -25,8 +25,10 @@ const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;
 const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
+    use glib::{subclass::Signal, WeakRef};
+    use once_cell::sync::Lazy;
+
     use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal, WeakRef};
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::SongPage)]

@@ -1,10 +1,7 @@
-use gettextrs::gettext;
-use gtk::{
-    glib::{self, IsA},
-    prelude::*,
-};
-
 use std::{env, path::Path};
+
+use gettextrs::gettext;
+use gtk::{glib, prelude::*};
 
 use crate::config::{APP_ID, VERSION};
 

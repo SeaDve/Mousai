@@ -19,8 +19,10 @@ use crate::{
 };
 
 mod imp {
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
+
     use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]

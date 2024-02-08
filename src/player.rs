@@ -39,8 +39,10 @@ impl PlayerState {
 }
 
 mod imp {
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
+
     use super::*;
-    use glib::{once_cell::sync::Lazy, subclass::Signal};
 
     #[derive(Default, glib::Properties)]
     #[properties(wrapper_type = super::Player)]
