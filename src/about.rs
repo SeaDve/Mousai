@@ -6,7 +6,7 @@ use gtk::glib;
 
 use crate::config::{APP_ID, VERSION};
 
-pub fn present_dialog(transient_for: &impl IsA<gtk::Widget>) {
+pub fn present_dialog(parent: &impl IsA<gtk::Widget>) {
     let dialog = adw::AboutDialog::builder()
         .application_icon(APP_ID)
         .application_name(gettext("Mousai"))
@@ -34,7 +34,7 @@ pub fn present_dialog(transient_for: &impl IsA<gtk::Widget>) {
         "https://hosted.weblate.org/projects/seadve/mousai",
     );
 
-    dialog.present(transient_for);
+    dialog.present(parent);
 }
 
 fn debug_info() -> String {
