@@ -2,12 +2,10 @@
 <gresources>
   <gresource prefix="/io/github/seadve/Mousai/">
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/emblem-music-symbolic.svg</file>
-    <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/face-sad-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/network-offline-symbolic.svg</file>
     <file compressed="true" preprocess="xml-stripblanks">icons/scalable/status/selection-mode-symbolic.svg</file>
     <file compressed="true">style.css</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/album-cover.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">ui/database-error-window.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/external-link-tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/history-view.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/information-row.ui</file>

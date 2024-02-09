@@ -30,7 +30,6 @@ mod audio_device;
 mod cancelled;
 mod config;
 mod database;
-mod database_error_window;
 mod date_time;
 mod external_link;
 mod external_links;

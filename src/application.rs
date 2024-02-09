@@ -1,16 +1,19 @@
+use std::{cell::OnceCell, time::Instant};
+
 use adw::{prelude::*, subclass::prelude::*};
 use anyhow::{Context, Result};
-use gtk::{gio, glib};
+use gettextrs::gettext;
+use gtk::{
+    gio,
+    glib::{self, clone},
+};
 use soup::prelude::*;
-
-use std::{cell::OnceCell, time::Instant};
 
 use crate::{
     about,
     album_art::AlbumArtStore,
     config::{APP_ID, PKGDATADIR, PROFILE, VERSION},
     database::{self, EnvExt, Migrations},
-    database_error_window::DatabaseErrorWindow,
     inspector_page::InspectorPage,
     preferences_dialog::PreferencesDialog,
     recognizer::Recordings,
@@ -51,23 +54,21 @@ mod imp {
                 return;
             }
 
+            let window = Window::new(&obj);
+
             // TODO use `get_or_try_init` once it's stable
             match init_env() {
                 Ok((env, song_history, recordings)) => {
-                    let window = Window::new(&obj);
                     window.bind_models(&song_history, &recordings);
                     self.env.set((env, song_history, recordings)).unwrap();
-                    window.present();
                 }
                 Err(err) => {
                     tracing::error!("Failed to setup db env: {:?}", err);
-
-                    // TODO don't spawn a new window if one is already open
-                    // or find a better solution in handling these errors
-                    let err_window = DatabaseErrorWindow::new(&*obj);
-                    err_window.present();
+                    obj.present_database_error_dialog(&window);
                 }
             }
+
+            window.present();
         }
 
         fn startup(&self) {
@@ -210,6 +211,28 @@ impl Application {
         }
 
         ApplicationExt::quit(self);
+    }
+
+    fn present_database_error_dialog(&self, parent: &impl IsA<gtk::Widget>) {
+        const QUIT_RESPONSE_ID: &str = "quit";
+
+        let dialog = adw::AlertDialog::builder()
+            .heading(gettext("Critical Database Error"))
+            .body(gettext("Sorry, a critical databse error has occurred. This is likely caused by a tampered or corrupted database. You can try clearing application data. However, this is not recommended and will delete all your songs and saved recordings.\n\nTo report this issue, please launch Mousai in the terminal to include the logs and submit the bug report to the <a href=\"https://github.com/SeaDve/Mousai/issues/\">issue page</a>"))
+            .body_use_markup(true)
+            .default_response(QUIT_RESPONSE_ID)
+            .close_response(QUIT_RESPONSE_ID)
+            .build();
+        dialog.add_response(QUIT_RESPONSE_ID, &gettext("Quit"));
+        dialog.set_response_appearance(QUIT_RESPONSE_ID, adw::ResponseAppearance::Suggested);
+        dialog.connect_response(
+            Some(QUIT_RESPONSE_ID),
+            clone!(@weak self as obj => move |_, response| match response {
+                QUIT_RESPONSE_ID => obj.quit(),
+                _ => unreachable!(),
+            }),
+        );
+        dialog.present(parent);
     }
 
     fn setup_gactions(&self) {
