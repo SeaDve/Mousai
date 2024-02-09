@@ -207,7 +207,7 @@ impl Application {
 
         let dialog = adw::AlertDialog::builder()
             .heading(gettext("Critical Database Error"))
-            .body(gettext("Sorry, a critical databse error has occurred. This is likely caused by a tampered or corrupted database. You can try clearing application data. However, this is not recommended and will delete all your songs and saved recordings.\n\nTo report this issue, please launch Mousai in the terminal to include the logs and submit the bug report to the <a href=\"https://github.com/SeaDve/Mousai/issues/\">issue page</a>"))
+            .body(gettext("Sorry, a critical database error has occurred. This is likely caused by a tampered or corrupted database. You can try clearing application data. However, this is not recommended and will delete all your songs and saved recordings.\n\nTo report this issue, please launch Mousai in the terminal to include the logs and submit the bug report to the <a href=\"https://github.com/SeaDve/Mousai/issues/\">issue page</a>"))
             .body_use_markup(true)
             .default_response(QUIT_RESPONSE_ID)
             .close_response(QUIT_RESPONSE_ID)
