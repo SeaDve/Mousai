@@ -48,27 +48,7 @@ mod imp {
 
             let obj = self.obj();
 
-            if let Some(window) = obj.window() {
-                debug_assert!(self.env.get().is_some(), "env must be initialized too");
-                window.present();
-                return;
-            }
-
-            let window = Window::new(&obj);
-
-            // TODO use `get_or_try_init` once it's stable
-            match init_env() {
-                Ok((env, song_history, recordings)) => {
-                    window.bind_models(&song_history, &recordings);
-                    self.env.set((env, song_history, recordings)).unwrap();
-                }
-                Err(err) => {
-                    tracing::error!("Failed to setup db env: {:?}", err);
-                    obj.present_database_error_dialog(&window);
-                }
-            }
-
-            window.present();
+            obj.window().present();
         }
 
         fn startup(&self) {
@@ -136,27 +116,36 @@ impl Application {
     }
 
     pub fn add_message_toast(&self, message: &str) {
-        if let Some(window) = self.window() {
-            window.add_message_toast(message);
-        } else {
-            tracing::warn!("Can't add message toast without an active window");
-        }
+        self.window().add_message_toast(message);
     }
 
     pub fn add_toast(&self, toast: adw::Toast) {
-        if let Some(window) = self.window() {
-            window.add_toast(toast);
-        } else {
-            tracing::warn!("Can't add toast without an active window");
-        }
+        self.window().add_toast(toast);
     }
 
-    pub fn window(&self) -> Option<Window> {
-        self.active_window().and_downcast().or_else(|| {
-            self.windows()
-                .into_iter()
-                .find_map(|w| w.downcast::<Window>().ok())
-        })
+    pub fn window(&self) -> Window {
+        self.active_window().map_or_else(
+            || {
+                let imp = self.imp();
+
+                let window = Window::new(self);
+
+                match init_env() {
+                    Ok((env, song_history, recordings)) => {
+                        tracing::debug!("db env initialized");
+                        window.bind_models(&song_history, &recordings);
+                        imp.env.set((env, song_history, recordings)).unwrap();
+                    }
+                    Err(err) => {
+                        tracing::error!("Failed to setup db env: {:?}", err);
+                        self.present_database_error_dialog(&window);
+                    }
+                }
+
+                window
+            },
+            |w| w.downcast().unwrap(),
+        )
     }
 
     pub fn session(&self) -> &soup::Session {
@@ -206,7 +195,7 @@ impl Application {
     }
 
     pub fn quit(&self) {
-        if let Some(window) = self.window() {
+        if let Some(window) = self.active_window() {
             window.close();
         }
 
@@ -243,21 +232,13 @@ impl Application {
             .build();
         let show_preferences_action = gio::ActionEntry::builder("show-preferences")
             .activate(|obj: &Self, _, _| {
-                if let Some(window) = obj.window() {
-                    let dialog = PreferencesDialog::new(obj.settings());
-                    dialog.present(&window);
-                } else {
-                    tracing::warn!("Can't present preferences dialog without an active window");
-                }
+                let dialog = PreferencesDialog::new(obj.settings());
+                dialog.present(&obj.window());
             })
             .build();
         let show_about_action = gio::ActionEntry::builder("show-about")
             .activate(|obj: &Self, _, _| {
-                if let Some(window) = obj.window() {
-                    about::present_dialog(&window);
-                } else {
-                    tracing::warn!("Can't present about dialog without an active window");
-                }
+                about::present_dialog(&obj.window());
             })
             .build();
         self.add_action_entries([quit_action, show_preferences_action, show_about_action]);
