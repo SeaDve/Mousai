@@ -96,14 +96,11 @@ impl ExternalLinkTile {
     }
 
     pub fn can_handle(link: &ExternalLink) -> bool {
-        // FIXME use `inspect` once it's stable
-        match ExternalLinkKey::from_str(link.key()) {
-            Ok(_) => true,
-            Err(_) => {
-                tracing::warn!("can't handle external link key `{}`", link.key());
-                false
-            }
-        }
+        ExternalLinkKey::from_str(link.key())
+            .inspect_err(|_| {
+                tracing::warn!("Can't handle external link key `{}`", link.key());
+            })
+            .is_ok()
     }
 
     pub fn handle_activation(&self) {
