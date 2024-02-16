@@ -3,21 +3,22 @@
 # This file is distributed under the same license as the mousai package.
 # Heimen Stoffels <vistausss@outlook.com>, 2021.
 # Heimen Stoffels <vistausss@fastmail.com>, 2021, 2022.
-# Philip Goto <philip.goto@gmail.com>, 2023.
+# Philip Goto <philip.goto@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/>\n"
+"PO-Revision-Date: 2024-02-16 20:02+0000\n"
+"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.4\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -92,14 +93,16 @@ msgstr "Waarom zult u van Mousai houden?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identificeer nummers binnen enkele seconden of sla ze op voor later "
+"wanneer u offline bent"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Herken nummers via desktop­audio of uw microfoon"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr "🎸 Bouw een repertoire van herkende liedjes op"
+msgstr "🎸 Bouw een repertoire van herkende nummers op"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
@@ -165,7 +168,7 @@ msgstr "_Niets selecteren"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Start"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -246,7 +249,7 @@ msgstr "Offline-modus ingeschakeld"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Herkennings­resultaten tonen in offline­modus"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -353,7 +356,6 @@ msgstr ""
 "Philip Goto https://flipflop97.github.io/"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Doneren (trakteer me op een kopje koffie)"
 
@@ -577,8 +579,8 @@ msgstr "Pauzeren"
 #: src/window/recognized_page.rs:134
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Herkend nummer"
+msgstr[1] "Herkende nummers"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:140
