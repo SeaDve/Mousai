@@ -6,22 +6,23 @@
 # Carlod <carlod@disroot.org>, 2022.
 # gnu-ewm <gnu.ewm@protonmail.com>, 2022.
 # David <troianovskyidavid@gmail.com>, 2023.
+# Patryk Mucha <nowehity@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/seadve/mousai/pl/"
-">\n"
+"PO-Revision-Date: 2024-02-21 10:01+0000\n"
+"Last-Translator: Patryk Mucha <nowehity@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/seadve/mousai/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -36,20 +37,21 @@ msgstr "Zidentyfikuj jaka to piosenka"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
+#, fuzzy
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Szerokość okna"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Wysokość okna"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Czy okno jest zmaksymalizowane"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Preferred audio source to use in recording audio"
@@ -57,11 +59,11 @@ msgstr "Preferowane źródło dźwięku do nagrywania dźwięku"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "Token API używany do rozpoznawania AudD"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Starsza wersja (przechowywana na potrzeby migracji)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -73,6 +75,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai to prosta aplikacja, która rozpoznaje utwory podobne do Shazam. "
+"Wystarczy kliknąć przycisk słuchania i poczekać kilka sekund. W magiczny "
+"sposób zwróci tytuł i wykonawcę tej piosenki!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -89,26 +94,28 @@ msgstr "Dlaczego pokochasz Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identyfikuj utwory w ciągu kilku sekund lub zapisz je na później, gdy "
+"jesteś offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Rozpoznaj na podstawie dźwięku z komputera lub mikrofonu"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Zbuduj repertuar uznanych utworów"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Szybki podgląd utworu w interfejsie"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Przeglądaj i słuchaj utworu od różnych dostawców"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Łatwy w użyciu interfejs użytkownika"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
 #, fuzzy
@@ -117,7 +124,7 @@ msgstr "Dave Patrick Caberto"
 
 #: data/resources/ui/database-error-window.ui:14
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Krytyczny błąd bazy danych"
 
 #: data/resources/ui/database-error-window.ui:15
 msgid ""
@@ -129,6 +136,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Jest to prawdopodobnie spowodowane naruszoną lub uszkodzoną bazą danych. "
+"Możesz spróbować wyczyścić dane aplikacji. Nie jest to jednak zalecane i "
+"spowoduje usunięcie wszystkich utworów i zapisanych nagrań.\n"
+"\n"
+"Aby zgłosić ten problem, uruchom Mousai w terminalu, dołącz dzienniki i "
+"prześlij raport o błędzie na <a href=\"https://github.com/SeaDve/Mousai/"
+"issues/\">stronę problemu</a>"
 
 #: data/resources/ui/database-error-window.ui:20
 msgid "Quit"

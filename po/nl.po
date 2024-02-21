@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2024-02-16 20:02+0000\n"
+"PO-Revision-Date: 2024-02-21 10:01+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
@@ -152,7 +152,7 @@ msgstr "_Voorkeuren"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "Snel_toetsen"
+msgstr "_Snel­toetsen"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
@@ -282,12 +282,12 @@ msgstr "Voorkeuren"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Sneltoetsen tonen"
+msgstr "Snel­toetsen tonen"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Sluiten"
+msgstr "Afsluiten"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -351,9 +351,7 @@ msgstr "© 2023, Dave Patrick Caberto"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:21
 msgid "translator-credits"
-msgstr ""
-"Heimen Stoffels &lt;vistausss@fastmail.com&gt;\n"
-"Philip Goto https://flipflop97.github.io/"
+msgstr "Philip Goto https://flipflop97.github.io/"
 
 #: src/about.rs:31
 msgid "Donate (Buy Me a Coffee)"
