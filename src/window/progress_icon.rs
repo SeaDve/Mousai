@@ -6,7 +6,7 @@ use std::{
 use adw::prelude::*;
 use gtk::{
     glib::{self, clone},
-    graphene,
+    graphene::Rect,
     subclass::prelude::*,
 };
 
@@ -59,35 +59,24 @@ mod imp {
     impl WidgetImpl for ProgressIcon {
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
             let obj = self.obj();
+
             let width = obj.width();
             let height = obj.height();
             let color = obj.color();
 
-            let ctx =
-                snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
-
-            let arc_end = self.display_progress.get() * TAU - FRAC_PI_2;
-
             let cx = width as f64 / 2.0;
             let cy = height as f64 / 2.0;
             let radius = width as f64 / 2.0;
+            let arc_end = self.display_progress.get() * TAU - FRAC_PI_2;
 
-            ctx.set_source_rgba(
-                color.red() as f64,
-                color.green() as f64,
-                color.blue() as f64,
-                color.alpha() as f64,
-            );
+            let ctx = snapshot.append_cairo(&Rect::new(0.0, 0.0, width as f32, height as f32));
+
+            ctx.set_source_color(&color);
             ctx.move_to(cx, cy);
             ctx.arc(cx, cy, radius, -FRAC_PI_2, arc_end);
             ctx.fill().unwrap();
 
-            ctx.set_source_rgba(
-                color.red() as f64,
-                color.green() as f64,
-                color.blue() as f64,
-                color.alpha() as f64 * 0.15,
-            );
+            ctx.set_source_color(&color.with_alpha(color.alpha() * 0.15));
             ctx.move_to(cx, cy);
             ctx.arc(cx, cy, radius, arc_end, 3.0 * FRAC_PI_2);
             ctx.fill().unwrap();
