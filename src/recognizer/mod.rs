@@ -25,14 +25,7 @@ use self::{
     recorder::Recorder,
     recording::{BoxedRecognizeResult, Recording},
 };
-use crate::{
-    audio_device::{self, AudioDeviceClass},
-    cancelled::Cancelled,
-    date_time::DateTime,
-    settings::PreferredAudioSource,
-    song::Song,
-    utils, Application,
-};
+use crate::{cancelled::Cancelled, date_time::DateTime, song::Song, utils, Application};
 
 const MAX_SAVED_RECORDING_RECOGNIZE_RETRIES: u8 = 3;
 
@@ -252,24 +245,11 @@ impl Recognizer {
 
         self.set_state(RecognizerState::Listening);
 
-        let device_name = gio::CancellableFuture::new(
-            audio_device::find_default_name(
-                match Application::get().settings().preferred_audio_source() {
-                    PreferredAudioSource::Microphone => AudioDeviceClass::Source,
-                    PreferredAudioSource::DesktopAudio => AudioDeviceClass::Sink,
-                },
-            ),
-            cancellable.clone(),
-        )
-        .await
-        .map_err(|_| Cancelled::new("recognizing while finding default audio device name"))?
-        .context("Failed to find default device name")?;
-
         let imp = self.imp();
 
         imp.recorder
             .start(
-                Some(&device_name),
+                Application::get().settings().audio_source_type(),
                 clone!(@weak self as obj => move |peak| {
                     obj.emit_recording_peak_changed(peak);
                 }),

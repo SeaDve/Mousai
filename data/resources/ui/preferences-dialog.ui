@@ -7,9 +7,9 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">General</property>
             <child>
-              <object class="AdwComboRow" id="preferred_audio_source_row">
-                <property name="title" translatable="yes">Preferred Audio Source</property>
-                <property name="subtitle" translatable="yes">Determines the audio source to use when available</property>
+              <object class="AdwComboRow" id="audio_source_type_row">
+                <property name="title" translatable="yes">Audio Source</property>
+                <property name="subtitle" translatable="yes">Device used for listening</property>
               </object>
             </child>
           </object>

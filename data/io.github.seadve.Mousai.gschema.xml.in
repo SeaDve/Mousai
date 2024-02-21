@@ -17,13 +17,13 @@
       <description></description>
     </key>
 
-    <key name="preferred-audio-source" type="s">
+    <key name="audio-source-type" type="s">
       <choices>
         <choice value="microphone"/>
         <choice value="desktop-audio"/>
       </choices>
       <default>"microphone"</default>
-      <summary>Preferred audio source to use in recording audio</summary>
+      <summary>Audio source type to use in recording audio</summary>
       <description></description>
     </key>
 

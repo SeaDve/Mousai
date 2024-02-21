@@ -1,11 +1,16 @@
-use anyhow::{anyhow, ensure, Result};
+use std::cell::RefCell;
+
+use anyhow::{anyhow, ensure, Context, Result};
 use gst::{bus::BusWatchGuard, prelude::*};
 use gtk::{
     gio::{self, prelude::*},
     glib::{self, clone},
 };
 
-use std::cell::RefCell;
+use crate::{
+    device::{self, DeviceClass},
+    settings::AudioSourceType,
+};
 
 #[derive(Default)]
 
@@ -24,7 +29,7 @@ impl Drop for Recorder {
 impl Recorder {
     pub fn start(
         &self,
-        device_name: Option<&str>,
+        audio_source_type: AudioSourceType,
         peak_callback: impl Fn(f64) + 'static,
     ) -> Result<()> {
         ensure!(
@@ -33,7 +38,7 @@ impl Recorder {
         );
 
         let output_stream = gio::MemoryOutputStream::new_resizable();
-        let pipeline = create_pipeline(&output_stream, device_name)?;
+        let pipeline = create_pipeline(&output_stream, audio_source_type)?;
 
         let bus_watch_guard = pipeline
             .bus()
@@ -141,13 +146,47 @@ fn handle_bus_message(
     }
 }
 
+fn make_pulsesrc(audio_source_type: AudioSourceType) -> Result<gst::Element> {
+    let pulsesrc = gst::ElementFactory::make("pulsesrc").build()?;
+
+    match audio_source_type {
+        AudioSourceType::DesktopAudio => {
+            let device = device::find_default(DeviceClass::Sink)?;
+            let pulsesink = device.create_element(None)?;
+
+            let device_name = pulsesink
+                .property::<Option<String>>("device")
+                .context("No device name")?;
+            ensure!(!device_name.is_empty(), "Empty device name");
+
+            let monitor_name = format!("{}.monitor", device_name);
+            pulsesrc.set_property("device", &monitor_name);
+
+            tracing::debug!("Found desktop audio with name `{}`", monitor_name);
+        }
+        AudioSourceType::Microphone => {
+            let device = device::find_default(DeviceClass::Source)?;
+            device.reconfigure_element(&pulsesrc)?;
+
+            let device_name = pulsesrc
+                .property::<Option<String>>("device")
+                .context("No device name")?;
+            ensure!(!device_name.is_empty(), "Empty device name");
+
+            tracing::debug!("Found microphone with name `{}`", device_name);
+        }
+    }
+
+    Ok(pulsesrc)
+}
+
 fn create_pipeline(
     stream: &gio::MemoryOutputStream,
-    device_name: Option<&str>,
+    audio_source_type: AudioSourceType,
 ) -> Result<gst::Pipeline> {
     let pipeline = gst::Pipeline::new();
 
-    let pulsesrc = gst::ElementFactory::make("pulsesrc").build()?;
+    let pulsesrc = make_pulsesrc(audio_source_type)?;
     let audioconvert = gst::ElementFactory::make("audioconvert").build()?;
     let level = gst::ElementFactory::make("level")
         .property("interval", gst::ClockTime::from_mseconds(80))
@@ -160,13 +199,6 @@ fn create_pipeline(
     let giostreamsink = gst::ElementFactory::make("giostreamsink")
         .property("stream", stream)
         .build()?;
-
-    if let Some(device_name) = device_name {
-        pulsesrc.set_property("device", device_name);
-        tracing::debug!("Using device `{}` for recording", device_name);
-    } else {
-        tracing::warn!("Recording without pulsesrc `device` property set");
-    }
 
     let elements = [
         &pulsesrc,

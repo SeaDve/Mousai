@@ -4,9 +4,9 @@ use gtk::glib::{self, clone};
 
 use std::cell::OnceCell;
 
-use crate::settings::{PreferredAudioSource, Settings};
+use crate::settings::{AudioSourceType, Settings};
 
-impl PreferredAudioSource {
+impl AudioSourceType {
     fn from_position(index: u32) -> Self {
         match index {
             0 => Self::Microphone,
@@ -34,7 +34,7 @@ mod imp {
         pub(super) settings: OnceCell<Settings>,
 
         #[template_child]
-        pub(super) preferred_audio_source_row: TemplateChild<adw::ComboRow>,
+        pub(super) audio_source_type_row: TemplateChild<adw::ComboRow>,
         #[template_child]
         pub(super) aud_d_api_token_row: TemplateChild<adw::EntryRow>,
     }
@@ -97,17 +97,17 @@ impl PreferencesDialog {
 
         let settings = self.settings();
 
-        imp.preferred_audio_source_row
+        imp.audio_source_type_row
             .set_model(Some(&gtk::StringList::new(&[
                 &gettext("Microphone"),
                 &gettext("Desktop Audio"),
             ])));
-        imp.preferred_audio_source_row
-            .set_selected(settings.preferred_audio_source().as_position());
-        imp.preferred_audio_source_row.connect_selected_notify(
+        imp.audio_source_type_row
+            .set_selected(settings.audio_source_type().as_position());
+        imp.audio_source_type_row.connect_selected_notify(
             clone!(@weak self as obj => move |provider_row| {
                 obj.settings()
-                    .set_preferred_audio_source(PreferredAudioSource::from_position(
+                    .set_audio_source_type(AudioSourceType::from_position(
                         provider_row.selected(),
                     ));
             }),

@@ -26,11 +26,11 @@
 mod about;
 mod album_art;
 mod application;
-mod audio_device;
 mod cancelled;
 mod config;
 mod database;
 mod date_time;
+mod device;
 mod external_link;
 mod external_links;
 mod i18n;
