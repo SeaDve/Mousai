@@ -1,14 +1,20 @@
-use adw::prelude::*;
-use gtk::{glib, graphene, subclass::prelude::*};
-
 use std::{
     cell::Cell,
     f64::consts::{FRAC_PI_2, TAU},
 };
 
-// TODO Port to GskPath
+use adw::prelude::*;
+use gtk::{
+    glib::{self, clone},
+    graphene,
+    subclass::prelude::*,
+};
+
+const ANIMATION_DURATION_MS: u32 = 300;
 
 mod imp {
+    use std::cell::OnceCell;
+
     use super::*;
 
     #[derive(Default, glib::Properties)]
@@ -16,6 +22,9 @@ mod imp {
     pub struct ProgressIcon {
         #[property(get, set = Self::set_progress, minimum = 0.0, maximum = 1.0, explicit_notify)]
         pub(super) progress: Cell<f64>,
+
+        pub(super) animation: OnceCell<adw::TimedAnimation>,
+        pub(super) display_progress: Cell<f64>,
     }
 
     #[glib::object_subclass]
@@ -26,7 +35,26 @@ mod imp {
     }
 
     #[glib::derived_properties]
-    impl ObjectImpl for ProgressIcon {}
+    impl ObjectImpl for ProgressIcon {
+        fn constructed(&self) {
+            self.parent_constructed();
+
+            let obj = self.obj();
+
+            let animation_target =
+                adw::CallbackAnimationTarget::new(clone!(@weak obj => move |value| {
+                    let imp = obj.imp();
+                    imp.display_progress.set(value);
+                    obj.queue_draw();
+                }));
+            let animation = adw::TimedAnimation::builder()
+                .widget(&*obj)
+                .duration(ANIMATION_DURATION_MS)
+                .target(&animation_target)
+                .build();
+            self.animation.set(animation).unwrap();
+        }
+    }
 
     impl WidgetImpl for ProgressIcon {
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
@@ -38,8 +66,7 @@ mod imp {
             let ctx =
                 snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
 
-            let progress = self.progress.get();
-            let arc_end = progress * TAU - FRAC_PI_2;
+            let arc_end = self.display_progress.get() * TAU - FRAC_PI_2;
 
             let cx = width as f64 / 2.0;
             let cy = height as f64 / 2.0;
@@ -74,8 +101,14 @@ mod imp {
             }
 
             let obj = self.obj();
+
             self.progress.set(progress);
-            obj.queue_draw();
+
+            let animation = self.animation.get().unwrap();
+            animation.set_value_from(animation.value());
+            animation.set_value_to(progress);
+            animation.play();
+
             obj.notify_progress();
         }
     }
