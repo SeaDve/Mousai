@@ -10,9 +10,9 @@ pub fn present_dialog(parent: &impl IsA<gtk::Widget>) {
     let dialog = adw::AboutDialog::builder()
         .application_icon(APP_ID)
         .application_name(gettext("Mousai"))
-        .developer_name(gettext("Dave Patrick Caberto"))
+        .developer_name("Dave Patrick Caberto")
         .version(VERSION)
-        .copyright(gettext("© 2023 Dave Patrick Caberto"))
+        .copyright("© 2023 Dave Patrick Caberto")
         .license_type(gtk::License::Gpl30)
         // Translators: Replace "translator-credits" with your names. Put a comma between.
         .translator_credits(gettext("translator-credits"))
