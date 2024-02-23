@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:02+0800\n"
+"POT-Creation-Date: 2024-02-22 18:15+0800\n"
 "PO-Revision-Date: 2023-10-08 13:02+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/fi/"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Weblate 5.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -50,7 +50,9 @@ msgid "Whether the window is maximized"
 msgstr "Onko ikkuna suurennettu"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-msgid "Preferred audio source to use in recording audio"
+#, fuzzy
+#| msgid "Preferred audio source to use in recording audio"
+msgid "Audio source type to use in recording audio"
 msgstr "Ensisijainen äänilähde äänen tallentamiseen"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
@@ -115,36 +117,6 @@ msgstr "🌐 Selaa ja kuuntele kappaleita useilta eri palveluntarjoajilta"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Helppokäyttöinen käyttöliittymä"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-msgid "Dave Patrick Caberto"
-msgstr "Dave Patrick Caberto"
-
-#: data/resources/ui/database-error-window.ui:14
-msgid "Critical Database Error"
-msgstr "Kriittinen tietokantavirhe"
-
-#: data/resources/ui/database-error-window.ui:15
-msgid ""
-"This is likely caused by a tampered or corrupted database. You can try "
-"clearing application data. However, this is not recommended and will delete "
-"all your songs and saved recordings.\n"
-"\n"
-"To report this issue, please launch Mousai in the terminal to include the "
-"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>"
-msgstr ""
-"Tämä johtuu todennäköisesti peukaloidusta tai vioittuneesta tietokannasta. "
-"Voit yrittää tyhjentää sovellustiedot. Tätä ei kuitenkaan suositella, ja se "
-"poistaa kaikki kappaleesi ja tallennetut tallenteet.\n"
-"\n"
-"Jos haluat ilmoittaa tästä ongelmasta, käynnistä Mousai päätteessä "
-"sisällyttääksesi lokit ja lähetä vikaraportti <a href=\"https://github.com/"
-"SeaDve/Mousai/issues/\">ongelmasivulle</a>"
-
-#: data/resources/ui/database-error-window.ui:20
-msgid "Quit"
-msgstr "Lopeta"
-
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
 msgstr "_Asetukset"
@@ -181,7 +153,7 @@ msgstr "Kuuntele"
 msgid "Main Menu"
 msgstr "Päävalikko"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
 msgstr "Valitse"
 
@@ -213,24 +185,26 @@ msgstr "Napsauta Kuuntele-painiketta aloittaaksesi"
 msgid "No Results"
 msgstr "Ei tuloksia"
 
-#: data/resources/ui/preferences-window.ui:8
+#: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "Yleiset"
 
-#: data/resources/ui/preferences-window.ui:11
-msgid "Preferred Audio Source"
+#: data/resources/ui/preferences-dialog.ui:11
+#, fuzzy
+#| msgid "Preferred Audio Source"
+msgid "Audio Source"
 msgstr "Ensisijainen äänilähde"
 
-#: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to use when available"
-msgstr "Määrittää käytettävän äänilähteen"
+#: data/resources/ui/preferences-dialog.ui:12
+msgid "Device used for listening"
+msgstr ""
 
-#: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:66
+#: data/resources/ui/preferences-dialog.ui:19
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-window.ui:20
+#: data/resources/ui/preferences-dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -239,7 +213,7 @@ msgstr ""
 "a>. Jos jätät tämän tyhjäksi, voit tunnistaa vain muutaman kappaleen "
 "päivittäin"
 
-#: data/resources/ui/preferences-window.ui:23
+#: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
 msgstr "API-poletti"
 
@@ -344,42 +318,74 @@ msgstr "Sanoitukset"
 msgid "New"
 msgstr "Uusi"
 
-#: src/about.rs:18
-msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023 Dave Patrick Caberto"
-
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/about.rs:21
+#: src/about.rs:18
 msgid "translator-credits"
 msgstr "Jiri Grönroos"
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Lahjoita (Buy Me a Coffee)"
 
-#: src/about.rs:34
+#: src/about.rs:31
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:36
+#: src/about.rs:33
 msgid "Translate"
 msgstr "Käännä"
 
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr "Kriittinen tietokantavirhe"
+
+#: src/application.rs:210
+#, fuzzy
+#| msgid ""
+#| "This is likely caused by a tampered or corrupted database. You can try "
+#| "clearing application data. However, this is not recommended and will "
+#| "delete all your songs and saved recordings.\n"
+#| "\n"
+#| "To report this issue, please launch Mousai in the terminal to include the "
+#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#| "Mousai/issues/\">issue page</a>"
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+"Tämä johtuu todennäköisesti peukaloidusta tai vioittuneesta tietokannasta. "
+"Voit yrittää tyhjentää sovellustiedot. Tätä ei kuitenkaan suositella, ja se "
+"poistaa kaikki kappaleesi ja tallennetut tallenteet.\n"
+"\n"
+"Jos haluat ilmoittaa tästä ongelmasta, käynnistä Mousai päätteessä "
+"sisällyttääksesi lokit ja lähetä vikaraportti <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">ongelmasivulle</a>"
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr "Lopeta"
+
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:27
+#: src/date_time.rs:31
 msgid "today at %R"
 msgstr "tänään %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:30
+#: src/date_time.rs:34
 msgid "yesterday at %R"
 msgstr "eilen %R"
 
-#: src/preferences_window.rs:103
+#: src/preferences_dialog.rs:102
 msgid "Microphone"
 msgstr "Mikrofoni"
 
-#: src/preferences_window.rs:104
+#: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
 msgstr "Tietokoneen ääni"
 
@@ -407,88 +413,88 @@ msgstr "Palvelimeen ei voi yhdistää"
 msgid "Received Other Permanent Error"
 msgstr "Vastaanotettiin muu pysyvä virhe"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "Selaa Apple Musicissa"
 
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "Selaa AudD:ssä"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:72
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "Kuuntele Spotifyssa"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:77
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "Etsi YouTubesta"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:146
+#: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
 msgstr "{key}:n käynnistäminen epäonnistui"
 
-#: src/window/history_view.rs:143 src/window/song_page.rs:77
+#: src/window/history_view.rs:137 src/window/song_page.rs:78
 msgid "Copied to clipboard"
 msgstr "Kopioitu leikepöydälle"
 
-#: src/window/history_view.rs:157
+#: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
 msgstr "Valittujen kappaleiden poistaminen epäonnistui"
 
-#: src/window/history_view.rs:336
+#: src/window/history_view.rs:327
 msgid "Failed to remove song"
 msgstr "Kappaleen poistaminen epäonnistui"
 
-#: src/window/history_view.rs:450
+#: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
 msgstr "Tunnistimen tulosten näyttäminen epäonnistui"
 
-#: src/window/history_view.rs:557
+#: src/window/history_view.rs:547
 msgid "_Undo"
 msgstr "_Kumoa"
 
-#: src/window/history_view.rs:568
+#: src/window/history_view.rs:556
 msgid "Failed to undo"
 msgstr "Kumoaminen epäonnistui"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:588
+#: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Poistettu {n_removed} kappale"
 msgstr[1] "Poistettu {n_removed} kappaletta"
 
-#: src/window/history_view.rs:711
+#: src/window/history_view.rs:699
 msgid "Select items"
 msgstr "Valitse kohteet"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:715
+#: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Valittu {selection_size} kappale"
 msgstr[1] "Valittu {selection_size} kappaletta"
 
-#: src/window/history_view.rs:725
+#: src/window/history_view.rs:713
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Kopioi kappale"
 msgstr[1] "Kopioi kappaleet"
 
-#: src/window/history_view.rs:732
+#: src/window/history_view.rs:720
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Poista kappale historiasta"
@@ -498,40 +504,40 @@ msgstr[1] "Poista kappaleet historiasta"
 msgid "Failed to insert song to history"
 msgstr "Kappaleen asettaminen historiaan epäonnistui"
 
-#: src/window/mod.rs:256
+#: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr "Avaa issue GitHubiin ja anna tarvittavat tiedot"
 
-#: src/window/mod.rs:259 src/window/mod.rs:291
+#: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
 msgstr "Ei"
 
-#: src/window/mod.rs:261
+#: src/window/mod.rs:257
 msgid "Open an Issue"
 msgstr "Avaa issue"
 
-#: src/window/mod.rs:288
+#: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr "Yritä siirtyä lähemmäksi lähdettä tai tunnistaa eri kohta kappaleesta"
 
-#: src/window/mod.rs:293
+#: src/window/mod.rs:289
 msgid "Try Again"
 msgstr "Yritä uudelleen"
 
-#: src/window/mod.rs:326
+#: src/window/mod.rs:320
 msgid "Recording Saved"
 msgstr "Nauhoitus tallennettu"
 
-#: src/window/mod.rs:334
+#: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
 msgstr "Tulos näytetään, kun olet taas yhteydessä verkkoon"
 
-#: src/window/mod.rs:337
+#: src/window/mod.rs:331
 msgid "Ok, Got It"
 msgstr "Selvä"
 
-#: src/window/mod.rs:347
+#: src/window/mod.rs:341
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -539,11 +545,11 @@ msgstr ""
 "Tulos näytetään, kun polettiraja nollautuu. Odota kunnes raja nollautuu tai "
 "avaa asetukset ja aseta eri poletti"
 
-#: src/window/mod.rs:350
+#: src/window/mod.rs:344
 msgid "I'll Wait"
 msgstr "Odotan"
 
-#: src/window/mod.rs:354
+#: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -551,15 +557,15 @@ msgstr ""
 "Tulos näytetään, kun poletti korvataan kelvollisella. Avaa asetukset ja "
 "aseta eri poletti"
 
-#: src/window/mod.rs:357
+#: src/window/mod.rs:351
 msgid "Later"
 msgstr "Myöhemmin"
 
-#: src/window/mod.rs:362
+#: src/window/mod.rs:356
 msgid "Open Preferences"
 msgstr "Avaa asetukset"
 
-#: src/window/mod.rs:450
+#: src/window/mod.rs:443
 msgid "An error occurred in the player"
 msgstr "Soittimessa tapahtui virhe"
 
@@ -571,27 +577,27 @@ msgstr "Toista"
 msgid "Pause"
 msgstr "Keskeytä"
 
-#: src/window/recognized_page.rs:134
+#: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Tunnistettu kappale"
 msgstr[1] "Tunnistetut kappaleet"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:140
+#: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Tunnistettu {n_songs} uusi kappale"
 msgstr[1] "Tunnistettu {n_songs} uutta kappaletta"
 
-#: src/window/recognized_page.rs:146
+#: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Tämä kappale tunnistettiin tallennetusta nauhoitteesta"
 msgstr[1] "Nämä kappaleet tunnistettiin tallennetuista nauhotteista"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:160
+#: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Tunnistettu {n_successful}/{total_minus_failed}"
 
@@ -603,13 +609,22 @@ msgstr "Kuunnellaan…"
 msgid "Recognizing…"
 msgstr "Tunnistetaan…"
 
-#: src/window/song_page.rs:348
+#: src/window/song_page.rs:349
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: src/window/song_tile.rs:335
+#: src/window/song_tile.rs:338
 msgid "Unselect"
 msgstr "Peru valinta"
+
+#~ msgid "Dave Patrick Caberto"
+#~ msgstr "Dave Patrick Caberto"
+
+#~ msgid "Determines the audio source to use when available"
+#~ msgstr "Määrittää käytettävän äänilähteen"
+
+#~ msgid "© 2023 Dave Patrick Caberto"
+#~ msgstr "© 2023 Dave Patrick Caberto"
 
 #~ msgid "🎵 Recognize songs within seconds or save for later when offline"
 #~ msgstr ""

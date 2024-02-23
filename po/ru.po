@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:02+0800\n"
+"POT-Creation-Date: 2024-02-22 18:15+0800\n"
 "PO-Revision-Date: 2023-10-10 00:02+0000\n"
 "Last-Translator: Axus Wizix <axus.wizix@mail.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/seadve/mousai/ru/"
@@ -28,8 +28,8 @@ msgstr ""
 "X-Generator: Weblate 5.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -58,7 +58,9 @@ msgid "Whether the window is maximized"
 msgstr "Развёрнуто ли окно"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-msgid "Preferred audio source to use in recording audio"
+#, fuzzy
+#| msgid "Preferred audio source to use in recording audio"
+msgid "Audio source type to use in recording audio"
 msgstr "Предпочтительный источник звука для записи"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
@@ -122,37 +124,6 @@ msgstr "🌐 Просматривайте и слушайте песни от р
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Простой интерфейс"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-msgid "Dave Patrick Caberto"
-msgstr "Дэйв Патрик Каберто"
-
-#: data/resources/ui/database-error-window.ui:14
-msgid "Critical Database Error"
-msgstr "Критическая ошибка в базе данных"
-
-#: data/resources/ui/database-error-window.ui:15
-msgid ""
-"This is likely caused by a tampered or corrupted database. You can try "
-"clearing application data. However, this is not recommended and will delete "
-"all your songs and saved recordings.\n"
-"\n"
-"To report this issue, please launch Mousai in the terminal to include the "
-"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>"
-msgstr ""
-"Вероятно это вызвано вмешательством в базу данных или её повреждением. Вы "
-"можете попробовать очистить данные приложения. Однако этого делать не "
-"рекомендуется, поскольку может привести к удалению всех ваших песен и "
-"сохраненных записей.\n"
-"\n"
-"Чтобы сообщить об этой проблеме, запустите Mousai в терминале, чтобы "
-"включить журналы и отправьте отчёт об ошибке на <a href=\"https://github.com/"
-"SeaDve/Mousai/issues/\">странице issue</a>"
-
-#: data/resources/ui/database-error-window.ui:20
-msgid "Quit"
-msgstr "Выход"
-
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
 msgstr "_Параметры"
@@ -189,7 +160,7 @@ msgstr "Слушать"
 msgid "Main Menu"
 msgstr "Главное меню"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
 msgstr "Выбрать"
 
@@ -221,26 +192,26 @@ msgstr "Чтобы начать, нажмите кнопку «Слушать»"
 msgid "No Results"
 msgstr "Нет результатов"
 
-#: data/resources/ui/preferences-window.ui:8
+#: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "Основное"
 
-#: data/resources/ui/preferences-window.ui:11
-msgid "Preferred Audio Source"
+#: data/resources/ui/preferences-dialog.ui:11
+#, fuzzy
+#| msgid "Preferred Audio Source"
+msgid "Audio Source"
 msgstr "Предпочтительный источник звука"
 
-#: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to use when available"
+#: data/resources/ui/preferences-dialog.ui:12
+msgid "Device used for listening"
 msgstr ""
-"Определяет источник получения звука, который будет использоваться, при его "
-"доступности"
 
-#: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:66
+#: data/resources/ui/preferences-dialog.ui:19
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-window.ui:20
+#: data/resources/ui/preferences-dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -249,7 +220,7 @@ msgstr ""
 "токен API. Оставив это поле пустым, вы сможете выполнять всего несколько "
 "попыток распознавания в день"
 
-#: data/resources/ui/preferences-window.ui:23
+#: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
 msgstr "Токен API"
 
@@ -354,43 +325,76 @@ msgstr "Лирика"
 msgid "New"
 msgstr "Новое"
 
-#: src/about.rs:18
-msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023 Дэйв Патрик Каберто"
-
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/about.rs:21
+#: src/about.rs:18
 msgid "translator-credits"
 msgstr ""
 "Ковалев Артем, Давид Лапшин, ViktorOn &lt;https://github.com/viktoron&gt;"
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Пожертвовать (Купите мне кофе)"
 
-#: src/about.rs:34
+#: src/about.rs:31
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:36
+#: src/about.rs:33
 msgid "Translate"
 msgstr "Перевести"
 
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr "Критическая ошибка в базе данных"
+
+#: src/application.rs:210
+#, fuzzy
+#| msgid ""
+#| "This is likely caused by a tampered or corrupted database. You can try "
+#| "clearing application data. However, this is not recommended and will "
+#| "delete all your songs and saved recordings.\n"
+#| "\n"
+#| "To report this issue, please launch Mousai in the terminal to include the "
+#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#| "Mousai/issues/\">issue page</a>"
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+"Вероятно это вызвано вмешательством в базу данных или её повреждением. Вы "
+"можете попробовать очистить данные приложения. Однако этого делать не "
+"рекомендуется, поскольку может привести к удалению всех ваших песен и "
+"сохраненных записей.\n"
+"\n"
+"Чтобы сообщить об этой проблеме, запустите Mousai в терминале, чтобы "
+"включить журналы и отправьте отчёт об ошибке на <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">странице issue</a>"
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr "Выход"
+
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:27
+#: src/date_time.rs:31
 msgid "today at %R"
 msgstr "сегодня в %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:30
+#: src/date_time.rs:34
 msgid "yesterday at %R"
 msgstr "вчера в %R"
 
-#: src/preferences_window.rs:103
+#: src/preferences_dialog.rs:102
 msgid "Microphone"
 msgstr "Микрофон"
 
-#: src/preferences_window.rs:104
+#: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
 msgstr "Звук с компьютера"
 
@@ -418,91 +422,91 @@ msgstr "Не удалось соединиться с сервером"
 msgid "Received Other Permanent Error"
 msgstr "Получена другая постоянная ошибка"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "Поиск в Apple Music"
 
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "Поиск в AudD"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:72
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "Слушать в Spotify"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:77
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "Поиск в YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:146
+#: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
 msgstr "Не удалось запустить {key}"
 
-#: src/window/history_view.rs:143 src/window/song_page.rs:77
+#: src/window/history_view.rs:137 src/window/song_page.rs:78
 msgid "Copied to clipboard"
 msgstr "Скопировано в буфер обмена"
 
-#: src/window/history_view.rs:157
+#: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
 msgstr "Не удалось удалить выбранные песни"
 
-#: src/window/history_view.rs:336
+#: src/window/history_view.rs:327
 msgid "Failed to remove song"
 msgstr "Не удалось удалить песню"
 
-#: src/window/history_view.rs:450
+#: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
 msgstr "Не удалось показать результаты распознавания"
 
-#: src/window/history_view.rs:557
+#: src/window/history_view.rs:547
 msgid "_Undo"
 msgstr "_Отменить"
 
-#: src/window/history_view.rs:568
+#: src/window/history_view.rs:556
 msgid "Failed to undo"
 msgstr "Не удалось отменить"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:588
+#: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Удалена {n_removed} песня"
 msgstr[1] "Удалено {n_removed} песни"
 msgstr[2] "Удалено {n_removed} песен"
 
-#: src/window/history_view.rs:711
+#: src/window/history_view.rs:699
 msgid "Select items"
 msgstr "Выберите элементы"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:715
+#: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Выбрана {selection_size} песня"
 msgstr[1] "Выбрано {selection_size} песни"
 msgstr[2] "Выбрано {selection_size} песен"
 
-#: src/window/history_view.rs:725
+#: src/window/history_view.rs:713
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Копировать песню"
 msgstr[1] "Копировать песни"
 msgstr[2] "Копировать песен"
 
-#: src/window/history_view.rs:732
+#: src/window/history_view.rs:720
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Удалить песню из истории"
@@ -513,43 +517,43 @@ msgstr[2] "Удалить песни из истории"
 msgid "Failed to insert song to history"
 msgstr "Не удалось добавить песню в историю"
 
-#: src/window/mod.rs:256
+#: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
 "Пожалуйста, сообщите о проблеме на GitHub и предоставьте необходимую "
 "информацию"
 
-#: src/window/mod.rs:259 src/window/mod.rs:291
+#: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
 msgstr "Нет, спасибо"
 
-#: src/window/mod.rs:261
+#: src/window/mod.rs:257
 msgid "Open an Issue"
 msgstr "Сообщить о проблеме"
 
-#: src/window/mod.rs:288
+#: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
 "Попробуйте приблизить источник звучания или использовать другой отрывок песни"
 
-#: src/window/mod.rs:293
+#: src/window/mod.rs:289
 msgid "Try Again"
 msgstr "Попробуйте ещё"
 
-#: src/window/mod.rs:326
+#: src/window/mod.rs:320
 msgid "Recording Saved"
 msgstr "Запись сохранена"
 
-#: src/window/mod.rs:334
+#: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
 msgstr "Результат будет доступен, когда вы будете онлайн"
 
-#: src/window/mod.rs:337
+#: src/window/mod.rs:331
 msgid "Ok, Got It"
 msgstr "Хорошо, всё понятно"
 
-#: src/window/mod.rs:347
+#: src/window/mod.rs:341
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -558,11 +562,11 @@ msgstr ""
 "лимит не будет сброшен, или откройте параметры и попробуйте установить "
 "другой токен"
 
-#: src/window/mod.rs:350
+#: src/window/mod.rs:344
 msgid "I'll Wait"
 msgstr "Я подожду"
 
-#: src/window/mod.rs:354
+#: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -570,15 +574,15 @@ msgstr ""
 "Результат будет доступен, когда ваш токен будет заменен действующим. "
 "Откройте настройки и попробуйте установить другой токен"
 
-#: src/window/mod.rs:357
+#: src/window/mod.rs:351
 msgid "Later"
 msgstr "Позже"
 
-#: src/window/mod.rs:362
+#: src/window/mod.rs:356
 msgid "Open Preferences"
 msgstr "Открыть параметры"
 
-#: src/window/mod.rs:450
+#: src/window/mod.rs:443
 msgid "An error occurred in the player"
 msgstr "Возникала ошибка в плеере"
 
@@ -590,7 +594,7 @@ msgstr "Воспроизвести"
 msgid "Pause"
 msgstr "Пауза"
 
-#: src/window/recognized_page.rs:134
+#: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Распознанная песня"
@@ -598,14 +602,14 @@ msgstr[1] "Распознанные песни"
 msgstr[2] "Распознанные песни"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:140
+#: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Распознана {n_songs} новая песня"
 msgstr[1] "Распознано {n_songs} новые песни"
 msgstr[2] "Распознано {n_songs} новых песен"
 
-#: src/window/recognized_page.rs:146
+#: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Эта песня была распознана по вашей сохраненной записи"
@@ -613,7 +617,7 @@ msgstr[1] "Эти песни были распознаны по вашим со�
 msgstr[2] "Эти песни были распознаны по вашим сохраненным записям"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:160
+#: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Распознано {n_successful} из {total_minus_failed}"
 
@@ -625,13 +629,24 @@ msgstr "Прослушивание…"
 msgid "Recognizing…"
 msgstr "Распознавание…"
 
-#: src/window/song_page.rs:348
+#: src/window/song_page.rs:349
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: src/window/song_tile.rs:335
+#: src/window/song_tile.rs:338
 msgid "Unselect"
 msgstr "Отменить выбор"
+
+#~ msgid "Dave Patrick Caberto"
+#~ msgstr "Дэйв Патрик Каберто"
+
+#~ msgid "Determines the audio source to use when available"
+#~ msgstr ""
+#~ "Определяет источник получения звука, который будет использоваться, при "
+#~ "его доступности"
+
+#~ msgid "© 2023 Dave Patrick Caberto"
+#~ msgstr "© 2023 Дэйв Патрик Каберто"
 
 #~ msgid "🎵 Recognize songs within seconds or save for later when offline"
 #~ msgstr ""

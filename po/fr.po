@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:02+0800\n"
+"POT-Creation-Date: 2024-02-22 18:15+0800\n"
 "PO-Revision-Date: 2023-11-18 17:38+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/"
@@ -28,8 +28,8 @@ msgstr ""
 "X-Generator: Weblate 5.2\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -57,7 +57,9 @@ msgid "Whether the window is maximized"
 msgstr "Indique si la fenêtre est maximisée"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-msgid "Preferred audio source to use in recording audio"
+#, fuzzy
+#| msgid "Preferred audio source to use in recording audio"
+msgid "Audio source type to use in recording audio"
 msgstr "Source audio préférée à utiliser pour l'enregistrement audio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
@@ -123,37 +125,6 @@ msgstr "🌐 Parcourez et écoutez le titre avec différentes sources"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱Interface utilisateur intuitive"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-msgid "Dave Patrick Caberto"
-msgstr "Dave Patrick Caberto"
-
-#: data/resources/ui/database-error-window.ui:14
-msgid "Critical Database Error"
-msgstr "Erreur critique de base de données"
-
-#: data/resources/ui/database-error-window.ui:15
-msgid ""
-"This is likely caused by a tampered or corrupted database. You can try "
-"clearing application data. However, this is not recommended and will delete "
-"all your songs and saved recordings.\n"
-"\n"
-"To report this issue, please launch Mousai in the terminal to include the "
-"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>"
-msgstr ""
-"Ceci est probablement du à une base de données altérée ou corrompue. Vous "
-"pouvez réessayer en effaçant auparavant les données de l’application. "
-"Cependant ce n’est pas recommandé et cela supprimera tous vos titres et vos "
-"enregistrements sauvegardés.\n"
-"\n"
-"Pour signaler ce problème, veuillez lancer Mousai depuis un terminal pour "
-"inclure les journaux et soumettre le rapport de bogue à la <a href=\"https://"
-"github.com/SeaDve/Mousai/issues/\">page des signalements</a>"
-
-#: data/resources/ui/database-error-window.ui:20
-msgid "Quit"
-msgstr "Quitter"
-
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
 msgstr "_Préférences"
@@ -190,7 +161,7 @@ msgstr "Écouter"
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -222,24 +193,26 @@ msgstr "Cliquez sur le bouton d'écoute pour commencer"
 msgid "No Results"
 msgstr "Aucun résultat"
 
-#: data/resources/ui/preferences-window.ui:8
+#: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "Général"
 
-#: data/resources/ui/preferences-window.ui:11
-msgid "Preferred Audio Source"
+#: data/resources/ui/preferences-dialog.ui:11
+#, fuzzy
+#| msgid "Preferred Audio Source"
+msgid "Audio Source"
 msgstr "Source audio favorite"
 
-#: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to use when available"
-msgstr "Détermine la source audio à utiliser si disponible"
+#: data/resources/ui/preferences-dialog.ui:12
+msgid "Device used for listening"
+msgstr ""
 
-#: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:66
+#: data/resources/ui/preferences-dialog.ui:19
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-window.ui:20
+#: data/resources/ui/preferences-dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -248,7 +221,7 @@ msgstr ""
 "dashboard.audd.io/\">audd.io</a>. Laisser ce champ vide vous donnera droit à "
 "quelques essais par jour"
 
-#: data/resources/ui/preferences-window.ui:23
+#: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
 msgstr "Jeton d’API"
 
@@ -353,42 +326,75 @@ msgstr "Paroles"
 msgid "New"
 msgstr "Nouveau"
 
-#: src/about.rs:18
-msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023 Dave Patrick Caberto"
-
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/about.rs:21
+#: src/about.rs:18
 msgid "translator-credits"
 msgstr "J. Lavoie, M. Bousquet, Irénée Thirion"
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Faire un don (Buy Me a Coffee)"
 
-#: src/about.rs:34
+#: src/about.rs:31
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:36
+#: src/about.rs:33
 msgid "Translate"
 msgstr "Traduire"
 
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr "Erreur critique de base de données"
+
+#: src/application.rs:210
+#, fuzzy
+#| msgid ""
+#| "This is likely caused by a tampered or corrupted database. You can try "
+#| "clearing application data. However, this is not recommended and will "
+#| "delete all your songs and saved recordings.\n"
+#| "\n"
+#| "To report this issue, please launch Mousai in the terminal to include the "
+#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#| "Mousai/issues/\">issue page</a>"
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+"Ceci est probablement du à une base de données altérée ou corrompue. Vous "
+"pouvez réessayer en effaçant auparavant les données de l’application. "
+"Cependant ce n’est pas recommandé et cela supprimera tous vos titres et vos "
+"enregistrements sauvegardés.\n"
+"\n"
+"Pour signaler ce problème, veuillez lancer Mousai depuis un terminal pour "
+"inclure les journaux et soumettre le rapport de bogue à la <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">page des signalements</a>"
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr "Quitter"
+
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:27
+#: src/date_time.rs:31
 msgid "today at %R"
 msgstr "aujourd’hui à %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:30
+#: src/date_time.rs:34
 msgid "yesterday at %R"
 msgstr "hier à %R"
 
-#: src/preferences_window.rs:103
+#: src/preferences_dialog.rs:102
 msgid "Microphone"
 msgstr "Microphone"
 
-#: src/preferences_window.rs:104
+#: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
 msgstr "Audio du Bureau"
 
@@ -416,88 +422,88 @@ msgstr "Impossible de se connecter au serveur"
 msgid "Received Other Permanent Error"
 msgstr "Autres erreur permanente reçue"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "Parcourir sur Apple Music"
 
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "Parcourir sur AudD"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:72
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "Écouter sur Spotify"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:77
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "Rechercher sur YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:146
+#: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
 msgstr "Échec du lancement de {key}"
 
-#: src/window/history_view.rs:143 src/window/song_page.rs:77
+#: src/window/history_view.rs:137 src/window/song_page.rs:78
 msgid "Copied to clipboard"
 msgstr "Copié dans le presse-papiers"
 
-#: src/window/history_view.rs:157
+#: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
 msgstr "Échec de la suppression des titres sélectionnés"
 
-#: src/window/history_view.rs:336
+#: src/window/history_view.rs:327
 msgid "Failed to remove song"
 msgstr "Échec de la suppression du titre"
 
-#: src/window/history_view.rs:450
+#: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
 msgstr "Échec de l’affichage des résultats de la reconnaissance"
 
-#: src/window/history_view.rs:557
+#: src/window/history_view.rs:547
 msgid "_Undo"
 msgstr "A_nnuler"
 
-#: src/window/history_view.rs:568
+#: src/window/history_view.rs:556
 msgid "Failed to undo"
 msgstr "Échec de l’annulation"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:588
+#: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "{n_removed} chanson supprimée"
 msgstr[1] "{n_removed} chansons supprimées"
 
-#: src/window/history_view.rs:711
+#: src/window/history_view.rs:699
 msgid "Select items"
 msgstr "Sélectionnez des éléments"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:715
+#: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "{selection_size} chanson sélectionnée"
 msgstr[1] "{selection_size} chansons sélectionnées"
 
-#: src/window/history_view.rs:725
+#: src/window/history_view.rs:713
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Copier le titre"
 msgstr[1] "Copier les titres"
 
-#: src/window/history_view.rs:732
+#: src/window/history_view.rs:720
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Supprimer la chanson de l'historique"
@@ -507,44 +513,44 @@ msgstr[1] "Supprimer les chansons de l'historique"
 msgid "Failed to insert song to history"
 msgstr "Échec de l’ajout du titre à l’historique"
 
-#: src/window/mod.rs:256
+#: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
 "Veuillez faire un signalement sur GitHub et fournir les informations "
 "nécessaires"
 
-#: src/window/mod.rs:259 src/window/mod.rs:291
+#: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
 msgstr "Non merci"
 
-#: src/window/mod.rs:261
+#: src/window/mod.rs:257
 msgid "Open an Issue"
 msgstr "Ouvrir un signalement"
 
-#: src/window/mod.rs:288
+#: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
 "Essayez de vous rapprocher de la source ou d’utiliser un autre extrait de la "
 "chanson"
 
-#: src/window/mod.rs:293
+#: src/window/mod.rs:289
 msgid "Try Again"
 msgstr "Réessayer"
 
-#: src/window/mod.rs:326
+#: src/window/mod.rs:320
 msgid "Recording Saved"
 msgstr "Enregistrement sauvegardé"
 
-#: src/window/mod.rs:334
+#: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
 msgstr "Le résultat sera disponible lorsque vous serez à nouveau connecté"
 
-#: src/window/mod.rs:337
+#: src/window/mod.rs:331
 msgid "Ok, Got It"
 msgstr "D’accord"
 
-#: src/window/mod.rs:347
+#: src/window/mod.rs:341
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -553,11 +559,11 @@ msgstr ""
 "réinitialisée. Attendez que la limite se réinitialise ou ouvrez les "
 "préférences et essayez d’utiliser un autre jeton"
 
-#: src/window/mod.rs:350
+#: src/window/mod.rs:344
 msgid "I'll Wait"
 msgstr "Je patienterai"
 
-#: src/window/mod.rs:354
+#: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -565,15 +571,15 @@ msgstr ""
 "Le résultat sera disponible lorsque votre jeton actuel sera remplacé par un "
 "jeton valide. Ouvrez les préférences et essayez d’utiliser un autre jeton"
 
-#: src/window/mod.rs:357
+#: src/window/mod.rs:351
 msgid "Later"
 msgstr "Plus tard"
 
-#: src/window/mod.rs:362
+#: src/window/mod.rs:356
 msgid "Open Preferences"
 msgstr "Ouvrir les Préférences"
 
-#: src/window/mod.rs:450
+#: src/window/mod.rs:443
 msgid "An error occurred in the player"
 msgstr "Une erreur s’est produite avec le lecteur"
 
@@ -585,20 +591,20 @@ msgstr "Lecture"
 msgid "Pause"
 msgstr "Pause"
 
-#: src/window/recognized_page.rs:134
+#: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Titre reconnu"
 msgstr[1] "Titres reconnus"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:140
+#: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "{n_songs} nouvelle chanson reconnue"
 msgstr[1] "{n_songs} nouvelles chansons reconnues"
 
-#: src/window/recognized_page.rs:146
+#: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Cette chanson a été reconnue depuis votre enregistrement sauvegardé"
@@ -606,7 +612,7 @@ msgstr[1] ""
 "Ces chansons ont été reconnues depuis vos enregistrements sauvegardés"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:160
+#: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "{n_successful} reconnue(s) sur {total_minus_failed}"
 
@@ -618,13 +624,22 @@ msgstr "Écoute en cours…"
 msgid "Recognizing…"
 msgstr "En cours d'identification…"
 
-#: src/window/song_page.rs:348
+#: src/window/song_page.rs:349
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: src/window/song_tile.rs:335
+#: src/window/song_tile.rs:338
 msgid "Unselect"
 msgstr "Désélectionner"
+
+#~ msgid "Dave Patrick Caberto"
+#~ msgstr "Dave Patrick Caberto"
+
+#~ msgid "Determines the audio source to use when available"
+#~ msgstr "Détermine la source audio à utiliser si disponible"
+
+#~ msgid "© 2023 Dave Patrick Caberto"
+#~ msgstr "© 2023 Dave Patrick Caberto"
 
 #~ msgid "🎵 Recognize songs within seconds or save for later when offline"
 #~ msgstr ""

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:02+0800\n"
+"POT-Creation-Date: 2024-02-22 18:15+0800\n"
 "PO-Revision-Date: 2023-06-28 15:52+0000\n"
 "Last-Translator: qqqq1 <qqqq1@hi2.in>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/seadve/mousai/fa/"
@@ -24,8 +24,8 @@ msgstr ""
 "X-Generator: Weblate 4.18.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -52,7 +52,9 @@ msgid "Whether the window is maximized"
 msgstr "خواه پنجره درحالت‌حداکثر باشد"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-msgid "Preferred audio source to use in recording audio"
+#, fuzzy
+#| msgid "Preferred audio source to use in recording audio"
+msgid "Audio source type to use in recording audio"
 msgstr "ورودی صوتی پیشنهادی جهت ضبط صدا"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
@@ -113,36 +115,6 @@ msgstr "🌐 کاوش و شنیدن آهنگ از منابع مختلف"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 رابط‌کاربری خیلی ساده"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-msgid "Dave Patrick Caberto"
-msgstr "Dave Patrick Caberto"
-
-#: data/resources/ui/database-error-window.ui:14
-msgid "Critical Database Error"
-msgstr "خطای بحرانی دیتابیس"
-
-#: data/resources/ui/database-error-window.ui:15
-msgid ""
-"This is likely caused by a tampered or corrupted database. You can try "
-"clearing application data. However, this is not recommended and will delete "
-"all your songs and saved recordings.\n"
-"\n"
-"To report this issue, please launch Mousai in the terminal to include the "
-"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>"
-msgstr ""
-"بنظر میاد دیتابیس شما دستکاری شده یا آسیب دیده. تلاش کنید داده‌های برنامه را "
-"حذف کنید. اگرچه پیشنهاد نمیشه چون باعث حذف همه آهنگ‌ها و صوت‌های ذخیره شده "
-"خواهد شد.\n"
-"\n"
-"برای گزارش این مشکل، برنامه Mousai رو ازطریق خط‌فرمان اجرا کنید که حاوی لاگ "
-"خطاها باشد، سپس گزارش را در صفحه <a href=\"https://github.com/SeaDve/Mousai/"
-"issues/\">گزارش‌خطا</a> ارسال کنید"
-
-#: data/resources/ui/database-error-window.ui:20
-msgid "Quit"
-msgstr "ترک"
-
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
 msgstr "_ تنظیمات"
@@ -179,7 +151,7 @@ msgstr "شنیدن"
 msgid "Main Menu"
 msgstr "منوی اصلی"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
 msgstr "انتخاب"
 
@@ -211,24 +183,26 @@ msgstr "برای شروع روی دکمه شنیدن کلیک کنید"
 msgid "No Results"
 msgstr "نتیجه‌ای نداشت"
 
-#: data/resources/ui/preferences-window.ui:8
+#: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "اصلی"
 
-#: data/resources/ui/preferences-window.ui:11
-msgid "Preferred Audio Source"
+#: data/resources/ui/preferences-dialog.ui:11
+#, fuzzy
+#| msgid "Preferred Audio Source"
+msgid "Audio Source"
 msgstr "منبع صدای ترجیحی"
 
-#: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to use when available"
-msgstr "شناسایی منابع صوتی جهت استفاده درصورت امکان"
+#: data/resources/ui/preferences-dialog.ui:12
+msgid "Device used for listening"
+msgstr ""
 
-#: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:66
+#: data/resources/ui/preferences-dialog.ui:19
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-window.ui:20
+#: data/resources/ui/preferences-dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -236,7 +210,7 @@ msgstr ""
 "توکنAPI ی خود را میتوانید از <a href=\"https://dashboard.audd.io/\">audd.io</"
 "a> دریافت کنید. اگر آنرا خالی رها کنید به شما روزانه چند سهمیه میدهد"
 
-#: data/resources/ui/preferences-window.ui:23
+#: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
 msgstr "توکنAPI"
 
@@ -341,42 +315,74 @@ msgstr "متن ترانه ها"
 msgid "New"
 msgstr "جدید"
 
-#: src/about.rs:18
-msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023 Dave Patrick Caberto"
-
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/about.rs:21
+#: src/about.rs:18
 msgid "translator-credits"
 msgstr "محمدصالح کامیاب"
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
 msgstr ""
 
-#: src/about.rs:34
+#: src/about.rs:31
 msgid "GitHub"
 msgstr "گیت‌هاب"
 
-#: src/about.rs:36
+#: src/about.rs:33
 msgid "Translate"
 msgstr "ترجمه"
 
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr "خطای بحرانی دیتابیس"
+
+#: src/application.rs:210
+#, fuzzy
+#| msgid ""
+#| "This is likely caused by a tampered or corrupted database. You can try "
+#| "clearing application data. However, this is not recommended and will "
+#| "delete all your songs and saved recordings.\n"
+#| "\n"
+#| "To report this issue, please launch Mousai in the terminal to include the "
+#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#| "Mousai/issues/\">issue page</a>"
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+"بنظر میاد دیتابیس شما دستکاری شده یا آسیب دیده. تلاش کنید داده‌های برنامه را "
+"حذف کنید. اگرچه پیشنهاد نمیشه چون باعث حذف همه آهنگ‌ها و صوت‌های ذخیره شده "
+"خواهد شد.\n"
+"\n"
+"برای گزارش این مشکل، برنامه Mousai رو ازطریق خط‌فرمان اجرا کنید که حاوی لاگ "
+"خطاها باشد، سپس گزارش را در صفحه <a href=\"https://github.com/SeaDve/Mousai/"
+"issues/\">گزارش‌خطا</a> ارسال کنید"
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr "ترک"
+
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:27
+#: src/date_time.rs:31
 msgid "today at %R"
 msgstr "امروز ساعت %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:30
+#: src/date_time.rs:34
 msgid "yesterday at %R"
 msgstr "دیروز ساعت %R"
 
-#: src/preferences_window.rs:103
+#: src/preferences_dialog.rs:102
 msgid "Microphone"
 msgstr "میکروفن"
 
-#: src/preferences_window.rs:104
+#: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
 msgstr "صوت دستگاه"
 
@@ -404,88 +410,88 @@ msgstr "اتصال به سرور امکانپذیر نیست"
 msgid "Received Other Permanent Error"
 msgstr "خطاهای دائمی دیگری دریافت شد"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "اپل موزیک"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "جستجو در اپل‌موزیک"
 
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "جستجو در AudD"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "اسپاتیفای"
 
-#: src/window/external_link_tile.rs:72
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "شنیدن در Spotify"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "یوتیوب"
 
-#: src/window/external_link_tile.rs:77
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "جستجو در یوتیوب"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:146
+#: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
 msgstr "اجرا ناموفق بود {key}"
 
-#: src/window/history_view.rs:143 src/window/song_page.rs:77
+#: src/window/history_view.rs:137 src/window/song_page.rs:78
 msgid "Copied to clipboard"
 msgstr "در حافظه کپی شد"
 
-#: src/window/history_view.rs:157
+#: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
 msgstr "حذف آهنگ‌های انتخابی ناموفق بود"
 
-#: src/window/history_view.rs:336
+#: src/window/history_view.rs:327
 msgid "Failed to remove song"
 msgstr "حذف آهنگ‌ها ناموفق بود"
 
-#: src/window/history_view.rs:450
+#: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
 msgstr "نمایش نتیجه تشخیص ناموفق بود"
 
-#: src/window/history_view.rs:557
+#: src/window/history_view.rs:547
 msgid "_Undo"
 msgstr "_ برگشت‌به‌قبل"
 
-#: src/window/history_view.rs:568
+#: src/window/history_view.rs:556
 msgid "Failed to undo"
 msgstr "برگشت‌به‌قبل ناموفق بود"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:588
+#: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "تعداد {n_removed} آهنگ حذف شد"
 msgstr[1] "تعداد {n_removed} آهنگ حذف شدند"
 
-#: src/window/history_view.rs:711
+#: src/window/history_view.rs:699
 msgid "Select items"
 msgstr "موارد را انتخاب کنید"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:715
+#: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "تعداد {selection_size} آهنگ انتخابی"
 msgstr[1] "تعداد {selection_size} آهنگ‌های انتخابی"
 
-#: src/window/history_view.rs:725
+#: src/window/history_view.rs:713
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "کپی‌کردن آهنگ"
 msgstr[1] "کپی‌کردن آهنگ‌ها"
 
-#: src/window/history_view.rs:732
+#: src/window/history_view.rs:720
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "حذف آهنگ از تاریخچه"
@@ -495,40 +501,40 @@ msgstr[1] "حذف آهنگ‌ها از تاریخچه"
 msgid "Failed to insert song to history"
 msgstr "قرار دادن آهنگ در تاریخچه ناموفق بود"
 
-#: src/window/mod.rs:256
+#: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr "خواهشمند است در GitHub یک گزارش ثبت کرده و اطلاعات لازم را ارائه دهید"
 
-#: src/window/mod.rs:259 src/window/mod.rs:291
+#: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
 msgstr "خیر، متشکرم"
 
-#: src/window/mod.rs:261
+#: src/window/mod.rs:257
 msgid "Open an Issue"
 msgstr "ثبت یک گزارش"
 
-#: src/window/mod.rs:288
+#: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr "به منبع صدا نزدیک‌تر شوید، یا بخش دیگری از آهنگ را ضبط کنید"
 
-#: src/window/mod.rs:293
+#: src/window/mod.rs:289
 msgid "Try Again"
 msgstr "تلاش مجدد"
 
-#: src/window/mod.rs:326
+#: src/window/mod.rs:320
 msgid "Recording Saved"
 msgstr "ضبط ذخیره شد"
 
-#: src/window/mod.rs:334
+#: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
 msgstr "نتیجه زمانی دردسترس خواهد بود که آنلاین شوید"
 
-#: src/window/mod.rs:337
+#: src/window/mod.rs:331
 msgid "Ok, Got It"
 msgstr "اوکی، بریم سراغش"
 
-#: src/window/mod.rs:347
+#: src/window/mod.rs:341
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -536,11 +542,11 @@ msgstr ""
 "نتیجه زمانی دردسترس خواهد بود که محدودیت توکن شما ریست شود. منتظر باشید تا "
 "زمان ریست شدن یا در بخش تنظیمات توکن دیگری را قرار دهید"
 
-#: src/window/mod.rs:350
+#: src/window/mod.rs:344
 msgid "I'll Wait"
 msgstr "منتظر خواهم ماند"
 
-#: src/window/mod.rs:354
+#: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -548,15 +554,15 @@ msgstr ""
 "نتیجه زمانی دردسترس خواهد بود که توکن شما جایگزین شود. در بخش تنظیمات توکن "
 "دیگری را قرار دهید"
 
-#: src/window/mod.rs:357
+#: src/window/mod.rs:351
 msgid "Later"
 msgstr "بعدا"
 
-#: src/window/mod.rs:362
+#: src/window/mod.rs:356
 msgid "Open Preferences"
 msgstr "باز کردن تنظیمات"
 
-#: src/window/mod.rs:450
+#: src/window/mod.rs:443
 msgid "An error occurred in the player"
 msgstr "خطایی در پخش‌کننده بروز کرد"
 
@@ -568,27 +574,27 @@ msgstr "پخش"
 msgid "Pause"
 msgstr "مکث"
 
-#: src/window/recognized_page.rs:134
+#: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:140
+#: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "تشخیص {n_songs} آهنگ جدید"
 msgstr[1] "تشخیص {n_songs} آهنگ‌های جدید"
 
-#: src/window/recognized_page.rs:146
+#: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "این آهنگ از صوت‌های ذخیره شده شما تشخیص داده شد"
 msgstr[1] "این آهنگ‌ها از صوت‌های ذخیره شده تشخیص داده شدند"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:160
+#: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "از {total_minus_failed} فقط {n_successful} تشخیص داده شد"
 
@@ -600,13 +606,22 @@ msgstr "درحال‌شنیدن…"
 msgid "Recognizing…"
 msgstr "درحال‌تشخیص…"
 
-#: src/window/song_page.rs:348
+#: src/window/song_page.rs:349
 msgid "Unknown"
 msgstr "ناشناخته"
 
-#: src/window/song_tile.rs:335
+#: src/window/song_tile.rs:338
 msgid "Unselect"
 msgstr "لغو انتخاب"
+
+#~ msgid "Dave Patrick Caberto"
+#~ msgstr "Dave Patrick Caberto"
+
+#~ msgid "Determines the audio source to use when available"
+#~ msgstr "شناسایی منابع صوتی جهت استفاده درصورت امکان"
+
+#~ msgid "© 2023 Dave Patrick Caberto"
+#~ msgstr "© 2023 Dave Patrick Caberto"
 
 #~ msgid "🎵 Recognize songs within seconds or save for later when offline"
 #~ msgstr ""

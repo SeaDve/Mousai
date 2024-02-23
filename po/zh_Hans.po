@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:02+0800\n"
+"POT-Creation-Date: 2024-02-22 18:15+0800\n"
 "PO-Revision-Date: 2023-10-30 05:13+0000\n"
 "Last-Translator: Carter Zhang <mcut17198@autistici.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -27,8 +27,8 @@ msgstr ""
 "X-Generator: Weblate 5.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -56,7 +56,9 @@ msgid "Whether the window is maximized"
 msgstr "窗口是否最大化"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-msgid "Preferred audio source to use in recording audio"
+#, fuzzy
+#| msgid "Preferred audio source to use in recording audio"
+msgid "Audio source type to use in recording audio"
 msgstr "录制音频时优先使用的音频源"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
@@ -114,34 +116,6 @@ msgstr "🌐 浏览和聆听来自不同提供者的歌曲"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 简单易用的用户界面"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-msgid "Dave Patrick Caberto"
-msgstr "Dave Patrick Caberto"
-
-#: data/resources/ui/database-error-window.ui:14
-msgid "Critical Database Error"
-msgstr "严重的数据库错误"
-
-#: data/resources/ui/database-error-window.ui:15
-msgid ""
-"This is likely caused by a tampered or corrupted database. You can try "
-"clearing application data. However, this is not recommended and will delete "
-"all your songs and saved recordings.\n"
-"\n"
-"To report this issue, please launch Mousai in the terminal to include the "
-"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>"
-msgstr ""
-"这可能是由于数据库被篡改或损坏造成的。你可以尝试清除应用数据。但不建议这样"
-"做，因为这会删除你的所有歌曲以及保存的录音。\n"
-"\n"
-"要报告这个问题，请在终端中启动Mousai以获取日志，并将错误报告提交到<a "
-"href=\"https://github.com/SeaDve/Mousai/issues/\">issue页面</a>"
-
-#: data/resources/ui/database-error-window.ui:20
-msgid "Quit"
-msgstr "退出"
-
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
 msgstr "设置 (_P)"
@@ -178,7 +152,7 @@ msgstr "聆听"
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
 msgstr "选择"
 
@@ -210,24 +184,26 @@ msgstr "点击该按钮以开始"
 msgid "No Results"
 msgstr "没有结果"
 
-#: data/resources/ui/preferences-window.ui:8
+#: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "通用"
 
-#: data/resources/ui/preferences-window.ui:11
-msgid "Preferred Audio Source"
+#: data/resources/ui/preferences-dialog.ui:11
+#, fuzzy
+#| msgid "Preferred Audio Source"
+msgid "Audio Source"
 msgstr "首选的音频源"
 
-#: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to use when available"
-msgstr "决定可用时要使用的音频源"
+#: data/resources/ui/preferences-dialog.ui:12
+msgid "Device used for listening"
+msgstr ""
 
-#: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:66
+#: data/resources/ui/preferences-dialog.ui:19
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-window.ui:20
+#: data/resources/ui/preferences-dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -235,7 +211,7 @@ msgstr ""
 "你可以从<a href=\"https://dashboard.audd.io/\">audd.io</a>获取一个API令牌。留"
 "空时每天可以获得几次试用机会"
 
-#: data/resources/ui/preferences-window.ui:23
+#: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
 msgstr "API令牌"
 
@@ -340,12 +316,8 @@ msgstr "歌词"
 msgid "New"
 msgstr "新建"
 
-#: src/about.rs:18
-msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023 Dave Patrick Caberto"
-
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/about.rs:21
+#: src/about.rs:18
 msgid "translator-credits"
 msgstr ""
 "有趣的灵魂 (@TheInterestingSoul)\n"
@@ -354,33 +326,67 @@ msgstr ""
 "WhiredPlanck &lt;wplanck@aosc.io&gt;\n"
 "lumingzh &lt;lumingzh@qq.com&gt;"
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
 msgstr "捐赠（买我一杯咖啡！）"
 
-#: src/about.rs:34
+#: src/about.rs:31
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:36
+#: src/about.rs:33
 msgid "Translate"
 msgstr "翻译"
 
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr "严重的数据库错误"
+
+#: src/application.rs:210
+#, fuzzy
+#| msgid ""
+#| "This is likely caused by a tampered or corrupted database. You can try "
+#| "clearing application data. However, this is not recommended and will "
+#| "delete all your songs and saved recordings.\n"
+#| "\n"
+#| "To report this issue, please launch Mousai in the terminal to include the "
+#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+#| "Mousai/issues/\">issue page</a>"
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+"这可能是由于数据库被篡改或损坏造成的。你可以尝试清除应用数据。但不建议这样"
+"做，因为这会删除你的所有歌曲以及保存的录音。\n"
+"\n"
+"要报告这个问题，请在终端中启动Mousai以获取日志，并将错误报告提交到<a "
+"href=\"https://github.com/SeaDve/Mousai/issues/\">issue页面</a>"
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr "退出"
+
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:27
+#: src/date_time.rs:31
 msgid "today at %R"
 msgstr "今天 %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:30
+#: src/date_time.rs:34
 msgid "yesterday at %R"
 msgstr "昨天 %R"
 
-#: src/preferences_window.rs:103
+#: src/preferences_dialog.rs:102
 msgid "Microphone"
 msgstr "麦克风"
 
-#: src/preferences_window.rs:104
+#: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
 msgstr "电脑音频"
 
@@ -408,85 +414,85 @@ msgstr "无法连接到服务器"
 msgid "Received Other Permanent Error"
 msgstr "接收到其他永久性的错误"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "苹果音乐"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "浏览苹果音乐"
 
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "浏览 AudD"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:72
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "收听 Spotify"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:77
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "搜索 YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:146
+#: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
 msgstr "启动 {key} 失败"
 
-#: src/window/history_view.rs:143 src/window/song_page.rs:77
+#: src/window/history_view.rs:137 src/window/song_page.rs:78
 msgid "Copied to clipboard"
 msgstr "已复制到剪贴板"
 
-#: src/window/history_view.rs:157
+#: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
 msgstr "删除选定歌曲失败"
 
-#: src/window/history_view.rs:336
+#: src/window/history_view.rs:327
 msgid "Failed to remove song"
 msgstr "删除歌曲失败"
 
-#: src/window/history_view.rs:450
+#: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
 msgstr "展示识别结果失败"
 
-#: src/window/history_view.rs:557
+#: src/window/history_view.rs:547
 msgid "_Undo"
 msgstr "撤销(_U)"
 
-#: src/window/history_view.rs:568
+#: src/window/history_view.rs:556
 msgid "Failed to undo"
 msgstr "撤销失败"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:588
+#: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "删除了 {n_removed} 首歌曲"
 
-#: src/window/history_view.rs:711
+#: src/window/history_view.rs:699
 msgid "Select items"
 msgstr "选择条目"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:715
+#: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "选择了 {selection_size} 首歌曲"
 
-#: src/window/history_view.rs:725
+#: src/window/history_view.rs:713
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "复制歌曲"
 
-#: src/window/history_view.rs:732
+#: src/window/history_view.rs:720
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "从历史记录移除歌曲"
@@ -495,66 +501,66 @@ msgstr[0] "从历史记录移除歌曲"
 msgid "Failed to insert song to history"
 msgstr "未能将歌曲添加到历史"
 
-#: src/window/mod.rs:256
+#: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr "请在Github上创建一个issue并提供必要的信息"
 
-#: src/window/mod.rs:259 src/window/mod.rs:291
+#: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
 msgstr "不，谢谢"
 
-#: src/window/mod.rs:261
+#: src/window/mod.rs:257
 msgid "Open an Issue"
 msgstr "创建一个Issue"
 
-#: src/window/mod.rs:288
+#: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr "尝试靠近声音源或换用歌曲的不同片段"
 
-#: src/window/mod.rs:293
+#: src/window/mod.rs:289
 msgid "Try Again"
 msgstr "重试"
 
-#: src/window/mod.rs:326
+#: src/window/mod.rs:320
 msgid "Recording Saved"
 msgstr "录制已保存"
 
-#: src/window/mod.rs:334
+#: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
 msgstr "结果将在你重新联网时可用"
 
-#: src/window/mod.rs:337
+#: src/window/mod.rs:331
 msgid "Ok, Got It"
 msgstr "好的，我知道了"
 
-#: src/window/mod.rs:347
+#: src/window/mod.rs:341
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
 "结果将在你的API令牌限额重置后可用。请等待限额重置或打开设置尝试换用另一个令牌"
 
-#: src/window/mod.rs:350
+#: src/window/mod.rs:344
 msgid "I'll Wait"
 msgstr "我再等等"
 
-#: src/window/mod.rs:354
+#: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
 "结果将在你重新设置一个有效的令牌后可用。打开设置，并尝试设置一个不同的令牌"
 
-#: src/window/mod.rs:357
+#: src/window/mod.rs:351
 msgid "Later"
 msgstr "稍后"
 
-#: src/window/mod.rs:362
+#: src/window/mod.rs:356
 msgid "Open Preferences"
 msgstr "打开设置"
 
-#: src/window/mod.rs:450
+#: src/window/mod.rs:443
 msgid "An error occurred in the player"
 msgstr "播放器发生了一个错误"
 
@@ -566,24 +572,24 @@ msgstr "播放"
 msgid "Pause"
 msgstr "暂停"
 
-#: src/window/recognized_page.rs:134
+#: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:140
+#: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "识别了 {n_songs} 首歌曲"
 
-#: src/window/recognized_page.rs:146
+#: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "这些歌曲从已保存的录音中识别"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:160
+#: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "已识别 {total_minus_failed} 首歌曲中的 {n_successful} 首"
 
@@ -595,13 +601,22 @@ msgstr "正在收听…"
 msgid "Recognizing…"
 msgstr "正在识别…"
 
-#: src/window/song_page.rs:348
+#: src/window/song_page.rs:349
 msgid "Unknown"
 msgstr "未知"
 
-#: src/window/song_tile.rs:335
+#: src/window/song_tile.rs:338
 msgid "Unselect"
 msgstr "取消选择"
+
+#~ msgid "Dave Patrick Caberto"
+#~ msgstr "Dave Patrick Caberto"
+
+#~ msgid "Determines the audio source to use when available"
+#~ msgstr "决定可用时要使用的音频源"
+
+#~ msgid "© 2023 Dave Patrick Caberto"
+#~ msgstr "© 2023 Dave Patrick Caberto"
 
 #~ msgid "🎵 Recognize songs within seconds or save for later when offline"
 #~ msgstr "🎵 在几秒钟内识别歌曲或保存以供离线时使用"

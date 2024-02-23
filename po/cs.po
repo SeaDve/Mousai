@@ -6,24 +6,26 @@
 # Petr Šimáček <petr.simacek@gmail.com>, 2021.
 # multiflexi <multi.flexi@seznam.cz>, 2022.
 # Fjuro <ifjuro@proton.me>, 2023.
+# Fjuro <fjuro@alius.cz>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-18 12:02+0800\n"
-"PO-Revision-Date: 2023-10-04 18:11+0000\n"
-"Last-Translator: Fjuro <ifjuro@proton.me>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>\n"
+"POT-Creation-Date: 2024-02-22 18:15+0800\n"
+"PO-Revision-Date: 2024-02-23 19:02+0000\n"
+"Last-Translator: Fjuro <fjuro@alius.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:15
-#: src/main.rs:57
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -50,8 +52,8 @@ msgid "Whether the window is maximized"
 msgstr "Zda je okno maximalizováno"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-msgid "Preferred audio source to use in recording audio"
-msgstr "Preferovaný zdroj zvuku pro nahrávání"
+msgid "Audio source type to use in recording audio"
+msgstr "Typ zdroje zvuku pro nahrávání"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -113,36 +115,6 @@ msgstr "🌐 Procházejte a poslouchejte skladbu z různých zdrojů"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Jednoduché rozhraní"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:374 src/about.rs:16
-msgid "Dave Patrick Caberto"
-msgstr "Dave Patrick Caberto"
-
-#: data/resources/ui/database-error-window.ui:14
-msgid "Critical Database Error"
-msgstr "Kritická chyba databáze"
-
-#: data/resources/ui/database-error-window.ui:15
-msgid ""
-"This is likely caused by a tampered or corrupted database. You can try "
-"clearing application data. However, this is not recommended and will delete "
-"all your songs and saved recordings.\n"
-"\n"
-"To report this issue, please launch Mousai in the terminal to include the "
-"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-"Mousai/issues/\">issue page</a>"
-msgstr ""
-"Příčinou je pravděpodobně narušená nebo poškozená databáze. Můžete zkusit "
-"vymazat data aplikace. To se však nedoporučuje a dojde k odstranění všech "
-"skladeb a uložených nahrávek.\n"
-"\n"
-"Chcete-li tento problém nahlásit, spusťte Mousai v terminálu, abyste "
-"zahrnuli protokoly, a odešlete hlášení o chybě na <a href=\"https://github."
-"com/SeaDve/Mousai/issues/\">stránku problémů</a>"
-
-#: data/resources/ui/database-error-window.ui:20
-msgid "Quit"
-msgstr "Ukončit"
-
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
 msgstr "_Předvolby"
@@ -179,7 +151,7 @@ msgstr "Poslouchat"
 msgid "Main Menu"
 msgstr "Hlavní Menu"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:337
+#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
 msgstr "Vybrat"
 
@@ -211,24 +183,24 @@ msgstr "Začněte kliknutím na tlačítko Poslouchat"
 msgid "No Results"
 msgstr "Žádné výsledky"
 
-#: data/resources/ui/preferences-window.ui:8
+#: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "Obecné"
 
-#: data/resources/ui/preferences-window.ui:11
-msgid "Preferred Audio Source"
-msgstr "Upřednostňovaný zdroj zvuku"
+#: data/resources/ui/preferences-dialog.ui:11
+msgid "Audio Source"
+msgstr "Zdroj zvuku"
 
-#: data/resources/ui/preferences-window.ui:12
-msgid "Determines the audio source to use when available"
-msgstr "Rozhodne o zdroji zvuku, pokud je dostupný"
+#: data/resources/ui/preferences-dialog.ui:12
+msgid "Device used for listening"
+msgstr "Zařízení používané pro poslech"
 
-#: data/resources/ui/preferences-window.ui:19
-#: src/window/external_link_tile.rs:66
+#: data/resources/ui/preferences-dialog.ui:19
+#: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-window.ui:20
+#: data/resources/ui/preferences-dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -236,7 +208,7 @@ msgstr ""
 "Token API můžete získat na webu <a href=\"https://dashboard.audd.io/\">audd."
 "io</a>. Pokud tento údaj necháte prázdný, získáte několik pokusů denně"
 
-#: data/resources/ui/preferences-window.ui:23
+#: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
 msgstr "Token API"
 
@@ -341,45 +313,69 @@ msgstr "Text skladby"
 msgid "New"
 msgstr "Nový"
 
-#: src/about.rs:18
-msgid "© 2023 Dave Patrick Caberto"
-msgstr "© 2023 Dave Patrick Caberto"
-
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
-#: src/about.rs:21
+#: src/about.rs:18
 msgid "translator-credits"
 msgstr ""
-"Jan Novák <jan.novak@silen.org>\n"
-"Vojtěch Perník <translations@pervoj.cz>\n"
-"Jaroslav Svoboda <jaroslav.svoboda@vse.cz>"
+"Jan Novák \n"
+"Vojtěch Perník \n"
+"Jaroslav Svoboda \n"
+"Jonáš Loskot "
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Přispět (kupte mi kávu)"
 
-#: src/about.rs:34
+#: src/about.rs:31
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:36
+#: src/about.rs:33
 msgid "Translate"
 msgstr "Překlad"
 
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr "Kritická chyba databáze"
+
+#: src/application.rs:210
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+"Omlouváme se, vyskytla se kritická chyba databáze. Příčinou je pravděpodobně "
+"narušená nebo poškozená databáze. Můžete zkusit vymazat data aplikace. To se "
+"však nedoporučuje a dojde k odstranění všech skladeb a uložených nahrávek.\n"
+"\n"
+"Chcete-li tento problém nahlásit, spusťte Mousai v terminálu, abyste "
+"zahrnuli protokoly, a odešlete hlášení o chybě na <a href=\"https://github."
+"com/SeaDve/Mousai/issues/\">stránku problémů</a>"
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr "Ukončit"
+
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:27
+#: src/date_time.rs:31
 msgid "today at %R"
 msgstr "dnes v %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
-#: src/core/date_time.rs:30
+#: src/date_time.rs:34
 msgid "yesterday at %R"
 msgstr "včera v %R"
 
-#: src/preferences_window.rs:103
+#: src/preferences_dialog.rs:102
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: src/preferences_window.rs:104
+#: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
 msgstr "Zvuk z plochy"
 
@@ -407,91 +403,91 @@ msgstr "Nepodařilo se spojit se serverem"
 msgid "Received Other Permanent Error"
 msgstr "Obdržena jiná permanentní chyba"
 
-#: src/window/external_link_tile.rs:61
+#: src/window/external_link_tile.rs:59
 msgid "Apple Music"
 msgstr "Apple Music"
 
-#: src/window/external_link_tile.rs:62
+#: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
 msgstr "Procházet s Apple Music"
 
-#: src/window/external_link_tile.rs:67
+#: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
 msgstr "Procházet na AudD"
 
-#: src/window/external_link_tile.rs:71
+#: src/window/external_link_tile.rs:69
 msgid "Spotify"
 msgstr "Spotify"
 
-#: src/window/external_link_tile.rs:72
+#: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr "Poslouchat na Spotify"
 
-#: src/window/external_link_tile.rs:76
+#: src/window/external_link_tile.rs:74
 msgid "YouTube"
 msgstr "YouTube"
 
-#: src/window/external_link_tile.rs:77
+#: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
 msgstr "Vyhledat na YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:146
+#: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
 msgstr "Nepodařilo se spustit {key}"
 
-#: src/window/history_view.rs:143 src/window/song_page.rs:77
+#: src/window/history_view.rs:137 src/window/song_page.rs:78
 msgid "Copied to clipboard"
 msgstr "Zkopírováno do schránky"
 
-#: src/window/history_view.rs:157
+#: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
 msgstr "Nepodařilo se odebrat vybrané skladby"
 
-#: src/window/history_view.rs:336
+#: src/window/history_view.rs:327
 msgid "Failed to remove song"
 msgstr "Nepodařilo se odebrat skladbu"
 
-#: src/window/history_view.rs:450
+#: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
 msgstr "Nepodařilo se zobrazit výsledky rozpoznání"
 
-#: src/window/history_view.rs:557
+#: src/window/history_view.rs:547
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: src/window/history_view.rs:568
+#: src/window/history_view.rs:556
 msgid "Failed to undo"
 msgstr "Nepodařilo se vrátit akci"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:588
+#: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Odebrána {n_removed} skladba"
 msgstr[1] "Odebrány {n_removed} skladby"
 msgstr[2] "Odebráno {n_removed} skladeb"
 
-#: src/window/history_view.rs:711
+#: src/window/history_view.rs:699
 msgid "Select items"
 msgstr "Vybrat položky"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:715
+#: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Vybrána {selection_size} skladba"
 msgstr[1] "Vybrány {selection_size} skladby"
 msgstr[2] "Vybráno {selection_size} skladeb"
 
-#: src/window/history_view.rs:725
+#: src/window/history_view.rs:713
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Kopírovat skladbu"
 msgstr[1] "Kopírovat skladby"
 msgstr[2] "Kopírovat skladby"
 
-#: src/window/history_view.rs:732
+#: src/window/history_view.rs:720
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Odebrat skladbu z historie"
@@ -502,41 +498,41 @@ msgstr[2] "Odebrat skladby z historie"
 msgid "Failed to insert song to history"
 msgstr "Nepodařilo se vložit skladbu do historie"
 
-#: src/window/mod.rs:256
+#: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
 "Otevřete si prosím problém na GitHubu a poskytněte všechny potřebné informace"
 
-#: src/window/mod.rs:259 src/window/mod.rs:291
+#: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
 msgstr "Ne, díky"
 
-#: src/window/mod.rs:261
+#: src/window/mod.rs:257
 msgid "Open an Issue"
 msgstr "Otevřít problém"
 
-#: src/window/mod.rs:288
+#: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr "Zkuste jít blíže ke zdroji nebo použít jiný úryvek skladby"
 
-#: src/window/mod.rs:293
+#: src/window/mod.rs:289
 msgid "Try Again"
 msgstr "Zkusit znovu"
 
-#: src/window/mod.rs:326
+#: src/window/mod.rs:320
 msgid "Recording Saved"
 msgstr "Nahrávka uložena"
 
-#: src/window/mod.rs:334
+#: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
 msgstr "Výsledek bude dostupný, až budete znovu online"
 
-#: src/window/mod.rs:337
+#: src/window/mod.rs:331
 msgid "Ok, Got It"
 msgstr "Jasně, chápu"
 
-#: src/window/mod.rs:347
+#: src/window/mod.rs:341
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -544,11 +540,11 @@ msgstr ""
 "Výsledek bude dostupný, až bude obnoven limit vašeho tokenu. Počkejte, než "
 "bude limit obnoven nebo zkuste v předvolbách nastavit jiný token"
 
-#: src/window/mod.rs:350
+#: src/window/mod.rs:344
 msgid "I'll Wait"
 msgstr "Počkám"
 
-#: src/window/mod.rs:354
+#: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -556,15 +552,15 @@ msgstr ""
 "Výsledek bude dostupný, až bude váš token nahrazen platným. Otevřete "
 "předvolby a zkuste nastavit jiný token"
 
-#: src/window/mod.rs:357
+#: src/window/mod.rs:351
 msgid "Later"
 msgstr "Později"
 
-#: src/window/mod.rs:362
+#: src/window/mod.rs:356
 msgid "Open Preferences"
 msgstr "Otevřít předvolby"
 
-#: src/window/mod.rs:450
+#: src/window/mod.rs:443
 msgid "An error occurred in the player"
 msgstr "V přehrávači se vyskytla chyba"
 
@@ -576,7 +572,7 @@ msgstr "Přehrát"
 msgid "Pause"
 msgstr "Pozastavit"
 
-#: src/window/recognized_page.rs:134
+#: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Rozpoznána skladba"
@@ -584,14 +580,14 @@ msgstr[1] "Rozpoznány skladby"
 msgstr[2] "Rozpoznány skladby"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:140
+#: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Rozpoznána {n_songs} nová skladba"
 msgstr[1] "Rozpoznány {n_songs} nové skladby"
 msgstr[2] "Rozpoznáno {n_songs} nových skladeb"
 
-#: src/window/recognized_page.rs:146
+#: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Tato skladba byla rozpoznána z vaší uložené nahrávky"
@@ -599,7 +595,7 @@ msgstr[1] "Tyto skladby byly rozpoznány z vašich uložených nahrávek"
 msgstr[2] "Tyto skladby byly rozpoznány z vašich uložených nahrávek"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:160
+#: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Rozpoznáno {n_successful} z {total_minus_failed}"
 
@@ -611,13 +607,22 @@ msgstr "Poslouchám…"
 msgid "Recognizing…"
 msgstr "Rozpoznávám…"
 
-#: src/window/song_page.rs:348
+#: src/window/song_page.rs:349
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: src/window/song_tile.rs:335
+#: src/window/song_tile.rs:338
 msgid "Unselect"
 msgstr "Zrušit výběr"
+
+#~ msgid "Dave Patrick Caberto"
+#~ msgstr "Dave Patrick Caberto"
+
+#~ msgid "Determines the audio source to use when available"
+#~ msgstr "Rozhodne o zdroji zvuku, pokud je dostupný"
+
+#~ msgid "© 2023 Dave Patrick Caberto"
+#~ msgstr "© 2023 Dave Patrick Caberto"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Navigation"
