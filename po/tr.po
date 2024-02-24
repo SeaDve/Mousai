@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2024-02-23 19:02+0000\n"
+"PO-Revision-Date: 2024-02-24 02:56+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/seadve/mousai/tr/"
 ">\n"
@@ -314,9 +314,7 @@ msgstr "Yeni"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
-"Sabri Ünal \n"
-"Oğuz Ersen"
+msgstr "Sabri Ünal (libreajans@gmail.com), Oğuz Ersen"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
