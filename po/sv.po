@@ -4,13 +4,13 @@
 # Luna Jernberg <droidbittin@gmail.com>, 2021, 2022, 2023.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
 # Kristoffer Grundström <swedishsailfishosuser@tutanota.com>, 2021, 2022.
-# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023.
+# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2023-12-05 09:05+0000\n"
+"PO-Revision-Date: 2024-02-25 07:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/seadve/mousai/sv/"
 ">\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
@@ -50,10 +50,8 @@ msgid "Whether the window is maximized"
 msgstr "Huruvida fönstret är maximerat"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Föredragen ljudkälla att använda vid inspelning av ljud"
+msgstr "Ljudkällastyp som ska användas vid inspelning av ljud"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -190,14 +188,12 @@ msgid "General"
 msgstr "Allmänt"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Föredragen ljudkälla"
+msgstr "Ljudkälla"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Enhet som används för att lyssna"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -320,9 +316,7 @@ msgstr "Ny"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
-"Kristoffer Grundström\n"
-"Luna Jernberg"
+msgstr "Luna Jernberg"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -341,15 +335,6 @@ msgid "Critical Database Error"
 msgstr "Kritiskt databasfel"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -360,9 +345,10 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Detta orsakas troligen av en manipulerad eller skadad databas. Du kan "
-"försöka rensa programdata. Detta rekommenderas dock inte och kommer att "
-"radera alla dina låtar och sparade inspelningar.\n"
+"Tyvärr har ett kritiskt databasfel inträffat. Detta orsakas troligen av en "
+"manipulerad eller skadad databas. Du kan försöka rensa programdata. Detta "
+"rekommenderas dock inte och kommer att radera alla dina låtar och sparade "
+"inspelningar.\n"
 "\n"
 "För att rapportera det här problemet, starta Mousai i terminalen för att "
 "inkludera loggarna och skicka felrapporten till <a href=\"https://github.com/"
