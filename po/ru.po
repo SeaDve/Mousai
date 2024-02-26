@@ -8,24 +8,24 @@
 # Vik <xasertop@gmail.com>, 2022.
 # Vik <k3kelm4vw@mozmail.com>, 2022.
 # Vin <k3kelm4vw@mozmail.com>, 2023.
-# Сергей <asvmail.as@gmail.com>, 2023.
+# Сергей <asvmail.as@gmail.com>, 2023, 2024.
 # Axus Wizix <axus.wizix@mail.ru>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2023-10-10 00:02+0000\n"
-"Last-Translator: Axus Wizix <axus.wizix@mail.ru>\n"
+"PO-Revision-Date: 2024-02-26 08:02+0000\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/seadve/mousai/ru/"
 ">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
@@ -58,10 +58,8 @@ msgid "Whether the window is maximized"
 msgstr "Развёрнуто ли окно"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Предпочтительный источник звука для записи"
+msgstr "Тип источника звука для аудиозаписи"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -197,14 +195,12 @@ msgid "General"
 msgstr "Основное"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Предпочтительный источник звука"
+msgstr "Источник звука"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Устройство, используемое для прослушивания"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -348,15 +344,6 @@ msgid "Critical Database Error"
 msgstr "Критическая ошибка в базе данных"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -367,10 +354,10 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Вероятно это вызвано вмешательством в базу данных или её повреждением. Вы "
-"можете попробовать очистить данные приложения. Однако этого делать не "
-"рекомендуется, поскольку может привести к удалению всех ваших песен и "
-"сохраненных записей.\n"
+"Извините, произошла критическая ошибка базы данных. Вероятно это вызвано "
+"вмешательством в базу данных или её повреждением. Вы можете попробовать "
+"очистить данные приложения. Однако этого делать не рекомендуется, поскольку "
+"может привести к удалению всех ваших песен и сохраненных записей.\n"
 "\n"
 "Чтобы сообщить об этой проблеме, запустите Mousai в терминале, чтобы "
 "включить журналы и отправьте отчёт об ошибке на <a href=\"https://github.com/"

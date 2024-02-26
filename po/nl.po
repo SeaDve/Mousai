@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2024-02-21 10:01+0000\n"
+"PO-Revision-Date: 2024-02-26 08:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/"
-">\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,10 +51,8 @@ msgid "Whether the window is maximized"
 msgstr "Of het venster is gemaximaliseerd"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Voorkeursbron voor audio-opname"
+msgstr "Audiobron­type voor audio-opname"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -191,14 +189,12 @@ msgid "General"
 msgstr "Algemeen"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Audiobron"
+msgstr "Audio­bron"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Apparaat voor luisteren"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -340,15 +336,6 @@ msgid "Critical Database Error"
 msgstr "Kritieke databasefout"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -359,12 +346,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Dit wordt waarschijnlijk veroorzaakt door een gemanipuleerde of beschadigde "
-"database. U kunt proberen de app-gegevens te wissen. Dit wordt echter niet "
-"aanbevolen en zal al uw nummers en opgeslagen opnames verwijderen.\n"
+"Sorry, er is een kritieke databasefout opgetreden. Dit wordt waarschijnlijk "
+"veroorzaakt door een gemanipuleerde of beschadigde database. U kunt proberen "
+"de app-gegevens te wissen. Dit wordt echter niet aanbevolen en zal al uw "
+"nummers en opgeslagen opnames verwijderen.\n"
 "\n"
 "Om dit probleem te melden, start Mousai in de terminal om het logboek op te "
-"nemen en dien het foutrapport in op de <a href=\"https://github.com/SeaDve/"
+"nemen en dien het fout­rapport in op de <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue-pagina</a>"
 
 #: src/application.rs:215
