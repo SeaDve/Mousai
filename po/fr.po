@@ -11,21 +11,22 @@
 # gt <orenantao@gmail.com>, 2022.
 # rene-coty <irenee.thirion@e.email>, 2022, 2023.
 # "Mathieu B." <mathieu.bousquet2@gmail.com>, 2023.
+# Kawasofft <kawasoft38@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2023-11-18 17:38+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2024-02-27 18:50+0000\n"
+"Last-Translator: Kawasofft <kawasoft38@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
@@ -57,10 +58,8 @@ msgid "Whether the window is maximized"
 msgstr "Indique si la fenêtre est maximisée"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Source audio préférée à utiliser pour l'enregistrement audio"
+msgstr "Source audio à utiliser pour l'enregistrement audio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -198,14 +197,13 @@ msgid "General"
 msgstr "Général"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Source audio favorite"
+msgstr "Source audio"
 
 #: data/resources/ui/preferences-dialog.ui:12
+#, fuzzy
 msgid "Device used for listening"
-msgstr ""
+msgstr "Appareil utilisé pour l'écoute"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -367,14 +365,15 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Ceci est probablement du à une base de données altérée ou corrompue. Vous "
-"pouvez réessayer en effaçant auparavant les données de l’application. "
-"Cependant ce n’est pas recommandé et cela supprimera tous vos titres et vos "
-"enregistrements sauvegardés.\n"
+"Nous sommes désolés, une erreur critique dans la base de données est "
+"survenue. Ceci est probablement du à une base de données altérée ou "
+"corrompue. Vous pouvez réessayer en effaçant auparavant les données de l’"
+"application. Cependant ce n’est pas recommandé et cela supprimera tous vos "
+"titres et vos enregistrements sauvegardés.\n"
 "\n"
 "Pour signaler ce problème, veuillez lancer Mousai depuis un terminal pour "
-"inclure les journaux et soumettre le rapport de bogue à la <a href=\"https://"
-"github.com/SeaDve/Mousai/issues/\">page des signalements</a>"
+"inclure les journaux et soumettre le rapport de bogue à la <a href=\"https"
+"://github.com/SeaDve/Mousai/issues/\">page des signalements</a>"
 
 #: src/application.rs:215
 msgid "Quit"

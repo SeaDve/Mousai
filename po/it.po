@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mousai package.
 # Nicolas Mariniello <seldon1000@tutanota.com>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
-# albanobattistella <albano_battistella@hotmail.com>, 2021, 2022, 2023.
+# albanobattistella <albano_battistella@hotmail.com>, 2021, 2022, 2023, 2024.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Michael Moroni <michaelmoroni@disroot.org>, 2021, 2023.
 # Andrea Brandi <git@andreabrandi.com>, 2022, 2023.
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2023-10-04 18:11+0000\n"
+"PO-Revision-Date: 2024-02-27 18:50+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/seadve/mousai/it/"
 ">\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
@@ -543,7 +543,7 @@ msgstr "Il risultato sarà disponibile quando sarai di nuovo online"
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
-msgstr "Ok capito"
+msgstr "Ok, ho capito"
 
 #: src/window/mod.rs:341
 msgid ""
