@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2024-02-27 18:50+0000\n"
+"PO-Revision-Date: 2024-03-02 15:01+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/seadve/mousai/it/"
 ">\n"
@@ -55,10 +55,8 @@ msgid "Whether the window is maximized"
 msgstr "Controlla se la finestra è massimizzata"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Sorgente audio preferita da utilizzare durante la registrazione"
+msgstr "Tipo di sorgente audio da utilizzare nella registrazione dell'audio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -196,14 +194,12 @@ msgid "General"
 msgstr "Generale"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Fonte audio preferita"
+msgstr "Fonte audio"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Dispositivo utilizzato per l'ascolto"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -346,15 +342,6 @@ msgid "Critical Database Error"
 msgstr "Errore del database critico"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -365,7 +352,7 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Ciò è probabilmente causato da un database manomesso o danneggiato. Puoi "
+"Siamo spiacenti, si è verificato un errore critico nel database. Puoi "
 "provare a cancellare i dati dell'applicazione. Tuttavia, questo non è "
 "raccomandato e cancellerà tutti i tuoi brani e le registrazioni salvate.\n"
 "\n"
