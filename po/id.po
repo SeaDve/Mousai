@@ -6,13 +6,14 @@
 # Sucipto <show.cheap@gmail.com>, 2021.
 # Hervy Qurrotul Ainur Rozi <hervyqa@proton.me>, 2022.
 # Muhammad Akbar Yanuar Mantari <mantarimay@users.noreply.hosted.weblate.org>, 2023.
+# Nur Ihsan <mnurihsanmutaqin66@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2023-10-01 09:04+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-03-05 09:01+0000\n"
+"Last-Translator: Nur Ihsan <mnurihsanmutaqin66@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/seadve/mousai/"
 "id/>\n"
 "Language: id\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
@@ -313,12 +314,9 @@ msgstr ""
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
+#, fuzzy
 msgid "translator-credits"
-msgstr ""
-"@liimee\n"
-"Hervy Qurrotul Ainur Rozi\n"
-"Reza Almanda\n"
-"@mantarimay"
+msgstr "@liimee,Hervy Qurrotul Ainur Rozi,Reza Almanda,@mantarimay,@nurihsan_m"
 
 #: src/about.rs:28
 #, fuzzy
@@ -530,7 +528,7 @@ msgstr ""
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Ya, Mengerti"
 
 #: src/window/mod.rs:341
 msgid ""

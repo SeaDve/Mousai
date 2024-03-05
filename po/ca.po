@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the mousai package.
 # Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022, 2023.
 # Joan Aymà <joanayma@gmail.com>, 2023.
-# victor dargallo <victordargallo@disroot.org>, 2023.
+# victor dargallo <victordargallo@disroot.org>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2023-12-17 17:08+0000\n"
+"PO-Revision-Date: 2024-03-05 09:01+0000\n"
 "Last-Translator: victor dargallo <victordargallo@disroot.org>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
@@ -316,7 +316,7 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Adolfo Jayme Barrientos , Víctor Dargallo"
+msgstr "Adolfo Jayme Barrientos, Víctor Dargallo"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -515,7 +515,7 @@ msgstr ""
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
-msgstr ""
+msgstr "D'acord, entès"
 
 #: src/window/mod.rs:341
 msgid ""
