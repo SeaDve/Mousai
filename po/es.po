@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
 "PO-Revision-Date: 2024-02-26 08:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/seadve/mousai/es/"
@@ -26,13 +26,13 @@ msgstr ""
 "X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Identifique canciones en segundos"
 
@@ -65,12 +65,12 @@ msgstr "Testigo API usado por el reconocimiento AudD"
 msgid "Legacy (Kept for migration)"
 msgstr "Heredado (conservado para la migración)"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
 "Descubra las canciones que le apetece conocer con una interfaz fácil de usar."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -80,7 +80,7 @@ msgstr ""
 "similar a Shazam. Solo tiene que pulsar el botón Escuchar y esperar unos "
 "segundos. ¡Le devolverá mágicamente el título y el artista de esa canción!"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -88,33 +88,33 @@ msgstr ""
 "Nota: esto utiliza la API de audd.io, por lo que es necesario acceder su "
 "sitio para obtener más pruebas."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "¿Por qué le encantará Mousai?"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 "🎵 Identifica canciones en cuestión de segundos o guárdalas para más tarde "
 "cuando no estés conectado"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr "🎙️ Reconocimiento a partir del audio de tu escritorio o tu micrófono"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 Construye un repertorio de canciones reconocidas"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 Previsualice rápidamente la canción dentro de la interfaz"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 Navegue y escuche la canción de diferentes proveedores"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Interfaz de usuario fácil de usar"
 
@@ -356,8 +356,8 @@ msgstr ""
 "recomienda y eliminará todas sus canciones y grabaciones guardadas.\n"
 "\n"
 "Para informar de este problema, inicie Mousai en el terminal para incluir "
-"los registros y envíe el informe de error a la página <a href=\"https"
-"://github.com/SeaDve/Mousai/issues/\">issue</a>"
+"los registros y envíe el informe de error a la página <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">issue</a>"
 
 #: src/application.rs:215
 msgid "Quit"

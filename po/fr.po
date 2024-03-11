@@ -10,17 +10,17 @@
 # Mathieu B. <perso@mathieu-bousquet.fr>, 2022.
 # gt <orenantao@gmail.com>, 2022.
 # rene-coty <irenee.thirion@e.email>, 2022, 2023.
-# "Mathieu B." <mathieu.bousquet2@gmail.com>, 2023.
+# "Mathieu B." <mathieu.bousquet2@gmail.com>, 2023, 2024.
 # Kawasofft <kawasoft38@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2024-02-27 18:50+0000\n"
-"Last-Translator: Kawasofft <kawasoft38@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/>"
-"\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
+"PO-Revision-Date: 2024-03-10 01:44+0000\n"
+"Last-Translator: \"Mathieu B.\" <mathieu.bousquet2@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/"
+">\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,13 +29,13 @@ msgstr ""
 "X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Identifier des titres en quelques secondes"
 
@@ -69,13 +69,13 @@ msgstr "Jeton API utilisé par la reconnaissance AudD"
 msgid "Legacy (Kept for migration)"
 msgstr "Ancien (conservé pour la migration)"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
 "Découvrez les chansons que vous avez hâte de connaître grâce à une interface "
 "facile à utiliser."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -86,7 +86,7 @@ msgstr ""
 "quelques secondes. Le titre et l’auteur de la chanson apparaîtront comme par "
 "magie…"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -94,33 +94,33 @@ msgstr ""
 "Remarque : l’application utilise l’API de audd.io, il est donc nécessaire de "
 "s’identifier sur leur site internet pour obtenir plus de tentatives."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "Pourquoi aimerez-vous Mousai ?"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 "🎵 Identifiez des chansons en quelques secondes ou enregistrez-les pour en "
 "profiter hors ligne"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr "🎙️ Reconnaissance à partir de l’audio du bureau ou de votre microphone"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 Construisez un répertoire de titres reconnus"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 Visualisez rapidement le titre dans l’application"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 Parcourez et écoutez le titre avec différentes sources"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱Interface utilisateur intuitive"
 
@@ -346,15 +346,6 @@ msgid "Critical Database Error"
 msgstr "Erreur critique de base de données"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -365,15 +356,15 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Nous sommes désolés, une erreur critique dans la base de données est "
-"survenue. Ceci est probablement du à une base de données altérée ou "
-"corrompue. Vous pouvez réessayer en effaçant auparavant les données de l’"
-"application. Cependant ce n’est pas recommandé et cela supprimera tous vos "
-"titres et vos enregistrements sauvegardés.\n"
+"Désolé, une erreur critique s'est produite dans la base de données. Cette "
+"erreur est probablement due à une base de données altérée ou corrompue. Vous "
+"pouvez essayer d'effacer les données de l'application. Cependant, cette "
+"opération n'est pas recommandée et supprimera tous vos titres et "
+"enregistrements sauvegardés.\n"
 "\n"
-"Pour signaler ce problème, veuillez lancer Mousai depuis un terminal pour "
-"inclure les journaux et soumettre le rapport de bogue à la <a href=\"https"
-"://github.com/SeaDve/Mousai/issues/\">page des signalements</a>"
+"Pour signaler ce problème, veuillez lancer Mousai dans le terminal pour "
+"inclure les journaux et soumettre le rapport de bogue à la <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">page des signalements</a>"
 
 #: src/application.rs:215
 msgid "Quit"

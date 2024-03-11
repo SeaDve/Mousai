@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
 "PO-Revision-Date: 2023-10-01 09:04+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/seadve/mousai/ko/"
@@ -19,14 +19,14 @@ msgstr ""
 "X-Generator: Weblate 5.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 #, fuzzy
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "몇 초 안에 노래를 식별합니다"
 
@@ -62,11 +62,11 @@ msgstr "AudD 인식에 사용되는 API 토큰"
 msgid "Legacy (Kept for migration)"
 msgstr "레거시 (이전을 위해 보존됨)"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr "직관적인 인터페이스를 통해 알고 싶어하는 노래를 발견하세요."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -76,7 +76,7 @@ msgstr ""
 "지 \"듣기\" 버튼을 클릭하고 몇 초를 기다리면, 그 노래의 제목과 아티스트를 마"
 "법처럼 반환해줍니다!"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -84,31 +84,31 @@ msgstr ""
 "참고: 이것은 audd.io의 API를 사용하므로 더 많은 트라이얼을 얻으려면 그들의 사"
 "이트에 로그인해야 합니다."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "왜 Mousai를 좋아합니까?"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 인식된 노래들의 레퍼토리를 구축하세요"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 인터페이스 내에서 노래를 빠르게 미리 들어볼 수 있습니다"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 다른 공급자에서 노래를 찾아보고 들을 수 있습니다"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 직관적인 사용자 인터페이스"
 

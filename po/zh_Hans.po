@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
 "PO-Revision-Date: 2023-10-30 05:13+0000\n"
 "Last-Translator: Carter Zhang <mcut17198@autistici.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -27,13 +27,13 @@ msgstr ""
 "X-Generator: Weblate 5.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "几秒钟内识别歌曲"
 
@@ -69,11 +69,11 @@ msgstr "AudD识别所需的API令牌"
 msgid "Legacy (Kept for migration)"
 msgstr "旧版（为迁移而保留）"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr "用简单地方式发现你渴望知道的歌曲。"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -82,37 +82,37 @@ msgstr ""
 "Mousai是一个和Shazam类似的，能够识别歌曲的简单应用。只需单击“聆听”按钮，等上"
 "几秒钟，它就能神奇地返回那首歌的歌名和作曲家！"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr "注意：此操作使用 audd.io 的 API，所以多次使用需要登录到他们的网站。"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "Mousai 有哪些特性呢？"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr ""
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 建立一个已识别的歌曲的合集"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 在界面中快速预览歌曲"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 浏览和聆听来自不同提供者的歌曲"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 简单易用的用户界面"
 

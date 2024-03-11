@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
 "PO-Revision-Date: 2024-01-18 07:31+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/seadve/mousai/el/"
@@ -21,13 +21,13 @@ msgstr ""
 "X-Generator: Weblate 5.4-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Εντόπισε τραγούδια σε δευτερόλεπτα"
 
@@ -62,12 +62,12 @@ msgstr "API token που χρησιμοποιείται από την αναγν
 msgid "Legacy (Kept for migration)"
 msgstr "Παλαιού τύπου (Διατηρείται για μετεγκατάσταση)"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
 "Ανακαλύψτε τραγούδια που πονάτε να αναγνωρίζετε με μια εύχρηστη διεπαφή."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -78,7 +78,7 @@ msgstr ""
 "συνέχεια, περιμένετε μερικά δευτερόλεπτα. Θα επιστρέψει μαγικά τον τίτλο και "
 "τον καλλιτέχνη αυτού του τραγουδιού!"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -86,33 +86,33 @@ msgstr ""
 "Σημείωση: Αυτό χρησιμοποιεί το API του aud.io, επομένως είναι απαραίτητο να "
 "συνδεθείτε στον ιστότοπό τους για να λάβετε περισσότερες δοκιμές."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "Γιατί θα αγαπήσετε το Mousai;"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 "🎵 Προσδιορίστε τραγούδια μέσα σε δευτερόλεπτα ή αποθηκεύστε τα για αργότερα "
 "όταν είστε εκτός σύνδεσης"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr "🎙️ Αναγνωρίστε από τον ήχο της επιφάνειας εργασίας ή το μικρόφωνό σας"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 Δημιουργήστε ένα ρεπερτόριο αναγνωρισμένων τραγουδιών"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 Γρήγορη προεπισκόπηση του τραγουδιού μέσα στη διεπαφή"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 Περιηγηθείτε και ακούστε το τραγούδι από διαφορετικούς παρόχους"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Εύκολο στη χρήση διεπαφή χρήστη"
 

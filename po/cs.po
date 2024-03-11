@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2024-02-23 19:02+0000\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
+"PO-Revision-Date: 2024-03-11 22:01+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
 "\n"
@@ -24,13 +24,13 @@ msgstr ""
 "X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Identifikujte skladby během sekund"
 
@@ -63,11 +63,11 @@ msgstr "Token API používaný rozpoznáváním AudD"
 msgid "Legacy (Kept for migration)"
 msgstr "Původní (ponecháno pro migraci)"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr "Objevte skladby, které se vám líbí, díky snadno použitelnému rozhraní."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -77,7 +77,7 @@ msgstr ""
 "Shazam. Stačí kliknout na tlačítko Poslouchat a počkat pár vteřin. Poté vám "
 "ukáže název a autora dané skladby!"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -85,33 +85,33 @@ msgstr ""
 "Poznámka: Aplikace používá API audd.io, takže je nutné přihlásit se na "
 "jejich web, abyste získali vyšší počet použití."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "Proč budete milovat Mousai?"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 "🎵 Identifikace skladeb během vteřin nebo uložení na později, když jste "
 "offline"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr "🎙️ Rozpoznávání zvuku z plochy nebo z vašeho mikrofonu"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 Sestavte si knihovnu rozpoznaných skladeb"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 Jednoduchý náhled skladby uvnitř rozhraní"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 Procházejte a poslouchejte skladbu z různých zdrojů"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Jednoduché rozhraní"
 
@@ -317,10 +317,10 @@ msgstr "Nový"
 #: src/about.rs:18
 msgid "translator-credits"
 msgstr ""
-"Jan Novák \n"
-"Vojtěch Perník \n"
-"Jaroslav Svoboda \n"
-"Jonáš Loskot "
+"Jan Novák\n"
+"Vojtěch Perník\n"
+"Jaroslav Svoboda\n"
+"Jonáš Loskot"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"

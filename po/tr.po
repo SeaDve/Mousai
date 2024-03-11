@@ -4,13 +4,14 @@
 # Oğuz Ersen <oguzersen@protonmail.com>, 2021.
 # Oğuz Ersen <oguz@ersen.moe>, 2022, 2024.
 # Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
+# Sabri Ünal <yakushabb@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 18:15+0800\n"
-"PO-Revision-Date: 2024-02-24 02:56+0000\n"
-"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"POT-Creation-Date: 2024-03-10 09:43+0800\n"
+"PO-Revision-Date: 2024-03-11 22:01+0000\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/seadve/mousai/tr/"
 ">\n"
 "Language: tr\n"
@@ -21,13 +22,13 @@ msgstr ""
 "X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:6 src/about.rs:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Şarkıları saniyeler içinde tanıyın"
 
@@ -60,11 +61,11 @@ msgstr "AudD tanıma tarafından kullanılan API jetonu"
 msgid "Legacy (Kept for migration)"
 msgstr "Eski (Geçiş için saklanır)"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:9
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr "Kullanımı kolay bir arayüzle bilmek istediğiniz şarkıları keşfedin."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
 "Mousai is a simple application that can recognize songs similar to Shazam. "
 "Just click the listen button, and then wait a few seconds. It will magically "
@@ -74,7 +75,7 @@ msgstr ""
 "Sadece dinle düğmesine tıklayın ve ardından birkaç saniye bekleyin. Sihirli "
 "bir şekilde o şarkının adını ve sanatçısını getirecektir!"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
@@ -82,33 +83,33 @@ msgstr ""
 "Not: Bu, audd.io API'sini kullanır, bu nedenle daha fazla deneme almak için "
 "sitelerinde oturum açmak gerekir."
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
 msgstr "Mousai'yi neden seveceksiniz?"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:14
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
 "🎵 Şarkıları saniyeler içinde tanımlayın ya da çevrim dışıyken kullanmak "
 "için kaydedin"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr "🎙️ Masaüstü sesinden ya da mikrofonunuzdan tanıma"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
 msgstr "🎸 Tanınmış şarkılardan oluşan bir repertuar oluşturun"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
 msgstr "🎼 Arayüzde şarkıyı hızlıca önizleyin"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
 msgstr "🌐 Farklı sağlayıcılardan şarkıya göz atın ve dinleyin"
 
-#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Kullanımı kolay kullanıcı arayüzü"
 
@@ -212,11 +213,11 @@ msgstr "API Jetonu"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr "Çevrimdışı Kip Etkin"
+msgstr "Çevrim Dışı Kip Etkin"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr "Çevrimdışı Kip Tanıma Sonuçlarını Göster"
+msgstr "Çevrim Dışı Kip Tanıma Sonuçlarını Göster"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -224,7 +225,7 @@ msgstr "Dinlemeyi İptal Et"
 
 #: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
-msgstr "Çevrimdışı Kip"
+msgstr "Çevrim Dışı Kip"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -314,7 +315,7 @@ msgstr "Yeni"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Sabri Ünal (libreajans@gmail.com), Oğuz Ersen"
+msgstr "Sabri Ünal (yakushabb@gmail.com), Oğuz Ersen"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -517,7 +518,7 @@ msgstr "Kayıt Kaydedildi"
 
 #: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
-msgstr "Sonuç, tekrar çevrimiçi olduğunuzda hazır olacaktır"
+msgstr "Sonuç, tekrar çevrim içi olduğunuzda hazır olacaktır"
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
