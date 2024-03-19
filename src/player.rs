@@ -8,7 +8,6 @@ use gtk::{
     subclass::prelude::*,
 };
 use mpris_server::{
-    async_trait,
     zbus::{self, fdo},
     LocalPlayerInterface, LocalRootInterface, LocalServer, LoopStatus, Metadata, PlaybackRate,
     PlaybackStatus, Property, Signal, Time, TrackId, Volume,
@@ -355,7 +354,6 @@ impl Default for Player {
     }
 }
 
-#[async_trait(?Send)]
 impl LocalRootInterface for Player {
     async fn raise(&self) -> fdo::Result<()> {
         Application::get().activate();
@@ -410,7 +408,6 @@ impl LocalRootInterface for Player {
     }
 }
 
-#[async_trait(?Send)]
 impl LocalPlayerInterface for Player {
     async fn next(&self) -> fdo::Result<()> {
         Err(fdo::Error::NotSupported("Next is not supported".into()))
