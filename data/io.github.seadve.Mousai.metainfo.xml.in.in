@@ -41,6 +41,17 @@
   <url type="vcs-browser">https://github.com/SeaDve/Mousai</url>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="0.7.7" date="2024-03-24">
+      <description translatable="no">
+        <p>This release contains the following changes:</p>
+        <ul>
+          <li>Offline mode recognition progress is now animated</li>
+          <li>Dialogs are now adaptive</li>
+          <li>Removed blur on song bar</li>
+          <li>Updated translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.6" date="2023-11-18">
       <description translatable="no">
         <p>This release contains the following changes:</p>
