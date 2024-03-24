@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Quentin PAGÈS <quentinantonin@free.fr>, 2021, 2022, 2023.
+# Quentin PAGÈS <quentinantonin@free.fr>, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 09:43+0800\n"
-"PO-Revision-Date: 2023-12-03 16:05+0000\n"
+"POT-Creation-Date: 2024-03-24 14:46+0800\n"
+"PO-Revision-Date: 2024-03-24 06:46+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/seadve/mousai/oc/"
 ">\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -509,7 +509,7 @@ msgstr ""
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
-msgstr ""
+msgstr "D'acòrdi"
 
 #: src/window/mod.rs:341
 msgid ""

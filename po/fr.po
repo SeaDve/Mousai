@@ -9,16 +9,16 @@
 # matb <perso@mathieu-bousquet.fr>, 2022.
 # Mathieu B. <perso@mathieu-bousquet.fr>, 2022.
 # gt <orenantao@gmail.com>, 2022.
-# rene-coty <irenee.thirion@e.email>, 2022, 2023.
+# rene-coty <irenee.thirion@e.email>, 2022, 2023, 2024.
 # "Mathieu B." <mathieu.bousquet2@gmail.com>, 2023, 2024.
 # Kawasofft <kawasoft38@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-10 09:43+0800\n"
-"PO-Revision-Date: 2024-03-10 01:44+0000\n"
-"Last-Translator: \"Mathieu B.\" <mathieu.bousquet2@gmail.com>\n"
+"POT-Creation-Date: 2024-03-24 14:46+0800\n"
+"PO-Revision-Date: 2024-03-24 06:46+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/"
 ">\n"
 "Language: fr\n"
@@ -538,7 +538,7 @@ msgstr "Le résultat sera disponible lorsque vous serez à nouveau connecté"
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
-msgstr "D’accord"
+msgstr "J’ai compris"
 
 #: src/window/mod.rs:341
 msgid ""
