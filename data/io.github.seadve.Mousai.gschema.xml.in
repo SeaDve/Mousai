@@ -2,12 +2,12 @@
 <schemalist>
   <schema path="/io/github/seadve/Mousai/" id="@app-id@" gettext-domain="@gettext-package@">
     <key name="window-width" type="i">
-      <default>600</default>
+      <default>768</default>
       <summary>Window width</summary>
       <description></description>
     </key>
     <key name="window-height" type="i">
-      <default>400</default>
+      <default>600</default>
       <summary>Window height</summary>
       <description></description>
     </key>
