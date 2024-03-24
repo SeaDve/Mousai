@@ -1286,7 +1286,7 @@ dependencies = [
 
 [[package]]
 name = "mousai"
-version = "0.7.6"
+version = "0.7.7"
 dependencies = [
  "anyhow",
  "async-lock 3.3.0",
