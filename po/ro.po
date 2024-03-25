@@ -4,13 +4,14 @@
 # Daniel <danny3@tutanota.com>, 2022.
 # Vik <k3kelm4vw@mozmail.com>, 2022.
 # C0sM1n <bordeic4@gmail.com>, 2023.
+# Gabriel Cozma <me@gabs.eu.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2023-10-30 05:13+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-03-25 13:46+0000\n"
+"Last-Translator: Gabriel Cozma <me@gabs.eu.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/seadve/mousai/"
 "ro/>\n"
 "Language: ro\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -187,7 +188,6 @@ msgid "No Results"
 msgstr "Niciun rezultat"
 
 #: data/resources/ui/preferences-dialog.ui:8
-#, fuzzy
 msgid "General"
 msgstr "General"
 
@@ -321,20 +321,21 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Danny3"
+msgstr ""
+"Gabriel Cozma\n"
+"Danny3"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Donează (Cumpără-mi o cafea)"
 
 #: src/about.rs:31
-#, fuzzy
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr ""
+msgstr "Traduceți"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
