@@ -10,13 +10,14 @@
 # Eric <alchemillatruth@purelymail.com>, 2022.
 # CrackTC <chenrke369@gmail.com>, 2023.
 # Carter Zhang <mcut17198@autistici.org>, 2023.
+# Jianhua Lu <lujianhua000@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2023-10-30 05:13+0000\n"
-"Last-Translator: Carter Zhang <mcut17198@autistici.org>\n"
+"PO-Revision-Date: 2024-03-28 06:01+0000\n"
+"Last-Translator: Jianhua Lu <lujianhua000@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "seadve/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -532,7 +533,7 @@ msgstr "结果将在你重新联网时可用"
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
-msgstr "好的，我知道了"
+msgstr "好的，明白了"
 
 #: src/window/mod.rs:341
 msgid ""
