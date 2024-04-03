@@ -12,15 +12,16 @@
 # rene-coty <irenee.thirion@e.email>, 2022, 2023, 2024.
 # "Mathieu B." <mathieu.bousquet2@gmail.com>, 2023, 2024.
 # Kawasofft <kawasoft38@gmail.com>, 2024.
+# p h <phhens@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-24 06:46+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/"
-">\n"
+"PO-Revision-Date: 2024-04-03 12:01+0000\n"
+"Last-Translator: p h <phhens@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -129,6 +130,7 @@ msgid "_Preferences"
 msgstr "_Préférences"
 
 #: data/resources/ui/history-view.ui:10
+#, fuzzy
 msgid "_Keyboard Shortcuts"
 msgstr "_Raccourcis clavier"
 
@@ -157,6 +159,7 @@ msgid "Listen"
 msgstr "Écouter"
 
 #: data/resources/ui/history-view.ui:65
+#, fuzzy
 msgid "Main Menu"
 msgstr "Menu principal"
 
@@ -173,6 +176,7 @@ msgid "Cancel Selection"
 msgstr "Annuler la sélection"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
+#, fuzzy
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -189,6 +193,7 @@ msgid "Click the listen button to start"
 msgstr "Cliquez sur le bouton d'écoute pour commencer"
 
 #: data/resources/ui/history-view.ui:150
+#, fuzzy
 msgid "No Results"
 msgstr "Aucun résultat"
 
@@ -240,6 +245,7 @@ msgid "Offline Mode"
 msgstr "Mode hors-ligne"
 
 #: data/resources/ui/shortcuts.ui:11
+#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Général"
@@ -260,11 +266,13 @@ msgid "Show Preferences"
 msgstr "Afficher les Préférences"
 
 #: data/resources/ui/shortcuts.ui:32
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Afficher les raccourcis"
 
 #: data/resources/ui/shortcuts.ui:38
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Quitter"
@@ -326,18 +334,22 @@ msgstr "Nouveau"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
+#, fuzzy
 msgid "translator-credits"
 msgstr "J. Lavoie, M. Bousquet, Irénée Thirion"
 
 #: src/about.rs:28
+#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
 msgstr "Faire un don (Buy Me a Coffee)"
 
 #: src/about.rs:31
+#, fuzzy
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:33
+#, fuzzy
 msgid "Translate"
 msgstr "Traduire"
 
