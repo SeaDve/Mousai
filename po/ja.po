@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-04-04 12:13+0000\n"
+"PO-Revision-Date: 2024-04-04 13:38+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/seadve/mousai/"
 "ja/>\n"
@@ -31,38 +31,38 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
-msgstr "数秒間で曲を特定します"
+msgstr "瞬時に曲を特定します"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
+"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;音声;オーディオ;音楽;"
+"ミュージック;認識;識別;特定;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "ウィンドウ幅"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "ウィンドウ高さ"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "ウィンドウを最大化するかどうか"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "録音に使用する好みの音源"
+msgstr "録音に使用するオーディオソースの種類"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "AudD 認識に使用される API トークン"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "レガシー (移行対応のために維持)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
@@ -76,42 +76,44 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai は、Shazam のように曲を認識できるシンプルなアプリケーションです。認識"
+"ボタンをクリックして数秒待つだけ。魔法のようにタイトルとアーティストを教えて"
+"くれます!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
-msgstr ""
-"注：Mousaiはaudd.ioのAPIを使用しているため、継続して利用するには、AudDのサイ"
-"トにログインする必要があります。"
+msgstr "注意: Mousai は audd.io の API を使用するため、継続利用には AudD "
+"のサイトへのログインが必要です。"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
-msgstr "Mousaiを使う理由"
+msgstr "Mousai を使う理由"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
-msgstr ""
+msgstr "🎵 瞬時に曲を特定。オフライン時は録音して後で特定可能"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ PC 内部またはマイクロフォンからの音を認識"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 認識した曲の一覧を作成"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Mousai で曲を素早くプレビュー"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 認識した曲をさまざまなサービスでブラウズ・再生"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 使いやすいインターフェース"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
@@ -123,7 +125,7 @@ msgstr "キーボードショートカット(_K)"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
-msgstr "Mousaiについて(_A)"
+msgstr "Mousai について(_A)"
 
 #: data/resources/ui/history-view.ui:22
 msgid "Select _All"
@@ -135,11 +137,11 @@ msgstr "すべて選択解除(_N)"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "ホーム"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "曲を認識"
 
 #: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
 msgid "Listen"
@@ -155,11 +157,11 @@ msgstr "選択"
 
 #: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "曲を検索"
 
 #: data/resources/ui/history-view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "選択をキャンセル"
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
 msgid "Cancel"
@@ -167,33 +169,31 @@ msgstr "キャンセル"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "曲を検索"
 
 #: data/resources/ui/history-view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "曲の認識を開始しましょう!"
 
 #: data/resources/ui/history-view.ui:141
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "認識ボタンをクリックしてください"
 
 #: data/resources/ui/history-view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "結果なし"
 
 #: data/resources/ui/preferences-dialog.ui:8
 msgid "General"
 msgstr "一般"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "_Preferred Audio Source"
 msgid "Audio Source"
-msgstr "オーディオソースを選択(_P)"
+msgstr "オーディオソース"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "認識に使用するデバイス"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -205,18 +205,20 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"API トークンは <a href=\"https://dashboard.audd.io/\">audd.io</a> "
+"から取得できます。空欄にすると、1 日数回試用できます"
 
 #: data/resources/ui/preferences-dialog.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API トークン"
 
 #: data/resources/ui/recognizer-status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "オフラインモード有効"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "オフラインモードの認識結果を表示"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -224,7 +226,7 @@ msgstr "認識をキャンセル"
 
 #: data/resources/ui/recognizer-view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "オフラインモード"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -239,23 +241,22 @@ msgstr "メインメニューを開く"
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr "検索"
+msgstr "検索する"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "設定を表示"
+msgstr "設定を表示する"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "ショートカット一覧を表示"
+msgstr "ショートカット一覧を表示する"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "終了"
+msgstr "終了する"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -265,12 +266,12 @@ msgstr "コントロール"
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr "聞き取りを切り替え"
+msgstr "認識開始/終了を切り替える"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr "再生を切り替え"
+msgstr "再生/一時停止を切り替える"
 
 #: data/resources/ui/song-bar.ui:34
 msgid "Show Song Information"
@@ -294,7 +295,7 @@ msgstr "情報"
 
 #: data/resources/ui/song-page.ui:137
 msgid "Last Heard"
-msgstr "最後に聞いた曲"
+msgstr "最後に聴いた日時"
 
 #: data/resources/ui/song-page.ui:142
 msgid "Album"
@@ -336,7 +337,7 @@ msgstr "翻訳"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr ""
+msgstr "致命的なデータベースエラー"
 
 #: src/application.rs:210
 msgid ""
@@ -349,20 +350,28 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"申し訳ありません。致命的なデータベースエラーが発生しました。これは、データベ"
+"ースの改ざんまたは破損により発生した可能性があります。アプリケーションデータ"
+"の消去を試してみることができますが、おすすめしません。また、すべての曲と保存"
+"した録音が削除されます。\n"
+"\n"
+"この問題を報告するには、Mousai を端末で起動しログを取得して、<a href=\"https"
+"://github.com/SeaDve/Mousai/issues/\">Issue "
+"ページ</a>にてバグ報告をしてください"
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr "終了する"
+msgstr "終了"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
 msgid "today at %R"
-msgstr ""
+msgstr "今日の %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:34
 msgid "yesterday at %R"
-msgstr ""
+msgstr "昨日の %R"
 
 #: src/preferences_dialog.rs:102
 msgid "Microphone"
@@ -370,31 +379,31 @@ msgstr "マイク"
 
 #: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
-msgstr "PC内部の音"
+msgstr "PC 内部の音"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "一致なし"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "音声からフィンガープリントを作成できません"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "不正トークンの指定"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "トークンが制限に達しました"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "サーバーに接続できません"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "その他の継続的なエラー"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -402,11 +411,11 @@ msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
-msgstr "Apple Musicでブラウス"
+msgstr "Apple Music でブラウズ"
 
 #: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
-msgstr "AudDでブラウス"
+msgstr "AudD でブラウズ"
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
@@ -414,7 +423,7 @@ msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
-msgstr "Spotifyで聞く"
+msgstr "Spotify で聴く"
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
@@ -422,29 +431,28 @@ msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
-msgstr "YouTubeで検索"
+msgstr "YouTube で検索"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "{key} を起動できませんでした"
 
 #: src/window/history_view.rs:137 src/window/song_page.rs:78
-#, fuzzy
 msgid "Copied to clipboard"
 msgstr "クリップボードにコピーしました"
 
 #: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "選択した曲を削除できませんでした"
 
 #: src/window/history_view.rs:327
 msgid "Failed to remove song"
-msgstr ""
+msgstr "曲を削除できませんでした"
 
 #: src/window/history_view.rs:440
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "認識結果を表示できませんでした"
 
 #: src/window/history_view.rs:547
 msgid "_Undo"
@@ -452,26 +460,25 @@ msgstr "元に戻す(_U)"
 
 #: src/window/history_view.rs:556
 msgid "Failed to undo"
-msgstr ""
+msgstr "元に戻せませんでした"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:576
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
+msgstr[0] "{n_removed} 曲を削除しました"
 
 #: src/window/history_view.rs:699
 msgid "Select items"
-msgstr ""
+msgstr "項目を選択"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:703
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
+msgstr[0] "{selection_size} 曲を選択しました"
 
 #: src/window/history_view.rs:713
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "曲をコピー"
@@ -483,36 +490,36 @@ msgstr[0] "曲を履歴から削除"
 
 #: src/window/mod.rs:208
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "曲を履歴に挿入できませんでした"
 
 #: src/window/mod.rs:252
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "GitHub で Issue を作成して、必要な情報を展開してください"
 
 #: src/window/mod.rs:255 src/window/mod.rs:287
 msgid "No, Thanks"
-msgstr ""
+msgstr "やめておく"
 
 #: src/window/mod.rs:257
 msgid "Open an Issue"
-msgstr ""
+msgstr "Issue を作成"
 
 #: src/window/mod.rs:284
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
-msgstr ""
+msgstr "音源に近づくか、曲の別の一部分を使ってみてください"
 
 #: src/window/mod.rs:289
 msgid "Try Again"
-msgstr ""
+msgstr "再試行"
 
 #: src/window/mod.rs:320
 msgid "Recording Saved"
-msgstr ""
+msgstr "録音を保存しました"
 
 #: src/window/mod.rs:328
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "認識結果はオンラインに戻った際に確認できます"
 
 #: src/window/mod.rs:331
 msgid "Ok, Got It"
@@ -523,29 +530,31 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"認識結果は、ご利用のトークンの制限がリセットされた際に確認できます。制限がリ"
+"セットされるまで待つか、設定を開いて別のトークンを設定してみてください"
 
 #: src/window/mod.rs:344
 msgid "I'll Wait"
-msgstr ""
+msgstr "待つ"
 
 #: src/window/mod.rs:348
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
-msgstr ""
+msgstr "認識結果は、適切なトークンに置き換えられた際に確認できます。設定を開いて別の"
+"トークンを設定してみてください"
 
 #: src/window/mod.rs:351
-#, fuzzy
 msgid "Later"
 msgstr "後で"
 
 #: src/window/mod.rs:356
 msgid "Open Preferences"
-msgstr ""
+msgstr "設定を開く"
 
 #: src/window/mod.rs:443
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "プレイヤーにエラーが発生しました"
 
 #: src/window/playback_button.rs:95
 msgid "Play"
@@ -558,23 +567,23 @@ msgstr "一時停止"
 #: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
+msgstr[0] "認識した曲"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:142
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
+msgstr[0] "新しく {n_songs} 曲を認識しました"
 
 #: src/window/recognized_page.rs:148
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
+msgstr[0] "以下の曲は保存済みの録音から認識されました"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:162
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "{total_minus_failed} 曲中 {n_successful} 曲を認識"
 
 #: src/window/recognizer_view.rs:134
 msgid "Listening…"
@@ -586,11 +595,11 @@ msgstr "識別しています…"
 
 #: src/window/song_page.rs:349
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 #: src/window/song_tile.rs:338
 msgid "Unselect"
-msgstr ""
+msgstr "選択解除"
 
 #, fuzzy
 #~ msgid "Dave Patrick Caberto"
