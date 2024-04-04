@@ -3,5 +3,9 @@ extend-glob = ["*.po"]
 check-file = false
 
 [default.extend-words]
+seeked = "seeked" # MPRIS seeked
+
+# AudD Test Data
 ba = "ba"
-seeked = "seeked"
+oif = "oif"
+sme = "sme"
