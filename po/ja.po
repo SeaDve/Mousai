@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-02 15:01+0000\n"
+"PO-Revision-Date: 2024-04-04 12:13+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/seadve/mousai/"
 "ja/>\n"
@@ -147,7 +147,7 @@ msgstr "認識"
 
 #: data/resources/ui/history-view.ui:65
 msgid "Main Menu"
-msgstr "メニュー"
+msgstr "メインメニュー"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
@@ -323,7 +323,6 @@ msgstr ""
 "kj7kt"
 
 #: src/about.rs:28
-#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
 msgstr "寄付 (Buy Me a Coffee)"
 
@@ -332,7 +331,6 @@ msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:33
-#, fuzzy
 msgid "Translate"
 msgstr "翻訳"
 
@@ -354,7 +352,7 @@ msgstr ""
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr "終了"
+msgstr "終了する"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
