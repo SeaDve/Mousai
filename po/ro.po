@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-25 13:46+0000\n"
-"Last-Translator: Gabriel Cozma <me@gabs.eu.org>\n"
+"PO-Revision-Date: 2024-04-08 20:01+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/seadve/mousai/"
 "ro/>\n"
 "Language: ro\n"
@@ -233,9 +233,10 @@ msgid "Offline Mode"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
+#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -248,14 +249,16 @@ msgid "Search"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Afișați preferințe"
 
 #: data/resources/ui/shortcuts.ui:32
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Afișați comenzile rapide"
 
 #: data/resources/ui/shortcuts.ui:38
 #, fuzzy
