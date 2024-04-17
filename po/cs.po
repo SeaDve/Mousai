@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-11 22:01+0000\n"
+"PO-Revision-Date: 2024-04-17 10:50+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/"
-">\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -295,7 +295,7 @@ msgstr "Informace"
 
 #: data/resources/ui/song-page.ui:137
 msgid "Last Heard"
-msgstr "Naposledy poslouchané"
+msgstr "Naposledy posloucháno"
 
 #: data/resources/ui/song-page.ui:142
 msgid "Album"
