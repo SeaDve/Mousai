@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-04-17 10:50+0000\n"
+"PO-Revision-Date: 2024-04-25 12:07+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
 "\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -149,7 +149,7 @@ msgstr "Poslouchat"
 
 #: data/resources/ui/history-view.ui:65
 msgid "Main Menu"
-msgstr "Hlavní Menu"
+msgstr "Hlavní nabídka"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
@@ -324,7 +324,7 @@ msgstr ""
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Přispět (kupte mi kávu)"
+msgstr "Darovat (kupte mi kávu)"
 
 #: src/about.rs:31
 msgid "GitHub"
