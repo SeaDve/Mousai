@@ -2,15 +2,15 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022, 2023.
-# Joan Aymà <joanayma@gmail.com>, 2023.
+# Joan Aymà <joanayma@gmail.com>, 2023, 2024.
 # victor dargallo <victordargallo@disroot.org>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-05 09:01+0000\n"
-"Last-Translator: victor dargallo <victordargallo@disroot.org>\n"
+"PO-Revision-Date: 2024-05-09 19:07+0000\n"
+"Last-Translator: Joan Aymà <joanayma@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
 ">\n"
 "Language: ca\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.5.4-rc\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -147,6 +147,7 @@ msgid "Listen"
 msgstr "Escolta"
 
 #: data/resources/ui/history-view.ui:65
+#, fuzzy
 msgid "Main Menu"
 msgstr "Menú principal"
 
