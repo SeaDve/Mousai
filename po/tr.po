@@ -5,13 +5,14 @@
 # Oğuz Ersen <oguz@ersen.moe>, 2022, 2024.
 # Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
 # Sabri Ünal <yakushabb@gmail.com>, 2024.
+# Volkan Yıldırım <volkan.y@posteo.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-11 22:01+0000\n"
-"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"PO-Revision-Date: 2024-05-31 08:59+0000\n"
+"Last-Translator: Volkan Yıldırım <volkan.y@posteo.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/seadve/mousai/tr/"
 ">\n"
 "Language: tr\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -135,7 +136,7 @@ msgstr "_Hiçbirini Seçme"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr "Ev"
+msgstr "Ana Sayfa"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
