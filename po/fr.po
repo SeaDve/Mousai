@@ -14,13 +14,14 @@
 # Kawasofft <kawasoft38@gmail.com>, 2024.
 # p h <phhens@gmail.com>, 2024.
 # Wedone <cafh62@gmail.com>, 2024.
+# Clyhtsuriva <aimeric@adjutor.xyz>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-06-12 03:13+0000\n"
-"Last-Translator: Wedone <cafh62@gmail.com>\n"
+"PO-Revision-Date: 2024-06-26 22:09+0000\n"
+"Last-Translator: Clyhtsuriva <aimeric@adjutor.xyz>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/seadve/mousai/fr/>"
 "\n"
 "Language: fr\n"
@@ -28,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -328,7 +329,7 @@ msgstr "Nouveau"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "J. Lavoie, M. Bousquet, Irénée Thirion, Wedone"
+msgstr "J. Lavoie, M. Bousquet, Irénée Thirion, Wedone, Clyhtsuriva"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
