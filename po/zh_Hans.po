@@ -11,13 +11,14 @@
 # CrackTC <chenrke369@gmail.com>, 2023.
 # Carter Zhang <mcut17198@autistici.org>, 2023.
 # Jianhua Lu <lujianhua000@gmail.com>, 2024.
+# I love Frank Ocean <hohoujoeng@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2024-03-28 06:01+0000\n"
-"Last-Translator: Jianhua Lu <lujianhua000@gmail.com>\n"
+"PO-Revision-Date: 2024-07-05 09:09+0000\n"
+"Last-Translator: I love Frank Ocean <hohoujoeng@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "seadve/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -25,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -57,10 +58,8 @@ msgid "Whether the window is maximized"
 msgstr "窗口是否最大化"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "录制音频时优先使用的音频源"
+msgstr "录制音频时使用的音频源"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -95,11 +94,11 @@ msgstr "Mousai 有哪些特性呢？"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
-msgstr ""
+msgstr "🎵 在几秒钟内识别歌曲，或在离线时保存以备稍后使用"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "从桌面音频或麦克风识别"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
@@ -139,7 +138,7 @@ msgstr "不选(_N)"
 
 #: data/resources/ui/history-view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "主页"
 
 #: data/resources/ui/history-view.ui:52
 msgid "Recognize Song"
@@ -190,14 +189,12 @@ msgid "General"
 msgstr "通用"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "首选的音频源"
+msgstr "音频源"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "用于监听的设备"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -222,7 +219,7 @@ msgstr "启用离线模式"
 
 #: data/resources/ui/recognizer-status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "显示离线模式识别结果"
 
 #: data/resources/ui/recognizer-view.ui:13
 msgid "Cancel Listening"
@@ -344,15 +341,6 @@ msgid "Critical Database Error"
 msgstr "严重的数据库错误"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -363,11 +351,11 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"这可能是由于数据库被篡改或损坏造成的。你可以尝试清除应用数据。但不建议这样"
-"做，因为这会删除你的所有歌曲以及保存的录音。\n"
+"对不起，数据库发生严重错误。这可能是由于数据库被篡改或损坏造成的。你可以尝试"
+"清除应用数据。但不建议这样做，因为这会删除你的所有歌曲以及保存的录音。\n"
 "\n"
-"要报告这个问题，请在终端中启动Mousai以获取日志，并将错误报告提交到<a "
-"href=\"https://github.com/SeaDve/Mousai/issues/\">issue页面</a>"
+"要报告这个问题，请在终端中启动Mousai以获取日志，并将错误报告提交到<a href="
+"\"https://github.com/SeaDve/Mousai/issues/\">issue页面</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -576,7 +564,7 @@ msgstr "暂停"
 #: src/window/recognized_page.rs:136
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
+msgstr[0] "识别的歌曲"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:142
