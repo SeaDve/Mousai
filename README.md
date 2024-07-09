@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://flathub.org/apps/details/io.github.seadve.Mousai">
-    <img alt="Download on Flathub" src="https://dl.flathub.org/assets/badges/flathub-badge-i-en.svg" width="200"/>
+    <img alt="Download on Flathub" src="https://flathub.org/api/badge?svg&locale=en&light" width="200"/>
   </a>
   <br>
   <a href="https://www.buymeacoffee.com/seadve">
