@@ -310,7 +310,7 @@ impl Window {
             }
         }
 
-        dialog.present(self);
+        dialog.present(Some(self));
     }
 
     fn present_recording_saved_message(&self, cause: &RecognizeError) {
@@ -364,7 +364,7 @@ impl Window {
                         debug_assert_eq!(id, OPEN_RESPONSE_ID);
 
                         let dialog = PreferencesDialog::new(Application::get().settings());
-                        dialog.present(&obj);
+                        dialog.present(Some(&obj));
 
                         let is_focused = dialog.focus_aud_d_api_token_row();
                         debug_assert!(is_focused, "token row must be focused");
@@ -378,7 +378,7 @@ impl Window {
             }
         }
 
-        dialog.present(self);
+        dialog.present(Some(self));
     }
 
     fn load_window_size(&self) {

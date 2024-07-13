@@ -69,7 +69,7 @@ mod imp {
                 .build();
             gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
                 gesture.set_state(gtk::EventSequenceState::Claimed);
-                if gesture.widget().contains(x, y) {
+                if gesture.widget().is_some_and(|w| w.contains(x, y)) {
                     obj.emit_by_name::<()>("activated", &[]);
                 }
             }));
