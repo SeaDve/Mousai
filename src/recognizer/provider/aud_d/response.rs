@@ -5,8 +5,6 @@ use crate::recognizer::provider::error::{RecognizeError, RecognizeErrorKind};
 #[derive(Debug, Deserialize)]
 pub struct LyricsData {
     pub lyrics: String,
-    /// A json object containing `provider` and `url` field
-    pub media: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -44,8 +42,6 @@ pub struct ExternalUrls {
 #[derive(Debug, Deserialize)]
 pub struct SpotifyData {
     pub album: Album,
-    pub disc_number: u32,
-    pub track_number: u32,
     pub preview_url: String,
     pub external_urls: ExternalUrls,
 }
@@ -57,9 +53,6 @@ pub struct Data {
     pub album: String,
     /// In format of ISO-8601 (%Y-%m-%d)
     pub release_date: Option<String>,
-    // TODO consider showing this in the ui
-    pub label: Option<String>,
-    pub timecode: String,
     #[serde(rename(deserialize = "song_link"))]
     pub info_link: String,
     #[serde(rename(deserialize = "spotify"))]
