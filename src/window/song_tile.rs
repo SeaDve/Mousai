@@ -107,49 +107,66 @@ mod imp {
             let obj = self.obj();
 
             let motion_controller = gtk::EventControllerMotion::new();
-            motion_controller.connect_enter(clone!(@weak obj => move |_, _, _| {
-                obj.imp().contains_pointer.set(true);
-                obj.update_select_button_visibility();
-            }));
-            motion_controller.connect_leave(clone!(@weak obj => move |_| {
-                obj.imp().contains_pointer.set(false);
-                obj.update_select_button_visibility();
-            }));
+            motion_controller.connect_enter(clone!(
+                #[weak]
+                obj,
+                move |_, _, _| {
+                    obj.imp().contains_pointer.set(true);
+                    obj.update_select_button_visibility();
+                }
+            ));
+            motion_controller.connect_leave(clone!(
+                #[weak]
+                obj,
+                move |_| {
+                    obj.imp().contains_pointer.set(false);
+                    obj.update_select_button_visibility();
+                }
+            ));
             obj.add_controller(motion_controller);
 
             let gesture_click = gtk::GestureClick::builder()
                 .button(gdk::BUTTON_SECONDARY)
                 .build();
-            gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
-                gesture.set_state(gtk::EventSequenceState::Claimed);
-                if obj.contains(x, y) {
-                    obj.emit_by_name::<()>("selection-mode-requested", &[]);
+            gesture_click.connect_released(clone!(
+                #[weak]
+                obj,
+                move |gesture, _, x, y| {
+                    gesture.set_state(gtk::EventSequenceState::Claimed);
+                    if obj.contains(x, y) {
+                        obj.emit_by_name::<()>("selection-mode-requested", &[]);
+                    }
                 }
-            }));
+            ));
             obj.add_controller(gesture_click);
 
             let gesture_long_press = gtk::GestureLongPress::builder()
                 .propagation_phase(gtk::PropagationPhase::Capture)
                 .build();
-            gesture_long_press.connect_pressed(clone!(@weak obj => move |gesture, x, y| {
-                gesture.set_state(gtk::EventSequenceState::Claimed);
-                if obj.contains(x, y) {
-                    obj.emit_by_name::<()>("selection-mode-requested", &[]);
+            gesture_long_press.connect_pressed(clone!(
+                #[weak]
+                obj,
+                move |gesture, x, y| {
+                    gesture.set_state(gtk::EventSequenceState::Claimed);
+                    if obj.contains(x, y) {
+                        obj.emit_by_name::<()>("selection-mode-requested", &[]);
+                    }
                 }
-            }));
+            ));
             obj.add_controller(gesture_long_press);
 
             self.select_button_active_notify_handler_id
-                .set(
-                    self.select_button
-                        .connect_active_notify(clone!(@weak obj => move |button| {
-                            if button.is_active() && !obj.is_selection_mode_active() {
-                                obj.emit_by_name::<()>("selection-mode-requested", &[]);
-                            }
+                .set(self.select_button.connect_active_notify(clone!(
+                    #[weak]
+                    obj,
+                    move |button| {
+                        if button.is_active() && !obj.is_selection_mode_active() {
+                            obj.emit_by_name::<()>("selection-mode-requested", &[]);
+                        }
 
-                            obj.notify_is_active();
-                        })),
-                )
+                        obj.notify_is_active();
+                    }
+                )))
                 .unwrap();
 
             self.song_binding_group
@@ -279,9 +296,13 @@ impl SongTile {
 
     /// Must only be called once.
     pub fn bind_player(&self, player: &Player) {
-        let handler_id = player.connect_state_notify(clone!(@weak self as obj => move |player| {
-            obj.update_playback_ui(player);
-        }));
+        let handler_id = player.connect_state_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |player| {
+                obj.update_playback_ui(player);
+            }
+        ));
 
         self.imp()
             .player

@@ -206,27 +206,33 @@ impl Recordings {
         unsafe {
             let handler_id = recording.connect_notify_local(
                 None,
-                clone!(@weak self as obj, @strong recording_id => move |recording, pspec| {
-                    tracing::debug!("Recording property `{}` notified", pspec.name());
+                clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    #[strong]
+                    recording_id,
+                    move |recording, pspec| {
+                        tracing::debug!("Recording property `{}` notified", pspec.name());
 
-                    let (env, db) = obj.db();
-                    if let Err(err) = env.with_write_txn(|wtxn| {
-                        debug_assert!(
-                            db.get(wtxn, &recording_id).unwrap().is_some(),
-                            "recording must exist in the db"
-                        );
+                        let (env, db) = obj.db();
+                        if let Err(err) = env.with_write_txn(|wtxn| {
+                            debug_assert!(
+                                db.get(wtxn, &recording_id).unwrap().is_some(),
+                                "recording must exist in the db"
+                            );
 
-                        db.put(wtxn, &recording_id, recording)
-                            .context("Failed to put recording to db")?;
+                            db.put(wtxn, &recording_id, recording)
+                                .context("Failed to put recording to db")?;
 
-                        Ok(())
-                    }) {
-                        tracing::error!("Failed to update recording in database: {:?}", err);
+                            Ok(())
+                        }) {
+                            tracing::error!("Failed to update recording in database: {:?}", err);
+                        }
+
+                        let index = obj.imp().list.borrow().get_index_of(&recording_id).unwrap();
+                        obj.items_changed(index as u32, 1, 1);
                     }
-
-                    let index = obj.imp().list.borrow().get_index_of(&recording_id).unwrap();
-                    obj.items_changed(index as u32, 1, 1);
-                }),
+                ),
             );
             recording.set_data(RECORDING_NOTIFY_HANDLER_ID_KEY, handler_id);
         }

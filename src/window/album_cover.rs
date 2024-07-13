@@ -126,17 +126,23 @@ impl AlbumCover {
 
             let join_handle = utils::spawn(
                 glib::Priority::LOW,
-                clone!(@weak self as obj, @weak album_art => async move {
-                    match album_art.texture().await {
-                        Ok(texture) => {
-                            obj.set_paintable(Some(texture));
-                        }
-                        Err(err) => {
-                            tracing::warn!("Failed to load texture: {:?}", err);
-                            obj.set_paintable(gdk::Paintable::NONE);
+                clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    #[weak]
+                    album_art,
+                    async move {
+                        match album_art.texture().await {
+                            Ok(texture) => {
+                                obj.set_paintable(Some(texture));
+                            }
+                            Err(err) => {
+                                tracing::warn!("Failed to load texture: {:?}", err);
+                                obj.set_paintable(gdk::Paintable::NONE);
+                            }
                         }
                     }
-                }),
+                ),
             );
             imp.join_handle.replace(Some(join_handle));
         } else {

@@ -160,9 +160,13 @@ impl RecognizedPage {
         for song in songs {
             let tile = RecognizedPageTile::new(song);
             tile.bind_player(&player);
-            tile.connect_activated(clone!(@weak self as obj => move |tile| {
-                obj.emit_by_name::<()>("song-activated", &[&tile.song()]);
-            }));
+            tile.connect_activated(clone!(
+                #[weak(rename_to = obj)]
+                self,
+                move |tile| {
+                    obj.emit_by_name::<()>("song-activated", &[&tile.song()]);
+                }
+            ));
 
             imp.carousel.append(&tile);
             imp.tiles.borrow_mut().push(tile);

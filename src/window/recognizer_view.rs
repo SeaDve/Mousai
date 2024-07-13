@@ -65,17 +65,29 @@ impl RecognizerView {
 
     /// Must be only called once
     pub fn bind_recognizer(&self, recognizer: &Recognizer) {
-        recognizer.connect_is_offline_mode_notify(clone!(@weak self as obj => move |_| {
-            obj.update_offline_mode_ui();
-        }));
+        recognizer.connect_is_offline_mode_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_offline_mode_ui();
+            }
+        ));
 
-        recognizer.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_ui();
-        }));
+        recognizer.connect_state_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_ui();
+            }
+        ));
 
-        recognizer.connect_recording_peak_changed(clone!(@weak self as obj => move |_, peak| {
-            obj.imp().waveform.push_peak(peak);
-        }));
+        recognizer.connect_recording_peak_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, peak| {
+                obj.imp().waveform.push_peak(peak);
+            }
+        ));
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 
@@ -98,11 +110,13 @@ impl RecognizerView {
                 .value_from(0.0)
                 .value_to(0.8)
                 .duration(1500)
-                .target(&adw::CallbackAnimationTarget::new(
-                    clone!(@weak self as obj => move |value| {
+                .target(&adw::CallbackAnimationTarget::new(clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move |value| {
                         obj.imp().waveform.push_peak(value);
-                    }),
-                ))
+                    }
+                )))
                 .easing(adw::Easing::EaseOutBack)
                 .repeat_count(u32::MAX)
                 .alternate(true)

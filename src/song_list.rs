@@ -261,24 +261,28 @@ impl SongList {
         unsafe {
             let handler_id = song.connect_notify_local(
                 None,
-                clone!(@weak self as obj => move |song, pspec| {
-                    tracing::debug!("Song property `{}` notified", pspec.name());
+                clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move |song, pspec| {
+                        tracing::debug!("Song property `{}` notified", pspec.name());
 
-                    let (env, db) = obj.db();
-                    if let Err(err) = env.with_write_txn(|wtxn| {
-                        debug_assert!(
-                            db.get(wtxn, song.id_ref()).unwrap().is_some(),
-                            "song must exist in the db"
-                        );
+                        let (env, db) = obj.db();
+                        if let Err(err) = env.with_write_txn(|wtxn| {
+                            debug_assert!(
+                                db.get(wtxn, song.id_ref()).unwrap().is_some(),
+                                "song must exist in the db"
+                            );
 
-                        db.put(wtxn, song.id_ref(), song)
-                            .context("Failed to put song to db")?;
+                            db.put(wtxn, song.id_ref(), song)
+                                .context("Failed to put song to db")?;
 
-                        Ok(())
-                    }) {
-                        tracing::error!("Failed to update song in database: {:?}", err);
-                    };
-                }),
+                            Ok(())
+                        }) {
+                            tracing::error!("Failed to update song in database: {:?}", err);
+                        };
+                    }
+                ),
             );
             song.set_data(SONG_NOTIFY_HANDLER_ID_KEY, handler_id);
         }

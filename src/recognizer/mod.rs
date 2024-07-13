@@ -155,18 +155,22 @@ impl Recognizer {
             .expect("saved recordings must be bound only once");
 
         let network_monitor = gio::NetworkMonitor::default();
-        network_monitor.connect_connectivity_notify(clone!(@weak self as obj => move |monitor| {
-            tracing::debug!(connectivity = ?monitor.connectivity());
+        network_monitor.connect_connectivity_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |monitor| {
+                tracing::debug!(connectivity = ?monitor.connectivity());
 
-            obj.update_offline_mode();
+                obj.update_offline_mode();
 
-            // TODO don't just call when network is available, but also for every
-            // interval if there is network, there are still saved recordings, and
-            // there is currently no recognition in progress.
-            //
-            // This should also be triggered when token is updated.
-            obj.try_recognize_saved_recordings();
-        }));
+                // TODO don't just call when network is available, but also for every
+                // interval if there is network, there are still saved recordings, and
+                // there is currently no recognition in progress.
+                //
+                // This should also be triggered when token is updated.
+                obj.try_recognize_saved_recordings();
+            }
+        ));
 
         self.update_offline_mode();
 
@@ -250,16 +254,24 @@ impl Recognizer {
         imp.recorder
             .start(
                 Application::get().settings().audio_source_type(),
-                clone!(@weak self as obj => move |peak| {
-                    obj.emit_recording_peak_changed(peak);
-                }),
+                clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move |peak| {
+                        obj.emit_recording_peak_changed(peak);
+                    }
+                ),
             )
             .context("Failed to start recording")?;
         let recorded_time = DateTime::now_utc();
 
-        cancellable.connect_cancelled_local(clone!(@weak _finally => move |_| {
-            let _ = _finally.take();
-        }));
+        cancellable.connect_cancelled_local(clone!(
+            #[weak]
+            _finally,
+            move |_| {
+                let _ = _finally.take();
+            }
+        ));
 
         let provider = ProviderSettings::lock().active.to_provider();
         let listen_duration = provider.listen_duration();
@@ -343,9 +355,13 @@ impl Recognizer {
         // TODO recognize recordings concurrently, but not too many at once (at most 3?)
         utils::spawn(
             glib::Priority::default(),
-            clone!(@weak self as obj => async move {
-                obj.try_recognize_saved_recordings_inner().await;
-            }),
+            clone!(
+                #[weak(rename_to = obj)]
+                self,
+                async move {
+                    obj.try_recognize_saved_recordings_inner().await;
+                }
+            ),
         );
     }
 

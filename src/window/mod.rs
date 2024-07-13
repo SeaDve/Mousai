@@ -185,12 +185,17 @@ impl Window {
         imp.main_view.bind_recognizer(&imp.recognizer);
         imp.recognizer_view.bind_recognizer(&imp.recognizer);
 
-        imp.recognizer
-            .connect_state_notify(clone!(@weak self as obj => move |_| {
+        imp.recognizer.connect_state_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
                 obj.update_stack();
-            }));
-        imp.recognizer
-            .connect_song_recognized(clone!(@weak self as obj => move |_, song| {
+            }
+        ));
+        imp.recognizer.connect_song_recognized(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, song| {
                 let history = obj.song_history();
 
                 // If the song is not found in the history, set it as newly heard
@@ -212,11 +217,15 @@ impl Window {
                 let main_view = obj.imp().main_view.get();
                 main_view.push_song_page(song);
                 main_view.scroll_to_top();
-            }));
-        imp.recognizer
-            .connect_recording_saved(clone!(@weak self as obj => move |_, cause| {
+            }
+        ));
+        imp.recognizer.connect_recording_saved(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, cause| {
                 obj.present_recording_saved_message(cause);
-            }));
+            }
+        ));
     }
 
     pub fn add_toast(&self, toast: adw::Toast) {
@@ -261,7 +270,7 @@ impl Window {
 
                 dialog.connect_response(
                     Some(OPEN_RESPONSE_ID),
-                    clone!(@weak self as obj => move |_, id| {
+                    clone!(#[weak(rename_to = obj)] self,move |_, id| {
                         debug_assert_eq!(id, OPEN_RESPONSE_ID);
 
                         gtk::UriLauncher::new("https://github.com/SeaDve/Mousai/issues/new?assignees=&labels=&template=bug_report.md").launch(
@@ -295,12 +304,16 @@ impl Window {
 
                 dialog.connect_response(
                     Some(TRY_AGAIN_RESPONSE_ID),
-                    clone!(@weak self as obj => move |_, id| {
-                        debug_assert_eq!(id, TRY_AGAIN_RESPONSE_ID);
+                    clone!(
+                        #[weak(rename_to = obj)]
+                        self,
+                        move |_, id| {
+                            debug_assert_eq!(id, TRY_AGAIN_RESPONSE_ID);
 
-                        debug_assert_eq!(obj.imp().recognizer.state(), RecognizerState::Null);
-                        WidgetExt::activate_action(&obj, "win.toggle-recognize", None).unwrap();
-                    }),
+                            debug_assert_eq!(obj.imp().recognizer.state(), RecognizerState::Null);
+                            WidgetExt::activate_action(&obj, "win.toggle-recognize", None).unwrap();
+                        }
+                    ),
                 );
             }
             RecognizeErrorKind::Connection
@@ -360,15 +373,19 @@ impl Window {
 
                 dialog.connect_response(
                     Some(OPEN_RESPONSE_ID),
-                    clone!(@weak self as obj => move |_, id| {
-                        debug_assert_eq!(id, OPEN_RESPONSE_ID);
+                    clone!(
+                        #[weak(rename_to = obj)]
+                        self,
+                        move |_, id| {
+                            debug_assert_eq!(id, OPEN_RESPONSE_ID);
 
-                        let dialog = PreferencesDialog::new(Application::get().settings());
-                        dialog.present(Some(&obj));
+                            let dialog = PreferencesDialog::new(Application::get().settings());
+                            dialog.present(Some(&obj));
 
-                        let is_focused = dialog.focus_aud_d_api_token_row();
-                        debug_assert!(is_focused, "token row must be focused");
-                    }),
+                            let is_focused = dialog.focus_aud_d_api_token_row();
+                            debug_assert!(is_focused, "token row must be focused");
+                        }
+                    ),
                 );
             }
             RecognizeErrorKind::NoMatches
@@ -433,31 +450,46 @@ impl Window {
     fn setup_signals(&self) {
         let imp = self.imp();
 
-        imp.player
-            .connect_song_notify(clone!(@weak self as obj => move |_| {
+        imp.player.connect_song_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
                 obj.update_toggle_playback_action();
                 obj.update_song_bar_revealer();
-            }));
-        imp.player
-            .connect_error(clone!(@weak self as obj => move |_, _| {
+            }
+        ));
+        imp.player.connect_error(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _| {
                 obj.add_message_toast(&gettext("An error occurred in the player"));
-            }));
+            }
+        ));
 
-        imp.song_bar
-            .connect_activated(clone!(@weak self as obj => move |_, song| {
+        imp.song_bar.connect_activated(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, song| {
                 obj.imp().main_view.push_song_page(song);
-            }));
+            }
+        ));
 
-        imp.main_view.connect_is_selection_mode_active_notify(
-            clone!(@weak self as obj => move |_| {
-                obj.update_song_bar_revealer();
-            }),
-        );
+        imp.main_view
+            .connect_is_selection_mode_active_notify(clone!(
+                #[weak(rename_to = obj)]
+                self,
+                move |_| {
+                    obj.update_song_bar_revealer();
+                }
+            ));
 
-        imp.stack
-            .connect_visible_child_notify(clone!(@weak self as obj => move |_| {
+        imp.stack.connect_visible_child_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
                 obj.update_toggle_search_action();
-            }));
+            }
+        ));
     }
 
     fn update_song_bar_revealer(&self) {

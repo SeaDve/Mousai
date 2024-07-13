@@ -89,10 +89,14 @@ mod imp {
 
             let obj = self.obj();
 
-            let bus_watch_guard = self.gst_play
+            let bus_watch_guard = self
+                .gst_play
                 .message_bus()
-                .add_watch_local(
-                    clone!(@weak obj => @default-return glib::ControlFlow::Continue, move |_, message| {
+                .add_watch_local(clone!(
+                    #[weak]
+                    obj,
+                    #[upgrade_or_panic]
+                    move |_, message| {
                         if gst_play::Play::is_play_message(message) {
                             let play_message = gst_play::PlayMessage::parse(message).unwrap();
                             obj.handle_gst_play_message(play_message);
@@ -100,8 +104,8 @@ mod imp {
                             tracing::trace!("Received other bus message: {:?}", message.view());
                         }
                         glib::ControlFlow::Continue
-                    }),
-                )
+                    }
+                ))
                 .unwrap();
             self.bus_watch_guard.set(bus_watch_guard).unwrap();
         }
@@ -238,36 +242,47 @@ impl Player {
     fn mpris_properties_changed(&self, property: impl IntoIterator<Item = Property> + 'static) {
         utils::spawn(
             glib::Priority::default(),
-            clone!(@weak self as obj => async move {
-                match obj.mpris_server().await {
-                    Ok(server) => {
-                        if let Err(err) = server.properties_changed(property).await {
-                            tracing::error!("Failed to emit MPRIS properties changed: {:?}", err);
+            clone!(
+                #[weak(rename_to = obj)]
+                self,
+                async move {
+                    match obj.mpris_server().await {
+                        Ok(server) => {
+                            if let Err(err) = server.properties_changed(property).await {
+                                tracing::error!(
+                                    "Failed to emit MPRIS properties changed: {:?}",
+                                    err
+                                );
+                            }
+                        }
+                        Err(err) => {
+                            tracing::error!("Failed to get MPRIS server: {:?}", err);
                         }
                     }
-                    Err(err) => {
-                        tracing::error!("Failed to get MPRIS server: {:?}", err);
-                    }
                 }
-            }),
+            ),
         );
     }
 
     fn mpris_seeked(&self, position: Time) {
         utils::spawn(
             glib::Priority::default(),
-            clone!(@weak self as obj => async move {
-                match obj.mpris_server().await {
-                    Ok(server) => {
-                        if let Err(err) = server.emit(Signal::Seeked { position }).await {
-                            tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
+            clone!(
+                #[weak(rename_to = obj)]
+                self,
+                async move {
+                    match obj.mpris_server().await {
+                        Ok(server) => {
+                            if let Err(err) = server.emit(Signal::Seeked { position }).await {
+                                tracing::error!("Failed to emit MPRIS seeked: {:?}", err);
+                            }
+                        }
+                        Err(err) => {
+                            tracing::error!("Failed to get MPRIS server: {:?}", err);
                         }
                     }
-                    Err(err) => {
-                        tracing::error!("Failed to get MPRIS server: {:?}", err);
-                    }
                 }
-            }),
+            ),
         );
     }
 

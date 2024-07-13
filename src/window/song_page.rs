@@ -101,16 +101,22 @@ mod imp {
 
             let obj = self.obj();
 
-            self.remove_button
-                .connect_clicked(clone!(@weak obj => move |_| {
+            self.remove_button.connect_clicked(clone!(
+                #[weak]
+                obj,
+                move |_| {
                     if let Some(ref song) = obj.song() {
                         obj.emit_by_name::<()>("song-remove-request", &[song]);
                     }
-                }));
-            self.playback_button
-                .connect_clicked(clone!(@weak obj => move |_| {
+                }
+            ));
+            self.playback_button.connect_clicked(clone!(
+                #[weak]
+                obj,
+                move |_| {
                     obj.toggle_playback();
-                }));
+                }
+            ));
 
             self.external_links_box.connect_child_activated(|_, child| {
                 let external_link_tile = child.downcast_ref::<ExternalLinkTile>().unwrap();
@@ -212,9 +218,13 @@ impl SongPage {
 
     /// Must only be called when no player was already bound.
     pub fn bind_player(&self, player: &Player) {
-        let handler_id = player.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_ui();
-        }));
+        let handler_id = player.connect_state_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_playback_ui();
+            }
+        ));
 
         self.imp()
             .player
@@ -233,11 +243,13 @@ impl SongPage {
 
     /// Must only be called when no song list was already bound.
     pub fn bind_song_list(&self, song_list: &SongList) {
-        let handler_id = song_list.connect_items_changed(
-            clone!(@weak self as obj => move |_, _index, _removed, _added| {
+        let handler_id = song_list.connect_items_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _index, _removed, _added| {
                 obj.update_remove_button_sensitivity();
-            }),
-        );
+            }
+        ));
 
         self.imp()
             .song_list

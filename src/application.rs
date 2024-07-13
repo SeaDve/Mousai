@@ -216,10 +216,14 @@ impl Application {
         dialog.set_response_appearance(QUIT_RESPONSE_ID, adw::ResponseAppearance::Suggested);
         dialog.connect_response(
             Some(QUIT_RESPONSE_ID),
-            clone!(@weak self as obj => move |_, response| match response {
-                QUIT_RESPONSE_ID => obj.quit(),
-                _ => unreachable!(),
-            }),
+            clone!(
+                #[weak(rename_to = obj)]
+                self,
+                move |_, response| match response {
+                    QUIT_RESPONSE_ID => obj.quit(),
+                    _ => unreachable!(),
+                }
+            ),
         );
         dialog.present(Some(parent));
     }

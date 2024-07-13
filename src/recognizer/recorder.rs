@@ -43,11 +43,12 @@ impl Recorder {
         let bus_watch_guard = pipeline
             .bus()
             .unwrap()
-            .add_watch_local(
-                clone!(@weak pipeline => @default-return glib::ControlFlow::Break, move |_, message| {
-                    handle_bus_message(&pipeline, message, &peak_callback)
-                }),
-            )
+            .add_watch_local(clone!(
+                #[weak]
+                pipeline,
+                #[upgrade_or_panic]
+                move |_, message| handle_bus_message(&pipeline, message, &peak_callback)
+            ))
             .unwrap();
         self.pipeline
             .replace(Some((pipeline.clone(), bus_watch_guard, output_stream)));

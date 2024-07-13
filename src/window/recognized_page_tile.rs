@@ -67,12 +67,16 @@ mod imp {
             let gesture_click = gtk::GestureClick::builder()
                 .button(gdk::BUTTON_PRIMARY)
                 .build();
-            gesture_click.connect_released(clone!(@weak obj => move |gesture, _, x, y| {
-                gesture.set_state(gtk::EventSequenceState::Claimed);
-                if gesture.widget().is_some_and(|w| w.contains(x, y)) {
-                    obj.emit_by_name::<()>("activated", &[]);
+            gesture_click.connect_released(clone!(
+                #[weak]
+                obj,
+                move |gesture, _, x, y| {
+                    gesture.set_state(gtk::EventSequenceState::Claimed);
+                    if gesture.widget().is_some_and(|w| w.contains(x, y)) {
+                        obj.emit_by_name::<()>("activated", &[]);
+                    }
                 }
-            }));
+            ));
             self.song_tile.add_controller(gesture_click);
         }
 

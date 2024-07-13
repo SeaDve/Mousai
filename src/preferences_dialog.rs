@@ -104,20 +104,23 @@ impl PreferencesDialog {
             ])));
         imp.audio_source_type_row
             .set_selected(settings.audio_source_type().as_position());
-        imp.audio_source_type_row.connect_selected_notify(
-            clone!(@weak self as obj => move |provider_row| {
+        imp.audio_source_type_row.connect_selected_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |provider_row| {
                 obj.settings()
-                    .set_audio_source_type(AudioSourceType::from_position(
-                        provider_row.selected(),
-                    ));
-            }),
-        );
+                    .set_audio_source_type(AudioSourceType::from_position(provider_row.selected()));
+            }
+        ));
 
         imp.aud_d_api_token_row
             .set_text(&settings.aud_d_api_token());
-        imp.aud_d_api_token_row
-            .connect_apply(clone!(@weak self as obj => move |row| {
+        imp.aud_d_api_token_row.connect_apply(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |row| {
                 obj.settings().set_aud_d_api_token(&row.text());
-            }));
+            }
+        ));
     }
 }

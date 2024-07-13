@@ -91,11 +91,13 @@ mod imp {
             let obj = self.obj();
 
             self.scale_handler_id
-                .set(self.playback_position_scale.connect_value_changed(
-                    clone!(@weak obj => move |scale| {
+                .set(self.playback_position_scale.connect_value_changed(clone!(
+                    #[weak]
+                    obj,
+                    move |scale| {
                         obj.on_playback_position_scale_value_changed(scale);
-                    }),
-                ))
+                    }
+                )))
                 .unwrap();
         }
 
@@ -136,23 +138,39 @@ impl SongBar {
 
         imp.player.set(player.clone()).unwrap();
 
-        player.connect_song_notify(clone!(@weak self as obj => move |_| {
-            obj.update_song_ui();
-        }));
+        player.connect_song_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_song_ui();
+            }
+        ));
 
-        player.connect_state_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_button();
-        }));
+        player.connect_state_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_playback_button();
+            }
+        ));
 
-        player.connect_position_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_position();
-            obj.update_playback_position_duration_label();
-        }));
+        player.connect_position_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_playback_position();
+                obj.update_playback_position_duration_label();
+            }
+        ));
 
-        player.connect_duration_notify(clone!(@weak self as obj => move |_| {
-            obj.update_playback_position_scale_range();
-            obj.update_playback_position_duration_label();
-        }));
+        player.connect_duration_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_playback_position_scale_range();
+                obj.update_playback_position_duration_label();
+            }
+        ));
 
         self.update_song_ui();
         self.update_playback_button();
@@ -187,10 +205,14 @@ impl SongBar {
         imp.seek_timeout_id
             .replace(Some(glib::timeout_add_local_once(
                 Duration::from_millis(20),
-                clone!(@weak self as obj => move || {
-                    obj.imp().seek_timeout_id.replace(None);
-                    obj.player().seek(gst::ClockTime::from_seconds_f64(value));
-                }),
+                clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move || {
+                        obj.imp().seek_timeout_id.replace(None);
+                        obj.player().seek(gst::ClockTime::from_seconds_f64(value));
+                    }
+                ),
             )));
     }
 

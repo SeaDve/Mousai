@@ -67,10 +67,13 @@ mod imp {
 
             let obj = self.obj();
 
-            self.show_results_button
-                .connect_clicked(clone!(@weak obj => move |_| {
+            self.show_results_button.connect_clicked(clone!(
+                #[weak]
+                obj,
+                move |_| {
                     obj.emit_by_name::<()>("show-results-requested", &[]);
-                }));
+                }
+            ));
         }
 
         fn dispose(&self) {
@@ -106,15 +109,21 @@ impl RecognizerStatus {
 
     /// Must be called only once
     pub fn bind_recognizer(&self, recognizer: &Recognizer) {
-        recognizer.connect_is_offline_mode_notify(clone!(@weak self as obj => move |_| {
-            obj.update_offline_mode_ui();
-        }));
+        recognizer.connect_is_offline_mode_notify(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_| {
+                obj.update_offline_mode_ui();
+            }
+        ));
 
-        recognizer.saved_recordings().connect_items_changed(
-            clone!(@weak self as obj => move |_, _, _, _| {
+        recognizer.saved_recordings().connect_items_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _, _, _| {
                 obj.update_progress_and_show_results_ui();
-            }),
-        );
+            }
+        ));
 
         self.imp().recognizer.set(recognizer.clone()).unwrap();
 

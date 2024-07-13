@@ -167,8 +167,10 @@ mod imp {
 
             let obj = self.obj();
 
-            self.navigation_view
-                .connect_pushed(clone!(@weak obj => move |view| {
+            self.navigation_view.connect_pushed(clone!(
+                #[weak]
+                obj,
+                move |view| {
                     let imp = obj.imp();
 
                     let visible_page = view
@@ -188,25 +190,28 @@ mod imp {
                             }
                         }
                     }
-                }));
-            self.navigation_view
-                .connect_popped(clone!(@weak obj => move |_, page| {
+                }
+            ));
+            self.navigation_view.connect_popped(clone!(
+                #[weak]
+                obj,
+                move |_, page| {
                     obj.imp()
                         .navigation_forward_stack
                         .borrow_mut()
                         .push(page.clone());
-                }));
-            self.navigation_view.connect_get_next_page(
-                clone!(@weak obj => @default-panic, move |_| {
-                    let next_page = obj.imp()
-                        .navigation_forward_stack
-                        .borrow()
-                        .last()
-                        .cloned();
+                }
+            ));
+            self.navigation_view.connect_get_next_page(clone!(
+                #[weak]
+                obj,
+                #[upgrade_or_panic]
+                move |_| {
+                    let next_page = obj.imp().navigation_forward_stack.borrow().last().cloned();
 
                     next_page
-                }),
-            );
+                }
+            ));
 
             self.content_empty_page.set_icon_name(Some(APP_ID));
             obj.setup_grid();
@@ -281,11 +286,13 @@ impl HistoryView {
         unsafe {
             recognized_page.set_data(
                 RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY,
-                recognized_page.connect_song_activated(
-                    clone!(@weak self as obj => move |_, song| {
+                recognized_page.connect_song_activated(clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move |_, song| {
                         obj.push_song_page(song);
-                    }),
-                ),
+                    }
+                )),
             );
             recognized_page.set_data(
                 RECOGNIZED_PAGE_ADAPTIVE_MODE_BINDING_KEY,
@@ -321,15 +328,19 @@ impl HistoryView {
         unsafe {
             song_page.set_data(
                 SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY,
-                song_page.connect_song_remove_request(clone!(@weak self as obj => move |_, song| {
-                    if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
-                        tracing::error!("Failed to remove song: {:?}", err);
-                        Application::get().add_message_toast(&gettext("Failed to remove song"));
-                        return;
-                    }
+                song_page.connect_song_remove_request(clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move |_, song| {
+                        if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
+                            tracing::error!("Failed to remove song: {:?}", err);
+                            Application::get().add_message_toast(&gettext("Failed to remove song"));
+                            return;
+                        }
 
-                    obj.show_undo_remove_song_toast();
-                })),
+                        obj.show_undo_remove_song_toast();
+                    }
+                )),
             );
             song_page.set_data(
                 SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY,
@@ -359,63 +370,89 @@ impl HistoryView {
     pub fn bind_song_list(&self, song_list: &SongList) {
         let imp = self.imp();
 
-        song_list.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_content_stack_visible_child();
-        }));
+        song_list.connect_items_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _, _, _| {
+                obj.update_content_stack_visible_child();
+            }
+        ));
 
         let filter = SongFilter::new();
         let sorter = SongSorter::new();
 
         let filter_model = gtk::FilterListModel::new(Some(song_list.clone()), Some(filter.clone()));
-        filter_model.connect_items_changed(clone!(@weak self as obj => move |_, _, _, _| {
-            obj.update_content_stack_visible_child();
-        }));
+        filter_model.connect_items_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, _, _, _| {
+                obj.update_content_stack_visible_child();
+            }
+        ));
 
-        imp.search_entry.connect_search_changed(
-            clone!(@weak self as obj, @weak filter, @weak sorter => move |search_entry| {
+        imp.search_entry.connect_search_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            #[weak]
+            filter,
+            #[weak]
+            sorter,
+            move |search_entry| {
                 let text = search_entry.text();
                 filter.set_search(text.trim());
                 sorter.set_search(text.trim());
                 obj.update_content_stack_visible_child();
-            }),
-        );
+            }
+        ));
 
         let sort_model = gtk::SortListModel::new(Some(filter_model.clone()), Some(sorter));
 
         // FIXME save selection even when the song are filtered from FilterListModel
         let selection_model = gtk::MultiSelection::new(Some(sort_model));
-        selection_model.connect_selection_changed(clone!(@weak self as obj => move |model, _, _| {
-            if obj.is_selection_mode_active() {
-                if model.selection().size() == 0 {
-                    obj.set_selection_mode_active(false);
-                }
+        selection_model.connect_selection_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |model, _, _| {
+                if obj.is_selection_mode_active() {
+                    if model.selection().size() == 0 {
+                        obj.set_selection_mode_active(false);
+                    }
 
-                obj.update_selection_actions();
-            }
-        }));
-        selection_model.connect_items_changed(clone!(@weak self as obj => move |model, _, _, _| {
-            if obj.is_selection_mode_active() {
-                if model.selection().size() == 0 {
-                    obj.set_selection_mode_active(false);
+                    obj.update_selection_actions();
                 }
-
-                obj.update_selection_actions();
             }
-        }));
+        ));
+        selection_model.connect_items_changed(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |model, _, _, _| {
+                if obj.is_selection_mode_active() {
+                    if model.selection().size() == 0 {
+                        obj.set_selection_mode_active(false);
+                    }
+
+                    obj.update_selection_actions();
+                }
+            }
+        ));
 
         let grid = imp.grid.get();
         grid.set_model(Some(&selection_model));
-        grid.connect_activate(
-            clone!(@weak self as obj, @weak selection_model => move |_, index| {
+        grid.connect_activate(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            #[weak]
+            selection_model,
+            move |_, index| {
                 match selection_model.item(index) {
                     Some(ref item) => {
                         let song = item.downcast_ref::<Song>().unwrap();
                         obj.push_song_page(song);
                     }
-                    None => unreachable!("selection model must have item at index `{}`", index)
+                    None => unreachable!("selection model must have item at index `{}`", index),
                 }
-            }),
-        );
+            }
+        ));
 
         imp.song_list.set(song_list.downgrade()).unwrap();
         imp.filter_model.set(filter_model.downgrade()).unwrap();
@@ -432,15 +469,19 @@ impl HistoryView {
 
         imp.recognizer_status.bind_recognizer(recognizer);
 
-        imp.recognizer_status.connect_show_results_requested(
-            clone!(@weak self as obj, @weak recognizer => move |_| {
+        imp.recognizer_status.connect_show_results_requested(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            #[weak]
+            recognizer,
+            move |_| {
                 if let Err(err) = obj.show_recognizer_results(&recognizer) {
                     tracing::error!("Failed to show recognizer results: {:?}", err);
                     Application::get()
                         .add_message_toast(&gettext("Failed to show recognizer results"));
                 }
-            }),
-        );
+            }
+        ));
     }
 
     pub fn scroll_to_top(&self) -> bool {
@@ -547,21 +588,29 @@ impl HistoryView {
                 .button_label(gettext("_Undo"))
                 .build();
 
-            toast.connect_button_clicked(clone!(@weak self as obj => move |_| {
-                if let Err(err) = obj
-                    .song_list()
-                    .insert_many(obj.imp().songs_purgatory.take())
-                {
-                    tracing::error!("Failed to undo remove song: {:?}", err);
-                    Application::get().add_message_toast(&gettext("Failed to undo"));
+            toast.connect_button_clicked(clone!(
+                #[weak(rename_to = obj)]
+                self,
+                move |_| {
+                    if let Err(err) = obj
+                        .song_list()
+                        .insert_many(obj.imp().songs_purgatory.take())
+                    {
+                        tracing::error!("Failed to undo remove song: {:?}", err);
+                        Application::get().add_message_toast(&gettext("Failed to undo"));
+                    }
                 }
-            }));
+            ));
 
-            toast.connect_dismissed(clone!(@weak self as obj => move |_| {
-                let imp = obj.imp();
-                imp.songs_purgatory.borrow_mut().clear();
-                imp.undo_remove_song_toast.take();
-            }));
+            toast.connect_dismissed(clone!(
+                #[weak(rename_to = obj)]
+                self,
+                move |_| {
+                    let imp = obj.imp();
+                    imp.songs_purgatory.borrow_mut().clear();
+                    imp.undo_remove_song_toast.take();
+                }
+            ));
 
             Application::get().add_toast(toast.clone());
 
@@ -725,69 +774,88 @@ impl HistoryView {
 
     fn setup_grid(&self) {
         let factory = gtk::SignalListItemFactory::new();
-        factory.connect_setup(clone!(@weak self as obj => move |_, list_item| {
-            let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
+        factory.connect_setup(clone!(
+            #[weak(rename_to = obj)]
+            self,
+            move |_, list_item| {
+                let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
 
-            let song_tile = SongTile::new();
-            song_tile.set_shows_select_button_on_hover(true);
-            song_tile.bind_player(&obj.player());
+                let song_tile = SongTile::new();
+                song_tile.set_shows_select_button_on_hover(true);
+                song_tile.bind_player(&obj.player());
 
-            let selection_mode_active_binding = obj
-                .bind_property("is-selection-mode-active", &song_tile, "is-selection-mode-active")
-                .sync_create()
-                .build();
-            let adaptive_mode_binding = obj
-                .bind_property("adaptive-mode", &song_tile, "adaptive-mode")
-                .sync_create()
-                .build();
+                let selection_mode_active_binding = obj
+                    .bind_property(
+                        "is-selection-mode-active",
+                        &song_tile,
+                        "is-selection-mode-active",
+                    )
+                    .sync_create()
+                    .build();
+                let adaptive_mode_binding = obj
+                    .bind_property("adaptive-mode", &song_tile, "adaptive-mode")
+                    .sync_create()
+                    .build();
 
-            song_tile.connect_is_active_notify(clone!(@weak obj, @weak list_item => move |tile| {
-                let selection_model = obj
-                    .imp()
-                    .selection_model
-                    .get()
-                    .and_then(|model| model.upgrade())
-                    .expect("selection model should exist");
-                if tile.is_active() {
-                    selection_model.select_item(list_item.position(), false);
-                } else {
-                    selection_model.unselect_item(list_item.position());
+                song_tile.connect_is_active_notify(clone!(
+                    #[weak]
+                    obj,
+                    #[weak]
+                    list_item,
+                    move |tile| {
+                        let selection_model = obj
+                            .imp()
+                            .selection_model
+                            .get()
+                            .and_then(|model| model.upgrade())
+                            .expect("selection model should exist");
+                        if tile.is_active() {
+                            selection_model.select_item(list_item.position(), false);
+                        } else {
+                            selection_model.unselect_item(list_item.position());
+                        }
+                    }
+                ));
+                song_tile.connect_selection_mode_requested(clone!(
+                    #[weak]
+                    obj,
+                    move |_| {
+                        obj.set_selection_mode_active(true);
+                    }
+                ));
+
+                let song_watch = list_item.property_expression("item").bind(
+                    &song_tile,
+                    "song",
+                    glib::Object::NONE,
+                );
+                let selected_watch = gtk::ClosureExpression::new::<bool>(
+                    [
+                        list_item.property_expression("selected"),
+                        obj.property_expression("is-selection-mode-active"),
+                    ],
+                    closure!(|_: Option<glib::Object>,
+                              is_selected: bool,
+                              is_selection_mode_active: bool| {
+                        is_selected && is_selection_mode_active
+                    }),
+                )
+                .bind(&song_tile, "is-selected", glib::Object::NONE);
+
+                unsafe {
+                    list_item.set_data(
+                        GRID_LIST_ITEM_BINDINGS_KEY,
+                        vec![selection_mode_active_binding, adaptive_mode_binding],
+                    );
+                    list_item.set_data(
+                        GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY,
+                        vec![song_watch, selected_watch],
+                    );
                 }
-            }));
-            song_tile.connect_selection_mode_requested(clone!(@weak obj => move |_| {
-                obj.set_selection_mode_active(true);
-            }));
 
-            let song_watch =
-                list_item
-                    .property_expression("item")
-                    .bind(&song_tile, "song", glib::Object::NONE);
-            let selected_watch = gtk::ClosureExpression::new::<bool>(
-                [
-                    list_item.property_expression("selected"),
-                    obj.property_expression("is-selection-mode-active"),
-                ],
-                closure!(|_: Option<glib::Object>,
-                        is_selected: bool,
-                        is_selection_mode_active: bool| {
-                    is_selected && is_selection_mode_active
-                }),
-            )
-            .bind(&song_tile, "is-selected", glib::Object::NONE);
-
-            unsafe {
-                list_item.set_data(
-                    GRID_LIST_ITEM_BINDINGS_KEY,
-                    vec![selection_mode_active_binding, adaptive_mode_binding],
-                );
-                list_item.set_data(
-                    GRID_LIST_ITEM_EXPRESSION_WATCHES_KEY,
-                    vec![song_watch, selected_watch],
-                );
+                list_item.set_child(Some(&song_tile));
             }
-
-            list_item.set_child(Some(&song_tile));
-        }));
+        ));
         factory.connect_teardown(|_, list_item| {
             let list_item = list_item.downcast_ref::<gtk::ListItem>().unwrap();
 
