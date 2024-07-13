@@ -1,5 +1,6 @@
+use adw::prelude::*;
 use gettextrs::gettext;
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk::{glib, subclass::prelude::*};
 
 use std::cell::Cell;
 
@@ -28,7 +29,7 @@ mod imp {
         #[template_child]
         pub(super) image_child: TemplateChild<gtk::Image>,
         #[template_child]
-        pub(super) spinner_child: TemplateChild<gtk::Spinner>,
+        pub(super) spinner_child: TemplateChild<adw::Spinner>,
     }
 
     #[glib::object_subclass]
@@ -94,19 +95,16 @@ impl PlaybackButton {
                     .set_icon_name(Some("media-playback-start-symbolic"));
                 self.set_tooltip_text(Some(&gettext("Play")));
                 imp.stack.set_visible_child(&imp.image_child.get());
-                imp.spinner_child.set_spinning(false);
             }
             PlaybackButtonMode::Pause => {
                 imp.image_child
                     .set_icon_name(Some("media-playback-pause-symbolic"));
                 self.set_tooltip_text(Some(&gettext("Pause")));
                 imp.stack.set_visible_child(&imp.image_child.get());
-                imp.spinner_child.set_spinning(false);
             }
             PlaybackButtonMode::Buffering => {
                 self.set_tooltip_text(None);
                 imp.stack.set_visible_child(&imp.spinner_child.get());
-                imp.spinner_child.set_spinning(true);
             }
         }
     }

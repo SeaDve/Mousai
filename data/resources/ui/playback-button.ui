@@ -7,11 +7,10 @@
           <object class="GtkImage" id="image_child"/>
         </child>
         <child>
-          <object class="GtkSpinner" id="spinner_child">
+          <object class="AdwSpinner" id="spinner_child">
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="width-request">24</property>
-            <property name="height-request">24</property>
+            <property name="size">24</property>
           </object>
         </child>
       </object>
