@@ -1,10 +1,10 @@
 waveform {
-  color: @accent_color;
+  color: var(--accent-color);
   transition: 200ms linear color;
 }
 
 waveform.red {
-  color: @error_color;
+  color: var(--error-color);
 }
 
 /* ExternalLinkTile */
@@ -89,8 +89,8 @@ recognizedpagetile songtile:active {
 .show-results-button > label {
   padding: 2px 6px;
 
-  color: @accent_fg_color;
-  background-color: @accent_bg_color;
+  color: var(--accent-fg-color);
+  background-color: var(--accent-bg-color);
   border-radius: 99999px;
 
   font-feature-settings: "tnum";
@@ -136,8 +136,8 @@ recognizedpagetile songtile:active {
 label.new {
   padding: 3px 8px;
 
-  color: @accent_fg_color;
-  background-color: @accent_bg_color;
+  color: var(--accent-fg-color);
+  background-color: var(--accent-bg-color);
   border-radius: 99999px;
 
   font-weight: bold;
