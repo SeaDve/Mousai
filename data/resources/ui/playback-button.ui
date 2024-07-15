@@ -10,7 +10,8 @@
           <object class="AdwSpinner" id="spinner_child">
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="size">24</property>
+            <property name="width-request">24</property>
+            <property name="height-request">24</property>
           </object>
         </child>
       </object>
