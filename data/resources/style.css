@@ -73,11 +73,11 @@ recognizedpagetile songtile {
 }
 
 recognizedpagetile songtile:hover {
-  background-color: alpha(currentColor, .07);
+  background-color: color-mix(in srgb, currentColor 7%, transparent);
 }
 
 recognizedpagetile songtile:active {
-  background-color: alpha(currentColor, .16);
+  background-color: color-mix(in srgb, currentColor 16%, transparent);
 }
 
 /* RecognizerStatus */
