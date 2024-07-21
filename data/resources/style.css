@@ -1,3 +1,8 @@
+:root {
+  --tile-hover-oklch: calc(l * 1.08) c h;
+  --tile-active-oklch: calc(l * 0.95) calc(c * 0.95) h;
+}
+
 waveform {
   color: var(--accent-color);
   transition: 200ms linear color;
@@ -9,15 +14,19 @@ waveform.red {
 
 /* ExternalLinkTile */
 
+.external-link-tile {
+  transition-property: background;
+}
+
 .external-link-tile.applemusic {
 	background: linear-gradient(180deg, #fb5b73 30%, #fa243c 100%);
 	color: white;
 }
 .external-link-tile.applemusic:hover {
-	background: linear-gradient(180deg, shade(#fb5b73, 1.07) 30%, shade(#fa243c, 1.07) 100%);
+	background: linear-gradient(180deg, oklch(from #fb5b73 var(--tile-hover-oklch)) 30%, oklch(from #fa243c var(--tile-hover-oklch)) 100%);
 }
 .external-link-tile.applemusic:active {
-	background: linear-gradient(180deg, shade(#fb5b73, .97) 30%, shade(#fa243c, 1.07) 100%);
+	background: linear-gradient(180deg, oklch(from #fb5b73 var(--tile-active-oklch)) 30%, oklch(from #fa243c var(--tile-active-oklch)) 100%);
 }
 
 .external-link-tile.audd {
@@ -25,10 +34,10 @@ waveform.red {
 	color: white;
 }
 .external-link-tile.audd:hover {
-	background: linear-gradient(180deg, shade(#ee1c52, 1.07) 30%, shade(#c12279, 1.07) 100%);
+	background: linear-gradient(180deg, oklch(from #ee1c52 var(--tile-hover-oklch)) 30%, oklch(from #c12279 var(--tile-hover-oklch)) 100%);
 }
 .external-link-tile.audd:active {
-	background: linear-gradient(180deg, shade(#ee1c52, .97) 30%, shade(#c12279, .95) 100%);
+	background: linear-gradient(180deg, oklch(from #ee1c52 var(--tile-active-oklch)) 30%, oklch(from #c12279 var(--tile-active-oklch)) 100%);
 }
 
 .external-link-tile.spotify {
@@ -36,21 +45,21 @@ waveform.red {
 	color: white;
 }
 .external-link-tile.spotify:hover {
-	background: shade(#1dd05d, 1.06);
+	background: oklch(from #1dd05d var(--tile-hover-oklch));
 }
 .external-link-tile.spotify:active {
-	background: shade(#1dd05d, 0.95);
+	background: oklch(from #1dd05d var(--tile-active-oklch));
 }
 
 .external-link-tile.youtube {
-	background: #f70000;
+	background: #FF0000;
 	color: white;
 }
 .external-link-tile.youtube:hover {
-	background: shade(#f70000, 1.15);
+	background: oklch(from #FF0000 var(--tile-hover-oklch));
 }
 .external-link-tile.youtube:active {
-	background: shade(#f70000, 0.95);
+	background: oklch(from #FF0000 var(--tile-active-oklch));
 }
 
 /* HistoryView */
