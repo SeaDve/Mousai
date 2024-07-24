@@ -85,7 +85,7 @@ impl RecognizerView {
             #[weak(rename_to = obj)]
             self,
             move |_, peak| {
-                obj.imp().waveform.push_peak(peak);
+                obj.imp().waveform.push_peak(peak as f32);
             }
         ));
 
@@ -114,7 +114,7 @@ impl RecognizerView {
                     #[weak(rename_to = obj)]
                     self,
                     move |value| {
-                        obj.imp().waveform.push_peak(value);
+                        obj.imp().waveform.push_peak(value as f32);
                     }
                 )))
                 .easing(adw::Easing::EaseOutBack)

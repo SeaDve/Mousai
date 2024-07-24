@@ -2,24 +2,22 @@
 // Modified to be bidirectional
 // See https://gitlab.gnome.org/GNOME/gnome-sound-recorder/-/blob/5ffc0fc935b402483b82c42f7baec015af21cdd6/src/waveform.ts
 
-use gtk::{cairo, glib, graphene, prelude::*, subclass::prelude::*};
+use gtk::{glib, gsk, prelude::*, subclass::prelude::*};
 
 use std::{cell::RefCell, collections::VecDeque};
 
-const GUTTER: f64 = 10.0;
-const LINE_WIDTH: f64 = 6.0;
+const GUTTER: f32 = 10.0;
+const LINE_WIDTH: f32 = 6.0;
 
 const NATURAL_WIDTH: i32 = 300;
 const NATURAL_HEIGHT: i32 = 240;
-
-// TODO Port to GskPath
 
 mod imp {
     use super::*;
 
     #[derive(Default)]
     pub struct Waveform {
-        pub(super) peaks: RefCell<VecDeque<f64>>,
+        pub(super) peaks: RefCell<VecDeque<f32>>,
     }
 
     #[glib::object_subclass]
@@ -50,13 +48,12 @@ mod imp {
             let height = obj.height();
             let color = obj.color();
 
-            let ctx =
-                snapshot.append_cairo(&graphene::Rect::new(0.0, 0.0, width as f32, height as f32));
-            ctx.set_line_cap(cairo::LineCap::Round);
-            ctx.set_line_width(LINE_WIDTH);
+            let stroke = gsk::Stroke::builder(LINE_WIDTH)
+                .line_cap(gsk::LineCap::Round)
+                .build();
 
-            let v_center = height as f64 / 2.0;
-            let h_center = width as f64 / 2.0;
+            let v_center = height as f32 / 2.0;
+            let h_center = width as f32 / 2.0;
 
             let peaks = self.peaks.borrow();
 
@@ -74,25 +71,24 @@ mod imp {
                 // first/older peaks are lower and shorter respectively.
                 let rev_index = n_peaks_to_draw - index - 1;
 
-                ctx.set_source_rgba(
-                    color.red() as f64,
-                    color.green() as f64,
-                    color.blue() as f64,
-                    color.alpha() as f64 * (rev_index as f64 / n_peaks_to_draw as f64), // Add feathering
+                let line_height =
+                    adw::Easing::EaseInQuad.ease(rev_index as f64 / n_peaks_to_draw as f64) as f32
+                        * peak
+                        * v_center;
+
+                let pb = gsk::PathBuilder::new();
+
+                pb.move_to(pointer, v_center + line_height);
+                pb.line_to(pointer, v_center - line_height);
+
+                pb.move_to(width as f32 - pointer, v_center + line_height);
+                pb.line_to(width as f32 - pointer, v_center - line_height);
+
+                snapshot.append_stroke(
+                    &pb.to_path(),
+                    &stroke,
+                    &color.with_alpha(color.alpha() * (rev_index as f32 / n_peaks_to_draw as f32)), // Add feathering
                 );
-
-                let line_height = adw::Easing::EaseInQuad
-                    .ease(rev_index as f64 / n_peaks_to_draw as f64)
-                    * peak
-                    * v_center;
-
-                ctx.move_to(pointer, v_center + line_height);
-                ctx.line_to(pointer, v_center - line_height);
-                ctx.stroke().unwrap();
-
-                ctx.move_to(width as f64 - pointer, v_center + line_height);
-                ctx.line_to(width as f64 - pointer, v_center - line_height);
-                ctx.stroke().unwrap();
 
                 pointer += GUTTER;
             }
@@ -110,7 +106,7 @@ impl Waveform {
         glib::Object::new()
     }
 
-    pub fn push_peak(&self, peak: f64) {
+    pub fn push_peak(&self, peak: f32) {
         let mut peaks = self.imp().peaks.borrow_mut();
 
         if peaks.len() > self.max_n_peaks() as usize {
