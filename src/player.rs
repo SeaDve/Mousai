@@ -142,7 +142,7 @@ mod imp {
             }
 
             let metadata = song.as_ref().map_or_else(Metadata::new, |song| {
-                // TODO Fill up nones
+                // TODO Fill up more metadata fields
                 let mut metadata = Metadata::builder()
                     .album(song.album())
                     .title(song.title())
