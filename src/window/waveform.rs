@@ -71,10 +71,9 @@ mod imp {
                 // first/older peaks are lower and shorter respectively.
                 let rev_index = n_peaks_to_draw - index - 1;
 
-                let line_height =
-                    adw::Easing::EaseInQuad.ease(rev_index as f64 / n_peaks_to_draw as f64) as f32
-                        * peak
-                        * v_center;
+                let line_height_factor =
+                    adw::Easing::EaseInQuad.ease(rev_index as f64 / n_peaks_to_draw as f64) as f32;
+                let line_height = (peak * v_center * line_height_factor).clamp(0.1, f32::MAX);
 
                 let pb = gsk::PathBuilder::new();
 
