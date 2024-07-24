@@ -3,7 +3,10 @@ use adw::{
     subclass::{navigation_page::NavigationPageImpl, prelude::*},
 };
 use gettextrs::ngettext;
-use gtk::glib::{self, clone, closure_local};
+use gtk::{
+    gdk,
+    glib::{self, clone, closure_local},
+};
 
 use std::cell::{Cell, OnceCell, RefCell};
 
@@ -42,6 +45,15 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+
+            klass.add_binding(gdk::Key::Left, gdk::ModifierType::empty(), |obj| {
+                obj.go_to_tile_relative(-1);
+                glib::Propagation::Stop
+            });
+            klass.add_binding(gdk::Key::Right, gdk::ModifierType::empty(), |obj| {
+                obj.go_to_tile_relative(1);
+                glib::Propagation::Stop
+            });
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -171,6 +183,23 @@ impl RecognizedPage {
             imp.carousel.append(&tile);
             imp.tiles.borrow_mut().push(tile);
         }
+    }
+
+    fn go_to_tile_relative(&self, delta: i32) {
+        let imp = self.imp();
+
+        let n_tiles = imp.carousel.n_pages();
+
+        if n_tiles == 0 {
+            return;
+        }
+
+        let curr_pos = imp.carousel.position();
+
+        let new_tile_pos = (curr_pos as i32 + delta + n_tiles as i32) as u32 % n_tiles;
+        let new_tile = imp.carousel.nth_page(new_tile_pos);
+
+        imp.carousel.scroll_to(&new_tile, true);
     }
 
     fn update_carousel_spacing(&self) {
