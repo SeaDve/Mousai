@@ -311,7 +311,7 @@ impl Player {
                 };
 
                 let old_state = imp.state.get();
-                tracing::debug!("State changed from `{:?}` -> `{:?}`", old_state, new_state);
+                tracing::trace!("State changed from `{:?}` -> `{:?}`", old_state, new_state);
 
                 imp.state.set(new_state);
 
