@@ -74,7 +74,9 @@ mod imp {
 
             klass.install_action("song-page.copy-song", None, |obj, _, _| {
                 let song = obj.song().expect("song should be set");
-                obj.display().clipboard().set_text(&song.copy_term());
+                obj.display()
+                    .clipboard()
+                    .set_text(&song.artist_title_text());
                 Application::get().add_message_toast(&gettext("Copied to clipboard"));
             });
         }
@@ -394,12 +396,12 @@ impl SongPage {
     fn update_page_title(&self) {
         let imp = self.imp();
 
-        let artist_title_text = self
+        let title_text = self
             .song()
-            .map(|s| format!("{} - {}", s.artist(), s.title()))
+            .map(|s| s.artist_title_text())
             .unwrap_or_default();
-        self.set_title(&artist_title_text);
-        imp.title.set_title(&artist_title_text);
+        self.set_title(&title_text);
+        imp.title.set_title(&title_text);
     }
 
     fn update_album_cover_size(&self) {

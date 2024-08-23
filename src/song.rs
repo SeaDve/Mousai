@@ -117,8 +117,8 @@ impl Song {
         FUZZY_MATCHER.fuzzy_match(&choice, pattern)
     }
 
-    /// String copied to clipboard when copying self.
-    pub fn copy_term(&self) -> String {
+    /// Returns the artist and title of the song in the format "Artist - Title"
+    pub fn artist_title_text(&self) -> String {
         format!("{} - {}", self.artist(), self.title())
     }
 

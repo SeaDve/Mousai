@@ -140,7 +140,7 @@ mod imp {
 
                 let text = selected_songs
                     .iter()
-                    .map(|song| song.copy_term())
+                    .map(|song| song.artist_title_text())
                     .collect::<Vec<_>>()
                     .join("\n");
                 obj.display().clipboard().set_text(&text);

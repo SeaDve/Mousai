@@ -51,11 +51,11 @@ mod imp {
             }
 
             if let Some(song) = &song {
-                let artist_title_text = format!("{} - {}", song.artist(), song.title());
+                let title_text = song.artist_title_text();
 
-                obj.set_title(&format!("{} (Lyrics)", artist_title_text));
+                obj.set_title(&format!("{} (Lyrics)", title_text));
 
-                self.title.set_title(&artist_title_text);
+                self.title.set_title(&title_text);
                 self.label.set_text(&song.lyrics().unwrap_or_default());
             } else {
                 obj.set_title("Lyrics");
