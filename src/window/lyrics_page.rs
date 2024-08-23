@@ -3,6 +3,8 @@ use gtk::glib;
 
 use crate::song::Song;
 
+// TODO Include lyrics credits in the page
+
 mod imp {
     use std::cell::RefCell;
 
