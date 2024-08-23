@@ -14,7 +14,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-view.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/recognizer_view.ui")]
     pub struct RecognizerView {
         #[template_child]
         pub(super) toolbar_view: TemplateChild<adw::ToolbarView>, // Unused

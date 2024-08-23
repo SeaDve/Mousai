@@ -28,7 +28,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::PreferencesDialog)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/preferences-dialog.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/preferences_dialog.ui")]
     pub struct PreferencesDialog {
         #[property(get, set, construct_only)]
         pub(super) settings: OnceCell<Settings>,

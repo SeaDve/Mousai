@@ -8,7 +8,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::InformationRow)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/information-row.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/information_row.ui")]
     pub struct InformationRow {
         /// Value of the information
         ///

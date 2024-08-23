@@ -32,7 +32,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::SongPage)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/song-page.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/song_page.ui")]
     pub struct SongPage {
         #[property(get, set = Self::set_song, explicit_notify)]
         pub(super) song: RefCell<Option<Song>>,

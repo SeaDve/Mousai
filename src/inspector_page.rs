@@ -16,7 +16,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::InspectorPage)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/inspector-page.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/inspector_page.ui")]
     pub struct InspectorPage {
         /// Title of this inspector page
         #[property(get = |_| INSPECTOR_TITLE.to_string())]

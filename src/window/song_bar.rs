@@ -25,7 +25,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/song-bar.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/song_bar.ui")]
     pub struct SongBar {
         #[template_child]
         pub(super) center_box: TemplateChild<gtk::CenterBox>, // Unused

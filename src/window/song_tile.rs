@@ -31,7 +31,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::SongTile)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/song-tile.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/song_tile.ui")]
     pub struct SongTile {
         /// Song represented by Self
         #[property(get, set = Self::set_song, explicit_notify)]

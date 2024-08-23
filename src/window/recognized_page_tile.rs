@@ -20,7 +20,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPageTile)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page-tile.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/recognized_page_tile.ui")]
     pub struct RecognizedPageTile {
         #[property(get = Self::song, set = Self::set_song, construct_only)]
         pub(super) song: PhantomData<Song>,

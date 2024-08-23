@@ -21,7 +21,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::RecognizedPage)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/recognized-page.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/recognized_page.ui")]
     pub struct RecognizedPage {
         #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
         pub(super) adaptive_mode: Cell<AdaptiveMode>,

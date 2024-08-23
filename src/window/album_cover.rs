@@ -17,7 +17,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::AlbumCover)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/album-cover.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/album_cover.ui")]
     pub struct AlbumCover {
         #[property(get = Self::pixel_size, set = Self::set_pixel_size, minimum = -1, default = -1, explicit_notify)]
         pub(super) pixel_size: PhantomData<i32>,

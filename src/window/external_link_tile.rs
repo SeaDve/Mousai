@@ -12,7 +12,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::ExternalLinkTile)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/external-link-tile.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/external_link_tile.ui")]
     pub struct ExternalLinkTile {
         /// Link shown by Self
         #[property(get, set, construct_only)]

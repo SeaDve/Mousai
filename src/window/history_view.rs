@@ -48,7 +48,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::HistoryView)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/history-view.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/history_view.ui")]
     pub struct HistoryView {
         /// Whether selection mode is active
         #[property(get)]

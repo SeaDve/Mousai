@@ -21,7 +21,7 @@ mod imp {
     use super::*;
 
     #[derive(Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/recognizer-status.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/recognizer_status.ui")]
     pub struct RecognizerStatus {
         #[template_child]
         pub(super) progress_icon_revealer: TemplateChild<gtk::Revealer>,

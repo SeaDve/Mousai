@@ -18,7 +18,7 @@ mod imp {
 
     #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
     #[properties(wrapper_type = super::PlaybackButton)]
-    #[template(resource = "/io/github/seadve/Mousai/ui/playback-button.ui")]
+    #[template(resource = "/io/github/seadve/Mousai/ui/playback_button.ui")]
     pub struct PlaybackButton {
         /// State or mode
         #[property(get, set = Self::set_mode, explicit_notify, builder(PlaybackButtonMode::default()))]
