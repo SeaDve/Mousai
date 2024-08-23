@@ -100,7 +100,7 @@ impl RecognizerStatus {
     {
         self.connect_closure(
             "show-results-requested",
-            true,
+            false,
             closure_local!(|obj: &Self| {
                 f(obj);
             }),

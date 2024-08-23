@@ -125,7 +125,7 @@ impl SongBar {
     {
         self.connect_closure(
             "activated",
-            true,
+            false,
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
             }),

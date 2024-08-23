@@ -103,7 +103,7 @@ impl Recognizer {
     {
         self.connect_closure(
             "recording-peak-changed",
-            true,
+            false,
             closure_local!(|obj: &Self, peak: f64| {
                 f(obj, peak);
             }),
@@ -120,7 +120,7 @@ impl Recognizer {
     {
         self.connect_closure(
             "song-recognized",
-            true,
+            false,
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
             }),
@@ -137,7 +137,7 @@ impl Recognizer {
     {
         self.connect_closure(
             "recording-saved",
-            true,
+            false,
             closure_local!(|obj: &Self, cause: &RecognizeError| {
                 f(obj, cause);
             }),

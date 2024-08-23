@@ -137,7 +137,7 @@ impl RecognizedPageTile {
     {
         self.connect_closure(
             "activated",
-            true,
+            false,
             closure_local!(|obj: &Self| {
                 f(obj);
             }),

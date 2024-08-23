@@ -118,7 +118,7 @@ impl RecognizedPage {
     {
         self.connect_closure(
             "song-activated",
-            true,
+            false,
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
             }),

@@ -184,7 +184,7 @@ impl Player {
     {
         self.connect_closure(
             "error",
-            true,
+            false,
             closure_local!(|obj: &Self, error: &glib::Error| {
                 f(obj, error);
             }),

@@ -287,7 +287,7 @@ impl SongTile {
     {
         self.connect_closure(
             "selection-mode-requested",
-            true,
+            false,
             closure_local!(|obj: &Self| {
                 f(obj);
             }),

@@ -219,7 +219,7 @@ impl SongPage {
     {
         self.connect_closure(
             "song-remove-request",
-            true,
+            false,
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
             }),
