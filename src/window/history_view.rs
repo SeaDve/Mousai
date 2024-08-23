@@ -8,19 +8,30 @@ use gtk::{
 
 use std::cell::{Cell, OnceCell, RefCell};
 
-use super::{
-    recognized_page::RecognizedPage, recognizer_status::RecognizerStatus, song_page::SongPage,
-    song_tile::SongTile, AdaptiveMode,
-};
 use crate::{
-    config::APP_ID, i18n::ngettext_f, player::Player, recognizer::Recognizer, song::Song,
-    song_filter::SongFilter, song_list::SongList, song_sorter::SongSorter, uid::Uid, Application,
+    config::APP_ID,
+    i18n::ngettext_f,
+    player::Player,
+    recognizer::Recognizer,
+    song::Song,
+    song_filter::SongFilter,
+    song_list::SongList,
+    song_sorter::SongSorter,
+    uid::Uid,
+    window::{
+        lyrics_page::LyricsPage, recognized_page::RecognizedPage,
+        recognizer_status::RecognizerStatus, song_page::SongPage, song_tile::SongTile,
+        AdaptiveMode,
+    },
+    Application,
 };
 
 // FIXME Missing global navigation shortcuts
 
 const SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY: &str =
     "mousai-song-page-song-remove-request-handler-id";
+const SONG_PAGE_SHOW_LYRICS_REQUEST_HANDLER_ID_KEY: &str =
+    "mousai-song-page-show-lyrics-request-handler-id";
 const SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY: &str = "mousai-song-page-adaptive-mode-binding";
 
 const RECOGNIZED_PAGE_SONG_ACTIVATED_HANDLER_ID_KEY: &str =
@@ -343,6 +354,18 @@ impl HistoryView {
                 )),
             );
             song_page.set_data(
+                SONG_PAGE_SHOW_LYRICS_REQUEST_HANDLER_ID_KEY,
+                song_page.connect_show_lyrics_request(clone!(
+                    #[weak(rename_to = obj)]
+                    self,
+                    move |page| {
+                        if let Some(song) = page.song() {
+                            obj.push_lyrics_page(&song);
+                        }
+                    }
+                )),
+            );
+            song_page.set_data(
                 SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY,
                 self.bind_property("adaptive-mode", &song_page, "adaptive-mode")
                     .sync_create()
@@ -354,6 +377,33 @@ impl HistoryView {
 
         // User is already aware of the newly recognized song, so unset it.
         song.set_is_newly_heard(false);
+    }
+
+    /// Pushes a `LyricsPage` for the given song to the navigation stack.
+    pub fn push_lyrics_page(&self, song: &Song) {
+        let imp = self.imp();
+
+        // Return if the last widget is a `LyricsPage` and its song's id is the same as the given song's id
+        if imp
+            .navigation_view
+            .visible_page()
+            .is_some_and(|visible_page| {
+                visible_page
+                    .downcast_ref::<LyricsPage>()
+                    .is_some_and(|lyrics_page| {
+                        lyrics_page
+                            .song()
+                            .is_some_and(|s| s.id_ref() == song.id_ref())
+                    })
+            })
+        {
+            return;
+        }
+
+        let lyrics_page = LyricsPage::new();
+        lyrics_page.set_song(Some(song));
+
+        imp.navigation_view.push(&lyrics_page);
     }
 
     /// Returns true if a page has been popped
@@ -880,13 +930,19 @@ impl HistoryView {
     }
 }
 
+/// This undoes the bindings and connections done on `push_*_page` methods.
 fn unbind_page(page: &adw::NavigationPage) {
     if let Some(song_page) = page.downcast_ref::<SongPage>() {
         unsafe {
-            let handler_id = song_page
+            let song_remove_request_handler_id = song_page
                 .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SONG_REMOVE_REQUEST_HANDLER_ID_KEY)
                 .unwrap();
-            song_page.disconnect(handler_id);
+            song_page.disconnect(song_remove_request_handler_id);
+
+            let show_lyrics_request_handler_id = song_page
+                .steal_data::<glib::SignalHandlerId>(SONG_PAGE_SHOW_LYRICS_REQUEST_HANDLER_ID_KEY)
+                .unwrap();
+            song_page.disconnect(show_lyrics_request_handler_id);
 
             let binding = song_page
                 .steal_data::<glib::Binding>(SONG_PAGE_ADAPTIVE_MODE_BINDING_KEY)
@@ -908,6 +964,8 @@ fn unbind_page(page: &adw::NavigationPage) {
             adaptive_mode_binding.unbind();
         }
         recognized_page.unbind_player();
+    } else if page.downcast_ref::<LyricsPage>().is_some() {
+        // Nothing to unbind
     } else {
         unreachable!(
             "tried to unbind unknown navigation page type `{}`",

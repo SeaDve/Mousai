@@ -10,6 +10,7 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/history-view.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/information-row.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/inspector-page.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/lyrics-page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/playback-button.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/preferences-dialog.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognized-page.ui</file>

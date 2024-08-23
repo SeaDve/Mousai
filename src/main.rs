@@ -1,3 +1,4 @@
+#![allow(clippy::new_without_default)]
 #![warn(
     rust_2018_idioms,
     clippy::items_after_statements,

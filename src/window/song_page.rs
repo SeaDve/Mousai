@@ -52,11 +52,9 @@ mod imp {
         #[template_child]
         pub(super) release_date_row: TemplateChild<InformationRow>,
         #[template_child]
+        pub(super) lyrics_row: TemplateChild<adw::ActionRow>,
+        #[template_child]
         pub(super) external_links_box: TemplateChild<gtk::FlowBox>,
-        #[template_child]
-        pub(super) lyrics_group: TemplateChild<adw::PreferencesGroup>,
-        #[template_child]
-        pub(super) lyrics_label: TemplateChild<gtk::Label>,
 
         pub(super) player: RefCell<Option<(WeakRef<Player>, glib::SignalHandlerId)>>, // Player and Player's state notify handler id
         pub(super) song_list: RefCell<Option<(WeakRef<SongList>, glib::SignalHandlerId)>>, // SongList and SongList's items changed handler id
@@ -88,9 +86,12 @@ mod imp {
     impl ObjectImpl for SongPage {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("song-remove-request")
-                    .param_types([Song::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("song-remove-request")
+                        .param_types([Song::static_type()])
+                        .build(),
+                    Signal::builder("show-lyrics-request").build(),
+                ]
             });
 
             SIGNALS.as_ref()
@@ -118,16 +119,21 @@ mod imp {
                 }
             ));
 
+            self.lyrics_row.connect_activated(clone!(
+                #[weak]
+                obj,
+                move |_| {
+                    obj.emit_by_name::<()>("show-lyrics-request", &[]);
+                }
+            ));
+
             self.external_links_box.connect_child_activated(|_, child| {
                 let external_link_tile = child.downcast_ref::<ExternalLinkTile>().unwrap();
                 external_link_tile.handle_activation();
             });
 
             self.song_binding_group
-                .bind("lyrics", &self.lyrics_label.get(), "label")
-                .build();
-            self.song_binding_group
-                .bind("lyrics", &self.lyrics_group.get(), "visible")
+                .bind("lyrics", &*self.lyrics_row, "visible")
                 .transform_to(|_, value| {
                     let lyrics = value.get::<Option<String>>().unwrap();
                     Some(lyrics.is_some().into())
@@ -213,6 +219,17 @@ impl SongPage {
             closure_local!(|obj: &Self, song: &Song| {
                 f(obj, song);
             }),
+        )
+    }
+
+    pub fn connect_show_lyrics_request(
+        &self,
+        f: impl Fn(&Self) + 'static,
+    ) -> glib::SignalHandlerId {
+        self.connect_closure(
+            "show-lyrics-request",
+            false,
+            closure_local!(|obj: &Self| f(obj)),
         )
     }
 

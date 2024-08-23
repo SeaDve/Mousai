@@ -73,6 +73,12 @@ waveform.red {
   padding: 0px;
 }
 
+/* LyricsPage */
+
+.lyrics-label {
+  line-height: 1.8em;
+}
+
 /* RecognizedPageTile */
 /* Note: Must be synced with libadwaita flat button style */
 
@@ -132,12 +138,6 @@ recognizedpagetile songtile:active {
 .playback-position-scale:active trough,
 .playback-position-scale:active highlight {
   min-height: 12px;
-}
-
-/* SongPage */
-
-.lyrics-label {
-  line-height: 1.8em;
 }
 
 /* SongTile */

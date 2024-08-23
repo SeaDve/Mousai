@@ -2,6 +2,7 @@ mod album_cover;
 mod external_link_tile;
 mod history_view;
 mod information_row;
+mod lyrics_page;
 mod playback_button;
 mod progress_icon;
 mod recognized_page;
