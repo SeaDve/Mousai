@@ -41,6 +41,15 @@
   <url type="vcs-browser">https://github.com/SeaDve/Mousai</url>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="0.7.8" date="2024-08-23">
+      <description translatable="no">
+        <p>This release contains the following changes:</p>
+        <ul>
+          <li>Lyrics are now on its own view</li>
+          <li>Navigation pages titles are now more consistent</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.7" date="2024-03-24">
       <description translatable="no">
         <p>This release contains the following changes:</p>
