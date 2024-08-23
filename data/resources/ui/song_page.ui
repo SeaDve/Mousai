@@ -27,7 +27,6 @@
           <object class="GtkScrolledWindow">
             <property name="child">
               <object class="AdwClamp">
-                <property name="maximum-size">800</property>
                 <property name="child">
                   <object class="GtkBox">
                     <property name="margin-start">24</property>
