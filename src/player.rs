@@ -192,7 +192,7 @@ impl Player {
     }
 
     pub fn is_active_song(&self, song_id: &Uid) -> bool {
-        self.song().map_or(false, |song| song.id_ref() == song_id)
+        self.song().is_some_and(|song| song.id_ref() == song_id)
     }
 
     pub fn play(&self) {

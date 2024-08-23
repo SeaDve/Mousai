@@ -345,7 +345,7 @@ impl SongPage {
 
         imp.remove_button.set_sensitive(
             self.song()
-                .map_or(false, |song| song_list.contains(song.id_ref())),
+                .is_some_and(|song| song_list.contains(song.id_ref())),
         );
     }
 

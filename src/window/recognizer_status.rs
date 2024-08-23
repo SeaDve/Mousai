@@ -161,7 +161,7 @@ impl RecognizerStatus {
             .filter(|recording| {
                 recording
                     .recognize_result()
-                    .map_or(false, |res| res.0.is_ok())
+                    .is_some_and(|res| res.0.is_ok())
             })
             .count();
         let n_failed = n_recognized - n_successful;

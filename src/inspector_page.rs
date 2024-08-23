@@ -93,7 +93,7 @@ impl InspectorPage {
 
     fn update_test_rows_sensitivity(&self) {
         let imp = self.imp();
-        let is_test = imp.provider_row.selected_item().map_or(false, |obj| {
+        let is_test = imp.provider_row.selected_item().is_some_and(|obj| {
             let item = obj.downcast_ref::<adw::EnumListItem>().unwrap();
             ProviderType::try_from(item.value())
                 .unwrap()
