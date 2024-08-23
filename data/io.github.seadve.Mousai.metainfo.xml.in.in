@@ -47,6 +47,7 @@
         <ul>
           <li>Lyrics are now on its own view</li>
           <li>Navigation pages titles are now more consistent</li>
+          <li>Song bar now adapts to narrow mode</li>
         </ul>
       </description>
     </release>
