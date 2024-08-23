@@ -40,6 +40,8 @@ mod imp {
         pub(super) adaptive_mode: Cell<AdaptiveMode>,
 
         #[template_child]
+        pub(super) title: TemplateChild<adw::WindowTitle>,
+        #[template_child]
         pub(super) remove_button: TemplateChild<gtk::Button>,
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
@@ -390,13 +392,14 @@ impl SongPage {
     }
 
     fn update_page_title(&self) {
-        self.set_title(
-            &self
-                .song()
-                .as_ref()
-                .map(|song| song.title())
-                .unwrap_or_default(),
-        );
+        let imp = self.imp();
+
+        let artist_title_text = self
+            .song()
+            .map(|s| format!("{} - {}", s.artist(), s.title()))
+            .unwrap_or_default();
+        self.set_title(&artist_title_text);
+        imp.title.set_title(&artist_title_text);
     }
 
     fn update_album_cover_size(&self) {

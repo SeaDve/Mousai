@@ -6,18 +6,7 @@
         <child type="top">
           <object class="AdwHeaderBar">
             <property name="title-widget">
-              <object class="AdwWindowTitle">
-                <binding name="title">
-                  <lookup name="title">
-                    <lookup name="song">MsaiSongPage</lookup>
-                  </lookup>
-                </binding>
-                <binding name="subtitle">
-                  <lookup name="artist">
-                    <lookup name="song">MsaiSongPage</lookup>
-                  </lookup>
-                </binding>
-              </object>
+              <object class="AdwWindowTitle" id="title"/>
             </property>
             <child type="end">
               <object class="GtkButton" id="remove_button">
