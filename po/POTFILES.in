@@ -2,6 +2,7 @@ data/io.github.seadve.Mousai.desktop.in.in
 data/io.github.seadve.Mousai.gschema.xml.in
 data/io.github.seadve.Mousai.metainfo.xml.in.in
 data/resources/ui/history_view.ui
+data/resources/ui/lyrics_page.ui
 data/resources/ui/preferences_dialog.ui
 data/resources/ui/recognizer_status.ui
 data/resources/ui/recognizer_view.ui
