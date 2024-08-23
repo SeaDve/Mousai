@@ -91,9 +91,7 @@ mod imp {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
                 vec![
-                    Signal::builder("song-remove-request")
-                        .param_types([Song::static_type()])
-                        .build(),
+                    Signal::builder("song-remove-request").build(),
                     Signal::builder("show-lyrics-request").build(),
                 ]
             });
@@ -110,9 +108,7 @@ mod imp {
                 #[weak]
                 obj,
                 move |_| {
-                    if let Some(ref song) = obj.song() {
-                        obj.emit_by_name::<()>("song-remove-request", &[song]);
-                    }
+                    obj.emit_by_name::<()>("song-remove-request", &[]);
                 }
             ));
             self.playback_button.connect_clicked(clone!(
@@ -215,14 +211,12 @@ impl SongPage {
 
     pub fn connect_song_remove_request<F>(&self, f: F) -> glib::SignalHandlerId
     where
-        F: Fn(&Self, &Song) + 'static,
+        F: Fn(&Self) + 'static,
     {
         self.connect_closure(
             "song-remove-request",
             false,
-            closure_local!(|obj: &Self, song: &Song| {
-                f(obj, song);
-            }),
+            closure_local!(|obj: &Self| f(obj)),
         )
     }
 

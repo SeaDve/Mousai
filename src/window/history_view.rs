@@ -342,7 +342,11 @@ impl HistoryView {
                 song_page.connect_song_remove_request(clone!(
                     #[weak(rename_to = obj)]
                     self,
-                    move |_, song| {
+                    move |song_page| {
+                        let song = song_page
+                            .song()
+                            .expect("song page must have a song on request");
+
                         if let Err(err) = obj.remove_songs(&[song.id_ref()]) {
                             tracing::error!("Failed to remove song: {:?}", err);
                             Application::get().add_message_toast(&gettext("Failed to remove song"));
@@ -358,10 +362,12 @@ impl HistoryView {
                 song_page.connect_show_lyrics_request(clone!(
                     #[weak(rename_to = obj)]
                     self,
-                    move |page| {
-                        if let Some(song) = page.song() {
-                            obj.push_lyrics_page(&song);
-                        }
+                    move |song_page| {
+                        let song = song_page
+                            .song()
+                            .expect("song page must have a song on request");
+
+                        obj.push_lyrics_page(&song);
                     }
                 )),
             );
