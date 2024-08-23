@@ -412,6 +412,27 @@ impl HistoryView {
             return;
         }
 
+        // If the next page is a `LyricsPage` with the same song id, just navigate to it.
+        //
+        // This is done to restore the scroll position of the `LyricsPage` when navigating back to it.
+        let forward_page = imp.navigation_forward_stack.borrow().last().cloned();
+        if let Some(forward_page) = forward_page {
+            if forward_page
+                .downcast_ref::<LyricsPage>()
+                .is_some_and(|lyrics_page| {
+                    lyrics_page
+                        .song()
+                        .is_some_and(|s| s.id_ref() == song.id_ref())
+                })
+            {
+                let removed = imp.navigation_forward_stack.borrow_mut().pop();
+                debug_assert_eq!(removed.as_ref(), Some(&forward_page));
+
+                imp.navigation_view.push(&forward_page);
+                return;
+            }
+        }
+
         let lyrics_page = LyricsPage::new();
         lyrics_page.set_song(Some(song));
 
