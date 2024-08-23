@@ -81,12 +81,6 @@ impl SongSorter {
     }
 }
 
-impl Default for SongSorter {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

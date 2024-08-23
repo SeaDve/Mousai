@@ -390,9 +390,3 @@ impl SongTile {
             });
     }
 }
-
-impl Default for SongTile {
-    fn default() -> Self {
-        Self::new()
-    }
-}

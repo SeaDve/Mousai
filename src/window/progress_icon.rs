@@ -116,9 +116,3 @@ impl ProgressIcon {
         glib::Object::new()
     }
 }
-
-impl Default for ProgressIcon {
-    fn default() -> Self {
-        Self::new()
-    }
-}

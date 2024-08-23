@@ -159,9 +159,3 @@ impl RecognizerView {
         }
     }
 }
-
-impl Default for RecognizerView {
-    fn default() -> Self {
-        Self::new()
-    }
-}

@@ -128,9 +128,3 @@ impl Waveform {
         self.width().unsigned_abs() / (2 * GUTTER as u32)
     }
 }
-
-impl Default for Waveform {
-    fn default() -> Self {
-        Self::new()
-    }
-}

@@ -212,9 +212,3 @@ impl RecognizedPage {
         imp.carousel.set_spacing(spacing);
     }
 }
-
-impl Default for RecognizedPage {
-    fn default() -> Self {
-        Self::new()
-    }
-}

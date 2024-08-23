@@ -974,12 +974,6 @@ fn unbind_page(page: &adw::NavigationPage) {
     }
 }
 
-impl Default for HistoryView {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::*;

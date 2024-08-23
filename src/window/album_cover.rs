@@ -166,9 +166,3 @@ impl AlbumCover {
         }
     }
 }
-
-impl Default for AlbumCover {
-    fn default() -> Self {
-        Self::new()
-    }
-}

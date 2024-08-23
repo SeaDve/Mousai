@@ -92,12 +92,6 @@ impl SongFilter {
     }
 }
 
-impl Default for SongFilter {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

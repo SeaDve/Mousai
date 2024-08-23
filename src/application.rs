@@ -258,12 +258,6 @@ impl Application {
     }
 }
 
-impl Default for Application {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 fn setup_inspector_page() {
     if gio::IOExtensionPoint::lookup("gtk-inspector-page").is_some() {
         gio::IOExtensionPoint::implement(

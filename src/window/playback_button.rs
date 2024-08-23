@@ -109,9 +109,3 @@ impl PlaybackButton {
         }
     }
 }
-
-impl Default for PlaybackButton {
-    fn default() -> Self {
-        Self::new()
-    }
-}

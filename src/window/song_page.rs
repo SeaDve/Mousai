@@ -413,9 +413,3 @@ impl SongPage {
             });
     }
 }
-
-impl Default for SongPage {
-    fn default() -> Self {
-        Self::new()
-    }
-}

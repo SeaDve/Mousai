@@ -192,9 +192,3 @@ impl RecognizerStatus {
             .set_label(&n_successful.to_string());
     }
 }
-
-impl Default for RecognizerStatus {
-    fn default() -> Self {
-        Self::new()
-    }
-}

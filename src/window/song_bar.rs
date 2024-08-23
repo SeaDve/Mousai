@@ -272,12 +272,6 @@ impl SongBar {
     }
 }
 
-impl Default for SongBar {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
 /// Displays `gst::ClockTime` in a `MM∶SS` format with padding for SS.
 pub fn format_clock_time_minute_sec(clock_time: gst::ClockTime) -> String {
     let seconds = clock_time.seconds();

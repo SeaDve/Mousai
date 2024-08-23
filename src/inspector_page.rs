@@ -188,9 +188,3 @@ impl InspectorPage {
             });
     }
 }
-
-impl Default for InspectorPage {
-    fn default() -> Self {
-        Self::new()
-    }
-}

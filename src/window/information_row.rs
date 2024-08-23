@@ -80,9 +80,3 @@ impl InformationRow {
         self.imp().value_label.set_text(&value);
     }
 }
-
-impl Default for InformationRow {
-    fn default() -> Self {
-        Self::new()
-    }
-}

@@ -144,12 +144,6 @@ impl Provider for AudD {
     }
 }
 
-impl Default for AudD {
-    fn default() -> Self {
-        Self::new(None)
-    }
-}
-
 #[cfg(test)]
 mod test {
     use super::*;
