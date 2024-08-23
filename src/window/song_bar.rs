@@ -5,17 +5,18 @@ use gtk::{
 };
 
 use std::{
-    cell::{OnceCell, RefCell},
+    cell::{Cell, OnceCell, RefCell},
     time::Duration,
 };
 
-use super::{
-    album_cover::AlbumCover,
-    playback_button::{PlaybackButton, PlaybackButtonMode},
-};
 use crate::{
     player::{Player, PlayerState},
     song::Song,
+    window::{
+        album_cover::AlbumCover,
+        playback_button::{PlaybackButton, PlaybackButtonMode},
+        AdaptiveMode,
+    },
 };
 
 mod imp {
@@ -24,11 +25,15 @@ mod imp {
 
     use super::*;
 
-    #[derive(Default, gtk::CompositeTemplate)]
+    #[derive(Default, glib::Properties, gtk::CompositeTemplate)]
+    #[properties(wrapper_type = super::SongBar)]
     #[template(resource = "/io/github/seadve/Mousai/ui/song_bar.ui")]
     pub struct SongBar {
+        #[property(get, set = Self::set_adaptive_mode, explicit_notify, builder(AdaptiveMode::default()))]
+        pub(super) adaptive_mode: Cell<AdaptiveMode>,
+
         #[template_child]
-        pub(super) center_box: TemplateChild<gtk::CenterBox>, // Unused
+        pub(super) multi_layout_view: TemplateChild<adw::MultiLayoutView>,
         #[template_child]
         pub(super) album_cover: TemplateChild<AlbumCover>,
         #[template_child]
@@ -74,6 +79,7 @@ mod imp {
         }
     }
 
+    #[glib::derived_properties]
     impl ObjectImpl for SongBar {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
@@ -107,6 +113,29 @@ mod imp {
     }
 
     impl WidgetImpl for SongBar {}
+
+    impl SongBar {
+        fn set_adaptive_mode(&self, adaptive_mode: AdaptiveMode) {
+            let obj = self.obj();
+
+            if adaptive_mode == obj.adaptive_mode() {
+                return;
+            }
+
+            self.adaptive_mode.set(adaptive_mode);
+
+            match adaptive_mode {
+                AdaptiveMode::Normal => {
+                    self.multi_layout_view.set_layout_name("normal");
+                }
+                AdaptiveMode::Narrow => {
+                    self.multi_layout_view.set_layout_name("narrow");
+                }
+            }
+
+            obj.notify_adaptive_mode();
+        }
+    }
 }
 
 glib::wrapper! {

@@ -9,6 +9,7 @@
         <!-- 450 is just right to prevent three columns history grid view on narrow mode. -->
         <condition>max-width: 450px</condition>
         <setter object="main_view" property="adaptive-mode">narrow</setter>
+        <setter object="song_bar" property="adaptive-mode">narrow</setter>
       </object>
     </child>
     <property name="content">
