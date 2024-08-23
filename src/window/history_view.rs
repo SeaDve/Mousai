@@ -321,14 +321,20 @@ impl HistoryView {
         let imp = self.imp();
 
         // Return if the last widget is a `SongPage` and its song's id is the same as the given song's id
-        if let Some(visible_page) = imp.navigation_view.visible_page() {
-            if let Some(song_page) = visible_page.downcast_ref::<SongPage>() {
-                if let Some(song_page_song) = song_page.song() {
-                    if song_page_song.id_ref() == song.id_ref() {
-                        return;
-                    }
-                }
-            }
+        if imp
+            .navigation_view
+            .visible_page()
+            .is_some_and(|visible_page| {
+                visible_page
+                    .downcast_ref::<SongPage>()
+                    .is_some_and(|song_page| {
+                        song_page
+                            .song()
+                            .is_some_and(|s| s.id_ref() == song.id_ref())
+                    })
+            })
+        {
+            return;
         }
 
         let song_page = SongPage::new();
