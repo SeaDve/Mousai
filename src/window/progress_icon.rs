@@ -29,7 +29,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for ProgressIcon {
-        const NAME: &'static str = "MsaiProgressIcon";
+        const NAME: &'static str = "MousaiProgressIcon";
         type Type = super::ProgressIcon;
         type ParentType = gtk::Widget;
     }

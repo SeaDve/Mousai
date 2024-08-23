@@ -37,7 +37,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Recordings {
-        const NAME: &'static str = "MsaiRecordings";
+        const NAME: &'static str = "MousaiRecordings";
         type Type = super::Recordings;
         type Interfaces = (gio::ListModel,);
     }

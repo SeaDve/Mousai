@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiRecognizerView">
+  <template class="MousaiRecognizerView">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>
@@ -28,7 +28,7 @@
             <property name="orientation">vertical</property>
             <property name="spacing">24</property>
             <child>
-              <object class="MsaiWaveform" id="waveform"/>
+              <object class="MousaiWaveform" id="waveform"/>
             </child>
             <child>
               <object class="GtkBox">

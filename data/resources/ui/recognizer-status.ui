@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiRecognizerStatus">
+  <template class="MousaiRecognizerStatus">
     <property name="layout-manager">
       <object class="GtkBoxLayout"/>
     </property>
@@ -24,7 +24,7 @@
       <object class="GtkRevealer" id="progress_icon_revealer">
         <property name="transition-type">slide-right</property>
         <property name="child">
-          <object class="MsaiProgressIcon" id="progress_icon">
+          <object class="MousaiProgressIcon" id="progress_icon">
             <property name="margin-start">10</property>
             <property name="margin-end">16</property>
             <property name="margin-top">10</property>

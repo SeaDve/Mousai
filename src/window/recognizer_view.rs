@@ -31,7 +31,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for RecognizerView {
-        const NAME: &'static str = "MsaiRecognizerView";
+        const NAME: &'static str = "MousaiRecognizerView";
         type Type = super::RecognizerView;
         type ParentType = gtk::Widget;
 

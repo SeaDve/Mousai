@@ -43,7 +43,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for InspectorPage {
-        const NAME: &'static str = "MsaiInspectorPage";
+        const NAME: &'static str = "MousaiInspectorPage";
         type Type = super::InspectorPage;
         type ParentType = gtk::Widget;
 

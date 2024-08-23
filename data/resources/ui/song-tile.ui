@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiSongTile">
+  <template class="MousaiSongTile">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>
@@ -18,7 +18,7 @@
               <object class="GtkOverlay">
                 <property name="halign">center</property>
                 <property name="child">
-                  <object class="MsaiAlbumCover" id="album_cover"/>
+                  <object class="MousaiAlbumCover" id="album_cover"/>
                 </property>
                 <child type="overlay">
                   <object class="GtkLabel" id="new_label">
@@ -34,7 +34,7 @@
                   </object>
                 </child>
                 <child type="overlay">
-                  <object class="MsaiPlaybackButton" id="playback_button">
+                  <object class="MousaiPlaybackButton" id="playback_button">
                     <property name="halign">end</property>
                     <property name="valign">end</property>
                     <property name="margin-end">12</property>
@@ -61,7 +61,7 @@
                     <property name="lines">2</property>
                     <binding name="label">
                       <lookup name="title">
-                        <lookup name="song">MsaiSongTile</lookup>
+                        <lookup name="song">MousaiSongTile</lookup>
                       </lookup>
                     </binding>
                   </object>
@@ -76,7 +76,7 @@
                     <property name="lines">2</property>
                     <binding name="label">
                       <lookup name="artist">
-                        <lookup name="song">MsaiSongTile</lookup>
+                        <lookup name="song">MousaiSongTile</lookup>
                       </lookup>
                     </binding>
                     <style>

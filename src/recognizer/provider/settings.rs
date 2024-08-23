@@ -10,7 +10,7 @@ use super::Provider;
 use crate::Application;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
-#[enum_type(name = "MsaiTestProviderMode")]
+#[enum_type(name = "MousaiTestProviderMode")]
 pub enum TestProviderMode {
     ErrorOnly,
     #[default]
@@ -27,7 +27,7 @@ impl TryFrom<i32> for TestProviderMode {
 }
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
-#[enum_type(name = "MsaiProviderType")]
+#[enum_type(name = "MousaiProviderType")]
 pub enum ProviderType {
     #[default]
     AudD,

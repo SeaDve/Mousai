@@ -5,7 +5,7 @@ use gtk::{glib, subclass::prelude::*};
 use std::cell::Cell;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
-#[enum_type(name = "MsaiPlaybackButtonMode")]
+#[enum_type(name = "MousaiPlaybackButtonMode")]
 pub enum PlaybackButtonMode {
     #[default]
     Play,
@@ -34,7 +34,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for PlaybackButton {
-        const NAME: &'static str = "MsaiPlaybackButton";
+        const NAME: &'static str = "MousaiPlaybackButton";
         type Type = super::PlaybackButton;
         type ParentType = gtk::Button;
 

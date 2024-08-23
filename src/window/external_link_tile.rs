@@ -24,7 +24,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for ExternalLinkTile {
-        const NAME: &'static str = "MsaiExternalLinkTile";
+        const NAME: &'static str = "MousaiExternalLinkTile";
         type Type = super::ExternalLinkTile;
         type ParentType = gtk::FlowBoxChild;
 

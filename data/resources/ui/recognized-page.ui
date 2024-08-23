@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiRecognizedPage" parent="AdwNavigationPage">
+  <template class="MousaiRecognizedPage" parent="AdwNavigationPage">
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">

@@ -38,7 +38,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for AlbumCover {
-        const NAME: &'static str = "MsaiAlbumCover";
+        const NAME: &'static str = "MousaiAlbumCover";
         type Type = super::AlbumCover;
         type ParentType = gtk::Widget;
 

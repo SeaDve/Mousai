@@ -22,7 +22,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for InformationRow {
-        const NAME: &'static str = "MsaiInformationRow";
+        const NAME: &'static str = "MousaiInformationRow";
         type Type = super::InformationRow;
         type ParentType = adw::ActionRow;
 

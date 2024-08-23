@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiExternalLinkTile" parent="GtkFlowBoxChild">
+  <template class="MousaiExternalLinkTile" parent="GtkFlowBoxChild">
     <property name="child">
       <object class="GtkBox">
         <property name="spacing">12</property>

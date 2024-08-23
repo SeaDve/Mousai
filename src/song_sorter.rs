@@ -25,7 +25,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for SongSorter {
-        const NAME: &'static str = "MsaiSongSorter";
+        const NAME: &'static str = "MousaiSongSorter";
         type Type = super::SongSorter;
         type ParentType = gtk::Sorter;
     }

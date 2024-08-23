@@ -23,7 +23,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for LyricsPage {
-        const NAME: &'static str = "MsaiLyricsPage";
+        const NAME: &'static str = "MousaiLyricsPage";
         type Type = super::LyricsPage;
         type ParentType = adw::NavigationPage;
 

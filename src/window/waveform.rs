@@ -22,7 +22,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Waveform {
-        const NAME: &'static str = "MsaiWaveform";
+        const NAME: &'static str = "MousaiWaveform";
         type Type = super::Waveform;
         type ParentType = gtk::Widget;
 

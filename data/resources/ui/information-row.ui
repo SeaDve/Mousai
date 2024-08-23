@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiInformationRow" parent="AdwActionRow">
+  <template class="MousaiInformationRow" parent="AdwActionRow">
     <child type="suffix">
       <object class="GtkLabel" id="value_label">
         <property name="xalign">1</property>

@@ -35,7 +35,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for RecognizedPageTile {
-        const NAME: &'static str = "MsaiRecognizedPageTile";
+        const NAME: &'static str = "MousaiRecognizedPageTile";
         type Type = super::RecognizedPageTile;
         type ParentType = gtk::Widget;
 

@@ -18,7 +18,7 @@ use std::cell::{Cell, OnceCell, RefCell};
 use crate::{config::APP_ID, song::Song, uid::Uid, utils, Application};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
-#[enum_type(name = "MsaiPlayerState")]
+#[enum_type(name = "MousaiPlayerState")]
 pub enum PlayerState {
     #[default]
     Stopped,
@@ -68,7 +68,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Player {
-        const NAME: &'static str = "MsaiPlayer";
+        const NAME: &'static str = "MousaiPlayer";
         type Type = super::Player;
     }
 

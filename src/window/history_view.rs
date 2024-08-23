@@ -105,7 +105,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for HistoryView {
-        const NAME: &'static str = "MsaiHistoryView";
+        const NAME: &'static str = "MousaiHistoryView";
         type Type = super::HistoryView;
         type ParentType = gtk::Widget;
 

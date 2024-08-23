@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiPlaybackButton" parent="GtkButton">
+  <template class="MousaiPlaybackButton" parent="GtkButton">
     <property name="child">
       <object class="GtkStack" id="stack">
         <child>

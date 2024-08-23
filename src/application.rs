@@ -35,7 +35,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Application {
-        const NAME: &'static str = "MsaiApplication";
+        const NAME: &'static str = "MousaiApplication";
         type Type = super::Application;
         type ParentType = adw::Application;
     }

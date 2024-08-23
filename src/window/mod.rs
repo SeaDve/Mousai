@@ -36,7 +36,7 @@ use crate::{
 };
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
-#[enum_type(name = "MsaiAdaptiveMode")]
+#[enum_type(name = "MousaiAdaptiveMode")]
 pub enum AdaptiveMode {
     #[default]
     Normal,
@@ -69,7 +69,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Window {
-        const NAME: &'static str = "MsaiWindow";
+        const NAME: &'static str = "MousaiWindow";
         type Type = super::Window;
         type ParentType = adw::ApplicationWindow;
 

@@ -49,7 +49,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for SongBar {
-        const NAME: &'static str = "MsaiSongBar";
+        const NAME: &'static str = "MousaiSongBar";
         type Type = super::SongBar;
         type ParentType = gtk::Widget;
 

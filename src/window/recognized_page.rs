@@ -39,7 +39,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for RecognizedPage {
-        const NAME: &'static str = "MsaiRecognizedPage";
+        const NAME: &'static str = "MousaiRecognizedPage";
         type Type = super::RecognizedPage;
         type ParentType = adw::NavigationPage;
 

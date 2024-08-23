@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiSongBar">
+  <template class="MousaiSongBar">
     <property name="layout-manager">
       <object class="GtkBoxLayout">
         <property name="orientation">vertical</property>
@@ -37,7 +37,7 @@
               <object class="GtkBox">
                 <property name="spacing">12</property>
                 <child>
-                  <object class="MsaiAlbumCover" id="album_cover">
+                  <object class="MousaiAlbumCover" id="album_cover">
                     <property name="pixel-size">42</property>
                   </object>
                 </child>
@@ -77,7 +77,7 @@
           <object class="GtkBox">
             <property name="spacing">6</property>
             <child>
-              <object class="MsaiPlaybackButton" id="playback_button">
+              <object class="MousaiPlaybackButton" id="playback_button">
                 <property name="valign">center</property>
                 <property name="width-request">40</property>
                 <property name="height-request">40</property>

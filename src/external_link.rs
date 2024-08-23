@@ -13,7 +13,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for ExternalLink {
-        const NAME: &'static str = "MsaiExternalLink";
+        const NAME: &'static str = "MousaiExternalLink";
         type Type = super::ExternalLink;
     }
 

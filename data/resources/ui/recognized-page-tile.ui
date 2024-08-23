@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiRecognizedPageTile">
+  <template class="MousaiRecognizedPageTile">
     <property name="layout-manager">
       <object class="GtkBoxLayout">
         <property name="orientation">vertical</property>
@@ -15,7 +15,7 @@
       </object>
     </child>
     <child>
-      <object class="MsaiSongTile" id="song_tile">
+      <object class="MousaiSongTile" id="song_tile">
         <property name="shows-select-button-on-hover">False</property>
       </object>
     </child>

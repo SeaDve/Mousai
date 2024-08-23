@@ -27,7 +27,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for ExternalLinks {
-        const NAME: &'static str = "MsaiExternalLinks";
+        const NAME: &'static str = "MousaiExternalLinks";
         type Type = super::ExternalLinks;
         type Interfaces = (gio::ListModel,);
     }

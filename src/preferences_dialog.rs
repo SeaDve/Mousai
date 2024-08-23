@@ -41,7 +41,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for PreferencesDialog {
-        const NAME: &'static str = "MsaiPreferencesDialog";
+        const NAME: &'static str = "MousaiPreferencesDialog";
         type Type = super::PreferencesDialog;
         type ParentType = adw::PreferencesDialog;
 

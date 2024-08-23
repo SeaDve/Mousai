@@ -7,7 +7,7 @@ use super::RecognizeError;
 use crate::{date_time::DateTime, serde_helpers, song::Song};
 
 #[derive(Debug, Clone, PartialEq, Eq, glib::Boxed, Serialize, Deserialize)]
-#[boxed_type(name = "MsaiBoxedRecognizeResult", nullable)]
+#[boxed_type(name = "MousaiBoxedRecognizeResult", nullable)]
 pub struct BoxedRecognizeResult(pub Result<Song, RecognizeError>);
 
 mod imp {
@@ -31,7 +31,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Recording {
-        const NAME: &'static str = "MsaiRecording";
+        const NAME: &'static str = "MousaiRecording";
         type Type = super::Recording;
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiWindow" parent="AdwApplicationWindow">
+  <template class="MousaiWindow" parent="AdwApplicationWindow">
     <!-- FIXME Properly support these dimensions -->
     <property name="width-request">360</property>
     <property name="height-request">294</property>
@@ -21,10 +21,10 @@
                 <property name="vexpand">True</property>
                 <property name="transition-type">crossfade</property>
                 <child>
-                  <object class="MsaiHistoryView" id="main_view"/>
+                  <object class="MousaiHistoryView" id="main_view"/>
                 </child>
                 <child>
-                  <object class="MsaiRecognizerView" id="recognizer_view"/>
+                  <object class="MousaiRecognizerView" id="recognizer_view"/>
                 </child>
               </object>
             </child>
@@ -33,7 +33,7 @@
                 <property name="overflow">visible</property>
                 <property name="transition-type">slide-up</property>
                 <property name="child">
-                  <object class="MsaiSongBar" id="song_bar"/>
+                  <object class="MousaiSongBar" id="song_bar"/>
                 </property>
               </object>
             </child>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="MsaiSongPage" parent="AdwNavigationPage">
+  <template class="MousaiSongPage" parent="AdwNavigationPage">
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
@@ -40,7 +40,7 @@
                       <object class="GtkBox">
                         <property name="spacing">24</property>
                         <child>
-                          <object class="MsaiAlbumCover" id="album_cover">
+                          <object class="MousaiAlbumCover" id="album_cover">
                             <property name="valign">center</property>
                           </object>
                         </child>
@@ -62,7 +62,7 @@
                                     <property name="lines">2</property>
                                     <binding name="label">
                                       <lookup name="title">
-                                        <lookup name="song">MsaiSongPage</lookup>
+                                        <lookup name="song">MousaiSongPage</lookup>
                                       </lookup>
                                     </binding>
                                     <style>
@@ -80,7 +80,7 @@
                                     <property name="lines">2</property>
                                     <binding name="label">
                                       <lookup name="artist">
-                                        <lookup name="song">MsaiSongPage</lookup>
+                                        <lookup name="song">MousaiSongPage</lookup>
                                       </lookup>
                                     </binding>
                                     <style>
@@ -92,7 +92,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="MsaiPlaybackButton" id="playback_button">
+                              <object class="MousaiPlaybackButton" id="playback_button">
                                 <property name="halign">start</property>
                                 <property name="width-request">40</property>
                                 <property name="height-request">40</property>
@@ -122,17 +122,17 @@
                       <object class="AdwPreferencesGroup">
                         <property name="title" translatable="yes">Information</property>
                         <child>
-                          <object class="MsaiInformationRow" id="last_heard_row">
+                          <object class="MousaiInformationRow" id="last_heard_row">
                             <property name="title" translatable="yes">Last Heard</property>
                           </object>
                         </child>
                         <child>
-                          <object class="MsaiInformationRow" id="album_row">
+                          <object class="MousaiInformationRow" id="album_row">
                             <property name="title" translatable="yes">Album</property>
                           </object>
                         </child>
                         <child>
-                          <object class="MsaiInformationRow" id="release_date_row">
+                          <object class="MousaiInformationRow" id="release_date_row">
                             <property name="title" translatable="yes">Release Date</property>
                           </object>
                         </child>

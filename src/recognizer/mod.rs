@@ -30,7 +30,7 @@ use crate::{cancelled::Cancelled, date_time::DateTime, song::Song, utils, Applic
 const MAX_SAVED_RECORDING_RECOGNIZE_RETRIES: u8 = 3;
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
-#[enum_type(name = "MsaiRecognizerState")]
+#[enum_type(name = "MousaiRecognizerState")]
 pub enum RecognizerState {
     #[default]
     Null,
@@ -62,7 +62,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for Recognizer {
-        const NAME: &'static str = "MsaiRecognizer";
+        const NAME: &'static str = "MousaiRecognizer";
         type Type = super::Recognizer;
     }
 

@@ -15,7 +15,7 @@ pub enum RecognizeErrorKind {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, glib::Boxed)]
-#[boxed_type(name = "MsaiRecognizeError")]
+#[boxed_type(name = "MousaiRecognizeError")]
 pub struct RecognizeError {
     kind: RecognizeErrorKind,
     message: Option<String>,

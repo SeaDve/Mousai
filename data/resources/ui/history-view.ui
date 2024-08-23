@@ -28,7 +28,7 @@
       </item>
     </section>
   </menu>
-  <template class="MsaiHistoryView">
+  <template class="MousaiHistoryView">
     <property name="layout-manager">
       <object class="GtkBinLayout"/>
     </property>
@@ -58,7 +58,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="MsaiRecognizerStatus" id="recognizer_status"/>
+                          <object class="MousaiRecognizerStatus" id="recognizer_status"/>
                         </child>
                         <child type="end">
                           <object class="GtkMenuButton">
