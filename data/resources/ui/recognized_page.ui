@@ -10,10 +10,9 @@
         </child>
         <property name="content">
           <object class="GtkBox">
-            <property name="margin-top">24</property>
             <property name="margin-bottom">24</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">48</property>
+            <property name="spacing">24</property>
             <child>
               <object class="GtkBox">
                 <property name="margin-start">24</property>
