@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="MousaiWindow" parent="AdwApplicationWindow">
-    <!-- FIXME Properly support these dimensions -->
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <child>
