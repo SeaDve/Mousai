@@ -4,13 +4,14 @@
 # ssantos <ssantos@web.de>, 2021, 2022, 2023.
 # Boud Knight <doubzarref@gmail.com>, 2021.
 # Danilo Alfredo Vieira <danilovieira978@gmail.com>, 2023.
+# Alexandre Vergueiro <alexandrevergueirojr@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: 2023-11-18 17:38+0000\n"
-"Last-Translator: Danilo Alfredo Vieira <danilovieira978@gmail.com>\n"
+"PO-Revision-Date: 2024-08-27 21:09+0000\n"
+"Last-Translator: Alexandre Vergueiro <alexandrevergueirojr@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/seadve/mousai/"
 "pt/>\n"
 "Language: pt\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -50,10 +51,8 @@ msgid "Whether the window is maximized"
 msgstr "Se a janela está maximizada"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Fonte de áudio preferida para usar na gravação de áudio"
+msgstr "Tipo de fonte de áudio usado na gravação do áudio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -117,11 +116,11 @@ msgstr "📱 Interface de usuário fácil de usar"
 
 #: data/resources/ui/history-view.ui:6
 msgid "_Preferences"
-msgstr "Preferências"
+msgstr "_Preferências"
 
 #: data/resources/ui/history-view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "Atalhos do teclado"
+msgstr "_Atalhos do teclado"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
@@ -188,14 +187,12 @@ msgid "General"
 msgstr "Geral"
 
 #: data/resources/ui/preferences-dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Fonte de áudio preferida"
+msgstr "Fonte de áudio"
 
 #: data/resources/ui/preferences-dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Driver usado para ouvir"
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -318,11 +315,11 @@ msgstr "Novo"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "créditos do Tradutor"
+msgstr "Créditos do tradutor"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Doe (compre um café para mim)"
+msgstr "Doe (Compre um café para mim)"
 
 #: src/about.rs:31
 msgid "GitHub"
@@ -337,15 +334,6 @@ msgid "Critical Database Error"
 msgstr "Erro crítico de banco de dados"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -356,15 +344,18 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Provavelmente isso é causado por um banco de dados adulterado ou corrompido. "
-"Você pode tentar limpar os dados do aplicativo. No entanto, isso não é "
-"recomendado e excluirá todas as suas músicas e gravações salvas. Para "
-"relatar esse problema, inicie o Mousai no terminal para incluir os logs e "
-"envie o relatório do bug para https://github.com/SeaDve/Mousai/issues/"
+"Desculpe, ocorreu um erro crítico no banco de dados. Isso provavelmente foi "
+"causado por um banco de dados adulterado ou corrompido. Você pode tentar "
+"limpar os dados do aplicativo. No entanto, isso não é recomendado e excluirá "
+"todas as suas músicas e gravações salvas.\n"
+"\n"
+"Para relatar esse problema, inicie o Mousai no terminal para incluir os logs "
+"e envie o relatório de bug para <a href=\"https://github.com/SeaDve/Mousai/"
+"issues/\">issue page</a>"
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr "Desistir"
+msgstr "Sair"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
