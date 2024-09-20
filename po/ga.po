@@ -7,15 +7,17 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-24 14:46+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-09-20 13:40+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Irish <https://hosted.weblate.org/projects/seadve/mousai/ga/>"
+"\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :("
 "n>6 && n<11) ? 3 : 4;\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -103,12 +105,14 @@ msgid "📱 Easy-to-use user interface"
 msgstr ""
 
 #: data/resources/ui/history-view.ui:6
+#, fuzzy
 msgid "_Preferences"
-msgstr ""
+msgstr "_Roghanna"
 
 #: data/resources/ui/history-view.ui:10
+#, fuzzy
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Aicearraí méarchláir"
 
 #: data/resources/ui/history-view.ui:14
 msgid "_About Mousai"
@@ -135,8 +139,9 @@ msgid "Listen"
 msgstr ""
 
 #: data/resources/ui/history-view.ui:65
+#, fuzzy
 msgid "Main Menu"
-msgstr ""
+msgstr "Príomh-Roghchlár"
 
 #: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
 msgid "Select"
@@ -151,8 +156,9 @@ msgid "Cancel Selection"
 msgstr ""
 
 #: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Cealaigh"
 
 #: data/resources/ui/history-view.ui:117
 msgid "Search songs"
@@ -171,8 +177,9 @@ msgid "No Results"
 msgstr ""
 
 #: data/resources/ui/preferences-dialog.ui:8
+#, fuzzy
 msgid "General"
-msgstr ""
+msgstr "Ginearálta"
 
 #: data/resources/ui/preferences-dialog.ui:11
 msgid "Audio Source"
@@ -184,8 +191,9 @@ msgstr ""
 
 #: data/resources/ui/preferences-dialog.ui:19
 #: src/window/external_link_tile.rs:64
+#, fuzzy
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences-dialog.ui:20
 msgid ""
@@ -214,9 +222,10 @@ msgid "Offline Mode"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:11
+#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Ginearálta"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -229,19 +238,22 @@ msgid "Search"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Taispeáin Roghanna"
 
 #: data/resources/ui/shortcuts.ui:32
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Taispeáin Aicearraí"
 
 #: data/resources/ui/shortcuts.ui:38
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Scoir"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -263,8 +275,9 @@ msgid "Show Song Information"
 msgstr ""
 
 #: data/resources/ui/song-bar.ui:92
+#, fuzzy
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: data/resources/ui/song-page.ui:24
 msgid "Remove From History"
@@ -300,20 +313,24 @@ msgstr ""
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
+#, fuzzy
 msgid "translator-credits"
-msgstr ""
+msgstr "creidiúintí aistritheora"
 
 #: src/about.rs:28
+#, fuzzy
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Deonaigh (Ceannaigh Caife Liom)"
 
 #: src/about.rs:31
+#, fuzzy
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/about.rs:33
+#, fuzzy
 msgid "Translate"
-msgstr ""
+msgstr "Aistrigh"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
@@ -332,8 +349,9 @@ msgid ""
 msgstr ""
 
 #: src/application.rs:215
+#, fuzzy
 msgid "Quit"
-msgstr ""
+msgstr "Scoir"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
@@ -390,16 +408,18 @@ msgid "Browse on AudD"
 msgstr ""
 
 #: src/window/external_link_tile.rs:69
+#, fuzzy
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr ""
 
 #: src/window/external_link_tile.rs:74
+#, fuzzy
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
@@ -411,8 +431,9 @@ msgid "Failed to launch {key}"
 msgstr ""
 
 #: src/window/history_view.rs:137 src/window/song_page.rs:78
+#, fuzzy
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Cóipeáladh chuig an ngearrthaisce"
 
 #: src/window/history_view.rs:150
 msgid "Failed to remove selected songs"
@@ -498,8 +519,9 @@ msgid "The result will be available when you're back online"
 msgstr ""
 
 #: src/window/mod.rs:331
+#, fuzzy
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Ceart go leor, thuig mé"
 
 #: src/window/mod.rs:341
 msgid ""
@@ -518,8 +540,9 @@ msgid ""
 msgstr ""
 
 #: src/window/mod.rs:351
+#, fuzzy
 msgid "Later"
-msgstr ""
+msgstr "Níos déanaí"
 
 #: src/window/mod.rs:356
 msgid "Open Preferences"
