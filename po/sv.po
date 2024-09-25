@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-24 14:46+0800\n"
+"POT-Creation-Date: 2024-09-25 09:44+0800\n"
 "PO-Revision-Date: 2024-02-25 07:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/seadve/mousai/sv/"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:64
+#: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -115,92 +115,96 @@ msgstr "🌐 Bläddra och lyssna på låten från olika leverantörer"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Lättanvänt användargränssnitt"
 
-#: data/resources/ui/history-view.ui:6
+#: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
 msgstr "_Inställningar"
 
-#: data/resources/ui/history-view.ui:10
+#: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
 msgstr "_Tangentbordsgenvägar"
 
-#: data/resources/ui/history-view.ui:14
+#: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
 msgstr "_Om Mousai"
 
-#: data/resources/ui/history-view.ui:22
+#: data/resources/ui/history_view.ui:22
 msgid "Select _All"
 msgstr "Välj _alla"
 
-#: data/resources/ui/history-view.ui:26
+#: data/resources/ui/history_view.ui:26
 msgid "Select _None"
 msgstr "Välj _ingen"
 
-#: data/resources/ui/history-view.ui:42
+#: data/resources/ui/history_view.ui:42
 msgid "Home"
 msgstr "Hem"
 
-#: data/resources/ui/history-view.ui:52
+#: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
 msgstr "Känn igen låt"
 
-#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
+#: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
 msgstr "Lyssna"
 
-#: data/resources/ui/history-view.ui:65
+#: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
 msgstr "Huvudmeny"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
+#: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
 msgstr "Välj"
 
-#: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
+#: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
 msgstr "Sök efter låtar"
 
-#: data/resources/ui/history-view.ui:96
+#: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
 msgstr "Avbryt val"
 
-#: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
+#: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: data/resources/ui/history-view.ui:117
+#: data/resources/ui/history_view.ui:117
 msgid "Search songs"
 msgstr "Sök låtar"
 
-#: data/resources/ui/history-view.ui:140
+#: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
 msgstr "Börja känna igen låtar!"
 
-#: data/resources/ui/history-view.ui:141
+#: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
 msgstr "Klicka på lyssna knappen för att starta"
 
-#: data/resources/ui/history-view.ui:150
+#: data/resources/ui/history_view.ui:150
 msgid "No Results"
 msgstr "Inga resultat"
 
-#: data/resources/ui/preferences-dialog.ui:8
+#: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
+msgid "Lyrics"
+msgstr "Låttext"
+
+#: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
 msgstr "Allmänt"
 
-#: data/resources/ui/preferences-dialog.ui:11
+#: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
 msgstr "Ljudkälla"
 
-#: data/resources/ui/preferences-dialog.ui:12
+#: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
 msgstr "Enhet som används för att lyssna"
 
-#: data/resources/ui/preferences-dialog.ui:19
+#: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-dialog.ui:20
+#: data/resources/ui/preferences_dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -208,23 +212,23 @@ msgstr ""
 "Du kan skaffa dig en API-token från <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Om du lämnar detta tomt får du några försök per dag"
 
-#: data/resources/ui/preferences-dialog.ui:23
+#: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
 msgstr "API Token"
 
-#: data/resources/ui/recognizer-status.ui:17
+#: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
 msgstr "Offlineläge aktiverat"
 
-#: data/resources/ui/recognizer-status.ui:44
+#: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
 msgstr "Visa offlineläge igenkänningsresultat"
 
-#: data/resources/ui/recognizer-view.ui:13
+#: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
 msgstr "Avbryt lyssning"
 
-#: data/resources/ui/recognizer-view.ui:49
+#: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
 msgstr "Offline läge"
 
@@ -273,43 +277,39 @@ msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Växla uppspelning"
 
-#: data/resources/ui/song-bar.ui:34
+#: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
 msgstr "Visa låtinformation"
 
-#: data/resources/ui/song-bar.ui:92
+#: data/resources/ui/song_bar.ui:145
 msgid "Stop"
 msgstr "Stopp"
 
-#: data/resources/ui/song-page.ui:24
+#: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
 msgstr "Ta bort från historik"
 
-#: data/resources/ui/song-page.ui:30
+#: data/resources/ui/song_page.ui:19
 msgid "Copy"
 msgstr "Kopiera"
 
-#: data/resources/ui/song-page.ui:134
+#: data/resources/ui/song_page.ui:122
 msgid "Information"
 msgstr "Information"
 
-#: data/resources/ui/song-page.ui:137
+#: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
 msgstr "Senast hörd"
 
-#: data/resources/ui/song-page.ui:142
+#: data/resources/ui/song_page.ui:130
 msgid "Album"
 msgstr "Album"
 
-#: data/resources/ui/song-page.ui:147
+#: data/resources/ui/song_page.ui:135
 msgid "Release Date"
 msgstr "Utgivningsdatum"
 
-#: data/resources/ui/song-page.ui:154
-msgid "Lyrics"
-msgstr "Låttext"
-
-#: data/resources/ui/song-tile.ui:30
+#: data/resources/ui/song_tile.ui:30
 msgid "New"
 msgstr "Ny"
 
@@ -433,101 +433,101 @@ msgstr "Sök på YouTube"
 msgid "Failed to launch {key}"
 msgstr "Misslyckades med att starta {key}"
 
-#: src/window/history_view.rs:137 src/window/song_page.rs:78
+#: src/window/history_view.rs:148 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "Kopierad till urklipp"
 
-#: src/window/history_view.rs:150
+#: src/window/history_view.rs:161
 msgid "Failed to remove selected songs"
 msgstr "Misslyckades med att ta bort valda låtar"
 
-#: src/window/history_view.rs:327
+#: src/window/history_view.rs:358
 msgid "Failed to remove song"
 msgstr "Misslyckades med att ta bort låt"
 
-#: src/window/history_view.rs:440
+#: src/window/history_view.rs:564
 msgid "Failed to show recognizer results"
 msgstr "Misslyckades att visa igenkänningsresultat"
 
-#: src/window/history_view.rs:547
+#: src/window/history_view.rs:671
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: src/window/history_view.rs:556
+#: src/window/history_view.rs:683
 msgid "Failed to undo"
 msgstr "Misslyckades att ångra"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:576
+#: src/window/history_view.rs:708
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Tog bort {n_removed} låt"
 msgstr[1] "Tog bort {n_removed} låtar"
 
-#: src/window/history_view.rs:699
+#: src/window/history_view.rs:831
 msgid "Select items"
 msgstr "Välj objekt"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:703
+#: src/window/history_view.rs:835
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Valde {selection_size} låt"
 msgstr[1] "Valde {selection_size} låtar"
 
-#: src/window/history_view.rs:713
+#: src/window/history_view.rs:845
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Kopiera låt"
 msgstr[1] "Kopiera låtar"
 
-#: src/window/history_view.rs:720
+#: src/window/history_view.rs:852
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Ta bort låt från historik"
 msgstr[1] "Ta bort låtar från historik"
 
-#: src/window/mod.rs:208
+#: src/window/mod.rs:214
 msgid "Failed to insert song to history"
 msgstr "Misslyckades att infoga låten i historiken"
 
-#: src/window/mod.rs:252
+#: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
 "Vänligen öppna ett problem på GitHub och tillhandahåll den nödvändiga "
 "informationen"
 
-#: src/window/mod.rs:255 src/window/mod.rs:287
+#: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
 msgstr "Nej, Tack"
 
-#: src/window/mod.rs:257
+#: src/window/mod.rs:267
 msgid "Open an Issue"
 msgstr "Öppna ett problem"
 
-#: src/window/mod.rs:284
+#: src/window/mod.rs:294
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
 "Försök att flytta närmare källan eller använd ett annat utdrag av låten"
 
-#: src/window/mod.rs:289
+#: src/window/mod.rs:299
 msgid "Try Again"
 msgstr "Försök igen"
 
-#: src/window/mod.rs:320
+#: src/window/mod.rs:334
 msgid "Recording Saved"
 msgstr "Inspelning sparad"
 
-#: src/window/mod.rs:328
+#: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
 msgstr "Resultatet kommer att vara tillgängligt när du är online igen"
 
-#: src/window/mod.rs:331
+#: src/window/mod.rs:345
 msgid "Ok, Got It"
 msgstr "Ok, jag förstår"
 
-#: src/window/mod.rs:341
+#: src/window/mod.rs:355
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -536,11 +536,11 @@ msgstr ""
 "Vänta tills gränsen har återställts eller öppna inställningar och försök "
 "ställa in en annan token"
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:358
 msgid "I'll Wait"
 msgstr "Jag väntar"
 
-#: src/window/mod.rs:348
+#: src/window/mod.rs:362
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -548,19 +548,19 @@ msgstr ""
 "Resultatet blir tillgängligt när din token ersätts med en giltig. Öppna "
 "inställningarna och försök ställa in en annan token"
 
-#: src/window/mod.rs:351
+#: src/window/mod.rs:365
 msgid "Later"
 msgstr "Senare"
 
-#: src/window/mod.rs:356
+#: src/window/mod.rs:370
 msgid "Open Preferences"
 msgstr "Öppna Inställningar"
 
-#: src/window/mod.rs:443
+#: src/window/mod.rs:466
 msgid "An error occurred in the player"
 msgstr "Ett fel uppstod i spelaren"
 
-#: src/window/playback_button.rs:95
+#: src/window/playback_button.rs:96
 msgid "Play"
 msgstr "Spela"
 
@@ -568,43 +568,43 @@ msgstr "Spela"
 msgid "Pause"
 msgstr "Paus"
 
-#: src/window/recognized_page.rs:136
+#: src/window/recognized_page.rs:148
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Igenkänd låt"
 msgstr[1] "Igenkända låtar"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:142
+#: src/window/recognized_page.rs:154
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Kände igen {n_songs} ny låt"
 msgstr[1] "Kände igen {n_songs} nya låtar"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:160
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Den här låten kändes igen från din sparade inspelning"
 msgstr[1] "Det här låtarna kändes igen från dina sparade inspelningar"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:162
+#: src/window/recognizer_status.rs:171
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Igenkänd {n_successful} av {total_minus_failed}"
 
-#: src/window/recognizer_view.rs:134
+#: src/window/recognizer_view.rs:148
 msgid "Listening…"
 msgstr "Lyssnar…"
 
-#: src/window/recognizer_view.rs:139
+#: src/window/recognizer_view.rs:153
 msgid "Recognizing…"
 msgstr "Känner igen…"
 
-#: src/window/song_page.rs:349
+#: src/window/song_page.rs:376
 msgid "Unknown"
 msgstr "Okänd"
 
-#: src/window/song_tile.rs:338
+#: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Avmarkera"
 

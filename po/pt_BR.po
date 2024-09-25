@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-24 14:46+0800\n"
+"POT-Creation-Date: 2024-09-25 09:44+0800\n"
 "PO-Revision-Date: 2023-11-09 02:35+0000\n"
 "Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:64
+#: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -120,94 +120,98 @@ msgstr "🌐 Navegue e ouça a música de diferentes provedores"
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Interface de usuário fácil de usar"
 
-#: data/resources/ui/history-view.ui:6
+#: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
 msgstr "_Preferências"
 
-#: data/resources/ui/history-view.ui:10
+#: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
 msgstr "_Atalhos de teclado"
 
-#: data/resources/ui/history-view.ui:14
+#: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
 msgstr "_Sobre o Mousai"
 
-#: data/resources/ui/history-view.ui:22
+#: data/resources/ui/history_view.ui:22
 msgid "Select _All"
 msgstr "Selecionar_Todos"
 
-#: data/resources/ui/history-view.ui:26
+#: data/resources/ui/history_view.ui:26
 msgid "Select _None"
 msgstr "Selecionar_Nenhum"
 
-#: data/resources/ui/history-view.ui:42
+#: data/resources/ui/history_view.ui:42
 msgid "Home"
 msgstr "Início"
 
-#: data/resources/ui/history-view.ui:52
+#: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
 msgstr "Reconhecer música"
 
-#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
+#: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
 msgstr "Escutar"
 
-#: data/resources/ui/history-view.ui:65
+#: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
+#: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
 msgstr "Selecionar"
 
-#: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
+#: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
 msgstr "Buscar músicas"
 
-#: data/resources/ui/history-view.ui:96
+#: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
 msgstr "Cancelar seleção"
 
-#: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
+#: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: data/resources/ui/history-view.ui:117
+#: data/resources/ui/history_view.ui:117
 msgid "Search songs"
 msgstr "Pesquisar músicas"
 
-#: data/resources/ui/history-view.ui:140
+#: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
 msgstr "Comece a reconhecer músicas!"
 
-#: data/resources/ui/history-view.ui:141
+#: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
 msgstr "Clique no botão escutar para iniciar"
 
-#: data/resources/ui/history-view.ui:150
+#: data/resources/ui/history_view.ui:150
 msgid "No Results"
 msgstr "Nenhum resultado"
 
-#: data/resources/ui/preferences-dialog.ui:8
+#: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
+msgid "Lyrics"
+msgstr "Letras"
+
+#: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
 msgstr "Geral"
 
-#: data/resources/ui/preferences-dialog.ui:11
+#: data/resources/ui/preferences_dialog.ui:11
 #, fuzzy
 #| msgid "Preferred Audio Source"
 msgid "Audio Source"
 msgstr "Fonte de áudio preferida"
 
-#: data/resources/ui/preferences-dialog.ui:12
+#: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
 msgstr ""
 
-#: data/resources/ui/preferences-dialog.ui:19
+#: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-dialog.ui:20
+#: data/resources/ui/preferences_dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -215,23 +219,23 @@ msgstr ""
 "Você pode obter um token de API de <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a> Deixar em branco lhe dará algumas tentativas por dia"
 
-#: data/resources/ui/preferences-dialog.ui:23
+#: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
 msgstr "API Token"
 
-#: data/resources/ui/recognizer-status.ui:17
+#: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
 msgstr "Modo offline ativado"
 
-#: data/resources/ui/recognizer-status.ui:44
+#: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
 msgstr "Mostrar resultados de reconhecimento do modo offline"
 
-#: data/resources/ui/recognizer-view.ui:13
+#: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
 msgstr "Cancelar a audição"
 
-#: data/resources/ui/recognizer-view.ui:49
+#: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
 msgstr "Modo offline"
 
@@ -280,43 +284,39 @@ msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Ativar reprodução"
 
-#: data/resources/ui/song-bar.ui:34
+#: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
 msgstr "Mostrar informações da música"
 
-#: data/resources/ui/song-bar.ui:92
+#: data/resources/ui/song_bar.ui:145
 msgid "Stop"
 msgstr "Parar"
 
-#: data/resources/ui/song-page.ui:24
+#: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
 msgstr "Remover do histórico"
 
-#: data/resources/ui/song-page.ui:30
+#: data/resources/ui/song_page.ui:19
 msgid "Copy"
 msgstr "Copiar"
 
-#: data/resources/ui/song-page.ui:134
+#: data/resources/ui/song_page.ui:122
 msgid "Information"
 msgstr "Informação"
 
-#: data/resources/ui/song-page.ui:137
+#: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
 msgstr "Última vez escutado"
 
-#: data/resources/ui/song-page.ui:142
+#: data/resources/ui/song_page.ui:130
 msgid "Album"
 msgstr "Álbum"
 
-#: data/resources/ui/song-page.ui:147
+#: data/resources/ui/song_page.ui:135
 msgid "Release Date"
 msgstr "Data de Lançamento"
 
-#: data/resources/ui/song-page.ui:154
-msgid "Lyrics"
-msgstr "Letras"
-
-#: data/resources/ui/song-tile.ui:30
+#: data/resources/ui/song_tile.ui:30
 msgid "New"
 msgstr "Novo"
 
@@ -448,98 +448,98 @@ msgstr "Buscar no Youtube"
 msgid "Failed to launch {key}"
 msgstr "Falha ao iniciar {key}"
 
-#: src/window/history_view.rs:137 src/window/song_page.rs:78
+#: src/window/history_view.rs:148 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "Copiado para a área de transferência"
 
-#: src/window/history_view.rs:150
+#: src/window/history_view.rs:161
 msgid "Failed to remove selected songs"
 msgstr "Falha ao remover as músicas selecionadas"
 
-#: src/window/history_view.rs:327
+#: src/window/history_view.rs:358
 msgid "Failed to remove song"
 msgstr "Falha ao remover a música"
 
-#: src/window/history_view.rs:440
+#: src/window/history_view.rs:564
 msgid "Failed to show recognizer results"
 msgstr "Falha ao mostrar os resultados do reconhecedor"
 
-#: src/window/history_view.rs:547
+#: src/window/history_view.rs:671
 msgid "_Undo"
 msgstr "_Desfazer"
 
-#: src/window/history_view.rs:556
+#: src/window/history_view.rs:683
 msgid "Failed to undo"
 msgstr "Falha ao desfazer"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:576
+#: src/window/history_view.rs:708
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Música {n_removed} removida"
 msgstr[1] "{n_removed} músicas removidas"
 
-#: src/window/history_view.rs:699
+#: src/window/history_view.rs:831
 msgid "Select items"
 msgstr "Selecionar itens"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:703
+#: src/window/history_view.rs:835
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Música {selection_size} selecionada"
 msgstr[1] "Músicas {selection_size} selecionadas"
 
-#: src/window/history_view.rs:713
+#: src/window/history_view.rs:845
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Copiar música"
 msgstr[1] "Copiar músicas"
 
-#: src/window/history_view.rs:720
+#: src/window/history_view.rs:852
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Remover música do histórico"
 msgstr[1] "Remover músicas do histórico"
 
-#: src/window/mod.rs:208
+#: src/window/mod.rs:214
 msgid "Failed to insert song to history"
 msgstr "Falha ao inserir música no histórico"
 
-#: src/window/mod.rs:252
+#: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr "Abra um problema no GitHub e forneça as informações necessárias"
 
-#: src/window/mod.rs:255 src/window/mod.rs:287
+#: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
 msgstr "Não, obrigado"
 
-#: src/window/mod.rs:257
+#: src/window/mod.rs:267
 msgid "Open an Issue"
 msgstr "Abra um problema"
 
-#: src/window/mod.rs:284
+#: src/window/mod.rs:294
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr "Tente se aproximar da fonte ou usar um trecho diferente da música"
 
-#: src/window/mod.rs:289
+#: src/window/mod.rs:299
 msgid "Try Again"
 msgstr "Tente novamente"
 
-#: src/window/mod.rs:320
+#: src/window/mod.rs:334
 msgid "Recording Saved"
 msgstr "Gravação salva"
 
-#: src/window/mod.rs:328
+#: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
 msgstr "O resultado estará disponível quando você estiver online novamente"
 
-#: src/window/mod.rs:331
+#: src/window/mod.rs:345
 msgid "Ok, Got It"
 msgstr "OK, entendi"
 
-#: src/window/mod.rs:341
+#: src/window/mod.rs:355
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -548,11 +548,11 @@ msgstr ""
 "até que o limite seja redefinido ou abra as preferências e tente definir um "
 "token diferente"
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:358
 msgid "I'll Wait"
 msgstr "Vou esperar"
 
-#: src/window/mod.rs:348
+#: src/window/mod.rs:362
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -560,19 +560,19 @@ msgstr ""
 "O resultado estará disponível quando seu token for substituído por um "
 "válido. Abra as preferências e tente definir um token diferente"
 
-#: src/window/mod.rs:351
+#: src/window/mod.rs:365
 msgid "Later"
 msgstr "Mais tarde"
 
-#: src/window/mod.rs:356
+#: src/window/mod.rs:370
 msgid "Open Preferences"
 msgstr "Abrir Preferências"
 
-#: src/window/mod.rs:443
+#: src/window/mod.rs:466
 msgid "An error occurred in the player"
 msgstr "Ocorreu um erro no reprodutor"
 
-#: src/window/playback_button.rs:95
+#: src/window/playback_button.rs:96
 msgid "Play"
 msgstr "Tocar"
 
@@ -580,43 +580,43 @@ msgstr "Tocar"
 msgid "Pause"
 msgstr "Pausar"
 
-#: src/window/recognized_page.rs:136
+#: src/window/recognized_page.rs:148
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Música Reconhecida"
 msgstr[1] "Músicas Reconhecidas"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:142
+#: src/window/recognized_page.rs:154
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Nova música {n_songs} reconhecida"
 msgstr[1] "{n_songs} novas músicas reconhecidas"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:160
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Esta música foi reconhecida da sua gravação salva"
 msgstr[1] "Estas músicas foram reconhecidas das suas gravações salvas"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:162
+#: src/window/recognizer_status.rs:171
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Reconhecido {n_successful} de {total_minus_failed}"
 
-#: src/window/recognizer_view.rs:134
+#: src/window/recognizer_view.rs:148
 msgid "Listening…"
 msgstr "Escutando…"
 
-#: src/window/recognizer_view.rs:139
+#: src/window/recognizer_view.rs:153
 msgid "Recognizing…"
 msgstr "Reconhecendo…"
 
-#: src/window/song_page.rs:349
+#: src/window/song_page.rs:376
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: src/window/song_tile.rs:338
+#: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Desmarcar"
 

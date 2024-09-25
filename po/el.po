@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-24 14:46+0800\n"
+"POT-Creation-Date: 2024-09-25 09:44+0800\n"
 "PO-Revision-Date: 2024-01-18 07:31+0000\n"
 "Last-Translator: greek anon <rnation@bbq59.xyz>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/seadve/mousai/el/"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:64
+#: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -116,94 +116,98 @@ msgstr "🌐 Περιηγηθείτε και ακούστε το τραγούδ�
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Εύκολο στη χρήση διεπαφή χρήστη"
 
-#: data/resources/ui/history-view.ui:6
+#: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
 msgstr "_Προτιμήσεις"
 
-#: data/resources/ui/history-view.ui:10
+#: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
 msgstr "_Συντομεύσεις Πληκτρολογίου"
 
-#: data/resources/ui/history-view.ui:14
+#: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
 msgstr "_Σχετικά με το Mousai"
 
-#: data/resources/ui/history-view.ui:22
+#: data/resources/ui/history_view.ui:22
 msgid "Select _All"
 msgstr "Επιλογή_Όλων"
 
-#: data/resources/ui/history-view.ui:26
+#: data/resources/ui/history_view.ui:26
 msgid "Select _None"
 msgstr "Επιλογή_Κανενός"
 
-#: data/resources/ui/history-view.ui:42
+#: data/resources/ui/history_view.ui:42
 msgid "Home"
 msgstr "Κεντρική"
 
-#: data/resources/ui/history-view.ui:52
+#: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
 msgstr "Αναγνωρίστε το τραγούδι"
 
-#: data/resources/ui/history-view.ui:53 data/resources/ui/song-page.ui:121
+#: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
 msgstr "Ακούστε"
 
-#: data/resources/ui/history-view.ui:65
+#: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
 msgstr "Κυρίως Μενού"
 
-#: data/resources/ui/history-view.ui:73 src/window/song_tile.rs:340
+#: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
 msgstr "Επιλέξτε"
 
-#: data/resources/ui/history-view.ui:80 data/resources/ui/history-view.ui:103
+#: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
 msgstr "Αναζήτηση Τραγουδιών"
 
-#: data/resources/ui/history-view.ui:96
+#: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
 msgstr "Ακύρωση επιλογής"
 
-#: data/resources/ui/history-view.ui:97 data/resources/ui/recognizer-view.ui:14
+#: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: data/resources/ui/history-view.ui:117
+#: data/resources/ui/history_view.ui:117
 msgid "Search songs"
 msgstr "Αναζήτηση τραγουδιών"
 
-#: data/resources/ui/history-view.ui:140
+#: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
 msgstr "Ξεκινήστε να αναγνωρίζετε τραγούδια!"
 
-#: data/resources/ui/history-view.ui:141
+#: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
 msgstr "Κάντε κλικ στο κουμπί ακρόαση για να ξεκινήσετε"
 
-#: data/resources/ui/history-view.ui:150
+#: data/resources/ui/history_view.ui:150
 msgid "No Results"
 msgstr "Χωρίς αποτέλεσμα"
 
-#: data/resources/ui/preferences-dialog.ui:8
+#: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
+msgid "Lyrics"
+msgstr "Στίχοι"
+
+#: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
 msgstr "Γενικά"
 
-#: data/resources/ui/preferences-dialog.ui:11
+#: data/resources/ui/preferences_dialog.ui:11
 #, fuzzy
 #| msgid "Preferred Audio Source"
 msgid "Audio Source"
 msgstr "Προτιμώμενη πηγή ήχου"
 
-#: data/resources/ui/preferences-dialog.ui:12
+#: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
 msgstr ""
 
-#: data/resources/ui/preferences-dialog.ui:19
+#: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
 msgstr "AudD"
 
-#: data/resources/ui/preferences-dialog.ui:20
+#: data/resources/ui/preferences_dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
@@ -212,23 +216,23 @@ msgstr ""
 "io/\">audd.io</a>. Αν αφήσετε αυτό το κενό, θα έχετε μερικές δοκιμές την "
 "ημέρα"
 
-#: data/resources/ui/preferences-dialog.ui:23
+#: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
 msgstr "API Token"
 
-#: data/resources/ui/recognizer-status.ui:17
+#: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
 msgstr "Ενεργοποιήθηκε η λειτουργία εκτός σύνδεσης"
 
-#: data/resources/ui/recognizer-status.ui:44
+#: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
 msgstr "Εμφάνιση αποτελεσμάτων από αναγνώρισεις σε λειτουργία εκτός σύνδεσης"
 
-#: data/resources/ui/recognizer-view.ui:13
+#: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
 msgstr "Ακύρωση ακρόασης"
 
-#: data/resources/ui/recognizer-view.ui:49
+#: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
 msgstr "Λειτουργία εκτός σύνδεσης"
 
@@ -277,43 +281,39 @@ msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Εναλλαγή λειτουργίας αναπαραγωγής"
 
-#: data/resources/ui/song-bar.ui:34
+#: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
 msgstr "Εμφάνιση πληροφοριών τραγουδιού"
 
-#: data/resources/ui/song-bar.ui:92
+#: data/resources/ui/song_bar.ui:145
 msgid "Stop"
 msgstr "Τέλος"
 
-#: data/resources/ui/song-page.ui:24
+#: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
 msgstr "Κατάργηση από το ιστορικό"
 
-#: data/resources/ui/song-page.ui:30
+#: data/resources/ui/song_page.ui:19
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: data/resources/ui/song-page.ui:134
+#: data/resources/ui/song_page.ui:122
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: data/resources/ui/song-page.ui:137
+#: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
 msgstr "Τελευταία ακρόαση"
 
-#: data/resources/ui/song-page.ui:142
+#: data/resources/ui/song_page.ui:130
 msgid "Album"
 msgstr "Άλμπουμ"
 
-#: data/resources/ui/song-page.ui:147
+#: data/resources/ui/song_page.ui:135
 msgid "Release Date"
 msgstr "Ημερομηνία κυκλοφορίας"
 
-#: data/resources/ui/song-page.ui:154
-msgid "Lyrics"
-msgstr "Στίχοι"
-
-#: data/resources/ui/song-tile.ui:30
+#: data/resources/ui/song_tile.ui:30
 msgid "New"
 msgstr "Νέο"
 
@@ -446,100 +446,100 @@ msgstr "Αναζήτηση στο YouTube"
 msgid "Failed to launch {key}"
 msgstr "Αποτυχία εκκίνησης {key}"
 
-#: src/window/history_view.rs:137 src/window/song_page.rs:78
+#: src/window/history_view.rs:148 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "Αντιγράφηκε στο πρόχειρο"
 
-#: src/window/history_view.rs:150
+#: src/window/history_view.rs:161
 msgid "Failed to remove selected songs"
 msgstr "Αποτυχία κατάργησης επιλεγμένων τραγουδιών"
 
-#: src/window/history_view.rs:327
+#: src/window/history_view.rs:358
 msgid "Failed to remove song"
 msgstr "Η κατάργηση του τραγουδιού απέτυχε"
 
-#: src/window/history_view.rs:440
+#: src/window/history_view.rs:564
 msgid "Failed to show recognizer results"
 msgstr "Αποτυχία εμφάνισης αποτελεσμάτων αναγνώρισης"
 
-#: src/window/history_view.rs:547
+#: src/window/history_view.rs:671
 msgid "_Undo"
 msgstr "_Αναίρεση"
 
-#: src/window/history_view.rs:556
+#: src/window/history_view.rs:683
 msgid "Failed to undo"
 msgstr "Αποτυχία αναίρεσης"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:576
+#: src/window/history_view.rs:708
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Αφαιρέθηκε {n_removed} τραγούδι"
 msgstr[1] "Αφαιρέθηκε {n_removed} τραγούδια"
 
-#: src/window/history_view.rs:699
+#: src/window/history_view.rs:831
 msgid "Select items"
 msgstr "Επιλέξτε στοιχεία"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:703
+#: src/window/history_view.rs:835
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Επιλεγμένο {selection_size} τραγούδι"
 msgstr[1] "Επιλεγμένα {selection_size} τραγούδια"
 
-#: src/window/history_view.rs:713
+#: src/window/history_view.rs:845
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Αντιγραφή τραγουδιού"
 msgstr[1] "Αντιγραφή τραγουδιών"
 
-#: src/window/history_view.rs:720
+#: src/window/history_view.rs:852
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Αφαιρέστε το τραγούδι από το ιστορίκο"
 msgstr[1] "Αφαιρέστε τα τραγούδια από το ιστορίκο"
 
-#: src/window/mod.rs:208
+#: src/window/mod.rs:214
 msgid "Failed to insert song to history"
 msgstr "Αποτυχία εισαγωγής τραγουδιού στο ιστορικό"
 
-#: src/window/mod.rs:252
+#: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr "Ανοίξτε ένα issue στο GitHub και δώστε τις απαραίτητες πληροφορίες"
 
-#: src/window/mod.rs:255 src/window/mod.rs:287
+#: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
 msgstr "Οχι ευχαριστώ"
 
-#: src/window/mod.rs:257
+#: src/window/mod.rs:267
 msgid "Open an Issue"
 msgstr "Ανοίξτε ένα Issue στο GitHub"
 
-#: src/window/mod.rs:284
+#: src/window/mod.rs:294
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
 "Δοκιμάστε να μετακινηθείτε πιο κοντά στην πηγή ή να χρησιμοποιήσετε ένα "
 "διαφορετικό απόσπασμα του τραγουδιού"
 
-#: src/window/mod.rs:289
+#: src/window/mod.rs:299
 msgid "Try Again"
 msgstr "Προσπάθησε ξανά"
 
-#: src/window/mod.rs:320
+#: src/window/mod.rs:334
 msgid "Recording Saved"
 msgstr "Η Εγγραφή Αποθηκεύτηκε"
 
-#: src/window/mod.rs:328
+#: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
 msgstr "Το αποτέλεσμα θα είναι διαθέσιμο όταν ξανασυνδεθείτε στο Διαδίκτυο"
 
-#: src/window/mod.rs:331
+#: src/window/mod.rs:345
 msgid "Ok, Got It"
 msgstr "Εντάξει, Κατάλαβα"
 
-#: src/window/mod.rs:341
+#: src/window/mod.rs:355
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
@@ -548,11 +548,11 @@ msgstr ""
 "διακριτικού σας. Περιμένετε έως ότου γίνει επαναφορά του ορίου ή ανοίξτε τις "
 "προτιμήσεις και δοκιμάστε να ορίσετε ένα διαφορετικό διακριτικό"
 
-#: src/window/mod.rs:344
+#: src/window/mod.rs:358
 msgid "I'll Wait"
 msgstr "Θα περιμένω"
 
-#: src/window/mod.rs:348
+#: src/window/mod.rs:362
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
@@ -561,19 +561,19 @@ msgstr ""
 "ένα έγκυρο. Ανοίξτε τις προτιμήσεις και δοκιμάστε να ορίσετε ένα διαφορετικό "
 "διακριτικό"
 
-#: src/window/mod.rs:351
+#: src/window/mod.rs:365
 msgid "Later"
 msgstr "Αργότερα"
 
-#: src/window/mod.rs:356
+#: src/window/mod.rs:370
 msgid "Open Preferences"
 msgstr "Ανοίξτε τις Προτιμήσεις"
 
-#: src/window/mod.rs:443
+#: src/window/mod.rs:466
 msgid "An error occurred in the player"
 msgstr "Παρουσιάστηκε σφάλμα στη συσκευή αναπαραγωγής"
 
-#: src/window/playback_button.rs:95
+#: src/window/playback_button.rs:96
 msgid "Play"
 msgstr "Αναπαραγωγή"
 
@@ -581,43 +581,43 @@ msgstr "Αναπαραγωγή"
 msgid "Pause"
 msgstr "Παύση"
 
-#: src/window/recognized_page.rs:136
+#: src/window/recognized_page.rs:148
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Αναγνωρισμένο τραγούδι"
 msgstr[1] "Αναγνωρισμένα τραγούδια"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:142
+#: src/window/recognized_page.rs:154
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Αναγνωρισμένο {n_songs} νέο τραγούδι"
 msgstr[1] "Αναγνωρισμένα {n_songs} νέα τραγούδια"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:160
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Αυτό το τραγούδι αναγνωρίστηκε από την αποθηκευμένη εγγραφή σας"
 msgstr[1] "Αυτά το τραγούδια αναγνωρίστηκαν από τις αποθηκευμένες εγγραφές σας"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:162
+#: src/window/recognizer_status.rs:171
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Αναγνωρισμένα {n_succif} από {total_minus_failed}"
 
-#: src/window/recognizer_view.rs:134
+#: src/window/recognizer_view.rs:148
 msgid "Listening…"
 msgstr "Ακρόαση…"
 
-#: src/window/recognizer_view.rs:139
+#: src/window/recognizer_view.rs:153
 msgid "Recognizing…"
 msgstr "Αναγνώριση…"
 
-#: src/window/song_page.rs:349
+#: src/window/song_page.rs:376
 msgid "Unknown"
 msgstr "Άγνωστο"
 
-#: src/window/song_tile.rs:338
+#: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Αποεπιλογή"
 
