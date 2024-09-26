@@ -52,7 +52,7 @@
       </description>
     </release>
     <release version="0.7.7" date="2024-03-24">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains the following changes:</p>
         <ul>
           <li>Offline mode recognition progress is now animated</li>
@@ -63,7 +63,7 @@
       </description>
     </release>
     <release version="0.7.6" date="2023-11-18">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains the following changes:</p>
         <ul>
           <li>Refreshed UI</li>
@@ -78,7 +78,7 @@
       </description>
     </release>
     <release version="0.7.5" date="2023-05-02">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains the following changes:</p>
         <ul>
           <li>Added suggestions and more helpful messages when a recording is saved</li>
@@ -91,7 +91,7 @@
       </description>
     </release>
     <release version="0.7.4" date="2023-04-26">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains new features and fixes:</p>
         <ul>
           <li>Added blur background on song player bar</li>
@@ -100,17 +100,17 @@
       </description>
     </release>
     <release version="0.7.3" date="2023-04-22">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains a new feature and translation updates:</p>
         <ul>
           <li>Save the recording when the error is non-permanent even in non-offline mode</li>
-          <li>Fixed some untranslatable strings</li>
+          <li>Fixed some untranslate strings</li>
           <li>Updated Ukrainian, Tamil, Arabic, Dutch, Norwegian Bokmål, Spanish, Italian, Filipino, Greek, Indonesian, and Croatian translations</li>
         </ul>
       </description>
     </release>
     <release version="0.7.2" date="2023-04-12">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains fixes:</p>
         <ul>
           <li>Added tooltip text on select tile button</li>
@@ -120,7 +120,7 @@
       </description>
     </release>
     <release version="0.7.1" date="2023-04-09">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains new features and fixes:</p>
         <ul>
           <li>Added button to try again on no matches</li>
@@ -134,7 +134,7 @@
       </description>
     </release>
     <release version="0.7.0" date="2023-04-06">
-      <description translatable="no">
+      <description translate="no">
         <p>This update contains huge UI updates and fixes:</p>
         <ul>
           <li>New feature-rich UI</li>
@@ -152,7 +152,7 @@
       </description>
     </release>
     <release version="0.6.6" date="2021-09-08">
-      <description translatable="no">
+      <description translate="no">
         <p>This update contains a fix and translation updates:</p>
         <ul>
           <li>Fixed wrong audio source</li>
@@ -161,7 +161,7 @@
       </description>
     </release>
     <release version="0.6.5" date="2021-09-08">
-      <description translatable="no">
+      <description translate="no">
         <p>This is a very minor release containing translations update:</p>
         <ul>
           <li>Updated Chinese (Simplified) translations</li>
@@ -170,7 +170,7 @@
       </description>
     </release>
     <release version="0.6.4" date="2021-09-02">
-      <description translatable="no">
+      <description translate="no">
         <p>This update contains new translations:</p>
         <ul>
           <li>Updated Turkish translations</li>
@@ -180,7 +180,7 @@
       </description>
     </release>
     <release version="0.6.3" date="2021-08-27">
-      <description translatable="no">
+      <description translate="no">
         <p>This is a minor release containing updated translations:</p>
         <ul>
           <li>Updated Finnish translations</li>
@@ -189,7 +189,7 @@
       </description>
     </release>
     <release version="0.6.2" date="2021-08-25">
-      <description translatable="no">
+      <description translate="no">
         <p>This is a fix release:</p>
         <ul>
           <li>Fix missing temporary directory</li>
@@ -197,7 +197,7 @@
       </description>
     </release>
     <release version="0.6.1" date="2021-08-24">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains bug fixes and translations updates:</p>
         <ul>
           <li>Fixed missiong icon on XFCE (thanks to @apandada1)</li>
@@ -208,7 +208,7 @@
       </description>
     </release>
     <release version="0.6.0" date="2021-08-22">
-      <description translatable="no">
+      <description translate="no">
         <p>This release contains UI and translation improvements:</p>
         <ul>
           <li>Improved playing animation</li>
@@ -223,7 +223,7 @@
       </description>
     </release>
     <release version="0.5.2" date="2021-08-10">
-      <description translatable="no">
+      <description translate="no">
         <p>This is a small update with miscellaneous improvements:</p>
         <ul>
           <li>Added a beep sound when trying to do something</li>
@@ -237,7 +237,7 @@
       </description>
     </release>
     <release version="0.5.1" date="2021-08-08">
-      <description translatable="no">
+      <description translate="no">
         <p>This is a small update with miscellaneous improvements:</p>
         <ul>
           <li>More fine-tuned user interface</li>
@@ -247,7 +247,7 @@
       </description>
     </release>
     <release version="0.5.0" date="2021-08-06">
-      <description translatable="no">
+      <description translate="no">
         <p>A semi-big release containing new features and major bug fixes:</p>
         <ul>
           <li>Added the ability to select preferred audio source (Either microphone or from desktop audio)</li>
@@ -263,7 +263,7 @@
       </description>
     </release>
     <release version="0.4.4" date="2021-08-03">
-      <description translatable="no">
+      <description translate="no">
         <p>This update contains translations and minor ui fixes:</p>
         <ul>
           <li>Minor user interface improvements</li>
@@ -273,7 +273,7 @@
       </description>
     </release>
     <release version="0.4.3" date="2021-07-28">
-      <description translatable="no">
+      <description translate="no">
         <p>This update contains translations and minor fixes:</p>
         <ul>
           <li>Better user experience with token dialog</li>
@@ -287,7 +287,7 @@
       </description>
     </release>
     <release version="0.4.2" date="2021-07-03">
-      <description translatable="no">
+      <description translate="no">
         <p>This update contains minor fixes:</p>
         <ul>
           <li>Added option to not show token dialog at startup</li>
@@ -297,7 +297,7 @@
       </description>
     </release>
     <release version="0.4.1" date="2021-05-23">
-      <description translatable="no">
+      <description translate="no">
         <p>This contains some fixes for the last update:</p>
         <ul>
           <li>Improved UI icons</li>
@@ -308,7 +308,7 @@
       </description>
     </release>
     <release version="0.4.0" date="2021-05-22">
-      <description translatable="no">
+      <description translate="no">
         <p>A release containing exciting new features and fixes!</p>
         <ul>
           <li>New built-in player for the identified music</li>
@@ -329,7 +329,7 @@
       </description>
     </release>
     <release version="0.3.2" date="2021-05-05">
-      <description translatable="no">
+      <description translate="no">
         <p>Not a big release, but it has some notable changes:</p>
         <ul>
           <li>Improved UI experience</li>
@@ -350,7 +350,7 @@
       </description>
     </release>
     <release version="0.3.1" date="2021-04-09">
-      <description translatable="no">
+      <description translate="no">
         <p>Minor improvements:</p>
         <ul>
           <li>Minor UI Improvements</li>
@@ -360,7 +360,7 @@
       </description>
     </release>
     <release version="0.3.0" date="2021-04-08">
-      <description translatable="no">
+      <description translate="no">
         <p>New features and performance improvements:</p>
         <ul>
           <li>Added a play button to preview songs</li>
@@ -372,7 +372,7 @@
       </description>
     </release>
     <release version="0.2.0" date="2021-03-31">
-      <description translatable="no">
+      <description translate="no">
         <p>This update brings few bug fixes:</p>
         <ul>
           <li>Fixed a bug when there are two similar named songs</li>
@@ -385,7 +385,7 @@
       </description>
     </release>
     <release version="0.1.0" date="2021-03-30">
-      <description translatable="no">
+      <description translate="no">
         <p>Initial release.</p>
       </description>
     </release>
@@ -395,9 +395,9 @@
     <kudo>HiDpiIcon</kudo>
   </kudos>
   <!-- developer_name tag deprecated with Appstream 1.0 -->
-  <developer_name translatable="no">Dave Patrick Caberto</developer_name>
+  <developer_name translate="no">Dave Patrick Caberto</developer_name>
   <developer id="io.github.seadve">
-    <name translatable="no">Dave Patrick Caberto</name>
+    <name translate="no">Dave Patrick Caberto</name>
   </developer>
   <update_contact>davecruz48@gmail.com</update_contact>
   <translation type="gettext">@gettext-package@</translation>
