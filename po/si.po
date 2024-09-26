@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2023-10-01 09:04+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Sinhala <https://hosted.weblate.org/projects/seadve/mousai/si/"
@@ -122,8 +122,10 @@ msgid "Select _All"
 msgstr "සියල්ල තෝරන්න (_A)"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "කිසිවක් නොතෝරන්න (_N)"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "නොතෝරන්න"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -583,6 +585,9 @@ msgstr "නොදන්නා"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "නොතෝරන්න"
+
+#~ msgid "Select _None"
+#~ msgstr "කිසිවක් නොතෝරන්න (_N)"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "ඩේව් පැට්‍රික් කැබර්ටෝ"

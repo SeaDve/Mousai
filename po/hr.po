@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-04-25 12:07+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -128,8 +128,10 @@ msgid "Select _All"
 msgstr "Odaberi _sve"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "Odaberi _ništa"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Poništi odabir"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -607,6 +609,9 @@ msgstr "Nepoznato"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Poništi odabir"
+
+#~ msgid "Select _None"
+#~ msgstr "Odaberi _ništa"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

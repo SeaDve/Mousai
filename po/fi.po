@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-02-25 07:01+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/fi/"
@@ -132,8 +132,10 @@ msgid "Select _All"
 msgstr "Valitse _kaikki"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "Älä valitse _mitään"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Peru valinta"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -604,6 +606,9 @@ msgstr "Tuntematon"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Peru valinta"
+
+#~ msgid "Select _None"
+#~ msgstr "Älä valitse _mitään"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

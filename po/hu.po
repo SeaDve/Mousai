@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2023-05-27 20:50+0000\n"
 "Last-Translator: Cimbora <domonkos.sebestyen@gmail.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -131,8 +131,10 @@ msgid "Select _All"
 msgstr "Az_összes_kiválasztása"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr ""
+#, fuzzy
+#| msgid "Select _All"
+msgid "_Unselect All"
+msgstr "Az_összes_kiválasztása"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"

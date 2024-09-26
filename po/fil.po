@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2023-04-14 19:50+0000\n"
 "Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -125,8 +125,10 @@ msgid "Select _All"
 msgstr "Piliin _Lahat"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "Piliin ang _Wala"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "I-unselect"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -601,6 +603,9 @@ msgstr "Hindi Alam"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "I-unselect"
+
+#~ msgid "Select _None"
+#~ msgstr "Piliin ang _Wala"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

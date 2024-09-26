@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-08-27 21:09+0000\n"
 "Last-Translator: Alexandre Vergueiro <alexandrevergueirojr@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -131,8 +131,10 @@ msgid "Select _All"
 msgstr "Selecionar Todos"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "Selecionar Nenhum"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Desmarcar"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -607,6 +609,9 @@ msgstr "Desconhecido"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Desmarcar"
+
+#~ msgid "Select _None"
+#~ msgstr "Selecionar Nenhum"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Danilo Alfredo Vieira"

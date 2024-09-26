@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-03-05 09:01+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -135,8 +135,10 @@ msgid "Select _All"
 msgstr "Выбраць_усё"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "Ска_саваць выбар"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Адмяніць выбар"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -617,6 +619,9 @@ msgstr "Невядома"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Адмяніць выбар"
+
+#~ msgid "Select _None"
+#~ msgstr "Ска_саваць выбар"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Дэйв Патрык Кабэрта (Dave Patrick Caberto)"

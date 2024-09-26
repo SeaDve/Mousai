@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-08-29 12:09+0000\n"
 "Last-Translator: victor dargallo <victordargallo@disroot.org>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
@@ -131,8 +131,10 @@ msgid "Select _All"
 msgstr "Selecciona-ho _tot"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "No seleccionis _res"
+#, fuzzy
+#| msgid "Select _All"
+msgid "_Unselect All"
+msgstr "Selecciona-ho _tot"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -592,6 +594,9 @@ msgstr ""
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr ""
+
+#~ msgid "Select _None"
+#~ msgstr "No seleccionis _res"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

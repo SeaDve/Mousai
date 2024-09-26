@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-05-31 08:59+0000\n"
 "Last-Translator: Volkan Yıldırım <volkan.y@posteo.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/seadve/mousai/tr/"
@@ -131,8 +131,10 @@ msgid "Select _All"
 msgstr "_Tümünü Seç"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "_Hiçbirini Seçme"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Seçimi Kaldır"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -605,6 +607,9 @@ msgstr "Bilinmiyor"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Seçimi Kaldır"
+
+#~ msgid "Select _None"
+#~ msgstr "_Hiçbirini Seçme"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-04-17 10:50+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/seadve/mousai/ta/"
@@ -128,8 +128,10 @@ msgid "Select _All"
 msgstr "அனைத்தையும்_தெரிவுசெய்"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "எதுவும் இல்லை என்பதைத் தேர்ந்தெடுக்கவும்"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "தேர்வுநீக்கு"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -599,6 +601,9 @@ msgstr "தெரியாதது"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "தேர்வுநீக்கு"
+
+#~ msgid "Select _None"
+#~ msgstr "எதுவும் இல்லை என்பதைத் தேர்ந்தெடுக்கவும்"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "டேவ் பேட்ரிக் கேபர்டோ"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-02-26 08:02+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/"
@@ -133,8 +133,10 @@ msgid "Select _All"
 msgstr "_Alles selecteren"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "_Niets selecteren"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Deselecteren"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -607,6 +609,9 @@ msgstr "Onbekend"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Deselecteren"
+
+#~ msgid "Select _None"
+#~ msgstr "_Niets selecteren"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

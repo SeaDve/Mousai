@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-05-11 06:00+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/seadve/mousai/hi/"
@@ -127,8 +127,10 @@ msgid "Select _All"
 msgstr "सभी चुनें (_A)"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "कुछ नहीं चुनें (_N)"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "अचयनित करें"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -599,6 +601,9 @@ msgstr "अज्ञात"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "अचयनित करें"
+
+#~ msgid "Select _None"
+#~ msgstr "कुछ नहीं चुनें (_N)"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

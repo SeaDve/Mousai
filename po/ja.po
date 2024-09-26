@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-04-19 13:03+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -133,8 +133,10 @@ msgid "Select _All"
 msgstr "すべて選択(_A)"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "すべて選択解除(_N)"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "選択解除"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -602,6 +604,9 @@ msgstr "不明"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "選択解除"
+
+#~ msgid "Select _None"
+#~ msgstr "すべて選択解除(_N)"
 
 #, fuzzy
 #~ msgid "Dave Patrick Caberto"

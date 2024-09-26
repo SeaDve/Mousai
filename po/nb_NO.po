@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2023-05-01 07:14+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/seadve/"
@@ -128,8 +128,10 @@ msgid "Select _All"
 msgstr "Velg _alle"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "_Fravelg alle"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Fravelg"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -615,6 +617,9 @@ msgstr "Ukjent"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Fravelg"
+
+#~ msgid "Select _None"
+#~ msgstr "_Fravelg alle"
 
 #, fuzzy
 #~ msgid "Dave Patrick Caberto"

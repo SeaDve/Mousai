@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-07-05 09:09+0000\n"
 "Last-Translator: I love Frank Ocean <hohoujoeng@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -133,8 +133,10 @@ msgid "Select _All"
 msgstr "全选(_A)"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "不选(_N)"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "取消选择"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -597,6 +599,9 @@ msgstr "未知"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "取消选择"
+
+#~ msgid "Select _None"
+#~ msgstr "不选(_N)"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

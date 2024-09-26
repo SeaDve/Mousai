@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-02-26 08:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/seadve/mousai/es/"
@@ -135,8 +135,10 @@ msgid "Select _All"
 msgstr "Seleccionar _todo"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "No seleccionar _nada"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Deseleccionar"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -613,6 +615,9 @@ msgstr "Desconocido"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Deseleccionar"
+
+#~ msgid "Select _None"
+#~ msgstr "No seleccionar _nada"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Dave Patrick Caberto"

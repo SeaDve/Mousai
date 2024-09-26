@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2023-10-01 09:04+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Nepali <https://hosted.weblate.org/projects/seadve/mousai/ne/"
@@ -130,8 +130,8 @@ msgstr "सबै छान्नु"
 
 #: data/resources/ui/history_view.ui:26
 #, fuzzy
-msgid "Select _None"
-msgstr "चयन गर्नुहोस् _कुनै छैन"
+msgid "_Unselect All"
+msgstr "सबै छान्नु"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -622,6 +622,10 @@ msgstr ""
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Select _None"
+#~ msgstr "चयन गर्नुहोस् _कुनै छैन"
 
 #~ msgctxt "shortcut window"
 #~ msgid "Navigation"

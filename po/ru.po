@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-02-26 08:02+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/seadve/mousai/ru/"
@@ -139,8 +139,10 @@ msgid "Select _All"
 msgstr "Выбрать _все"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "_Ничего не выбирать"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "Отменить выбор"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -623,6 +625,9 @@ msgstr "Неизвестно"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Отменить выбор"
+
+#~ msgid "Select _None"
+#~ msgstr "_Ничего не выбирать"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "Дэйв Патрик Каберто"

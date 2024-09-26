@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2023-12-16 14:06+0000\n"
 "Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/"
@@ -130,8 +130,10 @@ msgid "Select _All"
 msgstr "حدِّد ال_كلَّ"
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
-msgstr "لا ت_حدِّد أيَّ شيء"
+#, fuzzy
+#| msgid "Unselect"
+msgid "_Unselect All"
+msgstr "ألغِ التحديد"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -639,6 +641,9 @@ msgstr "مجهول"
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "ألغِ التحديد"
+
+#~ msgid "Select _None"
+#~ msgstr "لا ت_حدِّد أيَّ شيء"
 
 #~ msgid "Dave Patrick Caberto"
 #~ msgstr "ديف باترك كابرتو"

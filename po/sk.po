@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 09:44+0800\n"
+"POT-Creation-Date: 2024-09-26 19:58+0800\n"
 "PO-Revision-Date: 2024-04-23 23:07+0000\n"
 "Last-Translator: LvargaDS <lvarga@digitalsystems.eu>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/seadve/mousai/sk/"
@@ -123,7 +123,7 @@ msgid "Select _All"
 msgstr ""
 
 #: data/resources/ui/history_view.ui:26
-msgid "Select _None"
+msgid "_Unselect All"
 msgstr ""
 
 #: data/resources/ui/history_view.ui:42
