@@ -23,7 +23,7 @@
         <attribute name="action">history-view.select-all</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Select _None</attribute>
+        <attribute name="label" translatable="yes">_Unselect All</attribute>
         <attribute name="action">history-view.select-none</attribute>
       </item>
     </section>
