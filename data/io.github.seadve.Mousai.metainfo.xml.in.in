@@ -34,6 +34,10 @@
       <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot4.png</image>
     </screenshot>
   </screenshots>
+  <branding>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#513d68</color>
+  </branding>
   <url type="bugtracker">https://github.com/SeaDve/Mousai/issues</url>
   <url type="homepage">https://github.com/SeaDve/Mousai</url>
   <url type="donation">https://seadve.github.io/donate/</url>
@@ -413,8 +417,4 @@
   <custom>
     <value key="Purism::form_factor">mobile</value>
   </custom>
-  <branding>
-    <color type="primary" scheme_preference="light">#99c1f1</color>
-    <color type="primary" scheme_preference="dark">#513d68</color>
-  </branding>
 </component>
