@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-04-19 13:03+0000\n"
+"PO-Revision-Date: 2024-09-28 13:16+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/seadve/mousai/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -133,10 +133,8 @@ msgid "Select _All"
 msgstr "すべて選択(_A)"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "選択解除"
+msgstr "すべて選択解除(_U)"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"

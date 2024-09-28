@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021, 2022.
+# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2021, 2022, 2024.
 # robert schneider <robertschv@gmail.com>, 2021.
 # Sergio Varela <sergitroll9@gmail.com>, 2021, 2022.
 # Chardinson De la cruz Ventura <chardinsondelacruzventura@gmail.com>, 2021.
@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-09-27 12:16+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2024-09-28 13:16+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/seadve/mousai/es/"
 ">\n"
 "Language: es\n"
@@ -124,7 +124,7 @@ msgstr "_Preferencias"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "_Atajos del teclado"
+msgstr "Atajos del _teclado"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
@@ -217,7 +217,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
-msgstr "Testigo API"
+msgstr "Token de la API"
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
@@ -302,7 +302,7 @@ msgstr "Información"
 
 #: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
-msgstr "Último escuchado"
+msgstr "Escuchado por última vez"
 
 #: data/resources/ui/song_page.ui:130
 msgid "Album"
