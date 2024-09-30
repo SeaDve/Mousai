@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-02-26 08:02+0000\n"
+"PO-Revision-Date: 2024-09-30 12:16+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/"
-">\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -133,10 +133,8 @@ msgid "Select _All"
 msgstr "_Alles selecteren"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "Deselecteren"
+msgstr "Alles _deselecteren"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"

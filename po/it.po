@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-03-02 15:01+0000\n"
+"PO-Revision-Date: 2024-09-30 12:16+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/seadve/mousai/it/"
 ">\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -138,10 +138,8 @@ msgid "Select _All"
 msgstr "_Seleziona tutto"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "Deseleziona"
+msgstr "_Deseleziona tutto"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
