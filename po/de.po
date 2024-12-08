@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-10-22 21:16+0000\n"
-"Last-Translator: ChefExperte <aaron+git@chefexperte.de>\n"
+"PO-Revision-Date: 2024-12-08 10:00+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/seadve/mousai/de/>"
 "\n"
 "Language: de\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -267,14 +267,16 @@ msgid "Show Preferences"
 msgstr "Einstellungen anzeigen"
 
 #: data/resources/ui/shortcuts.ui:32
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Tastenkürzel anzeigen"
+msgstr "Tastaturkürzel anzeigen"
 
 #: data/resources/ui/shortcuts.ui:38
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Beenden"
+msgstr "Schließen"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
