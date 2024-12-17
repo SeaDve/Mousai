@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-11-16 21:00+0000\n"
+"PO-Revision-Date: 2024-12-17 22:00+0000\n"
 "Last-Translator: Joan Aymà <joanayma@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.9.2-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -49,10 +49,8 @@ msgid "Whether the window is maximized"
 msgstr "Si la finestra està maximitzada"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Font d’àudio preferida per a enregistrar el so"
+msgstr "Tipus de font d’àudio per a enregistrar el so"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -93,26 +91,28 @@ msgstr "Per què us encantarà el Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identifica cançons en segons o guarda per després quan estiguis "
+"desconnectat"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Reconeix des de l'àudio de l'escriptori o del teu micròfon"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Crea un repertori de cançons reconegudes"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Previsualitza ràpidament la cançó dins la interfície"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Navega i escolta la cançó des de diferents proveïdors"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 interfície d'usuari fàcil d'utilitzar"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -131,10 +131,8 @@ msgid "Select _All"
 msgstr "Selecciona-ho _tot"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Select _All"
 msgid "_Unselect All"
-msgstr "Selecciona-ho _tot"
+msgstr "Desselecciona-ho _tot"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -142,7 +140,7 @@ msgstr "Inici"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Reconeix l cançó"
 
 #: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
@@ -174,11 +172,11 @@ msgstr "Cerca cançons"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Comença a reconèixer cançons!"
 
 #: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Prem el botó escoltar per començar"
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
@@ -186,21 +184,19 @@ msgstr "Cap resultat"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
-msgstr ""
+msgstr "Lletra"
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
 msgstr "General"
 
 #: data/resources/ui/preferences_dialog.ui:11
-#, fuzzy
-#| msgid "_Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Font d’àudio _preferida"
+msgstr "Font d’àudio"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Dispositiu usat per escoltar"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -212,18 +208,20 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"Pots obtenir un token d'API a <a href=\"https://dashboard.audd.io/\""
+">audd.io</a>. Deixant-ho en blanc et permetrà fer algunes proves cada dia"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "Token (fitxa) d'API"
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Mode sense connexió activat"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Mostra els resultats de reconeixement sense connexió"
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
@@ -231,7 +229,7 @@ msgstr "Cancel·la l’escolta"
 
 #: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "Mode sense connexió"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -249,7 +247,6 @@ msgid "Search"
 msgstr "Cerca"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Mostra les Preferències"
@@ -313,7 +310,7 @@ msgstr "Data de publicació"
 
 #: data/resources/ui/song_tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
@@ -334,7 +331,7 @@ msgstr "Tradueix"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Error crític a la base de dades"
 
 #: src/application.rs:210
 msgid ""
@@ -347,6 +344,14 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Perdoneu, hi ha hagut un error a la base de dades. El més probable és que "
+"sigui causat per una base de dades manipulada o corrupta. Pots provar amb "
+"netejar les dades de l'aplicació, però no és recomanable i esborrarà totes "
+"les teves cançons i gravacions guardades.\n"
+"\n"
+"Per informar del problema, si-us-plau executa Mousai des del terminal per "
+"incloure els registres i envia l'error a <a href="
+"\"https://github.com/SeaDve/Mousai/issues/\">la pàgina de problemes</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -437,11 +442,11 @@ msgstr "No s'han pogut eliminar les cançons seleccionades"
 
 #: src/window/history_view.rs:358
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Ha fallat a l'esborrar la cançó"
 
 #: src/window/history_view.rs:564
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Ha faltat al mostrar els resultats de reconeixements"
 
 #: src/window/history_view.rs:671
 msgid "_Undo"
@@ -449,32 +454,31 @@ msgstr "_Desfés"
 
 #: src/window/history_view.rs:683
 msgid "Failed to undo"
-msgstr ""
+msgstr "Ha faltat al desfer"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:708
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha esborrat {n_removed} cançó"
+msgstr[1] "S'han esborrat {n_removed} cançons"
 
 #: src/window/history_view.rs:831
 msgid "Select items"
-msgstr ""
+msgstr "Seleccionar elements"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:835
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha seleccionat {selection_size} cançó"
+msgstr[1] "S'han seleccionat {selection_size} cançons"
 
 #: src/window/history_view.rs:845
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Copia la cançó"
-msgstr[1] "Copia la cançó"
+msgstr[1] "Copia les cançons"
 
 #: src/window/history_view.rs:852
 msgid "Remove Song From History"
@@ -484,36 +488,38 @@ msgstr[1] "Elimina les cançons de l’historial"
 
 #: src/window/mod.rs:214
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Ha fallat a l'inserir la cançó a l'historial"
 
 #: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
+"Si-us-plau, obté uns incidència a Github i proveeix la informació necessària"
 
 #: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
-msgstr ""
+msgstr "No, gràcies"
 
 #: src/window/mod.rs:267
 msgid "Open an Issue"
-msgstr ""
+msgstr "Obre una incidència"
 
 #: src/window/mod.rs:294
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
+"Prova a apropar-te a la font o fés servir un fragment diferent de la cançó"
 
 #: src/window/mod.rs:299
 msgid "Try Again"
-msgstr ""
+msgstr "Prova-ho un altre cop"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
-msgstr ""
+msgstr "Gravació guardada"
 
 #: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "El resultat estarà disponible quan estiguis connectat un altre cop"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
@@ -524,16 +530,21 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"El resultat estarà disponible quan el límit de teu token (fitxa) s'hagi "
+"restablert. Espera fins que el límit sigui restablert o obre les "
+"preferències i prova amb un token diferent"
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
-msgstr ""
+msgstr "M'espero"
 
 #: src/window/mod.rs:362
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"El resultat estarà disponible quan el teu token (fitxa) quedi reemplaçat amb "
+"un de vàlid. Obre les preferències i prova canviant-lo per un de diferent"
 
 #: src/window/mod.rs:365
 msgid "Later"
@@ -541,11 +552,11 @@ msgstr "Més endavant"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
-msgstr ""
+msgstr "Obre les preferències"
 
 #: src/window/mod.rs:466
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Ha ocorregut un error al reproductor"
 
 #: src/window/playback_button.rs:96
 msgid "Play"
@@ -558,26 +569,29 @@ msgstr "Posa en pausa"
 #: src/window/recognized_page.rs:148
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Cançó reconeguda"
+msgstr[1] "Cançons reconegudes"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:154
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha reconegut {n_songs} nova cançó"
+msgstr[1] "S'han reconegut {n_songs} noves cançons"
 
 #: src/window/recognized_page.rs:160
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] ""
+"Aquesta cançó ha estat reconeguda a partir de les teves gravacions guardades"
 msgstr[1] ""
+"Aquestes cançons han estat reconegudes a partir de les teves gravacions "
+"guardades"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:171
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "S'han reconegut {n_successful} de les {total_minus_failed} cançons"
 
 #: src/window/recognizer_view.rs:148
 msgid "Listening…"
@@ -589,11 +603,11 @@ msgstr "S’està reconeixent…"
 
 #: src/window/song_page.rs:376
 msgid "Unknown"
-msgstr ""
+msgstr "Desconegut"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
-msgstr ""
+msgstr "Desseleccionar"
 
 #~ msgid "Select _None"
 #~ msgstr "No seleccionis _res"
