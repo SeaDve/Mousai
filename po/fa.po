@@ -7,13 +7,14 @@
 # MSKF <walkingdeadstudio@outlook.com>, 2022.
 # MEgooneh <mohammad.erfan.gooneh@gmail.com>, 2022.
 # qqqq1 <qqqq1@hi2.in>, 2023.
+# Amirmatin Roosta <amirmatinrousta@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2023-06-28 15:52+0000\n"
-"Last-Translator: qqqq1 <qqqq1@hi2.in>\n"
+"PO-Revision-Date: 2024-12-29 07:04+0000\n"
+"Last-Translator: Amirmatin Roosta <amirmatinrousta@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/seadve/mousai/fa/"
 ">\n"
 "Language: fa\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18.1\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -52,10 +53,8 @@ msgid "Whether the window is maximized"
 msgstr "خواه پنجره درحالت‌حداکثر باشد"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "ورودی صوتی پیشنهادی جهت ضبط صدا"
+msgstr "ورودی صوتی جهت ضبط صدا"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
