@@ -9,13 +9,13 @@
 # Império Linux <kevendoria86@gmail.com>, 2023.
 # Fabio Emilio Costa <fabiocosta0305@gmail.com>, 2023.
 # Tiago Lucas Flach <tiagolucas9830@gmail.com>, 2023.
-# John Peter Sa <johnppetersa@gmail.com>, 2024.
+# John Peter Sa <johnppetersa@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-12-17 22:00+0000\n"
+"PO-Revision-Date: 2025-01-02 02:01+0000\n"
 "Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "seadve/mousai/pt_BR/>\n"
@@ -24,13 +24,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.9.2-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
-msgstr "Mousai"
+msgstr "Musa"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
@@ -77,9 +77,9 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai é um aplicativo simples que pode reconhecer músicas semelhantes ao "
-"Shazam. Basta clicar no botão ouvir e aguardar alguns segundos. Ele "
-"retornará magicamente o título e o artista dessa música!"
+"Musa é um aplicativo simples que pode reconhecer músicas, semelhante ao "
+"Shazam. Basta clicar no botão de ouvir e aguardar alguns segundos. Ele "
+"magicamente retornará o título e o artista da música!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
@@ -91,7 +91,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
-msgstr "Por que você vai amar o Mousai?"
+msgstr "Por que você vai amar a Musa?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
@@ -129,7 +129,7 @@ msgstr "_Atalhos de teclado"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
-msgstr "_Sobre o Mousai"
+msgstr "_Sobre o Musa"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
@@ -336,7 +336,7 @@ msgstr "Traduzir"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr "Erro Crítico do Banco de Dados"
+msgstr "Erro crítico de banco de dados"
 
 #: src/application.rs:210
 msgid ""
@@ -354,8 +354,9 @@ msgstr ""
 "limpar os dados do aplicativo. No entanto, isso não é recomendado e excluirá "
 "todas as suas músicas e gravações salvas.\n"
 "\n"
-"Para relatar esse problema, inicie o Mousai no terminal para incluir os logs "
-"e envie o relatório de bug para a <a>issue page</a>"
+"Para relatar esse problema, inicie o Musa no terminal para incluir os logs e "
+"envie o relatório de bug para a <a href="
+"\"https://github.com/SeaDve/Mousai/issues/\">página de problemas</a>"
 
 #: src/application.rs:215
 msgid "Quit"
