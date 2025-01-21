@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-01-21 00:52+0000\n"
+"Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
+"Language-Team: Interlingua <https://hosted.weblate.org/projects/seadve/"
+"mousai/ia/>\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -103,19 +105,19 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferentias"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Commandos curte de claviero"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
-msgstr ""
+msgstr "_A proposito de Mousai"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
-msgstr ""
+msgstr "Selection_ar toto"
 
 #: data/resources/ui/history_view.ui:26
 msgid "_Unselect All"
@@ -123,7 +125,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Initio"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
@@ -135,11 +137,11 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu principal"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
-msgstr ""
+msgstr "Selectionar"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
@@ -167,7 +169,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Necun resultatos"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
@@ -175,7 +177,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
@@ -244,12 +246,12 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Quitar"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Controlos"
 
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
@@ -312,7 +314,7 @@ msgstr ""
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr ""
+msgstr "Traducer"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
@@ -378,7 +380,7 @@ msgstr ""
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
