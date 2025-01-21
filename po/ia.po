@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-01-21 00:52+0000\n"
+"PO-Revision-Date: 2025-01-21 00:53+0000\n"
 "Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
 "Language-Team: Interlingua <https://hosted.weblate.org/projects/seadve/"
 "mousai/ia/>\n"
@@ -334,7 +334,7 @@ msgstr ""
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr ""
+msgstr "Quitar"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
