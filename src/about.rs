@@ -46,24 +46,6 @@ fn debug_info() -> String {
     let desktop_session = env::var("DESKTOP_SESSION").unwrap_or_else(|_| "<unknown>".into());
     let display_server = env::var("XDG_SESSION_TYPE").unwrap_or_else(|_| "<unknown>".into());
 
-    let gtk_version = format!(
-        "{}.{}.{}",
-        gtk::major_version(),
-        gtk::minor_version(),
-        gtk::micro_version()
-    );
-    let adw_version = format!(
-        "{}.{}.{}",
-        adw::major_version(),
-        adw::minor_version(),
-        adw::micro_version()
-    );
-    let soup_version = format!(
-        "{}.{}.{}",
-        soup::major_version(),
-        soup::minor_version(),
-        soup::micro_version()
-    );
     let gst_version_string = gst::version_string();
 
     format!(
@@ -79,7 +61,25 @@ fn debug_info() -> String {
 - GTK {gtk_version}
 - Libadwaita {adw_version}
 - Libsoup {soup_version}
-- {gst_version_string}"#
+- {gst_version_string}"#,
+        gtk_version = format_args!(
+            "{}.{}.{}",
+            gtk::major_version(),
+            gtk::minor_version(),
+            gtk::micro_version()
+        ),
+        adw_version = format_args!(
+            "{}.{}.{}",
+            adw::major_version(),
+            adw::minor_version(),
+            adw::micro_version()
+        ),
+        soup_version = format_args!(
+            "{}.{}.{}",
+            soup::major_version(),
+            soup::minor_version(),
+            soup::micro_version()
+        )
     )
 }
 
