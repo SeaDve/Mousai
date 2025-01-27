@@ -2,21 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # happylittle7 <Lance20501@gmail.com>, 2024.
+# 黃政揚 <noobpenguin0405@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-05-06 12:07+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
-"seadve/mousai/zh_Hant/>\n"
+"PO-Revision-Date: 2025-01-27 09:13+0000\n"
+"Last-Translator: 黃政揚 <noobpenguin0405@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/seadve/mousai/zh_Hant/>\n"
 "Language: zh_Hant\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -178,7 +179,6 @@ msgid "Lyrics"
 msgstr ""
 
 #: data/resources/ui/preferences_dialog.ui:8
-#, fuzzy
 msgid "General"
 msgstr "一般"
 
