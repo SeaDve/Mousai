@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-01-27 09:13+0000\n"
+"PO-Revision-Date: 2025-01-27 12:02+0000\n"
 "Last-Translator: 黃政揚 <noobpenguin0405@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/seadve/mousai/zh_Hant/>\n"
@@ -410,7 +410,7 @@ msgstr ""
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
-msgstr ""
+msgstr "Youtube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
