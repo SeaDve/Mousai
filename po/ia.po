@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-01-21 02:50+0000\n"
+"PO-Revision-Date: 2025-01-29 11:43+0000\n"
 "Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
 "Language-Team: Interlingua <https://hosted.weblate.org/projects/seadve/"
 "mousai/ia/>\n"
@@ -153,7 +153,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "Cancellar"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
@@ -221,7 +221,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -241,7 +241,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Monstrar commandos curte"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
