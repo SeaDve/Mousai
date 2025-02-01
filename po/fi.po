@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022, 2023, 2024.
 # Jiri Nakola <github@nakola.fi>, 2022, 2023.
+# Ricky Tigg <ricky.tigg@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2024-10-16 10:16+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"PO-Revision-Date: 2025-02-01 00:50+0000\n"
+"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/fi/"
 ">\n"
 "Language: fi\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -317,7 +318,7 @@ msgstr "Uusi"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Jiri Grönroos"
+msgstr "kääntäjien ansiot"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
