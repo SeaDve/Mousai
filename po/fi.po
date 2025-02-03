@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-02-01 00:50+0000\n"
+"PO-Revision-Date: 2025-02-03 13:06+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/fi/"
 ">\n"
@@ -318,7 +318,7 @@ msgstr "Uusi"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "kääntäjien ansiot"
+msgstr "Jiri Grönroos"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
