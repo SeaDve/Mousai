@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Dave Patrick <davecruz48@gmail.com>, 2021, 2022, 2023.
+# IverCoder <ivercoder+github@proton.me>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2023-04-14 19:50+0000\n"
-"Last-Translator: Dave Patrick <davecruz48@gmail.com>\n"
+"PO-Revision-Date: 2025-02-21 13:02+0000\n"
+"Last-Translator: IverCoder <ivercoder+github@proton.me>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/seadve/mousai/"
 "fil/>\n"
 "Language: fil\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1 && n != 2 && n != 3 && (n % 10 == 4 "
 "|| n % 10 == 6 || n % 10 == 9);\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 5.10.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -28,16 +29,16 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:4
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
-msgstr "Mag-identify ng kanta"
+msgstr "Kumilala ng kanta sa loob ng ilang segundo"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Musika;Kanta;Recognize;Identify;Recognition;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr "Haba ng window"
+msgstr "Lapad ng window"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
@@ -48,14 +49,12 @@ msgid "Whether the window is maximized"
 msgstr "Kung naka-maximize ang window"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Mas gustong panggagalingan ng audio para sa pag-record"
+msgstr "Uri ng audio source na gagamitin sa pagrerekord ng audio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr "API token na gagamitin ng recognition ng AudD"
+msgstr "API token para sa AudD recognition"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
@@ -71,38 +70,43 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Isang simpleng aplikasyon ang Mousai na nakakakilala ng mga kanta, parang "
+"Shazam. Pindutin lang ang buton at maghintay ng ilang segundo. Tutugon ito "
+"ng pangalan at artista ng kantang iyon!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Paalala: Gumagamit ito ng API ng audd.io, kaya kinakailangan na mag-log in "
-"sa kanilang site upang makatanggap ng mas maraming trials."
+"Paalala: Gumagamit ito ng API ng audd.io, kaya kinakailangang mag-log in sa "
+"kanilang site para makatanggap ng mas maraming trial."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
-msgstr "Bakit magugustuhan mo ang Mousai?"
+msgstr "Bakit mo magugustuhan ang Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Kumilala ng mga kanta sa loob ng ilang segundo o i-save para mamaya "
+"habang offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Kumilala mula sa audio ng desktop o sa mikropono mo"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr "🎸 Magipon ng mga na-recognize na mga kanta"
+msgstr "🎸 Mag-ipon ng mga na-recognize na mga kanta"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
-msgstr "🎼 I-preview ang kanta sa interface"
+msgstr "🎼 Mabilisang i-preview ang kanta sa interface"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
-msgstr "🌐 I-browse o makinig sa mga kanta gamit ang iba't ibang providers"
+msgstr "🌐 I-browse at pakinggan ang kanta gamit ang iba't-ibang provider"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
@@ -125,18 +129,16 @@ msgid "Select _All"
 msgstr "Piliin _Lahat"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "I-unselect"
+msgstr "I-_unselect Lahat"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Kumilala ng Kanta"
 
 #: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
@@ -148,11 +150,11 @@ msgstr "Pangunahing Menu"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
-msgstr "I-select"
+msgstr "Piliin"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Maghanap ng mga Kanta"
 
 #: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
