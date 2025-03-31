@@ -750,7 +750,7 @@ impl HistoryView {
             // history and it was newly heard, pass that state to the new value.
             if song_list
                 .get(song.id_ref())
-                .map_or(true, |prev| prev.is_newly_heard())
+                .is_none_or(|prev| prev.is_newly_heard())
             {
                 song.set_is_newly_heard(true);
             }
@@ -795,7 +795,7 @@ impl HistoryView {
             .filter_model
             .get()
             .and_then(|filter_model| filter_model.upgrade())
-            .map_or(true, |filter_model| filter_model.n_items() == 0)
+            .is_none_or(|filter_model| filter_model.n_items() == 0)
             && !search_text.is_empty()
         {
             imp.content_stack
@@ -804,7 +804,7 @@ impl HistoryView {
             .song_list
             .get()
             .and_then(|song_list| song_list.upgrade())
-            .map_or(true, |song_list| song_list.n_items() == 0)
+            .is_none_or(|song_list| song_list.n_items() == 0)
             && search_text.is_empty()
         {
             imp.content_stack

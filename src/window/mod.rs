@@ -204,7 +204,7 @@ impl Window {
                 // history and it was newly heard, pass that state to the new value.
                 if history
                     .get(song.id_ref())
-                    .map_or(true, |prev| prev.is_newly_heard())
+                    .is_none_or(|prev| prev.is_newly_heard())
                 {
                     song.set_is_newly_heard(true);
                 }
