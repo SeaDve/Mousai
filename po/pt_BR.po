@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-01-02 02:01+0000\n"
+"PO-Revision-Date: 2025-05-25 15:02+0000\n"
 "Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "seadve/mousai/pt_BR/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -185,7 +185,7 @@ msgstr "Clique no botão escutar para iniciar"
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
-msgstr "Nenhum resultado"
+msgstr "Sem resultados"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
@@ -320,7 +320,7 @@ msgstr "Novo"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Vitor Cardoso, Tiago Lucas Flach, inkhorn"
+msgstr "Vitor Cardoso, Tiago Lucas Flach, inkhorn, john peter sa"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
