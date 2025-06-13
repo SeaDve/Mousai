@@ -10,13 +10,14 @@
 # Fabio Emilio Costa <fabiocosta0305@gmail.com>, 2023.
 # Tiago Lucas Flach <tiagolucas9830@gmail.com>, 2023.
 # John Peter Sa <johnppetersa@gmail.com>, 2024, 2025.
+# Xen'on <saveliyburk@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-05-25 15:02+0000\n"
-"Last-Translator: John Peter Sa <johnppetersa@gmail.com>\n"
+"PO-Revision-Date: 2025-06-13 10:52+0000\n"
+"Last-Translator: Xen'on <saveliyburk@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "seadve/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -526,7 +527,7 @@ msgstr "O resultado estará disponível quando você estiver online novamente"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr "OK, entendi"
+msgstr "OK"
 
 #: src/window/mod.rs:355
 msgid ""
