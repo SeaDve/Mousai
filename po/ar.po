@@ -5,22 +5,23 @@
 # Muhammad Yasser <iamrokt@gmail.com>, 2021.
 # Ali Aljishi <ahj696@hotmail.com>, 2023.
 # Ali-98 <ahj696@hotmail.com>, 2023.
+# Yassin Amr <justxeez@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2023-12-16 14:06+0000\n"
-"Last-Translator: Ali-98 <ahj696@hotmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/"
-">\n"
+"PO-Revision-Date: 2025-07-06 03:47+0000\n"
+"Last-Translator: Yassin Amr <justxeez@gmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -51,10 +52,8 @@ msgid "Whether the window is maximized"
 msgstr "ما إن كانت النافذة مكبَّرةً"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "مصدر الصوت المفضَّل ليستخدم في تسجيل الأصوات"
+msgstr "نوع مصدر الصوت. ليستخدم في تسجيل الأصوات"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -130,10 +129,8 @@ msgid "Select _All"
 msgstr "حدِّد ال_كلَّ"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "ألغِ التحديد"
+msgstr "ألغِ تحديد الكل"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -192,14 +189,12 @@ msgid "General"
 msgstr "عام"
 
 #: data/resources/ui/preferences_dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "مصدر الصوت المفضَّل"
+msgstr "مصدر الصوت"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "الجهاز المستخدم للسمع"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -319,9 +314,8 @@ msgstr "جديد"
 #: src/about.rs:18
 msgid "translator-credits"
 msgstr ""
-"Mehdi Essalehi\n"
-"Muhammad Yasser\n"
-"علي الجشي https://github.com/Ali-x98"
+"Ali Elgashy\n"
+"Yassin Amr"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -340,15 +334,6 @@ msgid "Critical Database Error"
 msgstr "خطأ قاعدة بيانات حرج"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -359,12 +344,13 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"أغلب الظن أن سبب هذا هو فساد قاعدة البيانات، ولعل حذف بيانات التطبيق يصلحه، "
-"ولكن حذفها ليس خير خيار، فالحذف يحذف كل أغانيك وتسجيلاتك.\n"
+"نأسف, حدث خطأ حرج في قاعدة البيانات. أغلب الظن أن السبب هو فساد قاعدة "
+"البيانات، ولعل حذف بيانات التطبيق يصلحه، ولكن حذفها ليس افضل خيار لأنه سيحذف "
+"كل أغانيك وتسجيلاتك.\n"
 "\n"
-"إن شئت وأردت التبليغ عن هذه العلة فشغِّل موساي من الطرفية وضمِّن السجلات وأرسل "
-"تقرير على إلى <a href=\"https://github.com/SeaDve/Mousai/issues/\">صفحة "
-"العلل</a>"
+"إن شئت وأردت التبليغ عن هذه المشكلة فشغِّل موساي من الطرفية وأرفق السجلات "
+"وأرسل تقرير إلى <a href=\"https://github.com/SeaDve/Mousai/issues/\">صفحة "
+"المشاكل</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -550,7 +536,7 @@ msgstr "تُتاح النتيجة حالما تتصل"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr "حسنًا"
+msgstr "حسنًا, فهمتك"
 
 #: src/window/mod.rs:355
 msgid ""
