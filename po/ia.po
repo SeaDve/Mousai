@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-01-29 14:49+0000\n"
+"PO-Revision-Date: 2025-07-09 14:05+0000\n"
 "Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
 "Language-Team: Interlingua <https://hosted.weblate.org/projects/seadve/"
 "mousai/ia/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -109,7 +109,7 @@ msgstr "_Preferentias"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "_Commandos curte de claviero"
+msgstr "Vias breve de _claviero"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
@@ -141,7 +141,7 @@ msgstr "Menu principal"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
-msgstr "Selectionar"
+msgstr "Seliger"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
@@ -241,7 +241,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Monstrar commandos curte"
+msgstr "Monstrar vias breve"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
@@ -572,8 +572,8 @@ msgstr ""
 
 #: src/window/song_page.rs:376
 msgid "Unknown"
-msgstr "Non cognoscite"
+msgstr "Incognite"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
-msgstr "Disselectionar"
+msgstr "Disseliger"
