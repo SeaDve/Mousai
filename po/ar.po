@@ -6,13 +6,14 @@
 # Ali Aljishi <ahj696@hotmail.com>, 2023.
 # Ali-98 <ahj696@hotmail.com>, 2023.
 # Yassin Amr <justxeez@gmail.com>, 2025.
+# Ahmed Najmawi <iramosu@protonmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-07-06 03:47+0000\n"
-"Last-Translator: Yassin Amr <justxeez@gmail.com>\n"
+"PO-Revision-Date: 2025-07-27 16:14+0000\n"
+"Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/>"
 "\n"
 "Language: ar\n"
@@ -37,11 +38,13 @@ msgstr "تبيَّن الأغاني سريعًا"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:10
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr "شازام;صوت;موسيقى;أغنية;تعرف;تبين;أغاني;اغنية;اغاني;"
+msgstr ""
+"شازام;صوت;موسيقى;أغنية;تعرف;تبين;أغاني;اغنية;اغاني;Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Mousai;"
+""
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr "عرض النافذة"
+msgstr "عُرض النافذة"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
@@ -49,11 +52,11 @@ msgstr "ارتفاع النافذة"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr "ما إن كانت النافذة مكبَّرةً"
+msgstr "فيما إذا كانت النافذة مكبَّرةً"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Audio source type to use in recording audio"
-msgstr "نوع مصدر الصوت. ليستخدم في تسجيل الأصوات"
+msgstr "نوع مصدر الصوت ليستخدم في تسجيل الأصوات"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -81,7 +84,7 @@ msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"ملاحظة: هذا التطبيق يستعمل واجهة برمجة audd.io، لذلك يجب عليك تسجيل دخولك في "
+"ملاحظة: هذا التطبيق يستعمل واجهة برمجة audd.io، لذلك يجب عليك الولوج في "
 "موقعهم لتحصل على المزيد من الاستخدامات."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
@@ -90,7 +93,7 @@ msgstr "لماذا ستحب موساي؟"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
-msgstr "🎵 تبيَّن الأغاني سريعًا أو احفظها لحين تكون لست متصلًا"
+msgstr "🎵 تبيَّن الأغاني سريعًا أو احفظها لحين تكون غير متصلًا"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
@@ -122,7 +125,7 @@ msgstr "ا_ختصارات لوحة المفاتيح"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
-msgstr "_عن موساي"
+msgstr "_عَنْ «موساي»"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
@@ -130,7 +133,7 @@ msgstr "حدِّد ال_كلَّ"
 
 #: data/resources/ui/history_view.ui:26
 msgid "_Unselect All"
-msgstr "ألغِ تحديد الكل"
+msgstr "أل_غِ تحديد الكل"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -206,16 +209,17 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"لك الحصول على رمز واجهة برمجة من <a href=\"https://dashboard.audd.io/\">audd."
-"io</a>. ترك هذا فارغًا يعني أن لك عدة محاولات كل يوم"
+"يمكنك الحصول على رمز واجهة برمجة (API) من <a href="
+"\"https://dashboard.audd.io/\">audd.io</a>. ترك هذا فارغًا يعني أن لك عدة "
+"محاولات كل يوم"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
-msgstr "رمز واجهة البرمجة"
+msgstr "رمز واجهة البرمجة (API)"
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
-msgstr "مُكِّن وضع عدم الاتصال"
+msgstr "فُعِّل وضع عدم الاتصال"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
@@ -247,17 +251,17 @@ msgstr "ابحث"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "أظهر التفضيلات"
+msgstr "أظهِر التفضيلات"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "أظهر الاختصارات"
+msgstr "أظهِر الاختصارات"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "أنهِ"
+msgstr "اخرُج"
 
 #: data/resources/ui/shortcuts.ui:46
 msgctxt "shortcut window"
@@ -276,7 +280,7 @@ msgstr "بدِّل إعادة التشغيل"
 
 #: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
-msgstr "أظهر معلومات الأغنية"
+msgstr "أظهِر معلومات الأغنية"
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
@@ -284,7 +288,7 @@ msgstr "توقَّف"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
-msgstr "أزل من التاريخ"
+msgstr "أزِل من التأريخ"
 
 #: data/resources/ui/song_page.ui:19
 msgid "Copy"
@@ -313,9 +317,7 @@ msgstr "جديد"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
-"Ali Elgashy\n"
-"Yassin Amr"
+msgstr "علي الجشي، عمرو ياسين، أحمد النجماوي"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -344,27 +346,27 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"نأسف, حدث خطأ حرج في قاعدة البيانات. أغلب الظن أن السبب هو فساد قاعدة "
-"البيانات، ولعل حذف بيانات التطبيق يصلحه، ولكن حذفها ليس افضل خيار لأنه سيحذف "
-"كل أغانيك وتسجيلاتك.\n"
+"حدث خطأ حرج في قاعدة البيانات. أغلب الظن أن السبب هو فساد قاعدة البيانات، "
+"ولعل حذف بيانات التطبيق يصلحه، ولكن حذفها ليس افضل خيار لأنه سيحذف كل أغانيك "
+"وتسجيلاتك.\n"
 "\n"
-"إن شئت وأردت التبليغ عن هذه المشكلة فشغِّل موساي من الطرفية وأرفق السجلات "
+"إن شئت وأردت التبليغ عن هذه المشكلة فشغِّل «موساي» من الطرفية وأرفق السجلات "
 "وأرسل تقرير إلى <a href=\"https://github.com/SeaDve/Mousai/issues/\">صفحة "
 "المشاكل</a>"
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr "أنهِ"
+msgstr "اخرُج"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
 msgid "today at %R"
-msgstr "اليوم في %R"
+msgstr "اليوم في %OH:%OM"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:34
 msgid "yesterday at %R"
-msgstr "أمسًا في %R"
+msgstr "أمسًا في %OH:%OM"
 
 #: src/preferences_dialog.rs:102
 msgid "Microphone"
@@ -392,7 +394,7 @@ msgstr "بُلغ حدُّ الرموز"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr "تعذَّر الاتصال بالخادم"
+msgstr "تعذَّر الاتصال بالخادوم"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
@@ -429,7 +431,7 @@ msgstr "ابحث في يوتيوب"
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
-msgstr "فشل البدء {key}"
+msgstr "أخفَق البدء {key}"
 
 #: src/window/history_view.rs:148 src/window/song_page.rs:80
 msgid "Copied to clipboard"
@@ -437,23 +439,23 @@ msgstr "نُسخ للحافظة"
 
 #: src/window/history_view.rs:161
 msgid "Failed to remove selected songs"
-msgstr "فشلت إزالة الأغاني المحدَّدة"
+msgstr "تعذَّرت إزالة الأغاني المحدَّدة"
 
 #: src/window/history_view.rs:358
 msgid "Failed to remove song"
-msgstr "فشلت إزالة الأغنية"
+msgstr "تعذَّرت إزالة الأغنية"
 
 #: src/window/history_view.rs:564
 msgid "Failed to show recognizer results"
-msgstr "فشل عرض نتائج المتبيِّن"
+msgstr "تعذَّر عرض نتائج المتبيِّن"
 
 #: src/window/history_view.rs:671
 msgid "_Undo"
-msgstr "تراج_ع"
+msgstr "ت_راجع"
 
 #: src/window/history_view.rs:683
 msgid "Failed to undo"
-msgstr "فشل التراجع"
+msgstr "أخفق التراجع"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:708
@@ -494,16 +496,16 @@ msgstr[5] "انسخ الأغاني"
 #: src/window/history_view.rs:852
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] "لا تزل الأغنية من التاريخ"
-msgstr[1] "أزل الأغنية من التاريخ"
-msgstr[2] "أزل الأغنيتين من التاريخ"
-msgstr[3] "أزل الأغاني من التاريخ"
-msgstr[4] "أزل الأغاني من التاريخ"
-msgstr[5] "أزل الأغاني من التاريخ"
+msgstr[0] "لا تزل الأغنية من التأريخ"
+msgstr[1] "أزل الأغنية من التأريخ"
+msgstr[2] "أزل الأغنيتين من التأريخ"
+msgstr[3] "أزل الأغاني من التأريخ"
+msgstr[4] "أزل الأغاني من التأريخ"
+msgstr[5] "أزل الأغاني من التأريخ"
 
 #: src/window/mod.rs:214
 msgid "Failed to insert song to history"
-msgstr "فشل إدراج الأغنية في التاريخ"
+msgstr "تعذَّر إدراج الأغنية في التأريخ"
 
 #: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
@@ -536,7 +538,7 @@ msgstr "تُتاح النتيجة حالما تتصل"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr "حسنًا, فهمتك"
+msgstr "حسنًا"
 
 #: src/window/mod.rs:355
 msgid ""
