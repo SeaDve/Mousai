@@ -9,4 +9,5 @@ Categories=GNOME;GTK;Utility;
 Keywords=Shazam;Audio;Music;Song;Recognize;Identify;Recognition;
 Icon=@icon@
 StartupNotify=true
+DBusActivatable=true
 X-Purism-FormFactor=Workstation;Mobile;
