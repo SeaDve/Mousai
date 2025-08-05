@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-07-09 14:05+0000\n"
+"PO-Revision-Date: 2025-08-05 23:02+0000\n"
 "Last-Translator: \"Emilio S.\" <emism.translations@gmail.com>\n"
 "Language-Team: Interlingua <https://hosted.weblate.org/projects/seadve/"
 "mousai/ia/>\n"
@@ -117,7 +117,7 @@ msgstr "_A proposito de Mousai"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
-msgstr "Selection_ar toto"
+msgstr "Seliger _toto"
 
 #: data/resources/ui/history_view.ui:26
 msgid "_Unselect All"
@@ -173,7 +173,7 @@ msgstr "Necun resultatos"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
-msgstr ""
+msgstr "Parolas"
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
@@ -181,16 +181,16 @@ msgstr "General"
 
 #: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
-msgstr ""
+msgstr "Fonte de audio"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Dispositivo usate pro ascoltamento"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences_dialog.ui:20
 msgid ""
@@ -204,7 +204,7 @@ msgstr ""
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Modo foras de linea activate"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
@@ -212,11 +212,11 @@ msgstr ""
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Cancellar ascoltamento"
 
 #: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "Modo foras de linea"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -226,7 +226,7 @@ msgstr "General"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Aperir menu principal"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
@@ -236,7 +236,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Monstrar preferentias"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -256,48 +256,48 @@ msgstr "Controlos"
 #: data/resources/ui/shortcuts.ui:49
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Commutar ascoltamento"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Commutar reproduction"
 
 #: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
-msgstr ""
+msgstr "Monstrar information de cantion"
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
-msgstr ""
+msgstr "Stoppar"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
-msgstr ""
+msgstr "Deler ab le chronologia"
 
 #: data/resources/ui/song_page.ui:19
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: data/resources/ui/song_page.ui:122
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
-msgstr ""
+msgstr "Ultime ascoltamento"
 
 #: data/resources/ui/song_page.ui:130
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song_page.ui:135
 msgid "Release Date"
-msgstr ""
+msgstr "Data de lanceamento"
 
 #: data/resources/ui/song_tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "Nove"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
@@ -306,7 +306,7 @@ msgstr ""
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Facer un donation (Buy Me a Coffee)"
 
 #: src/about.rs:31
 msgid "GitHub"
@@ -318,7 +318,7 @@ msgstr "Traducer"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Error critic de base de datos"
 
 #: src/application.rs:210
 msgid ""
@@ -348,11 +348,11 @@ msgstr ""
 
 #: src/preferences_dialog.rs:102
 msgid "Microphone"
-msgstr ""
+msgstr "Microphono"
 
 #: src/preferences_dialog.rs:103
 msgid "Desktop Audio"
-msgstr ""
+msgstr "Audio de scriptorio"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
@@ -372,7 +372,7 @@ msgstr ""
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Non poteva connecter al servitor"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
@@ -384,44 +384,44 @@ msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Percurrer sur Apple Music"
 
 #: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Percurrer sur AudD"
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Ascolta lo sur Spotify"
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Cercar sur YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:141
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "Falleva le lanceamento de {key}"
 
 #: src/window/history_view.rs:148 src/window/song_page.rs:80
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Copiate al area de transferentia"
 
 #: src/window/history_view.rs:161
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Falleva le remotion del cantiones seligite"
 
 #: src/window/history_view.rs:358
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Falleva le remotion del cation"
 
 #: src/window/history_view.rs:564
 msgid "Failed to show recognizer results"
@@ -475,11 +475,11 @@ msgstr ""
 
 #: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
-msgstr ""
+msgstr "No, gratias"
 
 #: src/window/mod.rs:267
 msgid "Open an Issue"
-msgstr ""
+msgstr "Aperir un incidente"
 
 #: src/window/mod.rs:294
 msgid ""
@@ -488,11 +488,11 @@ msgstr ""
 
 #: src/window/mod.rs:299
 msgid "Try Again"
-msgstr ""
+msgstr "Tenta de novo"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
-msgstr ""
+msgstr "Registration salvate"
 
 #: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
@@ -524,19 +524,19 @@ msgstr ""
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
-msgstr ""
+msgstr "Aperir preferentias"
 
 #: src/window/mod.rs:466
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Ocurreva un error in le reproductor"
 
 #: src/window/playback_button.rs:96
 msgid "Play"
-msgstr ""
+msgstr "Reproducer"
 
 #: src/window/playback_button.rs:102
 msgid "Pause"
-msgstr ""
+msgstr "Pausar"
 
 #: src/window/recognized_page.rs:148
 msgid "Recognized Song"
@@ -564,7 +564,7 @@ msgstr ""
 
 #: src/window/recognizer_view.rs:148
 msgid "Listening…"
-msgstr ""
+msgstr "In ascoltamento…"
 
 #: src/window/recognizer_view.rs:153
 msgid "Recognizing…"
