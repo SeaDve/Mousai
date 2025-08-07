@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # happylittle7 <Lance20501@gmail.com>, 2024.
 # 黃政揚 <noobpenguin0405@gmail.com>, 2025.
+# wumou <gvchd4@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 19:58+0800\n"
-"PO-Revision-Date: 2025-01-27 12:02+0000\n"
-"Last-Translator: 黃政揚 <noobpenguin0405@gmail.com>\n"
+"PO-Revision-Date: 2025-08-07 21:02+0000\n"
+"Last-Translator: wumou <gvchd4@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/seadve/mousai/zh_Hant/>\n"
 "Language: zh_Hant\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -156,7 +157,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
@@ -314,7 +315,7 @@ msgstr "Kisaragi Hiu"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "贊助（請我一杯咖啡）"
 
 #: src/about.rs:31
 #, fuzzy
@@ -323,7 +324,7 @@ msgstr "GitHub"
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr ""
+msgstr "翻譯"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
