@@ -1,7 +1,7 @@
 project(
   'mousai',
   'rust',
-  version: '0.7.8',
+  version: '0.7.9',
   license: 'GPL-3.0-or-later',
   meson_version: '>= 0.59',
 )
