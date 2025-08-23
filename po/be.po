@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 19:58+0800\n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
 "PO-Revision-Date: 2024-03-05 09:01+0000\n"
 "Last-Translator: Yahor <k1llo2810@protonmail.com>\n"
 "Language-Team: Belarusian <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -20,19 +20,19 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.5-dev\n"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Вызначце песні за секунды"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in.in:10
+#: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
 "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;музыка;песня;"
@@ -265,20 +265,25 @@ msgstr "Паказаць спалучэнні клавіш"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выйсці"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Кіраванне"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Пераключыць праслухоўванне"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Пераключыць прайграванне"
@@ -374,11 +379,11 @@ msgstr "сёння ў %R"
 msgid "yesterday at %R"
 msgstr "учора ў %R"
 
-#: src/preferences_dialog.rs:102
+#: src/preferences_dialog.rs:103
 msgid "Microphone"
 msgstr "Мікрафон"
 
-#: src/preferences_dialog.rs:103
+#: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
 msgstr "Гук з камп'ютара"
 
@@ -435,62 +440,62 @@ msgid "Search on YouTube"
 msgstr "Пошук у YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:141
+#: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
 msgstr "Не атрымалася запусціць {key}"
 
-#: src/window/history_view.rs:148 src/window/song_page.rs:80
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "Скапіявана ў буфер абмену"
 
-#: src/window/history_view.rs:161
+#: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
 msgstr "Не ўдалося выдаліць выбраныя песні"
 
-#: src/window/history_view.rs:358
+#: src/window/history_view.rs:357
 msgid "Failed to remove song"
 msgstr "Не ўдалося выдаліць песню"
 
-#: src/window/history_view.rs:564
+#: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
 msgstr "Не ўдалося паказаць вынікі распазнавання"
 
-#: src/window/history_view.rs:671
+#: src/window/history_view.rs:669
 msgid "_Undo"
 msgstr "_Адрабіць"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:681
 msgid "Failed to undo"
 msgstr "Не ўдалося адрабіць"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:708
+#: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "Выдалена {n_removed} песня"
 msgstr[1] "Выдалена {n_removed} песні"
 msgstr[2] "Выдалена {n_removed} песень"
 
-#: src/window/history_view.rs:831
+#: src/window/history_view.rs:829
 msgid "Select items"
 msgstr "Абярыце элементы"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:835
+#: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "Выбрана {selection_size} песня"
 msgstr[1] "Выбрана {selection_size} песні"
 msgstr[2] "Выбрана {selection_size} песень"
 
-#: src/window/history_view.rs:845
+#: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Капіяваць песню"
 msgstr[1] "Капіяваць песні"
 msgstr[2] "Капіяваць песняў"
 
-#: src/window/history_view.rs:852
+#: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Выдаліць песню з гісторыі"
@@ -569,15 +574,15 @@ msgstr "Адкрыць налады"
 msgid "An error occurred in the player"
 msgstr "У плэеры адбылася памылка"
 
-#: src/window/playback_button.rs:96
+#: src/window/playback_button.rs:97
 msgid "Play"
 msgstr "Прайграць"
 
-#: src/window/playback_button.rs:102
+#: src/window/playback_button.rs:103
 msgid "Pause"
 msgstr "Паўза"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Распазнаная песня"
@@ -585,14 +590,14 @@ msgstr[1] "Распазнаныя песні"
 msgstr[2] "Распазнаныя песні"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:154
+#: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "Распазнаная {n_songs} новая песня"
 msgstr[1] "Распазнана {n_songs} новыя песні"
 msgstr[2] "Распазнана {n_songs} новых песень"
 
-#: src/window/recognized_page.rs:160
+#: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Гэтая песня была распазнана па вашым захаваным запісе"
@@ -600,19 +605,19 @@ msgstr[1] "Гэтыя песні былі распазнаны па вашых �
 msgstr[2] "Гэтыя песні былі распазнаны па вашых захаваных запісах"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:171
+#: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Распазнана {n_successful} з {total_minus_failed}"
 
-#: src/window/recognizer_view.rs:148
+#: src/window/recognizer_view.rs:149
 msgid "Listening…"
 msgstr "Праслухоўванне…"
 
-#: src/window/recognizer_view.rs:153
+#: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
 msgstr "Распазнаванне…"
 
-#: src/window/song_page.rs:376
+#: src/window/song_page.rs:377
 msgid "Unknown"
 msgstr "Невядома"
 

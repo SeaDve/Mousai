@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 19:58+0800\n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
 "PO-Revision-Date: 2024-09-27 12:16+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/seadve/mousai/tr/"
@@ -22,19 +22,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.8-dev\n"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Şarkıları saniyeler içinde tanıyın"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in.in:10
+#: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr "Shazam;Ses;Müzik;Şarkı;Türkü;Tanıma;Tanımlama;Tanılama;"
 
@@ -259,20 +259,25 @@ msgstr "Kısayolları Göster"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Çık"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Denetimler"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Dinlemeyi Aç/Kapat"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Oynatmayı Aç/Kapat"
@@ -368,11 +373,11 @@ msgstr "bugün %R"
 msgid "yesterday at %R"
 msgstr "dün %R"
 
-#: src/preferences_dialog.rs:102
+#: src/preferences_dialog.rs:103
 msgid "Microphone"
 msgstr "Mikrofon"
 
-#: src/preferences_dialog.rs:103
+#: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
 msgstr "Masaüstü Sesi"
 
@@ -429,59 +434,59 @@ msgid "Search on YouTube"
 msgstr "YouTube'da Ara"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:141
+#: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
 msgstr "{key} başlatılamadı"
 
-#: src/window/history_view.rs:148 src/window/song_page.rs:80
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "Panoya kopyalandı"
 
-#: src/window/history_view.rs:161
+#: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
 msgstr "Seçilen şarkılar kaldırılamadı"
 
-#: src/window/history_view.rs:358
+#: src/window/history_view.rs:357
 msgid "Failed to remove song"
 msgstr "Şarkı kaldırılamadı"
 
-#: src/window/history_view.rs:564
+#: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
 msgstr "Tanıyıcı sonuçları gösterilemedi"
 
-#: src/window/history_view.rs:671
+#: src/window/history_view.rs:669
 msgid "_Undo"
 msgstr "_Geri Al"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:681
 msgid "Failed to undo"
 msgstr "Geri alınamadı"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:708
+#: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "{n_removed} şarkı kaldırıldı"
 msgstr[1] "{n_removed} şarkı kaldırıldı"
 
-#: src/window/history_view.rs:831
+#: src/window/history_view.rs:829
 msgid "Select items"
 msgstr "Ögeleri seç"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:835
+#: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "{selection_size} şarkı seçildi"
 msgstr[1] "{selection_size} şarkı seçildi"
 
-#: src/window/history_view.rs:845
+#: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Şarkıyı Kopyala"
 msgstr[1] "Şarkıları Kopyala"
 
-#: src/window/history_view.rs:852
+#: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Şarkıyı Geçmişten Kaldır"
@@ -558,47 +563,47 @@ msgstr "Tercihleri Aç"
 msgid "An error occurred in the player"
 msgstr "Oynatıcıda bir hata oluştu"
 
-#: src/window/playback_button.rs:96
+#: src/window/playback_button.rs:97
 msgid "Play"
 msgstr "Oynat"
 
-#: src/window/playback_button.rs:102
+#: src/window/playback_button.rs:103
 msgid "Pause"
 msgstr "Duraklat"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Tanınan Şarkı"
 msgstr[1] "Tanınan Şarkılar"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:154
+#: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "{n_songs} Yeni Şarkı Tanındı"
 msgstr[1] "{n_songs} Yeni Şarkı Tanındı"
 
-#: src/window/recognized_page.rs:160
+#: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "Bu şarkı kayıtlı kayıtlarınızdan tanındı"
 msgstr[1] "Bu şarkılar kayıtlı kayıtlarınızdan tanındı"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:171
+#: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "Tanınan: {n_successful}, Başarısız: {total_minus_failed}"
 
-#: src/window/recognizer_view.rs:148
+#: src/window/recognizer_view.rs:149
 msgid "Listening…"
 msgstr "Dinleniyor…"
 
-#: src/window/recognizer_view.rs:153
+#: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
 msgstr "Tanınıyor…"
 
-#: src/window/song_page.rs:376
+#: src/window/song_page.rs:377
 msgid "Unknown"
 msgstr "Bilinmiyor"
 

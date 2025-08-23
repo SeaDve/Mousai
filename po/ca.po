@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 19:58+0800\n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
 "PO-Revision-Date: 2024-12-17 22:00+0000\n"
 "Last-Translator: Joan Aymà <joanayma@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
@@ -20,19 +20,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.9.2-dev\n"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "Identifiqueu cançons en qüestió de segons"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in.in:10
+#: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr "Shazam;Àudio;Música;Cançó;Reconeix;Identifica;Reconeixement;"
 
@@ -208,8 +208,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Pots obtenir un token d'API a <a href=\"https://dashboard.audd.io/\""
-">audd.io</a>. Deixant-ho en blanc et permetrà fer algunes proves cada dia"
+"Pots obtenir un token d'API a <a href=\"https://dashboard.audd.io/\">audd."
+"io</a>. Deixant-ho en blanc et permetrà fer algunes proves cada dia"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -258,20 +258,25 @@ msgstr "Mostra les dreceres"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Surt"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Controls"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Commuta l’escolta"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Commuta la reproducció"
@@ -350,8 +355,8 @@ msgstr ""
 "les teves cançons i gravacions guardades.\n"
 "\n"
 "Per informar del problema, si-us-plau executa Mousai des del terminal per "
-"incloure els registres i envia l'error a <a href="
-"\"https://github.com/SeaDve/Mousai/issues/\">la pàgina de problemes</a>"
+"incloure els registres i envia l'error a <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">la pàgina de problemes</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -367,11 +372,11 @@ msgstr "avui a les %R"
 msgid "yesterday at %R"
 msgstr "ahir a les %R"
 
-#: src/preferences_dialog.rs:102
+#: src/preferences_dialog.rs:103
 msgid "Microphone"
 msgstr "Micròfon"
 
-#: src/preferences_dialog.rs:103
+#: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
 msgstr "Àudio de l’ordinador"
 
@@ -428,59 +433,59 @@ msgid "Search on YouTube"
 msgstr "Cerca al YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:141
+#: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
 msgstr "No s'ha pogut iniciar {key}"
 
-#: src/window/history_view.rs:148 src/window/song_page.rs:80
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "S'ha copiat al porta-retalls"
 
-#: src/window/history_view.rs:161
+#: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
 msgstr "No s'han pogut eliminar les cançons seleccionades"
 
-#: src/window/history_view.rs:358
+#: src/window/history_view.rs:357
 msgid "Failed to remove song"
 msgstr "Ha fallat a l'esborrar la cançó"
 
-#: src/window/history_view.rs:564
+#: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
 msgstr "Ha faltat al mostrar els resultats de reconeixements"
 
-#: src/window/history_view.rs:671
+#: src/window/history_view.rs:669
 msgid "_Undo"
 msgstr "_Desfés"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:681
 msgid "Failed to undo"
 msgstr "Ha faltat al desfer"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:708
+#: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "S'ha esborrat {n_removed} cançó"
 msgstr[1] "S'han esborrat {n_removed} cançons"
 
-#: src/window/history_view.rs:831
+#: src/window/history_view.rs:829
 msgid "Select items"
 msgstr "Seleccionar elements"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:835
+#: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "S'ha seleccionat {selection_size} cançó"
 msgstr[1] "S'han seleccionat {selection_size} cançons"
 
-#: src/window/history_view.rs:845
+#: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "Copia la cançó"
 msgstr[1] "Copia les cançons"
 
-#: src/window/history_view.rs:852
+#: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "Elimina la cançó de l’historial"
@@ -558,28 +563,28 @@ msgstr "Obre les preferències"
 msgid "An error occurred in the player"
 msgstr "Ha ocorregut un error al reproductor"
 
-#: src/window/playback_button.rs:96
+#: src/window/playback_button.rs:97
 msgid "Play"
 msgstr "Reprodueix"
 
-#: src/window/playback_button.rs:102
+#: src/window/playback_button.rs:103
 msgid "Pause"
 msgstr "Posa en pausa"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "Cançó reconeguda"
 msgstr[1] "Cançons reconegudes"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:154
+#: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "S'ha reconegut {n_songs} nova cançó"
 msgstr[1] "S'han reconegut {n_songs} noves cançons"
 
-#: src/window/recognized_page.rs:160
+#: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] ""
@@ -589,19 +594,19 @@ msgstr[1] ""
 "guardades"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:171
+#: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "S'han reconegut {n_successful} de les {total_minus_failed} cançons"
 
-#: src/window/recognizer_view.rs:148
+#: src/window/recognizer_view.rs:149
 msgid "Listening…"
 msgstr "S’està escoltant…"
 
-#: src/window/recognizer_view.rs:153
+#: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
 msgstr "S’està reconeixent…"
 
-#: src/window/song_page.rs:376
+#: src/window/song_page.rs:377
 msgid "Unknown"
 msgstr "Desconegut"
 

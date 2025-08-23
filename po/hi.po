@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 19:58+0800\n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
 "PO-Revision-Date: 2024-05-11 06:00+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/seadve/mousai/hi/"
@@ -20,19 +20,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 5.5.4\n"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "सेकेंडों में गाने पहचानें"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in.in:10
+#: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr "शाज़म;ऑडियो;संगीत;गीत;पहचानना;"
 
@@ -256,20 +256,25 @@ msgstr "शॉर्टकट दिखाएं"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "बंद करें"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "नियंत्रण"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "सुनना शुरू/बंद करें"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "प्लेबैक शुरू/बंद करें"
@@ -366,11 +371,11 @@ msgstr "आज %R बजे"
 msgid "yesterday at %R"
 msgstr "कल %R बजे"
 
-#: src/preferences_dialog.rs:102
+#: src/preferences_dialog.rs:103
 msgid "Microphone"
 msgstr "माइक्रोफोन"
 
-#: src/preferences_dialog.rs:103
+#: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
 msgstr "डेस्कटॉप ऑडियो"
 
@@ -427,59 +432,59 @@ msgid "Search on YouTube"
 msgstr "YouTube पर खोजें"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:141
+#: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
 msgstr "{key} प्रारंभ करने में विफल"
 
-#: src/window/history_view.rs:148 src/window/song_page.rs:80
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "क्लिपबोर्ड पर कॉपी किया गया"
 
-#: src/window/history_view.rs:161
+#: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
 msgstr "चयनित गाने हटाने में विफल"
 
-#: src/window/history_view.rs:358
+#: src/window/history_view.rs:357
 msgid "Failed to remove song"
 msgstr "गाना हटाने में विफल"
 
-#: src/window/history_view.rs:564
+#: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
 msgstr "पहचानकर्ता परिणाम दिखाने में विफल"
 
-#: src/window/history_view.rs:671
+#: src/window/history_view.rs:669
 msgid "_Undo"
 msgstr "पूर्ववत करें (_U)"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:681
 msgid "Failed to undo"
 msgstr "पूर्ववत करने में विफल"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:708
+#: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "{n_removed} गाना हटाया"
 msgstr[1] "{n_removed} गाने हटाये"
 
-#: src/window/history_view.rs:831
+#: src/window/history_view.rs:829
 msgid "Select items"
 msgstr "वस्तुएं चुनें"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:835
+#: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "{selection_size} गीत चयनित"
 msgstr[1] "{selection_size} गाने चयनित"
 
-#: src/window/history_view.rs:845
+#: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "गाना कॉपी करें"
 msgstr[1] "गाने कॉपी करें"
 
-#: src/window/history_view.rs:852
+#: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "इतिहास से गाना हटाएं"
@@ -554,47 +559,47 @@ msgstr "प्राथमिकताएं खोलें"
 msgid "An error occurred in the player"
 msgstr "प्लेयर में कोई त्रुटि उत्पन्न हुई"
 
-#: src/window/playback_button.rs:96
+#: src/window/playback_button.rs:97
 msgid "Play"
 msgstr "चलाएं"
 
-#: src/window/playback_button.rs:102
+#: src/window/playback_button.rs:103
 msgid "Pause"
 msgstr "विराम"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "पहचाना गया गाना"
 msgstr[1] "पहचाने गये गाने"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:154
+#: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "{n_songs} नया गाना पहचाना गया"
 msgstr[1] "{n_songs} नये गाने पहचाने गये"
 
-#: src/window/recognized_page.rs:160
+#: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "यह गाना आपकी सहेजी गई रिकॉर्डिंग से पहचाना गया"
 msgstr[1] "ये गाने आपकी सहेजी गई रिकॉर्डिंग से पहचाने गए"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:171
+#: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "{total_minus_failed} में से {n_successful} पहचाने गए"
 
-#: src/window/recognizer_view.rs:148
+#: src/window/recognizer_view.rs:149
 msgid "Listening…"
 msgstr "सुन रहें हैं…"
 
-#: src/window/recognizer_view.rs:153
+#: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
 msgstr "पहचान रहें हैं…"
 
-#: src/window/song_page.rs:376
+#: src/window/song_page.rs:377
 msgid "Unknown"
 msgstr "अज्ञात"
 

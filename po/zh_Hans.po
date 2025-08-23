@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 19:58+0800\n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
 "PO-Revision-Date: 2025-01-20 15:26+0000\n"
 "Last-Translator: LS-Shandong <ls-shandong@outlook.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -29,19 +29,19 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.10-dev\n"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
 msgstr "Mousai"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "几秒钟内识别歌曲"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in.in:10
+#: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
 "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;音频;音乐;歌曲;识别;"
@@ -261,20 +261,25 @@ msgstr "显示快捷键"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "控制"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "切换收听"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "切换播放"
@@ -372,11 +377,11 @@ msgstr "今天 %R"
 msgid "yesterday at %R"
 msgstr "昨天 %R"
 
-#: src/preferences_dialog.rs:102
+#: src/preferences_dialog.rs:103
 msgid "Microphone"
 msgstr "麦克风"
 
-#: src/preferences_dialog.rs:103
+#: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
 msgstr "电脑音频"
 
@@ -433,56 +438,56 @@ msgid "Search on YouTube"
 msgstr "搜索 YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:141
+#: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
 msgstr "启动 {key} 失败"
 
-#: src/window/history_view.rs:148 src/window/song_page.rs:80
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "已复制到剪贴板"
 
-#: src/window/history_view.rs:161
+#: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
 msgstr "删除选定歌曲失败"
 
-#: src/window/history_view.rs:358
+#: src/window/history_view.rs:357
 msgid "Failed to remove song"
 msgstr "删除歌曲失败"
 
-#: src/window/history_view.rs:564
+#: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
 msgstr "展示识别结果失败"
 
-#: src/window/history_view.rs:671
+#: src/window/history_view.rs:669
 msgid "_Undo"
 msgstr "撤销(_U)"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:681
 msgid "Failed to undo"
 msgstr "撤销失败"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:708
+#: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "删除了 {n_removed} 首歌曲"
 
-#: src/window/history_view.rs:831
+#: src/window/history_view.rs:829
 msgid "Select items"
 msgstr "选择条目"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:835
+#: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "选择了 {selection_size} 首歌曲"
 
-#: src/window/history_view.rs:845
+#: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "复制歌曲"
 
-#: src/window/history_view.rs:852
+#: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "从历史记录移除歌曲"
@@ -554,44 +559,44 @@ msgstr "打开设置"
 msgid "An error occurred in the player"
 msgstr "播放器发生了一个错误"
 
-#: src/window/playback_button.rs:96
+#: src/window/playback_button.rs:97
 msgid "Play"
 msgstr "播放"
 
-#: src/window/playback_button.rs:102
+#: src/window/playback_button.rs:103
 msgid "Pause"
 msgstr "暂停"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "识别的歌曲"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:154
+#: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "识别了 {n_songs} 首歌曲"
 
-#: src/window/recognized_page.rs:160
+#: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "这些歌曲从已保存的录音中识别"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:171
+#: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "已识别 {total_minus_failed} 首歌曲中的 {n_successful} 首"
 
-#: src/window/recognizer_view.rs:148
+#: src/window/recognizer_view.rs:149
 msgid "Listening…"
 msgstr "正在收听…"
 
-#: src/window/recognizer_view.rs:153
+#: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
 msgstr "正在识别…"
 
-#: src/window/song_page.rs:376
+#: src/window/song_page.rs:377
 msgid "Unknown"
 msgstr "未知"
 

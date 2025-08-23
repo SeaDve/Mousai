@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 19:58+0800\n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
 "PO-Revision-Date: 2025-07-27 16:14+0000\n"
 "Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/>"
-"\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/"
+">\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,23 +24,23 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.13-dev\n"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
 msgstr "موساي"
 
-#: data/io.github.seadve.Mousai.desktop.in.in:4
+#: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
 msgstr "تبيَّن الأغاني سريعًا"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
-#: data/io.github.seadve.Mousai.desktop.in.in:10
+#: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
-"شازام;صوت;موسيقى;أغنية;تعرف;تبين;أغاني;اغنية;اغاني;Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Mousai;"
-""
+"شازام;صوت;موسيقى;أغنية;تعرف;تبين;أغاني;اغنية;اغاني;Shazam;Audio;Music;Song;"
+"Recognize;Identify;Recognition;Mousai;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -209,9 +209,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"يمكنك الحصول على رمز واجهة برمجة (API) من <a href="
-"\"https://dashboard.audd.io/\">audd.io</a>. ترك هذا فارغًا يعني أن لك عدة "
-"محاولات كل يوم"
+"يمكنك الحصول على رمز واجهة برمجة (API) من <a href=\"https://dashboard.audd."
+"io/\">audd.io</a>. ترك هذا فارغًا يعني أن لك عدة محاولات كل يوم"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -260,20 +259,25 @@ msgstr "أظهِر الاختصارات"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
 msgid "Quit"
 msgstr "اخرُج"
 
-#: data/resources/ui/shortcuts.ui:46
+#: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "عناصر التحكُّم"
 
-#: data/resources/ui/shortcuts.ui:49
+#: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "بدِّل الاستماع"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "بدِّل إعادة التشغيل"
@@ -368,11 +372,11 @@ msgstr "اليوم في %OH:%OM"
 msgid "yesterday at %R"
 msgstr "أمسًا في %OH:%OM"
 
-#: src/preferences_dialog.rs:102
+#: src/preferences_dialog.rs:103
 msgid "Microphone"
 msgstr "ميكروفون"
 
-#: src/preferences_dialog.rs:103
+#: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
 msgstr "صوت الجهاز"
 
@@ -429,36 +433,36 @@ msgid "Search on YouTube"
 msgstr "ابحث في يوتيوب"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/external_link_tile.rs:141
+#: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
 msgstr "أخفَق البدء {key}"
 
-#: src/window/history_view.rs:148 src/window/song_page.rs:80
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
 msgstr "نُسخ للحافظة"
 
-#: src/window/history_view.rs:161
+#: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
 msgstr "تعذَّرت إزالة الأغاني المحدَّدة"
 
-#: src/window/history_view.rs:358
+#: src/window/history_view.rs:357
 msgid "Failed to remove song"
 msgstr "تعذَّرت إزالة الأغنية"
 
-#: src/window/history_view.rs:564
+#: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
 msgstr "تعذَّر عرض نتائج المتبيِّن"
 
-#: src/window/history_view.rs:671
+#: src/window/history_view.rs:669
 msgid "_Undo"
 msgstr "ت_راجع"
 
-#: src/window/history_view.rs:683
+#: src/window/history_view.rs:681
 msgid "Failed to undo"
 msgstr "أخفق التراجع"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:708
+#: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "لم تُزل أي أغنية"
@@ -468,12 +472,12 @@ msgstr[3] "أُزيلت {n_removed} أغانٍ"
 msgstr[4] "أُزيلت {n_removed} أغنيةً"
 msgstr[5] "أُزيلت {n_removed} أغنية"
 
-#: src/window/history_view.rs:831
+#: src/window/history_view.rs:829
 msgid "Select items"
 msgstr "حدِّد عناصر"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/history_view.rs:835
+#: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "لم تُحدَّد أي أغنية"
@@ -483,7 +487,7 @@ msgstr[3] "حُدِّدت {selection_size} أغانٍ"
 msgstr[4] "حُدِّدت {selection_size} أغنيةً"
 msgstr[5] "حُدِّدت {selection_size} أغنية"
 
-#: src/window/history_view.rs:845
+#: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
 msgstr[0] "لا تنسخ أي أغنية"
@@ -493,7 +497,7 @@ msgstr[3] "انسخ الأغاني"
 msgstr[4] "انسخ الأغاني"
 msgstr[5] "انسخ الأغاني"
 
-#: src/window/history_view.rs:852
+#: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
 msgstr[0] "لا تزل الأغنية من التأريخ"
@@ -570,15 +574,15 @@ msgstr "افتح التفضيلات"
 msgid "An error occurred in the player"
 msgstr "حصل خطأ في المشغِّل"
 
-#: src/window/playback_button.rs:96
+#: src/window/playback_button.rs:97
 msgid "Play"
 msgstr "شغِّل"
 
-#: src/window/playback_button.rs:102
+#: src/window/playback_button.rs:103
 msgid "Pause"
 msgstr "ألبث"
 
-#: src/window/recognized_page.rs:148
+#: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
 msgstr[0] "لا أغانٍ تعرَّفت عليها"
@@ -589,7 +593,7 @@ msgstr[4] "تعرَّفت على عدة أغانٍ"
 msgstr[5] "تعرَّفت على عدة أغانٍ"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognized_page.rs:154
+#: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "لم تُتبيَّن أي أغنية"
@@ -599,7 +603,7 @@ msgstr[3] "تُبيِّنت {n_songs} أغانٍ"
 msgstr[4] "تُبيِّنت {n_songs} أغنيةً"
 msgstr[5] "تُبيِّنت {n_songs} أغنية"
 
-#: src/window/recognized_page.rs:160
+#: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "لم تُتبيَّن هذه الأغنية من تسجيلاتك المحفوظة"
@@ -610,19 +614,19 @@ msgstr[4] "تُبيِّنت هذه الأغاني من تسجيلاتك المح
 msgstr[5] "تُبيِّنت هذه الأغاني من تسجيلاتك المحفوظة"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
-#: src/window/recognizer_status.rs:171
+#: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "تُبيِّنت {n_successful} من أصل {total_minus_failed}"
 
-#: src/window/recognizer_view.rs:148
+#: src/window/recognizer_view.rs:149
 msgid "Listening…"
 msgstr "يستمع…"
 
-#: src/window/recognizer_view.rs:153
+#: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
 msgstr "يتبيَّن…"
 
-#: src/window/song_page.rs:376
+#: src/window/song_page.rs:377
 msgid "Unknown"
 msgstr "مجهول"
 
