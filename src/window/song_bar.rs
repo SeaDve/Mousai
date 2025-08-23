@@ -13,9 +13,9 @@ use crate::{
     player::{Player, PlayerState},
     song::Song,
     window::{
+        AdaptiveMode,
         album_cover::AlbumCover,
         playback_button::{PlaybackButton, PlaybackButtonMode},
-        AdaptiveMode,
     },
 };
 
@@ -83,9 +83,11 @@ mod imp {
     impl ObjectImpl for SongBar {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("activated")
-                    .param_types([Song::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("activated")
+                        .param_types([Song::static_type()])
+                        .build(),
+                ]
             });
 
             SIGNALS.as_ref()
@@ -140,7 +142,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct SongBar(ObjectSubclass<imp::SongBar>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl SongBar {

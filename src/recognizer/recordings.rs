@@ -423,9 +423,11 @@ mod tests {
 
         assert!(recordings.peek_filtered(|_| false).is_empty());
         assert!(recordings.peek_filtered(|_| true).is_empty());
-        assert!(recordings
-            .peek_filtered(|r| r.bytes().as_ref() == b"a")
-            .is_empty());
+        assert!(
+            recordings
+                .peek_filtered(|r| r.bytes().as_ref() == b"a")
+                .is_empty()
+        );
 
         recordings.insert(new_test_recording(b"a")).unwrap();
         assert!(recordings.peek_filtered(|_| false).is_empty());
@@ -479,10 +481,12 @@ mod tests {
         assert_n_items_and_db_count_eq(&recordings, 0);
         assert!(recordings.take_filtered(|_| false).unwrap().is_empty());
         assert!(recordings.take_filtered(|_| true).unwrap().is_empty());
-        assert!(recordings
-            .take_filtered(|r| r.bytes().as_ref() == b"a")
-            .unwrap()
-            .is_empty());
+        assert!(
+            recordings
+                .take_filtered(|r| r.bytes().as_ref() == b"a")
+                .unwrap()
+                .is_empty()
+        );
 
         recordings.insert(new_test_recording(b"a")).unwrap();
         assert_n_items_and_db_count_eq(&recordings, 1);

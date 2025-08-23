@@ -4,7 +4,7 @@ use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 use std::{cell::OnceCell, str::FromStr};
 
 use crate::{
-    external_link::ExternalLink, external_links::ExternalLinkKey, i18n::gettext_f, Application,
+    Application, external_link::ExternalLink, external_links::ExternalLinkKey, i18n::gettext_f,
 };
 
 mod imp {
@@ -85,7 +85,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct ExternalLinkTile(ObjectSubclass<imp::ExternalLinkTile>)
-        @extends gtk::Widget, gtk::FlowBoxChild;
+        @extends gtk::Widget, gtk::FlowBoxChild,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl ExternalLinkTile {
@@ -109,7 +110,10 @@ impl ExternalLinkTile {
         let raw_value = link.value();
 
         let Ok(key) = ExternalLinkKey::from_str(&raw_key) else {
-            unreachable!("external link tile with an unhandleable key `{}` should not have been constructed and thus activated", raw_key);
+            unreachable!(
+                "external link tile with an unhandleable key `{}` should not have been constructed and thus activated",
+                raw_key
+            );
         };
 
         let uri = match key {

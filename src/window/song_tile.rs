@@ -1,7 +1,7 @@
 use gettextrs::gettext;
 use gtk::{
     gdk,
-    glib::{self, clone, closure_local, WeakRef},
+    glib::{self, WeakRef, clone, closure_local},
     prelude::*,
     subclass::prelude::*,
 };
@@ -9,9 +9,9 @@ use gtk::{
 use std::cell::{Cell, OnceCell, RefCell};
 
 use super::{
+    AdaptiveMode,
     album_cover::AlbumCover,
     playback_button::{PlaybackButton, PlaybackButtonMode},
-    AdaptiveMode,
 };
 use crate::{
     player::{Player, PlayerState},
@@ -273,7 +273,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct SongTile(ObjectSubclass<imp::SongTile>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl SongTile {
@@ -312,10 +313,10 @@ impl SongTile {
     }
 
     pub fn unbind_player(&self) {
-        if let Some((player, handler_id)) = self.imp().player.take() {
-            if let Some(player) = player.upgrade() {
-                player.disconnect(handler_id);
-            }
+        if let Some((player, handler_id)) = self.imp().player.take()
+            && let Some(player) = player.upgrade()
+        {
+            player.disconnect(handler_id);
         }
     }
 
@@ -326,14 +327,13 @@ impl SongTile {
             .borrow()
             .as_ref()
             .and_then(|(player, _)| player.upgrade())
+            && let Some(song) = self.song()
         {
-            if let Some(song) = self.song() {
-                if player.state() == PlayerState::Playing && player.is_active_song(song.id_ref()) {
-                    player.pause();
-                } else {
-                    player.set_song(Some(song));
-                    player.play();
-                }
+            if player.state() == PlayerState::Playing && player.is_active_song(song.id_ref()) {
+                player.pause();
+            } else {
+                player.set_song(Some(song));
+                player.play();
             }
         }
     }

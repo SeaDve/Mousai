@@ -10,11 +10,11 @@ use gtk::{
 
 use std::cell::{Cell, OnceCell, RefCell};
 
-use super::{recognized_page_tile::RecognizedPageTile, AdaptiveMode};
+use super::{AdaptiveMode, recognized_page_tile::RecognizedPageTile};
 use crate::{i18n::ngettext_f, player::Player, song::Song};
 
 mod imp {
-    use glib::{subclass::Signal, WeakRef};
+    use glib::{WeakRef, subclass::Signal};
     use once_cell::sync::Lazy;
 
     use super::*;
@@ -65,9 +65,11 @@ mod imp {
     impl ObjectImpl for RecognizedPage {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("song-activated")
-                    .param_types([Song::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("song-activated")
+                        .param_types([Song::static_type()])
+                        .build(),
+                ]
             });
 
             SIGNALS.as_ref()
@@ -104,7 +106,8 @@ mod imp {
 
 glib::wrapper! {
      pub struct RecognizedPage(ObjectSubclass<imp::RecognizedPage>)
-        @extends gtk::Widget, adw::NavigationPage;
+        @extends gtk::Widget, adw::NavigationPage,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl RecognizedPage {

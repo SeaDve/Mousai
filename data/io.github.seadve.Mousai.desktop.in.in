@@ -10,3 +10,4 @@ Keywords=Shazam;Audio;Music;Song;Recognize;Identify;Recognition;
 Icon=@icon@
 StartupNotify=true
 X-Purism-FormFactor=Workstation;Mobile;
+DBusActivatable=true

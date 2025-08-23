@@ -74,3 +74,15 @@ if glib_compile_schemas.found()
     ],
   )
 endif
+
+# D-Bus service file
+service_conf = configuration_data()
+service_conf.set('app-id', application_id)
+service_conf.set('bindir', bindir)
+configure_file(
+    input: '@0@.service.in'.format(base_id),
+    output: '@0@.service'.format(application_id),
+    configuration: service_conf,
+    install: true,
+    install_dir: datadir / 'dbus-1' / 'services'
+)

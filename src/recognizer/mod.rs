@@ -3,11 +3,11 @@ mod recorder;
 mod recording;
 mod recordings;
 
-use anyhow::{ensure, Context, Result};
+use anyhow::{Context, Result, ensure};
 use gst::prelude::*;
 use gtk::{
     gio::{self, prelude::*},
-    glib::{self, clone, closure_local, subclass::prelude::*, WeakRef},
+    glib::{self, WeakRef, clone, closure_local, subclass::prelude::*},
 };
 
 use std::{
@@ -25,7 +25,7 @@ use self::{
     recorder::Recorder,
     recording::{BoxedRecognizeResult, Recording},
 };
-use crate::{cancelled::Cancelled, date_time::DateTime, song::Song, utils, Application};
+use crate::{Application, cancelled::Cancelled, date_time::DateTime, song::Song, utils};
 
 const MAX_SAVED_RECORDING_RECOGNIZE_RETRIES: u8 = 3;
 
@@ -321,7 +321,10 @@ impl Recognizer {
                     .insert(Recording::new(&recording_bytes, &recorded_time))
                     .context("Failed to insert recording")?;
                 self.emit_recording_saved(&err);
-                tracing::debug!("Recognition failed with non-permanent error `{:?}`; saved recording for later recognition", err);
+                tracing::debug!(
+                    "Recognition failed with non-permanent error `{:?}`; saved recording for later recognition",
+                    err
+                );
             }
         }
 

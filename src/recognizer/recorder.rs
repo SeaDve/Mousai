@@ -1,6 +1,6 @@
 use std::cell::RefCell;
 
-use anyhow::{anyhow, ensure, Context, Result};
+use anyhow::{Context, Result, anyhow, ensure};
 use gst::{bus::BusWatchGuard, prelude::*};
 use gtk::{
     gio::{self, prelude::*},
@@ -82,18 +82,18 @@ fn handle_bus_message(
         MessageView::Element(e) => {
             tracing::trace!("Received element message on bus: {:?}", e);
 
-            if let Some(structure) = e.structure() {
-                if structure.has_name("level") {
-                    let peak = structure
-                        .get::<&glib::ValueArray>("peak")
-                        .unwrap()
-                        .first()
-                        .unwrap()
-                        .get::<f64>()
-                        .unwrap();
-                    let normalized_peak = 10_f64.powf(peak / 20.0);
-                    peak_callback(normalized_peak);
-                }
+            if let Some(structure) = e.structure()
+                && structure.has_name("level")
+            {
+                let peak = structure
+                    .get::<&glib::ValueArray>("peak")
+                    .unwrap()
+                    .first()
+                    .unwrap()
+                    .get::<f64>()
+                    .unwrap();
+                let normalized_peak = 10_f64.powf(peak / 20.0);
+                peak_callback(normalized_peak);
             }
 
             glib::ControlFlow::Continue

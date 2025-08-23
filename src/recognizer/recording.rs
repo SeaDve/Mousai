@@ -1,5 +1,5 @@
 use gtk::{glib, prelude::*, subclass::prelude::*};
-use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{Deserialize, Deserializer, Serialize, Serializer, de};
 
 use std::cell::{Cell, OnceCell, RefCell};
 

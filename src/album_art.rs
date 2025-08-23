@@ -136,8 +136,10 @@ mod test {
         ])
         .await;
 
-        assert!(results
-            .iter()
-            .all(|r| r.as_ref().unwrap() == results[0].as_ref().unwrap()));
+        assert!(
+            results
+                .iter()
+                .all(|r| r.as_ref().unwrap() == results[0].as_ref().unwrap())
+        );
     }
 }

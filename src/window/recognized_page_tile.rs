@@ -123,7 +123,8 @@ mod imp {
 
 glib::wrapper! {
      pub struct RecognizedPageTile(ObjectSubclass<imp::RecognizedPageTile>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl RecognizedPageTile {

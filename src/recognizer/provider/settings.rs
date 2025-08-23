@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Error, Result};
+use anyhow::{Error, Result, anyhow};
 use gtk::glib::{self, translate::TryFromGlib};
 
 use std::{

@@ -9,6 +9,7 @@ use gtk::{
 use std::cell::{Cell, OnceCell, RefCell};
 
 use crate::{
+    Application,
     config::APP_ID,
     i18n::ngettext_f,
     player::Player,
@@ -19,11 +20,9 @@ use crate::{
     song_sorter::SongSorter,
     uid::Uid,
     window::{
-        lyrics_page::LyricsPage, recognized_page::RecognizedPage,
+        AdaptiveMode, lyrics_page::LyricsPage, recognized_page::RecognizedPage,
         recognizer_status::RecognizerStatus, song_page::SongPage, song_tile::SongTile,
-        AdaptiveMode,
     },
-    Application,
 };
 
 // FIXME Missing global navigation shortcuts
@@ -218,9 +217,8 @@ mod imp {
                 obj,
                 #[upgrade_or_panic]
                 move |_| {
-                    let next_page = obj.imp().navigation_forward_stack.borrow().last().cloned();
-
-                    next_page
+                    let imp = obj.imp();
+                    imp.navigation_forward_stack.borrow().last().cloned()
                 }
             ));
 
@@ -256,7 +254,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct HistoryView(ObjectSubclass<imp::HistoryView>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl HistoryView {
@@ -416,21 +415,20 @@ impl HistoryView {
         //
         // This is done to restore the scroll position of the `LyricsPage` when navigating back to it.
         let forward_page = imp.navigation_forward_stack.borrow().last().cloned();
-        if let Some(forward_page) = forward_page {
-            if forward_page
+        if let Some(forward_page) = forward_page
+            && forward_page
                 .downcast_ref::<LyricsPage>()
                 .is_some_and(|lyrics_page| {
                     lyrics_page
                         .song()
                         .is_some_and(|s| s.id_ref() == song.id_ref())
                 })
-            {
-                let removed = imp.navigation_forward_stack.borrow_mut().pop();
-                debug_assert_eq!(removed.as_ref(), Some(&forward_page));
+        {
+            let removed = imp.navigation_forward_stack.borrow_mut().pop();
+            debug_assert_eq!(removed.as_ref(), Some(&forward_page));
 
-                imp.navigation_view.push(&forward_page);
-                return;
-            }
+            imp.navigation_view.push(&forward_page);
+            return;
         }
 
         let lyrics_page = LyricsPage::new();
@@ -1015,7 +1013,7 @@ mod test {
 
     use std::sync::Once;
 
-    use crate::{database, RESOURCES_FILE};
+    use crate::{RESOURCES_FILE, database};
 
     static GRESOURCES_INIT: Once = Once::new();
 

@@ -86,7 +86,8 @@ mod imp {
 
 glib::wrapper! {
      pub struct RecognizerStatus(ObjectSubclass<imp::RecognizerStatus>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl RecognizerStatus {

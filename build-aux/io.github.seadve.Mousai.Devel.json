@@ -5,11 +5,12 @@
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable",
-        "org.freedesktop.Sdk.Extension.llvm18"
+        "org.freedesktop.Sdk.Extension.llvm20"
     ],
     "command": "mousai",
     "finish-args": [
         "--device=dri",
+        "--share=ipc",
         "--share=network",
         "--socket=fallback-x11",
         "--socket=pulseaudio",
@@ -20,7 +21,7 @@
         "--env=RUST_LIB_BACKTRACE=0"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/llvm18/bin:/usr/lib/sdk/rust-stable/bin",
+        "append-path": "/usr/lib/sdk/llvm20/bin:/usr/lib/sdk/rust-stable/bin",
         "build-args": [
             "--share=network"
         ],

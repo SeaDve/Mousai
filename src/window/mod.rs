@@ -26,13 +26,13 @@ use std::cell::OnceCell;
 
 use self::{history_view::HistoryView, recognizer_view::RecognizerView, song_bar::SongBar};
 use crate::{
+    Application,
     config::PROFILE,
     player::{Player, PlayerState},
     preferences_dialog::PreferencesDialog,
     recognizer::{RecognizeError, RecognizeErrorKind, Recognizer, RecognizerState, Recordings},
     song::Song,
     song_list::SongList,
-    Application,
 };
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
@@ -162,7 +162,7 @@ mod imp {
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,
-        @implements gio::ActionMap, gio::ActionGroup, gtk::Native, gtk::Root;
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget, gio::ActionMap, gio::ActionGroup, gtk::Native, gtk::Root, gtk::ShortcutManager;
 }
 
 impl Window {

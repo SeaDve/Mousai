@@ -55,7 +55,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct RecognizerView(ObjectSubclass<imp::RecognizerView>)
-        @extends gtk::Widget;
+        @extends gtk::Widget,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl RecognizerView {

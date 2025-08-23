@@ -851,10 +851,12 @@ mod test {
         });
 
         assert_eq!(n_called.get(), 0);
-        assert!(song_list
-            .remove_many(&[&Uid::from("0")])
-            .unwrap()
-            .is_empty());
+        assert!(
+            song_list
+                .remove_many(&[&Uid::from("0")])
+                .unwrap()
+                .is_empty()
+        );
         assert_eq!(n_called.get(), 0);
     }
 
@@ -985,10 +987,12 @@ mod test {
             n_called_clone.set(n_called_clone.get() + 1);
         });
 
-        assert!(song_list
-            .remove_many(&[&Uid::from("0"), &Uid::from("3")])
-            .unwrap()
-            .is_empty(),);
+        assert!(
+            song_list
+                .remove_many(&[&Uid::from("0"), &Uid::from("3")])
+                .unwrap()
+                .is_empty(),
+        );
         assert_eq!(n_called.get(), 0);
     }
 }

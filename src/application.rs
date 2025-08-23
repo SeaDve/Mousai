@@ -64,10 +64,10 @@ mod imp {
         }
 
         fn shutdown(&self) {
-            if let Some((env, _, _)) = self.env.get() {
-                if let Err(err) = env.force_sync() {
-                    tracing::error!("Failed to sync db env on shutdown: {:?}", err);
-                }
+            if let Some((env, _, _)) = self.env.get()
+                && let Err(err) = env.force_sync()
+            {
+                tracing::error!("Failed to sync db env on shutdown: {:?}", err);
             }
 
             if let Some((_, cache)) = self.session.get() {
@@ -267,7 +267,9 @@ fn setup_inspector_page() {
             10,
         );
     } else {
-        tracing::warn!("Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found");
+        tracing::warn!(
+            "Failed to setup Mousai's inspector page. IOExtensionPoint `gtk-inspector-page` is likely not found"
+        );
     }
 }
 

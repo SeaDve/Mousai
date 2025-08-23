@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use gettextrs::gettext;
 use gtk::glib;
-use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{Deserialize, Deserializer, Serialize, Serializer, de};
 
 /// A [`glib::DateTime`] that implements [`Serialize`] and [`Deserialize`]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, glib::ValueDelegate)]

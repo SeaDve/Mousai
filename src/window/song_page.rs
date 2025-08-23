@@ -8,24 +8,24 @@ use gtk::glib::{self, clone, closure_local};
 use std::cell::{Cell, RefCell};
 
 use super::{
+    AdaptiveMode,
     album_cover::AlbumCover,
     external_link_tile::ExternalLinkTile,
     information_row::InformationRow,
     playback_button::{PlaybackButton, PlaybackButtonMode},
-    AdaptiveMode,
 };
 use crate::{
+    Application,
     player::{Player, PlayerState},
     song::Song,
     song_list::SongList,
-    Application,
 };
 
 const NORMAL_ALBUM_COVER_PIXEL_SIZE: i32 = 180;
 const NARROW_ALBUM_COVER_PIXEL_SIZE: i32 = 120;
 
 mod imp {
-    use glib::{subclass::Signal, WeakRef};
+    use glib::{WeakRef, subclass::Signal};
     use once_cell::sync::Lazy;
 
     use super::*;
@@ -201,7 +201,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct SongPage(ObjectSubclass<imp::SongPage>)
-        @extends gtk::Widget, adw::NavigationPage;
+        @extends gtk::Widget, adw::NavigationPage,
+        @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl SongPage {
@@ -249,10 +250,10 @@ impl SongPage {
     }
 
     pub fn unbind_player(&self) {
-        if let Some((player, handler_id)) = self.imp().player.take() {
-            if let Some(player) = player.upgrade() {
-                player.disconnect(handler_id);
-            }
+        if let Some((player, handler_id)) = self.imp().player.take()
+            && let Some(player) = player.upgrade()
+        {
+            player.disconnect(handler_id);
         }
     }
 
@@ -274,10 +275,10 @@ impl SongPage {
     }
 
     pub fn unbind_song_list(&self) {
-        if let Some((song_list, handler_id)) = self.imp().song_list.take() {
-            if let Some(song_list) = song_list.upgrade() {
-                song_list.disconnect(handler_id);
-            }
+        if let Some((song_list, handler_id)) = self.imp().song_list.take()
+            && let Some(song_list) = song_list.upgrade()
+        {
+            song_list.disconnect(handler_id);
         }
     }
 

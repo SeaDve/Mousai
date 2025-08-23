@@ -8,14 +8,14 @@ use gtk::{
     subclass::prelude::*,
 };
 use mpris_server::{
-    zbus::{self, fdo},
     LocalPlayerInterface, LocalRootInterface, LocalServer, LoopStatus, Metadata, PlaybackRate,
     PlaybackStatus, Property, Signal, Time, TrackId, Volume,
+    zbus::{self, fdo},
 };
 
 use std::cell::{Cell, OnceCell, RefCell};
 
-use crate::{config::APP_ID, song::Song, uid::Uid, utils, Application};
+use crate::{Application, config::APP_ID, song::Song, uid::Uid, utils};
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, glib::Enum)]
 #[enum_type(name = "MousaiPlayerState")]
@@ -76,9 +76,11 @@ mod imp {
     impl ObjectImpl for Player {
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> = Lazy::new(|| {
-                vec![Signal::builder("error")
-                    .param_types([glib::Error::static_type()])
-                    .build()]
+                vec![
+                    Signal::builder("error")
+                        .param_types([glib::Error::static_type()])
+                        .build(),
+                ]
             });
 
             SIGNALS.as_ref()
@@ -99,7 +101,7 @@ mod imp {
                     move |_, message| {
                         if gst_play::Play::is_play_message(message) {
                             let play_message = gst_play::PlayMessage::parse(message).unwrap();
-                            obj.handle_gst_play_message(play_message);
+                            obj.handle_gst_play_message(&play_message);
                         } else {
                             tracing::trace!("Received other bus message: {:?}", message.view());
                         }
@@ -286,26 +288,26 @@ impl Player {
         );
     }
 
-    fn handle_gst_play_message(&self, message: gst_play::PlayMessage) {
+    fn handle_gst_play_message(&self, message: &gst_play::PlayMessage<'_>) {
         use gst_play::{PlayMessage, PlayState};
 
         let imp = self.imp();
 
         match message {
-            PlayMessage::PositionUpdated { position } => {
-                self.set_position(position.unwrap_or_default());
+            PlayMessage::PositionUpdated(m) => {
+                self.set_position(m.position().unwrap_or_default());
             }
-            PlayMessage::DurationChanged { duration } => {
-                self.set_duration(duration.unwrap_or_default());
+            PlayMessage::DurationChanged(m) => {
+                self.set_duration(m.duration().unwrap_or_default());
             }
-            PlayMessage::StateChanged { state } => {
-                let new_state = match state {
+            PlayMessage::StateChanged(m) => {
+                let new_state = match m.state() {
                     PlayState::Stopped => PlayerState::Stopped,
                     PlayState::Buffering => PlayerState::Buffering,
                     PlayState::Paused => PlayerState::Paused,
                     PlayState::Playing => PlayerState::Playing,
                     _ => {
-                        tracing::warn!("Received unknown PlayState `{}`", state);
+                        tracing::warn!("Received unknown PlayState `{}`", m.state());
                         return;
                     }
                 };
@@ -320,27 +322,28 @@ impl Player {
                 )]);
                 self.notify_state();
             }
-            PlayMessage::EndOfStream => {
+            PlayMessage::EndOfStream(_) => {
                 tracing::debug!("Received end of stream message");
                 self.set_position(gst::ClockTime::ZERO);
             }
-            PlayMessage::SeekDone => {
+            PlayMessage::SeekDone(m) => {
                 tracing::debug!("Received seek done message");
-                let position = imp.gst_play.position().unwrap_or_default();
+                let position = m.position().unwrap_or_default();
                 self.set_position(position);
                 self.mpris_seeked(Time::from_micros(position.useconds() as i64));
             }
-            PlayMessage::Error { error, details } => {
-                tracing::error!(state = ?self.state(), ?details, "Received error message: {:?}", error);
-                self.emit_by_name::<()>("error", &[&error]);
+            PlayMessage::Error(m) => {
+                tracing::error!(state = ?self.state(), details = ?m.details(), "Received error message: {:?}", m.error());
+                self.emit_by_name::<()>("error", &[&m.error()]);
             }
-            PlayMessage::Warning { error, details } => {
-                tracing::warn!(?details, "Received warning message: {:?}", error);
+            PlayMessage::Warning(m) => {
+                tracing::warn!(details = ?m.details(), "Received warning message: {:?}", m.error());
             }
-            PlayMessage::Buffering { percent } => {
-                tracing::trace!("Buffering ({}%)", percent);
+            PlayMessage::Buffering(m) => {
+                tracing::trace!("Buffering ({}%)", m.percent());
             }
-            PlayMessage::MediaInfoUpdated { info } => {
+            PlayMessage::MediaInfoUpdated(m) => {
+                let info = m.media_info();
                 tracing::trace!(
                     container_format = ?info.container_format(),
                     duration = ?info.duration(),

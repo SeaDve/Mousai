@@ -1,8 +1,8 @@
 use anyhow::Result;
-use fuzzy_matcher::{skim::SkimMatcherV2, FuzzyMatcher};
+use fuzzy_matcher::{FuzzyMatcher, skim::SkimMatcherV2};
 use gtk::{glib, prelude::*, subclass::prelude::*};
 use once_cell::sync::Lazy;
-use serde::{de, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{Deserialize, Deserializer, Serialize, Serializer, de};
 
 use std::{
     cell::{Cell, OnceCell, RefCell},
@@ -10,12 +10,12 @@ use std::{
 };
 
 use crate::{
+    Application,
     album_art::AlbumArt,
     date_time::DateTime,
     external_links::{ExternalLinkKey, ExternalLinks},
     serde_helpers,
     uid::Uid,
-    Application,
 };
 
 mod imp {
