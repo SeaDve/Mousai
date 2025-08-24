@@ -6,22 +6,22 @@
 # Petr Šimáček <petr.simacek@gmail.com>, 2021.
 # multiflexi <multi.flexi@seznam.cz>, 2022.
 # Fjuro <ifjuro@proton.me>, 2023.
-# Fjuro <fjuro@alius.cz>, 2024.
+# Fjuro <fjuro@alius.cz>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-09-27 12:16+0000\n"
+"PO-Revision-Date: 2025-08-24 05:03+0000\n"
 "Last-Translator: Fjuro <fjuro@alius.cz>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/"
-">\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -260,7 +260,7 @@ msgstr "Zobrazit zkratky"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Zavřít okno"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"

@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Henri <contact@hen.ee>, 2022.
 # Priit Jõerüüt <hwlate@joeruut.com>, 2024.
+# Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-12-06 16:00+0000\n"
-"Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
+"PO-Revision-Date: 2025-08-24 05:03+0000\n"
+"Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/seadve/mousai/"
 "et/>\n"
 "Language: et\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -116,7 +117,7 @@ msgstr "📱 Lihtne kasutajaliides"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Eelistused"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -147,9 +148,8 @@ msgid "Listen"
 msgstr "Tuvasta"
 
 #: data/resources/ui/history_view.ui:65
-#, fuzzy
 msgid "Main Menu"
-msgstr "Valikud"
+msgstr "Põhimenüü"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
@@ -188,9 +188,8 @@ msgid "Lyrics"
 msgstr "Sõnad"
 
 #: data/resources/ui/preferences_dialog.ui:8
-#, fuzzy
 msgid "General"
-msgstr "Üldine"
+msgstr "Üldised seadistused"
 
 #: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
@@ -237,12 +236,12 @@ msgstr "Vallasrežiim"
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Üldine"
+msgstr "Üldised"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr "Ava menüü"
+msgstr "Ava põhimenüü"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
@@ -262,7 +261,7 @@ msgstr "Näita kiirklahve"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Sulge aken"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
@@ -323,13 +322,11 @@ msgstr "Uus"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
-"Henri \n"
-"Priit Jõerüüt 2024"
+msgstr "Henri; Priit Jõerüüt 2024-2025"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Toeta meid (Buy Me a Coffee)"
 
 #: src/about.rs:31
 msgid "GitHub"
@@ -337,7 +334,7 @@ msgstr "GitHub"
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr ""
+msgstr "Tõlgi"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
@@ -364,9 +361,8 @@ msgstr ""
 "issues/\">meie veahalduse lehel</a>"
 
 #: src/application.rs:215
-#, fuzzy
 msgid "Quit"
-msgstr "Lahku"
+msgstr "Välju"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
@@ -445,7 +441,7 @@ msgstr "{key} käivitamine ei õnnestunud"
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Kopeeritud lõikelauale"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
@@ -532,7 +528,7 @@ msgstr "Tulemus on näha siis, kui oled tagasi võrgus"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Selge, sain aru"
 
 #: src/window/mod.rs:355
 msgid ""
@@ -557,7 +553,7 @@ msgstr ""
 
 #: src/window/mod.rs:365
 msgid "Later"
-msgstr ""
+msgstr "Hiljem"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
