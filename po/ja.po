@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # 小山田純 <oyamada.junjun@outlook.jp>, 2021.
-# Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022, 2023, 2024.
+# Ryo Nakano <ryonakaknock3@gmail.com>, 2021, 2022, 2023, 2024, 2025.
 # Kaz Sibuya <sibuyakazokuu@gmail.com>, 2021.
 # Kisaragi Hiu <mail@kisaragi-hiu.com>, 2022.
 # kj7kt <yyhuton@gmail.com>, 2023.
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-09-28 13:16+0000\n"
+"PO-Revision-Date: 2025-08-25 14:02+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/seadve/mousai/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -261,7 +261,7 @@ msgstr "ショートカット一覧を表示する"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "ウィンドウを閉じる"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
