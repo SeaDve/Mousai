@@ -11,13 +11,14 @@
 # Tiago Lucas Flach <tiagolucas9830@gmail.com>, 2023.
 # John Peter Sa <johnppetersa@gmail.com>, 2024, 2025.
 # Xen'on <saveliyburk@gmail.com>, 2025.
+# Tanaca <jtanacar@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-06-13 10:52+0000\n"
-"Last-Translator: Xen'on <saveliyburk@gmail.com>\n"
+"PO-Revision-Date: 2025-08-26 15:02+0000\n"
+"Last-Translator: Tanaca <jtanacar@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "seadve/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -25,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -265,7 +266,7 @@ msgstr "Mostrar atalhos"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Fechar janela"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"

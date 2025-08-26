@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mousai package.
 # Nicolas Mariniello <seldon1000@tutanota.com>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
-# albanobattistella <albano_battistella@hotmail.com>, 2021, 2022, 2023, 2024.
+# albanobattistella <albano_battistella@hotmail.com>, 2021, 2022, 2023, 2024, 2025.
 # Dave Patrick <davecruz48@gmail.com>, 2021.
 # Michael Moroni <michaelmoroni@disroot.org>, 2021, 2023.
 # Andrea Brandi <git@andreabrandi.com>, 2022, 2023.
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-09-30 12:16+0000\n"
+"PO-Revision-Date: 2025-08-26 15:02+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/seadve/mousai/it/"
 ">\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -267,7 +267,7 @@ msgstr "Mostra scorciatoie"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Chiudi finestra"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
