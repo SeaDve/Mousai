@@ -4,13 +4,14 @@
 # Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022, 2023, 2024, 2025.
 # Jiri Nakola <github@nakola.fi>, 2022, 2023.
 # Ricky Tigg <ricky.tigg@gmail.com>, 2025.
+# Linus Virtanen <linus.virtanen@protonmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-04-06 18:23+0000\n"
-"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"PO-Revision-Date: 2025-09-04 12:01+0000\n"
+"Last-Translator: Linus Virtanen <linus.virtanen@protonmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/fi/"
 ">\n"
 "Language: fi\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.13.1-rc\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -237,7 +238,7 @@ msgstr "Yhteydetön tila"
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Yleiset"
+msgstr "Yleistä"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -257,12 +258,12 @@ msgstr "Näytä asetukset"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Näytä pikanäppäimet"
+msgstr "Näytä pikavalinnat"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Sulje ikkuna"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
