@@ -7,13 +7,14 @@
 # Ali-98 <ahj696@hotmail.com>, 2023.
 # Yassin Amr <justxeez@gmail.com>, 2025.
 # Ahmed Najmawi <iramosu@protonmail.com>, 2025.
+# Ziad El-sayed <ziadelsayed1797@tutamail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-08-30 16:01+0000\n"
-"Last-Translator: Ahmed Najmawi <iramosu@protonmail.com>\n"
+"PO-Revision-Date: 2025-09-10 07:15+0000\n"
+"Last-Translator: Ziad El-sayed <ziadelsayed1797@tutamail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/>"
 "\n"
 "Language: ar\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -255,7 +256,7 @@ msgstr "أظهِر التفضيلات"
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "أظهِر الاختصارات"
+msgstr "أظهِر الإختصارات"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
@@ -265,7 +266,7 @@ msgstr "أغلق النافذة"
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "اخرُج"
+msgstr "خروج"
 
 #: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
