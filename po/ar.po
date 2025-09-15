@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-09-11 07:42+0000\n"
+"PO-Revision-Date: 2025-09-15 08:01+0000\n"
 "Last-Translator: Ziad El-sayed <ziadelsayed1797@tutamail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/>"
 "\n"
@@ -261,12 +261,12 @@ msgstr "أظهِر الإختصارات"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr "أغلق النافذة"
+msgstr "إغلاق النافذة"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "خروج"
+msgstr "اخرُج"
 
 #: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
