@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-08-24 05:03+0000\n"
+"PO-Revision-Date: 2025-09-18 00:42+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/seadve/mousai/"
 "et/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -149,7 +149,7 @@ msgstr "Tuvasta"
 
 #: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
-msgstr "Põhimenüü"
+msgstr "Peamenüü"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
@@ -236,7 +236,7 @@ msgstr "Vallasrežiim"
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Üldised"
+msgstr "Üldine"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
