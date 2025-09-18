@@ -7,20 +7,22 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-09-18 15:35+0000\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Kabyle <https://hosted.weblate.org/projects/seadve/mousai/kab/"
+">\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
@@ -103,19 +105,19 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Isemenyifen"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "Inegzumen n unasiw (_K)"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
-msgstr ""
+msgstr "Ɣef Mousai (_A)"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
-msgstr ""
+msgstr "Fren-iten _akk"
 
 #: data/resources/ui/history_view.ui:26
 msgid "_Unselect All"
@@ -123,7 +125,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Amager"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
@@ -131,15 +133,15 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
-msgstr ""
+msgstr "Ssel"
 
 #: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
-msgstr ""
+msgstr "Umuɣ agejdan"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
-msgstr ""
+msgstr "Fren"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
@@ -151,7 +153,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "Semmet"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
@@ -167,7 +169,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Ulac igmaḍ"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
@@ -175,11 +177,11 @@ msgstr ""
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
-msgstr ""
+msgstr "Amatu"
 
 #: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
-msgstr ""
+msgstr "Aɣbalu n umeslaw"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
@@ -188,7 +190,7 @@ msgstr ""
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences_dialog.ui:20
 msgid ""
@@ -219,7 +221,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr ""
+msgstr "Amatu"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -229,32 +231,32 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Nadi"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Sken-d ismenyifen"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Sken-d inegzumen"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Mdel asfaylu"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr ""
+msgstr "Tuffɣa"
 
 #: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Isenqaden"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
@@ -272,7 +274,7 @@ msgstr ""
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
-msgstr ""
+msgstr "Seḥbes"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
@@ -280,11 +282,11 @@ msgstr ""
 
 #: data/resources/ui/song_page.ui:19
 msgid "Copy"
-msgstr ""
+msgstr "Nɣel"
 
 #: data/resources/ui/song_page.ui:122
 msgid "Information"
-msgstr ""
+msgstr "Talɣut"
 
 #: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
@@ -300,12 +302,12 @@ msgstr ""
 
 #: data/resources/ui/song_tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "Amaynut"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
+msgstr "Athmane MOKRAOUI"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -313,11 +315,11 @@ msgstr ""
 
 #: src/about.rs:31
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr ""
+msgstr "Suqel"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
@@ -337,7 +339,7 @@ msgstr ""
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr ""
+msgstr "Tuffɣa"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
@@ -351,7 +353,7 @@ msgstr ""
 
 #: src/preferences_dialog.rs:103
 msgid "Microphone"
-msgstr ""
+msgstr "Asawaḍ"
 
 #: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
@@ -395,7 +397,7 @@ msgstr ""
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
@@ -403,7 +405,7 @@ msgstr ""
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
@@ -526,7 +528,7 @@ msgstr ""
 
 #: src/window/mod.rs:365
 msgid "Later"
-msgstr ""
+msgstr "Ticki"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
@@ -538,11 +540,11 @@ msgstr ""
 
 #: src/window/playback_button.rs:97
 msgid "Play"
-msgstr ""
+msgstr "Ɣeṛ"
 
 #: src/window/playback_button.rs:103
 msgid "Pause"
-msgstr ""
+msgstr "Seṛǧu"
 
 #: src/window/recognized_page.rs:151
 msgid "Recognized Song"
@@ -580,7 +582,7 @@ msgstr ""
 
 #: src/window/song_page.rs:377
 msgid "Unknown"
-msgstr ""
+msgstr "Arussin"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
