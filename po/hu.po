@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the mousai package.
 # Balázs Úr <balazs@urbalazs.hu>, 2021.
 # Cimbora <domonkos.sebestyen@gmail.com>, 2023.
+# Rémiás Tamás <remtamas96@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2023-05-27 20:50+0000\n"
-"Last-Translator: Cimbora <domonkos.sebestyen@gmail.com>\n"
+"PO-Revision-Date: 2025-10-15 15:08+0000\n"
+"Last-Translator: Rémiás Tamás <remtamas96@gmail.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/seadve/mousai/"
 "hu/>\n"
 "Language: hu\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -91,12 +92,15 @@ msgid "Why you will love Mousai?"
 msgstr "Miért fogja szeretni a Mousai alkalmazást?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+#, fuzzy
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Azonosítsd a dalokat másodpercek alatt, vagy mentsd el későbbre, amikor "
+"offline vagy"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr ""
+msgstr "🎙️ Felismerés asztali hangból vagy mikrofonodból"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
@@ -138,7 +142,7 @@ msgstr "Az_összes_kiválasztása"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Kezdőoldal"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
@@ -158,11 +162,11 @@ msgstr "Kiválasztás"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Dalok keresése"
 
 #: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Kijelölés törlése"
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
@@ -170,7 +174,7 @@ msgstr "Mégse"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Dalok keresése"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
@@ -205,7 +209,7 @@ msgstr ""
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences_dialog.ui:20
 msgid ""
@@ -236,7 +240,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Általános"
+msgstr "Általánosság"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -249,9 +253,10 @@ msgid "Search"
 msgstr ""
 
 #: data/resources/ui/shortcuts.ui:26
+#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Beállítások megjelenítése"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -261,7 +266,7 @@ msgstr "Gyorsbillentyűk megjelenítése"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Ablak bezárása?"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
@@ -322,7 +327,9 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Úr Balázs &lt;balazs@urbalazs.hu&gt;"
+msgstr ""
+"Fordítók: Cserélje le a \"translator-credits\" szöveget a neveire, minden "
+"név külön sorban"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
@@ -334,7 +341,7 @@ msgstr "GitHub"
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr ""
+msgstr "Fordítás"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
@@ -427,16 +434,18 @@ msgid "Browse on AudD"
 msgstr ""
 
 #: src/window/external_link_tile.rs:69
+#, fuzzy
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
 msgstr ""
 
 #: src/window/external_link_tile.rs:74
+#, fuzzy
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
