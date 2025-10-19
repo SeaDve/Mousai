@@ -4,8 +4,7 @@
     "runtime-version": "master",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
-        "org.freedesktop.Sdk.Extension.rust-stable",
-        "org.freedesktop.Sdk.Extension.llvm20"
+        "org.freedesktop.Sdk.Extension.rust-stable"
     ],
     "command": "mousai",
     "finish-args": [
@@ -21,14 +20,10 @@
         "--env=RUST_LIB_BACKTRACE=0"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/llvm20/bin:/usr/lib/sdk/rust-stable/bin",
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
         "build-args": [
             "--share=network"
-        ],
-        "env": {
-            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER": "clang",
-            "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS": "-C link-arg=-fuse-ld=/usr/lib/sdk/rust-stable/bin/mold"
-        }
+        ]
     },
     "modules": [
         {
