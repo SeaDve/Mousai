@@ -19,7 +19,6 @@
     clippy::unused_self,
     clippy::dbg_macro,
     clippy::todo,
-    clippy::map_unwrap_or,
     clippy::or_fun_call,
     clippy::print_stdout
 )]

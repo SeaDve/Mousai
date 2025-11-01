@@ -50,8 +50,8 @@ mod imp {
             Some(
                 self.cache
                     .borrow_mut()
-                    .entry(key.to_string())
-                    .or_insert_with(|| ExternalLink::new(key.to_string(), value.to_string()))
+                    .entry(key.clone())
+                    .or_insert_with(|| ExternalLink::new(key.clone(), value.clone()))
                     .clone()
                     .upcast::<glib::Object>(),
             )
