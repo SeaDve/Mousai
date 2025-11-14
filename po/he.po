@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-11-12 17:53+0000\n"
+"PO-Revision-Date: 2025-11-14 08:51+0000\n"
 "Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/>"
 "\n"
@@ -398,7 +398,7 @@ msgstr "לא ניתן להתחבר לשרת"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "התקבלה עוד שגיאה קבועה"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -448,7 +448,7 @@ msgstr "הסרת השיר נכשלה"
 
 #: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "הצגת תוצאות הזיהוי נכשלה"
 
 #: src/window/history_view.rs:669
 msgid "_Undo"

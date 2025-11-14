@@ -8,13 +8,14 @@
 # MEgooneh <mohammad.erfan.gooneh@gmail.com>, 2022.
 # qqqq1 <qqqq1@hi2.in>, 2023.
 # Amirmatin Roosta <amirmatinrousta@gmail.com>, 2024.
+# Shiba <theonlyshiba.ir@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-12-29 07:04+0000\n"
-"Last-Translator: Amirmatin Roosta <amirmatinrousta@gmail.com>\n"
+"PO-Revision-Date: 2025-11-14 08:51+0000\n"
+"Last-Translator: Shiba <theonlyshiba.ir@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/seadve/mousai/fa/"
 ">\n"
 "Language: fa\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -93,6 +94,8 @@ msgstr "چرا شما عاشق Mousai خواهید شد؟"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 اهنگ هارا در ثانیه شناسایی کنید و ذخیره کنید تا وقتی که افلاین بودید گوش "
+"دهید."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
