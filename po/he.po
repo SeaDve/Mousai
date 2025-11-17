@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-11-14 08:51+0000\n"
+"PO-Revision-Date: 2025-11-17 06:51+0000\n"
 "Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/>"
 "\n"
@@ -157,7 +157,7 @@ msgstr "חיפוש שירים"
 
 #: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
-msgstr "ביטול בחירה"
+msgstr "ביטול הבחירה"
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
@@ -218,7 +218,7 @@ msgstr "הופעל מצב לא מקוון"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "הצגת תוצאות הזיהוי ממצב לא מקוון"
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
@@ -540,6 +540,8 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"התוצאות יהיו זמינות כאשר מכסת האסימון שלך תתאפס. נא להמתין עד שהמכסה תתאפס "
+"או לנסות להגדיר אסימון אחר בהעדפות"
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
@@ -550,6 +552,8 @@ msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"התוצאות יהיו זמינות כאשר האסימון הנוכחי יוחלף באחד תקני. נא לנסות להגדיר "
+"אסימון אחר בהעדפות"
 
 #: src/window/mod.rs:365
 msgid "Later"
