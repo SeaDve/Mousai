@@ -23,15 +23,19 @@
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot1.png</image>
+      <caption>Mousai Home Page<caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot2.png</image>
+      <caption>Detailed view of identified song</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot3.png</image>
+      <caption>Listening mode detecting the song</caption>
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/SeaDve/Mousai/main/data/resources/screenshots/screenshot4.png</image>
+      <caption>Recognized songs</caption>
     </screenshot>
   </screenshots>
   <branding>
