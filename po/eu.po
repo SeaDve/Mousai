@@ -2,21 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Sergio Varela <sergitroll9@gmail.com>, 2021, 2022.
+# Asier Saratsua Garmendia <asier.sarasua@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2023-05-01 07:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Basque <https://hosted.weblate.org/projects/seadve/mousai/eu/"
-">\n"
+"PO-Revision-Date: 2025-12-09 20:00+0000\n"
+"Last-Translator: Asier Saratsua Garmendia <asier.sarasua@gmail.com>\n"
+"Language-Team: Basque <https://hosted.weblate.org/projects/seadve/mousai/eu/>"
+"\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -27,44 +28,42 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
-msgstr "Abestiak segundotan identifikatu"
+msgstr "Identifikatu abestiak berehala"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audioa;Musika;Abestia;Ezagutu;Identifikatu;Ezagutzea;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "Leiho-zabalera"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "Leiho-altuera"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "Leihoa maximizatuta dagoen ala ez"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Audio-grabazioan erabiltzeko audio-iturri gogokoena"
+msgstr "Audioa grabatzean erabiliko den audio-iturburu mota"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "AudD identifikazioan erabiliko den API tokena"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
-msgstr ""
+msgstr "Zaharra (mantendu migraziorako)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
-"Ezagutu ezagutu nahi dituzun abestiak, erabiltzeko erraza den interfaze "
-"batekin."
+"Aurkitu zein abesti entzuten ari zaren erabiltzeko erraza den interfaze "
+"baten bidez."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -72,14 +71,17 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
+"Mousai abestiak ezagutzeko aplikazio sinple bat da, Shazam aplikazioaren "
+"antzekoa. Egin klik entzuteko botoian eta itxaron segundo batzuk. Abestiaren "
+"izenburua eta artista emango dizkizu!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
 "Note: This uses the API of audd.io, so it is necessary to log in to their "
 "site to get more trials."
 msgstr ""
-"Oharra: honek audidd.io APIa erabiltzen du, eta, beraz, beharrezkoa da saioa "
-"bere lekuan hastea proba gehiago lortzeko."
+"Oharra: Aplikazio honek audd.io APIa erabiltzen du, eta, beraz, beharrezkoa "
+"da bere webgunean saioa hastea saialdi gehiagotarako aukera eskuratzeko."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
 msgid "Why you will love Mousai?"
@@ -88,31 +90,34 @@ msgstr "Zergatik gustatuko zaizu Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
+"🎵 Identifikatu abestiak berehalako batean edo gorde lineaz kanpo geroago "
+"erabiltzeko"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
 msgstr ""
+"🎙️ Aukeratu ezagutu beharreko soinua mahaigaineko audio batetik edo "
+"mikrofonotik"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr ""
+msgstr "🎸 Eraiki identifikatutako abestien bilduma bat"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
-msgstr ""
+msgstr "🎼 Ikusi abestiaren aurrebista azkarra aplikazioaren interfazean"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
-msgstr ""
+msgstr "🌐 Arakatu eta entzun abestia hornitzaile desberdinetatik"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 Erabiltzeko erraza den interfazea"
 
 #: data/resources/ui/history_view.ui:6
-#, fuzzy
 msgid "_Preferences"
-msgstr "_Ezarpenak"
+msgstr "_Hobespenak"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
@@ -127,18 +132,16 @@ msgid "Select _All"
 msgstr "Hautatu _guztia"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Select _All"
 msgid "_Unselect All"
-msgstr "Hautatu _guztia"
+msgstr "_Desautatu guztia"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "Karpeta nagusia"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "Identifikatu abestia"
 
 #: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
@@ -154,11 +157,11 @@ msgstr "Hautatu"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "Bilatu abestiak"
 
 #: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "Utzi hautapena"
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
@@ -166,19 +169,19 @@ msgstr "Ezeztatu"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "Bilatu abestiak"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Hasi abestiak identifikatzen"
 
 #: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Hasteko, egin klik entzuteko botoian"
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Emaitzarik ez"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
@@ -189,14 +192,12 @@ msgid "General"
 msgstr "Orokorra"
 
 #: data/resources/ui/preferences_dialog.ui:11
-#, fuzzy
-#| msgid "_Preferred Audio Source"
 msgid "Audio Source"
-msgstr "_Audio-iturri gogokoena"
+msgstr "Audio-iturburua"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Entzuteko erabilitako gailua"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -208,26 +209,29 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"API token bat jasotzeko, joan <a href=\"https://dashboard.audd.io/\">"
+"audd.io</a> gunera. Hau hutsik uzten baduzu, egunean saiakera gutxi batzuk "
+"egiteko aukera izango duzu"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API tokena"
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Lineaz kanpoko modua gaituta"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Erakutsi lineaz kanpoko moduaren identifikazio-emaitzak"
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
-msgstr "Ezeztatu erreprodukzioa"
+msgstr "Utzi entzuteari"
 
 #: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "Lineaz kanpoko modua"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -245,25 +249,24 @@ msgid "Search"
 msgstr "Bilatu"
 
 #: data/resources/ui/shortcuts.ui:26
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Erakutsi ezarpenak"
+msgstr "Erakutsi hobespenak"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Erakutsi sarbide zuzenak"
+msgstr "Erakutsi lasterbideak"
 
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Itxi leihoa"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Utzi"
+msgstr "Irten"
 
 #: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
@@ -273,16 +276,16 @@ msgstr "Kontrolak"
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr "Kommutatu entzutea"
+msgstr "Txandakatu entzutea"
 
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr "Konmutatu erreprodukzioa"
+msgstr "Txandakatu erreprodukzioa"
 
 #: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
-msgstr "Abestiaren informazioa erakutsi"
+msgstr "Erakutsi abestiaren informazioa"
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
@@ -290,7 +293,7 @@ msgstr "Gelditu"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
-msgstr "Eliminar del historial"
+msgstr "Kendu historiatik"
 
 #: data/resources/ui/song_page.ui:19
 msgid "Copy"
@@ -319,24 +322,23 @@ msgstr "Berria"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Sergio Varela"
+msgstr "Sergio Varela, Asier Saratsua"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Lagundu diruz (erosidazu kafe bat)"
 
 #: src/about.rs:31
 msgid "GitHub"
 msgstr "GitHub"
 
 #: src/about.rs:33
-#, fuzzy
 msgid "Translate"
 msgstr "Itzuli"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr ""
+msgstr "Datu-basearen errore kritikoa"
 
 #: src/application.rs:210
 msgid ""
@@ -357,12 +359,12 @@ msgstr "Utzi"
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
 msgid "today at %R"
-msgstr ""
+msgstr "gaur, %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:34
 msgid "yesterday at %R"
-msgstr ""
+msgstr "atzo, %R"
 
 #: src/preferences_dialog.rs:103
 msgid "Microphone"
@@ -374,27 +376,27 @@ msgstr "Mahaigaineko audioa"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "Ez dago bat etortzerik"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Ezin da hatz-marka sortu audiotik"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Token baliogabea eman da"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Token-muga gainditu da"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Ezin da zerbitzariarekin kontektatu"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "Beste errore iraunkor bat jaso da"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
@@ -402,11 +404,11 @@ msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
-msgstr "Esploratu Apple Music-en"
+msgstr "Arakatu Apple Music"
 
 #: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
-msgstr "Audd-en esploratu"
+msgstr "Arakatu AudD"
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
@@ -414,7 +416,7 @@ msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
-msgstr "Entzun Spotify-en"
+msgstr "Entzun Spotify zerbitzuan"
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
@@ -422,48 +424,47 @@ msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
-msgstr "Bilatu YouTube-n"
+msgstr "Bilatu YouTube gunean"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "Huts egin du {key} abiarazteak"
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
-#, fuzzy
 msgid "Copied to clipboard"
-msgstr "Paper-zorroan kopiatuta"
+msgstr "Arbelean kopiatu da"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Huts egin du hautatutako abestiak kentzeak"
 
 #: src/window/history_view.rs:357
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Huts egin du abestia kentzeak"
 
 #: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Huts egin du identifikatzailearen emaitzak erakusteak"
 
 #: src/window/history_view.rs:669
 msgid "_Undo"
-msgstr "_Lehengoratu"
+msgstr "_Desegin"
 
 #: src/window/history_view.rs:681
 msgid "Failed to undo"
-msgstr ""
+msgstr "Huts egin du desegiteak"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Abesti {n_removed} kendu da"
+msgstr[1] "{n_removed} abesti kendu dira"
 
 #: src/window/history_view.rs:829
 msgid "Select items"
-msgstr ""
+msgstr "Hautatu elementuak"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:833
@@ -473,54 +474,55 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/window/history_view.rs:843
-#, fuzzy
 msgid "Copy Song"
 msgid_plural "Copy Songs"
-msgstr[0] "Abestia kopiatu"
-msgstr[1] "Abestia kopiatu"
+msgstr[0] "Kopiatu abestia"
+msgstr[1] "Kopiatu abestiak"
 
 #: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] "Ezabatu abestia historiatik"
-msgstr[1] "Ezabatu abestiak historiatik"
+msgstr[0] "Kendu abestia historiatik"
+msgstr[1] "Kendu abestiak historiatik"
 
 #: src/window/mod.rs:214
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Huts egin du abestia historian txertatzeak"
 
 #: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
 msgstr ""
+"Ireki akats bat GitHub gunean eta eman akatsa zuzentzeko beharrezko "
+"informazioa"
 
 #: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
-msgstr ""
+msgstr "Ez, eskerrik asko"
 
 #: src/window/mod.rs:267
 msgid "Open an Issue"
-msgstr ""
+msgstr "Ireki akats bat"
 
 #: src/window/mod.rs:294
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
-msgstr ""
+msgstr "Saiatu iturburura hurbiltzen edo erabili abestiaren beste zati bat"
 
 #: src/window/mod.rs:299
 msgid "Try Again"
-msgstr ""
+msgstr "Saiatu berriro"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
-msgstr ""
+msgstr "Grabazioa gorde da"
 
 #: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Emaitza erabilgarri egongo da berriro linean zaudenean"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Ados"
 
 #: src/window/mod.rs:355
 msgid ""
@@ -530,7 +532,7 @@ msgstr ""
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
-msgstr ""
+msgstr "Itxarongo dut"
 
 #: src/window/mod.rs:362
 msgid ""
@@ -545,11 +547,11 @@ msgstr "Geroago"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
-msgstr ""
+msgstr "Ireki hobespenak"
 
 #: src/window/mod.rs:466
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "Errorea gertatu da erreproduzigailuan"
 
 #: src/window/playback_button.rs:97
 msgid "Play"
@@ -562,8 +564,8 @@ msgstr "Pausatu"
 #: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Identifikatutako abestia"
+msgstr[1] "Identifikatutako abestiak"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:157
@@ -593,11 +595,11 @@ msgstr "Aztertzen…"
 
 #: src/window/song_page.rs:377
 msgid "Unknown"
-msgstr ""
+msgstr "Ezezaguna"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
-msgstr ""
+msgstr "Desautatu"
 
 #~ msgid "Select _None"
 #~ msgstr "Hautatu _bat ere ez"
