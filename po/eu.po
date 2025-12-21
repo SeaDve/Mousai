@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-12-09 20:00+0000\n"
+"PO-Revision-Date: 2025-12-21 12:00+0000\n"
 "Last-Translator: Asier Saratsua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/seadve/mousai/eu/>"
 "\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -351,6 +351,14 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
+"Errore larria gertatu da datu-basean. Seguru asko datu-basea hondatuta dago. "
+"Saiatu aplikazioaren datuak garbitzen. Kontuz, hori egitea ez da "
+"gomendagarria, gordeta dituzun abesti eta grabazio guztiak ezabatuko "
+"baitira.\n"
+"\n"
+"Akatsa jakinarazteko, abiarazi Mousai terminal batean, egunkariak hartzeko, "
+"eta bidali akatsa <a href=\"https://github.com/SeaDve/Mousai/issues/\">"
+"akatsen orrira</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -470,8 +478,8 @@ msgstr "Hautatu elementuak"
 #: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Hautatutako abesti {selection_size}"
+msgstr[1] "Hautatutako {selection_size} abesti"
 
 #: src/window/history_view.rs:843
 msgid "Copy Song"
@@ -529,6 +537,8 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Token-muga berrezartzean eskainiko da emaitza. Itxaron muga berrezarri arte "
+"edo ireki hobespenak eta saiatu beste token bat ezarrita"
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
@@ -539,9 +549,10 @@ msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Tokena baliozko batekin ordezkatzen denean eskainiko da emaitza. Ireki "
+"hobespenak eta saiatu beste token bat ezarrita"
 
 #: src/window/mod.rs:365
-#, fuzzy
 msgid "Later"
 msgstr "Geroago"
 
@@ -571,19 +582,19 @@ msgstr[1] "Identifikatutako abestiak"
 #: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ezagututako abesti berri {n_songs}"
+msgstr[1] "Ezagututako {n_songs} abesti berri"
 
 #: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Abesti hau gordeta dituzun abestien artean dago"
+msgstr[1] "Abesti hauek gordeta dituzun abestietan daude"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "{n_successful} ezagutu dira, guztira {total_minus_failed} dira"
 
 #: src/window/recognizer_view.rs:149
 msgid "Listening…"

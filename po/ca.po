@@ -4,21 +4,22 @@
 # Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2022, 2023.
 # Joan Aymà <joanayma@gmail.com>, 2023, 2024.
 # victor dargallo <victordargallo@disroot.org>, 2023, 2024.
+# Isard Sabut <weblate@puntnet.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-12-17 22:00+0000\n"
-"Last-Translator: Joan Aymà <joanayma@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
-">\n"
+"PO-Revision-Date: 2025-12-21 12:00+0000\n"
+"Last-Translator: Isard Sabut <weblate@puntnet.org>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/"
+"ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9.2-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -259,7 +260,7 @@ msgstr "Mostra les dreceres"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Tanca la finestra"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
