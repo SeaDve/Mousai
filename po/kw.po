@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-01-06 21:01+0000\n"
+"PO-Revision-Date: 2026-01-10 11:01+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/seadve/mousai/"
 "kw/>\n"
@@ -54,7 +54,7 @@ msgstr "Mars an fenester yw kowlvoghhys"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Audio source type to use in recording audio"
-msgstr "Eghen devedhyans son rag devnydh yn sonskrifa son"
+msgstr "Eghen devedhyans son rag devnydh yn ow sonskrifa son"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -66,7 +66,7 @@ msgstr "Anterrus (Gwithys rag divroans)"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
-msgstr "Trovya kanow ty mynnes aswon gans unn ynterfas es."
+msgstr "Trovya kanow ty ow mynnes aswon gans unn ynterfas es."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -172,7 +172,7 @@ msgstr "Hwilas kanow"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr "Dalleth Aswon Kanow!"
+msgstr "Dalleth Ow Aswon Kanow!"
 
 #: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
@@ -196,7 +196,7 @@ msgstr "Devedhyans Son"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr "Devis devnydhya dhe goslowes"
+msgstr "Devis devnydhya dhe goslowyans"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
@@ -209,8 +209,8 @@ msgid ""
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
 "Ty kavos dha honan unn tokyn API dhyworth <a href=\"https://"
-"dashboard.audd.io/\">audd.io</a>. Gwitha ma gwag kavos ty nebes trials dre "
-"dydh"
+"dashboard.audd.io/\">audd.io</a>. Ow gwitha ma gwag kavos ty nebes trials "
+"dre dydh"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -226,7 +226,7 @@ msgstr "Diskwedhes Sewyansow Aswon Fordh Dhywarlinen"
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
-msgstr "Hedhi Goslowes"
+msgstr "Hedhi Goslowyans"
 
 #: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
@@ -351,7 +351,7 @@ msgid ""
 "Mousai/issues/\">issue page</a>"
 msgstr ""
 "Drog yw genev, unn error kritikel sel dherivadow happys. Ma yw kawsys "
-"gwirhaval gans unn sel dherivadow vandalisys po legrys. Ty gallos assaya "
+"gwirhaval gans unn sel dherivadow vandalisys po legrys. Ty gallos assaya ow "
 "dilea data app. Byttegyns, ma na komendys hag a wra dilea oll dha kanow ha "
 "sonskrifow sawys.\n"
 "\n"
@@ -531,7 +531,8 @@ msgstr "Ygeri unn Kudyn"
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
-"Assaya gwaya yn-nes dhe an devedhyans po devnydhya unn devyn ken a an kan"
+"Assaya ow gwaya yn-nes dhe an ow devedhyans po devnydhya unn devyn ken a an "
+"kan"
 
 #: src/window/mod.rs:299
 msgid "Try Again"
@@ -539,7 +540,7 @@ msgstr "Dasassaya"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
-msgstr "Sonskrifa Sawys"
+msgstr "Sonskrif Sawys"
 
 #: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
@@ -555,7 +556,7 @@ msgid ""
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
 "An sewyans a wra kavadow pan dha finweth tokyn yw dasgorra. Gortos bys dhe "
-"an finweth yw dasgorra po ygeri settyansow hag assaya gorra unn tokyn ken"
+"an finweth yw dasgorra po ygeri settyansow hag assaya ow gorra unn tokyn ken"
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
@@ -567,7 +568,7 @@ msgid ""
 "Open preferences and try setting a different token"
 msgstr ""
 "An sewyans a wra kavadow pan dha tokyn yw asleys gans unn tokyn ewn. Ygeri "
-"settyansow hag assaya gorra unn tokyn ken"
+"settyansow hag assaya ow gorra unn tokyn ken"
 
 #: src/window/mod.rs:365
 msgid "Later"
@@ -615,7 +616,7 @@ msgstr[5] "Aswonys {n_songs} Kanow Nowydh"
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
 msgstr[0] "An kanow ma yw aswonys dhyworth dha sonskrifow sawys"
-msgstr[1] "An kan ma yw aswonys dhyworth dha sonskrifow sawys"
+msgstr[1] "An kan ma yw aswonys dhyworth dha sonskrif sawys"
 msgstr[2] "An kanow ma yw aswonys dhyworth dha sonskrifow sawys"
 msgstr[3] "An kanow ma yw aswonys dhyworth dha sonskrifow sawys"
 msgstr[4] "An kanow ma yw aswonys dhyworth dha sonskrifow sawys"
@@ -629,11 +630,11 @@ msgstr "Aswonys {n_successful} Yn-mes A {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:149
 msgid "Listening…"
-msgstr "Gowlowes…"
+msgstr "Ow gowlowes…"
 
 #: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
-msgstr "Aswon…"
+msgstr "Ow aswon…"
 
 #: src/window/song_page.rs:377
 msgid "Unknown"
