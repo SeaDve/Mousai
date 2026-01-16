@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-01-03 18:01+0000\n"
+"PO-Revision-Date: 2026-01-16 21:01+0000\n"
 "Last-Translator: Sebastian Hagn <sebastian@hagn.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/seadve/mousai/de/>"
 "\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -143,10 +143,8 @@ msgid "Select _All"
 msgstr "_Alle auswählen"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "Abwählen"
+msgstr "_Alle abwählen"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -276,7 +274,6 @@ msgid "Close Window"
 msgstr "Fenster schließen"
 
 #: data/resources/ui/shortcuts.ui:44
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Schließen"
