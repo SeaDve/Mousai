@@ -4,22 +4,22 @@
 # Luna Jernberg <droidbittin@gmail.com>, 2021, 2022, 2023.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2021.
 # Kristoffer Grundström <swedishsailfishosuser@tutanota.com>, 2021, 2022.
-# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023, 2024.
+# bittin1ddc447d824349b2 <bittin@reimu.nl>, 2023, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2024-10-07 15:16+0000\n"
+"PO-Revision-Date: 2026-01-19 12:01+0000\n"
 "Last-Translator: bittin1ddc447d824349b2 <bittin@reimu.nl>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/seadve/mousai/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/seadve/mousai/"
+"sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -235,7 +235,7 @@ msgstr "Offline läge"
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Allmänt"
+msgstr "Allmän"
 
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
@@ -250,7 +250,7 @@ msgstr "Sök"
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Visa Inställningar"
+msgstr "Visa inställningar"
 
 #: data/resources/ui/shortcuts.ui:32
 msgctxt "shortcut window"
@@ -260,7 +260,7 @@ msgstr "Visa genvägar"
 #: data/resources/ui/shortcuts.ui:38
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Stäng fönster"
 
 #: data/resources/ui/shortcuts.ui:44
 msgctxt "shortcut window"
