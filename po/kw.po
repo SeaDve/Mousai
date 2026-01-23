@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-01-22 13:31+0000\n"
+"PO-Revision-Date: 2026-01-23 00:13+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/seadve/mousai/"
 "kw/>\n"
@@ -355,9 +355,9 @@ msgstr ""
 "dilea data app. Byttegyns, ma na komendys hag a wra dilea oll dha kanow ha "
 "sonskrifow sawys.\n"
 "\n"
-"Rag derivas an kudyn ma, mar pleg lonya Mousai yn an termynal rag "
-"komprehendya an kovadhow ha danvon an derivas kudyn dhe an <a href=\"https://"
-"github.com/SeaDve/Mousai/issues/\">folen kudynnow</a>"
+"Rag derivas an kudyn ma, mar pleg lonya Mousai y'n termynal rag komprehendya "
+"an kovadhow ha danvon an derivas kudyn dhe an <a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">folen kudynnow</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -536,7 +536,7 @@ msgstr ""
 
 #: src/window/mod.rs:299
 msgid "Try Again"
-msgstr "Dasassaya"
+msgstr "Assaya Arta"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
@@ -580,7 +580,7 @@ msgstr "Ygeri Settyansow"
 
 #: src/window/mod.rs:466
 msgid "An error occurred in the player"
-msgstr "Unn error happys yn an gwarier"
+msgstr "Unn error happys y'n gwarier"
 
 #: src/window/playback_button.rs:97
 msgid "Play"
