@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-01-23 00:13+0000\n"
+"PO-Revision-Date: 2026-01-28 10:54+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/seadve/mousai/"
 "kw/>\n"
@@ -76,7 +76,7 @@ msgid ""
 msgstr ""
 "Mousai yw ynn app sempel rag aswon kanow haval dhe Shazam. Yn sempel klyckya "
 "an boton goslowes, ha gortos nebes eylennow. Y'n a wra dehweles yn pystri an "
-"titel hag awtour a an kan na!"
+"titel hag awtour a'n kan na!"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
 msgid ""
@@ -356,7 +356,7 @@ msgstr ""
 "sonskrifow sawys.\n"
 "\n"
 "Rag derivas an kudyn ma, mar pleg lonya Mousai y'n termynal rag komprehendya "
-"an kovadhow ha danvon an derivas kudyn dhe an <a href=\"https://github.com/"
+"an kovadhow ha danvon an derivas kudyn dhe'n <a href=\"https://github.com/"
 "SeaDve/Mousai/issues/\">folen kudynnow</a>"
 
 #: src/application.rs:215
@@ -399,7 +399,7 @@ msgstr "Finweth Tokyn Hedhys"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr "Y Fyllis dhe Junya dhe an Servell"
+msgstr "Y Fyllis dhe Junya dhe'n Servell"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
@@ -531,8 +531,7 @@ msgstr "Ygeri unn Kudyn"
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
-"Assaya ow gwaya yn-nes dhe an ow devedhyans po devnydhya unn devyn ken a an "
-"kan"
+"Assaya ow gwaya yn-nes dhe'n devedhyans po ow devnydhya unn devyn ken a'n kan"
 
 #: src/window/mod.rs:299
 msgid "Try Again"
@@ -555,8 +554,8 @@ msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
-"An sewyans a wra kavadow pan dha finweth tokyn yw dasgorra. Gortos bys dhe "
-"an finweth yw dasgorra po ygeri settyansow hag assaya ow gorra unn tokyn ken"
+"An sewyans a wra kavadow pan dha finweth tokyn yw dasgorra. Gortos bys dhe'n "
+"finweth yw dasgorra po ygeri settyansow hag assaya ow gorra unn tokyn ken"
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
