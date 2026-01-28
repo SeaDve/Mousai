@@ -12,13 +12,14 @@
 # John Peter Sa <johnppetersa@gmail.com>, 2024, 2025.
 # Xen'on <saveliyburk@gmail.com>, 2025.
 # Tanaca <jtanacar@gmail.com>, 2025.
+# William Teles <967teles@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-08-26 15:02+0000\n"
-"Last-Translator: Tanaca <jtanacar@gmail.com>\n"
+"PO-Revision-Date: 2026-01-28 21:24+0000\n"
+"Last-Translator: William Teles <967teles@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "seadve/mousai/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -26,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
