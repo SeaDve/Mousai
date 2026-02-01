@@ -1,0 +1,587 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mousai package.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: mousai\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: data/io.github.seadve.Mousai.desktop.in.in:2
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
+#: src/main.rs:65
+msgid "Mousai"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.desktop.in.in:3
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
+msgid "Identify songs in seconds"
+msgstr ""
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.seadve.Mousai.desktop.in.in:9
+msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:6
+msgid "Window width"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:11
+msgid "Window height"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:16
+msgid "Whether the window is maximized"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:26
+msgid "Audio source type to use in recording audio"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:32
+msgid "API token used by AudD recognition"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.gschema.xml.in:37
+msgid "Legacy (Kept for migration)"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
+msgid "Discover songs you are aching to know with an easy-to-use interface."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
+msgid ""
+"Mousai is a simple application that can recognize songs similar to Shazam. "
+"Just click the listen button, and then wait a few seconds. It will magically "
+"return the title and artist of that song!"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:12
+msgid ""
+"Note: This uses the API of audd.io, so it is necessary to log in to their "
+"site to get more trials."
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:13
+msgid "Why you will love Mousai?"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
+msgid "🎵 Identify songs within seconds or save for later when offline"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
+msgid "🎙️ Recognize from desktop audio or your microphone"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
+msgid "🎸 Build a repertoire of recognized songs"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
+msgid "🎼 Quickly preview the song within the interface"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
+msgid "🌐 Browse and listen the song from different providers"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
+msgid "📱 Easy-to-use user interface"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:6
+msgid "_Preferences"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:10
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:14
+msgid "_About Mousai"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:22
+msgid "Select _All"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:26
+msgid "_Unselect All"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:42
+msgid "Home"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:52
+msgid "Recognize Song"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
+msgid "Listen"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:65
+msgid "Main Menu"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
+msgid "Select"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
+msgid "Search Songs"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:96
+msgid "Cancel Selection"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
+msgid "Cancel"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:117
+msgid "Search songs"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:140
+msgid "Start Recognizing Songs!"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:141
+msgid "Click the listen button to start"
+msgstr ""
+
+#: data/resources/ui/history_view.ui:150
+msgid "No Results"
+msgstr ""
+
+#: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
+msgid "Lyrics"
+msgstr ""
+
+#: data/resources/ui/preferences_dialog.ui:8
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/preferences_dialog.ui:11
+msgid "Audio Source"
+msgstr ""
+
+#: data/resources/ui/preferences_dialog.ui:12
+msgid "Device used for listening"
+msgstr ""
+
+#: data/resources/ui/preferences_dialog.ui:19
+#: src/window/external_link_tile.rs:64
+msgid "AudD"
+msgstr ""
+
+#: data/resources/ui/preferences_dialog.ui:20
+msgid ""
+"You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Leaving this blank will give you a few trials per day"
+msgstr ""
+
+#: data/resources/ui/preferences_dialog.ui:23
+msgid "API Token"
+msgstr ""
+
+#: data/resources/ui/recognizer_status.ui:17
+msgid "Offline Mode Enabled"
+msgstr ""
+
+#: data/resources/ui/recognizer_status.ui:44
+msgid "Show Offline Mode Recognition Results"
+msgstr ""
+
+#: data/resources/ui/recognizer_view.ui:13
+msgid "Cancel Listening"
+msgstr ""
+
+#: data/resources/ui/recognizer_view.ui:49
+msgid "Offline Mode"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:14
+msgctxt "shortcut window"
+msgid "Open Main Menu"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:20
+msgctxt "shortcut window"
+msgid "Search"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:26
+msgctxt "shortcut window"
+msgid "Show Preferences"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:32
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:38
+msgctxt "shortcut window"
+msgid "Close Window"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:44
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:52
+msgctxt "shortcut window"
+msgid "Controls"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:55
+msgctxt "shortcut window"
+msgid "Toggle Listen"
+msgstr ""
+
+#: data/resources/ui/shortcuts.ui:61
+msgctxt "shortcut window"
+msgid "Toggle Playback"
+msgstr ""
+
+#: data/resources/ui/song_bar.ui:85
+msgid "Show Song Information"
+msgstr ""
+
+#: data/resources/ui/song_bar.ui:145
+msgid "Stop"
+msgstr ""
+
+#: data/resources/ui/song_page.ui:13
+msgid "Remove From History"
+msgstr ""
+
+#: data/resources/ui/song_page.ui:19
+msgid "Copy"
+msgstr ""
+
+#: data/resources/ui/song_page.ui:122
+msgid "Information"
+msgstr ""
+
+#: data/resources/ui/song_page.ui:125
+msgid "Last Heard"
+msgstr ""
+
+#: data/resources/ui/song_page.ui:130
+msgid "Album"
+msgstr ""
+
+#: data/resources/ui/song_page.ui:135
+msgid "Release Date"
+msgstr ""
+
+#: data/resources/ui/song_tile.ui:30
+msgid "New"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your names. Put a comma between.
+#: src/about.rs:18
+msgid "translator-credits"
+msgstr ""
+
+#: src/about.rs:28
+msgid "Donate (Buy Me a Coffee)"
+msgstr ""
+
+#: src/about.rs:31
+msgid "GitHub"
+msgstr ""
+
+#: src/about.rs:33
+msgid "Translate"
+msgstr ""
+
+#: src/application.rs:209
+msgid "Critical Database Error"
+msgstr ""
+
+#: src/application.rs:210
+msgid ""
+"Sorry, a critical database error has occurred. This is likely caused by a "
+"tampered or corrupted database. You can try clearing application data. "
+"However, this is not recommended and will delete all your songs and saved "
+"recordings.\n"
+"\n"
+"To report this issue, please launch Mousai in the terminal to include the "
+"logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
+"Mousai/issues/\">issue page</a>"
+msgstr ""
+
+#: src/application.rs:215
+msgid "Quit"
+msgstr ""
+
+#. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
+#: src/date_time.rs:31
+msgid "today at %R"
+msgstr ""
+
+#. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
+#: src/date_time.rs:34
+msgid "yesterday at %R"
+msgstr ""
+
+#: src/preferences_dialog.rs:103
+msgid "Microphone"
+msgstr ""
+
+#: src/preferences_dialog.rs:104
+msgid "Desktop Audio"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:50
+msgid "No Matches Found"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:51
+msgid "Cannot Create Fingerprint From Audio"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:52
+msgid "Invalid Token Given"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:53
+msgid "Token Limit Reached"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:54
+msgid "Cannot Connect to the Server"
+msgstr ""
+
+#: src/recognizer/provider/error.rs:55
+msgid "Received Other Permanent Error"
+msgstr ""
+
+#: src/window/external_link_tile.rs:59
+msgid "Apple Music"
+msgstr ""
+
+#: src/window/external_link_tile.rs:60
+msgid "Browse on Apple Music"
+msgstr ""
+
+#: src/window/external_link_tile.rs:65
+msgid "Browse on AudD"
+msgstr ""
+
+#: src/window/external_link_tile.rs:69
+msgid "Spotify"
+msgstr ""
+
+#: src/window/external_link_tile.rs:70
+msgid "Listen on Spotify"
+msgstr ""
+
+#: src/window/external_link_tile.rs:74
+msgid "YouTube"
+msgstr ""
+
+#: src/window/external_link_tile.rs:75
+msgid "Search on YouTube"
+msgstr ""
+
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/external_link_tile.rs:145
+#, rust-format
+msgid "Failed to launch {key}"
+msgstr ""
+
+#: src/window/history_view.rs:147 src/window/song_page.rs:80
+msgid "Copied to clipboard"
+msgstr ""
+
+#: src/window/history_view.rs:160
+msgid "Failed to remove selected songs"
+msgstr ""
+
+#: src/window/history_view.rs:357
+msgid "Failed to remove song"
+msgstr ""
+
+#: src/window/history_view.rs:562
+msgid "Failed to show recognizer results"
+msgstr ""
+
+#: src/window/history_view.rs:669
+msgid "_Undo"
+msgstr ""
+
+#: src/window/history_view.rs:681
+msgid "Failed to undo"
+msgstr ""
+
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:706
+#, rust-format
+msgid "Removed {n_removed} song"
+msgid_plural "Removed {n_removed} songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/history_view.rs:829
+msgid "Select items"
+msgstr ""
+
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/history_view.rs:833
+#, rust-format
+msgid "Selected {selection_size} song"
+msgid_plural "Selected {selection_size} songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/history_view.rs:843
+msgid "Copy Song"
+msgid_plural "Copy Songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/history_view.rs:850
+msgid "Remove Song From History"
+msgid_plural "Remove Songs From History"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/mod.rs:214
+msgid "Failed to insert song to history"
+msgstr ""
+
+#: src/window/mod.rs:262
+msgid "Please open an issue on GitHub and provide the necessary information"
+msgstr ""
+
+#: src/window/mod.rs:265 src/window/mod.rs:297
+msgid "No, Thanks"
+msgstr ""
+
+#: src/window/mod.rs:267
+msgid "Open an Issue"
+msgstr ""
+
+#: src/window/mod.rs:294
+msgid ""
+"Try moving closer to the source or using a different excerpt of the song"
+msgstr ""
+
+#: src/window/mod.rs:299
+msgid "Try Again"
+msgstr ""
+
+#: src/window/mod.rs:334
+msgid "Recording Saved"
+msgstr ""
+
+#: src/window/mod.rs:342
+msgid "The result will be available when you're back online"
+msgstr ""
+
+#: src/window/mod.rs:345
+msgid "Ok, Got It"
+msgstr ""
+
+#: src/window/mod.rs:355
+msgid ""
+"The result will be available when your token limit is reset. Wait until the "
+"limit is reset or open preferences and try setting a different token"
+msgstr ""
+
+#: src/window/mod.rs:358
+msgid "I'll Wait"
+msgstr ""
+
+#: src/window/mod.rs:362
+msgid ""
+"The result will be available when your token is replaced with a valid one. "
+"Open preferences and try setting a different token"
+msgstr ""
+
+#: src/window/mod.rs:365
+msgid "Later"
+msgstr ""
+
+#: src/window/mod.rs:370
+msgid "Open Preferences"
+msgstr ""
+
+#: src/window/mod.rs:466
+msgid "An error occurred in the player"
+msgstr ""
+
+#: src/window/playback_button.rs:97
+msgid "Play"
+msgstr ""
+
+#: src/window/playback_button.rs:103
+msgid "Pause"
+msgstr ""
+
+#: src/window/recognized_page.rs:151
+msgid "Recognized Song"
+msgid_plural "Recognized Songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/recognized_page.rs:157
+#, rust-format
+msgid "Recognized {n_songs} New Song"
+msgid_plural "Recognized {n_songs} New Songs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/window/recognized_page.rs:163
+msgid "This song was recognized from your saved recording"
+msgid_plural "These songs were recognized from your saved recordings"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
+#: src/window/recognizer_status.rs:172
+#, rust-format
+msgid "Recognized {n_successful} Out Of {total_minus_failed}"
+msgstr ""
+
+#: src/window/recognizer_view.rs:149
+msgid "Listening…"
+msgstr ""
+
+#: src/window/recognizer_view.rs:154
+msgid "Recognizing…"
+msgstr ""
+
+#: src/window/song_page.rs:377
+msgid "Unknown"
+msgstr ""
+
+#: src/window/song_tile.rs:359
+msgid "Unselect"
+msgstr ""
