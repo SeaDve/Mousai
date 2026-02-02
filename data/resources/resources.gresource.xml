@@ -17,7 +17,7 @@
     <file compressed="true" preprocess="xml-stripblanks">ui/recognized_page_tile.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognizer_status.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/recognizer_view.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/shortcuts.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks" alias="shortcuts-dialog.ui">ui/shortcuts.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song_bar.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song_page.ui</file>
     <file compressed="true" preprocess="xml-stripblanks">ui/song_tile.ui</file>
