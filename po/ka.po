@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-02-04 14:02+0000\n"
+"PO-Revision-Date: 2026-02-05 15:01+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/seadve/mousai/"
 "ka/>\n"
@@ -22,29 +22,30 @@ msgstr ""
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
 #: src/main.rs:65
 msgid "Mousai"
-msgstr ""
+msgstr "Mousai"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "სიმღერების იდენტიფიკაცია წამებში"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 msgstr ""
+"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;ამოცნობა;სიმღერები;აუდიო;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
-msgstr ""
+msgstr "ფანჯრის სიგანე"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:11
 msgid "Window height"
-msgstr ""
+msgstr "ფანჯრის სიმაღლე"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:16
 msgid "Whether the window is maximized"
-msgstr ""
+msgstr "როცა ფანჯარა მთელ ეკრანზეა გაშლილი"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Audio source type to use in recording audio"
@@ -101,7 +102,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
-msgstr ""
+msgstr "📱 იოლი ინტერფეისი"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -113,27 +114,27 @@ msgstr "_კლავიატურის მალსახმობები"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
-msgstr ""
+msgstr "Mousai-ის შეს_ახებ"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
-msgstr ""
+msgstr "ყველ_აფრის მონიშვნა"
 
 #: data/resources/ui/history_view.ui:26
 msgid "_Unselect All"
-msgstr ""
+msgstr "მონიშვნის ყველაფერზე მო_ხსნა"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
-msgstr ""
+msgstr "საწყისი"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
-msgstr ""
+msgstr "სიმღერის ამოცნობა"
 
 #: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
-msgstr ""
+msgstr "მოსმენა"
 
 #: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
@@ -141,15 +142,15 @@ msgstr "მთავარი მენიუ"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
-msgstr ""
+msgstr "არჩევა"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
-msgstr ""
+msgstr "სიმღერების ძებნა"
 
 #: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
-msgstr ""
+msgstr "მონიშვნის გაუქმება"
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
@@ -157,23 +158,23 @@ msgstr "გაუქმება"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
-msgstr ""
+msgstr "სიმღერების ძებნა"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "სიმღერების ამოცნობის დაწყება!"
 
 #: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "დასაწყებად დააჭირეთ ღილაკს 'მოსმენა'"
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "შედეგების გარეშე"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
-msgstr ""
+msgstr "ლირიკა"
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
@@ -181,16 +182,16 @@ msgstr "ზოგადი"
 
 #: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
-msgstr ""
+msgstr "აუდიოს წყარო"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "მოსასმენად გამოყენებული მოწყობილობა"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences_dialog.ui:20
 msgid ""
@@ -200,11 +201,11 @@ msgstr ""
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "API კოდი"
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "ხაზგარეშე რეჟიმი ჩართულია"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
@@ -212,11 +213,11 @@ msgstr ""
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "მოსმენის გაუქმება"
 
 #: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "გათიშული რეჟიმი"
 
 #: data/resources/ui/shortcuts.ui:11
 msgctxt "shortcut window"
@@ -226,12 +227,12 @@ msgstr "ზოგადი"
 #: data/resources/ui/shortcuts.ui:14
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "მთავარი მენიუს გახსნა"
 
 #: data/resources/ui/shortcuts.ui:20
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "ძებნა"
 
 #: data/resources/ui/shortcuts.ui:26
 msgctxt "shortcut window"
@@ -256,21 +257,21 @@ msgstr "გასვლა"
 #: data/resources/ui/shortcuts.ui:52
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "მმართველები"
 
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "მოსმენის გადართვა"
 
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "დაკვრის გადართვა"
 
 #: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
-msgstr ""
+msgstr "სიმღერის ინფორმაციის ჩვენება"
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
@@ -278,31 +279,31 @@ msgstr "გაჩერება"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
-msgstr ""
+msgstr "ისტორიიდან წაშლა"
 
 #: data/resources/ui/song_page.ui:19
 msgid "Copy"
-msgstr ""
+msgstr "კოპირება"
 
 #: data/resources/ui/song_page.ui:122
 msgid "Information"
-msgstr ""
+msgstr "ინფორმაცია"
 
 #: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
-msgstr ""
+msgstr "ბოლოს მოსმენილი"
 
 #: data/resources/ui/song_page.ui:130
 msgid "Album"
-msgstr ""
+msgstr "ალბომი"
 
 #: data/resources/ui/song_page.ui:135
 msgid "Release Date"
-msgstr ""
+msgstr "რელიზის თარიღი"
 
 #: data/resources/ui/song_tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "ახალი"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
@@ -323,7 +324,7 @@ msgstr "თარგმნა"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr ""
+msgstr "მონაცემთა ბაზის კრიტიკული შეცდომა"
 
 #: src/application.rs:210
 msgid ""
@@ -344,24 +345,24 @@ msgstr "გასვლა"
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
 msgid "today at %R"
-msgstr ""
+msgstr "დღეს, %R-ზე"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:34
 msgid "yesterday at %R"
-msgstr ""
+msgstr "გუშინ, %R-ზე"
 
 #: src/preferences_dialog.rs:103
 msgid "Microphone"
-msgstr ""
+msgstr "მიკროფონი"
 
 #: src/preferences_dialog.rs:104
 msgid "Desktop Audio"
-msgstr ""
+msgstr "სამუშაო მაგიდის აუდიო"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "არაფერი მოიძებნა"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
@@ -369,53 +370,53 @@ msgstr ""
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "გადმოცემული ტოკენი არასწორია"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "მიღწეულია ტოკენების ზღვარი"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "სერვერთან დაკავშირების შეცდომა"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "მიღებულია სხვა სამუდამო შეცდომა"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "ძებნა Apple Music-ზე"
 
 #: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
-msgstr ""
+msgstr "ძებნა AudD-ზე"
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "მოსმენა Spotify-ზე"
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
-msgstr ""
+msgstr "ძებნა YouTube-ზე"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 #, rust-format
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "{key}-ის გაშვება ჩავარდა"
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
@@ -423,59 +424,59 @@ msgstr "დაკოპირდა გაცვლის ბაფერში"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "მონიშნული სიმღერების ამოცნობა შეუძლებელია"
 
 #: src/window/history_view.rs:357
 msgid "Failed to remove song"
-msgstr ""
+msgstr "სიმღერის წაშლა ჩავარდა"
 
 #: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "ამომცნობის შედეგების ჩვენების შეცდომა"
 
 #: src/window/history_view.rs:669
 msgid "_Undo"
-msgstr ""
+msgstr "გა_უქმება"
 
 #: src/window/history_view.rs:681
 msgid "Failed to undo"
-msgstr ""
+msgstr "გაუქმება ცავარდა"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
 #, rust-format
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "წაიშალა {n_removed} სიმღერა"
+msgstr[1] "წაიშალა {n_removed} სიმღერა"
 
 #: src/window/history_view.rs:829
 msgid "Select items"
-msgstr ""
+msgstr "ელემენტების მონიშვნა"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:833
 #, rust-format
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "მონიშნულია {selection_size} სიმღერა"
+msgstr[1] "მონიშნულია {selection_size} სიმღერა"
 
 #: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "სიმღერის კოპირება"
+msgstr[1] "სიმღერების კოპირება"
 
 #: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "სიმღერის წაშლა ისტორიიდან"
+msgstr[1] "სიმღერების წაშლა ისტორიიდან"
 
 #: src/window/mod.rs:214
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "სიმღერის ისტორიაში ჩასმა ჩავარდა"
 
 #: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
@@ -483,11 +484,11 @@ msgstr ""
 
 #: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
-msgstr ""
+msgstr "არა, მადლობა"
 
 #: src/window/mod.rs:267
 msgid "Open an Issue"
-msgstr ""
+msgstr "პრობლემის შესახებ ბილეთის გახსნა"
 
 #: src/window/mod.rs:294
 msgid ""
@@ -496,11 +497,11 @@ msgstr ""
 
 #: src/window/mod.rs:299
 msgid "Try Again"
-msgstr ""
+msgstr "კიდევ სცადეთ"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
-msgstr ""
+msgstr "ჩაწერი შენახულია"
 
 #: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
@@ -518,7 +519,7 @@ msgstr ""
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
-msgstr ""
+msgstr "მოვიცდი"
 
 #: src/window/mod.rs:362
 msgid ""
@@ -532,7 +533,7 @@ msgstr "მოგვიანებით"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
-msgstr ""
+msgstr "მორგების ფანჯრის გახსნა"
 
 #: src/window/mod.rs:466
 msgid "An error occurred in the player"
@@ -540,25 +541,25 @@ msgstr ""
 
 #: src/window/playback_button.rs:97
 msgid "Play"
-msgstr ""
+msgstr "დაკვრა"
 
 #: src/window/playback_button.rs:103
 msgid "Pause"
-msgstr ""
+msgstr "შეჩერება"
 
 #: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ამოცნობილი სიმღერა"
+msgstr[1] "ამოცნობილი სიმღერები"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:157
 #, rust-format
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ამოცნობილია {n_songs} ახალი სიმღერა"
+msgstr[1] "ამოცნობილია {n_songs} ახალი სიმღერა"
 
 #: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
@@ -574,16 +575,16 @@ msgstr ""
 
 #: src/window/recognizer_view.rs:149
 msgid "Listening…"
-msgstr ""
+msgstr "ვუსმენ…"
 
 #: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
-msgstr ""
+msgstr "ამოცნობა…"
 
 #: src/window/song_page.rs:377
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
-msgstr ""
+msgstr "მონიშვნის მოხსნა"
