@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022, 2023, 2024, 2025.
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2021, 2022, 2023, 2024, 2025, 2026.
 # Jiri Nakola <github@nakola.fi>, 2022, 2023.
 # Ricky Tigg <ricky.tigg@gmail.com>, 2025.
 # Linus Virtanen <linus.virtanen@protonmail.com>, 2025.
@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-11-30 08:00+0000\n"
+"PO-Revision-Date: 2026-02-22 17:09+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/fi/"
-">\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/seadve/mousai/"
+"fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -278,12 +278,12 @@ msgstr "Ohjaimet"
 #: data/resources/ui/shortcuts.ui:55
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr "Kuuntelu päälle/pois"
+msgstr "Kuuntelu päällä/pois"
 
 #: data/resources/ui/shortcuts.ui:61
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr "Toisto päälle/pois"
+msgstr "Toisto päällä/pois"
 
 #: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
