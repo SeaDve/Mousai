@@ -7,13 +7,14 @@
 # multiflexi <multi.flexi@seznam.cz>, 2022.
 # Fjuro <ifjuro@proton.me>, 2023.
 # Fjuro <fjuro@alius.cz>, 2024, 2025.
+# Pavel Borecki <pavel.borecki@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-08-24 05:03+0000\n"
-"Last-Translator: Fjuro <fjuro@alius.cz>\n"
+"PO-Revision-Date: 2026-03-07 21:09+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
 "\n"
 "Language: cs\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -337,7 +338,7 @@ msgstr "GitHub"
 
 #: src/about.rs:33
 msgid "Translate"
-msgstr "Překlad"
+msgstr "Překládat do mého jazyka"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
