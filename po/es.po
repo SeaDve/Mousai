@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-03-09 07:09+0000\n"
+"PO-Revision-Date: 2026-03-13 19:09+0000\n"
 "Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/seadve/mousai/"
 "es/>\n"
@@ -327,11 +327,11 @@ msgstr "Nueva"
 msgid "translator-credits"
 msgstr ""
 "Óscar Fernández Díaz (oscfdezdz@tuta.io), Adolfo Jayme Barrientos "
-"(fitojb@ubuntu.com)"
+"(fitojb@ubuntu.com), Javier F. Serrador (fserrador@gmail.com)"
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Donar (Buy Me a Coffee)"
+msgstr "Donar (cómprame un café)"
 
 #: src/about.rs:31
 msgid "GitHub"
