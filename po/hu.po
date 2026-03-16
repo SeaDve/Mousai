@@ -4,13 +4,14 @@
 # Balázs Úr <balazs@urbalazs.hu>, 2021.
 # Cimbora <domonkos.sebestyen@gmail.com>, 2023.
 # Rémiás Tamás <remtamas96@gmail.com>, 2025.
+# Romhányi-Kakucska Viktor <viktor@romhanyi.dev>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2025-12-04 19:00+0000\n"
-"Last-Translator: Rémiás Tamás <remtamas96@gmail.com>\n"
+"PO-Revision-Date: 2026-03-16 21:09+0000\n"
+"Last-Translator: Romhányi-Kakucska Viktor <viktor@romhanyi.dev>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/seadve/mousai/"
 "hu/>\n"
 "Language: hu\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -178,19 +179,19 @@ msgstr "Dalok keresése"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr ""
+msgstr "Kezdd el felismerni a dalokat!"
 
 #: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
-msgstr ""
+msgstr "Kattintson a „Lejátszás” gombra a lejátszás elindításához"
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
-msgstr ""
+msgstr "Nincs találat"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
-msgstr ""
+msgstr "Dalszöveg"
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
@@ -333,7 +334,7 @@ msgstr ""
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr ""
+msgstr "Adományozz (Vegyél nekem egy kávét)"
 
 #: src/about.rs:31
 msgid "GitHub"
@@ -458,7 +459,7 @@ msgstr ""
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "A vágólapra másolva"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
@@ -545,7 +546,7 @@ msgstr ""
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Oké, értem"
 
 #: src/window/mod.rs:355
 msgid ""
@@ -565,7 +566,7 @@ msgstr ""
 
 #: src/window/mod.rs:365
 msgid "Later"
-msgstr ""
+msgstr "Később"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"

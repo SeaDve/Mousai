@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-23 12:48+0800\n"
-"PO-Revision-Date: 2026-03-07 21:09+0000\n"
+"PO-Revision-Date: 2026-03-16 21:09+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
 "\n"
@@ -330,7 +330,7 @@ msgstr ""
 
 #: src/about.rs:28
 msgid "Donate (Buy Me a Coffee)"
-msgstr "Darovat (kupte mi kávu)"
+msgstr "Podpořit vývoj darem (přes službu Buy Me a Coffee)"
 
 #: src/about.rs:31
 msgid "GitHub"
@@ -536,7 +536,7 @@ msgstr "Výsledek bude dostupný, až budete znovu online"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr "Jasně, chápu"
+msgstr "Dobrá, pochopeno"
 
 #: src/window/mod.rs:355
 msgid ""
