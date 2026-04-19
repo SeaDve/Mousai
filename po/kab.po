@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-09-18 15:35+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Kabyle <https://hosted.weblate.org/projects/seadve/mousai/kab/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -101,6 +101,22 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+msgid "Recognized songs"
 msgstr ""
 
 #: data/resources/ui/history_view.ui:6
@@ -218,52 +234,52 @@ msgstr ""
 msgid "Offline Mode"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Amatu"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Nadi"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Sken-d ismenyifen"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Sken-d inegzumen"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Mdel asfaylu"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Tuffɣa"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Isenqaden"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr ""
@@ -309,15 +325,15 @@ msgstr "Amaynut"
 msgid "translator-credits"
 msgstr "Athmane MOKRAOUI"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
+#: src/about.rs:27
+msgid "Donate"
 msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Suqel"
 
@@ -413,7 +429,6 @@ msgstr ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
-#, rust-format
 msgid "Failed to launch {key}"
 msgstr ""
 
@@ -443,7 +458,6 @@ msgstr ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
-#, rust-format
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] ""
@@ -455,7 +469,6 @@ msgstr ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:833
-#, rust-format
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] ""
@@ -554,7 +567,6 @@ msgstr[1] ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:157
-#, rust-format
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] ""
@@ -568,7 +580,6 @@ msgstr[1] ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:172
-#, rust-format
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr ""
 
@@ -580,7 +591,7 @@ msgstr ""
 msgid "Recognizing…"
 msgstr ""
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Arussin"
 

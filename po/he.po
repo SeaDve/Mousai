@@ -6,22 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-11-17 06:51+0000\n"
 "Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
-"Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/>"
-"\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/"
+">\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : "
-"((n > 10 && n % 10 == 0) ? 2 : 3));\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Weblate 5.15-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -33,9 +33,7 @@ msgstr "זיהוי שירים בשניות"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
-"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;שזאם;שאזאם;שמע;מוזיקה;מוסיקה;שיר;זיהוי;ניחוש;"
-""
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;שזאם;שאזאם;שמע;מוזיקה;מוסיקה;שיר;זיהוי;ניחוש;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -89,7 +87,8 @@ msgstr "למה יהיה לך כיף להשתמש ב־Mousai?"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
-msgstr "🎵 אפשר לזהות שירים בשניות או לשמור למועד מאוחר יותר כאשר אין חיבור לרשת"
+msgstr ""
+"🎵 אפשר לזהות שירים בשניות או לשמור למועד מאוחר יותר כאשר אין חיבור לרשת"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
@@ -110,6 +109,25 @@ msgstr "🌐 אפשר לעיין ולהאזין לשיר דרך ספקים שו�
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 ממשק משתמש קל לשימוש"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "שיר שזוהה"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -228,52 +246,52 @@ msgstr "ביטול האזנה"
 msgid "Offline Mode"
 msgstr "מצב לא מקוון"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "כללי"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "פתיחת התפריט הראשי"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "חיפוש"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "הצגת ההעדפות"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "הצגת קיצורי המקשים"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "סגירת החלון"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "יציאה"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "פקדים"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "הפעלת/כיבוי האזנה"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "הפעלת/הפסקת נגינה"
@@ -319,15 +337,15 @@ msgstr "חדש"
 msgid "translator-credits"
 msgstr "עומר א״ש(@omeritzics)"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "תרומה (Buy Me a Coffee)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "תרגום"
 
@@ -351,8 +369,8 @@ msgstr ""
 "אינו מומלץ ויגרום למחיקה של כל השירים וההקלטות השמורות שלך.\n"
 "\n"
 "לצורך דיווח על בעיה זו, נא להפעיל את Mousai מהמסוף בשביל לצרף את פלט היומן "
-"שלו, ולשלוח את דו״ח התקלה (בשפה האנגלית) ל<a href="
-"\"https://github.com/SeaDve/Mousai/issues/\">עמוד הבעיות</a>"
+"שלו, ולשלוח את דו״ח התקלה (בשפה האנגלית) ל<a href=\"https://github.com/"
+"SeaDve/Mousai/issues/\">עמוד הבעיות</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -430,7 +448,6 @@ msgstr "חיפוש ב־YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
-#, rust-format
 msgid "Failed to launch {key}"
 msgstr "נכשלה הפעלת {key}"
 
@@ -460,7 +477,6 @@ msgstr "ביטול הפעולה נכשל"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
-#, rust-format
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "הוסר שיר אחד"
@@ -474,7 +490,6 @@ msgstr "בחירת פריטים"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:833
-#, rust-format
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "נבחר שיר אחד"
@@ -585,7 +600,6 @@ msgstr[3] "שירים שזוהו"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:157
-#, rust-format
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "זוהה שיר חדש אחד"
@@ -603,7 +617,6 @@ msgstr[3] "השירים האלה זוהו מתוך ההקלטות השמורות
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:172
-#, rust-format
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr "זוהו {n_successful} מתוך {total_minus_failed}"
 
@@ -615,10 +628,13 @@ msgstr "מתבצעת האזנה…"
 msgid "Recognizing…"
 msgstr "מתבצע זיהוי…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "לא ידוע"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "ביטול בחירה"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "תרומה (Buy Me a Coffee)"

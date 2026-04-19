@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-10-25 21:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -15,14 +15,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural="
-"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
-"1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.14.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -111,6 +110,25 @@ msgstr "🌐 Pregledaj i slušaj pjesmu od različitih providera"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Jednostavno korisničko sučelje"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Prepoznata pjesma"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -229,52 +247,52 @@ msgstr "Prekini slušanje"
 msgid "Offline Mode"
 msgstr "Izvanmrežni način rada"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Općenito"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Otvori glavni izbornik"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Pretraga"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Prikaži postavke"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Prikaži prečace"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Zatvori prozor"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Zatvori aplikaciju"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Upravljački elementi"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Uključi/Isključi slušanje"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Uključi/Isključi reprodukciju"
@@ -320,15 +338,15 @@ msgstr "Novo"
 msgid "translator-credits"
 msgstr "Milo Ivir"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Doniraj (kupi mi kavu)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Prevedi"
 
@@ -606,13 +624,16 @@ msgstr "Slušanje …"
 msgid "Recognizing…"
 msgstr "Prepoznavanje …"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Nepoznato"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Poništi odabir"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Doniraj (kupi mi kavu)"
 
 #~ msgid "Select _None"
 #~ msgstr "Odaberi _ništa"

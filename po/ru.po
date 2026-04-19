@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-09-15 08:01+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/seadve/mousai/ru/"
@@ -30,7 +30,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -42,9 +42,7 @@ msgstr "Распознавайте песни за секунды"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
-"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;музыка;песня;"
-"распознать;идентифицировать;"
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;музыка;песня;распознать;идентифицировать;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -122,6 +120,25 @@ msgstr "🌐 Просматривайте и слушайте песни от р
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Простой интерфейс"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Распознанная песня"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -241,52 +258,52 @@ msgstr "Отменить прослушивание"
 msgid "Offline Mode"
 msgstr "Автономный режим"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Общие"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Открыть главное меню"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Поиск"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Показать настройки"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Показать комбинации клавиш"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Закрыть окно"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выйти"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Управление"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Переключить прослушивание"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Переключить проигрывание"
@@ -333,15 +350,15 @@ msgid "translator-credits"
 msgstr ""
 "Ковалев Артем, Давид Лапшин, ViktorOn &lt;https://github.com/viktoron&gt;"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Пожертвовать (Купите мне кофе)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Перевести"
 
@@ -622,13 +639,16 @@ msgstr "Прослушивание…"
 msgid "Recognizing…"
 msgstr "Распознавание…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Неизвестно"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Отменить выбор"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Пожертвовать (Купите мне кофе)"
 
 #~ msgid "Select _None"
 #~ msgstr "_Ничего не выбирать"

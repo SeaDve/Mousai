@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-10-23 13:02+0000\n"
 "Last-Translator: Haoyu Qiu <timothyqiu32@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -117,6 +117,25 @@ msgstr "🌐 浏览和聆听来自不同提供者的歌曲"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 简单易用的用户界面"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "识别的歌曲"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -235,52 +254,52 @@ msgstr "取消收听"
 msgid "Offline Mode"
 msgstr "离线模式"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "通用"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "打开主菜单"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "搜索"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "显示首选项"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "显示快捷键"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "关闭窗口"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "退出"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "控制"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "切换收听"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "切换播放"
@@ -332,15 +351,15 @@ msgstr ""
 "lumingzh &lt;lumingzh@qq.com&gt;\n"
 "Haoyu Qiu &lt;timothyqiu32@gmail.com&gt;"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "捐赠（买我一杯咖啡！）"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "翻译"
 
@@ -598,13 +617,16 @@ msgstr "正在收听…"
 msgid "Recognizing…"
 msgstr "正在识别…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "未知"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "取消选择"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "捐赠（买我一杯咖啡！）"
 
 #~ msgid "Select _None"
 #~ msgstr "不选(_N)"
@@ -960,8 +982,8 @@ msgstr "取消选择"
 #~ "site to get more trials."
 #~ msgstr ""
 #~ "Mousai 是一个简单的应用程序，它可以像 Shazam 一样听歌识曲。Mousai 会把识别"
-#~ "到的歌手、专辑与歌曲标题保存在 JSON 文件中。请注意：本软件需要使用 audd."
-#~ "io 的 API，因此您需要登录以获得更多的免费额度。"
+#~ "到的歌手、专辑与歌曲标题保存在 JSON 文件中。请注意：本软件需要使用 "
+#~ "audd.io 的 API，因此您需要登录以获得更多的免费额度。"
 
 #~ msgid "Recording"
 #~ msgstr "录制中"

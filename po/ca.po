@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-12-21 12:00+0000\n"
 "Last-Translator: Isard Sabut <weblate@puntnet.org>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/"
-"ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/seadve/mousai/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -114,6 +114,25 @@ msgstr "🌐 Navega i escolta la cançó des de diferents proveïdors"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 interfície d'usuari fàcil d'utilitzar"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Cançó reconeguda"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -209,8 +228,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Pots obtenir un token d'API a <a href=\"https://dashboard.audd.io/\">audd."
-"io</a>. Deixant-ho en blanc et permetrà fer algunes proves cada dia"
+"Pots obtenir un token d'API a <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Deixant-ho en blanc et permetrà fer algunes proves cada dia"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -232,52 +251,52 @@ msgstr "Cancel·la l’escolta"
 msgid "Offline Mode"
 msgstr "Mode sense connexió"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "General"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Obre el menú principal"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Cerca"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Mostra les Preferències"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Mostra les dreceres"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Tanca la finestra"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Surt"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Controls"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Commuta l’escolta"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Commuta la reproducció"
@@ -323,15 +342,15 @@ msgstr "Nou"
 msgid "translator-credits"
 msgstr "Adolfo Jayme Barrientos, Víctor Dargallo, Joan Aymà"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Feu una donació (Buy Me a Coffee)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Tradueix"
 
@@ -607,13 +626,16 @@ msgstr "S’està escoltant…"
 msgid "Recognizing…"
 msgstr "S’està reconeixent…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Desconegut"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Desseleccionar"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Feu una donació (Buy Me a Coffee)"
 
 #~ msgid "Select _None"
 #~ msgstr "No seleccionis _res"

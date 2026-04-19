@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2024-04-17 10:50+0000\n"
 "Last-Translator: \"K.B.Dharun Krishna\" <kbdharunkrishna@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/seadve/mousai/ta/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "மௌசாய்"
 
@@ -110,6 +110,25 @@ msgstr "🌐 வெவ்வேறு வழங்குநர்களிடம
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 பயன்படுத்த எளிதான பயனர் இடைமுகம்"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "பாடல் கண்டறியப்பட்டது"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -230,52 +249,52 @@ msgstr "கேட்பதை ரத்துசெய்"
 msgid "Offline Mode"
 msgstr "ஆஃப்லைன் பயன்முறை"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "ஜெனரல்"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "முதன்மை மெனுவைத் திறக்கவும்"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "தேடு"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "விருப்பங்களைக் காட்டு"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "குறுக்குவழிகளைக் காட்டு"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "கட்டுப்பாடுகள்"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "கேட்பதை நிலைமாற்று"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "பிளேபேக்கை நிலைமாற்று"
@@ -321,15 +340,15 @@ msgstr "புதிய"
 msgid "translator-credits"
 msgstr "தருண் கிருஷ்ணா.க.பா"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "நன்கொடை (எனக்கு ஒரு காபி வாங்கிக் கொடு)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "கிட்ஹப்"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "மொழிபெயர்"
 
@@ -599,13 +618,16 @@ msgstr "கேட்கிறது…"
 msgid "Recognizing…"
 msgstr "அங்கீகரிக்கிறது…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "தெரியாதது"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "தேர்வுநீக்கு"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "நன்கொடை (எனக்கு ஒரு காபி வாங்கிக் கொடு)"
 
 #~ msgid "Select _None"
 #~ msgstr "எதுவும் இல்லை என்பதைத் தேர்ந்தெடுக்கவும்"
@@ -726,8 +748,9 @@ msgstr "தேர்வுநீக்கு"
 #~ msgstr "கிடைக்கும்போது தேர்ந்தெடுக்க ஒலி மூலத்தைத் தீர்மானிக்கிறது."
 
 #~ msgid ""
-#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
-#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ "You can get yourself an API token from <a href=\"https://"
+#~ "dashboard.audd.io/\">audd.io</a>. Leaving this blank will give you a few "
+#~ "trials per day."
 #~ msgstr ""
 #~ "நீங்கள் <a href=\"https://dashboard.audd.io/\">audd.io</a> இலிருந்து API "
 #~ "டோக்கனைப் பெறலாம். இதை காலியாக விடுவது ஒரு நாளைக்கு சில சோதனைகளை உங்களுக்கு "

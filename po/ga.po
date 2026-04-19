@@ -6,22 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-08-26 15:02+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
-"Language-Team: Irish <https://hosted.weblate.org/projects/seadve/mousai/ga/>"
-"\n"
+"Language-Team: Irish <https://hosted.weblate.org/projects/seadve/mousai/ga/"
+">\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :("
-"n>6 && n<11) ? 3 : 4;\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :"
+"(n>6 && n<11) ? 3 : 4;\n"
 "X-Generator: Weblate 5.13\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -112,6 +112,25 @@ msgstr "🌐 Brabhsáil agus éist leis an amhrán ó sholáthraithe éagsúla"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Comhéadan úsáideora atá éasca le húsáid"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Amhrán Aitheanta"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -207,9 +226,9 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Is féidir leat comhartha API a fháil duit féin ó <a href=\"https://dashboard."
-"audd.io/\">audd.io</a>. Má fhágtar an bán seo gheobhaidh tú cúpla triail in "
-"aghaidh an lae"
+"Is féidir leat comhartha API a fháil duit féin ó <a href=\"https://"
+"dashboard.audd.io/\">audd.io</a>. Má fhágtar an bán seo gheobhaidh tú cúpla "
+"triail in aghaidh an lae"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -231,52 +250,52 @@ msgstr "Cealaigh Éisteacht"
 msgid "Offline Mode"
 msgstr "Mód As Líne"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Ginearálta"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Oscail Príomh-Roghchlár"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Cuardach"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Taispeáin Roghanna"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Taispeáin Aicearraí"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Dún an Fhuinneog"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Scoir"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Rialuithe"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Scoránaigh Éist"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Scoránaigh Athsheinm"
@@ -322,15 +341,15 @@ msgstr "Nua"
 msgid "translator-credits"
 msgstr "aistritheoir-creidmheasa"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Deonaigh (Ceannaigh caife dom)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Aistrigh"
 
@@ -626,13 +645,16 @@ msgstr "Ag éisteacht…"
 msgid "Recognizing…"
 msgstr "Á aithint…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Anaithnid"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Díroghnaigh"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Deonaigh (Ceannaigh caife dom)"
 
 #~ msgid "Select _None"
 #~ msgstr "Roghnaigh _Níl"

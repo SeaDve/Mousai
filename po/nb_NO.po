@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2023-05-01 07:14+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/seadve/"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -109,6 +109,25 @@ msgstr "🌐 Utforsk og lytt til sanger fra forskjellige tilbydere"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Lettfattelig brukergrensesnitt"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized {} new song"
+#| msgid_plural "Recognized {} new songs"
+msgid "Recognized songs"
+msgstr "Gjenkjente {} ny sang"
 
 #: data/resources/ui/history_view.ui:6
 #, fuzzy
@@ -230,53 +249,53 @@ msgstr "Avbryt lytting"
 msgid "Offline Mode"
 msgstr "Frakoblet modus"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Generelt"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Åpne hovedmenyen"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Søk"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Vis innstillinger"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Vis snarveier"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Avslutt"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Kontroller"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Veksle lytting"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Veksle avspilling"
@@ -322,15 +341,15 @@ msgstr "Ny"
 msgid "translator-credits"
 msgstr "Allan Nordhøy"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
+#: src/about.rs:27
+msgid "Donate"
 msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 #, fuzzy
 msgid "Translate"
 msgstr "Oversett"
@@ -615,7 +634,7 @@ msgstr "Lytter …"
 msgid "Recognizing…"
 msgstr "Gjenkjenner …"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -728,8 +747,9 @@ msgstr "Fravelg"
 #~ msgstr "Avgjør valgt lydkilde når tilgjengelig."
 
 #~ msgid ""
-#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
-#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ "You can get yourself an API token from <a href=\"https://"
+#~ "dashboard.audd.io/\">audd.io</a>. Leaving this blank will give you a few "
+#~ "trials per day."
 #~ msgstr ""
 #~ "Du kan hente deg et API-symbol fra <a href=\"https://dashboard.audd.io/"
 #~ "\">audd.io</a>. Å la dette stå tomt gir deg et par forsøk per dag."
@@ -768,11 +788,6 @@ msgstr "Fravelg"
 #, fuzzy
 #~ msgid "Ok"
 #~ msgstr "OK"
-
-#~ msgid "Recognized {} new song"
-#~ msgid_plural "Recognized {} new songs"
-#~ msgstr[0] "Gjenkjente {} ny sang"
-#~ msgstr[1] "Gjenkjente {} nye sanger"
 
 #, fuzzy
 #~ msgid "This song was heard while you're offline"

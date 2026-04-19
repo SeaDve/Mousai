@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2023-10-01 09:04+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Nepali <https://hosted.weblate.org/projects/seadve/mousai/ne/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 #, fuzzy
 msgid "Mousai"
 msgstr "मौसै"
@@ -110,6 +110,23 @@ msgstr ""
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+msgid "Recognized songs"
+msgstr "पहिचान गर्दै…"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -235,56 +252,56 @@ msgstr "सुन्न रद्द गर्नुहोस्"
 msgid "Offline Mode"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "सामान्य"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "मुख्य मेनु खोल्नुहोस्"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "खोज्नुहोस्"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "सर्टकटहरू देखाउनुहोस्"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr ""
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "बाहिर निस्कनुहोस्"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "नियन्त्रणहरू"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "सुन्नुहोस् टगल गर्नुहोस्"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 #, fuzzy
 msgctxt "shortcut window"
 msgid "Toggle Playback"
@@ -337,15 +354,15 @@ msgstr ""
 msgid "translator-credits"
 msgstr "अनुवादक-क्रेडिट"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
+#: src/about.rs:27
+msgid "Donate"
 msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr ""
 
@@ -620,7 +637,7 @@ msgstr "सुन्दै…"
 msgid "Recognizing…"
 msgstr "पहिचान गर्दै…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr ""
 

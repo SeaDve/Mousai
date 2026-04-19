@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-09-15 08:01+0000\n"
 "Last-Translator: Ziad El-sayed <ziadelsayed1797@tutamail.com>\n"
-"Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/>"
-"\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/seadve/mousai/ar/"
+">\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "موساي"
 
@@ -39,9 +39,7 @@ msgstr "تبيَّن الأغاني سريعًا"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
-"شازام;صوت;موسيقى;أغنية;تعرف;تبين;أغاني;اغنية;اغاني;Shazam;Audio;Music;Song;"
-"Recognize;Identify;Recognition;Mousai;"
+msgstr "شازام;صوت;موسيقى;أغنية;تعرف;تبين;أغاني;اغنية;اغاني;Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Mousai;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -115,6 +113,25 @@ msgstr "🌐 تصفَّح واستمع الأغاني من مصادر مختلف
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 واجهة سهلة الاستخدام"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "لا أغانٍ تعرَّفت عليها"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -210,8 +227,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"يمكنك الحصول على رمز واجهة برمجة (API) من <a href=\"https://dashboard.audd."
-"io/\">audd.io</a>. ترك هذا فارغًا يعني أن لك عدة محاولات كل يوم"
+"يمكنك الحصول على رمز واجهة برمجة (API) من <a href=\"https://"
+"dashboard.audd.io/\">audd.io</a>. ترك هذا فارغًا يعني أن لك عدة محاولات كل يوم"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -233,52 +250,52 @@ msgstr "ألغِ الاستماع"
 msgid "Offline Mode"
 msgstr "وضع عدم الاتصال"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "عام"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "افتح القائمة الرئيسة"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "ابحث"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "أظهِر التفضيلات"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "أظهِر الإختصارات"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "إغلاق النافذة"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "اخرُج"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "عناصر التحكُّم"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "بدِّل الاستماع"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "بدِّل إعادة التشغيل"
@@ -324,15 +341,15 @@ msgstr "جديد"
 msgid "translator-credits"
 msgstr "علي الجشي، عمرو ياسين، أحمد النجماوي, زياد السيد"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "تبرَّع (اشترِ لي كوب قهوة)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "جت‌هب"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "ترجم"
 
@@ -627,13 +644,16 @@ msgstr "يستمع…"
 msgid "Recognizing…"
 msgstr "يتبيَّن…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "مجهول"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "ألغِ التحديد"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "تبرَّع (اشترِ لي كوب قهوة)"
 
 #~ msgid "Select _None"
 #~ msgstr "لا ت_حدِّد أيَّ شيء"
@@ -771,8 +791,9 @@ msgstr "ألغِ التحديد"
 #~ msgstr "يحدِّد مصدر الصوت المختار حال توفُّره."
 
 #~ msgid ""
-#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
-#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ "You can get yourself an API token from <a href=\"https://"
+#~ "dashboard.audd.io/\">audd.io</a>. Leaving this blank will give you a few "
+#~ "trials per day."
 #~ msgstr ""
 #~ "بإمكانك الحصول على رمز واجهة برمجة من <a href=\"https://dashboard.audd.io/"
 #~ "\">audd.io</a>. إن تركت هذا فارغًا فلك عدَّة محاولات لكلِّ يوم."

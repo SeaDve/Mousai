@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2026-04-07 19:09+0000\n"
 "Last-Translator: Peter Vančo <petervanco347@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/seadve/mousai/sk/>"
-"\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/seadve/mousai/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -114,6 +114,25 @@ msgstr "🌐 Prehliadajte a počúvajte skladbu z rôznych zdrojov"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Jednoduché rozhranie"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Skladba rozpoznaná"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -209,8 +228,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Token API môžete získať na stránke <a href=\"https://dashboard.audd.io/\">"
-"audd.io</a>. Ak toto pole necháte prázdne, získate niekoľko pokusov denne"
+"Token API môžete získať na stránke <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Ak toto pole necháte prázdne, získate niekoľko pokusov denne"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -232,52 +251,52 @@ msgstr "Zrušiť počúvanie"
 msgid "Offline Mode"
 msgstr "Režim offline"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Všeobecné"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Otvoriť hlavné menu"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Vyhľadať"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Zobraziť predvoľby"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Zobraziť skratky"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Zavrieť okno"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončiť"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Ovládanie"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Počúvať / zrušiť počúvanie"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Prehrať / zrušiť prehrávanie"
@@ -326,15 +345,15 @@ msgstr ""
 "Dušan Kazik <prescott66@gmail.com>,\n"
 "Ľubo Varga https://github.com/LvargaDS,"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Prispieť (Kúp mi kávu)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Prekladať"
 
@@ -612,13 +631,16 @@ msgstr "Počúvam…"
 msgid "Recognizing…"
 msgstr "Rozpoznávam…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Neznámy"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Zrušiť výber"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Prispieť (Kúp mi kávu)"
 
 #, fuzzy
 #~ msgid "Dave Patrick Caberto"

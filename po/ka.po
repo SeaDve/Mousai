@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2026-02-05 15:01+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/seadve/mousai/"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -32,8 +32,7 @@ msgstr "სიმღერების იდენტიფიკაცია �
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
-"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;ამოცნობა;სიმღერები;აუდიო;"
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;ამოცნობა;სიმღერები;აუდიო;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -103,6 +102,25 @@ msgstr ""
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 იოლი ინტერფეისი"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "ამოცნობილი სიმღერა"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -219,52 +237,52 @@ msgstr "მოსმენის გაუქმება"
 msgid "Offline Mode"
 msgstr "გათიშული რეჟიმი"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "ზოგადი"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "მთავარი მენიუს გახსნა"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "ძებნა"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "პარამეტრების ჩვენება"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "მალსახმობების ჩვენება"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "ფანჯრის დახურვა"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "გასვლა"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "მმართველები"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "მოსმენის გადართვა"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "დაკვრის გადართვა"
@@ -310,15 +328,15 @@ msgstr "ახალი"
 msgid "translator-credits"
 msgstr "თემური დოღონაძე"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "დონაცია (შემიძინეთ ყავა)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "თარგმნა"
 
@@ -414,7 +432,6 @@ msgstr "ძებნა YouTube-ზე"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
-#, rust-format
 msgid "Failed to launch {key}"
 msgstr "{key}-ის გაშვება ჩავარდა"
 
@@ -444,7 +461,6 @@ msgstr "გაუქმება ცავარდა"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
-#, rust-format
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
 msgstr[0] "წაიშალა {n_removed} სიმღერა"
@@ -456,7 +472,6 @@ msgstr "ელემენტების მონიშვნა"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:833
-#, rust-format
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
 msgstr[0] "მონიშნულია {selection_size} სიმღერა"
@@ -555,7 +570,6 @@ msgstr[1] "ამოცნობილი სიმღერები"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:157
-#, rust-format
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
 msgstr[0] "ამოცნობილია {n_songs} ახალი სიმღერა"
@@ -569,7 +583,6 @@ msgstr[1] ""
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:172
-#, rust-format
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
 msgstr ""
 
@@ -581,10 +594,13 @@ msgstr "ვუსმენ…"
 msgid "Recognizing…"
 msgstr "ამოცნობა…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "უცნობი"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "მონიშვნის მოხსნა"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "დონაცია (შემიძინეთ ყავა)"

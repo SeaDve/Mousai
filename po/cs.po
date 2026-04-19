@@ -12,11 +12,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2026-03-16 21:09+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
-"\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/"
+">\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -115,6 +115,25 @@ msgstr "🌐 Procházejte a poslouchejte skladbu z různých zdrojů"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Jednoduché rozhraní"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Rozpoznána skladba"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -210,8 +229,9 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"Token API můžete získat na webu <a href=\"https://dashboard.audd.io/\">audd."
-"io</a>. Pokud tento údaj necháte prázdný, získáte několik pokusů denně"
+"Token API můžete získat na webu <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Pokud tento údaj necháte prázdný, získáte několik pokusů "
+"denně"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -233,52 +253,52 @@ msgstr "Zrušit poslech"
 msgid "Offline Mode"
 msgstr "Režim offline"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Obecné"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Otevřít hlavní menu"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Vyhledat"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Zobrazit předvolby"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Zobrazit zkratky"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Zavřít okno"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Ukončit"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Ovládání"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Poslouchat / zrušit poslech"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Přehrát / zrušit přehrávání"
@@ -328,15 +348,15 @@ msgstr ""
 "Jaroslav Svoboda\n"
 "Jonáš Loskot"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Podpořit vývoj darem (přes službu Buy Me a Coffee)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Překládat do mého jazyka"
 
@@ -360,8 +380,8 @@ msgstr ""
 "však nedoporučuje a dojde k odstranění všech skladeb a uložených nahrávek.\n"
 "\n"
 "Chcete-li tento problém nahlásit, spusťte Mousai v terminálu, abyste "
-"zahrnuli protokoly, a odešlete hlášení o chybě na <a href=\"https://github."
-"com/SeaDve/Mousai/issues/\">stránku problémů</a>"
+"zahrnuli protokoly, a odešlete hlášení o chybě na <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">stránku problémů</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -613,13 +633,16 @@ msgstr "Poslouchám…"
 msgid "Recognizing…"
 msgstr "Rozpoznávám…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Neznámý"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Zrušit výběr"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Podpořit vývoj darem (přes službu Buy Me a Coffee)"
 
 #~ msgid "Select _None"
 #~ msgstr "Z_rušit výběr"
@@ -665,8 +688,7 @@ msgstr "Zrušit výběr"
 #~ msgstr[2] "Vybráno {} skladeb"
 
 #~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-#~ msgstr ""
-#~ "Shazam;Audio;Hudba;Song;Skladba;Písnička;Píseň;Identifikovat;Rozpoznání;"
+#~ msgstr "Shazam;Audio;Hudba;Song;Skladba;Písnička;Píseň;Identifikovat;Rozpoznání;"
 
 #~ msgid ""
 #~ "Mousai is a simple application that can identify song similar to Shazam. "

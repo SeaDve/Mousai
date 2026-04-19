@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-23 12:48+0800\n"
+"POT-Creation-Date: 2026-04-19 17:29+0800\n"
 "PO-Revision-Date: 2025-09-05 15:30+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/>"
-"\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/seadve/mousai/nl/"
+">\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
-#: src/main.rs:65
+#: src/main.rs:64
 msgid "Mousai"
 msgstr "Mousai"
 
@@ -34,9 +34,7 @@ msgstr "Identificeer nummers binnen enkele seconden"
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
-"Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Geluid;Muziek;"
-"Herkennen;Identificeren;Herkenning;"
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;Geluid;Muziek;Herkennen;Identificeren;Herkenning;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -115,6 +113,25 @@ msgstr "🌐 Blader en luister naar het nummer van verschillende aanbieders"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
 msgstr "📱 Gebruiksvriendelijke vormgeving"
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
+msgid "Mousai Home Page"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
+msgid "Detailed view of identified song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
+msgid "Listening mode detecting the song"
+msgstr ""
+
+#: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
+#, fuzzy
+#| msgid "Recognized Song"
+#| msgid_plural "Recognized Songs"
+msgid "Recognized songs"
+msgstr "Herkend nummer"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -210,8 +227,8 @@ msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
-"U kunt een API-token krijgen op <a href=\"https://dashboard.audd.io/\">audd."
-"io</a>. Indien leeggelaten krijgt u een paar pogingen per dag"
+"U kunt een API-token krijgen op <a href=\"https://dashboard.audd.io/"
+"\">audd.io</a>. Indien leeggelaten krijgt u een paar pogingen per dag"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
@@ -233,52 +250,52 @@ msgstr "Stoppen met luisteren"
 msgid "Offline Mode"
 msgstr "Offline-modus"
 
-#: data/resources/ui/shortcuts.ui:11
+#: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Algemeen"
 
-#: data/resources/ui/shortcuts.ui:14
+#: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
 msgstr "Hoofdmenu openen"
 
-#: data/resources/ui/shortcuts.ui:20
+#: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Zoeken"
 
-#: data/resources/ui/shortcuts.ui:26
+#: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
 msgstr "Voorkeuren tonen"
 
-#: data/resources/ui/shortcuts.ui:32
+#: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Snel­toetsen tonen"
 
-#: data/resources/ui/shortcuts.ui:38
+#: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
 msgstr "Venster sluiten"
 
-#: data/resources/ui/shortcuts.ui:44
+#: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: data/resources/ui/shortcuts.ui:52
+#: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
 msgstr "Bediening"
 
-#: data/resources/ui/shortcuts.ui:55
+#: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
 msgstr "Luisteren aan/uit"
 
-#: data/resources/ui/shortcuts.ui:61
+#: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
 msgstr "Afspelen/Pauzeren"
@@ -324,15 +341,15 @@ msgstr "Nieuw"
 msgid "translator-credits"
 msgstr "Philip Goto https://flipflop97.github.io/"
 
-#: src/about.rs:28
-msgid "Donate (Buy Me a Coffee)"
-msgstr "Doneren (trakteer me op een kopje koffie)"
+#: src/about.rs:27
+msgid "Donate"
+msgstr ""
 
-#: src/about.rs:31
+#: src/about.rs:28
 msgid "GitHub"
 msgstr "GitHub"
 
-#: src/about.rs:33
+#: src/about.rs:30
 msgid "Translate"
 msgstr "Meehelpen vertalen"
 
@@ -605,13 +622,16 @@ msgstr "Bezig met luisteren…"
 msgid "Recognizing…"
 msgstr "Bezig met herkennen…"
 
-#: src/window/song_page.rs:377
+#: src/window/song_page.rs:374
 msgid "Unknown"
 msgstr "Onbekend"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
 msgstr "Deselecteren"
+
+#~ msgid "Donate (Buy Me a Coffee)"
+#~ msgstr "Doneren (trakteer me op een kopje koffie)"
 
 #~ msgid "Select _None"
 #~ msgstr "_Niets selecteren"
@@ -678,9 +698,7 @@ msgstr "Deselecteren"
 #~ msgstr[1] "{} van {} nummers herkend"
 
 #~ msgid "Shazam;Audio;Music;Song;Identify;Recognition;"
-#~ msgstr ""
-#~ "Shazam;Audio;Music;Song;Identify;Recognition;Geluid;Muziek;Nummer;"
-#~ "Identificeren;Hekenning;"
+#~ msgstr "Shazam;Audio;Music;Song;Identify;Recognition;Geluid;Muziek;Nummer;Identificeren;Hekenning;"
 
 #~ msgid ""
 #~ "Mousai is a simple application that can identify song similar to Shazam. "
@@ -740,8 +758,9 @@ msgstr "Deselecteren"
 #~ msgstr "Audiobron om te selecteren als deze beschikbaar is"
 
 #~ msgid ""
-#~ "You can get yourself an API token from <a href=\"https://dashboard.audd."
-#~ "io/\">audd.io</a>. Leaving this blank will give you a few trials per day."
+#~ "You can get yourself an API token from <a href=\"https://"
+#~ "dashboard.audd.io/\">audd.io</a>. Leaving this blank will give you a few "
+#~ "trials per day."
 #~ msgstr ""
 #~ "U kunt een API-token krijgen van <a href=\"https://dashboard.audd.io/"
 #~ "\">audd.io</a>. Als u dit leeg laat, krijgt u een paar trials per dag."
