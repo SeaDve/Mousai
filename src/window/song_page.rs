@@ -134,10 +134,7 @@ mod imp {
 
             self.song_binding_group
                 .bind("lyrics", &*self.lyrics_row, "visible")
-                .transform_to(|_, value| {
-                    let lyrics = value.get::<Option<String>>().unwrap();
-                    Some(lyrics.is_some().into())
-                })
+                .transform_to(|_, lyrics: Option<String>| Some(lyrics.is_some()))
                 .build();
 
             obj.update_information();
