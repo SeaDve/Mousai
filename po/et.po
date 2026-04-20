@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the mousai package.
 # Henri <contact@hen.ee>, 2022.
 # Priit Jõerüüt <hwlate@joeruut.com>, 2024.
-# Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>, 2025.
+# Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2025-09-18 00:42+0000\n"
+"PO-Revision-Date: 2026-04-20 10:10+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/seadve/mousai/"
 "et/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -115,22 +115,19 @@ msgstr "📱 Lihtne kasutajaliides"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Mousai koduleht"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Tuvastatud loo üksikasjalik vaade"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Kuulamisrežiim loo tuvastamisel"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Tuvastatud lugu"
+msgstr "Tuvastatud lood"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -343,7 +340,7 @@ msgstr "Henri; Priit Jõerüüt 2024-2025"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "Toeta meid rahaliselt"
 
 #: src/about.rs:28
 msgid "GitHub"

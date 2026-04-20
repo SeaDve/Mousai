@@ -7,17 +7,17 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2025-11-17 06:51+0000\n"
-"Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
-"Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/"
-">\n"
+"PO-Revision-Date: 2026-04-20 10:10+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/>"
+"\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -338,8 +338,9 @@ msgid "translator-credits"
 msgstr "עומר א״ש(@omeritzics)"
 
 #: src/about.rs:27
+#, fuzzy
 msgid "Donate"
-msgstr ""
+msgstr "תרומה"
 
 #: src/about.rs:28
 msgid "GitHub"

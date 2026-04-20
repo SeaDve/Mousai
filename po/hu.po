@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-03-16 21:09+0000\n"
-"Last-Translator: Romhányi-Kakucska Viktor <viktor@romhanyi.dev>\n"
+"PO-Revision-Date: 2026-04-20 10:09+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/seadve/mousai/"
 "hu/>\n"
 "Language: hu\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -351,8 +351,9 @@ msgstr ""
 "név külön sorban"
 
 #: src/about.rs:27
+#, fuzzy
 msgid "Donate"
-msgstr ""
+msgstr "Támogasson"
 
 #: src/about.rs:28
 msgid "GitHub"

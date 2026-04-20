@@ -1,23 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Aindriú Mac Giolla Eoin <aindriu80@gmail.com>, 2024, 2025.
+# Aindriú Mac Giolla Eoin <aindriu80@gmail.com>, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2025-08-26 15:02+0000\n"
+"PO-Revision-Date: 2026-04-20 10:09+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
-"Language-Team: Irish <https://hosted.weblate.org/projects/seadve/mousai/ga/"
-">\n"
+"Language-Team: Irish <https://hosted.weblate.org/projects/seadve/mousai/ga/>"
+"\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :"
-"(n>6 && n<11) ? 3 : 4;\n"
-"X-Generator: Weblate 5.13\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :(n>"
+"6 && n<11) ? 3 : 4;\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -115,22 +115,19 @@ msgstr "📱 Comhéadan úsáideora atá éasca le húsáid"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Leathanach Baile Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Radharc mionsonraithe ar amhrán aitheanta"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Mód éisteachta ag braith an amhráin"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Amhrán Aitheanta"
+msgstr "Amhráin aitheanta"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -343,7 +340,7 @@ msgstr "aistritheoir-creidmheasa"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "Tabhair Síntiús"
 
 #: src/about.rs:28
 msgid "GitHub"

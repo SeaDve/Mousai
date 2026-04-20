@@ -8,21 +8,22 @@
 # Fjuro <ifjuro@proton.me>, 2023.
 # Fjuro <fjuro@alius.cz>, 2024, 2025.
 # Pavel Borecki <pavel.borecki@gmail.com>, 2026.
+# Fjuro <fjuro@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-03-16 21:09+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/"
-">\n"
+"PO-Revision-Date: 2026-04-20 10:10+0000\n"
+"Last-Translator: Fjuro <fjuro@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/seadve/mousai/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -118,22 +119,19 @@ msgstr "📱 Jednoduché rozhraní"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Domovská stránka Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Podrobný pohled na identifikovanou skladbu"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Režim poslechu detekující skladbu"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Rozpoznána skladba"
+msgstr "Rozpoznané skladby"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -350,7 +348,7 @@ msgstr ""
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "Přispět"
 
 #: src/about.rs:28
 msgid "GitHub"
