@@ -8,7 +8,7 @@
 # Vik <xasertop@gmail.com>, 2022.
 # Vik <k3kelm4vw@mozmail.com>, 2022.
 # Vin <k3kelm4vw@mozmail.com>, 2023.
-# Сергей <asvmail.as@gmail.com>, 2023, 2024, 2025.
+# Сергей <asvmail.as@gmail.com>, 2023, 2024, 2025, 2026.
 # Axus Wizix <axus.wizix@mail.ru>, 2023.
 # Yurt Page <yurtpage+weblate@gmail.com>, 2025.
 msgid ""
@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-20 10:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-04-21 11:09+0000\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/seadve/mousai/"
 "ru/>\n"
 "Language: ru\n"
@@ -123,11 +123,11 @@ msgstr "📱 Простой интерфейс"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Домашняя страница  Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Детальная информация об идентифицированной песне"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
