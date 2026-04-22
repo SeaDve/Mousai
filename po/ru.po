@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-21 11:09+0000\n"
+"PO-Revision-Date: 2026-04-22 12:09+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/seadve/mousai/"
 "ru/>\n"
@@ -131,14 +131,11 @@ msgstr "Детальная информация об идентифициров�
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Режим распознавания песни"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Распознанная песня"
+msgstr "Распознанные песни"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -351,7 +348,6 @@ msgstr ""
 "Ковалев Артем, Давид Лапшин, ViktorOn &lt;https://github.com/viktoron&gt;"
 
 #: src/about.rs:27
-#, fuzzy
 msgid "Donate"
 msgstr "Поддержать финансово"
 
