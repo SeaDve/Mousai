@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
 # Oğuz Ersen <oguzersen@protonmail.com>, 2021.
-# Oğuz Ersen <oguz@ersen.moe>, 2022, 2024, 2025.
+# Oğuz Ersen <oguz@ersen.moe>, 2022, 2024, 2025, 2026.
 # Sabri Ünal <libreajans@gmail.com>, 2023, 2024.
 # Sabri Ünal <yakushabb@gmail.com>, 2024, 2025, 2026.
 # Volkan Yıldırım <volkan.y@posteo.com>, 2024.
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-20 10:09+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-04-24 15:09+0000\n"
+"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/seadve/mousai/"
 "tr/>\n"
 "Language: tr\n"
@@ -116,22 +116,19 @@ msgstr "📱 Kullanımı kolay kullanıcı arayüzü"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Mousai Ana Sayfası"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Tanınan şarkının ayrıntılı görünümü"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Şarkıyı algılayan dinleme modu"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Tanınan Şarkı"
+msgstr "Tanınan şarkılar"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -345,7 +342,6 @@ msgstr ""
 "Oğuz Ersen"
 
 #: src/about.rs:27
-#, fuzzy
 msgid "Donate"
 msgstr "Bağış Yap"
 
