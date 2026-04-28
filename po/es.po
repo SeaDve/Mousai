@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-20 10:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-04-28 19:09+0000\n"
+"Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/seadve/mousai/"
 "es/>\n"
 "Language: es\n"
@@ -121,22 +121,19 @@ msgstr "📱 Interfaz de usuario fácil de usar"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Página Principal De Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Vista detallada de canción identificada"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Modo de listado detectando la canción"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Canción reconocida"
+msgstr "Canciones reconocidas"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -349,7 +346,6 @@ msgstr ""
 "(fitojb@ubuntu.com), Javier F. Serrador (fserrador@gmail.com)"
 
 #: src/about.rs:27
-#, fuzzy
 msgid "Donate"
 msgstr "Donar"
 
