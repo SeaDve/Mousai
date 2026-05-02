@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# "Omer I.S." <omeritzicschwartz@gmail.com>, 2025.
+# "Omer I.S." <omeritzicschwartz@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-20 10:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-05-02 08:09+0000\n"
+"Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/seadve/mousai/he/>"
 "\n"
 "Language: he\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -112,22 +112,19 @@ msgstr "📱 ממשק משתמש קל לשימוש"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "עמוד הבית של Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "תצוגה מפורטת של השיר שזוהה"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "מצב ההאזנה מזהה את השיר"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "שיר שזוהה"
+msgstr "שירים שזוהו"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -338,7 +335,6 @@ msgid "translator-credits"
 msgstr "עומר א״ש(@omeritzics)"
 
 #: src/about.rs:27
-#, fuzzy
 msgid "Donate"
 msgstr "תרומה"
 
