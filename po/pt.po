@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# ssantos <ssantos@web.de>, 2021, 2022, 2023.
+# ssantos <ssantos@web.de>, 2021, 2022, 2023, 2026.
 # Boud Knight <doubzarref@gmail.com>, 2021.
 # Danilo Alfredo Vieira <danilovieira978@gmail.com>, 2023.
 # Alexandre Vergueiro <alexandrevergueirojr@gmail.com>, 2024.
@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2024-08-27 21:09+0000\n"
-"Last-Translator: Alexandre Vergueiro <alexandrevergueirojr@gmail.com>\n"
+"PO-Revision-Date: 2026-05-26 10:11+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/seadve/mousai/"
 "pt/>\n"
 "Language: pt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -116,22 +116,19 @@ msgstr "📱 Interface de usuário fácil de usar"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Página Principal do Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Visão detalhada de música identificada"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Modo de escuta ao detetar a música"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognized Song"
-#| msgid_plural "Recognized Songs"
 msgid "Recognized songs"
-msgstr "Música reconhecida, Músicas reconhecidas"
+msgstr "Músicas reconhecidas"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -139,7 +136,7 @@ msgstr "_Preferências"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "_Atalhos do teclado"
+msgstr "_Atalhos de teclado"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
@@ -150,10 +147,8 @@ msgid "Select _All"
 msgstr "Selecionar Todos"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Unselect"
 msgid "_Unselect All"
-msgstr "Desmarcar"
+msgstr "_Desmarcar tudo"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -169,7 +164,7 @@ msgstr "Escutar"
 
 #: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
-msgstr "Menu Principal"
+msgstr "Menu principal"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
@@ -270,7 +265,7 @@ msgstr "Buscar"
 #: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Mostrar preferências"
+msgstr "Mostrar Preferências"
 
 #: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
@@ -280,12 +275,12 @@ msgstr "Mostrar atalhos"
 #: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Fechar Janela"
 
 #: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Desistir"
+msgstr "Sair"
 
 #: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
@@ -341,11 +336,11 @@ msgstr "Novo"
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr "Créditos do tradutor"
+msgstr "Vitor Cardoso, Tiago Lucas Flach, inkhorn, john peter sa"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "Doar"
 
 #: src/about.rs:28
 msgid "GitHub"
@@ -381,7 +376,7 @@ msgstr ""
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr "Sair"
+msgstr "Fechar"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
@@ -548,7 +543,7 @@ msgstr "O resultado estará disponível quando você estiver on-line novamente"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr "OK, entendi"
+msgstr "OK, compreendi"
 
 #: src/window/mod.rs:355
 msgid ""
