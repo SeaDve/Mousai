@@ -14,13 +14,15 @@
 # I love Frank Ocean <hohoujoeng@gmail.com>, 2024.
 # LS-Shandong <ls-shandong@outlook.com>, 2025.
 # Haoyu Qiu <timothyqiu32@gmail.com>, 2025.
+# reducedradius <137701630+flytothehighest@users.noreply.github.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2025-10-23 13:02+0000\n"
-"Last-Translator: Haoyu Qiu <timothyqiu32@gmail.com>\n"
+"PO-Revision-Date: 2026-07-25 14:01+0000\n"
+"Last-Translator: reducedradius "
+"<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/seadve/mousai/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -28,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -120,11 +122,11 @@ msgstr "📱 简单易用的用户界面"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Mousai项目主页"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "已识别歌曲的详细视图"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
@@ -349,11 +351,12 @@ msgstr ""
 "Zhongrui Cao &lt;zhongrui.cao@suse.com&gt;\n"
 "WhiredPlanck &lt;wplanck@aosc.io&gt;\n"
 "lumingzh &lt;lumingzh@qq.com&gt;\n"
-"Haoyu Qiu &lt;timothyqiu32@gmail.com&gt;"
+"Haoyu Qiu &lt;timothyqiu32@gmail.com&gt;\n"
+"ReducedRadius &lt;feixiang512@outlook.com&gt;"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "捐献"
 
 #: src/about.rs:28
 msgid "GitHub"
