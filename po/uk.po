@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the mousai package.
-# Ihor Hordiichuk <igor_ck@outlook.com>, 2021, 2022, 2023, 2024, 2025.
+# Ihor Hordiichuk <igor_ck@outlook.com>, 2021, 2022, 2023, 2024, 2025, 2026.
 # Сергій <sergiy.goncharuk.1@gmail.com>, 2024.
 # Максим Горпиніч <gorpinicmaksim0@gmail.com>, 2025.
 # Serhii Horichenko <serhii@horichenko.com>, 2026.
@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-07-27 23:01+0000\n"
-"Last-Translator: Serhii Horichenko <serhii@horichenko.com>\n"
+"PO-Revision-Date: 2026-07-29 21:01+0000\n"
+"Last-Translator: Ihor Hordiichuk <igor_ck@outlook.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/seadve/mousai/"
 "uk/>\n"
 "Language: uk\n"
@@ -344,7 +344,7 @@ msgstr "Ihor Hordiichuk, Serhii Honcharuk"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr "Пожертвувати"
+msgstr "Підтримати"
 
 #: src/about.rs:28
 msgid "GitHub"
