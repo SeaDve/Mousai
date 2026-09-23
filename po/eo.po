@@ -4,13 +4,14 @@
 # telmo bruno silva seabra <telmoseabra@petalmail.com>, 2021.
 # Unai Hernández Minaberry <unihernandez22@gmail.com>, 2021.
 # Tiago Lucas Flach <tiagolucas9830@gmail.com>, 2023.
+# GalaxyShard <galaxyshard.vcs@byteroach.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2023-11-09 02:35+0000\n"
-"Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
+"PO-Revision-Date: 2026-09-23 23:27+0000\n"
+"Last-Translator: GalaxyShard <galaxyshard.vcs@byteroach.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/seadve/mousai/"
 "eo/>\n"
 "Language: eo\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -123,11 +124,11 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferoj"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "_Fulmoklavoj"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
@@ -155,7 +156,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:65
 msgid "Main Menu"
-msgstr ""
+msgstr "Ĉefmenuo"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
@@ -171,7 +172,7 @@ msgstr ""
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
-msgstr ""
+msgstr "Nuligi"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
@@ -195,7 +196,7 @@ msgstr ""
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
-msgstr "Ĝenerala"
+msgstr "Ĝeneralaj"
 
 #: data/resources/ui/preferences_dialog.ui:11
 msgid "Audio Source"
@@ -239,7 +240,7 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:6
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Ĝenerala"
+msgstr "Ĝeneralaj"
 
 #: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
@@ -254,22 +255,22 @@ msgstr ""
 #: data/resources/ui/shortcuts.ui:21
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr ""
+msgstr "Montri preferojn"
 
 #: data/resources/ui/shortcuts.ui:27
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Montri fulmoklavojn"
 
 #: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Fermi fenestron"
 
 #: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Lasi"
+msgstr "Ĉesigi apon"
 
 #: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
@@ -292,7 +293,7 @@ msgstr ""
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
-msgstr ""
+msgstr "Fini"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
@@ -325,19 +326,19 @@ msgstr ""
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
+msgstr "Slami"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "Donaci"
 
 #: src/about.rs:28
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: src/about.rs:30
 msgid "Translate"
-msgstr ""
+msgstr "Traduki"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
@@ -357,7 +358,7 @@ msgstr ""
 
 #: src/application.rs:215
 msgid "Quit"
-msgstr "Lasi"
+msgstr "Ĉesigi apon"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
@@ -436,7 +437,7 @@ msgstr ""
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Kopiita al tondujo"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
@@ -523,7 +524,7 @@ msgstr ""
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Bone, konsentite"
 
 #: src/window/mod.rs:355
 msgid ""
@@ -543,7 +544,7 @@ msgstr ""
 
 #: src/window/mod.rs:365
 msgid "Later"
-msgstr ""
+msgstr "Poste"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
