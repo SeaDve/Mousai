@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-09-25 04:23+0000\n"
+"PO-Revision-Date: 2026-09-26 05:51+0000\n"
 "Last-Translator: GalaxyShard <galaxyshard.vcs@byteroach.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/seadve/mousai/"
 "eo/>\n"
@@ -51,7 +51,7 @@ msgstr "Ĉu maksimumigi la fenestron"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Audio source type to use in recording audio"
-msgstr ""
+msgstr "Fonto de sonoj por uzi registri sonojn"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
