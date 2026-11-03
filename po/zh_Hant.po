@@ -6,13 +6,14 @@
 # wumou <gvchd4@gmail.com>, 2025.
 # noeFly <noefly@proton.me>, 2025.
 # taketsuki <dpps93126@gmail.com>, 2026.
+# rtanryuc <rtanryuc@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-06-06 14:01+0000\n"
-"Last-Translator: taketsuki <dpps93126@gmail.com>\n"
+"PO-Revision-Date: 2026-11-03 15:51+0000\n"
+"Last-Translator: rtanryuc <rtanryuc@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/seadve/mousai/zh_Hant/>\n"
 "Language: zh_Hant\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6\n"
+"X-Generator: Weblate 2026.11.1.dev0\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -31,12 +32,12 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
-msgstr ""
+msgstr "幾秒鐘內識別歌曲"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr ""
+msgstr "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -52,11 +53,11 @@ msgstr "視窗是否最大化"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
 msgid "Audio source type to use in recording audio"
-msgstr ""
+msgstr "錄製音訊時所使用的音訊來源類型"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
-msgstr ""
+msgstr "錄製音訊時所使用的音訊來源類型"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:37
 msgid "Legacy (Kept for migration)"
@@ -109,11 +110,11 @@ msgstr ""
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Mousai 首頁"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "已識別歌曲的詳細視圖"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
@@ -411,15 +412,15 @@ msgstr ""
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "在 Apple Music 瀏覽"
 
 #: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
-msgstr ""
+msgstr "在 AudD 瀏覽"
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
@@ -427,20 +428,20 @@ msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "在 Spotify 聆聽"
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
-msgstr "Youtube"
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
-msgstr ""
+msgstr "在 YouTube 搜尋"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "啟動 {key} 失敗"
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
@@ -448,15 +449,15 @@ msgstr "已複製到剪貼簿"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "移除選定歌曲失敗"
 
 #: src/window/history_view.rs:357
 msgid "Failed to remove song"
-msgstr ""
+msgstr "移除歌曲失敗"
 
 #: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "未能顯示識別結果"
 
 #: src/window/history_view.rs:669
 msgid "_Undo"
@@ -464,14 +465,13 @@ msgstr ""
 
 #: src/window/history_view.rs:681
 msgid "Failed to undo"
-msgstr ""
+msgstr "撤銷失敗"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "移除了 {n_removed} 首歌曲"
 
 #: src/window/history_view.rs:829
 msgid "Select items"
