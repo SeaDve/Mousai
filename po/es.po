@@ -10,13 +10,14 @@
 # gallegonovato <fran-carro@hotmail.es>, 2023, 2024.
 # Império Linux <kevendoria86@gmail.com>, 2023.
 # Francisco Serrador <fserrador@gmail.com>, 2026.
+# Adolfo Jayme Barrientos <fito@libreoffice.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-28 19:09+0000\n"
-"Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
+"PO-Revision-Date: 2026-11-06 08:51+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/seadve/mousai/"
 "es/>\n"
 "Language: es\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -141,7 +142,7 @@ msgstr "_Preferencias"
 
 #: data/resources/ui/history_view.ui:10
 msgid "_Keyboard Shortcuts"
-msgstr "Atajos del _teclado"
+msgstr "Atajos de _teclado"
 
 #: data/resources/ui/history_view.ui:14
 msgid "_About Mousai"
@@ -280,7 +281,7 @@ msgstr "Mostrar atajos"
 #: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr "Cerrar Ventana"
+msgstr "Cerrar ventana"
 
 #: data/resources/ui/shortcuts.ui:39
 msgctxt "shortcut window"
@@ -342,8 +343,9 @@ msgstr "Nueva"
 #: src/about.rs:18
 msgid "translator-credits"
 msgstr ""
-"Óscar Fernández Díaz (oscfdezdz@tuta.io), Adolfo Jayme Barrientos "
-"(fitojb@ubuntu.com), Javier F. Serrador (fserrador@gmail.com)"
+"Óscar Fernández Díaz (oscfdezdz@tuta.io)\n"
+"Adolfo Jayme Barrientos (fitojb@ubuntu.com)\n"
+"Javier F. Serrador (fserrador@gmail.com)"
 
 #: src/about.rs:27
 msgid "Donate"
@@ -462,7 +464,7 @@ msgstr "Error al iniciar {key}"
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
-msgstr "Copiado al portapapeles"
+msgstr "Se copió en el portapapeles"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
@@ -552,7 +554,7 @@ msgstr "El resultado está disponible tan pronto como esté conectado"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr "Vale, lo tengo"
+msgstr "Entendido"
 
 #: src/window/mod.rs:355
 msgid ""

@@ -5,13 +5,14 @@
 # Vik <k3kelm4vw@mozmail.com>, 2022.
 # C0sM1n <bordeic4@gmail.com>, 2023.
 # Gabriel Cozma <me@gabs.eu.org>, 2024.
+# A D <load.txt@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: mousai\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-19 17:29+0800\n"
-"PO-Revision-Date: 2026-04-20 10:10+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-11-06 08:51+0000\n"
+"Last-Translator: A D <load.txt@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/seadve/mousai/"
 "ro/>\n"
 "Language: ro\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 
 #: data/io.github.seadve.Mousai.desktop.in.in:2
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:7 src/about.rs:12
@@ -31,12 +32,12 @@ msgstr "Mousai"
 #: data/io.github.seadve.Mousai.desktop.in.in:3
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:8
 msgid "Identify songs in seconds"
-msgstr "Identifică melodiile în secunde"
+msgstr "Identificați melodiile în secunde"
 
 #. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #: data/io.github.seadve.Mousai.desktop.in.in:9
 msgid "Shazam;Audio;Music;Song;Recognize;Identify;Recognition;"
-msgstr "Shazam;Sunet;Muzică;Melodie;Recunoaște;Identifică;Recunoștință;"
+msgstr "Shazam;Sunet;Muzică;Melodie;Recunoaștere;Identificare;Recunoaștere;"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:6
 msgid "Window width"
@@ -51,10 +52,8 @@ msgid "Whether the window is maximized"
 msgstr "Dacă fereastra este maximizată"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:26
-#, fuzzy
-#| msgid "Preferred audio source to use in recording audio"
 msgid "Audio source type to use in recording audio"
-msgstr "Sursa audio preferată in folosirea înregistrarii audio"
+msgstr "Tipul de sursă audio de folosit la înregistrarea audio"
 
 #: data/io.github.seadve.Mousai.gschema.xml.in:32
 msgid "API token used by AudD recognition"
@@ -67,8 +66,8 @@ msgstr "Legacy (Păstrat pentru migrare)"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:10
 msgid "Discover songs you are aching to know with an easy-to-use interface."
 msgstr ""
-"Discoperă cântece pe care abia aștepți să le cunoști intr-o interfață ușor "
-"de folosit."
+"Descoperiți cântece pe care abia așteptați să le cunoașteți, într-o "
+"interfață ușor de utilizat."
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:11
 msgid ""
@@ -76,7 +75,7 @@ msgid ""
 "Just click the listen button, and then wait a few seconds. It will magically "
 "return the title and artist of that song!"
 msgstr ""
-"Mousai e o aplicație simplă care recunoaște melodii similar ca Shazam. Doar "
+"Mousai este o aplicație simplă care recunoaște melodii asemenea Shazam. Doar "
 "apasă pe butonul de ascultă și așteaptă câteva secunde. O să returneze prin "
 "magie titlul și artistul melodiei!"
 
@@ -96,46 +95,44 @@ msgstr "De ce o să iubiți Mousai?"
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:15
 msgid "🎵 Identify songs within seconds or save for later when offline"
 msgstr ""
-"🎵 Identifică melodii în cateva secunde sau salvează pentru mai târziu când "
-"ești offline"
+"🎵 Identificați melodii în câteva secunde sau salvați-le pentru mai târziu "
+"când sunteți offline"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:16
 msgid "🎙️ Recognize from desktop audio or your microphone"
-msgstr "🎙️Recunoaște din sunetul din desktop sau microfon"
+msgstr "🎙️ Recunoașteți din sunetul desktopului sau al microfonului"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:17
 msgid "🎸 Build a repertoire of recognized songs"
-msgstr "🎸 Construiește un repertoriu al melodiilor recunoscute"
+msgstr "🎸 Construiți un repertoriu al melodiilor recunoscute"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:18
 msgid "🎼 Quickly preview the song within the interface"
-msgstr "🎼 Vizualizează melodia rapid în interfață"
+msgstr "🎼 Vizualizați melodia rapid în interfață"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:19
 msgid "🌐 Browse and listen the song from different providers"
-msgstr "🌐 Navighează si ascultă melodia de la diferiți producători"
+msgstr "🌐 Navigați și ascultați melodia de la diferiți furnizori"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:20
 msgid "📱 Easy-to-use user interface"
-msgstr "📱Interfață ușor de folosit"
+msgstr "📱 Interfață ușor de utilizat"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:26
 msgid "Mousai Home Page"
-msgstr ""
+msgstr "Pagina de pornire Mousai"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:30
 msgid "Detailed view of identified song"
-msgstr ""
+msgstr "Vizualizare detaliată a cântecului identificat"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:34
 msgid "Listening mode detecting the song"
-msgstr ""
+msgstr "Mod de ascultare care detectează cântecul"
 
 #: data/io.github.seadve.Mousai.metainfo.xml.in.in:38
-#, fuzzy
-#| msgid "Recognize Song"
 msgid "Recognized songs"
-msgstr "Recunoaște Melodia"
+msgstr "Cântece recunoscute"
 
 #: data/resources/ui/history_view.ui:6
 msgid "_Preferences"
@@ -151,13 +148,11 @@ msgstr "_Despre Mousai"
 
 #: data/resources/ui/history_view.ui:22
 msgid "Select _All"
-msgstr "Selectează _tot"
+msgstr "Selectați _tot"
 
 #: data/resources/ui/history_view.ui:26
-#, fuzzy
-#| msgid "Select _All"
 msgid "_Unselect All"
-msgstr "Selectează _tot"
+msgstr "Anulați _selecția"
 
 #: data/resources/ui/history_view.ui:42
 msgid "Home"
@@ -165,7 +160,7 @@ msgstr "Acasă"
 
 #: data/resources/ui/history_view.ui:52
 msgid "Recognize Song"
-msgstr "Recunoaște Melodia"
+msgstr "Recunoașteți melodia"
 
 #: data/resources/ui/history_view.ui:53 data/resources/ui/song_page.ui:109
 msgid "Listen"
@@ -177,31 +172,31 @@ msgstr "Meniul principal"
 
 #: data/resources/ui/history_view.ui:73 src/window/song_tile.rs:361
 msgid "Select"
-msgstr "Selectează"
+msgstr "Selectați"
 
 #: data/resources/ui/history_view.ui:80 data/resources/ui/history_view.ui:103
 msgid "Search Songs"
-msgstr "Caută Melodii"
+msgstr "Căutare de melodii"
 
 #: data/resources/ui/history_view.ui:96
 msgid "Cancel Selection"
-msgstr "Anulează Selecția"
+msgstr "Renunțați la selecție"
 
 #: data/resources/ui/history_view.ui:97 data/resources/ui/recognizer_view.ui:14
 msgid "Cancel"
-msgstr "Renunță"
+msgstr "Renunțați"
 
 #: data/resources/ui/history_view.ui:117
 msgid "Search songs"
-msgstr "Caută Melodii"
+msgstr "Căutați melodii"
 
 #: data/resources/ui/history_view.ui:140
 msgid "Start Recognizing Songs!"
-msgstr "Începe să recunoști melodii!"
+msgstr "Începeți să recunoașteți melodii!"
 
 #: data/resources/ui/history_view.ui:141
 msgid "Click the listen button to start"
-msgstr "Apasă pe butonul ascultă pentru a începe"
+msgstr "Apăsați butonul de ascultare pentru a începe"
 
 #: data/resources/ui/history_view.ui:150
 msgid "No Results"
@@ -209,55 +204,54 @@ msgstr "Niciun rezultat"
 
 #: data/resources/ui/lyrics_page.ui:10 data/resources/ui/song_page.ui:140
 msgid "Lyrics"
-msgstr ""
+msgstr "Versuri"
 
 #: data/resources/ui/preferences_dialog.ui:8
 msgid "General"
 msgstr "General"
 
 #: data/resources/ui/preferences_dialog.ui:11
-#, fuzzy
-#| msgid "Preferred Audio Source"
 msgid "Audio Source"
-msgstr "Sursa Audio Preferată"
+msgstr "Sursa audio"
 
 #: data/resources/ui/preferences_dialog.ui:12
 msgid "Device used for listening"
-msgstr ""
+msgstr "Dispozitiv folosit pentru ascultare"
 
 #: data/resources/ui/preferences_dialog.ui:19
 #: src/window/external_link_tile.rs:64
 msgid "AudD"
-msgstr ""
+msgstr "AudD"
 
 #: data/resources/ui/preferences_dialog.ui:20
 msgid ""
 "You can get yourself an API token from <a href=\"https://dashboard.audd.io/"
 "\">audd.io</a>. Leaving this blank will give you a few trials per day"
 msgstr ""
+"Vă puteți lua un token API de la <a href=\"https://dashboard.audd.io/\">"
+"audd.io</a>. Dacă lăsați câmpul gol, veți avea câteva încercări pe zi"
 
 #: data/resources/ui/preferences_dialog.ui:23
 msgid "API Token"
-msgstr ""
+msgstr "Token API"
 
 #: data/resources/ui/recognizer_status.ui:17
 msgid "Offline Mode Enabled"
-msgstr ""
+msgstr "Modul offline activat"
 
 #: data/resources/ui/recognizer_status.ui:44
 msgid "Show Offline Mode Recognition Results"
-msgstr ""
+msgstr "Afișați rezultatele recunoașterii în modul offline"
 
 #: data/resources/ui/recognizer_view.ui:13
 msgid "Cancel Listening"
-msgstr ""
+msgstr "Anulați ascultarea"
 
 #: data/resources/ui/recognizer_view.ui:49
 msgid "Offline Mode"
-msgstr ""
+msgstr "Mod offline"
 
 #: data/resources/ui/shortcuts.ui:6
-#, fuzzy
 msgctxt "shortcut window"
 msgid "General"
 msgstr "General"
@@ -265,21 +259,19 @@ msgstr "General"
 #: data/resources/ui/shortcuts.ui:9
 msgctxt "shortcut window"
 msgid "Open Main Menu"
-msgstr ""
+msgstr "Deschideți meniul principal"
 
 #: data/resources/ui/shortcuts.ui:15
 msgctxt "shortcut window"
 msgid "Search"
-msgstr ""
+msgstr "Căutare"
 
 #: data/resources/ui/shortcuts.ui:21
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Preferences"
-msgstr "Afișați preferințe"
+msgstr "Afișați preferințele"
 
 #: data/resources/ui/shortcuts.ui:27
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr "Afișați comenzile rapide"
@@ -287,10 +279,9 @@ msgstr "Afișați comenzile rapide"
 #: data/resources/ui/shortcuts.ui:33
 msgctxt "shortcut window"
 msgid "Close Window"
-msgstr ""
+msgstr "Închideți fereastra"
 
 #: data/resources/ui/shortcuts.ui:39
-#, fuzzy
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Închide programul"
@@ -298,64 +289,62 @@ msgstr "Închide programul"
 #: data/resources/ui/shortcuts.ui:47
 msgctxt "shortcut window"
 msgid "Controls"
-msgstr ""
+msgstr "Controale"
 
 #: data/resources/ui/shortcuts.ui:50
 msgctxt "shortcut window"
 msgid "Toggle Listen"
-msgstr ""
+msgstr "Comutați ascultarea"
 
 #: data/resources/ui/shortcuts.ui:56
 msgctxt "shortcut window"
 msgid "Toggle Playback"
-msgstr ""
+msgstr "Comutați redarea"
 
 #: data/resources/ui/song_bar.ui:85
 msgid "Show Song Information"
-msgstr ""
+msgstr "Afișați informațiile despre cântec"
 
 #: data/resources/ui/song_bar.ui:145
 msgid "Stop"
-msgstr ""
+msgstr "Opriți"
 
 #: data/resources/ui/song_page.ui:13
 msgid "Remove From History"
-msgstr ""
+msgstr "Eliminați din istoric"
 
 #: data/resources/ui/song_page.ui:19
 msgid "Copy"
-msgstr ""
+msgstr "Copiați"
 
 #: data/resources/ui/song_page.ui:122
 msgid "Information"
-msgstr ""
+msgstr "Informații"
 
 #: data/resources/ui/song_page.ui:125
 msgid "Last Heard"
-msgstr ""
+msgstr "Ultima ascultare"
 
 #: data/resources/ui/song_page.ui:130
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: data/resources/ui/song_page.ui:135
 msgid "Release Date"
-msgstr ""
+msgstr "Data lansării"
 
 #: data/resources/ui/song_tile.ui:30
 msgid "New"
-msgstr ""
+msgstr "Nou"
 
 #. Translators: Replace "translator-credits" with your names. Put a comma between.
 #: src/about.rs:18
 msgid "translator-credits"
-msgstr ""
-"Gabriel Cozma\n"
-"Danny3"
+msgstr "Gabriel Cozma, Danny3"
 
 #: src/about.rs:27
 msgid "Donate"
-msgstr ""
+msgstr "Donați"
 
 #: src/about.rs:28
 msgid "GitHub"
@@ -367,18 +356,9 @@ msgstr "Traduceți"
 
 #: src/application.rs:209
 msgid "Critical Database Error"
-msgstr "Eroare criticală a bazei de date"
+msgstr "Eroare critică a bazei de date"
 
 #: src/application.rs:210
-#, fuzzy
-#| msgid ""
-#| "This is likely caused by a tampered or corrupted database. You can try "
-#| "clearing application data. However, this is not recommended and will "
-#| "delete all your songs and saved recordings.\n"
-#| "\n"
-#| "To report this issue, please launch Mousai in the terminal to include the "
-#| "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
-#| "Mousai/issues/\">issue page</a>"
 msgid ""
 "Sorry, a critical database error has occurred. This is likely caused by a "
 "tampered or corrupted database. You can try clearing application data. "
@@ -389,13 +369,14 @@ msgid ""
 "logs and submit the bug report to the <a href=\"https://github.com/SeaDve/"
 "Mousai/issues/\">issue page</a>"
 msgstr ""
-"Aceasta a fost cauzată cel mai probabil de o bază de date corupta. Poți "
-"încerca să ștergi datele aplicației. Totuși, nu recomandăm să-ți ștergi "
-"toate înregistrălile salvate\n"
+"Ne pare rău, a apărut o eroare critică a bazei de date. Cel mai probabil, "
+"aceasta este cauzată de o bază de date alterată sau coruptă. Puteți încerca "
+"să ștergeți datele aplicației. Cu toate acestea, acest lucru nu este "
+"recomandat și va șterge toate cântecele și înregistrările dvs. salvate.\n"
 "\n"
-"Pentru a raporta această problema vă rugăm să porniți aplicatia Mousai în "
-"consola pentru a include logurile și trimite-ți bugul la <a href=\"https://"
-"github.com/SeaDve/Mousai/issues/\">issue page</a>"
+"Pentru a raporta această problemă, vă rugăm să porniți Mousai în terminal "
+"pentru a include jurnalele și să trimiteți raportul pe <a href=\"https://"
+"github.com/SeaDve/Mousai/issues/\">pagina de probleme</a>"
 
 #: src/application.rs:215
 msgid "Quit"
@@ -404,12 +385,12 @@ msgstr "Închide programul"
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:31
 msgid "today at %R"
-msgstr ""
+msgstr "astăzi la %R"
 
 #. Translators: `%R` will be replaced with 24-hour formatted datetime (e.g., `13:21`)
 #: src/date_time.rs:34
 msgid "yesterday at %R"
-msgstr ""
+msgstr "ieri la %R"
 
 #: src/preferences_dialog.rs:103
 msgid "Microphone"
@@ -421,234 +402,241 @@ msgstr "Sunetul sistemului"
 
 #: src/recognizer/provider/error.rs:50
 msgid "No Matches Found"
-msgstr ""
+msgstr "Nu s-au găsit potriviri"
 
 #: src/recognizer/provider/error.rs:51
 msgid "Cannot Create Fingerprint From Audio"
-msgstr ""
+msgstr "Nu s-a putut crea amprenta din audio"
 
 #: src/recognizer/provider/error.rs:52
 msgid "Invalid Token Given"
-msgstr ""
+msgstr "Token furnizat nevalid"
 
 #: src/recognizer/provider/error.rs:53
 msgid "Token Limit Reached"
-msgstr ""
+msgstr "Limita de token atinsă"
 
 #: src/recognizer/provider/error.rs:54
 msgid "Cannot Connect to the Server"
-msgstr ""
+msgstr "Nu se poate conecta la server"
 
 #: src/recognizer/provider/error.rs:55
 msgid "Received Other Permanent Error"
-msgstr ""
+msgstr "S-a primit o altă eroare permanentă"
 
 #: src/window/external_link_tile.rs:59
 msgid "Apple Music"
-msgstr ""
+msgstr "Apple Music"
 
 #: src/window/external_link_tile.rs:60
 msgid "Browse on Apple Music"
-msgstr ""
+msgstr "Răsfoiți pe Apple Music"
 
 #: src/window/external_link_tile.rs:65
 msgid "Browse on AudD"
-msgstr ""
+msgstr "Răsfoiți pe AudD"
 
 #: src/window/external_link_tile.rs:69
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: src/window/external_link_tile.rs:70
 msgid "Listen on Spotify"
-msgstr ""
+msgstr "Ascultați pe Spotify"
 
 #: src/window/external_link_tile.rs:74
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: src/window/external_link_tile.rs:75
 msgid "Search on YouTube"
-msgstr ""
+msgstr "Căutați pe YouTube"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/external_link_tile.rs:145
 msgid "Failed to launch {key}"
-msgstr ""
+msgstr "Nu s-a putut lansa {key}"
 
 #: src/window/history_view.rs:147 src/window/song_page.rs:80
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Copiat în clipboard"
 
 #: src/window/history_view.rs:160
 msgid "Failed to remove selected songs"
-msgstr ""
+msgstr "Nu s-au putut elimina cântecele selectate"
 
 #: src/window/history_view.rs:357
 msgid "Failed to remove song"
-msgstr ""
+msgstr "Nu s-a putut elimina cântecul"
 
 #: src/window/history_view.rs:562
 msgid "Failed to show recognizer results"
-msgstr ""
+msgstr "Nu s-au putut afișa rezultatele recunoașterii"
 
 #: src/window/history_view.rs:669
 msgid "_Undo"
-msgstr ""
+msgstr "_Anulați"
 
 #: src/window/history_view.rs:681
 msgid "Failed to undo"
-msgstr ""
+msgstr "Nu s-a putut anula"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:706
 msgid "Removed {n_removed} song"
 msgid_plural "Removed {n_removed} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{n_removed} cântec eliminat"
+msgstr[1] "{n_removed} de cântece eliminate"
+msgstr[2] "{n_removed} de cântece eliminate"
 
 #: src/window/history_view.rs:829
 msgid "Select items"
-msgstr ""
+msgstr "Selectați elemente"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/history_view.rs:833
 msgid "Selected {selection_size} song"
 msgid_plural "Selected {selection_size} songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{selection_size} cântec selectat"
+msgstr[1] "{selection_size} de cântece selectate"
+msgstr[2] "{selection_size} de cântece selectate"
 
 #: src/window/history_view.rs:843
 msgid "Copy Song"
 msgid_plural "Copy Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Copiați cântecul"
+msgstr[1] "Copiați cântecele"
+msgstr[2] "Copiați cântecele"
 
 #: src/window/history_view.rs:850
 msgid "Remove Song From History"
 msgid_plural "Remove Songs From History"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Eliminați cântecul din istoric"
+msgstr[1] "Eliminați cântecele din istoric"
+msgstr[2] "Eliminați cântecele din istoric"
 
 #: src/window/mod.rs:214
 msgid "Failed to insert song to history"
-msgstr ""
+msgstr "Nu s-a putut introduce cântecul în istoric"
 
 #: src/window/mod.rs:262
 msgid "Please open an issue on GitHub and provide the necessary information"
-msgstr ""
+msgstr "Deschideți o problemă pe GitHub și furnizați informațiile necesare"
 
 #: src/window/mod.rs:265 src/window/mod.rs:297
 msgid "No, Thanks"
-msgstr ""
+msgstr "Nu, mulțumesc"
 
 #: src/window/mod.rs:267
 msgid "Open an Issue"
-msgstr ""
+msgstr "Deschideți o problemă"
 
 #: src/window/mod.rs:294
 msgid ""
 "Try moving closer to the source or using a different excerpt of the song"
 msgstr ""
+"Încercați să vă apropiați de sursă sau să folosiți un alt fragment al "
+"cântecului"
 
 #: src/window/mod.rs:299
 msgid "Try Again"
-msgstr ""
+msgstr "Încercați din nou"
 
 #: src/window/mod.rs:334
 msgid "Recording Saved"
-msgstr ""
+msgstr "Înregistrare salvată"
 
 #: src/window/mod.rs:342
 msgid "The result will be available when you're back online"
-msgstr ""
+msgstr "Rezultatul va fi disponibil când reveniți online"
 
 #: src/window/mod.rs:345
 msgid "Ok, Got It"
-msgstr ""
+msgstr "Ok, am înțeles"
 
 #: src/window/mod.rs:355
 msgid ""
 "The result will be available when your token limit is reset. Wait until the "
 "limit is reset or open preferences and try setting a different token"
 msgstr ""
+"Rezultatul va fi disponibil când se resetează limita de token. Așteptați "
+"până se resetează limita sau deschideți preferințele și încercați un alt "
+"token"
 
 #: src/window/mod.rs:358
 msgid "I'll Wait"
-msgstr ""
+msgstr "Aștept"
 
 #: src/window/mod.rs:362
 msgid ""
 "The result will be available when your token is replaced with a valid one. "
 "Open preferences and try setting a different token"
 msgstr ""
+"Rezultatul va fi disponibil când tokenul este înlocuit cu unul valid. "
+"Deschideți preferințele și încercați un alt token"
 
 #: src/window/mod.rs:365
 msgid "Later"
-msgstr ""
+msgstr "Mai târziu"
 
 #: src/window/mod.rs:370
 msgid "Open Preferences"
-msgstr ""
+msgstr "Deschideți preferințele"
 
 #: src/window/mod.rs:466
 msgid "An error occurred in the player"
-msgstr ""
+msgstr "A apărut o eroare în redare"
 
 #: src/window/playback_button.rs:97
 msgid "Play"
-msgstr ""
+msgstr "Redați"
 
 #: src/window/playback_button.rs:103
 msgid "Pause"
-msgstr ""
+msgstr "Suspendați"
 
 #: src/window/recognized_page.rs:151
 msgid "Recognized Song"
 msgid_plural "Recognized Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Cântec recunoscut"
+msgstr[1] "Cântece recunoscute"
+msgstr[2] "Cântece recunoscute"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognized_page.rs:157
 msgid "Recognized {n_songs} New Song"
 msgid_plural "Recognized {n_songs} New Songs"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "{n_songs} cântec nou recunoscut"
+msgstr[1] "{n_songs} de cântece noi recunoscute"
+msgstr[2] "{n_songs} de cântece noi recunoscute"
 
 #: src/window/recognized_page.rs:163
 msgid "This song was recognized from your saved recording"
 msgid_plural "These songs were recognized from your saved recordings"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Acest cântec a fost identificat din înregistrarea dvs. salvată"
+msgstr[1] "Aceste cântece au fost identificate din înregistrarea dvs. salvată"
+msgstr[2] "Aceste cântece au fost identificate din înregistrarea dvs. salvată"
 
 #. Translators: Do NOT translate the contents between '{' and '}', this is a variable name.
 #: src/window/recognizer_status.rs:172
 msgid "Recognized {n_successful} Out Of {total_minus_failed}"
-msgstr ""
+msgstr "Recunoscute: {n_successful} din {total_minus_failed}"
 
 #: src/window/recognizer_view.rs:149
 msgid "Listening…"
-msgstr ""
+msgstr "Se ascultă…"
 
 #: src/window/recognizer_view.rs:154
 msgid "Recognizing…"
-msgstr ""
+msgstr "Se identifică…"
 
 #: src/window/song_page.rs:374
 msgid "Unknown"
-msgstr ""
+msgstr "Necunoscut"
 
 #: src/window/song_tile.rs:359
 msgid "Unselect"
-msgstr ""
+msgstr "Anulați selecția"
 
 #~ msgid "Donate (Buy Me a Coffee)"
 #~ msgstr "Donează (Cumpără-mi o cafea)"
